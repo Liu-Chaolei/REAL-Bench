@@ -1,0 +1,19 @@
+job_name: gaia2-qwen-audio-smoke
+jobs_dir: jobs
+n_attempts: 1
+n_concurrent_trials: 1
+retry:
+  max_retries: 0
+orchestrator:
+  type: local
+environment:
+  type: docker
+  delete: true
+agents:
+  - import_path: adapters.gaia2.qwen_audio_agent:Gaia2QwenAudioAgent
+    model_name: openai/gpt-6-astra
+    kwargs:
+      scenario_timeout_sec: 2400
+      env_file: /shared/chaolei.liu/.config/qwaudio/gaia2-evaluation-ali-speech-gpt.env
+datasets:
+  - path: datasets/gaia2-qwen-audio-smoke

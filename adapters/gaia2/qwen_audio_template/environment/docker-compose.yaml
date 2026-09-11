@@ -1,0 +1,16 @@
+services:
+  main:
+    build:
+      context: __QWEN_SOURCE__
+      dockerfile: Dockerfile.harbor
+  are-runner:
+    build:
+      context: ${CONTEXT_DIR}/runner
+    image: ${MAIN_IMAGE_NAME}_are_runner
+    volumes:
+      - ${CONTEXT_DIR}/scenario.json:/evaluation/scenario.json:ro
+      - ${CONTEXT_DIR}/input.wav:/evaluation/input.wav:ro
+      - ${CONTEXT_DIR}/audio.json:/evaluation/audio.json:ro
+    environment:
+      DEMO_FS_PATH: /opt/gaia2-filesystem/demo_filesystem
+    command: ["sleep", "infinity"]

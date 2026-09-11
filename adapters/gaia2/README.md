@@ -440,3 +440,11 @@ This adapter is developed and maintained by [Bo Chen](mailto:rossagaim@gmail.com
 **Issues and Contributions:**
 - Submit Issues and Pull Requests to the main repository
 - Follow the project's coding style and commit guidelines
+
+## Qwen Audio Agent
+
+For complete speech-input evaluation with externally generated WAVs, OpenCode as
+backend, and official ARE grading, see [QWEN_AUDIO.md](QWEN_AUDIO.md). This is a
+separate `gaia2-qwen-audio` mode; it does not use the approximate CLI verifier.
+
+For frozen three-track Qwen evaluation, see [the voice-variant protocol](QWEN_AUDIO_PROTOCOL.md).

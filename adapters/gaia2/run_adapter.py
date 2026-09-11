@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import logging
 import shutil
+import sys
 from pathlib import Path
 
 from datasets import load_dataset
@@ -123,6 +124,25 @@ def _parse_args() -> argparse.Namespace:
             "Output defaults to datasets/gaia2-cli/ when --cli is set."
         ),
     )
+    parser.add_argument(
+        "--qwen-audio",
+        action="store_true",
+        help="Generate full-system Qwen audio tasks with official ARE grading.",
+    )
+    audio_source = parser.add_mutually_exclusive_group()
+    audio_source.add_argument("--audio-dir", type=Path)
+    audio_source.add_argument("--audio-manifest", type=Path)
+    parser.add_argument("--qwen-agent-dir", type=Path)
+    parser.add_argument(
+        "--preflight",
+        action="store_true",
+        help="Write audio coverage/index without building tasks.",
+    )
+    parser.add_argument(
+        "--smoke",
+        action="store_true",
+        help="Select the shortest available audio per config.",
+    )
     return parser.parse_args()
 
 
@@ -154,6 +174,18 @@ def _load_requested_ids(
 
 def main() -> None:
     args = _parse_args()
+    if args.qwen_audio:
+        if args.cli:
+            raise ValueError("--cli and --qwen-audio are mutually exclusive")
+        sys.path.insert(0, str(HARBOR_ROOT))
+        from adapters.gaia2.generate_audio import generate
+
+        if args.output_dir == _default_output_dir():
+            args.output_dir = HARBOR_ROOT / "datasets" / "gaia2-qwen-audio"
+        generate(args)
+        return
+    if args.audio_dir or args.audio_manifest or args.preflight or args.smoke:
+        raise ValueError("Audio options require --qwen-audio")
     # Use CLI-specific output dir if --cli is set and user didn't override
     output_dir: Path = args.output_dir
     if args.cli and output_dir == _default_output_dir(cli=False):
