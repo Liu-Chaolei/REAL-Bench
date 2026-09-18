@@ -82,9 +82,26 @@ class Gaia2QwenAudioAgent(BaseAgent):
         )
         if track not in {"audio", "system_text", "backend_text"}:
             raise ValueError("Unknown evaluation track")
-        if protocol_version not in {"gaia2-qwen-audio/3", "gaia2-qwen-audio/4"}:
+        if protocol_version not in {
+            "gaia2-qwen-audio/3",
+            "gaia2-qwen-audio/4",
+            "gaia2-qwen-audio/5",
+            "gaia2-qwen-audio/6",
+            "gaia2-qwen-audio/7",
+            "gaia2-qwen-audio/8",
+        }:
             raise ValueError("Unsupported evaluation protocol")
-        if protocol_version.endswith("/4") and track != "audio":
+        if (
+            protocol_version
+            in {
+                "gaia2-qwen-audio/4",
+                "gaia2-qwen-audio/5",
+                "gaia2-qwen-audio/6",
+                "gaia2-qwen-audio/7",
+                "gaia2-qwen-audio/8",
+            }
+            and track != "audio"
+        ):
             raise ValueError("V4 supports audio only")
         self.protocol_version = protocol_version
         self.track = track
@@ -150,7 +167,13 @@ class Gaia2QwenAudioAgent(BaseAgent):
     @override
     async def setup(self, environment: BaseEnvironment) -> None:
         self.preflight()
-        if self.protocol_version == "gaia2-qwen-audio/4":
+        if self.protocol_version in {
+            "gaia2-qwen-audio/4",
+            "gaia2-qwen-audio/5",
+            "gaia2-qwen-audio/6",
+            "gaia2-qwen-audio/7",
+            "gaia2-qwen-audio/8",
+        }:
             preflight_code = (
                 "import json,sys; from pathlib import Path; "
                 "sys.path.insert(0, '/opt/runner'); from observation import eligibility; "

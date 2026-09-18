@@ -135,3 +135,22 @@ The opt-in `gaia2-qwen-audio/4` protocol uses a deterministic idle window and on
 lossless audible projection instead of the v3 dialogue-boundary model. V3 evidence
 is retained separately. See [QWEN_AUDIO_WINDOW.md](QWEN_AUDIO_WINDOW.md) for scope,
 partial-playback policy, audit gates, metrics, and preparation commands.
+
+## V5 task-aware evidence
+
+`gaia2-qwen-audio/5` derives scoring requirements from the official ARE reference
+filter. Normal barge-in no longer automatically blocks task grading or the whole
+batch: action-only tasks are scored; answer evidence gaps remain unknown and
+continue. See [QWEN_AUDIO_TASK_EVIDENCE.md](QWEN_AUDIO_TASK_EVIDENCE.md).
+
+## V6 passive native recovery
+
+See [native recovery protocol](QWEN_AUDIO_NATIVE_RECOVERY.md) for the narrow observation scope, readiness evidence, original-budget timing, and validation requirements.
+
+## V7 official necessary-action decisions
+
+See [V7 decision policy](QWEN_AUDIO_ACTION_DECISION.md) for deterministic failure certificates, chronological playback evidence, and score-basis reporting.
+
+## V8 response-bound interruption evidence
+
+See [V8 interruption evidence](QWEN_AUDIO_INTERRUPTION_EVIDENCE.md) for identity-based cancellation association and independent audit. Playback behavior remains unchanged.

@@ -54,6 +54,21 @@ VALID_OUTCOMES = {"completed", "protocol_failure", "execution_timeout"}
 
 
 def stops_batch(result):
+    if result.get("protocol") in {
+        "gaia2-qwen-audio/5",
+        "gaia2-qwen-audio/6",
+        "gaia2-qwen-audio/7",
+        "gaia2-qwen-audio/8",
+    }:
+        from adapters.gaia2.qwen_audio_template.environment.runner.evidence import (
+            validate_grade,
+        )
+
+        try:
+            validate_grade(result)
+        except ValueError:
+            return True
+        return False
     return (
         result.get("measurement_valid") is False
         or result.get("status") not in VALID_OUTCOMES
@@ -88,7 +103,10 @@ def window_results(job):
         framework = (
             json.loads(framework_path.read_text()) if framework_path.exists() else {}
         )
-        if framework.get("exception_info") and payload.get("measurement_valid") is True:
+        if framework.get("exception_info") and (
+            payload.get("measurement_valid") is True
+            or payload.get("status") == "completed_unscored"
+        ):
             payload = {
                 **payload,
                 "status": "infrastructure_error",
@@ -325,7 +343,13 @@ def run(campaign, stage, services_restored=False, concurrency=1, max_attempts=No
     from adapters.gaia2.evaluation_campaign import audit_digest
 
     manifest = verify_freeze(campaign)
-    windowed = manifest.get("protocol") == "gaia2-qwen-audio/4"
+    windowed = manifest.get("protocol") in {
+        "gaia2-qwen-audio/4",
+        "gaia2-qwen-audio/5",
+        "gaia2-qwen-audio/6",
+        "gaia2-qwen-audio/7",
+        "gaia2-qwen-audio/8",
+    }
     if windowed:
         if stage != "audio" or concurrency != 1:
             raise ValueError("V4 initially requires stage audio and concurrency 1")
@@ -469,6 +493,7 @@ def run(campaign, stage, services_restored=False, concurrency=1, max_attempts=No
             stage=stage,
             state="running",
             supervisor_pid=os.getpid(),
+            requested_attempt_limit=limit,
             services_restored_asserted_at=datetime.now(UTC).isoformat(),
         )
         write_json(ledger_path, ledger)
@@ -540,7 +565,27 @@ def run(campaign, stage, services_restored=False, concurrency=1, max_attempts=No
             with (campaign / "run.log").open("ab") as log:
                 child = subprocess.Popen(
                     [sys.executable, "-m", "harbor.cli.main", "run", "-c", str(launch)],
-                    env={**os.environ, "DOCKER_BUILDKIT": "0"},
+                    env={
+                        **os.environ,
+                        "DOCKER_BUILDKIT": "0",
+                        **(
+                            {
+                                "PATH": str(
+                                    Path(manifest["metric_uv_executable"]).parent
+                                )
+                                + os.pathsep
+                                + os.environ.get("PATH", "")
+                            }
+                            if manifest.get("protocol")
+                            in {
+                                "gaia2-qwen-audio/5",
+                                "gaia2-qwen-audio/6",
+                                "gaia2-qwen-audio/7",
+                                "gaia2-qwen-audio/8",
+                            }
+                            else {}
+                        ),
+                    },
                     stdout=log,
                     stderr=log,
                     start_new_session=True,

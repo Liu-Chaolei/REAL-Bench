@@ -99,7 +99,17 @@ def interaction_report(root: Path):
                     "response_id": data["response_id"],
                 }
             )
-    windowed = any(r.get("protocol") == "gaia2-qwen-audio/4" for r in rows)
+    windowed = any(
+        r.get("protocol")
+        in {
+            "gaia2-qwen-audio/4",
+            "gaia2-qwen-audio/5",
+            "gaia2-qwen-audio/6",
+            "gaia2-qwen-audio/7",
+            "gaia2-qwen-audio/8",
+        }
+        for r in rows
+    )
     if windowed:
         for response in responses:
             response.pop("review", None)

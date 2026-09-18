@@ -691,11 +691,16 @@ class AudioDriver:
             )
         return ProtocolError("Idle without completion, delivery or an environment wait")
 
+    async def observe_gateway_event(self, event):
+        return False
+
     async def receive(self, group: asyncio.TaskGroup) -> None:
         async for raw in self.ws:
             event = json.loads(raw)
             self.record("server", event)
             kind = event.get("type")
+            if await self.observe_gateway_event(event):
+                continue
             if kind == "evaluation.provider_event":
                 payload = event.get("payload", {})
                 if (

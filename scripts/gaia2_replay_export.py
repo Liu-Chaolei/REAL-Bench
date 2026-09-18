@@ -65,6 +65,8 @@ def main():
     sys.path.insert(0, os.environ.get("GAIA2_RUNNER_PATH", "/opt/runner"))
     import replay
 
+    os.environ["GAIA2_REPLAY_SOURCE"] = str(args.source_scenario.resolve())
+
     # ARE accepts empty string tool arguments at runtime, but its importer
     # conflates them with None. Preserve the original str value during replay.
     from are.simulation.scenarios.scenario import Scenario

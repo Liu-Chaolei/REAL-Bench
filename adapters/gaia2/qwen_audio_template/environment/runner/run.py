@@ -16,6 +16,7 @@ from typing import Any
 
 import httpx
 import uvicorn
+from action_decision import VERSION as COUNT_VERSION
 from are.simulation.agents.agent_builder import AbstractAgentBuilder
 from are.simulation.agents.agent_config_builder import AgentConfigBuilder
 from are.simulation.agents.agent_execution_result import AgentExecutionResult
@@ -32,11 +33,16 @@ from are.simulation.scenarios.scenario_imported_from_json.utils import (
 )
 from audio_driver import AudioDriver, InfrastructureError, UserAbort
 from boundary import BoundaryAssessor, MeasurementError
+from count_driver import CountDriver, CountProtocol, InterruptionProtocol
+from interruption_evidence import VERSION as INTERRUPTION_VERSION
 from mcp.server.lowlevel import Server
 from mcp.server.streamable_http_manager import StreamableHTTPSessionManager
 from mcp.types import TextContent, Tool
+from native_recovery import POLICY as RECOVERY_POLICY
+from native_recovery import VERSION as RECOVERY_VERSION
 from observation import POLICY, eligibility
 from observation import VERSION as WINDOW_VERSION
+from passive_driver import PassiveDriver, PassiveProtocol
 from protocol import VERSION, Protocol, ProtocolError
 from pydantic import Field, create_model
 from quality import interaction_report
@@ -44,6 +50,10 @@ from responses_judge import ResponsesJudge
 from runtime import Runtime
 from starlette.applications import Starlette
 from starlette.routing import Mount
+from task_contract import VERSION as TASK_VERSION
+from task_contract import derive_contract
+from task_driver import TaskDriver, TaskProtocol
+from task_scoring import install_evidence_guard, mark_unscored_exports
 from window_driver import WindowDriver, WindowProtocol
 
 
@@ -232,8 +242,41 @@ class QwenAgent(RunnableARESimulationAgent):
         if aui is None:
             raise ValueError("Scenario has no user interface")
         aui.set_wait_for_user_response(False)
-        windowed = getattr(self.options, "protocol", VERSION) == WINDOW_VERSION
-        protocol_class = WindowProtocol if windowed else Protocol
+        windowed = getattr(self.options, "protocol", VERSION) in {
+            WINDOW_VERSION,
+            TASK_VERSION,
+            RECOVERY_VERSION,
+            COUNT_VERSION,
+            INTERRUPTION_VERSION,
+        }
+        task_aware = getattr(self.options, "protocol", VERSION) in {
+            TASK_VERSION,
+            RECOVERY_VERSION,
+            COUNT_VERSION,
+            INTERRUPTION_VERSION,
+        }
+        passive = getattr(self.options, "protocol", VERSION) in {
+            RECOVERY_VERSION,
+            COUNT_VERSION,
+            INTERRUPTION_VERSION,
+        }
+        counted = getattr(self.options, "protocol", VERSION) in {
+            COUNT_VERSION,
+            INTERRUPTION_VERSION,
+        }
+        protocol_class = (
+            InterruptionProtocol
+            if self.options.protocol == INTERRUPTION_VERSION
+            else CountProtocol
+            if counted
+            else PassiveProtocol
+            if passive
+            else TaskProtocol
+            if task_aware
+            else WindowProtocol
+            if windowed
+            else Protocol
+        )
         protocol = protocol_class(
             Path(self.options.output),
             lambda: (self.env.time_manager.time(), 0 if self.env.is_paused() else 1),
@@ -256,7 +299,17 @@ class QwenAgent(RunnableARESimulationAgent):
                 for msg in notification_system.message_queue.get_by_timestamp(now)
             ]
 
-        driver_class = WindowDriver if windowed else AudioDriver
+        driver_class = (
+            CountDriver
+            if counted
+            else PassiveDriver
+            if passive
+            else TaskDriver
+            if task_aware
+            else WindowDriver
+            if windowed
+            else AudioDriver
+        )
         self.driver = driver_class(
             self.options.gateway,
             self.options.token,
@@ -280,6 +333,15 @@ class QwenAgent(RunnableARESimulationAgent):
             start_clock=runtime.start,
             track=self.options.track,
             text_input=self.options.text_input,
+            **({"contract": self.options.task_contract} if task_aware else {}),
+            **(
+                {
+                    "scenario": scenario,
+                    "source_text": Path(self.options.scenario).read_text(),
+                }
+                if counted
+                else {}
+            ),
         )
 
         runtime.driver = self.driver
@@ -316,6 +378,8 @@ class QwenAgent(RunnableARESimulationAgent):
                         )
                         protocol.end_sec = protocol.elapsed()
                         protocol.record("observation.ended", reason=protocol.end_reason)
+                    if isinstance(self.driver, PassiveDriver):
+                        self.driver.close_recovery_evidence(protocol.end_reason)
                     self.execution_timing = protocol.metrics()
                     self.env.pause()
                     self.stopped = True
@@ -363,7 +427,16 @@ def main():
     )
     parser.add_argument("--timeout", type=float, default=2400)
     parser.add_argument(
-        "--protocol", choices=[VERSION, WINDOW_VERSION], default=VERSION
+        "--protocol",
+        choices=[
+            VERSION,
+            WINDOW_VERSION,
+            TASK_VERSION,
+            RECOVERY_VERSION,
+            COUNT_VERSION,
+            INTERRUPTION_VERSION,
+        ],
+        default=VERSION,
     )
     options = parser.parse_args()
     options.text_input = None
@@ -398,7 +471,13 @@ def main():
         ):
             if not os.environ.get(key):
                 raise InfrastructureError(f"Missing {key}")
-        if options.protocol == WINDOW_VERSION:
+        if options.protocol in {
+            WINDOW_VERSION,
+            TASK_VERSION,
+            RECOVERY_VERSION,
+            COUNT_VERSION,
+            INTERRUPTION_VERSION,
+        }:
             supported = eligibility(json.loads(Path(options.scenario).read_text()))
             if not supported["supported"] or options.track != "audio":
                 raise InfrastructureError(
@@ -411,6 +490,21 @@ def main():
                 "maximum_seconds": min(options.timeout, 2400),
             }
             result["boundary_responses_calls"] = 0
+            if options.protocol in {
+                RECOVERY_VERSION,
+                COUNT_VERSION,
+                INTERRUPTION_VERSION,
+            }:
+                result["observation_policy"].update(RECOVERY_POLICY)
+            if options.protocol in {
+                TASK_VERSION,
+                RECOVERY_VERSION,
+                COUNT_VERSION,
+                INTERRUPTION_VERSION,
+            }:
+                result["observation_policy"]["partial_audio"] = (
+                    "score_by_official_task_contract"
+                )
         else:
             boundary_engine = ResponsesJudge(
                 model=os.environ["GAIA2_JUDGE_MODEL"],
@@ -465,12 +559,48 @@ def main():
                     config.max_scenario_duration,
                 ),
                 tool_augmentation_config=config.tool_augmentation_config,
-                offline_validation=options.protocol == WINDOW_VERSION,
+                offline_validation=options.protocol
+                in {
+                    WINDOW_VERSION,
+                    TASK_VERSION,
+                    RECOVERY_VERSION,
+                    COUNT_VERSION,
+                    INTERRUPTION_VERSION,
+                },
                 env_events_config=config.env_events_config,
             )
         else:
             scenario, _ = load_and_preprocess_scenario_str(
                 config, Path(options.scenario).read_text()
+            )
+        if options.protocol in {
+            TASK_VERSION,
+            RECOVERY_VERSION,
+            COUNT_VERSION,
+            INTERRUPTION_VERSION,
+        }:
+            contract = derive_contract(
+                scenario, Path(options.scenario).read_text(), protocol=options.protocol
+            )
+            expected = json.loads(
+                Path(options.scenario).with_name("task-contract.json").read_text()
+            )
+            if contract != expected:
+                raise InfrastructureError(
+                    "Frozen official contract differs", "task_contract_mismatch"
+                )
+            options.task_contract = contract
+            result["task_contract"] = contract
+            (output / "task-contract.json").write_text(
+                json.dumps(contract, indent=2) + "\n"
+            )
+            install_evidence_guard(
+                scenario,
+                lambda: (
+                    getattr(builder.agent.driver, "task_evidence", None)
+                    if builder.agent
+                    else None
+                ),
             )
         judged = ScenarioRunner(
             agent_config_builder=QwenConfigBuilder(), agent_builder=builder
@@ -526,6 +656,18 @@ def main():
                 result.update(status="execution_timeout", success=False)
             else:
                 raise execution_error
+        elif (
+            options.protocol
+            in {TASK_VERSION, RECOVERY_VERSION, COUNT_VERSION, INTERRUPTION_VERSION}
+            and builder.agent
+            and getattr(builder.agent.driver, "task_evidence", None)
+            and builder.agent.driver.task_evidence["task_score_status"]
+            == "unresolved_speech"
+        ):
+            result.update(
+                status="completed_unscored", success=None, measurement_valid=None
+            )
+            mark_unscored_exports(output)
         elif judged.exception:
             raise judged.exception
         elif judged.success is None:
@@ -595,7 +737,13 @@ def main():
                 finalization_error=type(exc).__name__,
             )
             result.setdefault("failure_cause", "artifact_finalization_failure")
-        if options.protocol == WINDOW_VERSION:
+        if options.protocol in {
+            WINDOW_VERSION,
+            TASK_VERSION,
+            RECOVERY_VERSION,
+            COUNT_VERSION,
+            INTERRUPTION_VERSION,
+        }:
             if builder.agent and builder.agent.driver:
                 result["observation_policy"]["maximum_seconds"] = (
                     builder.agent.driver.timeout
@@ -609,6 +757,62 @@ def main():
             else:
                 result["audible_transcript_complete"] = None
             result["audit_status"] = "pending"
+        if options.protocol in {
+            TASK_VERSION,
+            RECOVERY_VERSION,
+            COUNT_VERSION,
+            INTERRUPTION_VERSION,
+        }:
+            evidence = (
+                getattr(builder.agent.driver, "task_evidence", None)
+                if builder.agent
+                else None
+            )
+            result["task_score_status"] = (
+                evidence["task_score_status"] if evidence else "invalid_execution"
+            )
+            result["speech_evidence_status"] = (
+                evidence["speech_evidence_status"]
+                if evidence
+                else "not_collected"
+                if options.protocol
+                in {RECOVERY_VERSION, COUNT_VERSION, INTERRUPTION_VERSION}
+                else "missing_or_corrupt"
+            )
+            if options.protocol in {COUNT_VERSION, INTERRUPTION_VERSION}:
+                result["score_basis"] = (
+                    evidence.get("score_basis") if evidence else None
+                )
+                result["decision_proof_sha256"] = (
+                    evidence.get("decision_proof_sha256") if evidence else None
+                )
+            if options.protocol == INTERRUPTION_VERSION:
+                result["interruption_evidence_sha256"] = (
+                    evidence.get("interruption_evidence_sha256") if evidence else None
+                )
+                result["unverified_interruptions"] = (
+                    evidence.get("unverified_interruptions", []) if evidence else []
+                )
+            if result.get("measurement_valid") is False:
+                result["task_score_status"] = "invalid_execution"
+        if options.protocol in {RECOVERY_VERSION, COUNT_VERSION, INTERRUPTION_VERSION}:
+            result["native_recovery"] = result.get("timing", {}).get("native_recovery")
+            cause = result.get("failure_cause", "")
+            result["failure_origin"] = (
+                "external_service"
+                if cause.startswith("provider_")
+                else "backend_service_or_profile"
+                if cause == "backend_provider_failure"
+                else "measurement_scope"
+                if cause == "unsupported_recovery_state"
+                else "unknown_gateway_error"
+                if cause == "unclassified_gateway_error"
+                else "measurement_or_execution"
+                if cause
+                else None
+            )
+            if result.get("speech_evidence_status") == "not_collected":
+                result["evidence_collection_stage"] = "aborted_before_projection"
         result["audio"] = json.loads(Path(options.audio_metadata).read_text())
         result["models"] = {
             key: os.environ.get(key)

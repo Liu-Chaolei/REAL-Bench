@@ -15,9 +15,12 @@ from are.simulation.scenarios.scenario_imported_from_json.utils import (
 )
 from are.simulation.validation.configs import GraphPerEventJudgeConfig
 from boundary import resolve_votes
+from evidence import evaluate_evidence, validate_grade
 from observation import VERSION as WINDOW_VERSION
 from observation import project_audio
 from responses_judge import ResponsesJudge
+from task_contract import VERSION as TASK_VERSION
+from task_contract import derive_contract
 
 
 def verify_projection(events, protocol_rows):
@@ -84,18 +87,66 @@ def main():
             ):
                 raise ValueError("Artifact integrity check failed")
     result = json.loads((args.results / "result.json").read_text())
-    if result["status"] != "completed":
+    if result.get("protocol") in {
+        "gaia2-qwen-audio/6",
+        "gaia2-qwen-audio/7",
+        "gaia2-qwen-audio/8",
+    }:
+        from native_recovery import verify_recorded_recovery
+
+        verify_recorded_recovery(args.results, result)
+    v7 = result.get("protocol") in {"gaia2-qwen-audio/7", "gaia2-qwen-audio/8"}
+    if result["status"] != "completed" and not (
+        v7 and result["status"] == "completed_unscored"
+    ):
         raise ValueError("Only completed trials have an official score to replay")
     traces = list((args.results / "official/hf").glob("*.json"))
     if len(traces) != 1:
         raise ValueError("Expected exactly one official trace")
-    text = traces[0].read_text()
-    trace = json.loads(text)
+    trace_json = traces[0].read_text()
+    trace = json.loads(trace_json)
     protocol_rows = [
         json.loads(line)
         for line in (args.results / "protocol.jsonl").read_text().splitlines()
     ]
-    if result.get("protocol") == WINDOW_VERSION:
+    if result.get("protocol") in {
+        TASK_VERSION,
+        "gaia2-qwen-audio/6",
+        "gaia2-qwen-audio/7",
+        "gaia2-qwen-audio/8",
+    }:
+        validate_grade(result)
+        contract = json.loads((args.results / "task-contract.json").read_text())
+        projection = evaluate_evidence(
+            args.results,
+            contract,
+            end_reason=result["timing"]["observation_end_reason"],
+        )
+        saved = json.loads((args.results / "projection.json").read_text())
+        if not v7 and any(saved.get(k) != v for k, v in projection.items()):
+            raise ValueError("V5 task evidence differs")
+        official = [
+            e
+            for e in trace["completed_events"]
+            if e.get("event_type") == "AGENT"
+            and e.get("action", {}).get("app") == "AgentUserInterface"
+            and e["action"].get("function") == "send_message_to_user"
+        ]
+        submission_text = projection["task_submission_text"]
+        if len(official) != bool(submission_text):
+            raise ValueError("Unexpected task submission")
+        if (
+            official
+            and next(
+                a["value"]
+                for a in official[0]["action"]["args"]
+                if a["name"] == "content"
+            )
+            != submission_text
+        ):
+            raise ValueError("Task submission text differs")
+        count = len(official)
+    elif result.get("protocol") == WINDOW_VERSION:
         projection = project_audio(args.results)
         saved = json.loads((args.results / "projection.json").read_text())
         if not projection["audible_transcript_complete"] or any(
@@ -181,13 +232,56 @@ def main():
     )
     try:
         scenario, events, _ = JsonScenarioImporter().import_from_json_to_benchmark(
-            text, load_completed_events=True
+            trace_json, load_completed_events=True
         )
         preprocess_scenario(
             scenario,
             judge_config=GraphPerEventJudgeConfig(engine=judge),
             offline_validation=True,
         )
+        if result.get("protocol") in {
+            TASK_VERSION,
+            "gaia2-qwen-audio/6",
+            "gaia2-qwen-audio/7",
+            "gaia2-qwen-audio/8",
+        }:
+            source_path = Path(__import__("os").environ["GAIA2_REPLAY_SOURCE"])
+            if (
+                derive_contract(
+                    scenario, source_path.read_text(), protocol=result["protocol"]
+                )
+                != contract
+            ):
+                raise ValueError("Replayed official contract differs")
+        if v7:
+            from decision_audit import verify_decision
+
+            evidence = verify_decision(
+                args.results, result, scenario, events, source_path.read_text()
+            )
+            if evidence["score_basis"] != "official_full_judge":
+                if judge.replay or result.get("judge_responses_calls", 0):
+                    raise ValueError(
+                        "Deterministic decisions cannot contain judge calls"
+                    )
+                args.output.write_text(
+                    json.dumps(
+                        {
+                            "passed": True,
+                            "success": result["success"],
+                            "score_basis": evidence["score_basis"],
+                            "verification_kind": "official_necessary_condition"
+                            if evidence["score_basis"]
+                            == "official_action_count_failure"
+                            else "unresolved_evidence",
+                            "judge_calls_replayed": 0,
+                            "fresh_model_calls": 0,
+                        },
+                        indent=2,
+                    )
+                    + "\n"
+                )
+                return
         replayed = ScenarioRunner().run(
             ScenarioRunnerConfig(judge_only=True), scenario, completed_events=events
         )

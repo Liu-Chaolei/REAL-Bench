@@ -219,6 +219,11 @@ class WindowDriver(AudioDriver):
             self.observation.end_reason = "scenario_end"
             self.observation.end_sec = self.protocol.elapsed()
             self.protocol.record("observation.ended", reason="scenario_end")
+        self.finalize_projection()
+        if timeout:
+            raise timeout
+
+    def finalize_projection(self):
         projection = project_audio(self.output)
         self.observation.audible_complete = projection["audible_transcript_complete"]
         projection["observation_end_sec"] = self.observation.end_sec
@@ -239,5 +244,3 @@ class WindowDriver(AudioDriver):
                 are_turn=1,
                 segment_count=len(projection["segments"]),
             )
-        if timeout:
-            raise timeout

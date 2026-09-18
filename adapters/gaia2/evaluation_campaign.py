@@ -11,6 +11,7 @@ import argparse
 import hashlib
 import json
 import random
+import shutil
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -165,7 +166,14 @@ def prepare(args):
         VERSION as WINDOW_VERSION,
     )
 
-    windowed = getattr(args, "protocol", VERSION) == WINDOW_VERSION
+    protocol_version = getattr(args, "protocol", VERSION)
+    windowed = protocol_version in {
+        WINDOW_VERSION,
+        "gaia2-qwen-audio/5",
+        "gaia2-qwen-audio/6",
+        "gaia2-qwen-audio/7",
+        "gaia2-qwen-audio/8",
+    }
     if windowed:
         for row in rows:
             row["protocol_support"] = eligibility(
@@ -196,11 +204,40 @@ def prepare(args):
     for row in selected:
         task, asset = tasks[row["source_id"]]
         generate_audio_task(adapter, task, asset, source)
+    metric_uv = None
+    if protocol_version in {
+        "gaia2-qwen-audio/5",
+        "gaia2-qwen-audio/6",
+        "gaia2-qwen-audio/7",
+        "gaia2-qwen-audio/8",
+    }:
+        metric_uv = getattr(args, "metric_uv_executable", None) or shutil.which("uv")
+        if not metric_uv or not Path(metric_uv).is_file():
+            raise ValueError("V5 metric requires uv on PATH or --metric-uv-executable")
+        metric_uv = str(Path(metric_uv).resolve())
+        from adapters.gaia2.contract_packaging import build_contracts
+
+        contracts = build_contracts(output / "dataset", protocol=protocol_version)
+        for row in selected:
+            row["task_contract"] = contracts[row["task_name"]]
     manifest = {
-        "protocol": WINDOW_VERSION if windowed else VERSION,
+        "protocol": protocol_version,
         "original_selection_ids": original_selection,
+        "metric_uv_executable": metric_uv,
         "attempt_limit": len(selected) if windowed else None,
-        "observation_policy": POLICY if windowed else None,
+        "observation_policy": (
+            {**POLICY, "partial_audio": "score_by_official_task_contract"}
+            if protocol_version
+            in {
+                "gaia2-qwen-audio/5",
+                "gaia2-qwen-audio/6",
+                "gaia2-qwen-audio/7",
+                "gaia2-qwen-audio/8",
+            }
+            else POLICY
+            if windowed
+            else None
+        ),
         "seed": 20260909,
         "label": "GAIA2 voice variant; automatic validation, not human calibrated; not original GAIA2 leaderboard parity",
         "review_policy": "automatic",
@@ -229,6 +266,28 @@ def prepare(args):
         "infra_retry_limit": 1,
         "model_retry_limit": 0,
     }
+    if protocol_version in {
+        "gaia2-qwen-audio/6",
+        "gaia2-qwen-audio/7",
+        "gaia2-qwen-audio/8",
+    }:
+        from adapters.gaia2.qwen_audio_template.environment.runner.native_recovery import (
+            POLICY as RECOVERY_POLICY,
+        )
+
+        manifest["observation_policy"].update(RECOVERY_POLICY)
+    if protocol_version in {"gaia2-qwen-audio/7", "gaia2-qwen-audio/8"}:
+        from adapters.gaia2.qwen_audio_template.environment.runner.action_decision import (
+            POLICY as DECISION_POLICY,
+        )
+
+        manifest["decision_policy"] = DECISION_POLICY
+    if protocol_version == "gaia2-qwen-audio/8":
+        from adapters.gaia2.qwen_audio_template.environment.runner.interruption_evidence import (
+            POLICY as INTERRUPTION_POLICY,
+        )
+
+        manifest["interruption_policy"] = INTERRUPTION_POLICY
     write_json(output / "manifest.json", manifest)
     write_json(
         output / "freeze.json", {"manifest_sha256": digest(output / "manifest.json")}
@@ -261,6 +320,22 @@ def prepare(args):
             ],
             "datasets": [{"path": str(output / "dataset")}],
         }
+        if protocol_version in {
+            "gaia2-qwen-audio/5",
+            "gaia2-qwen-audio/6",
+            "gaia2-qwen-audio/7",
+            "gaia2-qwen-audio/8",
+        }:
+            job["metrics"] = [
+                {
+                    "type": "uv-script",
+                    "kwargs": {
+                        "script_path": str(
+                            Path(__file__).resolve().with_name("task_metric.py")
+                        )
+                    },
+                }
+            ]
         (output / f"{track}.yaml").write_text(yaml.safe_dump(job, sort_keys=False))
     print(
         json.dumps(
@@ -412,7 +487,13 @@ def check_gate(manifest, rows, evidence, audit, tracks=TRACKS):
             failures.append(f"Evidence artifact missing or changed: {name}")
     if evidence.get("deterministic_controls", {}).get("count", 0) < 20:
         failures.append("Need at least 20 deterministic controls")
-    if manifest.get("protocol") == "gaia2-qwen-audio/4":
+    if manifest.get("protocol") in {
+        "gaia2-qwen-audio/4",
+        "gaia2-qwen-audio/5",
+        "gaia2-qwen-audio/6",
+        "gaia2-qwen-audio/7",
+        "gaia2-qwen-audio/8",
+    }:
         for name in ("observation_window", "audible_projection", "no_boundary_model"):
             item = evidence.get(name, {})
             if (
@@ -422,7 +503,9 @@ def check_gate(manifest, rows, evidence, audit, tracks=TRACKS):
                 or digest(Path(item["artifact"])) != item.get("sha256")
             ):
                 failures.append(f"Missing verified v4 evidence: {name}")
-        if any(r.get("audible_transcript_complete") is not True for r in rows):
+        if manifest.get("protocol") == "gaia2-qwen-audio/4" and any(
+            r.get("audible_transcript_complete") is not True for r in rows
+        ):
             failures.append("Incomplete audible projection")
     else:
         boundary = evidence.get(
@@ -674,9 +757,19 @@ def main():
     sub = parser.add_subparsers(dest="command", required=True)
     prep = sub.add_parser("prepare")
     prep.add_argument(
-        "--protocol", choices=[VERSION, "gaia2-qwen-audio/4"], default=VERSION
+        "--protocol",
+        choices=[
+            VERSION,
+            "gaia2-qwen-audio/4",
+            "gaia2-qwen-audio/5",
+            "gaia2-qwen-audio/6",
+            "gaia2-qwen-audio/7",
+            "gaia2-qwen-audio/8",
+        ],
+        default=VERSION,
     )
     prep.add_argument("--selection-limit", type=int)
+    prep.add_argument("--metric-uv-executable", type=Path)
     prep.add_argument("--reuse-selection", type=Path)
     prep.add_argument("--output", type=Path, required=True)
     prep.add_argument("--dataset", type=Path, default=Path("../gaia2"))
