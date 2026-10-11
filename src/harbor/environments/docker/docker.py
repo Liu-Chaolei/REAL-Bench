@@ -224,8 +224,13 @@ class DockerEnvironment(BaseEnvironment):
         startup_network_policy = network_policy or NetworkPolicy(
             network_mode=NetworkMode.PUBLIC
         )
+        self._native_no_network = self._can_use_native_no_network(
+            startup_network_policy=startup_network_policy,
+            phase_network_policies=phase_network_policies,
+        )
         self._enable_egress_control = (
             not self._is_windows_container
+            and not self._native_no_network
             and self._requires_egress_control(
                 startup_network_policy=startup_network_policy,
                 phase_network_policies=phase_network_policies,
@@ -313,6 +318,17 @@ class DockerEnvironment(BaseEnvironment):
         ]
         return any(policy.network_mode != NetworkMode.PUBLIC for policy in policies)
 
+    @staticmethod
+    def _can_use_native_no_network(
+        *,
+        startup_network_policy: NetworkPolicy,
+        phase_network_policies: Sequence[NetworkPolicy],
+    ) -> bool:
+        if os.environ.get("HARBOR_DOCKER_NATIVE_NO_NETWORK") != "1":
+            return False
+        policies = [startup_network_policy, *phase_network_policies]
+        return all(policy.network_mode == NetworkMode.NO_NETWORK for policy in policies)
+
     @property
     @override
     def _uses_compose(self) -> bool:
@@ -329,7 +345,9 @@ class DockerEnvironment(BaseEnvironment):
     @override
     def capabilities(self) -> EnvironmentCapabilities:
         return EnvironmentCapabilities(
-            disable_internet=self._enable_egress_control,
+            disable_internet=(
+                self._enable_egress_control or self._native_no_network
+            ),
             network_allowlist=self._enable_egress_control,
             network_allowlist_hostnames=self._enable_egress_control,
             network_allowlist_wildcard_hostnames=self._enable_egress_control,
@@ -412,8 +430,8 @@ class DockerEnvironment(BaseEnvironment):
 
         if self._enable_egress_control:
             paths.append(self._DOCKER_COMPOSE_EGRESS_CONTROL_PATH)
-            if self._egress_control_services_compose_path:
-                paths.append(self._egress_control_services_compose_path)
+        if self._egress_control_services_compose_path:
+            paths.append(self._egress_control_services_compose_path)
 
         return paths
 
@@ -459,20 +477,28 @@ class DockerEnvironment(BaseEnvironment):
         ]
 
     def _write_egress_control_services_compose_file(self) -> Path | None:
-        """Write an override that routes eligible services through the sidecar."""
+        """Write an override that applies the selected egress isolation."""
         self._cleanup_egress_control_services_compose_file()
-        if not self._enable_egress_control:
+        if not self._enable_egress_control and not self._native_no_network:
             return None
 
-        services = {
-            service_name: {
-                "network_mode": f"service:{self._EGRESS_CONTROL_SERVICE_NAME}",
-                "depends_on": {
-                    self._EGRESS_CONTROL_SERVICE_NAME: {"condition": "service_healthy"}
-                },
+        if self._native_no_network:
+            services = {
+                service_name: {"network_mode": "none"}
+                for service_name in self._egress_controlled_service_names()
             }
-            for service_name in self._egress_controlled_service_names()
-        }
+        else:
+            services = {
+                service_name: {
+                    "network_mode": f"service:{self._EGRESS_CONTROL_SERVICE_NAME}",
+                    "depends_on": {
+                        self._EGRESS_CONTROL_SERVICE_NAME: {
+                            "condition": "service_healthy"
+                        }
+                    },
+                }
+                for service_name in self._egress_controlled_service_names()
+            }
         if not services:
             return None
 
@@ -1234,6 +1260,13 @@ class DockerEnvironment(BaseEnvironment):
 
     @override
     async def _apply_network_policy(self, network_policy: NetworkPolicy) -> None:
+        if self._native_no_network:
+            if network_policy.network_mode == NetworkMode.NO_NETWORK:
+                return
+            raise ValueError(
+                "Docker native no-network mode cannot change network policy "
+                "after the environment starts."
+            )
         if not self._enable_egress_control:
             if network_policy.network_mode == NetworkMode.PUBLIC:
                 return

@@ -21,7 +21,7 @@ const wss = new WebSocketServer({ port: 8199, host: '127.0.0.1' })
 wss.on('connection', ws => {
   const connectionNumber = ++connectionCount
   let pcm = Buffer.alloc(0)
-  let answered = false
+  let answered = inputVerified
   const send = event => ws.send(JSON.stringify(event))
   send({ type: 'session.created', session: { id: 'mock-session' } })
   ws.on('message', raw => {

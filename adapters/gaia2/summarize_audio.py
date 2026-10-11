@@ -63,7 +63,7 @@ def summarize(job: Path, coverage: dict[str, Any] | None = None) -> dict[str, An
     selected = coverage.get("selected", len(rows)) if coverage else len(rows)
     passed = sum(int(row["success"] is True) for row in rows)
     graded = sum(
-        row["measurement_valid"]
+        row["measurement_valid"] is True
         and row["status"] in {"completed", "execution_timeout", "protocol_failure"}
         for row in rows
     )
@@ -97,6 +97,7 @@ def summarize(job: Path, coverage: dict[str, Any] | None = None) -> dict[str, An
         "selected": selected,
         "timing_by_track": timing,
         "scored": graded,
+        "unscored": counts["completed_unscored"],
         "measurement_invalid": sum(
             row["measurement_valid"] is False and row["status"] != "user_aborted"
             for row in rows

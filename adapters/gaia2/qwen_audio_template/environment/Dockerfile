@@ -1,9 +1,6 @@
-FROM node:24.19.0-bookworm-slim
-RUN apt-get update && apt-get install -y --no-install-recommends python3 curl git ripgrep ca-certificates && rm -rf /var/lib/apt/lists/*
-RUN npm install -g opencode-ai@1.18.5
+FROM hearme/qwen-audio-agent-base:1.10.0-local
 WORKDIR /opt/qwen
 COPY . .
-RUN npm ci --ignore-scripts --omit=dev
 ENV QWAUDIO_CONFIG_DIR=/state/qwen \
     XDG_CONFIG_HOME=/state/config \
     XDG_DATA_HOME=/state/data \
@@ -16,7 +13,8 @@ ENV QWAUDIO_CONFIG_DIR=/state/qwen \
     AGENT_PROTOCOL=opencode \
     HOST=0.0.0.0 \
     PORT=3101
-RUN mkdir -p /state /app /run/evaluation
+RUN mkdir -p /state/backend/workspace /app /run/evaluation /logs/agent \
+    && chmod -R 0777 /state /app /run/evaluation /logs
 WORKDIR /app
 ENTRYPOINT []
 CMD ["sleep", "infinity"]

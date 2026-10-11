@@ -6,7 +6,12 @@ import asyncio
 import json
 import time
 from types import SimpleNamespace
-from typing import TYPE_CHECKING, override
+from typing import TYPE_CHECKING
+
+try:
+    from typing import override
+except ImportError:
+    from typing_extensions import override
 
 import httpx
 from audio_driver import AudioDriver, idle_state

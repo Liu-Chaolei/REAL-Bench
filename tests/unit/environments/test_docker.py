@@ -1394,6 +1394,51 @@ class TestDockerNetworkPolicy:
         assert env.capabilities.network_allowlist_ipv6_cidrs is True
         assert env.capabilities.dynamic_network_policy is True
 
+    def test_opt_in_native_no_network_uses_compose_none(
+        self, temp_dir, monkeypatch
+    ):
+        monkeypatch.setenv("HARBOR_DOCKER_NATIVE_NO_NETWORK", "1")
+        env_dir = temp_dir / "environment"
+        env_dir.mkdir()
+        (env_dir / "Dockerfile").write_text("FROM ubuntu:22.04\n")
+        trial_paths = TrialPaths(trial_dir=temp_dir / "trial")
+        trial_paths.mkdir()
+
+        env = DockerEnvironment(
+            environment_dir=env_dir,
+            environment_name="test-task",
+            session_id="test-task__abc123",
+            trial_paths=trial_paths,
+            task_env_config=EnvironmentConfig(docker_image="ubuntu:22.04"),
+            network_policy=NetworkPolicy(network_mode=NetworkMode.NO_NETWORK),
+        )
+
+        assert env._native_no_network is True
+        assert env._enable_egress_control is False
+        assert env.capabilities.disable_internet is True
+        assert env.capabilities.dynamic_network_policy is False
+
+        path = env._write_egress_control_services_compose_file()
+        assert path is not None
+        assert json.loads(path.read_text()) == {
+            "services": {"main": {"network_mode": "none"}}
+        }
+        assert env._DOCKER_COMPOSE_EGRESS_CONTROL_PATH not in env._docker_compose_paths
+        assert env._docker_compose_paths[-1] == path
+        env._cleanup_egress_control_services_compose_file()
+
+    def test_native_no_network_rejects_dynamic_policy(self, monkeypatch):
+        monkeypatch.setenv("HARBOR_DOCKER_NATIVE_NO_NETWORK", "1")
+
+        assert not DockerEnvironment._can_use_native_no_network(
+            startup_network_policy=NetworkPolicy(
+                network_mode=NetworkMode.NO_NETWORK
+            ),
+            phase_network_policies=[
+                NetworkPolicy(network_mode=NetworkMode.PUBLIC)
+            ],
+        )
+
     def test_allowlist_policy_enables_linux_egress_control(self, temp_dir):
         env_dir = temp_dir / "environment"
         env_dir.mkdir()

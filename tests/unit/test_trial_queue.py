@@ -1,6 +1,7 @@
 import asyncio
+from datetime import datetime, timezone
 from pathlib import Path
-from unittest.mock import MagicMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 from uuid import uuid4
 
 import pytest
@@ -13,7 +14,7 @@ from harbor.models.trial.config import (
     TaskConfig,
     TrialConfig,
 )
-from harbor.models.trial.result import AgentInfo, TrialResult
+from harbor.models.trial.result import AgentInfo, ExceptionInfo, TrialResult
 from harbor.trial.hooks import TrialEvent, TrialHookEvent
 from harbor.trial.queue import TrialQueue
 
@@ -244,6 +245,51 @@ class TestTrialQueue:
         ):
             with pytest.raises(ValueError, match="Test error"):
                 await queue.submit(trial_config)
+
+    @pytest.mark.unit
+    async def test_retry_preserves_failed_attempt_result(
+        self, hooks, trial_config, tmp_path
+    ):
+        queue = TrialQueue(
+            n_concurrent=1,
+            retry_config=RetryConfig(max_retries=1, min_wait_sec=0),
+            hooks=hooks,
+        )
+        failed = _make_trial_result(trial_config)
+        failed.exception_info = ExceptionInfo(
+            exception_type="RuntimeError",
+            exception_message="transient failure",
+            exception_traceback="traceback",
+            occurred_at=datetime.now(timezone.utc),
+        )
+        succeeded = _make_trial_result(trial_config)
+
+        first_trial = MagicMock()
+        first_trial.config = trial_config
+        first_trial.paths.trial_dir = tmp_path / trial_config.trial_name
+        first_trial.paths.trial_dir.mkdir()
+        first_trial.run = AsyncMock(return_value=failed)
+        second_trial = MagicMock()
+        second_trial.config = trial_config
+        second_trial.paths.trial_dir = tmp_path / trial_config.trial_name
+        second_trial.run = AsyncMock(return_value=succeeded)
+
+        with patch(
+            "harbor.trial.trial.Trial.create",
+            side_effect=[first_trial, second_trial],
+        ):
+            result = await queue._execute_trial_with_retries(trial_config)
+
+        assert result is succeeded
+        retry_result = (
+            tmp_path
+            / ".retry-attempts"
+            / trial_config.trial_name
+            / "attempt-1.json"
+        )
+        assert retry_result.is_file()
+        preserved = TrialResult.model_validate_json(retry_result.read_text())
+        assert preserved.exception_info == failed.exception_info
 
     @pytest.mark.unit
     def test_should_retry_exception(self, queue):

@@ -15,7 +15,7 @@ else:
 VERSION = "gaia2-qwen-audio/7"
 BASIS = "official_action_count_failure"
 AUI = "AgentUserInterface__send_message_to_user"
-ARE_IMAGE = "sha256:dbb0c94145258db2e0bbeb3cf7cfa90d3161ac79e0992214c10b16104fcfc36f"
+ARE_IMAGE = "sha256:359a60d5a10c1110b6f110660605765a9aa01867970d702bcb1e3e00574dfbea"
 RULE_SHA256 = "9cbca89144fd9597daf57047450e985c561132d5d00b1a98fdb933244d1699e3"
 POLICY = {
     "name": BASIS,

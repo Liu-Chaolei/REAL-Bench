@@ -651,7 +651,18 @@ class AudioDriver:
             "conversation.item.input_audio_transcription.completed",
             "conversation.item.ambient_audio_transcription.completed",
         }:
-            self.pending_input_items.discard(identity)
+            if identity in self.pending_input_items:
+                self.pending_input_items.discard(identity)
+            elif len(self.pending_input_items) == 1:
+                # DashScope can replace the provisional speech_started item ID
+                # before committing the same utterance. A completed transcript
+                # unambiguously closes the sole outstanding input segment.
+                provisional = self.pending_input_items.pop()
+                self.protocol.record(
+                    "input.transcription_id_reconciled",
+                    provisional_item_id=provisional,
+                    completed_item_id=identity,
+                )
         if (
             kind == "input_audio_buffer.speech_stopped"
             and payload.get("reason") == "turn_invalid"

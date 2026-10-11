@@ -127,6 +127,138 @@ async def test_unknown_errors_keep_unknown_attribution(tmp_path):
     )
 
 
+async def test_cancel_before_response_created_is_a_benign_race(tmp_path):
+    d, _ = driver(tmp_path)
+
+    assert await d.observe_gateway_event(
+        {
+            "type": "error",
+            "message": (
+                "invalid_request_error: Cannot cancel response before "
+                "response.created"
+            ),
+        }
+    )
+
+    rows = [
+        json.loads(line)
+        for line in (d.protocol.output / "protocol.jsonl").read_text().splitlines()
+    ]
+    assert any(
+        row["event"] == "agent.runtime_event"
+        and row["kind"] == "benign_cancel_race"
+        for row in rows
+    )
+
+
+async def test_action_only_task_allows_inactivity_disconnect_after_work(tmp_path):
+    d, _ = driver(tmp_path)
+    d.freeze = AsyncMock()
+    assert await d.observe_gateway_event(
+        {"type": "evaluation.connection.recovering", "reason": "inactivity"}
+    )
+    assert not d.native_recovery.pending
+    assert d.done
+    d.freeze.assert_awaited_once_with("idle_window")
+    rows = [
+        json.loads(line)
+        for line in (d.protocol.output / "protocol.jsonl").read_text().splitlines()
+    ]
+    assert any(
+        row["event"] == "connection.inactivity_after_terminal_work"
+        for row in rows
+    )
+
+
+async def test_terminal_inactivity_ignores_trailing_connection_teardown(tmp_path):
+    d, _ = driver(tmp_path)
+    d.freeze = AsyncMock()
+
+    assert await d.observe_gateway_event(
+        {"type": "evaluation.connection.recovering", "reason": "inactivity"}
+    )
+    assert d.done
+    assert await d.observe_gateway_event(
+        {"type": "voice.connection", "state": "unavailable"}
+    )
+
+
+async def test_answer_task_rejects_inactivity_disconnect_without_watchdog(tmp_path):
+    d, _ = driver(tmp_path)
+    d.contract["kind"] = "answer_only"
+    d.contract["requires_answer"] = True
+    with pytest.raises(InfrastructureError) as e:
+        await d.observe_gateway_event(
+            {"type": "evaluation.connection.recovering", "reason": "inactivity"}
+        )
+    assert e.value.cause == "unsupported_recovery_state"
+
+
+async def test_answer_task_closes_after_committed_terminal_delivery(tmp_path):
+    d, _ = driver(tmp_path)
+    d.contract["kind"] = "answer_only"
+    d.contract["requires_answer"] = True
+    delivery = d.protocol.declare("answer", "final")
+    delivery.played = True
+    delivery.committed = True
+    delivery.transcript = "The answer is 15."
+    d.protocol.set_state("completed")
+    d.freeze = AsyncMock()
+
+    assert await d.observe_gateway_event(
+        {"type": "evaluation.connection.recovering", "reason": "inactivity"}
+    )
+
+    assert d.done
+    assert not d.native_recovery.pending
+    d.freeze.assert_awaited_once_with("idle_window")
+
+
+def test_completed_transcription_reconciles_a_single_provisional_item_id(tmp_path):
+    d, _ = driver(tmp_path)
+    d.expects_input_transcription = True
+    d.pending_input_items.clear()
+
+    d.observe_provider_input(
+        {"type": "input_audio_buffer.speech_started", "item_id": "provisional"}
+    )
+    d.observe_provider_input(
+        {
+            "type": "conversation.item.input_audio_transcription.completed",
+            "item_id": "committed",
+            "transcript": "Answer only with a number.",
+        }
+    )
+
+    assert not d.pending_input_items
+    rows = [
+        json.loads(line)
+        for line in (d.protocol.output / "protocol.jsonl").read_text().splitlines()
+    ]
+    assert any(
+        row["event"] == "input.transcription_id_reconciled"
+        and row["provisional_item_id"] == "provisional"
+        and row["completed_item_id"] == "committed"
+        for row in rows
+    )
+
+
+def test_completed_transcription_does_not_guess_between_pending_inputs(tmp_path):
+    d, _ = driver(tmp_path)
+    d.expects_input_transcription = True
+    d.pending_input_items = {"first", "second"}
+
+    d.observe_provider_input(
+        {
+            "type": "conversation.item.input_audio_transcription.completed",
+            "item_id": "committed",
+            "transcript": "Ambiguous input.",
+        }
+    )
+
+    assert d.pending_input_items == {"first", "second"}
+
+
 async def test_legacy_repair_commands_are_forbidden(tmp_path):
     d, _ = driver(tmp_path)
     with pytest.raises(InfrastructureError):

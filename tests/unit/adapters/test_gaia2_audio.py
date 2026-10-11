@@ -336,14 +336,25 @@ def test_summary_keeps_infrastructure_failures_in_selected_denominator(tmp_path)
                 "audio": {"config": "search"},
             },
         ),
+        (
+            "unscored",
+            {
+                "status": "completed_unscored",
+                "success": None,
+                "measurement_valid": None,
+                "audio": {"config": "ambiguity"},
+            },
+        ),
     ]:
         directory = tmp_path / name / "agent"
         directory.mkdir(parents=True)
         (directory / "gaia2_qwen_audio_result.json").write_text(json.dumps(payload))
     summary = summarize(tmp_path, {"selected": 3})
-    assert summary["executed"] == 2
-    assert summary["not_executed"] == 1
+    assert summary["executed"] == 3
+    assert summary["not_executed"] == 0
     assert summary["pass_rate_selected"] == pytest.approx(1 / 3)
+    assert summary["scored"] == 1
+    assert summary["unscored"] == 1
     assert summary["statuses"]["infrastructure_error"] == 1
 
 
@@ -377,7 +388,12 @@ async def test_harbor_wrapper_handles_empty_exec_streams_and_separates_credentia
 
     environment = AsyncMock(spec=BaseEnvironment)
     environment.exec.return_value = ExecResult(return_code=0)
-    environment.service_exec.return_value = ExecResult(return_code=0)
+    environment.service_exec.side_effect = [
+        ExecResult(return_code=0),
+        # The official runner reports ordinary task failures with a non-zero
+        # process code; its downloaded status remains authoritative.
+        ExecResult(return_code=1),
+    ]
 
     async def download(source, target, *, service):
         assert service == "are-runner"
@@ -413,6 +429,61 @@ async def test_harbor_wrapper_handles_empty_exec_streams_and_separates_credentia
     )
     assert "OPENAI_API_KEY" not in start.kwargs["env"]
     assert "GAIA2_JUDGE_API_KEY" not in start.kwargs["env"]
+
+
+@pytest.mark.asyncio
+async def test_harbor_wrapper_preserves_custom_opencode_provider(tmp_path):
+    from unittest.mock import AsyncMock
+
+    from adapters.gaia2.qwen_audio_agent import Gaia2QwenAudioAgent
+    from harbor.environments.base import BaseEnvironment, ExecResult
+    from harbor.models.agent.context import AgentContext
+
+    environment = AsyncMock(spec=BaseEnvironment)
+    environment.exec.return_value = ExecResult(return_code=0)
+    environment.service_exec.return_value = ExecResult(return_code=0)
+
+    async def download(source, target, **kwargs):
+        target.write_text(json.dumps({"status": "completed", "success": True}))
+
+    environment.service_download_file.side_effect = download
+    config = {
+        "provider": {
+            "xi": {
+                "npm": "@ai-sdk/openai-compatible",
+                "options": {
+                    "baseURL": "https://backend.invalid/v1",
+                    "apiKey": "backend-test-key",
+                },
+                "models": {"gpt-5.5": {"name": "GPT-5.5"}},
+            }
+        }
+    }
+    agent = Gaia2QwenAudioAgent(
+        logs_dir=tmp_path,
+        extra_env={
+            "DASHSCOPE_API_KEY": "speech-test-key",
+            "QWEN_AUDIO_AGENT_BACKEND_MODEL": "xi/gpt-5.5",
+            "OPENCODE_CONFIG_CONTENT": json.dumps(config),
+            "GAIA2_JUDGE_MODEL": "judge-model",
+            "GAIA2_JUDGE_ENDPOINT": "http://judge.invalid/v1",
+            "GAIA2_JUDGE_API_KEY": "judge-test-key",
+        },
+    )
+    await agent.run("reference", environment, AgentContext())
+
+    proxy_start = next(
+        call
+        for call in environment.service_exec.await_args_list
+        if "model_proxy.py" in call.args[0]
+    )
+    assert proxy_start.kwargs["env"]["GAIA2_BACKEND_CONTROL_ONLY"] == "1"
+    start = next(
+        call for call in environment.exec.await_args_list if "nohup node" in call.args[0]
+    )
+    forwarded = json.loads(start.kwargs["env"]["OPENCODE_CONFIG_CONTENT"])
+    assert forwarded["provider"]["xi"]["options"]["baseURL"] == config["provider"]["xi"]["options"]["baseURL"]
+    assert forwarded["provider"]["xi"]["options"]["apiKey"] == "backend-test-key"
 
 
 def test_expected_user_interruption_does_not_mask_other_gateway_errors():
@@ -491,7 +562,7 @@ def test_responses_judge_sends_low_effort_and_keeps_official_checker_contract():
         assert request.url.path == "/v1/responses"
         assert payload["model"] == "gpt-6-astra"
         assert payload["reasoning"] == {"effort": "low"}
-        assert payload["stream"] is True
+        assert payload["stream"] is False
         assert payload["store"] is False
         assert "temperature" not in payload
         event = {
@@ -527,6 +598,45 @@ def test_responses_judge_sends_low_effort_and_keeps_official_checker_contract():
         assert text == "[[True]]"
         assert usage["input_tokens"] == 3
         assert judge.calls == 1
+    finally:
+        judge.close()
+
+
+def test_boundary_judge_uses_configured_dashscope_chat_transport():
+    import httpx
+
+    Judge = load_responses_judge()
+
+    def respond(request):
+        payload = json.loads(request.content)
+        assert request.url.path == "/compatible-mode/v1/chat/completions"
+        assert payload["model"] == "qwen-plus"
+        assert payload["enable_thinking"] is False
+        assert payload["messages"][0]["role"] == "system"
+        assert "input" not in payload
+        return httpx.Response(
+            200,
+            json={
+                "choices": [
+                    {"message": {"content": "[[True]]"}, "finish_reason": "stop"}
+                ],
+                "usage": {"prompt_tokens": 3},
+            },
+        )
+
+    judge = Judge(
+        "qwen-plus",
+        "https://dashscope.aliyuncs.com/compatible-mode/v1",
+        "secret-test-key",
+        api="chat",
+        client=httpx.Client(transport=httpx.MockTransport(respond)),
+    )
+    try:
+        text, usage = judge(
+            [{"role": "system", "content": "Return [[True]] or [[False]]."}]
+        )
+        assert text == "[[True]]"
+        assert usage["prompt_tokens"] == 3
     finally:
         judge.close()
 

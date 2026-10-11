@@ -142,7 +142,7 @@ partial-playback policy, audit gates, metrics, and preparation commands.
 filter. Normal barge-in no longer automatically blocks task grading or the whole
 batch: action-only tasks are scored; answer evidence gaps remain unknown and
 continue. See [QWEN_AUDIO_TASK_EVIDENCE.md](QWEN_AUDIO_TASK_EVIDENCE.md).
-
+ 
 ## V6 passive native recovery
 
 See [native recovery protocol](QWEN_AUDIO_NATIVE_RECOVERY.md) for the narrow observation scope, readiness evidence, original-budget timing, and validation requirements.

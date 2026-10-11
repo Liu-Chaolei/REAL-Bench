@@ -219,6 +219,15 @@ class TrialQueue:
                 )
                 return result
 
+            retry_result_dir = (
+                trial.paths.trial_dir.parent
+                / ".retry-attempts"
+                / trial_config.trial_name
+            )
+            retry_result_dir.mkdir(parents=True, exist_ok=True)
+            (retry_result_dir / f"attempt-{attempt + 1}.json").write_text(
+                result.model_dump_json(indent=4)
+            )
             shutil.rmtree(trial.paths.trial_dir, ignore_errors=True)
 
             delay_sec = self._calculate_backoff_delay_sec(attempt)

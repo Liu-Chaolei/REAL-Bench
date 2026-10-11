@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 import json
-from typing import override
+try:
+    from typing import override
+except ImportError:
+    from typing_extensions import override
 
 from boundary import MeasurementError
 from evidence import evaluate_evidence

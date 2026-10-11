@@ -11,6 +11,12 @@ services:
       - ${CONTEXT_DIR}/scenario.json:/evaluation/scenario.json:ro
       - ${CONTEXT_DIR}/input.wav:/evaluation/input.wav:ro
       - ${CONTEXT_DIR}/audio.json:/evaluation/audio.json:ro
+      - type: bind
+        source: ${CONTEXT_DIR}/task-contract.json
+        target: /evaluation/task-contract.json
+        read_only: true
+        bind:
+          create_host_path: false
     environment:
       DEMO_FS_PATH: /opt/gaia2-filesystem/demo_filesystem
     command: ["sleep", "infinity"]

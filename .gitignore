@@ -239,3 +239,11 @@ apps/*
 .agents/
 .tensorlake/
 /configs/
+
+# Local GAIA2 audio experiment artifacts
+# These Dockerfiles are scratch image-build contexts, not adapter source.
+/adapters/gaia2/clean_images/
+
+# Generated manifests contain machine-specific absolute audio paths.
+/adapters/gaia2/paired-random10-manifest.jsonl
+/adapters/gaia2/paired-v8-supported-random10-manifest.jsonl

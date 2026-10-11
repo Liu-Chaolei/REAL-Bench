@@ -511,6 +511,7 @@ def main():
                 endpoint=os.environ["GAIA2_JUDGE_ENDPOINT"],
                 api_key=os.environ["OPENAI_API_KEY"],
                 effort=os.environ.get("GAIA2_JUDGE_REASONING_EFFORT") or "low",
+                api=os.environ.get("GAIA2_JUDGE_API", "chat"),
                 record_path=output / "boundary-calls.jsonl",
             )
         options.boundary_engine = boundary_engine

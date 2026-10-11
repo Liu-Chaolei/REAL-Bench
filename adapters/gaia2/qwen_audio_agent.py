@@ -20,6 +20,14 @@ from harbor.environments.docker.docker import DockerEnvironment
 from harbor.models.agent.context import AgentContext
 
 MODEL_ENV = (
+    "AGENT_PROTOCOL",
+    "CODEX_AUTH_FILE",
+    "CODEX_PATH",
+    "CODEX_BASE_URL",
+    "CODEX_API_KEY",
+    "CODEX_MODEL_VERBOSITY",
+    "CODEX_REASONING_EFFORT",
+    "CODEX_SERVICE_TIER",
     "GAIA2_BACKEND_REASONING_EFFORT",
     "GAIA2_JUDGE_REASONING_EFFORT",
     "GAIA2_JUDGE_API",
@@ -39,6 +47,20 @@ MODEL_ENV = (
     "GAIA2_JUDGE_API_KEY",
     "OPENAI_API_KEY",
 )
+
+
+def _codex_auth_key() -> str:
+    """Read the local Codex API token without printing or copying it to logs."""
+    path = Path(
+        os.environ.get("CODEX_AUTH_FILE")
+        or (Path.home() / ".codex" / "auth.json")
+    )
+    try:
+        payload = json.loads(path.read_text())
+    except (OSError, ValueError, TypeError):
+        return ""
+    value = payload.get("OPENAI_API_KEY")
+    return value.strip() if isinstance(value, str) else ""
 
 
 class Gaia2QwenAudioAgent(BaseAgent):
@@ -61,6 +83,19 @@ class Gaia2QwenAudioAgent(BaseAgent):
             )
             for key in MODEL_ENV
         }
+        # The benchmark env files historically used ${OPENAI_KEY}. That
+        # reference is easy to leave unresolved when Harbor is launched from
+        # a clean shell, and may point at a different provider account. Codex
+        # should follow the active local Codex auth unless a caller explicitly
+        # supplied CODEX_API_KEY.
+        if (
+            self.runtime_env["AGENT_PROTOCOL"] == "codex"
+            and not self._extra_env.get("CODEX_API_KEY")
+            and not os.environ.get("CODEX_API_KEY")
+        ):
+            auth_key = _codex_auth_key()
+            if auth_key:
+                self.runtime_env["CODEX_API_KEY"] = auth_key
         self.runtime_env["QWEN_AUDIO_REALTIME_PROVIDER"] = (
             self.runtime_env["QWEN_AUDIO_REALTIME_PROVIDER"] or "dashscope"
         )
@@ -143,6 +178,11 @@ class Gaia2QwenAudioAgent(BaseAgent):
             raise ValueError(f"Unsupported speech provider: {provider}")
         backend = self.runtime_env["QWEN_AUDIO_AGENT_BACKEND_MODEL"]
         if (
+            self.runtime_env["AGENT_PROTOCOL"] == "codex"
+            and not self.runtime_env["CODEX_API_KEY"]
+        ):
+            missing.append("CODEX_API_KEY or ~/.codex/auth.json")
+        if (
             backend
             and ("/" not in backend or backend.startswith("alibaba-cn/"))
             and not self.runtime_env["DASHSCOPE_API_KEY"]
@@ -196,7 +236,7 @@ class Gaia2QwenAudioAgent(BaseAgent):
             raw = images.stdout or "[]"
             self.image_ids = json.loads(raw)
         result = await environment.exec(
-            "mkdir -p /run/evaluation /state/backend/workspace /logs/agent && chmod 700 /run/evaluation && chown -R node:node /state/backend && chmod 755 /state /logs/agent",
+            "mkdir -p /run/evaluation /state/backend/workspace /logs/agent",
             user="root",
         )
         if result.return_code:
@@ -226,40 +266,70 @@ class Gaia2QwenAudioAgent(BaseAgent):
     async def run(
         self, instruction: str, environment: BaseEnvironment, context: AgentContext
     ) -> None:
-        # Only the trusted proxy owns GPT credentials. OpenCode receives a dummy
-        # key, a private ARE endpoint and an explicit deny-by-default tool policy.
+        # External OpenAI-compatible models run through the credential-owning
+        # proxy. OpenCode-hosted models use OpenCode's native provider directly.
         backend_config = json.loads(self.runtime_env["OPENCODE_CONFIG_CONTENT"] or "{}")
-        model = self.runtime_env["QWEN_AUDIO_AGENT_BACKEND_MODEL"].split("/", 1)[-1]
-        provider = backend_config.get("provider", {}).get("openai", {})
-        endpoint = provider.get("options", {}).get("baseURL")
-        if not endpoint:
-            raise ValueError(
-                "Evaluation v2 requires an explicit OpenAI Responses backend baseURL"
+        backend_model = self.runtime_env["QWEN_AUDIO_AGENT_BACKEND_MODEL"]
+        provider_name = backend_model.partition("/")[0]
+        configured_providers = backend_config.get("provider", {})
+        direct_backend = (
+            self.runtime_env["AGENT_PROTOCOL"] == "codex"
+            or backend_model.startswith(("opencode/", "alibaba-cn/"))
+            or (
+                provider_name != "openai"
+                and isinstance(configured_providers.get(provider_name), dict)
             )
-        proxy_env = {
-            "GAIA2_BACKEND_ENDPOINT": endpoint,
-            "GAIA2_BACKEND_API_KEY": self.runtime_env["GAIA2_BACKEND_API_KEY"]
-            or provider.get("options", {}).get("apiKey", ""),
-            "GAIA2_BACKEND_MODEL": model,
-            "GAIA2_BACKEND_REASONING_EFFORT": self.runtime_env[
-                "GAIA2_BACKEND_REASONING_EFFORT"
-            ]
-            or "low",
-            "QWAUDIO_EVALUATION_TOKEN": self.token,
-        }
-        if not proxy_env["GAIA2_BACKEND_API_KEY"]:
-            raise ValueError("Missing backend proxy credential")
-        result = await environment.service_exec(
-            "nohup python /opt/runner/model_proxy.py >/evaluation/proxy.log 2>&1 </dev/null &",
-            service="are-runner",
-            env=proxy_env,
         )
-        if result.return_code:
-            raise RuntimeError("Could not start model proxy")
-        provider.setdefault("options", {}).update(
-            baseURL="http://are-runner:8001/v1", apiKey="evaluation-proxy"
-        )
-        backend_config["provider"] = {"openai": provider}
+        if not direct_backend:
+            model = backend_model.split("/", 1)[-1]
+            provider = backend_config.get("provider", {}).get("openai", {})
+            endpoint = provider.get("options", {}).get("baseURL")
+            if not endpoint:
+                raise ValueError(
+                    "External backends require an explicit OpenAI Responses baseURL"
+                )
+            proxy_env = {
+                "GAIA2_BACKEND_ENDPOINT": endpoint,
+                "GAIA2_BACKEND_API_KEY": self.runtime_env["GAIA2_BACKEND_API_KEY"]
+                or provider.get("options", {}).get("apiKey", ""),
+                "GAIA2_BACKEND_MODEL": model,
+                "GAIA2_BACKEND_REASONING_EFFORT": self.runtime_env[
+                    "GAIA2_BACKEND_REASONING_EFFORT"
+                ]
+                or "low",
+                "QWAUDIO_EVALUATION_TOKEN": self.token,
+            }
+            if not proxy_env["GAIA2_BACKEND_API_KEY"]:
+                raise ValueError("Missing backend proxy credential")
+            result = await environment.service_exec(
+                "nohup python /opt/runner/model_proxy.py >/evaluation/proxy.log 2>&1 </dev/null &",
+                service="are-runner",
+                env=proxy_env,
+            )
+            if result.return_code:
+                raise RuntimeError("Could not start model proxy")
+            provider.setdefault("options", {}).update(
+                baseURL="http://are-runner:8001/v1", apiKey="evaluation-proxy"
+            )
+            backend_config["provider"] = {"openai": provider}
+        else:
+            # Direct OpenCode providers still need the protocol's barrier/state/seal
+            # service. It never handles inference in this mode.
+            result = await environment.service_exec(
+                "nohup python /opt/runner/model_proxy.py >/evaluation/proxy.log 2>&1 </dev/null &",
+                service="are-runner",
+                env={
+                    "GAIA2_BACKEND_CONTROL_ONLY": "1",
+                    "GAIA2_BACKEND_MODEL": backend_model.split("/", 1)[-1],
+                    "GAIA2_BACKEND_REASONING_EFFORT": self.runtime_env[
+                        "GAIA2_BACKEND_REASONING_EFFORT"
+                    ]
+                    or "low",
+                    "QWAUDIO_EVALUATION_TOKEN": self.token,
+                },
+            )
+            if result.return_code:
+                raise RuntimeError("Could not start backend control service")
         backend_config.setdefault("experimental", {})["mcp_timeout"] = (
             self.scenario_timeout + 600
         ) * 1000
@@ -279,6 +349,13 @@ class Gaia2QwenAudioAgent(BaseAgent):
                 "SPEECH_TO_SPEECH_REALTIME_URL",
                 "SPEECH_TO_SPEECH_AUTH_TOKEN",
                 "QWEN_AUDIO_AGENT_BACKEND_MODEL",
+                "AGENT_PROTOCOL",
+                "CODEX_PATH",
+                "CODEX_BASE_URL",
+                "CODEX_API_KEY",
+                "CODEX_MODEL_VERBOSITY",
+                "CODEX_REASONING_EFFORT",
+                "CODEX_SERVICE_TIER",
             }
         }
         main_env.update(
@@ -287,7 +364,11 @@ class Gaia2QwenAudioAgent(BaseAgent):
                 "QWAUDIO_EVALUATION_CONFIG": "/run/evaluation/config.json",
                 "QWAUDIO_EVALUATION_BACKEND_SANDBOX": "1",
                 "OPENCODE_WORKSPACE": "/state/backend/workspace",
-                "QWEN_AUDIO_AGENT_BACKEND_PERMISSION_MODE": "native",
+                "QWEN_AUDIO_AGENT_BACKEND_PERMISSION_MODE": (
+                    "full"
+                    if self.runtime_env["AGENT_PROTOCOL"] == "codex"
+                    else "native"
+                ),
                 "AGENT_TIMEOUT_MS": str((self.scenario_timeout + 600) * 1000),
             }
         )
@@ -334,7 +415,9 @@ class Gaia2QwenAudioAgent(BaseAgent):
         runner_env["QWAUDIO_SOURCE_REVISION"] = json.dumps(source_info)
         runner_env["QWAUDIO_IMAGE_IDS"] = json.dumps(getattr(self, "image_ids", []))
         runner_env["OPENAI_API_KEY"] = (
-            self.runtime_env["GAIA2_JUDGE_API_KEY"]
+            self.runtime_env["DASHSCOPE_API_KEY"]
+            if "dashscope.aliyuncs.com" in self.runtime_env["GAIA2_JUDGE_ENDPOINT"]
+            else self.runtime_env["GAIA2_JUDGE_API_KEY"]
             or self.runtime_env["OPENAI_API_KEY"]
         )
         self.logs_dir.mkdir(parents=True, exist_ok=True)
@@ -363,7 +446,10 @@ class Gaia2QwenAudioAgent(BaseAgent):
             "official_success": payload.get("success"),
             "models": payload.get("models"),
         }
-        if result.return_code or payload["status"] == "infrastructure_error":
+        # The runner uses a non-zero exit code for normal benchmark failures too.
+        # Once its structured result exists, that status is the source of truth;
+        # the verifier maps completed failures and unscored outcomes to rewards.
+        if payload["status"] == "infrastructure_error":
             raise RuntimeError(
                 "ARE/Qwen evaluation infrastructure error; see gaia2_qwen_audio_result.json"
             )

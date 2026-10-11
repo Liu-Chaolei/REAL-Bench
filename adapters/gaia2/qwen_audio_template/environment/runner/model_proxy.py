@@ -18,7 +18,9 @@ from starlette.responses import JSONResponse, StreamingResponse
 from starlette.routing import Route
 
 
-def make_app(endpoint, key, model, effort, token, output, *, transport=None):
+def make_app(
+    endpoint, key, model, effort, token, output, *, transport=None, control_only=False
+):
     dispatch = asyncio.Event()
     dispatch.set()
     active = 0
@@ -29,7 +31,7 @@ def make_app(endpoint, key, model, effort, token, output, *, transport=None):
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
 
-    def failure(cause, status=None):
+    def failure(cause, status=None, details=None):
         with (output / "provider-failures.jsonl").open("a") as stream:
             stream.write(
                 json.dumps(
@@ -37,6 +39,7 @@ def make_app(endpoint, key, model, effort, token, output, *, transport=None):
                         "component": "backend_provider",
                         "cause": cause,
                         "http_status": status,
+                        **({"details": details} if details else {}),
                         "wall_time": time.time(),
                     }
                 )
@@ -86,6 +89,12 @@ def make_app(endpoint, key, model, effort, token, output, *, transport=None):
 
     async def responses(request: Request):
         nonlocal active, sequence
+        if control_only:
+            failure("unexpected_control_proxy_inference", 503)
+            return JSONResponse(
+                {"error": "Inference is owned by the direct OpenCode provider"},
+                status_code=503,
+            )
         body = await request.json()
         if sealed:
             return JSONResponse({"error": "Trial sealed"}, status_code=409)
@@ -93,7 +102,18 @@ def make_app(endpoint, key, model, effort, token, output, *, transport=None):
             body.get("model") != model
             or body.get("reasoning", {}).get("effort") != effort
         ):
-            failure("adapter_model_profile", 400)
+            failure(
+                "adapter_model_profile",
+                400,
+                {
+                    "actual_model": body.get("model"),
+                    "actual_reasoning_effort": body.get("reasoning", {}).get(
+                        "effort"
+                    ),
+                    "expected_model": model,
+                    "expected_reasoning_effort": effort,
+                },
+            )
             return JSONResponse(
                 {"error": "Model and reasoning effort must match the frozen profile"},
                 status_code=400,
@@ -226,12 +246,13 @@ def make_app(endpoint, key, model, effort, token, output, *, transport=None):
 if __name__ == "__main__":
     uvicorn.run(
         make_app(
-            os.environ["GAIA2_BACKEND_ENDPOINT"],
-            os.environ["GAIA2_BACKEND_API_KEY"],
+            os.environ.get("GAIA2_BACKEND_ENDPOINT", ""),
+            os.environ.get("GAIA2_BACKEND_API_KEY", ""),
             os.environ["GAIA2_BACKEND_MODEL"],
             os.environ["GAIA2_BACKEND_REASONING_EFFORT"],
             os.environ["QWAUDIO_EVALUATION_TOKEN"],
             "/evaluation/results/model-requests",
+            control_only=os.environ.get("GAIA2_BACKEND_CONTROL_ONLY") == "1",
         ),
         host="0.0.0.0",
         port=8001,

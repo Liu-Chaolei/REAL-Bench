@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import time
 from pathlib import Path
 from typing import Any
 
@@ -17,13 +18,19 @@ class ResponsesJudge:
         endpoint: str,
         api_key: str,
         effort: str = "low",
+        api: str = "responses",
         *,
         client: httpx.Client | None = None,
         record_path: Path | None = None,
         replay_path: Path | None = None,
     ) -> None:
         self.model = model
-        self.endpoint = endpoint.rstrip("/") + "/responses"
+        if api not in {"chat", "responses"}:
+            raise ValueError("Judge API must be chat or responses")
+        self.api = api
+        self.endpoint = endpoint.rstrip("/") + (
+            "/chat/completions" if api == "chat" else "/responses"
+        )
         self.api_key = api_key
         self.effort = effort
         self.client = client or httpx.Client(timeout=120)
@@ -44,14 +51,25 @@ class ResponsesJudge:
         stop_sequences: tuple[str, ...] = (),
         **kwargs: Any,
     ) -> tuple[str, dict[str, Any] | None]:
-        payload = {
-            "model": self.model,
-            "input": messages,
-            "reasoning": {"effort": self.effort},
-            "max_output_tokens": 4096,
-            "store": False,
-            "stream": True,
-        }
+        payload = (
+            {
+                "model": self.model,
+                "messages": messages,
+                "max_tokens": 4096,
+                "stream": False,
+            }
+            if self.api == "chat"
+            else {
+                "model": self.model,
+                "input": messages,
+                "reasoning": {"effort": self.effort},
+                "max_output_tokens": 4096,
+                "store": False,
+                "stream": False,
+            }
+        )
+        if "dashscope.aliyuncs.com" in self.endpoint:
+            payload["enable_thinking"] = False
         self.calls += 1
         input_hash = hashlib.sha256(
             json.dumps(
@@ -65,56 +83,73 @@ class ResponsesJudge:
             if row["input_sha256"] != input_hash:
                 raise RuntimeError("Judge replay input differs from recorded request")
             return row["text"], row["usage"]
-        chunks = []
-        completed: dict[str, Any] | None = None
-        with self.client.stream(
-            "POST",
-            self.endpoint,
-            json=payload,
-            headers={"Authorization": "Bearer " + self.api_key},
-        ) as response:
-            if not response.is_success:
-                message = response.read().decode(errors="replace")
-                message = (
-                    message.replace(self.api_key, "[redacted]")
-                    if self.api_key
-                    else message
-                )
-                raise RuntimeError(
-                    f"Judge Responses HTTP {response.status_code}: {message[:500]}"
-                )
-            if "text/event-stream" not in response.headers.get("content-type", ""):
-                data = json.loads(response.read())
-                if data.get("status") != "completed":
-                    raise RuntimeError("Judge Responses request did not complete")
-                completed = data
-            else:
-                for line in response.iter_lines():
-                    if not line.startswith("data:"):
-                        continue
-                    data = line[5:].strip()
-                    if data == "[DONE]":
-                        break
-                    event = json.loads(data)
-                    kind = event.get("type")
-                    if kind == "response.output_text.delta":
-                        chunks.append(event.get("delta", ""))
-                    elif kind == "response.completed":
-                        completed = event["response"]
-                    elif kind in {"error", "response.failed", "response.incomplete"}:
-                        # Keep credentials and provider-specific response bodies out of logs.
-                        raise RuntimeError(f"Judge Responses stream ended with {kind}")
+        for attempt in range(4):
+            chunks = []
+            completed: dict[str, Any] | None = None
+            try:
+                with self.client.stream(
+                    "POST",
+                    self.endpoint,
+                    json=payload,
+                    headers={"Authorization": "Bearer " + self.api_key},
+                ) as response:
+                    if not response.is_success:
+                        message = response.read().decode(errors="replace")
+                        message = (
+                            message.replace(self.api_key, "[redacted]")
+                            if self.api_key
+                            else message
+                        )
+                        if response.status_code == 429 or response.status_code >= 500:
+                            if attempt < 3:
+                                time.sleep(2**attempt)
+                                continue
+                        raise RuntimeError(
+                            f"Judge {self.api} HTTP {response.status_code}: {message[:500]}"
+                        )
+                    if "text/event-stream" not in response.headers.get("content-type", ""):
+                        data = json.loads(response.read())
+                        if self.api == "responses" and data.get("status") != "completed":
+                            raise RuntimeError("Judge Responses request did not complete")
+                        completed = data
+                    else:
+                        for line in response.iter_lines():
+                            if not line.startswith("data:"):
+                                continue
+                            data = line[5:].strip()
+                            if data == "[DONE]":
+                                break
+                            event = json.loads(data)
+                            kind = event.get("type")
+                            if kind == "response.output_text.delta":
+                                chunks.append(event.get("delta", ""))
+                            elif kind == "response.completed":
+                                completed = event["response"]
+                            elif kind in {"error", "response.failed", "response.incomplete"}:
+                                raise RuntimeError(
+                                    f"Judge Responses stream ended with {kind}"
+                                )
+                break
+            except httpx.TransportError:
+                if attempt == 3:
+                    raise
+                time.sleep(2**attempt)
         if completed is None:
             raise RuntimeError(
                 "Judge Responses stream closed without a completion event"
             )
-        text = "".join(
-            part.get("text", "")
-            for item in completed.get("output", [])
-            if item.get("type") == "message"
-            for part in item.get("content", [])
-            if part.get("type") == "output_text"
-        ) or "".join(chunks)
+        if self.api == "chat":
+            text = completed.get("choices", [{}])[0].get("message", {}).get(
+                "content", ""
+            )
+        else:
+            text = "".join(
+                part.get("text", "")
+                for item in completed.get("output", [])
+                if item.get("type") == "message"
+                for part in item.get("content", [])
+                if part.get("type") == "output_text"
+            ) or "".join(chunks)
         if not text.strip():
             raise RuntimeError("Judge Responses returned no text")
         # ARE LLMChecker matches [[True]]/[[False]] case-sensitively.
@@ -135,6 +170,7 @@ class ResponsesJudge:
                         {
                             "input_sha256": input_hash,
                             "payload": payload,
+                            "api": self.api,
                             "text": text,
                             "usage": completed.get("usage"),
                         },

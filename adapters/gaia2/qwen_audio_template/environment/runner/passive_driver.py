@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 import json
-from typing import override
+try:
+    from typing import override
+except ImportError:
+    from typing_extensions import override
 
 from audio_driver import InfrastructureError, expected_interruption, service_error_cause
 from native_recovery import (
@@ -12,6 +15,7 @@ from native_recovery import (
     NativeRecovery,
     external_service_cause,
 )
+from protocol import TERMINAL
 from task_driver import TaskDriver, TaskProtocol
 
 
@@ -52,6 +56,26 @@ class PassiveDriver(TaskDriver):
             and not any(not f.done() for f in self.delivery_waiters.values())
         )
 
+    def terminal_inactivity_ready(self):
+        if (
+            not self.recovery_scope_ready()
+            or self.runtime.waiting
+            or self.runtime.operations.locked()
+            or self.backend_active
+        ):
+            return False
+        if (
+            self.contract.get("kind") == "action_only"
+            and not self.contract.get("requires_answer", False)
+        ):
+            return True
+        return self.protocol.state in TERMINAL and any(
+            delivery.committed
+            and not delivery.cancelled
+            and delivery.kind in {"final", "clarification", "failure"}
+            for delivery in self.protocol.deliveries.values()
+        )
+
     @override
     async def observe_gateway_event(self, event):
         import time
@@ -78,6 +102,15 @@ class PassiveDriver(TaskDriver):
                     "Explicit external service error: " + message, cause
                 )
         if kind == "error":
+            message = str(event.get("message", ""))
+            if "Cannot cancel response before response.created" in message:
+                self.protocol.record(
+                    "agent.runtime_event",
+                    kind="benign_cancel_race",
+                    origin="qwen_gateway",
+                    message=message,
+                )
+                return True
             if expected_interruption(
                 event, self.last_user_interruption, time.monotonic()
             ):
@@ -113,6 +146,8 @@ class PassiveDriver(TaskDriver):
             "voice.ready",
             "evaluation.connection.recovering",
         }:
+            if self.done:
+                return True
             if self.native_recovery.pending:
                 observed = self.protocol.elapsed() or 0
                 self.native_recovery.connection(event, observed)
@@ -121,6 +156,20 @@ class PassiveDriver(TaskDriver):
                     connection_event=event,
                     observed_sec=observed,
                 )
+                return True
+            if (
+                kind == "evaluation.connection.recovering"
+                and event.get("reason") == "inactivity"
+                and self.terminal_inactivity_ready()
+            ):
+                self.protocol.record(
+                    "connection.inactivity_after_terminal_work",
+                    origin="qwen_gateway",
+                    reason=event.get("reason"),
+                    request_state=self.protocol.state,
+                )
+                await self.freeze("idle_window")
+                self.done = True
                 return True
             if kind == "evaluation.connection.recovering" or (
                 kind == "voice.connection" and event.get("state") == "unavailable"
