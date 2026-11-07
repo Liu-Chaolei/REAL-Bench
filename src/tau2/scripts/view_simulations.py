@@ -442,6 +442,21 @@ def display_simulation_with_task(
     tick_duration_ms: Optional[int] = None,
 ):
     """Display a simulation along with its associated task."""
+    base = Path(results_file)
+    base = base if base.is_dir() else base.parent
+    diagnostic = (
+        base
+        / "artifacts"
+        / f"task_{task.id}"
+        / f"sim_{simulation.id}"
+        / "diagnostics"
+        / "latest.json"
+    )
+    if diagnostic.exists():
+        simulation = simulation.model_copy(
+            update={"diagnostics_ref": json.loads(diagnostic.read_text())}
+        )
+
     ConsoleDisplay.console.print("\n" + "=" * 80)  # Separator
     ConsoleDisplay.console.print("[bold blue]Task Details:[/]")
     ConsoleDisplay.display_task(task)

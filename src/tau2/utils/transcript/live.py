@@ -2,7 +2,9 @@
 
 Split at 1.5 seconds of silence, pad each side by 750 ms, and associate saved
 caption ticks by overlap. A tick overlapping two clips belongs to the earlier
-clip. Provider transcript timestamps are preserved as evidence, not used to align.
+clip. Provider timestamps remain evidence. Observer ASR explicitly marked as
+played_audio uses timestamps on the actual playback stream instead of its later
+finalization tick.
 """
 
 import hashlib
@@ -33,6 +35,8 @@ class _Fragment:
     value: LiveTranscriptFragment
     index: int
     release_ms: float
+    audio_start_ms: float | None = None
+    audio_end_ms: float | None = None
 
 
 @dataclass
@@ -59,6 +63,9 @@ def _session_groups(
     if len(durations) != 1 or None in durations or next(iter(durations)) <= 0:
         raise ValueError("Live grouping requires one recorded positive tick duration")
     duration = next(iter(durations))
+    session_start_ms = ticks[records[0][0]].tick_id * duration * 1000
+    played_alignment = any(m.alignment == "played_audio" for _, m in records)
+    version = "played-audio-asr-v1" if played_alignment else LIVE_SEGMENT_VERSION
     for index, metadata in records:
         tick = ticks[index]
         start = round(tick.tick_id * duration * 1000, 6)
@@ -70,7 +77,20 @@ def _session_groups(
             )
         for fragment in metadata.fragments:
             if fragment.speaker == "agent" and fragment.text:
-                fragments.append(_Fragment(fragment, index, start))
+                aligned = metadata.alignment == "played_audio"
+                fragments.append(
+                    _Fragment(
+                        fragment,
+                        index,
+                        start,
+                        session_start_ms + fragment.start_ms
+                        if aligned and fragment.start_ms is not None
+                        else None,
+                        session_start_ms + fragment.end_ms
+                        if aligned and fragment.end_ms is not None
+                        else None,
+                    )
+                )
     spans: list[_AudioSpan] = []
     for span in sorted(activity, key=lambda s: (s.start_ms, s.end_ms)):
         if not spans or span.start_ms - spans[-1].end_ms >= LIVE_SILENCE_MS:
@@ -108,11 +128,20 @@ def _session_groups(
     outside: list[set[int]] = [set() for _ in spans]
     previous = 0
     for fragment in fragments:
-        tick_end = fragment.release_ms + duration * 1000
+        position = (
+            fragment.audio_start_ms
+            if fragment.audio_start_ms is not None
+            else fragment.release_ms
+        )
+        tick_end = (
+            fragment.audio_end_ms
+            if fragment.audio_end_ms is not None
+            else fragment.release_ms + duration * 1000
+        )
         matches = [
             ordinal
             for ordinal, (start, end) in enumerate(bounds)
-            if fragment.release_ms < end and tick_end > start
+            if position < end and tick_end > start
         ]
         if matches:
             # A text-bearing tick crossing both clips belongs to the earlier clip.
@@ -121,7 +150,7 @@ def _session_groups(
                 ties[selected].add(ticks[fragment.index].tick_id)
         else:
             # Retain distant text with the nearest group; record the timing mismatch.
-            selected, _ = _nearest(fragment.release_ms, spans)
+            selected, _ = _nearest(position, spans)
             outside[selected].add(ticks[fragment.index].tick_id)
         if selected < previous:
             raise ValueError("Live caption association would reorder recorded text")
@@ -135,7 +164,7 @@ def _session_groups(
             problems[ordinal].add("Recorded Live speech has no transcript")
         identity = [
             session,
-            LIVE_SEGMENT_VERSION,
+            version,
             span.start_ms,
             span.end_ms,
             bounds[ordinal],
@@ -149,11 +178,13 @@ def _session_groups(
         )
         error = "; ".join(sorted(problems[ordinal])) or None
         metadata = {
-            "version": LIVE_SEGMENT_VERSION,
+            "version": version,
             "evidence_origins": sorted({m.origin for _, m in records}),
             "silence_threshold_ms": LIVE_SILENCE_MS,
             "padding_ms": LIVE_PADDING_MS,
-            "association_method": "recorded_tick_overlap_earlier",
+            "association_method": "played_audio_timestamps"
+            if played_alignment
+            else "recorded_tick_overlap_earlier",
             "earlier_clip_tie_tick_ids": sorted(ties[ordinal]),
             "outside_window_tick_ids": sorted(outside[ordinal]),
             "segment_id": identifier,

@@ -24,6 +24,12 @@ from tau2.utils.text_match import fold_for_match
 class RetailTools(ToolKitBase):  # Tools
     """All the tools for the retail domain."""
 
+    def get_user_asr_materials(self, task):
+        """Return this caller's visible identity and order vocabulary."""
+        from tau2.domains.retail.asr_materials import user_asr_materials
+
+        return user_asr_materials(self.db, task)
+
     db: RetailDB
 
     def __init__(

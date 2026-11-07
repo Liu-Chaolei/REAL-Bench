@@ -366,6 +366,7 @@ def run_single_task(
     task: Task,
     *,
     seed: Optional[int] = None,
+    trial: Optional[int] = None,
     evaluation_type: EvaluationType = EvaluationType.ALL,
     save_dir: Optional[Path] = None,
     user_voice_settings: Optional[VoiceSettings] = None,
@@ -416,7 +417,17 @@ def run_single_task(
     with _TaskLogContext(simulation_id, save_dir, task, verbose_logs):
         # Compute audio taps directory if enabled
         taps_dir = None
-        if audio_taps and save_dir:
+        record_qwen_bridge = (
+            verbose_logs
+            and isinstance(config, VoiceRunConfig)
+            and config.audio_native_config.provider == "qwen_agent"
+        )
+        if (
+            audio_taps
+            or config.metrics_config is not None
+            or record_qwen_bridge
+            or (is_voice and config.audio_native_config.user_audio_renderer == "saasr")
+        ) and save_dir:
             taps_dir = (
                 save_dir
                 / "artifacts"
@@ -440,6 +451,19 @@ def run_single_task(
         )
 
         # Layer 1: Run the simulation
+        def save_raw_trajectory(simulation):
+            simulation.trial = trial
+            if save_dir is None:
+                return
+            directory = (
+                save_dir / "artifacts" / f"task_{task.id}" / f"sim_{simulation.id}"
+            )
+            directory.mkdir(parents=True, exist_ok=True)
+            path = directory / "trajectory.json"
+            temporary = path.with_suffix(".json.writing")
+            temporary.write_text(simulation.model_dump_json(indent=2))
+            temporary.replace(path)
+
         call_language = orchestrator.call_context.language
         env_kwargs = (
             _build_env_kwargs(config, task, language_context=call_language) or None
@@ -449,12 +473,47 @@ def run_single_task(
             evaluation_type=evaluation_type,
             env_kwargs=env_kwargs,
             canonical_tasks=uses_canonical_tasks(config.benchmark),
+            on_trajectory_ready=save_raw_trajectory,
+            metrics_config=config.metrics_config,
+            diagnostics_dir=(
+                save_dir
+                / "artifacts"
+                / f"task_{task.id}"
+                / f"sim_{simulation_id}"
+                / "diagnostics"
+            )
+            if save_dir
+            else None,
         )
 
         simulation.complication = sample_run_complication(config, task)
+        if save_dir is not None:
+            status_path = (
+                save_dir
+                / "artifacts"
+                / f"task_{task.id}"
+                / f"sim_{simulation.id}"
+                / "sim_status.json"
+            )
+            temporary = status_path.with_suffix(".json.writing")
+            temporary.write_text(
+                json.dumps(
+                    {
+                        "status": "failed"
+                        if simulation.evaluation_status == "failed"
+                        else "completed",
+                        "termination_reason": simulation.termination_reason.value,
+                        "evaluation_status": simulation.evaluation_status,
+                        "evaluation_error": simulation.evaluation_error,
+                        "duration": simulation.duration,
+                    },
+                    indent=2,
+                )
+            )
+            temporary.replace(status_path)
 
         # Side effects
-        if auto_review:
+        if auto_review and simulation.evaluation_status != "failed":
             review_guidelines = None
             review_context = (
                 call_language if call_language.persona is not None else None
@@ -554,9 +613,20 @@ def make_voice_run_settings(
     from the config (so a worker process re-derives the same values)."""
     if not isinstance(config, VoiceRunConfig):
         return None, None
+    synthesis = SynthesisConfig()
+    if config.audio_native_config.provider == "qwen_agent":
+        system = config.audio_native_config.qwen_agent_config
+        if system.tts is not None:
+            settings = system.tts.model_copy(
+                update={
+                    "config_env_file": system.tts.config_env_file
+                    or system.config_env_file,
+                }
+            )
+            synthesis = SynthesisConfig(provider="mimo", provider_config=settings)
     user_voice_settings = VoiceSettings(
         transcription_config=None,
-        synthesis_config=SynthesisConfig(),
+        synthesis_config=synthesis,
     )
     complexity_config = COMPLEXITY_CONFIGS[config.speech_complexity]
     user_persona_config = PersonaConfig(
@@ -618,6 +688,7 @@ def run_unit(
             config,
             task,
             seed=run_seed,
+            trial=trial,
             language_context=ctx.info.language_tasks[task.id],
             evaluation_type=ctx.evaluation_type,
             save_dir=save_dir,
@@ -870,12 +941,27 @@ def prepare_batch(
     if config.num_trials <= 0:
         raise ValueError("Number of trials must be greater than 0")
 
-    if config.effective_max_steps <= 0:
+    if config.effective_max_steps is not None and config.effective_max_steps <= 0:
         raise ValueError("Max steps must be greater than 0")
     if config.max_errors <= 0:
         raise ValueError("Max errors must be greater than 0")
 
     # Seed management
+    audio = getattr(config, "audio_native_config", None)
+    if audio is not None and audio.user_audio_renderer == "saasr":
+        from tau2.voice.saasr_worker import get_pool
+
+        if getattr(config, "workers", 0):
+            raise ValueError(
+                "SAASR uses local --max-concurrency and its own GPU workers; controller --workers is not supported"
+            )
+
+        # Validate all selected mappings together before opening any Agent calls.
+        audio.saasr_identity = audio.saasr_config.preflight(
+            config.domain, [t.id for t in tasks]
+        )
+        audio.saasr_identity["workers"] = get_pool(audio.saasr_config).identities
+
     random.seed(config.seed)
     seeds = [random.randint(0, 1000000) for _ in range(config.num_trials)]
     if (
@@ -1008,6 +1094,35 @@ def preregister_voice_plugins(config: RunConfig) -> None:
 
 
 def run_tasks(
+    config: RunConfig,
+    tasks: list[Task],
+    *,
+    save_path: Optional[Path] = None,
+    save_dir: Optional[Path] = None,
+    evaluation_type: EvaluationType = EvaluationType.ALL,
+    console_display: bool = True,
+    results_format: str = "json",
+) -> Results:
+    """Run a batch, releasing optional caller synthesis workers on every exit."""
+    try:
+        return _run_tasks(
+            config,
+            tasks,
+            save_path=save_path,
+            save_dir=save_dir,
+            evaluation_type=evaluation_type,
+            console_display=console_display,
+            results_format=results_format,
+        )
+    finally:
+        audio = getattr(config, "audio_native_config", None)
+        if audio is not None and audio.saasr_config is not None:
+            from tau2.voice.saasr_worker import close_pools
+
+            close_pools()
+
+
+def _run_tasks(
     config: RunConfig,
     tasks: list[Task],
     *,
@@ -1164,6 +1279,14 @@ def run_tasks(
             f"Use --auto-resume to continue later.[/bold yellow]"
         )
         monitor.stop()
+
+        if (
+            getattr(config, "audio_native_config", None) is not None
+            and config.audio_native_config.saasr_config is not None
+        ):
+            from tau2.voice.saasr_worker import close_pools
+
+            close_pools()
 
         # Force-exit: background threads (litellm, websocket loops, etc.)
         # hold the process alive and produce noisy errors during interpreter

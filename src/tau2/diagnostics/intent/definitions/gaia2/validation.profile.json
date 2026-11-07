@@ -1,0 +1,102 @@
+{
+  "name": "gaia2-reference-validation",
+  "global_unique_ids": true,
+  "ambiguity_paths": true,
+  "nodes": [
+    {
+      "namespace": "entity",
+      "path": "/entities/*",
+      "key": "id"
+    },
+    {
+      "namespace": "goal",
+      "path": "/goals/*",
+      "key": "id",
+      "branch": "direct"
+    },
+    {
+      "namespace": "rule",
+      "path": "/rules/*",
+      "key": "id"
+    },
+    {
+      "namespace": "goal",
+      "path": "/rules/*/then_goals/*",
+      "key": "id",
+      "owner_namespace": "rule",
+      "branch": "then"
+    },
+    {
+      "namespace": "goal",
+      "path": "/rules/*/else_goals/*",
+      "key": "id",
+      "owner_namespace": "rule",
+      "branch": "else"
+    },
+    {
+      "namespace": "trigger",
+      "path": "/rules/*/trigger",
+      "key": "bind_as",
+      "owner_namespace": "rule"
+    }
+  ],
+  "references": [
+    {
+      "key": "ref",
+      "namespace": "entity",
+      "kind": "entity_ref",
+      "role": "entity"
+    },
+    {
+      "key": "ref",
+      "namespace": "trigger",
+      "kind": "trigger_ref",
+      "role": "trigger",
+      "local": true
+    },
+    {
+      "key": "event_ref",
+      "namespace": "trigger",
+      "role": "trigger",
+      "local": true
+    },
+    {
+      "key": "about_ref",
+      "namespace": "entity",
+      "role": "about"
+    },
+    {
+      "key": "source_ref",
+      "namespace": "entity",
+      "role": "source"
+    },
+    {
+      "key": "scope_goal_ids",
+      "namespace": "goal",
+      "role": "scope"
+    },
+    {
+      "key": "ref",
+      "namespace": "goal",
+      "kind": "goal_ref",
+      "role": "goal"
+    },
+    {
+      "key": "entity_ref",
+      "namespace": "entity",
+      "role": "entity"
+    },
+    {
+      "key": "goal_ref",
+      "namespace": "goal",
+      "role": "goal"
+    },
+    {
+      "key": "rule_ref",
+      "namespace": "rule",
+      "role": "time_rule"
+    }
+  ],
+  "inline_selections": true,
+  "value_rules": "gaia2"
+}

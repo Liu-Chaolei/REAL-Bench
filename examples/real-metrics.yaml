@@ -1,0 +1,17 @@
+# Optional post-call REAL-derived diagnostics. No model calls with --dry-run.
+measures: [intent, execution, voice]
+auto_score: true
+concurrency: 1
+max_requests: 64
+timeout_seconds: 120
+max_characters: 200000
+# Omit model to use tau's independent communication-judge defaults.
+# model:
+#   model: openai/your-judge
+#   api_base: https://your-provider.example/v1
+#   api_key_env: DIAGNOSTIC_API_KEY
+#   args:
+#     reasoning_effort: low
+# models:
+#   gt: {model: openai/your-gt-model, api_key_env: DIAGNOSTIC_API_KEY}
+#   prediction: {model: openai/your-prediction-model, api_key_env: DIAGNOSTIC_API_KEY}

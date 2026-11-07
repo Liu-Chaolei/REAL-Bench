@@ -168,6 +168,24 @@ def extension_for_domain(language: str, domain: str) -> str | None:
     if not paths:
         return None
     pack, pack_bytes = _pack_header(language)
+    from tau2.registry import registry
+
+    try:
+        preferred_extension = registry.get_domain_capabilities(domain).get(
+            "pack_extension"
+        )
+    except KeyError:
+        preferred_extension = None
+    if preferred_extension and domain not in pack.domains:
+        target = extension_root() / preferred_extension / language / "extension.json"
+        extension = PackExtension.model_validate_json(target.read_bytes())
+        if domain not in extension.domains or extension.language != language:
+            raise ValueError(
+                "Domain extension does not declare the requested language/domain"
+            )
+        if extension.base_pack_sha256 != hashlib.sha256(pack_bytes).hexdigest():
+            raise ValueError("Domain extension targets a different published pack")
+        return preferred_extension
     if domain in pack.domains or pack.default_binding is not None:
         return None
     candidates = []

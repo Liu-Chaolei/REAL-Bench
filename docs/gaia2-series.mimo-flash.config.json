@@ -1,0 +1,27 @@
+{
+  "config_env_file": "/hpc_stor03/sjtu_home/chaolei.liu/.config/qwaudio/config.env",
+  "author": {
+    "model_env": "MIMO_MODEL2",
+    "api_key_env": "MIMO_API_KEY",
+    "api_base_env": "MIMO_BASE_URL",
+    "provider_prefix": "openai/",
+    "reasoning_effort": "low",
+    "model_args": {
+      "timeout": 180
+    }
+  },
+  "reviewer": {
+    "model_env": "MIMO_MODEL2",
+    "api_key_env": "MIMO_API_KEY",
+    "api_base_env": "MIMO_BASE_URL",
+    "provider_prefix": "openai/",
+    "reasoning_effort": "low",
+    "model_args": {
+      "timeout": 180
+    }
+  },
+  "concurrency": 8,
+  "max_attempts": 3,
+  "seed": 300,
+  "context_characters": 45000
+}

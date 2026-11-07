@@ -166,7 +166,11 @@ class ConsoleDisplay:
         c = cls.colors
 
         # Use effective values from config properties
-        effective_max_steps = config.effective_max_steps
+        effective_max_steps = (
+            config.effective_max_steps
+            if config.effective_max_steps is not None
+            else "Unlimited"
+        )
         effective_agent = config.effective_agent
         effective_user = config.effective_user
         effective_agent_model = config.effective_agent_model
@@ -238,7 +242,7 @@ class ConsoleDisplay:
                 "Tick Duration:",
                 f"{anc.tick_duration_seconds}s",
                 "Max Duration:",
-                f"{anc.max_steps_seconds}s",
+                f"{anc.max_steps_seconds}s" if anc.max_steps_seconds else "Unlimited",
             )
             # Row 2: Sample rates
             audio_table.add_row(
@@ -474,12 +478,33 @@ class ConsoleDisplay:
         sim_info.append(f"{simulation.mode}\n")
         sim_info.append("Termination Reason: ", style=c.section_header)
         sim_info.append(f"{simulation.termination_reason}\n")
+        if simulation.evaluation_status == "failed":
+            sim_info.append("Evaluation: failed (unscored)\n", style=c.section_header)
         if simulation.agent_cost is not None:
             sim_info.append("Agent Cost: ", style=c.section_header)
             sim_info.append(f"${simulation.agent_cost:.4f}\n")
         if simulation.user_cost is not None:
             sim_info.append("User Cost: ", style=c.section_header)
             sim_info.append(f"${simulation.user_cost:.4f}\n")
+        if simulation.diagnostics_ref:
+            diagnostics = simulation.diagnostics_ref
+            sim_info.append("Diagnostics: ", style=c.section_header)
+            sim_info.append(str(diagnostics.get("status", "evaluated")) + "\n")
+            for name, result in (
+                diagnostics.get("summary", {}).get("measures", {}).items()
+            ):
+                value = (
+                    result.get("f1")
+                    if name == "intent"
+                    else result.get("total", {}).get("score")
+                    if name == "execution"
+                    else result.get("status")
+                )
+                sim_info.append(f"  {name}: {value} ({result.get('status')})\n")
+            if diagnostics.get("directory"):
+                sim_info.append(
+                    "  Evidence and score details: " + diagnostics["directory"] + "\n"
+                )
         if simulation.reward_info:
             marker = "✅" if is_successful(simulation.reward_info.reward) else "❌"
             sim_info.append("Reward: ", style=c.section_header)
@@ -935,13 +960,30 @@ class ConsoleDisplay:
 
         # Overview section
         table.add_row("[cyan]═══ Overview ═══[/]", "")
-        if metrics.infra_error_count > 0:
-            total_with_infra = metrics.total_simulations + metrics.infra_error_count
-            table.add_row("Total Simulations", str(total_with_infra))
+        excluded = (
+            metrics.infra_error_count
+            + metrics.user_simulator_error_count
+            + metrics.grading_error_count
+        )
+        if excluded > 0:
             table.add_row(
-                "⚠️  Infra Errors",
-                f"[red]{metrics.infra_error_count}[/] (excluded from metrics below)",
+                "Total Simulations", str(metrics.total_simulations + excluded)
             )
+            if metrics.infra_error_count:
+                table.add_row(
+                    "⚠️  Infra Errors",
+                    f"[red]{metrics.infra_error_count}[/] (excluded from metrics below)",
+                )
+            if metrics.user_simulator_error_count:
+                table.add_row(
+                    "⚠️  User Simulator Errors",
+                    f"[red]{metrics.user_simulator_error_count}[/] (excluded from metrics below)",
+                )
+            if metrics.grading_error_count:
+                table.add_row(
+                    "Grading errors",
+                    f"[red]{metrics.grading_error_count}[/] (excluded from metrics below)",
+                )
             table.add_row("Evaluated", str(metrics.total_simulations))
         else:
             table.add_row("Total Simulations", str(metrics.total_simulations))
@@ -1240,7 +1282,7 @@ class ConsoleDisplay:
         header_lines = [
             f"[{c.label}]Domain:[/] {info.environment_info.domain_name}",
             f"[{c.label}]Git Commit:[/] {info.git_commit[:12]}...",
-            f"[{c.label}]Trials:[/] {info.num_trials}  [{c.label}]Max Steps:[/] {info.max_steps}  [{c.label}]Max Errors:[/] {info.max_errors}",
+            f"[{c.label}]Trials:[/] {info.num_trials}  [{c.label}]Max Steps:[/] {info.max_steps if info.max_steps is not None else 'Unlimited'}  [{c.label}]Max Errors:[/] {info.max_errors}",
         ]
         if info.seed is not None:
             header_lines[-1] += f"  [{c.label}]Seed:[/] {info.seed}"
@@ -1304,7 +1346,7 @@ class ConsoleDisplay:
                 "Tick Duration:",
                 f"{anc.tick_duration_seconds}s",
                 "Max Duration:",
-                f"{anc.max_steps_seconds}s",
+                f"{anc.max_steps_seconds}s" if anc.max_steps_seconds else "Unlimited",
             )
             # Row 2: Sample rates
             audio_table.add_row(

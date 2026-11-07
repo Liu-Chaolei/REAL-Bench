@@ -709,6 +709,7 @@ def test_voice_task_opener_precedes_pack_greeting(task_opener, expected, audio_f
     from tau2.orchestrator.full_duplex_orchestrator import FullDuplexOrchestrator
 
     orchestrator = object.__new__(FullDuplexOrchestrator)
+    orchestrator.environment = SimpleNamespace()
     orchestrator.task = SimpleNamespace(agent_opener=task_opener)
     orchestrator.call_context = SimpleNamespace(
         language=SimpleNamespace(agent_greeting="Pack greeting")

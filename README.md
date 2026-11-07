@@ -131,7 +131,21 @@ Each domain specifies:
 - A set of **tasks** to evaluate the agent's performance
 - Optionally: a set of **user tools** for the user simulator
 
-**Available domains**: `mock` · `airline` · `retail` · `telecom` · `banking_knowledge` · `intake`
+**Available domains**: `mock` · `airline` · `retail` · `telecom` · `banking_knowledge` · `intake` · `gaia2`
+
+[Gaia2](docs/gaia2.md) imports 800 personal-assistant tasks as a native domain,
+including application state and timed events. It uses the same `tau2 run`, user,
+voice and reward pipeline. Install the `gaia2` extra and verify the dataset before
+running; these adapted τ scores are separate from the original Gaia2 leaderboard.
+
+[REAL-derived diagnostics](docs/real-metrics.md) optionally adds whole-call intent
+fidelity, four execution scores and eight waveform interaction metrics alongside
+the ordinary task reward (`--metrics-config examples/real-metrics.yaml`).
+
+[Gaia2 series authoring](docs/gaia2-series.md) adds two grounded, related requests
+per original task, with reference execution, stage checkpoints and independent
+review. These offline artifacts prepare longer task sequences for later runtime
+integration.
 
 [τ-Entity](docs/elicitation.md) uses `--domain intake` to evaluate exact entity capture in outbound calls over 200 tasks. Agent-directed elicitation is the default; `--elicitation-strategy scaffolded` selects the scaffolded ablation.
 
@@ -161,6 +175,7 @@ Optional extras (install what you need):
 ```bash
 uv sync --extra voice          # + voice/audio-native features
 uv sync --extra knowledge      # + banking_knowledge domain (retrieval pipeline)
+uv sync --extra gaia2          # + Gaia2 applications and data import
 uv sync --extra gym            # + gymnasium RL interface
 uv sync --extra dev            # + pytest, ruff, pre-commit (required for contributing)
 uv sync --all-extras           # everything
@@ -206,6 +221,7 @@ Results are saved to `data/simulations/`. Use `tau2 view` to browse them.
 | [Domains](src/tau2/domains/README.md) | Domain structure, data format, and available domains |
 | [Orchestrator & Communication Modes](src/tau2/orchestrator/README.md) | Half-duplex and full-duplex orchestration |
 | [Task Schema & Evaluation](docs/evaluation.md) | What `evaluation_criteria.actions` means, how `reward_basis` gates the reward, and how to inspect action correctness |
+| [Gaia2](docs/gaia2.md) | Import, verify and run 800 Gaia2 tasks through the shared text and voice pipeline |
 
 ### Languages and judges
 
@@ -346,3 +362,8 @@ If you use a specific component of $\tau^3$-bench, please cite the corresponding
       url={https://openreview.net/forum?id=En2z9dckgP},
 }
 ```
+## Optional continuous caller scenes
+
+Use `--user-audio-renderer saasr --saasr-config runtime.json` for SAASR caller
+voices with continuous multi-speaker background audio in any voice domain.
+See [setup, behavior and evidence](docs/saasr-user-audio.md).

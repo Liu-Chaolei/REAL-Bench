@@ -19,8 +19,14 @@ tau2 run --domain retail --audio-native --num-tasks 1 --verbose-logs
 | Google Gemini Live | `--audio-native-provider gemini` | `GEMINI_API_KEY` (or Vertex AI credentials) |
 | xAI Grok Voice | `--audio-native-provider xai` | `XAI_API_KEY` |
 | Avartha (Pipecat RTVI) | `--audio-native-provider avartha_pipecat` | A hosted agent URL and `AVARTHA_API_KEY` |
+| Complete Qwen Audio Agent | `--audio-native-provider qwen_agent` | Docker, native Qwen Code configuration and `--qwen-agent-config` |
 
 The default provider is `openai`. Use `--audio-native-model` to override the default model for a provider.
+
+The `qwen_agent` provider evaluates the complete Gateway and Qwen Code backend.
+See the [integration guide](../../../integrations/qwen_audio_agent/README.md) for
+English retail and [Gaia2](../../../docs/gaia2.md) setup. The existing `qwen` provider connects directly
+to the Qwen realtime model API.
 
 ## Speech Complexity
 

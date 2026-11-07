@@ -35,6 +35,7 @@ from tau2.voice.audio_native.tick_result import (
 if TYPE_CHECKING:
     from tau2.data_model.live_config import LiveConfig
     from tau2.voice.audio_native.avartha_pipecat.config import AvarthaPipecatConfig
+    from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
 
 
 class DiscreteTimeAdapter(ABC):
@@ -330,6 +331,11 @@ class DiscreteTimeAdapter(ABC):
         """
         raise NotImplementedError
 
+    @property
+    def has_pending_output(self) -> bool:
+        """Expose buffered media and tool replies without altering playback."""
+        return bool(self._buffered_agent_audio or self._pending_tool_results)
+
     @abstractmethod
     async def _flush_pending_tool_results(self) -> None:
         """Send all pending tool results to the provider.
@@ -394,6 +400,8 @@ def create_adapter(
     transcription_language: Optional[str] = None,
     language: Optional[str] = None,
     avartha_config: Optional["AvarthaPipecatConfig"] = None,
+    qwen_agent_config: Optional["QwenAgentConfig"] = None,
+    observer_hotwords: Any = None,
 ) -> Tuple[DiscreteTimeAdapter, str]:
     """Create a discrete-time adapter for the given provider.
 
@@ -550,6 +558,23 @@ def create_adapter(
             reasoning_effort=reasoning_effort,
             audio_format=audio_format,
             avartha_config=avartha_config,
+        )
+    elif provider == "qwen_agent":
+        from tau2.voice.audio_native.qwen_agent.discrete_time_adapter import (
+            DiscreteTimeQwenAgentAdapter,
+        )
+
+        if qwen_agent_config is None:
+            raise ValueError("qwen_agent requires qwen_agent_config")
+        adapter = DiscreteTimeQwenAgentAdapter(
+            tick_duration_ms=tick_duration_ms,
+            config=qwen_agent_config,
+            observer_hotwords=observer_hotwords,
+            model=model,
+            reasoning_effort=reasoning_effort,
+            audio_format=audio_format,
+            language=language,
+            trace_path=trace_path,
         )
     elif provider == "phonic":
         from tau2.voice.audio_native.phonic.discrete_time_adapter import (

@@ -3,6 +3,8 @@
 import json
 import multiprocessing
 
+import pytest
+
 from tau2.data_model.simulation import (
     Info,
     Results,
@@ -21,6 +23,55 @@ from tau2.runner.checkpoint import (
     create_checkpoint_saver,
     try_resume,
 )
+
+
+@pytest.mark.parametrize("previous_version", [None, "v1.1", "v1.2"])
+def test_voice_resume_rejects_mixing_scheduling_versions(tmp_path, previous_version):
+    from tau2.data_model.run_config import AudioNativeConfig
+
+    task = _make_task("t0")
+    previous_info = _make_info().model_copy(
+        update={
+            "audio_native_config": AudioNativeConfig(),
+            "voice_user_simulator_version": previous_version,
+        }
+    )
+    previous = Results(info=previous_info, tasks=[task], simulations=[_make_sim("t0")])
+    path = tmp_path / "results.json"
+    previous.save(path)
+    current_info = previous_info.model_copy(
+        update={"voice_user_simulator_version": "v1.2"}
+    )
+    current = Results(info=current_info, tasks=[task], simulations=[])
+    if previous_version != "v1.2":
+        with pytest.raises(ValueError, match="voice_user_simulator_version"):
+            try_resume(path, current, [task], 1, auto_resume=True)
+    else:
+        resumed, done, _ = try_resume(path, current, [task], 1, auto_resume=True)
+        assert len(resumed.simulations) == 1 and len(done) == 1
+
+
+def test_legacy_results_do_not_acquire_the_new_scheduling_version():
+    info = _make_info().model_dump()
+    info.pop("voice_user_simulator_version")
+    assert Info.model_validate(info).voice_user_simulator_version is None
+
+
+def test_resume_cannot_mix_caller_renderers_even_with_auto_resume(tmp_path):
+    task = _make_task("t0")
+    info = _make_info()
+    previous = Results(info=info, tasks=[task], simulations=[_make_sim("t0")])
+    path = tmp_path / "results.json"
+    previous.save(path)
+    current = Results(
+        info=info.model_copy(
+            update={"user_audio_renderer": {"version": "saasr-continuous-v1"}}
+        ),
+        tasks=[task],
+        simulations=[],
+    )
+    with pytest.raises(ValueError, match="Caller audio renderer"):
+        try_resume(path, current, [task], 1, auto_resume=True)
 
 
 def _make_info() -> Info:

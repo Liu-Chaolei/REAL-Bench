@@ -1,5 +1,6 @@
 import argparse
 import json
+from pathlib import Path
 
 from tau2.config import (
     DEFAULT_AGENT_IMPLEMENTATION,
@@ -47,6 +48,7 @@ from tau2.domains.banking_knowledge.retrieval import get_all_variant_names
 from tau2.run import get_options, run_domain
 from tau2.runner.work import parse_provider_limits
 from tau2.voice.audio_native.avartha_pipecat.config import AvarthaPipecatConfig
+from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
 
 
 def get_all_retrieval_config_names():
@@ -200,6 +202,12 @@ def add_run_args(parser):
         help=f"The log level to use for the simulation. Default is {DEFAULT_LOG_LEVEL}.",
     )
     parser.add_argument(
+        "--metrics-config",
+        type=Path,
+        default=None,
+        help="Independent diagnostic YAML profile",
+    )
+    parser.add_argument(
         "--verbose-logs",
         action="store_true",
         default=False,
@@ -261,6 +269,15 @@ def add_run_args(parser):
 
     # Audio-native mode arguments
     parser.add_argument(
+        "--user-audio-renderer",
+        choices=["standard", "saasr"],
+        default="standard",
+        help="Caller audio renderer; saasr adds a continuous multi-speaker scene.",
+    )
+    parser.add_argument(
+        "--saasr-config", default=None, help="SAASR worker and scene JSON configuration"
+    )
+    parser.add_argument(
         "--audio-native",
         action="store_true",
         default=False,
@@ -277,6 +294,7 @@ def add_run_args(parser):
             "xai",
             "nova",
             "qwen",
+            "qwen_agent",
             "avartha_pipecat",
             "phonic",
             "livekit",
@@ -300,6 +318,11 @@ def add_run_args(parser):
         help="Audio native model to use. If not specified, uses the default model for the selected provider. "
         "For avartha_pipecat, it is only a label, since --avartha-base-url "
         "selects the agent.",
+    )
+    parser.add_argument(
+        "--qwen-agent-config",
+        default=None,
+        help="JSON configuration file for the complete qwen_agent system provider.",
     )
     parser.add_argument(
         "--avartha-base-url",
@@ -343,7 +366,7 @@ def add_run_args(parser):
         "--max-steps-seconds",
         type=int,
         default=None,
-        help=f"Maximum conversation duration in seconds. Default is {DEFAULT_MAX_STEPS_SECONDS}; τ-Entity uses {DEFAULT_ELICITATION_MAX_STEPS_SECONDS}.",
+        help=f"Maximum conversation duration in seconds; 0 disables the limit. Default is {DEFAULT_MAX_STEPS_SECONDS}; τ-Entity uses {DEFAULT_ELICITATION_MAX_STEPS_SECONDS}.",
     )
     parser.add_argument(
         "--speech-complexity",
@@ -673,8 +696,12 @@ def main():
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
 
     # Saved-run diagnostics are registered by their owning package.
+    from tau2.diagnostics.cli import add_metrics_args
     from tau2.judges.cli import add_judges_args
 
+    add_metrics_args(
+        subparsers.add_parser("metrics", help="REAL-derived saved-run diagnostics")
+    )
     add_judges_args(
         subparsers.add_parser("judges", help="Saved-run diagnostic judging and reports")
     )
@@ -694,7 +721,21 @@ def main():
         )
     )
 
+    from tau2.domains.gaia2.cli import add_gaia2_args
+
+    add_gaia2_args(
+        subparsers.add_parser("gaia2", help="Import and verify native Gaia2 task data")
+    )
+
     # Run command
+    from tau2.task_authoring.gaia2_series.cli import add_series_args
+
+    add_series_args(
+        subparsers.add_parser(
+            "gaia2-series", help="Author and validate related Gaia2 task continuations"
+        )
+    )
+
     from tau2.runner.cli import add_benchmarks_args
 
     add_benchmarks_args(
@@ -711,6 +752,26 @@ def main():
 
         args.benchmark = selected_benchmark(args) or "none"
         benchmark_mode = args.benchmark != "none"
+        if args.audio_native_provider == "qwen_agent":
+            if not args.audio_native or benchmark_mode:
+                run_parser.error("qwen_agent requires --audio-native --benchmark none")
+            from tau2.registry import registry
+
+            languages = (
+                registry.get_domain_capabilities(args.domain[0]).get(
+                    "qwen_agent_languages", []
+                )
+                if args.domain and len(args.domain) == 1
+                else []
+            )
+            if (args.language or ["en"])[0] not in languages:
+                run_parser.error(
+                    "qwen_agent requires a domain declaring support for the selected language"
+                )
+            # Each recorded call is the first attempt; infrastructure outcomes
+            # must not be replaced by later successful executions.
+            args.max_retries = 0
+            args.hallucination_retries = 0
         if not args.audio_native and (
             args.channel_effects_mode != "regular"
             or args.speech_effects_mode != "regular"
@@ -734,7 +795,23 @@ def main():
 
         # Build audio-native config if enabled
         audio_native_config = None
+        if not args.audio_native and (
+            args.user_audio_renderer != "standard" or args.saasr_config
+        ):
+            run_parser.error("SAASR rendering requires --audio-native")
         if args.audio_native:
+            from tau2.data_model.saasr import SaasrConfig
+
+            saasr_config = None
+            if args.saasr_config:
+                try:
+                    saasr_config = SaasrConfig.from_file(args.saasr_config)
+                except (OSError, ValueError) as error:
+                    run_parser.error(f"Invalid SAASR configuration: {error}")
+            if (args.user_audio_renderer == "saasr") != (saasr_config is not None):
+                run_parser.error(
+                    "--user-audio-renderer saasr requires --saasr-config and vice versa"
+                )
             # Resolve model based on provider if not specified
             audio_native_model = args.audio_native_model
             if audio_native_model is None:
@@ -743,6 +820,20 @@ def main():
                 ]
 
             avartha_config = None
+            qwen_agent_config = None
+            if args.audio_native_provider == "qwen_agent":
+                if not args.qwen_agent_config:
+                    run_parser.error("qwen_agent requires --qwen-agent-config")
+                try:
+                    from pathlib import Path
+
+                    qwen_agent_config = QwenAgentConfig.model_validate_json(
+                        Path(args.qwen_agent_config).read_text()
+                    )
+                except (OSError, ValueError) as exc:
+                    run_parser.error(f"invalid Qwen Agent configuration: {exc}")
+            elif args.qwen_agent_config:
+                run_parser.error("--qwen-agent-config requires provider qwen_agent")
             if args.audio_native_provider == "avartha_pipecat":
                 if not args.avartha_base_url:
                     run_parser.error(
@@ -762,10 +853,13 @@ def main():
                 use_xml_prompt = True
 
             audio_native_config = AudioNativeConfig(
+                user_audio_renderer=args.user_audio_renderer,
+                saasr_config=saasr_config,
                 # Provider
                 provider=args.audio_native_provider,
                 model=audio_native_model,
                 avartha_config=avartha_config,
+                qwen_agent_config=qwen_agent_config,
                 cascaded_request=(
                     CascadedConfigRequest(preset=args.cascaded_config)
                     if args.cascaded_config is not None
@@ -813,7 +907,15 @@ def main():
             if not benchmark_mode and args.domain and args.localize_db is not False
             else None
         )
+        metrics_config = None
+        if getattr(args, "metrics_config", None):
+            from tau2.diagnostics.config import MetricsConfig
+
+            metrics_config = MetricsConfig.load(args.metrics_config).model_dump(
+                mode="json"
+            )
         shared_kwargs = dict(
+            metrics_config=metrics_config,
             localize_db=args.localize_db,
             **(
                 {}
@@ -1042,6 +1144,11 @@ def main():
         action="store_true",
         help="Re-grade against the current task definitions from the data directory instead of the ones embedded in each results file.",
     )
+    evaluate_parser.add_argument(
+        "--recorded-data-root",
+        type=Path,
+        help="Archived Gaia2 data and language binding for strict historical rescoring",
+    )
     evaluate_parser.set_defaults(func=lambda args: run_evaluate_trajectories(args))
 
     # Review command - LLM-based conversation review
@@ -1221,7 +1328,10 @@ def run_evaluate_trajectories(args):
     logger.configure(handlers=[{"sink": sys.stderr, "level": "ERROR"}])
 
     evaluate_trajectories(
-        args.paths, args.output_dir, fresh_tasks=getattr(args, "fresh_tasks", False)
+        args.paths,
+        args.output_dir,
+        fresh_tasks=getattr(args, "fresh_tasks", False),
+        recorded_data_root=getattr(args, "recorded_data_root", None),
     )
 
 

@@ -27,6 +27,7 @@ class LiveTranscriptTick(BaseModel):
 
     session_id: str
     origin: Literal["provider", "recorded_audio"] = "provider"
+    alignment: Literal["release_tick", "played_audio"] = "release_tick"
     fragments: list[LiveTranscriptFragment] = Field(default_factory=list)
     speech_intervals_ms: list[tuple[float, float]] = Field(default_factory=list)
 

@@ -7,8 +7,11 @@ this layer and construct instances directly.
 """
 
 import hashlib
+import json
 import uuid
+from contextlib import ExitStack
 from copy import deepcopy
+from math import ceil
 from pathlib import Path
 from typing import Optional, Union
 
@@ -152,6 +155,23 @@ def build_agent(
 
     domain_kwargs = {}
     domain = environment.get_domain_name()
+    if audio_native_config is not None and audio_native_config.provider == "qwen_agent":
+        from tau2.config import DEFAULT_SCENARIO_NOTIFICATION_WAIT_SECONDS
+
+        if (
+            getattr(environment, "scenario_runtime", None) is not None
+            and audio_native_config.qwen_agent_config.tool_timeout_seconds
+            <= DEFAULT_SCENARIO_NOTIFICATION_WAIT_SECONDS + 5
+        ):
+            raise ValueError(
+                "Timed scenarios require a Qwen MCP tool timeout greater than the shared notification wait plus five seconds"
+            )
+        system = audio_native_config.qwen_agent_config.model_copy(
+            update={"domain": domain}
+        )
+        audio_native_config = audio_native_config.model_copy(
+            update={"qwen_agent_config": system}
+        )
     if domain in ELICITATION_DOMAINS:
         domain_kwargs["additional_stop_tool_names"] = frozenset({"end_call"})
         if audio_native_config is not None:
@@ -253,6 +273,7 @@ def build_voice_user(
     channel_effects_mode: str = DEFAULT_CHANNEL_EFFECTS_MODE,
     speech_effects_mode: str = DEFAULT_SPEECH_EFFECTS_MODE,
     force_sample_voice_config: bool = False,
+    saasr_session=None,
 ) -> FullDuplexUser:
     """Build a full-duplex voice user simulator.
 
@@ -345,7 +366,12 @@ def build_voice_user(
         synthesis.provider_config.language_code = language_context.language.split("-")[
             0
         ]
-        synthesis.provider_config.voice_id = persona.voice.voice_id
+        if synthesis.provider == "mimo":
+            synthesis.provider_config.voice_id = synthesis.provider_config.voices.get(
+                persona.persona_id, synthesis.provider_config.voice_id
+            )
+        else:
+            synthesis.provider_config.voice_id = persona.voice.voice_id
 
     # Update synthesis_config with merged effect configs
     task_voice_settings.synthesis_config.channel_effects_config = (
@@ -363,13 +389,23 @@ def build_voice_user(
         speech_environment = SpeechEnvironment(
             **sampled_voice_config.model_dump(exclude={"persona_config"}),
             voice_seed=task_seed,
-            voice_id=persona.voice.voice_id,
+            voice_id=task_voice_settings.synthesis_config.provider_config.voice_id,
         )
         persona_config = persona
     else:
         speech_environment = sampled_voice_config.to_speech_environment(task_seed)
         persona_config = persona_config or sampled_voice_config.persona_config
     task_voice_settings.speech_environment = speech_environment
+    if saasr_session is not None:
+        # Record the actual acoustic assignment rather than an unused legacy TTS voice.
+        synthesis = task_voice_settings.synthesis_config
+        synthesis.provider = "saasr"
+        synthesis.provider_config = None
+        reference = saasr_session.scene["speaker_refs"][0]
+        speech_environment.voice_id = f"saasr:reference:{reference}"
+        speech_environment.background_noise_file = None
+        speech_environment.burst_noise_files = []
+        speech_environment.environment = "saasr-continuous-v1"
 
     # Crossed speech effects change caller behavior while retaining the
     # selected pack persona's identity and gender.
@@ -438,6 +474,22 @@ def build_voice_user(
                 detector = build_spell_event_detector(task)
             domain_kwargs["spell_event_detector"] = detector.detect
 
+    if audio_native_config.provider == "qwen_agent":
+        system = audio_native_config.qwen_agent_config
+        caller_llm = system.user_llm_settings()
+        if caller_llm:
+            llm, llm_args = caller_llm
+        domain_kwargs["silence_checkin_threshold"] = ceil(
+            system.user_silence_checkin_seconds
+            / audio_native_config.tick_duration_seconds
+        )
+        if caller_llm:
+            domain_kwargs["decision_model"] = llm
+            domain_kwargs["decision_model_args"] = dict(llm_args)
+        elif system.user_decision_llm:
+            domain_kwargs["decision_model"] = system.user_decision_llm
+            domain_kwargs["decision_model_args"] = dict(system.user_decision_llm_args)
+
     user = VoiceStreamingUserSimulator(
         tools=user_tools,
         instructions=user_instructions,
@@ -469,6 +521,7 @@ def build_voice_user(
         backchannel=backchannel_settings(language_context),
         audio_taps_dir=audio_taps_dir,
         realtime_generation=audio_native_config.realtime_generation_enabled,
+        saasr_session=saasr_session,
     )
     return user
 
@@ -549,6 +602,9 @@ def _build_env_kwargs(
     if loaded.artifact_pins != language_context.artifact_pins:
         raise ValueError("Environment binding differs from the resolved task context")
     env_kwargs: dict = language_environment_kwargs(loaded)
+    if registry.get_domain_capabilities(config.domain).get("task_environment"):
+        env_kwargs["task"] = task
+        env_kwargs["semantic_scoring"] = config.communicate_scoring
     if config.domain in ELICITATION_DOMAINS:
         env_kwargs["task"] = task
         env_kwargs["strategy"] = config.elicitation.strategy
@@ -674,6 +730,37 @@ def build_voice_orchestrator(
     audio_taps_dir: Optional[Path] = None,
     language_context: Optional[LanguageTaskInfo] = None,
 ) -> FullDuplexOrchestrator:
+    """Build a voice trial and clean up prepared resources if construction fails."""
+    with ExitStack() as resources:
+        result = _build_voice_orchestrator(
+            config,
+            task,
+            seed=seed,
+            simulation_id=simulation_id,
+            user_voice_settings=user_voice_settings,
+            user_persona_config=user_persona_config,
+            hallucination_feedback=hallucination_feedback,
+            audio_taps_dir=audio_taps_dir,
+            language_context=language_context,
+            resources=resources,
+        )
+        resources.pop_all()  # The constructed trial now owns environment and audio.
+        return result
+
+
+def _build_voice_orchestrator(
+    config: VoiceRunConfig,
+    task: Task,
+    *,
+    seed=None,
+    simulation_id=None,
+    user_voice_settings=None,
+    user_persona_config=None,
+    hallucination_feedback=None,
+    audio_taps_dir=None,
+    language_context=None,
+    resources,
+) -> FullDuplexOrchestrator:
     """Build a full-duplex (voice) orchestrator from a VoiceRunConfig.
 
     Args:
@@ -726,6 +813,83 @@ def build_voice_orchestrator(
     env_kwargs = _build_env_kwargs(config, task, language_context=language_context)
 
     environment = build_environment(domain, env_kwargs=env_kwargs)
+    close_environment = getattr(environment, "close", None)
+    if close_environment is not None:
+        resources.callback(close_environment)
+
+    saasr_session = None
+    if config.audio_native_config.user_audio_renderer == "saasr":
+        from tau2.voice.saasr import SaasrSession, turn_seed
+
+        settings = config.audio_native_config.saasr_config
+        source_id = language_context.canonical_task_id
+        identity = settings.preflight(domain, [source_id])
+        recorded = config.audio_native_config.saasr_identity
+        if recorded is not None and (
+            recorded["scenes"].get(source_id) != identity["scenes"][source_id]
+            or recorded["model_sha256"] != identity["model_sha256"]
+            or recorded.get("renderer_sources") != identity.get("renderer_sources")
+        ):
+            raise ValueError("SAASR resources changed after batch preflight")
+        scene = settings.scene_for(domain, source_id)
+        directory = (
+            audio_taps_dir.parent / "saasr"
+            if audio_taps_dir is not None
+            else Path("data/simulations/saasr-artifacts") / simulation_id
+        )
+        saasr_session = SaasrSession(
+            settings,
+            scene,
+            directory,
+            seed=turn_seed(seed, f"{domain}/{source_id}"),
+            language={
+                "en": "English",
+                "zh": "Chinese",
+                "ja": "Japanese",
+                "ko": "Korean",
+                "fr": "French",
+                "de": "German",
+                "es": "Spanish",
+                "pt": "Portuguese",
+                "it": "Italian",
+                "ru": "Russian",
+            }.get(language_context.language.split("-")[0], "Auto"),
+            identity=identity,
+        )
+        resources.callback(saasr_session.close)
+        if (
+            recorded is not None
+            and recorded.get("workers") != saasr_session.pool.identities
+        ):
+            raise ValueError("SAASR worker software changed after batch preflight")
+
+    observer_hotwords = None
+    if config.audio_native_config.provider == "qwen_agent":
+        observer_settings = config.audio_native_config.qwen_agent_config
+        if observer_settings.asr_hotwords.enabled:
+            from tau2.user.asr_hotwords import build_hotword_profile
+
+            prompt_task = user_prompt_task(config, task)
+            try:
+                observer_hotwords = build_hotword_profile(
+                    prompt_task,
+                    environment.get_user_asr_materials(prompt_task),
+                    observer_settings.asr_hotwords,
+                    language=language_context.language,
+                    model=config.llm_user,
+                    model_args=config.llm_args_user,
+                )
+            except Exception as error:
+                raise RuntimeError(
+                    f"ASR hotword preparation failed ({type(error).__name__})"
+                ) from None
+            if audio_taps_dir is not None:
+                audio_taps_dir.mkdir(parents=True, exist_ok=True)
+                vocabulary_path = audio_taps_dir / "observer_hotwords.json"
+                vocabulary_path.write_text(
+                    json.dumps(observer_hotwords.record(), ensure_ascii=False, indent=2)
+                )
+                vocabulary_path.chmod(0o600)
 
     agent = build_agent(
         config.effective_agent,
@@ -738,6 +902,9 @@ def build_voice_orchestrator(
         audio_taps_dir=audio_taps_dir,
         elicitation_config=config.elicitation,
     )
+
+    if observer_hotwords is not None:
+        agent.observer_hotwords = observer_hotwords
 
     user = build_voice_user(
         environment,
@@ -763,6 +930,7 @@ def build_voice_orchestrator(
         channel_effects_mode=config.channel_effects_mode,
         speech_effects_mode=config.speech_effects_mode,
         force_sample_voice_config=config.pass3_condition is not None,
+        saasr_session=saasr_session,
     )
 
     orchestrator = FullDuplexOrchestrator(
@@ -779,6 +947,16 @@ def build_voice_orchestrator(
         timeout=config.timeout,
         call_context=context,
     )
+    if config.audio_native_config.provider == "qwen_agent":
+
+        def recheck(evidence, fragments):
+            # The adapter is constructed lazily when the call starts.
+            method = getattr(
+                getattr(agent, "_adapter", None), "recheck_heard_audio", None
+            )
+            return method(evidence, fragments) if method else {"status": "unavailable"}
+
+        user.audio_recheck = recheck
 
     logger.debug(
         f"Built voice orchestrator: domain={domain}, agent={config.effective_agent}, "

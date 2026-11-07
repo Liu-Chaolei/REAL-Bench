@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "operation": {"type": "string", "description": "The operation explicitly requested by this text."},
+    "arguments": {"type": "object", "description": "Only arguments requested by the text; explicit null is allowed.", "additionalProperties": {"type": ["string", "number", "boolean", "null"]}}
+  },
+  "required": ["operation", "arguments"]
+}

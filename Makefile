@@ -17,10 +17,20 @@ clean:
 test:
 	uv run pytest tests/ --ignore=tests/test_voice --ignore=tests/test_streaming --ignore=tests/test_gym --ignore=tests/test_domains/test_banking_knowledge
 
+## Run REAL-derived diagnostic tests (requires: diagnostics, gaia2, voice, dev extras)
+.PHONY: test-diagnostics
+test-diagnostics:
+	uv run pytest tests/test_diagnostics
+
 ## Run voice and streaming tests (requires: uv sync --extra dev --extra voice)
 .PHONY: test-voice
 test-voice:
 	uv run pytest tests/test_voice tests/test_streaming -m "not full_duplex_integration"
+
+## Run Gaia2 and shared scenario tests (requires: gaia2, voice, dev extras)
+.PHONY: test-gaia2
+test-gaia2:
+	uv run pytest tests/test_domains/test_gaia2 tests/test_task_authoring tests/test_scenario_runtime.py tests/test_scenario_replay.py tests/test_scenario_metrics.py tests/test_evaluator/test_scenario_assertions.py tests/test_streaming/test_scenario_voice.py tests/test_voice/test_audio_native/test_qwen_agent_domains.py
 
 ## Run knowledge/banking tests (requires: uv sync --extra dev --extra knowledge)
 .PHONY: test-knowledge

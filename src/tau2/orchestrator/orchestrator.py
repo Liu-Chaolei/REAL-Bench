@@ -95,7 +95,7 @@ class BaseOrchestrator(ABC, Generic[BaseAgentT, BaseUserT, TrajectoryItemT]):
         user: BaseUserT,
         environment: Environment,
         task: Task,
-        max_steps: int = 100,
+        max_steps: Optional[int] = 100,
         max_errors: int = 10,
         seed: Optional[int] = None,
         simulation_id: Optional[str] = None,
@@ -133,7 +133,7 @@ class BaseOrchestrator(ABC, Generic[BaseAgentT, BaseUserT, TrajectoryItemT]):
         self.user_state: Optional[UserState] = None
 
         # Termination tracking
-        self.max_steps: int = max_steps
+        self.max_steps: Optional[int] = max_steps
         self.max_errors: int = max_errors
         self.timeout: Optional[float] = timeout
         self.step_count: int = 0
@@ -142,6 +142,14 @@ class BaseOrchestrator(ABC, Generic[BaseAgentT, BaseUserT, TrajectoryItemT]):
         self.num_errors: int = 0
         self._run_start_time: Optional[str] = None
         self._run_start_perf: Optional[float] = None
+        self.scenario_stages = None
+        if task.scenario is not None and len(task.scenario.stages) > 1:
+            from tau2.orchestrator.scenario_stages import ScenarioStages
+
+            self.scenario_stages = ScenarioStages(task.scenario)
+            self.user.scenario_stage_ids = {
+                event.id for event in self.scenario_stages.requests
+            }
 
     @property
     def initial_agent_message(self) -> Optional[AssistantMessage]:
@@ -288,15 +296,97 @@ class BaseOrchestrator(ABC, Generic[BaseAgentT, BaseUserT, TrajectoryItemT]):
         self._run_start_perf = time.perf_counter()
         self.initialize()
 
+        scenario_runtime = getattr(self.environment, "scenario_runtime", None)
+        if scenario_runtime is not None:
+            scenario_runtime.advance(None if scenario_runtime.started else 0)
+
         finalized = False
         try:
             while not self.done:
+                previous_messages = None
+                if (
+                    scenario_runtime is not None
+                    and self.mode == CommunicationMode.HALF_DUPLEX
+                ):
+                    scenario_runtime.advance()
+                    with scenario_runtime.lock:
+                        while scenario_runtime.user_inputs:
+                            key, text = scenario_runtime.user_inputs.pop(0)
+                            self.user.queue_scenario_input(key, text)
+                    previous_messages = len(self.get_messages())
                 self.step()
+                if previous_messages is not None:
+                    for message in self.get_messages()[previous_messages:]:
+                        if (
+                            isinstance(message, UserMessage)
+                            and not message.is_tool_call()
+                        ):
+                            scenario_runtime.start()
+                            scenario_runtime.delivered(
+                                "user",
+                                message.content or "",
+                                event_id=(message.raw_data or {}).get(
+                                    "scenario_input_id"
+                                ),
+                            )
+                        elif (
+                            isinstance(message, AssistantMessage)
+                            and not message.is_tool_call()
+                        ):
+                            scenario_runtime.delivered("agent", message.content or "")
                 self._check_termination()
+            if scenario_runtime is not None and scenario_runtime.failure is not None:
+                raise RuntimeError(
+                    "Scenario execution failed"
+                ) from scenario_runtime.failure
+            interaction_stop = None
+            if scenario_runtime is not None:
+                interaction_stop = {
+                    "time": scenario_runtime.time(),
+                    "sequence": len(scenario_runtime.records),
+                    "index": len(getattr(self, "ticks", [])),
+                }
             result = self._finalize()
+            if self.scenario_stages is not None:
+                result.info = {
+                    **(result.info or {}),
+                    "scenario_series": self.scenario_stages.summary(
+                        self.termination_reason.value
+                    ),
+                }
+            if scenario_runtime is not None:
+                scenario_runtime.close()
+                executor = getattr(self, "_tool_executor", None)
+                if executor is not None:
+                    executor.close()
+                result.environment_trace = [
+                    r.model_dump(mode="json") for r in scenario_runtime.records
+                ]
+                result.info = {
+                    **(result.info or {}),
+                    "trajectory_seal": {
+                        "interaction_stop": interaction_stop,
+                        "sealed": {
+                            "time": scenario_runtime.time(),
+                            "sequence": len(scenario_runtime.records),
+                        },
+                    },
+                }
+                if scenario_runtime.event_triggers is not None:
+                    from tau2.domains.gaia2.replies import REPLY_VERSION
+
+                    result.info["reply_runtime_version"] = REPLY_VERSION
             finalized = True
             return result
         finally:
+            if scenario_runtime is not None:
+                scenario_runtime.close()
+                try:
+                    executor = getattr(self, "_tool_executor", None)
+                    if executor is not None and not finalized:
+                        executor.close()
+                finally:
+                    self.environment.close()
             if not finalized:
                 logger.warning(
                     "Simulation loop exited with an exception — "
@@ -323,6 +413,14 @@ class BaseOrchestrator(ABC, Generic[BaseAgentT, BaseUserT, TrajectoryItemT]):
             initialization_actions=initialization_actions,
             message_history=message_history,
         )
+        runtime = getattr(self.environment, "scenario_runtime", None)
+        if runtime is not None:
+            self.user.scenario_constraints = str(self.task.user_scenario)
+            runtime.advance(0)
+            with runtime.lock:
+                while runtime.user_inputs:
+                    key, text = runtime.user_inputs.pop(0)
+                    self.user.queue_scenario_input(key, text)
 
     def _execute_tool_calls(self, tool_calls: list[ToolCall]) -> list[ToolMessage]:
         """
@@ -762,7 +860,7 @@ class Orchestrator(BaseOrchestrator[AgentT, UserT, Message]):
         if self.to_role == Role.ENV:
             return
 
-        if self.step_count >= self.max_steps:
+        if self.max_steps is not None and self.step_count >= self.max_steps:
             self.done = True
             self.termination_reason = TerminationReason.MAX_STEPS
         if self.num_errors >= self.max_errors:
@@ -859,6 +957,20 @@ class Orchestrator(BaseOrchestrator[AgentT, UserT, Message]):
                 self.message, self.user_state
             )
             user_msg.validate()
+            if self.scenario_stages is not None:
+                runtime = self.environment.scenario_runtime
+                if self.scenario_stages.stop(user_msg, runtime, len(self.trajectory)):
+                    self.scenario_stages.release(
+                        self.user, runtime, len(self.trajectory)
+                    )
+                    user_msg, self.user_state = self.user.generate_next_message(
+                        None, self.user_state
+                    )
+                event_id = (user_msg.raw_data or {}).get("scenario_input_id")
+                if event_id:
+                    self.scenario_stages.delivered(
+                        event_id, runtime, len(self.trajectory), complete=True
+                    )
             if UserSimulator.is_stop(user_msg):
                 self.done = True
                 self.termination_reason = TerminationReason.USER_STOP

@@ -1,0 +1,56 @@
+{
+  "repository": "REAL-Bench",
+  "revision": "7e9224a80cb6a5abb5b457dd89988859c8b97234",
+  "files": {
+    "src/harbor/intent/__init__.py": "527bf72f05e0f63c364a7408361df26569b9aeebb2a5d6c616a8f4e4c990729e",
+    "src/harbor/intent/types.py": "5b9fe79e90f5e13c494226db3ccfd942b9f5c230b78c5e6ee8812a83e57abc94",
+    "src/harbor/intent/config.py": "246824e91ab5ed5fdd98112613979e1d8bcc92a463f5024330c79c3fe2bdcf6d",
+    "src/harbor/intent/io.py": "39ad0d8fed29bbc756b85b51fa85dd120c4ac43620639f10c91caa852b51df81",
+    "src/harbor/intent/generation.py": "603e9a06c087b1e7f3822b2fbad409944c5ecc9caf5ab5e289d25ace489dedf8",
+    "src/harbor/intent/gt.py": "b698119eb1e9431519ad2651216d8b9f4c244a8183db5ac8bede5b7a93d27ca8",
+    "src/harbor/intent/prediction.py": "6c72f8638376f8ca6daacb938b16cefaa499340ebc6ea6710b39fefe440138ac",
+    "src/harbor/intent/extraction.py": "8bc13f8cd3ebe18550fdce70e70eb82ed1fc3e0c2e0619cbabb43ae29e02725c",
+    "src/harbor/intent/evaluation.py": "cb81aa500df927d112d42c684b594cd809b505b41c01b96d89a60ad4c13f69b6",
+    "src/harbor/intent/scoring.py": "6d6ee5c3a497bc145097d88c39bc2c2d95a9498d30be3a634ce57b65bb9cca76",
+    "src/harbor/intent/units.py": "6992433654d3ce9a9497a4bda326f3db0ce3afe2a089444ac5201354402dce46",
+    "src/harbor/intent/gaia2_units.py": "76f148a559de8b5216afa925e62bd81f6819edd35696e3acb7a7a1c9b7042d26",
+    "src/harbor/intent/validation.py": "003417cef9a8fcdd9f1ef683b05b4eb50451c97beeec0c672b8f0d62e435b45b",
+    "src/harbor/intent/value_validation.py": "7ce8b0e0630259e50a0f56578c9827f6b26ec447b688e840729765be154d3095",
+    "src/harbor/intent/backend_scope.py": "e032d2100387a8f3cb39e68a250d36a48919387ac12fea6cef3dec1a79cb20cf",
+    "adapters/gaia2_blackbox/partial_scoring/checks.py": "fe6226309257bfc3da7e4eefbc07ff05d15d545b47aa83b80e0132dd0669e2cd",
+    "adapters/gaia2_blackbox/partial_scoring/bindings.py": "5a18d856441276a65b770615e91d25daa33dc2de84873cea8704860e52e4dd62",
+    "adapters/gaia2_blackbox/partial_scoring/matching.py": "b4170312e8be9a4ec517912d1f7249636ae14c2cc7ff82b7a4984f540408a362",
+    "adapters/gaia2_blackbox/partial_scoring/scoring.py": "c25a794ccb6cb44934f4ff86d25676cd77ac23db97c21b47ecbcef4c4b8729cf",
+    "adapters/gaia2_blackbox/partial_scoring/call_evidence.py": "3b23312b2cb63c680ee4ed12eaf8afee680766298e4414d0c65375d500df8190",
+    "adapters/gaia2_blackbox/partial_scoring/checker_policy.json": "11754b98718e47dd05113cdbc8e2807509218da20d2312e7a0c096a01f04ca75",
+    "src/harbor/intent/definitions/__init__.py": "3d55e7ad4f7ebfad53577a39c8d66a346c37a021b233ed31aed9b775cc8c0998",
+    "src/harbor/intent/definitions/gaia2/extraction_instructions.md": "37fa97746d6db326c0a3041438d3bffae3be0549ab3e8d29864458fc5cd23a6a",
+    "src/harbor/intent/definitions/gaia2/README.md": "6a7a2cde2066cc44dd7f4280955a3bd0e2f7324079ddc348375646ee8b198cba",
+    "src/harbor/intent/definitions/gaia2/intent.schema.json": "4b259f462d3b4d9b7a9f7eb66a345d3bac2426a781ff8d62161ddaa9d0508d5d",
+    "src/harbor/intent/definitions/gaia2/validation.profile.json": "416c34a3089746d5e451df149ad0b5563d2c41737813c6a74b0011d66b8f0f38",
+    "src/harbor/intent/definitions/gaia2/scoring.profile.json": "e9c93ba9077e11c3c18afdf0efc8b0621828eac3d1c698cdbb1ee85181488e8f",
+    "src/harbor/intent/definitions/gaia2/definition.json": "5eed45a462fc1f0dab091e67874544a78678369249136ac3d10f44e24d83f5d6",
+    "adapters/gaia2_blackbox/runtime/interaction_metrics.py": "71a2eb9015a7e2d04fbf1b19c5fdd63f76859ead0d9966910a5c4bb97da5c375",
+    "adapters/gaia2_blackbox/graded_runtime/effects.py": "fc41ee72e3fc24d31cd9e3f125d3b1658dd56861055249f3319c4f2d6fa6b6ef",
+    "adapters/gaia2_blackbox/graded_runtime/state.py": "5b4b41f5b7aa2b21aee3edd90b95eaf43257632dc79677ad08f6c51831783366"
+  },
+  "are": {
+    "version": "1.2.0",
+    "archive_sha256": "c16caa85abb36f42172ee4cb9e1df478d953d610f05442120f9b4066db85e5b2",
+    "files": {
+      "constants.py": "930476646f4cdfaa5875ad8cc51ced50667ea5de3e40356bafa0e7d57953524d",
+      "prompts.py": "37f5280cffa17d2ed05ebcab89a438bf0a9574b41207909c9685e8914af832a4",
+      "tool_judge.py": "15a82ba99f62ccdce7f2302f1cee847144280b37b01dd08b8edc273c96cf1407",
+      "utils/misc.py": "706b27ee877f659a2098c310b1814718f92299d6a78755588ce28f4a5628c09e",
+      "utils/llm_utils.py": "08f5d76ccbf07183bc667e521906af656c54c75ad3bd38eeaf705c58c2c9b25a",
+      "examples.py": "a5c5affd7d7aa6361e3384db8debd9a81f5f670a84a5d644cbaf2d47babe733e"
+    }
+  },
+  "adaptations": [
+    "Independent tau model transport; no Harbor/ARE service dependency.",
+    "Whole delivered conversation intent scope and per-request temporal anchors.",
+    "Release-aware matching, call-start ordering, native operation phase-state effects.",
+    "Tau media timeline and delivered-user-turn voice contract.",
+    "Explicit tau extensions for filesystem writing and mkdir parameters."
+  ]
+}

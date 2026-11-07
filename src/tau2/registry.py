@@ -84,6 +84,7 @@ class Registry:
         ] = {}  # Optional task filters per agent
         self._agent_metadata: Dict[str, dict] = {}  # Optional metadata per agent
         self._domains: Dict[str, Callable[[], Environment]] = {}
+        self._domain_capabilities: dict[str, dict] = {}
         self._tasks: Dict[str, Callable[[Optional[str]], list[Task]]] = {}
         self._task_splits: Dict[str, Callable[[], dict[str, list[str]]]] = {}
 
@@ -184,15 +185,23 @@ class Registry:
         self,
         get_environment: Callable[[], Environment],
         name: str,
+        capabilities: Optional[dict] = None,
     ):
         """Register a new Domain implementation"""
         try:
             if name in self._domains:
                 raise ValueError(f"Domain {name} already registered")
             self._domains[name] = get_environment
+            self._domain_capabilities[name] = dict(capabilities or {})
         except Exception as e:
             logger.error(f"Error registering domain {name}: {str(e)}")
             raise
+
+    def get_domain_capabilities(self, name: str) -> dict:
+        """Return explicit execution/provider capabilities for a registered domain."""
+        if name not in self._domains:
+            raise KeyError(f"Domain {name} not registered")
+        return dict(self._domain_capabilities.get(name, {}))
 
     def register_tasks(
         self,
@@ -325,11 +334,38 @@ try:
         get_task_splits=airline_domain_get_tasks_split,
     )
 
-    registry.register_domain(retail_domain_get_environment, "retail")
+    registry.register_domain(
+        retail_domain_get_environment,
+        "retail",
+        capabilities={"qwen_agent_languages": ["en"]},
+    )
     registry.register_tasks(
         retail_domain_get_tasks,
         "retail",
         get_task_splits=retail_domain_get_tasks_split,
+    )
+
+    from tau2.domains.gaia2.environment import (
+        get_environment as gaia2_get_environment,
+    )
+    from tau2.domains.gaia2.environment import (
+        get_tasks as gaia2_get_tasks,
+    )
+    from tau2.domains.gaia2.environment import (
+        get_tasks_split as gaia2_get_tasks_split,
+    )
+
+    registry.register_domain(
+        gaia2_get_environment,
+        "gaia2",
+        capabilities={
+            "qwen_agent_languages": ["en"],
+            "task_environment": True,
+            "pack_extension": "gaia2",
+        },
+    )
+    registry.register_tasks(
+        gaia2_get_tasks, "gaia2", get_task_splits=gaia2_get_tasks_split
     )
 
     registry.register_domain(telecom_domain_get_environment_manual_policy, "telecom")

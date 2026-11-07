@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Literal, Optional, Union
 
 import pandas as pd
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, model_serializer, model_validator
 from typing_extensions import Annotated
 
 from tau2.config import (
@@ -185,6 +185,28 @@ class BaseRunConfig(RunSettings):
         audio = getattr(self, "audio_native_config", None)
         if audio is None:
             return self
+        if audio.provider == "qwen_agent":
+            from tau2.registry import registry
+
+            languages = registry.get_domain_capabilities(self.domain).get(
+                "qwen_agent_languages", []
+            )
+            if self.language not in languages:
+                raise ValueError(
+                    "qwen_agent requires a domain declaring support for the selected language"
+                )
+            if self.benchmark is not None:
+                raise ValueError("qwen_agent currently supports custom runs only")
+            if "max_concurrency" not in self.model_fields_set:
+                self.max_concurrency = 1
+            for field, default in (
+                ("max_retries", 0),
+                ("hallucination_retries", 0),
+            ):
+                if field not in self.model_fields_set:
+                    setattr(self, field, default)
+                elif getattr(self, field) != default:
+                    raise ValueError(f"qwen_agent requires {field}={default}")
         recorded_language = audio.language
         if audio.language is not None and audio.language != self.language:
             raise ValueError("provider language must match the run language")
@@ -267,8 +289,8 @@ class BaseRunConfig(RunSettings):
         raise NotImplementedError("Subclasses must implement effective_user")
 
     @property
-    def effective_max_steps(self) -> int:
-        """Maximum simulation steps (turns for text, ticks for voice)."""
+    def effective_max_steps(self) -> Optional[int]:
+        """Maximum simulation steps, or None for unlimited voice conversations."""
         raise NotImplementedError("Subclasses must implement effective_max_steps")
 
     @property
@@ -363,7 +385,7 @@ class VoiceRunConfig(BaseRunConfig, VoiceRunSettings):
         return DEFAULT_AUDIO_NATIVE_USER_IMPLEMENTATION
 
     @property
-    def effective_max_steps(self) -> int:
+    def effective_max_steps(self) -> Optional[int]:
         return self.audio_native_config.max_steps_ticks
 
     @property
@@ -942,6 +964,14 @@ class UserInfo(BaseModel):
 class Info(BaseModel):
     """Information about the simulator."""
 
+    voice_user_simulator_version: Optional[str] = Field(
+        default=None,
+        description="Observed caller scheduling version; absent in legacy runs.",
+    )
+    user_audio_renderer: Optional[dict] = Field(
+        default=None,
+        description="Observed caller renderer source, model and scene identities.",
+    )
     domain_tools_version: Optional[str] = Field(
         default=None,
         description="Observed domain lookup semantics; absent for legacy results.",
@@ -1028,7 +1058,13 @@ class Info(BaseModel):
         description="Version of the spell-event detector used by agent-directed voice runs.",
     )
     num_trials: int = Field(description="The number of trials.")
-    max_steps: int = Field(description="The maximum number of steps.")
+    max_steps: Optional[int] = Field(
+        description="The maximum number of steps; None means unlimited."
+    )
+    nl_assertions_judge: Optional[dict] = Field(
+        default=None,
+        description="Resolved natural-language assertion judge model and arguments.",
+    )
     max_errors: int = Field(description="The maximum number of errors.")
     user_info: UserInfo = Field(description="User information.")
     agent_info: AgentInfo = Field(description="Agent information.")
@@ -1100,6 +1136,26 @@ class SimulationRun(BaseModel):
         default=None, description="Source revision of the voice metadata catalog."
     )
     id: str = Field(description="The unique identifier for the simulation run.")
+    diagnostics_ref: Optional[dict] = None
+    environment_trace: Optional[list[dict]] = None
+    evaluation_status: Optional[
+        Literal["pending", "completed", "skipped", "failed"]
+    ] = None
+    evaluation_error: Optional[dict] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_run(self, handler):
+        """Omit new optional evidence from historical trajectory payloads."""
+        data = handler(self)
+        if self.diagnostics_ref is None:
+            data.pop("diagnostics_ref", None)
+        if self.environment_trace is None:
+            data.pop("environment_trace", None)
+        for name in ("evaluation_status", "evaluation_error"):
+            if getattr(self, name) is None:
+                data.pop(name, None)
+        return data
+
     complication: Optional[SampledComplication] = Field(
         default=None,
         description="The seeded elicitation stimulus used for this simulation.",
@@ -1180,6 +1236,10 @@ class SimulationRun(BaseModel):
         description="Provider session ID (e.g., OpenAI session ID, xAI conversation ID) for debugging.",
         default=None,
     )
+    agent_system_metadata: Optional[dict] = Field(
+        default=None,
+        description="Complete-agent provenance and observer settings, without credentials.",
+    )
     policy: Optional[str] = Field(
         description="The actual domain policy used for this simulation, including any task-specific context.",
         default=None,
@@ -1225,6 +1285,19 @@ class SimulationIndexEntry(BaseModel):
     termination_reason: str | None = None
     agent_cost: float | None = None
     duration: float | None = None
+    evaluation_status: Optional[
+        Literal["pending", "completed", "skipped", "failed"]
+    ] = None
+    evaluation_error: Optional[dict] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_evaluation(self, handler):
+        """Keep older index entries unchanged when grading metadata is absent."""
+        data = handler(self)
+        for name in ("evaluation_status", "evaluation_error"):
+            if getattr(self, name) is None:
+                data.pop(name, None)
+        return data
 
 
 class Results(BaseModel):
@@ -1300,6 +1373,8 @@ class Results(BaseModel):
                 termination_reason=sim.termination_reason,
                 agent_cost=sim.agent_cost,
                 duration=sim.duration,
+                evaluation_status=sim.evaluation_status,
+                evaluation_error=sim.evaluation_error,
             )
             for sim in self.simulations
         ]
@@ -1512,6 +1587,7 @@ class Results(BaseModel):
             "trial": sim.trial,
             "seed": sim.seed,
             "reward": sim.reward_info.reward if sim.reward_info else None,
+            "evaluation_status": sim.evaluation_status,
             "agent_cost": sim.agent_cost,
             "user_cost": sim.user_cost,
             "termination_reason": sim.termination_reason,

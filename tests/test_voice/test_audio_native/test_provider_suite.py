@@ -74,6 +74,16 @@ TESTDATA_DIR = Path(__file__).parent / "testdata"
 # have credentials for.
 PROVIDERS = [
     pytest.param(
+        "qwen_agent",
+        marks=pytest.mark.skipif(
+            not (
+                os.environ.get("QWEN_AGENT_TEST_ENABLED")
+                and os.environ.get("TAU2_QWEN_AGENT_CONFIG")
+            ),
+            reason="QWEN_AGENT_TEST_ENABLED and TAU2_QWEN_AGENT_CONFIG are required",
+        ),
+    ),
+    pytest.param(
         "openai_live",
         marks=pytest.mark.skipif(
             not all(
@@ -383,9 +393,25 @@ def adapter(provider_name: str):
     cascaded_config = None
     live_config = None
     avartha_config = None
+    qwen_agent_config = None
     model = None
 
-    if provider_name == "openai_live":
+    if provider_name == "qwen_agent":
+        from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
+
+        qwen_agent_config = QwenAgentConfig.model_validate_json(
+            Path(os.environ["TAU2_QWEN_AGENT_CONFIG"]).read_text()
+        )
+        # Provider contracts have no benchmark task from which to prepare words.
+        # The task-aware vocabulary path is covered by the listener ASR tests.
+        qwen_agent_config = qwen_agent_config.model_copy(
+            update={
+                "asr_hotwords": qwen_agent_config.asr_hotwords.model_copy(
+                    update={"enabled": False}
+                )
+            }
+        )
+    elif provider_name == "openai_live":
         model = os.environ.get("OPENAI_LIVE_MODEL", DEFAULT_OPENAI_LIVE_MODEL)
         live_config = LiveConfig(backend_model=os.environ["OPENAI_LIVE_BACKEND_MODEL"])
     elif provider_name == "avartha_pipecat":
@@ -410,6 +436,7 @@ def adapter(provider_name: str):
         model=model,
         live_config=live_config,
         avartha_config=avartha_config,
+        qwen_agent_config=qwen_agent_config,
     )
     yield adapter
     if adapter.is_connected:

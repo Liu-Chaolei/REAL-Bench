@@ -36,6 +36,21 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+diagnostics = ["jsonschema>=4.23.0", "webrtcvad-wheels==2.0.14.post1", "soxr==0.5.0.post1", "jinja2>=3.1.0", "beautifulsoup4>=4.12.0"]
+gaia2 = [
+    "fastparquet>=2024.11.0",
+    "fsspec>=2024.10.0",
+    "rapidfuzz>=3.9.0",
+    "termcolor>=2.4.0",
+    "mammoth>=1.8.0",
+    "markdownify>=0.14.0",
+    "pdfminer-six>=20240706",
+    "python-pptx>=1.0.2",
+    "puremagic>=1.28",
+    "beautifulsoup4>=4.12.0",
+    "openpyxl>=3.1.5,<4",
+    "huggingface-hub>=0.26.0",
+]
 localization-review = [
     "openpyxl>=3.1.5,<4",
 ]
@@ -74,6 +89,7 @@ gym = [
 ]
 dev = [
     "pytest>=8.3.5",
+    "pytest-asyncio>=0.24.0",
     "pytest-xdist>=3.5.0",
     "ruff>=0.9.1",
     "pre-commit>=4.0.0",
@@ -85,7 +101,7 @@ experiments = [
     "scikit-learn>=1.6.1",
 ]
 all = [
-    "tau2[voice,live,knowledge,gym,dev,experiments,localization-review]",
+    "tau2[voice,live,knowledge,gym,dev,experiments,localization-review,gaia2,diagnostics]",
 ]
 [project.urls]
 Homepage = "https://taubench.com/"

@@ -3,13 +3,11 @@
 from dotenv import load_dotenv
 
 from tau2.data_model.audio import AudioData
-from tau2.data_model.voice import ElevenLabsTTSConfig
+from tau2.data_model.voice import ElevenLabsTTSConfig, MiMoTTSConfig, ProviderConfig
 from tau2.utils.retry import tts_retry
 from tau2.voice.utils.elevenlabs_utils import tts_elevenlabs
 
 load_dotenv()
-
-ProviderConfig = ElevenLabsTTSConfig
 
 
 @tts_retry
@@ -19,8 +17,12 @@ def synthesize_voice(
     provider_config: ProviderConfig,
 ) -> AudioData:
     """Synthesize voice from text using the specified configuration."""
-    if provider == "elevenlabs":
+    if provider == "elevenlabs" and isinstance(provider_config, ElevenLabsTTSConfig):
         audio_data = tts_elevenlabs(text=text, config=provider_config)
+    elif provider == "mimo" and isinstance(provider_config, MiMoTTSConfig):
+        from tau2.voice.mimo import synthesize_mimo
+
+        audio_data = synthesize_mimo(text, provider_config)
     else:
         raise ValueError(f"Unsupported synthesis provider: {provider}")
 

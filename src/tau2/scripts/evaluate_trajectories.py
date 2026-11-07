@@ -15,6 +15,8 @@ from tau2.data_model.language import LanguageTaskInfo, cross_lingual
 from tau2.data_model.simulation import Results, SimulationRun
 from tau2.data_model.tasks import Task
 from tau2.evaluator.evaluator import EvaluationType, evaluate_simulation
+from tau2.evaluator.evaluator_base import evaluation_error_info
+from tau2.evaluator.outcome import can_grade, stamp_grading
 from tau2.metrics.agent_metrics import compute_metrics
 from tau2.multilingual.runtime import LoadedLanguage
 from tau2.orchestrator.modes import CommunicationMode
@@ -150,6 +152,12 @@ def _build_eval_env_kwargs(
     """
     domain = results.info.environment_info.domain_name
     env_kwargs: dict = {}
+    from tau2.registry import registry
+
+    if registry.get_domain_capabilities(domain).get("task_environment"):
+        env_kwargs.update(
+            task=task, semantic_scoring=results.info.effective_communicate_scoring
+        )
     if loaded_language is not None:
         from tau2.multilingual.runtime import (
             language_environment_kwargs,
@@ -199,6 +207,7 @@ def compute_simulation_rewards(
     evaluation_type: EvaluationType = EvaluationType.ALL,
     console: Optional[Console] = None,
     fresh_tasks: bool = False,
+    recorded_data_root: str | Path | None = None,
 ) -> Results:
     """
     Compute and update rewards for all simulations in the results.
@@ -211,6 +220,12 @@ def compute_simulation_rewards(
             data directory instead of the ones embedded in the results file.
     """
     results = deepcopy(results)
+    if recorded_data_root is not None:
+        if fresh_tasks:
+            raise ValueError("Historical data cannot be combined with fresh_tasks")
+        from tau2.domains.gaia2.recorded import validate_recorded_data
+
+        recorded_data_root = validate_recorded_data(results, recorded_data_root)
     if fresh_tasks:
         results = _load_fresh_tasks(results, console=console)
     domain = results.info.environment_info.domain_name
@@ -218,7 +233,11 @@ def compute_simulation_rewards(
     tasks = {task.id: task for task in results.tasks}
     # Fresh tasks replace the pinned population; English contexts then score
     # against the ordinary canonical environment.
-    loaded_language = None if fresh_tasks else _recorded_language(results)
+    loaded_language = (
+        None
+        if fresh_tasks or recorded_data_root is not None
+        else _recorded_language(results)
+    )
     scoring = results.info.effective_communicate_scoring
 
     progress_context = Progress(console=console) if console else None
@@ -232,23 +251,43 @@ def compute_simulation_rewards(
 
         for simulation in results.simulations:
             task = tasks[simulation.task_id]
-            computed_reward_info = evaluate_simulation(
-                domain=domain,
-                task=task,
-                simulation=simulation,
-                evaluation_type=evaluation_type,
-                solo_mode=solo_mode,
-                mode=get_communication_mode(results, simulation),
-                env_kwargs=_build_eval_env_kwargs(
-                    results, task, simulation, loaded_language=loaded_language
-                ),
-                strict_replay=False,
-                communicate_scoring=scoring,
-                customer_language=_customer_language(results, task.id),
+            # Recorded-task/persona/constructor validation remains a hard input
+            # error; only execution of a valid scoring request is recoverable.
+            env_kwargs = _build_eval_env_kwargs(
+                results, task, simulation, loaded_language=loaded_language
             )
+            if domain == "gaia2":
+                env_kwargs.update(runtime_mode="replay")
+                if recorded_data_root is not None:
+                    env_kwargs["root"] = recorded_data_root
+            stamp_grading(simulation)
+            simulation.evaluation_status = "pending"
+            try:
+                computed_reward_info = evaluate_simulation(
+                    domain=domain,
+                    task=task,
+                    simulation=simulation,
+                    evaluation_type=evaluation_type,
+                    solo_mode=solo_mode,
+                    mode=get_communication_mode(results, simulation),
+                    env_kwargs=env_kwargs,
+                    strict_replay=task.scenario is not None,
+                    communicate_scoring=scoring,
+                    customer_language=_customer_language(results, task.id),
+                )
 
-            # Update the simulation with new reward info
-            simulation.reward_info = computed_reward_info
+            except Exception as error:
+                simulation.reward_info = None
+                simulation.evaluation_status = "failed"
+                simulation.evaluation_error = evaluation_error_info(error)
+            else:
+                simulation.reward_info = computed_reward_info
+                simulation.evaluation_status = (
+                    "completed"
+                    if can_grade(simulation.termination_reason)
+                    else "skipped"
+                )
+                simulation.evaluation_error = None
 
             if progress_context:
                 progress_context.update(task_progress, advance=1)
@@ -264,6 +303,7 @@ def evaluate_trajectories(
     output_dir: str | None = None,
     evaluation_type: EvaluationType = EvaluationType.ALL,
     fresh_tasks: bool = False,
+    recorded_data_root: str | Path | None = None,
 ) -> None:
     """
     Evaluate trajectories and optionally save updated results with recomputed rewards.
@@ -300,6 +340,12 @@ def evaluate_trajectories(
     for file_path in files:
         console.print(f"\n📁 {file_path}", style="bold")
 
+        if output_dir:
+            source = Path(file_path).resolve()
+            source_root = source if source.is_dir() else source.parent
+            if output_path.resolve() == source_root:
+                raise ValueError("Re-grading requires a separate output directory")
+
         if not os.path.exists(file_path):
             console.print(f"  ❌ File does not exist", style="red")
             all_files_processed = False
@@ -315,6 +361,7 @@ def evaluate_trajectories(
                 evaluation_type=evaluation_type,
                 console=console,
                 fresh_tasks=fresh_tasks,
+                recorded_data_root=recorded_data_root,
             )
             console.print(
                 f"  ✅ Computed rewards for {len(updated_results.simulations)} simulation(s)",
@@ -327,8 +374,15 @@ def evaluate_trajectories(
 
             # Save updated results if output directory is provided
             if output_dir:
-                input_filename = Path(file_path).name
-                output_file = output_path / f"updated_{input_filename}"
+                source_path = Path(file_path)
+                input_filename = source_path.name
+                # A batch can contain several results.json files; preserve each
+                # attempt instead of overwriting every result in one output dir.
+                prefix = (
+                    source_path.parent.name if input_filename == "results.json" else ""
+                )
+                output_name = f"{prefix}_{input_filename}" if prefix else input_filename
+                output_file = output_path / f"updated_{output_name}"
                 updated_results.save(output_file)
                 console.print(f"  💾 Saved to: {output_file}", style="blue")
 

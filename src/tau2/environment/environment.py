@@ -1,4 +1,5 @@
 import json
+from contextlib import nullcontext
 from copy import deepcopy
 from datetime import date, datetime
 from typing import Any, Literal, Optional
@@ -67,6 +68,30 @@ class Environment:
         Get the name of the domain.
         """
         return self.domain_name
+
+    def close(self) -> None:
+        """Release optional trial resources; ordinary in-memory domains own none."""
+        observer = getattr(self, "diagnostic_recorder", None)
+        if observer is not None:
+            observer.close()
+        runtime = getattr(self, "scenario_runtime", None)
+        if runtime is not None:
+            runtime.close()
+
+    def evaluation_kwargs(self) -> dict:
+        """Return constructor inputs required to replay this particular trial."""
+        return {}
+
+    def get_user_asr_materials(self, task):
+        """Return initial user-visible material through an optional domain hook.
+
+        All tasks also receive extraction from their initial user instructions
+        in the shared runner. No assistant database is exposed by default.
+        """
+        from tau2.data_model.asr import HotwordMaterials
+
+        hook = getattr(self.tools, "get_user_asr_materials", None)
+        return hook(task) if hook is not None else HotwordMaterials()
 
     def get_policy(self) -> str:
         """
@@ -471,6 +496,58 @@ class Environment:
             raise ValueError(f"Tool names overlap: {overlap}")
 
     def get_response(self, message: ToolCall) -> ToolMessage:
+        """Execute a normal tool, optionally journaling a timed scenario."""
+        runtime = getattr(self, "scenario_runtime", None)
+        observer = getattr(self, "diagnostic_recorder", None)
+        if runtime is None:
+            token = observer.before(message, message.arguments) if observer else None
+            response = self._get_response(message)
+            if observer:
+                observer.after(token, message, message.arguments, response)
+            return response
+        function = self.tools.tools.get(message.name) if self.tools else None
+        arguments = message.arguments
+        if function is not None:
+            import inspect
+
+            try:
+                bound = inspect.signature(function).bind(**message.arguments)
+                bound.apply_defaults()
+                arguments = dict(bound.arguments)
+            except TypeError:
+                pass  # The normal tool error is still returned and recorded.
+        waiting = bool(getattr(function, "__waits_for_environment__", False))
+        # Keep mutations and their journal entries in one critical section.
+        # A notification wait must leave the scheduler free to deliver events.
+        with nullcontext() if waiting else runtime.lock:
+            token = observer.before(message, arguments) if observer else None
+            started = runtime.time()
+            if waiting:
+                result = self._get_response(message)
+            else:
+                with runtime.operation() as started:
+                    result = self._get_response(message)
+            try:
+                content = json.loads(result.content)
+            except (TypeError, json.JSONDecodeError):
+                content = result.content
+            runtime.record(
+                "tool",
+                name=message.name,
+                arguments=arguments,
+                result=content,
+                error=result.error,
+                call_id=message.id,
+                started_time=started,
+            )
+            runtime.observe(
+                message.name, arguments, content, error=result.error, call_id=message.id
+            )
+            if observer:
+                observer.after(token, message, arguments, result)
+        return result
+
+    def _get_response(self, message: ToolCall) -> ToolMessage:
         """
         Get the response of the domain. This also calls sync_tools.
         Args:

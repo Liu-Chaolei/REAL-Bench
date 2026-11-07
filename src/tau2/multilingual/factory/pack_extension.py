@@ -19,6 +19,60 @@ from tau2.multilingual.scenario_dispatch import bundle_model
 from tau2.utils.artifacts import ReviewApproval, content_digest, write_artifact
 
 BANKING_VOICE_DATE_GUIDANCE_VERSION = "banking-spoken-dates-v1"
+
+
+def publish_registry_extension(
+    *,
+    name: str,
+    language: str,
+    domain: str,
+    revision: str,
+    metadata: dict,
+    user_guidelines: str = "",
+) -> Path:
+    """Publish a custom domain binding using existing reviewed pack personas.
+
+    Tasks remain owned by the domain registry, including its ordinary splits.
+    This is deliberately separate from released pack headers and manifests.
+    """
+    from tau2.data_model.language import (
+        DomainBinding,
+        PackExtension,
+        TaskMetadata,
+        TaskSource,
+    )
+    from tau2.multilingual.runtime import extension_root
+
+    pack_path = language_root() / language / "pack.yaml"
+    load_pack(language)  # Validate the inherited published persona contract.
+    extension = PackExtension(
+        name=name,
+        language=language,
+        base_pack_sha256=hashlib.sha256(pack_path.read_bytes()).hexdigest(),
+        revision=revision,
+        domains={
+            domain: DomainBinding(
+                revision=revision,
+                source=TaskSource.REGISTRY,
+                task_metadata_file="metadata.json",
+                user_guidelines=user_guidelines,
+            )
+        },
+    )
+    data = TypeAdapter(dict[str, TaskMetadata]).validate_python(metadata)
+    root = extension_root() / name / language
+    root.mkdir(parents=True, exist_ok=True)
+    payload = extension.model_dump_json(indent=2) + "\n"
+    target = root / "extension.json"
+    if target.exists() and target.read_text() != payload:
+        raise FileExistsError("An extension with different settings already exists")
+    (root / "metadata.json").write_bytes(
+        TypeAdapter(dict[str, TaskMetadata]).dump_json(data, indent=2)
+    )
+    target.write_text(payload)
+    return target
+
+
 BANKING_DEBIT_SHIPPING_VERSION = "banking-domestic-debit-shipping-v1"
 BANKING_DATE_AND_SHIPPING_VERSION = (
     f"{BANKING_VOICE_DATE_GUIDANCE_VERSION}+{BANKING_DEBIT_SHIPPING_VERSION}"

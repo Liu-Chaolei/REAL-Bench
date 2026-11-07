@@ -394,6 +394,41 @@ def tool_messages(ticks: list[Tick]) -> list[Message]:
     the environment evaluator's execution trajectory.
     """
     messages: list[Message] = []
+    if any(t.environment_events is not None for t in ticks):
+        pending = {}
+        for tick in ticks:
+            for speaker in ("caller", "agent"):
+                calls = (
+                    tick.user_tool_calls
+                    if speaker == "caller"
+                    else tick.agent_tool_calls
+                )
+                results = (
+                    tick.user_tool_results
+                    if speaker == "caller"
+                    else tick.agent_tool_results
+                )
+                for call in calls:
+                    pending[call.id] = (call, speaker)
+                for result in results:
+                    if result.id not in pending:
+                        raise ValueError(
+                            f"Tool result {result.id} has no recorded request"
+                        )
+                    call, owner = pending.pop(result.id)
+                    message_class = (
+                        UserMessage if owner == "caller" else AssistantMessage
+                    )
+                    messages.extend(
+                        [
+                            message_class(
+                                role="user" if owner == "caller" else "assistant",
+                                tool_calls=[call],
+                            ),
+                            result,
+                        ]
+                    )
+        return messages
     for tick in ticks:
         if tick.user_tool_calls:
             messages.append(

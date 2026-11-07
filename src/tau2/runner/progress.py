@@ -210,6 +210,11 @@ class StatusMonitor:
                         sim.reward_info.reward
                         for sim in self._simulation_results.simulations
                         if sim.reward_info is not None
+                        and sim.termination_reason
+                        not in {
+                            TerminationReason.INFRASTRUCTURE_ERROR,
+                            TerminationReason.USER_ERROR,
+                        }
                     ]
                     if rewards:
                         avg_reward = sum(rewards) / len(rewards)

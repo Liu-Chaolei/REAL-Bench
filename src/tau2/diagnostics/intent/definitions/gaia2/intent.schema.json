@@ -1,0 +1,1181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:harbor:intent:gaia2",
+  "description": "共享组合意图接口：业务名称开放，结构标签固定。未提出的字段省略；原文依据在记录外层。全部场景的语义覆盖尚未审核。",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "entities": {
+      "description": "可共享的对象绑定。",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entity"
+      }
+    },
+    "goals": {
+      "description": "当前请求的直接目标，可包含多个目标；只在条件下生效的目标放入 rules。",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/goal"
+      }
+    },
+    "relations": {
+      "description": "明确提出的跨目标关系。",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/relation"
+      }
+    },
+    "rules": {
+      "description": "触发、条件和分支目标。",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/rule"
+      }
+    },
+    "time_constraints": {
+      "description": "明确的独立时间约束；参数中已完整表达的起止时刻无需重复。",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/time_constraint"
+      }
+    },
+    "constraints": {
+      "description": "明确的政策或限制。",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/constraint"
+      }
+    },
+    "ambiguities": {
+      "description": "原文真实的不确定信息，没有则省略。",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ambiguity"
+      }
+    }
+  },
+  "required": [
+    "goals"
+  ],
+  "$defs": {
+    "parameter": {
+      "description": "具名参数。参数名表达角色，值使用类型化语义值，避免把不同目标的人物、日期或内容混在一起。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "description": "参数的规范角色名称，例如 recipient、date、start_time、end_time、attendees_include、content、date_and_time。只填写输入表达的参数。",
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "description": "该参数的语义值；可以是明确值、对象引用、相对时间或未来消息中的变量。",
+          "$ref": "#/$defs/value"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "literal": {
+      "description": "明确的标量值。数词可按统一规则转换，数值不能从 GT 修正。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "description": "该结构的类型标识，使用规范中的固定值。",
+          "const": "literal"
+        },
+        "value": {
+          "description": "输入表达的字符串、数值、布尔值或明确要求的空值；null 在这里表示用户明确要求空值。",
+          "type": [
+            "string",
+            "number",
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "value"
+      ]
+    },
+    "entity_ref": {
+      "description": "引用当前意图内定义的对象，引用名称本身不参与语义评分。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "description": "该结构的类型标识，使用规范中的固定值。",
+          "const": "entity_ref"
+        },
+        "ref": {
+          "description": "对象的内部引用名称，如 friend、film_day。",
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "kind",
+        "ref"
+      ]
+    },
+    "trigger_ref": {
+      "description": "引用当前规则触发的事件，不需要知道未来事件的具体内容。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "description": "该结构的类型标识，使用规范中的固定值。",
+          "const": "trigger_ref"
+        },
+        "ref": {
+          "description": "对应规则 trigger.bind_as 定义的事件变量名。",
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "kind",
+        "ref"
+      ]
+    },
+    "trigger_field": {
+      "description": "未来触发事件提供的参数，仅保存来源和角色，不预填隐藏的未来值。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "description": "该结构的类型标识，使用规范中的固定值。",
+          "const": "trigger_field"
+        },
+        "event_ref": {
+          "description": "参数来自哪个触发事件变量。",
+          "type": "string",
+          "minLength": 1
+        },
+        "field": {
+          "description": "从未来事件中读取的语义字段，如 suggested_date、suggested_date_and_time。这些是语义角色，不要求与应用原始 JSON 字段同名。",
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "kind",
+        "event_ref",
+        "field"
+      ]
+    },
+    "relative_date": {
+      "description": "保存相对日期表达与锚点，不依赖主机当前日期。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "description": "该结构的类型标识，使用规范中的固定值。",
+          "const": "relative_date"
+        },
+        "expression": {
+          "description": "规范化的相对日期表达，例如 upcoming_saturday。",
+          "type": "string",
+          "minLength": 1
+        },
+        "anchor": {
+          "description": "相对日期的时间基准。",
+          "$ref": "#/$defs/temporal_anchor"
+        }
+      },
+      "required": [
+        "kind",
+        "expression",
+        "anchor"
+      ]
+    },
+    "time_of_day": {
+      "description": "明确表达的日内时刻，统一为24小时格式。未确定的部分应在 ambiguities 中保存，不能猜测。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "description": "该结构的类型标识，使用规范中的固定值。",
+          "const": "time_of_day"
+        },
+        "value": {
+          "description": "24 小时 HH:MM 或明确到秒的 HH:MM:SS；保留输入精度，不补未表达的秒。",
+          "type": "string",
+          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$"
+        }
+      },
+      "required": [
+        "kind",
+        "value"
+      ]
+    },
+    "list_value": {
+      "description": "由多个语义值组成的列表。列表中的值仍需保留角色或对象引用。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "description": "该结构的类型标识，使用规范中的固定值。",
+          "const": "list"
+        },
+        "items": {
+          "description": "列表元素。例如参与者列表可含 entity_ref。",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/value"
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "items"
+      ]
+    },
+    "message_content": {
+      "description": "表达邮件或通知的内容要求，而非把内容提到的事情自动变成新的执行目标。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "description": "该结构的类型标识，使用规范中的固定值。",
+          "const": "message_content"
+        },
+        "purpose": {
+          "description": "用户要求消息表达的目的或命题，例如 provide_appointment_details。",
+          "type": "string",
+          "minLength": 1
+        },
+        "about_ref": {
+          "description": "消息内容涉及的对象，如 film_day；没有指定对象时省略。",
+          "type": "string",
+          "minLength": 1
+        },
+        "details": {
+          "description": "输入明确给出的内容参数或命题细节，没有要求时省略。",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/parameter"
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "purpose"
+      ]
+    },
+    "selection_value": {
+      "description": "用选择条件描述对象集合，不枚举 oracle 命中的具体 ID。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "description": "该结构的类型标识，使用规范中的固定值。",
+          "const": "selection"
+        },
+        "selection": {
+          "description": "对象的选择规则。",
+          "$ref": "#/$defs/selection"
+        }
+      },
+      "required": [
+        "kind",
+        "selection"
+      ]
+    },
+    "value": {
+      "description": "类型化语义值；各分支分别规定字段含义与填写边界。",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/literal"
+        },
+        {
+          "$ref": "#/$defs/entity_ref"
+        },
+        {
+          "$ref": "#/$defs/trigger_ref"
+        },
+        {
+          "$ref": "#/$defs/trigger_field"
+        },
+        {
+          "$ref": "#/$defs/relative_date"
+        },
+        {
+          "$ref": "#/$defs/time_of_day"
+        },
+        {
+          "$ref": "#/$defs/list_value"
+        },
+        {
+          "$ref": "#/$defs/message_content"
+        },
+        {
+          "$ref": "#/$defs/selection_value"
+        },
+        {
+          "$ref": "#/$defs/undetermined"
+        },
+        {
+          "$ref": "#/$defs/goal_ref"
+        },
+        {
+          "$ref": "#/$defs/entity_field"
+        }
+      ]
+    },
+    "comparison": {
+      "description": "字段比较条件。比较符及数值的边界必须忠实于输入。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "description": "该结构的类型标识，使用规范中的固定值。",
+          "const": "comparison"
+        },
+        "field": {
+          "description": "被比较的规范属性，例如 occupation、city、date、age。",
+          "type": "string",
+          "minLength": 1
+        },
+        "operator": {
+          "description": "比较关系；包含边界与严格边界分开保存。",
+          "type": "string",
+          "enum": [
+            "==",
+            "!=",
+            "<",
+            "<=",
+            ">",
+            ">="
+          ]
+        },
+        "value": {
+          "description": "比较对象，可以是明确值、相对日期或未来触发变量。",
+          "$ref": "#/$defs/value"
+        }
+      },
+      "required": [
+        "kind",
+        "field",
+        "operator",
+        "value"
+      ]
+    },
+    "logical_group": {
+      "description": "all 表示全部条件成立，any 表示任意条件成立。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "description": "逻辑连接类型。",
+          "type": "string",
+          "enum": [
+            "all",
+            "any"
+          ]
+        },
+        "items": {
+          "description": "被连接的条件。",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/condition"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "kind",
+        "items"
+      ]
+    },
+    "negation": {
+      "description": "条件取反；否定作用于此处指定的完整条件。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "description": "该结构的类型标识，使用规范中的固定值。",
+          "const": "not"
+        },
+        "condition": {
+          "description": "被否定的条件。",
+          "$ref": "#/$defs/condition"
+        }
+      },
+      "required": [
+        "kind",
+        "condition"
+      ]
+    },
+    "existence": {
+      "description": "判断符合选择条件的对象是否存在。表示原文的存在前提。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "description": "该结构的类型标识，使用规范中的固定值。",
+          "const": "exists"
+        },
+        "selection": {
+          "description": "待判断的对象选择条件。",
+          "$ref": "#/$defs/selection"
+        }
+      },
+      "required": [
+        "kind",
+        "selection"
+      ]
+    },
+    "predicate": {
+      "description": "表达普通比较无法直接表示的筛选条件，例如包含、匹配或取极值。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "description": "该结构的类型标识，使用规范中的固定值。",
+          "const": "predicate"
+        },
+        "name": {
+          "description": "条件的语义名称，自由命名。",
+          "type": "string",
+          "minLength": 1
+        },
+        "arguments": {
+          "description": "条件涉及的对象、属性和比较范围，只保存输入表达的信息。",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/parameter"
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "name",
+        "arguments"
+      ]
+    },
+    "condition": {
+      "description": "比较、逻辑组合、否定、存在性或命名谓词构成的条件。",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/comparison"
+        },
+        {
+          "$ref": "#/$defs/logical_group"
+        },
+        {
+          "$ref": "#/$defs/negation"
+        },
+        {
+          "$ref": "#/$defs/existence"
+        },
+        {
+          "$ref": "#/$defs/predicate"
+        }
+      ]
+    },
+    "selection": {
+      "description": "用户描述的对象选择规则。选择条件是意图，不是工具调用计划。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "entity_type": {
+          "description": "对象类型，例如 person、calendar_event、calendar_appointment。",
+          "type": "string",
+          "minLength": 1
+        },
+        "owner": {
+          "description": "原文表达的所属者；self 表示用户自己的对象。未表达时省略。",
+          "type": "string",
+          "minLength": 1
+        },
+        "relationship_to_user": {
+          "description": "人物与用户的关系，例如 friend。没有关系要求时省略。",
+          "type": "string",
+          "minLength": 1
+        },
+        "quantifier": {
+          "$ref": "#/$defs/quantifier"
+        },
+        "condition": {
+          "description": "对象必须满足的条件；没有筛选要求时省略。",
+          "$ref": "#/$defs/condition"
+        },
+        "state_anchor": {
+          "description": "选择集合属于哪个时点的已有对象状态，不指定工具执行顺序。对象自身日期仍放在 condition。",
+          "$ref": "#/$defs/temporal_anchor"
+        }
+      },
+      "required": [
+        "entity_type"
+      ]
+    },
+    "entity": {
+      "description": "可被目标引用的对象、集合或输出绑定。同一对象或集合只绑定一次；不要额外声明与内联 target 完全相同且未使用的对象。对象语义类型在这里定义；不得预填应用中查询得到的 ID。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "description": "内部对象引用名称，由本次表示定义；如 friend。",
+          "type": "string",
+          "minLength": 1
+        },
+        "entity_type": {
+          "description": "对象语义类型。",
+          "type": "string",
+          "minLength": 1
+        },
+        "selection": {
+          "description": "以输入中人物或对象描述定义的绑定。",
+          "$ref": "#/$defs/selection"
+        }
+      },
+      "required": [
+        "id",
+        "entity_type"
+      ]
+    },
+    "goal": {
+      "description": "一个操作或查询目标；规则内目标只在规则和自身条件满足时生效。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "description": "目标内部引用名称。任意命名本身不是意图差异。",
+          "type": "string",
+          "minLength": 1
+        },
+        "action": {
+          "description": "输入表达的具体操作名称，由抽取者准确命名。名称不是封闭分类；同义操作允许不同拼写，不使用 handle、process_request 等模糊名称。操作对象和参数共同确定语义。",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "target": {
+          "description": "操作对象，用对象引用或选择条件表达。同一对象已在 entities 中声明时优先使用 entity_ref；直接使用内联 selection 时，不额外声明未使用的重复 entity。",
+          "oneOf": [
+            {
+              "$ref": "#/$defs/entity_ref"
+            },
+            {
+              "$ref": "#/$defs/selection_value"
+            }
+          ]
+        },
+        "parameters": {
+          "description": "输入实际表达的角色参数。attendees_include 表示需要加入这些人，不补默认参与者；content 表示消息要求。",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/parameter"
+          }
+        },
+        "when": {
+          "description": "该目标执行的明确前提，例如存在当天预约时才取消；未提出前提时省略。",
+          "$ref": "#/$defs/condition"
+        },
+        "outputs": {
+          "description": "需要绑定供后续引用的操作输出。适用于创建、查询、复制、计算等；只保存输入要求或后续引用需要的绑定，不强行生成输出。",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/output"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "action"
+      ]
+    },
+    "relation": {
+      "description": "输入明确要求的跨目标关系。关系类型与各参数角色共同决定方向和含义；目标数组顺序不自动产生关系。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "description": "开放的业务关系名称，准确描述先后、依赖或其他明确关系。",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "arguments": {
+          "description": "关系端点及其他角色参数。目标使用 goal_ref；多个目标使用 list 保存多个 goal_ref。角色名开放，须与关系类型共同忠实表达方向及全部/任意等要求。",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/parameter"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "type",
+        "arguments"
+      ]
+    },
+    "trigger": {
+      "description": "触发条件规则的外部事件。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "event_type": {
+          "description": "事件语义类型，例如 communication_received；原文未指定具体应用通道时不补通道。",
+          "type": "string",
+          "minLength": 1
+        },
+        "source_ref": {
+          "description": "事件来源对象引用，例如 friend。",
+          "type": "string",
+          "minLength": 1
+        },
+        "about_ref": {
+          "description": "事件所涉及的对象，例如对 film_day 的出席回复。",
+          "type": "string",
+          "minLength": 1
+        },
+        "bind_as": {
+          "description": "规则内部引用此次事件使用的变量名。",
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "event_type",
+        "bind_as"
+      ]
+    },
+    "rule": {
+      "description": "触发事件与条件成立时需完成的目标，保留未实际触发的分支。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "description": "规则内部名称。",
+          "type": "string",
+          "minLength": 1
+        },
+        "trigger": {
+          "description": "明确的外部触发事件；没有外部触发要求时省略。",
+          "$ref": "#/$defs/trigger"
+        },
+        "condition": {
+          "description": "条件规则的完整前提。",
+          "$ref": "#/$defs/condition"
+        },
+        "then_goals": {
+          "description": "条件成立时的目标列表，这些目标不自动成为无条件目标。",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/goal"
+          }
+        },
+        "else_goals": {
+          "description": "原文明确提出的其他分支目标；未提出时省略。",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/goal"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "condition",
+        "then_goals"
+      ]
+    },
+    "constraint": {
+      "description": "明确提出的政策或限制。没有要求时省略整项。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "description": "开放的业务限制类别，不是通用 value.kind 的技术类型标签。",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "name": {
+          "description": "政策名称，例如 proposal_acceptance。",
+          "type": "string",
+          "minLength": 1
+        },
+        "scope_goal_ids": {
+          "description": "该政策约束哪些目标。",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "value": {
+          "description": "输入表达的政策值，例如接受任意建议日期和时间。",
+          "$ref": "#/$defs/value"
+        }
+      },
+      "required": [
+        "kind",
+        "name",
+        "scope_goal_ids",
+        "value"
+      ]
+    },
+    "time_constraint": {
+      "description": "独立的时间范围或延迟约束。普通起止时刻保存在所属目标参数中。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scope_goal_ids": {
+          "description": "时间约束作用的目标。",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "relation": {
+          "description": "规范时间关系，例如 exactly_after、within、immediately。",
+          "type": "string",
+          "minLength": 1
+        },
+        "anchor": {
+          "description": "独立时间约束的时间基准，amount/unit 保存相对偏移。",
+          "$ref": "#/$defs/temporal_anchor"
+        },
+        "amount": {
+          "description": "输入明确表达的时间量；没有量时省略。",
+          "type": "number"
+        },
+        "unit": {
+          "description": "时间量单位；没有量时省略。",
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "scope_goal_ids",
+        "relation",
+        "anchor"
+      ]
+    },
+    "ambiguity": {
+      "description": "输入与允许上下文本身不能唯一确定的语义信息。位置、原因和候选属于业务语义；原文依据在外层 evidence。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "description": "未确定参数在 intent 内的 JSON Pointer 路径。",
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "description": "说明原文存在何种不确定性。",
+          "type": "string",
+          "minLength": 1
+        },
+        "candidates": {
+          "description": "可确定的候选解释；无法列出时省略。",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/value"
+          }
+        }
+      },
+      "required": [
+        "path",
+        "reason"
+      ]
+    },
+    "undetermined": {
+      "description": "已表达的参数尚不能唯一确定。使用此标记及 ambiguities 保留不确定性；不是未提出要求，也不是明确空值。",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "description": "语义值未确定的类型标记。",
+          "const": "undetermined"
+        }
+      }
+    },
+    "output": {
+      "description": "一个操作输出绑定；角色描述该实体与操作的关系，不是创建专用标签。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "entity_ref": {
+          "description": "输出对应的已声明实体 ID。",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "role": {
+          "description": "开放的业务输出角色，如 created_event、query_result。具体作用结合 action 和参数解释，不由固定词表决定。",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "entity_ref",
+        "role"
+      ]
+    },
+    "goal_ref": {
+      "description": "引用本意图中定义的目标，ID 拼写不参与语义评分。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "description": "固定结构标签。",
+          "const": "goal_ref"
+        },
+        "ref": {
+          "description": "目标的内部引用名称。",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "kind",
+        "ref"
+      ]
+    },
+    "entity_field": {
+      "description": "动态读取对象、集合或输出的语义属性。仅保存来源和属性，不猜测隐藏值，不为表达引用增加工具查询目标。",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "description": "固定结构标签。",
+          "const": "entity_field"
+        },
+        "entity_ref": {
+          "description": "属性来自哪个已声明对象或集合。",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "field": {
+          "description": "开放的语义属性，如 count；不要求与应用原始 JSON 字段同名。",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "kind",
+        "entity_ref",
+        "field"
+      ]
+    },
+    "quantifier": {
+      "description": "选择对象的数量，不是增量、商品件数或每人分配量；后者放在操作参数中。未提出数量要求时省略。范围为含边界的范围。",
+      "oneOf": [
+        {
+          "description": "数量模式 all；只保存该模式需要的参数。",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mode": {
+              "description": "固定数量模式；any_one 仅用于明确允许任意选择一个，不从缺少名称推断。",
+              "const": "all"
+            }
+          },
+          "required": [
+            "mode"
+          ]
+        },
+        {
+          "description": "数量模式 exactly；只保存该模式需要的参数。",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mode": {
+              "description": "固定数量模式；any_one 仅用于明确允许任意选择一个，不从缺少名称推断。",
+              "const": "exactly"
+            },
+            "count": {
+              "description": "对象数量：明确非负整数，或从对象/未来事件读取的动态数量。真实歧义用 undetermined 并记录 ambiguities；不从隐藏状态推算数量。",
+              "oneOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                {
+                  "$ref": "#/$defs/entity_field"
+                },
+                {
+                  "$ref": "#/$defs/trigger_field"
+                },
+                {
+                  "$ref": "#/$defs/undetermined"
+                }
+              ]
+            }
+          },
+          "required": [
+            "mode",
+            "count"
+          ]
+        },
+        {
+          "description": "数量模式 at_least；只保存该模式需要的参数。",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mode": {
+              "description": "固定数量模式；any_one 仅用于明确允许任意选择一个，不从缺少名称推断。",
+              "const": "at_least"
+            },
+            "count": {
+              "description": "对象数量：明确非负整数，或从对象/未来事件读取的动态数量。真实歧义用 undetermined 并记录 ambiguities；不从隐藏状态推算数量。",
+              "oneOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                {
+                  "$ref": "#/$defs/entity_field"
+                },
+                {
+                  "$ref": "#/$defs/trigger_field"
+                },
+                {
+                  "$ref": "#/$defs/undetermined"
+                }
+              ]
+            }
+          },
+          "required": [
+            "mode",
+            "count"
+          ]
+        },
+        {
+          "description": "数量模式 at_most；只保存该模式需要的参数。",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mode": {
+              "description": "固定数量模式；any_one 仅用于明确允许任意选择一个，不从缺少名称推断。",
+              "const": "at_most"
+            },
+            "count": {
+              "description": "对象数量：明确非负整数，或从对象/未来事件读取的动态数量。真实歧义用 undetermined 并记录 ambiguities；不从隐藏状态推算数量。",
+              "oneOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                {
+                  "$ref": "#/$defs/entity_field"
+                },
+                {
+                  "$ref": "#/$defs/trigger_field"
+                },
+                {
+                  "$ref": "#/$defs/undetermined"
+                }
+              ]
+            }
+          },
+          "required": [
+            "mode",
+            "count"
+          ]
+        },
+        {
+          "description": "数量模式 range；只保存该模式需要的参数。",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mode": {
+              "description": "固定数量模式；any_one 仅用于明确允许任意选择一个，不从缺少名称推断。",
+              "const": "range"
+            },
+            "min_count": {
+              "description": "对象数量：明确非负整数，或从对象/未来事件读取的动态数量。真实歧义用 undetermined 并记录 ambiguities；不从隐藏状态推算数量。",
+              "oneOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                {
+                  "$ref": "#/$defs/entity_field"
+                },
+                {
+                  "$ref": "#/$defs/trigger_field"
+                },
+                {
+                  "$ref": "#/$defs/undetermined"
+                }
+              ]
+            },
+            "max_count": {
+              "description": "对象数量：明确非负整数，或从对象/未来事件读取的动态数量。真实歧义用 undetermined 并记录 ambiguities；不从隐藏状态推算数量。",
+              "oneOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                {
+                  "$ref": "#/$defs/entity_field"
+                },
+                {
+                  "$ref": "#/$defs/trigger_field"
+                },
+                {
+                  "$ref": "#/$defs/undetermined"
+                }
+              ]
+            }
+          },
+          "required": [
+            "mode",
+            "min_count",
+            "max_count"
+          ]
+        },
+        {
+          "description": "数量模式 any_one；只保存该模式需要的参数。",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mode": {
+              "description": "固定数量模式；any_one 仅用于明确允许任意选择一个，不从缺少名称推断。",
+              "const": "any_one"
+            }
+          },
+          "required": [
+            "mode"
+          ]
+        },
+        {
+          "$ref": "#/$defs/undetermined"
+        }
+      ]
+    },
+    "temporal_anchor": {
+      "description": "统一的时间来源结构。仅保存原文及允许上下文所支持的基准；真实基准歧义使用 undetermined 和 ambiguities。",
+      "oneOf": [
+        {
+          "description": "本次 USER 请求的时点，不取主机当前日期。",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "description": "固定结构标签。",
+              "const": "user_request"
+            }
+          },
+          "required": [
+            "kind"
+          ]
+        },
+        {
+          "description": "某规则声明的外部触发事件发生时点。",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "description": "固定结构标签。",
+              "const": "rule_trigger"
+            },
+            "rule_ref": {
+              "description": "声明 trigger 的规则 ID。跨规则基准须是原文明确的引用。",
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            }
+          },
+          "required": [
+            "kind",
+            "rule_ref"
+          ]
+        },
+        {
+          "description": "某操作完成的时点；创建活动完成不等于活动开始。",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "description": "固定结构标签。",
+              "const": "goal_completion"
+            },
+            "goal_ref": {
+              "description": "已声明的目标 ID。",
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            }
+          },
+          "required": [
+            "kind",
+            "goal_ref"
+          ]
+        },
+        {
+          "description": "对象自身的时间属性，如晚餐开始时间。",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "description": "固定结构标签。",
+              "const": "entity_time"
+            },
+            "entity_ref": {
+              "description": "提供时间的已声明对象 ID。",
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "field": {
+              "description": "开放的时间语义属性，如 start_datetime。",
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            }
+          },
+          "required": [
+            "kind",
+            "entity_ref",
+            "field"
+          ]
+        },
+        {
+          "description": "输入明确提供的绝对日期或日期时间。保留精度和明确时区；不补缺失时区或秒，不从主机环境推断。",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "description": "固定结构标签。",
+              "const": "absolute_time"
+            },
+            "value": {
+              "description": "ISO 日期 YYYY-MM-DD，或日期时间 YYYY-MM-DDTHH:MM[:SS]，日期时间可带明确 Z 或 ±HH:MM 偏移。",
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}(?:T(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d)?(?:Z|[+-](?:[01]\\d|2[0-3]):[0-5]\\d)?)?$"
+            }
+          },
+          "required": [
+            "kind",
+            "value"
+          ]
+        },
+        {
+          "$ref": "#/$defs/undetermined"
+        }
+      ]
+    }
+  }
+}

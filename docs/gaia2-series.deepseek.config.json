@@ -1,0 +1,23 @@
+{
+    "config_env_file": "/hpc_stor03/sjtu_home/chaolei.liu/.config/qwaudio/config.env",
+    "author": {
+        "model_env": "DEEPSEEK_MODEL",
+        "api_key_env": "DEEPSEEK_API_KEY",
+        "api_base_env": "DEEPSEEK_BASE_URL",
+        "provider_prefix": "openai/",
+        "reasoning_effort": "low",
+        "model_args": {"timeout": 180}
+    },
+    "reviewer": {
+        "model_env": "DEEPSEEK_MODEL",
+        "api_key_env": "DEEPSEEK_API_KEY",
+        "api_base_env": "DEEPSEEK_BASE_URL",
+        "provider_prefix": "openai/",
+        "reasoning_effort": "low",
+        "model_args": {"timeout": 180}
+    },
+    "concurrency": 2,
+    "max_attempts": 3,
+    "seed": 300,
+    "context_characters": 45000
+}

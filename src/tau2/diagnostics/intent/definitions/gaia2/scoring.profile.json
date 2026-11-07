@@ -1,0 +1,43 @@
+{
+  "name": "gaia2-semantic-facts",
+  "strategy": "gaia2",
+  "ignored_keys": [
+    "id",
+    "bind_as"
+  ],
+  "ignored_kind_values": [
+    "selection"
+  ],
+  "definition_key": "id",
+  "atomic_collection_keys": [
+    "parameters",
+    "relations",
+    "constraints",
+    "time_constraints",
+    "ambiguities",
+    "outputs"
+  ],
+  "atomic_kinds": [
+    "comparison",
+    "predicate",
+    "literal",
+    "entity_ref",
+    "trigger_ref",
+    "trigger_field",
+    "relative_date",
+    "time_of_day",
+    "message_content",
+    "undetermined",
+    "goal_ref",
+    "entity_field",
+    "user_request",
+    "rule_trigger",
+    "goal_completion",
+    "entity_time",
+    "absolute_time"
+  ],
+  "merge_rules": [
+    "entity_selection_type",
+    "target_existence_selection"
+  ]
+}

@@ -68,6 +68,12 @@ pytest tests/test_domains/test_<domain_name>
 | `telecom` | Telecom account management and troubleshooting |
 | `banking_knowledge` | Knowledge-retrieval-based banking customer service with configurable RAG pipelines |
 | `intake` | Outbound elicitation with an agent-directed default and a scaffolded strategy ablation |
+| `gaia2` | 800 personal-assistant tasks with isolated application state and timed events; requires the `gaia2` extra and verified data |
+
+The [Gaia2 guide](../../../docs/gaia2.md) covers data preparation, Qwen Audio Agent
+configuration and the adapted τ reward. Gaia2 uses the shared scenario runtime,
+orchestrators and evaluators, with private content-addressed snapshots selected
+per task in place of a single domain database.
 
 The `intake` domain and task set use `src/tau2/domains/intake/`,
 `data/tau2/domains/intake/`, and `tests/test_domains/test_intake/`. Agent-directed

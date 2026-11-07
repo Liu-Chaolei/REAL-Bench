@@ -6,6 +6,7 @@ communication between agent and user.
 """
 
 import time
+from bisect import bisect_left
 from copy import deepcopy
 from typing import Any, Optional, TypeVar, Union
 
@@ -28,10 +29,11 @@ from tau2.environment.environment import Environment
 from tau2.orchestrator.modes import CommunicationMode
 from tau2.orchestrator.orchestrator import DEFAULT_FIRST_AGENT_MESSAGE, BaseOrchestrator
 from tau2.user.user_simulator import UserSimulator
-from tau2.user.user_simulator_base import FullDuplexUser
+from tau2.user.user_simulator_base import FullDuplexUser, UserError
 from tau2.utils.llm_utils import get_cost
 from tau2.utils.utils import get_now
 from tau2.voice.pricing import build_session_usage
+from tau2.voice.saasr_worker import SaasrWorkerError
 from tau2.voice.utils.transcript_utils import compute_proportional_user_transcripts
 
 # Type variables for generic full-duplex orchestrator
@@ -69,7 +71,7 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
         user: StreamingUserT,
         environment: Environment,
         task: Task,
-        max_steps: int = 100,
+        max_steps: Optional[int] = 100,
         max_errors: int = 10,
         seed: Optional[int] = None,
         simulation_id: Optional[str] = None,
@@ -86,7 +88,7 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             user: The streaming user instance (must have get_next_chunk method).
             environment: The environment instance.
             task: The task specification.
-            max_steps: Maximum number of simulation steps.
+            max_steps: Maximum number of simulation steps. None disables the limit.
             max_errors: Maximum number of tool execution errors.
             seed: Optional random seed for reproducibility.
             simulation_id: Optional simulation ID.
@@ -126,6 +128,20 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
 
         # Tick-based trajectory structure
         self.ticks: list[Tick] = []
+        self._tool_executor = None
+        self._scenario_user_input = None
+        self._scenario_user_text = ""
+        self._scenario_user_utterance = None
+        self._scenario_last_user_time = None
+        self._scenario_seen_fragments = set()
+        self._scenario_audio_ms = [0.0]
+        self._scenario_audio_times = [
+            task.scenario.start_time if task.scenario else 0.0
+        ]
+        if task.scenario is not None:
+            from tau2.environment.execution import ToolExecutionQueue
+
+            self._tool_executor = ToolExecutionQueue(environment)
 
         # Validate mode compatibility
         self._validate_mode_compatibility()
@@ -252,6 +268,11 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             tick_duration_seconds=self.tick_duration_seconds,
         )
         first_tick.wall_clock_duration_seconds = time.perf_counter() - init_start_time
+        runtime = getattr(self.environment, "scenario_runtime", None)
+        if runtime is not None:
+            first_tick.environment_events = [
+                record.model_dump(mode="json") for record in runtime.drain()
+            ]
         self.ticks = [first_tick]
 
     def _format_chunk_summary(self, chunk: Optional[Message], role: str) -> str:
@@ -299,6 +320,25 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
         if self.done:
             raise ValueError("Simulation is done")
 
+        runtime = getattr(self.environment, "scenario_runtime", None)
+        if self.scenario_stages is not None and self.scenario_stages.transition_pending:
+            busy = bool(self._tool_executor.pending) if self._tool_executor else False
+            busy = busy or bool(
+                self.pending_agent_tool_results or self.pending_user_tool_results
+            )
+            busy = busy or getattr(self.agent, "has_pending_output", False)
+            busy = busy or bool(
+                self.current_agent_chunk and self.current_agent_chunk.contains_speech
+            )
+            if not busy:
+                self.scenario_stages.release(self.user, runtime, len(self.ticks))
+        if runtime is not None:
+            runtime.advance()
+            with runtime.lock:
+                while runtime.user_inputs:
+                    key, text = runtime.user_inputs.pop(0)
+                    self.user.queue_scenario_input(key, text)
+
         tick_id = len(self.ticks)
         logger.debug(f"Tick {tick_id}. step_count={self.step_count}")
 
@@ -316,6 +356,11 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             )
 
         # Create new tick
+        diagnostic_started = (
+            time.monotonic()
+            if getattr(self.environment, "diagnostic_recorder", None)
+            else None
+        )
         tick_start_time = time.perf_counter()
         tick = Tick(
             tick_id=tick_id,
@@ -357,6 +402,30 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
         )
 
         # --- 2. Process agent turn ---
+        input_time = None
+        foreground_origin = None
+        if (
+            runtime is not None
+            and incoming_for_agent is not None
+            and incoming_for_agent.contains_speech
+        ):
+            if getattr(self.user, "saasr_session", None) is not None:
+                # A chunk can begin with background before caller speech starts.
+                # Bind the initial input to its sample offset after transport.
+                offset = (incoming_for_agent.raw_data or {}).get(
+                    "saasr_speech_offset_seconds", 0
+                )
+                foreground_origin = runtime.monotonic() + offset
+                if runtime.started:
+                    input_time = runtime.timestamp_at(foreground_origin)
+            else:
+                runtime.start()
+                input_time = runtime.time()
+        diagnostic_recorder = getattr(self.environment, "diagnostic_recorder", None)
+        diagnostic_media_count = (
+            len(diagnostic_recorder.media_ticks) if diagnostic_recorder else 0
+        )
+        diagnostic_agent_start = time.monotonic() if diagnostic_recorder else None
         (
             agent_chunk,
             self.agent_state,
@@ -369,7 +438,24 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             is_agent=True,
             pending_tool_results=self.pending_agent_tool_results,
         )
+        if (
+            diagnostic_recorder is not None
+            and len(diagnostic_recorder.media_ticks) == diagnostic_media_count
+        ):
+            diagnostic_recorder.media(
+                incoming_for_agent,
+                agent_chunk,
+                diagnostic_agent_start,
+                time.monotonic(),
+                self.tick_duration_seconds,
+            )
         tick.agent_chunk = deepcopy(agent_chunk)
+        scene_audio = getattr(self.user, "saasr_session", None)
+        if scene_audio is not None:
+            scene_audio.record_sent(incoming_for_agent)
+        if foreground_origin is not None and not runtime.started:
+            runtime.start(monotonic_origin=min(foreground_origin, runtime.monotonic()))
+            input_time = runtime.spec.start_time
         tick.agent_tool_calls = [deepcopy(tc) for tc in agent_tool_calls]
         tick.agent_tool_results = [deepcopy(r) for r in agent_tool_results]
         self.pending_agent_tool_results = (
@@ -379,6 +465,13 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
         # --- 3. Update state and bookkeeping ---
         self.current_user_chunk = user_chunk
         self.current_agent_chunk = agent_chunk
+        if runtime is not None:
+            self._observe_scenario_delivery(
+                runtime, incoming_for_agent, agent_chunk, input_time=input_time
+            )
+            tick.environment_events = [
+                record.model_dump(mode="json") for record in runtime.drain()
+            ]
 
         # Record wall clock duration for this tick
         tick.wall_clock_duration_seconds = time.perf_counter() - tick_start_time
@@ -398,6 +491,11 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
                 f"Wall-clock pacing may not be enforced by the adapter."
             )
 
+        if diagnostic_started is not None:
+            timeline = getattr(self.environment, "_diagnostic_media_timeline", None)
+            if timeline is None:
+                timeline = self.environment._diagnostic_media_timeline = {}
+            timeline[tick.tick_id] = (diagnostic_started, time.monotonic())
         self.ticks.append(tick)
 
         self.step_count += 1
@@ -440,7 +538,6 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
         )
 
         new_state = state
-
         if pending_tool_results is not None:
             logger.debug(
                 f"  [{participant_name}] Delivering tool results alongside "
@@ -449,11 +546,28 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
 
         # Single get_next_chunk call with both channels
         logger.debug(f"  [{participant_name}] Calling get_next_chunk...")
-        new_chunk, new_state = participant.get_next_chunk(
-            state=new_state,
-            participant_chunk=incoming_chunk,
-            tool_results=pending_tool_results,
-        )
+        try:
+            new_chunk, new_state = participant.get_next_chunk(
+                state=new_state,
+                participant_chunk=incoming_chunk,
+                tool_results=pending_tool_results,
+            )
+        except (UserError, SaasrWorkerError) as error:
+            if is_agent:
+                raise
+            self.done = True
+            if isinstance(error, SaasrWorkerError):
+                self.termination_reason = TerminationReason.INFRASTRUCTURE_ERROR
+                self._audio_renderer_error = str(error)
+            else:
+                self.termination_reason = TerminationReason.USER_ERROR
+                self._user_error = str(error)
+            return (
+                UserMessage(role="user", content=None, contains_speech=False),
+                new_state,
+                [],
+                [],
+            )
         logger.debug(
             f"  [{participant_name}] Returned chunk: "
             f"{self._format_chunk_summary(new_chunk, 'chunk')}"
@@ -462,6 +576,23 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
         # Validate and check stop condition
         if new_chunk.contains_speech:
             new_chunk.validate()
+        if (
+            not is_agent
+            and self.scenario_stages is not None
+            and self.scenario_stages.stop(
+                new_chunk, self.environment.scenario_runtime, len(self.ticks)
+            )
+        ):
+            self.user.scenario_transition_pending = (
+                self.scenario_stages.transition_pending
+            )
+            new_chunk = UserMessage(
+                role="user",
+                content=None,
+                contains_speech=False,
+                cost=new_chunk.cost,
+                usage=new_chunk.usage,
+            )
         if is_stop(new_chunk):
             logger.info(f"  [{participant_name}] *** STOP signal detected ***")
             self.done = True
@@ -476,7 +607,11 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             tool_names = [tc.name for tc in tool_calls]
             logger.info(f"  [{participant_name}] Tool calls: {tool_names}")
 
-            results = self._execute_tool_calls(tool_calls)
+            if self._tool_executor is not None:
+                self._tool_executor.submit(tool_calls)
+                results = []
+            else:
+                results = self._execute_tool_calls(tool_calls)
             tool_results = list(results)
 
             for tc, result in zip(tool_calls, results):
@@ -499,7 +634,136 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
                 f"results pending for next tick"
             )
 
+        if self._tool_executor is not None:
+            ready = self._tool_executor.drain("assistant" if is_agent else "user")
+            self.num_errors += sum(result.error for result in ready)
+            tool_results.extend(ready)
         return new_chunk, new_state, tool_calls, tool_results
+
+    def _observe_scenario_delivery(
+        self, runtime, user_chunk, agent_chunk, *, input_time=None
+    ):
+        """Journal transported user input and actual playback, preserving both clocks."""
+        if user_chunk is not None:
+            utterance = tuple(user_chunk.utterance_ids or [])
+            action = user_chunk.turn_taking_action
+            if (
+                self.scenario_stages is not None
+                and self._scenario_user_input
+                and action is not None
+                and action.action == "stop_talking"
+            ):
+                retry = self.scenario_stages.interrupted(
+                    self._scenario_user_input, runtime, len(self.ticks)
+                )
+                if retry is not None:
+                    self.user.queue_scenario_input(retry.id, retry.arguments["content"])
+                self._scenario_user_input = None
+                self._scenario_user_text = ""
+                self._scenario_user_utterance = None
+            if (
+                utterance
+                and self._scenario_user_utterance
+                and utterance != self._scenario_user_utterance
+            ):
+                if self._scenario_user_text and runtime.started:
+                    runtime.delivered(
+                        "user",
+                        self._scenario_user_text,
+                        delivered_at=self._scenario_last_user_time,
+                    )
+                if self.scenario_stages is not None and self._scenario_user_input:
+                    retry = self.scenario_stages.interrupted(
+                        self._scenario_user_input, runtime, len(self.ticks)
+                    )
+                    if retry is not None:
+                        self.user.queue_scenario_input(
+                            retry.id, retry.arguments["content"]
+                        )
+                self._scenario_user_text = ""
+                self._scenario_user_input = None
+            if utterance:
+                self._scenario_user_utterance = utterance
+            data = user_chunk.raw_data or {}
+            self._scenario_user_input = data.get(
+                "scenario_input_id", self._scenario_user_input
+            )
+            self._scenario_user_text += user_chunk.content or ""
+            recorded = False
+            if user_chunk.contains_speech:
+                if self.scenario_stages is not None and self._scenario_user_input:
+                    self.scenario_stages.delivered(
+                        self._scenario_user_input,
+                        runtime,
+                        len(self.ticks),
+                        complete=bool(
+                            user_chunk.is_final_chunk or data.get("saasr_main_final")
+                        ),
+                        when=input_time,
+                    )
+                self._scenario_last_user_time = runtime.time()
+                if (
+                    self._scenario_user_input
+                    and self._scenario_user_input not in runtime.completed
+                ):
+                    runtime.delivered(
+                        "user",
+                        self._scenario_user_text,
+                        event_id=self._scenario_user_input,
+                        delivered_at=input_time,
+                    )
+                    recorded = True
+                if user_chunk.is_final_chunk or data.get("saasr_main_final"):
+                    if not recorded:
+                        runtime.delivered("user", self._scenario_user_text)
+                    self._scenario_user_input = None
+                    self._scenario_user_text = ""
+                    self._scenario_user_utterance = None
+        now = runtime.monotonic()
+        if len(self._scenario_audio_ms) == 1:
+            self._scenario_audio_times[0] = now - self.tick_duration_seconds
+        self._scenario_audio_ms.append(
+            self._scenario_audio_ms[-1] + self.tick_duration_seconds * 1000
+        )
+        self._scenario_audio_times.append(now)
+        if agent_chunk is None or not runtime.started:
+            return
+        live = (agent_chunk.raw_data or {}).get("live_transcript", {})
+        if (
+            live.get("origin") != "recorded_audio"
+            or live.get("alignment") != "played_audio"
+        ):
+            return
+        for fragment in live.get("fragments", []):
+            key = fragment.get("event_id") or fragment.get("id") or str(fragment)
+            if key in self._scenario_seen_fragments:
+                continue
+            self._scenario_seen_fragments.add(key)
+            text = fragment.get("text") or fragment.get("content")
+            if not text:
+                continue
+            ended = fragment.get("end_ms")
+            delivered_at = None
+            if ended is not None:
+                if ended > self._scenario_audio_ms[-1] + 1:
+                    raise ValueError(
+                        "Observer transcript refers to audio not yet played"
+                    )
+                index = min(
+                    bisect_left(self._scenario_audio_ms, ended),
+                    len(self._scenario_audio_ms) - 1,
+                )
+                if index:
+                    fraction = (ended - self._scenario_audio_ms[index - 1]) / (
+                        self._scenario_audio_ms[index]
+                        - self._scenario_audio_ms[index - 1]
+                    )
+                    wall = self._scenario_audio_times[index - 1] + fraction * (
+                        self._scenario_audio_times[index]
+                        - self._scenario_audio_times[index - 1]
+                    )
+                    delivered_at = runtime.timestamp_at(wall)
+            runtime.delivered("agent", text, delivered_at=delivered_at)
 
     def get_trajectory(self) -> list[Tick]:
         """
@@ -548,7 +812,7 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
 
         Checks max_steps, max_errors, and timeout after each tick.
         """
-        if self.step_count >= self.max_steps:
+        if self.max_steps is not None and self.step_count >= self.max_steps:
             self.done = True
             self.termination_reason = TerminationReason.MAX_STEPS
         if self.num_errors >= self.max_errors:
@@ -566,6 +830,9 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             SimulationRun with all simulation data.
         """
         # Send stop signals to agent and user, forwarding any pending tool results
+        cancel_generation = getattr(self.user, "cancel_pending_generation", None)
+        if cancel_generation is not None:
+            cancel_generation()
         try:
             self.agent.stop(
                 None, self.agent_state, tool_results=self.pending_agent_tool_results
@@ -615,6 +882,23 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
 
         # Compute responsiveness metrics
         info = compute_responsiveness_info(ticks)
+        scene_audio = getattr(self.user, "saasr_session", None)
+        if scene_audio is not None:
+            info["user_audio_renderer"] = scene_audio.record()
+        if getattr(self, "_audio_renderer_error", None):
+            info["audio_renderer_error"] = self._audio_renderer_error
+        if getattr(self, "_user_error", None):
+            info["user_simulator_error"] = self._user_error
+        if hasattr(self.user, "get_generation_diagnostics"):
+            diagnostics = self.user.get_generation_diagnostics()
+            if diagnostics is not None:
+                info["user_generation"] = diagnostics
+                additional = diagnostics["additional_llm_cost"]
+                user_cost = (
+                    user_cost + additional
+                    if user_cost is not None and additional is not None
+                    else None
+                )
 
         # Extract provider session ID if available (e.g., OpenAI session ID)
         provider_session_id = None

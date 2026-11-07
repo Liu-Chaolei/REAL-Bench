@@ -2,7 +2,7 @@ from enum import Enum
 from typing import Optional
 
 from tau2.data_model.semantic_communication import CommunicateScoring
-from tau2.data_model.simulation import RewardInfo, SimulationRun, TerminationReason
+from tau2.data_model.simulation import RewardInfo, SimulationRun
 from tau2.data_model.tasks import RewardType, Task
 from tau2.environment.toolkit import ToolType, get_tool_types
 from tau2.evaluator.evaluator_action import ActionEvaluator, FullDuplexActionEvaluator
@@ -18,6 +18,7 @@ from tau2.evaluator.evaluator_nl_assertions import (
     FullDuplexNLAssertionsEvaluator,
     NLAssertionsEvaluator,
 )
+from tau2.evaluator.outcome import can_grade, finalize_reward, stamp_grading
 from tau2.orchestrator.modes import CommunicationMode
 from tau2.registry import registry
 
@@ -120,25 +121,59 @@ def evaluate_simulation(
     Returns:
         RewardInfo with the evaluation results.
     """
-    if simulation.termination_reason not in {
-        TerminationReason.AGENT_STOP,
-        TerminationReason.USER_STOP,
-    }:
-        return RewardInfo(
-            reward=0.0,
-            reward_basis=None,
-            info={
-                "note": f"Simulation terminated prematurely. Termination reason: {simulation.termination_reason.value}"
-            },
+    stamp_grading(simulation)
+    if not can_grade(simulation.termination_reason):
+        return finalize_reward(
+            simulation,
+            RewardInfo(
+                reward=0.0,
+                reward_basis=None,
+                info={
+                    "note": f"Simulation terminated prematurely. Termination reason: {simulation.termination_reason.value}"
+                },
+            ),
         )
+    series = (simulation.info or {}).get("scenario_series")
+    missing = []
+    if task.scenario is not None and len(task.scenario.stages) > 1:
+        from tau2.evaluator.scenario_series import validate_delivery
+
+        missing = validate_delivery(task, series)
+    series_comm = (
+        {"environment_trace": simulation.environment_trace, "scenario_series": series}
+        if series
+        else {}
+    )
+    series_nl = {"scenario_series": series} if series else {}
     if task.evaluation_criteria is None:
-        return RewardInfo(
-            reward=1.0,
-            reward_basis=None,
-            info={"note": "No evaluation criteria"},
+        return finalize_reward(
+            simulation,
+            RewardInfo(
+                reward=1.0,
+                reward_basis=None,
+                info={"note": "No evaluation criteria"},
+            ),
+            series,
+            missing,
         )
     if env_kwargs is None:
         env_kwargs = {}
+    runtime_bindings = {
+        row["event_id"]: row.get("result")
+        for row in simulation.environment_trace or []
+        if row.get("kind") == "anchor"
+    }
+    env_reward_info = None
+
+    def communication_bindings():
+        return {
+            **runtime_bindings,
+            **(
+                (env_reward_info.info or {}).get("reference_bindings", {})
+                if env_reward_info is not None
+                else {}
+            ),
+        }
 
     # Select trajectory and evaluators based on mode
     is_full_duplex = mode == CommunicationMode.FULL_DUPLEX
@@ -180,18 +215,31 @@ def evaluate_simulation(
             solo_mode=solo_mode,
             env_kwargs=env_kwargs,
             strict_replay=strict_replay,
+            environment_trace=simulation.environment_trace,
         )
     elif evaluation_type == EvaluationType.NL_ASSERTIONS:
         reward_info = NLEvaluator.calculate_reward(
+            **series_nl,
             task=task,
             full_trajectory=trajectory,
+            **(
+                {"environment_trace": simulation.environment_trace}
+                if task.scenario is not None
+                else {}
+            ),
         )
     elif evaluation_type == EvaluationType.COMMUNICATE:
         reward_info = CommEvaluator.calculate_reward(
+            **series_comm,
             task=task,
             full_trajectory=trajectory,
             scoring=communicate_scoring,
             customer_language=customer_language,
+            **(
+                {"runtime_bindings": communication_bindings()}
+                if task.scenario is not None
+                else {}
+            ),
         )
     elif evaluation_type == EvaluationType.ACTION:
         reward_info = ActEvaluator.calculate_reward(
@@ -207,6 +255,7 @@ def evaluate_simulation(
             solo_mode=solo_mode,
             env_kwargs=env_kwargs,
             strict_replay=strict_replay,
+            environment_trace=simulation.environment_trace,
         )
         action_reward_info = ActEvaluator.calculate_reward(
             task=task,
@@ -216,17 +265,29 @@ def evaluate_simulation(
         communicate_reward_info = None
         if RewardType.COMMUNICATE in task.evaluation_criteria.reward_basis:
             communicate_reward_info = CommEvaluator.calculate_reward(
+                **series_comm,
                 task=task,
                 full_trajectory=trajectory,
                 scoring=communicate_scoring,
                 customer_language=customer_language,
+                **(
+                    {"runtime_bindings": communication_bindings()}
+                    if task.scenario is not None
+                    else {}
+                ),
             )
         nl_reward_info = None
         task_needs_nl = RewardType.NL_ASSERTION in task.evaluation_criteria.reward_basis
         if evaluation_type == EvaluationType.ALL_WITH_NL_ASSERTIONS or task_needs_nl:
             nl_reward_info = NLEvaluator.calculate_reward(
+                **series_nl,
                 task=task,
                 full_trajectory=trajectory,
+                **(
+                    {"environment_trace": simulation.environment_trace}
+                    if task.scenario is not None
+                    else {}
+                ),
             )
 
         ## Combine all the rewards.
@@ -301,6 +362,8 @@ def evaluate_simulation(
             full_trajectory=trajectory,
             solo_mode=solo_mode,
             env_kwargs=env_kwargs,
+            strict_replay=strict_replay,
+            environment_trace=simulation.environment_trace,
         )
         action_reward_info = ActEvaluator.calculate_reward(
             task=task,
@@ -308,16 +371,28 @@ def evaluate_simulation(
             tool_types=tool_types,
         )
         communicate_reward_info = CommEvaluator.calculate_reward(
+            **series_comm,
             task=task,
             full_trajectory=trajectory,
             scoring=communicate_scoring,
             customer_language=customer_language,
+            **(
+                {"runtime_bindings": communication_bindings()}
+                if task.scenario is not None
+                else {}
+            ),
         )
         nl_reward_info = None
         if evaluation_type == EvaluationType.ALL_WITH_NL_ASSERTIONS_IGNORE_BASIS:
             nl_reward_info = NLEvaluator.calculate_reward(
+                **series_nl,
                 task=task,
                 full_trajectory=trajectory,
+                **(
+                    {"environment_trace": simulation.environment_trace}
+                    if task.scenario is not None
+                    else {}
+                ),
             )
 
         # Combine all rewards regardless of the task's reward_basis
@@ -368,4 +443,4 @@ def evaluate_simulation(
         )
     else:
         raise ValueError(f"Unknown evaluation type: {evaluation_type}")
-    return reward_info
+    return finalize_reward(simulation, reward_info, series, missing)

@@ -2,6 +2,7 @@ import pytest
 
 from tau2.data_model.message import AssistantMessage, UserMessage
 from tau2.user.user_simulator import DummyUser, UserSimulator
+from tau2.user.user_simulator_base import UserError
 
 
 @pytest.fixture
@@ -65,3 +66,51 @@ def test_dummy_user_no_args():
     dummy = DummyUser()
     state = dummy.get_init_state()
     assert state.messages == []
+
+
+@pytest.mark.parametrize(
+    "content",
+    ["###STOP###", "###TRANSFER###", "###OUT-OF-SCOPE###", "Thanks. ###STOP###"],
+)
+def test_control_signals_bypass_grounding(monkeypatch, first_agent_message, content):
+    """A caller's existing termination signals must reach the normal stop path."""
+    user = UserSimulator(llm="unused", instructions="Ask for help.")
+    user.scenario_constraints = "Preserve the original request."
+    monkeypatch.setattr(
+        user,
+        "_generate_next_message",
+        lambda *args: UserMessage(role="user", content=content, cost=0.25),
+    )
+    monkeypatch.setattr(
+        "tau2.user.grounding.generate",
+        lambda **kw: pytest.fail("Control signals must not be sent to grounding"),
+    )
+
+    message, state = user.generate_next_message(
+        first_agent_message, user.get_init_state()
+    )
+
+    assert message.content == content
+    assert message.cost == 0.25
+    assert user.is_stop(message)
+    assert state.messages[-1] == message
+
+
+def test_ordinary_user_reply_still_requires_grounding(monkeypatch, first_agent_message):
+    """Control handling must not let an ordinary change to the goal bypass checks."""
+    user = UserSimulator(llm="unused", instructions="Book October 21.")
+    user.scenario_constraints = "Book October 21."
+    monkeypatch.setattr(
+        user,
+        "_generate_next_message",
+        lambda *args: UserMessage(role="user", content="Book October 22 instead."),
+    )
+    monkeypatch.setattr(
+        "tau2.user.grounding.generate",
+        lambda **kw: AssistantMessage(
+            role="assistant", content='{"valid":false,"reason":"Changed the date"}'
+        ),
+    )
+
+    with pytest.raises(UserError, match="Changed the date"):
+        user.generate_next_message(first_agent_message, user.get_init_state())

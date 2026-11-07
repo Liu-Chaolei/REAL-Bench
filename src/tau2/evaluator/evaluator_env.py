@@ -30,6 +30,7 @@ class EnvironmentEvaluator(EvaluatorBase[Message]):
         solo_mode: bool = False,
         env_kwargs: dict = None,
         strict_replay: bool = True,
+        environment_trace: list[dict] | None = None,
     ) -> RewardInfo:
         """
         Calculate the reward for the simulation.
@@ -44,6 +45,17 @@ class EnvironmentEvaluator(EvaluatorBase[Message]):
         Returns:
             RewardInfo
         """
+        if task.scenario is not None:
+            from tau2.evaluator.scenario import calculate_scenario_reward
+
+            return calculate_scenario_reward(
+                environment_constructor,
+                task,
+                environment_trace,
+                env_kwargs=env_kwargs,
+                strict=strict_replay,
+                solo_mode=solo_mode,
+            )
         if task.evaluation_criteria is None:
             return RewardInfo(
                 reward=1.0,
@@ -184,6 +196,7 @@ class FullDuplexEnvironmentEvaluator(EvaluatorBase[Tick]):
         solo_mode: bool = False,
         env_kwargs: dict = None,
         strict_replay: bool = True,
+        environment_trace: list[dict] | None = None,
     ) -> RewardInfo:
         """
         Calculate the reward for the simulation.
@@ -201,6 +214,17 @@ class FullDuplexEnvironmentEvaluator(EvaluatorBase[Tick]):
         """
         if env_kwargs is None:
             env_kwargs = {}
+        if task.scenario is not None:
+            from tau2.evaluator.scenario import calculate_scenario_reward
+
+            return calculate_scenario_reward(
+                environment_constructor,
+                task,
+                environment_trace,
+                env_kwargs=env_kwargs,
+                strict=strict_replay,
+                solo_mode=solo_mode,
+            )
         if task.evaluation_criteria is None:
             return RewardInfo(
                 reward=1.0,

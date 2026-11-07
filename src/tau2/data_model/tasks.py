@@ -6,10 +6,11 @@ import uuid
 from enum import Enum
 from typing import Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_serializer
 from typing_extensions import Annotated
 
 from tau2.data_model.message import Message, ToolCall, ToolRequestor
+from tau2.data_model.scenario import ScenarioSpec
 
 
 class StructuredUserInstructions(BaseModel):
@@ -563,6 +564,18 @@ class Task(BaseModel):
     """
 
     id: str = Field(description="The unique identifier for the task.")
+    scenario: ScenarioSpec | None = Field(
+        default=None, description="Private, optional timed-environment configuration."
+    )
+
+    @model_serializer(mode="wrap")
+    def serialize_task(self, handler):
+        """Keep existing published task payloads byte-compatible when unset."""
+        data = handler(self)
+        if self.scenario is None:
+            data.pop("scenario", None)
+        return data
+
     description: Annotated[
         Optional[Description],
         Field(

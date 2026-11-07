@@ -1,0 +1,7 @@
+#!/bin/sh
+# Qwen's native projection retains QWEN_CODE_*; restore its supported storage vars.
+set -eu
+: "${QWEN_CODE_TAU_ROOT:?Missing private trial directory}"
+export QWEN_HOME="$QWEN_CODE_TAU_ROOT/qwen"
+export QWEN_RUNTIME_DIR="$QWEN_CODE_TAU_ROOT/qwen-runtime"
+exec /usr/local/bin/qwen "$@"

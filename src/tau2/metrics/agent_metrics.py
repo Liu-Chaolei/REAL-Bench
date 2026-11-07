@@ -26,6 +26,8 @@ class AgentMetrics(BaseModel):
     total_simulations: int = 0
     total_tasks: int = 0
     infra_error_count: int = 0
+    user_simulator_error_count: int = 0
+    grading_error_count: int = 0
 
     # Action metrics
     total_read_actions: int = 0
@@ -104,6 +106,7 @@ class AgentMetrics(BaseModel):
             "total_simulations": self.total_simulations,
             "total_tasks": self.total_tasks,
             "infra_error_count": self.infra_error_count,
+            "user_simulator_error_count": self.user_simulator_error_count,
         }
         for k, v in self.pass_hat_ks.items():
             data[f"pass_hat_{k}"] = v
@@ -129,20 +132,23 @@ def pass_hat_k(num_trials: int, success_count: int, k: int) -> float:
 def get_metrics_df(results: Results) -> tuple[pd.DataFrame, int]:
     """
     Convert the results to a dataframe and add a column for success.
-    Filters out infrastructure errors (simulations that never ran).
+    Filters out infrastructure and user-simulator errors from agent accuracy.
     Checks that all simulations have the same number of trials.
     Returns the maximum number of trials that can be used for pass^k metrics.
     """
     df = results.to_df()
 
-    infra_count = (
-        df.termination_reason == TerminationReason.INFRASTRUCTURE_ERROR
-    ).sum()
-    if infra_count > 0:
+    invalid = df.termination_reason.isin(
+        [TerminationReason.INFRASTRUCTURE_ERROR, TerminationReason.USER_ERROR]
+    )
+    invalid |= df.reward.isna()
+    if "evaluation_status" in df:
+        invalid |= df.evaluation_status.isin(["pending", "failed"])
+    if invalid.any():
         logger.warning(
-            f"Excluding {infra_count} infrastructure error simulation(s) from metrics."
+            f"Excluding {invalid.sum()} infrastructure/user-simulator error simulation(s) from metrics."
         )
-        df = df[df.termination_reason != TerminationReason.INFRASTRUCTURE_ERROR]
+        df = df[~invalid].copy()
 
     if df.empty:
         df["success"] = pd.Series(dtype=bool)
@@ -219,10 +225,20 @@ def compute_metrics(results: Results) -> AgentMetrics:
         for sim in results.simulations
         if sim.termination_reason == TerminationReason.INFRASTRUCTURE_ERROR
     )
+    user_simulator_error_count = sum(
+        sim.termination_reason == TerminationReason.USER_ERROR
+        for sim in results.simulations
+    )
+    grading_error_count = sum(
+        sim.evaluation_status == "failed" for sim in results.simulations
+    )
     evaluated_sims = [
         sim
         for sim in results.simulations
-        if sim.termination_reason != TerminationReason.INFRASTRUCTURE_ERROR
+        if sim.termination_reason
+        not in {TerminationReason.INFRASTRUCTURE_ERROR, TerminationReason.USER_ERROR}
+        and sim.evaluation_status not in {"pending", "failed"}
+        and sim.reward_info is not None
     ]
 
     if not evaluated_sims:
@@ -233,6 +249,8 @@ def compute_metrics(results: Results) -> AgentMetrics:
             total_simulations=0,
             total_tasks=0,
             infra_error_count=infra_error_count,
+            user_simulator_error_count=user_simulator_error_count,
+            grading_error_count=grading_error_count,
         )
 
     df, df_pass_hat_k = prepare_dfs(results)
@@ -450,6 +468,8 @@ def compute_metrics(results: Results) -> AgentMetrics:
         total_simulations=total_simulations,
         total_tasks=total_tasks,
         infra_error_count=infra_error_count,
+        user_simulator_error_count=user_simulator_error_count,
+        grading_error_count=grading_error_count,
         total_read_actions=total_read_actions,
         correct_read_actions=correct_read_actions,
         total_write_actions=total_write_actions,

@@ -51,6 +51,7 @@ if TYPE_CHECKING:
     from tau2.voice.audio_native.nova.provider import NovaVADConfig
     from tau2.voice.audio_native.openai.provider import OpenAIVADConfig
     from tau2.voice.audio_native.qwen.provider import QwenVADConfig
+    from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
     from tau2.voice.audio_native.xai.provider import XAIVADConfig
 
 from pydantic import ConfigDict, Field
@@ -92,6 +93,7 @@ AudioNativeProvider = Literal[
     "xai",
     "nova",
     "qwen",
+    "qwen_agent",
     "avartha_pipecat",
     "phonic",
     "livekit",
@@ -253,6 +255,7 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
         agent_instruction_override: Optional[str] = None,
         additional_stop_tool_names: frozenset[str] = frozenset(),
         avartha_config: Optional["AvarthaPipecatConfig"] = None,
+        qwen_agent_config: Optional["QwenAgentConfig"] = None,
     ):
         """Initialize the discrete-time audio native agent.
 
@@ -306,6 +309,8 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
         self.agent_instruction_override = agent_instruction_override
         self.additional_stop_tool_names = additional_stop_tool_names
         self.avartha_config = avartha_config
+        self.qwen_agent_config = qwen_agent_config
+        self.observer_hotwords = None
         self._live_trace_path = (
             audio_taps_dir / "live.jsonl" if audio_taps_dir else None
         )
@@ -343,7 +348,7 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
             from tau2.voice.audio_native.qwen.provider import QwenVADConfig
 
             self.vad_config = QwenVADConfig()
-        elif provider == "avartha_pipecat":
+        elif provider in ("avartha_pipecat", "qwen_agent"):
             # Turn detection is configured on the hosted agent.
             self.vad_config = None
         elif provider == "phonic":
@@ -392,6 +397,10 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
 
     def _build_system_prompt(self) -> str:
         """Build the same prompt used by offline review."""
+        if self.provider == "qwen_agent":
+            # The remote system retains its native agent instructions. Only
+            # public business policy/language guidance is added by its launcher.
+            return self.domain_policy
         return build_audio_native_system_prompt(
             self.domain_policy,
             provider=self.provider,
@@ -417,6 +426,8 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
                 transcription_language=self.transcription_language,
                 language=self.language,
                 avartha_config=self.avartha_config,
+                qwen_agent_config=self.qwen_agent_config,
+                observer_hotwords=self.observer_hotwords,
             )
         return self._adapter
 
@@ -495,6 +506,11 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
             self._agent_input_tap.record(user_audio)
 
         # Run tick through adapter
+        diagnostic_started = (
+            __import__("time").monotonic()
+            if getattr(self, "diagnostic_recorder", None)
+            else None
+        )
         try:
             tick_result = self.adapter.run_tick(
                 user_audio=user_audio,
@@ -546,6 +562,16 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
 
         # Create response message
         response = self._create_response(tick_result, tool_calls)
+        if diagnostic_started is not None:
+            self.diagnostic_recorder.media(
+                participant_chunk,
+                response,
+                diagnostic_started,
+                __import__("time").monotonic(),
+                self.tick_duration_ms / 1000,
+                input_audio=user_audio,
+                input_format=self.audio_format,
+            )
 
         # Update speech timing
         if response.contains_speech or response.is_tool_call():
@@ -774,6 +800,10 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
         """
         # Generate silence audio for one tick
         silence = self._get_silence()
+        if self.provider == "qwen_agent":
+            # An external system has not spoken merely because the harness
+            # created its first tick. Let the real voice conversation open.
+            content = None
         return AssistantMessage(
             role="assistant",
             content=content,
@@ -825,6 +855,14 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
         """
         if self._agent_input_tap:
             self._agent_input_tap.save()
+        if self.provider == "qwen_agent" and tool_results is not None:
+            messages = (
+                tool_results.tool_messages
+                if isinstance(tool_results, MultiToolMessage)
+                else [tool_results]
+            )
+            for message in messages:
+                self._handle_tool_result(message, request_response=False)
         if self._agent_output_tap:
             self._agent_output_tap.save()
             logger.info("Saved agent_input audio tap")
@@ -838,6 +876,24 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
         """
         if self._owns_adapter and self._adapter is not None:
             self._adapter.disconnect()
+
+    @property
+    def has_pending_output(self) -> bool:
+        """Whether known media/tool results still need transport before continuation."""
+        return bool(self._adapter and self._adapter.has_pending_output)
+
+    def get_diagnostic_evidence(self):
+        """Expose observed backend inputs when the provider has that boundary."""
+        if self.provider != "qwen_agent" or self._adapter is None:
+            return {"status": "not_applicable"}
+        provider = self._adapter.provider
+        return {
+            "status": "complete" if provider.backend_observer_ready else "unavailable",
+            "reason": None
+            if provider.backend_observer_ready
+            else "bridge_backend_observer_not_available",
+            "backend_inputs": list(provider.backend_inputs.values()),
+        }
 
     def _check_if_stop_toolcall(self, message: AssistantMessage) -> AssistantMessage:
         """Check if the message is a stop message.
@@ -919,6 +975,7 @@ def create_discrete_time_audio_native_agent(tools, domain_policy, **kwargs):
             transcription_language=audio_native_config.transcription_language,
             language=audio_native_config.language,
             avartha_config=audio_native_config.avartha_config,
+            qwen_agent_config=audio_native_config.qwen_agent_config,
         )
     else:
         # Fallback: use individual kwargs or defaults

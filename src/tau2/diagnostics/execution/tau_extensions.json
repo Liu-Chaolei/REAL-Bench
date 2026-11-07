@@ -1,0 +1,16 @@
+{
+  "version": "tau-gaia2-parameters/1",
+  "tool_args": {
+    "SandboxLocalFileSystem__open": {
+      "path": "path_checker",
+      "mode": "eq_checker",
+      "kwargs": "eq_checker"
+    },
+    "SandboxLocalFileSystem__mkdir": {
+      "exist_ok": "eq_checker"
+    },
+    "SandboxLocalFileSystem__mv": {
+      "recursive": "eq_checker"
+    }
+  }
+}

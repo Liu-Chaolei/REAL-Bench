@@ -1,0 +1,10 @@
+{
+  "worker_commands": [
+    ["/path/to/saasr-pro/.venv/bin/python", "-m", "saasr_mini.worker"]
+  ],
+  "devices": ["cuda:0"],
+  "model_dir": "/path/to/Qwen3-TTS-12Hz-1.7B-Base",
+  "scene_index": "scenes.local.json",
+  "request_timeout_seconds": 900,
+  "prepare_timeout_seconds": 3600
+}

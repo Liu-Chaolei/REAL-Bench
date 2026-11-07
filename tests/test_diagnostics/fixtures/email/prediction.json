@@ -1,0 +1,31 @@
+{
+  "goals": [
+    {
+      "id": "g1",
+      "action": "send_email",
+      "parameters": [
+        {
+          "name": "content",
+          "value": {
+            "kind": "message_content",
+            "purpose": "remind_to_bring_report"
+          }
+        },
+        {
+          "name": "priority",
+          "value": {
+            "kind": "literal",
+            "value": "high"
+          }
+        },
+        {
+          "name": "to",
+          "value": {
+            "kind": "literal",
+            "value": "bob@example.com"
+          }
+        }
+      ]
+    }
+  ]
+}

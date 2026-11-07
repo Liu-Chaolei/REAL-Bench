@@ -1,0 +1,34 @@
+# Intent roles use the frontend DEEPSEEK_MODEL, DEEPSEEK_BASE_URL, and Responses API.
+# smoke.py resolves DEEPSEEK_API_KEY from the Agent config_env_file.
+# Full-call extraction uses a bounded 300-second request limit.
+measures:
+- intent
+- execution
+- voice
+auto_score: true
+concurrency: 1
+max_requests: 64
+timeout_seconds: 300
+max_characters: 200000
+models:
+  gt:
+    model: openai/responses/deepseek-flash
+    api_base: https://apifusion.aispeech.com.cn/v1
+    api_key_env: DEEPSEEK_API_KEY
+    args:
+      reasoning_effort: low
+      num_retries: 0
+  prediction:
+    model: openai/responses/deepseek-flash
+    api_base: https://apifusion.aispeech.com.cn/v1
+    api_key_env: DEEPSEEK_API_KEY
+    args:
+      reasoning_effort: low
+      num_retries: 0
+  evaluation:
+    model: openai/responses/deepseek-flash
+    api_base: https://apifusion.aispeech.com.cn/v1
+    api_key_env: DEEPSEEK_API_KEY
+    args:
+      reasoning_effort: low
+      num_retries: 0

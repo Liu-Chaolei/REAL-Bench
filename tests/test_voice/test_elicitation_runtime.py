@@ -10,8 +10,18 @@ from tau2.agent.discrete_time_audio_native_agent import (
     CASCADED_MODEL_INSTRUCTION,
     DiscreteTimeAudioNativeAgent,
 )
-from tau2.data_model.audio import AudioData, AudioEncoding, AudioFormat
-from tau2.data_model.message import AssistantMessage, ToolCall, UserMessage
+from tau2.data_model.audio import (
+    AudioData,
+    AudioEncoding,
+    AudioFormat,
+    audio_bytes_to_string,
+)
+from tau2.data_model.message import (
+    AssistantMessage,
+    ToolCall,
+    TurnTakingAction,
+    UserMessage,
+)
 from tau2.data_model.voice import SynthesisConfig, VoiceSettings
 from tau2.domains.intake.prompts import (
     OUTBOUND_ROLE_REMINDER,
@@ -119,12 +129,24 @@ def test_generated_messages_use_scoped_outbound_reminder_and_spell_events(
 
     monkeypatch.setattr("tau2.user.user_simulator_streaming.generate", generate)
     monkeypatch.setattr(
-        user, "synthesize_voice", lambda message, state, **kwargs: message
+        user,
+        "synthesize_voice",
+        lambda message, state, **kwargs: message.model_copy(
+            update={
+                "is_audio": True,
+                "audio_content": audio_bytes_to_string(b"\0" * 3200),
+                "audio_script_gold": message.content,
+                "audio_format": AudioFormat(
+                    encoding=AudioEncoding.PCM_S16LE, sample_rate=16000
+                ),
+            }
+        ),
     )
     state = user.get_init_state()
-    user._generate_full_duplex_voice_message(
-        AssistantMessage(role="assistant", content="Spell your name."), state
+    state.input_turn_taking_buffer.append(
+        AssistantMessage(role="assistant", content="Spell your name.")
     )
+    user._perform_turn_taking_action(state, TurnTakingAction(action="generate_message"))
     assert calls[0]["call_name"] == "user_streaming_response"
     reminder = calls[0]["messages"][-1].content
     events = user.get_effect_timeline().events

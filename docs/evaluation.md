@@ -240,3 +240,10 @@ a fidelity verdict. Text diagnostics and fidelity share the derived segment IDs.
   [`src/tau2/data_model/simulation.py`](../src/tau2/data_model/simulation.py)
 - Discussion of the `actions`-vs-`reward_basis` confusion:
   [issue #224][issue-224] and [RFC #129][issue-129].
+
+
+Budget exhaustion uses `tau-outcome-grading-v2`: returned `max_steps` and `timeout`
+trajectories are graded on their actual outcomes. The termination reason remains
+unchanged. Other error endings retain the existing skipped/failed handling.
+See [continuous outcome grading](gaia2-outcome-replies.md) for stage delivery,
+replay and historical rescoring behavior.

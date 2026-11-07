@@ -97,6 +97,14 @@ def try_resume(
     prev_simulation_results = Results.load(save_path)
 
     if (
+        prev_simulation_results.info.user_audio_renderer
+        != simulation_results.info.user_audio_renderer
+    ):
+        raise ValueError(
+            "Caller audio renderer or its resources changed; use a new output path"
+        )
+
+    if (
         prev_simulation_results.info.voice_instruction_prompt_version
         != simulation_results.info.voice_instruction_prompt_version
     ):
@@ -357,6 +365,8 @@ def create_checkpoint_fns(
                 termination_reason=sim.termination_reason,
                 agent_cost=sim.agent_cost,
                 duration=sim.duration,
+                evaluation_status=sim.evaluation_status,
+                evaluation_error=sim.evaluation_error,
             ).model_dump(mode="json")
 
         def _flush_index():

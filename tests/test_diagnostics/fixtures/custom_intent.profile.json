@@ -1,0 +1,45 @@
+{
+  "name": "custom-compositional",
+  "ignored_keys": [
+    "id",
+    "evidence",
+    "bind_as"
+  ],
+  "definition_key": "id",
+  "reference_keys": [
+    "ref",
+    "event_ref",
+    "about_ref",
+    "source_ref",
+    "scope_goal_ids"
+  ],
+  "atomic_collection_keys": [
+    "parameters",
+    "relations",
+    "constraints",
+    "time_constraints",
+    "ambiguities"
+  ],
+  "atomic_kinds": [
+    "comparison",
+    "predicate",
+    "exists",
+    "literal",
+    "entity_ref",
+    "trigger_ref",
+    "trigger_field",
+    "relative_date",
+    "time_of_day",
+    "message_content",
+    "undetermined"
+  ],
+  "local_definition_keys": [
+    "bind_as"
+  ],
+  "local_reference_keys": [
+    "event_ref"
+  ],
+  "local_reference_kinds": [
+    "trigger_ref"
+  ]
+}

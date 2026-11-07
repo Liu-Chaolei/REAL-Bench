@@ -1,0 +1,35 @@
+{
+  "version": "gaia2-tau-v1",
+  "source_files": {
+    "search/validation-00000-of-00001.parquet": "a8f2d1a0085a29b1e5de446d42187b0293d309c5e2b6722510c7ce005e625a14",
+    "execution/validation-00000-of-00001.parquet": "d6ded47be84b740866ca7617e45d4409f7ecf36f9b94b7beb3f1af6da99d0198",
+    "ambiguity/validation-00000-of-00001.parquet": "e4cd018c58708f2e8b4d08ec868a837e98efd4aafa7afee6b864685ba41f5feb",
+    "adaptability/validation-00000-of-00001.parquet": "e449bf40b5dbb26df844c23c62e8ea94ee313ea6dd13d4aedb730fd8c1a6230e",
+    "time/validation-00000-of-00001.parquet": "4642061f6f5e67e3853cec9bf7879eac19e073306131245af84da9a0cf817e16"
+  },
+  "tasks": 800,
+  "categories": {
+    "search": 160,
+    "execution": 160,
+    "ambiguity": 160,
+    "adaptability": 160,
+    "time": 160
+  },
+  "snapshots": 24,
+  "assets": "/aistor/hpc_stor03/sjtu_home/chaolei.liu/Audio-Agent/tau2-bench/data/tau2/domains/gaia2/assets",
+  "tasks_sha256": "f2e9ada85eef24333cd71b07bd0be69c6f18d9e9dbb3e38ac7e65de9ec64d0e8",
+  "failures": [],
+  "converted_complete": true,
+  "complete": true,
+  "verified": true,
+  "score_basis": "tau_environment_assertions_and_semantic_communication",
+  "runtime_sha256": "ae2ba5a50624369a71bba21bc53de7aafeb4bccc363fa246b9299719d64df365",
+  "assets_sha256": "c91672f4bda3799f17f110e584be509c0f9fbb415ce497ab535153c10b5c9cba",
+  "requests_per_task": 3,
+  "execution_ready": true,
+  "status": "ready_for_live_series_pilot",
+  "integration_note": "Native task graph and private stage answers are integrated. Live stage delivery, early termination and stage-aware grading still require integration testing.",
+  "series_runtime_version": "gaia2-series-runtime-v1",
+  "reply_runtime_version": "gaia2-actual-mail-replies-v1",
+  "grading_version": "tau-outcome-grading-v2"
+}

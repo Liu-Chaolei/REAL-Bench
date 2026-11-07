@@ -1,0 +1,284 @@
+{
+  "source_image": "hearme-blackbox-are:v3-interaction-v1",
+  "source_image_id": "sha256:5d5dbf9dc65ee311f914a983e9b9beace2499a3c530d583d181f39ec702224a2",
+  "source_sha256": {
+    "constants.py": "930476646f4cdfaa5875ad8cc51ced50667ea5de3e40356bafa0e7d57953524d",
+    "tool_judge.py": "15a82ba99f62ccdce7f2302f1cee847144280b37b01dd08b8edc273c96cf1407",
+    "utils/misc.py": "706b27ee877f659a2098c310b1814718f92299d6a78755588ce28f4a5628c09e"
+  },
+  "tool_args": {
+    "ApartmentListingApp__save_apartment": {
+      "apartment_id": "eq_checker"
+    },
+    "ApartmentListingApp__remove_saved_apartment": {
+      "apartment_id": "eq_checker"
+    },
+    "CalendarApp__add_calendar_event": {
+      "attendees": "list_attendees_checker",
+      "end_datetime": "datetime_checker",
+      "start_datetime": "datetime_checker",
+      "title": "llm_checker",
+      "description": "llm_checker",
+      "location": "llm_checker",
+      "tag": "eq_str_strip_checker"
+    },
+    "CalendarApp__delete_calendar_event": {
+      "event_id": "eq_checker"
+    },
+    "ShoppingApp__checkout": {
+      "discount_code": "eq_str_strip_checker"
+    },
+    "ShoppingApp__add_to_cart": {
+      "item_id": "eq_checker",
+      "quantity": "eq_checker"
+    },
+    "ShoppingApp__remove_from_cart": {
+      "item_id": "eq_checker",
+      "quantity": "eq_checker"
+    },
+    "ShoppingApp__cancel_order": {
+      "order_id": "eq_checker"
+    },
+    "ContactsApp__delete_contact": {
+      "contact_id": "eq_checker"
+    },
+    "ContactsApp__add_new_contact": {
+      "first_name": "eq_str_strip_checker",
+      "last_name": "eq_str_strip_checker",
+      "email": "eq_str_strip_checker",
+      "phone": "phone_number_checker",
+      "job": "eq_str_strip_checker",
+      "city_living": "eq_str_strip_checker",
+      "age": "eq_checker",
+      "gender": "eq_str_strip_checker",
+      "country": "eq_str_strip_checker",
+      "nationality": "eq_str_strip_checker",
+      "status": "eq_str_strip_checker",
+      "address": "eq_str_strip_checker",
+      "description": "eq_str_strip_checker"
+    },
+    "ContactsApp__edit_contact": {
+      "contact_id": "eq_checker",
+      "updates": "llm_checker"
+    },
+    "EmailClientApp__reply_to_email": {
+      "email_id": "eq_checker",
+      "content": "llm_checker",
+      "attachment_paths": "unordered_path_list_checker",
+      "folder_name": "eq_str_strip_checker"
+    },
+    "EmailClientApp__delete_email": {
+      "email_id": "eq_checker",
+      "folder_name": "eq_str_strip_checker"
+    },
+    "EmailClientApp__send_email": {
+      "recipients": "unordered_list_checker",
+      "cc": "unordered_list_checker",
+      "attachment_paths": "unordered_path_list_checker",
+      "subject": "llm_checker",
+      "content": "llm_checker"
+    },
+    "EmailClientApp__move_email": {
+      "email_id": "eq_checker",
+      "source_folder_name": "path_checker",
+      "dest_folder_name": "path_checker"
+    },
+    "EmailClientApp__forward_email": {
+      "email_id": "eq_checker",
+      "recipients": "unordered_list_checker",
+      "folder_name": "eq_checker"
+    },
+    "EmailClientApp__download_attachments": {
+      "email_id": "eq_checker",
+      "folder_name": "eq_checker",
+      "path_to_save": "path_checker"
+    },
+    "CabApp__order_ride": {
+      "start_location": "llm_checker",
+      "end_location": "llm_checker",
+      "service_type": "eq_checker",
+      "ride_time": "datetime_checker"
+    },
+    "CabApp__user_cancel_ride": {},
+    "MessagingApp__create_conversation": {
+      "participants": "unordered_list_checker"
+    },
+    "MessagingApp__add_participant_to_conversation": {
+      "conversation_id": "eq_checker",
+      "participant": "eq_checker"
+    },
+    "MessagingApp__remove_participant_from_conversation": {
+      "conversation_id": "eq_checker",
+      "participant": "eq_checker"
+    },
+    "MessagingApp__send_message": {
+      "conversation_id": "eq_checker",
+      "content": "llm_checker"
+    },
+    "MessagingAppV2__send_message": {
+      "user_id": "eq_checker",
+      "content": "llm_checker",
+      "attachment_path": "path_checker"
+    },
+    "MessagingAppV2__send_message_to_group_conversation": {
+      "conversation_id": "eq_checker",
+      "content": "llm_checker",
+      "attachment_path": "path_checker"
+    },
+    "MessagingAppV2__create_group_conversation": {
+      "user_ids": "unordered_list_checker",
+      "title": "llm_checker"
+    },
+    "MessagingAppV2__add_participant_to_conversation": {
+      "conversation_id": "eq_checker",
+      "user_id": "eq_checker"
+    },
+    "MessagingAppV2__remove_participant_from_conversation": {
+      "conversation_id": "eq_checker",
+      "user_id": "eq_checker"
+    },
+    "MessagingAppV2__change_conversation_title": {
+      "conversation_id": "eq_checker",
+      "title": "llm_checker"
+    },
+    "SandboxLocalFileSystem__mv": {
+      "path1": "path_checker",
+      "path2": "path_checker"
+    },
+    "SandboxLocalFileSystem__open": {
+      "path": "path_checker",
+      "mode": "eq_checker"
+    },
+    "SandboxLocalFileSystem__mkdir": {
+      "path": "path_checker",
+      "create_parents": "eq_checker"
+    },
+    "SandboxLocalFileSystem__rm": {
+      "path": "path_checker",
+      "recursive": "eq_checker"
+    },
+    "SandboxLocalFileSystem__rmdir": {
+      "path": "path_checker"
+    },
+    "AgentUserInterface__send_message_to_user": {
+      "content": "llm_checker"
+    },
+    "VirtualFileSystem__open": {
+      "path": "path_checker",
+      "mode": "eq_checker"
+    },
+    "VirtualFileSystem__mkdir": {
+      "path": "path_checker",
+      "create_recursive": "eq_checker"
+    },
+    "VirtualFileSystem__mv": {
+      "path1": "path_checker",
+      "path2": "path_checker"
+    },
+    "VirtualFileSystem__rm": {
+      "path": "path_checker",
+      "recursive": "eq_checker"
+    },
+    "VirtualFileSystem__rmdir": {
+      "path": "path_checker"
+    }
+  },
+  "soft_checks": {
+    "CalendarApp__add_calendar_event": [
+      "event_checker"
+    ],
+    "EmailClientApp__send_email": [
+      "placeholder_checker",
+      "signature_checker",
+      "tone_checker",
+      "email_checker"
+    ],
+    "EmailClientApp__reply_to_email": [
+      "placeholder_checker",
+      "signature_checker",
+      "tone_checker",
+      "email_checker"
+    ],
+    "MessagingApp__send_message": [
+      "placeholder_checker",
+      "tone_checker",
+      "message_checker"
+    ],
+    "CabApp__order_ride": [
+      "cab_checker"
+    ],
+    "AgentUserInterface__send_message_to_user": [
+      "sanity_checker",
+      "user_message_checker"
+    ],
+    "MessagingApp__create_conversation": [
+      "content_checker"
+    ]
+  },
+  "app_alias": {
+    "EmailClientApp": [
+      "EmailClientV2",
+      "Mail",
+      "Emails"
+    ],
+    "ApartmentListingApp": [
+      "RentAFlat"
+    ],
+    "ContactsApp": [
+      "Contacts"
+    ],
+    "MessagingApp": [],
+    "MessagingAppV2": [
+      "Messages",
+      "Chats"
+    ],
+    "CalendarApp": [
+      "Calendar"
+    ],
+    "ShoppingApp": [
+      "Shopping"
+    ],
+    "CabApp": [
+      "Cabs"
+    ],
+    "SandboxLocalFileSystem": [
+      "Files"
+    ]
+  },
+  "tool_alias": {
+    "MessagingApp__send_message": [
+      "MessagingAppV2__send_message",
+      "MessagingAppV2__send_message_to_group_conversation"
+    ],
+    "MessagingApp__create_conversation": [
+      "MessagingAppV2__create_group_conversation",
+      "MessagingAppV2__change_conversation_title"
+    ]
+  },
+  "reference_only_parameters": {
+    "CalendarApp__add_calendar_event": [
+      "tag"
+    ],
+    "EmailClientApp__reply_to_email": [
+      "folder_name"
+    ],
+    "EmailClientApp__delete_email": [
+      "folder_name"
+    ],
+    "SandboxLocalFileSystem__mkdir": [
+      "create_parents"
+    ],
+    "ContactsApp__add_new_contact": [
+      "job",
+      "city_living",
+      "age",
+      "gender",
+      "country",
+      "nationality",
+      "status",
+      "address",
+      "description"
+    ]
+  },
+  "extensions_version": "gaia2-reference-parameters/1"
+}

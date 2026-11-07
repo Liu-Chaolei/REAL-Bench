@@ -2,7 +2,13 @@ import json
 from copy import deepcopy
 from typing import Literal, Optional
 
-from pydantic import BaseModel, Field, field_validator, model_validator
+from pydantic import (
+    BaseModel,
+    Field,
+    field_validator,
+    model_serializer,
+    model_validator,
+)
 
 from tau2.data_model.audio import (
     AudioFormat,
@@ -153,6 +159,17 @@ class TurnTakingAction(BaseModel):
     info: Optional[str] = Field(
         description="Additional information about the action.", default=None
     )
+    generation_origin: Optional[
+        Literal["normal", "interrupt", "backchannel", "tool_result", "scripted"]
+    ] = Field(default=None, description="Authorization for a pending caller utterance.")
+
+    @model_serializer(mode="wrap")
+    def serialize_generation_origin(self, handler):
+        """Preserve historical actions without generation provenance."""
+        data = handler(self)
+        if self.generation_origin is None:
+            data.pop("generation_origin", None)
+        return data
 
     # --- Timing/cost metadata for performance analysis ---
     interrupt_check_seconds: Optional[float] = Field(
@@ -667,6 +684,16 @@ class Tick(BaseModel):
     """
 
     tick_id: int
+    environment_events: list[dict] | None = None
+
+    @model_serializer(mode="wrap")
+    def serialize_tick(self, handler):
+        """Preserve old trajectory payloads when no scenario journal is present."""
+        data = handler(self)
+        if self.environment_events is None:
+            data.pop("environment_events", None)
+        return data
+
     timestamp: str
     agent_chunk: Optional[AssistantMessage] = None
     user_chunk: Optional[UserMessage] = None

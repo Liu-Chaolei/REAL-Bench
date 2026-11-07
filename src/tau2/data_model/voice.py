@@ -8,6 +8,10 @@ from pydantic import BaseModel, ConfigDict, Field, computed_field, model_validat
 
 from tau2.config import (
     DEFAULT_CHANNEL_EFFECTS_MODE,
+    DEFAULT_MIMO_API_BASE,
+    DEFAULT_MIMO_API_KEY_ENV,
+    DEFAULT_MIMO_TTS_MODEL,
+    DEFAULT_MIMO_TTS_VOICE,
     DEFAULT_SEED,
     DEFAULT_SPEECH_EFFECTS_MODE,
 )
@@ -166,7 +170,28 @@ class LanguageVoiceDesign(BaseModel):
     )
 
 
-ProviderConfig = ElevenLabsTTSConfig
+class MiMoTTSConfig(BaseModel):
+    """MiMo synthesis settings; credentials remain private file/env references."""
+
+    model_config = ConfigDict(extra="forbid", hide_input_in_errors=True)
+    model_id: str = DEFAULT_MIMO_TTS_MODEL
+    base_url: str = DEFAULT_MIMO_API_BASE
+    api_key_env: str = Field(
+        default=DEFAULT_MIMO_API_KEY_ENV, pattern=r"^[A-Z_][A-Z0-9_]*$"
+    )
+    config_env_file: str | None = None
+    voice_id: str = DEFAULT_MIMO_TTS_VOICE
+    voices: dict[str, str] = Field(
+        default_factory=lambda: {
+            "mamadou_diallo": "Dean",
+            "priya_patil": "Chloe",
+        }
+    )
+    language_code: str | None = "en"
+    request_timeout_seconds: float = Field(default=60, gt=0)
+
+
+ProviderConfig = ElevenLabsTTSConfig | MiMoTTSConfig
 
 
 # ============================================================================
@@ -244,6 +269,19 @@ class SynthesisConfig(BaseModel):
     )
     provider: str = Field(default="elevenlabs")
     provider_config: Optional[ProviderConfig] = Field(default=ElevenLabsTTSConfig())
+
+    @model_validator(mode="before")
+    @classmethod
+    def parse_provider_settings(cls, value):
+        """Preserve the selected provider when deserializing saved runs."""
+        if isinstance(value, dict) and value.get("provider") == "mimo":
+            value = dict(value)
+            settings = value.get("provider_config") or {}
+            if not isinstance(settings, MiMoTTSConfig):
+                settings = MiMoTTSConfig.model_validate(settings)
+            value["provider_config"] = settings
+        return value
+
     channel_effects_config: ChannelEffectsConfig = Field(
         default_factory=ChannelEffectsConfig
     )

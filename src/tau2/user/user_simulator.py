@@ -90,6 +90,31 @@ class UserSimulator(
         )
         self.persona_config = persona_config or PersonaConfig()
         self.global_guidelines_override = global_guidelines_override
+        self._scenario_inputs = []
+        self.scenario_constraints = None
+        self._released_scenario_facts = []
+        self._candidate_recovery_events = []
+        from tau2.config import DEFAULT_USER_CANDIDATE_RETRIES
+
+        self.candidate_max_retries = DEFAULT_USER_CANDIDATE_RETRIES
+
+    def queue_scenario_input(self, event_id: str, text: str) -> None:
+        """Use the same task script contract in text and streaming voice runs."""
+        self._scenario_inputs.append((event_id, text))
+
+    def scenario_stage_context(self, event_id, text):
+        """Mark the newly released request as the current conversational goal."""
+        if event_id in getattr(self, "scenario_stage_ids", set()):
+            return SystemMessage(
+                role="system",
+                content=(
+                    "The previous interaction has ended. Your CURRENT request is: "
+                    + text
+                    + "\nEarlier requests and conversation are context. Apply the normal "
+                    "completion/STOP guidelines to this current request."
+                ),
+            )
+        return None
 
     @property
     def simulation_mode(self) -> Literal["text", "voice"]:
@@ -157,7 +182,59 @@ class UserSimulator(
     def generate_next_message(
         self, message: ValidUserInputMessage, state: UserStateType
     ) -> Tuple[UserMessage, UserStateType]:
-        user_message = self._generate_next_message(message, state)
+        if self._scenario_inputs:
+            key, text = self._scenario_inputs.pop(0)
+            self._released_scenario_facts.append(text)
+            reminder = self.scenario_stage_context(key, text)
+            if reminder is not None:
+                state.system_messages.append(reminder)
+            user_message = UserMessage(
+                role="user", content=text, cost=0.0, raw_data={"scenario_input_id": key}
+            )
+            if message is not None:
+                state.messages.append(message)
+        else:
+            if self.scenario_constraints is None:
+                user_message = self._generate_next_message(message, state)
+            else:
+                from tau2.user.grounding import generate_grounded_reply
+
+                generated_state = None
+
+                def generate_reply(feedback):
+                    nonlocal generated_state
+                    generated_state = state.model_copy(
+                        update={
+                            "messages": list(state.messages),
+                            "system_messages": list(state.system_messages) + feedback,
+                        }
+                    )
+                    return self._generate_next_message(message, generated_state)
+
+                incoming = (
+                    message.tool_messages
+                    if isinstance(message, MultiToolMessage)
+                    else [message]
+                )
+                conversation = "\n".join(
+                    f"{m.role}: {m.content}"
+                    for m in [*state.messages, *incoming]
+                    if m is not None and m.content
+                )
+                user_message = generate_grounded_reply(
+                    generate_reply=generate_reply,
+                    allowed=self.scenario_constraints
+                    + "\n"
+                    + "\n".join(self._released_scenario_facts),
+                    conversation=conversation,
+                    model=self.llm,
+                    model_args=self.llm_args,
+                    is_stop=self.is_stop,
+                    events=self._candidate_recovery_events,
+                    max_retries=self.candidate_max_retries,
+                    context_revision=len(state.messages),
+                )
+                state.messages = generated_state.messages
         # Updating state with response
         state.messages.append(user_message)
         return user_message, state
@@ -205,6 +282,7 @@ class UserSimulator(
         user_message = UserMessage(
             role="user",
             content=user_response,
+            generation_time_seconds=assistant_message.generation_time_seconds,
             cost=assistant_message.cost,
             usage=assistant_message.usage,
             raw_data=assistant_message.raw_data,

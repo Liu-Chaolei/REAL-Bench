@@ -10,16 +10,25 @@ dump.rdb
 *.rdg
 logs/
 data/simulations/*
+data/archives/
 data/exp/
 data/datasets/
 data/models/
 data/analyses/
 data/annotations/
+# Rebuildable Gaia2 authoring indexes, candidate API traces and sandbox journals.
+data/tau2/task_series/gaia2/*/indexes/
+data/tau2/task_series/gaia2/*/work/
+data/tau2/task_series/gaia2/*/journals/
+data/tau2/task_series/gaia2/*/.authoring.lock
+data/tau2/task_series/gaia2/*/pilot.pid
+data/tau2/task_series/gaia2/*/pilot.exit
 src/experiments/model_serving/vllm_serving/.*
 .ruff_cache
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
+data/.asr_hotword_cache/
 *.py[cod]
 *$py.class
 
@@ -199,6 +208,7 @@ data-*-of-*.arrow
 src/experiments/model_training/data/full-v1/*/cache-*.arrow
 src/experiments/model_training/data/full-v1/*/data-*.arrow
 data/.embeddings_cache/
+data/tau2/domains/gaia2/assets/
 
 # Large JSONL training files
 src/experiments/model_training/data/train_full-v1.jsonl

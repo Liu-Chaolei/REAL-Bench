@@ -1,12 +1,14 @@
+import json
 import random
 import time
-from concurrent.futures import Future, ThreadPoolExecutor
+from concurrent.futures import CancelledError, Future, ThreadPoolExecutor
 from contextvars import copy_context
 from copy import deepcopy
 from pathlib import Path
 from typing import Callable, List, Optional, Tuple
 
 from loguru import logger
+from pydantic import Field
 
 from tau2.agent.base.llm_config import LLMConfigMixin
 from tau2.agent.base.streaming import (
@@ -21,6 +23,7 @@ from tau2.backchannel import BackchannelSettings, default_backchannel_settings
 from tau2.config import (
     VOICE_USER_SIMULATOR_DECISION_MODEL,
     VOICE_USER_SIMULATOR_DECISION_MODEL_ARGS,
+    VOICE_USER_SIMULATOR_VERSION,
 )
 from tau2.data_model.audio import (
     PCM_SAMPLE_RATE,
@@ -45,8 +48,9 @@ from tau2.data_model.persona import InterruptTendency, PersonaConfig
 from tau2.data_model.transcript import LinearizationStrategy
 from tau2.data_model.voice import VoiceSettings
 from tau2.environment.tool import Tool
+from tau2.user.async_voice import PendingVoiceTask
 from tau2.user.guidelines import simulation_guidelines
-from tau2.user.user_simulator import build_user_system_prompt
+from tau2.user.user_simulator import UserSimulator, build_user_system_prompt
 from tau2.user.user_simulator_base import (
     OUT_OF_SCOPE,
     STOP,
@@ -118,6 +122,11 @@ class UserAudioStreamingState(
     model_config = {"arbitrary_types_allowed": True}
 
     user_utterance_count: int = 0
+    agent_input_revision: int = 0
+    agent_speech_epoch: int = 0
+    agent_speech_active: bool = False
+    agent_silent_ticks: int = 0
+    agent_transcript_contents: dict[str, str] = Field(default_factory=dict)
     elapsed_samples: int = 0
     effect_scheduler: Optional[EffectScheduler] = None
     out_of_turn_speech_generator: Optional[OutOfTurnSpeechGenerator] = None
@@ -140,6 +149,8 @@ class UserAudioStreamingState(
 def user_interruption_policy(
     state: UserStreamingState,
     integration_ticks: int = 1,
+    decision_model: Optional[str] = None,
+    decision_model_args: Optional[dict] = None,
 ) -> ListenerReactionDecision:
     """
     Decide whether the user should interrupt the agent while they're speaking.
@@ -185,10 +196,14 @@ def user_interruption_policy(
 
     try:
         response = generate(
-            model=VOICE_USER_SIMULATOR_DECISION_MODEL,
+            model=decision_model or VOICE_USER_SIMULATOR_DECISION_MODEL,
             messages=decision_messages,
             call_name="interruption_decision",
-            **VOICE_USER_SIMULATOR_DECISION_MODEL_ARGS,
+            **(
+                VOICE_USER_SIMULATOR_DECISION_MODEL_ARGS
+                if decision_model_args is None
+                else decision_model_args
+            ),
         )
 
         decision_text = response.content.strip().upper()
@@ -212,6 +227,8 @@ def user_backchannel_policy(
     state: UserStreamingState,
     backchannel: BackchannelSettings,
     integration_ticks: int = 1,
+    decision_model: Optional[str] = None,
+    decision_model_args: Optional[dict] = None,
 ) -> ListenerReactionDecision:
     """
     Decide whether the user should backchannel while the agent is speaking.
@@ -255,10 +272,14 @@ def user_backchannel_policy(
 
     try:
         response = generate(
-            model=VOICE_USER_SIMULATOR_DECISION_MODEL,
+            model=decision_model or VOICE_USER_SIMULATOR_DECISION_MODEL,
             messages=decision_messages,
             call_name="backchannel_decision",
-            **VOICE_USER_SIMULATOR_DECISION_MODEL_ARGS,
+            **(
+                VOICE_USER_SIMULATOR_DECISION_MODEL_ARGS
+                if decision_model_args is None
+                else decision_model_args
+            ),
         )
 
         decision_text = response.content.strip().upper()
@@ -348,6 +369,10 @@ class VoiceStreamingUserSimulator(
         role_reminder_override: Optional[str] = None,
         spell_event_detector: Optional[Callable[[str], list[SpellOutDetection]]] = None,
         backchannel: Optional[BackchannelSettings] = None,
+        decision_model: Optional[str] = None,
+        decision_model_args: Optional[dict] = None,
+        silence_checkin_threshold: Optional[int] = None,
+        saasr_session=None,
     ):
         """
         Initialize the streaming user simulator.
@@ -379,6 +404,8 @@ class VoiceStreamingUserSimulator(
             backchannel: Density level and continuers of the call language; None
                 uses the canonical English pack's.
             audio_taps_dir: If set, record audio at each pipeline stage to WAV files in this directory.
+            silence_checkin_threshold: Minimum silent ticks before an unsolicited
+                check-in. Fresh input, initial speech and tool replies bypass this gate.
         """
         # Initialize mixin and base class
         super().__init__(
@@ -391,6 +418,8 @@ class VoiceStreamingUserSimulator(
         )
         self.persona_config = persona_config or PersonaConfig()
         self.backchannel = backchannel or default_backchannel_settings()
+        self.decision_model = decision_model
+        self.decision_model_args = decision_model_args
         self.global_guidelines_override = global_guidelines_override
         self.role_reminder_override = role_reminder_override
         self.spell_event_detector = spell_event_detector
@@ -400,6 +429,7 @@ class VoiceStreamingUserSimulator(
         self.validate_voice_settings()
         self.wait_to_respond_threshold_other = wait_to_respond_threshold_other
         self.wait_to_respond_threshold_self = wait_to_respond_threshold_self
+        self.silence_checkin_threshold = silence_checkin_threshold
         self.yield_threshold_when_interrupted = yield_threshold_when_interrupted
         self.yield_threshold_when_interrupting = yield_threshold_when_interrupting
         self.backchannel_min_threshold = backchannel_min_threshold
@@ -408,11 +438,25 @@ class VoiceStreamingUserSimulator(
         self.use_llm_backchannel = use_llm_backchannel
         self.interruption_check_interval = interruption_check_interval
         self.realtime_generation = realtime_generation
-        self._generation: Future | None = None
-        self._generation_action = "generate_message"
-        self._listener: Future | None = None
-        self._generation_input_count = 0
-        self._generation_from_tool = False
+        self.saasr_session = saasr_session
+        if saasr_session is not None and not realtime_generation:
+            raise ValueError("SAASR needs asynchronous user generation")
+        self._scenario_inputs = []
+        self.scenario_constraints = None
+        self._released_scenario_facts = []
+        self._candidate_recovery_events = []
+        from tau2.config import DEFAULT_USER_CANDIDATE_RETRIES
+
+        self.candidate_max_retries = DEFAULT_USER_CANDIDATE_RETRIES
+        self.audio_recheck = None
+        self._generation_closed = False
+        self._generation_task: PendingVoiceTask | None = None
+        self._listener_task: PendingVoiceTask | None = None
+        self._needs_tool_reply = False
+        self._voice_task_sequence = 0
+        self._generation_events: list[dict] = []
+        self._additional_llm_cost: float | None = 0.0
+        self._latest_state: UserAudioStreamingState | None = None
         self._last_generation_tick = 0
         self._user_executor = (
             ThreadPoolExecutor(max_workers=2, thread_name_prefix="voice-user")
@@ -559,7 +603,7 @@ class VoiceStreamingUserSimulator(
         )
 
     @classmethod
-    def is_stop(cls, message: UserMessage) -> bool:
+    def is_stop(cls, message: Message) -> bool:
         """Check if the message is a stop message."""
         if message.is_tool_call():
             return False
@@ -579,9 +623,18 @@ class VoiceStreamingUserSimulator(
         tool_results: Optional[EnvironmentMessage] = None,
     ) -> Tuple[UserMessage, "UserAudioStreamingState"]:
         """Process one tick, recording incoming agent audio if taps are enabled."""
+        self._latest_state = state
+        if self.realtime_generation:
+            self._observe_agent_input(state, participant_chunk)
         if self._audio_taps:
             self._audio_taps["agent_input"].record_message(participant_chunk)
         return super().get_next_chunk(state, participant_chunk, tool_results)
+
+    def cancel_pending_generation(self) -> None:
+        """Close generation admission before the Agent and ASR are stopped."""
+        self._generation_closed = True
+        if self.saasr_session is not None:
+            self.saasr_session.cancelled.set()
 
     def stop(
         self,
@@ -590,21 +643,30 @@ class VoiceStreamingUserSimulator(
         tool_results: Optional[EnvironmentMessage] = None,
     ) -> None:
         """Stop the user simulator, close timeline events, and save audio taps."""
-        if self._user_executor is not None:
-            self._user_executor.shutdown(wait=True, cancel_futures=True)
-        # Close any open timeline events at the final time
-        if state is not None:
-            end_ms = int(state.elapsed_samples * 1000 / PCM_SAMPLE_RATE)
-            self._effect_timeline.close_all_open(end_ms)
-
-        if self._audio_taps:
-            for tap in self._audio_taps.values():
-                tap.save()
-            logger.info(
-                f"Saved {len(self._audio_taps)} audio taps: "
-                f"{list(self._audio_taps.keys())}"
-            )
-        super().stop(participant_chunk, state, tool_results)
+        self.cancel_pending_generation()
+        state = state or self._latest_state
+        try:
+            if self._user_executor is not None:
+                if state is not None:
+                    for task in (self._generation_task, self._listener_task):
+                        if task is not None:
+                            self._discard_task(task, state, "simulation_ended")
+                self._user_executor.shutdown(wait=True, cancel_futures=True)
+                if state is not None:
+                    self._refresh_voice_tasks(state)
+        finally:
+            if self.saasr_session is not None:
+                self.saasr_session.close()
+            # Persist recordings even when an unplayed request failed while
+            # the other participant was ending the call.
+            if state is not None:
+                end_ms = int(state.elapsed_samples * 1000 / PCM_SAMPLE_RATE)
+                self._effect_timeline.close_all_open(end_ms)
+            if self._audio_taps:
+                for tap in self._audio_taps.values():
+                    tap.save()
+                logger.info(f"Saved {len(self._audio_taps)} audio taps")
+            super().stop(participant_chunk, state, tool_results)
 
     def get_effect_timeline(self) -> EffectTimeline:
         """Return the effect timeline recorded during the simulation."""
@@ -627,6 +689,29 @@ class VoiceStreamingUserSimulator(
 
         synthesis_config = self.voice_settings.synthesis_config
         speech_env = self.voice_settings.speech_environment
+
+        if self.saasr_session is not None:
+            # The scene renderer owns acoustic effects. Do not pre-generate old
+            # random speech inserts or initialize a second background source.
+            from tau2.voice.synthesis.audio_effects.noise_generator import (
+                BackgroundNoiseGenerator,
+            )
+
+            return UserAudioStreamingState(
+                system_messages=[
+                    SystemMessage(role="system", content=self.system_prompt)
+                ],
+                messages=message_history,
+                noise_generator=BackgroundNoiseGenerator(
+                    silent_mode=True, sample_rate=PCM_SAMPLE_RATE
+                ),
+                telephony_converter=StreamingTelephonyConverter(
+                    input_sample_rate=PCM_SAMPLE_RATE
+                )
+                if speech_env.telephony_enabled
+                else None,
+                backchannel_rng=random.Random(speech_env.voice_seed + 100),
+            )
 
         # Resolve filenames to full paths
         background_noise_file = resolve_background_noise_path(
@@ -692,36 +777,253 @@ class VoiceStreamingUserSimulator(
         # Check contains_speech flag - defaults to True for backward compatibility if not set
         return chunk.contains_speech if chunk.contains_speech is not None else True
 
+    @property
+    def _generation(self) -> Future | None:
+        return self._generation_task.future if self._generation_task else None
+
+    def _observe_agent_input(self, state, chunk) -> None:
+        """Version only received speech/text, never speculative Gateway captions."""
+        speech = self.speech_detection(chunk)
+        if speech:
+            if not state.agent_speech_active:
+                state.agent_speech_epoch += 1
+            state.agent_speech_active = True
+            state.agent_silent_ticks = 0
+        else:
+            state.agent_silent_ticks += 1
+            if state.agent_silent_ticks >= max(1, self.integration_ticks):
+                state.agent_speech_active = False
+        text = bool(chunk.content and chunk.content.strip())
+        fragments = ((chunk.raw_data or {}).get("live_transcript") or {}).get(
+            "fragments", []
+        )
+        identified = [f for f in fragments if f.get("event_id")]
+        if identified:
+            text = False
+            for fragment in identified:
+                event_id = fragment["event_id"]
+                content = fragment.get("text", chunk.content or "")
+                if state.agent_transcript_contents.get(event_id) != content:
+                    text = True
+                    state.agent_transcript_contents[event_id] = content
+        if speech or text:
+            state.agent_input_revision += 1
+
+    def _voice_event(self, event, task, state, **details) -> None:
+        record = {
+            "event": event,
+            "id": task.id,
+            "origin": task.origin,
+            "tick": state.tick_count,
+            "time": get_now(),
+            "monotonic": time.monotonic(),
+            "snapshot_revision": task.revision,
+            "input_revision": state.agent_input_revision,
+            "speech_epoch": state.agent_speech_epoch,
+            "agent_speaking": state.agent_speech_active,
+            **details,
+        }
+        self._generation_events.append(record)
+        logger.info("USER_GENERATION_EVENT {}", json.dumps(record))
+
+    def _new_voice_task(
+        self, future, origin, action, state, rng=None
+    ) -> PendingVoiceTask:
+        self._voice_task_sequence += 1
+        task = PendingVoiceTask(
+            id=self._voice_task_sequence,
+            future=future,
+            origin=origin,
+            revision=state.agent_input_revision,
+            speech_epoch=state.agent_speech_epoch,
+            started_during_speech=state.agent_speech_active,
+            started_tick=state.tick_count,
+            input_count=len(state.input_turn_taking_buffer),
+            decision=action.model_copy(deep=True),
+            rng=rng,
+            from_tool_result=self._needs_tool_reply,
+        )
+        self._voice_event("started", task, state)
+        return task
+
+    @staticmethod
+    def _invalid_voice_task(task, state) -> str | None:
+        if task.origin == "scripted":
+            return None  # A released script stays valid; playback waits for silence.
+        if task.origin in {"normal", "tool_result"}:
+            if state.agent_input_revision != task.revision:
+                return "new_agent_input"
+            if state.agent_speech_active:
+                return "agent_speech_in_progress"
+        elif task.started_during_speech:
+            # Deliberate reactions may use a partial reply, but only the same
+            # speech episode that originally authorized the reaction.
+            if (
+                not state.agent_speech_active
+                or state.agent_speech_epoch != task.speech_epoch
+            ):
+                return "agent_speech_ended_or_replaced"
+        elif state.agent_input_revision != task.revision:
+            return "new_agent_input"
+        return None
+
+    def _discard_task(self, task, state, reason) -> None:
+        if task.discard_reason is None:
+            task.discard_reason = reason
+            self._voice_event("invalidated", task, state, reason=reason)
+        # Future.cancel cannot interrupt a running HTTP request. Keep its
+        # handle until it settles, without queueing replacement requests.
+        task.future.cancel()
+
+    def _add_unplayed_cost(self, cost) -> None:
+        if cost is None:
+            self._additional_llm_cost = None
+        elif self._additional_llm_cost is not None:
+            self._additional_llm_cost += cost
+
+    def _record_generated_result(self, task, message, generated, state, discarded):
+        self._voice_event(
+            "settled",
+            task,
+            state,
+            discarded=discarded,
+            reason=task.discard_reason,
+            llm_cost=message.cost,
+            llm_usage=message.usage,
+            llm_seconds=getattr(generated, "_llm_generation_seconds", None),
+            tts_seconds=getattr(generated, "_tts_synthesis_seconds", None),
+        )
+        if discarded:
+            self._add_unplayed_cost(message.cost)
+
+    def _reap_generation(self, state) -> None:
+        task = self._generation_task
+        self._generation_task = None
+        if task.future.cancelled():
+            self._voice_event("cancelled", task, state, reason=task.discard_reason)
+            return
+        try:
+            message, generated = task.future.result()
+        except CancelledError:
+            self._voice_event("cancelled", task, state, reason=task.discard_reason)
+            return
+        except Exception:
+            self._add_unplayed_cost(None)
+            self._voice_event("failed", task, state, reason=task.discard_reason)
+            raise
+        self._record_generated_result(task, message, generated, state, discarded=True)
+
+    def _finish_listener(self, state, apply=False):
+        task = self._listener_task
+        self._listener_task = None
+        if task.future.cancelled():
+            self._voice_event("cancelled", task, state, reason=task.discard_reason)
+            return None
+        try:
+            action = task.future.result()
+        except Exception:
+            self._add_unplayed_cost(None)
+            self._voice_event("failed", task, state, reason=task.discard_reason)
+            raise
+        # Listener costs are not part of message.cost, even when the resulting
+        # decision authorizes a later utterance. Count each decision once.
+        if self.enable_user_initiated_interruption:
+            self._add_unplayed_cost(action.interrupt_check_cost)
+        if self.use_llm_backchannel:
+            self._add_unplayed_cost(action.backchannel_check_cost)
+        self._voice_event(
+            "listener_applied" if apply else "listener_discarded",
+            task,
+            state,
+            reason=task.discard_reason,
+            decision=action.model_dump(mode="json"),
+        )
+        if apply and task.rng is not None:
+            state.backchannel_rng.setstate(task.rng.getstate())
+        return action if apply else None
+
+    def _refresh_voice_tasks(self, state) -> bool:
+        for task in (self._generation_task, self._listener_task):
+            if task is not None:
+                reason = self._invalid_voice_task(task, state)
+                if reason:
+                    self._discard_task(task, state, reason)
+        reaped = False
+        if (
+            self._generation_task is not None
+            and self._generation_task.discard_reason is not None
+            and self._generation_task.future.done()
+        ):
+            self._reap_generation(state)
+            reaped = True
+        if (
+            self._listener_task is not None
+            and self._listener_task.discard_reason is not None
+            and self._listener_task.future.done()
+        ):
+            self._finish_listener(state)
+        return reaped
+
+    def get_generation_diagnostics(self) -> dict | None:
+        """Report unplayed work separately from actually spoken conversation."""
+        if not self.realtime_generation:
+            return None
+        return {
+            "version": VOICE_USER_SIMULATOR_VERSION,
+            "additional_llm_cost": self._additional_llm_cost,
+            "tts_cost": None,
+            "events": list(self._generation_events),
+            "candidate_recovery": list(self._candidate_recovery_events),
+            "candidate_max_retries": self.candidate_max_retries,
+            "candidate_recovery_enabled": self.scenario_constraints is not None,
+        }
+
     def _next_turn_taking_action(
         self, state: UserAudioStreamingState
     ) -> TurnTakingAction:
+        if getattr(self, "scenario_transition_pending", False):
+            return TurnTakingAction(
+                action="wait", info="Continuing to listen during stage transition"
+            )
         if not self.realtime_generation:
             return self._compute_turn_taking_action(state)
-        if self._generation is not None:
-            return TurnTakingAction(
-                action=self._generation_action if self._generation.done() else "wait",
-                info="Customer generation pending",
-            )
+        if self._refresh_voice_tasks(state):
+            return TurnTakingAction(action="wait", info="Discarded obsolete generation")
+        if self._generation_task is not None:
+            task = self._generation_task
+            if task.origin == "scripted" and state.agent_speech_active:
+                return TurnTakingAction(
+                    action="wait", info="Waiting to deliver scripted input"
+                )
+            if task.discard_reason is None and task.future.done():
+                return task.decision.model_copy(deep=True)
+            return TurnTakingAction(action="wait", info="Customer generation pending")
         if state.is_talking:
             return self._compute_turn_taking_action(state)
+        if self._listener_task is not None:
+            if self._listener_task.discard_reason is None:
+                if self._listener_task.future.done():
+                    return self._finish_listener(state, apply=True)
+                return TurnTakingAction(action="wait", info="Listening")
         if state.input_ongoing_speech_duration() > 0:
-            if self._listener is not None and self._listener.done():
-                action = self._listener.result()
-                self._listener = None
-                return action
-            if self._listener is None and (
+            if self._listener_task is None and (
                 self.interruption_check_interval is None
                 or state.tick_count % self.interruption_check_interval == 0
             ):
-                self._listener = self._user_executor.submit(
+                snapshot = self._generation_snapshot(state)
+                future = self._user_executor.submit(
                     copy_context().run,
                     self._compute_turn_taking_action,
-                    self._generation_snapshot(state),
+                    snapshot,
+                )
+                self._listener_task = self._new_voice_task(
+                    future,
+                    "listener",
+                    TurnTakingAction(action="wait"),
+                    state,
+                    rng=snapshot.backchannel_rng,
                 )
             return TurnTakingAction(action="wait", info="Listening")
-        if self._listener is not None and self._listener.done():
-            self._listener.result()  # Surface errors, but do not apply a stale reaction.
-            self._listener = None
         if (
             state.input_total_speech_duration() == 0
             and state.tick_count - self._last_generation_tick
@@ -737,21 +1039,30 @@ class VoiceStreamingUserSimulator(
         # History messages are immutable here; isolate the lists the tick loop updates.
         return state.model_copy(
             update={
+                "system_messages": list(state.system_messages),
+                "messages": list(state.messages),
                 "ticks": list(state.ticks),
                 "input_turn_taking_buffer": list(state.input_turn_taking_buffer),
                 "output_streaming_queue": list(state.output_streaming_queue),
+                "agent_transcript_contents": dict(state.agent_transcript_contents),
+                "backchannel_rng": deepcopy(state.backchannel_rng),
             }
         )
 
-    def _start_generation(self, state, tool_result=None) -> None:
+    def _start_generation(self, state, tool_result=None, action=None) -> None:
+        if self._generation_closed:
+            return
+        self._latest_state = state
+        if action is None:
+            action = TurnTakingAction(
+                action="generate_message", generation_origin="tool_result"
+            )
         snapshot = self._generation_snapshot(state)
-        self._generation_input_count = len(state.input_turn_taking_buffer)
-        self._generation_from_tool = tool_result is not None
-        self._generation_action = "generate_message"
+        snapshot._llm_generation_seconds = None
+        snapshot._tts_synthesis_seconds = None
         self._last_generation_tick = state.tick_count
-        if self._listener is not None:
-            self._listener.cancel()
-            self._listener = None
+        if self._listener_task is not None:
+            self._discard_task(self._listener_task, state, "generation_started")
         if tool_result is not None:
             snapshot.input_turn_taking_buffer = [tool_result]
         message = (
@@ -759,12 +1070,83 @@ class VoiceStreamingUserSimulator(
             if snapshot.input_turn_taking_buffer
             else None
         )
-        self._generation = self._user_executor.submit(
-            copy_context().run,
-            self._generate_full_duplex_voice_message,
-            message,
-            snapshot,
-        )
+        if action.action == "backchannel":
+            future = self._user_executor.submit(
+                copy_context().run, self._generate_backchannel_result, snapshot
+            )
+        else:
+            scripted = self._scenario_inputs[0] if self._scenario_inputs else None
+            future = self._user_executor.submit(
+                copy_context().run,
+                self._generate_full_duplex_voice_message,
+                *(
+                    (message, snapshot, scripted)
+                    if scripted is not None
+                    else (message, snapshot)
+                ),
+            )
+        origin = action.generation_origin or "normal"
+        if action.action != "backchannel" and scripted is not None:
+            origin = "scripted"
+        if self._needs_tool_reply and origin == "normal":
+            origin = "tool_result"
+        action = action.model_copy(update={"generation_origin": origin})
+        self._generation_task = self._new_voice_task(future, origin, action, state)
+
+    def _take_generation(self, state, action):
+        """Revalidate before any speech, STOP signal, or user tool is committed."""
+        task = self._generation_task
+        if task is None:
+            self._start_generation(state, action=action)
+            return None
+        reason = self._invalid_voice_task(task, state)
+        if reason:
+            self._discard_task(task, state, reason)
+        if task.discard_reason is not None:
+            if task.future.done():
+                self._reap_generation(state)
+            return None
+        if not task.future.done():
+            return None
+        try:
+            message, generated = task.future.result()
+        except Exception:
+            self._generation_task = None
+            self._add_unplayed_cost(None)
+            self._voice_event("failed", task, state)
+            raise
+        self._record_generated_result(task, message, generated, state, discarded=False)
+        self._voice_event("committed", task, state)
+        self._generation_task = None
+        if task.origin == "scripted":
+            key = (message.raw_data or {}).get("scenario_input_id")
+            if not self._scenario_inputs or self._scenario_inputs[0][0] != key:
+                raise RuntimeError("Scripted user input changed before delivery")
+            _, text = self._scenario_inputs.pop(0)
+            self._released_scenario_facts.append(text)
+            reminder = UserSimulator.scenario_stage_context(self, key, text)
+            if reminder is not None:
+                state.system_messages.append(reminder)
+            state.system_messages.append(
+                SystemMessage(
+                    role="system",
+                    content=f"Additional user information now available: {text}",
+                )
+            )
+        state.user_utterance_count = generated.user_utterance_count
+        if task.origin == "backchannel":
+            state.backchannel_rng.setstate(generated.backchannel_rng.getstate())
+        for name in ("_llm_generation_seconds", "_tts_synthesis_seconds"):
+            setattr(state, name, getattr(generated, name, None))
+        state.input_turn_taking_buffer = state.input_turn_taking_buffer[
+            task.input_count :
+        ]
+        state.delivering_tool_result_speech = task.from_tool_result
+        if task.from_tool_result:
+            self._needs_tool_reply = False
+        for field, value in task.decision.model_dump().items():
+            setattr(action, field, value)
+        return message, state
 
     def _compute_turn_taking_action(
         self, state: UserAudioStreamingState
@@ -772,6 +1154,29 @@ class VoiceStreamingUserSimulator(
         """
         Decide the next action to take in the turn-taking.
         """
+        if (
+            self.silence_checkin_threshold
+            and state.user_utterance_count > 0
+            and not state.is_talking
+            and not self._scenario_inputs
+            and not self._needs_tool_reply
+            and not any(
+                chunk.contains_speech
+                or chunk.content
+                or isinstance(chunk, EnvironmentMessage)
+                for chunk in state.input_turn_taking_buffer
+            )
+            and min(
+                state.time_since_last_talk,
+                state.time_since_last_other_talk,
+                state.tick_count - self._last_generation_tick,
+            )
+            < self.silence_checkin_threshold
+        ):
+            return TurnTakingAction(
+                action="wait", info="Waiting before silence check-in"
+            )
+
         # Prepare listener reaction callbacks
         should_interrupt_callback = None
         should_backchannel_callback = None
@@ -783,7 +1188,12 @@ class VoiceStreamingUserSimulator(
             def should_interrupt_callback(
                 s: UserStreamingState,
             ) -> ListenerReactionDecision:
-                return user_interruption_policy(s, integration_ticks=integration_ticks)
+                return user_interruption_policy(
+                    s,
+                    integration_ticks=integration_ticks,
+                    decision_model=self.decision_model,
+                    decision_model_args=self.decision_model_args,
+                )
 
         # Backchannel callback is tied to the use_llm_backchannel config
         if self.use_llm_backchannel:
@@ -792,7 +1202,11 @@ class VoiceStreamingUserSimulator(
                 s: UserStreamingState,
             ) -> ListenerReactionDecision:
                 return user_backchannel_policy(
-                    s, self.backchannel, integration_ticks=integration_ticks
+                    s,
+                    self.backchannel,
+                    integration_ticks=integration_ticks,
+                    decision_model=self.decision_model,
+                    decision_model_args=self.decision_model_args,
                 )
 
         action, info = basic_turn_taking_policy(
@@ -818,6 +1232,17 @@ class VoiceStreamingUserSimulator(
         return TurnTakingAction(
             action=action,
             info=info,
+            generation_origin=(
+                "backchannel"
+                if action == "backchannel"
+                else (
+                    "interrupt"
+                    if state.input_ongoing_speech_duration() > 0
+                    else "normal"
+                )
+                if action == "generate_message"
+                else None
+            ),
             interrupt_check_seconds=timing.get("interrupt_check_seconds"),
             interrupt_check_cost=timing.get("interrupt_check_cost"),
             interrupt_check_usage=timing.get("interrupt_check_usage"),
@@ -876,6 +1301,9 @@ class VoiceStreamingUserSimulator(
         When audio taps are enabled, individual tracks are recorded.
         Effect events are always recorded in the timeline.
         """
+        if self.saasr_session is not None:
+            return self._mix_saasr_chunk(chunk, state)
+
         current_time_ms = int(state.elapsed_samples * 1000 / PCM_SAMPLE_RATE)
 
         # 1. Get scheduled effects from the scheduler
@@ -1067,22 +1495,10 @@ class VoiceStreamingUserSimulator(
             state.is_backchanneling = False
         elif action.action == "generate_message":
             if self.realtime_generation:
-                if self._generation is None:
-                    self._start_generation(state)
+                generated = self._take_generation(state, action)
+                if generated is None:
                     return self._emit_waiting_chunk(state)
-                if not self._generation.done():
-                    return self._emit_waiting_chunk(state)
-                full_message, generated_state = self._generation.result()
-                self._generation = None
-                state.user_utterance_count = generated_state.user_utterance_count
-                for name in ("_llm_generation_seconds", "_tts_synthesis_seconds"):
-                    setattr(state, name, getattr(generated_state, name, None))
-                fresh_input = state.input_turn_taking_buffer[
-                    self._generation_input_count :
-                ]
-                state.input_turn_taking_buffer = fresh_input
-                state.delivering_tool_result_speech = self._generation_from_tool
-                new_state = state
+                full_message, new_state = generated
             else:
                 merged_message = merge_homogeneous_chunks(
                     state.input_turn_taking_buffer
@@ -1114,6 +1530,7 @@ class VoiceStreamingUserSimulator(
                 return self._emit_waiting_chunk(state)
             else:
                 logger.debug("Generating message: Creating chunk messages")
+                self._record_spelling_events(full_message, state)
                 chunk_messages = self._create_chunk_messages(full_message)
                 logger.debug(
                     f"Generating message: Created {len(chunk_messages)} chunk messages"
@@ -1127,19 +1544,10 @@ class VoiceStreamingUserSimulator(
         elif action.action == "backchannel":
             logger.debug("Backchannel: Generating backchannel message")
             if self.realtime_generation:
-                if self._generation is None:
-                    self._generation_action = "backchannel"
-                    self._generation = self._user_executor.submit(
-                        copy_context().run,
-                        self._generate_backchannel_result,
-                        self._generation_snapshot(state),
-                    )
+                generated = self._take_generation(state, action)
+                if generated is None:
                     return self._emit_waiting_chunk(state)
-                if not self._generation.done():
-                    return self._emit_waiting_chunk(state)
-                backchannel_message, generated_state = self._generation.result()
-                self._generation = None
-                state.user_utterance_count = generated_state.user_utterance_count
+                backchannel_message, state = generated
             else:
                 backchannel_message = self._generate_backchannel_message(state)
             chunk_messages = self._create_chunk_messages(backchannel_message)
@@ -1165,6 +1573,8 @@ class VoiceStreamingUserSimulator(
                 "Voice Streaming User Simulator should never return None chunk."
             )
 
+        if self.saasr_session is not None:
+            is_speech_action = bool(next_user_chunk.contains_speech)
         if is_speech_action:
             next_user_chunk.contains_speech = True
             state.time_since_last_talk = 0
@@ -1172,7 +1582,7 @@ class VoiceStreamingUserSimulator(
             state.time_since_last_talk += 1
 
         # Update turn-taking action with LLM/TTS timing if available
-        if action.action == "generate_message":
+        if action.action in {"generate_message", "backchannel"}:
             llm_time = getattr(state, "_llm_generation_seconds", None)
             tts_time = getattr(state, "_tts_synthesis_seconds", None)
             if llm_time is not None:
@@ -1194,11 +1604,13 @@ class VoiceStreamingUserSimulator(
     ) -> Tuple[UserMessage, UserAudioStreamingState]:
         """Process a tool result by calling the LLM and returning the response."""
         if self.realtime_generation:
-            if self._generation is not None:
+            if self._generation_task is not None:
                 raise RuntimeError(
                     "Tool result arrived while customer generation is pending"
                 )
-            self._start_generation(state, tool_result)
+            self._needs_tool_reply = True
+            if not state.agent_speech_active:
+                self._start_generation(state, tool_result)
             return self._emit_waiting_chunk(state)
         # Temporarily set buffer so get_linearized_messages(include_pending_input=True)
         # picks up the tool result for LLM context
@@ -1243,8 +1655,25 @@ class VoiceStreamingUserSimulator(
         state.time_since_last_talk += 1
         return noise_chunk, state
 
+    def queue_scenario_input(self, event_id: str, text: str) -> None:
+        """Queue one released input through the same TTS and playback pipeline."""
+        if not any(key == event_id for key, _ in self._scenario_inputs):
+            self._scenario_inputs.append((event_id, text))
+            if (
+                self._generation_task is not None
+                and self._generation_task.origin != "scripted"
+            ):
+                self._discard_task(
+                    self._generation_task,
+                    self._latest_state,
+                    "scripted_input_available",
+                )
+
     def _generate_full_duplex_voice_message(
-        self, message: ValidUserInputMessage, state: UserAudioStreamingState
+        self,
+        message: ValidUserInputMessage,
+        state: UserAudioStreamingState,
+        scripted_input=None,
     ) -> Tuple[UserMessage, UserAudioStreamingState]:
         """
         Generate a voice message using tick-based history for LLM context.
@@ -1306,13 +1735,91 @@ class VoiceStreamingUserSimulator(
         messages = messages + [role_reminder]
 
         # Generate response (timing is captured in llm_utils.generate)
-        assistant_message = generate(
-            model=self.llm,
-            messages=messages,
-            tools=self.tools,
-            call_name="user_streaming_response",
-            **self.llm_args,
-        )
+        if (
+            scripted_input is None
+            and not self.realtime_generation
+            and self._scenario_inputs
+        ):
+            scripted_input = self._scenario_inputs.pop(0)
+        if scripted_input is not None:
+            key, text = scripted_input
+            assistant_message = AssistantMessage(
+                role="assistant",
+                content=text,
+                cost=0.0,
+                generation_time_seconds=0.0,
+                raw_data={"scenario_input_id": key},
+            )
+        else:
+
+            def generate_reply(feedback):
+                return generate(
+                    model=self.llm,
+                    messages=messages + feedback,
+                    tools=self.tools,
+                    call_name="user_streaming_response",
+                    **self.llm_args,
+                )
+
+            if self.scenario_constraints is None:
+                assistant_message = generate_reply([])
+            else:
+                from tau2.user.grounding import generate_grounded_reply
+
+                def recheck(evidence):
+                    if self.audio_recheck is None:
+                        return {"status": "unavailable"}
+                    latest_text = []
+                    found_agent = False
+                    # Only the latest actually-heard Agent turn is eligible.
+                    for entry in reversed(linearized_messages):
+                        if entry.role == "user" and found_agent:
+                            break
+                        if entry.role == "assistant" and entry.content:
+                            found_agent = True
+                            latest_text.append(entry.content)
+                    heard = " ".join(" ".join(t.split()) for t in reversed(latest_text))
+                    if " ".join(evidence.split()) not in heard:
+                        return {"status": "unavailable"}
+                    # Message merging intentionally drops raw_data. Select IDs
+                    # from the original immutable snapshot, then let the observer
+                    # bind them to its measured, already-played audio ranges.
+                    chunks = [t.other_chunk for t in state.ticks]
+                    chunks.extend(state.input_turn_taking_buffer)
+                    chunks.extend(linearized_messages)
+                    fragments = {}
+                    for chunk in chunks:
+                        if not isinstance(chunk, AssistantMessage):
+                            continue
+                        raw = chunk.raw_data or {}
+                        metadata = (
+                            raw.get("live_segment") or raw.get("live_transcript") or {}
+                        )
+                        for fragment in metadata.get("fragments", []):
+                            if fragment.get("event_id"):
+                                fragments[fragment["event_id"]] = fragment
+                    return self.audio_recheck(evidence, list(fragments.values()))
+
+                assistant_message = generate_grounded_reply(
+                    generate_reply=generate_reply,
+                    allowed=self.scenario_constraints
+                    + "\n"
+                    + "\n".join(self._released_scenario_facts),
+                    conversation="\n".join(
+                        f"{m.role}: {m.content}"
+                        for m in linearized_messages
+                        if m.content
+                    ),
+                    model=self.decision_model or self.llm,
+                    model_args=self.decision_model_args
+                    if self.decision_model
+                    else self.llm_args,
+                    is_stop=self.is_stop,
+                    events=self._candidate_recovery_events,
+                    max_retries=self.candidate_max_retries,
+                    recheck=recheck if self.audio_recheck is not None else None,
+                    context_revision=state.agent_input_revision,
+                )
 
         # Store LLM timing on state for later use when updating TurnTakingAction
         # Use generation_time_seconds from the returned message
@@ -1356,17 +1863,6 @@ class VoiceStreamingUserSimulator(
         if not user_message.has_text_content():
             return user_message, state
 
-        if self.spell_event_detector is not None:
-            now_ms = int(state.elapsed_samples * 1000 / PCM_SAMPLE_RATE)
-            for detection in self.spell_event_detector(user_message.content):
-                event = self._effect_timeline.open_event(
-                    "spell_out",
-                    start_ms=now_ms,
-                    participant="user",
-                    params=detection.model_dump(),
-                )
-                event.end_ms = now_ms
-
         # Synthesize voice (without background noise - added per chunk) with timing
         effects_turn_idx = state.user_utterance_count
         tts_start = time.perf_counter()
@@ -1386,7 +1882,144 @@ class VoiceStreamingUserSimulator(
 
         state.user_utterance_count += 1
 
+        if scripted_input is not None and not self.realtime_generation:
+            self._released_scenario_facts.append(scripted_input[1])
+            reminder = UserSimulator.scenario_stage_context(self, *scripted_input)
+            if reminder is not None:
+                state.system_messages.append(reminder)
+
         return user_message, state
+
+    def synthesize_voice(self, message, state, **kwargs):
+        """Route all caller text, including backchannels, through one renderer."""
+        if self.saasr_session is None:
+            return super().synthesize_voice(message, state, **kwargs)
+        from tau2.voice.saasr import SAASR_AUDIO_FORMAT
+        from tau2.voice.utils.pronunciation_swap import apply_pronunciations
+
+        text = message.content
+        if self.voice_settings.pronunciation_map:
+            text, _ = apply_pronunciations(
+                text,
+                self.voice_settings.pronunciation_map,
+                grapheme_tokens=tuple(
+                    self.voice_settings.pronunciation_grapheme_tokens
+                ),
+            )
+        tables = self.voice_settings.synthesis_config.spelled_entity_tables
+        if tables is not None:
+            from tau2.voice.spelled_entity_normalizer import normalize_spelled_entities
+
+            text = normalize_spelled_entities(text, tables)
+        audio, metadata = self.saasr_session.synthesize(text)
+        message.audio_content = audio_bytes_to_string(audio)
+        message.audio_format = SAASR_AUDIO_FORMAT.model_copy()
+        message.audio_script_gold = text
+        message.is_audio = True
+        message.raw_data = {**(message.raw_data or {}), "saasr_foreground": metadata}
+        return message
+
+    def _create_chunk_messages(self, full_message):
+        """Align caller captions to foreground, excluding prelude and RIR tail."""
+        if self.saasr_session is None:
+            return super()._create_chunk_messages(full_message)
+        lead = self.saasr_session.commit(full_message)
+        metadata = full_message.raw_data["saasr_foreground"]
+        audio = b"\x00\x00" * lead + full_message.get_audio_bytes()
+        full_message.audio_content = audio_bytes_to_string(audio)
+        chunks = self._chunk_by_bytes(full_message)
+        first = lead // self.chunk_size
+        last = (lead + metadata["speech_samples"] - 1) // self.chunk_size
+        spoken = self._create_content_chunks(full_message.content, last - first + 1)
+        script = self._create_content_chunks(
+            full_message.audio_script_gold, last - first + 1
+        )
+        text_chunks = [""] * len(chunks)
+        text_chunks[first : last + 1] = spoken
+        script_chunks = [""] * len(chunks)
+        script_chunks[first : last + 1] = script
+        import uuid
+
+        utterance = str(uuid.uuid4())
+        template = "".join(
+            f"<chunk id={i}>{text}</chunk>" for i, text in enumerate(script_chunks)
+        )
+        result = []
+        for index, audio_chunk in enumerate(chunks):
+            raw = {
+                "saasr_foreground": {
+                    "transport_gain": metadata["transport_gain"],
+                    "utterance": metadata["utterance"],
+                },
+                "saasr_main_final": index == last,
+                "saasr_speech_offset_seconds": max(0, lead - index * self.chunk_size)
+                / PCM_SAMPLE_RATE,
+            }
+            if index == first:
+                raw.update(
+                    {
+                        k: v
+                        for k, v in full_message.raw_data.items()
+                        if k != "saasr_foreground"
+                    }
+                )
+            # Keep the dry speech boundary separate from reverberant tail audio.
+            active = first <= index <= last
+            result.append(
+                UserMessage(
+                    role="user",
+                    content=text_chunks[index],
+                    is_audio=True,
+                    audio_content=audio_bytes_to_string(audio_chunk.data),
+                    audio_format=audio_chunk.format,
+                    contains_speech=active,
+                    utterance_ids=[utterance],
+                    chunk_id=index,
+                    is_final_chunk=index == len(chunks) - 1,
+                    audio_script_gold=f'<message uuid="{utterance}" active="{index}">{template}</message>',
+                    raw_data=raw,
+                    cost=full_message.cost if index == first else 0.0,
+                    usage=full_message.usage if index == first else None,
+                )
+            )
+        return result
+
+    def _mix_saasr_chunk(self, chunk, state):
+        """Add continuous scene audio even when no caller foreground is playing."""
+        from tau2.voice.saasr import SAASR_AUDIO_FORMAT
+
+        audio, output_id = self.saasr_session.mix_tick(chunk, self.chunk_size)
+        if chunk is None:
+            chunk = UserMessage(
+                role="user",
+                content="",
+                contains_speech=False,
+                audio_script_gold="",
+                is_audio=True,
+            )
+        chunk.audio_content = audio_bytes_to_string(audio)
+        chunk.audio_format = SAASR_AUDIO_FORMAT.model_copy()
+        chunk.audio_path = None
+        chunk.raw_data = {**(chunk.raw_data or {}), "saasr_output_id": output_id}
+        if state.telephony_converter is not None:
+            chunk = self._add_telephony_compression(chunk, state.telephony_converter)
+        if self._audio_taps:
+            self._audio_taps["user_output"].record_message(chunk)
+        state.elapsed_samples += self.chunk_size
+        return chunk
+
+    def _record_spelling_events(self, message, state) -> None:
+        """Attach spelling effects only after an utterance is accepted to play."""
+        if self.spell_event_detector is not None:
+            now_ms = int(state.elapsed_samples * 1000 / PCM_SAMPLE_RATE)
+            for detection in self.spell_event_detector(message.content):
+                event = self._effect_timeline.open_event(
+                    "spell_out",
+                    start_ms=now_ms,
+                    participant="user",
+                    params=detection.model_dump(),
+                )
+                event.end_ms = now_ms
 
     def _flip_roles_for_llm(self, messages: list[Message]) -> list[Message]:
         """
@@ -1481,7 +2114,10 @@ class VoiceStreamingUserSimulator(
         )
 
     def _generate_backchannel_result(self, state):
-        return self._generate_backchannel_message(state), state
+        started = time.perf_counter()
+        message = self._generate_backchannel_message(state)
+        state._tts_synthesis_seconds = time.perf_counter() - started
+        return message, state
 
 
 def _format_conversation_history(messages: list[Message]) -> str:

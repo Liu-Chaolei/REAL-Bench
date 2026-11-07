@@ -4,7 +4,13 @@ Helper functions for task loading, run configuration, and metadata.
 
 from typing import Optional
 
-from tau2.config import DOMAIN_TOOLS_VERSION, VOICE_INSTRUCTION_PROMPT_VERSION
+from tau2.config import (
+    DEFAULT_LLM_NL_ASSERTIONS,
+    DEFAULT_LLM_NL_ASSERTIONS_ARGS,
+    DOMAIN_TOOLS_VERSION,
+    VOICE_INSTRUCTION_PROMPT_VERSION,
+    VOICE_USER_SIMULATOR_VERSION,
+)
 from tau2.data_model.elicitation import ElicitationStrategy
 from tau2.data_model.simulation import (
     AgentInfo,
@@ -262,6 +268,9 @@ def get_info(
         or config.elicitation.strategy != ElicitationStrategy.AGENT_DIRECTED
     )
     return Info(
+        user_audio_renderer=(
+            config.audio_native_config.saasr_identity if is_voice else None
+        ),
         domain_tools_version=DOMAIN_TOOLS_VERSION,
         voice_instruction_prompt_version=(
             VOICE_INSTRUCTION_PROMPT_VERSION if shared_voice_prompt else None
@@ -279,8 +288,15 @@ def get_info(
         benchmark=config.benchmark,
         communicate_scoring=config.communicate_scoring,
         git_commit=get_commit_hash(),
+        voice_user_simulator_version=(
+            VOICE_USER_SIMULATOR_VERSION if is_voice else None
+        ),
         num_trials=config.num_trials,
         max_steps=config.effective_max_steps,
+        nl_assertions_judge={
+            "model": DEFAULT_LLM_NL_ASSERTIONS,
+            "model_args": dict(DEFAULT_LLM_NL_ASSERTIONS_ARGS),
+        },
         max_errors=config.max_errors,
         user_info=user_info,
         agent_info=agent_info,

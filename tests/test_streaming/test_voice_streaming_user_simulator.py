@@ -14,7 +14,7 @@ from threading import Event
 
 import pytest
 
-from tau2.data_model.audio import AudioEncoding, AudioFormat
+from tau2.data_model.audio import AudioEncoding, AudioFormat, audio_bytes_to_string
 from tau2.data_model.message import (
     AssistantMessage,
     ToolCall,
@@ -23,6 +23,31 @@ from tau2.data_model.message import (
 )
 from tau2.data_model.voice import SynthesisConfig, VoiceSettings
 from tau2.user.user_simulator_streaming import VoiceStreamingUserSimulator
+
+
+@pytest.fixture(autouse=True)
+def offline_voice_boundaries(monkeypatch):
+    """Interface tests exercise scheduling without live LLM or TTS requests."""
+    monkeypatch.setattr(
+        "tau2.user.user_simulator_streaming.generate",
+        lambda **_: AssistantMessage(
+            role="assistant", content="NO", cost=0, generation_time_seconds=0
+        ),
+    )
+
+    def synthesize(self, message, state, **kwargs):
+        return message.model_copy(
+            update={
+                "is_audio": True,
+                "audio_content": audio_bytes_to_string(b"\x01\x00" * 1600),
+                "audio_script_gold": message.content,
+                "audio_format": AudioFormat(
+                    encoding=AudioEncoding.PCM_S16LE, sample_rate=16000
+                ),
+            }
+        )
+
+    monkeypatch.setattr(VoiceStreamingUserSimulator, "synthesize_voice", synthesize)
 
 
 @pytest.fixture
@@ -256,14 +281,15 @@ def test_audio_ticks_continue_while_caller_generation_is_pending(
         release.set()
         user._generation.result(timeout=1)
         reply, state = user._perform_turn_taking_action(state, action)
-        assert reply.content == "###STOP###"
-        assert state.user_utterance_count == 1
+        assert reply.contains_speech is False
+        assert reply.content != "###STOP###"
+        assert state.user_utterance_count == 0
         assert "".join(chunk.content for chunk in state.input_turn_taking_buffer) == (
-            "Your order shipped."
+            "Ready?Your order shipped."
         )
     finally:
         release.set()
-        user.stop(state)
+        user.stop(state=state)
 
 
 def test_voice_streaming_user_contains_speech_on_all_responses(

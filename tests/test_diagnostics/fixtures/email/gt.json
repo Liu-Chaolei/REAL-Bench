@@ -1,0 +1,31 @@
+{
+  "goals": [
+    {
+      "id": "send_reminder",
+      "action": "send_email",
+      "parameters": [
+        {
+          "name": "recipient",
+          "value": {
+            "kind": "literal",
+            "value": "alice@example.com"
+          }
+        },
+        {
+          "name": "subject",
+          "value": {
+            "kind": "literal",
+            "value": "Meeting Reminder"
+          }
+        },
+        {
+          "name": "content",
+          "value": {
+            "kind": "message_content",
+            "purpose": "remind_recipient_to_bring_report"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -46,9 +46,11 @@ from tau2.data_model.elicitation import (
     ElicitationConfig,
 )
 from tau2.data_model.live_config import LiveConfig
+from tau2.data_model.saasr import SaasrConfig
 from tau2.data_model.semantic_communication import CommunicateScoring
 from tau2.data_model.voice import SpeechComplexity, VoiceSettings
 from tau2.voice.audio_native.avartha_pipecat.config import AvarthaPipecatConfig
+from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
 
 
 class AudioNativeConfig(BaseModel):
@@ -59,6 +61,19 @@ class AudioNativeConfig(BaseModel):
     """
 
     model_config = ConfigDict(extra="forbid")
+
+    user_audio_renderer: Literal["standard", "saasr"] = "standard"
+    saasr_config: SaasrConfig | None = None
+    saasr_identity: dict | None = None
+
+    @model_validator(mode="after")
+    def validate_user_renderer(self):
+        """Continuous caller scenes need background ticks during synthesis."""
+        if (self.user_audio_renderer == "saasr") != (self.saasr_config is not None):
+            raise ValueError("SAASR renderer requires saasr_config and vice versa")
+        if self.saasr_config is not None and self.realtime_generation is False:
+            raise ValueError("SAASR requires non-blocking user generation")
+        return self
 
     @model_validator(mode="before")
     @classmethod
@@ -89,6 +104,7 @@ class AudioNativeConfig(BaseModel):
         "xai",
         "nova",
         "qwen",
+        "qwen_agent",
         "avartha_pipecat",
         "phonic",
         "livekit",
@@ -129,6 +145,10 @@ class AudioNativeConfig(BaseModel):
         description="Hosted agent connection settings for the avartha_pipecat provider",
     )
 
+    qwen_agent_config: Optional[QwenAgentConfig] = Field(
+        default=None, description="Complete Qwen Audio Agent system settings"
+    )
+
     model: str = Field(
         default=DEFAULT_AUDIO_NATIVE_MODELS[DEFAULT_AUDIO_NATIVE_PROVIDER],
         description=(
@@ -156,7 +176,25 @@ class AudioNativeConfig(BaseModel):
         """Resolve the provider-aware default for real-time user generation."""
         if self.realtime_generation is not None:
             return self.realtime_generation
-        return self.provider in ("openai_live", "avartha_pipecat")
+        if self.user_audio_renderer == "saasr":
+            return True
+        return self.provider in ("openai_live", "avartha_pipecat", "qwen_agent")
+
+    @model_validator(mode="after")
+    def validate_qwen_agent_config(self):
+        """Keep complete-system settings and real-time semantics explicit."""
+        if self.provider == "qwen_agent":
+            if self.qwen_agent_config is None:
+                raise ValueError("qwen_agent requires qwen_agent_config")
+            if self.reasoning_effort is not None:
+                raise ValueError("Qwen Agent reasoning is configured on the system")
+            if self.realtime_generation is False:
+                raise ValueError("qwen_agent requires non-blocking user generation")
+            if self.model == DEFAULT_AUDIO_NATIVE_MODELS[DEFAULT_AUDIO_NATIVE_PROVIDER]:
+                self.model = DEFAULT_AUDIO_NATIVE_MODELS["qwen_agent"]
+        elif self.qwen_agent_config is not None:
+            raise ValueError("qwen_agent_config requires provider='qwen_agent'")
+        return self
 
     @model_validator(mode="after")
     def validate_live_config(self):
@@ -189,6 +227,13 @@ class AudioNativeConfig(BaseModel):
         value = handler(self)
         if self.avartha_config is None:
             value.pop("avartha_config", None)
+        if self.qwen_agent_config is None:
+            value.pop("qwen_agent_config", None)
+        if self.user_audio_renderer == "standard":
+            value.pop("user_audio_renderer", None)
+            value.pop("saasr_config", None)
+        if self.saasr_identity is None:
+            value.pop("saasr_identity", None)
         return value
 
     # Timing configuration
@@ -198,7 +243,8 @@ class AudioNativeConfig(BaseModel):
     )
     max_steps_seconds: int = Field(
         default=DEFAULT_MAX_STEPS_SECONDS,
-        description="Maximum conversation duration in seconds",
+        ge=0,
+        description="Maximum conversation duration in seconds; 0 disables the limit",
     )
 
     # Audio configuration
@@ -342,8 +388,10 @@ class AudioNativeConfig(BaseModel):
         return int(self.backchannel_max_threshold_seconds / self.tick_duration_seconds)
 
     @property
-    def max_steps_ticks(self) -> int:
-        """Maximum steps in ticks."""
+    def max_steps_ticks(self) -> Optional[int]:
+        """Maximum steps in ticks, or None for an unlimited conversation."""
+        if self.max_steps_seconds == 0:
+            return None
         return int(self.max_steps_seconds / self.tick_duration_seconds)
 
 
@@ -448,6 +496,18 @@ class RunSettings(BaseModel):
             default=DEFAULT_LOG_LEVEL,
         ),
     ]
+
+    metrics_config: Optional[dict] = Field(
+        default=None, description="Resolved independent diagnostic profile."
+    )
+
+    @model_serializer(mode="wrap")
+    def serialize_optional_metrics(self, handler):
+        """Uninstrumented runs retain their historical configuration payload."""
+        data = handler(self)
+        if self.metrics_config is None:
+            data.pop("metrics_config", None)
+        return data
 
     verbose_logs: Annotated[
         bool,

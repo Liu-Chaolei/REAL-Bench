@@ -641,6 +641,19 @@ def _generate_once(
     )
     _apply_anthropic_adaptive_thinking(model, kwargs)
     litellm_messages = to_litellm_messages(messages)
+    if (
+        call_name == "user_streaming_response"
+        and model.split("/")[-1].lower().startswith("minimax-")
+        and litellm_messages
+        and all(message["role"] == "system" for message in litellm_messages)
+    ):
+        # MiniMax requires a conversational input even before the caller has
+        # heard speech. Use the existing final role reminder as that input;
+        # preserve its text and all scenario/policy instructions verbatim.
+        litellm_messages = [
+            *litellm_messages[:-1],
+            {**litellm_messages[-1], "role": "user"},
+        ]
     if api_model.startswith("openai/responses/"):
         litellm_messages = _keep_non_leading_system_messages_positional(
             litellm_messages

@@ -66,12 +66,26 @@ class CommunicateEvaluator(EvaluatorBase[Message]):
         *,
         scoring: CommunicateScoring,
         customer_language: str | None = None,
+        runtime_bindings: dict | None = None,
+        environment_trace: list[dict] | None = None,
+        scenario_series: dict | None = None,
     ) -> RewardInfo:
         """Score required facts; absent criteria are neutral and make no LLM calls.
 
         ``customer_language`` is set only when the call language differs from the
         scenario language; the semantic judge then accepts that language too.
         """
+        if scenario_series is not None:
+            from tau2.evaluator.scenario_series import communication_reward
+
+            return communication_reward(
+                task,
+                environment_trace,
+                scenario_series,
+                scoring,
+                customer_language,
+                runtime_bindings,
+            )
         semantic = scoring.scorer == CommunicateScorer.SEMANTIC
         if task.evaluation_criteria is None and not semantic:
             return RewardInfo(
@@ -95,6 +109,11 @@ class CommunicateEvaluator(EvaluatorBase[Message]):
             communicate_info,
             scoring=scoring,
             customer_language=customer_language,
+            **(
+                {"runtime_bindings": runtime_bindings}
+                if runtime_bindings is not None
+                else {}
+            ),
         )
         reward = float(all(check.met for check in checks))
         return RewardInfo(
@@ -117,8 +136,40 @@ class CommunicateEvaluator(EvaluatorBase[Message]):
         *,
         scoring: CommunicateScoring,
         customer_language: str | None = None,
+        runtime_bindings: dict | None = None,
     ) -> list[CommunicateCheck]:
         """Check each fact; semantic mode makes one validated LLM call per fact."""
+        if runtime_bindings is not None and communicate_info:
+            import json
+
+            from tau2.environment.scenario import resolve_references
+
+            resolved = []
+            positions = []
+            missing = {}
+            for index, value in enumerate(communicate_info):
+                try:
+                    fact = resolve_references(value, runtime_bindings)
+                    positions.append(index)
+                    resolved.append(
+                        fact
+                        if isinstance(fact, str)
+                        else json.dumps(fact, ensure_ascii=False)
+                    )
+                except KeyError:
+                    missing[index] = CommunicateCheck(
+                        info=value,
+                        met=False,
+                        justification="Required operation had no verified runtime result",
+                    )
+            checks = cls.evaluate_communicate_info(
+                full_trajectory,
+                resolved,
+                scoring=scoring,
+                customer_language=customer_language,
+            )
+            by_index = {**missing, **dict(zip(positions, checks))}
+            return [by_index[index] for index in range(len(communicate_info))]
         if not communicate_info:
             return []
         judge = scoring.judge
@@ -205,6 +256,9 @@ class FullDuplexCommunicateEvaluator(EvaluatorBase[Tick]):
         *,
         scoring: CommunicateScoring,
         customer_language: str | None = None,
+        runtime_bindings: dict | None = None,
+        environment_trace: list[dict] | None = None,
+        scenario_series: dict | None = None,
     ) -> RewardInfo:
         """Apply the same checks to the established merged-agent transcript."""
         messages = (
@@ -217,7 +271,14 @@ class FullDuplexCommunicateEvaluator(EvaluatorBase[Tick]):
             task,
             messages,
             scoring=scoring,
+            environment_trace=environment_trace,
+            scenario_series=scenario_series,
             customer_language=customer_language,
+            **(
+                {"runtime_bindings": runtime_bindings}
+                if runtime_bindings is not None
+                else {}
+            ),
         )
 
     @classmethod
@@ -228,6 +289,7 @@ class FullDuplexCommunicateEvaluator(EvaluatorBase[Tick]):
         *,
         scoring: CommunicateScoring,
         customer_language: str | None = None,
+        runtime_bindings: dict | None = None,
     ) -> list[CommunicateCheck]:
         """Evaluate required facts on an already reconstructed agent transcript."""
         return CommunicateEvaluator.evaluate_communicate_info(
@@ -235,4 +297,9 @@ class FullDuplexCommunicateEvaluator(EvaluatorBase[Tick]):
             communicate_info,
             scoring=scoring,
             customer_language=customer_language,
+            **(
+                {"runtime_bindings": runtime_bindings}
+                if runtime_bindings is not None
+                else {}
+            ),
         )
