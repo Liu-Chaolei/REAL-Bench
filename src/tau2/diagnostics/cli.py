@@ -1,4 +1,4 @@
-"""CLI for independent REAL-derived metrics on ordinary saved tau runs."""
+"""CLI for independent post-call metrics on ordinary saved tau runs."""
 
 import json
 from pathlib import Path
@@ -16,7 +16,10 @@ def add_metrics_args(parser):
         child.add_argument("--output", type=Path)
         if name == "run":
             child.add_argument("--config", type=Path, required=True)
-            child.add_argument("--only", help="Comma-separated intent,execution,voice")
+            child.add_argument(
+                "--only",
+                help="Comma-separated intent,execution,voice,interaction,conciseness",
+            )
             child.add_argument("--dry-run", action="store_true")
         child.set_defaults(func=run_metrics)
 
@@ -26,6 +29,33 @@ def add_metrics_args(parser):
         if name == "verify-gaia2":
             child.add_argument("--workers", type=int, default=4)
         child.set_defaults(func=run_validation)
+
+    review = commands.add_parser("feedback-review")
+    review.add_argument("results", type=Path)
+    review.add_argument("--output", type=Path, required=True)
+    review.set_defaults(func=run_feedback_review)
+    calibration = commands.add_parser("feedback-calibrate")
+    calibration.add_argument("reviews", type=Path)
+    calibration.add_argument("--id", required=True)
+    calibration.add_argument("--provenance", required=True)
+    calibration.add_argument("--output", type=Path, required=True)
+    calibration.set_defaults(func=run_feedback_calibration)
+
+
+def run_feedback_review(args):
+    """Export evidence for independent human annotation without API calls."""
+    from tau2.diagnostics.conciseness.calibration import export_review
+
+    print(json.dumps(export_review(args.results, args.output), ensure_ascii=False))
+
+
+def run_feedback_calibration(args):
+    """Fit frozen language budgets only from explicit human-reviewed references."""
+    from tau2.diagnostics.conciseness.calibration import fit_calibration
+
+    result = fit_calibration(args.reviews, args.id, args.provenance)
+    write_json(args.output, result)
+    print(json.dumps(result, ensure_ascii=False, indent=2))
 
 
 def run_validation(args):
@@ -59,8 +89,13 @@ def run_metrics(args):
         from tau2.diagnostics.suite import run_saved
 
         only = args.only.split(",") if args.only else None
-        if only and any(x not in ("intent", "execution", "voice") for x in only):
-            raise ValueError("--only accepts intent,execution,voice")
+        if only and any(
+            x not in ("intent", "execution", "voice", "interaction", "conciseness")
+            for x in only
+        ):
+            raise ValueError(
+                "--only accepts intent,execution,voice,interaction,conciseness"
+            )
         report = run_saved(
             args.results, MetricsConfig.load(args.config), only, args.dry_run
         )

@@ -230,6 +230,9 @@ class FullDuplexNLAssertionsEvaluator(EvaluatorBase[Tick]):
     @classmethod
     def ticks_to_message_history(cls, ticks: list[Tick]) -> list[Message]:
         """Use the shared speech_messages transcript view."""
+        from tau2.utils.transcript.live import require_live_alignment
+
+        require_live_alignment(ticks)
         return speech_messages(ticks)
 
     @classmethod

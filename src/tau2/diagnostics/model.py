@@ -33,7 +33,7 @@ class TauJsonModel:
             budget,
         )
 
-    def complete_sync(self, prompt, schema):
+    def complete_sync(self, prompt, schema, *, validate=None):
         from tau2.data_model.message import UserMessage
         from tau2.utils.llm_utils import extract_json_from_llm_response, generate
 
@@ -54,35 +54,68 @@ class TauJsonModel:
             if row.get("identity") == identity and row.get("output_sha256") == digest(
                 row.get("output")
             ):
+                if validate is not None:
+                    validate(row["output"])
                 return row["output"]
-        self.budget.take()
         args = profile.arguments()
-        response = (
-            generate(
-                model=profile.model,
-                messages=[UserMessage(role="user", content=prompt)],
-                call_name="diagnostic_" + self.role,
-                response_format={"type": "json_object"},
-                timeout=self.config.timeout_seconds,
-                **args,
-            )
-            if not schema
-            else generate(
-                model=profile.model,
-                messages=[
-                    UserMessage(
-                        role="user",
-                        content=prompt + "\nOutput JSON schema:\n" + canonical(schema),
-                    )
-                ],
-                call_name="diagnostic_" + self.role,
-                response_format={"type": "json_object"},
-                timeout=self.config.timeout_seconds,
-                **args,
-            )
+        if self.role in {"interaction", "feedback_nuggets", "feedback_alignment"}:
+            args.update(num_retries=0, response_validation_retries=0)
+        content = (
+            prompt + "\nOutput JSON schema:\n" + canonical(schema) if schema else prompt
         )
+        attempt_path, attempt = None, None
+        if self.role in {"feedback_nuggets", "feedback_alignment"}:
+            from uuid import uuid4
+
+            if len(content) > self.config.max_characters:
+                raise ValueError("diagnostic_input_too_long")
+            attempt_path = (
+                self.directory / "attempts" / (identity + "_" + uuid4().hex + ".json")
+            )
+            attempt = {
+                "identity": identity,
+                "role": self.role,
+                "prompt": prompt,
+                "schema": schema,
+                "profile": profile.model_dump(),
+                "status": "started",
+            }
+        self.budget.take()
+        if attempt_path:
+            write_json(attempt_path, attempt)
+        try:
+            response = generate(
+                model=profile.model,
+                messages=[UserMessage(role="user", content=content)],
+                call_name="diagnostic_" + self.role,
+                response_format={"type": "json_object"},
+                timeout=self.config.timeout_seconds,
+                **args,
+            )
+        except Exception as exc:
+            if attempt_path:
+                write_json(
+                    attempt_path,
+                    attempt
+                    | {"status": "provider_error", "reason": type(exc).__name__},
+                )
+            raise
+        if attempt_path:
+            # Preserve malformed or semantically invalid responses before parsing.
+            write_json(
+                attempt_path,
+                attempt
+                | {
+                    "status": "responded",
+                    "raw_response": response.content,
+                    "usage": response.usage,
+                    "cost": response.cost,
+                },
+            )
         raw = extract_json_from_llm_response(response.content or "")
         json.loads(raw)
+        if validate is not None:
+            validate(raw)
         write_json(
             path,
             {

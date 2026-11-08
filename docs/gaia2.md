@@ -1,7 +1,9 @@
 # Gaia2 tasks in τ-bench
 
-The `gaia2` domain runs all 800 core Gaia2 scenarios through the ordinary τ task
-loader, environment, user simulator, audio adapter, orchestrator and evaluator.
+The `gaia2` domain runs all 800 core Gaia2 scenarios plus 200 request variants
+through the ordinary τ task loader, environment, user simulator, audio adapter,
+orchestrator and evaluator. The complete local population contains 1,000 tasks;
+the original Parquet import contains 800.
 It supports the existing Qwen Audio Agent integration in English, including
 parallel calls with independent containers, tool state and scene clocks.
 ARE agents, environment loops and judges are not used. No Gaia2
@@ -12,7 +14,10 @@ They are not original Gaia2 leaderboard scores.
 
 The local canonical data now combines each original question and its two authored
 continuations in `data/tau2/domains/gaia2/tasks.json`, retaining the 800 original
-task IDs. Each private `scenario.stages` entry holds the request, event index,
+task IDs. The additional `mind_change` and `repetition` categories each contain
+100 tasks that rewrite one request while preserving the original final objective,
+reference execution and scoring. See [request variant authoring](gaia2-variants.md).
+Each private `scenario.stages` entry holds the request, event index,
 evidence, outcome checks and criteria; operations remain in `scenario.events`.
 Generation attempts, review logs and acceptance fingerprints are archived outside
 the domain. Runtime-required resource and task integrity pins remain.
@@ -91,8 +96,11 @@ tau2 check-data
 Import converts the five configurations deterministically, preserves source IDs,
 deduplicates application snapshots, validates typed arguments and dependencies,
 and publishes a separate English registry extension through the language factory.
-`base` contains all 800 tasks; `search`, `execution`, `ambiguity`, `adaptability`
-and `time` contain 160 each. `mini` and `demo` are not counted again. The original
+An original import's `base` contains all 800 tasks; `search`, `execution`,
+`ambiguity`, `adaptability` and `time` contain 160 each. After variant authoring
+and merge, `base` contains 1,000 tasks and `mind_change` and `repetition` contain
+100 each; the original category membership is preserved. `mini` and `demo` are
+not added to the core population. The original
 Parquet files and released τ language packs and benchmark manifests remain intact.
 
 Reference verification invokes the same application operations as live tools,

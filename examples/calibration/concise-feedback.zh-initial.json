@@ -1,0 +1,28 @@
+{
+  "calibration": {
+    "id": "zh-feedback-user-initial-v1",
+    "version": "tau-feedback-calibration/1",
+    "length_rule": "nfc_nonwhitespace/1",
+    "reviewed": true,
+    "provenance": "Single-user approval of the initial Chinese 10 + 20N budget after reviewing illustrative examples. This approval covers budget selection only; corpus calibration, independent annotation and held-out listening validation remain pending. See selection in this file.",
+    "review_sha256": "46d91195aad6df4c116d3e40f07215f19341ad7679c6b7eb9e985e8c1a49df33",
+    "languages": {
+      "zh": {
+        "base": 10,
+        "per_nugget": 20,
+        "optional_cap": 0.25
+      }
+    }
+  },
+  "selection": {
+    "kind": "user_selected_initial_budget",
+    "language": "zh",
+    "user_feedback": "我感觉现在的设置还可以，现在设的10+20N还不错，看了这几题的结果。",
+    "basis": "User reviewed illustrative Chinese feedback examples and selected the 10 + 20N preset.",
+    "base": 10,
+    "per_nugget": 20,
+    "optional_cap": 0.25,
+    "optional_cap_basis": "Retained from the existing scoring rule; not newly tuned by this selection.",
+    "validation_status": "Preliminary parameter choice; no 40–60-window annotation, corpus fit or held-out listening validation completed."
+  }
+}

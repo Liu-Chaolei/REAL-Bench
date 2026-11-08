@@ -383,16 +383,24 @@ class Gaia2ExecutionAdapter:
             expected = stage.criteria.get("communicate_info") or []
             if not expected:
                 continue
+            stage_replies = [
+                r
+                for r in evidence.user_inputs
+                if r.role == "assistant_context" and r.stage == stage.stage
+            ]
+            missing_transcript = any(r.unavailable_reason for r in stage_replies)
             messages = [
                 r.text
-                for r in evidence.user_inputs
-                if r.role == "assistant_context"
-                and r.stage == stage.stage
-                and r.complete
+                for r in stage_replies
+                if r.complete and not r.unavailable_reason and r.text
             ]
             for fact in expected:
                 if not messages:
-                    passed, reason = False, "required_answer_not_delivered"
+                    passed, reason = (
+                        (None, "delivered_answer_transcript_unavailable")
+                        if missing_transcript
+                        else (False, "required_answer_not_delivered")
+                    )
                 else:
                     try:
                         row = {
@@ -412,6 +420,11 @@ class Gaia2ExecutionAdapter:
                             Gaia2ExecutionAdapter.user(evidence),
                         )
                         reason = "native_are_answer_checker"
+                        if passed is False and missing_transcript:
+                            passed, reason = (
+                                None,
+                                "delivered_answer_transcript_unavailable",
+                            )
                     except Exception as exc:
                         passed, reason = None, type(exc).__name__
                 units.append({"stage": stage.stage, "passed": passed, "reason": reason})

@@ -15,6 +15,7 @@ from tau2.config import (
     DEFAULT_SEMANTIC_COMMUNICATE_MODEL,
     DEFAULT_SEMANTIC_COMMUNICATE_MODEL_ARGS,
 )
+from tau2.diagnostics.conciseness.models import FeedbackConfig
 from tau2.diagnostics.intent.io import digest
 
 
@@ -51,9 +52,9 @@ class MetricsConfig(BaseModel):
     """One frozen diagnostic profile, separate from the evaluated model."""
 
     model_config = ConfigDict(extra="forbid")
-    measures: list[Literal["intent", "execution", "voice"]] = Field(
-        default_factory=lambda: ["intent", "execution", "voice"]
-    )
+    measures: list[
+        Literal["intent", "execution", "voice", "interaction", "conciseness"]
+    ] = Field(default_factory=lambda: ["intent", "execution", "voice"])
     auto_score: bool = True
     concurrency: int = Field(default=DEFAULT_DIAGNOSTIC_CONCURRENCY, ge=1)
     max_requests: int = Field(default=DEFAULT_DIAGNOSTIC_MAX_REQUESTS, ge=1)
@@ -61,12 +62,31 @@ class MetricsConfig(BaseModel):
     max_characters: int = Field(default=DEFAULT_DIAGNOSTIC_MAX_CHARACTERS, ge=1)
     model: ModelProfile = Field(default_factory=ModelProfile)
     models: dict[
-        Literal["gt", "prediction", "evaluation", "execution"], ModelProfile
+        Literal[
+            "gt",
+            "prediction",
+            "evaluation",
+            "execution",
+            "interaction",
+            "feedback_nuggets",
+            "feedback_alignment",
+        ],
+        ModelProfile,
     ] = Field(default_factory=dict)
+    conciseness: FeedbackConfig = Field(default_factory=FeedbackConfig)
 
     @classmethod
     def load(cls, path):
-        return cls.model_validate(yaml.safe_load(Path(path).read_text()))
+        path = Path(path)
+        value = yaml.safe_load(path.read_text())
+        feedback = value.get("conciseness", {})
+        if isinstance(feedback.get("calibration"), str):
+            import json
+
+            calibration_path = path.parent / feedback["calibration"]
+            data = json.loads(calibration_path.read_text())
+            feedback["calibration"] = data.get("calibration", data)
+        return cls.model_validate(value)
 
     def profile(self, role):
         return self.models.get(role, self.model)

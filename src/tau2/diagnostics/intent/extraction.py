@@ -75,6 +75,7 @@ def extraction_schema(schema: dict[str, Any]) -> dict[str, Any]:
                     "additionalProperties": False,
                     "properties": {
                         "path": {"type": "string"},
+                        "source_id": {"type": "string", "minLength": 1},
                         "quote": {"type": "string", "minLength": 1},
                     },
                     "required": ["path", "quote"],
@@ -162,7 +163,18 @@ async def extract(
         def check(value: dict[str, Any]) -> None:
             validate_references(value["intent"], profile)
             validate_intent(value["intent"], validation)
-            validate_annotations(value, record.text or "")
+            if stage == "prediction" and record.context.get("require_goal_sources"):
+                from tau2.diagnostics.intent.repetition import validate_goal_evidence
+
+                # The output envelope is not part of business JSON pointers.
+                for item in value.get("evidence", []):
+                    if item["path"].startswith("/intent/"):
+                        item["path"] = item["path"][len("/intent") :]
+                validate_goal_evidence(
+                    value["intent"], value.get("evidence", []), record.text or ""
+                )
+            else:
+                validate_annotations(value, record.text or "")
 
         value, raw = await generate_json(
             model,
@@ -185,6 +197,7 @@ async def extract(
         return result | {
             "status": "error",
             "reason": type(exc).__name__,
+            "error_detail": str(exc) if hasattr(exc, "responses") else None,
             "configuration_error": getattr(exc, "configuration_error", None),
             "raw_responses": getattr(exc, "responses", []),
         }

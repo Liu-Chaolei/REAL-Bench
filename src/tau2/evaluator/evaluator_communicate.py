@@ -246,6 +246,9 @@ class FullDuplexCommunicateEvaluator(EvaluatorBase[Tick]):
     @classmethod
     def ticks_to_message_history(cls, ticks: list[Tick]) -> list[AssistantMessage]:
         """Use the shared agent_messages transcript view."""
+        from tau2.utils.transcript.live import require_live_alignment
+
+        require_live_alignment(ticks)
         return agent_messages(ticks)
 
     @classmethod

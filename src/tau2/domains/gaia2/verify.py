@@ -11,6 +11,64 @@ from tau2.data_model.tasks import Task
 from tau2.domains.gaia2.utils import read_snapshot
 
 
+def population_errors(tasks, splits, manifest):
+    """Validate either the historical core or the complete seven-category release."""
+    from collections import Counter
+
+    expected = dict.fromkeys(
+        ("search", "execution", "ambiguity", "adaptability", "time"), 160
+    )
+    version = manifest.get("population_version", "gaia2-core-v1")
+    if version == "gaia2-variants-v1":
+        expected.update(mind_change=100, repetition=100)
+    elif version != "gaia2-core-v1":
+        return [f"Unknown Gaia2 population version: {version}"]
+    identifiers = [task.id for task in tasks]
+    errors = []
+    if len(tasks) != sum(expected.values()) or len(set(identifiers)) != len(tasks):
+        errors.append(f"Expected exactly {sum(expected.values())} unique tasks")
+    if Counter(task.scenario.category for task in tasks) != expected:
+        errors.append("Task categories differ from the versioned population")
+    if set(splits) != {"base", *expected}:
+        errors.append("Task splits differ from the versioned categories")
+    if len(splits.get("base", [])) != len(tasks) or set(splits.get("base", [])) != set(
+        identifiers
+    ):
+        errors.append("Base split differs from the imported population")
+    for category, count in expected.items():
+        selected = splits.get(category, [])
+        actual = {task.id for task in tasks if task.scenario.category == category}
+        if len(selected) != count or set(selected) != actual:
+            errors.append(f"Category split differs from tasks: {category}")
+    if (
+        manifest.get("tasks") != sum(expected.values())
+        or manifest.get("categories") != expected
+    ):
+        errors.append("Manifest counts differ from the versioned population")
+    if version == "gaia2-variants-v1":
+        original = {
+            task.id
+            for task in tasks
+            if task.scenario.category not in {"mind_change", "repetition"}
+        }
+        sources = []
+        for task in tasks:
+            if task.scenario.category not in {"mind_change", "repetition"}:
+                continue
+            suffix = f"__{task.scenario.category}_v1"
+            source = task.id.removesuffix(suffix)
+            if (
+                not task.id.endswith(suffix)
+                or source not in original
+                or task.scenario.source_id != source
+            ):
+                errors.append(f"Variant has an invalid source identity: {task.id}")
+            sources.append(source)
+        if len(set(sources)) != 200:
+            errors.append("Variants must use 200 different original tasks")
+    return errors
+
+
 def _check_reference(task_payload, root, assets, observer_factory=None):
     from tau2.data_model.message import ToolCall
     from tau2.domains.gaia2.environment import get_environment
@@ -172,11 +230,7 @@ def verify_dataset(root: Path, *, reference=False, workers=4, seal=False) -> dic
     manifest = json.loads((root / "manifest.json").read_text())
     tasks = get_tasks(root=root)
     splits = get_tasks_split(root=root)
-    errors = []
-    if len(tasks) != 800 or len({t.id for t in tasks}) != 800:
-        errors.append("Expected exactly 800 unique core tasks")
-    if set(splits["base"]) != {t.id for t in tasks}:
-        errors.append("Base split differs from the imported population")
+    errors = population_errors(tasks, splits, manifest)
     if (
         hashlib.sha256((root / "tasks.json").read_bytes()).hexdigest()
         != manifest["tasks_sha256"]
@@ -239,7 +293,7 @@ def verify_dataset(root: Path, *, reference=False, workers=4, seal=False) -> dic
     }
     (root / "verification.json").write_text(json.dumps(result, indent=2) + "\n")
     if seal:
-        if not result["valid"] or not reference or len(references) != 800:
+        if not result["valid"] or not reference or len(references) != len(tasks):
             raise ValueError(
                 "Only complete reference/replay verification can seal task data"
             )

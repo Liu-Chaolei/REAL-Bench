@@ -2,7 +2,8 @@
 
 The optional diagnostics suite reports whole-call intent fidelity, four execution
 scores and eight waveform interaction measurements alongside the ordinary task
-reward. The execution adapter covers the current 800 Gaia2 tasks and their three
+reward. The execution adapter covers the Gaia2 tasks, including the 200 request
+variants in the 1,000-task population, and their three
 requests. Agent implementations share the same environment and playback evidence;
 only backend-input observation needs an Agent-specific integration.
 
@@ -72,6 +73,63 @@ GT and prediction extraction are independent, and each intent is judged against
 the opposite raw text. The output contains Precision, Recall, F1, exact-complete
 match, directional item explanations, micro/macro summaries and coverage.
 
+### Duplicate delegations (intent v2)
+
+User extraction merges repeated emphasis while retaining explicitly requested
+repetitions. Backend extraction retains independently issued goals even when
+their business content is identical. Restated `final_asr`/`objective` fields,
+history and supplementary updates do not automatically add an execution request.
+Every backend goal, including conditional goals, carries external
+`evidence[{path, source_id, quote}]`. These annotations do not add scoring facts.
+
+After the ordinary bidirectional checks, one additional call to the configured
+`evaluation` model inspects the complete prediction and both delivered message
+streams. It identifies equivalent independent goals, the requested occurrence
+count, excess goals and original-source evidence. Object identity, parameters,
+conditions, time anchors and dependencies are compared together. Unknown
+provenance/counts remain uncertain. No GT JSON or application state is supplied
+to this check, and prediction extraction still cannot see user-side evidence.
+
+For confirmed excess goals, matched facts whose **entire** `source_paths` belong
+to that goal become `extra`, with reason `duplicate_delegation`. Existing
+`extra`, `changed`, `ignored` and `uncertain` judgments retain their status.
+Shared entities and cross-goal/global facts keep their original judgments.
+Precision uses the final fact counts; Recall retains the original forward check;
+F1 is recomputed. No second penalty multiplier is applied. A failed or uncertain
+duplicate check leaves final Precision/F1 null while preserving content scores
+and any known Recall. Empty predictions require no duplicate model call.
+
+The intent directory additionally stores `evaluation.content.json` (base verdict)
+and `repetition.json` (duplicate groups, citations, state and requests).
+`evaluation.json` embeds their frozen records and deterministic fact adjustments,
+and scoring verifies reconstruction and hashes before accepting a result.
+`scores.json` and `tau2 view` show both content and final Precision, excess goals,
+citations and affected facts. Summaries pool final counts and report duplicate
+check coverage. Different intent versions are reported separately.
+
+Inputs, rules, model parameters and versions determine cache identity; retries
+reuse completed extraction and content checks. Each nonempty prediction normally
+adds one model request, with at most one format repair under the same budget.
+Old evaluations remain intact. Regrading requires original backend messages:
+goals merged by an older extraction cannot be recovered from its JSON alone.
+
+Run the fixed live judge acceptance cases and optionally a saved whole call:
+
+```bash
+UV_FROZEN=1 uv run python scripts/validate_intent_repetition.py \
+  --env-file /path/to/private/config.env \
+  --saved-evidence /path/to/diagnostics/evidence \
+  --duplicate-saved \
+  --output data/simulations/intent-repetition-validation
+```
+
+This command calls grading models only and never runs the evaluated Agent or
+business tools. It keeps evidence copies and semantic acceptance results in the
+specified directory. Programmatic frozen-verdict tests remain key-free.
+`--duplicate-saved` grades a separate copy with the last accepted prompt repeated
+under a new task/session; it never alters the collected source. `--case NAME`
+selects individual acceptance cases for recovery or inspection.
+
 Unreleased requests are excluded from intent and appear in stage coverage. A
 proven empty backend submission gives F1=0 for a nonempty request. No backend
 boundary is `not_applicable`; missing or unconfirmed messages are `unavailable`.
@@ -129,7 +187,9 @@ and model ability scores are separate.
 
 Source revisions, licenses and upstream file hashes are shipped in
 `tau2/diagnostics/SOURCE.json`. The independent metric versions are
-`tau-real-intent/1`, `tau-real-execution/1`, and `tau-real-voice/1`.
+`tau-real-intent/2`, `tau-real-execution/1`, and `tau-real-voice/1`.
+Duplicate delegation checking is a τ extension (`tau-intent-repetition/1`);
+the pinned original REAL source provenance remains in `SOURCE.json`.
 
 Implementation test results and the real frontend authentication limitation are
 recorded in [validation](real-metrics-validation.md).

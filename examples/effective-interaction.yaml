@@ -1,0 +1,15 @@
+# One whole-call judge request per trial. Use on saved runs with tau2 metrics run.
+measures: [interaction]
+auto_score: false
+concurrency: 1
+max_requests: 1
+timeout_seconds: 120
+max_characters: 200000
+# Uses the existing diagnostic model default unless overridden here.
+# models:
+#   interaction:
+#     model: openai/your-judge
+#     api_base: https://your-provider.example/v1
+#     api_key_env: DIAGNOSTIC_API_KEY
+#     args:
+#       reasoning_effort: low

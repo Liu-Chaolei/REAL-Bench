@@ -133,8 +133,10 @@ Each domain specifies:
 
 **Available domains**: `mock` · `airline` · `retail` · `telecom` · `banking_knowledge` · `intake` · `gaia2`
 
-[Gaia2](docs/gaia2.md) imports 800 personal-assistant tasks as a native domain,
-including application state and timed events. It uses the same `tau2 run`, user,
+[Gaia2](docs/gaia2.md) imports 800 personal-assistant tasks as a native domain and
+adds 200 [request variants](docs/gaia2-variants.md) for within-utterance changes of
+mind and repeated intentions, for 1,000 tasks including application state and timed
+events. It uses the same `tau2 run`, user,
 voice and reward pipeline. Install the `gaia2` extra and verify the dataset before
 running; these adapted τ scores are separate from the original Gaia2 leaderboard.
 
@@ -221,7 +223,7 @@ Results are saved to `data/simulations/`. Use `tau2 view` to browse them.
 | [Domains](src/tau2/domains/README.md) | Domain structure, data format, and available domains |
 | [Orchestrator & Communication Modes](src/tau2/orchestrator/README.md) | Half-duplex and full-duplex orchestration |
 | [Task Schema & Evaluation](docs/evaluation.md) | What `evaluation_criteria.actions` means, how `reward_basis` gates the reward, and how to inspect action correctness |
-| [Gaia2](docs/gaia2.md) | Import, verify and run 800 Gaia2 tasks through the shared text and voice pipeline |
+| [Gaia2](docs/gaia2.md) | Import 800 core tasks and run the 1,000-task population including request variants through the shared text and voice pipeline |
 
 ### Languages and judges
 

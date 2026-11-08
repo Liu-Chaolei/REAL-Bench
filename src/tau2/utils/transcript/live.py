@@ -18,7 +18,7 @@ from tau2.data_model.transcript import (
     UtteranceGroup,
 )
 
-LIVE_SEGMENT_VERSION = "live-tick-padding-v3"
+LIVE_SEGMENT_VERSION = "live-tick-padding-v5"
 LIVE_SILENCE_MS = 1500
 LIVE_PADDING_MS = LIVE_SILENCE_MS // 2
 
@@ -65,7 +65,7 @@ def _session_groups(
     duration = next(iter(durations))
     session_start_ms = ticks[records[0][0]].tick_id * duration * 1000
     played_alignment = any(m.alignment == "played_audio" for _, m in records)
-    version = "played-audio-asr-v1" if played_alignment else LIVE_SEGMENT_VERSION
+    version = "played-audio-asr-v3" if played_alignment else LIVE_SEGMENT_VERSION
     for index, metadata in records:
         tick = ticks[index]
         start = round(tick.tick_id * duration * 1000, 6)
@@ -203,6 +203,14 @@ def _session_groups(
             "playback_end_us": round(bounds[ordinal][1] * 1000),
             "fragments": [f.value.model_dump() for f in part],
             "caption_tick_ids": [ticks[f.index].tick_id for f in part],
+            "playback_response_ids": sorted(
+                {
+                    identity
+                    for i in range(span.start_index, span.end_index + 1)
+                    if ticks[i].agent_chunk is not None
+                    for identity in ticks[i].agent_chunk.utterance_ids or []
+                }
+            ),
         }
         groups.append(
             UtteranceGroup(
@@ -224,12 +232,43 @@ def _session_groups(
         )
     # Explicit cuts concern playback. Caller overlap alone is not proof of a cut.
     for index, _ in records:
-        if not ticks[index].agent_chunk.raw_data.get("was_truncated"):
+        tick_raw = ticks[index].agent_chunk.raw_data
+        cancellations = tick_raw.get("playback_cancellations")
+        if cancellations is not None:
+            # New Qwen recordings distinguish no-op clears from actual cuts and
+            # identify the cancelled response. A new reply can play in the very
+            # same tick; its audio must not inherit the old response's cut flag.
+            for event in cancellations:
+                if not event.get("interrupted"):
+                    continue
+                candidates = [
+                    g
+                    for g in groups
+                    if g.start_index <= index
+                    and event["response_id"]
+                    in g.chunks[0].raw_data["live_segment"]["playback_response_ids"]
+                ]
+                if not candidates:
+                    continue
+                raw = candidates[-1].chunks[0].raw_data
+                raw["was_truncated"] = True
+                raw["live_segment"].setdefault("truncation_tick_ids", []).append(
+                    ticks[index].tick_id
+                )
+            continue
+        if not tick_raw.get("was_truncated"):
             continue
         started = [g for g in groups if g.start_index <= index]
         if not started:
             continue
         group = started[-1]
+        # A clear/cancel notification may arrive when the caller starts a new
+        # turn, long after the previous reply finished. It is not evidence that
+        # the previous reply was cut. Attribute a cut only during its recorded
+        # speech or in the immediately following tick (the buffer drain tick).
+        # Use speech bounds, not padded clip bounds or caption-arrival times.
+        if index > group.end_index + 1:
+            continue
         raw = group.chunks[0].raw_data
         if len(started) > 1 and started[-2].start_index == group.start_index:
             for g in started[-2:]:

@@ -493,6 +493,19 @@ class ConsoleDisplay:
             for name, result in (
                 diagnostics.get("summary", {}).get("measures", {}).items()
             ):
+                if name == "interaction":
+                    rate = result.get("effective_interaction_rate")
+                    coverage = result.get("judgment_coverage")
+                    counts = result.get("counts", {})
+                    rate_text = f"{rate:.1%}" if rate is not None else "N/A"
+                    coverage_text = f"{coverage:.1%}" if coverage is not None else "N/A"
+                    sim_info.append(
+                        f"  interaction: {rate_text} ({result.get('status')}) "
+                        f"useful/unhelpful/uncertain="
+                        f"{counts.get('useful', 0)}/{counts.get('unhelpful', 0)}/"
+                        f"{counts.get('uncertain', 0)}; coverage={coverage_text}\n"
+                    )
+                    continue
                 value = (
                     result.get("f1")
                     if name == "intent"
@@ -501,6 +514,43 @@ class ConsoleDisplay:
                     else result.get("status")
                 )
                 sim_info.append(f"  {name}: {value} ({result.get('status')})\n")
+                if name == "conciseness":
+                    trial = result.get("trial", {})
+                    sim_info.append(
+                        f"    coverage={trial.get('required_coverage')} "
+                        f"efficiency={trial.get('length_efficiency')} "
+                        f"score={trial.get('feedback_score')} "
+                        f"windows={trial.get('scored_windows')}/{trial.get('delivered_windows')} "
+                        f"material errors={trial.get('material_error_windows')}\n"
+                    )
+                if name == "intent" and "repetition" in result:
+                    repetition = result["repetition"]
+                    sim_info.append(
+                        f"    Content precision: {result['content_scores'].get('precision')}; "
+                        f"final P/R/F1: {result.get('precision')}/"
+                        f"{result.get('recall')}/{result.get('f1')}\n"
+                        f"    Duplicate delegation check: {repetition['status']}; "
+                        f"extra goals: {repetition['extra_goal_count']}; "
+                        f"checked: {repetition['checked_goal_count']}/"
+                        f"{repetition['total_goal_count']}\n"
+                    )
+                    for group in repetition.get("groups", []):
+                        sim_info.append(
+                            f"      Goals: {group['goal_paths']}; requested: "
+                            f"{group['allowed_count']}; extra: {group['extra_goal_paths']}\n"
+                            f"      {group['reason']}\n"
+                        )
+                        for citation in group["evidence"]:
+                            sim_info.append(
+                                f"        {citation['side']} {citation['source_id']}: {citation['quote']}\n"
+                            )
+                    for adjustment in repetition.get("adjustments", []):
+                        sim_info.append(
+                            f"      {adjustment['item_id']} ({adjustment['goal_path']}): "
+                            f"{adjustment['original_status']} -> {adjustment['final_status']}\n"
+                        )
+                    if repetition.get("reason"):
+                        sim_info.append(f"    Check reason: {repetition['reason']}\n")
             if diagnostics.get("directory"):
                 sim_info.append(
                     "  Evidence and score details: " + diagnostics["directory"] + "\n"

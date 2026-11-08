@@ -13,6 +13,7 @@ from tau2.voice.audio_native.async_loop import BackgroundAsyncLoop
 from tau2.voice.audio_native.audio_converter import StreamingTelephonyConverter
 from tau2.voice.audio_native.qwen_agent.provider import QwenAgentProvider
 from tau2.voice.audio_native.qwen_agent.transcription import PlayedAudioTranscriber
+from tau2.voice.audio_native.tick_result import PlaybackCancellation
 
 
 class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
@@ -155,6 +156,7 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
             return {"status": "error"}
 
     async def _execute_tick(self, user_audio, tick_number, result, tick_start):
+        result.playback_cancellations = []
         pcm = self._input_converter.convert_input(user_audio)
 
         async def send_audio(chunk):
@@ -213,7 +215,55 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
                 if event.get("response_id")
                 else set(self._received)
             )
-            ids -= self._terminal
+            completed = {
+                response_id
+                for response_id in ids
+                if response_id in self._terminal
+                or (
+                    response_id in self._done
+                    and self._played[response_id] >= self._received[response_id]
+                )
+            }
+            ids -= completed
+            if result.playback_cancellations is None:
+                result.playback_cancellations = []
+            for response_id in sorted(completed):
+                result.playback_cancellations.append(
+                    PlaybackCancellation(
+                        response_id=response_id,
+                        status="already_completed",
+                        received_bytes=self._received[response_id],
+                        played_bytes=self._played[response_id],
+                    )
+                )
+            if not ids and not completed:
+                result.playback_cancellations.append(
+                    PlaybackCancellation(
+                        response_id=None,
+                        status="no_pending_output",
+                    )
+                )
+            interrupted = False
+            for response_id in sorted(ids):
+                discarded = sum(
+                    len(data)
+                    for data, item in result.agent_audio_chunks
+                    if item == response_id
+                )
+                active = self._received[response_id] > self._played[response_id] or (
+                    self._received[response_id] > 0 and response_id not in self._done
+                )
+                interrupted |= active
+                result.playback_cancellations.append(
+                    PlaybackCancellation(
+                        response_id=response_id,
+                        status="cancelled",
+                        interrupted=active,
+                        received_bytes=self._received[response_id],
+                        played_bytes=self._played[response_id],
+                        discarded_bytes=discarded,
+                    )
+                )
             self._cancelled.update(ids)
             result.truncated_audio_bytes += sum(
                 len(data) for data, item in result.agent_audio_chunks if item in ids
@@ -223,11 +273,16 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
                 for data, item in result.agent_audio_chunks
                 if item not in ids
             ]
-            result.was_truncated = True
-            for converter in self._converters.values():
-                converter.reset()
+            result.was_truncated |= interrupted
+            # Filtering above is response-specific. The shared buffer must not
+            # discard the remainder of an unrelated new response in this tick.
+            result.audio_truncation_applied = True
+            if interrupted:
+                for converter in self._converters.values():
+                    converter.reset()
             # Do not set skip_item_id: it would also discard a new reply this tick.
-            result.vad_events.append("interrupted")
+            if interrupted:
+                result.vad_events.append("interrupted")
         elif kind == "tool_call":
             call_id = event["call_id"]
             if call_id in self._seen_calls:

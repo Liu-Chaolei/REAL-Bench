@@ -6,7 +6,7 @@
 - literal.value=null 仅表示明确要求空值。真实歧义保留已知部分，使用 undetermined 和 ambiguities。未来对象/事件提供的变量使用 entity_field 或 trigger_field，不预填隐藏值，不将未来变量当作初始歧义。
 - 业务名称开放：action、entity_type、参数角色、关系 type、输出 role、限制 kind/name、谓词和语义属性均须准确表达意义，不受动作或业务词表限制。不得使用 handle、process_request 等笼统动作掩盖具体操作。不同名称可以表达相同意义；固定结构标签、比较符和布尔逻辑必须遵守 schema。
 - entities 绑定共享的对象、集合或输出；内部 ID 自由命名，引用必须正确，不预填应用 ID。目标通过 outputs 的 entity_ref/role 绑定所需输出，创建、查询、复制、计算等均适用；不要强行为每个目标添加输出。对象类型在实体声明处保存，不再复制为输出类型参数。实体被查询到并不表示本请求创建了它。
-- 同一业务要求只表达一次；重复提及或 final_asr 与 objective 的重述不增加实体、目标或参数。不同对象、角色、时间、分支，以及明确要求执行多次的操作必须保留。同一目标中，同一参数角色只填写一次，不用同义参数名重复记录。
+- GT 合并同一业务要求的重复表达，但保留明确要求的执行次数。Prediction 对后台独立下达的每次操作分别保留目标，不因业务内容相同而跨委派融合；同一任务的 final_asr 与 objective 重述、历史引用及补充修改不自动增加独立执行目标。两侧均保留不同对象、角色、时间、分支与明确的再次执行要求。同一目标中，同一参数角色只填写一次，不用同义参数名重复记录。
 - 同一对象或集合只绑定一次；已在 entities 中声明时，goal.target 使用 entity_ref；仅用内联 selection 表达时，不再额外声明相同实体。修复重复只整理表示，保留业务值，并更新必要引用及歧义路径。
 - 操作参数放 parameters，对象筛选放 selection.condition，规则共同前提放 rule.condition，分支目标的 when 只补额外前提；constraints 只保存这些位置尚未表达的独立限制。
 - 普通起止时刻放所属目标的 parameters，延迟或期限放 time_constraints，单纯跨目标先后关系放 relations。同一时间要求只放一处；“完成 A 后五分钟执行 B”用以 A 完成为基准的时间约束，不再重复添加 A 在 B 之前的关系。
@@ -20,6 +20,6 @@
 - 明确日内时刻统一为 24 小时 HH:MM 或 HH:MM:SS，保留输入精度。absolute_time.value 使用 ISO 日期或日期时间；只保留明确时区/偏移，不补秒或时区。相对日期保留表达及锚点，不根据主机时钟、隐藏事件或未提供场景时间变成绝对日期。
 - 消息 content 保存希望传达的内容，邮件中希望安排活动不自动增加创建活动目标。未要求标题、逐字正文、截止时间或后续通知时不添加。
 - 只记录用户要求的操作及其参数，不执行任务或预先计算执行结果。
-- evidence 可选，path 保存字段定位信息，不做路径校验；quote 为本次文本连续原文片段。不要求每个字段都有证据，原文依据不放在业务 intent 或 ambiguities 中。
+- evidence 不进入业务计分。普通输入中证据可选；整通 Prediction 的 context.require_goal_sources=true 时，每个操作目标（含规则分支目标）必须有对应 evidence，path 指向目标本身，source_id 指向本次实际后台消息，quote 引用该消息内容中的连续原文片段；一个目标可由多条消息共同支持。不得从另一侧补入依据。不要求每个字段都有证据，原文依据不放在业务 intent 或 ambiguities 中。
 
 输出成功仅表示通过格式、引用及轻量结构检查，最多进行一次格式修复。GT 仍标记 generated_draft，semantic_coverage=not_checked，不运行额外语义审核或原文覆盖审核 agent。全部800场景的语义覆盖尚未验证。

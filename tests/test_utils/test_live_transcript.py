@@ -316,6 +316,92 @@ def test_explicit_truncation_follows_playback_not_caption_clock(cut_tick):
     ]
 
 
+@pytest.mark.parametrize("played_alignment", [False, True])
+def test_later_clear_does_not_mark_completed_reply_as_interrupted(played_alignment):
+    ticks = timeline(
+        {
+            8: [fragment("Finished reply.", 1000, 1800, "a")],
+            25: [fragment("Next reply.", 4200, 5000, "b")],
+        },
+        [*range(5, 10), *range(21, 26)],
+        caller=[18],
+    )
+    if played_alignment:
+        for tick in ticks:
+            tick.agent_chunk.raw_data["live_transcript"].update(
+                origin="recorded_audio", alignment="played_audio"
+            )
+    ticks[18].agent_chunk.raw_data.update(
+        was_truncated=True, truncated_audio_bytes=0, vad_events=["interrupted"]
+    )
+    before = copy.deepcopy(ticks)
+    groups = utterance_groups(ticks, "agent")
+    assert [g.chunks[0].content for g in groups] == ["Finished reply.", "Next reply."]
+    assert not any(g.chunks[0].raw_data.get("was_truncated") for g in groups)
+    assert not any(metadata(g.chunks[0]).get("truncation_tick_ids") for g in groups)
+    assert [turn.interrupted for turn in build_agent_turns(simulation(ticks))] == [
+        False,
+        False,
+    ]
+    assert ticks == before
+
+
+def test_old_clear_after_last_reply_does_not_poison_the_final_group():
+    ticks = timeline({8: [fragment("Done.", 1000, 1800)]}, range(5, 10), caller=[28])
+    ticks[28].agent_chunk.raw_data.update(was_truncated=True, truncated_audio_bytes=0)
+    assert not agent_messages(ticks)[0].raw_data.get("was_truncated")
+
+
+def test_response_scoped_cut_does_not_mark_new_reply_in_same_tick():
+    ticks = timeline(
+        {
+            8: [fragment("Old reply", 1000, 1800)],
+            25: [fragment("New reply", 4200, 5000)],
+        },
+        [*range(5, 10), *range(21, 26)],
+    )
+    for i, tick in enumerate(ticks):
+        tick.agent_chunk.utterance_ids = (
+            ["old"] if 5 <= i < 10 else ["new"] if 21 <= i < 26 else None
+        )
+        tick.agent_chunk.raw_data["playback_cancellations"] = []
+    ticks[21].agent_chunk.raw_data.update(
+        was_truncated=True,
+        playback_cancellations=[
+            {"response_id": "old", "status": "cancelled", "interrupted": True}
+        ],
+    )
+    messages = agent_messages(ticks)
+    assert messages[0].raw_data["was_truncated"] is True
+    assert not messages[1].raw_data.get("was_truncated")
+
+
+def test_explicit_noop_clear_overrides_legacy_boolean():
+    ticks = timeline({8: [fragment("Done.", 1000, 1800)]}, range(5, 10))
+    ticks[9].agent_chunk.raw_data.update(
+        was_truncated=True,
+        playback_cancellations=[
+            {"response_id": "old", "status": "already_completed", "interrupted": False}
+        ],
+    )
+    assert not agent_messages(ticks)[0].raw_data.get("was_truncated")
+
+
+@pytest.mark.parametrize("kind", ["communication", "nl_assertions"])
+def test_outcome_text_judges_reject_untranscribed_playback(kind):
+    from tau2.evaluator.evaluator_communicate import FullDuplexCommunicateEvaluator
+    from tau2.evaluator.evaluator_nl_assertions import FullDuplexNLAssertionsEvaluator
+
+    ticks = timeline({}, [5, 6])
+    evaluator = (
+        FullDuplexCommunicateEvaluator
+        if kind == "communication"
+        else FullDuplexNLAssertionsEvaluator
+    )
+    with pytest.raises(ValueError, match="Unresolved Live"):
+        evaluator.ticks_to_message_history(ticks)
+
+
 def test_invalid_activity_interval_rejected():
     ticks = timeline({}, [])
     ticks[0].agent_chunk.raw_data["live_transcript"]["speech_intervals_ms"] = [(0, 201)]

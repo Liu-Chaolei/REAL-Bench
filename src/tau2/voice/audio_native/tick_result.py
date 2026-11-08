@@ -8,7 +8,7 @@ These classes are provider-agnostic and used by DiscreteTimeAudioNativeAgent
 regardless of the underlying provider (OpenAI, Gemini, etc.).
 """
 
-from typing import Any, List, Optional, Tuple
+from typing import Any, List, Literal, Optional, Tuple
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -59,6 +59,17 @@ class UtteranceTranscript(BaseModel):
             start_char=self.transcript_chars_shown,
         )
         return text
+
+
+class PlaybackCancellation(BaseModel):
+    """Response-scoped playback evidence; a clear is not necessarily a cut."""
+
+    response_id: str | None
+    status: Literal["cancelled", "already_completed", "no_pending_output"]
+    interrupted: bool = False
+    received_bytes: int = Field(default=0, ge=0)
+    played_bytes: int = Field(default=0, ge=0)
+    discarded_bytes: int = Field(default=0, ge=0)
 
 
 class TickResult(BaseModel):
@@ -156,6 +167,11 @@ class TickResult(BaseModel):
     )
     truncated_audio_bytes: int = Field(
         default=0, description="Bytes of agent audio discarded due to interruption"
+    )
+    playback_cancellations: List[PlaybackCancellation] | None = None
+    audio_truncation_applied: bool = Field(
+        default=False,
+        description="Adapter already removed cancelled responses; preserve other audio.",
     )
     skip_item_id: Optional[str] = Field(
         default=None,
@@ -419,10 +435,11 @@ def buffer_excess_audio(
     for the caller to buffer until the next tick.
 
     When ``result.was_truncated`` is True the excess is discarded instead
-    (byte count added to ``result.truncated_audio_bytes``) and an empty list
-    is returned.
+    (byte count added to ``result.truncated_audio_bytes``), unless the adapter
+    already applied response-scoped cancellation (``audio_truncation_applied``).
+    In that case remaining audio belongs to unaffected responses and is buffered.
     """
-    if result.was_truncated:
+    if result.was_truncated and not result.audio_truncation_applied:
         total_bytes = 0
         keep_chunks: List[Tuple[bytes, Optional[str]]] = []
         discarded_bytes = 0

@@ -169,6 +169,112 @@ def test_playback_end_waits_for_buffer_to_drain(system):
     assert sum(e.get("event") == "playback.ended" for e in bridge.sent) == 1
 
 
+def test_clear_without_pending_output_is_not_a_truncation(system):
+    adapter, bridge, _ = system
+    bridge.events.append({"type": "clear"})
+    result = adapter.run_tick(b"\xff" * 160)
+    assert not result.was_truncated
+    assert result.truncated_audio_bytes == 0
+
+
+@pytest.mark.parametrize("new_audio_first", [False, True])
+def test_cancelling_old_response_keeps_new_response_backlog(system, new_audio_first):
+    adapter, bridge, _ = system
+    bridge.events.append(audio("old", milliseconds=100))
+    adapter.run_tick(b"\xff" * 160)
+    events = [{"type": "clear", "response_id": "old"}, audio("new", milliseconds=100)]
+    bridge.events.extend(reversed(events) if new_audio_first else events)
+    cut = adapter.run_tick(b"\xff" * 160)
+    assert cut.was_truncated
+    assert cut.truncated_audio_bytes > 0
+    assert adapter._buffered_agent_audio
+    assert all(response == "new" for _, response in adapter._buffered_agent_audio)
+    assert (
+        adapter._played["old"] + cut.truncated_audio_bytes == adapter._received["old"]
+    )
+    bridge.events.append({"type": "audio_done", "response_id": "new"})
+    for _ in range(8):
+        adapter.run_tick(b"\xff" * 160)
+    assert adapter._played["new"] == adapter._received["new"]
+    assert any(
+        e.get("event") == "playback.ended" and e.get("response_id") == "new"
+        for e in bridge.sent
+    )
+
+
+def test_late_clear_for_completed_response_does_not_cut_new_reply(system):
+    adapter, bridge, _ = system
+    bridge.events.extend(
+        [audio("old", milliseconds=20), {"type": "audio_done", "response_id": "old"}]
+    )
+    for _ in range(3):
+        adapter.run_tick(b"\xff" * 160)
+    assert "old" in adapter._terminal
+    bridge.events.extend(
+        [audio("new", milliseconds=100), {"type": "clear", "response_id": "old"}]
+    )
+    result = adapter.run_tick(b"\xff" * 160)
+    assert not result.was_truncated
+    assert adapter._buffered_agent_audio
+
+
+def test_playback_to_collector_preserves_completed_reply_after_idle_clear(system):
+    from types import SimpleNamespace
+
+    from tau2.data_model.diagnostics import DiagnosticEvidence
+    from tau2.data_model.message import AssistantMessage, Tick, UserMessage
+    from tau2.diagnostics.collect import delivered_inputs
+    from tau2.diagnostics.conciseness.evidence import preflight
+    from tau2.diagnostics.conciseness.models import FeedbackConfig
+    from tau2.utils.transcript.views import utterance_interrupted
+
+    adapter, bridge, observer = system
+    ticks = []
+    bridge.events.extend(
+        [audio(milliseconds=100), {"type": "audio_done", "response_id": "r"}]
+    )
+    for index in range(12):
+        if index == 8:
+            # Ordinary caller turn after completion, not an interruption.
+            bridge.events.append({"type": "clear", "response_id": "r"})
+        if index == 9:
+            observer.fragments = [
+                LiveTranscriptFragment(
+                    speaker="agent", text="Completed.", start_ms=0, end_ms=100
+                )
+            ]
+        result = adapter.run_tick(b"\xff" * 160)
+        ticks.append(
+            Tick(
+                tick_id=index,
+                timestamp="2026-11-07T00:00:00",
+                tick_duration_seconds=0.02,
+                agent_chunk=AssistantMessage(
+                    role="assistant",
+                    content=result.proportional_transcript or None,
+                    contains_speech=result.contains_speech,
+                    utterance_ids=result.item_ids or None,
+                    raw_data=result.model_dump(),
+                ),
+                user_chunk=UserMessage(
+                    role="user",
+                    content="Do the task" if index == 0 else None,
+                    contains_speech=index == 0,
+                    utterance_ids=["user"] if index == 0 else None,
+                ),
+            )
+        )
+    rows = delivered_inputs(SimpleNamespace(ticks=ticks, info={}), None)
+    (reply,) = [r for r in rows if r.role == "assistant_context"]
+    assert reply.text == "Completed."
+    assert reply.complete and reply.unavailable_reason is None
+    evidence = DiagnosticEvidence(
+        simulation_id="s", task_id="t", domain="gaia2", user_inputs=rows
+    )
+    assert preflight(evidence, FeedbackConfig())["ready_windows"] == 1
+    assert not any(utterance_interrupted([t.agent_chunk]) for t in ticks)
+
+
 def test_duplicate_business_request_is_not_replayed(system):
     adapter, bridge, _ = system
     event = {

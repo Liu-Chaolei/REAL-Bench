@@ -4,6 +4,10 @@ Implementation date: 2026-11-06. This record distinguishes implementation checks
 reference verification and real model trials. No complete real-model benchmark
 score is claimed.
 
+The 2026-11-07 intent v2 implementation, live duplicate-delegation examples and
+saved-call regrading are recorded separately in
+[duplicate delegation validation](intent-repetition-validation.md).
+
 ## Verified behavior
 
 - The REAL source baseline is commit `7e9224a80cb6a5abb5b457dd89988859c8b97234`.

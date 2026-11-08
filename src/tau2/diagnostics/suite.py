@@ -14,7 +14,11 @@ from tau2.diagnostics.model import RequestBudget, TauJsonModel
 def implementation_digest():
     """Cache identity includes every score definition and shipped resource."""
     root = Path(__file__).parent
-    files = list(root.rglob("*")) + [root.parent / "metrics/real_voice.py"]
+    files = (
+        list(root.rglob("*"))
+        + [root.parent / "metrics/real_voice.py"]
+        + list((root.parent / "utils/transcript").glob("*.py"))
+    )
     h = hashlib.sha256()
     for p in sorted(
         p
@@ -101,6 +105,16 @@ def evaluate_evidence(task, evidence, directory, config, only=None):
                 from tau2.diagnostics.voice import evaluate_voice
 
                 result = evaluate_voice(evidence, directory)
+            elif measure == "conciseness":
+                from tau2.diagnostics.conciseness.evaluator import evaluate_feedback
+
+                result = evaluate_feedback(
+                    evidence, config, directory, output / "conciseness", budget
+                )
+            elif measure == "interaction":
+                from tau2.diagnostics.interaction import evaluate_interaction
+
+                result = evaluate_interaction(evidence, config, output, budget)
             else:
                 raise ValueError("Unknown diagnostic measure: " + measure)
         except Exception as exc:
@@ -187,7 +201,16 @@ def run_saved(results_path, config, only=None, dry_run=False):
                 / "diagnostics"
                 / "evidence"
             )
-            jobs.append((run, sim, tasks[sim.task_id], directory))
+            jobs.append(
+                (
+                    run,
+                    sim,
+                    tasks[sim.task_id],
+                    directory,
+                    meta.info.environment_info.domain_name,
+                    meta.info.language,
+                )
+            )
         for task in meta.tasks:
             for trial in range(meta.info.num_trials):
                 if (task.id, trial) not in observed:
@@ -202,7 +225,7 @@ def run_saved(results_path, config, only=None, dry_run=False):
                     )
 
     def process(job):
-        run, sim, task, directory = job
+        run, sim, task, directory, domain, language = job
         row = {
             "simulation_id": sim.id,
             "task_id": sim.task_id,
@@ -212,22 +235,51 @@ def run_saved(results_path, config, only=None, dry_run=False):
             "termination_reason": sim.termination_reason.value,
             "reward": sim.reward_info.reward if sim.reward_info else None,
         }
-        if not directory.exists():
+        selected = only if only is not None else config.measures
+        if not directory.exists() and selected != ["interaction"]:
             return row | {
                 "status": "unavailable",
                 "reason": "historical_run_missing_diagnostic_evidence",
             }
         try:
-            evidence = load_evidence(directory)
+            if directory.exists():
+                evidence = load_evidence(directory)
+            else:
+                from tau2.diagnostics.interaction import conversation_evidence
+
+                evidence = conversation_evidence(sim, task, domain)
             if evidence.simulation_id != sim.id or evidence.task_id != sim.task_id:
                 raise ValueError("Evidence identity differs from trajectory")
             if dry_run:
-                return row | {"status": "planned", "measures": only or config.measures}
+                planned = row | {"status": "planned", "measures": selected}
+                if "conciseness" in selected:
+                    from tau2.diagnostics.conciseness.evidence import preflight
+
+                    planned["conciseness"] = preflight(evidence, config.conciseness)
+                if "interaction" in selected:
+                    from tau2.diagnostics.interaction import build_input
+
+                    payload = build_input(evidence)
+                    planned.update(
+                        target_utterances=len(payload["target_utterance_ids"]),
+                        interaction_input_characters=len(
+                            json.dumps(payload, ensure_ascii=False)
+                        ),
+                    )
+                return planned
             effective = config
+            if "conciseness" in selected and config.conciseness.language is None:
+                effective = config.model_copy(
+                    update={
+                        "conciseness": config.conciseness.model_copy(
+                            update={"language": language}
+                        )
+                    }
+                )
             if "model" not in config.model_fields_set and evidence.source.get(
                 "metrics_config"
             ):
-                effective = config.model_copy(
+                effective = effective.model_copy(
                     update={
                         "model": MetricsConfig.model_validate(
                             evidence.source["metrics_config"]
@@ -319,10 +371,30 @@ def summarize(rows):
             "unscored_trials": sum(not r.get("profile") for r in rows),
             "reason": "different_profiles_reported_separately",
         }
+
+    def intent_version(row):
+        result = row.get("summary", {}).get("measures", {}).get("intent", {})
+        return result.get("version", "tau-real-intent/1") if result else "unscored"
+
+    versions = {intent_version(row) for row in rows} - {"unscored"}
+    if len(versions) > 1:
+        return {
+            "version": "tau-real-diagnostics/1",
+            "total_trials": len(rows),
+            "records": rows,
+            "groups": {
+                version: summarize(
+                    [row for row in rows if intent_version(row) == version]
+                )
+                for version in sorted(versions)
+            },
+            "unscored_trials": sum(intent_version(row) == "unscored" for row in rows),
+            "reason": "different_intent_versions_reported_separately",
+        }
     intent, voice, execution, statuses = [], [], [], {}
     for row in rows:
         summary = row.get("summary", {})
-        for name in ("intent", "execution", "voice"):
+        for name in ("intent", "execution", "voice", "interaction", "conciseness"):
             result = summary.get("measures", {}).get(name)
             statuses.setdefault(name, Counter())[
                 result.get("status", "unavailable") if result else "unavailable"
@@ -340,6 +412,7 @@ def summarize(rows):
             execution.append(result)
     # Intent score_record is already deterministic; pool its directional counts.
     valid = [r for r in intent if r.get("f1") is not None]
+    repetitions = [result["repetition"] for result in intent if "repetition" in result]
 
     def fraction(direction):
         matched = sum(r[direction]["counts"]["matched"] for r in valid)
@@ -417,6 +490,7 @@ def summarize(rows):
             Counter(row.get("termination_reason", "unknown") for row in rows)
         ),
         "intent": {
+            "version": next(iter(versions)) if versions else None,
             "scored": len(valid),
             "micro": {"precision": p, "recall": r, "f1": harmonic(p, r)}
             if valid
@@ -425,6 +499,21 @@ def summarize(rows):
             "complete_match_rate": sum(x["complete_match"] for x in valid) / len(valid)
             if valid
             else None,
+            "repetition": {
+                "trials": len(repetitions),
+                "completed": sum(r["status"] == "complete" for r in repetitions),
+                "statuses": dict(Counter(r["status"] for r in repetitions)),
+                "total_goal_count": sum(r["total_goal_count"] for r in repetitions),
+                "checked_goal_count": sum(r["checked_goal_count"] for r in repetitions),
+                "extra_goal_count": sum(r["extra_goal_count"] for r in repetitions),
+                "uncertain_goal_count": sum(
+                    r["uncertain_goal_count"] for r in repetitions
+                ),
+                "coverage": sum(r["status"] == "complete" for r in repetitions)
+                / len(repetitions)
+                if repetitions
+                else None,
+            },
         },
         "real_voice": aggregate_voice(voice + [None] * (len(rows) - len(voice))),
         "execution": {
@@ -438,4 +527,12 @@ def summarize(rows):
             "note": "Compare totals only within matching applicability and coverage profiles.",
         },
     }
+    from tau2.diagnostics.interaction import summarize_interaction
+
+    report["interaction"] = summarize_interaction(
+        [row.get("summary", {}).get("measures", {}).get("interaction") for row in rows]
+    )
+    from tau2.diagnostics.conciseness.scoring import aggregate_reports
+
+    report["conciseness"] = aggregate_reports(rows)
     return report

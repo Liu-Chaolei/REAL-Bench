@@ -4,6 +4,8 @@
 
 实现包含独立证据契约、公共环境和媒体采集、可选后台观察、Gaia2 四项执行适配、八项 REAL 语音指标，以及运行后自动评分、离线重评、缓存、汇总和终端展示。新增成绩与原 τ reward 并列。
 
+意图 v2 增加重复委派检查：用户侧合并重复强调，后台侧保留独立下达的重复目标及其来源。原双向核对后，复用 evaluation 模型对完整后台意图和两侧实际原文做一次检查，区分独立重复、字段重述、补充及明确多次要求。程序将确认多余目标内原本 matched 的事实改为 extra；共享实体和跨目标事实沿用原判定，不再乘额外惩罚系数。原始内容判定、重复依据、最终判定和计分分别保留并可重建校验。不确定或失败时最终 Precision/F1 为 null，保留内容分及已知 Recall。执行与语音计分不因本扩展改变。
+
 使用方式、接口、版本和限制见 [REAL-derived diagnostics](real-metrics.md)。默认配置见 [examples/real-metrics.yaml](../examples/real-metrics.yaml)。迁移核心的源版本及文件哈希保存在 `src/tau2/diagnostics/SOURCE.json`。
 
 验证按以下顺序执行：

@@ -37,7 +37,9 @@ def ratio(counts: dict[str, int]) -> float:
 def score_direction(value: dict[str, Any], direction: str) -> dict[str, Any]:
     if value.get("status") not in {"complete", "uncertain", "error", "unavailable"}:
         raise ValueError("Invalid direction status")
-    if value.get("status") in {"complete", "uncertain"}:
+    if value.get("status") in {"complete", "uncertain"} or (
+        "repetition_status" in value and "judgments" in value
+    ):
         items = value["items"]
         if digest(items) != value["items_sha256"]:
             raise ValueError("Frozen item checksum differs")
@@ -45,7 +47,16 @@ def score_direction(value: dict[str, Any], direction: str) -> dict[str, Any]:
         if regenerated != value["rows"]:
             raise ValueError("Rows differ from validated frozen item judgments")
         uncertain = any(row["status"] == "uncertain" for row in regenerated)
-        if uncertain != (value["status"] == "uncertain"):
+        expected = next(
+            state
+            for state in ("error", "unavailable", "uncertain", "complete")
+            if state
+            in {
+                "uncertain" if uncertain else "complete",
+                value.get("repetition_status", "complete"),
+            }
+        )
+        if expected != value["status"]:
             raise ValueError("Direction status disagrees with item judgments")
     counts = direction_counts(value)
     components = {}
@@ -53,7 +64,9 @@ def score_direction(value: dict[str, Any], direction: str) -> dict[str, Any]:
         rows = [row for row in value["rows"] if row["component"] == component]
         subtotal = direction_counts({"rows": rows})
         components[component] = subtotal | {
-            "score": None if subtotal["uncertain"] else ratio(subtotal)
+            "score": None
+            if subtotal["uncertain"] or value["status"] != "complete"
+            else ratio(subtotal)
         }
     return {
         "status": value["status"],
@@ -64,6 +77,17 @@ def score_direction(value: dict[str, Any], direction: str) -> dict[str, Any]:
 
 
 def score_record(evaluation: dict[str, Any]) -> dict[str, Any]:
+    """Score frozen facts, validating duplicate adjustments by deterministic replay."""
+    if evaluation.get("version") == "tau-real-intent/2" or "repetition" in evaluation:
+        from tau2.diagnostics.intent.repetition import validate_final
+
+        if evaluation.get("version") != "tau-real-intent/2":
+            raise ValueError("Unknown or missing repetition-aware intent version")
+        validate_final(evaluation)
+        # Independently verify the immutable base, including its frozen fact rows.
+        content_scores = score_record(evaluation["content_evaluation"])
+    else:
+        content_scores = None
     if evaluation.get("method") != METHOD:
         raise ValueError(
             "Evaluation records require method=bidirectional_text; run intent evaluate with original texts"
@@ -79,7 +103,7 @@ def score_record(evaluation: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("Evaluation status disagrees with direction statuses")
     precision, recall = directions["backward"]["score"], directions["forward"]["score"]
     valid = precision is not None and recall is not None
-    return {
+    result = {
         "method": METHOD,
         "id": evaluation["id"],
         "evaluation_sha256": digest(evaluation),
@@ -91,6 +115,27 @@ def score_record(evaluation: dict[str, Any]) -> dict[str, Any]:
         "complete_match": precision == recall == 1 if valid else None,
         **directions,
     } | ({"reason": evaluation["reason"]} if evaluation.get("reason") else {})
+    if content_scores is not None:
+        record = evaluation["repetition"]
+        judgment = record.get("judgment", {})
+        result.update(
+            version=evaluation["version"],
+            content_scores=content_scores,
+            repetition={
+                "version": record["version"],
+                "status": record["status"],
+                "total_goal_count": len(record["input"]["goal_paths"]),
+                "checked_goal_count": len(judgment.get("checked_goal_paths", [])),
+                "extra_goal_count": sum(
+                    len(g["extra_goal_paths"]) for g in judgment.get("groups", [])
+                ),
+                "uncertain_goal_count": len(judgment.get("uncertain_goal_paths", [])),
+                "groups": judgment.get("groups", []),
+                "adjustments": evaluation["repetition_adjustments"],
+                "reason": record.get("reason"),
+            },
+        )
+    return result
 
 
 def score_batch(
@@ -102,6 +147,8 @@ def score_batch(
     }
     if len(profiles) > 1:
         raise ValueError("Score different profile versions in separate batches")
+    if len({row.get("version", "tau-real-intent/1") for row in evaluations}) > 1:
+        raise ValueError("Score different intent rule versions in separate batches")
     records = [score_record(row) for row in evaluations]
     valid = [row for row in records if row["f1"] is not None]
     micro = None

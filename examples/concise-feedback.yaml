@@ -1,0 +1,20 @@
+# Opt-in offline feedback evaluation with the user's initial Chinese budget.
+# Other languages remain uncalibrated; real-sample validation is still pending.
+measures: [conciseness]
+auto_score: false
+concurrency: 1
+max_requests: 64
+timeout_seconds: 120
+max_characters: 200000
+# Defaults inherit the run's communication judge. Override roles independently:
+# models:
+#   feedback_nuggets:
+#     model: openai/your-judge
+#     api_key_env: DIAGNOSTIC_API_KEY
+#   feedback_alignment:
+#     model: openai/your-judge
+#     api_key_env: DIAGNOSTIC_API_KEY
+conciseness:
+  calibration: calibration/concise-feedback.zh-initial.json
+  # language: en  # Saved runs otherwise use their recorded language.
+  evidence_max_characters: 12000

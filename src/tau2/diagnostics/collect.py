@@ -213,7 +213,15 @@ def delivered_inputs(simulation, task, index_offset=0):
                         c.content or "" for c in group.chunks if c.contains_speech
                     )
                 )
-                if not text or any(
+                raw = group.chunks[0].raw_data
+                live = raw.get("live_segment", {}) if isinstance(raw, dict) else {}
+                unavailable = live.get("audio_alignment_error")
+                # Actual recorded speech without finalized ASR is missing
+                # evidence, not silence. Keep a placeholder so downstream
+                # diagnostics cannot quietly ignore the untranscribed reply.
+                if not text and speaker == "agent":
+                    unavailable = unavailable or "missing_delivered_agent_transcript"
+                if (not text and not unavailable) or any(
                     s in text
                     for s in ("###STOP###", "###TRANSFER###", "###OUT-OF-SCOPE###")
                 ):
@@ -243,9 +251,12 @@ def delivered_inputs(simulation, task, index_offset=0):
                         stage=stage,
                         complete=not interrupted,
                         role="user" if speaker == "caller" else "assistant_context",
-                        unavailable_reason="partial_delivery_text_unverified"
-                        if interrupted and speaker == "caller" and not gold
-                        else None,
+                        unavailable_reason=unavailable
+                        or (
+                            "partial_delivery_text_unverified"
+                            if interrupted and speaker == "caller" and not gold
+                            else None
+                        ),
                     )
                 )
     else:

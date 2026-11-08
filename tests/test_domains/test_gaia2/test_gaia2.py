@@ -107,13 +107,16 @@ def test_domain_uses_standard_registry_and_all_source_ids():
         pytest.skip("Gaia2 data not imported")
     tasks = get_tasks()
     splits = get_tasks_split()
-    assert len(tasks) == 800
-    assert len(set(t.id for t in tasks)) == 800
+    expected = 1000 if "mind_change" in splits else 800
+    assert len(tasks) == expected
+    assert len(set(t.id for t in tasks)) == expected
     assert set(splits["base"]) == {t.id for t in tasks}
     assert all(
         len(splits[name]) == 160
         for name in ["search", "execution", "ambiguity", "adaptability", "time"]
     )
+    if expected == 1000:
+        assert len(splits["mind_change"]) == len(splits["repetition"]) == 100
     assert registry.get_env_constructor("gaia2")
 
 
