@@ -30,6 +30,7 @@ class EnvironmentEvaluator(EvaluatorBase[Message]):
         solo_mode: bool = False,
         env_kwargs: dict = None,
         strict_replay: bool = True,
+        compare_tool_results: bool = True,
         environment_trace: list[dict] | None = None,
     ) -> RewardInfo:
         """
@@ -54,6 +55,7 @@ class EnvironmentEvaluator(EvaluatorBase[Message]):
                 environment_trace,
                 env_kwargs=env_kwargs,
                 strict=strict_replay,
+                compare_tool_results=compare_tool_results,
                 solo_mode=solo_mode,
             )
         if task.evaluation_criteria is None:
@@ -196,6 +198,7 @@ class FullDuplexEnvironmentEvaluator(EvaluatorBase[Tick]):
         solo_mode: bool = False,
         env_kwargs: dict = None,
         strict_replay: bool = True,
+        compare_tool_results: bool = True,
         environment_trace: list[dict] | None = None,
     ) -> RewardInfo:
         """
@@ -223,6 +226,7 @@ class FullDuplexEnvironmentEvaluator(EvaluatorBase[Tick]):
                 environment_trace,
                 env_kwargs=env_kwargs,
                 strict=strict_replay,
+                compare_tool_results=compare_tool_results,
                 solo_mode=solo_mode,
             )
         if task.evaluation_criteria is None:

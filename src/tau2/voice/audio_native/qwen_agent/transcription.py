@@ -122,6 +122,13 @@ class PlayedAudioTranscriber:
             fragments.append(self.fragments.get_nowait())
         return fragments
 
+    async def flush_pending(self):
+        """Drain finalized streaming results before closing the websocket."""
+        if self.failure:
+            raise RuntimeError("Observer transcription unavailable") from self.failure
+        await asyncio.sleep(0)
+        return self.drain()
+
     def summary(self):
         """Observer finalization latency, separate from Agent playback metrics."""
         return {

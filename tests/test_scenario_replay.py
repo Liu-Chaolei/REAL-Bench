@@ -175,3 +175,40 @@ def test_wait_replay_accepts_exact_string_timestamp_but_not_missing_arrival():
     finally:
         environment.close()
         replayed.close()
+
+
+def test_tool_result_mismatch_can_be_recorded_without_blocking_replay():
+    environment = _environment([])
+    _call(environment, "parent", "original")
+    records = [record.model_dump(mode="json") for record in environment.scenario_runtime.records]
+    records[-1]["result"] = "stale-result"
+    replayed = _environment([])
+    warnings = []
+    try:
+        replay_environment(
+            replayed,
+            records,
+            strict=True,
+            compare_tool_results=False,
+            replay_warnings=warnings,
+        )
+        assert warnings == [{"tool": "parent"}]
+    finally:
+        environment.close()
+        replayed.close()
+
+
+def test_tool_error_still_blocks_when_result_comparison_is_disabled():
+    environment = _environment([])
+    _call(environment, "parent", "original")
+    records = [record.model_dump(mode="json") for record in environment.scenario_runtime.records]
+    records[-1]["error"] = True
+    replayed = _environment([])
+    try:
+        import pytest
+
+        with pytest.raises(ValueError, match="Tool replay differs"):
+            replay_environment(replayed, records, compare_tool_results=False)
+    finally:
+        environment.close()
+        replayed.close()

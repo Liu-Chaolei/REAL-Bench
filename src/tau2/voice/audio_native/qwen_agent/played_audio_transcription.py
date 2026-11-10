@@ -190,6 +190,17 @@ class SegmentedPlayedAudioTranscriber:
             fragments.append(self.fragments.get_nowait())
         return fragments
 
+    async def flush_pending(self):
+        """Submit the final played-audio fragment before the observer closes."""
+        if self.failure:
+            raise RuntimeError(
+                f"{self.display_name} observer transcription unavailable"
+            ) from self.failure
+        self._queue_pending()
+        timeout = float(getattr(self.config, "request_timeout_seconds", 30)) + 1
+        await asyncio.wait_for(self._segments.join(), timeout=timeout)
+        return self.drain()
+
     def summary(self):
         """Record the segment method and its actual release delay explicitly."""
         return {

@@ -895,6 +895,15 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
             "backend_inputs": list(provider.backend_inputs.values()),
         }
 
+    def get_final_live_transcript(self):
+        """Return observer text finalized during adapter shutdown."""
+        if self._adapter is None:
+            return None, None
+        return (
+            self._adapter.final_live_transcript,
+            self._adapter.final_live_transcript_error,
+        )
+
     def _check_if_stop_toolcall(self, message: AssistantMessage) -> AssistantMessage:
         """Check if the message is a stop message.
         If the message contains a tool call with the name STOP_FUNCTION_NAME,

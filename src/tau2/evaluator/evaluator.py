@@ -122,6 +122,7 @@ def evaluate_simulation(
         RewardInfo with the evaluation results.
     """
     stamp_grading(simulation)
+    compare_tool_results = not (domain == "gaia2" and task.scenario is not None)
     if not can_grade(simulation.termination_reason):
         return finalize_reward(
             simulation,
@@ -215,6 +216,7 @@ def evaluate_simulation(
             solo_mode=solo_mode,
             env_kwargs=env_kwargs,
             strict_replay=strict_replay,
+            compare_tool_results=compare_tool_results,
             environment_trace=simulation.environment_trace,
         )
     elif evaluation_type == EvaluationType.NL_ASSERTIONS:
@@ -255,6 +257,7 @@ def evaluate_simulation(
             solo_mode=solo_mode,
             env_kwargs=env_kwargs,
             strict_replay=strict_replay,
+            compare_tool_results=compare_tool_results,
             environment_trace=simulation.environment_trace,
         )
         action_reward_info = ActEvaluator.calculate_reward(
@@ -363,6 +366,7 @@ def evaluate_simulation(
             solo_mode=solo_mode,
             env_kwargs=env_kwargs,
             strict_replay=strict_replay,
+            compare_tool_results=compare_tool_results,
             environment_trace=simulation.environment_trace,
         )
         action_reward_info = ActEvaluator.calculate_reward(

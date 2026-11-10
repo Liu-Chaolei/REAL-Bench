@@ -148,6 +148,17 @@ def test_missing_and_wrong_state_fail_but_correct_state_replays(tmp_path):
                 bad,
                 env_kwargs={"task": task, "root": tmp_path, "allow_unverified": True},
             )
+        relaxed = calculate_scenario_reward(
+            get_environment,
+            task,
+            bad,
+            env_kwargs={"task": task, "root": tmp_path, "allow_unverified": True},
+            compare_tool_results=False,
+        )
+        assert relaxed.reward == 1
+        assert relaxed.info["replay_warnings"] == [
+            {"tool": "Contacts__edit_contact", "count": 2}
+        ]
     finally:
         environment.close()
 

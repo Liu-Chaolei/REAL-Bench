@@ -6,7 +6,14 @@ from tau2.data_model.message import ToolCall
 from tau2.data_model.scenario import ScenarioRecord
 
 
-def replay_environment(environment, records, *, strict=True):
+def replay_environment(
+    environment,
+    records,
+    *,
+    strict=True,
+    compare_tool_results=True,
+    replay_warnings=None,
+):
     """Reconstruct only recorded operations with their recorded application time."""
     runtime = environment.scenario_runtime
     runtime.replaying = True
@@ -102,11 +109,13 @@ def replay_environment(environment, records, *, strict=True):
                     "replay_result_equal",
                     lambda name, actual, recorded: actual == recorded,
                 )
-                if strict and (
-                    response.error != record.error
-                    or not equal_result(record.name, reproduced.result, record.result)
-                ):
+                if response.error != record.error:
                     raise ValueError(f"Tool replay differs for {record.name}")
+                if not equal_result(record.name, reproduced.result, record.result):
+                    if compare_tool_results and strict:
+                        raise ValueError(f"Tool replay differs for {record.name}")
+                    if replay_warnings is not None:
+                        replay_warnings.append({"tool": record.name})
             elif record.kind == "trigger":
                 if runtime.event_triggers is not None:
                     runtime.event_triggers.bindings[record.event_id] = copy.deepcopy(

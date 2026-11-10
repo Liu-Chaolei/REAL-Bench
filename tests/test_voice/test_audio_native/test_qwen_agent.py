@@ -13,6 +13,9 @@ from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
 from tau2.voice.audio_native.qwen_agent.discrete_time_adapter import (
     DiscreteTimeQwenAgentAdapter,
 )
+from tau2.voice.audio_native.qwen_agent.played_audio_transcription import (
+    SegmentedPlayedAudioTranscriber,
+)
 from tau2.voice.audio_native.qwen_agent.provider import QwenAgentProvider
 
 
@@ -65,6 +68,35 @@ class Observer:
 
     async def close(self):
         pass
+
+
+class FinalizingObserver(Observer):
+    """Observer that exposes a final played-audio fragment during shutdown."""
+
+    def __init__(self):
+        super().__init__()
+        self.closed = False
+        self.flushed = False
+
+    async def flush_pending(self):
+        self.flushed = True
+        return [
+            LiveTranscriptFragment(speaker="agent", text="Tail", start_ms=0, end_ms=100)
+        ]
+
+    async def close(self):
+        assert self.flushed
+        self.closed = True
+
+
+class FakeSegmentedTranscriber(SegmentedPlayedAudioTranscriber):
+    """Key-free ASR implementation for exercising final pending audio."""
+
+    def validate_config(self):
+        pass
+
+    async def _transcribe(self, pcm, *, purpose="primary"):
+        return "tail"
 
 
 def tool():
@@ -128,6 +160,34 @@ def test_media_keeps_flowing_while_business_result_is_pending(system):
     returns = [e for e in bridge.sent if e["type"] == "tool_result"]
     assert len(returns) == 1 and returns[0]["content"] == "official tool result"
     assert sum(e["type"] == "input_audio" for e in bridge.sent) >= 2
+
+
+def test_shutdown_flushes_final_observer_transcript():
+    bridge, observer = Bridge(), FinalizingObserver()
+    adapter = DiscreteTimeQwenAgentAdapter(
+        tick_duration_ms=20,
+        config=QwenAgentConfig(),
+        provider=bridge,
+        transcriber=observer,
+    )
+    adapter.connect("Full policy", [tool()])
+    adapter.disconnect()
+    assert observer.flushed and observer.closed
+    assert adapter.final_live_transcript is not None
+    assert adapter.final_live_transcript.fragments[0].text == "Tail"
+
+
+def test_segmented_observer_flushes_a_short_pending_tail():
+    async def scenario():
+        transcriber = FakeSegmentedTranscriber(QwenAgentConfig())
+        await transcriber.connect()
+        await transcriber.send(b"\x10\x10" * (8000 * 18 // 10))
+        assert transcriber._pending
+        fragments = await transcriber.flush_pending()
+        assert fragments and fragments[0].text == "tail "
+        await transcriber.close()
+
+    asyncio.run(scenario())
 
 
 def test_interruption_discards_unplayed_audio_and_never_reads_gateway_text(system):

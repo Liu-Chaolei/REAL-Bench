@@ -851,6 +851,36 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
 
         # Derive messages for cost computation (not stored in SimulationRun)
         ticks = self.get_trajectory()
+        final_live_transcript = None
+        final_live_transcript_error = None
+        get_final_live_transcript = getattr(
+            self.agent, "get_final_live_transcript", None
+        )
+        if get_final_live_transcript is not None:
+            final_live_transcript, final_live_transcript_error = (
+                get_final_live_transcript()
+            )
+        if final_live_transcript is not None and final_live_transcript.fragments:
+            for tick in reversed(ticks):
+                if tick.agent_chunk is None:
+                    continue
+                raw = dict(tick.agent_chunk.raw_data or {})
+                existing = raw.get("live_transcript")
+                if existing is None:
+                    raw["live_transcript"] = final_live_transcript.model_dump(
+                        mode="json"
+                    )
+                else:
+                    from tau2.data_model.transcript import LiveTranscriptTick
+
+                    merged = LiveTranscriptTick.model_validate(existing)
+                    merged.fragments.extend(final_live_transcript.fragments)
+                    merged.speech_intervals_ms.extend(
+                        final_live_transcript.speech_intervals_ms
+                    )
+                    raw["live_transcript"] = merged.model_dump(mode="json")
+                tick.agent_chunk.raw_data = raw
+                break
         agent_cost, user_cost = get_cost(self.get_messages())
 
         # Provider usage ledger (audio-native agents). The session-level
@@ -889,6 +919,8 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             info["audio_renderer_error"] = self._audio_renderer_error
         if getattr(self, "_user_error", None):
             info["user_simulator_error"] = self._user_error
+        if final_live_transcript_error:
+            info["final_live_transcript_error"] = final_live_transcript_error
         if hasattr(self.user, "get_generation_diagnostics"):
             diagnostics = self.user.get_generation_diagnostics()
             if diagnostics is not None:

@@ -73,6 +73,8 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
         self._seen_calls = set()
         self._allowed_tools = set()
         self._ticks = 0
+        self.final_live_transcript = None
+        self.final_live_transcript_error = None
 
     @property
     def is_connected(self):
@@ -97,6 +99,8 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
         self._cancelled.clear()
         self._seen_calls.clear()
         self._allowed_tools = {t.name for t in tools}
+        self.final_live_transcript = None
+        self.final_live_transcript_error = None
         self._bg_loop.start()
         try:
             self._bg_loop.run_coroutine(
@@ -349,9 +353,41 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
                 await self._flush_pending_tool_results()
         finally:
             try:
-                await self.transcriber.close()
+                await self._flush_observer()
             finally:
-                await self.provider.disconnect()
+                try:
+                    await self.transcriber.close()
+                finally:
+                    await self.provider.disconnect()
+
+    async def _flush_observer(self):
+        """Finalize played-audio ASR before cancelling its worker."""
+        flush = getattr(self.transcriber, "flush_pending", None)
+        if flush is None:
+            self.final_live_transcript_error = "observer_flush_not_supported"
+            return
+        try:
+            fragments = await flush()
+            if not fragments:
+                self.final_live_transcript = None
+                return
+            intervals = [
+                (fragment.start_ms or 0, fragment.end_ms or fragment.start_ms or 0)
+                for fragment in fragments
+                if fragment.start_ms is not None and fragment.end_ms is not None
+            ]
+            from tau2.data_model.transcript import LiveTranscriptTick
+
+            self.final_live_transcript = LiveTranscriptTick(
+                session_id=self.provider.session_id,
+                origin="recorded_audio",
+                alignment="played_audio",
+                fragments=fragments,
+                speech_intervals_ms=intervals,
+            )
+        except Exception as error:
+            self.final_live_transcript = None
+            self.final_live_transcript_error = type(error).__name__
 
     def disconnect(self):
         """Reject later writes and always tear down the owned system."""
