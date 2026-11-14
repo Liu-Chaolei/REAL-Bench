@@ -71,6 +71,12 @@ def _session_groups(
         start = round(tick.tick_id * duration * 1000, 6)
         for a, b in metadata.speech_intervals_ms:
             if not 0 <= a < b <= duration * 1000 + 1e-6:
+                # Older played-audio flush records stored session-relative
+                # intervals on the final tick. Per-tick playback intervals
+                # are authoritative, so ignore that duplicate session span
+                # instead of rejecting the whole conversation.
+                if metadata.alignment == "played_audio" and b > duration * 1000:
+                    continue
                 raise ValueError("Live speech interval lies outside its recorded tick")
             activity.append(
                 _AudioSpan(round(start + a, 6), round(start + b, 6), index, index)

@@ -6,6 +6,7 @@ import re
 import secrets
 import subprocess
 import tempfile
+import uuid
 from pathlib import Path
 
 from tau2.config import DEFAULT_QWEN_AGENT_PORT
@@ -22,6 +23,10 @@ class DockerRuntime:
         self.metadata: dict = {}
         self.diagnostics_path: Path | None = None
         self._redactions: list[str] = [self.token]
+        # A timed-out Docker CLI can create a container before it writes the
+        # cidfile. Keep a private label so that the launch can recover or clean
+        # up that exact container without touching another evaluation.
+        self.runtime_label = f"tau2-{uuid.uuid4().hex}"
 
     def _command(self, *args, env=None, missing_ok=False):
         result = subprocess.run(
@@ -102,6 +107,8 @@ class DockerRuntime:
             "systempaths=unconfined",
             "--publish",
             f"127.0.0.1::{DEFAULT_QWEN_AGENT_PORT}",
+            "--label",
+            f"org.tau.tau2-runtime={self.runtime_label}",
             "--env",
             "TAU_BRIDGE_TOKEN",
         ]
@@ -125,6 +132,24 @@ class DockerRuntime:
                 if not re.fullmatch(r"[a-f0-9]{64}", container_id):
                     raise RuntimeError("Docker did not return a container ID")
                 self.container_id = container_id
+            except (TimeoutError, subprocess.TimeoutExpired):
+                # Docker may have created the container even though the CLI
+                # timed out before writing the cidfile. Recover that container
+                # by its unique label; otherwise the next run would accumulate
+                # orphaned bridges and eventually hit the same timeout.
+                if cidfile.exists():
+                    value = cidfile.read_text().strip()
+                    if re.fullmatch(r"[a-f0-9]{64}", value):
+                        self.container_id = value
+                        self.close()
+                    raise
+                matches = self._find_labeled_containers()
+                if matches:
+                    self.container_id = matches[0]
+                    for extra in matches[1:]:
+                        self._remove_container_quick(extra)
+                else:
+                    raise
             except BaseException:
                 # A timed-out CLI can leave a successfully created container.
                 # Its client-side cidfile identifies only this launch attempt.
@@ -202,6 +227,44 @@ class DockerRuntime:
         except BaseException:
             self.close()
             raise
+
+    def _find_labeled_containers(self) -> list[str]:
+        """Find containers belonging to this launch after a CLI timeout."""
+        try:
+            result = subprocess.run(
+                [
+                    "docker",
+                    "ps",
+                    "-aq",
+                    "--filter",
+                    f"label=org.tau.tau2-runtime={self.runtime_label}",
+                ],
+                capture_output=True,
+                text=True,
+                timeout=10,
+            )
+        except (OSError, subprocess.TimeoutExpired):
+            return []
+        if result.returncode:
+            return []
+        return [
+            value
+            for value in result.stdout.split()
+            if re.fullmatch(r"[a-f0-9]{64}", value)
+        ]
+
+    @staticmethod
+    def _remove_container_quick(container_id: str) -> None:
+        """Best-effort cleanup for duplicate containers from one timed-out launch."""
+        try:
+            subprocess.run(
+                ["docker", "rm", "--force", container_id],
+                capture_output=True,
+                text=True,
+                timeout=15,
+            )
+        except (OSError, subprocess.TimeoutExpired):
+            pass
 
     def close(self):
         """Kill the owned process tree, including pending native backend work."""

@@ -2,10 +2,28 @@
 
 import asyncio
 import json
+import logging
 import threading
 from pathlib import Path
 
 from tau2.diagnostics.intent.io import canonical, digest, write_json
+
+logger = logging.getLogger(__name__)
+
+
+def _is_timeout_error(error: BaseException) -> bool:
+    """Recognize provider and transport timeout wrappers without retrying 4xx errors."""
+    seen: set[int] = set()
+    current: BaseException | None = error
+    while current is not None and id(current) not in seen:
+        seen.add(id(current))
+        if isinstance(current, (TimeoutError, asyncio.TimeoutError)):
+            return True
+        name = type(current).__name__.lower()
+        if "timeout" in name or "timedout" in name:
+            return True
+        current = current.__cause__ or current.__context__
+    return False
 
 
 class RequestBudget:
@@ -25,6 +43,9 @@ class RequestBudget:
 class TauJsonModel:
     """Fresh model history per request with content-addressed successful replay."""
 
+    TIMEOUT_RETRIES = 1
+    OUTER_TIMEOUT_GRACE_SECONDS = 5.0
+
     def __init__(self, config, role, directory: Path, budget):
         self.config, self.role, self.directory, self.budget = (
             config,
@@ -33,7 +54,7 @@ class TauJsonModel:
             budget,
         )
 
-    def complete_sync(self, prompt, schema, *, validate=None):
+    def _complete_once(self, prompt, schema, *, validate=None):
         from tau2.data_model.message import UserMessage
         from tau2.utils.llm_utils import extract_json_from_llm_response, generate
 
@@ -132,8 +153,48 @@ class TauJsonModel:
         )
         return raw
 
+    def complete_sync(self, prompt, schema, *, validate=None):
+        """Run one diagnostic request, retrying a provider timeout once."""
+        for attempt in range(self.TIMEOUT_RETRIES + 1):
+            try:
+                return self._complete_once(prompt, schema, validate=validate)
+            except Exception as exc:
+                if attempt >= self.TIMEOUT_RETRIES or not _is_timeout_error(exc):
+                    raise
+                logger.warning(
+                    "Diagnostic %s request timed out; retrying once (%d/%d)",
+                    self.role,
+                    attempt + 1,
+                    self.TIMEOUT_RETRIES,
+                )
+
     async def complete(self, prompt, schema):
-        return await asyncio.to_thread(self.complete_sync, prompt, schema)
+        """Run with an outer deadline and retry one timeout.
+
+        LiteLLM normally enforces its own request timeout. The outer deadline
+        covers providers that leave the underlying call waiting indefinitely.
+        ``to_thread`` cannot forcibly stop a blocked provider worker, so a
+        timed-out attempt may finish in the background while the retry starts;
+        successful responses are still content-addressed and validated before
+        being cached.
+        """
+        timeout = self.config.timeout_seconds + self.OUTER_TIMEOUT_GRACE_SECONDS
+        for attempt in range(self.TIMEOUT_RETRIES + 1):
+            try:
+                return await asyncio.wait_for(
+                    asyncio.to_thread(self._complete_once, prompt, schema),
+                    timeout=timeout,
+                )
+            except Exception as exc:
+                if attempt >= self.TIMEOUT_RETRIES or not _is_timeout_error(exc):
+                    raise
+                logger.warning(
+                    "Diagnostic %s request exceeded %.1fs; retrying once (%d/%d)",
+                    self.role,
+                    timeout,
+                    attempt + 1,
+                    self.TIMEOUT_RETRIES,
+                )
 
     def judge(self, prompt):
         value = json.loads(

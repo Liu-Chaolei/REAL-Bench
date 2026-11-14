@@ -6,7 +6,12 @@ pytest.importorskip("termcolor")
 
 from tau2.data_model.message import ToolCall
 from tau2.domains.gaia2.importer import decode_arguments
-from tau2.domains.gaia2.scoring import _equivalent, business_state
+from tau2.domains.gaia2.scoring import (
+    _VOICE_RELAXED_LITERAL_SOURCES,
+    _equivalent,
+    _same_words,
+    business_state,
+)
 
 
 def test_optional_source_arguments_and_json_lists_are_decoded_safely():
@@ -95,6 +100,54 @@ def test_explicit_labels_remain_literal_while_free_text_can_be_semantic(monkeypa
         {"title": "Work Party"},
         scoring=scoring,
         literal_texts={"Work Party"},
+    )
+
+
+def test_voice_literal_prototype_ignores_case_and_punctuation_but_keeps_words():
+    assert _same_words("properties list!", "Properties List")
+    assert _same_words("Properties-List", "Properties List")
+    assert not _same_words("Property List", "Properties List")
+    assert not _same_words("List Properties", "Properties List")
+
+    assert _equivalent(
+        {"subject": "properties list!"},
+        {"subject": "Properties List"},
+        literal_texts={"Properties List"},
+        relaxed_literal_texts={"Properties List"},
+    )
+    assert not _equivalent(
+        {"subject": "Property List"},
+        {"subject": "Properties List"},
+        literal_texts={"Properties List"},
+        relaxed_literal_texts={"Properties List"},
+    )
+
+
+def test_voice_literal_allowlist_covers_the_audited_sources():
+    assert len(_VOICE_RELAXED_LITERAL_SOURCES) == 177
+    assert "0052_snsq4rd73gytoo0wr75bgd2nyzra07z1" in (_VOICE_RELAXED_LITERAL_SOURCES)
+
+
+def test_location_source_rules_keep_environment_fragments_exact():
+    from tau2.domains.gaia2.location_rules import VOICE_LOCATION_RULES
+
+    source = "0097_kxccpkni1h796gejnt95f5yz1jottv2j"
+    expected = "Fort Worth Flats, 9012 W 7th St, Fort Worth"
+    rules = VOICE_LOCATION_RULES[source]
+    assert _equivalent(
+        {"start_location": "Fort Worth Flats; 9012 W 7th St, Fort Worth"},
+        {"start_location": expected},
+        location_rules=rules,
+    )
+    assert not _equivalent(
+        {"start_location": "fort worth flats, 9012 w 7th st, fort worth"},
+        {"start_location": expected},
+        location_rules=rules,
+    )
+    assert _equivalent(
+        {"end_location": "meir 90 leuven belgium"},
+        {"end_location": "Meir 90, Leuven, Belgium"},
+        location_rules={"end_location": {"Meir 90, Leuven, Belgium": {"mode": "user"}}},
     )
 
 

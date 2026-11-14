@@ -41,6 +41,34 @@ StreamingAgentT = TypeVar("StreamingAgentT", bound=FullDuplexAgent)
 StreamingUserT = TypeVar("StreamingUserT", bound=FullDuplexUser)
 
 
+def _merge_final_live_transcript(ticks, final_live_transcript):
+    """Attach final observer text without mixing session and tick clocks."""
+
+    if final_live_transcript is None or not final_live_transcript.fragments:
+        return
+    for tick in reversed(ticks):
+        if tick.agent_chunk is None:
+            continue
+        raw = dict(tick.agent_chunk.raw_data or {})
+        existing = raw.get("live_transcript")
+        if existing is None:
+            final_data = final_live_transcript.model_dump(mode="json")
+            # Final observer intervals use the session clock. This field is
+            # interpreted as tick-relative evidence, so do not place them here.
+            final_data["speech_intervals_ms"] = []
+            raw["live_transcript"] = final_data
+        else:
+            from tau2.data_model.transcript import LiveTranscriptTick
+
+            merged = LiveTranscriptTick.model_validate(existing)
+            merged.fragments.extend(final_live_transcript.fragments)
+            # Existing tick audio already supplies the local activity spans.
+            # Finalized intervals use the session clock and must stay separate.
+            raw["live_transcript"] = merged.model_dump(mode="json")
+        tick.agent_chunk.raw_data = raw
+        break
+
+
 class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, Tick]):
     """
     Orchestrator for full-duplex (streaming) communication.
@@ -860,27 +888,7 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             final_live_transcript, final_live_transcript_error = (
                 get_final_live_transcript()
             )
-        if final_live_transcript is not None and final_live_transcript.fragments:
-            for tick in reversed(ticks):
-                if tick.agent_chunk is None:
-                    continue
-                raw = dict(tick.agent_chunk.raw_data or {})
-                existing = raw.get("live_transcript")
-                if existing is None:
-                    raw["live_transcript"] = final_live_transcript.model_dump(
-                        mode="json"
-                    )
-                else:
-                    from tau2.data_model.transcript import LiveTranscriptTick
-
-                    merged = LiveTranscriptTick.model_validate(existing)
-                    merged.fragments.extend(final_live_transcript.fragments)
-                    merged.speech_intervals_ms.extend(
-                        final_live_transcript.speech_intervals_ms
-                    )
-                    raw["live_transcript"] = merged.model_dump(mode="json")
-                tick.agent_chunk.raw_data = raw
-                break
+        _merge_final_live_transcript(ticks, final_live_transcript)
         agent_cost, user_cost = get_cost(self.get_messages())
 
         # Provider usage ledger (audio-native agents). The session-level

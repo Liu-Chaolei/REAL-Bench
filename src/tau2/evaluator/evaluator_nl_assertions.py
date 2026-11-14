@@ -12,6 +12,27 @@ from tau2.evaluator.evaluator_base import EvaluatorBase
 from tau2.utils.llm_utils import generate
 from tau2.utils.transcript.views import speech_messages
 
+VOICE_ASR_TOLERANCE_ADDENDUM = """
+VOICE/ASR TRANSCRIPT HANDLING
+- The agent reply is recovered from speech through observer ASR.
+- When an expected outcome asks the agent to report a subject, title,
+  address, or other literal text, judge the underlying words and facts.
+- Ignore capitalization, punctuation, quotation marks, and spacing differences
+  introduced by speech or transcription. The same words, recipient, and
+  business object must still be present; do not accept a different address,
+  subject, or recipient.
+- Keep exact identity, email, ID, numeric, date/time, and environment-provided
+  canonical values strict. If a subject, title, description, or address is
+  already persisted in the environment, treat that persisted value as
+  canonical and require character-exact matching.
+"""
+
+
+def _voice_prompt_addendum(task: Task) -> str:
+    """Return the first-version ASR instructions for NL judge calls."""
+    del task
+    return VOICE_ASR_TOLERANCE_ADDENDUM
+
 
 def _with_scenario_evidence(messages, records, scenario_series=None):
     """Expose recorded execution timing to the shared judge, never to actors."""
@@ -91,6 +112,7 @@ class NLAssertionsEvaluator(EvaluatorBase[Message]):
                 full_trajectory, environment_trace, scenario_series
             ),
             nl_assertions,
+            prompt_addendum=_voice_prompt_addendum(task),
         )
 
         # Calculate reward: 1 if all expectations are met, 0 otherwise
@@ -114,6 +136,8 @@ class NLAssertionsEvaluator(EvaluatorBase[Message]):
         cls,
         trajectory: list[Message],
         nl_assertions: list[str],
+        *,
+        prompt_addendum: str | None = None,
     ) -> list[NLAssertionCheck]:
         """
         Evaluate whether the trajectory meets each expected outcome.
@@ -156,6 +180,9 @@ class NLAssertionsEvaluator(EvaluatorBase[Message]):
             ]
         }
         """
+
+        if prompt_addendum:
+            system_prompt += "\n" + prompt_addendum
 
         user_prompt = f"""
         conversation:
@@ -270,7 +297,11 @@ class FullDuplexNLAssertionsEvaluator(EvaluatorBase[Tick]):
             scenario_series,
         )
 
-        nl_assertions_checks = cls.evaluate_nl_assertions(messages, nl_assertions)
+        nl_assertions_checks = cls.evaluate_nl_assertions(
+            messages,
+            nl_assertions,
+            prompt_addendum=_voice_prompt_addendum(task),
+        )
 
         # Calculate reward: 1 if all expectations are met, 0 otherwise
         all_expectations_met = all(result.met for result in nl_assertions_checks)
@@ -293,10 +324,16 @@ class FullDuplexNLAssertionsEvaluator(EvaluatorBase[Tick]):
         cls,
         trajectory: list[Message],
         nl_assertions: list[str],
+        *,
+        prompt_addendum: str | None = None,
     ) -> list[NLAssertionCheck]:
         """
         Evaluate whether the trajectory meets each expected outcome.
 
         Delegates to NLAssertionsEvaluator.evaluate_nl_assertions.
         """
-        return NLAssertionsEvaluator.evaluate_nl_assertions(trajectory, nl_assertions)
+        return NLAssertionsEvaluator.evaluate_nl_assertions(
+            trajectory,
+            nl_assertions,
+            prompt_addendum=prompt_addendum,
+        )

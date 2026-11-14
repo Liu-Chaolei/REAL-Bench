@@ -3,6 +3,7 @@
 import pytest
 
 from tau2.data_model.message import AssistantMessage
+from tau2.data_model.scenario import ScenarioSpec
 from tau2.data_model.tasks import EvaluationCriteria, RewardType, Task, UserScenario
 from tau2.evaluator.evaluator_nl_assertions import NLAssertionsEvaluator
 
@@ -65,6 +66,40 @@ def test_empty_judge_results_cannot_pass_declared_assertions(monkeypatch):
         NLAssertionsEvaluator.evaluate_nl_assertions(
             [], ["The requested condition holds"]
         )
+
+
+def test_voice_nl_prompt_uses_first_version_asr_tolerance(monkeypatch):
+    seen = {}
+
+    def judge(**kwargs):
+        seen["system"] = kwargs["messages"][0].content
+        return AssistantMessage(
+            role="assistant",
+            content='{"results":[{"assertion_id":"a0","metExpectation":true,"reasoning":"same words"}]}',
+        )
+
+    monkeypatch.setattr("tau2.evaluator.evaluator_nl_assertions.generate", judge)
+    task = Task(
+        id="0017_z5g3da3kgwcmuxllf1sxvz6esfrbs87w",
+        user_scenario=UserScenario(instructions="Find the contact."),
+        scenario=ScenarioSpec(
+            start_time=0,
+            source_id="0017_z5g3da3kgwcmuxllf1sxvz6esfrbs87w",
+            source_sha256="0" * 64,
+            snapshot="1" * 64,
+            category="search",
+            events=[],
+        ),
+        evaluation_criteria=EvaluationCriteria(
+            nl_assertions=["The reply confirms the exact subject."],
+            reward_basis=[RewardType.NL_ASSERTION],
+        ),
+    )
+    assert NLAssertionsEvaluator.calculate_reward(task, []).reward == 1
+    assert "VOICE/ASR TRANSCRIPT HANDLING" in seen["system"]
+    assert "same words" in seen["system"]
+    assert "already persisted in the environment" in seen["system"]
+    assert "Persistence alone does not make" not in seen["system"]
 
 
 def test_required_runtime_fact_uses_actual_result_and_missing_fact_fails():

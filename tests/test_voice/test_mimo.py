@@ -8,6 +8,7 @@ import wave
 
 import httpx
 import pytest
+from tenacity import stop_after_attempt, wait_none
 
 from tau2.data_model.voice import MiMoTTSConfig, SynthesisConfig
 from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
@@ -15,6 +16,7 @@ from tau2.voice.audio_native.qwen_agent.mimo_transcription import (
     MiMoPlayedAudioTranscriber,
 )
 from tau2.voice.mimo import pcm_wav, synthesize_mimo
+from tau2.voice.synthesis.synthesize import synthesize_voice
 
 
 def test_mimo_tts_normalizes_wav_and_preserves_provider_on_reload(
@@ -145,6 +147,48 @@ def test_mimo_error_body_is_not_copied_to_diagnostics(monkeypatch):
     with pytest.raises(RuntimeError, match="HTTP 401") as error:
         synthesize_mimo("Hello", MiMoTTSConfig())
     assert "synthetic-secret" not in str(error.value)
+
+
+def test_mimo_tts_connection_error_retries(monkeypatch):
+    monkeypatch.setenv("MIMO_API_KEY", "synthetic-secret")
+    calls = []
+
+    def reply(request):
+        calls.append(request)
+        if len(calls) == 1:
+            raise httpx.ConnectError("temporary connection failure", request=request)
+        return httpx.Response(
+            200,
+            json={
+                "choices": [
+                    {
+                        "message": {
+                            "audio": {
+                                "data": base64.b64encode(
+                                    pcm_wav(b"\x10\x10" * 2400, 16000)
+                                ).decode(),
+                            }
+                        }
+                    }
+                ]
+            },
+        )
+
+    client_type = httpx.Client
+    monkeypatch.setattr(
+        "tau2.voice.mimo.httpx.Client",
+        lambda **kw: client_type(transport=httpx.MockTransport(reply), **kw),
+    )
+
+    # Remove backoff from the unit test while retaining the production retry
+    # predicate and attempt limit.
+    retrying_synthesize = synthesize_voice.retry_with(
+        stop=stop_after_attempt(3), wait=wait_none()
+    )
+    audio = retrying_synthesize("Hello", "mimo", MiMoTTSConfig())
+
+    assert audio.format.is_pcm16
+    assert len(calls) == 2
 
 
 @pytest.mark.parametrize(

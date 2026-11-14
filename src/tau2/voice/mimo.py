@@ -13,6 +13,10 @@ from tau2.data_model.voice import MiMoTTSConfig
 from tau2.utils.env_config import read_config_environment, resolve_env_reference
 
 
+class MiMoTTSConnectionError(ConnectionError):
+    """Sanitized, retryable transport failure from the MiMo TTS endpoint."""
+
+
 def mimo_api_key(key_env: str, config_env_file: str | None) -> str:
     """Resolve one credential without exporting unrelated evaluation secrets."""
     value = resolve_env_reference(read_config_environment(config_env_file), key_env)
@@ -61,7 +65,9 @@ def synthesize_mimo(text: str, config: MiMoTTSConfig) -> AudioData:
                 },
             )
     except httpx.HTTPError:
-        raise RuntimeError("MiMo TTS connection failed") from None
+        # Preserve retry semantics without exposing provider URLs or response
+        # details in logs.  ``tts_retry`` recognizes ConnectionError.
+        raise MiMoTTSConnectionError("MiMo TTS connection failed") from None
     body = checked_mimo_reply(response, "TTS")
     try:
         encoded = body["choices"][0]["message"]["audio"]["data"]
