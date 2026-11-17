@@ -592,7 +592,7 @@ def test_calibration_file_is_resolved_and_fingerprinted(tmp_path):
     assert loaded.fingerprint() != MetricsConfig(measures=["conciseness"]).fingerprint()
 
 
-def test_provider_error_audits_attempt_and_consumes_one_request(tmp_path, monkeypatch):
+def test_provider_timeout_retries_and_audits_attempts(tmp_path, monkeypatch):
     from tau2.diagnostics.model import TauJsonModel
     from tau2.utils import llm_utils
 
@@ -605,9 +605,13 @@ def test_provider_error_audits_attempt_and_consumes_one_request(tmp_path, monkey
         TauJsonModel(
             MetricsConfig(), "feedback_nuggets", tmp_path, requests
         ).complete_sync("test", {})
-    assert requests.used == 1
-    attempt = json.loads(next((tmp_path / "attempts").glob("*.json")).read_text())
-    assert attempt["status"] == "provider_error"
+    assert requests.used == 2
+    attempts = list((tmp_path / "attempts").glob("*.json"))
+    assert len(attempts) == 2
+    assert all(
+        json.loads(path.read_text())["status"] == "provider_error"
+        for path in attempts
+    )
 
 
 def test_audio_duration_uses_delivered_waveform_without_changing_text_score(

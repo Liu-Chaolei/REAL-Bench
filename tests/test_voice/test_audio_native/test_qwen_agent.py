@@ -622,6 +622,69 @@ def test_start_timeout_cleans_up_a_container_created_before_the_cli_returned(
     assert runtime.container_id is None
 
 
+def test_start_timeout_recovers_container_when_cidfile_was_not_written(monkeypatch):
+    """A Docker CLI timeout must not strand a labeled bridge container."""
+    import json
+
+    from tau2.voice.audio_native.qwen_agent.runtime import DockerRuntime
+
+    runtime = DockerRuntime(QwenAgentConfig(environment={}))
+    monkeypatch.setattr(QwenAgentConfig, "resolved_environment", lambda *_: {})
+    recovered = "b" * 64
+    calls = []
+
+    def command(*args, **kwargs):
+        calls.append(args)
+        if args[:2] == ("image", "inspect"):
+            return json.dumps(
+                [
+                    {
+                        "Id": "image",
+                        "Config": {
+                            "Labels": {
+                                "org.tau.qwen-agent.protocol": "1",
+                                "org.tau.qwen-agent.confinement": "mount-namespace-v1",
+                            }
+                        },
+                    }
+                ]
+            )
+        if args[0] == "run":
+            raise TimeoutError("Docker client timed out before cidfile write")
+        if args[0] == "inspect":
+            return json.dumps(
+                [
+                    {
+                        "Mounts": [],
+                        "HostConfig": {
+                            "Privileged": False,
+                            "MaskedPaths": [],
+                            "ReadonlyPaths": [],
+                            "SecurityOpt": [
+                                "seccomp=unconfined",
+                                "apparmor=unconfined",
+                                "systempaths=unconfined",
+                            ],
+                        },
+                    }
+                ]
+            )
+        if args[0] == "port":
+            return "127.0.0.1:12345"
+        if args[:2] == ("rm", "--force"):
+            return ""
+        raise AssertionError(args)
+
+    monkeypatch.setattr(runtime, "_command", command)
+    monkeypatch.setattr(runtime, "_find_labeled_containers", lambda: [recovered])
+    assert runtime.start() == "ws://127.0.0.1:12345/control"
+    run_args = next(args for args in calls if args[0] == "run")
+    assert "--label" in run_args
+    assert runtime.container_id == recovered
+    runtime.close()
+    assert runtime.container_id is None
+
+
 def test_private_config_aliases_expansion_precedence_and_no_secret_serialization(
     tmp_path,
 ):
