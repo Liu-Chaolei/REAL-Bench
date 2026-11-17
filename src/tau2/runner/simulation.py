@@ -28,6 +28,7 @@ def run_simulation(
     canonical_tasks: bool = False,
     on_trajectory_ready: Optional[Callable[[SimulationRun], None]] = None,
     metrics_config: Optional[dict] = None,
+    persistent_task_config: Optional[dict] = None,
     diagnostics_dir=None,
 ) -> SimulationRun:
     """Run a simulation and evaluate the result.
@@ -128,6 +129,14 @@ def run_simulation(
             )
         env_kwargs = {**(env_kwargs or {}), key: value}
 
+    from tau2.persistent_tasks.availability import resolve_config
+
+    persistent_task_config = resolve_config(orchestrator.task, persistent_task_config)
+    if persistent_task_config is not None:
+        from tau2.persistent_tasks.integration import install
+
+        install(orchestrator, persistent_task_config)
+
     recorder = None
     if metrics_config is not None:
         from pathlib import Path
@@ -165,9 +174,22 @@ def run_simulation(
     # Run the orchestrator
     try:
         simulation = orchestrator.run()
-    except BaseException:
+    except BaseException as error:
         if recorder is not None:
             recorder.close()
+        persistent_runtime = getattr(orchestrator, "persistent_task_runtime", None)
+        if persistent_runtime is not None and diagnostics_dir is not None:
+            from tau2.persistent_tasks.runtime.evidence import write_summary
+
+            persistent_runtime.issues.append(
+                {"reason": "simulation_failed", "error_type": type(error).__name__}
+            )
+            write_summary(
+                persistent_runtime.summary(
+                    orchestrator.environment.scenario_runtime.time()
+                ),
+                diagnostics_dir,
+            )
         raise
     evidence = None
     if recorder is not None:
@@ -253,6 +275,12 @@ def run_simulation(
     if on_trajectory_ready is not None:
         on_trajectory_ready(simulation)
     try:
+        persistent = (simulation.info or {}).get("persistent_tasks")
+        if persistent is not None:
+            from tau2.persistent_tasks.runtime.evidence import write_summary
+
+            if diagnostics_dir is not None:
+                write_summary(persistent, diagnostics_dir)
         reward_info = evaluate_simulation(
             simulation=simulation,
             task=task,
@@ -264,6 +292,8 @@ def run_simulation(
             communicate_scoring=communicate_scoring,
             customer_language=customer_language,
         )
+        if persistent is not None and diagnostics_dir is not None:
+            write_summary(persistent, diagnostics_dir)
     except Exception as error:
         # Preserve the actual completed conversation, never a new empty run.
         simulation.reward_info = None

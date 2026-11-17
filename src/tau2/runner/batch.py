@@ -44,6 +44,10 @@ from tau2.evaluator.evaluator import EvaluationType
 from tau2.evaluator.hallucination_reviewer import failed_hallucination_check
 from tau2.evaluator.reviewer import check_hallucination, format_hallucination_feedback
 from tau2.metrics.agent_metrics import compute_metrics
+from tau2.persistent_tasks.availability import (
+    AsyncTaskUnavailable,
+    skip_unavailable_async,
+)
 from tau2.registry import registry
 from tau2.runner.build import _build_env_kwargs, build_orchestrator
 from tau2.runner.checkpoint import (
@@ -341,6 +345,8 @@ class _TaskLogContext:
                 "error": str(exc_val),
                 "error_type": exc_type.__name__,
             }
+            if isinstance(exc_val, AsyncTaskUnavailable):
+                status.update(status="skipped", reason=exc_val.status)
             try:
                 status_path = self.task_log_dir / "sim_status.json"
                 with open(status_path, "w") as f:
@@ -361,6 +367,7 @@ class _TaskLogContext:
 # =============================================================================
 
 
+@skip_unavailable_async
 def run_single_task(
     config: RunConfig,
     task: Task,
@@ -475,6 +482,7 @@ def run_single_task(
             canonical_tasks=uses_canonical_tasks(config.benchmark),
             on_trajectory_ready=save_raw_trajectory,
             metrics_config=config.metrics_config,
+            persistent_task_config=config.persistent_task_config,
             diagnostics_dir=(
                 save_dir
                 / "artifacts"

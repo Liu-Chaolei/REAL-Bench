@@ -268,6 +268,7 @@ def get_info(
         or config.elicitation.strategy != ElicitationStrategy.AGENT_DIRECTED
     )
     return Info(
+        persistent_task_config=config.persistent_task_config,
         user_audio_renderer=(
             config.audio_native_config.saasr_identity if is_voice else None
         ),

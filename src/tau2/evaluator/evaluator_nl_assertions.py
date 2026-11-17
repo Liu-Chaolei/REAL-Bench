@@ -228,11 +228,15 @@ class FullDuplexNLAssertionsEvaluator(EvaluatorBase[Tick]):
     """
 
     @classmethod
-    def ticks_to_message_history(cls, ticks: list[Tick]) -> list[Message]:
+    def ticks_to_message_history(
+        cls, ticks: list[Tick], *, allow_unresolved_live_audio: bool = False
+    ) -> list[Message]:
         """Use the shared speech_messages transcript view."""
         from tau2.utils.transcript.live import require_live_alignment
 
-        require_live_alignment(ticks)
+        require_live_alignment(
+            ticks, allow_missing_transcript=allow_unresolved_live_audio
+        )
         return speech_messages(ticks)
 
     @classmethod
@@ -242,6 +246,7 @@ class FullDuplexNLAssertionsEvaluator(EvaluatorBase[Tick]):
         full_trajectory: list[Tick],
         environment_trace: list[dict] | None = None,
         scenario_series: dict | None = None,
+        allow_unresolved_live_audio: bool = False,
     ) -> RewardInfo:
         """
         Calculate the reward for the simulation by using an LLM to evaluate whether
@@ -265,7 +270,10 @@ class FullDuplexNLAssertionsEvaluator(EvaluatorBase[Tick]):
 
         # Convert ticks to linearized message history
         messages = _with_scenario_evidence(
-            cls.ticks_to_message_history(full_trajectory),
+            cls.ticks_to_message_history(
+                full_trajectory,
+                allow_unresolved_live_audio=allow_unresolved_live_audio,
+            ),
             environment_trace,
             scenario_series,
         )

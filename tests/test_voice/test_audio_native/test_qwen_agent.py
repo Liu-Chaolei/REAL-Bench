@@ -797,3 +797,26 @@ def test_initial_docker_tcp_readiness_race_does_not_fail_a_new_call(monkeypatch)
             assert runtime.closed
 
     asyncio.run(scenario())
+
+
+def test_backend_channel_reports_overflow_and_never_enters_media_queue():
+    from queue import Queue
+    from types import SimpleNamespace
+
+    from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
+    from tau2.voice.audio_native.qwen_agent.provider import QwenAgentProvider
+
+    provider = QwenAgentProvider(QwenAgentConfig(), runtime=SimpleNamespace())
+    provider.persistent_tasks_enabled = True
+    provider.backend_events = Queue(maxsize=1)
+    provider.record(
+        {"type": "backend_task_state", "task_id": "native", "state": "running"}
+    )
+    provider.record(
+        {"type": "backend_task_state", "task_id": "native", "state": "completed"}
+    )
+    assert provider.backend_evidence_gap is True
+    assert provider.events.empty()
+    drained = provider.drain_backend_events()
+    assert len(drained) == 1 and drained[0]["received_monotonic"] > 0
+    assert provider.drain_backend_events() == []

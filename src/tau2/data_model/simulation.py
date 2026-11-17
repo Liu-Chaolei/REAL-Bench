@@ -63,6 +63,24 @@ class BaseRunConfig(RunSettings):
     Do not instantiate directly. Use TextRunConfig or VoiceRunConfig.
     """
 
+    @model_validator(mode="after")
+    def validate_persistent_task_mode(self):
+        if self.persistent_task_config is not None:
+            from tau2.persistent_tasks.config import PersistentTaskConfig
+
+            PersistentTaskConfig.model_validate(self.persistent_task_config)
+            audio = getattr(self, "audio_native_config", None)
+            if (
+                self.domain != "gaia2"
+                or audio is None
+                or audio.provider != "qwen_agent"
+                or self.language != "en"
+            ):
+                raise ValueError(
+                    "Persistent tasks v1 requires English Gaia2 with qwen_agent"
+                )
+        return self
+
     language: str = Field(
         default=DEFAULT_LANGUAGE,
         description="Published language pack; canonical English unless a language is requested.",
@@ -964,6 +982,15 @@ class UserInfo(BaseModel):
 class Info(BaseModel):
     """Information about the simulator."""
 
+    persistent_task_config: Optional[dict] = Field(default=None)
+
+    @model_serializer(mode="wrap")
+    def serialize_persistent_config(self, handler):
+        data = handler(self)
+        if self.persistent_task_config is None:
+            data.pop("persistent_task_config", None)
+        return data
+
     voice_user_simulator_version: Optional[str] = Field(
         default=None,
         description="Observed caller scheduling version; absent in legacy runs.",
@@ -1104,6 +1131,8 @@ class Info(BaseModel):
 
 
 class TerminationReason(str, Enum):
+    UNSUPPORTED = "unsupported"
+    TASK_NOT_READY = "task_not_ready"
     USER_STOP = "user_stop"
     AGENT_STOP = "agent_stop"
     MAX_STEPS = "max_steps"

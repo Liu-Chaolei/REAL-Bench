@@ -71,6 +71,12 @@ def _session_groups(
         start = round(tick.tick_id * duration * 1000, 6)
         for a, b in metadata.speech_intervals_ms:
             if not 0 <= a < b <= duration * 1000 + 1e-6:
+                # Older played-audio flush records stored session-relative
+                # intervals on the final tick. Per-tick playback intervals
+                # are authoritative, so ignore that duplicate session span
+                # instead of rejecting the whole conversation.
+                if metadata.alignment == "played_audio" and b > duration * 1000:
+                    continue
                 raise ValueError("Live speech interval lies outside its recorded tick")
             activity.append(
                 _AudioSpan(round(start + a, 6), round(start + b, 6), index, index)
@@ -297,12 +303,25 @@ def live_utterance_groups(ticks: list[Tick]) -> list[UtteranceGroup]:
     ]
 
 
-def require_live_alignment(ticks: list[Tick]) -> None:
-    """Prevent uncertain units, including uncaptioned audio, from silently scoring."""
+def require_live_alignment(
+    ticks: list[Tick], *, allow_missing_transcript: bool = False
+) -> None:
+    """Prevent uncertain units from silently scoring.
+
+    Generated-text persistent grading may proceed when played-audio ASR has no
+    caption for an interrupted fragment. Other alignment failures remain hard
+    errors because they indicate corrupted timing evidence.
+    """
     unresolved = [
         g.chunks[0].raw_data["live_segment"] for g in live_utterance_groups(ticks)
     ]
     unresolved = [m for m in unresolved if m["audio_alignment_error"]]
+    if allow_missing_transcript:
+        unresolved = [
+            m
+            for m in unresolved
+            if m["audio_alignment_error"] != "Recorded Live speech has no transcript"
+        ]
     if unresolved:
         raise ValueError(
             "Unresolved Live audio/text association: "

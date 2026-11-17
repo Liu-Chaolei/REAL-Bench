@@ -114,6 +114,10 @@ class TickResult(BaseModel):
         exclude=True,  # Exclude from serialization (may contain bytes)
     )
     live_transcript: LiveTranscriptTick | None = None
+    generated_text: List[dict] = Field(
+        default_factory=list,
+        description="Provider-generated response text, independent of played-audio ASR.",
+    )
 
     # --- VAD events (provider-agnostic) ---
     # Normalized VAD event types detected this tick:

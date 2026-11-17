@@ -10,7 +10,7 @@ from tau2.data_model.message import AssistantMessage, Tick, UserMessage
 from tau2.data_model.simulation import SimulationRun, TerminationReason
 from tau2.data_model.transcript import LiveTranscriptFragment, LiveTranscriptTick
 from tau2.judges.run_evidence import load_audio_clips
-from tau2.utils.transcript.live import require_live_alignment
+from tau2.utils.transcript.live import live_utterance_groups, require_live_alignment
 from tau2.utils.transcript.views import (
     agent_messages,
     build_agent_turns,
@@ -407,6 +407,40 @@ def test_invalid_activity_interval_rejected():
     ticks[0].agent_chunk.raw_data["live_transcript"]["speech_intervals_ms"] = [(0, 201)]
     with pytest.raises(ValueError, match="outside"):
         agent_messages(ticks)
+
+
+def test_legacy_played_audio_session_interval_is_ignored():
+    ticks = timeline({}, [0, 1, 2])
+    raw = ticks[-1].agent_chunk.raw_data["live_transcript"]
+    raw["alignment"] = "played_audio"
+    raw["speech_intervals_ms"] = [(0, 200), (400, 600)]
+    groups = live_utterance_groups(ticks)
+    assert groups and groups[0].chunks[0].raw_data["live_segment"][
+        "audio_alignment_error"
+    ]
+
+
+def test_final_session_interval_is_not_inserted_as_tick_interval():
+    from tau2.orchestrator.full_duplex_orchestrator import (
+        _merge_final_live_transcript,
+    )
+
+    ticks = timeline({}, [0, 1, 2])
+    final = LiveTranscriptTick(
+        session_id="test-session",
+        origin="recorded_audio",
+        alignment="played_audio",
+        fragments=[fragment("Tail", 400, 600)],
+        speech_intervals_ms=[(400, 600)],
+    )
+    _merge_final_live_transcript(ticks, final)
+    intervals = ticks[-1].agent_chunk.raw_data["live_transcript"][
+        "speech_intervals_ms"
+    ]
+    assert all(0 <= start < end <= 200 for start, end in intervals)
+    assert ticks[-1].agent_chunk.raw_data["live_transcript"]["fragments"][0][
+        "text"
+    ] == "Tail"
 
 
 def test_provider_timestamp_changes_do_not_change_group_ids_or_bounds():

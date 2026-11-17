@@ -40,6 +40,28 @@ def main():
     )
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--metrics-config", type=Path)
+    parser.add_argument("--persistent-task-config", type=Path)
+    parser.add_argument(
+        "--judge-api-key-env",
+        default="GAIA2_JUDGE_API_KEY",
+        help="Environment variable containing the communication/NL judge key.",
+    )
+    parser.add_argument(
+        "--judge-endpoint-env",
+        default="GAIA2_JUDGE_ENDPOINT",
+        help="Environment variable containing the communication/NL judge endpoint.",
+    )
+    parser.add_argument(
+        "--judge-model-env",
+        default="GAIA2_JUDGE_MODEL",
+        help="Environment variable containing the communication/NL judge model.",
+    )
+    parser.add_argument(
+        "--judge-api",
+        choices=["chat", "responses"],
+        default=None,
+        help="Judge API protocol; defaults to GAIA2_JUDGE_API for the legacy profile.",
+    )
     parser.add_argument(
         "--resume",
         action="store_true",
@@ -53,8 +75,8 @@ def main():
     config = QwenAgentConfig.model_validate_json(args.config.read_text())
     values = read_config_environment(config.config_env_file)
     env = dict(os.environ)
-    env["OPENAI_API_KEY"] = resolve_env_reference(values, "GAIA2_JUDGE_API_KEY")
-    env["OPENAI_API_BASE"] = resolve_env_reference(values, "GAIA2_JUDGE_ENDPOINT")
+    env["OPENAI_API_KEY"] = resolve_env_reference(values, args.judge_api_key_env)
+    env["OPENAI_API_BASE"] = resolve_env_reference(values, args.judge_endpoint_env)
     env["OPENAI_BASE_URL"] = env["OPENAI_API_BASE"]
     if args.metrics_config:
         from tau2.diagnostics.config import MetricsConfig
@@ -78,10 +100,10 @@ def main():
         raise ValueError(
             "Smoke config must explicitly reference backend key, base URL and model"
         )
-    model = resolve_env_reference(values, "GAIA2_JUDGE_MODEL")
+    model = resolve_env_reference(values, args.judge_model_env)
     prefix = (
         "openai/responses/"
-        if values.get("GAIA2_JUDGE_API") == "responses"
+        if (args.judge_api or values.get("GAIA2_JUDGE_API")) == "responses"
         else "openai/"
     )
     model = prefix + model
@@ -148,6 +170,8 @@ def main():
     ]
     if args.metrics_config:
         command += ["--metrics-config", str(args.metrics_config.resolve())]
+    if args.persistent_task_config:
+        command += ["--persistent-task-config", str(args.persistent_task_config.resolve())]
 
     if args.max_seconds:
         command.extend(["--timeout", str(args.max_seconds + 150)])

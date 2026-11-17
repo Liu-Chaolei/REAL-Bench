@@ -41,6 +41,34 @@ StreamingAgentT = TypeVar("StreamingAgentT", bound=FullDuplexAgent)
 StreamingUserT = TypeVar("StreamingUserT", bound=FullDuplexUser)
 
 
+def _merge_final_live_transcript(ticks, final_live_transcript):
+    """Attach final observer text without mixing session and tick clocks."""
+
+    if final_live_transcript is None or not final_live_transcript.fragments:
+        return
+    for tick in reversed(ticks):
+        if tick.agent_chunk is None:
+            continue
+        raw = dict(tick.agent_chunk.raw_data or {})
+        existing = raw.get("live_transcript")
+        if existing is None:
+            final_data = final_live_transcript.model_dump(mode="json")
+            # The final observer intervals are session-relative. This field is
+            # interpreted as tick-relative evidence, so do not place them here.
+            final_data["speech_intervals_ms"] = []
+            raw["live_transcript"] = final_data
+        else:
+            from tau2.data_model.transcript import LiveTranscriptTick
+
+            merged = LiveTranscriptTick.model_validate(existing)
+            merged.fragments.extend(final_live_transcript.fragments)
+            # Existing tick audio already supplies the local activity spans.
+            # Finalized intervals use the session clock and must stay separate.
+            raw["live_transcript"] = merged.model_dump(mode="json")
+        tick.agent_chunk.raw_data = raw
+        break
+
+
 class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, Tick]):
     """
     Orchestrator for full-duplex (streaming) communication.
@@ -321,6 +349,24 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             raise ValueError("Simulation is done")
 
         runtime = getattr(self.environment, "scenario_runtime", None)
+        persistent = getattr(self, "persistent_task_runtime", None)
+        communication_busy = bool(
+            getattr(self.agent, "has_pending_output", False)
+            or (self.current_agent_chunk and self.current_agent_chunk.contains_speech)
+            or (self.current_user_chunk and self.current_user_chunk.contains_speech)
+            or self._scenario_user_input
+            or (self._tool_executor and self._tool_executor.pending)
+            or self.pending_agent_tool_results
+            or self.pending_user_tool_results
+        )
+        if persistent is not None:
+            from tau2.persistent_tasks.integration import advance
+
+            advance(
+                self,
+                not communication_busy
+                and self.async_evidence_source.get_status()["request_boundary"],
+            )
         if self.scenario_stages is not None and self.scenario_stages.transition_pending:
             busy = bool(self._tool_executor.pending) if self._tool_executor else False
             busy = busy or bool(
@@ -330,9 +376,14 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             busy = busy or bool(
                 self.current_agent_chunk and self.current_agent_chunk.contains_speech
             )
+            busy = busy or bool(
+                persistent and persistent.blocks_stage(self.scenario_stages.current)
+            )
             if not busy:
                 self.scenario_stages.release(self.user, runtime, len(self.ticks))
         if runtime is not None:
+            if not communication_busy:
+                runtime.notify_turn_boundary()
             runtime.advance()
             with runtime.lock:
                 while runtime.user_inputs:
@@ -579,6 +630,12 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
         if (
             not is_agent
             and self.scenario_stages is not None
+            and not (
+                getattr(self, "persistent_task_runtime", None)
+                and self.persistent_task_runtime.blocks_stage(
+                    self.scenario_stages.current
+                )
+            )
             and self.scenario_stages.stop(
                 new_chunk, self.environment.scenario_runtime, len(self.ticks)
             )
@@ -593,6 +650,18 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
                 cost=new_chunk.cost,
                 usage=new_chunk.usage,
             )
+        persistent = getattr(self, "persistent_task_runtime", None)
+        if (
+            not is_agent
+            and is_stop(new_chunk)
+            and persistent
+            and persistent.blocks_stage(
+                self.scenario_stages.current
+                if self.scenario_stages
+                else (persistent.binder.active_stage or 0)
+            )
+        ):
+            new_chunk = UserMessage(role="user", content=None, contains_speech=False)
         if is_stop(new_chunk):
             logger.info(f"  [{participant_name}] *** STOP signal detected ***")
             self.done = True
@@ -646,6 +715,28 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
         """Journal transported user input and actual playback, preserving both clocks."""
         if user_chunk is not None:
             utterance = tuple(user_chunk.utterance_ids or [])
+            persistent = getattr(self, "persistent_task_runtime", None)
+            scripted_id = (user_chunk.raw_data or {}).get(
+                "scenario_input_id", self._scenario_user_input
+            )
+            previous_utterance = getattr(self, "_persistent_user_utterance", None)
+            previously_speaking = getattr(self, "_persistent_user_speaking", False)
+            if (
+                persistent
+                and user_chunk.contains_speech
+                and not scripted_id
+                and (
+                    utterance != previous_utterance
+                    if utterance
+                    else not previously_speaking
+                )
+            ):
+                persistent.ordinary_user_started(
+                    input_time if input_time is not None else runtime.time()
+                )
+            if user_chunk.contains_speech:
+                self._persistent_user_utterance = utterance
+            self._persistent_user_speaking = bool(user_chunk.contains_speech)
             action = user_chunk.turn_taking_action
             if (
                 self.scenario_stages is not None
@@ -691,6 +782,7 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             self._scenario_user_text += user_chunk.content or ""
             recorded = False
             if user_chunk.contains_speech:
+                persistent = getattr(self, "persistent_task_runtime", None)
                 if self.scenario_stages is not None and self._scenario_user_input:
                     self.scenario_stages.delivered(
                         self._scenario_user_input,
@@ -714,6 +806,10 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
                     )
                     recorded = True
                 if user_chunk.is_final_chunk or data.get("saasr_main_final"):
+                    if persistent and self._scenario_user_input:
+                        persistent.delivery_completed(
+                            self._scenario_user_input, runtime.time()
+                        )
                     if not recorded:
                         runtime.delivered("user", self._scenario_user_text)
                     self._scenario_user_input = None
@@ -860,27 +956,7 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             final_live_transcript, final_live_transcript_error = (
                 get_final_live_transcript()
             )
-        if final_live_transcript is not None and final_live_transcript.fragments:
-            for tick in reversed(ticks):
-                if tick.agent_chunk is None:
-                    continue
-                raw = dict(tick.agent_chunk.raw_data or {})
-                existing = raw.get("live_transcript")
-                if existing is None:
-                    raw["live_transcript"] = final_live_transcript.model_dump(
-                        mode="json"
-                    )
-                else:
-                    from tau2.data_model.transcript import LiveTranscriptTick
-
-                    merged = LiveTranscriptTick.model_validate(existing)
-                    merged.fragments.extend(final_live_transcript.fragments)
-                    merged.speech_intervals_ms.extend(
-                        final_live_transcript.speech_intervals_ms
-                    )
-                    raw["live_transcript"] = merged.model_dump(mode="json")
-                tick.agent_chunk.raw_data = raw
-                break
+        _merge_final_live_transcript(ticks, final_live_transcript)
         agent_cost, user_cost = get_cost(self.get_messages())
 
         # Provider usage ledger (audio-native agents). The session-level

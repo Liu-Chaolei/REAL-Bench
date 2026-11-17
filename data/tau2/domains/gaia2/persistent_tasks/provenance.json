@@ -1,0 +1,129 @@
+[
+  {
+    "scenario_id": "pt_0001",
+    "source_task_id": "0002_46myz87t501b0c902dy81rlbqbye2dyi",
+    "source_task_sha256": "d4b66bc333c558774544f0fc5887a0c9892282a2ee79d366587b39ef04a93e58",
+    "source_stage": 1,
+    "source_event_ids": [
+      "series_s1_send_message"
+    ],
+    "operation_type": "association",
+    "task_scope": "single_task",
+    "reference_type": "recent_reference"
+  },
+  {
+    "scenario_id": "pt_0002",
+    "source_task_id": "0004_zsnxn8rtxeqy64r6axi78wlnmodvvpb8",
+    "source_task_sha256": "b0d5dec5c0b82326ed6836c87bebafbb2f8b3c8c8c569696cf686d6d4d61df56",
+    "source_stage": 2,
+    "source_event_ids": [
+      "series_s2_add",
+      "series_s2_verify"
+    ],
+    "operation_type": "association",
+    "task_scope": "multi_task",
+    "reference_type": "title_reference"
+  },
+  {
+    "scenario_id": "pt_0003",
+    "source_task_id": "0052_snsq4rd73gytoo0wr75bgd2nyzra07z1",
+    "source_task_sha256": "794e6c25e05792f8c34faaa15c2c3a4f54321b4bae6147247ce25f1d70597772",
+    "source_stage": 0,
+    "source_event_ids": [
+      "OracleEvent-AGENT-1709af94-237c-44ed-8553-19921c27e9aa",
+      "OracleEvent-AGENT-7cb8843d-e5f6-438f-b9f7-763860449efe"
+    ],
+    "operation_type": "association",
+    "task_scope": "multi_task",
+    "reference_type": "ordinal_reference"
+  },
+  {
+    "scenario_id": "pt_0004",
+    "source_task_id": "0053_aanknwl7oew08yda60lfw6ii37zmbn27",
+    "source_task_sha256": "ac863cab23d9d6844f89a110fdd2fd3d07704f938c34b2beea6b625bcbe5f902",
+    "source_stage": 1,
+    "source_event_ids": [
+      "series_s1_original",
+      "series_s1_photo_0"
+    ],
+    "operation_type": "association",
+    "task_scope": "multi_task",
+    "reference_type": "goal_reference"
+  },
+  {
+    "scenario_id": "pt_0005",
+    "source_task_id": "0132_4hy9gimaap8287dl6so87nfx59ivjykp",
+    "source_task_sha256": "fc0fcd4c3908c8a03aa135bdb24620b6df6dd4a657aa3acbcf632d2808fb9452",
+    "source_stage": 2,
+    "source_event_ids": [
+      "series_s2_id_frantisek"
+    ],
+    "operation_type": "query",
+    "task_scope": "single_task",
+    "reference_type": "state_reference"
+  },
+  {
+    "scenario_id": "pt_0006",
+    "source_task_id": "0137_66e1hycxx6kg6fux28hhbytn5x0jh07t",
+    "source_task_sha256": "9a55e84da9242ace0c47d8db71ff9d8c09cc102fc32ba0fb3bb5e2b15ec591a3",
+    "source_stage": 0,
+    "source_event_ids": [
+      "OracleEvent-AGENT-f67fc73e-0a4b-49f3-8484-a9724c975263",
+      "OracleEvent-AGENT-96177f0c-c938-4c19-a032-1775a09b7db0"
+    ],
+    "operation_type": "query",
+    "task_scope": "multi_task",
+    "reference_type": "goal_reference"
+  },
+  {
+    "scenario_id": "pt_0007",
+    "source_task_id": "0601_mz4dh4tml93gims9dxwrcz7i16t0p5ud",
+    "source_task_sha256": "bce4e0560cbf0e176d67632e159baef8cf134a8d32352571f1086c5d7ef18eb5",
+    "source_stage": 0,
+    "source_event_ids": [
+      "OracleEvent-AGENT-9ca29aa0-de61-43b9-8784-1181580bc6b2",
+      "OracleEvent-AGENT-5a7544b9-62b6-451e-b485-f2628cc66444"
+    ],
+    "operation_type": "modify",
+    "task_scope": "multi_task",
+    "reference_type": "title_reference"
+  },
+  {
+    "scenario_id": "pt_0008",
+    "source_task_id": "0602_sy6r944liwulln91ravyrcctdirinr0d",
+    "source_task_sha256": "370477b0f8ad554593fc5320bef94cbcc74f1ff2b12d51a769b17c1cbba43bcc",
+    "source_stage": 0,
+    "source_event_ids": [
+      "OracleEvent-AGENT-256976f3-16e3-41a9-9c05-fdb8e3efc735",
+      "OracleEvent-AGENT-6f905404-ff39-4354-baae-14b2a9ae31b0"
+    ],
+    "operation_type": "modify",
+    "task_scope": "multi_task",
+    "reference_type": "ordinal_reference"
+  },
+  {
+    "scenario_id": "pt_0009",
+    "source_task_id": "0710_e2cjolirnhypj7tgr44nl3woxkfrgtu2",
+    "source_task_sha256": "431749bc68dcde98de10232cad261c0e5f23334e1ad7a4d172b70c735d087c91",
+    "source_stage": 0,
+    "source_event_ids": [
+      "OracleEvent-AGENT-dc61540a-8350-479e-b3f9-003fedcda943"
+    ],
+    "operation_type": "cancel",
+    "task_scope": "single_task",
+    "reference_type": "title_reference"
+  },
+  {
+    "scenario_id": "pt_0010",
+    "source_task_id": "0711_acar9gkovf7n11r9zk0ylit3acbd64kj",
+    "source_task_sha256": "a193cd5ed3fe65bc6c2b4dcba379bc044581d4fd1d6aab2fec6211c0dbf0aee2",
+    "source_stage": 0,
+    "source_event_ids": [
+      "OracleEvent-AGENT-bd26f312-bda3-4038-a6cd-3c28c2f6a687",
+      "OracleEvent-AGENT-2d0f178b-abcd-4830-8a12-635c61c3acaa"
+    ],
+    "operation_type": "result",
+    "task_scope": "multi_task",
+    "reference_type": "state_reference"
+  }
+]

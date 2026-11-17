@@ -304,6 +304,10 @@ async def check_repetition(gt, prediction, model, model_config, previous=None):
             "status": "error",
             "reason": str(exc) if isinstance(exc, ValueError) else type(exc).__name__,
             "raw_responses": getattr(exc, "responses", []),
+            "configuration_error": getattr(exc, "configuration_error", None),
+            "attempts": getattr(exc, "attempts", 0),
+            "validation_errors": getattr(exc, "validation_errors", []),
+            "last_error": getattr(exc, "last_error", None),
         }
 
 

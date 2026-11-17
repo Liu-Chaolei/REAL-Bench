@@ -2,6 +2,7 @@ ARG BASE_IMAGE
 FROM ${BASE_IMAGE}
 ARG BASE_IMAGE_ID
 LABEL org.tau.speech-asr.qwen="1" \
+      org.tau.qwen-agent.persistent-observer="1" \
       org.tau.qwen-agent.base-image-id=$BASE_IMAGE_ID
 USER root
 COPY bridge/ /opt/tau-bridge/

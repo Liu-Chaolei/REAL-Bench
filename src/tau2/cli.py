@@ -208,6 +208,12 @@ def add_run_args(parser):
         help="Independent diagnostic YAML profile",
     )
     parser.add_argument(
+        "--persistent-task-config",
+        type=Path,
+        default=None,
+        help="Private JSON scenario for native Qwen persistent-task evaluation",
+    )
+    parser.add_argument(
         "--verbose-logs",
         action="store_true",
         default=False,
@@ -914,7 +920,15 @@ def main():
             metrics_config = MetricsConfig.load(args.metrics_config).model_dump(
                 mode="json"
             )
+        persistent_task_config = None
+        if args.persistent_task_config:
+            from tau2.persistent_tasks.config import PersistentTaskConfig
+
+            persistent_task_config = PersistentTaskConfig.load(
+                args.persistent_task_config
+            ).model_dump(mode="json")
         shared_kwargs = dict(
+            persistent_task_config=persistent_task_config,
             metrics_config=metrics_config,
             localize_db=args.localize_db,
             **(

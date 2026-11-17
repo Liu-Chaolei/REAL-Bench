@@ -73,13 +73,35 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
         self._seen_calls = set()
         self._allowed_tools = set()
         self._ticks = 0
+        self._frontend_state = None
         self.final_live_transcript = None
         self.final_live_transcript_error = None
+        self._generated_response_buffers = {}
 
     @property
     def is_connected(self):
         """The live system and observer must both be connected."""
         return self._connected and self.provider.is_connected
+
+    def get_async_evidence_source(self):
+        """Return the provider's implementation of the public evidence contract."""
+        from tau2.voice.audio_native.qwen_agent.async_evidence import (
+            QwenAsyncEvidenceSource,
+        )
+
+        if not hasattr(self, "_async_evidence_source"):
+            self._async_evidence_source = QwenAsyncEvidenceSource(self)
+        return self._async_evidence_source
+
+    def drain_backend_observations(self):
+        """Return Qwen backend events for persistent-task projection."""
+        from tau2.persistent_tasks.adapters.qwen import QwenEventAdapter
+
+        adapter = QwenEventAdapter()
+        return [
+            adapter.backend_observation(payload)
+            for payload in self.provider.drain_backend_events()
+        ]
 
     def connect(self, system_prompt, tools, vad_config=None, modality="audio"):
         """Boot a fresh system with only the public business environment."""
@@ -88,6 +110,7 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
         if self._connected:
             self.disconnect()
         self.clear_buffers()
+        self._frontend_state = None
         self._next_tick_start = None
         self._cumulative_user_audio_ms = 0
         self._ticks = 0
@@ -101,6 +124,7 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
         self._allowed_tools = {t.name for t in tools}
         self.final_live_transcript = None
         self.final_live_transcript_error = None
+        self._generated_response_buffers.clear()
         self._bg_loop.start()
         try:
             self._bg_loop.run_coroutine(
@@ -194,9 +218,21 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
         """Include audio responses whose playback has not reached its end receipt."""
         return super().has_pending_output or bool(set(self._received) - self._terminal)
 
+    @property
+    def backend_request_boundary(self):
+        """A native frontend idle signal plus completed physical playback."""
+        return self._frontend_state == "idle" and not self.has_pending_output
+
     def _process_event(self, result, event):
         """Map business requests and media; never expose internal task text."""
         kind = event.get("type")
+        if kind == "gateway_event":
+            self._collect_generated_text(result, event.get("event") or {})
+        if (
+            kind == "gateway_event"
+            and event.get("event", {}).get("type") == "voice.state"
+        ):
+            self._frontend_state = event["event"].get("state")
         result.events.append({k: v for k, v in event.items() if k != "audio"})
         if kind == "audio":
             response_id = event["response_id"]
@@ -303,6 +339,47 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
                 )
             )
 
+    def _collect_generated_text(self, result, event):
+        """Collect Qwen response text without treating it as played-audio ASR."""
+        event_type = event.get("type") or ""
+        if event_type not in {
+            "transcript.delta",
+            "transcript.final",
+            "response.audio_transcript.delta",
+            "response.audio_transcript.done",
+            "response.output_audio_transcript.delta",
+            "response.output_audio_transcript.done",
+        }:
+            return
+        response_id = event.get("responseId") or event.get("response_id")
+        text = (
+            event.get("content") or event.get("transcript") or event.get("delta") or ""
+        )
+        from tau2.utils.transcript.generated import sanitize_generated_text
+
+        text = sanitize_generated_text(str(text))
+        if not response_id or not text:
+            return
+        buffer = self._generated_response_buffers.setdefault(
+            response_id, {"text": "", "final": False}
+        )
+        is_final = event_type.endswith("final") or event_type.endswith("done")
+        if is_final:
+            buffer["text"] = str(text)
+            buffer["final"] = True
+        elif not buffer["final"]:
+            buffer["text"] += str(text)
+        result.generated_text.append(
+            {
+                "response_id": response_id,
+                "turn_id": event.get("turnId") or event.get("turn_id"),
+                "text": text,
+                "source": "qwen_response_transcript",
+                "received_monotonic": event.get("received_monotonic"),
+                "final": is_final,
+            }
+        )
+
     async def _after_playback(self, result):
         for data, response_id in result.agent_audio_chunks:
             if data and not self._played[response_id]:
@@ -316,13 +393,16 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
                 await self._receipt("playback.ended", response_id)
                 self._terminal.add(response_id)
         played = result.get_played_agent_audio()
+        result.contains_speech = bool(
+            played and audioop.rms(audioop.ulaw2lin(played, 2), 2)
+        )
         await self.transcriber.send(audioop.ulaw2lin(played, 2))
+        if result.was_truncated and result.contains_speech:
+            queue_partial = getattr(self.transcriber, "queue_pending", None)
+            if queue_partial is not None:
+                queue_partial()
         fragments = self.transcriber.drain()
         result.proportional_transcript = " ".join(f.text for f in fragments)
-        result.contains_speech = bool(
-            result.agent_audio_data
-            and audioop.rms(audioop.ulaw2lin(result.agent_audio_data, 2), 2)
-        )
         result.live_transcript = LiveTranscriptTick(
             session_id=self.provider.session_id,
             origin="recorded_audio",
@@ -332,9 +412,7 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
                 [
                     (
                         0,
-                        len(result.agent_audio_data)
-                        / self.audio_format.bytes_per_second
-                        * 1000,
+                        len(played) / self.audio_format.bytes_per_second * 1000,
                     )
                 ]
                 if result.contains_speech

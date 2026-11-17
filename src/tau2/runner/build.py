@@ -731,6 +731,19 @@ def build_voice_orchestrator(
     language_context: Optional[LanguageTaskInfo] = None,
 ) -> FullDuplexOrchestrator:
     """Build a voice trial and clean up prepared resources if construction fails."""
+    from tau2.persistent_tasks.availability import check_task, resolve_config
+
+    async_config = resolve_config(task, config.persistent_task_config)
+    if async_config is not None:
+        from tau2.persistent_tasks.config import PersistentTaskConfig
+
+        profile = PersistentTaskConfig.model_validate(async_config)
+        check_task(task, profile)
+        if profile.overlay:
+            from tau2.domains.gaia2.utils import GAIA2_DATA_DIR
+            from tau2.evaluator.persistent_tasks.overlay import verify_overlay
+
+            verify_overlay(profile, task, GAIA2_DATA_DIR)
     with ExitStack() as resources:
         result = _build_voice_orchestrator(
             config,
@@ -817,6 +830,32 @@ def _build_voice_orchestrator(
     if close_environment is not None:
         resources.callback(close_environment)
 
+    agent = build_agent(
+        config.effective_agent,
+        environment,
+        audio_native_config=config.audio_native_config,
+        language_guidance=agent_language_guidance(
+            language_context, agent_voice_gender=context.agent_voice_gender
+        ),
+        language=language_context.language,
+        audio_taps_dir=audio_taps_dir,
+        elicitation_config=config.elicitation,
+    )
+
+    from tau2.persistent_tasks.availability import (
+        check_capabilities,
+        evidence_source,
+        resolve_config,
+    )
+
+    embedded_async = resolve_config(task, config.persistent_task_config)
+    if embedded_async is not None:
+        from tau2.persistent_tasks.config import PersistentTaskConfig
+
+        check_capabilities(
+            PersistentTaskConfig.model_validate(embedded_async), evidence_source(agent)
+        )
+
     saasr_session = None
     if config.audio_native_config.user_audio_renderer == "saasr":
         from tau2.voice.saasr import SaasrSession, turn_seed
@@ -890,18 +929,6 @@ def _build_voice_orchestrator(
                     json.dumps(observer_hotwords.record(), ensure_ascii=False, indent=2)
                 )
                 vocabulary_path.chmod(0o600)
-
-    agent = build_agent(
-        config.effective_agent,
-        environment,
-        audio_native_config=config.audio_native_config,
-        language_guidance=agent_language_guidance(
-            language_context, agent_voice_gender=context.agent_voice_gender
-        ),
-        language=language_context.language,
-        audio_taps_dir=audio_taps_dir,
-        elicitation_config=config.elicitation,
-    )
 
     if observer_hotwords is not None:
         agent.observer_hotwords = observer_hotwords

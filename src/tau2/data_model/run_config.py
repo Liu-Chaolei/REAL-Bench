@@ -500,6 +500,9 @@ class RunSettings(BaseModel):
     metrics_config: Optional[dict] = Field(
         default=None, description="Resolved independent diagnostic profile."
     )
+    persistent_task_config: Optional[dict] = Field(
+        default=None, description="Private native backend task scenario."
+    )
 
     @model_serializer(mode="wrap")
     def serialize_optional_metrics(self, handler):
@@ -507,6 +510,8 @@ class RunSettings(BaseModel):
         data = handler(self)
         if self.metrics_config is None:
             data.pop("metrics_config", None)
+        if self.persistent_task_config is None:
+            data.pop("persistent_task_config", None)
         return data
 
     verbose_logs: Annotated[

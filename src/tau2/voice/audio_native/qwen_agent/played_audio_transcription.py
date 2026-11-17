@@ -141,6 +141,10 @@ class SegmentedPlayedAudioTranscriber:
         self._pending.clear()
         self._silence_ms = 0
 
+    def queue_pending(self):
+        """Queue the current partial played segment without waiting for ASR."""
+        self._queue_pending()
+
     async def _recognize(self):
         try:
             while True:

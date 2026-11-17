@@ -244,11 +244,36 @@ class CommunicateEvaluator(EvaluatorBase[Message]):
 
 class FullDuplexCommunicateEvaluator(EvaluatorBase[Tick]):
     @classmethod
-    def ticks_to_message_history(cls, ticks: list[Tick]) -> list[AssistantMessage]:
+    def ticks_to_message_history(
+        cls, ticks: list[Tick], *, allow_unresolved_live_audio: bool = False
+    ) -> list[AssistantMessage]:
         """Use the shared agent_messages transcript view."""
         from tau2.utils.transcript.live import require_live_alignment
 
-        require_live_alignment(ticks)
+        if not allow_unresolved_live_audio:
+            require_live_alignment(ticks)
+        if allow_unresolved_live_audio:
+            generated = {}
+            order = []
+            for tick in ticks:
+                raw = (tick.agent_chunk.raw_data or {}) if tick.agent_chunk else {}
+                for item in raw.get("generated_text", []):
+                    response_id = item.get("response_id") or f"tick-{tick.tick_id}"
+                    if response_id not in generated:
+                        generated[response_id] = ""
+                        order.append(response_id)
+                    if item.get("final"):
+                        generated[response_id] = item.get("text", "")
+                    else:
+                        generated[response_id] += item.get("text", "")
+            return [
+                AssistantMessage(
+                    role="assistant",
+                    content=generated[response_id],
+                )
+                for response_id in order
+                if generated[response_id]
+            ]
         return agent_messages(ticks)
 
     @classmethod
@@ -262,10 +287,14 @@ class FullDuplexCommunicateEvaluator(EvaluatorBase[Tick]):
         runtime_bindings: dict | None = None,
         environment_trace: list[dict] | None = None,
         scenario_series: dict | None = None,
+        allow_unresolved_live_audio: bool = False,
     ) -> RewardInfo:
         """Apply the same checks to the established merged-agent transcript."""
         messages = (
-            cls.ticks_to_message_history(full_trajectory)
+            cls.ticks_to_message_history(
+                full_trajectory,
+                allow_unresolved_live_audio=allow_unresolved_live_audio,
+            )
             if task.evaluation_criteria is not None
             and task.evaluation_criteria.communicate_info
             else []

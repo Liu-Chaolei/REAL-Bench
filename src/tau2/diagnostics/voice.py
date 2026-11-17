@@ -2,14 +2,87 @@
 
 from pathlib import Path
 
+from tau2.diagnostics.media_clock import (
+    MEDIA_CLOCK_VERSION,
+    map_scenario_time_to_media,
+)
 from tau2.metrics import real_voice
 
-VERSION = "tau-real-voice/1"
+VERSION = "tau-real-voice/2"
 CONFIG = {
     **real_voice.CONFIG,
     "time_basis": "tau_actual_media_delivery_and_playback",
     "turn_basis": "delivered_user_turns",
+    "media_clock_version": MEDIA_CLOCK_VERSION,
 }
+
+
+def map_tool_operations(operations, timeline, scenario_start_time, monotonic_origin):
+    """Convert tool evidence one row at a time and retain mapping diagnostics."""
+
+    operations = [
+        op for op in operations if op.kind != "SYSTEM" and op.requestor == "assistant"
+    ]
+    mapped_calls = []
+    partial_operations = 0
+    unmapped_operations = 0
+    unavailable_operations = []
+    for op in operations:
+        started = map_scenario_time_to_media(
+            op.started, timeline, scenario_start_time, monotonic_origin
+        )
+        ended = map_scenario_time_to_media(
+            op.ended, timeline, scenario_start_time, monotonic_origin
+        )
+        if started["status"] == ended["status"] == "mapped":
+            if ended["media_seconds"] < started["media_seconds"]:
+                unmapped_operations += 1
+                unavailable_operations.append(
+                    {"call_id": op.call_id, "reason": "invalid_time_mapping"}
+                )
+            else:
+                mapped_calls.append(
+                    {
+                        "call_id": op.call_id,
+                        "completed": True,
+                        "started_mono": started["media_seconds"],
+                        "completed_mono": ended["media_seconds"],
+                    }
+                )
+        elif started["status"] == "mapped" or ended["status"] == "mapped":
+            partial_operations += 1
+            unavailable_operations.append(
+                {
+                    "call_id": op.call_id,
+                    "reason": "partial_time_mapping",
+                    "started": started["reason"],
+                    "ended": ended["reason"],
+                }
+            )
+        else:
+            unmapped_operations += 1
+            unavailable_operations.append(
+                {
+                    "call_id": op.call_id,
+                    "reason": started["reason"] or ended["reason"],
+                }
+            )
+    tool_context = {
+        "total_operations": len(operations),
+        "mapped_operations": len(mapped_calls),
+        "partially_mapped_operations": partial_operations,
+        "unmapped_operations": unmapped_operations,
+        "mapping_version": MEDIA_CLOCK_VERSION,
+    }
+    if unavailable_operations:
+        tool_context["unavailable_operations"] = unavailable_operations
+    if not operations:
+        calls = []
+    elif mapped_calls:
+        calls = mapped_calls
+    else:
+        calls = None
+    return calls, tool_context
 
 
 def evaluate_voice(evidence, directory: Path):
@@ -105,39 +178,22 @@ def evaluate_voice(evidence, directory: Path):
         "input_start_mono": 0.0,
         "cutoff_mono": evidence.audio["duration"],
     }
-    # Operations use scenario seconds. Interpolate through recorded monotonic
-    # samples only when their scenario origin is explicitly known.
+    # Operations use scenario seconds. Map each operation independently through
+    # the recorded monotonic/media timeline so one gap cannot erase all context.
     origin = evidence.source.get("scenario_monotonic_origin")
     epoch = evidence.source.get("scenario_start_time")
-
-    def media_time(value):
-        target = value - epoch + origin
-        for row in timeline:
-            a, b = row.get("monotonic_start"), row.get("monotonic_end")
-            if a is not None and b is not None and a <= target <= b and b > a:
-                return row["start"] + (target - a) / (b - a) * (
-                    row["end"] - row["start"]
-                )
-        raise ValueError("tool_media_time_mapping_unavailable")
-
-    calls = None
-    if not evidence.operations:
-        calls = []
-    elif origin is not None and epoch is not None:
-        try:
-            calls = [
-                {
-                    "call_id": op.call_id,
-                    "completed": True,
-                    "started_mono": media_time(op.started),
-                    "completed_mono": media_time(op.ended),
-                }
-                for op in evidence.operations
-                if op.kind != "SYSTEM" and op.requestor == "assistant"
-            ]
-        except ValueError:
-            calls = None
+    calls, tool_context = map_tool_operations(
+        evidence.operations, timeline, epoch, origin
+    )
     result = real_voice.score_interactions(waveform, calls)
+    if calls is None and tool_context["total_operations"]:
+        for name in (
+            "on_time_rate",
+            "late_rate",
+            "audible_pretoolspeech_rate",
+        ):
+            result["metrics"][name]["reason"] = "tool_media_time_mapping_unavailable"
+    result.setdefault("details", {})["tool_context"] = tool_context
     result.update(
         version=VERSION,
         status="measured",

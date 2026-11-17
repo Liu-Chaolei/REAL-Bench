@@ -95,6 +95,11 @@ def try_resume(
     # Auto-detect format from on-disk state
     fmt = Results._detect_format(save_path)
     prev_simulation_results = Results.load(save_path)
+    if (
+        prev_simulation_results.info.persistent_task_config
+        != simulation_results.info.persistent_task_config
+    ):
+        raise ValueError("Persistent task conditions changed; use a new output path")
 
     if (
         prev_simulation_results.info.user_audio_renderer

@@ -45,7 +45,7 @@ class TauJsonModel:
                 "prompt": prompt,
                 "schema": schema,
                 "profile": profile.model_dump(),
-                "implementation": "tau-json/1",
+                "implementation": "tau-json/2",
             }
         )
         path = self.directory / (identity + ".json")

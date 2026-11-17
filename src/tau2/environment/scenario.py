@@ -117,6 +117,11 @@ class ScenarioRuntime:
             if e.kind != "reference" and e.id not in self.managed_user_events
             for p in e.dependencies
         }
+        self._event_completion_listeners: list[Callable[[str, Any, float], None]] = []
+        self._turn_boundary_listeners: list[Callable[[float], None]] = []
+        self._delivery_listeners: list[
+            Callable[[str, str, str | None, float], None]
+        ] = []
         for _ in spec.events:
             before = len(self._needed_anchors)
             self._needed_anchors.update(
@@ -266,6 +271,34 @@ class ScenarioRuntime:
         self._observations = [
             item for item in self._observations if item[4] != identifier
         ]
+        for listener in list(self._event_completion_listeners):
+            listener(event.id, copy.deepcopy(result), self.spec.start_time + completed)
+
+    def add_event_completion_listener(
+        self, listener: Callable[[str, Any, float], None]
+    ) -> None:
+        """Notify a sidecar when an original reference tool event binds."""
+        with self.lock:
+            self._event_completion_listeners.append(listener)
+
+    def add_turn_boundary_listener(self, listener: Callable[[float], None]) -> None:
+        """Register a callback invoked at a communication boundary."""
+        with self.lock:
+            self._turn_boundary_listeners.append(listener)
+
+    def notify_turn_boundary(self, timestamp: float | None = None) -> None:
+        """Let sidecars release requests after the current turn is complete."""
+        with self.lock:
+            when = self.time() if timestamp is None else timestamp
+            for listener in list(self._turn_boundary_listeners):
+                listener(when)
+
+    def add_delivery_listener(
+        self, listener: Callable[[str, str, str | None, float], None]
+    ) -> None:
+        """Register a callback for actual user/agent speech delivery."""
+        with self.lock:
+            self._delivery_listeners.append(listener)
 
     def _match_text_fields(self, pairs):
         return all(
@@ -372,6 +405,9 @@ class ScenarioRuntime:
         """Observe actual speech delivery; future captions never count."""
         with self.lock:
             self.record(kind, result=text, event_id=event_id, event_time=delivered_at)
+            when = self.time() if delivered_at is None else delivered_at
+            for listener in list(self._delivery_listeners):
+                listener(kind, text, event_id, when)
             if kind == "user" and event_id and event_id not in self.completed:
                 self.completed[event_id] = (
                     self.elapsed

@@ -308,6 +308,7 @@ class BaseOrchestrator(ABC, Generic[BaseAgentT, BaseUserT, TrajectoryItemT]):
                     scenario_runtime is not None
                     and self.mode == CommunicationMode.HALF_DUPLEX
                 ):
+                    scenario_runtime.notify_turn_boundary()
                     scenario_runtime.advance()
                     with scenario_runtime.lock:
                         while scenario_runtime.user_inputs:
@@ -353,6 +354,14 @@ class BaseOrchestrator(ABC, Generic[BaseAgentT, BaseUserT, TrajectoryItemT]):
                     "scenario_series": self.scenario_stages.summary(
                         self.termination_reason.value
                     ),
+                }
+            persistent_summary = getattr(
+                self.environment, "persistent_task_summary", lambda: None
+            )()
+            if persistent_summary is not None:
+                result.info = {
+                    **(result.info or {}),
+                    "persistent_tasks": persistent_summary,
                 }
             if scenario_runtime is not None:
                 scenario_runtime.close()

@@ -5,6 +5,7 @@ import pytest
 
 from tau2.diagnostics.intent.config import IntentConfig, ModelConfig
 from tau2.diagnostics.intent.evaluation import evaluate
+from tau2.diagnostics.intent.generation import GenerationError, generate_json
 from tau2.diagnostics.intent.io import digest
 from tau2.diagnostics.intent.scoring import score_batch, score_record
 from tau2.diagnostics.intent.units import build_items
@@ -16,6 +17,79 @@ CONFIG = IntentConfig(definition_set="gaia2")
     CONFIG.validation(),
 )
 MODEL = ModelConfig(model="fixture/model")
+
+
+@pytest.mark.asyncio
+async def test_generation_uses_two_bounded_repairs_and_structured_errors():
+    schema = {
+        "type": "object",
+        "properties": {
+            "intent": {
+                "type": "object",
+                "properties": {"kind": {"const": "literal"}},
+                "required": ["kind"],
+                "additionalProperties": False,
+            }
+        },
+        "required": ["intent"],
+        "additionalProperties": False,
+    }
+
+    class Model:
+        def __init__(self):
+            self.prompts = []
+            self.responses = [
+                '{"intent":{"kind":"wrong"}}',
+                '{"intent":{"kind":null}}',
+                '{"intent":{"kind":"literal"}}',
+            ]
+
+        async def complete(self, prompt, schema):
+            self.prompts.append(prompt)
+            return self.responses.pop(0)
+
+    model = Model()
+    value, responses = await generate_json(model, "extract", schema, max_repairs=2)
+    assert value == {"intent": {"kind": "literal"}}
+    assert len(responses) == len(model.prompts) == 3
+    assert "/intent/kind" in model.prompts[1]
+    assert "expected_structure" in model.prompts[1]
+    assert "/intent/kind" in model.prompts[2]
+    assert "generation_version" in model.prompts[0]
+
+
+@pytest.mark.asyncio
+async def test_generation_error_preserves_attempts_without_turning_failure_into_score():
+    schema = {"type": "object", "properties": {"value": {"type": "string"}}}
+
+    class Model:
+        async def complete(self, prompt, schema):
+            return '{"value":1}'
+
+    with pytest.raises(GenerationError) as captured:
+        await generate_json(Model(), "extract", schema, max_repairs=2)
+    error = captured.value
+    assert error.attempts == 3
+    assert len(error.responses) == len(error.validation_errors) == 3
+    assert error.validation_errors[-1]["path"] == "/value"
+    assert error.last_error
+
+
+@pytest.mark.asyncio
+async def test_generation_provider_error_is_not_retried():
+    calls = 0
+
+    class Model:
+        async def complete(self, prompt, schema):
+            nonlocal calls
+            calls += 1
+            raise TimeoutError("provider timeout")
+
+    with pytest.raises(GenerationError) as captured:
+        await generate_json(Model(), "extract", {"type": "object"}, max_repairs=2)
+    assert calls == 1
+    assert captured.value.attempts == 0
+    assert captured.value.last_error == "provider timeout"
 
 
 class Fake:

@@ -8,6 +8,9 @@ import wave
 
 import pytest
 
+from tau2.data_model.diagnostics import OperationEvidence
+from tau2.diagnostics.media_clock import map_scenario_time_to_media
+from tau2.diagnostics.voice import map_tool_operations
 from tau2.metrics import real_voice as im
 
 
@@ -170,6 +173,57 @@ def test_mapping_preserves_queue_gaps_and_partial_sample_boundaries():
         im.map_speech([[0, 0.03]], timeline, 16000, 481)
     with pytest.raises(ValueError, match="missing_sample_timeline"):
         im.map_speech([[0, 0.03]], [], 16000, 480)
+
+
+def test_media_clock_maps_tick_interiors_gaps_boundaries_and_rejects_outside():
+    timeline = [
+        {"start": 0, "end": 1, "monotonic_start": 100, "monotonic_end": 101},
+        {"start": 1.5, "end": 2.5, "monotonic_start": 102, "monotonic_end": 103},
+    ]
+    inside = map_scenario_time_to_media(1000.5, timeline, 1000, 100)
+    gap = map_scenario_time_to_media(1001.5, timeline, 1000, 100)
+    boundary = map_scenario_time_to_media(1001, timeline, 1000, 100)
+    outside = map_scenario_time_to_media(999, timeline, 1000, 100)
+    assert inside["status"] == "mapped" and inside["source"] == "tick"
+    assert gap["status"] == "mapped" and gap["source"] == "gap_boundary"
+    assert gap["media_seconds"] == pytest.approx(1.25)
+    assert boundary["media_seconds"] == pytest.approx(1)
+    assert outside == {
+        "status": "unavailable",
+        "media_seconds": None,
+        "source": None,
+        "distance_seconds": None,
+        "reason": "outside_media_timeline",
+    }
+
+
+def test_tool_mapping_keeps_good_calls_when_one_operation_is_unavailable():
+    def operation(call_id, started, ended):
+        return OperationEvidence(
+            call_id=call_id,
+            name="Files__ls",
+            app="Files",
+            kind="READ",
+            raw_arguments={},
+            arguments={},
+            started=started,
+            ended=ended,
+        )
+
+    timeline = [
+        {"start": 0, "end": 1, "monotonic_start": 100, "monotonic_end": 101},
+        {"start": 1, "end": 2, "monotonic_start": 102, "monotonic_end": 103},
+    ]
+    calls, context = map_tool_operations(
+        [operation("good", 1000.2, 1001.5), operation("bad", 999, 999.5)],
+        timeline,
+        1000,
+        100,
+    )
+    assert [call["call_id"] for call in calls] == ["good"]
+    assert context["total_operations"] == 2
+    assert context["mapped_operations"] == 1
+    assert context["unmapped_operations"] == 1
 
 
 @pytest.mark.parametrize("rate", [16000, 24000])

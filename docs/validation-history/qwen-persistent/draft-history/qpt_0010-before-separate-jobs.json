@@ -1,0 +1,45 @@
+{
+  "version": "qwen-persistent-v1",
+  "scenario_id": "qpt_0010",
+  "status": "draft",
+  "bindings": [
+    {
+      "role": "email",
+      "source_task_id": "0068_gbelbkkh09hbtozeyzl9fo46xjjy34wt",
+      "source_stage": 0,
+      "objective_contains": "email"
+    },
+    {
+      "role": "orders",
+      "source_task_id": "0068_gbelbkkh09hbtozeyzl9fo46xjjy34wt",
+      "source_stage": 0,
+      "objective_contains": "Beanie"
+    }
+  ],
+  "requests": [
+    {
+      "request_id": "qpt_0010_request_1",
+      "role": "email",
+      "state": "completed",
+      "operation": "result",
+      "text": "Please check the completed email task and tell me its recorded result, separately from the toy order.",
+      "delay_seconds": 1,
+      "max_wait_seconds": 480,
+      "reply_expectation": "Accurately answer the user's request using the native task operation result. Do not claim an accepted instruction has already finished.",
+      "allow_status_list_lookup": true
+    },
+    {
+      "request_id": "qpt_0010_request_2",
+      "role": "orders",
+      "state": "completed",
+      "operation": "result",
+      "text": "Separately, please check the toy-order task and tell me its recorded result.",
+      "delay_seconds": 1,
+      "max_wait_seconds": 480,
+      "reply_expectation": "Report the actual toy-order task result, keeping it separate from the email task.",
+      "allow_status_list_lookup": true
+    }
+  ],
+  "combine_reward": false,
+  "overlay": null
+}

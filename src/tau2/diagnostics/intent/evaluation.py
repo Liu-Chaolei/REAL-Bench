@@ -276,6 +276,9 @@ async def check_direction(
             "reason": type(exc).__name__,
             "configuration_error": getattr(exc, "configuration_error", None),
             "raw_responses": getattr(exc, "responses", []),
+            "attempts": getattr(exc, "attempts", 0),
+            "validation_errors": getattr(exc, "validation_errors", []),
+            "last_error": getattr(exc, "last_error", None),
         }
 
 

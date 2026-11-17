@@ -10,7 +10,11 @@ from tau2.diagnostics.intent.config import (
     ScoringProfile,
     ValidationProfile,
 )
-from tau2.diagnostics.intent.generation import generate_json, provenance
+from tau2.diagnostics.intent.generation import (
+    EXTRACTION_MAX_REPAIRS,
+    generate_json,
+    provenance,
+)
 from tau2.diagnostics.intent.io import canonical, digest
 from tau2.diagnostics.intent.types import JsonModel, TextRecord
 from tau2.diagnostics.intent.units import validate_references
@@ -113,7 +117,9 @@ async def extract(
         "stage": stage,
         "input": asdict(record),
         "schema_sha256": digest(schema),
-        "provenance": provenance(prompt, schema, model_config),
+        "provenance": provenance(
+            prompt, schema, model_config, max_repairs=EXTRACTION_MAX_REPAIRS
+        ),
         "intent": None,
         "raw_responses": [],
         "evidence": [],
@@ -181,6 +187,7 @@ async def extract(
             prompt,
             extraction_schema(schema),
             check,
+            max_repairs=EXTRACTION_MAX_REPAIRS,
         )
         return (
             result
@@ -200,4 +207,7 @@ async def extract(
             "error_detail": str(exc) if hasattr(exc, "responses") else None,
             "configuration_error": getattr(exc, "configuration_error", None),
             "raw_responses": getattr(exc, "responses", []),
+            "attempts": getattr(exc, "attempts", 0),
+            "validation_errors": getattr(exc, "validation_errors", []),
+            "last_error": getattr(exc, "last_error", None),
         }
