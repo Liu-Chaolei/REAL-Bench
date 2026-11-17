@@ -1,8 +1,8 @@
 {
   "valid": true,
   "tasks": 1100,
-  "runtime_sha256": "4464f5197f2dee04690f37dfb7b1c3e82f73846cc592c167f0548d8e5e1c4192",
-  "tasks_sha256": "431d06fec64eea03f43715fe7c7b4aec090b5a3508cb7c10b4c225122ed7931e",
+  "runtime_sha256": "3fe170d4dfabaa166c028b8dc60a374bd079deb8f4a757ef86a3993fdc0c3758",
+  "tasks_sha256": "dfbfada3e05461017186f129584f9edaf3efe38bd50bf112d60bec47c4633465",
   "errors": [],
   "missing_resources": [],
   "resource_hashes": {
@@ -317,21 +317,14 @@
     {
       "id": "0031_45dydqdiaufomudhpahsl0isohbn6s7z",
       "stage": 1,
-      "error": "Outcome failed: Confirms the second Swedish (+46) participant, giving the count of 2 besides Astrid.; actual=+46734567890"
+      "error": "Outcome failed: Confirms the second Swedish (+46) participant, giving the count of 2 besides Astrid.; actual=+358936123456"
     },
     {
       "id": "0031_45dydqdiaufomudhpahsl0isohbn6s7z",
       "stage": 1,
-      "error": "Outcome failed: This +46 entry is Astrid herself and is excluded from the count of other Swedish participants.; actual=+46701234537"
+      "error": "Outcome failed: The Finnish number confirms the remaining participant is not Swedish, so the count stays at 2.; actual=+46701234537"
     }
   ],
-  "reference_validation_provenance": {
-    "report": "data/simulations/gaia2-async-adapter-seal-20261116-initial.json",
-    "log": "data/simulations/gaia2-async-adapter-seal-20261116.log",
-    "verified_input_sha256": "1dfe3c06caf7c2a29956f85e53d5a5508c0233cbcd84280ecda49cf2aa1e99d2",
-    "input_unchanged_since_before_reference": true,
-    "recovery": "Corrected migrated import-manifest hash; reused all 1100 successful reference/replay executions after fresh structural/resource validation."
-  },
   "assets_sha256": "c91672f4bda3799f17f110e584be509c0f9fbb415ce497ab535153c10b5c9cba",
   "sealed": true
 }
