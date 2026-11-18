@@ -150,6 +150,27 @@ class BaseOrchestrator(ABC, Generic[BaseAgentT, BaseUserT, TrajectoryItemT]):
             self.user.scenario_stage_ids = {
                 event.id for event in self.scenario_stages.requests
             }
+            self.user.scenario_dynamic_stage_ids = {
+                event.id: stage.stage
+                for stage, event in zip(
+                    task.scenario.stages, self.scenario_stages.requests
+                )
+            }
+            events = {event.id: event for event in task.scenario.events}
+            self.user.scenario_dynamic_stage_tool_gts = {
+                event.id: [
+                    {
+                        "event_id": action.id,
+                        "tool": action.tool,
+                        "arguments": action.arguments,
+                    }
+                    for action_id in stage.event_ids
+                    if (action := events[action_id]).kind == "reference"
+                ]
+                for stage, event in zip(
+                    task.scenario.stages, self.scenario_stages.requests
+                )
+            }
 
     @property
     def initial_agent_message(self) -> Optional[AssistantMessage]:

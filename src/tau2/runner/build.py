@@ -24,6 +24,7 @@ from tau2.config import (
     DEFAULT_SPEECH_EFFECTS_MODE,
     ELICITATION_DOMAINS,
 )
+from tau2.data_model.dynamic_followup import DynamicFollowupConfig
 from tau2.data_model.elicitation import ElicitationConfig, ElicitationStrategy
 from tau2.data_model.language import CallContext, LanguageTaskInfo
 from tau2.data_model.persona import PersonaConfig
@@ -274,6 +275,7 @@ def build_voice_user(
     speech_effects_mode: str = DEFAULT_SPEECH_EFFECTS_MODE,
     force_sample_voice_config: bool = False,
     saasr_session=None,
+    dynamic_followup_config: DynamicFollowupConfig | None = None,
 ) -> FullDuplexUser:
     """Build a full-duplex voice user simulator.
 
@@ -522,6 +524,7 @@ def build_voice_user(
         audio_taps_dir=audio_taps_dir,
         realtime_generation=audio_native_config.realtime_generation_enabled,
         saasr_session=saasr_session,
+        dynamic_followup_config=dynamic_followup_config,
     )
     return user
 
@@ -931,6 +934,12 @@ def _build_voice_orchestrator(
         speech_effects_mode=config.speech_effects_mode,
         force_sample_voice_config=config.pass3_condition is not None,
         saasr_session=saasr_session,
+        dynamic_followup_config=(
+            config.audio_native_config.qwen_agent_config.dynamic_followup
+            if config.audio_native_config.provider == "qwen_agent"
+            and config.audio_native_config.qwen_agent_config is not None
+            else None
+        ),
     )
 
     orchestrator = FullDuplexOrchestrator(

@@ -41,6 +41,14 @@ def main():
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--metrics-config", type=Path)
     parser.add_argument(
+        "--judge-from-user-llm",
+        action="store_true",
+        help=(
+            "Use the configured caller LLM credentials/model for all runtime "
+            "judges and diagnostics, without changing the source config files."
+        ),
+    )
+    parser.add_argument(
         "--resume",
         action="store_true",
         help="Resume saved results and run only unfinished task/trial pairs.",
@@ -53,20 +61,48 @@ def main():
     config = QwenAgentConfig.model_validate_json(args.config.read_text())
     values = read_config_environment(config.config_env_file)
     env = dict(os.environ)
-    env["OPENAI_API_KEY"] = resolve_env_reference(values, "GAIA2_JUDGE_API_KEY")
-    env["OPENAI_API_BASE"] = resolve_env_reference(values, "GAIA2_JUDGE_ENDPOINT")
-    env["OPENAI_BASE_URL"] = env["OPENAI_API_BASE"]
+    caller = config.user_llm_settings()
+    if args.judge_from_user_llm:
+        if caller is None:
+            raise ValueError(
+                "--judge-from-user-llm requires a complete user LLM configuration"
+            )
+        judge_model, user_llm_args = caller
+        judge_api_key = user_llm_args["api_key"]
+        judge_api_base = user_llm_args["api_base"]
+        # Judges use LiteLLM's ambient OpenAI-compatible connection. The source
+        # JSON remains unchanged; these values exist only in this subprocess.
+        env["OPENAI_API_KEY"] = judge_api_key
+        env["OPENAI_API_BASE"] = judge_api_base
+        env["OPENAI_BASE_URL"] = judge_api_base
+        judge_model_args = {
+            key: value
+            for key, value in user_llm_args.items()
+            if key not in {"api_key", "api_base", "base_url"}
+        }
+    else:
+        env["OPENAI_API_KEY"] = resolve_env_reference(values, "GAIA2_JUDGE_API_KEY")
+        env["OPENAI_API_BASE"] = resolve_env_reference(values, "GAIA2_JUDGE_ENDPOINT")
+        env["OPENAI_BASE_URL"] = env["OPENAI_API_BASE"]
+        judge_model = resolve_env_reference(values, "GAIA2_JUDGE_MODEL")
+        judge_model_args = {
+            "reasoning_effort": values.get("GAIA2_JUDGE_REASONING_EFFORT", "low"),
+            "num_retries": 0,
+        }
+
+    metrics_source = args.metrics_config
     if args.metrics_config:
         from tau2.diagnostics.config import MetricsConfig
 
         metrics = MetricsConfig.load(args.metrics_config)
         # Resolve only explicitly named diagnostic credentials from the same
         # private source; each role retains its own declared model and endpoint.
-        for profile in [metrics.model, *metrics.models.values()]:
-            if profile.api_key_env:
-                env[profile.api_key_env] = resolve_env_reference(
-                    values, profile.api_key_env
-                )
+        if not args.judge_from_user_llm:
+            for profile in [metrics.model, *metrics.models.values()]:
+                if profile.api_key_env:
+                    env[profile.api_key_env] = resolve_env_reference(
+                        values, profile.api_key_env
+                    )
     # Explicit backend references prevent evaluator credentials overriding Agent.
     # The names are configurable so a run can select a separate provider profile
     # (for example DEEPSEEK_*); only the complete three-variable contract matters.
@@ -78,21 +114,18 @@ def main():
         raise ValueError(
             "Smoke config must explicitly reference backend key, base URL and model"
         )
-    model = resolve_env_reference(values, "GAIA2_JUDGE_MODEL")
-    prefix = (
-        "openai/responses/"
-        if values.get("GAIA2_JUDGE_API") == "responses"
-        else "openai/"
+    if not args.judge_from_user_llm:
+        prefix = (
+            "openai/responses/"
+            if values.get("GAIA2_JUDGE_API") == "responses"
+            else "openai/"
+        )
+        judge_model = prefix + judge_model
+    user_model, user_args = caller if caller else (judge_model, judge_model_args)
+    env["TAU2_NL_ASSERTIONS_MODEL"] = judge_model
+    env["TAU2_NL_ASSERTIONS_REASONING_EFFORT"] = judge_model_args.get(
+        "reasoning_effort", "low"
     )
-    model = prefix + model
-    model_args = {
-        "reasoning_effort": values.get("GAIA2_JUDGE_REASONING_EFFORT", "low"),
-        "num_retries": 0,
-    }
-    caller = config.user_llm_settings()
-    user_model, user_args = caller if caller else (model, model_args)
-    env["TAU2_NL_ASSERTIONS_MODEL"] = model
-    env["TAU2_NL_ASSERTIONS_REASONING_EFFORT"] = model_args["reasoning_effort"]
     from tau2.utils.utils import DATA_DIR
 
     output = DATA_DIR / "simulations" / args.save_to
@@ -108,9 +141,41 @@ def main():
                 "user_decision_llm_args": user_args,
             }
         )
+    if args.judge_from_user_llm:
+        # The source config may point the embedded backend at a separate
+        # MiniMax GAIA2 profile. Redirect that runtime-only mapping as well, so
+        # the agent, user simulator, communicative judge, NL judge, and all
+        # diagnostics use the same configured DeepSeek connection.
+        runtime_environment = dict(config.environment)
+        runtime_environment.update(
+            {
+                "OPENAI_API_KEY": "DEEPSEEK_API_KEY",
+                "OPENAI_BASE_URL": "DEEPSEEK_BASE_URL",
+                "OPENAI_MODEL": "DEEPSEEK_MODEL",
+            }
+        )
+        config = config.model_copy(update={"environment": runtime_environment})
     derived_config = output / "qwen_agent_config.json"
     derived_config.write_text(config.model_dump_json(indent=2))
     derived_config.chmod(0o600)
+    if args.judge_from_user_llm and metrics_source is not None:
+        import yaml
+
+        judge_profile = {
+            "model": judge_model,
+            "api_base": judge_api_base,
+            "api_key_env": "TAU2_RUNTIME_JUDGE_API_KEY",
+            "args": judge_model_args,
+        }
+        metrics_value = yaml.safe_load(metrics_source.read_text()) or {}
+        metrics_value["model"] = judge_profile
+        for role in metrics_value.get("models") or {}:
+            metrics_value["models"][role] = dict(judge_profile)
+        metrics_source = output / "metrics_config.runtime.yaml"
+        metrics_source.write_text(
+            yaml.safe_dump(metrics_value, sort_keys=False, allow_unicode=True)
+        )
+        env["TAU2_RUNTIME_JUDGE_API_KEY"] = judge_api_key
     command = [
         str(here / "run_hpc.sh"),
         "run",
@@ -140,14 +205,14 @@ def main():
         "--user-llm-args",
         json.dumps(user_args),
         "--communicate-judge",
-        json.dumps({"model": model, "model_args": model_args}),
+        json.dumps({"model": judge_model, "model_args": judge_model_args}),
         "--save-to",
         args.save_to,
         "--verbose-logs",
         "--audio-taps",
     ]
-    if args.metrics_config:
-        command += ["--metrics-config", str(args.metrics_config.resolve())]
+    if metrics_source:
+        command += ["--metrics-config", str(metrics_source.resolve())]
 
     if args.max_seconds:
         command.extend(["--timeout", str(args.max_seconds + 150)])

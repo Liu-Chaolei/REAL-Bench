@@ -47,6 +47,39 @@ def test_mimo_user_profile_reaches_simulator_and_decision_model(monkeypatch, tmp
     assert "fake-mimo" not in system.model_dump_json()
 
 
+def test_dynamic_followup_config_reaches_simulator(monkeypatch):
+    from tau2.data_model.run_config import AudioNativeConfig
+    from tau2.data_model.simulation import VoiceRunConfig
+    from tau2.multilingual.runtime import task_context
+    from tau2.registry import registry
+    from tau2.runner.build import build_voice_user
+
+    monkeypatch.setattr(
+        "tau2.user.user_simulator_streaming.VoiceStreamingUserSimulator",
+        lambda **kwargs: SimpleNamespace(**kwargs),
+    )
+    environment = registry.get_env_constructor("mock")()
+    task = registry.get_tasks_loader("mock")()[0]
+    context = task_context(
+        VoiceRunConfig(domain="mock", audio_native_config=AudioNativeConfig()), task
+    )
+    audio = AudioNativeConfig(
+        provider="qwen_agent",
+        qwen_agent_config=QwenAgentConfig(
+            dynamic_followup={"enabled": True, "stages": [1, 2]}
+        ),
+    )
+    user = build_voice_user(
+        environment,
+        task,
+        audio,
+        language_context=context,
+        dynamic_followup_config=audio.qwen_agent_config.dynamic_followup,
+    )
+    assert user.dynamic_followup_config.enabled is True
+    assert user.dynamic_followup_config.stages == [1, 2]
+
+
 @pytest.mark.parametrize("seconds", [0, 30, 30.05])
 def test_caller_silence_checkin_config_reaches_shared_voice_builder(
     monkeypatch, seconds

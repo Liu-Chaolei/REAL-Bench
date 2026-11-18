@@ -176,6 +176,45 @@ distribution. Runtime has offline model caches and needs no GPU or downloads.
 Public generic audio from the provider test fixtures is included only for
 key-free image contracts; it contains no benchmark task content.
 
+### Contextual later-stage requests
+
+Gaia2 Qwen configs can opt into contextual rendering for the second and third
+fixed scenario requests by adding this block to the Qwen Agent config:
+
+```json
+"dynamic_followup": {
+  "enabled": true,
+  "stages": [1, 2],
+  "max_context_characters": 24000,
+  "max_retries": 1
+}
+```
+
+The stage numbers are internal zero-based indices: `[1, 2]` means the second
+and third user tasks, while the first request remains fixed. For later requests,
+the context classifier first receives only the preceding user/agent dialogue
+and returns structured `status` and `affect` labels. This describes what the
+caller believes happened, rather than objective tool correctness. The caller
+model then receives the immutable stage request, preceding conversation, and
+those labels, and produces one structured contextual utterance. A second
+structured check compares the source request with the generated wording and
+receives the stage's reference tool-call GT; internal IDs in that GT are
+evidence for the checker and are not required in the caller's wording. Values
+found only in tool results or the GT, such as answers, addresses, contact
+details and database IDs, are forbidden in the generated request unless the
+source request already states them. The utterance may adjust its tone and
+transition wording to the caller's perceived status and affect, while
+preserving the same business goal. If an earlier stage failed or remains
+incomplete, the utterance moves directly to the current request and does not
+reopen or repair the earlier stage. If the source request uses a cross-stage
+reference such as “that same chat”, “this contact”, or “those listings”, the
+generated wording must preserve the reference to the same antecedent. The
+source request remains the scoring goal; unsafe or incomplete renderings fall
+back to the original fixed text. If context classification is unavailable,
+the runtime uses the deterministic heuristic fallback. The accepted rendering,
+context labels and check result are recorded with the stage and reused when
+replaying the run. The default is disabled.
+
 ### Realtime frontend
 
 The supplied `config.example.json` reads the existing, read-only configuration:

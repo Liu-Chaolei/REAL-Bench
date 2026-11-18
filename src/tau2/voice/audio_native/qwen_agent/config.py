@@ -23,6 +23,7 @@ from tau2.config import (
     DEFAULT_QWEN_AGENT_USER_SILENCE_CHECKIN_SECONDS,
 )
 from tau2.data_model.asr import HotwordSettings
+from tau2.data_model.dynamic_followup import DynamicFollowupConfig
 from tau2.data_model.voice import MiMoTTSConfig
 from tau2.utils.env_config import read_config_environment, resolve_env_reference
 
@@ -112,6 +113,12 @@ class QwenAgentConfig(BaseModel):
     user_llm_api_key_env: str | None = None
     user_llm_base_url_env: str | None = None
     user_llm_model_env: str | None = None
+    dynamic_followup: DynamicFollowupConfig = Field(
+        default_factory=DynamicFollowupConfig,
+        description=(
+            "Opt-in contextual rendering for the second and third fixed scenario requests"
+        ),
+    )
 
     @model_validator(mode="after")
     def paired_user_llm_references(self):

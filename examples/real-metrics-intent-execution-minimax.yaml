@@ -1,0 +1,27 @@
+measures: [intent, execution]
+auto_score: true
+concurrency: 1
+max_requests: 128
+timeout_seconds: 120
+max_characters: 200000
+model:
+  model: openai/responses/MiniMax-M3
+  args:
+    reasoning_effort: low
+models:
+  gt:
+    model: openai/responses/MiniMax-M3
+    args:
+      reasoning_effort: low
+  prediction:
+    model: openai/responses/MiniMax-M3
+    args:
+      reasoning_effort: low
+  evaluation:
+    model: openai/responses/MiniMax-M3
+    args:
+      reasoning_effort: low
+  execution:
+    model: openai/responses/MiniMax-M3
+    args:
+      reasoning_effort: low

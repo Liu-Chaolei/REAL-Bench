@@ -1,0 +1,12 @@
+# All available diagnostics for one live Gaia2 voice trial.
+measures: [intent, execution, voice, interaction, conciseness]
+auto_score: true
+concurrency: 1
+max_requests: 128
+timeout_seconds: 120
+max_characters: 200000
+model:
+  model: openai/responses/MiniMax-M3
+  args:
+    reasoning_effort: low
+conciseness: {}
