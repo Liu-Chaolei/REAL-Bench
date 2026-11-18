@@ -432,6 +432,7 @@ def run_single_task(
         if (
             audio_taps
             or config.metrics_config is not None
+            or config.active_metrics is not None
             or record_qwen_bridge
             or (is_voice and config.audio_native_config.user_audio_renderer == "saasr")
         ) and save_dir:
@@ -482,7 +483,9 @@ def run_single_task(
             canonical_tasks=uses_canonical_tasks(config.benchmark),
             on_trajectory_ready=save_raw_trajectory,
             metrics_config=config.metrics_config,
+            active_metrics_config=config.active_metrics,
             persistent_task_config=config.persistent_task_config,
+            trial=trial,
             diagnostics_dir=(
                 save_dir
                 / "artifacts"

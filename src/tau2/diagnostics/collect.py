@@ -366,6 +366,7 @@ def finalize_evidence(orchestrator, simulation, recorder, directory):
         source={
             "task_sha256": digest(orchestrator.task.model_dump(mode="json")),
             "metrics_config": getattr(recorder, "metrics_config", None),
+            "active_metrics": (simulation.info or {}).get("active_metrics"),
             "final_frame": getattr(recorder, "final_frame", None),
             "initial_frame": recorder.initial_frame,
             "frame_labels": recorder.frame_labels,

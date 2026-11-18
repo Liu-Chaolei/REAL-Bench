@@ -65,6 +65,14 @@ class BaseRunConfig(RunSettings):
 
     @model_validator(mode="after")
     def validate_persistent_task_mode(self):
+        if self.active_metrics is not None:
+            from tau2.metrics.active.config import ActiveMetricsConfig
+
+            ActiveMetricsConfig.model_validate(self.active_metrics)
+            if self.persistent_task_config is not None:
+                raise ValueError(
+                    "active_metrics cannot be combined with persistent_task_config"
+                )
         if self.persistent_task_config is not None:
             from tau2.persistent_tasks.config import PersistentTaskConfig
 
@@ -983,12 +991,15 @@ class Info(BaseModel):
     """Information about the simulator."""
 
     persistent_task_config: Optional[dict] = Field(default=None)
+    active_metrics: Optional[dict] = Field(default=None)
 
     @model_serializer(mode="wrap")
     def serialize_persistent_config(self, handler):
         data = handler(self)
         if self.persistent_task_config is None:
             data.pop("persistent_task_config", None)
+        if self.active_metrics is None:
+            data.pop("active_metrics", None)
         return data
 
     voice_user_simulator_version: Optional[str] = Field(

@@ -269,6 +269,7 @@ def get_info(
     )
     return Info(
         persistent_task_config=config.persistent_task_config,
+        active_metrics=config.active_metrics,
         user_audio_renderer=(
             config.audio_native_config.saasr_identity if is_voice else None
         ),

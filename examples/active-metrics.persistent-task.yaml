@@ -1,0 +1,40 @@
+active_metrics:
+  persistent_task:
+    enabled: true
+    policy_version: persistent-task-metric-v1
+    preferred_options:
+      - state: waiting
+        operation: query
+        weight: 0.10
+      - state: queued
+        operation: query
+        weight: 0.10
+      - state: running
+        operation: query
+        weight: 0.40
+      - state: completed
+        operation: result
+        weight: 0.20
+      - state: failed
+        operation: query
+        weight: 0.15
+      - state: cancelled
+        operation: query
+        weight: 0.05
+    gates:
+      min_observations_after_creation: 2
+      min_dwell_seconds: 3
+      min_turn_boundaries: 1
+      initial_state_guard: true
+      max_wait_seconds: 300
+      reply_timeout_seconds: 30
+      reply_max_steps: 8
+    generator:
+      model:
+        model: gpt-5.5
+        args:
+          reasoning_effort: low
+      timeout_seconds: 8
+      max_attempts: 1
+      max_characters: 300
+      fallback_policy: call_language_required

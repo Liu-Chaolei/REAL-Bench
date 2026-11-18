@@ -53,7 +53,14 @@ class MetricsConfig(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
     measures: list[
-        Literal["intent", "execution", "voice", "interaction", "conciseness"]
+        Literal[
+            "intent",
+            "execution",
+            "voice",
+            "interaction",
+            "conciseness",
+            "persistent_task",
+        ]
     ] = Field(default_factory=lambda: ["intent", "execution", "voice"])
     auto_score: bool = True
     concurrency: int = Field(default=DEFAULT_DIAGNOSTIC_CONCURRENCY, ge=1)

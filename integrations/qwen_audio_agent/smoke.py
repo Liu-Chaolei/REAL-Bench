@@ -40,6 +40,7 @@ def main():
     )
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--metrics-config", type=Path)
+    parser.add_argument("--active-metrics-config", type=Path)
     parser.add_argument("--persistent-task-config", type=Path)
     parser.add_argument(
         "--judge-api-key-env",
@@ -170,6 +171,11 @@ def main():
     ]
     if args.metrics_config:
         command += ["--metrics-config", str(args.metrics_config.resolve())]
+    if args.active_metrics_config:
+        command += [
+            "--active-metrics-config",
+            str(args.active_metrics_config.resolve()),
+        ]
     if args.persistent_task_config:
         command += ["--persistent-task-config", str(args.persistent_task_config.resolve())]
 

@@ -208,6 +208,12 @@ def add_run_args(parser):
         help="Independent diagnostic YAML profile",
     )
     parser.add_argument(
+        "--active-metrics-config",
+        type=Path,
+        default=None,
+        help="Active metric YAML profile",
+    )
+    parser.add_argument(
         "--persistent-task-config",
         type=Path,
         default=None,
@@ -920,6 +926,13 @@ def main():
             metrics_config = MetricsConfig.load(args.metrics_config).model_dump(
                 mode="json"
             )
+        active_metrics = None
+        if getattr(args, "active_metrics_config", None):
+            from tau2.metrics.active.config import ActiveMetricsConfig
+
+            active_metrics = ActiveMetricsConfig.load(
+                args.active_metrics_config
+            ).model_dump(mode="json")
         persistent_task_config = None
         if args.persistent_task_config:
             from tau2.persistent_tasks.config import PersistentTaskConfig
@@ -929,6 +942,7 @@ def main():
             ).model_dump(mode="json")
         shared_kwargs = dict(
             persistent_task_config=persistent_task_config,
+            active_metrics=active_metrics,
             metrics_config=metrics_config,
             localize_db=args.localize_db,
             **(

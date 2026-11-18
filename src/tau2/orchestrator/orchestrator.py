@@ -304,6 +304,9 @@ class BaseOrchestrator(ABC, Generic[BaseAgentT, BaseUserT, TrajectoryItemT]):
         try:
             while not self.done:
                 previous_messages = None
+                active_metrics = getattr(self, "active_metric_manager", None)
+                if active_metrics is not None and scenario_runtime is not None:
+                    active_metrics.advance(scenario_runtime.time(), True)
                 if (
                     scenario_runtime is not None
                     and self.mode == CommunicationMode.HALF_DUPLEX
@@ -335,6 +338,8 @@ class BaseOrchestrator(ABC, Generic[BaseAgentT, BaseUserT, TrajectoryItemT]):
                             and not message.is_tool_call()
                         ):
                             scenario_runtime.delivered("agent", message.content or "")
+                if active_metrics is not None and scenario_runtime is not None:
+                    active_metrics.advance(scenario_runtime.time(), False)
                 self._check_termination()
             if scenario_runtime is not None and scenario_runtime.failure is not None:
                 raise RuntimeError(
@@ -362,6 +367,15 @@ class BaseOrchestrator(ABC, Generic[BaseAgentT, BaseUserT, TrajectoryItemT]):
                 result.info = {
                     **(result.info or {}),
                     "persistent_tasks": persistent_summary,
+                }
+            active_metrics = getattr(self, "active_metric_manager", None)
+            if active_metrics is not None:
+                result.info = {
+                    **(result.info or {}),
+                    "active_metrics": active_metrics.finalize(
+                        self.termination_reason.value,
+                        scenario_runtime.time() if scenario_runtime is not None else 0,
+                    ),
                 }
             if scenario_runtime is not None:
                 scenario_runtime.close()
@@ -870,6 +884,12 @@ class Orchestrator(BaseOrchestrator[AgentT, UserT, Message]):
             return
 
         if self.max_steps is not None and self.step_count >= self.max_steps:
+            active_metrics = getattr(self, "active_metric_manager", None)
+            if active_metrics is not None and active_metrics.should_extend_reply(
+                self.environment.scenario_runtime.time()
+            ):
+                active_metrics.consume_reply_step(self.environment.scenario_runtime.time())
+                return
             self.done = True
             self.termination_reason = TerminationReason.MAX_STEPS
         if self.num_errors >= self.max_errors:

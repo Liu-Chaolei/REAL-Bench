@@ -367,6 +367,17 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
                 not communication_busy
                 and self.async_evidence_source.get_status()["request_boundary"],
             )
+        active_metrics = getattr(self, "active_metric_manager", None)
+        if active_metrics is not None and runtime is not None:
+            active_metrics.advance(
+                runtime.time(),
+                not communication_busy
+                and (
+                    self.async_evidence_source.get_status()["request_boundary"]
+                    if getattr(self, "async_evidence_source", None) is not None
+                    else True
+                ),
+            )
         if self.scenario_stages is not None and self.scenario_stages.transition_pending:
             busy = bool(self._tool_executor.pending) if self._tool_executor else False
             busy = busy or bool(
@@ -909,6 +920,15 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
         Checks max_steps, max_errors, and timeout after each tick.
         """
         if self.max_steps is not None and self.step_count >= self.max_steps:
+            active_metrics = getattr(self, "active_metric_manager", None)
+            runtime = getattr(self.environment, "scenario_runtime", None)
+            if (
+                active_metrics is not None
+                and runtime is not None
+                and active_metrics.should_extend_reply(runtime.time())
+            ):
+                active_metrics.consume_reply_step(runtime.time())
+                return
             self.done = True
             self.termination_reason = TerminationReason.MAX_STEPS
         if self.num_errors >= self.max_errors:
