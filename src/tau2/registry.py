@@ -367,6 +367,18 @@ try:
     registry.register_tasks(
         gaia2_get_tasks, "gaia2", get_task_splits=gaia2_get_tasks_split
     )
+    from tau2.domains.gaia2_hidden.loader import (
+        get_tasks as gaia2_hidden_get_tasks,
+    )
+    from tau2.domains.gaia2_hidden.loader import (
+        get_tasks_split as gaia2_hidden_get_tasks_split,
+    )
+
+    registry.register_tasks(
+        gaia2_hidden_get_tasks,
+        "gaia2_hidden",
+        get_task_splits=gaia2_hidden_get_tasks_split,
+    )
 
     registry.register_domain(telecom_domain_get_environment_manual_policy, "telecom")
     registry.register_domain(
