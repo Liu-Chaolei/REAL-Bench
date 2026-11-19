@@ -1,3 +1,4 @@
+import hashlib
 import json
 import random
 import time
@@ -36,6 +37,8 @@ from tau2.data_model.audio_effects import (
     EffectTimeline,
     SpellOutDetection,
 )
+from tau2.data_model.dynamic_followup import DynamicFollowupConfig
+from tau2.data_model.hidden_intent import HiddenGoalGraph
 from tau2.data_model.message import (
     AssistantMessage,
     EnvironmentMessage,
@@ -49,7 +52,13 @@ from tau2.data_model.transcript import LinearizationStrategy
 from tau2.data_model.voice import VoiceSettings
 from tau2.environment.tool import Tool
 from tau2.user.async_voice import PendingVoiceTask
+from tau2.user.dynamic_followup import (
+    classify_status_affect,
+    generate_dynamic_followup,
+    infer_status_affect,
+)
 from tau2.user.guidelines import simulation_guidelines
+from tau2.user.hidden_intent import HiddenIntentRuntime
 from tau2.user.user_simulator import UserSimulator, build_user_system_prompt
 from tau2.user.user_simulator_base import (
     OUT_OF_SCOPE,
@@ -373,6 +382,8 @@ class VoiceStreamingUserSimulator(
         decision_model_args: Optional[dict] = None,
         silence_checkin_threshold: Optional[int] = None,
         saasr_session=None,
+        dynamic_followup_config: DynamicFollowupConfig | None = None,
+        hidden_intent_graph: HiddenGoalGraph | None = None,
     ):
         """
         Initialize the streaming user simulator.
@@ -439,6 +450,17 @@ class VoiceStreamingUserSimulator(
         self.interruption_check_interval = interruption_check_interval
         self.realtime_generation = realtime_generation
         self.saasr_session = saasr_session
+        self.dynamic_followup_config = dynamic_followup_config
+        self.hidden_intent_runtime = (
+            HiddenIntentRuntime(hidden_intent_graph)
+            if hidden_intent_graph is not None
+            else None
+        )
+        self._hidden_intent_events: list[dict] = []
+        self.scenario_dynamic_stage_ids: dict[str, int] = {}
+        self.scenario_dynamic_stage_tool_gts: dict[str, list[dict]] = {}
+        self._dynamic_followup_events: list[dict] = []
+        self._dynamic_followup_cache: dict[str, dict] = {}
         if saasr_session is not None and not realtime_generation:
             raise ValueError("SAASR needs asynchronous user generation")
         self._scenario_inputs = []
@@ -976,6 +998,8 @@ class VoiceStreamingUserSimulator(
             "candidate_recovery": list(self._candidate_recovery_events),
             "candidate_max_retries": self.candidate_max_retries,
             "candidate_recovery_enabled": self.scenario_constraints is not None,
+            "dynamic_followup": list(self._dynamic_followup_events),
+            "hidden_intent": list(self._hidden_intent_events),
         }
 
     def _next_turn_taking_action(
@@ -1122,15 +1146,18 @@ class VoiceStreamingUserSimulator(
             key = (message.raw_data or {}).get("scenario_input_id")
             if not self._scenario_inputs or self._scenario_inputs[0][0] != key:
                 raise RuntimeError("Scripted user input changed before delivery")
-            _, text = self._scenario_inputs.pop(0)
-            self._released_scenario_facts.append(text)
-            reminder = UserSimulator.scenario_stage_context(self, key, text)
+            _, source_text = self._scenario_inputs.pop(0)
+            released_text = message.content or source_text
+            self._released_scenario_facts.append(released_text)
+            reminder = UserSimulator.scenario_stage_context(self, key, released_text)
             if reminder is not None:
                 state.system_messages.append(reminder)
             state.system_messages.append(
                 SystemMessage(
                     role="system",
-                    content=f"Additional user information now available: {text}",
+                    content=(
+                        "Additional user information now available: " + released_text
+                    ),
                 )
             )
         state.user_utterance_count = generated.user_utterance_count
@@ -1720,6 +1747,20 @@ class VoiceStreamingUserSimulator(
                     f"Last message is an assistant message with no content: {linearized_messages[-1]}"
                 )
 
+        if self.hidden_intent_runtime is not None:
+            for message in reversed(linearized_messages):
+                if not isinstance(message, AssistantMessage) or not message.content:
+                    continue
+                result = self.hidden_intent_runtime.ask_auto(message.content)
+                self._hidden_intent_events.append(
+                    {
+                        "question": message.content,
+                        **result,
+                        "revision": self.hidden_intent_runtime.state.revision,
+                    }
+                )
+                break
+
         # Flip roles for user simulator (it sees itself as assistant)
         flipped_messages = self._flip_roles_for_llm(linearized_messages)
 
@@ -1743,13 +1784,191 @@ class VoiceStreamingUserSimulator(
             scripted_input = self._scenario_inputs.pop(0)
         if scripted_input is not None:
             key, text = scripted_input
+            dynamic_event = None
+            dynamic_stage = self.scenario_dynamic_stage_ids.get(key)
+            dynamic_enabled = (
+                self.dynamic_followup_config is not None
+                and self.dynamic_followup_config.enabled
+                and dynamic_stage in self.dynamic_followup_config.stages
+            )
+            if dynamic_enabled:
+                cache_material = {
+                    "event_id": key,
+                    "stage": dynamic_stage,
+                    "source_request": text,
+                    "state_revision": getattr(state, "agent_input_revision", 0),
+                    "config": self.dynamic_followup_config.model_dump(mode="json"),
+                }
+                cache_key = hashlib.sha256(
+                    json.dumps(
+                        cache_material, ensure_ascii=False, sort_keys=True
+                    ).encode()
+                ).hexdigest()
+                cached = self._dynamic_followup_cache.get(cache_key)
+                if cached is not None:
+                    text = cached["generated_utterance"]
+                    dynamic_event = {**cached, "replayed": True}
+                else:
+                    context_classification = None
+                    context_reply = None
+                    context_fallback = False
+                    context_error = None
+                    try:
+                        context_classification, context_reply = classify_status_affect(
+                            model=self.llm,
+                            model_args=self.llm_args,
+                            conversation=linearized_messages,
+                            max_context_characters=(
+                                self.dynamic_followup_config.max_context_characters
+                            ),
+                        )
+                        stage_status = context_classification.status
+                        affect = context_classification.affect
+                    except Exception as error:
+                        # Context classification is advisory. Preserve the
+                        # source request if this extra call is unavailable.
+                        stage_status, affect = infer_status_affect(
+                            linearized_messages, self._released_scenario_facts
+                        )
+                        context_fallback = True
+                        context_error = f"{type(error).__name__}: {error}"
+                    dynamic_context_hash = hashlib.sha256(
+                        json.dumps(
+                            {
+                                "stage": dynamic_stage,
+                                "source_request": text,
+                                "conversation": [
+                                    {"role": m.role, "content": m.content}
+                                    for m in linearized_messages
+                                    if m.content
+                                ],
+                                "released_facts": self._released_scenario_facts,
+                                "stage_status": stage_status,
+                                "affect": affect,
+                                "context_fallback": context_fallback,
+                                "tool_call_gt": self.scenario_dynamic_stage_tool_gts.get(
+                                    key, []
+                                ),
+                                "config": self.dynamic_followup_config.model_dump(
+                                    mode="json"
+                                ),
+                            },
+                            ensure_ascii=False,
+                            sort_keys=True,
+                        ).encode()
+                    ).hexdigest()
+                    try:
+                        (
+                            candidate,
+                            candidate_reply,
+                            verification,
+                            verification_reply,
+                        ) = generate_dynamic_followup(
+                            model=self.llm,
+                            model_args=self.llm_args,
+                            stage=dynamic_stage,
+                            source_request=text,
+                            conversation=linearized_messages,
+                            released_facts=self._released_scenario_facts,
+                            config=self.dynamic_followup_config,
+                            tool_call_gt=self.scenario_dynamic_stage_tool_gts.get(
+                                key, []
+                            ),
+                            stage_status=stage_status,
+                            affect=affect,
+                        )
+                        text = candidate.utterance
+                        dynamic_event = {
+                            "stage": dynamic_stage,
+                            "source_request": scripted_input[1],
+                            "generated_utterance": text,
+                            "tool_call_gt": self.scenario_dynamic_stage_tool_gts.get(
+                                key, []
+                            ),
+                            "covered_requirements": candidate.covered_requirements,
+                            "referenced_entities": candidate.referenced_entities,
+                            "new_requirements": candidate.new_requirements,
+                            "verification": verification.model_dump(mode="json"),
+                            "accepted": True,
+                            "fallback": False,
+                            "model": self.llm,
+                            "prompt_hash": dynamic_context_hash,
+                            "context_revision": state.agent_input_revision,
+                            "generation_time_seconds": candidate_reply.generation_time_seconds,
+                            "verification_cost": verification_reply.cost,
+                            "verification_time_seconds": (
+                                verification_reply.generation_time_seconds
+                            ),
+                            "stage_status": stage_status,
+                            "affect": affect,
+                            "context_classification": (
+                                context_classification.model_dump(mode="json")
+                                if context_classification is not None
+                                else None
+                            ),
+                            "context_fallback": context_fallback,
+                            "context_error": context_error,
+                            "context_generation_time_seconds": (
+                                context_reply.generation_time_seconds
+                                if context_reply is not None
+                                else None
+                            ),
+                            "context_cost": (
+                                context_reply.cost
+                                if context_reply is not None
+                                else None
+                            ),
+                        }
+                    except Exception as error:
+                        dynamic_event = {
+                            "stage": dynamic_stage,
+                            "source_request": text,
+                            "generated_utterance": text,
+                            "tool_call_gt": self.scenario_dynamic_stage_tool_gts.get(
+                                key, []
+                            ),
+                            "accepted": False,
+                            "fallback": True,
+                            "reason": type(error).__name__,
+                            "reason_detail": str(error),
+                            "prompt_hash": dynamic_context_hash,
+                            "context_revision": state.agent_input_revision,
+                            "stage_status": stage_status,
+                            "affect": affect,
+                            "context_classification": (
+                                context_classification.model_dump(mode="json")
+                                if context_classification is not None
+                                else None
+                            ),
+                            "context_fallback": context_fallback,
+                            "context_error": context_error,
+                        }
+                    self._dynamic_followup_cache[cache_key] = dynamic_event
+            if dynamic_event is not None:
+                self._dynamic_followup_events.append(dynamic_event)
             assistant_message = AssistantMessage(
                 role="assistant",
                 content=text,
                 cost=0.0,
                 generation_time_seconds=0.0,
-                raw_data={"scenario_input_id": key},
+                raw_data={
+                    "scenario_input_id": key,
+                    **(
+                        {"dynamic_followup": dynamic_event}
+                        if dynamic_event is not None
+                        else {}
+                    ),
+                },
             )
+            if (
+                dynamic_event is not None
+                and dynamic_event["accepted"]
+                and not dynamic_event.get("replayed")
+            ):
+                assistant_message.cost = candidate_reply.cost
+                assistant_message.generation_time_seconds = (
+                    candidate_reply.generation_time_seconds
+                )
         else:
 
             def generate_reply(feedback):

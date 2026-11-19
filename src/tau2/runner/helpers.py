@@ -251,6 +251,10 @@ def get_info(
     if config.elicitation is not None:
         info_env_kwargs["channel"] = "voice" if is_voice else "text"
         info_env_kwargs["strategy"] = config.elicitation.strategy
+    if config.domain == "gaia2" and getattr(
+        config, "gaia2_allow_stale_runtime", False
+    ):
+        info_env_kwargs["allow_stale_runtime"] = True
     if getattr(config, "retrieval_config", None) is not None:
         info_env_kwargs["retrieval_variant"] = config.retrieval_config
         rk = dict(getattr(config, "retrieval_config_kwargs", None) or {})

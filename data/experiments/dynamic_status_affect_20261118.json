@@ -1,0 +1,126 @@
+{
+  "experiment": "dynamic_status_affect",
+  "model": "openai/deepseek-flash",
+  "temperature": 0.8,
+  "cases": [
+    {
+      "task_id": "0002_46myz87t501b0c902dy81rlbqbye2dyi",
+      "stage": 1,
+      "stage_status": "abandoned",
+      "affect": "frustrated and giving up",
+      "context_classification": {
+        "status": "abandoned",
+        "affect": "frustrated and giving up",
+        "rationale": "The caller repeatedly waited for the first name, then concluded the agent had no result and ended the request to try another way. This is giving up rather than accepting completion or merely waiting.",
+        "evidence": [
+          "Question asks for just the first name",
+          "Repeated: still waiting / can you get it or not",
+          "Final: So after all that, you've got nothing",
+          "Final: I'm done — I'll try another way. Goodbye."
+        ]
+      },
+      "source": "In my Chats, post a message in the group chat titled \"A Conversation Across Cultures\" thanking Lianying for her point about places of worship and cultures. Use exactly these words: \"Ni hao Lianying! Your point that mosques, like other places of worship, play a vital role in promoting understanding and tolerance between different cultures really resonated with me. Sharing our stories is how we build bridges.\" Then rename that same group chat to \"Cultures, Faith and Understanding\". Finally, report back the new chat title and quote exactly what you posted.",
+      "previous_dynamic_utterance": "In my Chats, please post this message in the group chat titled “A Conversation Across Cultures”: “Ni hao Lianying! Your point that mosques, like other places of worship, play a vital role in promoting understanding and tolerance between different cultures really resonated with me. Sharing our stories is how we build bridges.” Then rename that same group chat to “Cultures, Faith and Understanding,” and report back the new chat title and quote exactly what you posted.",
+      "new_dynamic_utterance": "Forget the name lookup—I’m done waiting on that. In my Chats, go to the group chat titled 'A Conversation Across Cultures' and post this exact message thanking Lianying for her point about places of worship and cultures: 'Ni hao Lianying! Your point that mosques, like other places of worship, play a vital role in promoting understanding and tolerance between different cultures really resonated with me. Sharing our stories is how we build bridges.' Then rename that same group chat to 'Cultures, Faith and Understanding.' Finally, report back the new chat title and quote exactly what I posted.",
+      "covered_requirements": [
+        "In Chats, post a message in the group chat titled 'A Conversation Across Cultures'.",
+        "Thank Lianying for her point about places of worship and cultures.",
+        "Use exactly the words: 'Ni hao Lianying! Your point that mosques, like other places of worship, play a vital role in promoting understanding and tolerance between different cultures really resonated with me. Sharing our stories is how we build bridges.'",
+        "Rename that same group chat to 'Cultures, Faith and Understanding'.",
+        "Report back the new chat title and quote exactly what was posted."
+      ],
+      "verification": {
+        "valid": true,
+        "reason": "The generated request preserves the source goal: it posts the exact message to the specified group chat, renames that same chat to the exact new title, and asks for the new title plus an exact quote of the posted message. The reference to abandoning the prior name lookup reflects the failed/abandoned earlier stage and does not add a new business goal or leak hidden information. The requested operations align with the expected tool calls.",
+        "missing_requirements": [],
+        "invented_requirements": [],
+        "missing_tools": [],
+        "extra_tools": [],
+        "leaked_information": []
+      },
+      "generation_time_seconds": 5.983304019551724,
+      "verification_time_seconds": 4.354521262925118,
+      "context_generation_time_seconds": 2.7220064527355134,
+      "context_cost": 0.0
+    },
+    {
+      "task_id": "0138_t6mwmx3ilpme496q17bhcx0f39vm1a9o",
+      "stage": 1,
+      "stage_status": "completed",
+      "affect": "satisfied and appreciative",
+      "context_classification": {
+        "status": "completed",
+        "affect": "satisfied and appreciative",
+        "rationale": "The caller explicitly accepts the confirmed calendar event and saved listings, and says the still-unsent email is what they wanted. They thank the assistant and close the conversation.",
+        "evidence": [
+          "event's booked and the three listings are saved",
+          "email's still unsent, which is what I wanted",
+          "That all works for me",
+          "Thanks a lot for the help"
+        ]
+      },
+      "source": "Email Aurelia Păunescu at aurelia.paunescu@gaia2mail.com a shortlist of all Phoenix properties priced at 1200 per month, with each name, address, rent, bedroom count and lease term. Ask which property she would like to see first. Use the subject \"Shortlist: Phoenix places at $1200\".",
+      "previous_dynamic_utterance": "Now I have the right contact—please email Aurelia Păunescu at aurelia.paunescu@gaia2mail.com a shortlist of all Phoenix properties priced at $1,200 per month, including each property’s name, address, rent, bedroom count, and lease term. Ask which property she would like to see first, and use the subject \"Shortlist: Phoenix places at $1200\".",
+      "new_dynamic_utterance": "Thanks for confirming everything else. Now that I have Aurelia’s full details, please email Aurelia Păunescu at aurelia.paunescu@gaia2mail.com with a shortlist of all Phoenix properties priced at 1200 per month. For each one, include its name, address, rent, bedroom count, and lease term, use the subject “Shortlist: Phoenix places at $1200,” and ask which property she’d like to see first.",
+      "covered_requirements": [
+        "Email Aurelia Păunescu at aurelia.paunescu@gaia2mail.com",
+        "Create a shortlist of all Phoenix properties priced at 1200 per month",
+        "Include each property’s name, address, rent, bedroom count, and lease term",
+        "Ask which property she would like to see first",
+        "Use the subject “Shortlist: Phoenix places at $1200”"
+      ],
+      "verification": {
+        "valid": true,
+        "reason": "The generated request preserves the source goal: it emails the specified Aurelia address with a shortlist of all Phoenix properties at $1200/month, includes name, address, rent, bedroom count, and lease term for each, uses the exact subject, and asks which property she would like to see first. No new business requirements or hidden GT details are introduced.",
+        "missing_requirements": [],
+        "invented_requirements": [],
+        "missing_tools": [],
+        "extra_tools": [],
+        "leaked_information": []
+      },
+      "generation_time_seconds": 10.258271749131382,
+      "verification_time_seconds": 20.49414502689615,
+      "context_generation_time_seconds": 6.588842125143856,
+      "context_cost": 0.0
+    },
+    {
+      "task_id": "0138_t6mwmx3ilpme496q17bhcx0f39vm1a9o",
+      "stage": 2,
+      "stage_status": "partial",
+      "affect": "calm and satisfied with the completed parts",
+      "context_classification": {
+        "status": "partial",
+        "affect": "calm and satisfied with the completed parts",
+        "rationale": "The caller accepts the saved Phoenix listings and the calendar event, but the email to Aurelia remains intentionally unsent pending confirmation.",
+        "evidence": [
+          "just make sure it's the right Aurelia before anything goes out. I'll hang on.",
+          "I'd rather you not guess. Just message me about it and hold off on the email until we're sure.",
+          "that all sounds good — three Phoenix listings saved, and Property Search on the 16th from noon to 2, tagged Personal."
+        ]
+      },
+      "source": "Add a Calendar event on 16 October 2024 from 15:00 to 16:00 UTC titled \"Viewing Debrief with Aurelia\", at Desert Bloom Apartments on N 7th St, with Aurelia Păunescu (aurelia.paunescu@gaia2mail.com) as attendee, tagged Personal.",
+      "previous_dynamic_utterance": "Next, please add a Calendar event on 16 October 2024 from 15:00 to 16:00 UTC titled “Viewing Debrief with Aurelia”, at Desert Bloom Apartments on N 7th St, with Aurelia Păunescu (aurelia.paunescu@gaia2mail.com) as an attendee, tagged Personal.",
+      "new_dynamic_utterance": "Great, thanks — the three Phoenix listings and the Property Search event are all sorted. Now please add another calendar event: 16 October 2024 from 15:00 to 16:00 UTC, titled “Viewing Debrief with Aurelia,” at Desert Bloom Apartments on N 7th St. Put Aurelia Păunescu (aurelia.paunescu@gaia2mail.com) down as the attendee and tag it Personal.",
+      "covered_requirements": [
+        "Add a calendar event on 16 October 2024 from 15:00 to 16:00 UTC",
+        "Title the event \"Viewing Debrief with Aurelia\"",
+        "Set the event location to Desert Bloom Apartments on N 7th St",
+        "Add Aurelia Păunescu with email aurelia.paunescu@gaia2mail.com as an attendee",
+        "Tag the event Personal"
+      ],
+      "verification": {
+        "valid": true,
+        "reason": "The generated request preserves all substantive source requirements for the new calendar event, including date, time range and UTC, title, location, attendee name and email, and Personal tag. The brief prior-status preamble is supported by the conversation and does not add a new business goal or reopen unresolved work.",
+        "missing_requirements": [],
+        "invented_requirements": [],
+        "missing_tools": [],
+        "extra_tools": [],
+        "leaked_information": []
+      },
+      "generation_time_seconds": 5.78597541898489,
+      "verification_time_seconds": 23.33132431609556,
+      "context_generation_time_seconds": 6.355293435975909,
+      "context_cost": 0.0
+    }
+  ]
+}

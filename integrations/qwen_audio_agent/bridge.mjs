@@ -51,6 +51,21 @@ async function initialize(message) {
     timeoutMs: message.tool_timeout_ms, onFailure: fail })
   mkdirSync(`${trial}/prompts`, { recursive: true })
   mkdirSync(`${trial}/config`, { recursive: true })
+  // Extend the immutable Qwen catalog with the DashScope model selected by tau.
+  // The gateway merges this file with its built-in profiles at startup.
+  writeFileSync(`${trial}/config/frontend-models.json`, JSON.stringify({
+    providers: {
+      dashscope: {
+        models: {
+          'qwen-audio-3.1-realtime-flash': {
+            api: 'audio',
+            label: 'Qwen Audio 3.1 Realtime Flash',
+            voice: 'longanqian_v3.1',
+          },
+        },
+      },
+    },
+  }))
   mkdirSync(`${workspace}/.qwen`, { recursive: true })
   const original = readFileSync(`${root}/config/frontend-agent/PROMPT.md`, 'utf8')
   const combined = composePolicy(original, message.policy)

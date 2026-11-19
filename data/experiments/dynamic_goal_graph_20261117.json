@@ -1,0 +1,375 @@
+{
+  "experiment": "dynamic_goal_graph",
+  "graph_temperature": 0.0,
+  "render_temperature": 0.8,
+  "cases": [
+    {
+      "task_id": "0002_46myz87t501b0c902dy81rlbqbye2dyi",
+      "stage": 1,
+      "source": "In my Chats, post a message in the group chat titled \"A Conversation Across Cultures\" thanking Lianying for her point about places of worship and cultures. Use exactly these words: \"Ni hao Lianying! Your point that mosques, like other places of worship, play a vital role in promoting understanding and tolerance between different cultures really resonated with me. Sharing our stories is how we build bridges.\" Then rename that same group chat to \"Cultures, Faith and Understanding\". Finally, report back the new chat title and quote exactly what you posted.",
+      "original_utterance": "In my Chats, please post this message in the group chat titled “A Conversation Across Cultures”: “Ni hao Lianying! Your point that mosques, like other places of worship, play a vital role in promoting understanding and tolerance between different cultures really resonated with me. Sharing our stories is how we build bridges.” Then rename that same group chat to “Cultures, Faith and Understanding,” and report back the new chat title and quote exactly what you posted.",
+      "goal_graph": {
+        "stage": 1,
+        "nodes": [
+          {
+            "id": "g1_select_target_chat",
+            "kind": "constraint",
+            "description": "locate group chat",
+            "visibility": "caller_visible",
+            "tool": null,
+            "arguments": {
+              "container": "Chats",
+              "object_type": "group chat",
+              "title": "A Conversation Across Cultures"
+            },
+            "depends_on": [],
+            "protected_values": [],
+            "backend_only_values": []
+          },
+          {
+            "id": "g2_post_message",
+            "kind": "tool_action",
+            "description": "post message to group chat",
+            "visibility": "caller_visible",
+            "tool": null,
+            "arguments": {
+              "target_ref": "target_group_chat",
+              "content": "Ni hao Lianying! Your point that mosques, like other places of worship, play a vital role in promoting understanding and tolerance between different cultures really resonated with me. Sharing our stories is how we build bridges."
+            },
+            "depends_on": [
+              "g1_select_target_chat"
+            ],
+            "protected_values": [],
+            "backend_only_values": []
+          },
+          {
+            "id": "g3_rename_chat",
+            "kind": "tool_action",
+            "description": "rename group chat",
+            "visibility": "caller_visible",
+            "tool": null,
+            "arguments": {
+              "target_ref": "target_group_chat",
+              "new_title": "Cultures, Faith and Understanding"
+            },
+            "depends_on": [
+              "g1_select_target_chat",
+              "g2_post_message"
+            ],
+            "protected_values": [],
+            "backend_only_values": []
+          },
+          {
+            "id": "g4_report_back",
+            "kind": "report",
+            "description": "report back",
+            "visibility": "caller_visible",
+            "tool": null,
+            "arguments": {
+              "new_chat_title": {
+                "source": "g3_rename_chat.arguments.new_title"
+              },
+              "exact_posted_text": {
+                "source": "g2_post_message.arguments.content"
+              }
+            },
+            "depends_on": [
+              "g2_post_message",
+              "g3_rename_chat"
+            ],
+            "protected_values": [],
+            "backend_only_values": []
+          }
+        ],
+        "edges": [],
+        "protected_values": [
+          "A Conversation Across Cultures",
+          "Ni hao Lianying! Your point that mosques, like other places of worship, play a vital role in promoting understanding and tolerance between different cultures really resonated with me. Sharing our stories is how we build bridges.",
+          "Cultures, Faith and Understanding"
+        ],
+        "backend_only_values": [
+          "<backend-only:conversation_id>",
+          "<backend-only:tool_names>",
+          "<backend-only:event_ids>",
+          "<backend-only:dependency_ids>"
+        ],
+        "extraction_notes": []
+      },
+      "generated_utterance": "In my Chats, go to the group chat titled \"A Conversation Across Cultures\" and post this exact message: \"Ni hao Lianying! Your point that mosques, like other places of worship, play a vital role in promoting understanding and tolerance between different cultures really resonated with me. Sharing our stories is how we build bridges.\" After that, rename that same group chat to \"Cultures, Faith and Understanding,\" then report back with the exact message you posted and the new chat title.",
+      "covered_node_ids": [],
+      "verification": {
+        "valid": true,
+        "reason": "Generated request expresses all caller-visible graph nodes, preserves the required order and same-chat dependency, includes exact protected values without exposing backend-only values, and introduces no new requirements.",
+        "missing_nodes": [],
+        "invented_requirements": [],
+        "broken_dependencies": [],
+        "wrong_values": [],
+        "leaked_backend_values": [],
+        "issues": []
+      },
+      "metrics": {
+        "source_generated_jaccard": 0.7916666666666666,
+        "source_original_jaccard": 0.8571428571428571,
+        "generated_chars": 488.0,
+        "original_chars": 470.0
+      }
+    },
+    {
+      "task_id": "0138_t6mwmx3ilpme496q17bhcx0f39vm1a9o",
+      "stage": 1,
+      "source": "Email Aurelia Păunescu at aurelia.paunescu@gaia2mail.com a shortlist of all Phoenix properties priced at 1200 per month, with each name, address, rent, bedroom count and lease term. Ask which property she would like to see first. Use the subject \"Shortlist: Phoenix places at $1200\".",
+      "original_utterance": "Now I have the right contact—please email Aurelia Păunescu at aurelia.paunescu@gaia2mail.com a shortlist of all Phoenix properties priced at $1,200 per month, including each property’s name, address, rent, bedroom count, and lease term. Ask which property she would like to see first, and use the subject \"Shortlist: Phoenix places at $1200\".",
+      "goal_graph": {
+        "stage": 1,
+        "nodes": [
+          {
+            "id": "g1",
+            "kind": "constraint",
+            "description": "retrieve_shortlist",
+            "visibility": "caller_visible",
+            "tool": null,
+            "arguments": {
+              "city": "Phoenix",
+              "rent": "1200 per month",
+              "scope": "all",
+              "fields": [
+                "name",
+                "address",
+                "rent",
+                "bedroom count",
+                "lease term"
+              ]
+            },
+            "depends_on": [],
+            "protected_values": [],
+            "backend_only_values": []
+          },
+          {
+            "id": "g2",
+            "kind": "constraint",
+            "description": "ask_first_viewing_preference",
+            "visibility": "caller_visible",
+            "tool": null,
+            "arguments": {
+              "question": "which property she would like to see first",
+              "shortlist_ref": "g1.output"
+            },
+            "depends_on": [
+              "g1"
+            ],
+            "protected_values": [],
+            "backend_only_values": []
+          },
+          {
+            "id": "g3",
+            "kind": "tool_action",
+            "description": "send_email",
+            "visibility": "caller_visible",
+            "tool": "Emails__send_email",
+            "arguments": {
+              "to_name": "Aurelia Păunescu",
+              "recipients": [
+                "aurelia.paunescu@gaia2mail.com"
+              ],
+              "subject": "Shortlist: Phoenix places at $1200",
+              "shortlist_ref": "g1.output",
+              "question_ref": "g2",
+              "body_requirements": [
+                "name",
+                "address",
+                "rent",
+                "bedroom count",
+                "lease term"
+              ]
+            },
+            "depends_on": [
+              "g1",
+              "g2"
+            ],
+            "protected_values": [],
+            "backend_only_values": []
+          },
+          {
+            "id": "g4",
+            "kind": "constraint",
+            "description": "list_sent_emails",
+            "visibility": "backend_only",
+            "tool": "Emails__list_emails",
+            "arguments": {
+              "folder_name": "SENT",
+              "limit": 1,
+              "offset": 0
+            },
+            "depends_on": [
+              "g3"
+            ],
+            "protected_values": [],
+            "backend_only_values": []
+          }
+        ],
+        "edges": [
+          [
+            "g1",
+            "g2"
+          ],
+          [
+            "g1",
+            "g3"
+          ],
+          [
+            "g2",
+            "g3"
+          ],
+          [
+            "g3",
+            "g4"
+          ]
+        ],
+        "protected_values": [
+          "Shortlist: Phoenix places at $1200",
+          "aurelia.paunescu@gaia2mail.com"
+        ],
+        "backend_only_values": [
+          "<backend-only:send_email.content>",
+          "<backend-only:property_values>",
+          "<backend-only:sender_signature>",
+          "<backend-only:send_email.event_id>",
+          "<backend-only:send_email.dependencies>",
+          "<backend-only:list_emails.arguments>",
+          "<backend-only:list_emails.event_id>",
+          "<backend-only:list_emails.dependencies>",
+          "<backend-only:tool_names>"
+        ],
+        "extraction_notes": []
+      },
+      "generated_utterance": "Could you pull a shortlist of all Phoenix properties at $1200 per month, including each one’s name, address, rent, bedroom count, and lease term, then email Aurelia Păunescu at aurelia.paunescu@gaia2mail.com with the subject \"Shortlist: Phoenix places at $1200\"? In that email, include those property details and ask her which property she would like to see first.",
+      "covered_node_ids": [],
+      "verification": {
+        "valid": true,
+        "reason": "",
+        "missing_nodes": [],
+        "invented_requirements": [],
+        "broken_dependencies": [],
+        "wrong_values": [],
+        "leaked_backend_values": [],
+        "issues": []
+      },
+      "metrics": {
+        "source_generated_jaccard": 0.7222222222222222,
+        "source_original_jaccard": 0.7843137254901961,
+        "generated_chars": 364.0,
+        "original_chars": 342.0
+      }
+    },
+    {
+      "task_id": "0138_t6mwmx3ilpme496q17bhcx0f39vm1a9o",
+      "stage": 2,
+      "source": "Add a Calendar event on 16 October 2024 from 15:00 to 16:00 UTC titled \"Viewing Debrief with Aurelia\", at Desert Bloom Apartments on N 7th St, with Aurelia Păunescu (aurelia.paunescu@gaia2mail.com) as attendee, tagged Personal.",
+      "original_utterance": "Next, please add a Calendar event on 16 October 2024 from 15:00 to 16:00 UTC titled “Viewing Debrief with Aurelia”, at Desert Bloom Apartments on N 7th St, with Aurelia Păunescu (aurelia.paunescu@gaia2mail.com) as an attendee, tagged Personal.",
+      "goal_graph": {
+        "stage": 2,
+        "nodes": [
+          {
+            "id": "user_context",
+            "kind": "constraint",
+            "description": "user_context",
+            "visibility": "backend_only",
+            "tool": null,
+            "arguments": {},
+            "depends_on": [],
+            "protected_values": [],
+            "backend_only_values": []
+          },
+          {
+            "id": "create_event",
+            "kind": "tool_action",
+            "description": "add_calendar_event",
+            "visibility": "caller_visible",
+            "tool": null,
+            "arguments": {},
+            "depends_on": [
+              "user_context"
+            ],
+            "protected_values": [],
+            "backend_only_values": []
+          },
+          {
+            "id": "read_event",
+            "kind": "tool_action",
+            "description": "get_calendar_event",
+            "visibility": "backend_only",
+            "tool": null,
+            "arguments": {},
+            "depends_on": [
+              "user_context",
+              "create_event"
+            ],
+            "protected_values": [],
+            "backend_only_values": []
+          }
+        ],
+        "edges": [
+          [
+            "user_context",
+            "create_event"
+          ],
+          [
+            "create_event",
+            "read_event"
+          ],
+          [
+            "user_context",
+            "read_event"
+          ],
+          [
+            "create_event",
+            "read_event"
+          ]
+        ],
+        "protected_values": [
+          "Viewing Debrief with Aurelia",
+          "aurelia.paunescu@gaia2mail.com",
+          "Calendar",
+          "16 October 2024",
+          "15:00",
+          "16:00",
+          "15:00 to 16:00 UTC",
+          "UTC",
+          "Desert Bloom Apartments on N 7th St",
+          "Aurelia Păunescu",
+          "Personal"
+        ],
+        "backend_only_values": [
+          "Calendar__add_calendar_event",
+          "Calendar__get_calendar_event",
+          "series_s2_user",
+          "series_s2_create",
+          "series_s2_read",
+          "{{series_s2_create}}",
+          "2024-10-16",
+          "2024-10-16 15:00:00",
+          "2024-10-16 16:00:00"
+        ],
+        "extraction_notes": []
+      },
+      "generated_utterance": "Please add a Calendar event titled “Viewing Debrief with Aurelia” for 16 October 2024, from 15:00 to 16:00 UTC. Set the location to Desert Bloom Apartments on N 7th St, invite Aurelia Păunescu at aurelia.paunescu@gaia2mail.com, and tag it as Personal.",
+      "covered_node_ids": [],
+      "verification": {
+        "valid": true,
+        "reason": "The generated request expresses the caller-visible create_event action with all protected values preserved, does not expose backend-only nodes or values, and introduces no new requirements.",
+        "missing_nodes": [],
+        "invented_requirements": [],
+        "broken_dependencies": [],
+        "wrong_values": [],
+        "leaked_backend_values": [],
+        "issues": []
+      },
+      "metrics": {
+        "source_generated_jaccard": 0.7441860465116279,
+        "source_original_jaccard": 0.918918918918919,
+        "generated_chars": 251.0,
+        "original_chars": 243.0
+      }
+    }
+  ]
+}

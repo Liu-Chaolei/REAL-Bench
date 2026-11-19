@@ -78,6 +78,9 @@ class RequestGeneratorConfig(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
     model: ModelProfile = Field(default_factory=ModelProfile)
+    model_env: str | None = None
+    api_base_env: str | None = None
+    api_key_env: str | None = None
     timeout_seconds: float = Field(default=8, gt=0)
     max_attempts: int = Field(default=1, ge=0)
     max_characters: int = Field(default=300, ge=1)

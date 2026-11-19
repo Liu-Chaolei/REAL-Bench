@@ -24,6 +24,7 @@ from tau2.config import (
     DEFAULT_SPEECH_EFFECTS_MODE,
     ELICITATION_DOMAINS,
 )
+from tau2.data_model.dynamic_followup import DynamicFollowupConfig
 from tau2.data_model.elicitation import ElicitationConfig, ElicitationStrategy
 from tau2.data_model.language import CallContext, LanguageTaskInfo
 from tau2.data_model.persona import PersonaConfig
@@ -274,6 +275,8 @@ def build_voice_user(
     speech_effects_mode: str = DEFAULT_SPEECH_EFFECTS_MODE,
     force_sample_voice_config: bool = False,
     saasr_session=None,
+    dynamic_followup_config: DynamicFollowupConfig | None = None,
+    hidden_intent_graph=None,
 ) -> FullDuplexUser:
     """Build a full-duplex voice user simulator.
 
@@ -522,6 +525,8 @@ def build_voice_user(
         audio_taps_dir=audio_taps_dir,
         realtime_generation=audio_native_config.realtime_generation_enabled,
         saasr_session=saasr_session,
+        dynamic_followup_config=dynamic_followup_config,
+        hidden_intent_graph=hidden_intent_graph,
     )
     return user
 
@@ -605,6 +610,10 @@ def _build_env_kwargs(
     if registry.get_domain_capabilities(config.domain).get("task_environment"):
         env_kwargs["task"] = task
         env_kwargs["semantic_scoring"] = config.communicate_scoring
+        if config.domain == "gaia2" and getattr(
+            config, "gaia2_allow_stale_runtime", False
+        ):
+            env_kwargs["allow_stale_runtime"] = True
     if config.domain in ELICITATION_DOMAINS:
         env_kwargs["task"] = task
         env_kwargs["strategy"] = config.elicitation.strategy
@@ -830,32 +839,6 @@ def _build_voice_orchestrator(
     if close_environment is not None:
         resources.callback(close_environment)
 
-    agent = build_agent(
-        config.effective_agent,
-        environment,
-        audio_native_config=config.audio_native_config,
-        language_guidance=agent_language_guidance(
-            language_context, agent_voice_gender=context.agent_voice_gender
-        ),
-        language=language_context.language,
-        audio_taps_dir=audio_taps_dir,
-        elicitation_config=config.elicitation,
-    )
-
-    from tau2.persistent_tasks.availability import (
-        check_capabilities,
-        evidence_source,
-        resolve_config,
-    )
-
-    embedded_async = resolve_config(task, config.persistent_task_config)
-    if embedded_async is not None:
-        from tau2.persistent_tasks.config import PersistentTaskConfig
-
-        check_capabilities(
-            PersistentTaskConfig.model_validate(embedded_async), evidence_source(agent)
-        )
-
     saasr_session = None
     if config.audio_native_config.user_audio_renderer == "saasr":
         from tau2.voice.saasr import SaasrSession, turn_seed
@@ -931,7 +914,65 @@ def _build_voice_orchestrator(
                 vocabulary_path.chmod(0o600)
 
     if observer_hotwords is not None:
+        agent = build_agent(
+            config.effective_agent,
+            environment,
+            audio_native_config=config.audio_native_config,
+            language_guidance=agent_language_guidance(
+                language_context, agent_voice_gender=context.agent_voice_gender
+            ),
+            language=language_context.language,
+            audio_taps_dir=audio_taps_dir,
+            elicitation_config=config.elicitation,
+        )
         agent.observer_hotwords = observer_hotwords
+    else:
+        agent = build_agent(
+            config.effective_agent,
+            environment,
+            audio_native_config=config.audio_native_config,
+            language_guidance=agent_language_guidance(
+                language_context, agent_voice_gender=context.agent_voice_gender
+            ),
+            language=language_context.language,
+            audio_taps_dir=audio_taps_dir,
+            elicitation_config=config.elicitation,
+        )
+
+    from tau2.persistent_tasks.availability import (
+        check_capabilities,
+        evidence_source,
+        resolve_config,
+    )
+
+    embedded_async = resolve_config(task, config.persistent_task_config)
+    if embedded_async is not None:
+        from tau2.persistent_tasks.config import PersistentTaskConfig
+
+        check_capabilities(
+            PersistentTaskConfig.model_validate(embedded_async), evidence_source(agent)
+        )
+
+    dynamic_followup_config = None
+    hidden_intent_graph = None
+    if (
+        config.audio_native_config.provider == "qwen_agent"
+        and config.audio_native_config.qwen_agent_config is not None
+    ):
+        dynamic_followup_config = (
+            config.audio_native_config.qwen_agent_config.dynamic_followup
+        )
+        if dynamic_followup_config.enabled and (
+            domain != "gaia2" or language_context.language != "en"
+        ):
+            raise ValueError(
+                "Dynamic followup v1 requires English Gaia2 Qwen voice runs"
+            )
+    if config.task_set_name == "gaia2_hidden":
+        from tau2.data_model.hidden_intent import HiddenGoalGraph
+        from tau2.domains.gaia2_hidden.loader import get_goal_graph
+
+        hidden_intent_graph = HiddenGoalGraph.model_validate(get_goal_graph(task.id))
 
     user = build_voice_user(
         environment,
@@ -958,6 +999,8 @@ def _build_voice_orchestrator(
         speech_effects_mode=config.speech_effects_mode,
         force_sample_voice_config=config.pass3_condition is not None,
         saasr_session=saasr_session,
+        dynamic_followup_config=dynamic_followup_config,
+        hidden_intent_graph=hidden_intent_graph,
     )
 
     orchestrator = FullDuplexOrchestrator(

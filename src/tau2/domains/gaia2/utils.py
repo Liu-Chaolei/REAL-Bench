@@ -52,10 +52,12 @@ def runtime_digest() -> str:
         package / relative
         for relative in [
             "data_model/scenario.py",
+            "data_model/dynamic_followup.py",
             "data_model/diagnostics.py",
             "diagnostics/collect.py",
             "agent/discrete_time_audio_native_agent.py",
             "voice/audio_native/qwen_agent/provider.py",
+            "voice/audio_native/qwen_agent/config.py",
             "voice/audio_native/qwen_agent/discrete_time_adapter.py",
             "voice/audio_native/adapter.py",
             "voice/audio_native/tick_result.py",
@@ -104,6 +106,7 @@ def runtime_digest() -> str:
             "evaluator/evaluator_communicate.py",
             "user/user_simulator.py",
             "user/user_simulator_streaming.py",
+            "user/dynamic_followup.py",
             "user/grounding.py",
             "voice/audio_native/qwen_agent/mimo_transcription.py",
             "voice/audio_native/qwen_agent/played_audio_transcription.py",

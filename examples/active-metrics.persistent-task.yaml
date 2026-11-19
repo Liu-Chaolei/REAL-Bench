@@ -31,9 +31,12 @@ active_metrics:
       reply_max_steps: 8
     generator:
       model:
-        model: gpt-5.5
+        model: qwen3.8-flash
         args:
           reasoning_effort: low
+      model_env: DEEPSEEK_MODEL
+      api_base_env: DEEPSEEK_BASE_URL
+      api_key_env: DEEPSEEK_API_KEY
       timeout_seconds: 8
       max_attempts: 1
       max_characters: 300

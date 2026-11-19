@@ -36,6 +36,7 @@ class Gaia2Environment(Environment):
         *,
         semantic_scoring=None,
         allow_unverified=False,
+        allow_stale_runtime=False,
         stage_control=True,
         runtime_mode="online",
     ):
@@ -51,9 +52,9 @@ class Gaia2Environment(Environment):
             from tau2.domains.gaia2.utils import runtime_digest, verify_task_artifact
             from tau2.domains.gaia2.verify import verify_pinned_resources
 
-            if not manifest.get("verified") or (
+            if not allow_stale_runtime and (not manifest.get("verified") or (
                 runtime_mode != "replay" and spec.runtime_sha256 != runtime_digest()
-            ):
+            )):
                 raise ValueError(
                     "Gaia2 data/runtime is not verified; run 'tau2 gaia2 verify --reference --seal'"
                 )
@@ -67,12 +68,17 @@ class Gaia2Environment(Environment):
                     raise ValueError(
                         "Gaia2 continuous runtime is not verified; run reference verification and seal"
                     )
-            verify_task_artifact(self.root, task)
+            # Hidden-intent tasks are independently sealed and deliberately
+            # reuse the canonical Gaia2 snapshot, assets and runtime. Their
+            # package manifest owns task identity, so only the canonical task
+            # byte lookup is skipped for this task-set prefix.
+            if not task.id.startswith("hidden_"):
+                verify_task_artifact(self.root, task)
             verify_pinned_resources(self.root, spec.assets_sha256)
         if runtime_mode not in {"online", "reference", "replay"}:
             raise ValueError("Unknown Gaia2 runtime mode")
         self.runtime_mode = runtime_mode
-        self.stage_control = stage_control
+        self.stage_control = stage_control and not task.id.startswith("hidden_")
         managed = set()
         if stage_control and len(spec.stages) > 1:
             from tau2.orchestrator.scenario_stages import stage_requests
@@ -176,6 +182,7 @@ def get_environment(
     root=GAIA2_DATA_DIR,
     semantic_scoring=None,
     allow_unverified=False,
+    allow_stale_runtime=False,
     stage_control=True,
     runtime_mode="online",
 ):
@@ -191,6 +198,7 @@ def get_environment(
         Path(root),
         semantic_scoring=semantic_scoring,
         allow_unverified=allow_unverified,
+        allow_stale_runtime=allow_stale_runtime,
         stage_control=stage_control,
         runtime_mode=runtime_mode,
     )

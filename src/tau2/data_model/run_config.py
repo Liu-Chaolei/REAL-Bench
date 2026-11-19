@@ -503,6 +503,10 @@ class RunSettings(BaseModel):
     active_metrics: Optional[dict] = Field(
         default=None, description="Resolved active metric profiles."
     )
+    gaia2_allow_stale_runtime: bool = Field(
+        default=False,
+        description="Development-only Gaia2 mode that skips runtime seal comparison.",
+    )
     persistent_task_config: Optional[dict] = Field(
         default=None, description="Private native backend task scenario."
     )

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
@@ -85,10 +86,20 @@ class RequestGenerator:
             f"Reference style: {context.intent.reference_mode}. "
             f"Task label: {context.task_label or 'that task'}."
         )
+        model = self.config.model.model
+        if self.config.model_env:
+            model = os.environ.get(self.config.model_env, model)
+        if "/" not in model:
+            model = "openai/" + model
+        args = self.config.model.arguments()
+        if self.config.api_base_env:
+            args["api_base"] = os.environ[self.config.api_base_env]
+        if self.config.api_key_env:
+            args["api_key"] = os.environ[self.config.api_key_env]
         response = generate(
             messages=[UserMessage(role="user", content=prompt)],
-            model=self.config.model.model,
-            **self.config.model.arguments(),
+            model=model,
+            **args,
         )
         content = response if isinstance(response, str) else getattr(response, "content", response)
         if isinstance(content, list):

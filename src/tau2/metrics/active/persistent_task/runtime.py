@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from dataclasses import replace
 from pathlib import Path
 from typing import Any
 
@@ -91,6 +92,7 @@ class PersistentTaskMetricRuntime:
     def _observe(self, event: BackendTaskObservation) -> None:
         if event.backend_task_id is None:
             return
+        event = replace(event, timestamp=self._timestamp(event))
         if self.backend_task_id is None:
             if event.kind not in {
                 "task_created",
@@ -136,10 +138,15 @@ class PersistentTaskMetricRuntime:
                 self.status = self.policy.decision_status
             return
         self.status = "generating"
-        language = self.config.language or getattr(
+        language_context = getattr(
             getattr(self.orchestrator, "call_context", None), "language", None
         )
-        language = getattr(language, "provider_language", None) or language or "en"
+        language = (
+            self.config.language
+            or getattr(language_context, "provider_language", None)
+            or getattr(language_context, "language", None)
+            or "en"
+        )
         try:
             generated = self.generator.generate(
                 RequestGenerationContext(intent, language, self.task_label, self.seed)

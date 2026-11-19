@@ -214,6 +214,11 @@ def add_run_args(parser):
         help="Active metric YAML profile",
     )
     parser.add_argument(
+        "--gaia2-allow-stale-runtime",
+        action="store_true",
+        help="Skip the Gaia2 runtime seal comparison for development smoke runs",
+    )
+    parser.add_argument(
         "--persistent-task-config",
         type=Path,
         default=None,
@@ -943,6 +948,7 @@ def main():
         shared_kwargs = dict(
             persistent_task_config=persistent_task_config,
             active_metrics=active_metrics,
+            gaia2_allow_stale_runtime=args.gaia2_allow_stale_runtime,
             metrics_config=metrics_config,
             localize_db=args.localize_db,
             **(

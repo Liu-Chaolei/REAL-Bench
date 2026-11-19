@@ -921,7 +921,9 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
         """
         if self.max_steps is not None and self.step_count >= self.max_steps:
             active_metrics = getattr(self, "active_metric_manager", None)
-            runtime = getattr(self.environment, "scenario_runtime", None)
+            runtime = getattr(
+                getattr(self, "environment", None), "scenario_runtime", None
+            )
             if (
                 active_metrics is not None
                 and runtime is not None
