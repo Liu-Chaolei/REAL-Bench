@@ -7,12 +7,13 @@ stage-1/stage-2 prompts captured from the two real Gaia2 runs.
 
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
 from types import SimpleNamespace
 
 from experiment_dynamic_goal_graph import (
-    CASES,
+    configured_cases,
     load_request_case,
     load_task,
     tool_gt_for_stage,
@@ -42,11 +43,12 @@ def history_messages(history: str) -> list[SimpleNamespace]:
 
 
 def main() -> int:
-    config_path = (
-        ROOT
-        / "integrations/qwen_audio_agent/config.gaia2.dynamic.metrics.deepseek-user.json"
-    )
-    config = QwenAgentConfig.model_validate_json(config_path.read_text())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--config", type=Path, default=ROOT / "integrations/qwen_audio_agent/config.gaia2.dynamic.metrics.deepseek-user.json")
+    parser.add_argument("--simulations-root", type=Path, default=ROOT / "data/simulations")
+    parser.add_argument("--output", type=Path, default=OUTPUT)
+    args = parser.parse_args()
+    config = QwenAgentConfig.model_validate_json(args.config.read_text())
     model, model_args = config.user_llm_settings()
     model_args = {**model_args, "num_retries": 0, "temperature": 0.8, "seed": 626729}
     dynamic_config = DynamicFollowupConfig(enabled=True, stages=[1, 2], max_retries=1)
@@ -57,7 +59,7 @@ def main() -> int:
         "cases": [],
     }
 
-    for case in CASES:
+    for case in configured_cases(args.simulations_root):
         data = load_request_case(case)
         messages = history_messages(data["history"])
         context_classification, context_reply = classify_status_affect(
@@ -107,9 +109,9 @@ def main() -> int:
             flush=True,
         )
 
-    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT.write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n")
-    print(OUTPUT)
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n")
+    print(args.output)
     return 0
 
 

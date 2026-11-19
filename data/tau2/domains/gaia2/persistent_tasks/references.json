@@ -1,0 +1,226 @@
+[
+  {
+    "scenario_id": "pt_0001",
+    "original_event_dependencies": {
+      "request_1": [
+        "series_s1_send_message",
+        "pt_0001_progress_state"
+      ]
+    },
+    "operations": [
+      {
+        "request_id": "request_1",
+        "operation": "query",
+        "expected_state": "running",
+        "target": {
+          "source_task_id": "0002_46myz87t501b0c902dy81rlbqbye2dyi",
+          "source_stage": 1
+        },
+        "expected_milestone": "pt_0001_progress_state"
+      }
+    ]
+  },
+  {
+    "scenario_id": "pt_0002",
+    "original_event_dependencies": {
+      "request_1": [
+        "series_s2_add",
+        "series_s2_verify",
+        "pt_0002_progress_state",
+        "pt_0002_secondary_progress_state"
+      ]
+    },
+    "operations": [
+      {
+        "request_id": "request_1",
+        "operation": "query",
+        "expected_state": "running",
+        "target": {
+          "source_task_id": "0004_zsnxn8rtxeqy64r6axi78wlnmodvvpb8",
+          "source_stage": 2
+        },
+        "expected_milestone": "pt_0002_secondary_progress_state"
+      }
+    ]
+  },
+  {
+    "scenario_id": "pt_0003",
+    "original_event_dependencies": {
+      "request_1": [
+        "OracleEvent-AGENT-1709af94-237c-44ed-8553-19921c27e9aa",
+        "OracleEvent-AGENT-7cb8843d-e5f6-438f-b9f7-763860449efe",
+        "pt_0003_progress_state",
+        "pt_0003_secondary_progress_state"
+      ]
+    },
+    "operations": [
+      {
+        "request_id": "request_1",
+        "operation": "query",
+        "expected_state": "running",
+        "target": {
+          "source_task_id": "0052_snsq4rd73gytoo0wr75bgd2nyzra07z1",
+          "source_stage": 0
+        },
+        "expected_milestone": "pt_0003_secondary_progress_state"
+      }
+    ]
+  },
+  {
+    "scenario_id": "pt_0004",
+    "original_event_dependencies": {
+      "request_1": [
+        "series_s1_original",
+        "series_s1_photo_0",
+        "pt_0004_progress_state",
+        "pt_0004_secondary_progress_state"
+      ]
+    },
+    "operations": [
+      {
+        "request_id": "request_1",
+        "operation": "query",
+        "expected_state": "running",
+        "target": {
+          "source_task_id": "0053_aanknwl7oew08yda60lfw6ii37zmbn27",
+          "source_stage": 1
+        },
+        "expected_milestone": "pt_0004_secondary_progress_state"
+      }
+    ]
+  },
+  {
+    "scenario_id": "pt_0005",
+    "original_event_dependencies": {
+      "request_1": [
+        "series_s2_id_frantisek",
+        "pt_0005_progress_state"
+      ]
+    },
+    "operations": [
+      {
+        "request_id": "request_1",
+        "operation": "query",
+        "expected_state": "running",
+        "target": {
+          "source_task_id": "0132_4hy9gimaap8287dl6so87nfx59ivjykp",
+          "source_stage": 2
+        },
+        "expected_milestone": "pt_0005_progress_state"
+      }
+    ]
+  },
+  {
+    "scenario_id": "pt_0006",
+    "original_event_dependencies": {
+      "request_1": [
+        "OracleEvent-AGENT-f67fc73e-0a4b-49f3-8484-a9724c975263",
+        "OracleEvent-AGENT-96177f0c-c938-4c19-a032-1775a09b7db0",
+        "pt_0006_progress_state",
+        "pt_0006_secondary_progress_state"
+      ]
+    },
+    "operations": [
+      {
+        "request_id": "request_1",
+        "operation": "query",
+        "expected_state": "running",
+        "target": {
+          "source_task_id": "0137_66e1hycxx6kg6fux28hhbytn5x0jh07t",
+          "source_stage": 0
+        },
+        "expected_milestone": "pt_0006_secondary_progress_state"
+      }
+    ]
+  },
+  {
+    "scenario_id": "pt_0007",
+    "original_event_dependencies": {
+      "request_1": [
+        "OracleEvent-AGENT-9ca29aa0-de61-43b9-8784-1181580bc6b2",
+        "OracleEvent-AGENT-5a7544b9-62b6-451e-b485-f2628cc66444",
+        "pt_0007_progress_state",
+        "pt_0007_secondary_progress_state"
+      ]
+    },
+    "operations": [
+      {
+        "request_id": "request_1",
+        "operation": "modify",
+        "expected_state": "running",
+        "target": {
+          "source_task_id": "0601_mz4dh4tml93gims9dxwrcz7i16t0p5ud",
+          "source_stage": 0
+        },
+        "expected_milestone": "pt_0007_secondary_progress_state"
+      }
+    ]
+  },
+  {
+    "scenario_id": "pt_0008",
+    "original_event_dependencies": {
+      "request_1": [
+        "OracleEvent-AGENT-256976f3-16e3-41a9-9c05-fdb8e3efc735",
+        "OracleEvent-AGENT-6f905404-ff39-4354-baae-14b2a9ae31b0",
+        "pt_0008_progress_state",
+        "pt_0008_secondary_progress_state"
+      ]
+    },
+    "operations": [
+      {
+        "request_id": "request_1",
+        "operation": "modify",
+        "expected_state": "running",
+        "target": {
+          "source_task_id": "0602_sy6r944liwulln91ravyrcctdirinr0d",
+          "source_stage": 0
+        },
+        "expected_milestone": "pt_0008_secondary_progress_state"
+      }
+    ]
+  },
+  {
+    "scenario_id": "pt_0009",
+    "original_event_dependencies": {
+      "request_1": [
+        "OracleEvent-AGENT-dc61540a-8350-479e-b3f9-003fedcda943",
+        "pt_0009_progress_state"
+      ]
+    },
+    "operations": [
+      {
+        "request_id": "request_1",
+        "operation": "cancel",
+        "expected_state": "running",
+        "target": {
+          "source_task_id": "0710_e2cjolirnhypj7tgr44nl3woxkfrgtu2",
+          "source_stage": 0
+        },
+        "expected_milestone": "pt_0009_progress_state"
+      }
+    ]
+  },
+  {
+    "scenario_id": "pt_0010",
+    "original_event_dependencies": {
+      "request_1": [
+        "OracleEvent-AGENT-bd26f312-bda3-4038-a6cd-3c28c2f6a687",
+        "OracleEvent-AGENT-2d0f178b-abcd-4830-8a12-635c61c3acaa",
+        "pt_0010_progress_state",
+        "pt_0010_secondary_progress_state"
+      ]
+    },
+    "operations": [
+      {
+        "request_id": "request_1",
+        "operation": "result",
+        "expected_state": "completed",
+        "target": {
+          "source_task_id": "0711_acar9gkovf7n11r9zk0ylit3acbd64kj",
+          "source_stage": 0
+        },
+        "expected_milestone": "pt_0010_secondary_progress_state"
+      }
+    ]
+  }
+]

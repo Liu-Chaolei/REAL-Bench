@@ -6,6 +6,11 @@ from pathlib import Path
 from tau2.diagnostics.intent import PIPELINE_VERSION
 from tau2.diagnostics.intent.config import IntentConfig, ModelConfig
 from tau2.diagnostics.intent.evaluation import evaluate
+from tau2.diagnostics.intent.generation import (
+    EXTRACTION_MAX_REPAIRS,
+    GENERATION_VERSION,
+    VALIDATION_ERROR_FORMAT_VERSION,
+)
 from tau2.diagnostics.intent.gt import build_gt
 from tau2.diagnostics.intent.io import canonical, digest, write_json
 from tau2.diagnostics.intent.prediction import extract_prediction
@@ -179,6 +184,9 @@ async def evaluate_call(evidence, config, directory: Path, budget):
                 "schema": schema,
                 "profile": config.profile(role).model_dump(),
                 "policy": instructions,
+                "generation_version": GENERATION_VERSION,
+                "max_repairs": EXTRACTION_MAX_REPAIRS,
+                "validation_error_format_version": VALIDATION_ERROR_FORMAT_VERSION,
             }
         )
         previous = json.loads(path.read_text()) if path.exists() else {}

@@ -43,10 +43,31 @@ def main():
     parser.add_argument(
         "--judge-from-user-llm",
         action="store_true",
-        help=(
-            "Use the configured caller LLM credentials/model for all runtime "
-            "judges and diagnostics, without changing the source config files."
-        ),
+        help="Use caller LLM credentials and model for runtime judges.",
+    )
+    parser.add_argument("--active-metrics-config", type=Path)
+    parser.add_argument("--gaia2-allow-stale-runtime", action="store_true")
+    parser.add_argument("--persistent-task-config", type=Path)
+    parser.add_argument(
+        "--judge-api-key-env",
+        default="GAIA2_JUDGE_API_KEY",
+        help="Environment variable containing the communication/NL judge key.",
+    )
+    parser.add_argument(
+        "--judge-endpoint-env",
+        default="GAIA2_JUDGE_ENDPOINT",
+        help="Environment variable containing the communication/NL judge endpoint.",
+    )
+    parser.add_argument(
+        "--judge-model-env",
+        default="GAIA2_JUDGE_MODEL",
+        help="Environment variable containing the communication/NL judge model.",
+    )
+    parser.add_argument(
+        "--judge-api",
+        choices=["chat", "responses"],
+        default=None,
+        help="Judge API protocol; defaults to GAIA2_JUDGE_API for the legacy profile.",
     )
     parser.add_argument(
         "--resume",
@@ -64,14 +85,10 @@ def main():
     caller = config.user_llm_settings()
     if args.judge_from_user_llm:
         if caller is None:
-            raise ValueError(
-                "--judge-from-user-llm requires a complete user LLM configuration"
-            )
+            raise ValueError("--judge-from-user-llm requires a complete user LLM configuration")
         judge_model, user_llm_args = caller
         judge_api_key = user_llm_args["api_key"]
         judge_api_base = user_llm_args["api_base"]
-        # Judges use LiteLLM's ambient OpenAI-compatible connection. The source
-        # JSON remains unchanged; these values exist only in this subprocess.
         env["OPENAI_API_KEY"] = judge_api_key
         env["OPENAI_API_BASE"] = judge_api_base
         env["OPENAI_BASE_URL"] = judge_api_base
@@ -81,15 +98,14 @@ def main():
             if key not in {"api_key", "api_base", "base_url"}
         }
     else:
-        env["OPENAI_API_KEY"] = resolve_env_reference(values, "GAIA2_JUDGE_API_KEY")
-        env["OPENAI_API_BASE"] = resolve_env_reference(values, "GAIA2_JUDGE_ENDPOINT")
+        env["OPENAI_API_KEY"] = resolve_env_reference(values, args.judge_api_key_env)
+        env["OPENAI_API_BASE"] = resolve_env_reference(values, args.judge_endpoint_env)
         env["OPENAI_BASE_URL"] = env["OPENAI_API_BASE"]
-        judge_model = resolve_env_reference(values, "GAIA2_JUDGE_MODEL")
+        judge_model = resolve_env_reference(values, args.judge_model_env)
         judge_model_args = {
             "reasoning_effort": values.get("GAIA2_JUDGE_REASONING_EFFORT", "low"),
             "num_retries": 0,
         }
-
     metrics_source = args.metrics_config
     if args.metrics_config:
         from tau2.diagnostics.config import MetricsConfig
@@ -117,7 +133,7 @@ def main():
     if not args.judge_from_user_llm:
         prefix = (
             "openai/responses/"
-            if values.get("GAIA2_JUDGE_API") == "responses"
+            if (args.judge_api or values.get("GAIA2_JUDGE_API")) == "responses"
             else "openai/"
         )
         judge_model = prefix + judge_model
@@ -142,10 +158,6 @@ def main():
             }
         )
     if args.judge_from_user_llm:
-        # The source config may point the embedded backend at a separate
-        # MiniMax GAIA2 profile. Redirect that runtime-only mapping as well, so
-        # the agent, user simulator, communicative judge, NL judge, and all
-        # diagnostics use the same configured DeepSeek connection.
         runtime_environment = dict(config.environment)
         runtime_environment.update(
             {
@@ -213,6 +225,32 @@ def main():
     ]
     if metrics_source:
         command += ["--metrics-config", str(metrics_source.resolve())]
+    if args.active_metrics_config:
+        from tau2.metrics.active.config import ActiveMetricsConfig
+
+        active_metrics = ActiveMetricsConfig.load(args.active_metrics_config)
+        if active_metrics.persistent_task is not None:
+            profile = active_metrics.persistent_task.generator.model
+            generator = active_metrics.persistent_task.generator
+            for name in (
+                generator.model_env,
+                generator.api_base_env,
+                generator.api_key_env,
+            ):
+                if name:
+                    env[name] = resolve_env_reference(values, name)
+            if profile.api_key_env:
+                env[profile.api_key_env] = resolve_env_reference(
+                    values, profile.api_key_env
+                )
+        command += [
+            "--active-metrics-config",
+            str(args.active_metrics_config.resolve()),
+        ]
+    if args.gaia2_allow_stale_runtime:
+        command.append("--gaia2-allow-stale-runtime")
+    if args.persistent_task_config:
+        command += ["--persistent-task-config", str(args.persistent_task_config.resolve())]
 
     if args.max_seconds:
         command.extend(["--timeout", str(args.max_seconds + 150)])

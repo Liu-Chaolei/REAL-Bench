@@ -9,6 +9,7 @@ not imported or modified by this experiment.
 
 from __future__ import annotations
 
+import argparse
 import json
 import re
 import sys
@@ -42,6 +43,18 @@ CASES = [
         / "data/simulations/dynamic-metrics-task0138-focus-20261117-retry/artifacts/task_0138_t6mwmx3ilpme496q17bhcx0f39vm1a9o/sim_cf793b64-22b7-43ef-9406-456f22413ece/llm_debug/20261117_203305_295_dynamic_followup_request_0ee60cf0.json",
     },
 ]
+
+
+def configured_cases(simulations_root: Path) -> list[dict[str, Any]]:
+    """Return captured cases with an explicitly selected artifact root."""
+    return [
+        {
+            **case,
+            "request_log": simulations_root
+            / case["request_log"].relative_to(ROOT / "data/simulations"),
+        }
+        for case in CASES
+    ]
 
 
 class GoalNode(BaseModel):
@@ -432,13 +445,21 @@ def normalize_graph(raw: RawGoalGraph, stage: int, source: str) -> GoalGraph:
 
 
 def main() -> int:
+    global TASKS_PATH
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--config", type=Path, default=ROOT / "integrations/qwen_audio_agent/config.gaia2.dynamic.metrics.deepseek-user.json")
+    parser.add_argument("--tasks", type=Path, default=TASKS_PATH)
+    parser.add_argument("--simulations-root", type=Path, default=ROOT / "data/simulations")
+    parser.add_argument("--output", type=Path, default=OUTPUT_PATH)
+    args = parser.parse_args()
+    TASKS_PATH = args.tasks.resolve()
+    cases = configured_cases(args.simulations_root)
     # Resolve credentials only through the same local config reference used by
     # the smoke runner. They are never serialized into the experiment output.
     from tau2.utils.llm_utils import extract_json_from_llm_response, generate
     from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
 
-    config_path = ROOT / "integrations/qwen_audio_agent/config.gaia2.dynamic.metrics.deepseek-user.json"
-    config = QwenAgentConfig.model_validate_json(config_path.read_text())
+    config = QwenAgentConfig.model_validate_json(args.config.read_text())
     model, base_args = config.user_llm_settings()
     base_args = dict(base_args)
     base_args["num_retries"] = 0
@@ -450,7 +471,7 @@ def main() -> int:
         "cases": [],
     }
 
-    for case in CASES:
+    for case in cases:
         data = load_request_case(case)
         task = load_task(data["task_id"])
         gt = tool_gt_for_stage(task, data["stage"])
@@ -559,9 +580,9 @@ EXPECTED TOOL GT:
             flush=True,
         )
 
-    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT_PATH.write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n")
-    print(OUTPUT_PATH)
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n")
+    print(args.output)
     return 0
 
 

@@ -10,6 +10,7 @@ import { pathToFileURL } from 'node:url'
 import { WebSocketServer, WebSocket } from 'ws'
 import { ToolBroker, composePolicy, gatewayMedia, gatewayFailure, serveMcp, observeBackend } from './core.mjs'
 import { startSpeechToSpeech } from './speech-runtime.mjs'
+import { observePersistentTasks } from './persistent-observer.mjs'
 
 const port = Number(process.env.TAU_BRIDGE_PORT || 8787)
 const root = process.env.TAU_QWEN_ROOT || '/opt/qwen-audio-agent'
@@ -22,6 +23,7 @@ if (!token) throw new Error('TAU_BRIDGE_TOKEN is required')
 const mcpPath = `/mcp/${randomUUID()}`
 let controller, broker, application, gateway, client, initialized = false, closing = false
 let speech
+let stopPersistentObserver
 
 function send(event) {
   if (controller?.readyState !== WebSocket.OPEN) throw new Error('Evaluator disconnected')
@@ -33,6 +35,7 @@ function fail(error) {
 async function close() {
   if (closing) return
   closing = true
+  stopPersistentObserver?.()
   broker?.close()
   client?.stop()
   await application?.close()
@@ -48,6 +51,21 @@ async function initialize(message) {
     timeoutMs: message.tool_timeout_ms, onFailure: fail })
   mkdirSync(`${trial}/prompts`, { recursive: true })
   mkdirSync(`${trial}/config`, { recursive: true })
+  // Extend the immutable Qwen catalog with the DashScope model selected by tau.
+  // The gateway merges this file with its built-in profiles at startup.
+  writeFileSync(`${trial}/config/frontend-models.json`, JSON.stringify({
+    providers: {
+      dashscope: {
+        models: {
+          'qwen-audio-3.1-realtime-flash': {
+            api: 'audio',
+            label: 'Qwen Audio 3.1 Realtime Flash',
+            voice: 'longanqian_v3.1',
+          },
+        },
+      },
+    },
+  }))
   mkdirSync(`${workspace}/.qwen`, { recursive: true })
   const original = readFileSync(`${root}/config/frontend-agent/PROMPT.md`, 'utf8')
   const combined = composePolicy(original, message.policy)
@@ -102,6 +120,10 @@ async function initialize(message) {
   })
   if (message.diagnostics_enabled) observeBackend(backend, send)
   application = createGatewayApplication({ autoStart: false, agent: createBackendAgentHost(backend) })
+  if (message.persistent_tasks_enabled) {
+    const { AgentTaskRuntime } = await import(pathToFileURL(`${root}/server/src/frontend/tools/agent-task-runtime.mjs`))
+    stopPersistentObserver = observePersistentTasks({ taskManager: application.services.taskManager, AgentTaskRuntime, emit: send })
+  }
   await application.services.agent.start()
   gateway = application.start({ host: '127.0.0.1', port: 0 })
   await once(gateway, 'listening')

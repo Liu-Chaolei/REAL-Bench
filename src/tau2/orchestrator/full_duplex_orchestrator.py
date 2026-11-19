@@ -53,7 +53,7 @@ def _merge_final_live_transcript(ticks, final_live_transcript):
         existing = raw.get("live_transcript")
         if existing is None:
             final_data = final_live_transcript.model_dump(mode="json")
-            # Final observer intervals use the session clock. This field is
+            # The final observer intervals are session-relative. This field is
             # interpreted as tick-relative evidence, so do not place them here.
             final_data["speech_intervals_ms"] = []
             raw["live_transcript"] = final_data
@@ -349,6 +349,35 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             raise ValueError("Simulation is done")
 
         runtime = getattr(self.environment, "scenario_runtime", None)
+        persistent = getattr(self, "persistent_task_runtime", None)
+        communication_busy = bool(
+            getattr(self.agent, "has_pending_output", False)
+            or (self.current_agent_chunk and self.current_agent_chunk.contains_speech)
+            or (self.current_user_chunk and self.current_user_chunk.contains_speech)
+            or self._scenario_user_input
+            or (self._tool_executor and self._tool_executor.pending)
+            or self.pending_agent_tool_results
+            or self.pending_user_tool_results
+        )
+        if persistent is not None:
+            from tau2.persistent_tasks.integration import advance
+
+            advance(
+                self,
+                not communication_busy
+                and self.async_evidence_source.get_status()["request_boundary"],
+            )
+        active_metrics = getattr(self, "active_metric_manager", None)
+        if active_metrics is not None and runtime is not None:
+            active_metrics.advance(
+                runtime.time(),
+                not communication_busy
+                and (
+                    self.async_evidence_source.get_status()["request_boundary"]
+                    if getattr(self, "async_evidence_source", None) is not None
+                    else True
+                ),
+            )
         if self.scenario_stages is not None and self.scenario_stages.transition_pending:
             busy = bool(self._tool_executor.pending) if self._tool_executor else False
             busy = busy or bool(
@@ -358,9 +387,14 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             busy = busy or bool(
                 self.current_agent_chunk and self.current_agent_chunk.contains_speech
             )
+            busy = busy or bool(
+                persistent and persistent.blocks_stage(self.scenario_stages.current)
+            )
             if not busy:
                 self.scenario_stages.release(self.user, runtime, len(self.ticks))
         if runtime is not None:
+            if not communication_busy:
+                runtime.notify_turn_boundary()
             runtime.advance()
             with runtime.lock:
                 while runtime.user_inputs:
@@ -607,6 +641,12 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
         if (
             not is_agent
             and self.scenario_stages is not None
+            and not (
+                getattr(self, "persistent_task_runtime", None)
+                and self.persistent_task_runtime.blocks_stage(
+                    self.scenario_stages.current
+                )
+            )
             and self.scenario_stages.stop(
                 new_chunk, self.environment.scenario_runtime, len(self.ticks)
             )
@@ -621,6 +661,18 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
                 cost=new_chunk.cost,
                 usage=new_chunk.usage,
             )
+        persistent = getattr(self, "persistent_task_runtime", None)
+        if (
+            not is_agent
+            and is_stop(new_chunk)
+            and persistent
+            and persistent.blocks_stage(
+                self.scenario_stages.current
+                if self.scenario_stages
+                else (persistent.binder.active_stage or 0)
+            )
+        ):
+            new_chunk = UserMessage(role="user", content=None, contains_speech=False)
         if is_stop(new_chunk):
             logger.info(f"  [{participant_name}] *** STOP signal detected ***")
             self.done = True
@@ -674,6 +726,28 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
         """Journal transported user input and actual playback, preserving both clocks."""
         if user_chunk is not None:
             utterance = tuple(user_chunk.utterance_ids or [])
+            persistent = getattr(self, "persistent_task_runtime", None)
+            scripted_id = (user_chunk.raw_data or {}).get(
+                "scenario_input_id", self._scenario_user_input
+            )
+            previous_utterance = getattr(self, "_persistent_user_utterance", None)
+            previously_speaking = getattr(self, "_persistent_user_speaking", False)
+            if (
+                persistent
+                and user_chunk.contains_speech
+                and not scripted_id
+                and (
+                    utterance != previous_utterance
+                    if utterance
+                    else not previously_speaking
+                )
+            ):
+                persistent.ordinary_user_started(
+                    input_time if input_time is not None else runtime.time()
+                )
+            if user_chunk.contains_speech:
+                self._persistent_user_utterance = utterance
+            self._persistent_user_speaking = bool(user_chunk.contains_speech)
             action = user_chunk.turn_taking_action
             if (
                 self.scenario_stages is not None
@@ -719,6 +793,7 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             self._scenario_user_text += user_chunk.content or ""
             recorded = False
             if user_chunk.contains_speech:
+                persistent = getattr(self, "persistent_task_runtime", None)
                 if self.scenario_stages is not None and self._scenario_user_input:
                     self.scenario_stages.delivered(
                         self._scenario_user_input,
@@ -742,6 +817,10 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
                     )
                     recorded = True
                 if user_chunk.is_final_chunk or data.get("saasr_main_final"):
+                    if persistent and self._scenario_user_input:
+                        persistent.delivery_completed(
+                            self._scenario_user_input, runtime.time()
+                        )
                     if not recorded:
                         runtime.delivered("user", self._scenario_user_text)
                     self._scenario_user_input = None
@@ -841,6 +920,17 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
         Checks max_steps, max_errors, and timeout after each tick.
         """
         if self.max_steps is not None and self.step_count >= self.max_steps:
+            active_metrics = getattr(self, "active_metric_manager", None)
+            runtime = getattr(
+                getattr(self, "environment", None), "scenario_runtime", None
+            )
+            if (
+                active_metrics is not None
+                and runtime is not None
+                and active_metrics.should_extend_reply(runtime.time())
+            ):
+                active_metrics.consume_reply_step(runtime.time())
+                return
             self.done = True
             self.termination_reason = TerminationReason.MAX_STEPS
         if self.num_errors >= self.max_errors:

@@ -17,6 +17,12 @@ def implementation_digest():
     files = (
         list(root.rglob("*"))
         + [root.parent / "metrics/real_voice.py"]
+        + list((root.parent / "metrics/active").rglob("*.py"))
+        + list(
+            (root.parents[2] / "data/tau2/metrics/persistent_task/templates").glob(
+                "*.json"
+            )
+        )
         + list((root.parent / "utils/transcript").glob("*.py"))
     )
     h = hashlib.sha256()
@@ -115,6 +121,17 @@ def evaluate_evidence(task, evidence, directory, config, only=None):
                 from tau2.diagnostics.interaction import evaluate_interaction
 
                 result = evaluate_interaction(evidence, config, output, budget)
+            elif measure == "persistent_task":
+                result = (
+                    evidence.source.get("active_metrics", {})
+                    .get("scores", {})
+                    .get("persistent_task")
+                )
+                if result is None:
+                    result = {
+                        "status": "not_applicable",
+                        "reason": "active_metric_evidence_missing",
+                    }
             else:
                 raise ValueError("Unknown diagnostic measure: " + measure)
         except Exception as exc:

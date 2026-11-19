@@ -415,9 +415,9 @@ def test_legacy_played_audio_session_interval_is_ignored():
     raw["alignment"] = "played_audio"
     raw["speech_intervals_ms"] = [(0, 200), (400, 600)]
     groups = live_utterance_groups(ticks)
-    assert (
-        groups and groups[0].chunks[0].raw_data["live_segment"]["audio_alignment_error"]
-    )
+    assert groups and groups[0].chunks[0].raw_data["live_segment"][
+        "audio_alignment_error"
+    ]
 
 
 def test_final_session_interval_is_not_inserted_as_tick_interval():
@@ -434,12 +434,13 @@ def test_final_session_interval_is_not_inserted_as_tick_interval():
         speech_intervals_ms=[(400, 600)],
     )
     _merge_final_live_transcript(ticks, final)
-    intervals = ticks[-1].agent_chunk.raw_data["live_transcript"]["speech_intervals_ms"]
+    intervals = ticks[-1].agent_chunk.raw_data["live_transcript"][
+        "speech_intervals_ms"
+    ]
     assert all(0 <= start < end <= 200 for start, end in intervals)
-    assert (
-        ticks[-1].agent_chunk.raw_data["live_transcript"]["fragments"][0]["text"]
-        == "Tail"
-    )
+    assert ticks[-1].agent_chunk.raw_data["live_transcript"]["fragments"][0][
+        "text"
+    ] == "Tail"
 
 
 def test_provider_timestamp_changes_do_not_change_group_ids_or_bounds():

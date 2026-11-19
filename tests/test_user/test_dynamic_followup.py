@@ -2,6 +2,8 @@
 
 import json
 
+import pytest
+
 from tau2.data_model.dynamic_followup import DynamicFollowupConfig
 from tau2.data_model.message import AssistantMessage, SystemMessage, UserMessage
 from tau2.user.dynamic_followup import (
@@ -9,6 +11,14 @@ from tau2.user.dynamic_followup import (
     generate_dynamic_followup,
     infer_status_affect,
 )
+
+
+def test_qwen_dynamic_followup_config_defaults_off_and_validates_stages():
+    from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
+
+    assert QwenAgentConfig().dynamic_followup.enabled is False
+    with pytest.raises(ValueError, match="stages"):
+        DynamicFollowupConfig(stages=[1, 3])
 
 
 def test_status_affect_inference_is_coarse_and_grounded():

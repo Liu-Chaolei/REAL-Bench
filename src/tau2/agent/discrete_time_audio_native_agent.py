@@ -895,6 +895,38 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
             "backend_inputs": list(provider.backend_inputs.values()),
         }
 
+    def get_async_evidence_source(self):
+        """Return an optional passive evidence port implemented by the transport Adapter."""
+        factory = getattr(self.adapter, "get_async_evidence_source", None)
+        return factory() if factory else None
+
+    def enable_backend_observation(self):
+        """Compatibility entry point for native background observation."""
+        source = self.get_async_evidence_source()
+        if source is None:
+            raise ValueError("Agent has no async evidence Adapter")
+        source.enable()
+
+    def drain_backend_observations(self):
+        """Compatibility entry point; new integrations consume the public source."""
+        source = self.get_async_evidence_source()
+        return source.drain_events() if source else []
+
+    def backend_observation_status(self):
+        """Compatibility entry point for evidence-channel status."""
+        source = self.get_async_evidence_source()
+        return (
+            source.get_status()
+            if source
+            else {
+                "ready": False,
+                "evidence_gap": False,
+                "request_boundary": False,
+                "capabilities": None,
+                "final_drain_complete": False,
+            }
+        )
+
     def get_final_live_transcript(self):
         """Return observer text finalized during adapter shutdown."""
         if self._adapter is None:

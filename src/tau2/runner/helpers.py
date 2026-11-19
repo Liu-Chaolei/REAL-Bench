@@ -251,6 +251,10 @@ def get_info(
     if config.elicitation is not None:
         info_env_kwargs["channel"] = "voice" if is_voice else "text"
         info_env_kwargs["strategy"] = config.elicitation.strategy
+    if config.domain == "gaia2" and getattr(
+        config, "gaia2_allow_stale_runtime", False
+    ):
+        info_env_kwargs["allow_stale_runtime"] = True
     if getattr(config, "retrieval_config", None) is not None:
         info_env_kwargs["retrieval_variant"] = config.retrieval_config
         rk = dict(getattr(config, "retrieval_config_kwargs", None) or {})
@@ -268,6 +272,8 @@ def get_info(
         or config.elicitation.strategy != ElicitationStrategy.AGENT_DIRECTED
     )
     return Info(
+        persistent_task_config=config.persistent_task_config,
+        active_metrics=config.active_metrics,
         user_audio_renderer=(
             config.audio_native_config.saasr_identity if is_voice else None
         ),

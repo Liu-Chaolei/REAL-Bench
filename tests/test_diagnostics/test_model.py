@@ -1,4 +1,4 @@
-"""Timeout and retry behavior for saved diagnostics model calls."""
+"""Timeout and retry behavior for saved diagnostic model calls."""
 
 import pytest
 
@@ -19,7 +19,7 @@ def test_non_timeout_is_not_retried(monkeypatch, tmp_path):
     monkeypatch.setattr(model, "_complete_once", once)
     with pytest.raises(ValueError, match="bad request"):
         model.complete_sync("prompt", {})
-    assert len(calls) == 1
+    assert calls == [1]
 
 
 def test_sync_provider_timeout_retries_once(monkeypatch, tmp_path):
@@ -34,4 +34,18 @@ def test_sync_provider_timeout_retries_once(monkeypatch, tmp_path):
 
     monkeypatch.setattr(model, "_complete_once", once)
     assert model.complete_sync("prompt", {}) == "ok"
-    assert len(calls) == 2
+    assert calls == [1, 1]
+
+
+def test_provider_timeout_consumes_budget_for_each_attempt(monkeypatch, tmp_path):
+    budget = RequestBudget(2)
+    model = TauJsonModel(MetricsConfig(), "prediction", tmp_path, budget)
+
+    def once(prompt, schema, *, validate=None):
+        budget.take()
+        raise TimeoutError("provider timeout")
+
+    monkeypatch.setattr(model, "_complete_once", once)
+    with pytest.raises(TimeoutError):
+        model.complete_sync("prompt", {})
+    assert budget.used == 2

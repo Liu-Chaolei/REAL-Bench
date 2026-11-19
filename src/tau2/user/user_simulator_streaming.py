@@ -38,6 +38,7 @@ from tau2.data_model.audio_effects import (
     SpellOutDetection,
 )
 from tau2.data_model.dynamic_followup import DynamicFollowupConfig
+from tau2.data_model.hidden_intent import HiddenGoalGraph
 from tau2.data_model.message import (
     AssistantMessage,
     EnvironmentMessage,
@@ -57,6 +58,7 @@ from tau2.user.dynamic_followup import (
     infer_status_affect,
 )
 from tau2.user.guidelines import simulation_guidelines
+from tau2.user.hidden_intent import HiddenIntentRuntime
 from tau2.user.user_simulator import UserSimulator, build_user_system_prompt
 from tau2.user.user_simulator_base import (
     OUT_OF_SCOPE,
@@ -381,6 +383,7 @@ class VoiceStreamingUserSimulator(
         silence_checkin_threshold: Optional[int] = None,
         saasr_session=None,
         dynamic_followup_config: DynamicFollowupConfig | None = None,
+        hidden_intent_graph: HiddenGoalGraph | None = None,
     ):
         """
         Initialize the streaming user simulator.
@@ -448,6 +451,12 @@ class VoiceStreamingUserSimulator(
         self.realtime_generation = realtime_generation
         self.saasr_session = saasr_session
         self.dynamic_followup_config = dynamic_followup_config
+        self.hidden_intent_runtime = (
+            HiddenIntentRuntime(hidden_intent_graph)
+            if hidden_intent_graph is not None
+            else None
+        )
+        self._hidden_intent_events: list[dict] = []
         self.scenario_dynamic_stage_ids: dict[str, int] = {}
         self.scenario_dynamic_stage_tool_gts: dict[str, list[dict]] = {}
         self._dynamic_followup_events: list[dict] = []
@@ -990,6 +999,7 @@ class VoiceStreamingUserSimulator(
             "candidate_max_retries": self.candidate_max_retries,
             "candidate_recovery_enabled": self.scenario_constraints is not None,
             "dynamic_followup": list(self._dynamic_followup_events),
+            "hidden_intent": list(self._hidden_intent_events),
         }
 
     def _next_turn_taking_action(
@@ -1737,6 +1747,20 @@ class VoiceStreamingUserSimulator(
                     f"Last message is an assistant message with no content: {linearized_messages[-1]}"
                 )
 
+        if self.hidden_intent_runtime is not None:
+            for message in reversed(linearized_messages):
+                if not isinstance(message, AssistantMessage) or not message.content:
+                    continue
+                result = self.hidden_intent_runtime.ask_auto(message.content)
+                self._hidden_intent_events.append(
+                    {
+                        "question": message.content,
+                        **result,
+                        "revision": self.hidden_intent_runtime.state.revision,
+                    }
+                )
+                break
+
         # Flip roles for user simulator (it sees itself as assistant)
         flipped_messages = self._flip_roles_for_llm(linearized_messages)
 
@@ -1768,7 +1792,19 @@ class VoiceStreamingUserSimulator(
                 and dynamic_stage in self.dynamic_followup_config.stages
             )
             if dynamic_enabled:
-                cached = self._dynamic_followup_cache.get(key)
+                cache_material = {
+                    "event_id": key,
+                    "stage": dynamic_stage,
+                    "source_request": text,
+                    "state_revision": getattr(state, "agent_input_revision", 0),
+                    "config": self.dynamic_followup_config.model_dump(mode="json"),
+                }
+                cache_key = hashlib.sha256(
+                    json.dumps(
+                        cache_material, ensure_ascii=False, sort_keys=True
+                    ).encode()
+                ).hexdigest()
+                cached = self._dynamic_followup_cache.get(cache_key)
                 if cached is not None:
                     text = cached["generated_utterance"]
                     dynamic_event = {**cached, "replayed": True}
@@ -1878,7 +1914,9 @@ class VoiceStreamingUserSimulator(
                                 else None
                             ),
                             "context_cost": (
-                                context_reply.cost if context_reply is not None else None
+                                context_reply.cost
+                                if context_reply is not None
+                                else None
                             ),
                         }
                     except Exception as error:
@@ -1905,7 +1943,7 @@ class VoiceStreamingUserSimulator(
                             "context_fallback": context_fallback,
                             "context_error": context_error,
                         }
-                    self._dynamic_followup_cache[key] = dynamic_event
+                    self._dynamic_followup_cache[cache_key] = dynamic_event
             if dynamic_event is not None:
                 self._dynamic_followup_events.append(dynamic_event)
             assistant_message = AssistantMessage(

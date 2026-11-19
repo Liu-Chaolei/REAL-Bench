@@ -7,9 +7,11 @@ import os
 import time
 import uuid
 from pathlib import Path
+from queue import Empty, Full, Queue
 
 import websockets
 
+from tau2.config import DEFAULT_QWEN_AGENT_BACKEND_EVENT_QUEUE_SIZE
 from tau2.voice.audio_native.qwen_agent.runtime import DockerRuntime
 
 
@@ -31,6 +33,11 @@ class QwenAgentProvider:
         self.input_sample_rate = None
         self.diagnostics_enabled = False
         self.backend_inputs = {}
+        self.backend_events = Queue(maxsize=DEFAULT_QWEN_AGENT_BACKEND_EVENT_QUEUE_SIZE)
+        self.persistent_tasks_enabled = False
+        self.backend_capabilities = None
+        self.backend_evidence_gap = False
+        self.backend_event_callback = None
         self.backend_observer_ready = False
         self._trace = None
 
@@ -43,10 +50,40 @@ class QwenAgentProvider:
         """Persist diagnostic events without copying raw media or credentials."""
         if self.diagnostics_enabled and event.get("type") == "diagnostic_backend_ready":
             self.backend_observer_ready = True
-        if self.diagnostics_enabled and event.get("type") == "diagnostic_backend":
-            self.backend_inputs[event["id"]] = {
-                k: v for k, v in event.items() if k not in {"type"}
-            }
+        if event.get("type") == "backend_observer_ready":
+            self.backend_capabilities = event.get("capabilities")
+        is_reply = event.get("type") == "gateway_event" and (
+            event.get("event") or {}
+        ).get("type") in {
+            "transcript.delta",
+            "transcript.final",
+            "response.audio_transcript.delta",
+            "response.audio_transcript.done",
+            "response.output_audio_transcript.delta",
+            "response.output_audio_transcript.done",
+            "response.created",
+            "response.started",
+        }
+        event.setdefault("received_monotonic", time.monotonic())
+        if is_reply or event.get("type") in {
+            "diagnostic_backend",
+            "backend_task_state",
+            "backend_native_operation",
+        }:
+            if self.diagnostics_enabled and event.get("type") == "diagnostic_backend":
+                self.backend_inputs[event.get("id", str(len(self.backend_inputs)))] = {
+                    k: v for k, v in event.items() if k not in {"type"}
+                }
+            if self.persistent_tasks_enabled:
+                payload = dict(
+                    event, session_id=event.get("session_id") or self.session_id
+                )
+                if isinstance(self.runtime, DockerRuntime):
+                    payload = json.loads(self.runtime.redact(json.dumps(payload)))
+                try:
+                    self.backend_events.put_nowait(payload)
+                except Full:
+                    self.backend_evidence_gap = True
         if self._trace:
             safe = {k: v for k, v in event.items() if k not in {"audio", "token"}}
             content = json.dumps({"time": time.monotonic(), **safe})
@@ -59,6 +96,11 @@ class QwenAgentProvider:
         """Boot one isolated system with public policy and tool schemas only."""
         self.failure = None
         self.events = asyncio.Queue(maxsize=10000)
+        self.backend_events = Queue(maxsize=DEFAULT_QWEN_AGENT_BACKEND_EVENT_QUEUE_SIZE)
+        self.backend_capabilities = None
+        self.backend_evidence_gap = False
+        self.backend_inputs = {}
+        self.backend_observer_ready = False
         self.session_id = str(uuid.uuid4())
         if self.trace_path:
             self.trace_path.parent.mkdir(parents=True, exist_ok=True)
@@ -99,6 +141,7 @@ class QwenAgentProvider:
                     "policy": system_prompt,
                     "tools": [tool.openai_schema["function"] for tool in tools],
                     "diagnostics_enabled": self.diagnostics_enabled,
+                    "persistent_tasks_enabled": self.persistent_tasks_enabled,
                     "tool_timeout_ms": round(self.config.tool_timeout_seconds * 1000),
                 }
             )
@@ -135,6 +178,13 @@ class QwenAgentProvider:
                                     "Missing effective confinement proof"
                                 )
                         self.record({"type": "provenance", **self.metadata})
+                        if (
+                            self.persistent_tasks_enabled
+                            and not self.backend_capabilities
+                        ):
+                            raise RuntimeError(
+                                "Qwen image does not support persistent backend observation"
+                            )
                         break
             self.reader = asyncio.create_task(self._read())
         except BaseException:
@@ -148,7 +198,13 @@ class QwenAgentProvider:
                 self.record(event)
                 if event.get("type") == "error":
                     raise RuntimeError(event.get("message", "Qwen bridge error"))
-                if event.get("type", "").startswith("diagnostic_backend"):
+                if event.get("type", "").startswith("diagnostic_backend") or event.get(
+                    "type"
+                ) in {
+                    "backend_task_state",
+                    "backend_native_operation",
+                    "backend_observer_ready",
+                }:
                     continue
                 self.events.put_nowait(event)
             raise RuntimeError("Qwen bridge disconnected during the call")
@@ -171,6 +227,20 @@ class QwenAgentProvider:
         while not self.events.empty():
             events.append(self.events.get_nowait())
         return events
+
+    def drain_backend_events(self):
+        """Drain backend observations without injecting them into media events."""
+        events = []
+        while True:
+            try:
+                events.append(self.backend_events.get_nowait())
+            except Empty:
+                break
+        return events
+
+    def set_backend_event_callback(self, callback):
+        """Attach a passive backend observer used by persistent-task evaluation."""
+        self.backend_event_callback = callback
 
     async def disconnect(self):
         """Close sockets and the owned container even after partial startup."""

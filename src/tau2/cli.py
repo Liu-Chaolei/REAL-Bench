@@ -208,6 +208,23 @@ def add_run_args(parser):
         help="Independent diagnostic YAML profile",
     )
     parser.add_argument(
+        "--active-metrics-config",
+        type=Path,
+        default=None,
+        help="Active metric YAML profile",
+    )
+    parser.add_argument(
+        "--gaia2-allow-stale-runtime",
+        action="store_true",
+        help="Skip the Gaia2 runtime seal comparison for development smoke runs",
+    )
+    parser.add_argument(
+        "--persistent-task-config",
+        type=Path,
+        default=None,
+        help="Private JSON scenario for native Qwen persistent-task evaluation",
+    )
+    parser.add_argument(
         "--verbose-logs",
         action="store_true",
         default=False,
@@ -914,7 +931,24 @@ def main():
             metrics_config = MetricsConfig.load(args.metrics_config).model_dump(
                 mode="json"
             )
+        active_metrics = None
+        if getattr(args, "active_metrics_config", None):
+            from tau2.metrics.active.config import ActiveMetricsConfig
+
+            active_metrics = ActiveMetricsConfig.load(
+                args.active_metrics_config
+            ).model_dump(mode="json")
+        persistent_task_config = None
+        if args.persistent_task_config:
+            from tau2.persistent_tasks.config import PersistentTaskConfig
+
+            persistent_task_config = PersistentTaskConfig.load(
+                args.persistent_task_config
+            ).model_dump(mode="json")
         shared_kwargs = dict(
+            persistent_task_config=persistent_task_config,
+            active_metrics=active_metrics,
+            gaia2_allow_stale_runtime=args.gaia2_allow_stale_runtime,
             metrics_config=metrics_config,
             localize_db=args.localize_db,
             **(

@@ -25,6 +25,28 @@ def stamp_grading(simulation):
 
 def finalize_reward(simulation, reward, series=None, missing=()):
     """Attach diagnostics and enforce delivery after component checks finish."""
+    persistent_summary = (simulation.info or {}).get("persistent_tasks")
+    if persistent_summary is not None:
+        from tau2.data_model.tasks import RewardType
+
+        persistent = persistent_summary.get("grading")
+        if persistent is None:
+            persistent = {"status": "ungraded", "reward": None}
+        combine = persistent_summary.get("config", {}).get("combine_reward", False)
+        if combine and RewardType.PERSISTENT_TASK in (reward.reward_basis or []):
+            factor = (
+                persistent.get("native_reward")
+                if persistent_summary.get("config", {}).get("overlay")
+                else persistent["reward"]
+            )
+            if factor is None:
+                raise ValueError("Persistent reward requires complete graded evidence")
+            reward.reward *= factor
+            reward.reward_breakdown = {
+                **(reward.reward_breakdown or {}),
+                RewardType.PERSISTENT_TASK: factor,
+            }
+        reward.info = {**(reward.info or {}), "persistent_tasks": persistent}
     reward.info = {
         **(reward.info or {}),
         "grading_version": GRADING_VERSION,

@@ -104,7 +104,10 @@ class UserSimulator(
 
     def scenario_stage_context(self, event_id, text):
         """Mark the newly released request as the current conversational goal."""
-        if event_id in getattr(self, "scenario_stage_ids", set()):
+        if event_id in (
+            getattr(self, "scenario_stage_ids", set())
+            | getattr(self, "scenario_goal_update_ids", set())
+        ):
             return SystemMessage(
                 role="system",
                 content=(

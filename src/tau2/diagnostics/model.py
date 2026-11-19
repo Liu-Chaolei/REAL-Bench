@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 
 def _is_timeout_error(error: BaseException) -> bool:
-    """Recognize provider and transport timeout wrappers without retrying 4xx errors."""
+    """Recognize timeout wrappers without retrying unrelated provider errors."""
     seen: set[int] = set()
     current: BaseException | None = error
     while current is not None and id(current) not in seen:
@@ -66,7 +66,7 @@ class TauJsonModel:
                 "prompt": prompt,
                 "schema": schema,
                 "profile": profile.model_dump(),
-                "implementation": "tau-json/1",
+                "implementation": "tau-json/2",
             }
         )
         path = self.directory / (identity + ".json")
@@ -169,15 +169,7 @@ class TauJsonModel:
                 )
 
     async def complete(self, prompt, schema):
-        """Run with an outer deadline and retry one timeout.
-
-        LiteLLM normally enforces its own request timeout. The outer deadline
-        covers providers that leave the underlying call waiting indefinitely.
-        ``to_thread`` cannot forcibly stop a blocked provider worker, so a
-        timed-out attempt may finish in the background while the retry starts;
-        successful responses are still content-addressed and validated before
-        being cached.
-        """
+        """Run with an outer deadline and retry one provider timeout."""
         timeout = self.config.timeout_seconds + self.OUTER_TIMEOUT_GRACE_SECONDS
         for attempt in range(self.TIMEOUT_RETRIES + 1):
             try:

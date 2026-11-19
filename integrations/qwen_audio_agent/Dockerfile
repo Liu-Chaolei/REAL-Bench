@@ -7,6 +7,7 @@ ARG QWEN_CODE_VERSION=0.26.0
 ARG QWEN_SOURCE_REVISION
 ARG QWEN_SOURCE_SHA256
 LABEL org.tau.qwen-agent.protocol="1" \
+      org.tau.qwen-agent.persistent-observer="1" \
       org.tau.qwen-agent.domains="retail,gaia2" \
       org.tau.qwen-agent.confinement="mount-namespace-v1" \
       org.tau.qwen-agent.source-revision=$QWEN_SOURCE_REVISION \

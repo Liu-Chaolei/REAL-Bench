@@ -349,3 +349,20 @@ class TestCheckpointReplacer:
 
         assert len(on_disk["simulations"]) == 1
         assert on_disk["simulations"][0]["termination_reason"] == "user_stop"
+
+
+def test_resume_rejects_changed_persistent_task_conditions(tmp_path):
+    task = _make_task("t0")
+    info = _make_info().model_copy(
+        update={"persistent_task_config": {"scenario_id": "one"}}
+    )
+    previous = Results(info=info, tasks=[task], simulations=[_make_sim("t0")])
+    path = tmp_path / "results.json"
+    previous.save(path)
+    current = Results(
+        info=info.model_copy(update={"persistent_task_config": {"scenario_id": "two"}}),
+        tasks=[task],
+        simulations=[],
+    )
+    with pytest.raises(ValueError, match="Persistent task conditions changed"):
+        try_resume(path, current, [task], 1, auto_resume=True)

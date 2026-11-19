@@ -592,7 +592,7 @@ def test_calibration_file_is_resolved_and_fingerprinted(tmp_path):
     assert loaded.fingerprint() != MetricsConfig(measures=["conciseness"]).fingerprint()
 
 
-def test_provider_timeout_retries_once_and_audits_attempts(tmp_path, monkeypatch):
+def test_provider_timeout_retries_and_audits_attempts(tmp_path, monkeypatch):
     from tau2.diagnostics.model import TauJsonModel
     from tau2.utils import llm_utils
 
@@ -609,7 +609,8 @@ def test_provider_timeout_retries_once_and_audits_attempts(tmp_path, monkeypatch
     attempts = list((tmp_path / "attempts").glob("*.json"))
     assert len(attempts) == 2
     assert all(
-        json.loads(path.read_text())["status"] == "provider_error" for path in attempts
+        json.loads(path.read_text())["status"] == "provider_error"
+        for path in attempts
     )
 
 

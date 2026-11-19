@@ -19,8 +19,10 @@ def population_errors(tasks, splits, manifest):
         ("search", "execution", "ambiguity", "adaptability", "time"), 160
     )
     version = manifest.get("population_version", "gaia2-core-v1")
-    if version == "gaia2-variants-v1":
+    if version in {"gaia2-variants-v1", "gaia2-async-v1"}:
         expected.update(mind_change=100, repetition=100)
+        if version == "gaia2-async-v1":
+            expected["async"] = 100
     elif version != "gaia2-core-v1":
         return [f"Unknown Gaia2 population version: {version}"]
     identifiers = [task.id for task in tasks]
@@ -45,11 +47,11 @@ def population_errors(tasks, splits, manifest):
         or manifest.get("categories") != expected
     ):
         errors.append("Manifest counts differ from the versioned population")
-    if version == "gaia2-variants-v1":
+    if version in {"gaia2-variants-v1", "gaia2-async-v1"}:
         original = {
             task.id
             for task in tasks
-            if task.scenario.category not in {"mind_change", "repetition"}
+            if task.scenario.category not in {"mind_change", "repetition", "async"}
         }
         sources = []
         for task in tasks:
@@ -66,6 +68,26 @@ def population_errors(tasks, splits, manifest):
             sources.append(source)
         if len(set(sources)) != 200:
             errors.append("Variants must use 200 different original tasks")
+    if version == "gaia2-async-v1":
+        by_id = {task.id: task for task in tasks}
+        for task in tasks:
+            if task.scenario.category != "async":
+                continue
+            spec = task.scenario
+            metadata = spec.async_metadata or {}
+            source = by_id.get(spec.source_id)
+            if source is None or source.scenario.category == "async":
+                errors.append(f"Async variant has an invalid source: {task.id}")
+                continue
+            legacy = metadata.get("legacy_qpt_id", "")
+            suffix = legacy.removeprefix("qpt_")
+            if (
+                task.id != f"{source.id}__async_{suffix}_v1"
+                or spec.async_interaction is None
+            ):
+                errors.append(f"Async variant identity/config mismatch: {task.id}")
+            if spec.source_sha256 != source.scenario.source_sha256:
+                errors.append(f"Async variant source revision mismatch: {task.id}")
     return errors
 
 

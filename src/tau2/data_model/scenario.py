@@ -58,6 +58,12 @@ class ScenarioSpec(BaseModel):
     runtime_sha256: str | None = None
     assets_sha256: str | None = None
     stages: list[ScenarioStage] = Field(default_factory=list)
+    async_interaction: dict[str, Any] | None = Field(
+        default=None, description="Private provider-neutral async task configuration."
+    )
+    async_metadata: dict[str, Any] | None = Field(
+        default=None, description="Async variant provenance and data readiness."
+    )
 
     @model_serializer(mode="wrap")
     def serialize_spec(self, handler):
@@ -65,6 +71,10 @@ class ScenarioSpec(BaseModel):
         data = handler(self)
         if not self.stages:
             data.pop("stages", None)
+        if self.async_interaction is None:
+            data.pop("async_interaction", None)
+        if self.async_metadata is None:
+            data.pop("async_metadata", None)
         return data
 
 

@@ -180,8 +180,6 @@ def test_mimo_tts_connection_error_retries(monkeypatch):
         lambda **kw: client_type(transport=httpx.MockTransport(reply), **kw),
     )
 
-    # Remove backoff from the unit test while retaining the production retry
-    # predicate and attempt limit.
     retrying_synthesize = synthesize_voice.retry_with(
         stop=stop_after_attempt(3), wait=wait_none()
     )

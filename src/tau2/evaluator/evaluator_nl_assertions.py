@@ -14,24 +14,14 @@ from tau2.utils.transcript.views import speech_messages
 
 VOICE_ASR_TOLERANCE_ADDENDUM = """
 VOICE/ASR TRANSCRIPT HANDLING
-- The agent reply is recovered from speech through observer ASR.
-- When an expected outcome asks the agent to report a subject, title,
-  address, or other literal text, judge the underlying words and facts.
+- The agent reply may be recovered from speech through observer ASR.
 - Ignore capitalization, punctuation, quotation marks, and spacing differences
-  introduced by speech or transcription. The same words, recipient, and
-  business object must still be present; do not accept a different address,
-  subject, or recipient.
+  introduced by speech or transcription when the underlying words are the same.
+- Keep the actual words, order, recipient, business object, and requested facts
+  correct; do not accept a different address, subject, or recipient.
 - Keep exact identity, email, ID, numeric, date/time, and environment-provided
-  canonical values strict. If a subject, title, description, or address is
-  already persisted in the environment, treat that persisted value as
-  canonical and require character-exact matching.
+  canonical values strict.
 """
-
-
-def _voice_prompt_addendum(task: Task) -> str:
-    """Return the first-version ASR instructions for NL judge calls."""
-    del task
-    return VOICE_ASR_TOLERANCE_ADDENDUM
 
 
 def _with_scenario_evidence(messages, records, scenario_series=None):
@@ -112,7 +102,6 @@ class NLAssertionsEvaluator(EvaluatorBase[Message]):
                 full_trajectory, environment_trace, scenario_series
             ),
             nl_assertions,
-            prompt_addendum=_voice_prompt_addendum(task),
         )
 
         # Calculate reward: 1 if all expectations are met, 0 otherwise
@@ -180,7 +169,6 @@ class NLAssertionsEvaluator(EvaluatorBase[Message]):
             ]
         }
         """
-
         if prompt_addendum:
             system_prompt += "\n" + prompt_addendum
 
@@ -255,11 +243,15 @@ class FullDuplexNLAssertionsEvaluator(EvaluatorBase[Tick]):
     """
 
     @classmethod
-    def ticks_to_message_history(cls, ticks: list[Tick]) -> list[Message]:
+    def ticks_to_message_history(
+        cls, ticks: list[Tick], *, allow_unresolved_live_audio: bool = False
+    ) -> list[Message]:
         """Use the shared speech_messages transcript view."""
         from tau2.utils.transcript.live import require_live_alignment
 
-        require_live_alignment(ticks)
+        require_live_alignment(
+            ticks, allow_missing_transcript=allow_unresolved_live_audio
+        )
         return speech_messages(ticks)
 
     @classmethod
@@ -269,6 +261,7 @@ class FullDuplexNLAssertionsEvaluator(EvaluatorBase[Tick]):
         full_trajectory: list[Tick],
         environment_trace: list[dict] | None = None,
         scenario_series: dict | None = None,
+        allow_unresolved_live_audio: bool = False,
     ) -> RewardInfo:
         """
         Calculate the reward for the simulation by using an LLM to evaluate whether
@@ -292,7 +285,10 @@ class FullDuplexNLAssertionsEvaluator(EvaluatorBase[Tick]):
 
         # Convert ticks to linearized message history
         messages = _with_scenario_evidence(
-            cls.ticks_to_message_history(full_trajectory),
+            cls.ticks_to_message_history(
+                full_trajectory,
+                allow_unresolved_live_audio=allow_unresolved_live_audio,
+            ),
             environment_trace,
             scenario_series,
         )
@@ -300,7 +296,7 @@ class FullDuplexNLAssertionsEvaluator(EvaluatorBase[Tick]):
         nl_assertions_checks = cls.evaluate_nl_assertions(
             messages,
             nl_assertions,
-            prompt_addendum=_voice_prompt_addendum(task),
+            prompt_addendum=VOICE_ASR_TOLERANCE_ADDENDUM,
         )
 
         # Calculate reward: 1 if all expectations are met, 0 otherwise

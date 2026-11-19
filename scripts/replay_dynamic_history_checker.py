@@ -8,13 +8,14 @@ behavior from a new candidate-generation sample.
 
 from __future__ import annotations
 
+import argparse
 import json
 import re
 from pathlib import Path
 from types import SimpleNamespace
 
 from experiment_dynamic_goal_graph import (
-    CASES,
+    configured_cases,
     load_request_case,
     load_task,
     tool_gt_for_stage,
@@ -54,8 +55,12 @@ def _safe_error(error: Exception) -> str:
 
 
 def main() -> int:
-    config_path = ROOT / "integrations/qwen_audio_agent/config.gaia2.dynamic.metrics.deepseek-user.json"
-    config = QwenAgentConfig.model_validate_json(config_path.read_text())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--config", type=Path, default=ROOT / "integrations/qwen_audio_agent/config.gaia2.dynamic.metrics.deepseek-user.json")
+    parser.add_argument("--simulations-root", type=Path, default=ROOT / "data/simulations")
+    parser.add_argument("--output", type=Path, default=OUTPUT)
+    args = parser.parse_args()
+    config = QwenAgentConfig.model_validate_json(args.config.read_text())
     settings = config.user_llm_settings()
     if settings is None:
         raise RuntimeError("the replay config has no user LLM")
@@ -69,7 +74,7 @@ def main() -> int:
     }
 
     original_generate = dynamic_module.generate
-    for case in CASES:
+    for case in configured_cases(args.simulations_root):
         data = load_request_case(case)
         candidate = _candidate(case["request_log"])
         checker_payload = {}
@@ -122,8 +127,8 @@ def main() -> int:
             flush=True,
         )
 
-    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT.write_text(json.dumps(results, ensure_ascii=False, indent=2) + "\n")
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(json.dumps(results, ensure_ascii=False, indent=2) + "\n")
     print(OUTPUT)
     return 0
 
