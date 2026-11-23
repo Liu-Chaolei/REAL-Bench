@@ -1,0 +1,156 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0414_3yql6usimuhmbc4q5hlkwpiz859qwj0e__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "424f7e76eb13b0db7aa3729b1803d07199dadd4b5e5458d320d6f255b9af4f1d",
+  "review_input_sha256": "c5764ca6b27b6134b29a25c03fe0110efac2cf78bc868aff3dc731d6d2c89e53",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "a68f1d14237be5ee272af38d614ae4ebafcadbd531d9632c16fe71a700fe138d",
+  "reference_results_sha256": "7ff9a394ce29588890fecee871c589455635ea263e519fefcd8db07dce1d22d4",
+  "sources": {
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Liesbeth",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Kiettisak Somsakul",
+      "original_source": "stage1.tool_gt.series_s1_add_event.arguments.description"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Nonglak Sriwong",
+      "original_source": "stage2.tool_gt.series_s2_email_tracker.arguments.content"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Jamila Al-Farsi",
+      "original_source": "stage2.tool_gt.series_s2_email_tracker.arguments.content"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Thierry Vandenberghe",
+      "original_source": "stage2.tool_gt.series_s2_email_tracker.arguments.content"
+    },
+    "stage2.existing_catalog.3": {
+      "stage": 2,
+      "text": "Elodie Vandenberghe",
+      "original_source": "stage2.tool_gt.series_s2_email_tracker.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kiettisak Somsakul",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "完整泰语人名，难以识别，保留全名",
+          "weight": 50
+        },
+        {
+          "text": "Liesbeth",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "困难荷兰语名字，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kiettisak Somsakul",
+        "Liesbeth"
+      ],
+      "active_vocabulary": {
+        "Kiettisak Somsakul": 50,
+        "Liesbeth": 50
+      },
+      "vocabulary_sha256": "b3eefdd2853d4e894a367487cc542d92d7ad3e2abb71e8c86b24fc67490df9b8"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Jamila Al-Farsi",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "完整阿拉伯语人名，含连字符，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Elodie Vandenberghe",
+          "kind": "person",
+          "source": "stage2.existing_catalog.3",
+          "reason": "完整荷兰语人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Nonglak Sriwong",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整泰语人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Thierry Vandenberghe",
+          "kind": "person",
+          "source": "stage2.existing_catalog.2",
+          "reason": "完整荷兰语人名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Jamila Al-Farsi",
+        "Elodie Vandenberghe",
+        "Nonglak Sriwong",
+        "Thierry Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Kiettisak Somsakul": 50,
+        "Liesbeth": 50,
+        "Jamila Al-Farsi": 50,
+        "Elodie Vandenberghe": 50,
+        "Nonglak Sriwong": 50,
+        "Thierry Vandenberghe": 50
+      },
+      "vocabulary_sha256": "85591f89b1801a5a79db6b1b8518f2ba1fdc6a40f9abc17afd3d6cad0c099846"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": [
+        {
+          "text": "Kiettisak",
+          "covered_by": "Kiettisak Somsakul"
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kiettisak"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:33.091587+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

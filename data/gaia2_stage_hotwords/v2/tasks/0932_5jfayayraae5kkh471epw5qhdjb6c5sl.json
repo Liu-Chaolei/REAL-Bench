@@ -1,0 +1,154 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0932_5jfayayraae5kkh471epw5qhdjb6c5sl",
+  "model": "deepseek-flash",
+  "input_sha256": "2787cbd6d2d395d0b74175eba00fcd0f469cb825939467b1b510906cab811b79",
+  "review_input_sha256": "c3903d599cac919dce07390f7610a4f95f1498341b714dc70d02b8b79da71a48",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "95f3f0e36d8da30a73dcb596e2a7cf1778112bd25a9985dfdeee5d6383d62ffd",
+  "reference_results_sha256": "0b7dd551ab06b49d469477a0042fa137e3248758a33dd41db9f7005c8b7a2e16",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kryštof Nováček",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-11f264b8-f570-47f5-af69-b2d0b71fc768.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Bay Restaurant",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-11f264b8-f570-47f5-af69-b2d0b71fc768.arguments.location"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Bohumil Nováček",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Lukáš Nováček",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.tool_response.series_s1_read_thursday": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"1e52d065fedd40ca9abd8179e2be0570\", \"title\": \"Translation Project Meeting\", \"start_datetime\": \"1729177200\", \"end_datetime\": \"1729184400\", \"tag\": \"Work\", \"description\": \"Discuss ongoing translation project with team.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Šárka Nováková\"], \"start_strftime\": \"Thursday, 2024-10-17 15:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 17:00:00\"}, {\"event_id\": \"336a614755644750bc8d534f9c10da90\", \"title\": \"Global Governance Seminar\", \"start_datetime\": \"1729155600\", \"end_datetime\": \"1729166400\", \"tag\": \"Academics\", \"description\": \"Seminar on global governance and its implications on international relations.\", \"location\": \"Charles University, Prague\", \"attendees\": [], \"start_strftime\": \"Thursday, 2024-10-17 09:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 12:00:00\"}, {\"event_id\": \"3479ccb9e4c743abb1223ba9837ff853\", \"title\": \"Research Session\", \"start_datetime\": \"1729202400\", \"end_datetime\": \"1729209600\", \"tag\": \"Academics\", \"description\": \"Conduct research on international relations and global governance.\", \"location\": \"Home, Prague\", \"attendees\": [], \"start_strftime\": \"Thursday, 2024-10-17 22:00:00\", \"end_strftime\": \"Friday, 2024-10-18 00:00:00\"}, {\"event_id\": \"8b999799feca4bc1bd25ec59f55f1174\", \"title\": \"Dinner with Family\", \"start_datetime\": \"1729191600\", \"end_datetime\": \"1729198800\", \"tag\": \"Personal\", \"description\": \"Spend quality time with family over dinner.\", \"location\": \"Home, Prague\", \"attendees\": [\"Bohumil Nováček\", \"Lukáš Nováček\"], \"start_strftime\": \"Thursday, 2024-10-17 19:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 21:00:00\"}, {\"event_id\": \"d720a84bfb7e41f7b459dc92bc472798\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729188000\", \"end_datetime\": \"1729191600\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio, Prague\", \"attendees\": [], \"start_strftime\": \"Thursday, 2024-10-17 18:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 19:00:00\"}, {\"event_id\": \"eb296bc434964e3796c20a736c65596d\", \"title\": \"Lunch with Friends\", \"start_datetime\": \"1729170000\", \"end_datetime\": \"1729175400\", \"tag\": \"Social\", \"description\": \"Catch up with friends over lunch.\", \"location\": \"Café, Prague\", \"attendees\": [\"Kvido Nováček\"], \"start_strftime\": \"Thursday, 2024-10-17 13:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 14:30:00\"}], \"range\": [\"0\", \"6\"], \"total\": \"6\"}",
+      "event_id": "series_s1_read_thursday",
+      "response_sha256": "6f7de2cac554d692211aa2437e53ec1cded4913331bf3fada7a32a0b37c2826f"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Bay Restaurant",
+          "kind": "place",
+          "source": "stage0.existing_catalog.1",
+          "reason": "具体场所名称，具辨识度",
+          "weight": 50
+        },
+        {
+          "text": "Kryštof Nováček",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Bay Restaurant",
+        "Kryštof Nováček"
+      ],
+      "active_vocabulary": {
+        "Bay Restaurant": 50,
+        "Kryštof Nováček": 50
+      },
+      "vocabulary_sha256": "8197520325317de2577db758780c323e6d4b0034fbb4a619f47ae379f210e4e4"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Bohumil Nováček",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Kvido Nováček",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_thursday",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Lukáš Nováček",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Šárka Nováková",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_thursday",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Bohumil Nováček",
+        "Kvido Nováček",
+        "Lukáš Nováček",
+        "Šárka Nováková"
+      ],
+      "active_vocabulary": {
+        "Bay Restaurant": 50,
+        "Kryštof Nováček": 50,
+        "Bohumil Nováček": 50,
+        "Kvido Nováček": 50,
+        "Lukáš Nováček": 50,
+        "Šárka Nováková": 50
+      },
+      "vocabulary_sha256": "529ef62700d7f1004a470597f1b8b9ebe1db28fa4c6be78c7b63e866d96aee30"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Bay Restaurant": 50,
+        "Kryštof Nováček": 50,
+        "Bohumil Nováček": 50,
+        "Kvido Nováček": 50,
+        "Lukáš Nováček": 50,
+        "Šárka Nováková": 50
+      },
+      "vocabulary_sha256": "529ef62700d7f1004a470597f1b8b9ebe1db28fa4c6be78c7b63e866d96aee30"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kryštof"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:52.853970+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

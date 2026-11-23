@@ -1,0 +1,129 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0099_dys7qiasymc6tsiomethj9v7ofhlksfb",
+  "model": "deepseek-flash",
+  "input_sha256": "6b50831dffd19d63afe0f8960022f83072fca92cf2b719ab947daf116558a054",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Luís Silva",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名，邮件收件人"
+        },
+        {
+          "text": "Astrid Nakamura",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名，需删除其邮件"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-23fe73b2-4f37-4025-bc8a-6188bb5fb745.arguments.content",
+          "reason": "人名，邮件署名"
+        }
+      ],
+      "new_terms": [
+        "Luís Silva",
+        "Astrid Nakamura",
+        "Aurélien LaFleur"
+      ],
+      "active_vocabulary": {
+        "Luís Silva": 50,
+        "Astrid Nakamura": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "49a566e4464311f1c7853314fc4e1e38774d16063bc8892632d167db060e40b0"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Luís Silva",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "人名，回复对象"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply.arguments.content",
+          "reason": "人名，邮件署名"
+        },
+        {
+          "text": "New York",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_reply.arguments.content",
+          "reason": "地名，餐厅所在地"
+        }
+      ],
+      "new_terms": [
+        "New York"
+      ],
+      "active_vocabulary": {
+        "Luís Silva": 50,
+        "Astrid Nakamura": 50,
+        "Aurélien LaFleur": 50,
+        "New York": 50
+      },
+      "vocabulary_sha256": "4c518f67b410eba2b45acfe217cc50f1ccede52215b4b8705fcea4b0c3610e1b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "La Jolla Cove",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "The Lofts at Downtown",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "公寓名称"
+        }
+      ],
+      "new_terms": [
+        "La Jolla Cove",
+        "The Lofts at Downtown"
+      ],
+      "active_vocabulary": {
+        "Luís Silva": 50,
+        "Astrid Nakamura": 50,
+        "Aurélien LaFleur": 50,
+        "New York": 50,
+        "La Jolla Cove": 50,
+        "The Lofts at Downtown": 50
+      },
+      "vocabulary_sha256": "8dd6791afe4af8b8985d5ab7feeb90926567febcc12d1f0f21e5f61aab22518b"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "fdd1503405d552070c55dbde417fcf2ebca70fce17977dee1ee7361e273fef5b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2643,
+        "completion_tokens": 297,
+        "total_tokens": 2940,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2387
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.355
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0099_dys7qiasymc6tsiomethj9v7ofhlksfb",
+  "extracted_at": "2026-11-22T06:40:02.194617+00:00"
+}

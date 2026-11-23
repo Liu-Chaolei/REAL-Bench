@@ -1,0 +1,204 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0522_ausuhnnfsyc6a0fov5yiirc8ek8eofi6",
+  "model": "deepseek-flash",
+  "input_sha256": "6ff74dd870e270504cf307f9a36c72b812365d1ffe0870282a7afafd7db0220d",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Lausanne",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "瑞士城市名"
+        },
+        {
+          "text": "Nakamura",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人姓氏"
+        },
+        {
+          "text": "Rue de la Vigie, 1000 Lausanne",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7035e9f1-4a51-4cf2-addf-442120223d1f.arguments.end_location",
+          "reason": "具体街道地址"
+        }
+      ],
+      "new_terms": [
+        "Lausanne",
+        "Nakamura",
+        "Rue de la Vigie, 1000 Lausanne"
+      ],
+      "active_vocabulary": {
+        "Lausanne": 50,
+        "Nakamura": 50,
+        "Rue de la Vigie, 1000 Lausanne": 50
+      },
+      "vocabulary_sha256": "03e51d68965661f0c1a5ba239043293fbf0cd16c853849def55ba0ee2401801e"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Lausanne",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "瑞士城市名"
+        },
+        {
+          "text": "Lausanne University Housing",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Rue de Bourg, 1003 Lausanne",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "具体街道地址"
+        },
+        {
+          "text": "Lausanne Hills",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Lausanne Oasis",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "公寓名称"
+        }
+      ],
+      "new_terms": [
+        "Lausanne University Housing",
+        "Rue de Bourg, 1003 Lausanne",
+        "Lausanne Hills",
+        "Lausanne Oasis"
+      ],
+      "active_vocabulary": {
+        "Lausanne": 50,
+        "Nakamura": 50,
+        "Rue de la Vigie, 1000 Lausanne": 50,
+        "Lausanne University Housing": 50,
+        "Rue de Bourg, 1003 Lausanne": 50,
+        "Lausanne Hills": 50,
+        "Lausanne Oasis": 50
+      },
+      "vocabulary_sha256": "3baaced474fe7d521612d5f04a1e61c70e0274104ad15d6cb719f5f53afc5ac6"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Nadja Ramadanović",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Lausanne",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "瑞士城市名"
+        },
+        {
+          "text": "Lausanne Hills",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_details.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Rue de la Vigie, 1000 Lausanne",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_details.arguments.content",
+          "reason": "具体街道地址"
+        },
+        {
+          "text": "Lausanne Oasis",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_details.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Rue de la Madeleine",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_details.arguments.content",
+          "reason": "街道名"
+        },
+        {
+          "text": "Lausanne University Housing",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_details.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Rue de Bourg",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_details.arguments.content",
+          "reason": "街道名"
+        },
+        {
+          "text": "Lausanne Property Review Call",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.title",
+          "reason": "日历事件标题"
+        },
+        {
+          "text": "Historical Research Seminar",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "既有研讨会名称"
+        }
+      ],
+      "new_terms": [
+        "Nadja Ramadanović",
+        "Rue de la Madeleine",
+        "Rue de Bourg",
+        "Lausanne Property Review Call",
+        "Historical Research Seminar"
+      ],
+      "active_vocabulary": {
+        "Lausanne": 50,
+        "Nakamura": 50,
+        "Rue de la Vigie, 1000 Lausanne": 50,
+        "Lausanne University Housing": 50,
+        "Rue de Bourg, 1003 Lausanne": 50,
+        "Lausanne Hills": 50,
+        "Lausanne Oasis": 50,
+        "Nadja Ramadanović": 50,
+        "Rue de la Madeleine": 50,
+        "Rue de Bourg": 50,
+        "Lausanne Property Review Call": 50,
+        "Historical Research Seminar": 50
+      },
+      "vocabulary_sha256": "c5c30e426f148178d54bf06a06bcbe22bb263c3bd815e778bf25e7b0c448da82"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "cf27a21643c1efe797f7fb81b39b1e3b9d455129b63b694f759a7ee86f97cd1f",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2518,
+        "completion_tokens": 665,
+        "total_tokens": 3183,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2262
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.122
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0522_ausuhnnfsyc6a0fov5yiirc8ek8eofi6",
+  "extracted_at": "2026-11-22T06:42:33.158993+00:00"
+}

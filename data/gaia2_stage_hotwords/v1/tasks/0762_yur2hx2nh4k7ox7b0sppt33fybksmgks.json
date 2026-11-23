@@ -1,0 +1,155 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0762_yur2hx2nh4k7ox7b0sppt33fybksmgks",
+  "model": "deepseek-flash",
+  "input_sha256": "5729ac965fa9bf38e5b4280a7d0d465df25b95830cbcad5ae17dda2c643adc56",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Nalani",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-427c45b9-a99d-4289-b74c-02a6ced8bda3.arguments.content",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ebc3ee51-671e-49a8-bda9-135ff9360451.arguments.content",
+          "reason": "用户署名"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b982b186-49e7-4479-8c88-bcbe5ff73582.arguments.content",
+          "reason": "用户全名署名"
+        },
+        {
+          "text": "Shopping Spree",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e498e30c-befb-48f1-8fca-b4734c23b37b.arguments.title",
+          "reason": "日历事件标题"
+        }
+      ],
+      "new_terms": [
+        "Nalani",
+        "Aurélien",
+        "Aurélien LaFleur",
+        "Shopping Spree"
+      ],
+      "active_vocabulary": {
+        "Nalani": 50,
+        "Aurélien": 50,
+        "Aurélien LaFleur": 50,
+        "Shopping Spree": 50
+      },
+      "vocabulary_sha256": "537abd3bad865f355395f2bdcdfd1c39464caf0c90071f5157cb8ac6e471bb30"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Shopping Spree",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_add_spree.arguments.title",
+          "reason": "日历事件标题"
+        },
+        {
+          "text": "Staff Meeting",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "日历事件标题"
+        }
+      ],
+      "new_terms": [
+        "Staff Meeting"
+      ],
+      "active_vocabulary": {
+        "Nalani": 50,
+        "Aurélien": 50,
+        "Aurélien LaFleur": 50,
+        "Shopping Spree": 50,
+        "Staff Meeting": 50
+      },
+      "vocabulary_sha256": "5eb8bbd5bddc6f1be98b0ee8ae1a54d53e23651b3b9b4bf430d337bd37d0951f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Xochitl",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "邀请人姓名"
+        },
+        {
+          "text": "Xóchitl",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "带重音的邀请人姓名"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply_bagels.arguments.content",
+          "reason": "用户全名署名"
+        },
+        {
+          "text": "Bagels",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_add_bagels.arguments.title",
+          "reason": "日历事件标题"
+        },
+        {
+          "text": "Wine List Review",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "日历事件标题"
+        }
+      ],
+      "new_terms": [
+        "Xochitl",
+        "Xóchitl",
+        "Bagels",
+        "Wine List Review"
+      ],
+      "active_vocabulary": {
+        "Nalani": 50,
+        "Aurélien": 50,
+        "Aurélien LaFleur": 50,
+        "Shopping Spree": 50,
+        "Staff Meeting": 50,
+        "Xochitl": 50,
+        "Xóchitl": 50,
+        "Bagels": 50,
+        "Wine List Review": 50
+      },
+      "vocabulary_sha256": "53059c9280699050c52b2cbc19bbfca876c1232c3c5b93c9bef3527457f9711d"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "4b6f5aa7a487eb2f7cdb483959d5b78108c61a49c6839a76c56ef594ce20d42b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3059,
+        "completion_tokens": 519,
+        "total_tokens": 3578,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2803
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.771
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0762_yur2hx2nh4k7ox7b0sppt33fybksmgks",
+  "extracted_at": "2026-11-22T06:43:43.930225+00:00"
+}

@@ -1,0 +1,96 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0603_pofr8ljj8zqoeamwjnrvlu23397rqasi__async_0053_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "e0bd11a59b31731f1017b29a8228c4979e9be5cad16a5955bf4e66d11e3fa338",
+  "review_input_sha256": "4e8ccf600f9e68525ed62d490c75d96ebd875c8b5dd0051036b398822f7bc844",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "0f0cce6d3cb03adb1379394614eb45b1d0b946ccf03fa5cdc0184f46a6b83478",
+  "reference_results_sha256": "3c042c0842d2a71729efe710af727e327097e8cd805ddcf2454c9a9df1fd9d8b",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kymberley Nakamura",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Rohan Kumar",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-1eb5d9cb-adc5-4cbd-99e9-dfd04ebcb693.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kymberley Nakamura",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，拼写较难，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，非普通词汇，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kymberley Nakamura",
+        "Rohan Kumar"
+      ],
+      "active_vocabulary": {
+        "Kymberley Nakamura": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "9e56bcc5ceb41699b7098e29863c56d4152270f2ddceb910d68b4982a951743c"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kymberley Nakamura": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "9e56bcc5ceb41699b7098e29863c56d4152270f2ddceb910d68b4982a951743c"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kymberley Nakamura": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "9e56bcc5ceb41699b7098e29863c56d4152270f2ddceb910d68b4982a951743c"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "D3S83JEK57"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:56.804915+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

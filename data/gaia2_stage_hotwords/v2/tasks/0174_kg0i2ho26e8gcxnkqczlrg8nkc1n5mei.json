@@ -1,0 +1,113 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0174_kg0i2ho26e8gcxnkqczlrg8nkc1n5mei",
+  "model": "deepseek-flash",
+  "input_sha256": "04aafb8f334257506ca0c8374b724c6c09156a8f6b75b3c4b6eb83db11b91fb0",
+  "review_input_sha256": "d1d7b6b5add0e4c5bab0b1f9c49c7d7ff7556a34715e56f5ee4a211ba29a89af",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "2079af5333265b249af4e92c0e34d10e6c7c6fea7c15df73e3d6fd4afe9d5fe8",
+  "reference_results_sha256": "eb50ab64723fe76e775ce64287c3b225cc28e91ce776db28c047f854c7a2971f",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Atom Elite Palm Guard",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Akira Tanaka",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Rohini Deshpande",
+      "original_source": "stage1.tool_gt.series_s1_send_email.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Atom Elite Palm Guard",
+          "kind": "product",
+          "source": "stage0.existing_catalog.0",
+          "reason": "特定产品名，拼写独特，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Atom Elite Palm Guard"
+      ],
+      "active_vocabulary": {
+        "Atom Elite Palm Guard": 50
+      },
+      "vocabulary_sha256": "13b19593c096fa4b9d5aa8fb4b1b82d236b40ca26daf5d4cf22bd7a4bdbfd249"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Akira Tanaka",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Akira Tanaka",
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "Atom Elite Palm Guard": 50,
+        "Akira Tanaka": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "6c97f832b9656fd9ab2f9e9a709f3dde6a059edc87193ed9b6cf1380b671fd42"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Atom Elite Palm Guard": 50,
+        "Akira Tanaka": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "6c97f832b9656fd9ab2f9e9a709f3dde6a059edc87193ed9b6cf1380b671fd42"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Akira",
+    "Melbourne"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:19.826599+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

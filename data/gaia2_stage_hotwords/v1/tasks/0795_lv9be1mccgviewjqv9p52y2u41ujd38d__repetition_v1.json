@@ -1,0 +1,106 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0795_lv9be1mccgviewjqv9p52y2u41ujd38d__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "71600982a828c6b05dd7200352f78e34dd60d6691c13ccc8bbab55eb326058ec",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Pokemon",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "产品名称中的品牌词，需保留原拼写"
+        }
+      ],
+      "new_terms": [
+        "Pokemon"
+      ],
+      "active_vocabulary": {
+        "Pokemon": 50
+      },
+      "vocabulary_sha256": "712acbb7b92d03c0766a72c126283040ddd87324030033d3641c543965e7783d"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Pokemon Starter Decks",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "完整产品名称"
+        }
+      ],
+      "new_terms": [
+        "Pokemon Starter Decks"
+      ],
+      "active_vocabulary": {
+        "Pokemon": 50,
+        "Pokemon Starter Decks": 50
+      },
+      "vocabulary_sha256": "d0455162e75e1d239fa9b2b5882b10b5fbb6b4857c183f609f26d8be63f1fc96"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Pokemon Starter Decks",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "完整产品名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Pokemon": 50,
+        "Pokemon Starter Decks": 50
+      },
+      "vocabulary_sha256": "d0455162e75e1d239fa9b2b5882b10b5fbb6b4857c183f609f26d8be63f1fc96"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "9730b3e08467621758f200fee6bd4fe52ec5c2e74a309aecd1c3e647004c6fcd",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1937,
+        "completion_tokens": 54,
+        "total_tokens": 1991,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1681
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 0.673,
+      "error": "3 validation errors for Extraction\nstages.0.terms.0.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage0.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='品牌名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "ac945dfb80d953896244ba1bc1da551b9dad3dfe26f94704929898eaa7ff6259",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2559,
+        "completion_tokens": 113,
+        "total_tokens": 2672,
+        "prompt_tokens_details": {
+          "cached_tokens": 1920
+        },
+        "prompt_cache_hit_tokens": 1920,
+        "prompt_cache_miss_tokens": 639
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.741
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0795_lv9be1mccgviewjqv9p52y2u41ujd38d__repetition_v1",
+  "extracted_at": "2026-11-22T06:46:14.896331+00:00"
+}

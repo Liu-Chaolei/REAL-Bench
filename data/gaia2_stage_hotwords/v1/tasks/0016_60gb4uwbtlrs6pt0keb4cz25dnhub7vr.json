@@ -1,0 +1,121 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0016_60gb4uwbtlrs6pt0keb4cz25dnhub7vr",
+  "model": "deepseek-flash",
+  "input_sha256": "1cf85ed034ac9658c2b60d5ca25a24a29913d34ccfdc75a7d8a511ad29928b10",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Antwerp City Hall",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "安特卫普市政厅专有地名"
+        },
+        {
+          "text": "Antwerp International Airport",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "安特卫普国际机场专有地名"
+        }
+      ],
+      "new_terms": [
+        "Antwerp City Hall",
+        "Antwerp International Airport"
+      ],
+      "active_vocabulary": {
+        "Antwerp City Hall": 50,
+        "Antwerp International Airport": 50
+      },
+      "vocabulary_sha256": "46be91219cb4b10ad1eb23c821feb2410144ced7b3bf68597ffbf838e785eb92"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélie De Waele",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Bruges",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "比利时城市名"
+        },
+        {
+          "text": "Rue des Carmes",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_send_answer.arguments.content",
+          "reason": "街道专有名称"
+        }
+      ],
+      "new_terms": [
+        "Aurélie De Waele",
+        "Bruges",
+        "Rue des Carmes"
+      ],
+      "active_vocabulary": {
+        "Antwerp City Hall": 50,
+        "Antwerp International Airport": 50,
+        "Aurélie De Waele": 50,
+        "Bruges": 50,
+        "Rue des Carmes": 50
+      },
+      "vocabulary_sha256": "4bdbf7bfa706341d12261682598edc29f8b29ea97fe20986c0f3357b9dbaab3d"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "3150f40c30cbf4be7ae5897f694e1a6eb147d39910f2d09e8642d8b3d8fa68a7",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1180,
+        "completion_tokens": 234,
+        "total_tokens": 1414,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 924
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.221,
+      "error": "9 validation errors for Extraction\nstages.0.kind\n  Extra inputs are not permitted [type=extra_forbidden, input_value='place', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage0.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无具体专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.kind\n  Extra inputs are not permitted [type=extra_forbidden, input_value='place', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage1.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='地名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.kind\n  Extra inputs are not permitted [type=extra_forbidden, input_value='person', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage2.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.1"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "580665821c7692b216bae27e4c6cd724b3d1081ee67b12e678aee44444faff46",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2223,
+        "completion_tokens": 184,
+        "total_tokens": 2407,
+        "prompt_tokens_details": {
+          "cached_tokens": 1408
+        },
+        "prompt_cache_hit_tokens": 1408,
+        "prompt_cache_miss_tokens": 815
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.898
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0016_60gb4uwbtlrs6pt0keb4cz25dnhub7vr",
+  "extracted_at": "2026-11-22T06:39:40.807102+00:00"
+}

@@ -1,0 +1,183 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0413_87siyi43gryv6dsfvoo9t3pqocw8vyj9",
+  "model": "deepseek-flash",
+  "input_sha256": "5e28ea8fb8df226be6a9a58d853a0ff35c20b935881f0f33166ef90f3c9e21fd",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien De Vos",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Aurélie Vandenberghe",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Amira El Khattabi",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Aurélien De Witte",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Colette Vandenberghe",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Ghent City Hall",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "地点名称"
+        },
+        {
+          "text": "Ghent 9000 Neighbours",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "群聊名称"
+        },
+        {
+          "text": "Liesbeth",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "署名人名"
+        }
+      ],
+      "new_terms": [
+        "Aurélien De Vos",
+        "Aurélie Vandenberghe",
+        "Amira El Khattabi",
+        "Aurélien De Witte",
+        "Colette Vandenberghe",
+        "Ghent City Hall",
+        "Ghent 9000 Neighbours",
+        "Liesbeth"
+      ],
+      "active_vocabulary": {
+        "Aurélien De Vos": 50,
+        "Aurélie Vandenberghe": 50,
+        "Amira El Khattabi": 50,
+        "Aurélien De Witte": 50,
+        "Colette Vandenberghe": 50,
+        "Ghent City Hall": 50,
+        "Ghent 9000 Neighbours": 50,
+        "Liesbeth": 50
+      },
+      "vocabulary_sha256": "c1da3628915779e94ca92ebf3f312f4544d1718602d0c2820de8f839cc74bcc2"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien De Vos",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Aurélie Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[1]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Amira El Khattabi",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[2]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Aurélien De Witte",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[3]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Colette Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[4]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Ghent City Hall",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.location",
+          "reason": "地点名称"
+        },
+        {
+          "text": "Ghent 9000 Neighbourhood Coffee",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_create.arguments.title",
+          "reason": "日历事件标题"
+        },
+        {
+          "text": "Saskia Vandermeersch",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "冲突事件中的人名"
+        }
+      ],
+      "new_terms": [
+        "Ghent 9000 Neighbourhood Coffee",
+        "Saskia Vandermeersch"
+      ],
+      "active_vocabulary": {
+        "Aurélien De Vos": 50,
+        "Aurélie Vandenberghe": 50,
+        "Amira El Khattabi": 50,
+        "Aurélien De Witte": 50,
+        "Colette Vandenberghe": 50,
+        "Ghent City Hall": 50,
+        "Ghent 9000 Neighbours": 50,
+        "Liesbeth": 50,
+        "Ghent 9000 Neighbourhood Coffee": 50,
+        "Saskia Vandermeersch": 50
+      },
+      "vocabulary_sha256": "8e1c66092b1240418a95d890764167cd3186cdcbf962decc29851cf6f508899a"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "6a20262684569c0b39038689bb910f92144b08e26c70967869acfcef4b7437aa",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1940,
+        "completion_tokens": 578,
+        "total_tokens": 2518,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1684
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.875
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0413_87siyi43gryv6dsfvoo9t3pqocw8vyj9",
+  "extracted_at": "2026-11-22T06:41:43.754351+00:00"
+}

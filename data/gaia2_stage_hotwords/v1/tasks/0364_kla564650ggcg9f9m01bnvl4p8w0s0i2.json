@@ -1,0 +1,252 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0364_kla564650ggcg9f9m01bnvl4p8w0s0i2",
+  "model": "deepseek-flash",
+  "input_sha256": "8930bcb883c4b50c02a4607a156061efcefbc11e7c6a3e25780a000c62d1aaad",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Müller",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "德语姓氏，需精确识别变音符号"
+        },
+        {
+          "text": "New York",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名，更新目标地点"
+        },
+        {
+          "text": "United States",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "国家名，更新目标国家"
+        }
+      ],
+      "new_terms": [
+        "Müller",
+        "New York",
+        "United States"
+      ],
+      "active_vocabulary": {
+        "Müller": 50,
+        "New York": 50,
+        "United States": 50
+      },
+      "vocabulary_sha256": "aae34a39ab117fee4ddb837ce96a9cf28f0dea01fd7f1c65ce255fbe96eaa017"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Müller",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "德语姓氏，需精确识别变音符号"
+        },
+        {
+          "text": "Katharina Müller",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "完整人名，Messages组成员"
+        },
+        {
+          "text": "Lea Müller",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "完整人名，Messages组成员"
+        },
+        {
+          "text": "Saskia Müller",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "完整人名，Messages组成员"
+        },
+        {
+          "text": "Klaus-Peter Müller",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "完整人名，含连字符，Chats组成员"
+        },
+        {
+          "text": "Lukas Müller",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "完整人名，Chats组成员"
+        },
+        {
+          "text": "Stuttgart",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "德国城市名，原居住地"
+        },
+        {
+          "text": "Berlin",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "德国城市名，原居住地"
+        },
+        {
+          "text": "Munich",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "德国城市名，原居住地"
+        },
+        {
+          "text": "Germany",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "国家名，原居住国"
+        },
+        {
+          "text": "New York",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "城市名，新居住地"
+        },
+        {
+          "text": "United States",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "国家名，新居住国"
+        }
+      ],
+      "new_terms": [
+        "Katharina Müller",
+        "Lea Müller",
+        "Saskia Müller",
+        "Klaus-Peter Müller",
+        "Lukas Müller",
+        "Stuttgart",
+        "Berlin",
+        "Munich",
+        "Germany"
+      ],
+      "active_vocabulary": {
+        "Müller": 50,
+        "New York": 50,
+        "United States": 50,
+        "Katharina Müller": 50,
+        "Lea Müller": 50,
+        "Saskia Müller": 50,
+        "Klaus-Peter Müller": 50,
+        "Lukas Müller": 50,
+        "Stuttgart": 50,
+        "Berlin": 50,
+        "Munich": 50,
+        "Germany": 50
+      },
+      "vocabulary_sha256": "25b9ce39992e04d562f6e0b3dde614be8ef317bbba82f9fea9cfab43ee985375"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Müller",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.title",
+          "reason": "德语姓氏，需精确识别变音符号"
+        },
+        {
+          "text": "Klaus-Peter Müller",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "完整人名，Chats组成员"
+        },
+        {
+          "text": "Lukas Müller",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "完整人名，Chats组成员"
+        },
+        {
+          "text": "Katharina Müller",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "完整人名，Messages组成员"
+        },
+        {
+          "text": "Lea Müller",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "完整人名，Messages组成员"
+        },
+        {
+          "text": "Saskia Müller",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "完整人名，Messages组成员"
+        },
+        {
+          "text": "New York",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.title",
+          "reason": "城市名，提醒标题中提及"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Müller": 50,
+        "New York": 50,
+        "United States": 50,
+        "Katharina Müller": 50,
+        "Lea Müller": 50,
+        "Saskia Müller": 50,
+        "Klaus-Peter Müller": 50,
+        "Lukas Müller": 50,
+        "Stuttgart": 50,
+        "Berlin": 50,
+        "Munich": 50,
+        "Germany": 50
+      },
+      "vocabulary_sha256": "25b9ce39992e04d562f6e0b3dde614be8ef317bbba82f9fea9cfab43ee985375"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "2e3d03e8998f63af581e7287be61e0beb411f3816bf95d712e8ecdff1e348dad",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3670,
+        "completion_tokens": 854,
+        "total_tokens": 4524,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3414
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 3.009,
+      "error": "3 validation errors for Extraction\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage0仅含通用地名与姓氏', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage1含完整人名与城市国家名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage2含完整人名与城市名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "8dab855192949d6b27dc03e6edef2ef9d4f58f56b7f55cd7c1df4adb83408198",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5090,
+        "completion_tokens": 820,
+        "total_tokens": 5910,
+        "prompt_tokens_details": {
+          "cached_tokens": 4480
+        },
+        "prompt_cache_hit_tokens": 4480,
+        "prompt_cache_miss_tokens": 610
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.584
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0364_kla564650ggcg9f9m01bnvl4p8w0s0i2",
+  "extracted_at": "2026-11-22T06:41:36.093232+00:00"
+}

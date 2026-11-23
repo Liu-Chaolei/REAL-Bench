@@ -1,0 +1,174 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0476_mmbz78x1qg2tl9tqomuzz7dbv8nsumdb",
+  "model": "deepseek-flash",
+  "input_sha256": "af33dc921726ae4048175a5ff1d4989b7753a617b63a20f5ef2f371f393dcbe2",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "St. Michael's Hospital",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "医院专有名称"
+        }
+      ],
+      "new_terms": [
+        "St. Michael's Hospital"
+      ],
+      "active_vocabulary": {
+        "St. Michael's Hospital": 50
+      },
+      "vocabulary_sha256": "ae1f32b286f622114591a35e26adfaa2058fbc8d7a2940f8e13ec33d08fa15e5"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Prasert Suthipong",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_message.arguments.content",
+          "reason": "消息中提及的参会人姓名"
+        },
+        {
+          "text": "Stijn Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_message.arguments.content",
+          "reason": "消息中提及的参会人姓名"
+        },
+        {
+          "text": "Thanakorn Srisombat",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_message.arguments.content",
+          "reason": "消息中提及的参会人姓名"
+        },
+        {
+          "text": "Søren",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_message.arguments.content",
+          "reason": "署名特殊人名"
+        }
+      ],
+      "new_terms": [
+        "Prasert Suthipong",
+        "Stijn Vandenberghe",
+        "Thanakorn Srisombat",
+        "Søren"
+      ],
+      "active_vocabulary": {
+        "St. Michael's Hospital": 50,
+        "Prasert Suthipong": 50,
+        "Stijn Vandenberghe": 50,
+        "Thanakorn Srisombat": 50,
+        "Søren": 50
+      },
+      "vocabulary_sha256": "e531bb596fac3e2fbaa4597b15f0af8749911b6b5373c310dab7aefa3f6adf23"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Stijn Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_0.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Thanakorn Srisombat",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_0.arguments.attendees[1]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Startup Office",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_0.arguments.location",
+          "reason": "会议地点名称"
+        },
+        {
+          "text": "Prasert Suthipong",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_1.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        }
+      ],
+      "new_terms": [
+        "Startup Office"
+      ],
+      "active_vocabulary": {
+        "St. Michael's Hospital": 50,
+        "Prasert Suthipong": 50,
+        "Stijn Vandenberghe": 50,
+        "Thanakorn Srisombat": 50,
+        "Søren": 50,
+        "Startup Office": 50
+      },
+      "vocabulary_sha256": "cc486f34272ee240d0a5b04813eca35a5ab3e3154d0a1600678152fc25334709"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "adc92e58d30d51b8ac65adbaecb49efa37e11273b252f51d21c29e1ca853bc92",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4141,
+        "completion_tokens": 594,
+        "total_tokens": 4735,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3885
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.272,
+      "error": "Not an exact quotation of a source in stage 0: 'Stijn Vandenberghe' from 'stage0.tool_gt.OracleEvent-AGENT-a1ef8c2e-67e8-4d38-a0b5-c7cccadc0243.arguments.recipients[0]'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "4e28591259233c19f741bd4dbf11a437995fa721a31b54b6805633ff038fb5fa",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5187,
+        "completion_tokens": 621,
+        "total_tokens": 5808,
+        "prompt_tokens_details": {
+          "cached_tokens": 4608
+        },
+        "prompt_cache_hit_tokens": 4608,
+        "prompt_cache_miss_tokens": 579
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.032,
+      "error": "Invalid proper-name phrase: 'stijn.vandenberghe@gaia2mail.com'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "cd7e168a207bb26b489f891e4f294476add1e12792cb9c6cceec53b37ef38ec2",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5164,
+        "completion_tokens": 384,
+        "total_tokens": 5548,
+        "prompt_tokens_details": {
+          "cached_tokens": 4096
+        },
+        "prompt_cache_hit_tokens": 4096,
+        "prompt_cache_miss_tokens": 1068
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.747
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0476_mmbz78x1qg2tl9tqomuzz7dbv8nsumdb",
+  "extracted_at": "2026-11-22T06:42:19.523821+00:00"
+}

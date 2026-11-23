@@ -1,0 +1,139 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0032_fwfr1ffsqyuq7vxq3jrwyh94ijhbh8wt",
+  "model": "deepseek-flash",
+  "input_sha256": "d4b2dc5d7021299255f8b2f665077b8376668586a4c49a6156d6faaa12acd6e0",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaidën",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-b30ae8ab-5cb2-42bd-94ee-54bb28a67070.arguments.content",
+          "reason": "联系人名字，含特殊字符ë"
+        }
+      ],
+      "new_terms": [
+        "Kaidën"
+      ],
+      "active_vocabulary": {
+        "Kaidën": 50
+      },
+      "vocabulary_sha256": "15999a1d1a784b1d986b56a7860012d7847b1a552d4e3ab30a9269c58d64310b"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaidën Jelani",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_edit.arguments.updates.description",
+          "reason": "完整联系人姓名"
+        },
+        {
+          "text": "Melbourne",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_edit.arguments.updates.description",
+          "reason": "城市名"
+        },
+        {
+          "text": "Australia",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_edit.arguments.updates.description",
+          "reason": "国家名"
+        }
+      ],
+      "new_terms": [
+        "Kaidën Jelani",
+        "Melbourne",
+        "Australia"
+      ],
+      "active_vocabulary": {
+        "Kaidën": 50,
+        "Kaidën Jelani": 50,
+        "Melbourne": 50,
+        "Australia": 50
+      },
+      "vocabulary_sha256": "c8696bb7bc1501b5ff383879e66e911fc72cb7807dfa4c6b0843614f91df9b51"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaidën Jelani",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Kaidën",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "邮件称呼中的名字"
+        },
+        {
+          "text": "Rohini",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [
+        "Rohini"
+      ],
+      "active_vocabulary": {
+        "Kaidën": 50,
+        "Kaidën Jelani": 50,
+        "Melbourne": 50,
+        "Australia": 50,
+        "Rohini": 50
+      },
+      "vocabulary_sha256": "add56cc627f1a19e9d01a6158ffdbfdb2f6b3c977d461e473efbc8387efa1c7f"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "2d7af8c010a812e610e9019016b67db6bcbc76b0066dd0a07d38d0319c183c43",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1546,
+        "completion_tokens": 311,
+        "total_tokens": 1857,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1290
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.416,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "08c75186f86c85ad34e1ac9c8579f215e5a1aaa5b8cef68d0941ae5c5e8592b4",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2250,
+        "completion_tokens": 313,
+        "total_tokens": 2563,
+        "prompt_tokens_details": {
+          "cached_tokens": 1792
+        },
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 458
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.352
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0032_fwfr1ffsqyuq7vxq3jrwyh94ijhbh8wt",
+  "extracted_at": "2026-11-22T06:39:45.046403+00:00"
+}

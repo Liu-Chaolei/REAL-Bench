@@ -1,0 +1,146 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0141_2v7u2xwuricaq88si4purwtnp4sbo5fw__async_0040_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "35ead34d21b16d1a6405c28c8de53ced6e2e2c32392a97024998558b6e497e82",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Travbaneplan 10",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "瑞典街道地址专有名词"
+        },
+        {
+          "text": "Solvalla",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "瑞典地名"
+        },
+        {
+          "text": "Hästsportens hus",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "瑞典建筑专有名称"
+        },
+        {
+          "text": "Stockholm",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Sweden",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "国家名"
+        },
+        {
+          "text": "New York Yankees",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "品牌/球队专有名称"
+        },
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-bf162cce-4ba1-46fa-8f15-e1acfdc3b7ba.arguments.content",
+          "reason": "用户人名"
+        }
+      ],
+      "new_terms": [
+        "Travbaneplan 10",
+        "Solvalla",
+        "Hästsportens hus",
+        "Stockholm",
+        "Sweden",
+        "New York Yankees",
+        "Astrid"
+      ],
+      "active_vocabulary": {
+        "Travbaneplan 10": 50,
+        "Solvalla": 50,
+        "Hästsportens hus": 50,
+        "Stockholm": 50,
+        "Sweden": 50,
+        "New York Yankees": 50,
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "77c83b74022510f85b67099738ffb4e10a0a6c935f995645daf3ebd4cee14516"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Yankees",
+          "kind": "organization",
+          "source": "stage1.source_task",
+          "reason": "品牌简称专有名称"
+        }
+      ],
+      "new_terms": [
+        "Yankees"
+      ],
+      "active_vocabulary": {
+        "Travbaneplan 10": 50,
+        "Solvalla": 50,
+        "Hästsportens hus": 50,
+        "Stockholm": 50,
+        "Sweden": 50,
+        "New York Yankees": 50,
+        "Astrid": 50,
+        "Yankees": 50
+      },
+      "vocabulary_sha256": "abea45a7a4baae9672c6682be72b5a599cea160aa85887a7418e203a4a150e6e"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Yankees",
+          "kind": "organization",
+          "source": "stage2.source_task",
+          "reason": "品牌简称专有名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Travbaneplan 10": 50,
+        "Solvalla": 50,
+        "Hästsportens hus": 50,
+        "Stockholm": 50,
+        "Sweden": 50,
+        "New York Yankees": 50,
+        "Astrid": 50,
+        "Yankees": 50
+      },
+      "vocabulary_sha256": "abea45a7a4baae9672c6682be72b5a599cea160aa85887a7418e203a4a150e6e"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "005e88b6d74ad1068346c866a281b49792636795a3f59442d9903eb7824aeba4",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2073,
+        "completion_tokens": 293,
+        "total_tokens": 2366,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1817
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.332
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0141_2v7u2xwuricaq88si4purwtnp4sbo5fw__async_0040_v1",
+  "extracted_at": "2026-11-22T06:46:32.431213+00:00"
+}

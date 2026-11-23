@@ -1,0 +1,162 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0607_mo3yh3fqpxo6jdsrdabi02k9p19vyvzx__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "a91c4c5a5081e55345cb4aee66fea2537ce8258a2cacf68f1a588262d9058af2",
+  "review_input_sha256": "4e9288b44be334c406c9d81375f1576c3fa02176bca79929d17d8471e64c3cc8",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "0da319598fce8d8ac329d91f21147a743011f08c75c0e2618c47642e71c25eff",
+  "reference_results_sha256": "b0d965249631aeef628d2695ed8007c00c5a0b78b45b9a591ea7a1f2c186f301",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Eliška Nováková",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Tereza Nováková",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Kryštof Nováček",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Zuzana Nováková",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "František Šťastný",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Matěj Nováček",
+      "original_source": "stage1.tool_gt.series_s1_email_eliska.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Eliška Nováková",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "František Šťastný",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Kryštof Nováček",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Tereza Nováková",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Zuzana Nováková",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Eliška Nováková",
+        "František Šťastný",
+        "Kryštof Nováček",
+        "Tereza Nováková",
+        "Zuzana Nováková"
+      ],
+      "active_vocabulary": {
+        "Eliška Nováková": 50,
+        "František Šťastný": 50,
+        "Kryštof Nováček": 50,
+        "Tereza Nováková": 50,
+        "Zuzana Nováková": 50
+      },
+      "vocabulary_sha256": "53ef461d49708c89f825626597b14a0f9489bdbc23ca72dc32a9a09e35ea9bac"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Matěj Nováček"
+      ],
+      "active_vocabulary": {
+        "Eliška Nováková": 50,
+        "František Šťastný": 50,
+        "Kryštof Nováček": 50,
+        "Tereza Nováková": 50,
+        "Zuzana Nováková": 50,
+        "Matěj Nováček": 50
+      },
+      "vocabulary_sha256": "796f14e106b96241c45b4867a853a15bc408393495dfac699e7016a15ef61eca"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Eliška Nováková": 50,
+        "František Šťastný": 50,
+        "Kryštof Nováček": 50,
+        "Tereza Nováková": 50,
+        "Zuzana Nováková": 50,
+        "Matěj Nováček": 50
+      },
+      "vocabulary_sha256": "796f14e106b96241c45b4867a853a15bc408393495dfac699e7016a15ef61eca"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Restaurant TBD",
+    "Tereza"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:23.652574+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

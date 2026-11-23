@@ -1,0 +1,126 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0885_xprway7wdx5vwlrh2upaefyi7qkmzy6b__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "26c08009bc8b3ae8aae44c0c77c027fcfa86ae38283e2296a92ca1ccb13238bc",
+  "review_input_sha256": "bd12d3a2cb88965e8f99c691f7f3fa27a8119d1c0a98569bfe092de9d6ee871b",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "e8a01e82cfe63f9ecc00d51fc234dadcefc86f2eda787ecdc5f0c1294c3e02ad",
+  "reference_results_sha256": "3b1ff74761e43efacc199107a2ff233430391c978442a3c79b2797cebd92ba6d",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-77afd560-de31-47f0-95cd-fca382aa0d69.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Nalani Jensen",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-77afd560-de31-47f0-95cd-fca382aa0d69.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Kaia Nakamura",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-77afd560-de31-47f0-95cd-fca382aa0d69.arguments.attendees[2]"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Ryder Nakamura",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-77afd560-de31-47f0-95cd-fca382aa0d69.arguments.attendees[3]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Kaia Nakamura",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Ryder Nakamura",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur",
+        "Kaia Nakamura",
+        "Nalani Jensen",
+        "Ryder Nakamura"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Kaia Nakamura": 50,
+        "Nalani Jensen": 50,
+        "Ryder Nakamura": 50
+      },
+      "vocabulary_sha256": "68a067a62cbc2c4802e0c3b646f07c124c5c2580191595a1789a924e2f5f1e59"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Kaia Nakamura": 50,
+        "Nalani Jensen": 50,
+        "Ryder Nakamura": 50
+      },
+      "vocabulary_sha256": "68a067a62cbc2c4802e0c3b646f07c124c5c2580191595a1789a924e2f5f1e59"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Kaia Nakamura": 50,
+        "Nalani Jensen": 50,
+        "Ryder Nakamura": 50
+      },
+      "vocabulary_sha256": "68a067a62cbc2c4802e0c3b646f07c124c5c2580191595a1789a924e2f5f1e59"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:19.470211+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

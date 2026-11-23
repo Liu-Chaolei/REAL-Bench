@@ -1,0 +1,164 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0858_a5qwuxpnuybrw05twxj4t4wd8p8wewtw",
+  "model": "deepseek-flash",
+  "input_sha256": "16db589e54c5f4aaa3675fa692fbc608e80508ac74b485078170d8090a349612",
+  "review_input_sha256": "8b3bb363b34b754bcd16792596fdc9587a86a98753db62ced7a4d460f5692855",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "cb9566f56cbcc9dd6bcea2ddbaf6b8b39233e059037172ad36d0cdd0c28bc0a2",
+  "reference_results_sha256": "5c24b6ef03eabb17573c4b8915a181e9b246512a8650e62576968c97e259f2b0",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kavita Jensen",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Manchester Mansions",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-1cde4529-566e-4ca3-a418-20d8c16b23ea.arguments.content"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Rohini Deshpande",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-1cde4529-566e-4ca3-a418-20d8c16b23ea.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Manchester Maison",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Jaeho Kim",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "234 Deansgate",
+      "original_source": "stage2.tool_gt.series_s2_reply_kavita_overinflation.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kavita Jensen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，含独特拼写，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Manchester Mansions",
+          "kind": "place",
+          "source": "stage0.existing_catalog.4",
+          "reason": "独特建筑/地点名称，非普通词",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "完整人名，拼写较难，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kavita Jensen",
+        "Manchester Mansions",
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "Kavita Jensen": 50,
+        "Manchester Mansions": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "59f6d1be4e97e1dbf93a4426395b31318d09a683eabbec648867bb0cd0dcefa8"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Jaeho Kim",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "完整人名，拼写较难，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Manchester Maison",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "独特建筑名称，含法语拼写，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Jaeho Kim",
+        "Manchester Maison"
+      ],
+      "active_vocabulary": {
+        "Kavita Jensen": 50,
+        "Manchester Mansions": 50,
+        "Rohini Deshpande": 50,
+        "Jaeho Kim": 50,
+        "Manchester Maison": 50
+      },
+      "vocabulary_sha256": "08bb323bfc79fa7f13276d538545bed9736e5a5fa516afd51a0a1837cab0fc6c"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "234 Deansgate",
+          "kind": "place",
+          "source": "stage2.existing_catalog.1",
+          "reason": "具体街道地址，含独特地名 Deansgate",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "234 Deansgate"
+      ],
+      "active_vocabulary": {
+        "Kavita Jensen": 50,
+        "Manchester Mansions": 50,
+        "Rohini Deshpande": 50,
+        "Jaeho Kim": 50,
+        "Manchester Maison": 50,
+        "234 Deansgate": 50
+      },
+      "vocabulary_sha256": "ad7389de8dff59cf4d12dc4e0e9e4eecacf54fb8770e01d9a797fe1bc631a14d"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Manchester",
+    "Manchester Modern",
+    "Manchester Marvel",
+    "Kavita",
+    "Manchester Properties"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:37.234020+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

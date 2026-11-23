@@ -1,0 +1,101 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0913_kip4smczj5eirm6q7y2cj7zbf2390b37",
+  "model": "deepseek-flash",
+  "input_sha256": "909b38469b9895e643444f1fef4059e4a4819467989a04f065e07a9611200f70",
+  "review_input_sha256": "c6ff74f0ad31083450b86beb80c2b9183e6a0906113bd232c386b19148afdec9",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "db3552ea8cffde7ec69116ef8309755b1edc73c863db56397624928d52cac870",
+  "reference_results_sha256": "e6308f3557689f032391e06f55b7c3c351bbe9b90c472cfee40640723b32dbeb",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "PIONEER BALLOON COMPANY",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Kalyan Rao",
+      "original_source": "stage0.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "PIONEER BALLOON COMPANY",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整且较难的公司专名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Kalyan Rao",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整人名，较难识别，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "PIONEER BALLOON COMPANY",
+        "Kalyan Rao"
+      ],
+      "active_vocabulary": {
+        "PIONEER BALLOON COMPANY": 50,
+        "Kalyan Rao": 50
+      },
+      "vocabulary_sha256": "d1f6a535c0e5a03f4aacc23746465fbeda7785a7ec5dbbdb77c347ca1ad730cc"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "PIONEER BALLOON COMPANY": 50,
+        "Kalyan Rao": 50
+      },
+      "vocabulary_sha256": "d1f6a535c0e5a03f4aacc23746465fbeda7785a7ec5dbbdb77c347ca1ad730cc"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "PIONEER BALLOON COMPANY": 50,
+        "Kalyan Rao": 50
+      },
+      "vocabulary_sha256": "d1f6a535c0e5a03f4aacc23746465fbeda7785a7ec5dbbdb77c347ca1ad730cc"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "41611 B'day Radiance Foil Balloon",
+    "Amscan Soccer Latex Balloons",
+    "Amscan",
+    "Rohan",
+    "PIONEER",
+    "8EH83DSXPQ"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:48.251845+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

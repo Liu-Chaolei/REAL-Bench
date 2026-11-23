@@ -92,6 +92,93 @@ def utterance_groups(
     return groups
 
 
+def _live_fragment_content(
+    chunk: ParticipantMessageBase,
+) -> tuple[bool, str | None]:
+    """Return this tick's ASR fragment text when Live evidence is present.
+
+    Qwen's streaming observer stores two different views on every tick:
+    ``live_transcript.snapshot.text`` is the complete confirmed transcript,
+    while ``live_transcript.fragments`` contains only text released since the
+    previous tick.  The latter is the only view that can safely be concatenated
+    across ticks.  ``active`` distinguishes an empty fragment list (a silent
+    tick with a repeated snapshot) from a legacy chunk without Live metadata.
+    """
+    raw = getattr(chunk, "raw_data", None)
+    live = raw.get("live_transcript") if isinstance(raw, dict) else None
+    if hasattr(live, "model_dump"):
+        live = live.model_dump(mode="json")
+    if not isinstance(live, dict) or not isinstance(live.get("fragments"), list):
+        return False, None
+
+    expected_speaker = "agent" if chunk.role == "assistant" else "caller"
+    parts: list[str] = []
+    for fragment in live["fragments"]:
+        if hasattr(fragment, "model_dump"):
+            fragment = fragment.model_dump(mode="json")
+        if not isinstance(fragment, dict):
+            continue
+        speaker = fragment.get("speaker")
+        if speaker not in (None, expected_speaker):
+            continue
+        text = fragment.get("text")
+        if isinstance(text, str) and text:
+            parts.append(text)
+    return True, "".join(parts) or None
+
+
+def streaming_transcript_content(
+    chunk: ParticipantMessageBase | None,
+) -> str | None:
+    """Return non-duplicating text for one stored streaming chunk.
+
+    Live ASR chunks use newly released fragments.  Other providers and legacy
+    trajectories retain their original content; for those, the optional raw
+    ``proportional_transcript`` fallback preserves the previous behavior.
+    """
+    if chunk is None:
+        return None
+    active, text = _live_fragment_content(chunk)
+    if active:
+        return text
+    content = chunk.content
+    if content:
+        return content
+    raw = getattr(chunk, "raw_data", None)
+    if chunk.role == "assistant" and isinstance(raw, dict):
+        proportional = raw.get("proportional_transcript")
+        if isinstance(proportional, str) and proportional:
+            return proportional
+    return content
+
+
+def normalize_streaming_transcript_ticks(ticks: list[Tick]) -> list[Tick]:
+    """Copy ticks with cumulative Live ASR content replaced by per-tick deltas.
+
+    The raw trajectory remains unchanged for audit/replay.  Consumers that need
+    a concatenable transcript should use this view before linearization or
+    display.  Tool calls, audio, timing, raw Live evidence and speech flags are
+    preserved.
+    """
+    normalized: list[Tick] = []
+    for tick in ticks:
+        updates = {}
+        for field in ("agent_chunk", "user_chunk"):
+            chunk = getattr(tick, field)
+            if chunk is None:
+                continue
+            active, _ = _live_fragment_content(chunk)
+            if not active:
+                continue
+            content = streaming_transcript_content(chunk)
+            if content != chunk.content:
+                updates[field] = chunk.model_copy(update={"content": content})
+        normalized.append(
+            tick.model_copy(deep=True, update=updates) if updates else tick
+        )
+    return normalized
+
+
 def agent_messages(ticks: list[Tick]) -> list[AssistantMessage]:
     """Agent speech messages indexed exactly like audio/delivery utterance spans."""
     return [
@@ -327,6 +414,7 @@ def build_agent_turns(simulation: SimulationRun) -> list[AgentTurn]:
 
 def speech_messages(ticks: list[Tick]) -> list[Message]:
     """Containment-aware evaluation view, excluding tool calls from both speakers."""
+    ticks = normalize_streaming_transcript_ticks(ticks)
     return linearize_ticks(
         [
             ParticipantTick(
@@ -354,7 +442,7 @@ def _participant_tick_message(
     message_class = AssistantMessage if agent else UserMessage
     fields = dict(
         role="assistant" if agent else "user",
-        content=chunk.content if chunk else None,
+        content=streaming_transcript_content(chunk),
         tool_calls=calls or None,
         timestamp=chunk.timestamp if chunk else tick.timestamp,
         contains_speech=chunk.contains_speech if chunk else False,

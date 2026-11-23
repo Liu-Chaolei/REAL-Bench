@@ -1,0 +1,196 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0722_fvkmflhob7blr325ifgvys8onydq7nqi",
+  "model": "deepseek-flash",
+  "input_sha256": "fefb4fac557f65c1c27265211cc188cf97338429698b80fed425e1d88940bcca",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "VIP Wine Tasting Event",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-71f98308-ae4a-45c2-896e-896c120b49a2.arguments.content",
+          "reason": "特定活动名称"
+        },
+        {
+          "text": "Staff Meeting",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-275c7938-f717-421d-ac8e-313dee96701d.arguments.content",
+          "reason": "特定会议名称"
+        },
+        {
+          "text": "Yoga Class",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6d1c5408-7232-4a63-9e51-44312cb788c8.arguments.content",
+          "reason": "特定活动名称"
+        }
+      ],
+      "new_terms": [
+        "VIP Wine Tasting Event",
+        "Staff Meeting",
+        "Yoga Class"
+      ],
+      "active_vocabulary": {
+        "VIP Wine Tasting Event": 50,
+        "Staff Meeting": 50,
+        "Yoga Class": 50
+      },
+      "vocabulary_sha256": "81d20cfacd2ca0693fba1717ae0da8edb6f1eef97534e66e56bdce32bc9ca2a8"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "VIP Wine Tasting Event",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "特定活动名称"
+        },
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "添加活动者姓名"
+        },
+        {
+          "text": "Staff Meeting",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "特定会议名称"
+        },
+        {
+          "text": "Yoga Class",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "特定活动名称"
+        },
+        {
+          "text": "Wine List Review",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "特定活动名称"
+        }
+      ],
+      "new_terms": [
+        "Nalani Jensen",
+        "Wine List Review"
+      ],
+      "active_vocabulary": {
+        "VIP Wine Tasting Event": 50,
+        "Staff Meeting": 50,
+        "Yoga Class": 50,
+        "Nalani Jensen": 50,
+        "Wine List Review": 50
+      },
+      "vocabulary_sha256": "4a54356db7389f741f7c03b25c9bebce5d57406d4e274e09c63743c9cc9dd6d1"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaia Nakamura",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Staff Meeting",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "特定会议名称"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_proposal.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [
+        "Kaia Nakamura",
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "VIP Wine Tasting Event": 50,
+        "Staff Meeting": 50,
+        "Yoga Class": 50,
+        "Nalani Jensen": 50,
+        "Wine List Review": 50,
+        "Kaia Nakamura": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "9de8404c96147bf91d52d63f7a9ab62b75a2d39a1b9fb9c77f8e7ac7434977c4"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "03a4f7a293c3838a9279640e4d9bf89db624d96b9d4a769059d826acd76fa270",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2522,
+        "completion_tokens": 615,
+        "total_tokens": 3137,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2266
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.795,
+      "error": "Not an exact quotation of a source in stage 0: 'Nalani Jensen' from 'stage0.tool_gt.OracleEvent-AGENT-71f98308-ae4a-45c2-896e-896c120b49a2.arguments.recipients[0]'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "15c253a38003befd2a71606d50014eead98eb27be1051aa1de71ea06492a1d8c",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3585,
+        "completion_tokens": 549,
+        "total_tokens": 4134,
+        "prompt_tokens_details": {
+          "cached_tokens": 3072
+        },
+        "prompt_cache_hit_tokens": 3072,
+        "prompt_cache_miss_tokens": 513
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.897,
+      "error": "Not an exact quotation of a source in stage 1: 'Aurelien Lafleur' from 'stage1.tool_gt.series_s1_send.arguments.recipients[0]'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "6baac6e8a2fbc4e8086552e7e976cd6d2bf68b40fae62cc6413a2cd1257bfcae",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3497,
+        "completion_tokens": 505,
+        "total_tokens": 4002,
+        "prompt_tokens_details": {
+          "cached_tokens": 2432
+        },
+        "prompt_cache_hit_tokens": 2432,
+        "prompt_cache_miss_tokens": 1065
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.721
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0722_fvkmflhob7blr325ifgvys8onydq7nqi",
+  "extracted_at": "2026-11-22T06:43:40.526540+00:00"
+}

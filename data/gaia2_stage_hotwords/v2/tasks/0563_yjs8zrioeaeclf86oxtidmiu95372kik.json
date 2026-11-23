@@ -1,0 +1,132 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0563_yjs8zrioeaeclf86oxtidmiu95372kik",
+  "model": "deepseek-flash",
+  "input_sha256": "a8c7f5942e1886024fac2550d170b8b6d0c406d178e7eb473b980cde745bfa56",
+  "review_input_sha256": "0bd157575b9a04daad3ec2252f17dd24ee900598f18ce9b90b567abb25162b46",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "6fda263ec61283c11d9756ed4f87959ea4d4eeed4ae310664829ab648d1ca89b",
+  "reference_results_sha256": "77ae32154e30b7500e185c0ea34071411c24b99efcaa820990935df0944d476a",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Rohini",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Nalini",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Smuggler's Bounty",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.7": {
+      "stage": 0,
+      "text": "Glovelettes",
+      "original_source": "stage0.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Smuggler's Bounty",
+          "kind": "custom_name",
+          "source": "stage0.existing_catalog.4",
+          "reason": "含撇号的专有订阅名称",
+          "weight": 50
+        },
+        {
+          "text": "Glovelettes",
+          "kind": "product",
+          "source": "stage0.existing_catalog.7",
+          "reason": "特殊产品名，非普通词",
+          "weight": 50
+        },
+        {
+          "text": "Nalini",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "印度人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Rohini",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "印度人名，较难识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Smuggler's Bounty",
+        "Glovelettes",
+        "Nalini",
+        "Rohini"
+      ],
+      "active_vocabulary": {
+        "Smuggler's Bounty": 50,
+        "Glovelettes": 50,
+        "Nalini": 50,
+        "Rohini": 50
+      },
+      "vocabulary_sha256": "3841fc0f6f39f3eee622c18c34f3a4ee51c2774d776fcfd4f4e3a54ed3867f3e"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Smuggler's Bounty": 50,
+        "Glovelettes": 50,
+        "Nalini": 50,
+        "Rohini": 50
+      },
+      "vocabulary_sha256": "3841fc0f6f39f3eee622c18c34f3a4ee51c2774d776fcfd4f4e3a54ed3867f3e"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Smuggler's Bounty": 50,
+        "Glovelettes": 50,
+        "Nalini": 50,
+        "Rohini": 50
+      },
+      "vocabulary_sha256": "3841fc0f6f39f3eee622c18c34f3a4ee51c2774d776fcfd4f4e3a54ed3867f3e"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Star Wars",
+    "Funko",
+    "Rubie's",
+    "Darth Vader",
+    "Rohan"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:25.132680+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

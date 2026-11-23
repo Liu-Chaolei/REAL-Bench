@@ -1,0 +1,156 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0612_nxnlsgo0crpgkmib1mkfbcg744f1u09k__async_0062_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "eb201bcfa6f8e6d4ae7be786e20450f475c8f1e9477227bd09e61370a8b5e1d0",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Yuting Liang",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b31654de-8b49-4d5a-ae5b-83e9e6fb08e8.arguments.content",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Joao",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dffeced1-ba5f-465d-8819-c8f6e5ae99dd.arguments.content",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Astrid Kjeldsen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ca9b69d6-0550-488b-9091-aca2b75d64ba.arguments.content",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b31654de-8b49-4d5a-ae5b-83e9e6fb08e8.arguments.content",
+          "reason": "发件人签名姓名"
+        },
+        {
+          "text": "Num Noms Snackables Silly Shakes- Candy Corn Smoothie",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品名称"
+        },
+        {
+          "text": "Swedish Fashion Brands",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-d715c0a8-3e04-42bd-833b-6d3c041d72d6.arguments.title",
+          "reason": "邮件主题中的品牌群体名称"
+        }
+      ],
+      "new_terms": [
+        "Yuting Liang",
+        "Joao",
+        "Astrid Kjeldsen",
+        "Astrid Lundqvist",
+        "Num Noms Snackables Silly Shakes- Candy Corn Smoothie",
+        "Swedish Fashion Brands"
+      ],
+      "active_vocabulary": {
+        "Yuting Liang": 50,
+        "Joao": 50,
+        "Astrid Kjeldsen": 50,
+        "Astrid Lundqvist": 50,
+        "Num Noms Snackables Silly Shakes- Candy Corn Smoothie": 50,
+        "Swedish Fashion Brands": 50
+      },
+      "vocabulary_sha256": "1d12e6d14c92f99570a7543ce3e02c3e9e9deca449f58d1975a397b74190e4f8"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Yuting Liang",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply_yuting_confirm.arguments.content",
+          "reason": "发件人签名姓名"
+        },
+        {
+          "text": "Num Noms Snackables Silly Shakes- Candy Corn Smoothie",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "商品名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Yuting Liang": 50,
+        "Joao": 50,
+        "Astrid Kjeldsen": 50,
+        "Astrid Lundqvist": 50,
+        "Num Noms Snackables Silly Shakes- Candy Corn Smoothie": 50,
+        "Swedish Fashion Brands": 50
+      },
+      "vocabulary_sha256": "1d12e6d14c92f99570a7543ce3e02c3e9e9deca449f58d1975a397b74190e4f8"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Astrid Kjeldsen",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply_astrid_confirm.arguments.content",
+          "reason": "发件人签名姓名"
+        },
+        {
+          "text": "Num Noms Snackables Silly Shakes- Candy Corn Smoothie",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "商品名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Yuting Liang": 50,
+        "Joao": 50,
+        "Astrid Kjeldsen": 50,
+        "Astrid Lundqvist": 50,
+        "Num Noms Snackables Silly Shakes- Candy Corn Smoothie": 50,
+        "Swedish Fashion Brands": 50
+      },
+      "vocabulary_sha256": "1d12e6d14c92f99570a7543ce3e02c3e9e9deca449f58d1975a397b74190e4f8"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "e6e82cb4405962be578bb58ba6d8d25c5313b1a974fbe375ce5d4e027c2c6973",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4902,
+        "completion_tokens": 587,
+        "total_tokens": 5489,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4646
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.326
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0612_nxnlsgo0crpgkmib1mkfbcg744f1u09k__async_0062_v1",
+  "extracted_at": "2026-11-22T06:46:44.334922+00:00"
+}

@@ -1,0 +1,181 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0953_ryrhpss2i5o6y703ow7xy78k0pll9fhf",
+  "model": "deepseek-flash",
+  "input_sha256": "ca34fb63014c9d796780c94fb1933cf8efdc03603b77615355ac79d1db54b4b1",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "kari.jensen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-285b83f4-ed28-4751-8c42-2ed43663ddb7.arguments.recipients[0]",
+          "reason": "联系人邮箱前缀，含人名"
+        },
+        {
+          "text": "kari.ostensen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-655244e6-533d-42ae-a0ae-5fe7954e169e.arguments.recipients[0]",
+          "reason": "联系人邮箱前缀，含人名"
+        },
+        {
+          "text": "rohini.naidu",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e558ae83-a9fc-4fd9-8329-24453feaf424.arguments.recipients[0]",
+          "reason": "联系人邮箱前缀，含人名"
+        },
+        {
+          "text": "Nonglak",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-57759891-7245-4ed3-a064-ed9d2a086e4b.arguments.content",
+          "reason": "邮件正文中的联系人名"
+        },
+        {
+          "text": "nonglak.wongchai",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-57759891-7245-4ed3-a064-ed9d2a086e4b.arguments.recipients[0]",
+          "reason": "联系人邮箱前缀，含人名"
+        },
+        {
+          "text": "kaia.levesque",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-bab0379f-2ca4-4de0-8c61-c739642908b8.arguments.recipients[0]",
+          "reason": "联系人邮箱前缀，含人名"
+        },
+        {
+          "text": "aurora.jensen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5373caed-bd5e-41db-aa23-b0727a9b32e7.arguments.recipients[0]",
+          "reason": "联系人邮箱前缀，含人名"
+        }
+      ],
+      "new_terms": [
+        "kari.jensen",
+        "kari.ostensen",
+        "rohini.naidu",
+        "Nonglak",
+        "nonglak.wongchai",
+        "kaia.levesque",
+        "aurora.jensen"
+      ],
+      "active_vocabulary": {
+        "kari.jensen": 50,
+        "kari.ostensen": 50,
+        "rohini.naidu": 50,
+        "Nonglak": 50,
+        "nonglak.wongchai": 50,
+        "kaia.levesque": 50,
+        "aurora.jensen": 50
+      },
+      "vocabulary_sha256": "0ae11f1c5fee3d030b9bb70f73d4899c0ecf1daa4ba1a14cd24296b0bb3ef800"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kari Jensen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "会议相关人名"
+        },
+        {
+          "text": "Aurora Jensen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "Zoom会议发起人名"
+        }
+      ],
+      "new_terms": [
+        "Kari Jensen",
+        "Aurora Jensen"
+      ],
+      "active_vocabulary": {
+        "kari.jensen": 50,
+        "kari.ostensen": 50,
+        "rohini.naidu": 50,
+        "Nonglak": 50,
+        "nonglak.wongchai": 50,
+        "kaia.levesque": 50,
+        "aurora.jensen": 50,
+        "Kari Jensen": 50,
+        "Aurora Jensen": 50
+      },
+      "vocabulary_sha256": "2c4f5d644c75f4a01f0a641bceeaf62b45c31b981faed16dadfe812798292f6a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kari Jensen",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "会议相关人名"
+        },
+        {
+          "text": "Aurora Jensen",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_summary.arguments.content",
+          "reason": "Zoom会议发起人名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "kari.jensen": 50,
+        "kari.ostensen": 50,
+        "rohini.naidu": 50,
+        "Nonglak": 50,
+        "nonglak.wongchai": 50,
+        "kaia.levesque": 50,
+        "aurora.jensen": 50,
+        "Kari Jensen": 50,
+        "Aurora Jensen": 50
+      },
+      "vocabulary_sha256": "2c4f5d644c75f4a01f0a641bceeaf62b45c31b981faed16dadfe812798292f6a"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "93ef353a3928b4299805b2a24052913a4fba828aba1e0ce685c5b5c00caa40f0",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3983,
+        "completion_tokens": 542,
+        "total_tokens": 4525,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3727
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.897,
+      "error": "Not an exact quotation of a source in stage 0: 'Kari Jensen' from 'stage0.tool_gt.OracleEvent-AGENT-285b83f4-ed28-4751-8c42-2ed43663ddb7.arguments.recipients[0]'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "25437573761b3996a37d3dfc4cd79ffc215b9382f30a42cf1c859fc4dbea8c44",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4971,
+        "completion_tokens": 605,
+        "total_tokens": 5576,
+        "prompt_tokens_details": {
+          "cached_tokens": 4480
+        },
+        "prompt_cache_hit_tokens": 4480,
+        "prompt_cache_miss_tokens": 491
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.386
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0953_ryrhpss2i5o6y703ow7xy78k0pll9fhf",
+  "extracted_at": "2026-11-22T06:44:43.969909+00:00"
+}

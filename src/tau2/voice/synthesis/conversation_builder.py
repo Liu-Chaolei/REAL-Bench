@@ -13,6 +13,7 @@ from tau2.data_model.message import (
 )
 from tau2.data_model.simulation import SimulationRun
 from tau2.orchestrator.modes import CommunicationMode
+from tau2.utils.transcript.views import streaming_transcript_content
 from tau2.voice.utils.audio_io import load_wav_file, save_wav_file
 from tau2.voice.utils.audio_preprocessing import convert_to_stereo, merge_audio_datas
 
@@ -65,14 +66,8 @@ def _collect_speech_segments(
         has_speech = chunk is not None and getattr(chunk, "contains_speech", False)
 
         if has_speech:
-            # Get text content - prefer proportional_transcript from raw_data for agent
-            text = ""
-            if chunk.content:
-                text = chunk.content
-            elif role == "assistant" and chunk.raw_data:
-                # Agent may have proportional_transcript in raw_data
-                if isinstance(chunk.raw_data, dict):
-                    text = chunk.raw_data.get("proportional_transcript", "")
+            # Live ASR snapshots are cumulative; consume only released fragments.
+            text = streaming_transcript_content(chunk) or ""
 
             if current_segment is None:
                 # Start new segment

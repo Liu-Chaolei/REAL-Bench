@@ -1,0 +1,73 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0338_ugesmo8pcxcfp7ufk8up37soybzet3o0",
+  "model": "deepseek-flash",
+  "input_sha256": "582eace65165cc89d8ebe3dde990479d79d9598fb6132f6ec5d52bdb4fb63c1d",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "52928b366a4f5e2b9a65d0c05bc28d73e74abbefafb953151d70a2a25a1ec36e",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3026,
+        "completion_tokens": 57,
+        "total_tokens": 3083,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2770
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 0.734,
+      "error": "3 validation errors for Extraction\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无合适专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无合适专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无合适专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "0323970390f344d6509c1aacb66811bf68fc601026ef3391cd5debfff3f842b7",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3639,
+        "completion_tokens": 30,
+        "total_tokens": 3669,
+        "prompt_tokens_details": {
+          "cached_tokens": 3072
+        },
+        "prompt_cache_hit_tokens": 3072,
+        "prompt_cache_miss_tokens": 567
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.722
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0338_ugesmo8pcxcfp7ufk8up37soybzet3o0",
+  "extracted_at": "2026-11-22T06:41:22.196261+00:00"
+}

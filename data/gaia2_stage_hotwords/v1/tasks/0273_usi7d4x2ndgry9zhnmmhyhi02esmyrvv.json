@@ -1,0 +1,116 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0273_usi7d4x2ndgry9zhnmmhyhi02esmyrvv",
+  "model": "deepseek-flash",
+  "input_sha256": "cc4c7a34ad717f8022ff724ab63931dc0d2f1834d13bf26aa8e4ef5d5d13876f",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Plzeň Panorama",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "独特的租赁房源名称"
+        },
+        {
+          "text": "Prague Luxury",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "独特的租赁房源名称"
+        },
+        {
+          "text": "Praha 1 Luxury",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "独特的租赁房源名称"
+        },
+        {
+          "text": "Prague 1 Luxury",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "独特的租赁房源名称"
+        },
+        {
+          "text": "Riverfront Residence",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "独特的租赁房源名称"
+        }
+      ],
+      "new_terms": [
+        "Plzeň Panorama",
+        "Prague Luxury",
+        "Praha 1 Luxury",
+        "Prague 1 Luxury",
+        "Riverfront Residence"
+      ],
+      "active_vocabulary": {
+        "Plzeň Panorama": 50,
+        "Prague Luxury": 50,
+        "Praha 1 Luxury": 50,
+        "Prague 1 Luxury": 50,
+        "Riverfront Residence": 50
+      },
+      "vocabulary_sha256": "fa5094a05e13c98f47075c1c722395b6acc1efefee8d793936ab50e536b6fd02"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "bd95cdc6d13ec27396600b5790e98f284fde09f218693281ad11fdbc8bab90f7",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1440,
+        "completion_tokens": 236,
+        "total_tokens": 1676,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1184
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.017,
+      "error": "6 validation errors for Extraction\nstages.0.kind\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.kind\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "0f7c9e574d76ccf420be18d6ed604343c3954ec26347858c6d3412d0bc78d0d0",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2368,
+        "completion_tokens": 216,
+        "total_tokens": 2584,
+        "prompt_tokens_details": {
+          "cached_tokens": 1664
+        },
+        "prompt_cache_hit_tokens": 1664,
+        "prompt_cache_miss_tokens": 704
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.095
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0273_usi7d4x2ndgry9zhnmmhyhi02esmyrvv",
+  "extracted_at": "2026-11-22T06:41:05.287016+00:00"
+}

@@ -1,0 +1,159 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0704_lui2dl8fcrr4qp8syekzbkaaj1s0o1ce__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "88d243816d1bd1148ec2dc4166f86f8d1612962b59a991805244c9753ccb0eb8",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kasper",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5ee176a0-95fc-4370-aa66-78199c471b79.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5ee176a0-95fc-4370-aa66-78199c471b79.arguments.content",
+          "reason": "发件人姓名"
+        },
+        {
+          "text": "Astrid Mikkelsen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-cdacf16e-aead-4d50-bc11-e41c13f00793.arguments.content",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Beshoy Gadallah",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ad70af5f-bb3c-4b84-bf7e-4369c83f7b19.arguments.content",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Party Pictures Game",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品名称"
+        }
+      ],
+      "new_terms": [
+        "Kasper",
+        "Astrid Lundqvist",
+        "Astrid Mikkelsen",
+        "Beshoy Gadallah",
+        "Party Pictures Game"
+      ],
+      "active_vocabulary": {
+        "Kasper": 50,
+        "Astrid Lundqvist": 50,
+        "Astrid Mikkelsen": 50,
+        "Beshoy Gadallah": 50,
+        "Party Pictures Game": 50
+      },
+      "vocabulary_sha256": "8bd636258408d324a0ef12365ad54aaf35b09e501ea5cb7151417d515b094515"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kasper",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "回复对象名字"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply_kasper.arguments.content",
+          "reason": "发件人姓名"
+        },
+        {
+          "text": "Networking Event Prep",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_add_prep.arguments.title",
+          "reason": "日历事件自定义名称"
+        }
+      ],
+      "new_terms": [
+        "Networking Event Prep"
+      ],
+      "active_vocabulary": {
+        "Kasper": 50,
+        "Astrid Lundqvist": 50,
+        "Astrid Mikkelsen": 50,
+        "Beshoy Gadallah": 50,
+        "Party Pictures Game": 50,
+        "Networking Event Prep": 50
+      },
+      "vocabulary_sha256": "9e460b7bed77e0d0f75330072816aac3f8883a5882e9ef4274dda348752f9d4e"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Attendee Check",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_add_check.arguments.title",
+          "reason": "日历事件自定义名称"
+        },
+        {
+          "text": "Astrid Mikkelsen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_check.arguments.description",
+          "reason": "确认出席人姓名"
+        },
+        {
+          "text": "Beshoy Gadallah",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_check.arguments.description",
+          "reason": "确认出席人姓名"
+        },
+        {
+          "text": "Networking Event Prep",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_say.arguments.content",
+          "reason": "已有日历事件名称"
+        }
+      ],
+      "new_terms": [
+        "Attendee Check"
+      ],
+      "active_vocabulary": {
+        "Kasper": 50,
+        "Astrid Lundqvist": 50,
+        "Astrid Mikkelsen": 50,
+        "Beshoy Gadallah": 50,
+        "Party Pictures Game": 50,
+        "Networking Event Prep": 50,
+        "Attendee Check": 50
+      },
+      "vocabulary_sha256": "ba3ebd9a93cb320429dd76a8e51afb1c19df8325b2aa71d869b4263aa887a93a"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "0f1f3b92e949cd8def06453dee7c3827078d886edef71dfaafff26878e1f0e87",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3526,
+        "completion_tokens": 547,
+        "total_tokens": 4073,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3270
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.081
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0704_lui2dl8fcrr4qp8syekzbkaaj1s0o1ce__repetition_v1",
+  "extracted_at": "2026-11-22T06:46:03.340634+00:00"
+}

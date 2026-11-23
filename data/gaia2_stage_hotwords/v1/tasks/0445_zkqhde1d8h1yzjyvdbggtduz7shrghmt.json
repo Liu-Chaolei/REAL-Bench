@@ -1,0 +1,116 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0445_zkqhde1d8h1yzjyvdbggtduz7shrghmt",
+  "model": "deepseek-flash",
+  "input_sha256": "504baf1d1a7eea9e673819d0c4b590678e5cca6aa32609881a877f5223c2ca48",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Akira",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-9319b616-4b74-4f20-8198-ef250c7a57a1.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-9319b616-4b74-4f20-8198-ef250c7a57a1.arguments.content",
+          "reason": "发件人全名"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-059efeff-47a4-413b-be1f-2a9e76323178.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "100 Dollar Bill Tin Money Bank",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品名称"
+        }
+      ],
+      "new_terms": [
+        "Akira",
+        "Ursula Wiederkehr",
+        "Aurélien",
+        "100 Dollar Bill Tin Money Bank"
+      ],
+      "active_vocabulary": {
+        "Akira": 50,
+        "Ursula Wiederkehr": 50,
+        "Aurélien": 50,
+        "100 Dollar Bill Tin Money Bank": 50
+      },
+      "vocabulary_sha256": "94e67add8ee28021c3776ac54efb6c4b29904aac839ac5d8bb860c60e90dc192"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "100 Dollar Bill Tin Money Banks",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "商品名称复数形式"
+        }
+      ],
+      "new_terms": [
+        "100 Dollar Bill Tin Money Banks"
+      ],
+      "active_vocabulary": {
+        "Akira": 50,
+        "Ursula Wiederkehr": 50,
+        "Aurélien": 50,
+        "100 Dollar Bill Tin Money Bank": 50,
+        "100 Dollar Bill Tin Money Banks": 50
+      },
+      "vocabulary_sha256": "0929b65e0c6da31dea646e81a60463e5a2ff51a90f1d107adeba9e4949c35593"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "100 Dollar Bill Tin Money Bank",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "商品名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Akira": 50,
+        "Ursula Wiederkehr": 50,
+        "Aurélien": 50,
+        "100 Dollar Bill Tin Money Bank": 50,
+        "100 Dollar Bill Tin Money Banks": 50
+      },
+      "vocabulary_sha256": "0929b65e0c6da31dea646e81a60463e5a2ff51a90f1d107adeba9e4949c35593"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "0ff955864b1fdd6ab8cfbf08d2ee726d79dd77b3a6fb70f44cab8f455527cac5",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2508,
+        "completion_tokens": 313,
+        "total_tokens": 2821,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2252
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.286
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0445_zkqhde1d8h1yzjyvdbggtduz7shrghmt",
+  "extracted_at": "2026-11-22T06:42:00.114046+00:00"
+}

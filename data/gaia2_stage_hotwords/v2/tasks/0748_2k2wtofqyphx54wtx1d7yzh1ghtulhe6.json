@@ -1,0 +1,226 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0748_2k2wtofqyphx54wtx1d7yzh1ghtulhe6",
+  "model": "deepseek-flash",
+  "input_sha256": "e83901da72e530f243d2b518075862ed2d8a4519466685bcec78c4a38c6ce10b",
+  "review_input_sha256": "dd76ae6a699103f1a75b4e544605b7685aa12d21a9e19b57229d12b8355ab98c",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "64e5208bdf1e429ad8adcfe18f0a9f0cc72d7d88e06632ce7b28913958f7c343",
+  "reference_results_sha256": "66cde2aa89d5ceee4ee33e2ccad7137f9e300e12d6393ac671e6b67e54052f57",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Eliška Nováková",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-77b02460-fd4b-453a-871b-524aeaa89d1d.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Tereza Nováková",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-77b02460-fd4b-453a-871b-524aeaa89d1d.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Kryštof Nováček",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-77b02460-fd4b-453a-871b-524aeaa89d1d.arguments.content"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Zuzana Nováková",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-77b02460-fd4b-453a-871b-524aeaa89d1d.arguments.content"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "František Šťastný",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-77b02460-fd4b-453a-871b-524aeaa89d1d.arguments.content"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "Dominion Nocturne Board Game",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Božetěchova 3",
+      "original_source": "stage1.tool_gt.series_s1_calendar.arguments.location"
+    },
+    "stage2.tool_response.series_s2_calendar_check": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"17d78b301ae743dfbdc9641f4fa61293\", \"title\": \"Translation Project Meeting\", \"start_datetime\": \"1729004400\", \"end_datetime\": \"1729011600\", \"tag\": \"Work\", \"description\": \"Discuss ongoing translation project with team.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Šárka Nováková\"], \"start_strftime\": \"Tuesday, 2024-10-15 15:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 17:00:00\"}, {\"event_id\": \"b36adeb73b9842f19bd44e71c27c7710\", \"title\": \"Global Governance Seminar\", \"start_datetime\": \"1728982800\", \"end_datetime\": \"1728993600\", \"tag\": \"Academics\", \"description\": \"Seminar on global governance and its implications on international relations.\", \"location\": \"Charles University, Prague\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-15 09:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 12:00:00\"}, {\"event_id\": \"d8f74d0f62114d16a7e72e4889b50a65\", \"title\": \"Lunch with Friends\", \"start_datetime\": \"1728997200\", \"end_datetime\": \"1729002600\", \"tag\": \"Social\", \"description\": \"Catch up with friends over lunch.\", \"location\": \"Café, Prague\", \"attendees\": [\"Kvido Nováček\"], \"start_strftime\": \"Tuesday, 2024-10-15 13:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 14:30:00\"}, {\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Dominion Night\", \"start_datetime\": \"1729015200.0\", \"end_datetime\": \"1729026000.0\", \"tag\": \"Social\", \"description\": \"Dominion evening with Kryštof and Zuzana. Playing the Deluxe English edition of Dominion: Nocturne.\", \"location\": \"Božetěchova 3, 110 00 Prague 1\", \"attendees\": [\"Kryštof Nováček\", \"Zuzana Nováková\"], \"start_strftime\": \"Tuesday, 2024-10-15 18:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 21:00:00\"}], \"range\": [\"0\", \"4\"], \"total\": \"4\"}",
+      "event_id": "series_s2_calendar_check",
+      "response_sha256": "979d813026da506013176cf48a05b28dcf4b497ae4ab523729515fcbdf643d9d"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Dominion Nocturne Board Game",
+          "kind": "product",
+          "source": "stage0.existing_catalog.6",
+          "reason": "独特产品名，含专有名词",
+          "weight": 50
+        },
+        {
+          "text": "Eliška Nováková",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "František Šťastný",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Kryštof Nováček",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Tereza Nováková",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Zuzana Nováková",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Dominion Nocturne Board Game",
+        "Eliška Nováková",
+        "František Šťastný",
+        "Kryštof Nováček",
+        "Tereza Nováková",
+        "Zuzana Nováková"
+      ],
+      "active_vocabulary": {
+        "Dominion Nocturne Board Game": 50,
+        "Eliška Nováková": 50,
+        "František Šťastný": 50,
+        "Kryštof Nováček": 50,
+        "Tereza Nováková": 50,
+        "Zuzana Nováková": 50
+      },
+      "vocabulary_sha256": "92cd11ed5d1cddb80315209deb298b7650e9703b890b2adc8fd177762c0c7c78"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Božetěchova 3",
+          "kind": "place",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含变音符号的独特街道地址名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Božetěchova 3"
+      ],
+      "active_vocabulary": {
+        "Dominion Nocturne Board Game": 50,
+        "Eliška Nováková": 50,
+        "František Šťastný": 50,
+        "Kryštof Nováček": 50,
+        "Tereza Nováková": 50,
+        "Zuzana Nováková": 50,
+        "Božetěchova 3": 50
+      },
+      "vocabulary_sha256": "c90717b3cd6b8176659115fdd10085960670ebccc1a58725664351c033a4d7db"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kryštof Nováček",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_calendar_check",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Kvido Nováček",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_calendar_check",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Zuzana Nováková",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_calendar_check",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Šárka Nováková",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_calendar_check",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kvido Nováček",
+        "Šárka Nováková"
+      ],
+      "active_vocabulary": {
+        "Dominion Nocturne Board Game": 50,
+        "Eliška Nováková": 50,
+        "František Šťastný": 50,
+        "Kryštof Nováček": 50,
+        "Tereza Nováková": 50,
+        "Zuzana Nováková": 50,
+        "Božetěchova 3": 50,
+        "Kvido Nováček": 50,
+        "Šárka Nováková": 50
+      },
+      "vocabulary_sha256": "b35a705abc2f0ddd65212129227c9736fd1469fde04f0a67d89fcd692cf224a8"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": [
+        {
+          "text": "Dominion: Nocturne",
+          "covered_by": "Dominion Nocturne Board Game"
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Matěj",
+    "Dominion",
+    "Kryštof",
+    "Zuzana",
+    "Dominion: Nocturne"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:14.815852+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

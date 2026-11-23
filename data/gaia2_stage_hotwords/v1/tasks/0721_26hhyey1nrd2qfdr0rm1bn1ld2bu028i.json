@@ -1,0 +1,153 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0721_26hhyey1nrd2qfdr0rm1bn1ld2bu028i",
+  "model": "deepseek-flash",
+  "input_sha256": "02c04f8bf799ffd3607df8378c4eb680bfee9907e682d10e685cc7e3f34179c1",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "The Eagle Pub",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e54e1598-990c-4074-975e-70c72890bdfb.arguments.end_location",
+          "reason": "酒馆专有名称"
+        },
+        {
+          "text": "Cambridge",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e54e1598-990c-4074-975e-70c72890bdfb.arguments.end_location",
+          "reason": "城市名"
+        },
+        {
+          "text": "University of Cambridge",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e54e1598-990c-4074-975e-70c72890bdfb.arguments.start_location",
+          "reason": "大学机构名"
+        },
+        {
+          "text": "Department of Physics",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e54e1598-990c-4074-975e-70c72890bdfb.arguments.start_location",
+          "reason": "院系专有名称"
+        }
+      ],
+      "new_terms": [
+        "The Eagle Pub",
+        "Cambridge",
+        "University of Cambridge",
+        "Department of Physics"
+      ],
+      "active_vocabulary": {
+        "The Eagle Pub": 50,
+        "Cambridge": 50,
+        "University of Cambridge": 50,
+        "Department of Physics": 50
+      },
+      "vocabulary_sha256": "981507412a7da369aa6297eb8847abd86bb57bc42bc73b71030de6bd030fa18c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "The Eagle Pub",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_calendar.arguments.title",
+          "reason": "酒馆专有名称"
+        },
+        {
+          "text": "Department of Physics",
+          "kind": "organization",
+          "source": "stage1.tool_gt.series_s1_calendar.arguments.location",
+          "reason": "院系专有名称"
+        },
+        {
+          "text": "University of Cambridge",
+          "kind": "organization",
+          "source": "stage1.tool_gt.series_s1_calendar.arguments.location",
+          "reason": "大学机构名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "The Eagle Pub": 50,
+        "Cambridge": 50,
+        "University of Cambridge": 50,
+        "Department of Physics": 50
+      },
+      "vocabulary_sha256": "981507412a7da369aa6297eb8847abd86bb57bc42bc73b71030de6bd030fa18c"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kymberley Janssen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add.arguments.attendees[0]",
+          "reason": "同事全名"
+        },
+        {
+          "text": "Klaasje Van der Meer",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add.arguments.attendees[1]",
+          "reason": "同事全名"
+        },
+        {
+          "text": "The Eagle Pub",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add.arguments.title",
+          "reason": "酒馆专有名称"
+        },
+        {
+          "text": "Department of Physics",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_add.arguments.location",
+          "reason": "院系专有名称"
+        },
+        {
+          "text": "University of Cambridge",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_add.arguments.location",
+          "reason": "大学机构名"
+        }
+      ],
+      "new_terms": [
+        "Kymberley Janssen",
+        "Klaasje Van der Meer"
+      ],
+      "active_vocabulary": {
+        "The Eagle Pub": 50,
+        "Cambridge": 50,
+        "University of Cambridge": 50,
+        "Department of Physics": 50,
+        "Kymberley Janssen": 50,
+        "Klaasje Van der Meer": 50
+      },
+      "vocabulary_sha256": "a473e5e00af0fc1841f1ab478674d825fca489c869547747e7697f6fa4839f1c"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "67e2e8026e8d3896ace1945cb363b803870a854285dbd7f4b0a1a8f8ba455ba7",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2650,
+        "completion_tokens": 566,
+        "total_tokens": 3216,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2394
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.871
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0721_26hhyey1nrd2qfdr0rm1bn1ld2bu028i",
+  "extracted_at": "2026-11-22T06:43:32.536465+00:00"
+}

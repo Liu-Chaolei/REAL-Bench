@@ -21,10 +21,13 @@ from tau2.config import (
     DEFAULT_QWEN_AGENT_MAX_BUFFER_SECONDS,
     DEFAULT_QWEN_AGENT_TOOL_TIMEOUT_SECONDS,
     DEFAULT_QWEN_AGENT_USER_SILENCE_CHECKIN_SECONDS,
+    DEFAULT_QWEN_ASR_APPEND_SECONDS,
+    DEFAULT_QWEN_ASR_STREAMING_TIMEOUT_SECONDS,
+    DEFAULT_QWEN_OUTPUT_SAMPLE_RATE,
 )
 from tau2.data_model.asr import HotwordSettings
 from tau2.data_model.dynamic_followup import DynamicFollowupConfig
-from tau2.data_model.voice import MiMoTTSConfig
+from tau2.data_model.voice import MiMoTTSConfig, QwenTTSConfig
 from tau2.utils.env_config import read_config_environment, resolve_env_reference
 
 
@@ -107,7 +110,7 @@ class QwenAgentConfig(BaseModel):
         default=DEFAULT_QWEN_AGENT_MAX_BUFFER_SECONDS, gt=0
     )
     speech_to_speech: SpeechToSpeechConfig | None = None
-    tts: MiMoTTSConfig | None = None
+    tts: MiMoTTSConfig | QwenTTSConfig | None = None
     user_decision_llm: str | None = None
     user_decision_llm_args: dict = Field(default_factory=dict)
     user_llm_api_key_env: str | None = None
@@ -179,6 +182,18 @@ class QwenAgentConfig(BaseModel):
     asr_provider_env: str | None = None
     asr_hotwords: HotwordSettings = Field(default_factory=HotwordSettings)
     asr_segment_seconds: float = Field(default=4.0, ge=1, le=15)
+    asr_append_seconds: float = Field(
+        default=DEFAULT_QWEN_ASR_APPEND_SECONDS, ge=0.2, le=2
+    )
+    playback_sample_rate: int = Field(
+        default=DEFAULT_QWEN_OUTPUT_SAMPLE_RATE,
+        ge=8000,
+        le=48000,
+        description="Native agent PCM output rate; must match the audio events",
+    )
+    asr_streaming_timeout_seconds: float = Field(
+        default=DEFAULT_QWEN_ASR_STREAMING_TIMEOUT_SECONDS, gt=0
+    )
     asr_silence_seconds: float = Field(default=0.6, ge=0.2, le=3)
     asr_speech_rms: int = Field(default=80, ge=1, le=32767)
     asr_recheck_enabled: bool = True
@@ -355,18 +370,29 @@ class QwenAgentConfig(BaseModel):
     @model_validator(mode="after")
     def observer_profile(self):
         """Reject inconsistent observer profiles before any model startup."""
-        from tau2.config import DEFAULT_QWEN_ASR_MODEL
+        from tau2.config import DEFAULT_QWEN_ASR_MODEL, DEFAULT_QWEN_ASR_STREAMING_MODEL
 
         if self.asr_hotwords.enabled and self.asr_provider != "qwen":
             raise ValueError("Automatic hotwords require the Qwen user-side ASR")
+        if (
+            self.asr_hotwords.enabled
+            and self.asr_hotwords.mode == "gaia2_stage_gt"
+            and self.asr_model != DEFAULT_QWEN_ASR_STREAMING_MODEL
+        ):
+            raise ValueError("Fixed stage hotwords require Qwen streaming observer ASR")
         if self.asr_provider == "qwen":
-            if self.asr_model != DEFAULT_QWEN_ASR_MODEL:
-                raise ValueError("Qwen user-side ASR requires qwen-audio-3.1-asr-flash")
+            if self.asr_model not in {
+                DEFAULT_QWEN_ASR_MODEL,
+                DEFAULT_QWEN_ASR_STREAMING_MODEL,
+            }:
+                raise ValueError("Qwen user-side ASR requires a Qwen 3.1 ASR model")
             if (
                 self.asr_base_url_env is None
                 and self.asr_base_url == DEFAULT_MIMO_API_BASE
             ):
                 raise ValueError("Qwen user-side ASR requires its own base URL")
+        elif self.asr_model == DEFAULT_QWEN_ASR_STREAMING_MODEL:
+            raise ValueError("Qwen streaming ASR requires the qwen provider")
         return self
 
     @field_validator("asr_api_key_env", "asr_base_url_env", "asr_provider_env")

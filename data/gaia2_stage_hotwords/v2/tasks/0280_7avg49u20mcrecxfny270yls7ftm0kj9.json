@@ -1,0 +1,191 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0280_7avg49u20mcrecxfny270yls7ftm0kj9",
+  "model": "deepseek-flash",
+  "input_sha256": "71b1afb01a23bc593044ceb43ebebb1f5014fc205a7985bbe767795336d4ad47",
+  "review_input_sha256": "bbd4f84203e615cbd682f5fe8ea1c82a3a45e55b4bdeb4c1daa75f6eb52a1272",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "c163b98069cd5f93811e74ca4c897f30f9b34f730278a3c080bfc7392498d9d7",
+  "reference_results_sha256": "029b056e85edc322520a05fe2e005a618ca70039fd19db7e85570642a169ff27",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "City Lights Apartments",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-f78c17aa-db10-4c97-a6b5-9961d32baf15.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Liberty Place",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Riverwalk Condos",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Cityview Apartments",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Philadelphia Place",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.tool_response.series_s2_search_philadelphia": {
+      "stage": 2,
+      "text": "{\"1da4bd7da91241f39de7c7d926466b02\": {\"name\": \"City Heights\", \"location\": \"4567 City Heights Dr, Philadelphia\", \"zip_code\": \"19104\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1100\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"1da4bd7da91241f39de7c7d926466b02\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"False\"}, \"21477b4a035943d197b4f5c022124e29\": {\"name\": \"Philadelphia Place\", \"location\": \"9012 Market St, Philadelphia\", \"zip_code\": \"19107\", \"price\": \"1800\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"21477b4a035943d197b4f5c022124e29\", \"amenities\": [\"Laundry\", \"Gym\"], \"saved\": \"False\"}, \"21e3e24e809e4ed0b04313537eb2d16f\": {\"name\": \"CityView Condos\", \"location\": \"3456 N Broad St, Philadelphia\", \"zip_code\": \"19122\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"21e3e24e809e4ed0b04313537eb2d16f\", \"amenities\": [\"Parking\", \"Gym\", \"Pool\"], \"saved\": \"False\"}, \"254bdd6338ad4b109f8f325a98944e02\": {\"name\": \"Liberty Place\", \"location\": \"6789 Market St, Philadelphia\", \"zip_code\": \"19107\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1100\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"254bdd6338ad4b109f8f325a98944e02\", \"amenities\": [\"Gym\", \"Laundry\", \"Pool\"], \"saved\": \"True\"}, \"3d313fc7194749c3848baa194be114b9\": {\"name\": \"The Franklin\", \"location\": \"1234 Market St, Philadelphia\", \"zip_code\": \"19107\", \"price\": \"2400\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"3d313fc7194749c3848baa194be114b9\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"False\"}, \"3dab26c9397f4e1b969206dcf6a18ed2\": {\"name\": \"Riverwalk Condos\", \"location\": \"6789 Riverwalk Dr, Philadelphia\", \"zip_code\": \"19123\", \"price\": \"2600\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1600\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"3dab26c9397f4e1b969206dcf6a18ed2\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\", \"Doorman\"], \"saved\": \"True\"}, \"42e3d8f93c644fe69d6469db7314f9be\": {\"name\": \"Liberty Square Apartments\", \"location\": \"2345 Market St, Philadelphia\", \"zip_code\": \"19103\", \"price\": \"2000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"42e3d8f93c644fe69d6469db7314f9be\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"False\"}, \"60f076729f274bd089f94d939dbd0d0b\": {\"name\": \"City Lights Loft\", \"location\": \"3456 Market St, Philadelphia\", \"zip_code\": \"19104\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Loft\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"60f076729f274bd089f94d939dbd0d0b\", \"amenities\": [\"Gym\", \"Parking\"], \"saved\": \"False\"}, \"850970db7c5c4e57b05180d4c7e89a37\": {\"name\": \"City Lights Apartments\", \"location\": \"3456 City Ave, Philadelphia\", \"zip_code\": \"19104\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"850970db7c5c4e57b05180d4c7e89a37\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"9cae60b19d2f432ca9fc98c3c6f73df3\": {\"name\": \"Cityview Apartments\", \"location\": \"567 Cityview Dr, Philadelphia\", \"zip_code\": \"19103\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"9cae60b19d2f432ca9fc98c3c6f73df3\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\"], \"saved\": \"False\"}}",
+      "event_id": "series_s2_search_philadelphia",
+      "response_sha256": "c41d02ad1af93b2c634b2e911c7686e8dee1716a66db381350074e221dfe46e9"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "City Lights Apartments",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "具体公寓楼名称，作为专有名词保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "City Lights Apartments"
+      ],
+      "active_vocabulary": {
+        "City Lights Apartments": 50
+      },
+      "vocabulary_sha256": "2fa061c2e4e798651604d2340534e42620f1454aa55f4bedf2e7fd25454b80e5"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Liberty Place",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "具体公寓楼名称，保留",
+          "weight": 50
+        },
+        {
+          "text": "Riverwalk Condos",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "具体公寓楼名称，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Liberty Place",
+        "Riverwalk Condos"
+      ],
+      "active_vocabulary": {
+        "City Lights Apartments": 50,
+        "Liberty Place": 50,
+        "Riverwalk Condos": 50
+      },
+      "vocabulary_sha256": "8525c62879a0a54b6c92b46b50d3eef506df2430ec654c4ce64fb1b460cfeb04"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "City Lights Loft",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_philadelphia",
+          "reason": "工具结果中的具体公寓楼名称，保留",
+          "weight": 50
+        },
+        {
+          "text": "Liberty Square Apartments",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_philadelphia",
+          "reason": "工具结果中的具体公寓楼名称，保留",
+          "weight": 50
+        },
+        {
+          "text": "City Heights",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_philadelphia",
+          "reason": "工具结果中的具体公寓楼名称，保留",
+          "weight": 50
+        },
+        {
+          "text": "Cityview Apartments",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "具体公寓楼名称，保留",
+          "weight": 50
+        },
+        {
+          "text": "CityView Condos",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_philadelphia",
+          "reason": "工具结果中的具体公寓楼名称，保留",
+          "weight": 50
+        },
+        {
+          "text": "Philadelphia Place",
+          "kind": "place",
+          "source": "stage2.existing_catalog.1",
+          "reason": "具体公寓楼名称，保留",
+          "weight": 50
+        },
+        {
+          "text": "The Franklin",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_philadelphia",
+          "reason": "工具结果中的具体公寓楼名称，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "City Lights Loft",
+        "Liberty Square Apartments",
+        "City Heights",
+        "Cityview Apartments",
+        "CityView Condos",
+        "Philadelphia Place",
+        "The Franklin"
+      ],
+      "active_vocabulary": {
+        "City Lights Apartments": 50,
+        "Liberty Place": 50,
+        "Riverwalk Condos": 50,
+        "City Lights Loft": 50,
+        "Liberty Square Apartments": 50,
+        "City Heights": 50,
+        "Cityview Apartments": 50,
+        "CityView Condos": 50,
+        "Philadelphia Place": 50,
+        "The Franklin": 50
+      },
+      "vocabulary_sha256": "a64b0922947ecb96a5b0295541a1c9abb7d8528292575c13f7c2a67b403e8f8c"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:55.419573+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

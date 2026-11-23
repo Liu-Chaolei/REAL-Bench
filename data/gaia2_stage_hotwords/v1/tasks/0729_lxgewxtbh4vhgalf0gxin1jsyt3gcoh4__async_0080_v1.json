@@ -1,0 +1,162 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0729_lxgewxtbh4vhgalf0gxin1jsyt3gcoh4__async_0080_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "2e263ae42974c8943bdf4dafb9b0dc3a2dc0f2d5d2ed0f508275d67e69dbfb32",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Deniz Öztürk",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-64420011-569a-48ef-8d7d-70189c225ec5.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Exclusive Wine Bar",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-64420011-569a-48ef-8d7d-70189c225ec5.arguments.title",
+          "reason": "活动专有名称"
+        },
+        {
+          "text": "Client Confirmation",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1d8fae6e-9b63-4d40-9a33-5b1108dcc7b7.arguments.title",
+          "reason": "群聊专有名称"
+        },
+        {
+          "text": "Reservation Confirmed",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-721fbbf1-6199-4a03-9dda-47a86dd07ad8.arguments.subject",
+          "reason": "邮件主题专有名称"
+        }
+      ],
+      "new_terms": [
+        "Deniz Öztürk",
+        "Exclusive Wine Bar",
+        "Client Confirmation",
+        "Reservation Confirmed"
+      ],
+      "active_vocabulary": {
+        "Deniz Öztürk": 50,
+        "Exclusive Wine Bar": 50,
+        "Client Confirmation": 50,
+        "Reservation Confirmed": 50
+      },
+      "vocabulary_sha256": "248728d6b63fe3d1708ee13cfe2c01190d321432cbd153ca23488129461b2317"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Kaia Nakamura",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[1]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "VIP Evening Prep Briefing",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.title",
+          "reason": "活动专有名称"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "邮件署名姓名"
+        },
+        {
+          "text": "Deniz Öztürk",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.description",
+          "reason": "描述中提及的参会人姓名"
+        }
+      ],
+      "new_terms": [
+        "Nalani Jensen",
+        "Kaia Nakamura",
+        "VIP Evening Prep Briefing",
+        "Aurélien LaFleur"
+      ],
+      "active_vocabulary": {
+        "Deniz Öztürk": 50,
+        "Exclusive Wine Bar": 50,
+        "Client Confirmation": 50,
+        "Reservation Confirmed": 50,
+        "Nalani Jensen": 50,
+        "Kaia Nakamura": 50,
+        "VIP Evening Prep Briefing": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "f2c6a8c96b0d5d969b8a156a61ebdd7fac755b222502d86fb27191564e63858f"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Deniz Öztürk": 50,
+        "Exclusive Wine Bar": 50,
+        "Client Confirmation": 50,
+        "Reservation Confirmed": 50,
+        "Nalani Jensen": 50,
+        "Kaia Nakamura": 50,
+        "VIP Evening Prep Briefing": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "f2c6a8c96b0d5d969b8a156a61ebdd7fac755b222502d86fb27191564e63858f"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "9b42853c1ced378b9f69039981916662c4803828f8a0ae5cc7eeba8aec310945",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3255,
+        "completion_tokens": 532,
+        "total_tokens": 3787,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2999
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.971,
+      "error": "Not an exact quotation of a source in stage 2: 'Rohini Deshpande' from 'stage2.tool_gt.series_s2_email.arguments.recipients[0]'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "121461b4099647b74e9bc51c57136f79b4c3f90ca43e341d5899c41a0ed6dddc",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4212,
+        "completion_tokens": 489,
+        "total_tokens": 4701,
+        "prompt_tokens_details": {
+          "cached_tokens": 3712
+        },
+        "prompt_cache_hit_tokens": 3712,
+        "prompt_cache_miss_tokens": 500
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.831
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0729_lxgewxtbh4vhgalf0gxin1jsyt3gcoh4__async_0080_v1",
+  "extracted_at": "2026-11-22T06:46:53.486618+00:00"
+}

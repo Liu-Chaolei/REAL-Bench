@@ -1,0 +1,144 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0489_3d0b4g9b6n7w1b87br37xdl0hve5e0yb",
+  "model": "deepseek-flash",
+  "input_sha256": "259cbfc92ba894af78ea53dbb67a3037de1ee7e589b65ef7c25908770804d18a",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Marvel",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "品牌名，用于筛选商品"
+        }
+      ],
+      "new_terms": [
+        "Marvel"
+      ],
+      "active_vocabulary": {
+        "Marvel": 50
+      },
+      "vocabulary_sha256": "510458ad100f86e24237c71d00025221a517d6023d9171232c69cb96bbb5b226"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Marvel": 50
+      },
+      "vocabulary_sha256": "510458ad100f86e24237c71d00025221a517d6023d9171232c69cb96bbb5b226"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Marvel",
+          "kind": "organization",
+          "source": "stage2.source_task",
+          "reason": "品牌名，用于搜索商品"
+        },
+        {
+          "text": "Funko Marvel Captain America Pop Vinyl Figure",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "具体商品名称"
+        }
+      ],
+      "new_terms": [
+        "Funko Marvel Captain America Pop Vinyl Figure"
+      ],
+      "active_vocabulary": {
+        "Marvel": 50,
+        "Funko Marvel Captain America Pop Vinyl Figure": 50
+      },
+      "vocabulary_sha256": "3e23e72ad64d4a3102be4d9b9e5677c4abf420e6e595382a4ea087be2b69af19"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "e4b057f99b4501680651dd19c91c63ca827f3c7b4a98d4d967140375b4fbcfb2",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2186,
+        "completion_tokens": 252,
+        "total_tokens": 2438,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1930
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.251,
+      "error": "5 validation errors for Extraction\nstages.0.terms.0.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nstages.0.terms.1.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nstages.2.terms.0.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nstages.2.terms.1.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nstages.2.terms.3.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "ab720381ff8a23a9957a1fa02347d9cca6e823c37831f39dd8d920f826a8fe52",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3191,
+        "completion_tokens": 252,
+        "total_tokens": 3443,
+        "prompt_tokens_details": {
+          "cached_tokens": 2432
+        },
+        "prompt_cache_hit_tokens": 2432,
+        "prompt_cache_miss_tokens": 759
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.077,
+      "error": "Not an exact quotation of a source in stage 0: 'Marvel' from 'stage0.reference_reply.OracleEvent-AGENT-bcfee81c-c6ac-43da-9817-807b6ae05030.arguments.content'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "1fd752936fd5884ecf676b078d8e246b41a18cb5d924e6446473d031dab22b07",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2876,
+        "completion_tokens": 194,
+        "total_tokens": 3070,
+        "prompt_tokens_details": {
+          "cached_tokens": 2176
+        },
+        "prompt_cache_hit_tokens": 2176,
+        "prompt_cache_miss_tokens": 700
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 0.938,
+      "error": "Duplicate term within stage 2: 'Marvel'"
+    },
+    {
+      "attempt": 4,
+      "request_sha256": "c62e8c5ab8e5ffb2bd94a8628ce415a3d1d4c3a446c6666e2df143f73ca2e825",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2774,
+        "completion_tokens": 122,
+        "total_tokens": 2896,
+        "prompt_tokens_details": {
+          "cached_tokens": 2176
+        },
+        "prompt_cache_hit_tokens": 2176,
+        "prompt_cache_miss_tokens": 598
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.952
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0489_3d0b4g9b6n7w1b87br37xdl0hve5e0yb",
+  "extracted_at": "2026-11-22T06:42:28.887474+00:00"
+}

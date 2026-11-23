@@ -1,0 +1,160 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0902_nr5dyc9smzyyylzduhtvdgheve0z7934",
+  "model": "deepseek-flash",
+  "input_sha256": "fd1624e3741a43597dbc0a952642c128544392c5be764d0a2eeac19fdc750ac5",
+  "review_input_sha256": "04296561f028ae16dcabf3e1445d3f48ffce9544ceccc4257ca14fb0fde09ee8",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "0b61a1f149d80e280062676fa772180f8c870337908a2d02947ba1fdb0a57afe",
+  "reference_results_sha256": "f391dbc373c54262e556085cc5948f1afd46a37b8d0fcfba8dc4f92eb33a742d",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Rohan Kumar",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f43bbc2f-eb0e-4eb7-ab3a-4a85e9535c4c.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Kaitlyn Nguyen",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f43bbc2f-eb0e-4eb7-ab3a-4a85e9535c4c.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Kaida Jensen",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f43bbc2f-eb0e-4eb7-ab3a-4a85e9535c4c.arguments.attendees[2]"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "The Leela Hotel",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f43bbc2f-eb0e-4eb7-ab3a-4a85e9535c4c.arguments.location"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Sahyadri Apartments",
+      "original_source": "stage1.tool_gt.series_s1_quote.arguments.start_location"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Bandra West",
+      "original_source": "stage1.tool_gt.series_s1_quote.arguments.start_location"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "The Leela Hotel",
+          "kind": "place",
+          "source": "stage0.existing_catalog.3",
+          "reason": "特定酒店名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Kaida Jensen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Kaitlyn Nguyen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "The Leela Hotel",
+        "Kaida Jensen",
+        "Kaitlyn Nguyen",
+        "Rohan Kumar"
+      ],
+      "active_vocabulary": {
+        "The Leela Hotel": 50,
+        "Kaida Jensen": 50,
+        "Kaitlyn Nguyen": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "ad60c5e8d1cdda4d89367addd33e74ad57bd7db6dbd5bc10bf5dd667404fe354"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Bandra West",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "特定地名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Sahyadri Apartments",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "特定公寓名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Bandra West",
+        "Sahyadri Apartments"
+      ],
+      "active_vocabulary": {
+        "The Leela Hotel": 50,
+        "Kaida Jensen": 50,
+        "Kaitlyn Nguyen": 50,
+        "Rohan Kumar": 50,
+        "Bandra West": 50,
+        "Sahyadri Apartments": 50
+      },
+      "vocabulary_sha256": "dcd166de7019d8089201fe6de2d53d59b4ac5e3a76e199a156f16e5dd0add154"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "The Leela Hotel": 50,
+        "Kaida Jensen": 50,
+        "Kaitlyn Nguyen": 50,
+        "Rohan Kumar": 50,
+        "Bandra West": 50,
+        "Sahyadri Apartments": 50
+      },
+      "vocabulary_sha256": "dcd166de7019d8089201fe6de2d53d59b4ac5e3a76e199a156f16e5dd0add154"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Mumbai"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:45.875575+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

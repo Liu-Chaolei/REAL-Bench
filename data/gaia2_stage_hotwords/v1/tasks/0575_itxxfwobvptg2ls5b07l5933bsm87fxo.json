@@ -1,0 +1,204 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0575_itxxfwobvptg2ls5b07l5933bsm87fxo",
+  "model": "deepseek-flash",
+  "input_sha256": "465f52e32f8094fc055d3787f981148e7e8a913d4370891be9028b55fcdd9d90",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Restaurant Schønnemann's",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a0cedad7-cd75-4835-9518-b640a66be4d5.arguments.location",
+          "reason": "餐厅专有名称"
+        },
+        {
+          "text": "Elmer's Classic Glitter Glue",
+          "kind": "product",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-509c2e56-d66a-4848-86ca-f5fc11e0dad7.arguments.content",
+          "reason": "产品品牌型号名称"
+        },
+        {
+          "text": "Astrid Jensen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a0cedad7-cd75-4835-9518-b640a66be4d5.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Astrid Kjærsgaard",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a0cedad7-cd75-4835-9518-b640a66be4d5.arguments.attendees[1]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Astrid Rasmussen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a0cedad7-cd75-4835-9518-b640a66be4d5.arguments.attendees[2]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Astrid Kjær",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a0cedad7-cd75-4835-9518-b640a66be4d5.arguments.attendees[3]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Aksel Jensen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a0cedad7-cd75-4835-9518-b640a66be4d5.arguments.attendees[4]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Emilie Møller",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a0cedad7-cd75-4835-9518-b640a66be4d5.arguments.attendees[5]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Astrid Møller",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a0cedad7-cd75-4835-9518-b640a66be4d5.arguments.attendees[6]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-27356f5e-4064-4590-80ae-34b577e94608.arguments.content",
+          "reason": "邮件署名姓名"
+        }
+      ],
+      "new_terms": [
+        "Restaurant Schønnemann's",
+        "Elmer's Classic Glitter Glue",
+        "Astrid Jensen",
+        "Astrid Kjærsgaard",
+        "Astrid Rasmussen",
+        "Astrid Kjær",
+        "Aksel Jensen",
+        "Emilie Møller",
+        "Astrid Møller",
+        "Søren Kjær"
+      ],
+      "active_vocabulary": {
+        "Restaurant Schønnemann's": 50,
+        "Elmer's Classic Glitter Glue": 50,
+        "Astrid Jensen": 50,
+        "Astrid Kjærsgaard": 50,
+        "Astrid Rasmussen": 50,
+        "Astrid Kjær": 50,
+        "Aksel Jensen": 50,
+        "Emilie Møller": 50,
+        "Astrid Møller": 50,
+        "Søren Kjær": 50
+      },
+      "vocabulary_sha256": "aeb4f2ba2d95302b80c62687fea9cd7947b52b2a84bc2e269e61a45d4862a104"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Østerbrogade 123",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_quote_out.arguments.start_location",
+          "reason": "上车地点街道名"
+        },
+        {
+          "text": "København Ø",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_quote_out.arguments.start_location",
+          "reason": "哥本哈根地区名"
+        },
+        {
+          "text": "Restaurant Schønnemann's",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_quote_out.arguments.end_location",
+          "reason": "目的地餐厅名"
+        }
+      ],
+      "new_terms": [
+        "Østerbrogade 123",
+        "København Ø"
+      ],
+      "active_vocabulary": {
+        "Restaurant Schønnemann's": 50,
+        "Elmer's Classic Glitter Glue": 50,
+        "Astrid Jensen": 50,
+        "Astrid Kjærsgaard": 50,
+        "Astrid Rasmussen": 50,
+        "Astrid Kjær": 50,
+        "Aksel Jensen": 50,
+        "Emilie Møller": 50,
+        "Astrid Møller": 50,
+        "Søren Kjær": 50,
+        "Østerbrogade 123": 50,
+        "København Ø": 50
+      },
+      "vocabulary_sha256": "4aa3ac21748bc9920dffd284a8729a1d617e98d8c7a22cf628f5ce4faa04d0c3"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Restaurant Schønnemann's": 50,
+        "Elmer's Classic Glitter Glue": 50,
+        "Astrid Jensen": 50,
+        "Astrid Kjærsgaard": 50,
+        "Astrid Rasmussen": 50,
+        "Astrid Kjær": 50,
+        "Aksel Jensen": 50,
+        "Emilie Møller": 50,
+        "Astrid Møller": 50,
+        "Søren Kjær": 50,
+        "Østerbrogade 123": 50,
+        "København Ø": 50
+      },
+      "vocabulary_sha256": "4aa3ac21748bc9920dffd284a8729a1d617e98d8c7a22cf628f5ce4faa04d0c3"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "468de5128f4469ece346837effa227dd7939e6812c13ae52c9b19363000ca5d6",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3317,
+        "completion_tokens": 837,
+        "total_tokens": 4154,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3061
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.714,
+      "error": "Invalid proper-name phrase: 'rohini.deshpande@gaia2mail.com'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "5b709fbd4494e54ed529a0a60065709a6e392fb4bf8dab0a8a3a21e9b523bbc6",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4557,
+        "completion_tokens": 787,
+        "total_tokens": 5344,
+        "prompt_tokens_details": {
+          "cached_tokens": 4096
+        },
+        "prompt_cache_hit_tokens": 4096,
+        "prompt_cache_miss_tokens": 461
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.665
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0575_itxxfwobvptg2ls5b07l5933bsm87fxo",
+  "extracted_at": "2026-11-22T06:42:53.709798+00:00"
+}

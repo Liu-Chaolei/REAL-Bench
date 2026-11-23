@@ -1,0 +1,166 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0310_q5zmbuobreamwii2kviu7xjy7lonhsvw__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "37e5b80aece78910c6d4bc261b17f7eb3053efba93a37ccae0abe27db7f5c06d",
+  "review_input_sha256": "04849797f33719665f5ed91d7db195b02daf056901540036898740fc975de3a3",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "c889ae43c6173ba3556a4359832204884ba24ee04225d15b28ad4a481732c135",
+  "reference_results_sha256": "e4bfdee60a424e6d2f6312ba0c6a46ec1d32a666e1cc36a2c4d83b900b6b683e",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Aurélie Dumont",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Aurélie Dupont",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Aurélien Benhamou",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Aurélien Dumont",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Colette Dumont",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.5": {
+      "stage": 1,
+      "text": "Colette Dupont",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.6": {
+      "stage": 1,
+      "text": "Rohan Kumar",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélie Dumont",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整法语人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Aurélie Dupont",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的完整法语人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Benhamou",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含变音符号的完整法语人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage1.existing_catalog.3",
+          "reason": "含变音符号的完整法语人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Colette Dumont",
+          "kind": "person",
+          "source": "stage1.existing_catalog.4",
+          "reason": "完整法语人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Colette Dupont",
+          "kind": "person",
+          "source": "stage1.existing_catalog.5",
+          "reason": "完整法语人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage1.existing_catalog.6",
+          "reason": "完整人名，非普通词汇",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélie Dumont",
+        "Aurélie Dupont",
+        "Aurélien Benhamou",
+        "Aurélien Dumont",
+        "Colette Dumont",
+        "Colette Dupont",
+        "Rohan Kumar"
+      ],
+      "active_vocabulary": {
+        "Aurélie Dumont": 50,
+        "Aurélie Dupont": 50,
+        "Aurélien Benhamou": 50,
+        "Aurélien Dumont": 50,
+        "Colette Dumont": 50,
+        "Colette Dupont": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "c56b3c6ed52e8b516400374463650a0e61b7f5cae9a2e085037dc192077f1f38"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélie Dumont": 50,
+        "Aurélie Dupont": 50,
+        "Aurélien Benhamou": 50,
+        "Aurélien Dumont": 50,
+        "Colette Dumont": 50,
+        "Colette Dupont": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "c56b3c6ed52e8b516400374463650a0e61b7f5cae9a2e085037dc192077f1f38"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:33.716174+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

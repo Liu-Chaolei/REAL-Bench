@@ -1,0 +1,182 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0536_xmhms2a1j0j6y6uku5udoa2jgaj2tj1a",
+  "model": "deepseek-flash",
+  "input_sha256": "0b07c6f5869e81aeb6832df55999001e29f1e78fa594251db229954d47100362",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Brand Partnership Meeting",
+          "kind": "custom_name",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-89af3afe-deaa-4313-aead-31c81e950242.arguments.content",
+          "reason": "特定会议名称"
+        },
+        {
+          "text": "Content Creation Session",
+          "kind": "custom_name",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-89af3afe-deaa-4313-aead-31c81e950242.arguments.content",
+          "reason": "特定会议名称"
+        },
+        {
+          "text": "Yoga Class",
+          "kind": "custom_name",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-89af3afe-deaa-4313-aead-31c81e950242.arguments.content",
+          "reason": "特定活动名称"
+        }
+      ],
+      "new_terms": [
+        "Brand Partnership Meeting",
+        "Content Creation Session",
+        "Yoga Class"
+      ],
+      "active_vocabulary": {
+        "Brand Partnership Meeting": 50,
+        "Content Creation Session": 50,
+        "Yoga Class": 50
+      },
+      "vocabulary_sha256": "aa081edff2393fc1764803a4fdb280ac086f6264cc523472ae07bbe9c87f5fe0"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Åsa",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_msg_asa.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Åke",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email_ake.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email_ake.arguments.content",
+          "reason": "发件人全名"
+        },
+        {
+          "text": "Åsa Lindgren",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Åke Svensson",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Catching up with friends",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "群聊名称"
+        },
+        {
+          "text": "Yoga Studio",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_msg_asa.arguments.content",
+          "reason": "地点名称"
+        },
+        {
+          "text": "Zoom",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_email_ake.arguments.content",
+          "reason": "平台品牌名"
+        }
+      ],
+      "new_terms": [
+        "Åsa",
+        "Åke",
+        "Astrid Lundqvist",
+        "Åsa Lindgren",
+        "Åke Svensson",
+        "Catching up with friends",
+        "Yoga Studio",
+        "Zoom"
+      ],
+      "active_vocabulary": {
+        "Brand Partnership Meeting": 50,
+        "Content Creation Session": 50,
+        "Yoga Class": 50,
+        "Åsa": 50,
+        "Åke": 50,
+        "Astrid Lundqvist": 50,
+        "Åsa Lindgren": 50,
+        "Åke Svensson": 50,
+        "Catching up with friends": 50,
+        "Yoga Studio": 50,
+        "Zoom": 50
+      },
+      "vocabulary_sha256": "1ff69e04969ba8e6648272109d8e27e7ed89375b287b00485c7768a8668e93d9"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Brand Partnership Meeting": 50,
+        "Content Creation Session": 50,
+        "Yoga Class": 50,
+        "Åsa": 50,
+        "Åke": 50,
+        "Astrid Lundqvist": 50,
+        "Åsa Lindgren": 50,
+        "Åke Svensson": 50,
+        "Catching up with friends": 50,
+        "Yoga Studio": 50,
+        "Zoom": 50
+      },
+      "vocabulary_sha256": "1ff69e04969ba8e6648272109d8e27e7ed89375b287b00485c7768a8668e93d9"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "fe58bbcf932c53505ff049b7c1148c15cb4d0d3dac595bbb0a02d918eaa7e900",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2286,
+        "completion_tokens": 539,
+        "total_tokens": 2825,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2030
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.884,
+      "error": "Invalid proper-name phrase: 'rohini.deshpande@gaia2mail.com'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "79a2efe884e03ccf3fd187a6353acf3a8ddb803256036e4e92d1db13c1964a4a",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3228,
+        "completion_tokens": 488,
+        "total_tokens": 3716,
+        "prompt_tokens_details": {
+          "cached_tokens": 2816
+        },
+        "prompt_cache_hit_tokens": 2816,
+        "prompt_cache_miss_tokens": 412
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.17
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0536_xmhms2a1j0j6y6uku5udoa2jgaj2tj1a",
+  "extracted_at": "2026-11-22T06:42:39.818259+00:00"
+}

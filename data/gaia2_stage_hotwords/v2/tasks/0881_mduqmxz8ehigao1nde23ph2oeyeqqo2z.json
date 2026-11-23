@@ -1,0 +1,113 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0881_mduqmxz8ehigao1nde23ph2oeyeqqo2z",
+  "model": "deepseek-flash",
+  "input_sha256": "8e8a195f10804eafaab7864877eb7d15eb607fec2d3125a057406163b72ec63c",
+  "review_input_sha256": "9f782baba2ef457c2bbb0a8e2a3443e10088850fbf3c036c4304f48e8ee993a5",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "b83573e39bbf0b1c36fbd595f16ffba75fc819e1f7e4e14075992853219f568d",
+  "reference_results_sha256": "2264ae012fbd49c612fa1f7bdba14c3abf50ab5c680182cf8492ae87b3e034a8",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Södermalm, Stockholm",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Kasper Rønnow",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-98f2b0d7-7716-4180-b4bd-ce74a441f5de.arguments.attendees[0]"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Photoshoot Review",
+      "original_source": "stage2.tool_gt.series_s2_add_review.arguments.title"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kasper Rønnow",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含特殊字符ø的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Södermalm, Stockholm",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符的完整地名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kasper Rønnow",
+        "Södermalm, Stockholm"
+      ],
+      "active_vocabulary": {
+        "Kasper Rønnow": 50,
+        "Södermalm, Stockholm": 50
+      },
+      "vocabulary_sha256": "376db233e001b686a8bb8afa1c8f8af165ecef12d4c7174324a6739f11dc28b6"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kasper Rønnow": 50,
+        "Södermalm, Stockholm": 50
+      },
+      "vocabulary_sha256": "376db233e001b686a8bb8afa1c8f8af165ecef12d4c7174324a6739f11dc28b6"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Photoshoot Review",
+          "kind": "custom_name",
+          "source": "stage2.existing_catalog.0",
+          "reason": "具体活动名称，非通用词，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Photoshoot Review"
+      ],
+      "active_vocabulary": {
+        "Kasper Rønnow": 50,
+        "Södermalm, Stockholm": 50,
+        "Photoshoot Review": 50
+      },
+      "vocabulary_sha256": "5a68bb2e4a6e8bf6edc376dc76de5b35a4ca153218311b53cc94b07e5dd7962e"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Astrid",
+    "Kasper"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:41.630391+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

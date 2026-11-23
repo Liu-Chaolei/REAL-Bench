@@ -1,0 +1,142 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0934_99zgszdgzsqhouza9b9zxf6uyalahvth__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "7d9965f673cdb3ffc5a48a71b2d8ec6ff8cb38ce84a1d3847c6ce9273a624246",
+  "review_input_sha256": "fdfb73b9b43f699b7f28e624f3554f81bf2ca50d86f2a41ae7f0c4751e6957d9",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "27adfa6a6b09f462e033cc0a7c85fa7195c22a4a348a8627e0e21d334181ad69",
+  "reference_results_sha256": "0771ab0fbf1811ad713cded348a5d6abdbcb7112dba3ed3a16aae475f08cf5b9",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Koenraad Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-888dbcc0-5060-44a8-a081-6b29fd529345.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Elara Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-888dbcc0-5060-44a8-a081-6b29fd529345.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Thierry Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-888dbcc0-5060-44a8-a081-6b29fd529345.arguments.attendees[2]"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Aurélien Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-888dbcc0-5060-44a8-a081-6b29fd529345.arguments.attendees[3]"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Vandenberghe Family Breakfasts",
+      "original_source": "stage2.tool_gt.series_s2_create.arguments.title"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Elara Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，姓氏Vandenberghe拼写复杂",
+          "weight": 50
+        },
+        {
+          "text": "Koenraad Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含罕见名Koenraad的完整人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Thierry Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，姓氏拼写复杂",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien Vandenberghe",
+        "Elara Vandenberghe",
+        "Koenraad Vandenberghe",
+        "Thierry Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Aurélien Vandenberghe": 50,
+        "Elara Vandenberghe": 50,
+        "Koenraad Vandenberghe": 50,
+        "Thierry Vandenberghe": 50
+      },
+      "vocabulary_sha256": "2f58ba03c3501898a78ee5d01cb2e07b48d7366218fea646b1b4bceee42a749b"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien Vandenberghe": 50,
+        "Elara Vandenberghe": 50,
+        "Koenraad Vandenberghe": 50,
+        "Thierry Vandenberghe": 50
+      },
+      "vocabulary_sha256": "2f58ba03c3501898a78ee5d01cb2e07b48d7366218fea646b1b4bceee42a749b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Vandenberghe Family Breakfasts",
+          "kind": "custom_name",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含复杂姓氏的自定义群组名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Vandenberghe Family Breakfasts"
+      ],
+      "active_vocabulary": {
+        "Aurélien Vandenberghe": 50,
+        "Elara Vandenberghe": 50,
+        "Koenraad Vandenberghe": 50,
+        "Thierry Vandenberghe": 50,
+        "Vandenberghe Family Breakfasts": 50
+      },
+      "vocabulary_sha256": "5392b0914f148f46f5dd3932d83762e0f8fe0a532039e297e3ecaf6e9b365b20"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:13.144854+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,122 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0284_pmi8cc0i8x8l9ol5w8v9vnzj8jqpg6ha",
+  "model": "deepseek-flash",
+  "input_sha256": "d34b576776cef88b6923ff1232bb0daf99675dcfaddb54ff4aa79d339e07bfd3",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Cab Duration Review",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_add_note.arguments.title",
+          "reason": "自定义日历事件标题"
+        }
+      ],
+      "new_terms": [
+        "Cab Duration Review"
+      ],
+      "active_vocabulary": {
+        "Cab Duration Review": 50
+      },
+      "vocabulary_sha256": "80bc31915edf3b8d3d257557ee700b04ac9182ff4ee434140af757c5d25a9c89"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Cab Average Check",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_add_note.arguments.title",
+          "reason": "自定义日历事件标题"
+        },
+        {
+          "text": "Cab Duration Review",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "引用的自定义事件标题"
+        }
+      ],
+      "new_terms": [
+        "Cab Average Check"
+      ],
+      "active_vocabulary": {
+        "Cab Duration Review": 50,
+        "Cab Average Check": 50
+      },
+      "vocabulary_sha256": "1ea5ebd34d5f6bc0bb66df32d90cfa64b92f5aae9794e1585ad41032a4146bd2"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "c7cd67b85eb5d92d448846ab721e7f7d57a7967089eef1033cf1a65d56982d63",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1612,
+        "completion_tokens": 285,
+        "total_tokens": 1897,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1356
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.282,
+      "error": "6 validation errors for Extraction\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage0.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage1.tool_gt.series_s1...dd_note.arguments.title', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='提取自定义事件名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage2.tool_gt.series_s2...dd_note.arguments.title', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='提取自定义事件名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "369d99806445bb7d977ca31cf910039a4d3fe4671626c70eca1fd19924b10573",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2638,
+        "completion_tokens": 218,
+        "total_tokens": 2856,
+        "prompt_tokens_details": {
+          "cached_tokens": 1792
+        },
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 846
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 0.945,
+      "error": "Duplicate term within stage 1: 'Cab Duration Review'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "f91e573f8424a18148f3ba886e6d4c621942654a9982165f2efc907c23703435",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2225,
+        "completion_tokens": 144,
+        "total_tokens": 2369,
+        "prompt_tokens_details": {
+          "cached_tokens": 1536
+        },
+        "prompt_cache_hit_tokens": 1536,
+        "prompt_cache_miss_tokens": 689
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.983
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0284_pmi8cc0i8x8l9ol5w8v9vnzj8jqpg6ha",
+  "extracted_at": "2026-11-22T06:41:11.781262+00:00"
+}

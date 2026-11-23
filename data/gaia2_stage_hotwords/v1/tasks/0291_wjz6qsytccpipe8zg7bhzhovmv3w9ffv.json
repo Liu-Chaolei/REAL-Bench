@@ -1,0 +1,147 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0291_wjz6qsytccpipe8zg7bhzhovmv3w9ffv",
+  "model": "deepseek-flash",
+  "input_sha256": "282fa12e6610787d02e855c341cbff64ca7a81105cee42baf02606fa7ba91cd1",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nadira Saeed",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Nadira",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "邮件正文中称呼的人名"
+        }
+      ],
+      "new_terms": [
+        "Nadira Saeed",
+        "Nadira"
+      ],
+      "active_vocabulary": {
+        "Nadira Saeed": 50,
+        "Nadira": 50
+      },
+      "vocabulary_sha256": "44ca412525e9481c6c2d60a9702c310c8580c10eda3689f27ec84ffa461498ff"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Rohini Nair",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群组成员姓名"
+        },
+        {
+          "text": "Nadira Saeed",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群组成员姓名"
+        },
+        {
+          "text": "Prison Reform and Social Justice",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "聊天群组名称"
+        },
+        {
+          "text": "Prison Reform Policy Meeting",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "日历事件名称"
+        }
+      ],
+      "new_terms": [
+        "Rohini Nair",
+        "Prison Reform and Social Justice",
+        "Prison Reform Policy Meeting"
+      ],
+      "active_vocabulary": {
+        "Nadira Saeed": 50,
+        "Nadira": 50,
+        "Rohini Nair": 50,
+        "Prison Reform and Social Justice": 50,
+        "Prison Reform Policy Meeting": 50
+      },
+      "vocabulary_sha256": "9ab3f9cb8db7d48d2226c7663aafac03c8d7fc0b73ce4f313f4553a4e85a2178"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "7f539bed4abb21b1f8c20ecde39c72bc2bb614b08edfe3218f3ee14343d10f7d",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2132,
+        "completion_tokens": 294,
+        "total_tokens": 2426,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1876
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.345,
+      "error": "6 validation errors for Extraction\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage0.reference_reply.O...3b0cc.arguments.content', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='仅国家名，非专有名称', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage1.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='阶段1专有名称', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage2.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='阶段2专有名称', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "7dc776fba15be96cd8537baa873a7f9891d9c0ce080dbf96f49420a2fe9fa689",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3158,
+        "completion_tokens": 206,
+        "total_tokens": 3364,
+        "prompt_tokens_details": {
+          "cached_tokens": 2304
+        },
+        "prompt_cache_hit_tokens": 2304,
+        "prompt_cache_miss_tokens": 854
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 0.97,
+      "error": "Not an exact quotation of a source in stage 1: 'Rohini Nair' from 'stage1.tool_gt.series_s1_send.arguments.content'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "13fde688c4805f6b504db8412e67985999634d0010adbd708f019176329bea78",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2758,
+        "completion_tokens": 205,
+        "total_tokens": 2963,
+        "prompt_tokens_details": {
+          "cached_tokens": 2048
+        },
+        "prompt_cache_hit_tokens": 2048,
+        "prompt_cache_miss_tokens": 710
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.016
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0291_wjz6qsytccpipe8zg7bhzhovmv3w9ffv",
+  "extracted_at": "2026-11-22T06:41:14.099108+00:00"
+}

@@ -1,0 +1,177 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0474_nvrutne256q0mv5mwcdytmpozvpjjy8y",
+  "model": "deepseek-flash",
+  "input_sha256": "8e61e05db60727becd2833ed13db4e7b54a9c3ae4c5f3e6576a3d24e6facb69c",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Arnold",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-338b1dad-9bc0-4b6d-b3ec-d9c8efa7a9b0.arguments.first_name",
+          "reason": "联系人名字"
+        },
+        {
+          "text": "Schwarzenegger",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-338b1dad-9bc0-4b6d-b3ec-d9c8efa7a9b0.arguments.last_name",
+          "reason": "联系人姓氏"
+        },
+        {
+          "text": "Vasco Pinto",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "聊天对象姓名"
+        },
+        {
+          "text": "Malmö Modern",
+          "kind": "place",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-e9c51e76-8cb8-47f2-b8ca-7e8c28059903.arguments.content",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Södra Förstadsgatan 20, Malmö",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-0a403262-2c50-4b21-853b-f9b0eff1bc1b.arguments.end_location",
+          "reason": "房产地址"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-349f91d9-3361-4698-9bfc-e1960e02f41a.arguments.content",
+          "reason": "邮件署名"
+        }
+      ],
+      "new_terms": [
+        "Arnold",
+        "Schwarzenegger",
+        "Vasco Pinto",
+        "Malmö Modern",
+        "Södra Förstadsgatan 20, Malmö",
+        "Astrid Lundqvist"
+      ],
+      "active_vocabulary": {
+        "Arnold": 50,
+        "Schwarzenegger": 50,
+        "Vasco Pinto": 50,
+        "Malmö Modern": 50,
+        "Södra Förstadsgatan 20, Malmö": 50,
+        "Astrid Lundqvist": 50
+      },
+      "vocabulary_sha256": "93828c843eaf2e4091837b5b27b0a5004c722aeae6e12d99b74864d8ce90fc93"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Vasco Pinto",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_get_vasco_id.arguments.user_name",
+          "reason": "聊天对象姓名"
+        },
+        {
+          "text": "Malmö Harbour",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_viewing.arguments.title",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Södra Promenaden 25, Malmö",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_viewing.arguments.location",
+          "reason": "房产地址"
+        }
+      ],
+      "new_terms": [
+        "Malmö Harbour",
+        "Södra Promenaden 25, Malmö"
+      ],
+      "active_vocabulary": {
+        "Arnold": 50,
+        "Schwarzenegger": 50,
+        "Vasco Pinto": 50,
+        "Malmö Modern": 50,
+        "Södra Förstadsgatan 20, Malmö": 50,
+        "Astrid Lundqvist": 50,
+        "Malmö Harbour": 50,
+        "Södra Promenaden 25, Malmö": 50
+      },
+      "vocabulary_sha256": "6da9ddbb7b5bb545861098596d7b96d4061996fcc046f6d92ef6cb3bb4ff87e2"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Malmö Modern",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.description",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Södra Förstadsgatan 20, Malmö",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_order_ride.arguments.start_location",
+          "reason": "房产地址"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Arnold": 50,
+        "Schwarzenegger": 50,
+        "Vasco Pinto": 50,
+        "Malmö Modern": 50,
+        "Södra Förstadsgatan 20, Malmö": 50,
+        "Astrid Lundqvist": 50,
+        "Malmö Harbour": 50,
+        "Södra Promenaden 25, Malmö": 50
+      },
+      "vocabulary_sha256": "6da9ddbb7b5bb545861098596d7b96d4061996fcc046f6d92ef6cb3bb4ff87e2"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "29d5124ee779daadb110bd27f1e3ed66d326475a19ff4715dbcd099b7ecb0931",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3135,
+        "completion_tokens": 569,
+        "total_tokens": 3704,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2879
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.004,
+      "error": "Not an exact quotation of a source in stage 2: 'Malmö Modern' from 'stage2.tool_gt.series_s2_order_ride.arguments.start_location'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "4c8b273c3b90b1d3d31e01aee8ecaf16adfcab147d0f64e2ab7c4ecd5f4bf68e",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4125,
+        "completion_tokens": 567,
+        "total_tokens": 4692,
+        "prompt_tokens_details": {
+          "cached_tokens": 3584
+        },
+        "prompt_cache_hit_tokens": 3584,
+        "prompt_cache_miss_tokens": 541
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.113
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0474_nvrutne256q0mv5mwcdytmpozvpjjy8y",
+  "extracted_at": "2026-11-22T06:42:15.127226+00:00"
+}

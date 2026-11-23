@@ -1,0 +1,112 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0265_kbq2p9ttzuhm6z1w49yghtuarhdeuzls",
+  "model": "deepseek-flash",
+  "input_sha256": "bb704d87bf4e6b33bc206877f41f56b0413701c9bc081e015cc3c425584ec64c",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Alethea Fothergill",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-522705f3-05a7-42ef-92d3-17a9ee78eb7c.arguments.content",
+          "reason": "联系人姓名"
+        }
+      ],
+      "new_terms": [
+        "Alethea Fothergill"
+      ],
+      "active_vocabulary": {
+        "Alethea Fothergill": 50
+      },
+      "vocabulary_sha256": "330ece639168195f0af1aea231a5abfe3f87332a0ee2ac99a49ae23e6c4eecc2"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Alethea Fothergill",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply_email.arguments.content",
+          "reason": "署名姓名"
+        }
+      ],
+      "new_terms": [
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Alethea Fothergill": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "6faadef0e1e56e0d1c1c144dfb28648439e9ac2f61c07b32b73b02d4d249dbcf"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Alethea Fothergill",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "联系人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Alethea Fothergill": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "6faadef0e1e56e0d1c1c144dfb28648439e9ac2f61c07b32b73b02d4d249dbcf"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "eff7f46244004652410266740cd02f9962f9edf990676ae8b64c1d7c8526d621",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1621,
+        "completion_tokens": 201,
+        "total_tokens": 1822,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1365
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.056,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "0bd4e1f055243a1a611ab43a1065ed5103c4edaaab73f325c034e4e1b87090fa",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2215,
+        "completion_tokens": 203,
+        "total_tokens": 2418,
+        "prompt_tokens_details": {
+          "cached_tokens": 1792
+        },
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 423
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.007
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0265_kbq2p9ttzuhm6z1w49yghtuarhdeuzls",
+  "extracted_at": "2026-11-22T06:41:03.943654+00:00"
+}

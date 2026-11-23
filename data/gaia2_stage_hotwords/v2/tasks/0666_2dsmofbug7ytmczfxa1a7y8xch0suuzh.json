@@ -1,0 +1,117 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0666_2dsmofbug7ytmczfxa1a7y8xch0suuzh",
+  "model": "deepseek-flash",
+  "input_sha256": "9f6a8ddf6052571f76b0a9024a2cdba416afa50dbe755a6f458125788e6d5226",
+  "review_input_sha256": "c5d653a64443b3cacbc2f1872fc47b5919f1d322fec72286b33f398cd4ad3582",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "340955d7df1966fe33ed696129c894442c25e42dfc301cba1b64ac8564512fd5",
+  "reference_results_sha256": "3d1d6dd61da741d8960788ad0f2b306c52969939f7df3589c54963125b0532b5",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Axel",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Kungsholmsgatan 10, 112 27 Stockholm",
+      "original_source": "stage0.source_task"
+    },
+    "stage2.tool_response.series_s2_read_axel": {
+      "stage": 2,
+      "text": "{\"messages\": [{\"sender_id\": \"+46734567890\", \"message_id\": \"661ec994daca63a587f83b529e2e8b50\", \"timestamp\": \"1728975610.0\", \"content\": \"Hey Axel, quick reminder that we're on for Monday, Oct 21st at 2:00pm at the Coffee Shop, Kungsholmsgatan 10, 112 27 Stockholm. My cab picks me up from Home at 1:00pm, so I may be there a little early. See you then!\"}], \"metadata\": {\"message_range\": [\"0\", \"1\"], \"conversation_length\": \"14\", \"conversation_id\": \"bd5fd1ae6f9947dda2e6631c4cde1773\", \"conversation_title\": \"Axel Lindqvist\"}}",
+      "event_id": "series_s2_read_axel",
+      "response_sha256": "a10f56bb1f5b73923a2e54ae9c5066a3d74d256a13708147f14481c894c9f46d"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kungsholmsgatan 10, 112 27 Stockholm",
+          "kind": "place",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含瑞典语地名的完整街道地址，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Axel",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "人名，但为常见短名，保留价值有限",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kungsholmsgatan 10, 112 27 Stockholm",
+        "Axel"
+      ],
+      "active_vocabulary": {
+        "Kungsholmsgatan 10, 112 27 Stockholm": 50,
+        "Axel": 50
+      },
+      "vocabulary_sha256": "8375e3913b5067a36b91813f2a51f0fbf0bb384b09afbf7f65251a196d5c304c"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kungsholmsgatan 10, 112 27 Stockholm": 50,
+        "Axel": 50
+      },
+      "vocabulary_sha256": "8375e3913b5067a36b91813f2a51f0fbf0bb384b09afbf7f65251a196d5c304c"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Axel Lindqvist",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_axel",
+          "reason": "完整瑞典人名，含独特姓氏，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Axel Lindqvist"
+      ],
+      "active_vocabulary": {
+        "Kungsholmsgatan 10, 112 27 Stockholm": 50,
+        "Axel": 50,
+        "Axel Lindqvist": 50
+      },
+      "vocabulary_sha256": "cf8e83ac4d6d97755e3bf53d1a06d0d7d0f39d40f014a013b7a50553ff3576d1"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Coffee Shop",
+    "Coffee Break with Axel",
+    "Home Office",
+    "Plan next week's content",
+    "Edit Instagram captions"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:56.782925+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,142 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0998_zzkcww1uftksx1aichwydu5391h2gfym",
+  "model": "deepseek-flash",
+  "input_sha256": "a2a4259b0b476651aa7fc77c4f7fa84a379eba4ef53fa383de6482dfefc11a0a",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "RTX 5090",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "显卡产品型号名称"
+        }
+      ],
+      "new_terms": [
+        "RTX 5090"
+      ],
+      "active_vocabulary": {
+        "RTX 5090": 50
+      },
+      "vocabulary_sha256": "fd87508874e8012da93a4a534aaba83de5c65f4f54361fd8c5c1b544f39f72d6"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aisha Patel",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_setup_event.arguments.attendees[0]",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "University of Cambridge, Department of Physics",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_setup_event.arguments.location",
+          "reason": "会议地点机构名称"
+        },
+        {
+          "text": "RTX 5090",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_add_setup_event.arguments.description",
+          "reason": "显卡产品型号名称"
+        }
+      ],
+      "new_terms": [
+        "Aisha Patel",
+        "University of Cambridge, Department of Physics"
+      ],
+      "active_vocabulary": {
+        "RTX 5090": 50,
+        "Aisha Patel": 50,
+        "University of Cambridge, Department of Physics": 50
+      },
+      "vocabulary_sha256": "ee1141aff36c1b44bab1368de28fb6d3f1821913c87b3fefc5e39ae1237d7063"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aisha Patel",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "收件人完整姓名"
+        },
+        {
+          "text": "University of Cambridge, Department of Physics",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_confirmation.arguments.content",
+          "reason": "会议地点机构名称"
+        },
+        {
+          "text": "RTX 5090",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_send_confirmation.arguments.content",
+          "reason": "显卡产品型号名称"
+        },
+        {
+          "text": "Rohini",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_confirmation.arguments.content",
+          "reason": "邮件署名人物名"
+        }
+      ],
+      "new_terms": [
+        "Rohini"
+      ],
+      "active_vocabulary": {
+        "RTX 5090": 50,
+        "Aisha Patel": 50,
+        "University of Cambridge, Department of Physics": 50,
+        "Rohini": 50
+      },
+      "vocabulary_sha256": "5b16eabaff4fa82464b8330b9ea091abe5072d7a68cdf8b9d199c51f279c2807"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "9ae973dbe89dd34ad861ebc52740a5aed502598383a5eb533d64a866a1fc8b27",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2462,
+        "completion_tokens": 414,
+        "total_tokens": 2876,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2206
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.866,
+      "error": "Invalid proper-name phrase: 'aisha.patel@gaia2mail.com'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "de112371ef171266579d47fafa82591736516f7a42c2bd0e0532da310685b09b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3276,
+        "completion_tokens": 338,
+        "total_tokens": 3614,
+        "prompt_tokens_details": {
+          "cached_tokens": 2816
+        },
+        "prompt_cache_hit_tokens": 2816,
+        "prompt_cache_miss_tokens": 460
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.231
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0998_zzkcww1uftksx1aichwydu5391h2gfym",
+  "extracted_at": "2026-11-22T06:44:57.283627+00:00"
+}

@@ -1,0 +1,158 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0956_8z9q8qtsjkhyodepu3qp522i9qnte9r1",
+  "model": "deepseek-flash",
+  "input_sha256": "40ab197dae2ca1799b14b53211ff393381c5b680c28e61dcd738bbf6776d1600",
+  "review_input_sha256": "a1125c32ac841c38954b47fd34c167ea06bea9e934bd637a04e55255afc3782f",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "9c0b87c28d34e94dd3e1091356f942ea8d1b3a5c7d8788b86b00391f3971b140",
+  "reference_results_sha256": "68e622b73acc893e85ba116f6666ecabf4f952b5799dfd95814ff69fa039b81a",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Krittin Sricharoen",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-25019530-2797-4fcf-ae26-5d841862cb70.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Nonglak Saelee",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-25019530-2797-4fcf-ae26-5d841862cb70.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Astrid Kleveland",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-d51497a4-6fc2-4aef-960b-6da1a89adee0.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Kåre Jensen",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-d51497a4-6fc2-4aef-960b-6da1a89adee0.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Oleksandr Hrynchenko",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-d51497a4-6fc2-4aef-960b-6da1a89adee0.arguments.attendees[2]"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Warunee Suthiwong",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b3504b3b-05b3-4680-8a2c-950ed3fef73c.arguments.attendees[0]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Astrid Kleveland",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整挪威语人名",
+          "weight": 50
+        },
+        {
+          "text": "Krittin Sricharoen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整泰语人名，拼写复杂",
+          "weight": 50
+        },
+        {
+          "text": "Kåre Jensen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含变音符å的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Nonglak Saelee",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整泰语人名，拼写复杂",
+          "weight": 50
+        },
+        {
+          "text": "Oleksandr Hrynchenko",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整乌克兰语人名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Warunee Suthiwong",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "完整泰语人名，拼写复杂",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Kleveland",
+        "Krittin Sricharoen",
+        "Kåre Jensen",
+        "Nonglak Saelee",
+        "Oleksandr Hrynchenko",
+        "Warunee Suthiwong"
+      ],
+      "active_vocabulary": {
+        "Astrid Kleveland": 50,
+        "Krittin Sricharoen": 50,
+        "Kåre Jensen": 50,
+        "Nonglak Saelee": 50,
+        "Oleksandr Hrynchenko": 50,
+        "Warunee Suthiwong": 50
+      },
+      "vocabulary_sha256": "adcf3727ab0829f3110436466e8a64752cfec0a057a88c2c5ed196f7565d18bd"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid Kleveland": 50,
+        "Krittin Sricharoen": 50,
+        "Kåre Jensen": 50,
+        "Nonglak Saelee": 50,
+        "Oleksandr Hrynchenko": 50,
+        "Warunee Suthiwong": 50
+      },
+      "vocabulary_sha256": "adcf3727ab0829f3110436466e8a64752cfec0a057a88c2c5ed196f7565d18bd"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid Kleveland": 50,
+        "Krittin Sricharoen": 50,
+        "Kåre Jensen": 50,
+        "Nonglak Saelee": 50,
+        "Oleksandr Hrynchenko": 50,
+        "Warunee Suthiwong": 50
+      },
+      "vocabulary_sha256": "adcf3727ab0829f3110436466e8a64752cfec0a057a88c2c5ed196f7565d18bd"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:58.618306+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

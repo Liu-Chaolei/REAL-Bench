@@ -1,0 +1,132 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0245_39p1w2cv12wmovrngvrhr68qy1cxh84i",
+  "model": "deepseek-flash",
+  "input_sha256": "0a3ea33902f866cb6ab09d038648e796ea8f5d4d7ceab47529b853d4c8dd4369",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Citlali Ramírez García",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Jasper Ragnarsson",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[1]",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Kaidën Rylan",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[2]",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Luís Pereira da Silva",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[3]",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Luísa Pereira de Sousa",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[4]",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Somsak Chanthavong",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[5]",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Zeynep Çelik",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[6]",
+          "reason": "联系人姓名"
+        }
+      ],
+      "new_terms": [
+        "Citlali Ramírez García",
+        "Jasper Ragnarsson",
+        "Kaidën Rylan",
+        "Luís Pereira da Silva",
+        "Luísa Pereira de Sousa",
+        "Somsak Chanthavong",
+        "Zeynep Çelik"
+      ],
+      "active_vocabulary": {
+        "Citlali Ramírez García": 50,
+        "Jasper Ragnarsson": 50,
+        "Kaidën Rylan": 50,
+        "Luís Pereira da Silva": 50,
+        "Luísa Pereira de Sousa": 50,
+        "Somsak Chanthavong": 50,
+        "Zeynep Çelik": 50
+      },
+      "vocabulary_sha256": "fb0ea3e7d0a572a5d81b9041381f585d7fad19acfb0175dcc778650259a28b6b"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "02acdcead161f5085e5a7dbed97d5ac693170d4dace61fd42bc4aef4a371b96e",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1708,
+        "completion_tokens": 348,
+        "total_tokens": 2056,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1452
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.344,
+      "error": "4 validation errors for Extraction\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage0.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage1.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "3e238565882d15297c2f015ef31491c8d99a4152cfbb2aa78a7a6352b3ea2b03",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2662,
+        "completion_tokens": 318,
+        "total_tokens": 2980,
+        "prompt_tokens_details": {
+          "cached_tokens": 2048
+        },
+        "prompt_cache_hit_tokens": 2048,
+        "prompt_cache_miss_tokens": 614
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.236
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0245_39p1w2cv12wmovrngvrhr68qy1cxh84i",
+  "extracted_at": "2026-11-22T06:40:57.107957+00:00"
+}

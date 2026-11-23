@@ -1,0 +1,147 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0690_1b9hg1u36ugt0cnr2ksoeabyob36ofbx",
+  "model": "deepseek-flash",
+  "input_sha256": "7088d8d721d1da6c4ee318857ea43c5450737bd4767a59916f84f077b63ff6bb",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aino Kukkonen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Aino Kukkoken",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "任务中出现的姓名变体"
+        },
+        {
+          "text": "Lapland",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "地名"
+        },
+        {
+          "text": "Aino",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a836b985-f05f-44cb-854c-93cf046cc381.arguments.content",
+          "reason": "消息中称呼的名字"
+        },
+        {
+          "text": "Matěj",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-7f45c861-7f21-4716-a55c-90b41a6a8eef.arguments.content",
+          "reason": "回复中称呼的用户名"
+        }
+      ],
+      "new_terms": [
+        "Aino Kukkonen",
+        "Aino Kukkoken",
+        "Lapland",
+        "Aino",
+        "Matěj"
+      ],
+      "active_vocabulary": {
+        "Aino Kukkonen": 50,
+        "Aino Kukkoken": 50,
+        "Lapland": 50,
+        "Aino": 50,
+        "Matěj": 50
+      },
+      "vocabulary_sha256": "ae0dbaf644aa590a54b518fe16bdc7a16d22e11fc77347febcbeac56388b4788"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aino",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "消息对象姓名"
+        },
+        {
+          "text": "Helsinki",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "地名"
+        }
+      ],
+      "new_terms": [
+        "Helsinki"
+      ],
+      "active_vocabulary": {
+        "Aino Kukkonen": 50,
+        "Aino Kukkoken": 50,
+        "Lapland": 50,
+        "Aino": 50,
+        "Matěj": 50,
+        "Helsinki": 50
+      },
+      "vocabulary_sha256": "1440d1ea160b9379a8694e300c28832289631cc3ddd8e15c1ba95d60cda169d6"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aino",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "消息对象姓名"
+        },
+        {
+          "text": "Prague",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "地名"
+        },
+        {
+          "text": "Helsinki",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "地名"
+        }
+      ],
+      "new_terms": [
+        "Prague"
+      ],
+      "active_vocabulary": {
+        "Aino Kukkonen": 50,
+        "Aino Kukkoken": 50,
+        "Lapland": 50,
+        "Aino": 50,
+        "Matěj": 50,
+        "Helsinki": 50,
+        "Prague": 50
+      },
+      "vocabulary_sha256": "f4e62c87a851116278ad4c3bf5be90d3387bdf509a054ba5944434c259e9fba5"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "74a8e7a266c439712c5dd3ef5bcb0413bbf3678fba332fa78bb204e4d30b81dc",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3169,
+        "completion_tokens": 336,
+        "total_tokens": 3505,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2913
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.672
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0690_1b9hg1u36ugt0cnr2ksoeabyob36ofbx",
+  "extracted_at": "2026-11-22T06:43:23.875943+00:00"
+}

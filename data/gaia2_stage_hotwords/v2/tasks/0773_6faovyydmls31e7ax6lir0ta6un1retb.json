@@ -1,0 +1,174 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0773_6faovyydmls31e7ax6lir0ta6un1retb",
+  "model": "deepseek-flash",
+  "input_sha256": "a3cf07c8c009baa279b4ea98120d7f2d904d2be38296f0dd59485175206a3f7f",
+  "review_input_sha256": "9c9d491740a752c3b04fc66f754f8b002a06e77b273f6e69b57f3b0ba0b4285a",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "80016acee4da2f05df9f159f6aff5c20aaef06c61d53521e3289aa8925824e9d",
+  "reference_results_sha256": "4a5d663eaccde89eed68abdd9a6fa22cb7e7dc6633da88c4143936c910507867",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Luís Marques",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-052f226c-8742-4d70-a798-e38eddf2aaf4.arguments.content"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Adelaide Silva",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-052f226c-8742-4d70-a798-e38eddf2aaf4.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-052f226c-8742-4d70-a798-e38eddf2aaf4.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Luís Silva",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-9fd7ff0a-4117-4bb8-8c52-71b71096fdb9.arguments.content"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Jamila Fernandes",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b2bd9b13-b560-4c47-917d-35eacbbd778d.arguments.attendees[2]"
+    },
+    "stage1.tool_response.series_s1_verify_day": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"4f5f15f11f604f8ea2bab2f1b0d8355b\", \"title\": \"Staff Meeting\", \"start_datetime\": \"1729242000\", \"end_datetime\": \"1729245600\", \"tag\": \"Work\", \"description\": \"Weekly staff meeting to discuss updates, share feedback, and align on goals.\", \"location\": \"Restaurant Office\", \"attendees\": [\"Aurélien LaFleur\", \"Nalani Jensen\", \"Kaia Nakamura\"], \"start_strftime\": \"Friday, 2024-10-18 09:00:00\", \"end_strftime\": \"Friday, 2024-10-18 10:00:00\"}, {\"event_id\": \"e3028e48c650446ba122e787f906df17\", \"title\": \"Wine and Food Pairing Research\", \"start_datetime\": \"1729249200\", \"end_datetime\": \"1729256400\", \"tag\": \"Work\", \"description\": \"Research and experiment with different wine and food pairings to create new menu items.\", \"location\": \"Restaurant Kitchen\", \"attendees\": [\"Aurélien LaFleur\"], \"start_strftime\": \"Friday, 2024-10-18 11:00:00\", \"end_strftime\": \"Friday, 2024-10-18 13:00:00\"}, {\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Wine Tasting\", \"start_datetime\": \"1729278000.0\", \"end_datetime\": \"1729285200.0\", \"tag\": \"Work\", \"description\": \"Host a wine tasting event for customers to showcase new wines and build relationships.\", \"location\": \"Restaurant Private Dining Room\", \"attendees\": [\"Aurélien LaFleur\", \"Luís Marques\", \"Jamila Fernandes\", \"Adelaide Silva\"], \"start_strftime\": \"Friday, 2024-10-18 19:00:00\", \"end_strftime\": \"Friday, 2024-10-18 21:00:00\"}, {\"event_id\": \"d4c2d9f7cdacdf99ad578e25036c7e5f\", \"title\": \"Wine Tasting\", \"start_datetime\": \"1729263600.0\", \"end_datetime\": \"1729274400.0\", \"tag\": \"Work\", \"description\": \"Taste and evaluate new wines for the restaurant's wine list.\", \"location\": \"Wine Cellar\", \"attendees\": [\"Aurélien LaFleur\", \"Luís Silva\", \"Adelaide Silva\"], \"start_strftime\": \"Friday, 2024-10-18 15:00:00\", \"end_strftime\": \"Friday, 2024-10-18 18:00:00\"}], \"range\": [\"0\", \"4\"], \"total\": \"4\"}",
+      "event_id": "series_s1_verify_day",
+      "response_sha256": "d6b828d13c3e438f527489685056b06e8c6ba04cbab407d8302ac7227b40294e"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Adelaide Silva",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Luís Marques",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Luís Silva",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Adelaide Silva",
+        "Aurélien LaFleur",
+        "Jamila Fernandes",
+        "Luís Marques",
+        "Luís Silva"
+      ],
+      "active_vocabulary": {
+        "Adelaide Silva": 50,
+        "Aurélien LaFleur": 50,
+        "Jamila Fernandes": 50,
+        "Luís Marques": 50,
+        "Luís Silva": 50
+      },
+      "vocabulary_sha256": "9433d3efb52afcd10fc9fa57cd31ab98465ce5e1b0b15f26a9f2eba6014e0b1e"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaia Nakamura",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_verify_day",
+          "reason": "新出现的完整人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_verify_day",
+          "reason": "新出现的完整人名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kaia Nakamura",
+        "Nalani Jensen"
+      ],
+      "active_vocabulary": {
+        "Adelaide Silva": 50,
+        "Aurélien LaFleur": 50,
+        "Jamila Fernandes": 50,
+        "Luís Marques": 50,
+        "Luís Silva": 50,
+        "Kaia Nakamura": 50,
+        "Nalani Jensen": 50
+      },
+      "vocabulary_sha256": "29de190700aa28dbeff9de06f4e88fad53ea348bd0298a346447181ff7921b08"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Adelaide Silva": 50,
+        "Aurélien LaFleur": 50,
+        "Jamila Fernandes": 50,
+        "Luís Marques": 50,
+        "Luís Silva": 50,
+        "Kaia Nakamura": 50,
+        "Nalani Jensen": 50
+      },
+      "vocabulary_sha256": "29de190700aa28dbeff9de06f4e88fad53ea348bd0298a346447181ff7921b08"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Restaurant Private Dining Room",
+    "Wine Cellar",
+    "Adelaide"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:18.534507+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

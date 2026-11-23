@@ -1,0 +1,64 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0556_lefo4w28c7ax8oxnmxvggcu77dkot2oe",
+  "model": "deepseek-flash",
+  "input_sha256": "1923e83e396fd74eeb9baebf29e0533e0e35584e3e8c142d7c42e0e14f9fba65",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]",
+          "reason": "日历参会人姓名，独特专有名词"
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "8ddb0a94599ebe2d52fc8977fe11e48d059fa068aee431ab6bf5112d1f2de8bd"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "5a18465f8e428a80d724a4ac0371c92f2d77939d85ef3310a77f053f1c617dea",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2457,
+        "completion_tokens": 79,
+        "total_tokens": 2536,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2201
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.647
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0556_lefo4w28c7ax8oxnmxvggcu77dkot2oe",
+  "extracted_at": "2026-11-22T06:42:41.330787+00:00"
+}

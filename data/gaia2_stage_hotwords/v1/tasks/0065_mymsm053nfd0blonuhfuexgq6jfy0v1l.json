@@ -1,0 +1,135 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0065_mymsm053nfd0blonuhfuexgq6jfy0v1l",
+  "model": "deepseek-flash",
+  "input_sha256": "1b90c230cdcfe002ea304a1d462c515e0f7d8d77c1b9f52e447003a39ffac7ec",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Jawaher Al-Mansour",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "邮件收件人姓名"
+        },
+        {
+          "text": "Karel Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fea3ca4f-0696-4980-99d5-f4d5ea764bfb.arguments.attendees[0]",
+          "reason": "会议参会人全名"
+        },
+        {
+          "text": "Spiral Ashley Productions",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "商品品牌/厂商名"
+        },
+        {
+          "text": "Ghent Gem",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "房源名称中的专有地名"
+        },
+        {
+          "text": "Ghent Eco-Friendly",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "房源名称中的专有地名"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-43635c3a-43cd-4dca-9912-7042944941c1.arguments.content",
+          "reason": "邮件署名发件人姓名"
+        }
+      ],
+      "new_terms": [
+        "Jawaher Al-Mansour",
+        "Karel Vandenberghe",
+        "Spiral Ashley Productions",
+        "Ghent Gem",
+        "Ghent Eco-Friendly",
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Jawaher Al-Mansour": 50,
+        "Karel Vandenberghe": 50,
+        "Spiral Ashley Productions": 50,
+        "Ghent Gem": 50,
+        "Ghent Eco-Friendly": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "2462191f16881ffb318250ed627dd11abde3576c49928140ad2dd9d033b92801"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Karel Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_prep.arguments.attendees[0]",
+          "reason": "准备会议参会人全名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Jawaher Al-Mansour": 50,
+        "Karel Vandenberghe": 50,
+        "Spiral Ashley Productions": 50,
+        "Ghent Gem": 50,
+        "Ghent Eco-Friendly": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "2462191f16881ffb318250ed627dd11abde3576c49928140ad2dd9d033b92801"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Nalinee Wongchana",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_nalinee_prep.arguments.attendees[0]",
+          "reason": "午餐及准备会议参会人全名"
+        }
+      ],
+      "new_terms": [
+        "Nalinee Wongchana"
+      ],
+      "active_vocabulary": {
+        "Jawaher Al-Mansour": 50,
+        "Karel Vandenberghe": 50,
+        "Spiral Ashley Productions": 50,
+        "Ghent Gem": 50,
+        "Ghent Eco-Friendly": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Nalinee Wongchana": 50
+      },
+      "vocabulary_sha256": "128737b1efc306e3575ec1d0275c18284cb244ea6de0a7ea11488db607b5f5a5"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "74f93de04075d2bfd980eee2261e470d513da76e824230c113a76ccc4a4770e1",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3291,
+        "completion_tokens": 375,
+        "total_tokens": 3666,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3035
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.609
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0065_mymsm053nfd0blonuhfuexgq6jfy0v1l",
+  "extracted_at": "2026-11-22T06:39:53.067385+00:00"
+}

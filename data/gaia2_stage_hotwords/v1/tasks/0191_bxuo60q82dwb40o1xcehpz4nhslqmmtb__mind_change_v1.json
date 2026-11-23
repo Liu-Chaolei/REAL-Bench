@@ -1,0 +1,148 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0191_bxuo60q82dwb40o1xcehpz4nhslqmmtb__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "04fd2af462b7696cf4e4f2918065860f1579262f0693928f0d10f7b707c47baa",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Riemann",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人姓氏，需精确识别"
+        },
+        {
+          "text": "Spooky Hollow Halloween Window Cling Sheet",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定商品名称"
+        },
+        {
+          "text": "Vinyl",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品材质规格名"
+        },
+        {
+          "text": "Samara City Center",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "已保存房产的特定名称"
+        }
+      ],
+      "new_terms": [
+        "Riemann",
+        "Spooky Hollow Halloween Window Cling Sheet",
+        "Vinyl",
+        "Samara City Center"
+      ],
+      "active_vocabulary": {
+        "Riemann": 50,
+        "Spooky Hollow Halloween Window Cling Sheet": 50,
+        "Vinyl": 50,
+        "Samara City Center": 50
+      },
+      "vocabulary_sha256": "b95819c7647f93359b9e85b2d7c049b75059a522c5c1ed937b3b2c7ed5afd076"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Samara Studio",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "特定公寓名称"
+        },
+        {
+          "text": "Kuibyshev Street",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "街道专名"
+        },
+        {
+          "text": "Samara City Center",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "被替换的房产名称"
+        }
+      ],
+      "new_terms": [
+        "Samara Studio",
+        "Kuibyshev Street"
+      ],
+      "active_vocabulary": {
+        "Riemann": 50,
+        "Spooky Hollow Halloween Window Cling Sheet": 50,
+        "Vinyl": 50,
+        "Samara City Center": 50,
+        "Samara Studio": 50,
+        "Kuibyshev Street": 50
+      },
+      "vocabulary_sha256": "de1153456ece5ddc6413315f7a4ad840422499900e76ddb19ecd788960ee2a09"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Spooky Hollow Halloween Window Cling Sheets",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "特定商品名称"
+        },
+        {
+          "text": "Vinyl",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "商品材质规格名"
+        },
+        {
+          "text": "Put Up Halloween Window Clings",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_calendar.arguments.title",
+          "reason": "日历事件标题专名"
+        }
+      ],
+      "new_terms": [
+        "Spooky Hollow Halloween Window Cling Sheets",
+        "Put Up Halloween Window Clings"
+      ],
+      "active_vocabulary": {
+        "Riemann": 50,
+        "Spooky Hollow Halloween Window Cling Sheet": 50,
+        "Vinyl": 50,
+        "Samara City Center": 50,
+        "Samara Studio": 50,
+        "Kuibyshev Street": 50,
+        "Spooky Hollow Halloween Window Cling Sheets": 50,
+        "Put Up Halloween Window Clings": 50
+      },
+      "vocabulary_sha256": "b5b12380fded6a3f9f24a5a80b4e3802500447edb66e2306a3ae54bc8c490c9b"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "add38c9fc79e726d1e5e859f3641cf491007a951428b8c2b6c30d5555c7cf4aa",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2154,
+        "completion_tokens": 309,
+        "total_tokens": 2463,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1898
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.418
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0191_bxuo60q82dwb40o1xcehpz4nhslqmmtb__mind_change_v1",
+  "extracted_at": "2026-11-22T06:45:29.808107+00:00"
+}

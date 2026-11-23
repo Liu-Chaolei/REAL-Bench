@@ -1,0 +1,97 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0586_fj9jybhselpm9g6shui65hmd0wg6gcvy",
+  "model": "deepseek-flash",
+  "input_sha256": "81f910ad22501c3c13c911b0b874b1132bdaf2ba7cbd22de73b3a5844ecb5d84",
+  "review_input_sha256": "7676899a3fa9b8d99c08423c6a013f921119efd0c421e519b955e43e5ba2af02",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "23aed11b82650cadc20527a0714ea1c7a636b9f616a0e94cfb4febebc4ff9fae",
+  "reference_results_sha256": "8cfce270ad5b0f8ccf4bf231a2b69b598f1ea9ba888df29f87ba0280da282723",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Jianzhi Liang",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Stora Södergatan 13, Lund",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-3b6d949a-0ffb-4024-8a65-3ffe14fb09fc.arguments.location"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Stora Södergatan 13, Lund",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符的瑞典语街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Jianzhi Liang",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整中文人名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Stora Södergatan 13, Lund",
+        "Jianzhi Liang"
+      ],
+      "active_vocabulary": {
+        "Stora Södergatan 13, Lund": 50,
+        "Jianzhi Liang": 50
+      },
+      "vocabulary_sha256": "31a331304fe3afe3627e7a003933a6d23ae4acbb7bc2ebbdbf4ab9cd0eaa5a99"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Stora Södergatan 13, Lund": 50,
+        "Jianzhi Liang": 50
+      },
+      "vocabulary_sha256": "31a331304fe3afe3627e7a003933a6d23ae4acbb7bc2ebbdbf4ab9cd0eaa5a99"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Stora Södergatan 13, Lund": 50,
+        "Jianzhi Liang": 50
+      },
+      "vocabulary_sha256": "31a331304fe3afe3627e7a003933a6d23ae4acbb7bc2ebbdbf4ab9cd0eaa5a99"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Jianzhi",
+    "Premium"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:31.794836+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

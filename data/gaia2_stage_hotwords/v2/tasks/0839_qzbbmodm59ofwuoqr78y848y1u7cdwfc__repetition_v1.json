@@ -1,0 +1,126 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0839_qzbbmodm59ofwuoqr78y848y1u7cdwfc__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "547bc5e0b5f55081acfa6b80c2d91c4b4862022f0c8a5258a35d1d442dc83d4f",
+  "review_input_sha256": "44daec2bfa69a5d0aecc08855f2f9bd343d080e1d6ddb50ec3aaad733a062a68",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "d38bab8f49e4917b2b336b47b7c6a4daf28ed1b0ac4c90b1501a9222c66c68f3",
+  "reference_results_sha256": "ffbceda14cf18bbb483f866e7850de6a75720300086570651ea1e99ea9ca734b",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Zofia Kowalczyk",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Ursula Ramseyer",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Aurélie De Clercq",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b6947501-842e-4a63-bbb7-9e8b130bb12f.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélie De Clercq",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Ramseyer",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整人名，姓氏难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Zofia Kowalczyk",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，含难拼写姓氏",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélie De Clercq",
+        "Ursula Ramseyer",
+        "Ursula Wiederkehr",
+        "Zofia Kowalczyk"
+      ],
+      "active_vocabulary": {
+        "Aurélie De Clercq": 50,
+        "Ursula Ramseyer": 50,
+        "Ursula Wiederkehr": 50,
+        "Zofia Kowalczyk": 50
+      },
+      "vocabulary_sha256": "a2d6411ef6733144060f5f80401dee3a0bfd570fe6f1ff71942b67ed5052fed2"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélie De Clercq": 50,
+        "Ursula Ramseyer": 50,
+        "Ursula Wiederkehr": 50,
+        "Zofia Kowalczyk": 50
+      },
+      "vocabulary_sha256": "a2d6411ef6733144060f5f80401dee3a0bfd570fe6f1ff71942b67ed5052fed2"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélie De Clercq": 50,
+        "Ursula Ramseyer": 50,
+        "Ursula Wiederkehr": 50,
+        "Zofia Kowalczyk": 50
+      },
+      "vocabulary_sha256": "a2d6411ef6733144060f5f80401dee3a0bfd570fe6f1ff71942b67ed5052fed2"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:33.073566+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,172 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0860_eb73aw922n6616jbjhv4clst7899rlwa",
+  "model": "deepseek-flash",
+  "input_sha256": "d050e4831b79cfd844191bb8085a5d2ad3fd911bc451109366f5e9df8a2e757a",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e2759e57-d5c9-4406-ae16-acd45fd8c8b5.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e2759e57-d5c9-4406-ae16-acd45fd8c8b5.arguments.attendees[1]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Aurélie Wyss",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e2759e57-d5c9-4406-ae16-acd45fd8c8b5.arguments.attendees[2]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Bruderholzallee 42, 4059 Basel, Switzerland",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e2759e57-d5c9-4406-ae16-acd45fd8c8b5.arguments.location",
+          "reason": "活动地点地址"
+        },
+        {
+          "text": "Basel SBB Railway Station, 4051 Basel, Switzerland",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3a3cc8dc-426c-4bac-82ce-928bdda35313.arguments.start_location",
+          "reason": "出租车起点地址"
+        }
+      ],
+      "new_terms": [
+        "Aurélien Vandenberghe",
+        "Liesbeth Vandenberghe",
+        "Aurélie Wyss",
+        "Bruderholzallee 42, 4059 Basel, Switzerland",
+        "Basel SBB Railway Station, 4051 Basel, Switzerland"
+      ],
+      "active_vocabulary": {
+        "Aurélien Vandenberghe": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Aurélie Wyss": 50,
+        "Bruderholzallee 42, 4059 Basel, Switzerland": 50,
+        "Basel SBB Railway Station, 4051 Basel, Switzerland": 50
+      },
+      "vocabulary_sha256": "aab69f8e2be80aa84e1080f90fbffa048e57a553bcdc1d553810b5461d3a3dc8"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Basel Get-Together",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "群聊名称"
+        },
+        {
+          "text": "Ursula Ramseyer",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_notify.arguments.content",
+          "reason": "受邀嘉宾姓名"
+        },
+        {
+          "text": "Aurélien Kübler",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_notify.arguments.content",
+          "reason": "受邀嘉宾姓名"
+        },
+        {
+          "text": "Aurélie Joensen",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_notify.arguments.content",
+          "reason": "受邀嘉宾姓名"
+        },
+        {
+          "text": "Bruderholzallee 42, 4059 Basel, Switzerland",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_notify.arguments.content",
+          "reason": "活动地点地址"
+        }
+      ],
+      "new_terms": [
+        "Basel Get-Together",
+        "Ursula Ramseyer",
+        "Aurélien Kübler",
+        "Aurélie Joensen"
+      ],
+      "active_vocabulary": {
+        "Aurélien Vandenberghe": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Aurélie Wyss": 50,
+        "Bruderholzallee 42, 4059 Basel, Switzerland": 50,
+        "Basel SBB Railway Station, 4051 Basel, Switzerland": 50,
+        "Basel Get-Together": 50,
+        "Ursula Ramseyer": 50,
+        "Aurélien Kübler": 50,
+        "Aurélie Joensen": 50
+      },
+      "vocabulary_sha256": "33b591ed69db176adf638424bedcdd06a8fd4cf9e0bd97b594e37d883ea86467"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien Vandenberghe": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Aurélie Wyss": 50,
+        "Bruderholzallee 42, 4059 Basel, Switzerland": 50,
+        "Basel SBB Railway Station, 4051 Basel, Switzerland": 50,
+        "Basel Get-Together": 50,
+        "Ursula Ramseyer": 50,
+        "Aurélien Kübler": 50,
+        "Aurélie Joensen": 50
+      },
+      "vocabulary_sha256": "33b591ed69db176adf638424bedcdd06a8fd4cf9e0bd97b594e37d883ea86467"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "24cb2edfe59feb1383458e3e3ba85cca702c1b2e152df7d3cc0efd50e7f2ecc9",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3356,
+        "completion_tokens": 609,
+        "total_tokens": 3965,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3100
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.029,
+      "error": "Invalid proper-name phrase: 'rohini.deshpande@gaia2mail.com'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "3410e0216e68fbc6eefb70b91bb343c806eed69f3fe3f576d6f12ede4722fe16",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4368,
+        "completion_tokens": 558,
+        "total_tokens": 4926,
+        "prompt_tokens_details": {
+          "cached_tokens": 3840
+        },
+        "prompt_cache_hit_tokens": 3840,
+        "prompt_cache_miss_tokens": 528
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.994
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0860_eb73aw922n6616jbjhv4clst7899rlwa",
+  "extracted_at": "2026-11-22T06:44:17.333833+00:00"
+}

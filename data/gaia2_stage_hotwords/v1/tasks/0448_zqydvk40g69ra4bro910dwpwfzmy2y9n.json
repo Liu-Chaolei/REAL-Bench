@@ -1,0 +1,219 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0448_zqydvk40g69ra4bro910dwpwfzmy2y9n",
+  "model": "deepseek-flash",
+  "input_sha256": "8c3952b416dd480f0f7ee237d04c4fabba01cf4d9656a00a52cdf3951587c4f3",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Trondheim",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-72f777b1-563d-442c-91ab-2420ad73593e.arguments.subject",
+          "reason": "挪威城市名，邮件主题中的地名"
+        }
+      ],
+      "new_terms": [
+        "Trondheim"
+      ],
+      "active_vocabulary": {
+        "Trondheim": 50
+      },
+      "vocabulary_sha256": "016bbb4743e3419305b742146d001a853c2a9e0704d27217e45af0f246060bfe"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Trondheim East",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_pet_friendly_shortlist.arguments.content",
+          "reason": "公寓名称，含城市名"
+        },
+        {
+          "text": "Trondheim Terraces",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_pet_friendly_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Trondheim Student Living",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_pet_friendly_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Trondheim Leilighet",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_pet_friendly_shortlist.arguments.content",
+          "reason": "公寓名称，含挪威语词"
+        },
+        {
+          "text": "Trondheim Modern Home",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_pet_friendly_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Rohan",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email_pet_friendly_shortlist.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email_pet_friendly_shortlist.arguments.content",
+          "reason": "发件人署名，含特殊字符"
+        }
+      ],
+      "new_terms": [
+        "Trondheim East",
+        "Trondheim Terraces",
+        "Trondheim Student Living",
+        "Trondheim Leilighet",
+        "Trondheim Modern Home",
+        "Rohan",
+        "Åse Kjellstad"
+      ],
+      "active_vocabulary": {
+        "Trondheim": 50,
+        "Trondheim East": 50,
+        "Trondheim Terraces": 50,
+        "Trondheim Student Living": 50,
+        "Trondheim Leilighet": 50,
+        "Trondheim Modern Home": 50,
+        "Rohan": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "894cd4bf5d6815b953a303e889e19e3cf15dc785d19af375494cf1d4e1eb882e"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Trondheim Leilighet",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_viewing_request.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Trondheim University Apartments",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_viewing_request.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Trondheim Central",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_viewing_request.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Trondheim Student Housing",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_viewing_request.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Trondheim Tower",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_viewing_request.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Trondheim Town Centre",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_viewing_request.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Trondheim Modern Home",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_viewing_request.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Rohan",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_viewing_request.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_viewing_request.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [
+        "Trondheim University Apartments",
+        "Trondheim Central",
+        "Trondheim Student Housing",
+        "Trondheim Tower",
+        "Trondheim Town Centre"
+      ],
+      "active_vocabulary": {
+        "Trondheim": 50,
+        "Trondheim East": 50,
+        "Trondheim Terraces": 50,
+        "Trondheim Student Living": 50,
+        "Trondheim Leilighet": 50,
+        "Trondheim Modern Home": 50,
+        "Rohan": 50,
+        "Åse Kjellstad": 50,
+        "Trondheim University Apartments": 50,
+        "Trondheim Central": 50,
+        "Trondheim Student Housing": 50,
+        "Trondheim Tower": 50,
+        "Trondheim Town Centre": 50
+      },
+      "vocabulary_sha256": "2ec74350fec52ee4167f7b609aa3818e3e198e72b806459d5a70db34a9373756"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "332e098e68b6e86b790b9674668cddb641f844cb4ddd2ab5871925ba20911ba9",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3700,
+        "completion_tokens": 817,
+        "total_tokens": 4517,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3444
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.593,
+      "error": "Invalid proper-name phrase: 'rohan.mehta@mumbaiproperties.com'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "b8d8472f71539e9ef996a59d0cb850b968a3a8ae2edf9654a93b37e10ee429d4",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4917,
+        "completion_tokens": 743,
+        "total_tokens": 5660,
+        "prompt_tokens_details": {
+          "cached_tokens": 4480
+        },
+        "prompt_cache_hit_tokens": 4480,
+        "prompt_cache_miss_tokens": 437
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.362
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0448_zqydvk40g69ra4bro910dwpwfzmy2y9n",
+  "extracted_at": "2026-11-22T06:42:05.226811+00:00"
+}

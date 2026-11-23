@@ -1,0 +1,148 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0147_knh0fssbzcq8a1lytctvobpulktdavgv__async_0045_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "c21256d00dfb3d6f1df5ad954310ca518e6962816a90f3dca74b14b7c0e04188",
+  "review_input_sha256": "3fd378e2bbcab8bd287a389a00bf0537131aebef6f91c18e4750ff85a6cb6aa6",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "0d8b661d6e63579e754edda221eb56d3516b128314d389680a2a4bca86dbe84e",
+  "reference_results_sha256": "9afbc383abeb1f26d5f50188b890b26f12b8dfe2c141d8ec9d8037efde596bc5",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Aurélie Vandenberghe",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Colette Vandenberghe",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Gent-Sint-Pieters",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Sint-Baafsplein 1",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Sint-Michielsstraat 23",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Gent-Sint-Pieters",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "复合弗拉芒地名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Sint-Baafsplein 1",
+          "kind": "place",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含荷兰语复合词的街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Aurélie Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Colette Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，姓氏较难拼写",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Gent-Sint-Pieters",
+        "Sint-Baafsplein 1",
+        "Aurélie Vandenberghe",
+        "Colette Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Gent-Sint-Pieters": 50,
+        "Sint-Baafsplein 1": 50,
+        "Aurélie Vandenberghe": 50,
+        "Colette Vandenberghe": 50
+      },
+      "vocabulary_sha256": "eea04324e3dc4e61d5b45f68b5a85998ac89255b544835f867b3e423c91d5501"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Sint-Michielsstraat 23",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "荷兰语复合街道名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Sint-Michielsstraat 23"
+      ],
+      "active_vocabulary": {
+        "Gent-Sint-Pieters": 50,
+        "Sint-Baafsplein 1": 50,
+        "Aurélie Vandenberghe": 50,
+        "Colette Vandenberghe": 50,
+        "Sint-Michielsstraat 23": 50
+      },
+      "vocabulary_sha256": "273a8b4bf4475e47afbe3b25c24432aa01bba52a8c67ecbaffd02b81c9d917c0"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Gent-Sint-Pieters": 50,
+        "Sint-Baafsplein 1": 50,
+        "Aurélie Vandenberghe": 50,
+        "Colette Vandenberghe": 50,
+        "Sint-Michielsstraat 23": 50
+      },
+      "vocabulary_sha256": "273a8b4bf4475e47afbe3b25c24432aa01bba52a8c67ecbaffd02b81c9d917c0"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "WowWee Pinkfong Baby Shark Bath Squirt Toy – 4-Pack",
+    "WowWee Pinkfong Baby Shark Bath Squirt Toy - 4 Pack",
+    "Gent-Sint-Pieter",
+    "Leuven"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:54.146858+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

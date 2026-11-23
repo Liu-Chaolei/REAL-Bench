@@ -1,0 +1,144 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0927_ox4f2a4q0zjrgo92ach8m88gdyzxkavq",
+  "model": "deepseek-flash",
+  "input_sha256": "5d248cfdc6d06ced19f322f6cfd70d065bf20822fadccc9bd7e27df441691713",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaitlyn Nakamura",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Jamila Patel",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Aurora Heights",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fc83de32-16a1-44d1-93bc-2814ba349d8c.arguments.content",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Soho Oasis",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fc83de32-16a1-44d1-93bc-2814ba349d8c.arguments.content",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Skyline Views",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fc83de32-16a1-44d1-93bc-2814ba349d8c.arguments.content",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fc83de32-16a1-44d1-93bc-2814ba349d8c.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [
+        "Kaitlyn Nakamura",
+        "Jamila Patel",
+        "Aurora Heights",
+        "Soho Oasis",
+        "Skyline Views",
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Kaitlyn Nakamura": 50,
+        "Jamila Patel": 50,
+        "Aurora Heights": 50,
+        "Soho Oasis": 50,
+        "Skyline Views": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "f57abecf6b69b4b4d2ea0824b9d55992c3f086ed6f067bd2c8fb0f733da83df1"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurora Heights",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_cal_add.arguments.description",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Skyline Views",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_cal_add.arguments.description",
+          "reason": "房产名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kaitlyn Nakamura": 50,
+        "Jamila Patel": 50,
+        "Aurora Heights": 50,
+        "Soho Oasis": 50,
+        "Skyline Views": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "f57abecf6b69b4b4d2ea0824b9d55992c3f086ed6f067bd2c8fb0f733da83df1"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurora Heights",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_cal_add_sat.arguments.title",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Skyline Views",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_cal_add_sun.arguments.title",
+          "reason": "房产名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kaitlyn Nakamura": 50,
+        "Jamila Patel": 50,
+        "Aurora Heights": 50,
+        "Soho Oasis": 50,
+        "Skyline Views": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "f57abecf6b69b4b4d2ea0824b9d55992c3f086ed6f067bd2c8fb0f733da83df1"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "49972465ecddfd02b91b816b3a5237bc653ae01c04c4c8174e28370b81636cbc",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4527,
+        "completion_tokens": 458,
+        "total_tokens": 4985,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4271
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.747
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0927_ox4f2a4q0zjrgo92ach8m88gdyzxkavq",
+  "extracted_at": "2026-11-22T06:44:31.157832+00:00"
+}

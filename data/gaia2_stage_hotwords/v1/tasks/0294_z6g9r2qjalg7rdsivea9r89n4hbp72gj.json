@@ -1,0 +1,162 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0294_z6g9r2qjalg7rdsivea9r89n4hbp72gj",
+  "model": "deepseek-flash",
+  "input_sha256": "8e5f43360c455ffb4d2cc8e3a44f3cd9aa8db0ee6162d512b8d9079f3acca6d2",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Samara City Center",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Nevsky Prospekt Residences",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Samara",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "城市名"
+        },
+        {
+          "text": "Saint Petersburg",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "城市名"
+        },
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Natalya Kuznetsova",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Kuznetsov",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_contacts_check.arguments.query",
+          "reason": "联系人查询姓氏"
+        }
+      ],
+      "new_terms": [
+        "Samara City Center",
+        "Nevsky Prospekt Residences",
+        "Samara",
+        "Saint Petersburg",
+        "Viktor Kuznetsov",
+        "Natalya Kuznetsova",
+        "Kuznetsov"
+      ],
+      "active_vocabulary": {
+        "Samara City Center": 50,
+        "Nevsky Prospekt Residences": 50,
+        "Samara": 50,
+        "Saint Petersburg": 50,
+        "Viktor Kuznetsov": 50,
+        "Natalya Kuznetsova": 50,
+        "Kuznetsov": 50
+      },
+      "vocabulary_sha256": "370a914a8cc226c54d4e58d2e5d0fc04d631ebea96385d8d5658e94d740a671a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Samara City Center",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Samara Riverfront",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Samara",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_samara_flats.arguments.location",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Samara Riverfront"
+      ],
+      "active_vocabulary": {
+        "Samara City Center": 50,
+        "Nevsky Prospekt Residences": 50,
+        "Samara": 50,
+        "Saint Petersburg": 50,
+        "Viktor Kuznetsov": 50,
+        "Natalya Kuznetsova": 50,
+        "Kuznetsov": 50,
+        "Samara Riverfront": 50
+      },
+      "vocabulary_sha256": "2c5bcf05748ebe76358cb52cf861928da501738773750bf1db0faecafa676fcb"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "fac47ea8574617db720a24e4c1a51785f42b3d8a056eaedd493c241edb536abd",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1789,
+        "completion_tokens": 408,
+        "total_tokens": 2197,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1533
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.52,
+      "error": "3 validation errors for Extraction\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='提取公寓名、城市名及联系人姓名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='提取公寓名及城市名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "115736409be46f5f83b5c8dc18c1222fbfe1adf13d7be54e8a464c3bd25867b0",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2757,
+        "completion_tokens": 379,
+        "total_tokens": 3136,
+        "prompt_tokens_details": {
+          "cached_tokens": 2176
+        },
+        "prompt_cache_hit_tokens": 2176,
+        "prompt_cache_miss_tokens": 581
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.295
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0294_z6g9r2qjalg7rdsivea9r89n4hbp72gj",
+  "extracted_at": "2026-11-22T06:41:12.670832+00:00"
+}

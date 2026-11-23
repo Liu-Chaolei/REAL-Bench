@@ -1,0 +1,208 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0069_c6ccebef5z1zicc1hes4d9rxqps58tvl__async_0034_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "27eada99737a05e6c407b00034688c24ad0cd68430f1b223f87d02244f3e9749",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Seefeldstrasse 123",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "苏黎世的具体街道地址"
+        },
+        {
+          "text": "Zurich",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "瑞士城市名"
+        },
+        {
+          "text": "Switzerland",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "国家名"
+        },
+        {
+          "text": "Jigsaw Puzzle Factory",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "拼图品牌名"
+        },
+        {
+          "text": "Abraham Hunter-Good Old Days",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "具体拼图产品名"
+        },
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-09408d30-da78-48d2-a401-b163b42c5186.arguments.content",
+          "reason": "收件人名字，含特殊字符"
+        },
+        {
+          "text": "Ursula",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-09408d30-da78-48d2-a401-b163b42c5186.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [
+        "Seefeldstrasse 123",
+        "Zurich",
+        "Switzerland",
+        "Jigsaw Puzzle Factory",
+        "Abraham Hunter-Good Old Days",
+        "Aurélie",
+        "Ursula"
+      ],
+      "active_vocabulary": {
+        "Seefeldstrasse 123": 50,
+        "Zurich": 50,
+        "Switzerland": 50,
+        "Jigsaw Puzzle Factory": 50,
+        "Abraham Hunter-Good Old Days": 50,
+        "Aurélie": 50,
+        "Ursula": 50
+      },
+      "vocabulary_sha256": "813149d8f157016991470fbbb32394abdc6e03a82f9c3eeafdd65936ef082e38"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélie Wyss",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "完整人名，含特殊字符"
+        },
+        {
+          "text": "Seefeldstrasse 123",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "会议地点街道地址"
+        },
+        {
+          "text": "Zurich",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Switzerland",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "国家名"
+        }
+      ],
+      "new_terms": [
+        "Aurélie Wyss"
+      ],
+      "active_vocabulary": {
+        "Seefeldstrasse 123": 50,
+        "Zurich": 50,
+        "Switzerland": 50,
+        "Jigsaw Puzzle Factory": 50,
+        "Abraham Hunter-Good Old Days": 50,
+        "Aurélie": 50,
+        "Ursula": 50,
+        "Aurélie Wyss": 50
+      },
+      "vocabulary_sha256": "747eb18b12ef37d651749b12bcd510ddddb3aadaf9da22d05d5a81c3957ae14d"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélie Wyss",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "完整人名，含特殊字符"
+        },
+        {
+          "text": "Seefeldstrasse 123",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "会议地点街道地址"
+        },
+        {
+          "text": "Zurich",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Switzerland",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "国家名"
+        },
+        {
+          "text": "Ursula",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Seefeldstrasse 123": 50,
+        "Zurich": 50,
+        "Switzerland": 50,
+        "Jigsaw Puzzle Factory": 50,
+        "Abraham Hunter-Good Old Days": 50,
+        "Aurélie": 50,
+        "Ursula": 50,
+        "Aurélie Wyss": 50
+      },
+      "vocabulary_sha256": "747eb18b12ef37d651749b12bcd510ddddb3aadaf9da22d05d5a81c3957ae14d"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "57c66aad50657a61247bfe3b6a0cdacc52b93469940cce20db140f717316aaac",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3152,
+        "completion_tokens": 509,
+        "total_tokens": 3661,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2896
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 2.145,
+      "error": "1 validation error for Extraction\nstages.0.terms.3.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "fc09b064966c7b6fac12789a2f4899e0b23f2573b216ddd1f3af61ebf5a57539",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4122,
+        "completion_tokens": 509,
+        "total_tokens": 4631,
+        "prompt_tokens_details": {
+          "cached_tokens": 3584
+        },
+        "prompt_cache_hit_tokens": 3584,
+        "prompt_cache_miss_tokens": 538
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.872
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0069_c6ccebef5z1zicc1hes4d9rxqps58tvl__async_0034_v1",
+  "extracted_at": "2026-11-22T06:46:33.756464+00:00"
+}

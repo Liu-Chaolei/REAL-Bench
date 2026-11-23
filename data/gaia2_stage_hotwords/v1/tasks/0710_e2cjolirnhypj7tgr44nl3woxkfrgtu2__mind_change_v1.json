@@ -1,0 +1,201 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0710_e2cjolirnhypj7tgr44nl3woxkfrgtu2__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "c1f734457c55bed4572ebd70370e51b6a6bb25e20bd40214065e89dfaaf17933",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "The Vue",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Willow Creek Apartments",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Riverwalk Condos",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Harbor Heights",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Kaitlyn McAllister",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        }
+      ],
+      "new_terms": [
+        "The Vue",
+        "Willow Creek Apartments",
+        "Riverwalk Condos",
+        "Harbor Heights",
+        "Kaitlyn McAllister"
+      ],
+      "active_vocabulary": {
+        "The Vue": 50,
+        "Willow Creek Apartments": 50,
+        "Riverwalk Condos": 50,
+        "Harbor Heights": 50,
+        "Kaitlyn McAllister": 50
+      },
+      "vocabulary_sha256": "43a5df499e9c3a76aa020a28beffe1d1422a8494fbc2ac76f23c400bcc58598a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaitlyn",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Skyline Oasis",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send_price_details.arguments.content",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Lakeside Village",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send_price_details.arguments.content",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Cityview Apartments",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send_price_details.arguments.content",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Skyview Towers",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send_price_details.arguments.content",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Willow Creek Residences",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send_price_details.arguments.content",
+          "reason": "公寓楼名称"
+        }
+      ],
+      "new_terms": [
+        "Kaitlyn",
+        "Skyline Oasis",
+        "Lakeside Village",
+        "Cityview Apartments",
+        "Skyview Towers",
+        "Willow Creek Residences"
+      ],
+      "active_vocabulary": {
+        "The Vue": 50,
+        "Willow Creek Apartments": 50,
+        "Riverwalk Condos": 50,
+        "Harbor Heights": 50,
+        "Kaitlyn McAllister": 50,
+        "Kaitlyn": 50,
+        "Skyline Oasis": 50,
+        "Lakeside Village": 50,
+        "Cityview Apartments": 50,
+        "Skyview Towers": 50,
+        "Willow Creek Residences": 50
+      },
+      "vocabulary_sha256": "176fe22634abf1539a9053a9d8a3d7fb34b3b71e9873ad4b86173b1fcd45e0d7"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaitlyn",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Skyline Oasis",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Willow Creek Residences",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Lakeside Village",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Cityview Apartments",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Skyview Towers",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓楼名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "The Vue": 50,
+        "Willow Creek Apartments": 50,
+        "Riverwalk Condos": 50,
+        "Harbor Heights": 50,
+        "Kaitlyn McAllister": 50,
+        "Kaitlyn": 50,
+        "Skyline Oasis": 50,
+        "Lakeside Village": 50,
+        "Cityview Apartments": 50,
+        "Skyview Towers": 50,
+        "Willow Creek Residences": 50
+      },
+      "vocabulary_sha256": "176fe22634abf1539a9053a9d8a3d7fb34b3b71e9873ad4b86173b1fcd45e0d7"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "463831f3d66cec36f68becf144a4c5ee77e7cb6334cb12c0da76d3366a71e724",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3290,
+        "completion_tokens": 572,
+        "total_tokens": 3862,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3034
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.624
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0710_e2cjolirnhypj7tgr44nl3woxkfrgtu2__mind_change_v1",
+  "extracted_at": "2026-11-22T06:46:08.573373+00:00"
+}

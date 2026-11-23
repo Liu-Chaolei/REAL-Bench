@@ -1,0 +1,108 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0412_on8akz9pbncab56rgb9jgeqg5fye8nej",
+  "model": "deepseek-flash",
+  "input_sha256": "2305b1e1cfb5eb6a54bb8a9dc21b7e1e3477c39d7a02dc6ff7dab846c2d32aee",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Søren Mikkelsen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Nordic Collectibles",
+          "kind": "organization",
+          "source": "stage1.source_task",
+          "reason": "合作方机构名"
+        }
+      ],
+      "new_terms": [
+        "Søren Mikkelsen",
+        "Nordic Collectibles"
+      ],
+      "active_vocabulary": {
+        "Søren Mikkelsen": 50,
+        "Nordic Collectibles": 50
+      },
+      "vocabulary_sha256": "753ce8ac5a041ec49514d76e9347646af7e2eeb7da65fc05467237b9925b7878"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Søren Mikkelsen",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Nordic Collectibles",
+          "kind": "organization",
+          "source": "stage2.source_task",
+          "reason": "合作方机构名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Søren Mikkelsen": 50,
+        "Nordic Collectibles": 50
+      },
+      "vocabulary_sha256": "753ce8ac5a041ec49514d76e9347646af7e2eeb7da65fc05467237b9925b7878"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "992a62bb4e5abb367ec013c25715b3946233ff49786dee2ee182f22d75a046eb",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1738,
+        "completion_tokens": 180,
+        "total_tokens": 1918,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1482
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.036,
+      "error": "6 validation errors for Extraction\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage0.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无具体专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage1.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='提取人名与机构名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage2.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='提取人名与机构名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "335bc70a8bfd77acd3bdc3bec6562fcb7acfd479fee45831f95700753924e423",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2636,
+        "completion_tokens": 134,
+        "total_tokens": 2770,
+        "prompt_tokens_details": {
+          "cached_tokens": 1792
+        },
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 844
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.982
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0412_on8akz9pbncab56rgb9jgeqg5fye8nej",
+  "extracted_at": "2026-11-22T06:41:44.805573+00:00"
+}

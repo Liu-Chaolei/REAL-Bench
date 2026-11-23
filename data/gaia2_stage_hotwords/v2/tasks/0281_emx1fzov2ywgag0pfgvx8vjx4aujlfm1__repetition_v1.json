@@ -1,0 +1,111 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0281_emx1fzov2ywgag0pfgvx8vjx4aujlfm1__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "982a36e88b03f58890e05ec3bbb8e618bffa1c223226a9b8c6ab8833a5261a00",
+  "review_input_sha256": "f6ea7b233d1fb6b47f49afca5d552cdcdf8722543135c38ce784c0358aad128e",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "58b18b2af8a73038371f4df32ee447ab3c7a5e002f32a90bf0ee9d507dfaa77d",
+  "reference_results_sha256": "4810a063baa9f96e84672428e65a70c3fd24df84d1107d37dc5426b77236277a",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Sri Widyastuti",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-6309c35b-f9c7-4c71-88c1-c772cb0e77d1.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "History Buffs Reading Circle",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.title"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "History Buffs Reading Circle - first discussion",
+      "original_source": "stage2.tool_gt.series_s2_calendar.arguments.title"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Sri Widyastuti",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含独特姓名的完整人名，具有辨识度",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Sri Widyastuti"
+      ],
+      "active_vocabulary": {
+        "Sri Widyastuti": 50
+      },
+      "vocabulary_sha256": "f25c000fd3f674c5235edaee2e767bcd7ed6f8489643ed0cce917ef210a72de6"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "History Buffs Reading Circle",
+          "kind": "organization",
+          "source": "stage1.existing_catalog.0",
+          "reason": "独特的读书会组织名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "History Buffs Reading Circle"
+      ],
+      "active_vocabulary": {
+        "Sri Widyastuti": 50,
+        "History Buffs Reading Circle": 50
+      },
+      "vocabulary_sha256": "a0928f31b52e4630dd7e0fed0ab8894de49334376329aa8e67045e68aa9fdd4d"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "History Buffs Reading Circle - first discussion",
+          "kind": "custom_name",
+          "source": "stage2.existing_catalog.0",
+          "reason": "独特的活动名称，包含组织名与讨论主题",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "History Buffs Reading Circle - first discussion"
+      ],
+      "active_vocabulary": {
+        "Sri Widyastuti": 50,
+        "History Buffs Reading Circle": 50,
+        "History Buffs Reading Circle - first discussion": 50
+      },
+      "vocabulary_sha256": "4ba89b076d81a30a356cc8160eeb6169372f9f08fb55e0115d7d223e612761c7"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:29.133827+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

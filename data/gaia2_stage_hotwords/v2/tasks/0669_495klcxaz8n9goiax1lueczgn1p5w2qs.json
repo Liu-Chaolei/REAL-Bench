@@ -1,0 +1,143 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0669_495klcxaz8n9goiax1lueczgn1p5w2qs",
+  "model": "deepseek-flash",
+  "input_sha256": "c87f2deafde638ae56d5fa3bed8393fe3fac1522f7be018b51278f9945e88368",
+  "review_input_sha256": "64c41efcdacbc10091f900f4b98e1d06f4ed8f3b97d9e18654994fc4687fbacb",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "36dba93067207e455baba88dbcedec44db39893bf81fe3044e281a016ca830fe",
+  "reference_results_sha256": "cb110448044d509ba34a3d5d5a7982636b9ee2fd565881ffe310b7c93660b1c9",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Dewi Sutanto",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Xóchitl García Ramírez",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Ximena Morales García",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Anastasiya Kuznetsova",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-1cf4f169-160e-4640-bb6c-5841cb43ae37.arguments.content"
+    },
+    "stage2.tool_response.series_s2_day_window": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"6eb157d280ca484c890f0797045174ee\", \"title\": \"Lecture on Soviet Era\", \"start_datetime\": \"1729587600\", \"end_datetime\": \"1729593000\", \"tag\": \"Work\", \"description\": \"Deliver a lecture on the Soviet era to my history class.\", \"location\": \"Moscow University\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-22 09:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 10:30:00\"}, {\"event_id\": \"cfdd8095457d4061b577a38253717bd9\", \"title\": \"Meeting with Viktor Kuznetsov\", \"start_datetime\": \"1729594800\", \"end_datetime\": \"1729598400\", \"tag\": \"Social\", \"description\": \"Meet with Viktor Kuznetsov to discuss our shared interest in Russian history.\", \"location\": \"Coffee Shop\", \"attendees\": [\"Viktor Kuznetsov\"], \"start_strftime\": \"Tuesday, 2024-10-22 11:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 12:00:00\"}, {\"event_id\": \"d4c2d9f7cdacdf99ad578e25036c7e5f\", \"title\": \"Culture Exchange\", \"start_datetime\": \"1729620000.0\", \"end_datetime\": \"1729627200.0\", \"tag\": null, \"description\": null, \"location\": \"Zoom Meeting\", \"attendees\": [\"Dewi Sutanto\", \"Xóchitl García Ramírez\", \"Ximena Morales García\"], \"start_strftime\": \"Tuesday, 2024-10-22 18:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 20:00:00\"}, {\"event_id\": \"1eb633f381cb1a19fbaa26def26885d9\", \"title\": \"Grading Papers\", \"start_datetime\": \"1729605600.0\", \"end_datetime\": \"1729612800.0\", \"tag\": \"Work\", \"description\": \"Grade papers and assignments for my history class.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-22 14:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 16:00:00\"}, {\"event_id\": \"633353a8e6d114a9be65378058a68b17\", \"title\": \"Culture Exchange Prep\", \"start_datetime\": \"1729614600.0\", \"end_datetime\": \"1729617300.0\", \"tag\": \"Work\", \"description\": \"Review the agenda and joining details for the Culture Exchange evening session.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-22 16:30:00\", \"end_strftime\": \"Tuesday, 2024-10-22 17:15:00\"}], \"range\": [\"0\", \"5\"], \"total\": \"5\"}",
+      "event_id": "series_s2_day_window",
+      "response_sha256": "61c5728b51c259a9130f9ac718702255429127e25c2d09a56a59f305a1414c43"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Ximena Morales García",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Xóchitl García Ramírez",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Dewi Sutanto",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Ximena Morales García",
+        "Xóchitl García Ramírez",
+        "Anastasiya Kuznetsova",
+        "Dewi Sutanto"
+      ],
+      "active_vocabulary": {
+        "Ximena Morales García": 50,
+        "Xóchitl García Ramírez": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Dewi Sutanto": 50
+      },
+      "vocabulary_sha256": "7b6233624f864b6716b092d8de066786c15b966cc54974bbb7c47dc550b6df91"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Ximena Morales García": 50,
+        "Xóchitl García Ramírez": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Dewi Sutanto": 50
+      },
+      "vocabulary_sha256": "7b6233624f864b6716b092d8de066786c15b966cc54974bbb7c47dc550b6df91"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_day_window",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Viktor Kuznetsov"
+      ],
+      "active_vocabulary": {
+        "Ximena Morales García": 50,
+        "Xóchitl García Ramírez": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Dewi Sutanto": 50,
+        "Viktor Kuznetsov": 50
+      },
+      "vocabulary_sha256": "f4ba2ea6dde630e848175195b26fe4a930466d14e3f9e77ee9dcaa36b262a76c"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:57.069677+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

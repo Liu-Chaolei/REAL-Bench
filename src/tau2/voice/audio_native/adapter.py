@@ -22,7 +22,7 @@ from tau2.config import (
     DEFAULT_SEND_AUDIO_INSTANT,
     TELEPHONY_ULAW_SILENCE,
 )
-from tau2.data_model.audio import TELEPHONY_AUDIO_FORMAT, AudioFormat
+from tau2.data_model.audio import TELEPHONY_AUDIO_FORMAT, AudioEncoding, AudioFormat
 from tau2.data_model.usage import UsageRecord
 from tau2.environment.tool import Tool
 from tau2.voice.audio_native.tick_result import (
@@ -245,6 +245,8 @@ class DiscreteTimeAdapter(ABC):
         # 1. Flush pending tool results
         await self._flush_pending_tool_results()
 
+        # Input and output share a time axis, not necessarily an encoding/rate.
+        playback_format = self.playback_audio_format
         # 2. Create tick result
         result = TickResult(
             tick_number=tick_number,
@@ -255,9 +257,18 @@ class DiscreteTimeAdapter(ABC):
             * 1000,
             user_audio_data=user_audio,
             cumulative_user_audio_at_tick_start_ms=self._cumulative_user_audio_ms,
-            bytes_per_tick=self.bytes_per_tick,
-            bytes_per_second=self.audio_format.bytes_per_second,
-            silence_byte=TELEPHONY_ULAW_SILENCE,
+            bytes_per_tick=round(
+                self.tick_duration_ms * playback_format.sample_rate / 1000
+            )
+            * playback_format.sample_width
+            * playback_format.channels,
+            bytes_per_second=playback_format.bytes_per_second,
+            playback_audio_format=playback_format,
+            silence_byte=(
+                b"\x00"
+                if playback_format.encoding == AudioEncoding.PCM_S16LE
+                else TELEPHONY_ULAW_SILENCE
+            ),
         )
 
         # 3. Prepend buffered audio from previous tick
@@ -274,7 +285,7 @@ class DiscreteTimeAdapter(ABC):
         result.tick_sim_duration_ms = result.audio_sent_duration_ms
 
         # 7. Cap audio to bytes_per_tick, buffer excess for next tick
-        self._buffered_agent_audio = buffer_excess_audio(result, self.bytes_per_tick)
+        self._buffered_agent_audio = buffer_excess_audio(result, result.bytes_per_tick)
 
         # 8. Compute proportional transcript
         result.proportional_transcript = get_proportional_transcript(
@@ -330,6 +341,11 @@ class DiscreteTimeAdapter(ABC):
         - Set result.was_truncated and result.skip_item_id on barge-in
         """
         raise NotImplementedError
+
+    @property
+    def playback_audio_format(self) -> AudioFormat:
+        """Output format; user input keeps its independently configured format."""
+        return self.audio_format
 
     @property
     def has_pending_output(self) -> bool:

@@ -1,0 +1,191 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0613_yizeir0okkaixm3wd7s6o0j9u94uy4e1__async_0063_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "0b87721ff173204c2ce4afc09bacfee5fc68e81a01ee643ae8f271cd0de91979",
+  "review_input_sha256": "4441f0ab4836e0ca7587307c18a80f9bab7a06f79af9adb4d67d4801c5f907ab",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "f40f819bfaff83c7e0f52749b614547e149410450ec770723f079a0c1be6ee41",
+  "reference_results_sha256": "71cb0c2579fd6091cd233e834954d7501cd27d3f2342aed021d65855c66dd21e",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kjersti Fjellstad",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Astrid Kleveland",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f9253161-a7e4-4bcf-b71a-7c73f9f139ab.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Kåre Jensen",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f9253161-a7e4-4bcf-b71a-7c73f9f139ab.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Oleksandr Hrynchenko",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f9253161-a7e4-4bcf-b71a-7c73f9f139ab.arguments.attendees[2]"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Oslo Film Museum",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f9253161-a7e4-4bcf-b71a-7c73f9f139ab.arguments.location"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Åse Kjellstad",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-c96ce1e1-64fc-4ec8-9a2b-59a46ed7f5a9.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Filmteateret",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "rohini.deshpande",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.recipients[0]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Oslo Film Museum",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.4",
+          "reason": "特定机构名称，含专有地名",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Kleveland",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，姓氏拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Kjersti Fjellstad",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "挪威语完整人名，含不常见拼写，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Kåre Jensen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含挪威语特殊字符å的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Oleksandr Hrynchenko",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "乌克兰语复杂拼写完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "含特殊字符Å的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Oslo Film Museum",
+        "Astrid Kleveland",
+        "Kjersti Fjellstad",
+        "Kåre Jensen",
+        "Oleksandr Hrynchenko",
+        "Åse Kjellstad"
+      ],
+      "active_vocabulary": {
+        "Oslo Film Museum": 50,
+        "Astrid Kleveland": 50,
+        "Kjersti Fjellstad": 50,
+        "Kåre Jensen": 50,
+        "Oleksandr Hrynchenko": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "c9bd550d893584736d4434ddccc92c4f39c0a0a7e46b8bdaad9e870d6fe635ce"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Filmteateret",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "挪威语特定场所名称，拼写独特",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Filmteateret"
+      ],
+      "active_vocabulary": {
+        "Oslo Film Museum": 50,
+        "Astrid Kleveland": 50,
+        "Kjersti Fjellstad": 50,
+        "Kåre Jensen": 50,
+        "Oleksandr Hrynchenko": 50,
+        "Åse Kjellstad": 50,
+        "Filmteateret": 50
+      },
+      "vocabulary_sha256": "e862641c74aaf4ff41fb6c53785275254b480f5712fb3d808618f3998d02ed1f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "rohini.deshpande",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "特定邮箱用户名，含印度语姓名拼写",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "rohini.deshpande"
+      ],
+      "active_vocabulary": {
+        "Oslo Film Museum": 50,
+        "Astrid Kleveland": 50,
+        "Kjersti Fjellstad": 50,
+        "Kåre Jensen": 50,
+        "Oleksandr Hrynchenko": 50,
+        "Åse Kjellstad": 50,
+        "Filmteateret": 50,
+        "rohini.deshpande": 50
+      },
+      "vocabulary_sha256": "f06948d0e5204b9823ffb54c1800ac689f5fa6665b87a983fa3ea716970bf17d"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:20:03.384786+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

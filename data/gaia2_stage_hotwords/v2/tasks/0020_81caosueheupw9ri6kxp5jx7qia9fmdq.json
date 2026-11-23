@@ -1,0 +1,140 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0020_81caosueheupw9ri6kxp5jx7qia9fmdq",
+  "model": "deepseek-flash",
+  "input_sha256": "e0af6606eb94cc8a7ddfa9e8ed333d6f0c0a49418198dafc0c8105108dee902a",
+  "review_input_sha256": "c0773dc67b7155ff8b49dacaf718799d82f32c248406c92e3d6074203af6751e",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "b37e0073214e9341198eb96fb602debb7536c8a39b8766b4608c883eb0cdffcf",
+  "reference_results_sha256": "f3a5b28e4aabb4dd1e30b6ef81308d450cba0c81073b3c7818b13e38be0986d8",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Aurélien",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-b7a848a6-a53d-464a-b0b6-fb169297366b.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Ursula Kaufmann",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Zurich",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "A Historical Perspective on the Swiss Economy",
+      "original_source": "stage2.reference_reply.series_s2_reply.arguments.content"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Basel",
+      "original_source": "stage2.reference_reply.series_s2_reply.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的专有人名，拼写困难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "202ddec9e4313928156bc6592746ccdd38af7f224b07d02fce35cdd91a88cf1c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Ursula Kaufmann",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整专有人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Zurich",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "地名，但拼写较常见，保留为地名候选",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Ursula Kaufmann",
+        "Zurich"
+      ],
+      "active_vocabulary": {
+        "Aurélien": 50,
+        "Ursula Kaufmann": 50,
+        "Zurich": 50
+      },
+      "vocabulary_sha256": "f29c53f62f8f4e57649a8cdc27b1af0b3ffb7fa7d331cc980ae3d7a92cac1609"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "A Historical Perspective on the Swiss Economy",
+          "kind": "custom_name",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整标题类专有名称，较长且难识别",
+          "weight": 50
+        },
+        {
+          "text": "Basel",
+          "kind": "place",
+          "source": "stage2.existing_catalog.1",
+          "reason": "地名，拼写较常见，保留为地名候选",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "A Historical Perspective on the Swiss Economy",
+        "Basel"
+      ],
+      "active_vocabulary": {
+        "Aurélien": 50,
+        "Ursula Kaufmann": 50,
+        "Zurich": 50,
+        "A Historical Perspective on the Swiss Economy": 50,
+        "Basel": 50
+      },
+      "vocabulary_sha256": "c1a397dcc34251482e3ff0ec8044061878bbc14f46242f4a7993791c6a2aa3d7"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:13:39.631533+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

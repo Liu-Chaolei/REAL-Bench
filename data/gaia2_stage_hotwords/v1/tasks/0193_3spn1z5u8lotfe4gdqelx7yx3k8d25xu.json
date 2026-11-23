@@ -1,0 +1,244 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0193_3spn1z5u8lotfe4gdqelx7yx3k8d25xu",
+  "model": "deepseek-flash",
+  "input_sha256": "ca087eb13ed67e9ccae03ce80ee15d1efbf169aa4efaaee74654f25bb55b3c59",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kasper",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Stockholm",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Multiproduktion Norden AB",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "公司名"
+        },
+        {
+          "text": "Batman",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "品牌/作品名"
+        },
+        {
+          "text": "Åke Lindström",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-83f16ba3-1137-4593-9a71-6929b625d397.arguments.content",
+          "reason": "收件人全名"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-83f16ba3-1137-4593-9a71-6929b625d397.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Jiaying",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b6d576b4-b1f1-4ee5-a9e7-0bb27066f5be.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "João",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b6d576b4-b1f1-4ee5-a9e7-0bb27066f5be.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Luísa",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b6d576b4-b1f1-4ee5-a9e7-0bb27066f5be.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b6d576b4-b1f1-4ee5-a9e7-0bb27066f5be.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Axel",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b6d576b4-b1f1-4ee5-a9e7-0bb27066f5be.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Åke",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b6d576b4-b1f1-4ee5-a9e7-0bb27066f5be.arguments.content",
+          "reason": "收件人名字"
+        }
+      ],
+      "new_terms": [
+        "Kasper",
+        "Stockholm",
+        "Multiproduktion Norden AB",
+        "Batman",
+        "Åke Lindström",
+        "Astrid Lundqvist",
+        "Jiaying",
+        "João",
+        "Luísa",
+        "Astrid",
+        "Axel",
+        "Åke"
+      ],
+      "active_vocabulary": {
+        "Kasper": 50,
+        "Stockholm": 50,
+        "Multiproduktion Norden AB": 50,
+        "Batman": 50,
+        "Åke Lindström": 50,
+        "Astrid Lundqvist": 50,
+        "Jiaying": 50,
+        "João": 50,
+        "Luísa": 50,
+        "Astrid": 50,
+        "Axel": 50,
+        "Åke": 50
+      },
+      "vocabulary_sha256": "0e90e8fceefa88e03e8d03355f5ffe8b8968ba7634f389f6cfd9ae5548e96e3c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kasper Mikkelsen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "被移除的联系人全名"
+        },
+        {
+          "text": "Cryptocurrency and Quantum Computing",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "群聊名称"
+        },
+        {
+          "text": "Åsa",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人名字"
+        },
+        {
+          "text": "Åsa Lundgren",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "联系人全名"
+        }
+      ],
+      "new_terms": [
+        "Kasper Mikkelsen",
+        "Cryptocurrency and Quantum Computing",
+        "Åsa",
+        "Åsa Lundgren"
+      ],
+      "active_vocabulary": {
+        "Kasper": 50,
+        "Stockholm": 50,
+        "Multiproduktion Norden AB": 50,
+        "Batman": 50,
+        "Åke Lindström": 50,
+        "Astrid Lundqvist": 50,
+        "Jiaying": 50,
+        "João": 50,
+        "Luísa": 50,
+        "Astrid": 50,
+        "Axel": 50,
+        "Åke": 50,
+        "Kasper Mikkelsen": 50,
+        "Cryptocurrency and Quantum Computing": 50,
+        "Åsa": 50,
+        "Åsa Lundgren": 50
+      },
+      "vocabulary_sha256": "0c758a02282b474c4240a7f572ce7e73121c615dfd8e487fbcbf11038136ae85"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Batman",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "品牌/作品名"
+        },
+        {
+          "text": "Stockholm",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_reminder.arguments.location",
+          "reason": "地点名"
+        },
+        {
+          "text": "Multiproduktion Norden AB",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_add_reminder.arguments.description",
+          "reason": "公司名"
+        },
+        {
+          "text": "Filmcells Batman Begins Minicell Framed Art, S2",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "产品型号名"
+        }
+      ],
+      "new_terms": [
+        "Filmcells Batman Begins Minicell Framed Art, S2"
+      ],
+      "active_vocabulary": {
+        "Kasper": 50,
+        "Stockholm": 50,
+        "Multiproduktion Norden AB": 50,
+        "Batman": 50,
+        "Åke Lindström": 50,
+        "Astrid Lundqvist": 50,
+        "Jiaying": 50,
+        "João": 50,
+        "Luísa": 50,
+        "Astrid": 50,
+        "Axel": 50,
+        "Åke": 50,
+        "Kasper Mikkelsen": 50,
+        "Cryptocurrency and Quantum Computing": 50,
+        "Åsa": 50,
+        "Åsa Lundgren": 50,
+        "Filmcells Batman Begins Minicell Framed Art, S2": 50
+      },
+      "vocabulary_sha256": "f9a01c0521d3be3312b7611399537b83e5d0df4c3fca8941a27c03b0e66f1d4b"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "aed798c11649516639542a2e6121661aa1f6410dd64f39c35644355ec668a494",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4192,
+        "completion_tokens": 873,
+        "total_tokens": 5065,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3936
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.723
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0193_3spn1z5u8lotfe4gdqelx7yx3k8d25xu",
+  "extracted_at": "2026-11-22T06:40:37.302364+00:00"
+}

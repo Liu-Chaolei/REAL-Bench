@@ -30,6 +30,7 @@ from tau2.data_model.tasks import Action, Task
 from tau2.data_model.transcript import DisplayTick
 from tau2.metrics.agent_metrics import AgentMetrics, is_successful
 from tau2.utils.transcript.display import display_tick_ranges
+from tau2.utils.transcript.views import streaming_transcript_content
 
 if TYPE_CHECKING:
     from tau2.agent.base.streaming import StreamingState
@@ -1752,8 +1753,10 @@ class ConsoleDisplay:
 
         for tick in ticks:
             agent_content = ""
-            if tick.agent_chunk and tick.agent_chunk.content:
-                agent_content = cls.escape_markup(tick.agent_chunk.content)
+            if tick.agent_chunk:
+                agent_text = streaming_transcript_content(tick.agent_chunk)
+                if agent_text:
+                    agent_content = cls.escape_markup(agent_text)
 
             agent_calls = ""
             if tick.agent_tool_calls:
@@ -1779,8 +1782,10 @@ class ConsoleDisplay:
                 agent_turn_action = f"{action}: {info}" if info else action
 
             user_content = ""
-            if tick.user_chunk and tick.user_chunk.content:
-                user_content = cls.escape_markup(tick.user_chunk.content)
+            if tick.user_chunk:
+                user_text = streaming_transcript_content(tick.user_chunk)
+                if user_text:
+                    user_content = cls.escape_markup(user_text)
 
             user_calls = ""
             if tick.user_tool_calls:
@@ -1931,8 +1936,10 @@ class ConsoleDisplay:
                 "user_turn_action": "",
             }
 
-            if tick.agent_chunk and tick.agent_chunk.content:
-                info["agent_content"] = cls.escape_markup(tick.agent_chunk.content)
+            if tick.agent_chunk:
+                agent_text = streaming_transcript_content(tick.agent_chunk)
+                if agent_text:
+                    info["agent_content"] = cls.escape_markup(agent_text)
             if tick.agent_tool_calls:
                 info["agent_calls"] = "\n".join(
                     f"{tc.name}({json.dumps(tc.arguments)})"
@@ -1952,8 +1959,10 @@ class ConsoleDisplay:
                 info["agent_turn_action"] = (
                     f"{action}: {info_text}" if info_text else action
                 )
-            if tick.user_chunk and tick.user_chunk.content:
-                info["user_content"] = cls.escape_markup(tick.user_chunk.content)
+            if tick.user_chunk:
+                user_text = streaming_transcript_content(tick.user_chunk)
+                if user_text:
+                    info["user_content"] = cls.escape_markup(user_text)
             if tick.user_transcript:
                 info["user_transcript"] = cls.escape_markup(tick.user_transcript)
             if tick.user_tool_calls:
@@ -2206,8 +2215,9 @@ class ConsoleDisplay:
             self_content = ""
             self_tools = ""
             if tick.self_chunk:
-                if hasattr(tick.self_chunk, "content") and tick.self_chunk.content:
-                    content = cls.escape_markup(tick.self_chunk.content)
+                content = streaming_transcript_content(tick.self_chunk)
+                if content:
+                    content = cls.escape_markup(content)
                     self_content = content
                 if (
                     hasattr(tick.self_chunk, "tool_calls")
@@ -2232,8 +2242,9 @@ class ConsoleDisplay:
             other_content = ""
             other_tools = ""
             if tick.other_chunk:
-                if hasattr(tick.other_chunk, "content") and tick.other_chunk.content:
-                    content = cls.escape_markup(tick.other_chunk.content)
+                content = streaming_transcript_content(tick.other_chunk)
+                if content:
+                    content = cls.escape_markup(content)
                     other_content = content
                 if (
                     hasattr(tick.other_chunk, "tool_calls")
@@ -2369,8 +2380,9 @@ class ConsoleDisplay:
             content = ""
             info_parts = []
 
-            if hasattr(chunk, "content") and chunk.content:
-                content = cls.escape_markup(chunk.content)
+            chunk_text = streaming_transcript_content(chunk)
+            if chunk_text:
+                content = cls.escape_markup(chunk_text)
                 if len(content) > 80:
                     content = content
 
@@ -2736,8 +2748,10 @@ class MarkdownDisplay:
                 "user_turn_action": "",
             }
 
-            if tick.agent_chunk and tick.agent_chunk.content:
-                info["agent_content"] = tick.agent_chunk.content
+            if tick.agent_chunk:
+                agent_text = streaming_transcript_content(tick.agent_chunk)
+                if agent_text:
+                    info["agent_content"] = agent_text
             # Only include agent tool calls/results if not in user_visible_only mode
             if not user_visible_only:
                 if tick.agent_tool_calls:
@@ -2758,8 +2772,10 @@ class MarkdownDisplay:
                     f"{action}: {info_text}" if info_text else action
                 )
 
-            if tick.user_chunk and tick.user_chunk.content:
-                info["user_content"] = tick.user_chunk.content
+            if tick.user_chunk:
+                user_text = streaming_transcript_content(tick.user_chunk)
+                if user_text:
+                    info["user_content"] = user_text
             if tick.user_tool_calls:
                 info["user_calls"] = [
                     {"name": tc.name, "arguments": tc.arguments}

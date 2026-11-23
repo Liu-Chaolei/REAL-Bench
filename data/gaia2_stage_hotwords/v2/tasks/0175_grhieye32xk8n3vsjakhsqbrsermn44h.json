@@ -1,0 +1,628 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0175_grhieye32xk8n3vsjakhsqbrsermn44h",
+  "model": "deepseek-flash",
+  "input_sha256": "d0c444de79e1d27d6ce36d584f860a0c9d41674695710d4648b20c6000e29a62",
+  "review_input_sha256": "1d8bdefed521910bc30043511a424b8b9a53d2092b2153b5977728ad9c57340b",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "b8b2c20a57093ddb731b81f1969fff10defaa58174fe4582b0c63a9e0a412051",
+  "reference_results_sha256": "04e89edbf1fdb8eb696dfa93e2a10eed4d72e51534b56bb462bd659248d04a8e",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kofi Adjei",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-daf01625-2bbb-41fa-8496-7e769579b019.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Rohini Deshpande",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-daf01625-2bbb-41fa-8496-7e769579b019.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Liverpool Lofts",
+      "original_source": "stage1.tool_gt.series_s1_send_email.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Albert Dock",
+      "original_source": "stage1.tool_gt.series_s1_send_email.arguments.content"
+    },
+    "stage1.existing_catalog.10": {
+      "stage": 1,
+      "text": "Princes Dock",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.11": {
+      "stage": 1,
+      "text": "Liverpool Luxury Living",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Liverpool Luxe Living",
+      "original_source": "stage1.tool_gt.series_s1_send_email.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Paradise Street",
+      "original_source": "stage1.tool_gt.series_s1_send_email.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Liverpool Docks Apartments",
+      "original_source": "stage1.tool_gt.series_s1_send_email.arguments.content"
+    },
+    "stage1.existing_catalog.5": {
+      "stage": 1,
+      "text": "Merseyside",
+      "original_source": "stage1.tool_gt.series_s1_send_email.arguments.content"
+    },
+    "stage1.existing_catalog.7": {
+      "stage": 1,
+      "text": "Liverpool ONE",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.9": {
+      "stage": 1,
+      "text": "Liverpool Waterfront Apartments",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.tool_response.series_s1_list_saved": {
+      "stage": 1,
+      "text": "{\"be97a76a51c345ee958b501d519c5e53\": {\"name\": \"Edinburgh New Town Flat\", \"location\": \"50 George St, Edinburgh\", \"zip_code\": \"EH2 2LR\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"700\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"be97a76a51c345ee958b501d519c5e53\", \"amenities\": [\"Gym\", \"Laundry\", \"New Town location\"], \"saved\": \"True\"}, \"d0e03d25ac2a422586501cf90b3c68e6\": {\"name\": \"Belfast Bliss\", \"location\": \"1 Donegall Quay, Belfast\", \"zip_code\": \"BT1 3EA\", \"price\": \"1000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"d0e03d25ac2a422586501cf90b3c68e6\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"91c296b0d95d4385b6b457f0288a57d0\": {\"name\": \"Bristol Bay\", \"location\": \"1-3 Harbourside, Bristol\", \"zip_code\": \"BS1 5BA\", \"price\": \"1800\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"700\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"91c296b0d95d4385b6b457f0288a57d0\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"fc8da003f0fd4ba0848c6bc2e8c71b63\": {\"name\": \"Birmingham City Living\", \"location\": \"23 New St, Birmingham, B2 4EG\", \"zip_code\": \"B2 4EG\", \"price\": \"1200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"fc8da003f0fd4ba0848c6bc2e8c71b63\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"66b785a4d655421e994740bb28ec2b08\": {\"name\": \"Glasgow West End Apartment\", \"location\": \"20 Hyndland St, Glasgow\", \"zip_code\": \"G11 5PT\", \"price\": \"1000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"66b785a4d655421e994740bb28ec2b08\", \"amenities\": [\"Laundry\", \"West End location\"], \"saved\": \"True\"}, \"77675cfb01a742b8af3ab7181204e9bb\": {\"name\": \"Birmingham Boulevard\", \"location\": \"600 Broad Street, Birmingham\", \"zip_code\": \"B1 2EA\", \"price\": \"1400\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"700\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"77675cfb01a742b8af3ab7181204e9bb\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"75aa49e275594755a847c616f9bda19f\": {\"name\": \"Plymouth Penthouse\", \"location\": \"1000 Armada Way, Plymouth\", \"zip_code\": \"PL1 1LE\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"75aa49e275594755a847c616f9bda19f\", \"amenities\": [\"Gym\", \"Laundry\", \"Pool\"], \"saved\": \"True\"}, \"a13667a86b814f699305e9739d60ae22\": {\"name\": \"Edinburgh New Town Apartments\", \"location\": \"20 George Street, Edinburgh\", \"zip_code\": \"EH2 2LR\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"a13667a86b814f699305e9739d60ae22\", \"amenities\": [\"Pool\", \"Parking\"], \"saved\": \"True\"}, \"52faf42e1ffe4a5997d1bdb6e6cc46be\": {\"name\": \"Cardiff Bay Apartments\", \"location\": \"Cardiff, Wales\", \"zip_code\": \"CF10 5AL\", \"price\": \"1400\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"52faf42e1ffe4a5997d1bdb6e6cc46be\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"2f81f190d39e49168440f858eff5fef4\": {\"name\": \"Liverpool Lofts\", \"location\": \"45 Albert Dock, Liverpool, L3 4AZ\", \"zip_code\": \"L3 4AZ\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"2f81f190d39e49168440f858eff5fef4\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"568e27c28ec746d88cd3128b1c8f93dc\": {\"name\": \"Birmingham Brook\", \"location\": \"Brindleyplace, Birmingham\", \"zip_code\": \"B1 2HL\", \"price\": \"1100\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"568e27c28ec746d88cd3128b1c8f93dc\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"1369b5a883084c7ab7ebeb054cd5306a\": {\"name\": \"Glasgow Gem\", \"location\": \"50 George Square, Glasgow\", \"zip_code\": \"G2 1DU\", \"price\": \"1000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"1369b5a883084c7ab7ebeb054cd5306a\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"4b17efba33e94c4380819f916657a6f0\": {\"name\": \"Manchester Maison\", \"location\": \"234 Deansgate, Manchester\", \"zip_code\": \"M3 3WB\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"4b17efba33e94c4380819f916657a6f0\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"77661de6e480472cbdcfabc818ed6de8\": {\"name\": \"Edinburgh City Centre Flats\", \"location\": \"Edinburgh, Scotland\", \"zip_code\": \"EH1 1DD\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"77661de6e480472cbdcfabc818ed6de8\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"e2e85475e0164e9e89ee17d59d607db5\": {\"name\": \"Glasgow West End Apartments\", \"location\": \"Glasgow, Scotland\", \"zip_code\": \"G3 8AQ\", \"price\": \"1500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"e2e85475e0164e9e89ee17d59d607db5\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"69a184e9bb9f4125b58b5ff8f56138c3\": {\"name\": \"Nottingham Nest\", \"location\": \"1-3 Victoria St, Nottingham\", \"zip_code\": \"NG1 2EY\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"69a184e9bb9f4125b58b5ff8f56138c3\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"a97bbf88f4f94ee68840f72a4c19406a\": {\"name\": \"Bristol Harbourside Apartment\", \"location\": \"10 Canons Rd, Bristol\", \"zip_code\": \"BS1 5HH\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"a97bbf88f4f94ee68840f72a4c19406a\", \"amenities\": [\"Laundry\", \"Harbourside location\"], \"saved\": \"True\"}, \"daed5bcedfee42a6becf79f6328d40da\": {\"name\": \"Edinburgh Elite\", \"location\": \"1-3 Waterloo Pl, Edinburgh\", \"zip_code\": \"EH1 3BG\", \"price\": \"3000\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"daed5bcedfee42a6becf79f6328d40da\", \"amenities\": [\"Gym\", \"Pool\"], \"saved\": \"True\"}, \"70c76a66b8fb49e0a40266cbf8730f78\": {\"name\": \"Glasgow Heights\", \"location\": \"100 Bothwell Street, Glasgow\", \"zip_code\": \"G2 7JS\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"70c76a66b8fb49e0a40266cbf8730f78\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\"], \"saved\": \"True\"}, \"551d10469f07407795e65a25bb4a379f\": {\"name\": \"Liverpool Waterfront Apartment\", \"location\": \"10 The Strand, Liverpool\", \"zip_code\": \"L1 8LT\", \"price\": \"1200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"551d10469f07407795e65a25bb4a379f\", \"amenities\": [\"Parking\", \"Waterfront location\"], \"saved\": \"True\"}, \"91e52b10b9f3409792e4b423059eee2b\": {\"name\": \"Liverpool Luxury\", \"location\": \"321 Liverpool ONE, Liverpool\", \"zip_code\": \"L1 8BU\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"91e52b10b9f3409792e4b423059eee2b\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"71b8ead89c9446d4b82b6f13233aafb9\": {\"name\": \"Manchester Metro\", \"location\": \"1-3 Piccadilly, Manchester\", \"zip_code\": \"M1 1RG\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"71b8ead89c9446d4b82b6f13233aafb9\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"94bc5f49cdab44b8bc9338c77d0b7446\": {\"name\": \"Nottingham City Living Apartments\", \"location\": \"25 Market St, Nottingham\", \"zip_code\": \"NG1 6HY\", \"price\": \"1000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"400\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"94bc5f49cdab44b8bc9338c77d0b7446\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"085d4c6fe9584e9b9ea8d37a2b53f346\": {\"name\": \"Manchester Mews\", \"location\": \"45 Mews St, Manchester, M1 1HG\", \"zip_code\": \"M1 1HG\", \"price\": \"1000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"085d4c6fe9584e9b9ea8d37a2b53f346\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"cb69a230e0054aba8cc8be5ffe993f80\": {\"name\": \"Belfast Bungalow\", \"location\": \"456 Lisburn Rd, Belfast\", \"zip_code\": \"BT9 7EW\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Bungalow\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"cb69a230e0054aba8cc8be5ffe993f80\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"92c76efbb46c49e28a6fbf22a5319d1c\": {\"name\": \"London Luxe\", \"location\": \"10 Downing St, London\", \"zip_code\": \"SW1A 2AA\", \"price\": \"2500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"92c76efbb46c49e28a6fbf22a5319d1c\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"1c4a1918d4f442798735622d312cca99\": {\"name\": \"Glasgow Grand\", \"location\": \"100-102 West George St, Glasgow\", \"zip_code\": \"G2 1PP\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"2500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"1c4a1918d4f442798735622d312cca99\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"e30c0cb2d47c43848c8c04265b68a1a2\": {\"name\": \"Bristol Bungalow\", \"location\": \"200 Whiteladies Road, Bristol\", \"zip_code\": \"BS8 2PY\", \"price\": \"1800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"2500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"e30c0cb2d47c43848c8c04265b68a1a2\", \"amenities\": [\"Laundry\", \"Garden\"], \"saved\": \"True\"}, \"58a01e65023b43bda80652fe435e8bf0\": {\"name\": \"Birmingham Heights\", \"location\": \"Edgbaston, Birmingham\", \"zip_code\": \"B15 1TR\", \"price\": \"1200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"58a01e65023b43bda80652fe435e8bf0\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"6fe5e3bfbe0443c5a0988e68e911fcb7\": {\"name\": \"The Bristolian\", \"location\": \"23-25 College Green, Bristol\", \"zip_code\": \"BS1 5TN\", \"price\": \"1800\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"700\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"6fe5e3bfbe0443c5a0988e68e911fcb7\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"5883c5c883f444679e93cc5d125e47d7\": {\"name\": \"Liverpool Loft\", \"location\": \"901 Albert Dock, Liverpool\", \"zip_code\": \"L3 4AZ\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"5883c5c883f444679e93cc5d125e47d7\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"3f5d0183d78c486c906ebe4169d2f79e\": {\"name\": \"Liverpool Luxe Living\", \"location\": \"100 Paradise Street, Liverpool\", \"zip_code\": \"L1 3EU\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"3f5d0183d78c486c906ebe4169d2f79e\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"2813f60a866b4f8ea37a5a82d1070246\": {\"name\": \"Liverpool Docks Apartments\", \"location\": \"Liverpool, Merseyside\", \"zip_code\": \"L3 4BB\", \"price\": \"1400\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"2813f60a866b4f8ea37a5a82d1070246\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"9dac6674c9224710b731d694a72046cf\": {\"name\": \"Liverpool Waterfront Apartments\", \"location\": \"10 Princes Dock, Liverpool\", \"zip_code\": \"L3 1DL\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"9dac6674c9224710b731d694a72046cf\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"1d974d566f4249a684d466d9621e739e\": {\"name\": \"Liverpool Luxury Living\", \"location\": \"901 Albert Dock, Liverpool, L3 4AD\", \"zip_code\": \"L3 4AD\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"1d974d566f4249a684d466d9621e739e\", \"amenities\": [\"Pool\", \"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}}",
+      "event_id": "series_s1_list_saved",
+      "response_sha256": "cfaab1486dee1d16866cf38f42e31aacced6adcd6a68443de2967653c1fd554e"
+    },
+    "stage2.tool_response.series_s2_get_contact": {
+      "stage": 2,
+      "text": "{\"first_name\": \"Kofi\", \"last_name\": \"Adjei\", \"contact_id\": \"eb0f5294922548cea2a946570bd9a715\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"41\", \"nationality\": \"German\", \"city_living\": \"Berlin\", \"country\": \"Germany\", \"status\": \"Status.EMPLOYED\", \"job\": \"Consultant for Law Enforcement Agencies\", \"description\": \"Kofi Adjei is a complex individual with a tumultuous past. Born to Ghanaian parents in Berlin, he grew up in a culturally rich and diverse environment. However, his early life took a turn for the worse when he became involved with a human trafficking ring. For years, he was a key player in the organization, but after a series of events, including the loss of a close friend and a stint in prison, Kofi had a change of heart. He began cooperating with law enforcement, providing crucial information that helped dismantle the trafficking network. Today, Kofi works as a consultant for law enforcement agencies, using his expertise to help combat human trafficking. His unique perspective and knowledge have proven invaluable in the field. Despite his troubled past, Kofi is a charismatic and empathetic individual, known for his quick wit and sharp intellect. He is fiercely independent and values his freedom above all else.\", \"phone\": \"+991578234567\", \"email\": \"kofi.adjei@consultant.de\", \"address\": \"Schönhauser Allee 123, 10435 Berlin, Germany\"}",
+      "event_id": "series_s2_get_contact",
+      "response_sha256": "3c8c072daa09e55aa47bc79f9115c1ad9a25c1a5685d95774010f4c041d500e3"
+    },
+    "stage2.tool_response.series_s2_read_calendar": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"1024f0cf6dbe4ff295b1c2b65b467efb\", \"title\": \"Meeting with Research Collaborators\", \"start_datetime\": \"1730196000\", \"end_datetime\": \"1730203200\", \"tag\": \"Work\", \"description\": \"Meeting with research collaborators to discuss ongoing projects.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [\"Rohini Deshpande\", \"Saskia van der Meer\", \"Gerrit van der Meer\"], \"start_strftime\": \"Tuesday, 2024-10-29 10:00:00\", \"end_strftime\": \"Tuesday, 2024-10-29 12:00:00\"}, {\"event_id\": \"4fdf7b94c0554edab9b5e3e0b754f25b\", \"title\": \"Dinner with Colleagues\", \"start_datetime\": \"1730145600\", \"end_datetime\": \"1730152800\", \"tag\": \"Social\", \"description\": \"Dinner with colleagues to discuss ongoing projects and share experiences.\", \"location\": \"The Pint Shop\", \"attendees\": [\"Rohini Deshpande\", \"Saskia van der Meer\", \"Zara Saeed\"], \"start_strftime\": \"Monday, 2024-10-28 20:00:00\", \"end_strftime\": \"Monday, 2024-10-28 22:00:00\"}, {\"event_id\": \"5f7f268223f34d91acc60fb1a930c238\", \"title\": \"Research Seminar: Quantum Algorithms\", \"start_datetime\": \"1730124000\", \"end_datetime\": \"1730131200\", \"tag\": \"Work\", \"description\": \"Attend a research seminar on quantum algorithms and their applications.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [\"Rohini Deshpande\", \"Saskia van der Meer\", \"Gerrit van der Meer\"], \"start_strftime\": \"Monday, 2024-10-28 14:00:00\", \"end_strftime\": \"Monday, 2024-10-28 16:00:00\"}, {\"event_id\": \"66d20619578346e68b649aa172d08192\", \"title\": \"Lecture on Quantum Computing\", \"start_datetime\": \"1730210400\", \"end_datetime\": \"1730217600\", \"tag\": \"Work\", \"description\": \"Attend a lecture on quantum computing and its applications.\", \"location\": \"University of Cambridge, Department of Computer Science\", \"attendees\": [\"Rohini Deshpande\", \"Ximena García-Ramírez\"], \"start_strftime\": \"Tuesday, 2024-10-29 14:00:00\", \"end_strftime\": \"Tuesday, 2024-10-29 16:00:00\"}, {\"event_id\": \"78cfdbd3051046969b8fcfcb6fd62f9b\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1730232000\", \"end_datetime\": \"1730239200\", \"tag\": \"Social\", \"description\": \"Dinner with friends to catch up and share experiences.\", \"location\": \"The Pint Shop\", \"attendees\": [\"Rohini Deshpande\", \"Zara Saeed\", \"Kaida Nakahara\"], \"start_strftime\": \"Tuesday, 2024-10-29 20:00:00\", \"end_strftime\": \"Tuesday, 2024-10-29 22:00:00\"}, {\"event_id\": \"808c400120ff4d5592db18d8b82ae932\", \"title\": \"Reading Time\", \"start_datetime\": \"1730154600\", \"end_datetime\": \"1730160000\", \"tag\": \"Personal\", \"description\": \"Dedicated time for reading and relaxation.\", \"location\": \"Home\", \"attendees\": [\"Rohini Deshpande\"], \"start_strftime\": \"Monday, 2024-10-28 22:30:00\", \"end_strftime\": \"Tuesday, 2024-10-29 00:00:00\"}, {\"event_id\": \"b04a3d9ca9d94600888c844fb6259856\", \"title\": \"Research Paper Review\", \"start_datetime\": \"1730241000\", \"end_datetime\": \"1730248200\", \"tag\": \"Work\", \"description\": \"Review and provide feedback on a research paper.\", \"location\": \"Home\", \"attendees\": [\"Rohini Deshpande\"], \"start_strftime\": \"Tuesday, 2024-10-29 22:30:00\", \"end_strftime\": \"Wednesday, 2024-10-30 00:30:00\"}, {\"event_id\": \"cf663e2ef5b84635ad782bacc442f5de\", \"title\": \"Yoga Class\", \"start_datetime\": \"1730224800\", \"end_datetime\": \"1730228400\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Rohini Deshpande\"], \"start_strftime\": \"Tuesday, 2024-10-29 18:00:00\", \"end_strftime\": \"Tuesday, 2024-10-29 19:00:00\"}, {\"event_id\": \"f6938f1175514de89853af59a2c76052\", \"title\": \"Yoga Class\", \"start_datetime\": \"1730138400\", \"end_datetime\": \"1730142000\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Rohini Deshpande\"], \"start_strftime\": \"Monday, 2024-10-28 18:00:00\", \"end_strftime\": \"Monday, 2024-10-28 19:00:00\"}], \"range\": [\"0\", \"9\"], \"total\": \"9\"}",
+      "event_id": "series_s2_read_calendar",
+      "response_sha256": "015d6ced55ca3b216c17cc4ec71f8a0c337583088299a6a53053813a8ff3992b"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kofi Adjei",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，含独特拼写，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，拼写较难，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kofi Adjei",
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "Kofi Adjei": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "779b1e7fed219026c4b1f494acda374c28e28eb972905ac887fbb6d224b27b68"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Edinburgh City Centre Flats",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Edinburgh New Town Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Edinburgh New Town Flat",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称，含地名组合",
+          "weight": 50
+        },
+        {
+          "text": "Glasgow West End Apartment",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Glasgow West End Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Nottingham City Living Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Birmingham City Living",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Bristol Harbourside Apartment",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Cardiff Bay Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Liverpool Docks Apartments",
+          "kind": "place",
+          "source": "stage1.existing_catalog.4",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Liverpool Luxe Living",
+          "kind": "place",
+          "source": "stage1.existing_catalog.2",
+          "reason": "具体公寓名称，含独特组合词",
+          "weight": 50
+        },
+        {
+          "text": "Liverpool Luxury Living",
+          "kind": "place",
+          "source": "stage1.existing_catalog.11",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Liverpool Waterfront Apartment",
+          "kind": "place",
+          "source": "stage1.existing_catalog.9",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Liverpool Waterfront Apartments",
+          "kind": "place",
+          "source": "stage1.existing_catalog.9",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Albert Dock",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "具体地点名称",
+          "weight": 50
+        },
+        {
+          "text": "Belfast Bliss",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Belfast Bungalow",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Birmingham Boulevard",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Birmingham Brook",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Birmingham Heights",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Bristol Bay",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Bristol Bungalow",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Edinburgh Elite",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Glasgow Gem",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Glasgow Grand",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Glasgow Heights",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Liverpool Loft",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Liverpool Lofts",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "具体公寓名称，含地名组合",
+          "weight": 50
+        },
+        {
+          "text": "Liverpool ONE",
+          "kind": "place",
+          "source": "stage1.existing_catalog.7",
+          "reason": "具体商业区名称",
+          "weight": 50
+        },
+        {
+          "text": "London Luxe",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Manchester Maison",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Manchester Metro",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Manchester Mews",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Nottingham Nest",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Paradise Street",
+          "kind": "place",
+          "source": "stage1.existing_catalog.3",
+          "reason": "具体街道名称",
+          "weight": 50
+        },
+        {
+          "text": "Plymouth Penthouse",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Princes Dock",
+          "kind": "place",
+          "source": "stage1.existing_catalog.10",
+          "reason": "具体地点名称",
+          "weight": 50
+        },
+        {
+          "text": "The Bristolian",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "具体公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Merseyside",
+          "kind": "place",
+          "source": "stage1.existing_catalog.5",
+          "reason": "地名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Edinburgh City Centre Flats",
+        "Edinburgh New Town Apartments",
+        "Edinburgh New Town Flat",
+        "Glasgow West End Apartment",
+        "Glasgow West End Apartments",
+        "Nottingham City Living Apartments",
+        "Birmingham City Living",
+        "Bristol Harbourside Apartment",
+        "Cardiff Bay Apartments",
+        "Liverpool Docks Apartments",
+        "Liverpool Luxe Living",
+        "Liverpool Luxury Living",
+        "Liverpool Waterfront Apartment",
+        "Liverpool Waterfront Apartments",
+        "Albert Dock",
+        "Belfast Bliss",
+        "Belfast Bungalow",
+        "Birmingham Boulevard",
+        "Birmingham Brook",
+        "Birmingham Heights",
+        "Bristol Bay",
+        "Bristol Bungalow",
+        "Edinburgh Elite",
+        "Glasgow Gem",
+        "Glasgow Grand",
+        "Glasgow Heights",
+        "Liverpool Loft",
+        "Liverpool Lofts",
+        "Liverpool ONE",
+        "London Luxe",
+        "Manchester Maison",
+        "Manchester Metro",
+        "Manchester Mews",
+        "Nottingham Nest",
+        "Paradise Street",
+        "Plymouth Penthouse",
+        "Princes Dock",
+        "The Bristolian",
+        "Merseyside"
+      ],
+      "active_vocabulary": {
+        "Kofi Adjei": 50,
+        "Rohini Deshpande": 50,
+        "Edinburgh City Centre Flats": 50,
+        "Edinburgh New Town Apartments": 50,
+        "Edinburgh New Town Flat": 50,
+        "Glasgow West End Apartment": 50,
+        "Glasgow West End Apartments": 50,
+        "Nottingham City Living Apartments": 50,
+        "Birmingham City Living": 50,
+        "Bristol Harbourside Apartment": 50,
+        "Cardiff Bay Apartments": 50,
+        "Liverpool Docks Apartments": 50,
+        "Liverpool Luxe Living": 50,
+        "Liverpool Luxury Living": 50,
+        "Liverpool Waterfront Apartment": 50,
+        "Liverpool Waterfront Apartments": 50,
+        "Albert Dock": 50,
+        "Belfast Bliss": 50,
+        "Belfast Bungalow": 50,
+        "Birmingham Boulevard": 50,
+        "Birmingham Brook": 50,
+        "Birmingham Heights": 50,
+        "Bristol Bay": 50,
+        "Bristol Bungalow": 50,
+        "Edinburgh Elite": 50,
+        "Glasgow Gem": 50,
+        "Glasgow Grand": 50,
+        "Glasgow Heights": 50,
+        "Liverpool Loft": 50,
+        "Liverpool Lofts": 50,
+        "Liverpool ONE": 50,
+        "London Luxe": 50,
+        "Manchester Maison": 50,
+        "Manchester Metro": 50,
+        "Manchester Mews": 50,
+        "Nottingham Nest": 50,
+        "Paradise Street": 50,
+        "Plymouth Penthouse": 50,
+        "Princes Dock": 50,
+        "The Bristolian": 50,
+        "Merseyside": 50
+      },
+      "vocabulary_sha256": "ecb653c7d1d4848cfba2924a3e72ebd087f1db1d3629cabef4f9cffc0566c957"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Gerrit van der Meer",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_calendar",
+          "reason": "完整人名，含独特姓氏组合",
+          "weight": 50
+        },
+        {
+          "text": "Saskia van der Meer",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_calendar",
+          "reason": "完整人名，含独特姓氏组合",
+          "weight": 50
+        },
+        {
+          "text": "Ximena García-Ramírez",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_calendar",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Kaida Nakahara",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_calendar",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Schönhauser Allee",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_get_contact",
+          "reason": "含变音符号的街道名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Zara Saeed",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_calendar",
+          "reason": "完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Gerrit van der Meer",
+        "Saskia van der Meer",
+        "Ximena García-Ramírez",
+        "Kaida Nakahara",
+        "Schönhauser Allee",
+        "Zara Saeed"
+      ],
+      "active_vocabulary": {
+        "Kofi Adjei": 50,
+        "Rohini Deshpande": 50,
+        "Edinburgh City Centre Flats": 50,
+        "Edinburgh New Town Apartments": 50,
+        "Edinburgh New Town Flat": 50,
+        "Glasgow West End Apartment": 50,
+        "Glasgow West End Apartments": 50,
+        "Nottingham City Living Apartments": 50,
+        "Birmingham City Living": 50,
+        "Bristol Harbourside Apartment": 50,
+        "Cardiff Bay Apartments": 50,
+        "Liverpool Docks Apartments": 50,
+        "Liverpool Luxe Living": 50,
+        "Liverpool Luxury Living": 50,
+        "Liverpool Waterfront Apartment": 50,
+        "Liverpool Waterfront Apartments": 50,
+        "Albert Dock": 50,
+        "Belfast Bliss": 50,
+        "Belfast Bungalow": 50,
+        "Birmingham Boulevard": 50,
+        "Birmingham Brook": 50,
+        "Birmingham Heights": 50,
+        "Bristol Bay": 50,
+        "Bristol Bungalow": 50,
+        "Edinburgh Elite": 50,
+        "Glasgow Gem": 50,
+        "Glasgow Grand": 50,
+        "Glasgow Heights": 50,
+        "Liverpool Loft": 50,
+        "Liverpool Lofts": 50,
+        "Liverpool ONE": 50,
+        "London Luxe": 50,
+        "Manchester Maison": 50,
+        "Manchester Metro": 50,
+        "Manchester Mews": 50,
+        "Nottingham Nest": 50,
+        "Paradise Street": 50,
+        "Plymouth Penthouse": 50,
+        "Princes Dock": 50,
+        "The Bristolian": 50,
+        "Merseyside": 50,
+        "Gerrit van der Meer": 50,
+        "Saskia van der Meer": 50,
+        "Ximena García-Ramírez": 50,
+        "Kaida Nakahara": 50,
+        "Schönhauser Allee": 50,
+        "Zara Saeed": 50
+      },
+      "vocabulary_sha256": "90d853f9938736bd9dd2782d9d36c927300f214b7c582c0f0bf870986e528fd6"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [
+    {
+      "text": "Liverpool Waterfront Apartment",
+      "from": "stage1.tool_response.series_s1_list_saved",
+      "to": "stage1.existing_catalog.9"
+    },
+    {
+      "text": "Liverpool Loft",
+      "from": "stage1.tool_response.series_s1_list_saved",
+      "to": "stage1.existing_catalog.0"
+    }
+  ],
+  "old_terms_removed": [
+    "Liverpool",
+    "Liverpool Luxury",
+    "Ghanaian",
+    "Berlin",
+    "Liverpool apartment search check-in",
+    "Lecture on Quantum Computing"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:31.159372+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

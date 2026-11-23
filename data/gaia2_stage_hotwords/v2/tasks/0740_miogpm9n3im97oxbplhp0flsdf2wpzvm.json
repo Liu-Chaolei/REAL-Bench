@@ -1,0 +1,113 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0740_miogpm9n3im97oxbplhp0flsdf2wpzvm",
+  "model": "deepseek-flash",
+  "input_sha256": "42d71470709d28adcbd2603eea26a01e3305ed1ecb5b7127c0844029db47ee12",
+  "review_input_sha256": "63e059ebc1172e409f597435d4a9965e9a287713d3a8d7abca0215f73957a87e",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "467328cbc1940c1b0bed6a81febda4967a3ce048acc4e8d0f0844dd99717ea87",
+  "reference_results_sha256": "140216cf0d9318455d183dd2dea515263493cdf151bcc84b6d9d919521edee82",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Baba Yaga",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Magic 8 Ball",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Magic 8 Balls",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Magic 8 Ball",
+          "kind": "product",
+          "source": "stage0.existing_catalog.1",
+          "reason": "独特产品名，含数字，识别困难",
+          "weight": 50
+        },
+        {
+          "text": "Baba Yaga",
+          "kind": "custom_name",
+          "source": "stage0.existing_catalog.0",
+          "reason": "独特的神话人物专名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Magic 8 Ball",
+        "Baba Yaga"
+      ],
+      "active_vocabulary": {
+        "Magic 8 Ball": 50,
+        "Baba Yaga": 50
+      },
+      "vocabulary_sha256": "ba2f5d24d1679c5cb38222825fd4f837775012050ba68345db419cd871932872"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Magic 8 Balls",
+          "kind": "product",
+          "source": "stage1.existing_catalog.0",
+          "reason": "独特产品名复数形式，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Magic 8 Balls"
+      ],
+      "active_vocabulary": {
+        "Magic 8 Ball": 50,
+        "Baba Yaga": 50,
+        "Magic 8 Balls": 50
+      },
+      "vocabulary_sha256": "adcaf4fb35bc6581a4bc8cc2fd277d8ea7e9fdaf94378f86aa563c6380533a29"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Magic 8 Ball": 50,
+        "Baba Yaga": 50,
+        "Magic 8 Balls": 50
+      },
+      "vocabulary_sha256": "adcaf4fb35bc6581a4bc8cc2fd277d8ea7e9fdaf94378f86aa563c6380533a29"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "mattel"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:12.769434+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

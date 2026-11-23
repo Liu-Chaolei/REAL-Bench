@@ -1,0 +1,219 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0478_ak7k87nial5i4qbqu0ugpyss7zida6hg",
+  "model": "deepseek-flash",
+  "input_sha256": "4d53e9ca89a2edf1c3cea88f32fcadd5a36a79e8b2dba62cc4676113cb919409",
+  "review_input_sha256": "46a243d4d66cba3b71918236f5bca36e8905d90a7b72bc2f1e7246ab5dff7d36",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "6906c4459e9c98d02fe6bba291afdf9dc4374d70788e103c23a6de19f64c5ecc",
+  "reference_results_sha256": "aa211038722070f2d3aa887140dcb5939d2e5b19e15bfc1f9f04083bff9c202c",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "PokerCo",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-8f7b3b4d-4d4a-446c-8338-3118ab63e245.arguments.content"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Poker Tiles",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Jianhua Wang",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Maria Luísa Sousa e Silva",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Vasco Oliveira",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Vasco Pinto",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Åke Zanström",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.tool_response.series_s1_contact_0": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Jianhua\", \"last_name\": \"Wang\", \"contact_id\": \"0eaff34d30d64a21ada0f969526ded6b\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"68\", \"nationality\": \"Chinese\", \"city_living\": \"Shanghai\", \"country\": \"China\", \"status\": \"Status.RETIRED\", \"job\": \"Former High School History Teacher\", \"description\": \"Jianhua Wang is a proud and supportive father of Ridho Syuhada, his only child. He was born and raised in Shanghai, China, and has lived there his entire life. Jianhua is a retired high school history teacher, having spent 35 years educating young minds about the rich history of China. He is a kind and gentle soul, loved by his family, friends, and former students alike. Jianhua is an avid gardener and takes great pride in his small garden, where he grows a variety of herbs and vegetables. He is also a skilled calligrapher and enjoys practicing this traditional Chinese art form in his free time. Cooking is another one of Jianhua's passions, and he loves to experiment with new recipes in the kitchen.\", \"phone\": \"+862162395678\", \"email\": \"jianhua.wang1964@gaia2mail.com\", \"address\": \"345 Lane 123, Wukang Road, Xuhui District, Shanghai, 200031\"}",
+      "event_id": "series_s1_contact_0",
+      "response_sha256": "f1cb1d5fdae10e8bbb280ae0112a2d48f192560f8d67d3050f7e1fa53ed235e2"
+    },
+    "stage1.tool_response.series_s1_contact_2": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Vasco\", \"last_name\": \"Oliveira\", \"contact_id\": \"714a6f1325bf4df598a96fef298ac5e1\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"72\", \"nationality\": \"Portuguese\", \"city_living\": \"Punxsutawney\", \"country\": \"United States\", \"status\": \"Status.RETIRED\", \"job\": \"Former High School Teacher\", \"description\": \"Vasco Oliveira is a 72-year-old retired high school teacher who has lived in Punxsutawney, Pennsylvania, for over 40 years. Born and raised in Lisbon, Portugal, Vasco moved to the United States in his late 20s to pursue a master's degree in education. He fell in love with the small town of Punxsutawney and decided to stay, teaching history and social studies at the local high school for over three decades. Vasco is a die-hard baseball fan and has been following the Pittsburgh Pirates since his arrival in the United States. He attends every home game he can and has a vast collection of baseball memorabilia.\", \"phone\": \"+18149381234\", \"email\": \"vasco.oliveira@gaia2mail.com\", \"address\": \"345 Walnut St, Punxsutawney, PA 15767\"}",
+      "event_id": "series_s1_contact_2",
+      "response_sha256": "558f084f8752da40aca2cd2002d036bece2d16eeecf4371678e4923036f64b62"
+    },
+    "stage1.tool_response.series_s1_contact_4": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Åke\", \"last_name\": \"Zanström\", \"contact_id\": \"c11a5e1a1a6443fa998bdccd7accfbd1\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"78\", \"nationality\": \"Swedish\", \"city_living\": \"Stockholm\", \"country\": \"Sweden\", \"status\": \"Status.RETIRED\", \"job\": \"Former High School Teacher\", \"description\": \"\", \"phone\": \"+4683234567\", \"email\": \"ake.zanstrom@gaia2mail.com\", \"address\": \"Östermalmsgatan 12, 114 39 Stockholm, Sweden\"}",
+      "event_id": "series_s1_contact_4",
+      "response_sha256": "dd8294086462adb2885777a424044b5072b4ac2293554d1c0847d15798985f8a"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Poker Tiles",
+          "kind": "product",
+          "source": "stage0.existing_catalog.1",
+          "reason": "独特产品名，双词组合易混淆",
+          "weight": 50
+        },
+        {
+          "text": "PokerCo",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.0",
+          "reason": "独特品牌名，含混合大小写，ASR易误识",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Poker Tiles",
+        "PokerCo"
+      ],
+      "active_vocabulary": {
+        "Poker Tiles": 50,
+        "PokerCo": 50
+      },
+      "vocabulary_sha256": "b6f269a4416e5dfd255dc1a346804e59e66c1098ba2b0fac485a5ca5fa8b8a6f"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Maria Luísa Sousa e Silva",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的完整葡语姓名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Jianhua Wang",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "中文拼音全名，ASR易误识",
+          "weight": 50
+        },
+        {
+          "text": "Ridho Syuhada",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_contact_0",
+          "reason": "独特印尼语姓名，ASR难识别",
+          "weight": 50
+        },
+        {
+          "text": "Vasco Oliveira",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "完整葡语姓名",
+          "weight": 50
+        },
+        {
+          "text": "Vasco Pinto",
+          "kind": "person",
+          "source": "stage1.existing_catalog.3",
+          "reason": "完整葡语姓名",
+          "weight": 50
+        },
+        {
+          "text": "Åke Zanström",
+          "kind": "person",
+          "source": "stage1.existing_catalog.4",
+          "reason": "含Å和ö变音符号的瑞典姓名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Punxsutawney",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_contact_2",
+          "reason": "罕见美国地名，发音困难",
+          "weight": 50
+        },
+        {
+          "text": "Östermalmsgatan",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_contact_4",
+          "reason": "含变音符号的瑞典街道名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Maria Luísa Sousa e Silva",
+        "Jianhua Wang",
+        "Ridho Syuhada",
+        "Vasco Oliveira",
+        "Vasco Pinto",
+        "Åke Zanström",
+        "Punxsutawney",
+        "Östermalmsgatan"
+      ],
+      "active_vocabulary": {
+        "Poker Tiles": 50,
+        "PokerCo": 50,
+        "Maria Luísa Sousa e Silva": 50,
+        "Jianhua Wang": 50,
+        "Ridho Syuhada": 50,
+        "Vasco Oliveira": 50,
+        "Vasco Pinto": 50,
+        "Åke Zanström": 50,
+        "Punxsutawney": 50,
+        "Östermalmsgatan": 50
+      },
+      "vocabulary_sha256": "af35a51d8c6aee3c4250901ff0f1a68a4b4b7fdb638095861268daaddb444905"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Poker Tiles": 50,
+        "PokerCo": 50,
+        "Maria Luísa Sousa e Silva": 50,
+        "Jianhua Wang": 50,
+        "Ridho Syuhada": 50,
+        "Vasco Oliveira": 50,
+        "Vasco Pinto": 50,
+        "Åke Zanström": 50,
+        "Punxsutawney": 50,
+        "Östermalmsgatan": 50
+      },
+      "vocabulary_sha256": "af35a51d8c6aee3c4250901ff0f1a68a4b4b7fdb638095861268daaddb444905"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:04.407800+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

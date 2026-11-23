@@ -1,0 +1,120 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0930_bs9rikfk9v9px9kdy0b7ztru657zreek",
+  "model": "deepseek-flash",
+  "input_sha256": "d78293ed535d737c100eeb02ee086b70664e90562409b15b1b58943d0d6f4319",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Çağla Öztürk",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "参与者姓名，含特殊字符"
+        },
+        {
+          "text": "Ayşe Kaya",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "参与者姓名，含特殊字符"
+        },
+        {
+          "text": "Luís Pimentel",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "参与者姓名，含重音"
+        },
+        {
+          "text": "Xóchitl Hernández García",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "参与者姓名，含特殊字符"
+        }
+      ],
+      "new_terms": [
+        "Çağla Öztürk",
+        "Ayşe Kaya",
+        "Luís Pimentel",
+        "Xóchitl Hernández García"
+      ],
+      "active_vocabulary": {
+        "Çağla Öztürk": 50,
+        "Ayşe Kaya": 50,
+        "Luís Pimentel": 50,
+        "Xóchitl Hernández García": 50
+      },
+      "vocabulary_sha256": "5407938061c85447821d5644cf6a4bdc3fd4ad7bad3955564b64307f9b4cb04d"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Çağla Öztürk": 50,
+        "Ayşe Kaya": 50,
+        "Luís Pimentel": 50,
+        "Xóchitl Hernández García": 50
+      },
+      "vocabulary_sha256": "5407938061c85447821d5644cf6a4bdc3fd4ad7bad3955564b64307f9b4cb04d"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Çağla Öztürk",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "需移除的参与者姓名"
+        },
+        {
+          "text": "Luísa Pereira de Sousa",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "新增参与者完整姓名"
+        },
+        {
+          "text": "Luís Pimentel",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "提出请求的参与者姓名"
+        }
+      ],
+      "new_terms": [
+        "Luísa Pereira de Sousa"
+      ],
+      "active_vocabulary": {
+        "Çağla Öztürk": 50,
+        "Ayşe Kaya": 50,
+        "Luís Pimentel": 50,
+        "Xóchitl Hernández García": 50,
+        "Luísa Pereira de Sousa": 50
+      },
+      "vocabulary_sha256": "38dfb7b95f92ffc731fb3dc36116491610bde3708e870e581853c4efd4362d81"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "47a3db40722eda2070892286bfbb6a64dd7b0e11462bac7849517b6dd8bace98",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3514,
+        "completion_tokens": 238,
+        "total_tokens": 3752,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3258
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.163
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0930_bs9rikfk9v9px9kdy0b7ztru657zreek",
+  "extracted_at": "2026-11-22T06:44:31.628772+00:00"
+}

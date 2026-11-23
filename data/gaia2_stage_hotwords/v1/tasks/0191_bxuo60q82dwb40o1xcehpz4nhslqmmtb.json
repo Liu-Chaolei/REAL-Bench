@@ -1,0 +1,144 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0191_bxuo60q82dwb40o1xcehpz4nhslqmmtb",
+  "model": "deepseek-flash",
+  "input_sha256": "a7deec589e1c5477154fd14dd506b03a5b533196ac8dcc9d5fbb9cd8be8e2d4b",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Riemann",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人姓氏，需精确识别"
+        },
+        {
+          "text": "Spooky Hollow Halloween Window Cling Sheet",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定商品名称"
+        },
+        {
+          "text": "Samara City Center",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "已保存房产的特定名称"
+        }
+      ],
+      "new_terms": [
+        "Riemann",
+        "Spooky Hollow Halloween Window Cling Sheet",
+        "Samara City Center"
+      ],
+      "active_vocabulary": {
+        "Riemann": 50,
+        "Spooky Hollow Halloween Window Cling Sheet": 50,
+        "Samara City Center": 50
+      },
+      "vocabulary_sha256": "61920c6e731036843448fe92cb2d56c80256b5415bbc7f5d9e9899dbaddcb103"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Samara Studio",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "特定房产名称"
+        },
+        {
+          "text": "Kuibyshev Street",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "街道专有名称"
+        },
+        {
+          "text": "Samara City Center",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "特定房产名称"
+        }
+      ],
+      "new_terms": [
+        "Samara Studio",
+        "Kuibyshev Street"
+      ],
+      "active_vocabulary": {
+        "Riemann": 50,
+        "Spooky Hollow Halloween Window Cling Sheet": 50,
+        "Samara City Center": 50,
+        "Samara Studio": 50,
+        "Kuibyshev Street": 50
+      },
+      "vocabulary_sha256": "d73d1805645525790aa061fabeb5e5951e22b6a277406ac493faca9340b9ec70"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Spooky Hollow Halloween Window Cling Sheets",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "特定商品名称"
+        }
+      ],
+      "new_terms": [
+        "Spooky Hollow Halloween Window Cling Sheets"
+      ],
+      "active_vocabulary": {
+        "Riemann": 50,
+        "Spooky Hollow Halloween Window Cling Sheet": 50,
+        "Samara City Center": 50,
+        "Samara Studio": 50,
+        "Kuibyshev Street": 50,
+        "Spooky Hollow Halloween Window Cling Sheets": 50
+      },
+      "vocabulary_sha256": "2b44357070b26886cc0ecdbb841c567dc9f089e9d801dc9baa21d111185c4dcb"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "23879ae4d1e7f13f303537344392185add05cdcb58b86182ba59e41cb203d1a6",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2135,
+        "completion_tokens": 227,
+        "total_tokens": 2362,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1879
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.046,
+      "error": "3 validation errors for Extraction\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "29beb6af5a23607382e769f432d02fcd199f4061c5a4eb01367d2cdfa4e2f552",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2900,
+        "completion_tokens": 218,
+        "total_tokens": 3118,
+        "prompt_tokens_details": {
+          "cached_tokens": 2304
+        },
+        "prompt_cache_hit_tokens": 2304,
+        "prompt_cache_miss_tokens": 596
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.955
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0191_bxuo60q82dwb40o1xcehpz4nhslqmmtb",
+  "extracted_at": "2026-11-22T06:40:37.000646+00:00"
+}

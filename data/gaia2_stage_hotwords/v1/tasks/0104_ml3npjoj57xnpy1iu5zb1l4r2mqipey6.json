@@ -1,0 +1,250 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0104_ml3npjoj57xnpy1iu5zb1l4r2mqipey6",
+  "model": "deepseek-flash",
+  "input_sha256": "95cdb70d8d4c0eb6d770ac99f811d0651d427fdd58f9ac548eed64dfe3abdeac",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Anna Parson",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Helmut Eisenstadt",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-36169cf5-4bf3-476a-ad91-f4903c1c67fd.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Gerrit van der Meer",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-36169cf5-4bf3-476a-ad91-f4903c1c67fd.arguments.attendees[1]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "University of Cambridge",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-36169cf5-4bf3-476a-ad91-f4903c1c67fd.arguments.location",
+          "reason": "活动地点机构"
+        },
+        {
+          "text": "Department of Physics",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-36169cf5-4bf3-476a-ad91-f4903c1c67fd.arguments.location",
+          "reason": "院系名称"
+        },
+        {
+          "text": "LEGO Creator 3in1 Propeller Plane",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品型号"
+        },
+        {
+          "text": "The Pint Shop",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-66205084-9641-40bc-b21c-6ae5c8add238.arguments.content",
+          "reason": "餐厅名称"
+        },
+        {
+          "text": "Cambridge",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-66205084-9641-40bc-b21c-6ae5c8add238.arguments.content",
+          "reason": "城市名"
+        },
+        {
+          "text": "Glasgow",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Anna Parson",
+        "Helmut Eisenstadt",
+        "Gerrit van der Meer",
+        "University of Cambridge",
+        "Department of Physics",
+        "LEGO Creator 3in1 Propeller Plane",
+        "The Pint Shop",
+        "Cambridge",
+        "Glasgow"
+      ],
+      "active_vocabulary": {
+        "Anna Parson": 50,
+        "Helmut Eisenstadt": 50,
+        "Gerrit van der Meer": 50,
+        "University of Cambridge": 50,
+        "Department of Physics": 50,
+        "LEGO Creator 3in1 Propeller Plane": 50,
+        "The Pint Shop": 50,
+        "Cambridge": 50,
+        "Glasgow": 50
+      },
+      "vocabulary_sha256": "5018ab5a9060eb510c0f035590d3c04557765a67a7ff841bc66a7a42890d4272"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Anna Parson",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群组成员姓名"
+        },
+        {
+          "text": "Evangelia Papadopoulos",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群组成员姓名"
+        },
+        {
+          "text": "Kaidën Nakamura",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群组成员姓名"
+        },
+        {
+          "text": "The Pint Shop",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "餐厅名称"
+        },
+        {
+          "text": "Cambridge",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Evangelia Papadopoulos",
+        "Kaidën Nakamura"
+      ],
+      "active_vocabulary": {
+        "Anna Parson": 50,
+        "Helmut Eisenstadt": 50,
+        "Gerrit van der Meer": 50,
+        "University of Cambridge": 50,
+        "Department of Physics": 50,
+        "LEGO Creator 3in1 Propeller Plane": 50,
+        "The Pint Shop": 50,
+        "Cambridge": 50,
+        "Glasgow": 50,
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50
+      },
+      "vocabulary_sha256": "900a0b0349b3d104a3e8701723c2cb5af3bd8c8edab499036d231c39ea09f67b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Glasgow City Centre Apartments",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "George Square",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "广场地名"
+        },
+        {
+          "text": "Glasgow",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Glasgow Gem",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Glasgow West End Apartment",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Hyndland St",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "街道名"
+        },
+        {
+          "text": "Glasgow West End Apartments",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Scotland",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "地区名"
+        }
+      ],
+      "new_terms": [
+        "Glasgow City Centre Apartments",
+        "George Square",
+        "Glasgow Gem",
+        "Glasgow West End Apartment",
+        "Hyndland St",
+        "Glasgow West End Apartments",
+        "Scotland"
+      ],
+      "active_vocabulary": {
+        "Anna Parson": 50,
+        "Helmut Eisenstadt": 50,
+        "Gerrit van der Meer": 50,
+        "University of Cambridge": 50,
+        "Department of Physics": 50,
+        "LEGO Creator 3in1 Propeller Plane": 50,
+        "The Pint Shop": 50,
+        "Cambridge": 50,
+        "Glasgow": 50,
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Glasgow City Centre Apartments": 50,
+        "George Square": 50,
+        "Glasgow Gem": 50,
+        "Glasgow West End Apartment": 50,
+        "Hyndland St": 50,
+        "Glasgow West End Apartments": 50,
+        "Scotland": 50
+      },
+      "vocabulary_sha256": "ebfe145d3a13bea62742e5eabdbc309a448d9d2c4d4e3f2f69e0fd2a09e1b178"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "1cac3ac188104c1f703cf8a8b76a0f786182f1a2112d56d3510fea7f54158bcb",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3427,
+        "completion_tokens": 820,
+        "total_tokens": 4247,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3171
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.776
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0104_ml3npjoj57xnpy1iu5zb1l4r2mqipey6",
+  "extracted_at": "2026-11-22T06:40:04.780124+00:00"
+}

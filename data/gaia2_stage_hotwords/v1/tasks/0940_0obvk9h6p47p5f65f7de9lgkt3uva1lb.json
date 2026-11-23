@@ -1,0 +1,171 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0940_0obvk9h6p47p5f65f7de9lgkt3uva1lb",
+  "model": "deepseek-flash",
+  "input_sha256": "8c8682b6f87a439c900f3d751d3de9c445a99e54889aea1d2c05430bd375320a",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Šárka Nováková",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-939da7c3-69c6-4bd6-9dc6-aff2da99cddf.arguments.attendees[0]",
+          "reason": "与会者姓名，含变音符号"
+        },
+        {
+          "text": "Charles University",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-939da7c3-69c6-4bd6-9dc6-aff2da99cddf.arguments.location",
+          "reason": "地点中的大学名称"
+        },
+        {
+          "text": "Prague",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-939da7c3-69c6-4bd6-9dc6-aff2da99cddf.arguments.location",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Šárka Nováková",
+        "Charles University",
+        "Prague"
+      ],
+      "active_vocabulary": {
+        "Šárka Nováková": 50,
+        "Charles University": 50,
+        "Prague": 50
+      },
+      "vocabulary_sha256": "0167a91942a465460f0f48bb713075bc95c7f9665d44ba652f316b7e35dcc3c0"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Šárka Nováková",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_log.arguments.content",
+          "reason": "邮件正文中的人名"
+        },
+        {
+          "text": "Šárka",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_log.arguments.content",
+          "reason": "邮件正文中单独出现的名字"
+        },
+        {
+          "text": "Charles University",
+          "kind": "organization",
+          "source": "stage1.tool_gt.series_s1_send_log.arguments.content",
+          "reason": "邮件正文中的大学名称"
+        },
+        {
+          "text": "Prague",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send_log.arguments.content",
+          "reason": "邮件正文中的城市名"
+        },
+        {
+          "text": "Coffee Break with Friends",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send_log.arguments.content",
+          "reason": "另一事件的自定义名称"
+        }
+      ],
+      "new_terms": [
+        "Šárka",
+        "Coffee Break with Friends"
+      ],
+      "active_vocabulary": {
+        "Šárka Nováková": 50,
+        "Charles University": 50,
+        "Prague": 50,
+        "Šárka": 50,
+        "Coffee Break with Friends": 50
+      },
+      "vocabulary_sha256": "3881d97097930f505790900a18ff1252a80bd26d6eb6e3648c689933c82a614b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Šárka Nováková",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "任务中指定的人名"
+        },
+        {
+          "text": "Šárka",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "消息中单独出现的名字"
+        },
+        {
+          "text": "Charles University",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "消息中的大学名称"
+        },
+        {
+          "text": "Prague",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "消息中的城市名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Šárka Nováková": 50,
+        "Charles University": 50,
+        "Prague": 50,
+        "Šárka": 50,
+        "Coffee Break with Friends": 50
+      },
+      "vocabulary_sha256": "3881d97097930f505790900a18ff1252a80bd26d6eb6e3648c689933c82a614b"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "4d9f1aa9deed037d0b055b8b6e526e4dbbcea55cf1fc4d90eff1f95d6674f9f9",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3312,
+        "completion_tokens": 600,
+        "total_tokens": 3912,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3056
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.321,
+      "error": "Invalid proper-name phrase: 'matej.novacek@student.cuni.cz'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "b86c2315c161192c60eb479be1fdf56fe1052ac8deff74368fc98763713497fc",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4313,
+        "completion_tokens": 548,
+        "total_tokens": 4861,
+        "prompt_tokens_details": {
+          "cached_tokens": 3840
+        },
+        "prompt_cache_hit_tokens": 3840,
+        "prompt_cache_miss_tokens": 473
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.85
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0940_0obvk9h6p47p5f65f7de9lgkt3uva1lb",
+  "extracted_at": "2026-11-22T06:44:39.529186+00:00"
+}

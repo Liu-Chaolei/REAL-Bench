@@ -1,0 +1,120 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0060_20gzbu5axwurnrooquit6zgdiu8h51v0__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "d48356598c4abf54fec704949c5ac336e40186b2a33e0905671acada253f9f0d",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Conan The Brigand",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定商品名称"
+        },
+        {
+          "text": "Corinth",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定商品名称"
+        }
+      ],
+      "new_terms": [
+        "Conan The Brigand",
+        "Corinth"
+      ],
+      "active_vocabulary": {
+        "Conan The Brigand": 50,
+        "Corinth": 50
+      },
+      "vocabulary_sha256": "a86cd44ccc3558a8719eb22ee47d106628feebbce0f6aad76abcec062fce63eb"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Jamila Patel",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create.arguments.attendees[1]",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create.arguments.attendees[0]",
+          "reason": "发件人姓名"
+        },
+        {
+          "text": "Conan The Brigand",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "特定商品名称"
+        },
+        {
+          "text": "Corinth",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "特定商品名称"
+        }
+      ],
+      "new_terms": [
+        "Jamila Patel",
+        "Aurélien LaFleur"
+      ],
+      "active_vocabulary": {
+        "Conan The Brigand": 50,
+        "Corinth": 50,
+        "Jamila Patel": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "509dcc2cba0744853db56f157a39f4958e4cd8034b096f035d5e601f35fbb36e"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Portland",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_search.arguments.location",
+          "reason": "搜索城市名称"
+        }
+      ],
+      "new_terms": [
+        "Portland"
+      ],
+      "active_vocabulary": {
+        "Conan The Brigand": 50,
+        "Corinth": 50,
+        "Jamila Patel": 50,
+        "Aurélien LaFleur": 50,
+        "Portland": 50
+      },
+      "vocabulary_sha256": "c26198ac920ed26e9e777d5f3c504df60fb2e5bcfec0cfe2ff71580ae1a11cb5"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "ce71ecbd5baf52eaca0ae326f3f1cbca9d503a37324644a935abdeaffbbee3da",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2516,
+        "completion_tokens": 245,
+        "total_tokens": 2761,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2260
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.17
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0060_20gzbu5axwurnrooquit6zgdiu8h51v0__repetition_v1",
+  "extracted_at": "2026-11-22T06:45:26.276895+00:00"
+}

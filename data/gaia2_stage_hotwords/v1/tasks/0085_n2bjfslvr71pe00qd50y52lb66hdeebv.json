@@ -1,0 +1,237 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0085_n2bjfslvr71pe00qd50y52lb66hdeebv",
+  "model": "deepseek-flash",
+  "input_sha256": "a83b94c60b0281da9ee198d90642bf5d24f51749d946cb35eb3744110827c3a0",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Ake Jansson",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-361ef856-ad0e-48f3-a59c-2b45cda907ea.arguments.content",
+          "reason": "邮件署名"
+        }
+      ],
+      "new_terms": [
+        "Ake Jansson",
+        "Rohan Kumar"
+      ],
+      "active_vocabulary": {
+        "Ake Jansson": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "89288f177eb42d5acbf28c4ec4694eb21a0648c4f3516a798a9dd2f4b8b687b6"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurum Heights",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Navi Mumbai",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Aashiana Apartments",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Delhi",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "城市名"
+        },
+        {
+          "text": "Ganga Heights",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Gurgaon",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "城市名"
+        },
+        {
+          "text": "Yummy World",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "产品品牌名"
+        }
+      ],
+      "new_terms": [
+        "Aurum Heights",
+        "Navi Mumbai",
+        "Aashiana Apartments",
+        "Delhi",
+        "Ganga Heights",
+        "Gurgaon",
+        "Yummy World"
+      ],
+      "active_vocabulary": {
+        "Ake Jansson": 50,
+        "Rohan Kumar": 50,
+        "Aurum Heights": 50,
+        "Navi Mumbai": 50,
+        "Aashiana Apartments": 50,
+        "Delhi": 50,
+        "Ganga Heights": 50,
+        "Gurgaon": 50,
+        "Yummy World": 50
+      },
+      "vocabulary_sha256": "f1910fbee5c3a42c2f69f342e3707b35d31b1139db3540a7f1e6e0feec61bace"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Lodha The Park",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Worli",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "地区名"
+        },
+        {
+          "text": "Mumbai",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "城市名"
+        },
+        {
+          "text": "Prestige Shantiniketan",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Whitefield",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "地区名"
+        },
+        {
+          "text": "Bengaluru",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "城市名"
+        },
+        {
+          "text": "Aashiana Apartments",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Delhi",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "城市名"
+        },
+        {
+          "text": "Ganga Heights",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Gurgaon",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Lodha The Park",
+        "Worli",
+        "Mumbai",
+        "Prestige Shantiniketan",
+        "Whitefield",
+        "Bengaluru"
+      ],
+      "active_vocabulary": {
+        "Ake Jansson": 50,
+        "Rohan Kumar": 50,
+        "Aurum Heights": 50,
+        "Navi Mumbai": 50,
+        "Aashiana Apartments": 50,
+        "Delhi": 50,
+        "Ganga Heights": 50,
+        "Gurgaon": 50,
+        "Yummy World": 50,
+        "Lodha The Park": 50,
+        "Worli": 50,
+        "Mumbai": 50,
+        "Prestige Shantiniketan": 50,
+        "Whitefield": 50,
+        "Bengaluru": 50
+      },
+      "vocabulary_sha256": "617486161fa55991b3386445cbe4b9c9c677d060d57ad2de4e3cfd43ff345acd"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "c106b22e6a89c6314c001a02f1aedfe4dceab00afcaa14b8d07adacdd88241b5",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2637,
+        "completion_tokens": 671,
+        "total_tokens": 3308,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2381
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 2.086,
+      "error": "1 validation error for Extraction\nstages.1.terms.6.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "ad4ebe86de7c5cb7505fc166c897c5e75e547e078630417a2647cf5fdb5501b9",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3769,
+        "completion_tokens": 671,
+        "total_tokens": 4440,
+        "prompt_tokens_details": {
+          "cached_tokens": 3200
+        },
+        "prompt_cache_hit_tokens": 3200,
+        "prompt_cache_miss_tokens": 569
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.056
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0085_n2bjfslvr71pe00qd50y52lb66hdeebv",
+  "extracted_at": "2026-11-22T06:40:01.992857+00:00"
+}

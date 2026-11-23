@@ -1,0 +1,147 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0730_zhjiaqjkfei1o7d00u5dnp8h3ybf4pw9__async_0081_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "b0e08c98ce2a021e5a2e1cac82fbc96cdf8f41d637954857eb112500d7710f9c",
+  "review_input_sha256": "c6931716b022c58e76de7d8ab2ef9aa0a4b11eb84edb0274597b08b562f3c743",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "2f8db443584cdd41a09ad59dccd9a690b840ddb975bff9f98789c0217ecd4c07",
+  "reference_results_sha256": "c4e245b4b9ddfe4e919263bfd2c686395a0a94f725f56071460d39ffa4698be2",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Luis Pereira",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Aurelian Toma",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-d2a5a6d5-6a6b-4169-b265-c15e8c23094d.arguments.content"
+    },
+    "stage1.tool_response.series_s1_get_event": {
+      "stage": 1,
+      "text": "{\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"LA Dodger's Game\", \"start_datetime\": \"1729450800.0\", \"end_datetime\": \"1729461600.0\", \"tag\": null, \"description\": null, \"location\": \"Dodger's stadium\", \"attendees\": [], \"start_strftime\": \"Sunday, 2024-10-20 19:00:00\", \"end_strftime\": \"Sunday, 2024-10-20 22:00:00\"}",
+      "event_id": "series_s1_get_event",
+      "response_sha256": "b124fae78d100a927749dc5acffa5d8a0253415b715c30a6d9f49875198968f5"
+    },
+    "stage2.tool_response.series_s2_read_back": {
+      "stage": 2,
+      "text": "{\"event_id\": \"d4c2d9f7cdacdf99ad578e25036c7e5f\", \"title\": \"Buy LA Dodger's Tickets - Aurelian Reply Deadline\", \"start_datetime\": \"1729080000.0\", \"end_datetime\": \"1729081800.0\", \"tag\": null, \"description\": \"Ticket deadline for the LA Dodger's Game collaboration meeting with Luis Pereira: Sunday, 20 October 2024, 7:00 PM to 10:00 PM at Dodger's stadium. Aurelian Toma needs to confirm his ticket by this time.\", \"location\": null, \"attendees\": [], \"start_strftime\": \"Wednesday, 2024-10-16 12:00:00\", \"end_strftime\": \"Wednesday, 2024-10-16 12:30:00\"}",
+      "event_id": "series_s2_read_back",
+      "response_sha256": "68c60a7afcb756dccbb39c648f6f4dc2c41c46265037c6194a0975282dd59098"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurelian Toma",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "较难拼写的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Luis Pereira",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，可保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurelian Toma",
+        "Aurélien LaFleur",
+        "Luis Pereira"
+      ],
+      "active_vocabulary": {
+        "Aurelian Toma": 50,
+        "Aurélien LaFleur": 50,
+        "Luis Pereira": 50
+      },
+      "vocabulary_sha256": "8cc2849c9bf4b922de3fa630ba196b749844926373fe9202160c9414e646d7e0"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "LA Dodger's Game",
+          "kind": "custom_name",
+          "source": "stage1.tool_response.series_s1_get_event",
+          "reason": "含专有名词的完整活动名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "LA Dodger's Game"
+      ],
+      "active_vocabulary": {
+        "Aurelian Toma": 50,
+        "Aurélien LaFleur": 50,
+        "Luis Pereira": 50,
+        "LA Dodger's Game": 50
+      },
+      "vocabulary_sha256": "a93edc831553631caa3bacce54adbf9d6de71e65e3f54661ad2dbda4d4f2db32"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Buy LA Dodger's Tickets - Aurelian Reply Deadline",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_read_back",
+          "reason": "含专有名词的完整自定义事件名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Buy LA Dodger's Tickets - Aurelian Reply Deadline"
+      ],
+      "active_vocabulary": {
+        "Aurelian Toma": 50,
+        "Aurélien LaFleur": 50,
+        "Luis Pereira": 50,
+        "LA Dodger's Game": 50,
+        "Buy LA Dodger's Tickets - Aurelian Reply Deadline": 50
+      },
+      "vocabulary_sha256": "9d28a6c399d12065d273d17cc0f6200910823aa3cffe0e74a8fe6313b8208068"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Dodger's stadium"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:20:08.446050+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

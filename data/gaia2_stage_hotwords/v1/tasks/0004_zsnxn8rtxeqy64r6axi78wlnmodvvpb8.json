@@ -1,0 +1,111 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0004_zsnxn8rtxeqy64r6axi78wlnmodvvpb8",
+  "model": "deepseek-flash",
+  "input_sha256": "59f325cbbe2f0e7c55e3d67563397e074a74471d2fea2fe734effa86d72a0f01",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Frantz Fanon",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "对话中提及的人名"
+        },
+        {
+          "text": "Vladimíra Nováková",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-6d426bab-bfc7-42b1-9204-db67ff3ea9dc.arguments.content",
+          "reason": "最终答案中的人名"
+        }
+      ],
+      "new_terms": [
+        "Frantz Fanon",
+        "Vladimíra Nováková"
+      ],
+      "active_vocabulary": {
+        "Frantz Fanon": 50,
+        "Vladimíra Nováková": 50
+      },
+      "vocabulary_sha256": "eafa2712fd4fddc6ef3ab7237d3fad002de8fed022737b90c0faffd1f0e6b74b"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Vladimíra Nováková",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Detective Inspector",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_say.arguments.content",
+          "reason": "职务名称"
+        }
+      ],
+      "new_terms": [
+        "Detective Inspector"
+      ],
+      "active_vocabulary": {
+        "Frantz Fanon": 50,
+        "Vladimíra Nováková": 50,
+        "Detective Inspector": 50
+      },
+      "vocabulary_sha256": "ee3a5f71306f41a37031e4f0188d868f7c3d52885a5868276423410c366a18e1"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Vladimíra Nováková",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Křižovnická 86/4, 110 00 Prague 1, Czech Republic",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add.arguments.location",
+          "reason": "活动地点地址"
+        }
+      ],
+      "new_terms": [
+        "Křižovnická 86/4, 110 00 Prague 1, Czech Republic"
+      ],
+      "active_vocabulary": {
+        "Frantz Fanon": 50,
+        "Vladimíra Nováková": 50,
+        "Detective Inspector": 50,
+        "Křižovnická 86/4, 110 00 Prague 1, Czech Republic": 50
+      },
+      "vocabulary_sha256": "e7b78258863c9a7631148376a3256168f8310f3c8c25011a281a55e9a8c68fa8"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "1d5a4804be534cbff3a78dfeb9fa1533a1670e11a51c9e62de2241585e543981",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1588,
+        "completion_tokens": 282,
+        "total_tokens": 1870,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1332
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.464
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0004_zsnxn8rtxeqy64r6axi78wlnmodvvpb8",
+  "extracted_at": "2026-11-22T06:38:21.796680+00:00"
+}

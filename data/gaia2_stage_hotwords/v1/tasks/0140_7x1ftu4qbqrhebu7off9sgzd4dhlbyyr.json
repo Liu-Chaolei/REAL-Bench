@@ -1,0 +1,142 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0140_7x1ftu4qbqrhebu7off9sgzd4dhlbyyr",
+  "model": "deepseek-flash",
+  "input_sha256": "3f1e83460c1dd66756778a47a93049803302680d6686391fe1c2c21a1ad50e1e",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Marie Dubois",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "新联系人姓名"
+        },
+        {
+          "text": "Lucas Vermeulen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "新联系人姓名"
+        },
+        {
+          "text": "Emma Janssens",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "新联系人姓名"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3f289af9-8034-406f-8a86-10fdb3a49250.arguments.content",
+          "reason": "邮件署名中的发件人姓名"
+        }
+      ],
+      "new_terms": [
+        "Marie Dubois",
+        "Lucas Vermeulen",
+        "Emma Janssens",
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Marie Dubois": 50,
+        "Lucas Vermeulen": 50,
+        "Emma Janssens": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "2eeda7b259e0200d1121b78cd7202181c944c2a2c26b3668d26f44aa3412a825"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Marie Dubois",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Lucas Vermeulen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Emma Janssens",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_marie.arguments.content",
+          "reason": "邮件署名中的发件人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Marie Dubois": 50,
+        "Lucas Vermeulen": 50,
+        "Emma Janssens": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "2eeda7b259e0200d1121b78cd7202181c944c2a2c26b3668d26f44aa3412a825"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Marie Dubois",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "联系人表中的姓名"
+        },
+        {
+          "text": "Lucas Vermeulen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "联系人表中的姓名"
+        },
+        {
+          "text": "Emma Janssens",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "联系人表中的姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Marie Dubois": 50,
+        "Lucas Vermeulen": 50,
+        "Emma Janssens": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "2eeda7b259e0200d1121b78cd7202181c944c2a2c26b3668d26f44aa3412a825"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "7e0be168917c60e392f9285dd0de0c19d91c7e03a5592ae67f468f24de2f41a4",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3938,
+        "completion_tokens": 398,
+        "total_tokens": 4336,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3682
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.511
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0140_7x1ftu4qbqrhebu7off9sgzd4dhlbyyr",
+  "extracted_at": "2026-11-22T06:40:11.742776+00:00"
+}

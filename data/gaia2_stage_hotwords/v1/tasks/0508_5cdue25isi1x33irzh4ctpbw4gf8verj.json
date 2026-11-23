@@ -1,0 +1,127 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0508_5cdue25isi1x33irzh4ctpbw4gf8verj",
+  "model": "deepseek-flash",
+  "input_sha256": "03e2063e6f53231a6fe755d0558c7890d09c0113ad5728062126e81780a85f76",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Harold Nakamura",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "受邀嘉宾姓名"
+        },
+        {
+          "text": "Ayşe Demir",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "受邀嘉宾姓名，含特殊字符"
+        },
+        {
+          "text": "Xóchitl Ramírez",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "受邀嘉宾姓名，含特殊字符"
+        }
+      ],
+      "new_terms": [
+        "Harold Nakamura",
+        "Ayşe Demir",
+        "Xóchitl Ramírez"
+      ],
+      "active_vocabulary": {
+        "Harold Nakamura": 50,
+        "Ayşe Demir": 50,
+        "Xóchitl Ramírez": 50
+      },
+      "vocabulary_sha256": "f091af5dc82e45959d1c7ac704dffcc69b8913ff29697fef243b089ac69aa184"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Harold Nakamura": 50,
+        "Ayşe Demir": 50,
+        "Xóchitl Ramírez": 50
+      },
+      "vocabulary_sha256": "f091af5dc82e45959d1c7ac704dffcc69b8913ff29697fef243b089ac69aa184"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Harold Nakamura",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群聊成员姓名"
+        },
+        {
+          "text": "Ayşe Demir",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群聊成员姓名，含特殊字符"
+        },
+        {
+          "text": "Xóchitl Ramírez",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群聊成员姓名，含特殊字符"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Harold Nakamura": 50,
+        "Ayşe Demir": 50,
+        "Xóchitl Ramírez": 50
+      },
+      "vocabulary_sha256": "f091af5dc82e45959d1c7ac704dffcc69b8913ff29697fef243b089ac69aa184"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "ece80bfb14f5bea25424f642b8b6c5d892a5bfa23c7ff4c97a703b3b3fa321cc",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2961,
+        "completion_tokens": 204,
+        "total_tokens": 3165,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2705
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.133,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "6d4006f665fa12095d4b68ce1f3dfc13267da392e8153a4464c62eaaf705c653",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3558,
+        "completion_tokens": 205,
+        "total_tokens": 3763,
+        "prompt_tokens_details": {
+          "cached_tokens": 3072
+        },
+        "prompt_cache_hit_tokens": 3072,
+        "prompt_cache_miss_tokens": 486
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.933
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0508_5cdue25isi1x33irzh4ctpbw4gf8verj",
+  "extracted_at": "2026-11-22T06:42:27.634940+00:00"
+}

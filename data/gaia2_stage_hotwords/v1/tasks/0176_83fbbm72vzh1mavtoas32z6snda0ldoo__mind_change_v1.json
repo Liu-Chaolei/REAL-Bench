@@ -1,0 +1,292 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0176_83fbbm72vzh1mavtoas32z6snda0ldoo__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "21953cac7b1b20dea287d91cb3386130d47454084160fef883a3c12659c3a1ca",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Elodie Vandenberghe",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Antwerp Dream - Meir 100",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称及地址"
+        },
+        {
+          "text": "Antwerp Haven - Schuttershofstraat",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称及地址"
+        },
+        {
+          "text": "Antwerp Abode - Meir",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称及地址"
+        },
+        {
+          "text": "Antwerp Luxury Loft - Schuttershofstraat",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称及地址"
+        },
+        {
+          "text": "Brugge Bungalow - Langestraat",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称及地址"
+        },
+        {
+          "text": "Brugge Canal View",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Brugge Historic Home - Langestraat",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称及地址"
+        },
+        {
+          "text": "Brugge Breeze - Markt",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称及地址"
+        },
+        {
+          "text": "Brussels Bright - Avenue Louise",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称及地址"
+        },
+        {
+          "text": "Brussels Luxe Living",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Brussels Green - Avenue de Tervuren",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称及地址"
+        },
+        {
+          "text": "Brussels Boutique - Rue des Chartreux",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称及地址"
+        },
+        {
+          "text": "Ghent Waterfront - Korenlei",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称及地址"
+        },
+        {
+          "text": "Leuven Luxury - Tiensestraat 50",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称及地址"
+        },
+        {
+          "text": "Namur River Views",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Namur Riverside - Quai des Bateliers",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称及地址"
+        },
+        {
+          "text": "Namur Riverfront - Rue de la Meuse",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称及地址"
+        },
+        {
+          "text": "Ostend Beachside Condo - Koninginnelaan 10",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称及地址"
+        },
+        {
+          "text": "Liege Luxury - Rue des Guillemins 45",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称及地址"
+        },
+        {
+          "text": "Liesbeth",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [
+        "Elodie Vandenberghe",
+        "Antwerp Dream - Meir 100",
+        "Antwerp Haven - Schuttershofstraat",
+        "Antwerp Abode - Meir",
+        "Antwerp Luxury Loft - Schuttershofstraat",
+        "Brugge Bungalow - Langestraat",
+        "Brugge Canal View",
+        "Brugge Historic Home - Langestraat",
+        "Brugge Breeze - Markt",
+        "Brussels Bright - Avenue Louise",
+        "Brussels Luxe Living",
+        "Brussels Green - Avenue de Tervuren",
+        "Brussels Boutique - Rue des Chartreux",
+        "Ghent Waterfront - Korenlei",
+        "Leuven Luxury - Tiensestraat 50",
+        "Namur River Views",
+        "Namur Riverside - Quai des Bateliers",
+        "Namur Riverfront - Rue de la Meuse",
+        "Ostend Beachside Condo - Koninginnelaan 10",
+        "Liege Luxury - Rue des Guillemins 45",
+        "Liesbeth"
+      ],
+      "active_vocabulary": {
+        "Elodie Vandenberghe": 50,
+        "Antwerp Dream - Meir 100": 50,
+        "Antwerp Haven - Schuttershofstraat": 50,
+        "Antwerp Abode - Meir": 50,
+        "Antwerp Luxury Loft - Schuttershofstraat": 50,
+        "Brugge Bungalow - Langestraat": 50,
+        "Brugge Canal View": 50,
+        "Brugge Historic Home - Langestraat": 50,
+        "Brugge Breeze - Markt": 50,
+        "Brussels Bright - Avenue Louise": 50,
+        "Brussels Luxe Living": 50,
+        "Brussels Green - Avenue de Tervuren": 50,
+        "Brussels Boutique - Rue des Chartreux": 50,
+        "Ghent Waterfront - Korenlei": 50,
+        "Leuven Luxury - Tiensestraat 50": 50,
+        "Namur River Views": 50,
+        "Namur Riverside - Quai des Bateliers": 50,
+        "Namur Riverfront - Rue de la Meuse": 50,
+        "Ostend Beachside Condo - Koninginnelaan 10": 50,
+        "Liege Luxury - Rue des Guillemins 45": 50,
+        "Liesbeth": 50
+      },
+      "vocabulary_sha256": "39933a652d00b994c2bfd57e650e347f12573cae82042a9685ef71ed0a3666a8"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Nalinee Srisombat",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Jawaher Al-Mansour",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [
+        "Nalinee Srisombat",
+        "Jawaher Al-Mansour",
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Elodie Vandenberghe": 50,
+        "Antwerp Dream - Meir 100": 50,
+        "Antwerp Haven - Schuttershofstraat": 50,
+        "Antwerp Abode - Meir": 50,
+        "Antwerp Luxury Loft - Schuttershofstraat": 50,
+        "Brugge Bungalow - Langestraat": 50,
+        "Brugge Canal View": 50,
+        "Brugge Historic Home - Langestraat": 50,
+        "Brugge Breeze - Markt": 50,
+        "Brussels Bright - Avenue Louise": 50,
+        "Brussels Luxe Living": 50,
+        "Brussels Green - Avenue de Tervuren": 50,
+        "Brussels Boutique - Rue des Chartreux": 50,
+        "Ghent Waterfront - Korenlei": 50,
+        "Leuven Luxury - Tiensestraat 50": 50,
+        "Namur River Views": 50,
+        "Namur Riverside - Quai des Bateliers": 50,
+        "Namur Riverfront - Rue de la Meuse": 50,
+        "Ostend Beachside Condo - Koninginnelaan 10": 50,
+        "Liege Luxury - Rue des Guillemins 45": 50,
+        "Liesbeth": 50,
+        "Nalinee Srisombat": 50,
+        "Jawaher Al-Mansour": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "07309298946897b33cdf1c4080ffb2ed1e305c342ebf010a22cc96e823a53762"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "9547105acfd451b7d4d740495b76febabd99f7a73bea86c2cd34f23c0a1ad760",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3316,
+        "completion_tokens": 1032,
+        "total_tokens": 4348,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3060
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 3.217,
+      "error": "9 validation errors for Extraction\nstages.0.kind\n  Extra inputs are not permitted [type=extra_forbidden, input_value='person', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage0.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无合适专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.kind\n  Extra inputs are not permitted [type=extra_forbidden, input_value='person', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage1.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='联系人姓名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.kind\n  Extra inputs are not permitted [type=extra_forbidden, input_value='person', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage2.source_task', input_type=str]\n    For further information visit https://errors.pydantic.de"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "0d931be0cb71d31dc6a44dac366820a42f07510793931575b418a4b0b81a877b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5154,
+        "completion_tokens": 978,
+        "total_tokens": 6132,
+        "prompt_tokens_details": {
+          "cached_tokens": 4224
+        },
+        "prompt_cache_hit_tokens": 4224,
+        "prompt_cache_miss_tokens": 930
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 3.025
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0176_83fbbm72vzh1mavtoas32z6snda0ldoo__mind_change_v1",
+  "extracted_at": "2026-11-22T06:45:36.317430+00:00"
+}

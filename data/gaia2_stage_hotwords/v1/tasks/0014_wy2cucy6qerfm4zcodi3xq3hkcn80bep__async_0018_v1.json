@@ -1,0 +1,156 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0014_wy2cucy6qerfm4zcodi3xq3hkcn80bep__async_0018_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "4a739c57a6215d8119ed0554fc926155cdc582e8cc0e5332d9ecd38b7be5f1c4",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Saskia Müller-Krüger",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_send_reply.arguments.content",
+          "reason": "晚宴嘉宾姓名"
+        },
+        {
+          "text": "Katharina Müller-Schneider",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_send_reply.arguments.content",
+          "reason": "同时出现在两份嘉宾名单上的人名"
+        },
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_send_reply.arguments.content",
+          "reason": "晚宴嘉宾姓名"
+        }
+      ],
+      "new_terms": [
+        "Saskia Müller-Krüger",
+        "Katharina Müller-Schneider",
+        "Viktor Kuznetsov"
+      ],
+      "active_vocabulary": {
+        "Saskia Müller-Krüger": 50,
+        "Katharina Müller-Schneider": 50,
+        "Viktor Kuznetsov": 50
+      },
+      "vocabulary_sha256": "5921eaa958cee63130f56b5508126c1deb06e5e3254be711bf8b4e867ea626be"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Katharina Müller-Schneider",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_emails_search.arguments.query",
+          "reason": "查询对象人名"
+        },
+        {
+          "text": "Collaboration on European History Curriculum",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_send_reply.arguments.content",
+          "reason": "邮件主题名称"
+        },
+        {
+          "text": "Catching up on summer",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_send_reply.arguments.content",
+          "reason": "消息会话名称"
+        },
+        {
+          "text": "Upcoming Lecture and Catching Up",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_send_reply.arguments.content",
+          "reason": "消息会话名称"
+        }
+      ],
+      "new_terms": [
+        "Collaboration on European History Curriculum",
+        "Catching up on summer",
+        "Upcoming Lecture and Catching Up"
+      ],
+      "active_vocabulary": {
+        "Saskia Müller-Krüger": 50,
+        "Katharina Müller-Schneider": 50,
+        "Viktor Kuznetsov": 50,
+        "Collaboration on European History Curriculum": 50,
+        "Catching up on summer": 50,
+        "Upcoming Lecture and Catching Up": 50
+      },
+      "vocabulary_sha256": "5cd0e4078ae1c950b6da12f5582578280ad2bf4fa32a9da4ec8eb0fba9263764"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "2d2dc8c902350b07f13f946c51badabe341d488b71f6f92f2aeb963a64660dc1",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1694,
+        "completion_tokens": 398,
+        "total_tokens": 2092,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1438
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.65,
+      "error": "3 validation errors for Extraction\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='提取嘉宾姓名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='提取人名、邮箱及会话/邮件标题', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "487132e71f71bac911f891008fd45596ad58765619f1c8106f23820fbc848ec9",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2649,
+        "completion_tokens": 372,
+        "total_tokens": 3021,
+        "prompt_tokens_details": {
+          "cached_tokens": 2048
+        },
+        "prompt_cache_hit_tokens": 2048,
+        "prompt_cache_miss_tokens": 601
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.545,
+      "error": "Invalid proper-name phrase: 'katharina.mueller-schneider@berlin.de'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "ac15153da3fd0fd2a0f5cb5a0dc66c481773dfa4545da97c021f1cb3911be682",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2470,
+        "completion_tokens": 322,
+        "total_tokens": 2792,
+        "prompt_tokens_details": {
+          "cached_tokens": 1664
+        },
+        "prompt_cache_hit_tokens": 1664,
+        "prompt_cache_miss_tokens": 806
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.307
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0014_wy2cucy6qerfm4zcodi3xq3hkcn80bep__async_0018_v1",
+  "extracted_at": "2026-11-22T06:46:31.064752+00:00"
+}

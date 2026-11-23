@@ -1,0 +1,163 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0787_d2ljdpgaj90leipexeolvajdowbmoxxk",
+  "model": "deepseek-flash",
+  "input_sha256": "5cc58cb9a0cd87e614d76841f1316cd7df460eaf8534fe87adfbdfd190610042",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Karel",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-83a4c1d1-4fcf-4779-8e66-3a1a05e1278c.arguments.content",
+          "reason": "与会者人名"
+        },
+        {
+          "text": "Émile",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fb92d3ff-7885-44ef-a651-ff485ee79ec0.arguments.content",
+          "reason": "与会者人名，含重音"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a4d7e249-fb0d-4192-8eef-0db85bba14ab.arguments.content",
+          "reason": "与会者人名，含重音"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a4d7e249-fb0d-4192-8eef-0db85bba14ab.arguments.content",
+          "reason": "邮件署名完整人名"
+        },
+        {
+          "text": "Karel Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fcaf8aae-8ab5-455a-9f51-7be8c2c8f4fb.arguments.attendees[0]",
+          "reason": "与会者完整姓名"
+        },
+        {
+          "text": "Émile Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ee71b290-ca66-4bdb-9460-8ddeb92365ee.arguments.attendees[0]",
+          "reason": "与会者完整姓名"
+        },
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c5ab4685-5acf-4eef-8800-32483a62528e.arguments.attendees[0]",
+          "reason": "与会者完整姓名"
+        }
+      ],
+      "new_terms": [
+        "Karel",
+        "Émile",
+        "Aurélien",
+        "Liesbeth Vandenberghe",
+        "Karel Vandenberghe",
+        "Émile Vandenberghe",
+        "Aurélien Dumont"
+      ],
+      "active_vocabulary": {
+        "Karel": 50,
+        "Émile": 50,
+        "Aurélien": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Karel Vandenberghe": 50,
+        "Émile Vandenberghe": 50,
+        "Aurélien Dumont": 50
+      },
+      "vocabulary_sha256": "6f98efaca313a8fdefa9ce2a99b149bad468e9f8977efe5d46cb7a8c8179633e"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_rescheduled.arguments.attendees[0]",
+          "reason": "与会者完整姓名"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_request.arguments.content",
+          "reason": "消息中称呼的人名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Karel": 50,
+        "Émile": 50,
+        "Aurélien": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Karel Vandenberghe": 50,
+        "Émile Vandenberghe": 50,
+        "Aurélien Dumont": 50
+      },
+      "vocabulary_sha256": "6f98efaca313a8fdefa9ce2a99b149bad468e9f8977efe5d46cb7a8c8179633e"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Jawaher Al-Mansour",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "午餐对象完整姓名"
+        },
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_afternoon.arguments.attendees[0]",
+          "reason": "与会者完整姓名"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_update.arguments.content",
+          "reason": "消息中称呼的人名"
+        }
+      ],
+      "new_terms": [
+        "Jawaher Al-Mansour"
+      ],
+      "active_vocabulary": {
+        "Karel": 50,
+        "Émile": 50,
+        "Aurélien": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Karel Vandenberghe": 50,
+        "Émile Vandenberghe": 50,
+        "Aurélien Dumont": 50,
+        "Jawaher Al-Mansour": 50
+      },
+      "vocabulary_sha256": "a334107b42eec149b0b2e68ee112432ce17ac4ca5049ce94f10adca4b79785ad"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "25bd101694b6f2101e4103926d4e8fad46788e7336ea60b01140c582895a3ff1",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5099,
+        "completion_tokens": 683,
+        "total_tokens": 5782,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4843
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.584
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0787_d2ljdpgaj90leipexeolvajdowbmoxxk",
+  "extracted_at": "2026-11-22T06:43:51.734209+00:00"
+}

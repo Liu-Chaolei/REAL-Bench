@@ -1,0 +1,118 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0396_4h1ozlei9bclo7xlsltfykc9dmvidj1j",
+  "model": "deepseek-flash",
+  "input_sha256": "ace7cab0fce106adf7f2c7deb2e99ff2582b2a8dad0f5a512b09b538634409de",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Oslo",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "挪威首都地名，用于筛选联系人所在地"
+        }
+      ],
+      "new_terms": [
+        "Oslo"
+      ],
+      "active_vocabulary": {
+        "Oslo": 50
+      },
+      "vocabulary_sha256": "fd157d1b59ed0355a3d428956ca5c0ca60b479af2d783a35540926a0ec04c557"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "LEGO",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_lookup_brick.arguments.product_name",
+          "reason": "乐高品牌名，作为产品检索词"
+        },
+        {
+          "text": "LEGO Storage Brick 4",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "具体乐高收纳砖产品型号"
+        }
+      ],
+      "new_terms": [
+        "LEGO",
+        "LEGO Storage Brick 4"
+      ],
+      "active_vocabulary": {
+        "Oslo": 50,
+        "LEGO": 50,
+        "LEGO Storage Brick 4": 50
+      },
+      "vocabulary_sha256": "aeb3360bca1def3a7d4e6a578bba4ef7e0fcc3eb3e53c8604be017f5f85b1fb5"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "LEGO 8-Brick Storage Box",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "具体乐高8格收纳盒产品名"
+        }
+      ],
+      "new_terms": [
+        "LEGO 8-Brick Storage Box"
+      ],
+      "active_vocabulary": {
+        "Oslo": 50,
+        "LEGO": 50,
+        "LEGO Storage Brick 4": 50,
+        "LEGO 8-Brick Storage Box": 50
+      },
+      "vocabulary_sha256": "bfe16f5ed7883079bccf42f8c6ca5c5b490a3ee18f45d116887fc69151d3d32b"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "7af2a2d3fe3ea0a9c7cf03a11aba4cc25eaecca0b0e0896816f9bf7fe6452efd",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1271,
+        "completion_tokens": 182,
+        "total_tokens": 1453,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1015
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.264,
+      "error": "1 validation error for Extraction\nstages.1.terms.0.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "612f6fcf4317c3d6a82bd500ca17dc5a1b93ff953eb2fe7e85ba920c0b2cb607",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1914,
+        "completion_tokens": 187,
+        "total_tokens": 2101,
+        "prompt_tokens_details": {
+          "cached_tokens": 1408
+        },
+        "prompt_cache_hit_tokens": 1408,
+        "prompt_cache_miss_tokens": 506
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.076
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0396_4h1ozlei9bclo7xlsltfykc9dmvidj1j",
+  "extracted_at": "2026-11-22T06:41:41.860640+00:00"
+}

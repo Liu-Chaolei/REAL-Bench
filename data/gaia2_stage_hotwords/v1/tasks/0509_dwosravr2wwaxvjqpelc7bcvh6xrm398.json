@@ -1,0 +1,133 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0509_dwosravr2wwaxvjqpelc7bcvh6xrm398",
+  "model": "deepseek-flash",
+  "input_sha256": "2a74a87308495100491a33418ecf29a7c2c2837a28453fb709d19a74397d0401",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Yassel Pérez",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-221135fa-60aa-4458-b8f1-5f5679c47dfe.arguments.attendees[0]",
+          "reason": "队友姓名"
+        },
+        {
+          "text": "Sebastião Silva e Oliveira",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-221135fa-60aa-4458-b8f1-5f5679c47dfe.arguments.attendees[1]",
+          "reason": "队友完整姓名"
+        },
+        {
+          "text": "Valorant",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "电竞游戏品牌名"
+        }
+      ],
+      "new_terms": [
+        "Yassel Pérez",
+        "Sebastião Silva e Oliveira",
+        "Valorant"
+      ],
+      "active_vocabulary": {
+        "Yassel Pérez": 50,
+        "Sebastião Silva e Oliveira": 50,
+        "Valorant": 50
+      },
+      "vocabulary_sha256": "cc28cdd4f1648d070e05c7bd884e4ab105dc07e53c3f61c2121e17d33bba07e1"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Valorant",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "电竞游戏品牌名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Yassel Pérez": 50,
+        "Sebastião Silva e Oliveira": 50,
+        "Valorant": 50
+      },
+      "vocabulary_sha256": "cc28cdd4f1648d070e05c7bd884e4ab105dc07e53c3f61c2121e17d33bba07e1"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Prague 6 Apartment",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "场馆建筑名称"
+        },
+        {
+          "text": "Nad Šárkou 20",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "场馆街道地址"
+        },
+        {
+          "text": "Božetěchova 3",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "家庭住址街道名"
+        },
+        {
+          "text": "Yassel Pérez",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "队友姓名"
+        },
+        {
+          "text": "Sebastião Silva e Oliveira",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "队友完整姓名"
+        }
+      ],
+      "new_terms": [
+        "Prague 6 Apartment",
+        "Nad Šárkou 20",
+        "Božetěchova 3"
+      ],
+      "active_vocabulary": {
+        "Yassel Pérez": 50,
+        "Sebastião Silva e Oliveira": 50,
+        "Valorant": 50,
+        "Prague 6 Apartment": 50,
+        "Nad Šárkou 20": 50,
+        "Božetěchova 3": 50
+      },
+      "vocabulary_sha256": "f2ecf1640207ee2d242d54f52b8e92083653d27e808dc614d87c7e795945af8d"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "eaac4442fa6c2024dd2ec4e714e5d0e9e2efd872573647c3311000c9de7989f6",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2994,
+        "completion_tokens": 366,
+        "total_tokens": 3360,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2738
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.46
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0509_dwosravr2wwaxvjqpelc7bcvh6xrm398",
+  "extracted_at": "2026-11-22T06:42:27.278238+00:00"
+}

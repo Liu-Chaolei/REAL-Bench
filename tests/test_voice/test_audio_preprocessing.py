@@ -5,11 +5,20 @@ Minimal high-level tests for audio preprocessing utilities.
 
 import tempfile
 from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
 import pytest
 
-from tau2.data_model.audio import AudioData, AudioEncoding, AudioFormat
+from tau2.data_model.audio import (
+    TELEPHONY_AUDIO_FORMAT,
+    AudioData,
+    AudioEncoding,
+    AudioFormat,
+    audio_bytes_to_string,
+)
+from tau2.data_model.message import AssistantMessage, UserMessage
+from tau2.orchestrator.modes import CommunicationMode
 from tau2.voice.synthesis.audio_effects.effects import (
     apply_band_pass_filter,
     convert_to_telephony,
@@ -25,6 +34,36 @@ from tau2.voice.utils.audio_preprocessing import (
     numpy_to_audio_data,
     resample_audio,
 )
+from tau2.voice.utils.conversation_builder import generate_simulation_audio
+
+
+def test_duplex_export_preserves_native_agent_audio_with_telephony_caller(tmp_path):
+    native_pcm = b"\x00\x00\xe0\x2e\x00\x00\x20\xd1" * 120
+    caller = UserMessage(
+        role="user",
+        audio_format=TELEPHONY_AUDIO_FORMAT,
+        audio_content=audio_bytes_to_string(b"\x7f" * 160),
+    )
+    agent = AssistantMessage(
+        role="assistant",
+        audio_format=AudioFormat(encoding=AudioEncoding.PCM_S16LE, sample_rate=24000),
+        audio_content=audio_bytes_to_string(native_pcm),
+    )
+    simulation = SimpleNamespace(
+        mode=CommunicationMode.FULL_DUPLEX,
+        get_messages=lambda: [caller, agent],
+    )
+    result = generate_simulation_audio(simulation, tmp_path)
+    stereo = result["both"]
+    assert stereo.format.sample_rate == 24000
+    assert stereo.format.channels == 2 and stereo.num_samples == 480
+    right_channel = np.frombuffer(stereo.data, dtype=np.int16).reshape(-1, 2)[:, 1]
+    assert right_channel.tobytes() == native_pcm
+    assert result["assistant"].data == native_pcm
+    assert result["user"].format.sample_rate == 8000
+    saved = load_wav_file(tmp_path / "both.wav")
+    assert saved.format.sample_rate == 24000
+    assert saved.data == stereo.data
 
 
 @pytest.fixture

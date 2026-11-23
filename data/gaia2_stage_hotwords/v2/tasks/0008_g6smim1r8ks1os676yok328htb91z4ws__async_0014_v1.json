@@ -1,0 +1,144 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0008_g6smim1r8ks1os676yok328htb91z4ws__async_0014_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "0465435041155e1909b307f131406e05442dc4b81a17c73993147eaa8cff0960",
+  "review_input_sha256": "9d9bf2d5b9f335043dd06afb46c37d98a04ac3dcc5a41c6a31fd43b35825207e",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "91e20022f8d73324ca32b29f0d34789381d84ab3ed63e7bc46845a2de58c03dd",
+  "reference_results_sha256": "d333334976a7f8c937cc7f34fdbfa6769ada0dc88e4d1626eae382a52ebde77f",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Sérgio Oliveira Silva",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Helga Pichler",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage2.tool_response.series_s2_name_aks": {
+      "stage": 2,
+      "text": "Akseli Korhonen",
+      "event_id": "series_s2_name_aks",
+      "response_sha256": "f0b9190ea05c56ae2dc25584406f28baea33964b92a366f927dcad72f2ad6a37"
+    },
+    "stage2.tool_response.series_s2_name_user": {
+      "stage": 2,
+      "text": "Matěj Nováček",
+      "event_id": "series_s2_name_user",
+      "response_sha256": "f0fedf3dfef012500b66b94cb7b22818aac4486333cbbd127d74f6bf3a5e3fa0"
+    },
+    "stage2.tool_response.series_s2_read": {
+      "stage": 2,
+      "text": "{\"messages\": [{\"sender_id\": \"+436991234568\", \"message_id\": \"b039f6388e314b849859586454c5a05f\", \"timestamp\": \"1728130500\", \"content\": \"Me too, dear! Let's plan on catching up again soon. And Sérgio, I'd love to hear more about your work in IT and how it's impacted your views on politics.\"}, {\"sender_id\": \"+420725123456\", \"message_id\": \"bb5ec5c467c742d68579038fb1c918cc\", \"timestamp\": \"1728129600\", \"content\": \"I think we're all in agreement on that! It's been great catching up with you all, and I'm looking forward to hearing more about your thoughts on politics and technology.\"}, {\"sender_id\": \"+358451234567\", \"message_id\": \"a3360a163bc1422eab75e861d8614b15\", \"timestamp\": \"1728128700\", \"content\": \"Thanks, Helga! Max is doing great, and I'm sure he'd love to meet you someday. Sérgio, I completely agree about technology. It's amazing how much it's changed the way we communicate and access information.\"}, {\"sender_id\": \"+5541988881234\", \"message_id\": \"9d2bfae9640642a08529e9aace951c37\", \"timestamp\": \"1728127800\", \"content\": \"Ah, technology has been a game-changer in politics, that's for sure. It's allowed for greater transparency and accountability, but it's also created new challenges. As for Max, Helga, I'm sure he's doing well. You always take such great care of him!\"}, {\"sender_id\": \"+436991234568\", \"message_id\": \"638f3fb7886d463891dda18d3ea45e52\", \"timestamp\": \"1728126900\", \"content\": \"I'd love to hear more about Max, Akseli! How's he doing? And Sérgio, I'm curious, what do you think about the role of technology in politics?\"}, {\"sender_id\": \"+420725123456\", \"message_id\": \"07bd3600aabf469c9309f5a6a2dae43e\", \"timestamp\": \"1728126000\", \"content\": \"Actually, Akseli, I've been following the news, and it's been really interesting to see the different perspectives on the situation. Sérgio, I'd love to hear more about your thoughts on the show and its portrayal of politics.\"}, {\"sender_id\": \"+358451234567\", \"message_id\": \"46a773a92a3048feabfe5d93d8fdf8e9\", \"timestamp\": \"1728125100\", \"content\": \"I've read the books, and I think they're even more insightful than the show. The way Dobbs explores the themes of power and corruption is really thought-provoking. Speaking of which, have you guys heard about the recent developments in Slovak politics?\"}, {\"sender_id\": \"+5541988881234\", \"message_id\": \"ed9b1832065844e3a73d5e7d6fe03641\", \"timestamp\": \"1728124200\", \"content\": \"I've been following the show since the beginning, and I must say, it's been a wild ride. The way they portray the inner workings of politics is fascinating. Have you read the books by Michael Dobbs that the show is based on?\"}, {\"sender_id\": \"+436991234568\", \"message_id\": \"62b86e3531504aea9220918a9c01ede2\", \"timestamp\": \"1728123300\", \"content\": \"Ah, I've heard great things about that show! I've been meaning to start watching it, but I've been so busy with Max, my Labrador Retriever. How did you find the latest season?\"}, {\"sender_id\": \"+420725123456\", \"message_id\": \"c62409be23734ad7b1b569b00a91bc18\", \"timestamp\": \"1728122400\", \"content\": \"Hey everyone, hope you're all doing well. I just finished watching the latest season of House of Cards and I'm still trying to process everything that happened.\"}], \"metadata\": {\"message_range\": [\"0\", \"10\"], \"conversation_length\": \"10\", \"conversation_id\": \"afe526df6d7840d29412f8c8b97176a3\", \"conversation_title\": \"Politics and Technology\"}}",
+      "event_id": "series_s2_read",
+      "response_sha256": "c7f5d289a734c70917a27cc180ad90c66ad73947e7bf10bf0dadf935eed55e12"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Sérgio Oliveira Silva",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Helga Pichler",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Sérgio Oliveira Silva",
+        "Helga Pichler"
+      ],
+      "active_vocabulary": {
+        "Sérgio Oliveira Silva": 50,
+        "Helga Pichler": 50
+      },
+      "vocabulary_sha256": "6e79808e6d28a62bc7a3ba44f1d5e6a46240cd3ba2c07f2da01e74fb9c37b71b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Akseli Korhonen",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_name_aks",
+          "reason": "难以识别的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_name_user",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Michael Dobbs",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "完整人名，作家姓名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Akseli Korhonen",
+        "Matěj Nováček",
+        "Michael Dobbs"
+      ],
+      "active_vocabulary": {
+        "Sérgio Oliveira Silva": 50,
+        "Helga Pichler": 50,
+        "Akseli Korhonen": 50,
+        "Matěj Nováček": 50,
+        "Michael Dobbs": 50
+      },
+      "vocabulary_sha256": "e1439cfd0d8f468b4ae2704ac0be0e62043194fdfdeebd50ed80dacae6a1a73b"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Politics and Technology",
+    "Discussing History and Technology",
+    "Catching up on 'House of Cards' and more",
+    "Digitization and Civic Engagement",
+    "Technology, Politics, and Art"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:43.347796+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

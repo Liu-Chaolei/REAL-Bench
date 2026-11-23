@@ -1,0 +1,166 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0516_1xv9btt2d876mjh70tspq59bb1bcnwbh",
+  "model": "deepseek-flash",
+  "input_sha256": "e5b5697729817d19fde111d8b50fd288dd1fa36b1b1b216c7fd13424135ad041",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-4a25c3b4-f9a6-4259-8cbe-b1a034883904.arguments.content",
+          "reason": "发件人签名中的完整人名"
+        },
+        {
+          "text": "Antwerp",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "地名，最年轻联系人的所在地"
+        },
+        {
+          "text": "Tokyo",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "地名，联系人所在城市"
+        }
+      ],
+      "new_terms": [
+        "Ursula Wiederkehr",
+        "Antwerp",
+        "Tokyo"
+      ],
+      "active_vocabulary": {
+        "Ursula Wiederkehr": 50,
+        "Antwerp": 50,
+        "Tokyo": 50
+      },
+      "vocabulary_sha256": "b9416b3d171c45ebb738cc5ff34576fc77f493c94620cd168abd0b5977a63845"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Ursula Wiederkehr": 50,
+        "Antwerp": 50,
+        "Tokyo": 50
+      },
+      "vocabulary_sha256": "b9416b3d171c45ebb738cc5ff34576fc77f493c94620cd168abd0b5977a63845"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Emiko Nakahara",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_person_0.arguments.user_name",
+          "reason": "Messages 联系人完整姓名"
+        },
+        {
+          "text": "Kaito Nakamura",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_person_1.arguments.user_name",
+          "reason": "Messages 联系人完整姓名"
+        },
+        {
+          "text": "Kenji Nakamura",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_person_2.arguments.user_name",
+          "reason": "Messages 联系人完整姓名"
+        },
+        {
+          "text": "Kiyoshi Nakahara",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_person_3.arguments.user_name",
+          "reason": "Messages 联系人完整姓名"
+        },
+        {
+          "text": "Taro Matsumoto",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_person_4.arguments.user_name",
+          "reason": "Messages 联系人完整姓名"
+        },
+        {
+          "text": "Yuna Nakahara",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_person_5.arguments.user_name",
+          "reason": "Messages 联系人完整姓名"
+        },
+        {
+          "text": "Kaito Matsumoto",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_kaito.arguments.user_name",
+          "reason": "Chats 单独发送对象完整姓名"
+        }
+      ],
+      "new_terms": [
+        "Emiko Nakahara",
+        "Kaito Nakamura",
+        "Kenji Nakamura",
+        "Kiyoshi Nakahara",
+        "Taro Matsumoto",
+        "Yuna Nakahara",
+        "Kaito Matsumoto"
+      ],
+      "active_vocabulary": {
+        "Ursula Wiederkehr": 50,
+        "Antwerp": 50,
+        "Tokyo": 50,
+        "Emiko Nakahara": 50,
+        "Kaito Nakamura": 50,
+        "Kenji Nakamura": 50,
+        "Kiyoshi Nakahara": 50,
+        "Taro Matsumoto": 50,
+        "Yuna Nakahara": 50,
+        "Kaito Matsumoto": 50
+      },
+      "vocabulary_sha256": "a1db707679bb7ece770006988ecf330cd7844e486b38141eb2cf55d3a8a455dd"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "38322a1fccb7f3c1129f027717d85e538dbb54adf9b816abde2a3d7b54abe315",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4259,
+        "completion_tokens": 478,
+        "total_tokens": 4737,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4003
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.872,
+      "error": "Not an exact quotation of a source in stage 1: 'Ursula Wiederkehr' from 'stage1.tool_gt.series_s1_request.arguments.cc[0]'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "24ce3c2766d3703efc9a6929ac7f5870e5d388fb3b4086c1841c0c4fa83ec8ad",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5159,
+        "completion_tokens": 436,
+        "total_tokens": 5595,
+        "prompt_tokens_details": {
+          "cached_tokens": 4736
+        },
+        "prompt_cache_hit_tokens": 4736,
+        "prompt_cache_miss_tokens": 423
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.594
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0516_1xv9btt2d876mjh70tspq59bb1bcnwbh",
+  "extracted_at": "2026-11-22T06:42:32.131223+00:00"
+}

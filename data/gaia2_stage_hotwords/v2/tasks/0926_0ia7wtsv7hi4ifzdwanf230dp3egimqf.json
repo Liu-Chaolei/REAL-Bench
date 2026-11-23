@@ -1,0 +1,144 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0926_0ia7wtsv7hi4ifzdwanf230dp3egimqf",
+  "model": "deepseek-flash",
+  "input_sha256": "5155dd0c0497455c037badee937394f980765224243c40e87e5d091e9ee3992e",
+  "review_input_sha256": "5721a7f7b26d55dc085f3c247c7f2b22746a8fff3c1d8cf7ec73cb9222ae14cc",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "3039615131e13d0e11bf006f15f52b254bb64dee7d3f5db9d089f43f0ff6d5f8",
+  "reference_results_sha256": "d7249291972094e02db3fd4198d60cd1ae77de010e6b5d94e88f1c444a90909f",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Liesbeth Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-5e13cecc-fd65-435c-9093-0793a7395f7e.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Astrid Svensson",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-5e13cecc-fd65-435c-9093-0793a7395f7e.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Astrid Lindqvist",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-5e13cecc-fd65-435c-9093-0793a7395f7e.arguments.attendees[2]"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Aurélien Dumont",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-5e13cecc-fd65-435c-9093-0793a7395f7e.arguments.attendees[3]"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Net-Zero Energy Buildings and Sustainable Communities",
+      "original_source": "stage0.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Net-Zero Energy Buildings and Sustainable Communities",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.4",
+          "reason": "较长且独特的专有名称",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Lindqvist",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，含少见姓氏",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Svensson",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，含少见姓氏",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Net-Zero Energy Buildings and Sustainable Communities",
+        "Astrid Lindqvist",
+        "Astrid Svensson",
+        "Aurélien Dumont",
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Net-Zero Energy Buildings and Sustainable Communities": 50,
+        "Astrid Lindqvist": 50,
+        "Astrid Svensson": 50,
+        "Aurélien Dumont": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "70c6ab5e0ae1850a1a31746b62d12a61f445700386cbd21e11dd39003877f94a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Net-Zero Energy Buildings and Sustainable Communities": 50,
+        "Astrid Lindqvist": 50,
+        "Astrid Svensson": 50,
+        "Aurélien Dumont": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "70c6ab5e0ae1850a1a31746b62d12a61f445700386cbd21e11dd39003877f94a"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Net-Zero Energy Buildings and Sustainable Communities": 50,
+        "Astrid Lindqvist": 50,
+        "Astrid Svensson": 50,
+        "Aurélien Dumont": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "70c6ab5e0ae1850a1a31746b62d12a61f445700386cbd21e11dd39003877f94a"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Follow-up Call with Aurélien"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:51.070670+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

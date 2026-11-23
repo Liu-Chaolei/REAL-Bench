@@ -1,0 +1,178 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0701_vmapv8jm29lndnxu3e0hmxz4nq9v2pza",
+  "model": "deepseek-flash",
+  "input_sha256": "a5b550cde9be35547f402817a60dbea22f99447ed26177fdc6cbacc7cf068617",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Swiss Technology and Culture",
+          "kind": "custom_name",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-cf0f7555-3d86-4333-85a6-6dcfe8f2e7f5.arguments.content",
+          "reason": "群聊名称，独特自定义名称"
+        },
+        {
+          "text": "Geneva Seaside",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c0dd32b1-d135-4524-bee7-661ada582463.arguments.content",
+          "reason": "房产名称，独特专名"
+        },
+        {
+          "text": "Zug Lake Apartments",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1cf00725-e00e-4bdb-b93e-423c9f588163.arguments.content",
+          "reason": "房产名称，独特专名"
+        },
+        {
+          "text": "Lugano Luxury",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1cf00725-e00e-4bdb-b93e-423c9f588163.arguments.content",
+          "reason": "房产名称，独特专名"
+        },
+        {
+          "text": "Lugano Lake View",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1cf00725-e00e-4bdb-b93e-423c9f588163.arguments.content",
+          "reason": "房产名称，独特专名"
+        }
+      ],
+      "new_terms": [
+        "Swiss Technology and Culture",
+        "Geneva Seaside",
+        "Zug Lake Apartments",
+        "Lugano Luxury",
+        "Lugano Lake View"
+      ],
+      "active_vocabulary": {
+        "Swiss Technology and Culture": 50,
+        "Geneva Seaside": 50,
+        "Zug Lake Apartments": 50,
+        "Lugano Luxury": 50,
+        "Lugano Lake View": 50
+      },
+      "vocabulary_sha256": "8bbae7c2a7837c2878d4a1e3adefcd47b2e4cf8175c6aa3f67db64cd643a2a8e"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien Wyss",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_event.arguments.attendees[0]",
+          "reason": "参与者姓名"
+        },
+        {
+          "text": "Ursula Zwygart",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_event.arguments.attendees[1]",
+          "reason": "参与者姓名"
+        },
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_event.arguments.attendees[2]",
+          "reason": "参与者姓名"
+        },
+        {
+          "text": "Geneva Seaside",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_event.arguments.description",
+          "reason": "房产名称，独特专名"
+        },
+        {
+          "text": "Quai du Général-Guisan",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_event.arguments.location",
+          "reason": "街道地址，独特地名"
+        },
+        {
+          "text": "Swiss Technology and Culture",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_tell.arguments.content",
+          "reason": "群聊名称，独特自定义名称"
+        }
+      ],
+      "new_terms": [
+        "Aurélien Wyss",
+        "Ursula Zwygart",
+        "Katarzyna Zielińska",
+        "Quai du Général-Guisan"
+      ],
+      "active_vocabulary": {
+        "Swiss Technology and Culture": 50,
+        "Geneva Seaside": 50,
+        "Zug Lake Apartments": 50,
+        "Lugano Luxury": 50,
+        "Lugano Lake View": 50,
+        "Aurélien Wyss": 50,
+        "Ursula Zwygart": 50,
+        "Katarzyna Zielińska": 50,
+        "Quai du Général-Guisan": 50
+      },
+      "vocabulary_sha256": "ba9e15077fdb571db02a7352f2136fba6b22d0034d0ed2eb08d0456e79f1e058"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Swiss Technology and Culture": 50,
+        "Geneva Seaside": 50,
+        "Zug Lake Apartments": 50,
+        "Lugano Luxury": 50,
+        "Lugano Lake View": 50,
+        "Aurélien Wyss": 50,
+        "Ursula Zwygart": 50,
+        "Katarzyna Zielińska": 50,
+        "Quai du Général-Guisan": 50
+      },
+      "vocabulary_sha256": "ba9e15077fdb571db02a7352f2136fba6b22d0034d0ed2eb08d0456e79f1e058"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "a1d55630706b1d850e6de3fe30a81818b5f58fbe62f96517292745ec44acb412",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3014,
+        "completion_tokens": 641,
+        "total_tokens": 3655,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2758
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.618,
+      "error": "Invalid proper-name phrase: 'rohini.deshpande@gaia2mail.com'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "fba4bbfb878c6d521b4fd8a6dcc9c00b28bda4f4226001dab88177d280f80202",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4058,
+        "completion_tokens": 588,
+        "total_tokens": 4646,
+        "prompt_tokens_details": {
+          "cached_tokens": 3584
+        },
+        "prompt_cache_hit_tokens": 3584,
+        "prompt_cache_miss_tokens": 474
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.926
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0701_vmapv8jm29lndnxu3e0hmxz4nq9v2pza",
+  "extracted_at": "2026-11-22T06:43:30.250198+00:00"
+}

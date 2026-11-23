@@ -1,0 +1,137 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0316_0bzp42knercfgz527jpy44mj4j6nd0x1",
+  "model": "deepseek-flash",
+  "input_sha256": "f2a9610735030c1b0a32f1a6ef5923784d71e193fa80d3ba055ff9870c464e7b",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Sergei Kuznetsov",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-055c04d1-3667-4fa1-9443-e248e189a288.arguments.content",
+          "reason": "查询结果中的完整人名"
+        }
+      ],
+      "new_terms": [
+        "Sergei Kuznetsov"
+      ],
+      "active_vocabulary": {
+        "Sergei Kuznetsov": 50
+      },
+      "vocabulary_sha256": "082526bee1807546e38c2d96a541cab06ce1d195cc7ffef9bbe4399788fbf587"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Sergei Kuznetsov",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "消息对象完整人名"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "发件人署名完整人名"
+        }
+      ],
+      "new_terms": [
+        "Anastasiya Kuznetsova"
+      ],
+      "active_vocabulary": {
+        "Sergei Kuznetsov": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "53c93d5a582076926aaafb6254a6b34f32c9982429b39fb52599a79ce08620bb"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Sergei",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "邮件称呼中的名字"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "邮件署名完整人名"
+        },
+        {
+          "text": "Tverskaya Street",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "地点街道名"
+        },
+        {
+          "text": "Arbat Street",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "地点街道名"
+        }
+      ],
+      "new_terms": [
+        "Sergei",
+        "Tverskaya Street",
+        "Arbat Street"
+      ],
+      "active_vocabulary": {
+        "Sergei Kuznetsov": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Sergei": 50,
+        "Tverskaya Street": 50,
+        "Arbat Street": 50
+      },
+      "vocabulary_sha256": "f954b0b9c1ab10fff4d7b924ea63886ab1244c8b4ffda2c29e0cb5f22ce57a70"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "121415c5e896096b06c40cdcc9f99465760cadb73e7509dfd16ee0f576f11f60",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1629,
+        "completion_tokens": 314,
+        "total_tokens": 1943,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1373
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.384,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "90714fb73576841a345482bdd8004ed85e442d74176876fcac6293dddca9aae4",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2336,
+        "completion_tokens": 316,
+        "total_tokens": 2652,
+        "prompt_tokens_details": {
+          "cached_tokens": 1920
+        },
+        "prompt_cache_hit_tokens": 1920,
+        "prompt_cache_miss_tokens": 416
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.216
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0316_0bzp42knercfgz527jpy44mj4j6nd0x1",
+  "extracted_at": "2026-11-22T06:41:17.761217+00:00"
+}

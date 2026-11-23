@@ -1,0 +1,180 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0493_su3bfdjdmzi5t7g6p6qlanptvrbdj2d5",
+  "model": "deepseek-flash",
+  "input_sha256": "c49180633678ec6d8d32f1db05239819aa99a954773edd63ab1bcdcfe09dbf1f",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Leont'yevskiy Pereulok",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "新地址中的独特街道名"
+        },
+        {
+          "text": "Moscow",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Leont'yevskiy Pereulok",
+        "Moscow"
+      ],
+      "active_vocabulary": {
+        "Leont'yevskiy Pereulok": 50,
+        "Moscow": 50
+      },
+      "vocabulary_sha256": "6d58f6221e2201ea5293d989e981fdb0fb8879ce0759a3a589f95168690a17a3"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Idea Max",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "玩具品牌名"
+        },
+        {
+          "text": "Peek-A-Pet",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "独特产品系列名"
+        },
+        {
+          "text": "Bobble Heads",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "产品名称"
+        },
+        {
+          "text": "Corgi",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "产品款式名"
+        },
+        {
+          "text": "Pooparoos",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "独特品牌名"
+        },
+        {
+          "text": "Squishy Pooping Pets",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "产品系列名"
+        }
+      ],
+      "new_terms": [
+        "Idea Max",
+        "Peek-A-Pet",
+        "Bobble Heads",
+        "Corgi",
+        "Pooparoos",
+        "Squishy Pooping Pets"
+      ],
+      "active_vocabulary": {
+        "Leont'yevskiy Pereulok": 50,
+        "Moscow": 50,
+        "Idea Max": 50,
+        "Peek-A-Pet": 50,
+        "Bobble Heads": 50,
+        "Corgi": 50,
+        "Pooparoos": 50,
+        "Squishy Pooping Pets": 50
+      },
+      "vocabulary_sha256": "709e15102a9be7e3f4498b6a63200069fc64cbcb7f9e5b10c6f610ab82841372"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Gulandom Davlatov",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "乘车人完整姓名"
+        },
+        {
+          "text": "Leont’yevskiy Pereulok",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "起点街道名"
+        },
+        {
+          "text": "Ulitsa Tverskaya",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_quote_ride.arguments.end_location",
+          "reason": "目的地街道名"
+        }
+      ],
+      "new_terms": [
+        "Gulandom Davlatov",
+        "Leont’yevskiy Pereulok",
+        "Ulitsa Tverskaya"
+      ],
+      "active_vocabulary": {
+        "Leont'yevskiy Pereulok": 50,
+        "Moscow": 50,
+        "Idea Max": 50,
+        "Peek-A-Pet": 50,
+        "Bobble Heads": 50,
+        "Corgi": 50,
+        "Pooparoos": 50,
+        "Squishy Pooping Pets": 50,
+        "Gulandom Davlatov": 50,
+        "Leont’yevskiy Pereulok": 50,
+        "Ulitsa Tverskaya": 50
+      },
+      "vocabulary_sha256": "5e6a6cddb675fdf4ecf1a6a2b251b753f2a9dc41f48770a2343a4b6f1156f1bf"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "5ec49a0af2a5ebacf846ed9b267406457b5dab34e816e73b271fc5b478a69d03",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2869,
+        "completion_tokens": 337,
+        "total_tokens": 3206,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2613
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.487,
+      "error": "2 validation errors for Extraction\nstages.1.terms.0.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nstages.1.terms.4.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "a82e51899c94df6d25f65318cb9b4af7345601820779d22c26e6af24abdd6d00",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3740,
+        "completion_tokens": 337,
+        "total_tokens": 4077,
+        "prompt_tokens_details": {
+          "cached_tokens": 3200
+        },
+        "prompt_cache_hit_tokens": 3200,
+        "prompt_cache_miss_tokens": 540
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.246
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0493_su3bfdjdmzi5t7g6p6qlanptvrbdj2d5",
+  "extracted_at": "2026-11-22T06:42:23.070093+00:00"
+}

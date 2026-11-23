@@ -1,0 +1,180 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0703_e6nz1ppwdudnjel0ojtznkulnfeqewot",
+  "model": "deepseek-flash",
+  "input_sha256": "cd672cb328a637de6003d55497f813a36cbedd50f9baa1209dbd7e139898fe56",
+  "review_input_sha256": "96bcac783cf8a52d46f24cb048b1a7fadee6fb80c0b1d10ad51c777fb03be6b0",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "804a317bf5308053a58157d9ba29824053245490efeb19a427b49a38f26c4c39",
+  "reference_results_sha256": "200c455e3118499bca893743e55953431064656867fd50fe3287f7e1f22860e9",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Aurélien Dumont",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Aurélie De Smet",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Château de la Hulpe",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Chaussée de Bruxelles 111",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.7": {
+      "stage": 0,
+      "text": "Liesbeth Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-a8c20102-a883-47d4-b770-5b54bc1cc50b.arguments.content"
+    },
+    "stage0.existing_catalog.8": {
+      "stage": 0,
+      "text": "Irish College Leuven",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-73d6f878-46dc-4022-b09e-2d63bba3667d.arguments.content"
+    },
+    "stage0.existing_catalog.9": {
+      "stage": 0,
+      "text": "Janseniusstraat 1",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-73d6f878-46dc-4022-b09e-2d63bba3667d.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Chaussée de Bruxelles 111",
+          "kind": "place",
+          "source": "stage0.existing_catalog.4",
+          "reason": "含变音符号的困难街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Château de la Hulpe",
+          "kind": "place",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含变音符号的困难地名",
+          "weight": 50
+        },
+        {
+          "text": "Aurélie De Smet",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Irish College Leuven",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.8",
+          "reason": "困难机构专名",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Janseniusstraat 1",
+          "kind": "place",
+          "source": "stage0.existing_catalog.9",
+          "reason": "困难街道地址专名",
+          "weight": 50
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.7",
+          "reason": "困难完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Chaussée de Bruxelles 111",
+        "Château de la Hulpe",
+        "Aurélie De Smet",
+        "Irish College Leuven",
+        "Aurélien Dumont",
+        "Janseniusstraat 1",
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Chaussée de Bruxelles 111": 50,
+        "Château de la Hulpe": 50,
+        "Aurélie De Smet": 50,
+        "Irish College Leuven": 50,
+        "Aurélien Dumont": 50,
+        "Janseniusstraat 1": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "c0d07602b311a31bfa71b32a3d2001b493e6b23ba5c28a2906dfa386c895aee7"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Chaussée de Bruxelles 111": 50,
+        "Château de la Hulpe": 50,
+        "Aurélie De Smet": 50,
+        "Irish College Leuven": 50,
+        "Aurélien Dumont": 50,
+        "Janseniusstraat 1": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "c0d07602b311a31bfa71b32a3d2001b493e6b23ba5c28a2906dfa386c895aee7"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Chaussée de Bruxelles 111": 50,
+        "Château de la Hulpe": 50,
+        "Aurélie De Smet": 50,
+        "Irish College Leuven": 50,
+        "Aurélien Dumont": 50,
+        "Janseniusstraat 1": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "c0d07602b311a31bfa71b32a3d2001b493e6b23ba5c28a2906dfa386c895aee7"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Elara",
+    "La Hulpe",
+    "Net-Zero Multidisciplinary Brainstorming",
+    "Leuven",
+    "Aurélien"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:03.615092+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,156 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0187_wk3hw6dtnbrvzs94r1cjqmkwogkjziv6",
+  "model": "deepseek-flash",
+  "input_sha256": "b48394e916c7c2d537838d073ef646c07239e10fd9cd0de299d0248c38460811",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Rowan Fothergill",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ce62aff1-fe36-4b1a-ade9-1630c7a1f5fa.arguments.attendees[0]",
+          "reason": "完整人名，日历参会者"
+        },
+        {
+          "text": "Rohan Deshpande",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ce62aff1-fe36-4b1a-ade9-1630c7a1f5fa.arguments.attendees[1]",
+          "reason": "完整人名，日历参会者"
+        },
+        {
+          "text": "Kavita Deshpande",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ce62aff1-fe36-4b1a-ade9-1630c7a1f5fa.arguments.attendees[2]",
+          "reason": "完整人名，日历参会者"
+        },
+        {
+          "text": "Nottingham Park",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ce62aff1-fe36-4b1a-ade9-1630c7a1f5fa.arguments.location",
+          "reason": "地点名称"
+        },
+        {
+          "text": "Estes Alpha III Rocket Launch Set",
+          "kind": "product",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-c2b7663a-c168-45ad-a1fb-8adab464858e.arguments.content",
+          "reason": "产品型号名称"
+        }
+      ],
+      "new_terms": [
+        "Rowan Fothergill",
+        "Rohan Deshpande",
+        "Kavita Deshpande",
+        "Nottingham Park",
+        "Estes Alpha III Rocket Launch Set"
+      ],
+      "active_vocabulary": {
+        "Rowan Fothergill": 50,
+        "Rohan Deshpande": 50,
+        "Kavita Deshpande": 50,
+        "Nottingham Park": 50,
+        "Estes Alpha III Rocket Launch Set": 50
+      },
+      "vocabulary_sha256": "f8bd75f0477f4ae48b40097becd18d8c93147b050531b27082d98e5489aad2ef"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Estes Alpha III Rocket Launch Set",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_group_followup.arguments.content",
+          "reason": "产品型号名称"
+        },
+        {
+          "text": "UK Reunion 2024",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_retitle.arguments.title",
+          "reason": "群聊自定义标题"
+        },
+        {
+          "text": "Nottingham Park",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_group_followup.arguments.content",
+          "reason": "地点名称"
+        }
+      ],
+      "new_terms": [
+        "UK Reunion 2024"
+      ],
+      "active_vocabulary": {
+        "Rowan Fothergill": 50,
+        "Rohan Deshpande": 50,
+        "Kavita Deshpande": 50,
+        "Nottingham Park": 50,
+        "Estes Alpha III Rocket Launch Set": 50,
+        "UK Reunion 2024": 50
+      },
+      "vocabulary_sha256": "45d90eca1a15f586f0482be5ecd81f654247eb33aa64cfec173190ba2fcc66e9"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kavita Deshpande",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "完整人名"
+        },
+        {
+          "text": "UK Reunion 2024",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "群聊自定义标题"
+        },
+        {
+          "text": "Nottingham Park",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_group_setup.arguments.content",
+          "reason": "地点名称"
+        },
+        {
+          "text": "Estes Alpha III Rocket Launch Set",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_kavita_message.arguments.content",
+          "reason": "产品型号名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Rowan Fothergill": 50,
+        "Rohan Deshpande": 50,
+        "Kavita Deshpande": 50,
+        "Nottingham Park": 50,
+        "Estes Alpha III Rocket Launch Set": 50,
+        "UK Reunion 2024": 50
+      },
+      "vocabulary_sha256": "45d90eca1a15f586f0482be5ecd81f654247eb33aa64cfec173190ba2fcc66e9"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "e2c1ee472fd331853656201fdc59fed5581d8a24d55f1b3e070a6b83dbf8994e",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3176,
+        "completion_tokens": 605,
+        "total_tokens": 3781,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2920
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.13
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0187_wk3hw6dtnbrvzs94r1cjqmkwogkjziv6",
+  "extracted_at": "2026-11-22T06:40:34.984890+00:00"
+}

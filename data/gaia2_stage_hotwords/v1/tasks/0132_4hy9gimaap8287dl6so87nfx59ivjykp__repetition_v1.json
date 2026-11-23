@@ -1,0 +1,157 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0132_4hy9gimaap8287dl6so87nfx59ivjykp__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "ab420fc8dce6e14c0d11c6677818cb98783fa56755b5d6b5f751e9b7588545ce",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Prague",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Funny Drink Beer and Play Euchre",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "产品名称"
+        }
+      ],
+      "new_terms": [
+        "Prague",
+        "Funny Drink Beer and Play Euchre"
+      ],
+      "active_vocabulary": {
+        "Prague": 50,
+        "Funny Drink Beer and Play Euchre": 50
+      },
+      "vocabulary_sha256": "dbd77a55a77fd85b79d1e7b03c9b6c671fc928c4cb285948e99d4e079f18ad77"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Božetěchova 3, 110 00 Prague 1",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.location",
+          "reason": "家庭住址"
+        }
+      ],
+      "new_terms": [
+        "Božetěchova 3, 110 00 Prague 1"
+      ],
+      "active_vocabulary": {
+        "Prague": 50,
+        "Funny Drink Beer and Play Euchre": 50,
+        "Božetěchova 3, 110 00 Prague 1": 50
+      },
+      "vocabulary_sha256": "8b97e4d7ab1ec5d08d3f43a5fbbf9416b64ae4a6eb93b60ff5b65bedf05ec11d"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "František Šťastný",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_id_frantisek.arguments.user_name",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Vladimíra Nováková",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_id_vladimira.arguments.user_name",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Kryštof Nováček",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_inform.arguments.content",
+          "reason": "被邀请联系人姓名"
+        },
+        {
+          "text": "Šárka Nováková",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_inform.arguments.content",
+          "reason": "被邀请联系人姓名"
+        },
+        {
+          "text": "Zuzana Nováková",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_inform.arguments.content",
+          "reason": "被邀请联系人姓名"
+        },
+        {
+          "text": "Božetěchova 3, 110 00 Prague 1",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "家庭住址"
+        }
+      ],
+      "new_terms": [
+        "František Šťastný",
+        "Vladimíra Nováková",
+        "Kryštof Nováček",
+        "Šárka Nováková",
+        "Zuzana Nováková"
+      ],
+      "active_vocabulary": {
+        "Prague": 50,
+        "Funny Drink Beer and Play Euchre": 50,
+        "Božetěchova 3, 110 00 Prague 1": 50,
+        "František Šťastný": 50,
+        "Vladimíra Nováková": 50,
+        "Kryštof Nováček": 50,
+        "Šárka Nováková": 50,
+        "Zuzana Nováková": 50
+      },
+      "vocabulary_sha256": "a7057e4c99d40f24dbc6b42377bf522da7968e2f4aaed6f347c614806b16662e"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "1dace0b45ebf55cd719dc3a992fcb345b24ec8f644da859c57ce38910612e551",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3125,
+        "completion_tokens": 749,
+        "total_tokens": 3874,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2869
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.568,
+      "error": "Invalid proper-name phrase: 'k.novacek@gaia2mail.com'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "597fab3f4e41e0516f65b160a28abdc5ae266c7088ee642d59dd21783b6a0646",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4275,
+        "completion_tokens": 381,
+        "total_tokens": 4656,
+        "prompt_tokens_details": {
+          "cached_tokens": 3840
+        },
+        "prompt_cache_hit_tokens": 3840,
+        "prompt_cache_miss_tokens": 435
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.636
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0132_4hy9gimaap8287dl6so87nfx59ivjykp__repetition_v1",
+  "extracted_at": "2026-11-22T06:45:49.970409+00:00"
+}

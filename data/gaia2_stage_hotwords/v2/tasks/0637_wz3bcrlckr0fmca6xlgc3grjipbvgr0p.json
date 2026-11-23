@@ -1,0 +1,120 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0637_wz3bcrlckr0fmca6xlgc3grjipbvgr0p",
+  "model": "deepseek-flash",
+  "input_sha256": "13adad8427c45bc38b6d118aa714ce76881577823f0bcf8a6228cb09ce8eadbc",
+  "review_input_sha256": "ab021123457bfdc687c232a4c66c92778ece74e60a859637c54224c1d5ce2ba3",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "fff3a0605eb52fd179f7b9ebcc31d20f88771fe6a44272c540dc07b50716d4aa",
+  "reference_results_sha256": "7761d4d984b0e8a00dde6b6febff55768250f51a2151142299b633671f5d33f2",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Çağla Öztürk",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-359e9a85-e2ef-47c3-8e4c-4543c5286688.arguments.attendees[0]"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Istanbul Wine Tasting Tour",
+      "original_source": "stage1.tool_gt.series_s1_add_tour.arguments.title"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含法语变音符号的完整人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Çağla Öztürk",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含土耳其语特殊字符的完整人名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur",
+        "Çağla Öztürk"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Çağla Öztürk": 50
+      },
+      "vocabulary_sha256": "b2cf275d4dca849d6a61cef0645f42cc5d74b1482fb1b8e6faed6aaad7739aba"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Istanbul Wine Tasting Tour",
+          "kind": "custom_name",
+          "source": "stage1.existing_catalog.2",
+          "reason": "独特活动名称，含专有地名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Istanbul Wine Tasting Tour"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Çağla Öztürk": 50,
+        "Istanbul Wine Tasting Tour": 50
+      },
+      "vocabulary_sha256": "4eef7178cfd4c9bb99b93e48cc8688cc4fb090cbbf8f862a4bb4add883f846c2"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Çağla Öztürk": 50,
+        "Istanbul Wine Tasting Tour": 50
+      },
+      "vocabulary_sha256": "4eef7178cfd4c9bb99b93e48cc8688cc4fb090cbbf8f862a4bb4add883f846c2"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Luísa",
+    "Khalil",
+    "August",
+    "Ahmet",
+    "Mehmet",
+    "Çağla",
+    "Deniz",
+    "Oana"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:49.172752+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -70,6 +70,7 @@ from tau2.user.user_simulator_base import (
 )
 from tau2.utils.llm_utils import generate
 from tau2.utils.transcript.linearization import merge_homogeneous_chunks
+from tau2.utils.transcript.views import streaming_transcript_content
 from tau2.utils.utils import get_now
 from tau2.voice.synthesis.audio_effects.effects import StreamingTelephonyConverter
 from tau2.voice.synthesis.audio_effects.processor import (
@@ -816,11 +817,10 @@ class VoiceStreamingUserSimulator(
             if state.agent_silent_ticks >= max(1, self.integration_ticks):
                 state.agent_speech_active = False
         text = bool(chunk.content and chunk.content.strip())
-        fragments = ((chunk.raw_data or {}).get("live_transcript") or {}).get(
-            "fragments", []
-        )
+        live = (chunk.raw_data or {}).get("live_transcript") or {}
+        fragments = live.get("fragments", [])
         identified = [f for f in fragments if f.get("event_id")]
-        if identified:
+        if identified or live.get("snapshot") is not None:
             text = False
             for fragment in identified:
                 event_id = fragment["event_id"]
@@ -1189,7 +1189,7 @@ class VoiceStreamingUserSimulator(
             and not self._needs_tool_reply
             and not any(
                 chunk.contains_speech
-                or chunk.content
+                or streaming_transcript_content(chunk)
                 or isinstance(chunk, EnvironmentMessage)
                 for chunk in state.input_turn_taking_buffer
             )

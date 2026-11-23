@@ -1,0 +1,297 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0084_wvmtc5auy4ioyglwkyxuer2zfdr1xnw8__mind_change_v1__async_0084_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "21ba318a370cbb8580ea0e8f5216327e86e15dbaa5559e9c417270a7ff3dfc86",
+  "review_input_sha256": "ba1d7d91440efd7efb0775eba88d665d39ff1e11e8036a2be17047d3f978a6c2",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "8c45344d5f23b5c6ebb19376aaf06641c2d8faffd87f87c2871a6bfa1b443714",
+  "reference_results_sha256": "7be5b1e06d5e24c273d2954a2a0c5b7308f5e330499fb37e4a2ae48797d8f7c2",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Åshild Nystad",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Tromsø",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Stavanger Cathedral",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Stavanger Airport, Sola",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "Åse Kjellstad",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-7fc938f6-936c-4a6f-830a-59ba15895a15.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Kåre Fjellstad",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Stavanger Suites",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Kongsgata 20",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Stavanger City Apartment",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.5": {
+      "stage": 1,
+      "text": "Kirkelivatnet 12",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.6": {
+      "stage": 1,
+      "text": "Stavanger City Living",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.7": {
+      "stage": 1,
+      "text": "Kvadraturen 12",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Nordic Film Picks",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Kofi Owusu",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Alejandro Moreno-González",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Stavanger Airport, Sola",
+          "kind": "place",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整机场地名，含难拼写地名",
+          "weight": 50
+        },
+        {
+          "text": "Stavanger Cathedral",
+          "kind": "place",
+          "source": "stage0.existing_catalog.3",
+          "reason": "具体地点名称，含难拼写地名",
+          "weight": 50
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage0.existing_catalog.6",
+          "reason": "含特殊字符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Åshild Nystad",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含挪威语特殊字符的完整人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Tromsø",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含特殊字符的挪威地名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Stavanger Airport, Sola",
+        "Stavanger Cathedral",
+        "Åse Kjellstad",
+        "Åshild Nystad",
+        "Tromsø"
+      ],
+      "active_vocabulary": {
+        "Stavanger Airport, Sola": 50,
+        "Stavanger Cathedral": 50,
+        "Åse Kjellstad": 50,
+        "Åshild Nystad": 50,
+        "Tromsø": 50
+      },
+      "vocabulary_sha256": "3c40378150ae7423d28dff41e7860b75db32da36dd8636f47936c42335f48cc4"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Stavanger City Apartment",
+          "kind": "organization",
+          "source": "stage1.existing_catalog.4",
+          "reason": "具体住宿机构名称",
+          "weight": 50
+        },
+        {
+          "text": "Stavanger City Living",
+          "kind": "organization",
+          "source": "stage1.existing_catalog.6",
+          "reason": "具体住宿机构名称",
+          "weight": 50
+        },
+        {
+          "text": "Kirkelivatnet 12",
+          "kind": "place",
+          "source": "stage1.existing_catalog.5",
+          "reason": "具体挪威街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Kongsgata 20",
+          "kind": "place",
+          "source": "stage1.existing_catalog.3",
+          "reason": "具体挪威街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Kvadraturen 12",
+          "kind": "place",
+          "source": "stage1.existing_catalog.7",
+          "reason": "具体挪威街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Kåre Fjellstad",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含特殊字符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Stavanger Suites",
+          "kind": "organization",
+          "source": "stage1.existing_catalog.2",
+          "reason": "具体住宿机构名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Stavanger City Apartment",
+        "Stavanger City Living",
+        "Kirkelivatnet 12",
+        "Kongsgata 20",
+        "Kvadraturen 12",
+        "Kåre Fjellstad",
+        "Stavanger Suites"
+      ],
+      "active_vocabulary": {
+        "Stavanger Airport, Sola": 50,
+        "Stavanger Cathedral": 50,
+        "Åse Kjellstad": 50,
+        "Åshild Nystad": 50,
+        "Tromsø": 50,
+        "Stavanger City Apartment": 50,
+        "Stavanger City Living": 50,
+        "Kirkelivatnet 12": 50,
+        "Kongsgata 20": 50,
+        "Kvadraturen 12": 50,
+        "Kåre Fjellstad": 50,
+        "Stavanger Suites": 50
+      },
+      "vocabulary_sha256": "201dde9aa9e58415f2fd8c7e9fb11c0e83e83a645e2300b16136d019eaf66d7a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Alejandro Moreno-González",
+          "kind": "person",
+          "source": "stage2.existing_catalog.2",
+          "reason": "含特殊字符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Nordic Film Picks",
+          "kind": "organization",
+          "source": "stage2.existing_catalog.0",
+          "reason": "具体群组名称",
+          "weight": 50
+        },
+        {
+          "text": "Kofi Owusu",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Alejandro Moreno-González",
+        "Nordic Film Picks",
+        "Kofi Owusu"
+      ],
+      "active_vocabulary": {
+        "Stavanger Airport, Sola": 50,
+        "Stavanger Cathedral": 50,
+        "Åse Kjellstad": 50,
+        "Åshild Nystad": 50,
+        "Tromsø": 50,
+        "Stavanger City Apartment": 50,
+        "Stavanger City Living": 50,
+        "Kirkelivatnet 12": 50,
+        "Kongsgata 20": 50,
+        "Kvadraturen 12": 50,
+        "Kåre Fjellstad": 50,
+        "Stavanger Suites": 50,
+        "Alejandro Moreno-González": 50,
+        "Nordic Film Picks": 50,
+        "Kofi Owusu": 50
+      },
+      "vocabulary_sha256": "3ed7e9095f6b7dd41ac81f0ff89002dd6aedd920bc37f836235e25dcfd05d562"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "100% Wool Navy Aurora 8\" Woolsey",
+    "Astrid",
+    "Stavanger"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:20:14.205116+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

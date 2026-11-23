@@ -1,0 +1,244 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0448_zqydvk40g69ra4bro910dwpwfzmy2y9n__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "226750c959c8795d238b662cca7fdfb0e58e69b23602dcfd4a4c2754b8f64dcc",
+  "review_input_sha256": "875a25cba9d3c6102aa026201ce0cd83d7b20bf6d540f0597b37d0572b24823c",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "50719e396305a869a2172705586b9c81fb5036b6b3ab457be5a07149163651ac",
+  "reference_results_sha256": "f5e2568d1e0637b905f0d6b526ea2f538827761d9ac3165916b894e22892f5db",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Trondheim",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-72f777b1-563d-442c-91ab-2420ad73593e.arguments.subject"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Trondheim East",
+      "original_source": "stage1.tool_gt.series_s1_email_pet_friendly_shortlist.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Trondheim Terraces",
+      "original_source": "stage1.tool_gt.series_s1_email_pet_friendly_shortlist.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Trondheim Student Living",
+      "original_source": "stage1.tool_gt.series_s1_email_pet_friendly_shortlist.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Trondheim Leilighet",
+      "original_source": "stage1.tool_gt.series_s1_email_pet_friendly_shortlist.arguments.content"
+    },
+    "stage1.existing_catalog.5": {
+      "stage": 1,
+      "text": "Trondheim Modern Home",
+      "original_source": "stage1.tool_gt.series_s1_email_pet_friendly_shortlist.arguments.content"
+    },
+    "stage1.existing_catalog.6": {
+      "stage": 1,
+      "text": "Åse Kjellstad",
+      "original_source": "stage1.tool_gt.series_s1_email_pet_friendly_shortlist.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Trondheim University Apartments",
+      "original_source": "stage2.tool_gt.series_s2_email_viewing_request.arguments.content"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Trondheim Central",
+      "original_source": "stage2.tool_gt.series_s2_email_viewing_request.arguments.content"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Trondheim Student Housing",
+      "original_source": "stage2.tool_gt.series_s2_email_viewing_request.arguments.content"
+    },
+    "stage2.existing_catalog.3": {
+      "stage": 2,
+      "text": "Trondheim Tower",
+      "original_source": "stage2.tool_gt.series_s2_email_viewing_request.arguments.content"
+    },
+    "stage2.existing_catalog.4": {
+      "stage": 2,
+      "text": "Trondheim Town Centre",
+      "original_source": "stage2.tool_gt.series_s2_email_viewing_request.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Trondheim",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "挪威城市专有地名，发音较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Trondheim"
+      ],
+      "active_vocabulary": {
+        "Trondheim": 50
+      },
+      "vocabulary_sha256": "016bbb4743e3419305b742146d001a853c2a9e0704d27217e45af0f246060bfe"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Trondheim Modern Home",
+          "kind": "place",
+          "source": "stage1.existing_catalog.5",
+          "reason": "公寓专有名称",
+          "weight": 50
+        },
+        {
+          "text": "Trondheim Student Living",
+          "kind": "place",
+          "source": "stage1.existing_catalog.3",
+          "reason": "公寓专有名称",
+          "weight": 50
+        },
+        {
+          "text": "Trondheim East",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "公寓专有名称",
+          "weight": 50
+        },
+        {
+          "text": "Trondheim Leilighet",
+          "kind": "place",
+          "source": "stage1.existing_catalog.4",
+          "reason": "含挪威语词的公寓专名",
+          "weight": 50
+        },
+        {
+          "text": "Trondheim Terraces",
+          "kind": "place",
+          "source": "stage1.existing_catalog.2",
+          "reason": "公寓专有名称",
+          "weight": 50
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage1.existing_catalog.6",
+          "reason": "含挪威语变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Trondheim Modern Home",
+        "Trondheim Student Living",
+        "Trondheim East",
+        "Trondheim Leilighet",
+        "Trondheim Terraces",
+        "Åse Kjellstad"
+      ],
+      "active_vocabulary": {
+        "Trondheim": 50,
+        "Trondheim Modern Home": 50,
+        "Trondheim Student Living": 50,
+        "Trondheim East": 50,
+        "Trondheim Leilighet": 50,
+        "Trondheim Terraces": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "24a333e27aab9690026aafef3337d4fe0f1365b0f15d14531163a6e74701ef77"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Trondheim Student Housing",
+          "kind": "place",
+          "source": "stage2.existing_catalog.2",
+          "reason": "公寓专有名称",
+          "weight": 50
+        },
+        {
+          "text": "Trondheim Town Centre",
+          "kind": "place",
+          "source": "stage2.existing_catalog.4",
+          "reason": "公寓专有名称",
+          "weight": 50
+        },
+        {
+          "text": "Trondheim University Apartments",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "公寓专有名称",
+          "weight": 50
+        },
+        {
+          "text": "Trondheim Central",
+          "kind": "place",
+          "source": "stage2.existing_catalog.1",
+          "reason": "公寓专有名称",
+          "weight": 50
+        },
+        {
+          "text": "Trondheim Tower",
+          "kind": "place",
+          "source": "stage2.existing_catalog.3",
+          "reason": "公寓专有名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Trondheim Student Housing",
+        "Trondheim Town Centre",
+        "Trondheim University Apartments",
+        "Trondheim Central",
+        "Trondheim Tower"
+      ],
+      "active_vocabulary": {
+        "Trondheim": 50,
+        "Trondheim Modern Home": 50,
+        "Trondheim Student Living": 50,
+        "Trondheim East": 50,
+        "Trondheim Leilighet": 50,
+        "Trondheim Terraces": 50,
+        "Åse Kjellstad": 50,
+        "Trondheim Student Housing": 50,
+        "Trondheim Town Centre": 50,
+        "Trondheim University Apartments": 50,
+        "Trondheim Central": 50,
+        "Trondheim Tower": 50
+      },
+      "vocabulary_sha256": "a18a3ecdbd01a2f81338769bfc3f2129c6285e42dc865da01f5082e2ccd61b8c"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Rohan"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:50.330885+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

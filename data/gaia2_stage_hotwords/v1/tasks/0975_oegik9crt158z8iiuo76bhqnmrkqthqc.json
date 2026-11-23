@@ -1,0 +1,117 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0975_oegik9crt158z8iiuo76bhqnmrkqthqc",
+  "model": "deepseek-flash",
+  "input_sha256": "0cb7eb224c3ee9cbdec40339c47cc13067125d4002cf10da2fd090c12899a642",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Gulandom",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fd0498d1-0c10-40f9-8bdb-1e5eafcb48f1.arguments.content",
+          "reason": "消息收件人姓名"
+        },
+        {
+          "text": "Saoirse",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-8764d89c-7283-4281-95e4-24f5280c0b10.arguments.content",
+          "reason": "消息收件人姓名"
+        },
+        {
+          "text": "Kacper",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f0f4b9f8-6fe7-43ef-879c-44662e60d81a.arguments.content",
+          "reason": "消息收件人姓名"
+        }
+      ],
+      "new_terms": [
+        "Gulandom",
+        "Saoirse",
+        "Kacper"
+      ],
+      "active_vocabulary": {
+        "Gulandom": 50,
+        "Saoirse": 50,
+        "Kacper": 50
+      },
+      "vocabulary_sha256": "8ed92b26408f11ff77f411101104ab19c188452bd82f9c4c9576fede0eec734a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Research on 19th-Century Russia",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_3.arguments.title",
+          "reason": "需移动的日程标题"
+        },
+        {
+          "text": "Grading Papers",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_4.arguments.title",
+          "reason": "需移动的日程标题"
+        },
+        {
+          "text": "Rogelio",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "周六会议对象姓名"
+        }
+      ],
+      "new_terms": [
+        "Research on 19th-Century Russia",
+        "Grading Papers",
+        "Rogelio"
+      ],
+      "active_vocabulary": {
+        "Gulandom": 50,
+        "Saoirse": 50,
+        "Kacper": 50,
+        "Research on 19th-Century Russia": 50,
+        "Grading Papers": 50,
+        "Rogelio": 50
+      },
+      "vocabulary_sha256": "3bc88a30c0ab8797d617354786c1d7e7e1457adc2893f37b0583e5d2cf71ce2b"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Gulandom": 50,
+        "Saoirse": 50,
+        "Kacper": 50,
+        "Research on 19th-Century Russia": 50,
+        "Grading Papers": 50,
+        "Rogelio": 50
+      },
+      "vocabulary_sha256": "3bc88a30c0ab8797d617354786c1d7e7e1457adc2893f37b0583e5d2cf71ce2b"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "6150af67b33b59bdd2e32c9d490690fd061db5d4cf2c0432b0761ee61c0bd04b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3700,
+        "completion_tokens": 325,
+        "total_tokens": 4025,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3444
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.339
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0975_oegik9crt158z8iiuo76bhqnmrkqthqc",
+  "extracted_at": "2026-11-22T06:44:46.592010+00:00"
+}

@@ -1,0 +1,124 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0430_h041kg14zk7jm989zrvt0hbhdmaefz4q__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "4648fe9951ce2cebd05d1008eb349265d575efa3f0361682509d6419a2b798a5",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Brno Bliss",
+          "kind": "product",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-8219ec80-afd9-480b-8f5a-00af61abad55.arguments.content",
+          "reason": "房源专有名称"
+        }
+      ],
+      "new_terms": [
+        "Brno Bliss"
+      ],
+      "active_vocabulary": {
+        "Brno Bliss": 50
+      },
+      "vocabulary_sha256": "7afb37361c146b235d8f1d1f3ddaba3dc8f5fcf89a51419437f28b07e7969f24"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Brno Bliss",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Brno Lake Views",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Kvido Nováček",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人姓名"
+        }
+      ],
+      "new_terms": [
+        "Brno Lake Views",
+        "Kvido Nováček"
+      ],
+      "active_vocabulary": {
+        "Brno Bliss": 50,
+        "Brno Lake Views": 50,
+        "Kvido Nováček": 50
+      },
+      "vocabulary_sha256": "f977eba9cb1b949e5820f60a14e8ef84471e506ad08306d1928ed915b7b78386"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Brno Student Housing",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "房源专有名称"
+        }
+      ],
+      "new_terms": [
+        "Brno Student Housing"
+      ],
+      "active_vocabulary": {
+        "Brno Bliss": 50,
+        "Brno Lake Views": 50,
+        "Kvido Nováček": 50,
+        "Brno Student Housing": 50
+      },
+      "vocabulary_sha256": "9323d39a62ac149b9c92c23d7611812749eab04b72b588303c312921c132bbc8"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "e992bd66c5cdb86270767dfb91a1d9fb302f51435d9a1330b921f536736969a7",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1276,
+        "completion_tokens": 222,
+        "total_tokens": 1498,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1020
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.043,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "1aa4511b23b8f18e305a9a78867292dac6f1ccbeafa8aa175c752ad55ac9b909",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1891,
+        "completion_tokens": 224,
+        "total_tokens": 2115,
+        "prompt_tokens_details": {
+          "cached_tokens": 1408
+        },
+        "prompt_cache_hit_tokens": 1408,
+        "prompt_cache_miss_tokens": 483
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.235
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0430_h041kg14zk7jm989zrvt0hbhdmaefz4q__mind_change_v1",
+  "extracted_at": "2026-11-22T06:45:03.161993+00:00"
+}

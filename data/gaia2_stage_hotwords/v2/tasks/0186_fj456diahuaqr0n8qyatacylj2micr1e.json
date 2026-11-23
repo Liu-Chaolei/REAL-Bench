@@ -1,0 +1,174 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0186_fj456diahuaqr0n8qyatacylj2micr1e",
+  "model": "deepseek-flash",
+  "input_sha256": "0c05603f26f1bb6a6cf57f39187690b782376ab9fecb133b748378f02fd95856",
+  "review_input_sha256": "d7d32384ba9981bc45ccc1c8c797a5c3db4e32216b4ba2eb8e54707e4503259e",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "048126fcc8d43243834e6befb2e57cf17f8a8548ea5ee9b3cecf803a4ecc91af",
+  "reference_results_sha256": "b606f3d949a90c1417aaebdd1612865530024f5ca080011bdd7b06a8548ebc8c",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Watch Ya' Mouth",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Think Fun Last Letter",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Creative Converting 85590 2 Count Construction Zone Party Treat Boxes",
+      "original_source": "stage1.reference_reply.series_s1_ask_centerpiece.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Cinco De Mayo Fiesta Mini Honeycomb Table Centerpiece",
+      "original_source": "stage1.reference_reply.series_s1_ask_centerpiece.arguments.content"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Ulitsa Bolshaya Dmitrovka, 15/1, Moscow, 127006",
+      "original_source": "stage2.tool_gt.series_s2_add_party.arguments.location"
+    },
+    "stage2.existing_catalog.3": {
+      "stage": 2,
+      "text": "Research on 19th-Century Russia",
+      "original_source": "stage2.reference_reply.series_s2_reply.arguments.content"
+    },
+    "stage2.existing_catalog.4": {
+      "stage": 2,
+      "text": "Rogelio García-Mendoza",
+      "original_source": "stage2.reference_reply.series_s2_reply.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Think Fun Last Letter",
+          "kind": "product",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整独特产品名，含多词组合",
+          "weight": 50
+        },
+        {
+          "text": "Watch Ya' Mouth",
+          "kind": "product",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含标点的独特桌游名称，ASR易错",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Think Fun Last Letter",
+        "Watch Ya' Mouth"
+      ],
+      "active_vocabulary": {
+        "Think Fun Last Letter": 50,
+        "Watch Ya' Mouth": 50
+      },
+      "vocabulary_sha256": "a5c355d752203e76aaf9a31a7060bf2dd3223c969ee5f4af1be6400b6d7cbdd9"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Creative Converting 85590 2 Count Construction Zone Party Treat Boxes",
+          "kind": "product",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含数字与多词的独特完整产品名",
+          "weight": 50
+        },
+        {
+          "text": "Cinco De Mayo Fiesta Mini Honeycomb Table Centerpiece",
+          "kind": "product",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含西语词的独特完整产品名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Creative Converting 85590 2 Count Construction Zone Party Treat Boxes",
+        "Cinco De Mayo Fiesta Mini Honeycomb Table Centerpiece"
+      ],
+      "active_vocabulary": {
+        "Think Fun Last Letter": 50,
+        "Watch Ya' Mouth": 50,
+        "Creative Converting 85590 2 Count Construction Zone Party Treat Boxes": 50,
+        "Cinco De Mayo Fiesta Mini Honeycomb Table Centerpiece": 50
+      },
+      "vocabulary_sha256": "1975c58b1e4eef931aea0163abb1c6ec544099cdbadbed9917939a1617529018"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Ulitsa Bolshaya Dmitrovka, 15/1, Moscow, 127006",
+          "kind": "place",
+          "source": "stage2.existing_catalog.2",
+          "reason": "含俄语转写的完整难读地址",
+          "weight": 50
+        },
+        {
+          "text": "Research on 19th-Century Russia",
+          "kind": "custom_name",
+          "source": "stage2.existing_catalog.3",
+          "reason": "含世纪数字的独特研究名称",
+          "weight": 50
+        },
+        {
+          "text": "Rogelio García-Mendoza",
+          "kind": "person",
+          "source": "stage2.existing_catalog.4",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Ulitsa Bolshaya Dmitrovka, 15/1, Moscow, 127006",
+        "Research on 19th-Century Russia",
+        "Rogelio García-Mendoza"
+      ],
+      "active_vocabulary": {
+        "Think Fun Last Letter": 50,
+        "Watch Ya' Mouth": 50,
+        "Creative Converting 85590 2 Count Construction Zone Party Treat Boxes": 50,
+        "Cinco De Mayo Fiesta Mini Honeycomb Table Centerpiece": 50,
+        "Ulitsa Bolshaya Dmitrovka, 15/1, Moscow, 127006": 50,
+        "Research on 19th-Century Russia": 50,
+        "Rogelio García-Mendoza": 50
+      },
+      "vocabulary_sha256": "9a337bcecc7aca175d6253fe6d2ade7792324cadca7c6ca7e54c581c5c032615"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Helga",
+    "Last Letter",
+    "Moscow"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:24.648478+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

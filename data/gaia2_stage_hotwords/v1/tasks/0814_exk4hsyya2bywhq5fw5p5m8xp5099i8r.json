@@ -1,0 +1,175 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0814_exk4hsyya2bywhq5fw5p5m8xp5099i8r",
+  "model": "deepseek-flash",
+  "input_sha256": "391e0cf1d0fece8651e86fbed47528a30aad2124c074995fa7b3b9defebb1142",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "kvido.novacek",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "表弟姓名，出现在其旧邮箱地址中"
+        }
+      ],
+      "new_terms": [
+        "kvido.novacek"
+      ],
+      "active_vocabulary": {
+        "kvido.novacek": 50
+      },
+      "vocabulary_sha256": "406427526295994de1c2fae8d979c3867b565e57737786fe0c71ed893d0fa06e"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kvido",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "表弟的名字，内部通讯录条目"
+        }
+      ],
+      "new_terms": [
+        "Kvido"
+      ],
+      "active_vocabulary": {
+        "kvido.novacek": 50,
+        "Kvido": 50
+      },
+      "vocabulary_sha256": "85af0b5ff0d18d3c034b567792bc90c42f97694c6d0765a02418b02ae84a4425"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kvido",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "警告邮件的收件人名字"
+        },
+        {
+          "text": "Matej",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_warn_kvido.arguments.content",
+          "reason": "邮件署名中的发件人名字"
+        }
+      ],
+      "new_terms": [
+        "Matej"
+      ],
+      "active_vocabulary": {
+        "kvido.novacek": 50,
+        "Kvido": 50,
+        "Matej": 50
+      },
+      "vocabulary_sha256": "3effa0130d9e1a580705ec7c563570700ca2be2c0758897c214405386c0ebb60"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "5a118ba11fbafd325fa6b094256ffa85a0273c33e26ab9dcd5e1fce7501f930a",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2230,
+        "completion_tokens": 234,
+        "total_tokens": 2464,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1974
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.343,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "3fb9b66c80f9fb182d03295cd00834ff95f91f43397bbfeba901d91109d8ad3d",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2857,
+        "completion_tokens": 234,
+        "total_tokens": 3091,
+        "prompt_tokens_details": {
+          "cached_tokens": 2432
+        },
+        "prompt_cache_hit_tokens": 2432,
+        "prompt_cache_miss_tokens": 425
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 0.983,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "3fb9b66c80f9fb182d03295cd00834ff95f91f43397bbfeba901d91109d8ad3d",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2857,
+        "completion_tokens": 234,
+        "total_tokens": 3091,
+        "prompt_tokens_details": {
+          "cached_tokens": 2688
+        },
+        "prompt_cache_hit_tokens": 2688,
+        "prompt_cache_miss_tokens": 169
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.029,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 4,
+      "request_sha256": "3fb9b66c80f9fb182d03295cd00834ff95f91f43397bbfeba901d91109d8ad3d",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2857,
+        "completion_tokens": 236,
+        "total_tokens": 3093,
+        "prompt_tokens_details": {
+          "cached_tokens": 2688
+        },
+        "prompt_cache_hit_tokens": 2688,
+        "prompt_cache_miss_tokens": 169
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.035,
+      "error": "Not an exact quotation of a source in stage 0: 'Kvido' from 'stage0.source_task'"
+    },
+    {
+      "attempt": 5,
+      "request_sha256": "d6f074e603f2774b63ece1c29ead6a336f9be9e10b714f447a419bab23877e12",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2906,
+        "completion_tokens": 162,
+        "total_tokens": 3068,
+        "prompt_tokens_details": {
+          "cached_tokens": 2176
+        },
+        "prompt_cache_hit_tokens": 2176,
+        "prompt_cache_miss_tokens": 730
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.165
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0814_exk4hsyya2bywhq5fw5p5m8xp5099i8r",
+  "extracted_at": "2026-11-22T06:46:44.576928+00:00"
+}

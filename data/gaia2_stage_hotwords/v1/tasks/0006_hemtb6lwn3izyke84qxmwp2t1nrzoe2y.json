@@ -1,0 +1,148 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0006_hemtb6lwn3izyke84qxmwp2t1nrzoe2y",
+  "model": "deepseek-flash",
+  "input_sha256": "97c965a41c67cdf4351378fff4c2741f8843951d22451e0dc0e988135b406c1e",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Niamh Okoro",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "都柏林联系人中最年长者姓名"
+        },
+        {
+          "text": "Aoife Byrne",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "都柏林联系人中最年轻者姓名"
+        },
+        {
+          "text": "Áine Ní Bhroin",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "都柏林联系人姓名"
+        },
+        {
+          "text": "Caoimhe Ní Chonchobhair",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "都柏林联系人姓名"
+        },
+        {
+          "text": "Áine Ní Chonaill",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "戈尔韦退休联系人姓名"
+        },
+        {
+          "text": "Aisling Ó Cuinn",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "戈尔韦退休联系人姓名"
+        },
+        {
+          "text": "Aoife Ní Chonaill",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "戈尔韦退休联系人姓名"
+        },
+        {
+          "text": "Saoirse Ní Chonaill",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "戈尔韦学生联系人姓名"
+        }
+      ],
+      "new_terms": [
+        "Niamh Okoro",
+        "Aoife Byrne",
+        "Áine Ní Bhroin",
+        "Caoimhe Ní Chonchobhair",
+        "Áine Ní Chonaill",
+        "Aisling Ó Cuinn",
+        "Aoife Ní Chonaill",
+        "Saoirse Ní Chonaill"
+      ],
+      "active_vocabulary": {
+        "Niamh Okoro": 50,
+        "Aoife Byrne": 50,
+        "Áine Ní Bhroin": 50,
+        "Caoimhe Ní Chonchobhair": 50,
+        "Áine Ní Chonaill": 50,
+        "Aisling Ó Cuinn": 50,
+        "Aoife Ní Chonaill": 50,
+        "Saoirse Ní Chonaill": 50
+      },
+      "vocabulary_sha256": "f0a1412c7a1c8a024ddbafd41bf8a661c143ec57b377bc9dd73df81b7b67f087"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Áine Ní Chonaill",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "戈尔韦退休联系人姓名"
+        },
+        {
+          "text": "Aisling Ó Cuinn",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "戈尔韦退休联系人姓名"
+        },
+        {
+          "text": "Aoife Ní Chonaill",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "戈尔韦退休联系人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Niamh Okoro": 50,
+        "Aoife Byrne": 50,
+        "Áine Ní Bhroin": 50,
+        "Caoimhe Ní Chonchobhair": 50,
+        "Áine Ní Chonaill": 50,
+        "Aisling Ó Cuinn": 50,
+        "Aoife Ní Chonaill": 50,
+        "Saoirse Ní Chonaill": 50
+      },
+      "vocabulary_sha256": "f0a1412c7a1c8a024ddbafd41bf8a661c143ec57b377bc9dd73df81b7b67f087"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "7f2fa261488b2bf9ede730366dc5e2cf466500ce19802b4baf77e30fc7b4348b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1503,
+        "completion_tokens": 480,
+        "total_tokens": 1983,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1247
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.802
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0006_hemtb6lwn3izyke84qxmwp2t1nrzoe2y",
+  "extracted_at": "2026-11-22T06:38:22.140602+00:00"
+}

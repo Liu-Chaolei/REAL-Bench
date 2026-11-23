@@ -1,0 +1,210 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0541_ti9ury6266qvorcbm82d42fc3n9b68d7",
+  "model": "deepseek-flash",
+  "input_sha256": "6cce6bfed7c71323d80f626ab21eac8f23a494f470cb46b52891ff640998a8be",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Axel Lindqvist",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Sodermalm",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "庆祝晚餐地点"
+        },
+        {
+          "text": "Linnea Svensson",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "群聊成员姓名"
+        },
+        {
+          "text": "Åsa Lindqvist",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "群聊成员姓名"
+        },
+        {
+          "text": "Astrid Lindqvist",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "群聊成员姓名"
+        },
+        {
+          "text": "Party Pictures Game for Adults",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "需购买的游戏产品名"
+        }
+      ],
+      "new_terms": [
+        "Axel Lindqvist",
+        "Sodermalm",
+        "Linnea Svensson",
+        "Åsa Lindqvist",
+        "Astrid Lindqvist",
+        "Party Pictures Game for Adults"
+      ],
+      "active_vocabulary": {
+        "Axel Lindqvist": 50,
+        "Sodermalm": 50,
+        "Linnea Svensson": 50,
+        "Åsa Lindqvist": 50,
+        "Astrid Lindqvist": 50,
+        "Party Pictures Game for Adults": 50
+      },
+      "vocabulary_sha256": "f41ae36f886ed41e2bf59c3d6dc034e24c7f4ce3e2b26442bce97f4fa0bc40fc"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Axel Lindqvist",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "需加入庆祝活动的人名"
+        },
+        {
+          "text": "Linnea Svensson",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群聊成员姓名"
+        },
+        {
+          "text": "Åsa Lindqvist",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群聊成员姓名"
+        },
+        {
+          "text": "Astrid Lindqvist",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群聊成员姓名"
+        },
+        {
+          "text": "Södermalm",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "晚餐地点"
+        },
+        {
+          "text": "Södermalm, Stockholm",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.location",
+          "reason": "日历地点完整写法"
+        }
+      ],
+      "new_terms": [
+        "Södermalm",
+        "Södermalm, Stockholm"
+      ],
+      "active_vocabulary": {
+        "Axel Lindqvist": 50,
+        "Sodermalm": 50,
+        "Linnea Svensson": 50,
+        "Åsa Lindqvist": 50,
+        "Astrid Lindqvist": 50,
+        "Party Pictures Game for Adults": 50,
+        "Södermalm": 50,
+        "Södermalm, Stockholm": 50
+      },
+      "vocabulary_sha256": "03392b65543052b0e87f996608adbba2a11786b42cddeb78e75b670843b9fbd5"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Östermalmsgatan 12, 114 39 Stockholm, Sweden",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "出租车出发地址"
+        },
+        {
+          "text": "Södermalm",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "庆祝活动地点"
+        },
+        {
+          "text": "Södermalm, Stockholm",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_order_outbound.arguments.end_location",
+          "reason": "出租车目的地完整写法"
+        },
+        {
+          "text": "Axel Lindqvist",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]",
+          "reason": "保留的参会人姓名"
+        }
+      ],
+      "new_terms": [
+        "Östermalmsgatan 12, 114 39 Stockholm, Sweden"
+      ],
+      "active_vocabulary": {
+        "Axel Lindqvist": 50,
+        "Sodermalm": 50,
+        "Linnea Svensson": 50,
+        "Åsa Lindqvist": 50,
+        "Astrid Lindqvist": 50,
+        "Party Pictures Game for Adults": 50,
+        "Södermalm": 50,
+        "Södermalm, Stockholm": 50,
+        "Östermalmsgatan 12, 114 39 Stockholm, Sweden": 50
+      },
+      "vocabulary_sha256": "1abbaa257159c51258f6933a8c5a405c74d279e54a9fb1d4877b22d20d8d1ec5"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "6711cc6a95e7e4ebe0adf6fdcd8de124eefeab0d66e03fbaee212aee914e0465",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3554,
+        "completion_tokens": 548,
+        "total_tokens": 4102,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3298
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.931,
+      "error": "Duplicate term within stage 2: 'Östermalmsgatan 12, 114 39 Stockholm, Sweden'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "51abbce21f3fa422a51f841045207f1543da34a8f107ae64773b4d26f6d03821",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4509,
+        "completion_tokens": 498,
+        "total_tokens": 5007,
+        "prompt_tokens_details": {
+          "cached_tokens": 4096
+        },
+        "prompt_cache_hit_tokens": 4096,
+        "prompt_cache_miss_tokens": 413
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.909
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0541_ti9ury6266qvorcbm82d42fc3n9b68d7",
+  "extracted_at": "2026-11-22T06:42:40.670906+00:00"
+}

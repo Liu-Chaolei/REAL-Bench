@@ -89,6 +89,26 @@ class FinalizingObserver(Observer):
         self.closed = True
 
 
+class NativeObserver(Observer):
+    """Record original PCM and its playback rate, never the legacy phone path."""
+
+    def __init__(self):
+        super().__init__()
+        self.rates = []
+        self.order = []
+
+    async def send(self, pcm):
+        raise AssertionError("Native playback must bypass the legacy observer input")
+
+    async def send_native(self, pcm, sample_rate):
+        self.played.append(pcm)
+        self.rates.append(sample_rate)
+        self.order.append("audio")
+
+    def queue_pending(self):
+        self.order.append("finish")
+
+
 class FakeSegmentedTranscriber(SegmentedPlayedAudioTranscriber):
     """Key-free ASR implementation for exercising final pending audio."""
 
@@ -135,6 +155,110 @@ def audio(response="r", milliseconds=100):
         "sample_rate": 24000,
         "audio": base64.b64encode(b"\x10\x10" * (24 * milliseconds)).decode(),
     }
+
+
+@pytest.mark.parametrize("rate", [16000, 24000])
+def test_native_pcm_playback_preserves_bytes_and_only_releases_played_ticks(
+    rate, tmp_path
+):
+    import wave
+
+    from tau2.agent.discrete_time_audio_native_agent import DiscreteTimeAudioNativeAgent
+    from tau2.data_model.audio import AudioEncoding
+
+    bridge, observer = Bridge(), NativeObserver()
+    adapter = DiscreteTimeQwenAgentAdapter(
+        tick_duration_ms=20,
+        config=QwenAgentConfig(playback_sample_rate=rate),
+        provider=bridge,
+        transcriber=observer,
+    )
+    adapter.connect("Policy", [])
+    try:
+        # This waveform would be altered by downsampling or mu-law encoding.
+        pcm = b"\x00\x00\xe0\x2e\x00\x00\x20\xd1" * (rate // 40)
+        bridge.events.append(
+            {
+                "type": "audio",
+                "response_id": "native",
+                "sample_rate": rate,
+                "audio": base64.b64encode(pcm).decode(),
+            }
+        )
+        first = adapter.run_tick(b"\xff" * 160)
+        tick_bytes = rate // 50 * 2
+        assert adapter.bytes_per_tick == 160  # Caller input is still 20 ms of mu-law.
+        assert first.audio_sent_duration_ms == 20
+        assert first.bytes_per_tick == tick_bytes
+        assert first.bytes_per_second == rate * 2
+        assert first.playback_audio_format.encoding == AudioEncoding.PCM_S16LE
+        assert first.agent_audio_data == pcm[:tick_bytes]
+        assert observer.played == [pcm[:tick_bytes]]
+        assert observer.rates == [rate]
+        assert len(adapter._buffered_agent_audio[0][0]) == len(pcm) - tick_bytes
+        agent = DiscreteTimeAudioNativeAgent(
+            tools=[],
+            domain_policy="Policy",
+            provider="qwen_agent",
+            tick_duration_ms=20,
+            adapter=adapter,
+            audio_taps_dir=tmp_path,
+        )
+        message = agent._create_response(first, [])
+        assert message.audio_format.sample_rate == rate
+        assert message.get_audio_bytes() == pcm[:tick_bytes]
+        greeting = agent.create_initial_message()
+        assert greeting.audio_format.sample_rate == rate
+        assert greeting.get_audio_bytes() == bytes(tick_bytes)
+        agent._agent_output_tap.record(message.get_audio_bytes())
+        path = agent._agent_output_tap.save()
+        with wave.open(str(path), "rb") as recorded:
+            assert recorded.getframerate() == rate
+            assert recorded.readframes(recorded.getnframes()) == pcm[:tick_bytes]
+        for _ in range(4):
+            adapter.run_tick(b"\xff" * 160)
+        assert b"".join(observer.played) == pcm
+        silent = adapter.run_tick(b"\xff" * 160)
+        assert silent.get_played_agent_audio() == bytes(tick_bytes)
+        assert observer.played[-1] == bytes(tick_bytes)
+    finally:
+        adapter.disconnect()
+
+
+def test_native_barge_in_discards_buffered_audio_before_observing_the_new_reply():
+    bridge, observer = Bridge(), NativeObserver()
+    adapter = DiscreteTimeQwenAgentAdapter(
+        tick_duration_ms=20,
+        config=QwenAgentConfig(),
+        provider=bridge,
+        transcriber=observer,
+    )
+    adapter.connect("Policy", [])
+    try:
+        bridge.events.append(audio("old", milliseconds=100))
+        adapter.run_tick(b"\xff" * 160)
+        new_pcm = b"\x21\x43" * 480
+        bridge.events.extend(
+            [
+                {"type": "clear", "response_id": "old"},
+                {
+                    "type": "audio",
+                    "response_id": "new",
+                    "sample_rate": 24000,
+                    "audio": base64.b64encode(new_pcm).decode(),
+                },
+            ]
+        )
+        cut = adapter.run_tick(b"\xff" * 160)
+        assert cut.was_truncated
+        assert cut.agent_audio_data == new_pcm
+        assert observer.played == [b"\x10\x10" * 480, new_pcm]
+        assert observer.order == ["audio", "finish", "audio"]
+        assert adapter._buffered_agent_audio == []
+        assert cut.playback_cancellations[0].played_bytes == 960
+        assert cut.playback_cancellations[0].discarded_bytes == 3840
+    finally:
+        adapter.disconnect()
 
 
 def test_media_keeps_flowing_while_business_result_is_pending(system):
@@ -883,3 +1007,28 @@ def test_backend_channel_reports_overflow_and_never_enters_media_queue():
     drained = provider.drain_backend_events()
     assert len(drained) == 1 and drained[0]["received_monotonic"] > 0
     assert provider.drain_backend_events() == []
+
+
+def test_diagnostic_backend_input_excludes_transport_timestamp():
+    from types import SimpleNamespace
+
+    from tau2.data_model.diagnostics import BackendInput
+    from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
+    from tau2.voice.audio_native.qwen_agent.provider import QwenAgentProvider
+
+    provider = QwenAgentProvider(QwenAgentConfig(), runtime=SimpleNamespace())
+    provider.diagnostics_enabled = True
+    provider.record(
+        {
+            "type": "diagnostic_backend",
+            "id": "backend-1",
+            "content": "delegate this request",
+            "time": 12.5,
+            "role": "submit",
+            "accepted": True,
+        }
+    )
+
+    row = provider.backend_inputs["backend-1"]
+    assert "received_monotonic" not in row
+    assert BackendInput.model_validate(row).id == "backend-1"

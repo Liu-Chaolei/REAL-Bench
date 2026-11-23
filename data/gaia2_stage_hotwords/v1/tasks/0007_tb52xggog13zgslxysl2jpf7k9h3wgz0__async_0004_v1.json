@@ -1,0 +1,107 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0007_tb52xggog13zgslxysl2jpf7k9h3wgz0__async_0004_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "ef10ec0bb401655d3e233367d40381fafae7421a83ccb985fe7900a3b96b76bb",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Lysverket",
+          "kind": "place",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-b22c59d7-9b0a-4e92-8151-c3b7acf27718.arguments.content",
+          "reason": "餐厅专有名称"
+        }
+      ],
+      "new_terms": [
+        "Lysverket"
+      ],
+      "active_vocabulary": {
+        "Lysverket": 50
+      },
+      "vocabulary_sha256": "3fe32685a991e8e88f32caa85115ba79fb027a096f3d5a412a2d49ef9422b6d1"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaida Rao",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_lunch.arguments.attendees[0]",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Lysverket",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_lunch.arguments.location",
+          "reason": "午餐地点专有名称"
+        }
+      ],
+      "new_terms": [
+        "Kaida Rao"
+      ],
+      "active_vocabulary": {
+        "Lysverket": 50,
+        "Kaida Rao": 50
+      },
+      "vocabulary_sha256": "5f1456771b135bcc47c9b20e92a40d3a95baa5566c73090300506c2ced1a8ada"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaida Rao",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "收件人完整姓名"
+        },
+        {
+          "text": "Lysverket",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.subject",
+          "reason": "邮件主题中的地点专有名称"
+        },
+        {
+          "text": "Åse",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [
+        "Åse"
+      ],
+      "active_vocabulary": {
+        "Lysverket": 50,
+        "Kaida Rao": 50,
+        "Åse": 50
+      },
+      "vocabulary_sha256": "6f3e2179b646712b966ddbe5d48f4163e5ed60209e462ad00f616daeb38dcbbf"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "853f3288f1a4799c45418b5a6811fbeafc5f442a618961020658e07418b9e0b9",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1594,
+        "completion_tokens": 288,
+        "total_tokens": 1882,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1338
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.298
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0007_tb52xggog13zgslxysl2jpf7k9h3wgz0__async_0004_v1",
+  "extracted_at": "2026-11-22T06:46:20.183379+00:00"
+}

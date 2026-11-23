@@ -1,0 +1,162 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0528_mffknyiv4klvuq0cooc30pzdovahxxdb",
+  "model": "deepseek-flash",
+  "input_sha256": "ccef29e5cbc2fe8af46cd1a74c15c5cfddc03fa72bebb7fea06fcc60a73fa3b2",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Ostrava Poruba",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "捷克城市与城区专名"
+        },
+        {
+          "text": "Ostrava",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "捷克城市专名"
+        }
+      ],
+      "new_terms": [
+        "Ostrava Poruba",
+        "Ostrava"
+      ],
+      "active_vocabulary": {
+        "Ostrava Poruba": 50,
+        "Ostrava": 50
+      },
+      "vocabulary_sha256": "04ae75d47774596dd92bd59f7be8e0c503c55e62a14234bbd720b07864a80689"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Ostravská Rezidence",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "公寓楼专名"
+        },
+        {
+          "text": "Ostravská Nová Karolina",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓楼专名"
+        },
+        {
+          "text": "Plzeň City Apartments",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓楼专名"
+        },
+        {
+          "text": "Plzeň",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "捷克城市专名"
+        },
+        {
+          "text": "Nová Karolina",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "俄斯特拉发城区专名"
+        },
+        {
+          "text": "Poruba",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "俄斯特拉发城区专名"
+        },
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "发件人完整姓名"
+        }
+      ],
+      "new_terms": [
+        "Ostravská Rezidence",
+        "Ostravská Nová Karolina",
+        "Plzeň City Apartments",
+        "Plzeň",
+        "Nová Karolina",
+        "Poruba",
+        "Matěj Nováček"
+      ],
+      "active_vocabulary": {
+        "Ostrava Poruba": 50,
+        "Ostrava": 50,
+        "Ostravská Rezidence": 50,
+        "Ostravská Nová Karolina": 50,
+        "Plzeň City Apartments": 50,
+        "Plzeň": 50,
+        "Nová Karolina": 50,
+        "Poruba": 50,
+        "Matěj Nováček": 50
+      },
+      "vocabulary_sha256": "f1827c8f96c70b505824d4fe56ea56b39d93bf413c90c91bfb04015de3e873ba"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Ostravská Rezidence",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "公寓楼专名"
+        },
+        {
+          "text": "Poruba",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add.arguments.description",
+          "reason": "俄斯特拉发城区专名"
+        },
+        {
+          "text": "Ostrava",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add.arguments.description",
+          "reason": "捷克城市专名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Ostrava Poruba": 50,
+        "Ostrava": 50,
+        "Ostravská Rezidence": 50,
+        "Ostravská Nová Karolina": 50,
+        "Plzeň City Apartments": 50,
+        "Plzeň": 50,
+        "Nová Karolina": 50,
+        "Poruba": 50,
+        "Matěj Nováček": 50
+      },
+      "vocabulary_sha256": "f1827c8f96c70b505824d4fe56ea56b39d93bf413c90c91bfb04015de3e873ba"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "9e0080da50b0e6fd55783246cc3c312c8e41e83b1ce83624e9aa4527d1697ef2",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1981,
+        "completion_tokens": 448,
+        "total_tokens": 2429,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1725
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.793
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0528_mffknyiv4klvuq0cooc30pzdovahxxdb",
+  "extracted_at": "2026-11-22T06:42:33.935985+00:00"
+}

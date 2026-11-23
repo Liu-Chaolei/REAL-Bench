@@ -1,0 +1,203 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0619_tgha7t9yspde6hqhw3u744d5mrhvl923",
+  "model": "deepseek-flash",
+  "input_sha256": "9cb3e899fa1c77e5dc6c83a455676fa5ade6781d94a3775c280d112430bc12d0",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f916c9ac-e63e-4919-b932-5e395bb1acc2.arguments.content",
+          "reason": "发件人姓名"
+        },
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f916c9ac-e63e-4919-b932-5e395bb1acc2.arguments.content",
+          "reason": "参会人名字"
+        },
+        {
+          "text": "Beshoy",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-4fb26438-2533-4c8b-9e83-22b7c0bc70b8.arguments.content",
+          "reason": "参会人名字"
+        },
+        {
+          "text": "Malmö-Sturup",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-18f8b6fe-8133-4125-88e1-bc414049606e.arguments.start_location",
+          "reason": "机场地名"
+        },
+        {
+          "text": "Norra Vallgatan 60",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-18f8b6fe-8133-4125-88e1-bc414049606e.arguments.end_location",
+          "reason": "目的地街道名"
+        },
+        {
+          "text": "Malmö",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-18f8b6fe-8133-4125-88e1-bc414049606e.arguments.end_location",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Astrid Lundqvist",
+        "Astrid",
+        "Beshoy",
+        "Malmö-Sturup",
+        "Norra Vallgatan 60",
+        "Malmö"
+      ],
+      "active_vocabulary": {
+        "Astrid Lundqvist": 50,
+        "Astrid": 50,
+        "Beshoy": 50,
+        "Malmö-Sturup": 50,
+        "Norra Vallgatan 60": 50,
+        "Malmö": 50
+      },
+      "vocabulary_sha256": "fbd7fb103c692ee9d6e5c37081d8f42705392b9f757ee14e8a8420698b5a6b90"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Malmö-Sturup Airport",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_calendar_event.arguments.location",
+          "reason": "日历地点名称"
+        },
+        {
+          "text": "Norra Vallgatan 60",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_calendar_event.arguments.description",
+          "reason": "目的地街道名"
+        },
+        {
+          "text": "Malmö",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_calendar_event.arguments.description",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Malmö-Sturup Airport"
+      ],
+      "active_vocabulary": {
+        "Astrid Lundqvist": 50,
+        "Astrid": 50,
+        "Beshoy": 50,
+        "Malmö-Sturup": 50,
+        "Norra Vallgatan 60": 50,
+        "Malmö": 50,
+        "Malmö-Sturup Airport": 50
+      },
+      "vocabulary_sha256": "37e245c081dcd03e74b17a465fac3ac780a095b6a44e67500da2d4666b911ac0"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Astrid Mikkelsen",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Beshoy Gadallah",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "邮件署名"
+        },
+        {
+          "text": "Malmö-Sturup",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "机场地名"
+        },
+        {
+          "text": "Norra Vallgatan 60",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "目的地街道名"
+        },
+        {
+          "text": "Malmö",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Astrid Mikkelsen",
+        "Beshoy Gadallah"
+      ],
+      "active_vocabulary": {
+        "Astrid Lundqvist": 50,
+        "Astrid": 50,
+        "Beshoy": 50,
+        "Malmö-Sturup": 50,
+        "Norra Vallgatan 60": 50,
+        "Malmö": 50,
+        "Malmö-Sturup Airport": 50,
+        "Astrid Mikkelsen": 50,
+        "Beshoy Gadallah": 50
+      },
+      "vocabulary_sha256": "338eb5c4f3a8afe9ff07eb192e06322fe4ce77ff905e349378e9633e709d86a6"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "62e3845414a65527e15fad57198e067e84644d90abf23928c10893b445f6819a",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3681,
+        "completion_tokens": 644,
+        "total_tokens": 4325,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3425
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.466,
+      "error": "Not an exact quotation of a source in stage 0: 'Astrid Mikkelsen' from 'stage0.source_task'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "6f439e5eeeff1292f9be2b5c196870ae24da4b43321ac74be2475f272c5f043d",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4734,
+        "completion_tokens": 709,
+        "total_tokens": 5443,
+        "prompt_tokens_details": {
+          "cached_tokens": 4224
+        },
+        "prompt_cache_hit_tokens": 4224,
+        "prompt_cache_miss_tokens": 510
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.75
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0619_tgha7t9yspde6hqhw3u744d5mrhvl923",
+  "extracted_at": "2026-11-22T06:43:10.660420+00:00"
+}

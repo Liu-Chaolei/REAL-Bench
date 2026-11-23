@@ -1,0 +1,162 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0039_6u86tml7x72m298phk38pb7m7gihkro5",
+  "model": "deepseek-flash",
+  "input_sha256": "006b49c1d5b9c6c6135b7f2c3f0c18bbe9a2a85cdef81436876f285c2b984c92",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Vasco Sousa",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Gudrun Schrøder",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Astrid Møller",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Meixiang Liang",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Meiying Wong",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "用户本人姓名"
+        },
+        {
+          "text": "Samtal med Gudrun och Vasco",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "消息线程名称"
+        },
+        {
+          "text": "Catch-up and Cultural Exchange",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "消息线程名称"
+        }
+      ],
+      "new_terms": [
+        "Vasco Sousa",
+        "Gudrun Schrøder",
+        "Astrid Møller",
+        "Meixiang Liang",
+        "Meiying Wong",
+        "Astrid Lundqvist",
+        "Samtal med Gudrun och Vasco",
+        "Catch-up and Cultural Exchange"
+      ],
+      "active_vocabulary": {
+        "Vasco Sousa": 50,
+        "Gudrun Schrøder": 50,
+        "Astrid Møller": 50,
+        "Meixiang Liang": 50,
+        "Meiying Wong": 50,
+        "Astrid Lundqvist": 50,
+        "Samtal med Gudrun och Vasco": 50,
+        "Catch-up and Cultural Exchange": 50
+      },
+      "vocabulary_sha256": "5ebebf635b0f56b1c5e669f67abd9ec85830363c33acaece2d5fdb6371264dc2"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Astrid Møller",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Meixiang Liang",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "联系人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Vasco Sousa": 50,
+        "Gudrun Schrøder": 50,
+        "Astrid Møller": 50,
+        "Meixiang Liang": 50,
+        "Meiying Wong": 50,
+        "Astrid Lundqvist": 50,
+        "Samtal med Gudrun och Vasco": 50,
+        "Catch-up and Cultural Exchange": 50
+      },
+      "vocabulary_sha256": "5ebebf635b0f56b1c5e669f67abd9ec85830363c33acaece2d5fdb6371264dc2"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "a6710374181fdc3a43cb51181eb3f91c69079c1a67c5e98db5a27a014e9827b1",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1623,
+        "completion_tokens": 462,
+        "total_tokens": 2085,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1367
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.808,
+      "error": "6 validation errors for Extraction\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage0.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage1.reference_reply.s...reply.arguments.content', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='联系人及线程专名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage2.reference_reply.s...reply.arguments.content', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='联系人姓名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "91ca015755a61478e0a4a0fd2d666104f8a68686b6244f64ef5cacbf48758bad",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2815,
+        "completion_tokens": 398,
+        "total_tokens": 3213,
+        "prompt_tokens_details": {
+          "cached_tokens": 2048
+        },
+        "prompt_cache_hit_tokens": 2048,
+        "prompt_cache_miss_tokens": 767
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.543
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0039_6u86tml7x72m298phk38pb7m7gihkro5",
+  "extracted_at": "2026-11-22T06:39:48.030439+00:00"
+}

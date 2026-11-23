@@ -1,0 +1,162 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0719_pciarpzgm5cf0v9sp5ws2sm2m5uywxd1__async_0073_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "239f7028fce89940d5e8358b725447ed0aae49b956f0f31206f6ef8cc3f3994e",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Napa Valley",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "地名"
+        },
+        {
+          "text": "Silver Oak Winery",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-23985072-daba-4a88-8385-9589b4ff60e8.arguments.title",
+          "reason": "酒庄名称"
+        },
+        {
+          "text": "Oakville Estate Tasting Room",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-23985072-daba-4a88-8385-9589b4ff60e8.arguments.location",
+          "reason": "品酒室地点"
+        },
+        {
+          "text": "Opus One Winery",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-99d6ebb7-235b-45d6-bfc1-286e1a496c61.arguments.title",
+          "reason": "酒庄名称"
+        },
+        {
+          "text": "Stag’s Leap Winery",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-2a6d6fe9-7065-4063-9fb7-c583ae3d53e7.arguments.title",
+          "reason": "酒庄名称"
+        }
+      ],
+      "new_terms": [
+        "Napa Valley",
+        "Silver Oak Winery",
+        "Oakville Estate Tasting Room",
+        "Opus One Winery",
+        "Stag’s Leap Winery"
+      ],
+      "active_vocabulary": {
+        "Napa Valley": 50,
+        "Silver Oak Winery": 50,
+        "Oakville Estate Tasting Room": 50,
+        "Opus One Winery": 50,
+        "Stag’s Leap Winery": 50
+      },
+      "vocabulary_sha256": "15a94919ae66776041f9e41941de3b2adfd5805d78083b28f1481d5225d6e3f1"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Silver Oak Follow-up Tasting",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_add_followup.arguments.title",
+          "reason": "自定义活动名称"
+        },
+        {
+          "text": "Oakville Estate Tasting Room",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_followup.arguments.location",
+          "reason": "品酒室地点"
+        },
+        {
+          "text": "Napa",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "地名"
+        }
+      ],
+      "new_terms": [
+        "Silver Oak Follow-up Tasting",
+        "Napa"
+      ],
+      "active_vocabulary": {
+        "Napa Valley": 50,
+        "Silver Oak Winery": 50,
+        "Oakville Estate Tasting Room": 50,
+        "Opus One Winery": 50,
+        "Stag’s Leap Winery": 50,
+        "Silver Oak Follow-up Tasting": 50,
+        "Napa": 50
+      },
+      "vocabulary_sha256": "0b5a8467fa675726fe75871dffbbacc9fb5292de58e2b05f809700fd61bacd59"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Walk-through: Oakville Estate Grounds",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_add_walkthrough.arguments.title",
+          "reason": "自定义活动名称"
+        },
+        {
+          "text": "Oakville Estate Tasting Room",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_walkthrough.arguments.location",
+          "reason": "品酒室地点"
+        },
+        {
+          "text": "Silver Oak Follow-up Tasting",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "自定义活动名称"
+        },
+        {
+          "text": "Napa",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "地名"
+        }
+      ],
+      "new_terms": [
+        "Walk-through: Oakville Estate Grounds"
+      ],
+      "active_vocabulary": {
+        "Napa Valley": 50,
+        "Silver Oak Winery": 50,
+        "Oakville Estate Tasting Room": 50,
+        "Opus One Winery": 50,
+        "Stag’s Leap Winery": 50,
+        "Silver Oak Follow-up Tasting": 50,
+        "Napa": 50,
+        "Walk-through: Oakville Estate Grounds": 50
+      },
+      "vocabulary_sha256": "30df19efe95eb009f15f338f14deb0be9ba446b876adf03eb84f4c92d3f7c04b"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "c0fbfda3d5bd9269cd93b6a4cd93cf172601594ff3d16be107ee948f0a94d48a",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4406,
+        "completion_tokens": 533,
+        "total_tokens": 4939,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4150
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.037
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0719_pciarpzgm5cf0v9sp5ws2sm2m5uywxd1__async_0073_v1",
+  "extracted_at": "2026-11-22T06:46:48.105043+00:00"
+}

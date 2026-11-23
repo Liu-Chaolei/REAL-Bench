@@ -1,0 +1,194 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0585_phx0d9dba34uddqwvwxy1fvxnay3h3js",
+  "model": "deepseek-flash",
+  "input_sha256": "b023d897a2707fab6ce22d180fe08549bb966062adc85c816b6981b63ca49627",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Acoustic Guitar Pinata",
+          "kind": "product",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-842575ee-8980-4b9d-98fe-7d451ad1ce12.arguments.content",
+          "reason": "特定商品名称"
+        }
+      ],
+      "new_terms": [
+        "Acoustic Guitar Pinata"
+      ],
+      "active_vocabulary": {
+        "Acoustic Guitar Pinata": 50
+      },
+      "vocabulary_sha256": "c64ee2996f10960285f7be7c5e8da12b31aefad5e0542a02dc92c04f05ea8462"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien Clouet",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Nomsa Mthembu",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Colette Dumont",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Étienne Dumont",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Aurélien Zylberberg",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Aurélie Dupont",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Aurélie Dumont",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Lyon",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "法国城市名"
+        },
+        {
+          "text": "Paris",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "法国城市名"
+        }
+      ],
+      "new_terms": [
+        "Aurélien Clouet",
+        "Nomsa Mthembu",
+        "Colette Dumont",
+        "Étienne Dumont",
+        "Aurélien Zylberberg",
+        "Aurélie Dupont",
+        "Aurélie Dumont",
+        "Lyon",
+        "Paris"
+      ],
+      "active_vocabulary": {
+        "Acoustic Guitar Pinata": 50,
+        "Aurélien Clouet": 50,
+        "Nomsa Mthembu": 50,
+        "Colette Dumont": 50,
+        "Étienne Dumont": 50,
+        "Aurélien Zylberberg": 50,
+        "Aurélie Dupont": 50,
+        "Aurélie Dumont": 50,
+        "Lyon": 50,
+        "Paris": 50
+      },
+      "vocabulary_sha256": "c7fd727189b78c091903351f7bbd4350fc567f9d5e0de3a22841850c54419684"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien Clouet",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_0.arguments.content",
+          "reason": "收件人全名"
+        },
+        {
+          "text": "Nomsa Mthembu",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_1.arguments.content",
+          "reason": "收件人全名"
+        },
+        {
+          "text": "Colette Dumont",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_2.arguments.content",
+          "reason": "收件人全名"
+        },
+        {
+          "text": "Étienne Dumont",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_3.arguments.content",
+          "reason": "收件人全名"
+        },
+        {
+          "text": "Aurélien Zylberberg",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_4.arguments.content",
+          "reason": "收件人全名"
+        },
+        {
+          "text": "Aurélie Dupont",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_5.arguments.content",
+          "reason": "收件人全名"
+        },
+        {
+          "text": "Aurélie Dumont",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_6.arguments.content",
+          "reason": "收件人全名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Acoustic Guitar Pinata": 50,
+        "Aurélien Clouet": 50,
+        "Nomsa Mthembu": 50,
+        "Colette Dumont": 50,
+        "Étienne Dumont": 50,
+        "Aurélien Zylberberg": 50,
+        "Aurélie Dupont": 50,
+        "Aurélie Dumont": 50,
+        "Lyon": 50,
+        "Paris": 50
+      },
+      "vocabulary_sha256": "c7fd727189b78c091903351f7bbd4350fc567f9d5e0de3a22841850c54419684"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "d716815eaf4910133f0b3f6973b824b4e8c75fe65b10c0e8829e4b4b5970840c",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4418,
+        "completion_tokens": 717,
+        "total_tokens": 5135,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4162
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.514
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0585_phx0d9dba34uddqwvwxy1fvxnay3h3js",
+  "extracted_at": "2026-11-22T06:42:54.853117+00:00"
+}

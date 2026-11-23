@@ -1,0 +1,227 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0057_mdv6vvycdzxucjedlzt3nbrq7iu116ew__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "c4dd0efb772aac2af96faa2843b405082532bb3b43bec1f0fbd53e001a951b85",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélie Joensen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-90a52281-3fd4-49f2-9a40-8f14689a864e.arguments.content",
+          "reason": "邮件署名"
+        }
+      ],
+      "new_terms": [
+        "Aurélie Joensen",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Aurélie Joensen": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "d316853296e2015333b42572f5993e14df587936d595053171dd13a22f26643d"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélie Joensen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "邮件署名"
+        },
+        {
+          "text": "Geneva Haven",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Lausanne Charm",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Basel City",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Zug City Living",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Locarno Loft",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "公寓名称"
+        }
+      ],
+      "new_terms": [
+        "Geneva Haven",
+        "Lausanne Charm",
+        "Basel City",
+        "Zug City Living",
+        "Locarno Loft"
+      ],
+      "active_vocabulary": {
+        "Aurélie Joensen": 50,
+        "Ursula Wiederkehr": 50,
+        "Geneva Haven": 50,
+        "Lausanne Charm": 50,
+        "Basel City": 50,
+        "Zug City Living": 50,
+        "Locarno Loft": 50
+      },
+      "vocabulary_sha256": "f66ac3f744c892a4f1e7e5501b3662ed1ae4ab79e0605a38818af02dc7ea2c81"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélie Ramseyer",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "被提及的人名"
+        },
+        {
+          "text": "Bern Old Town",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Bern Barenplatz",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Lugano Living",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Zurich Zen",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Zug Lake Views",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Zug Zest",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Zug Mountain Views",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Locarno Living",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Lausanne University (Rue de la Vigie)",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Lausanne University Housing (Rue de Bourg)",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓名称"
+        }
+      ],
+      "new_terms": [
+        "Aurélie Ramseyer",
+        "Bern Old Town",
+        "Bern Barenplatz",
+        "Lugano Living",
+        "Zurich Zen",
+        "Zug Lake Views",
+        "Zug Zest",
+        "Zug Mountain Views",
+        "Locarno Living",
+        "Lausanne University (Rue de la Vigie)",
+        "Lausanne University Housing (Rue de Bourg)"
+      ],
+      "active_vocabulary": {
+        "Aurélie Joensen": 50,
+        "Ursula Wiederkehr": 50,
+        "Geneva Haven": 50,
+        "Lausanne Charm": 50,
+        "Basel City": 50,
+        "Zug City Living": 50,
+        "Locarno Loft": 50,
+        "Aurélie Ramseyer": 50,
+        "Bern Old Town": 50,
+        "Bern Barenplatz": 50,
+        "Lugano Living": 50,
+        "Zurich Zen": 50,
+        "Zug Lake Views": 50,
+        "Zug Zest": 50,
+        "Zug Mountain Views": 50,
+        "Locarno Living": 50,
+        "Lausanne University (Rue de la Vigie)": 50,
+        "Lausanne University Housing (Rue de Bourg)": 50
+      },
+      "vocabulary_sha256": "4277b85e51f95f0a2b6569288a3b3c8805f798733ba9df8ca38c12e59e875ab5"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "158fe94dbb5b63ee503a9fafcde9b2d360dc73f0d8778c554d47de24f5cd7a24",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3219,
+        "completion_tokens": 745,
+        "total_tokens": 3964,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2963
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.595
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0057_mdv6vvycdzxucjedlzt3nbrq7iu116ew__mind_change_v1",
+  "extracted_at": "2026-11-22T06:45:21.954482+00:00"
+}

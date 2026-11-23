@@ -1,0 +1,173 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0665_wa4ul66wyinqf8ulxowdjgf6jts7lxu3",
+  "model": "deepseek-flash",
+  "input_sha256": "15180173584d9e09537f7cdca39fb99191b0796ae78d8d55161d98fe9d49bf1c",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kåre Sørensen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Tøyengata 2",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "地址地名"
+        },
+        {
+          "text": "Oslo",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Kåre",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e5539949-f617-4ae2-9e03-89b146d91c66.arguments.content",
+          "reason": "人名简称"
+        }
+      ],
+      "new_terms": [
+        "Kåre Sørensen",
+        "Tøyengata 2",
+        "Oslo",
+        "Kåre"
+      ],
+      "active_vocabulary": {
+        "Kåre Sørensen": 50,
+        "Tøyengata 2": 50,
+        "Oslo": 50,
+        "Kåre": 50
+      },
+      "vocabulary_sha256": "74e955f9bb9d2dec76907335d5801499c5e7f29ae421e0694aed8ff7e5c0a755"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kåre",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Tøyengata 2",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "地址地名"
+        },
+        {
+          "text": "Oslo",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Frognerveien 34",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "地址地名"
+        }
+      ],
+      "new_terms": [
+        "Frognerveien 34"
+      ],
+      "active_vocabulary": {
+        "Kåre Sørensen": 50,
+        "Tøyengata 2": 50,
+        "Oslo": 50,
+        "Kåre": 50,
+        "Frognerveien 34": 50
+      },
+      "vocabulary_sha256": "55ea670b21b7404a84d8509466382d9ab7b2babd787c563162f215c216942867"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kåre",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Marvin Gaye Tribute Concert",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "演出活动专名"
+        },
+        {
+          "text": "Oslo",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Marvin Gaye",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply.arguments.content",
+          "reason": "人名"
+        },
+        {
+          "text": "Oslo Concert Hall",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_reply.arguments.content",
+          "reason": "场馆名"
+        },
+        {
+          "text": "Åse",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply.arguments.content",
+          "reason": "署名人名"
+        }
+      ],
+      "new_terms": [
+        "Marvin Gaye Tribute Concert",
+        "Marvin Gaye",
+        "Oslo Concert Hall",
+        "Åse"
+      ],
+      "active_vocabulary": {
+        "Kåre Sørensen": 50,
+        "Tøyengata 2": 50,
+        "Oslo": 50,
+        "Kåre": 50,
+        "Frognerveien 34": 50,
+        "Marvin Gaye Tribute Concert": 50,
+        "Marvin Gaye": 50,
+        "Oslo Concert Hall": 50,
+        "Åse": 50
+      },
+      "vocabulary_sha256": "217fa28ca137eda6a270bbc636a4af410084d7daf0789aea7d54a98308585a9e"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "9e5ecb3a12ee0e2fbb2e1923f31a01b44de4f636aac8141a9b236125e38f4f09",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2976,
+        "completion_tokens": 432,
+        "total_tokens": 3408,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2720
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.731
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0665_wa4ul66wyinqf8ulxowdjgf6jts7lxu3",
+  "extracted_at": "2026-11-22T06:43:18.601662+00:00"
+}

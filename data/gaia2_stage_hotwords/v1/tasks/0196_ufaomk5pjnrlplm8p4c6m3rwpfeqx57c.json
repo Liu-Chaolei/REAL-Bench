@@ -1,0 +1,191 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0196_ufaomk5pjnrlplm8p4c6m3rwpfeqx57c",
+  "model": "deepseek-flash",
+  "input_sha256": "a8510625e24c33bfbfcb16667cf6a5aef418eb7894f4722210ecdf6c062cc44e",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Xóchitl",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c7d9c3e8-8b52-45e8-b2c7-79286eef1258.arguments.content",
+          "reason": "收件人名字，含特殊字符"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c7d9c3e8-8b52-45e8-b2c7-79286eef1258.arguments.content",
+          "reason": "发件人完整姓名"
+        },
+        {
+          "text": "Utah Playing Cards",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定商品名称"
+        }
+      ],
+      "new_terms": [
+        "Xóchitl",
+        "Anastasiya Kuznetsova",
+        "Utah Playing Cards"
+      ],
+      "active_vocabulary": {
+        "Xóchitl": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Utah Playing Cards": 50
+      },
+      "vocabulary_sha256": "74c65120a7d007f04b55a766f09d1651c94bac50330cbd4317c9fddbc1a740a5"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Saoirse Ní Mhaoldhamhnaigh",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[0]",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Xóchitl Hernández García",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[1]",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Áine Ní Bhroin",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[2]",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Utah Playing Cards",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_group_note.arguments.content",
+          "reason": "特定商品名称"
+        }
+      ],
+      "new_terms": [
+        "Saoirse Ní Mhaoldhamhnaigh",
+        "Xóchitl Hernández García",
+        "Áine Ní Bhroin"
+      ],
+      "active_vocabulary": {
+        "Xóchitl": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Utah Playing Cards": 50,
+        "Saoirse Ní Mhaoldhamhnaigh": 50,
+        "Xóchitl Hernández García": 50,
+        "Áine Ní Bhroin": 50
+      },
+      "vocabulary_sha256": "91e8f694941bda81cedcc8848337c7eb57284b26f59c97d2d8be33425f77eb3c"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Saoirse",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Xóchitl",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "收件人名字，含特殊字符"
+        },
+        {
+          "text": "Áine",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Saoirse Ní Mhaoldhamhnaigh",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "收件人完整姓名"
+        },
+        {
+          "text": "Xóchitl Hernández García",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "收件人完整姓名"
+        },
+        {
+          "text": "Áine Ní Bhroin",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "收件人完整姓名"
+        },
+        {
+          "text": "Utah Playing Cards",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "特定商品名称"
+        }
+      ],
+      "new_terms": [
+        "Saoirse",
+        "Áine"
+      ],
+      "active_vocabulary": {
+        "Xóchitl": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Utah Playing Cards": 50,
+        "Saoirse Ní Mhaoldhamhnaigh": 50,
+        "Xóchitl Hernández García": 50,
+        "Áine Ní Bhroin": 50,
+        "Saoirse": 50,
+        "Áine": 50
+      },
+      "vocabulary_sha256": "8280a6d8fb861dede2cb54619b9c4215067d10847e404476488086956905eed8"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "58f35719a1bf8a895dbc9bf85168bf0c50bf939d8c729663a7def77d9631cbee",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3016,
+        "completion_tokens": 526,
+        "total_tokens": 3542,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2760
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.948,
+      "error": "Not an exact quotation of a source in stage 2: 'Saoirse Ní Mhaoldhamhnaigh' from 'stage2.tool_gt.series_s2_email.arguments.content'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "d7a1669d9120df1357eaf40727ba7b619fb1000ce61b40a5a861283b3cf39be8",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3968,
+        "completion_tokens": 638,
+        "total_tokens": 4606,
+        "prompt_tokens_details": {
+          "cached_tokens": 3456
+        },
+        "prompt_cache_hit_tokens": 3456,
+        "prompt_cache_miss_tokens": 512
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.097
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0196_ufaomk5pjnrlplm8p4c6m3rwpfeqx57c",
+  "extracted_at": "2026-11-22T06:40:40.551397+00:00"
+}

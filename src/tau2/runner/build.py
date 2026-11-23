@@ -369,7 +369,7 @@ def build_voice_user(
         synthesis.provider_config.language_code = language_context.language.split("-")[
             0
         ]
-        if synthesis.provider == "mimo":
+        if synthesis.provider in {"mimo", "qwen"}:
             synthesis.provider_config.voice_id = synthesis.provider_config.voices.get(
                 persona.persona_id, synthesis.provider_config.voice_id
             )
@@ -891,16 +891,26 @@ def _build_voice_orchestrator(
         if observer_settings.asr_hotwords.enabled:
             from tau2.user.asr_hotwords import build_hotword_profile
 
-            prompt_task = user_prompt_task(config, task)
             try:
-                observer_hotwords = build_hotword_profile(
-                    prompt_task,
-                    environment.get_user_asr_materials(prompt_task),
-                    observer_settings.asr_hotwords,
-                    language=language_context.language,
-                    model=config.llm_user,
-                    model_args=config.llm_args_user,
-                )
+                if observer_settings.asr_hotwords.mode == "gaia2_stage_gt":
+                    if domain != "gaia2" or language_context.language != "en":
+                        raise ValueError("Fixed stage hotwords require English Gaia2")
+                    from tau2.user.stage_asr_hotwords import load_stage_hotword_profile
+
+                    observer_hotwords = load_stage_hotword_profile(
+                        task,
+                        observer_settings.asr_hotwords,
+                    )
+                else:
+                    prompt_task = user_prompt_task(config, task)
+                    observer_hotwords = build_hotword_profile(
+                        prompt_task,
+                        environment.get_user_asr_materials(prompt_task),
+                        observer_settings.asr_hotwords,
+                        language=language_context.language,
+                        model=config.llm_user,
+                        model_args=config.llm_args_user,
+                    )
             except Exception as error:
                 raise RuntimeError(
                     f"ASR hotword preparation failed ({type(error).__name__})"

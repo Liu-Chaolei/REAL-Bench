@@ -1,0 +1,108 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0259_c864b8uw0no68przmug02ukj6mnx4yxf",
+  "model": "deepseek-flash",
+  "input_sha256": "57eb6534b1e8780607e544af708e8f28b5703ad31a028ce177a221a9aefb6553",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien Schneider",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[0]",
+          "reason": "参会人全名"
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "邮件署名中的发件人姓名"
+        }
+      ],
+      "new_terms": [
+        "Aurélien Schneider",
+        "Åse Kjellstad"
+      ],
+      "active_vocabulary": {
+        "Aurélien Schneider": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "4ea0deb0e5e27094786eca3ef26c4c9554ca05d11df256705409466b0bb5734d"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien Schneider",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.attendees[0]",
+          "reason": "参会人全名"
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "邮件署名中的发件人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien Schneider": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "4ea0deb0e5e27094786eca3ef26c4c9554ca05d11df256705409466b0bb5734d"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "ec4d0a6b5eda6c693742acb8439e87f5308bb6fccc404db957e5e0fa90b0e679",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2264,
+        "completion_tokens": 290,
+        "total_tokens": 2554,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2008
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.391,
+      "error": "Invalid proper-name phrase: 'aurelien.schneider@gaia2mail.com'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "da5d7c0464b4453791ada6d0b649a8373aa98b57214443633c891438608f6ca2",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2958,
+        "completion_tokens": 200,
+        "total_tokens": 3158,
+        "prompt_tokens_details": {
+          "cached_tokens": 2432
+        },
+        "prompt_cache_hit_tokens": 2432,
+        "prompt_cache_miss_tokens": 526
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.979
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0259_c864b8uw0no68przmug02ukj6mnx4yxf",
+  "extracted_at": "2026-11-22T06:41:01.976650+00:00"
+}

@@ -1,0 +1,158 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0360_4ng30spcn91kxhcsq1nkszukbf2g1rvf__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "c7ba1505656004260704552562688b77bab11ae4e939615df0eaf437b7386453",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Evangelia Papadopoulos",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_get_evangelia.arguments.user_name",
+          "reason": "出席者完整姓名"
+        },
+        {
+          "text": "Kaidën Nakamura",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_get_kadien.arguments.user_name",
+          "reason": "出席者完整姓名，含特殊字符"
+        },
+        {
+          "text": "Akua Owusu-Agyemang",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_get_akua.arguments.user_name",
+          "reason": "出席者完整姓名"
+        },
+        {
+          "text": "Reginald Fothergill",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_get_reginald.arguments.user_name",
+          "reason": "出席者完整姓名"
+        },
+        {
+          "text": "Saskia van der Meer",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_get_saskia.arguments.user_name",
+          "reason": "出席者完整姓名"
+        },
+        {
+          "text": "Zara Saeed",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_get_zara.arguments.user_name",
+          "reason": "出席者完整姓名"
+        },
+        {
+          "text": "Kaida Nakahara",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_get_kaida.arguments.user_name",
+          "reason": "出席者完整姓名"
+        }
+      ],
+      "new_terms": [
+        "Evangelia Papadopoulos",
+        "Kaidën Nakamura",
+        "Akua Owusu-Agyemang",
+        "Reginald Fothergill",
+        "Saskia van der Meer",
+        "Zara Saeed",
+        "Kaida Nakahara"
+      ],
+      "active_vocabulary": {
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Akua Owusu-Agyemang": 50,
+        "Reginald Fothergill": 50,
+        "Saskia van der Meer": 50,
+        "Zara Saeed": 50,
+        "Kaida Nakahara": 50
+      },
+      "vocabulary_sha256": "a9edce2d85dc484d52016651f7ca0fb4a0117ddc7faa1255f4a0527fd79eb153"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "The Pint Shop, Cambridge",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_quote_0.arguments.start_location",
+          "reason": "上车地点完整名称"
+        },
+        {
+          "text": "34, Storey's Way, Cambridge CB3 0DT",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_quote_0.arguments.end_location",
+          "reason": "目的地完整地址"
+        }
+      ],
+      "new_terms": [
+        "The Pint Shop, Cambridge",
+        "34, Storey's Way, Cambridge CB3 0DT"
+      ],
+      "active_vocabulary": {
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Akua Owusu-Agyemang": 50,
+        "Reginald Fothergill": 50,
+        "Saskia van der Meer": 50,
+        "Zara Saeed": 50,
+        "Kaida Nakahara": 50,
+        "The Pint Shop, Cambridge": 50,
+        "34, Storey's Way, Cambridge CB3 0DT": 50
+      },
+      "vocabulary_sha256": "f6e515cf4282d0d25f31ba90d64dbdf0f53ddebfaa5081b110152774d4d78dfb"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "494137e7a2ec2ccac16f1208db6fe80c5935d08a4680d59ba56dd62e87888a6f",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 7269,
+        "completion_tokens": 464,
+        "total_tokens": 7733,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 7013
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.816,
+      "error": "Invalid proper-name phrase: 'rohini.deshpande@cam.ac.uk'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "10b48b54897a0d26055dbc48443283b02321211fa9a9b8865165d2e66b0aab12",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 8134,
+        "completion_tokens": 414,
+        "total_tokens": 8548,
+        "prompt_tokens_details": {
+          "cached_tokens": 7680
+        },
+        "prompt_cache_hit_tokens": 7680,
+        "prompt_cache_miss_tokens": 454
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.759
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0360_4ng30spcn91kxhcsq1nkszukbf2g1rvf__mind_change_v1",
+  "extracted_at": "2026-11-22T06:45:18.989905+00:00"
+}

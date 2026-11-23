@@ -1,0 +1,240 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0638_qcto4jn2nd340bdgeuieam0zp8mjk2x1",
+  "model": "deepseek-flash",
+  "input_sha256": "8d33be6f338fea8a3ad9962a8f97c6eb40d5b6c6d022f4ccb59db4c6fe0c2c33",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Oslo",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "挪威首都地名"
+        },
+        {
+          "text": "Jensen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "家族姓氏"
+        },
+        {
+          "text": "Fjellstad",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "娘家姓氏"
+        },
+        {
+          "text": "Kåre Fjellstad",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7532e329-b2e7-4710-b333-2c4d12e2f428.arguments.attendees[0]",
+          "reason": "受邀亲属全名"
+        },
+        {
+          "text": "Åse Jensen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7532e329-b2e7-4710-b333-2c4d12e2f428.arguments.attendees[1]",
+          "reason": "受邀亲属全名"
+        },
+        {
+          "text": "Aurora Jensen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7532e329-b2e7-4710-b333-2c4d12e2f428.arguments.attendees[2]",
+          "reason": "受邀亲属全名"
+        },
+        {
+          "text": "Kari Jensen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7532e329-b2e7-4710-b333-2c4d12e2f428.arguments.attendees[3]",
+          "reason": "受邀亲属全名"
+        },
+        {
+          "text": "Solveig Fjellstad",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7532e329-b2e7-4710-b333-2c4d12e2f428.arguments.attendees[4]",
+          "reason": "受邀亲属全名"
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-d0840185-fb70-4a50-b1a2-2b852560e73c.arguments.content",
+          "reason": "签名中的独特姓名"
+        }
+      ],
+      "new_terms": [
+        "Oslo",
+        "Jensen",
+        "Fjellstad",
+        "Kåre Fjellstad",
+        "Åse Jensen",
+        "Aurora Jensen",
+        "Kari Jensen",
+        "Solveig Fjellstad",
+        "Åse Kjellstad"
+      ],
+      "active_vocabulary": {
+        "Oslo": 50,
+        "Jensen": 50,
+        "Fjellstad": 50,
+        "Kåre Fjellstad": 50,
+        "Åse Jensen": 50,
+        "Aurora Jensen": 50,
+        "Kari Jensen": 50,
+        "Solveig Fjellstad": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "21648755b49e4ff918e8b94d6a4d7fbd615aaf88cc2362feb1c6197f6e527f1a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Åse Jensen",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_person_0.arguments.user_name",
+          "reason": "Messages 用户全名"
+        },
+        {
+          "text": "Kari Jensen",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_person_1.arguments.user_name",
+          "reason": "Messages 用户全名"
+        },
+        {
+          "text": "Solveig Fjellstad",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_person_2.arguments.user_name",
+          "reason": "Messages 用户全名"
+        },
+        {
+          "text": "Kåre",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "被代拒的亲属名"
+        },
+        {
+          "text": "Aurora",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "代他人确认的亲属名"
+        }
+      ],
+      "new_terms": [
+        "Kåre",
+        "Aurora"
+      ],
+      "active_vocabulary": {
+        "Oslo": 50,
+        "Jensen": 50,
+        "Fjellstad": 50,
+        "Kåre Fjellstad": 50,
+        "Åse Jensen": 50,
+        "Aurora Jensen": 50,
+        "Kari Jensen": 50,
+        "Solveig Fjellstad": 50,
+        "Åse Kjellstad": 50,
+        "Kåre": 50,
+        "Aurora": 50
+      },
+      "vocabulary_sha256": "885388c1b76b7f5f4d8a0b31d28203b6c1a08c704fd7a68a6049be9d84ddea36"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Frognerveien 34",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_post.arguments.content",
+          "reason": "家庭住址街道名"
+        },
+        {
+          "text": "Oslo",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_post.arguments.content",
+          "reason": "城市地名"
+        },
+        {
+          "text": "Norway",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_post.arguments.content",
+          "reason": "国家地名"
+        },
+        {
+          "text": "Åse Jensen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_post.arguments.content",
+          "reason": "受邀亲属全名"
+        },
+        {
+          "text": "Aurora Jensen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_post.arguments.content",
+          "reason": "受邀亲属全名"
+        },
+        {
+          "text": "Kari Jensen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_post.arguments.content",
+          "reason": "受邀亲属全名"
+        },
+        {
+          "text": "Solveig Fjellstad",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_post.arguments.content",
+          "reason": "受邀亲属全名"
+        },
+        {
+          "text": "Kåre Fjellstad",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_post.arguments.content",
+          "reason": "受邀亲属全名"
+        }
+      ],
+      "new_terms": [
+        "Frognerveien 34",
+        "Norway"
+      ],
+      "active_vocabulary": {
+        "Oslo": 50,
+        "Jensen": 50,
+        "Fjellstad": 50,
+        "Kåre Fjellstad": 50,
+        "Åse Jensen": 50,
+        "Aurora Jensen": 50,
+        "Kari Jensen": 50,
+        "Solveig Fjellstad": 50,
+        "Åse Kjellstad": 50,
+        "Kåre": 50,
+        "Aurora": 50,
+        "Frognerveien 34": 50,
+        "Norway": 50
+      },
+      "vocabulary_sha256": "555ed6d1be977a555aed1ae7d8ba3a5ef886fe3cc2480962895e0f58546c69eb"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "87c78e9ef0377251a6cc9d4c7fde0da58224ffd1bd8ca94eb440ae9cfa158608",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 6145,
+        "completion_tokens": 972,
+        "total_tokens": 7117,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 5889
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 3.056
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0638_qcto4jn2nd340bdgeuieam0zp8mjk2x1",
+  "extracted_at": "2026-11-22T06:43:13.732251+00:00"
+}

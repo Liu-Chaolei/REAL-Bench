@@ -1,0 +1,524 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0440_jf13lgl41rqdhskxrffkm01n14ca9z50",
+  "model": "deepseek-flash",
+  "input_sha256": "b068724e0f1a0937176cf863e2b27bcc331aaeeac9445f55204f9fe49f96da29",
+  "review_input_sha256": "83d380d40203f183a01dfb9030d7fed19b7ca0b4a43c75082f7230c2433166f9",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "a8abbdad0f86f2bf6e862d4b60b65de084196de8b29aa6f8a66e44e32905e73b",
+  "reference_results_sha256": "2d7f6d3e274deaeaaef064d02fbeff34023740c88547087958e15b2cbeaa933c",
+  "sources": {
+    "stage1.tool_response.series_s1_ride_history_a": {
+      "stage": 1,
+      "text": "{\"rides\": {\"0\": {\"ride_id\": \"d50a324554ff4a6bab78dca7732ade22\", \"status\": \"BOOKED\", \"service_type\": \"Premium\", \"start_location\": \"Biskupská 3, 602 00 Brno-střed, Brno\", \"end_location\": \"Mečová 2, 602 00 Brno-střed, Brno\", \"price\": \"32.5\", \"duration\": \"11.9\", \"time_stamp\": \"1725007452.87\", \"distance_km\": \"7.3\", \"delay\": null, \"delay_history\": []}, \"1\": {\"ride_id\": \"e63f412f35ef4cbabb413195ad326fd1\", \"status\": \"BOOKED\", \"service_type\": \"Premium\", \"start_location\": \"Šaldovo náměstí 12, 460 01 Liberec\", \"end_location\": \"Železná 2, 460 01 Liberec\", \"price\": \"35.5\", \"duration\": \"12.9\", \"time_stamp\": \"1727298659.55\", \"distance_km\": \"8.1\", \"delay\": null, \"delay_history\": []}, \"2\": {\"ride_id\": \"bef80f3e8de94bfea7b7657ad243f8fc\", \"status\": \"BOOKED\", \"service_type\": \"Premium\", \"start_location\": \"Zelný trh 314/2, 602 00 Brno-střed\", \"end_location\": \"Štefánikova 646/76, 612 00 Brno-sever\", \"price\": \"231.8\", \"duration\": \"15.5\", \"time_stamp\": \"1725453358.99\", \"distance_km\": \"8.21\", \"delay\": null, \"delay_history\": []}, \"3\": {\"ride_id\": \"81f200cf0d43495980cdbb89ab810195\", \"status\": \"BOOKED\", \"service_type\": \"Default\", \"start_location\": \"Náměstí Míru 15, 120 00 Praha 2, Prague\", \"end_location\": \"Václavské náměstí 34, 110 00 Praha 1, Prague\", \"price\": \"85.5\", \"duration\": \"10.2\", \"time_stamp\": \"1725571560.31\", \"distance_km\": \"4.53\", \"delay\": null, \"delay_history\": []}, \"4\": {\"ride_id\": \"9e1ab0fba67f4b8ea72e46b02a06103e\", \"status\": \"BOOKED\", \"service_type\": \"Van\", \"start_location\": \"Masarykova 43, 702 00 Ostrava, Ostrava\", \"end_location\": \"Sokolská třída 21, 702 00 Ostrava, Ostrava\", \"price\": \"40.2\", \"duration\": \"18.1\", \"time_stamp\": \"1722715303.2\", \"distance_km\": \"8.5\", \"delay\": null, \"delay_history\": []}, \"5\": {\"ride_id\": \"6735a92836b4490f85a448e88f44ecdc\", \"status\": \"BOOKED\", \"service_type\": \"Premium\", \"start_location\": \"Křenová 20, 602 00 Brno-střed, Brno\", \"end_location\": \"Mečová 20, 602 00 Brno-střed, Brno\", \"price\": \"28.2\", \"duration\": \"13.4\", \"time_stamp\": \"1726373858.07\", \"distance_km\": \"6.98\", \"delay\": null, \"delay_history\": []}, \"6\": {\"ride_id\": \"cf24be61edc140d9bb2eef98c2ecf902\", \"status\": \"BOOKED\", \"service_type\": \"Default\", \"start_location\": \"Koterovská 1726/48, 326 00 Plzeň\", \"end_location\": \"náměstí Republiky 240/1, 301 00 Plzeň\", \"price\": \"105.4\", \"duration\": \"8.5\", \"time_stamp\": \"1728292883.21\", \"distance_km\": \"4.19\", \"delay\": null, \"delay_history\": []}, \"7\": {\"ride_id\": \"ff9b018ecd1145cf87a2dcdebe4d053b\", \"status\": \"BOOKED\", \"service_type\": \"Default\", \"start_location\": \"náměstí Republiky 23, 301 00 Plzeň, Plzeň\", \"end_location\": \"Sady Pětatřicátníků 23, 301 00 Plzeň, Plzeň\", \"price\": \"18.3\", \"duration\": \"8.5\", \"time_stamp\": \"1724482942.5\", \"distance_km\": \"3.8\", \"delay\": null, \"delay_history\": []}, \"8\": {\"ride_id\": \"84caec871d534bc9aa740089f2bb5252\", \"status\": \"BOOKED\", \"service_type\": \"Van\", \"start_location\": \"Velké náměstí 135/1, 500 03 Hradec Králové\", \"end_location\": \"Kotěrova 1613/2, 500 03 Hradec Králové\", \"price\": \"159.8\", \"duration\": \"10.9\", \"time_stamp\": \"1728473051.88\", \"distance_km\": \"5.81\", \"delay\": null, \"delay_history\": []}, \"9\": {\"ride_id\": \"08b379e85bbe49abac6ec41782600d1f\", \"status\": \"BOOKED\", \"service_type\": \"Premium\", \"start_location\": \"Šaldova 12, 460 01 Liberec, Liberec\", \"end_location\": \"Náměstí Dr. E. Beneše 23, 460 01 Liberec, Liberec\", \"price\": \"100\", \"duration\": \"11.2\", \"time_stamp\": \"1728696440.44\", \"distance_km\": \"5.19\", \"delay\": null, \"delay_history\": []}, \"10\": {\"ride_id\": \"886116b9133645cf9d76a3eab757604c\", \"status\": \"BOOKED\", \"service_type\": \"Premium\", \"start_location\": \"Šilingrovo náměstí 3, 602 00 Brno-střed, Brno\", \"end_location\": \"Jezuitská 1, 602 00 Brno-střed, Brno\", \"price\": \"25.8\", \"duration\": \"10.5\", \"time_stamp\": \"1725227554.56\", \"distance_km\": \"4.2\", \"delay\": null, \"delay_history\": []}, \"11\": {\"ride_id\": \"2b872d9ac56044ee94a199ed7199af10\", \"status\": \"BOOKED\", \"service_type\": \"Default\", \"start_location\": \"Křižovnické náměstí 3, 110 00 Praha 1, Prague\", \"end_location\": \"Pařížská 25, 110 00 Praha 1, Prague\", \"price\": \"15.8\", \"duration\": \"6.1\", \"time_stamp\": \"1725239376.43\", \"distance_km\": \"2.8\", \"delay\": null, \"delay_history\": []}, \"12\": {\"ride_id\": \"23aaaad79419460fa1836b8763974cec\", \"status\": \"BOOKED\", \"service_type\": \"Default\", \"start_location\": \"náměstí Republiky 240/23, 301 00 Plzeň, Plzeň\", \"end_location\": \"Sady Pětatřicátníků 12, 301 00 Plzeň, Plzeň\", \"price\": \"10.8\", \"duration\": \"6.8\", \"time_stamp\": \"1726058956.66\", \"distance_km\": \"2.89\", \"delay\": null, \"delay_history\": []}, \"13\": {\"ride_id\": \"bfe8539616264c309bef48227c7cadd9\", \"status\": \"BOOKED\", \"service_type\": \"Default\", \"start_location\": \"Jungmannova 31, 110 00 Praha 1\", \"end_location\": \"Vodičkova 28, 110 00 Praha 1\", \"price\": \"93.5\", \"duration\": \"6.3\", \"time_stamp\": \"1723281589.45\", \"distance_km\": \"2.53\", \"delay\": null, \"delay_history\": []}, \"14\": {\"ride_id\": \"bc06cd79a4664f858ff97311bfdcfd2e\", \"status\": \"BOOKED\", \"service_type\": \"Default\", \"start_location\": \"náměstí Republiky 240/1, 301 00 Plzeň\", \"end_location\": \"Koterovská 1726/48, 326 00 Plzeň\", \"price\": \"121.9\", \"duration\": \"9.5\", \"time_stamp\": \"1726517452.3\", \"distance_km\": \"5.29\", \"delay\": null, \"delay_history\": []}, \"15\": {\"ride_id\": \"04f72187a17e415081cc5db42326b103\", \"status\": \"BOOKED\", \"service_type\": \"Premium\", \"start_location\": \"Křenová 20, 602 00 Brno-střed, Brno\", \"end_location\": \"Vodní 2, 602 00 Brno-střed, Brno\", \"price\": \"28.5\", \"duration\": \"11.9\", \"time_stamp\": \"1725413213.85\", \"distance_km\": \"5.5\", \"delay\": null, \"delay_history\": []}, \"16\": {\"ride_id\": \"f7256dc8b811465685c297dfe8db8420\", \"status\": \"BOOKED\", \"service_type\": \"Van\", \"start_location\": \"Havlíčkova 12, 602 00 Brno-střed, Brno\", \"end_location\": \"Křenová 29, 602 00 Brno-střed, Brno\", \"price\": \"180\", \"duration\": \"15.5\", \"time_stamp\": \"1725676526.44\", \"distance_km\": \"8.35\", \"delay\": null, \"delay_history\": []}, \"17\": {\"ride_id\": \"2d10e157e6324e618f1b3c7cb0ffe1fd\", \"status\": \"BOOKED\", \"service_type\": \"Van\", \"start_location\": \"Českobratrská 18, 702 00 Ostrava, Ostrava\", \"end_location\": \"Sokolská třída 21, 702 00 Ostrava, Ostrava\", \"price\": \"150\", \"duration\": \"12.1\", \"time_stamp\": \"1728688513.66\", \"distance_km\": \"6.54\", \"delay\": null, \"delay_history\": []}, \"18\": {\"ride_id\": \"5e8bb6ecfc424a689f73063dae8bc2ba\", \"status\": \"BOOKED\", \"service_type\": \"Premium\", \"start_location\": \"Dvořákova 1, 602 00 Brno-střed, Brno\", \"end_location\": \"Štefánikova 24, 602 00 Brno-střed, Brno\", \"price\": \"25.8\", \"duration\": \"12.1\", \"time_stamp\": \"1722542645.36\", \"distance_km\": \"6.23\", \"delay\": null, \"delay_history\": []}, \"19\": {\"ride_id\": \"8d1e910052d84dd6a0b6c892df85a5db\", \"status\": \"BOOKED\", \"service_type\": \"Default\", \"start_location\": \"Náměstí Republiky 3, 110 00 Praha 1, Prague\", \"end_location\": \"Křižovnické náměstí 3, 110 00 Praha 1, Prague\", \"price\": \"12.5\", \"duration\": \"6.2\", \"time_stamp\": \"1727011094.86\", \"distance_km\": \"2.15\", \"delay\": null, \"delay_history\": []}}, \"range\": [\"0\", \"20\"], \"total\": \"43\"}",
+      "event_id": "series_s1_ride_history_a",
+      "response_sha256": "3ac2599615ca70cda5d8ac7e2e25be2458510e0c9e37926da97b3299e3d3d193"
+    },
+    "stage1.tool_response.series_s1_ride_history_b": {
+      "stage": 1,
+      "text": "{\"rides\": {\"20\": {\"ride_id\": \"fc8410743db443939ae9e785ab3808b8\", \"status\": \"BOOKED\", \"service_type\": \"Van\", \"start_location\": \"Bolzanova 1, 602 00 Brno-střed, Brno\", \"end_location\": \"Kozí 8, 602 00 Brno-střed, Brno\", \"price\": \"220\", \"duration\": \"18.2\", \"time_stamp\": \"1725295335.87\", \"distance_km\": \"10.19\", \"delay\": null, \"delay_history\": []}, \"21\": {\"ride_id\": \"0fa44140f5d54a2e8b645ef997b20ecb\", \"status\": \"BOOKED\", \"service_type\": \"Van\", \"start_location\": \"Dvořákova 11, 702 00 Ostrava\", \"end_location\": \"Sokolská třída 11, 702 00 Ostrava\", \"price\": \"20.5\", \"duration\": \"5.9\", \"time_stamp\": \"1726939571.7\", \"distance_km\": \"2.9\", \"delay\": null, \"delay_history\": []}, \"22\": {\"ride_id\": \"eec42edb229a494cb0e63c59e4ee9a23\", \"status\": \"BOOKED\", \"service_type\": \"Van\", \"start_location\": \"28. října 20, 702 00 Ostrava, Ostrava\", \"end_location\": \"Havlíčkovo náměstí 20, 702 00 Ostrava, Ostrava\", \"price\": \"45.8\", \"duration\": \"19.5\", \"time_stamp\": \"1726860984.91\", \"distance_km\": \"9.8\", \"delay\": null, \"delay_history\": []}, \"23\": {\"ride_id\": \"b41fc2f1d85f4bcfbab629e044015d3e\", \"status\": \"BOOKED\", \"service_type\": \"Default\", \"start_location\": \"Sady Pětatřicátníků 12, 301 00 Plzeň\", \"end_location\": \"náměstí Republiky 33, 301 00 Plzeň\", \"price\": \"18.2\", \"duration\": \"7.3\", \"time_stamp\": \"1728152694.09\", \"distance_km\": \"3.9\", \"delay\": null, \"delay_history\": []}, \"24\": {\"ride_id\": \"eefdb5cd39474322956df7d53d4338ad\", \"status\": \"BOOKED\", \"service_type\": \"Van\", \"start_location\": \"28. října 3346/65, 702 00 Ostrava\", \"end_location\": \"Sokolská třída 21, 702 00 Ostrava\", \"price\": \"25.8\", \"duration\": \"8.1\", \"time_stamp\": \"1722861139.52\", \"distance_km\": \"4.2\", \"delay\": null, \"delay_history\": []}, \"25\": {\"ride_id\": \"a552f4c10a40410eb6ade2867f351f47\", \"status\": \"BOOKED\", \"service_type\": \"Van\", \"start_location\": \"Vodičkova 20, 110 00 Praha 1, Prague\", \"end_location\": \"Jindřišská 20, 110 00 Praha 1, Prague\", \"price\": \"20.4\", \"duration\": \"10.5\", \"time_stamp\": \"1724956283.5\", \"distance_km\": \"5.15\", \"delay\": null, \"delay_history\": []}, \"26\": {\"ride_id\": \"f48488d2fb754e0aa38483c5c31fc1cd\", \"status\": \"BOOKED\", \"service_type\": \"Default\", \"start_location\": \"Velké náměstí 134/1, 500 03 Hradec Králové, Hradec Králové\", \"end_location\": \"Gočárova třída 265/1, 500 02 Hradec Králové, Hradec Králové\", \"price\": \"15.6\", \"duration\": \"9.2\", \"time_stamp\": \"1723784413.61\", \"distance_km\": \"4.21\", \"delay\": null, \"delay_history\": []}, \"27\": {\"ride_id\": \"4b88937ecc584106a8ffcd44ed1215cc\", \"status\": \"BOOKED\", \"service_type\": \"Premium\", \"start_location\": \"U Jezu 525/4, 460 01 Liberec\", \"end_location\": \"Šaldovo náměstí 258/1, 460 01 Liberec\", \"price\": \"201.4\", \"duration\": \"11.8\", \"time_stamp\": \"1724858853.06\", \"distance_km\": \"6.91\", \"delay\": null, \"delay_history\": []}, \"28\": {\"ride_id\": \"4f21065084594aa0b8472bdfb9ae1cc8\", \"status\": \"BOOKED\", \"service_type\": \"Default\", \"start_location\": \"Havlíčkova 20, 702 00 Ostrava, Ostrava\", \"end_location\": \"Závodní 20, 702 00 Ostrava, Ostrava\", \"price\": \"14.4\", \"duration\": \"8.8\", \"time_stamp\": \"1723567572.46\", \"distance_km\": \"3.82\", \"delay\": null, \"delay_history\": []}, \"29\": {\"ride_id\": \"d3f77d8a748b4089beb2652a1c89b312\", \"status\": \"BOOKED\", \"service_type\": \"Default\", \"start_location\": \"Vodičkova 20, 110 00 Praha 1, Prague\", \"end_location\": \"Jindřišská 5, 110 00 Praha 1, Prague\", \"price\": \"10.2\", \"duration\": \"5.1\", \"time_stamp\": \"1723932984.55\", \"distance_km\": \"1.8\", \"delay\": null, \"delay_history\": []}, \"30\": {\"ride_id\": \"30a6f8916ced45c48b218b9edc270109\", \"status\": \"BOOKED\", \"service_type\": \"Default\", \"start_location\": \"Náměstí Míru 15, 120 00 Praha 2\", \"end_location\": \"Václavské náměstí 68, 110 00 Praha 1\", \"price\": \"145.5\", \"duration\": \"10.2\", \"time_stamp\": \"1727827616.69\", \"distance_km\": \"4.53\", \"delay\": null, \"delay_history\": []}, \"31\": {\"ride_id\": \"ce23f5456bab4944bee8854dcfc3ed4b\", \"status\": \"BOOKED\", \"service_type\": \"Default\", \"start_location\": \"Náměstí Republiky 3, 110 00 Praha 1, Prague\", \"end_location\": \"V Celnici 4, 110 00 Praha 1, Prague\", \"price\": \"12.5\", \"duration\": \"5.2\", \"time_stamp\": \"1727459122.26\", \"distance_km\": \"2.1\", \"delay\": null, \"delay_history\": []}, \"32\": {\"ride_id\": \"2ca3ebccc651423fa5aa4dfeab84a09f\", \"status\": \"BOOKED\", \"service_type\": \"Premium\", \"start_location\": \"Vodičkova 20, 110 00 Praha 1, Prague\", \"end_location\": \"Jindřišská 5, 110 00 Praha 1, Prague\", \"price\": \"140\", \"duration\": \"6.2\", \"time_stamp\": \"1723047728.49\", \"distance_km\": \"2.56\", \"delay\": null, \"delay_history\": []}, \"33\": {\"ride_id\": \"cd4839e3f99d41fbb8617a061c626ad6\", \"status\": \"BOOKED\", \"service_type\": \"Premium\", \"start_location\": \"Štefánikova 25, 602 00 Brno-střed, Brno\", \"end_location\": \"náměstí Svobody 17, 602 00 Brno-střed, Brno\", \"price\": \"120\", \"duration\": \"8.5\", \"time_stamp\": \"1722826103.17\", \"distance_km\": \"3.21\", \"delay\": null, \"delay_history\": []}, \"34\": {\"ride_id\": \"9e86cca6c4744d319567449c4b36b9c3\", \"status\": \"BOOKED\", \"service_type\": \"Premium\", \"start_location\": \"Šaldova 12, 460 01 Liberec, Liberec\", \"end_location\": \"5. května 21, 460 01 Liberec, Liberec\", \"price\": \"32.1\", \"duration\": \"12.8\", \"time_stamp\": \"1724710651.28\", \"distance_km\": \"6.3\", \"delay\": null, \"delay_history\": []}, \"35\": {\"ride_id\": \"bbf3688428314c7d8951a9526162f0c6\", \"status\": \"BOOKED\", \"service_type\": \"Van\", \"start_location\": \"Sokolská třída 22, 702 00 Ostrava\", \"end_location\": \"Českobratrská 1187/14, 702 00 Ostrava\", \"price\": \"187.3\", \"duration\": \"12.1\", \"time_stamp\": \"1724374622.48\", \"distance_km\": \"6.38\", \"delay\": null, \"delay_history\": []}, \"36\": {\"ride_id\": \"3e16420f501548a580c8d8bba3a004c5\", \"status\": \"BOOKED\", \"service_type\": \"Default\", \"start_location\": \"Smetanovy sady 20, 301 00 Plzeň, Plzeň\", \"end_location\": \"Riegrova 20, 301 00 Plzeň, Plzeň\", \"price\": \"22.5\", \"duration\": \"10.2\", \"time_stamp\": \"1725832386.73\", \"distance_km\": \"5.2\", \"delay\": null, \"delay_history\": []}, \"37\": {\"ride_id\": \"20ab2b6f06504df8a10e2f111ef729dc\", \"status\": \"BOOKED\", \"service_type\": \"Van\", \"start_location\": \"28. října 3346/65, 702 00 Ostrava, Ostrava\", \"end_location\": \"Sokolská třída 22, 702 00 Ostrava, Ostrava\", \"price\": \"18.2\", \"duration\": \"9.5\", \"time_stamp\": \"1727460452.14\", \"distance_km\": \"4.56\", \"delay\": null, \"delay_history\": []}, \"38\": {\"ride_id\": \"8ce4aa1e5b8646f3acb2e1d9f46fe3c4\", \"status\": \"BOOKED\", \"service_type\": \"Default\", \"start_location\": \"Slezská 10, 120 00 Praha 2, Prague\", \"end_location\": \"Legerova 22, 120 00 Praha 2, Prague\", \"price\": \"70\", \"duration\": \"10.5\", \"time_stamp\": \"1722626006.05\", \"distance_km\": \"4.23\", \"delay\": null, \"delay_history\": []}, \"39\": {\"ride_id\": \"8de9a08be25c483e918c5fcea8429be4\", \"status\": \"BOOKED\", \"service_type\": \"Van\", \"start_location\": \"Velké náměstí 15, 500 03 Hradec Králové, Hradec Králové\", \"end_location\": \"Pražská třída 10, 500 03 Hradec Králové, Hradec Králové\", \"price\": \"50.5\", \"duration\": \"20.9\", \"time_stamp\": \"1728616811.22\", \"distance_km\": \"11.2\", \"delay\": null, \"delay_history\": []}, \"40\": {\"ride_id\": \"2fc6664719704d37b222b55c27577396\", \"status\": \"BOOKED\", \"service_type\": \"Default\", \"start_location\": \"Masarykovo náměstí 10, 500 03 Hradec Králové, Hradec Králové\", \"end_location\": \"Riegrovo náměstí 25, 500 03 Hradec Králové, Hradec Králové\", \"price\": \"80\", \"duration\": \"8.8\", \"time_stamp\": \"1727981727.89\", \"distance_km\": \"3.92\", \"delay\": null, \"delay_history\": []}, \"41\": {\"ride_id\": \"f905d19a70ec4cd7823cd5e1b3d7858a\", \"status\": \"BOOKED\", \"service_type\": \"Van\", \"start_location\": \"Velké náměstí 137, 500 03 Hradec Králové\", \"end_location\": \"Pražská 161, 500 03 Hradec Králové\", \"price\": \"22.1\", \"duration\": \"6.5\", \"time_stamp\": \"1723818277.22\", \"distance_km\": \"3.5\", \"delay\": null, \"delay_history\": []}, \"42\": {\"ride_id\": \"0d46abcda7ad421c8c9631fe2b87f597\", \"status\": \"BOOKED\", \"service_type\": \"Van\", \"start_location\": \"Smetanovy sady 20, 301 00 Plzeň, Plzeň\", \"end_location\": \"Klatovská třída 20, 301 00 Plzeň, Plzeň\", \"price\": \"24.8\", \"duration\": \"12.8\", \"time_stamp\": \"1723768127.73\", \"distance_km\": \"6.45\", \"delay\": null, \"delay_history\": []}}, \"range\": [\"20\", \"43\"], \"total\": \"43\"}",
+      "event_id": "series_s1_ride_history_b",
+      "response_sha256": "47714d1a6b11c06dc913018aaf1ee49350371c8b43cf9a6e609b1317d623a3b3"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Helga Steinbacher",
+      "original_source": "stage2.tool_gt.series_s2_add_followup.arguments.attendees[0]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Náměstí Dr. E. Beneše",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "利贝雷茨广场名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Gočárova třída",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_b",
+          "reason": "赫拉德茨-克拉洛韦街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Havlíčkovo náměstí",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_b",
+          "reason": "俄斯特拉发广场名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Klatovská třída",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_b",
+          "reason": "比尔森街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Křižovnické náměstí",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "布拉格广场名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Masarykovo náměstí",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_b",
+          "reason": "赫拉德茨-克拉洛韦广场名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Náměstí Míru",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "布拉格广场名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "náměstí Republiky",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "捷克广场名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "náměstí Svobody",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_b",
+          "reason": "布尔诺广场名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Pražská třída",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_b",
+          "reason": "赫拉德茨-克拉洛韦街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Riegrovo náměstí",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_b",
+          "reason": "赫拉德茨-克拉洛韦广场名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Sady Pětatřicátníků",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "比尔森街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Smetanovy sady",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_b",
+          "reason": "比尔森街道名",
+          "weight": 50
+        },
+        {
+          "text": "Sokolská třída",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "俄斯特拉发街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "U Jezu",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_b",
+          "reason": "利贝雷茨街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "V Celnici",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_b",
+          "reason": "布拉格街道名",
+          "weight": 50
+        },
+        {
+          "text": "Václavské náměstí",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "布拉格广场名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Zelný trh",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "布尔诺广场名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Šaldovo náměstí",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "利贝雷茨广场名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Šilingrovo náměstí",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "布尔诺广场名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Biskupská",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "捷克布尔诺街道名，含变音符号，发音困难",
+          "weight": 50
+        },
+        {
+          "text": "Bolzanova",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_b",
+          "reason": "布尔诺街道名",
+          "weight": 50
+        },
+        {
+          "text": "Dvořákova",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "捷克街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Havlíčkova",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "捷克街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Jezuitská",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "布尔诺街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Jindřišská",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_b",
+          "reason": "布拉格街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Jungmannova",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "布拉格街道名",
+          "weight": 50
+        },
+        {
+          "text": "Koterovská",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "比尔森街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Kotěrova",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "赫拉德茨-克拉洛韦街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Kozí",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_b",
+          "reason": "布尔诺街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Křenová",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "布尔诺街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Legerova",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_b",
+          "reason": "布拉格街道名",
+          "weight": 50
+        },
+        {
+          "text": "Masarykova",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "俄斯特拉发街道名",
+          "weight": 50
+        },
+        {
+          "text": "Mečová",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "捷克街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Pařížská",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "布拉格街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Riegrova",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_b",
+          "reason": "比尔森街道名",
+          "weight": 50
+        },
+        {
+          "text": "Slezská",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_b",
+          "reason": "布拉格街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Vodičkova",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "布拉格街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Vodní",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "布尔诺街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Závodní",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_b",
+          "reason": "俄斯特拉发街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Českobratrská",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "俄斯特拉发街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Štefánikova",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "捷克街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Železná",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_ride_history_a",
+          "reason": "捷克街道名，含变音符号",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Náměstí Dr. E. Beneše",
+        "Gočárova třída",
+        "Havlíčkovo náměstí",
+        "Klatovská třída",
+        "Křižovnické náměstí",
+        "Masarykovo náměstí",
+        "Náměstí Míru",
+        "náměstí Republiky",
+        "náměstí Svobody",
+        "Pražská třída",
+        "Riegrovo náměstí",
+        "Sady Pětatřicátníků",
+        "Smetanovy sady",
+        "Sokolská třída",
+        "U Jezu",
+        "V Celnici",
+        "Václavské náměstí",
+        "Zelný trh",
+        "Šaldovo náměstí",
+        "Šilingrovo náměstí",
+        "Biskupská",
+        "Bolzanova",
+        "Dvořákova",
+        "Havlíčkova",
+        "Jezuitská",
+        "Jindřišská",
+        "Jungmannova",
+        "Koterovská",
+        "Kotěrova",
+        "Kozí",
+        "Křenová",
+        "Legerova",
+        "Masarykova",
+        "Mečová",
+        "Pařížská",
+        "Riegrova",
+        "Slezská",
+        "Vodičkova",
+        "Vodní",
+        "Závodní",
+        "Českobratrská",
+        "Štefánikova",
+        "Železná"
+      ],
+      "active_vocabulary": {
+        "Náměstí Dr. E. Beneše": 50,
+        "Gočárova třída": 50,
+        "Havlíčkovo náměstí": 50,
+        "Klatovská třída": 50,
+        "Křižovnické náměstí": 50,
+        "Masarykovo náměstí": 50,
+        "Náměstí Míru": 50,
+        "náměstí Republiky": 50,
+        "náměstí Svobody": 50,
+        "Pražská třída": 50,
+        "Riegrovo náměstí": 50,
+        "Sady Pětatřicátníků": 50,
+        "Smetanovy sady": 50,
+        "Sokolská třída": 50,
+        "U Jezu": 50,
+        "V Celnici": 50,
+        "Václavské náměstí": 50,
+        "Zelný trh": 50,
+        "Šaldovo náměstí": 50,
+        "Šilingrovo náměstí": 50,
+        "Biskupská": 50,
+        "Bolzanova": 50,
+        "Dvořákova": 50,
+        "Havlíčkova": 50,
+        "Jezuitská": 50,
+        "Jindřišská": 50,
+        "Jungmannova": 50,
+        "Koterovská": 50,
+        "Kotěrova": 50,
+        "Kozí": 50,
+        "Křenová": 50,
+        "Legerova": 50,
+        "Masarykova": 50,
+        "Mečová": 50,
+        "Pařížská": 50,
+        "Riegrova": 50,
+        "Slezská": 50,
+        "Vodičkova": 50,
+        "Vodní": 50,
+        "Závodní": 50,
+        "Českobratrská": 50,
+        "Štefánikova": 50,
+        "Železná": 50
+      },
+      "vocabulary_sha256": "2b2b561ca3d805f4d29cafaa4d033d727e12209d8417c8a1aadc8338d7d9eaf0"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Helga Steinbacher",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整人名，保留全名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Helga Steinbacher"
+      ],
+      "active_vocabulary": {
+        "Náměstí Dr. E. Beneše": 50,
+        "Gočárova třída": 50,
+        "Havlíčkovo náměstí": 50,
+        "Klatovská třída": 50,
+        "Křižovnické náměstí": 50,
+        "Masarykovo náměstí": 50,
+        "Náměstí Míru": 50,
+        "náměstí Republiky": 50,
+        "náměstí Svobody": 50,
+        "Pražská třída": 50,
+        "Riegrovo náměstí": 50,
+        "Sady Pětatřicátníků": 50,
+        "Smetanovy sady": 50,
+        "Sokolská třída": 50,
+        "U Jezu": 50,
+        "V Celnici": 50,
+        "Václavské náměstí": 50,
+        "Zelný trh": 50,
+        "Šaldovo náměstí": 50,
+        "Šilingrovo náměstí": 50,
+        "Biskupská": 50,
+        "Bolzanova": 50,
+        "Dvořákova": 50,
+        "Havlíčkova": 50,
+        "Jezuitská": 50,
+        "Jindřišská": 50,
+        "Jungmannova": 50,
+        "Koterovská": 50,
+        "Kotěrova": 50,
+        "Kozí": 50,
+        "Křenová": 50,
+        "Legerova": 50,
+        "Masarykova": 50,
+        "Mečová": 50,
+        "Pařížská": 50,
+        "Riegrova": 50,
+        "Slezská": 50,
+        "Vodičkova": 50,
+        "Vodní": 50,
+        "Závodní": 50,
+        "Českobratrská": 50,
+        "Štefánikova": 50,
+        "Železná": 50,
+        "Helga Steinbacher": 50
+      },
+      "vocabulary_sha256": "c6ec65314580166c1e3b95b0af9a4cf9bfa4bfe73d2cbcf7cf73e43aa441f39f"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Praha 1",
+    "Praha 2",
+    "Prague",
+    "Helga"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:56.387058+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

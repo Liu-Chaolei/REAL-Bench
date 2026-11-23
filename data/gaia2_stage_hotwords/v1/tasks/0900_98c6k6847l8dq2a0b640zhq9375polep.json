@@ -1,0 +1,166 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0900_98c6k6847l8dq2a0b640zhq9375polep",
+  "model": "deepseek-flash",
+  "input_sha256": "c71c98dae22dc5324358dfce6c12344bd8a6a00aed36e2b37325eb23ba2bb579",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Karel Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-aa4f5a50-dbe4-4ed4-a54e-a0b2d8451cc3.arguments.attendees[0]",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Khalifa Al-Mansoori",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-8405cff1-684c-4362-9822-288976be3f41.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fbe4ebe7-17b0-4e5f-b4a5-b2ae083dc6d0.arguments.content",
+          "reason": "发件人姓名"
+        },
+        {
+          "text": "Board & Dice Inuit: The Snow Folk",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "桌游产品名"
+        },
+        {
+          "text": "Schuttershofstraat",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-abaee972-2fba-46ad-8a1e-8b45d4699e1a.arguments.address",
+          "reason": "街道名"
+        },
+        {
+          "text": "Antwerpen",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-abaee972-2fba-46ad-8a1e-8b45d4699e1a.arguments.address",
+          "reason": "城市名"
+        },
+        {
+          "text": "Belgian Armed Forces",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-abaee972-2fba-46ad-8a1e-8b45d4699e1a.arguments.description",
+          "reason": "军事组织名"
+        }
+      ],
+      "new_terms": [
+        "Karel Vandenberghe",
+        "Khalifa Al-Mansoori",
+        "Liesbeth Vandenberghe",
+        "Board & Dice Inuit: The Snow Folk",
+        "Schuttershofstraat",
+        "Antwerpen",
+        "Belgian Armed Forces"
+      ],
+      "active_vocabulary": {
+        "Karel Vandenberghe": 50,
+        "Khalifa Al-Mansoori": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Board & Dice Inuit: The Snow Folk": 50,
+        "Schuttershofstraat": 50,
+        "Antwerpen": 50,
+        "Belgian Armed Forces": 50
+      },
+      "vocabulary_sha256": "890b2422e130a7d280ad98bcb88f607b66929920f6d78bcaf9612d8ebd84f5e1"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Karel Vandenberghe",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Board & Dice Inuit: The Snow Folk",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "桌游产品名"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email_karel.arguments.content",
+          "reason": "发件人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Karel Vandenberghe": 50,
+        "Khalifa Al-Mansoori": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Board & Dice Inuit: The Snow Folk": 50,
+        "Schuttershofstraat": 50,
+        "Antwerpen": 50,
+        "Belgian Armed Forces": 50
+      },
+      "vocabulary_sha256": "890b2422e130a7d280ad98bcb88f607b66929920f6d78bcaf9612d8ebd84f5e1"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Karel Vandenberghe",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Board & Dice Inuit: The Snow Folk",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "桌游产品名"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_karel.arguments.content",
+          "reason": "发件人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Karel Vandenberghe": 50,
+        "Khalifa Al-Mansoori": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Board & Dice Inuit: The Snow Folk": 50,
+        "Schuttershofstraat": 50,
+        "Antwerpen": 50,
+        "Belgian Armed Forces": 50
+      },
+      "vocabulary_sha256": "890b2422e130a7d280ad98bcb88f607b66929920f6d78bcaf9612d8ebd84f5e1"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "1f0c76f5ce91eb76f3057528e522d93b1b3d749634c399856cb98c57875c8cd0",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4594,
+        "completion_tokens": 633,
+        "total_tokens": 5227,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4338
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.218
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0900_98c6k6847l8dq2a0b640zhq9375polep",
+  "extracted_at": "2026-11-22T06:44:25.347540+00:00"
+}

@@ -1,0 +1,213 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0724_fe18bzowaa0awdnps9482scuxwz5zm9i__async_0077_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "bd17e9242b5d878a4ffe84dadac25f42d943b2f480ec883611193eb865b08ec3",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Birgitta Rasmussen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Kaatje De Smet",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "UglyDolls",
+          "kind": "product",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-af67ebd9-368e-4dfb-b676-385bfce6a7b5.arguments.content",
+          "reason": "商品品牌名"
+        },
+        {
+          "text": "DJECO Puzz Art Sea Horse Jig Saw Puzzle",
+          "kind": "product",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-cf3293f3-3416-47d8-bd7c-922703a60371.arguments.content",
+          "reason": "商品完整名称"
+        }
+      ],
+      "new_terms": [
+        "Birgitta Rasmussen",
+        "Kaatje De Smet",
+        "UglyDolls",
+        "DJECO Puzz Art Sea Horse Jig Saw Puzzle"
+      ],
+      "active_vocabulary": {
+        "Birgitta Rasmussen": 50,
+        "Kaatje De Smet": 50,
+        "UglyDolls": 50,
+        "DJECO Puzz Art Sea Horse Jig Saw Puzzle": 50
+      },
+      "vocabulary_sha256": "920848293fd3e148c9833a07794ec5bc4f1cdd8f54f4016713982e188c5c9b48"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaatje De Smet",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Mickey and Friends: Activity Pinball Ride On",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "商品完整名称"
+        },
+        {
+          "text": "BRIO World - 33319 Battery Operated Action Train",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "商品完整名称"
+        },
+        {
+          "text": "BRIO",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "品牌名"
+        }
+      ],
+      "new_terms": [
+        "Mickey and Friends: Activity Pinball Ride On",
+        "BRIO World - 33319 Battery Operated Action Train",
+        "BRIO"
+      ],
+      "active_vocabulary": {
+        "Birgitta Rasmussen": 50,
+        "Kaatje De Smet": 50,
+        "UglyDolls": 50,
+        "DJECO Puzz Art Sea Horse Jig Saw Puzzle": 50,
+        "Mickey and Friends: Activity Pinball Ride On": 50,
+        "BRIO World - 33319 Battery Operated Action Train": 50,
+        "BRIO": 50
+      },
+      "vocabulary_sha256": "b5dc779884b7ac2ce241dc6dd75175fce378c019b6c9f59a0ae9a53a3b0901b2"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "4M Tin Can Edge Detector Science Kit",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_send_summary.arguments.content",
+          "reason": "不可用商品完整名称"
+        },
+        {
+          "text": "DJECO Puzz Art Sea Horse Jig Saw Puzzle",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_send_summary.arguments.content",
+          "reason": "保留订单商品名称"
+        },
+        {
+          "text": "UglyDolls",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_send_summary.arguments.content",
+          "reason": "商品品牌名"
+        },
+        {
+          "text": "Mickey and Friends: Activity Pinball Ride On",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_send_summary.arguments.content",
+          "reason": "已取消订单商品名称"
+        },
+        {
+          "text": "BRIO World - 33319 Battery Operated Action Train",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_send_summary.arguments.content",
+          "reason": "已取消订单商品名称"
+        },
+        {
+          "text": "BRIO",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_send_summary.arguments.content",
+          "reason": "品牌名"
+        }
+      ],
+      "new_terms": [
+        "4M Tin Can Edge Detector Science Kit"
+      ],
+      "active_vocabulary": {
+        "Birgitta Rasmussen": 50,
+        "Kaatje De Smet": 50,
+        "UglyDolls": 50,
+        "DJECO Puzz Art Sea Horse Jig Saw Puzzle": 50,
+        "Mickey and Friends: Activity Pinball Ride On": 50,
+        "BRIO World - 33319 Battery Operated Action Train": 50,
+        "BRIO": 50,
+        "4M Tin Can Edge Detector Science Kit": 50
+      },
+      "vocabulary_sha256": "37a1164c9f2089a396115769a3d8db63b67cf6f92f01500d5d9fa852ce5d69b3"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "bdf3b833188972fd4df42ad72b6b0ef0b6f2e81128f124e40a8645dc94f3e2da",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3771,
+        "completion_tokens": 720,
+        "total_tokens": 4491,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3515
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 2.716,
+      "error": "2 validation errors for Extraction\nstages.1.terms.3.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nstages.2.terms.5.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "40a176d4540138e85eb2ff1568986294c974ada3a42bbb8d10e38afcf328c434",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5025,
+        "completion_tokens": 720,
+        "total_tokens": 5745,
+        "prompt_tokens_details": {
+          "cached_tokens": 4480
+        },
+        "prompt_cache_hit_tokens": 4480,
+        "prompt_cache_miss_tokens": 545
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.564,
+      "error": "Not an exact quotation of a source in stage 0: 'Birgitta Rasmussen' from 'stage0.tool_gt.OracleEvent-AGENT-af67ebd9-368e-4dfb-b676-385bfce6a7b5.arguments.recipients[0]'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "8eea9dd6fa3a511f763093db2cf857e660b08a2f01dbed71724c85d33da867b9",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4939,
+        "completion_tokens": 624,
+        "total_tokens": 5563,
+        "prompt_tokens_details": {
+          "cached_tokens": 3968
+        },
+        "prompt_cache_hit_tokens": 3968,
+        "prompt_cache_miss_tokens": 971
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.223
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0724_fe18bzowaa0awdnps9482scuxwz5zm9i__async_0077_v1",
+  "extracted_at": "2026-11-22T06:46:58.459652+00:00"
+}

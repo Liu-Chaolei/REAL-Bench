@@ -1,0 +1,91 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0010_h8rf4902ivlsba175pmgq4j8id1gch7b",
+  "model": "deepseek-flash",
+  "input_sha256": "d3542b0eef0856f62f6ba9c7d7ce96e18e798d24fb6ed2e54c728273b4d9f48c",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "嘉宾名字，含特殊字符"
+        },
+        {
+          "text": "Colette",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "嘉宾名字"
+        },
+        {
+          "text": "Karel",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "嘉宾名字"
+        }
+      ],
+      "new_terms": [
+        "Aurélie",
+        "Colette",
+        "Karel"
+      ],
+      "active_vocabulary": {
+        "Aurélie": 50,
+        "Colette": 50,
+        "Karel": 50
+      },
+      "vocabulary_sha256": "62a2b12dc40f87376ba96718e7df0f69d087ad69c1bcad98d47d0a078f605af3"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Colette",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "嘉宾名字"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélie": 50,
+        "Colette": 50,
+        "Karel": 50
+      },
+      "vocabulary_sha256": "62a2b12dc40f87376ba96718e7df0f69d087ad69c1bcad98d47d0a078f605af3"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "78adbc67b8a3468fa41f089c159c70741c55b4731eb2b55243b0dd43d1cf3e02",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 952,
+        "completion_tokens": 164,
+        "total_tokens": 1116,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 696
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.848
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0010_h8rf4902ivlsba175pmgq4j8id1gch7b",
+  "extracted_at": "2026-11-22T06:38:23.004881+00:00"
+}

@@ -1,0 +1,149 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0148_nuc8i5symvvme7zidshvzw0eur1asa17__async_0046_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "b51c7b17724e05088c85b425b1ec7e5e2ce4cbc7aef1c53505b703cd09ce6ce5",
+  "review_input_sha256": "31db547350dca35d674fa88d2b4fde5d62674753acc664fc3691a83b01c421fc",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "90d0d47b453f00c3821df7bf30133a82bd599da4007884cd09a99f47deb66f37",
+  "reference_results_sha256": "59b190531fa315e0cc3158de2380fcb0632724f76cdf252c5e2dd68e38e24713",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kåre",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f3e80d72-7b5a-4cc4-8bd8-3f3b29ad5758.arguments.content"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Åse",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f3e80d72-7b5a-4cc4-8bd8-3f3b29ad5758.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Nonglak Wongchai",
+      "original_source": "stage1.tool_gt.series_s1_add.arguments.attendees[0]"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Café Opéra",
+      "original_source": "stage1.tool_gt.series_s1_add.arguments.location"
+    },
+    "stage2.tool_response.series_s2_read": {
+      "stage": 2,
+      "text": "{\"sender\": \"akjellstad@gaia2mail.com\", \"recipients\": [\"karejensen@gaia2mail.com\"], \"subject\": \"Re: Film Festival in the Bronx\", \"content\": \"Hei Kåre,\\nI am interested in joining the Bronx film festival invitation. Could you confirm the exact Friday date, screening start/end times and venue address, and which two-hour screening window would suit us? I have not reserved a film-festival slot because those details are still missing.\\nBest,\\nÅse\", \"email_id\": \"52e1ddc06020cc2ed26e5c843a6cc81f\", \"parent_id\": \"abd972780f84478cb34ffaf9cbdd1135\", \"cc\": [], \"attachments\": {}, \"timestamp\": \"1728975601.0\", \"is_read\": \"True\"}",
+      "event_id": "series_s2_read",
+      "response_sha256": "1e05604d43ca0a4821aeca5063883f01574f49a371aba379ff9c9c8fb6de2af8"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kåre",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含特殊字符å的挪威人名，ASR易错",
+          "weight": 50
+        },
+        {
+          "text": "Åse",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含特殊字符Å的挪威人名，ASR易错",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kåre",
+        "Åse"
+      ],
+      "active_vocabulary": {
+        "Kåre": 50,
+        "Åse": 50
+      },
+      "vocabulary_sha256": "e916875d75ec2cebf1e16767533391cc6bc1b8e8d6359aca8bbf1aa725981ac9"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Café Opéra",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含重音符号é的地点名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Nonglak Wongchai",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "泰语完整人名，发音困难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Café Opéra",
+        "Nonglak Wongchai"
+      ],
+      "active_vocabulary": {
+        "Kåre": 50,
+        "Åse": 50,
+        "Café Opéra": 50,
+        "Nonglak Wongchai": 50
+      },
+      "vocabulary_sha256": "188e522e72ff96a3a2f12f0ef99862b3ac538dfd85368966f8ce8dd6d5f97004"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kåre",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "含å的挪威人名，邮件正文出现",
+          "weight": 50
+        },
+        {
+          "text": "Åse",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "含Å的挪威人名，邮件署名出现",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kåre": 50,
+        "Åse": 50,
+        "Café Opéra": 50,
+        "Nonglak Wongchai": 50
+      },
+      "vocabulary_sha256": "188e522e72ff96a3a2f12f0ef99862b3ac538dfd85368966f8ce8dd6d5f97004"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Bronx"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:54.720407+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

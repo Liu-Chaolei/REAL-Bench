@@ -1,0 +1,169 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0853_242ovkbi72tuxkmovexnua7fpsd840vj__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "58786614318ec217a4d17e0d832f337684b0c194a321e11913f827c408cb896c",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Nalinee Wongcharee",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "好友完整姓名"
+        },
+        {
+          "text": "Rohan Sengupta",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "好友完整姓名"
+        },
+        {
+          "text": "Aurélie Desjardins",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "好友完整姓名，含重音"
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-57e33911-6857-407b-83b5-6fd1449bff9b.arguments.content",
+          "reason": "邮件署名，含特殊字符"
+        }
+      ],
+      "new_terms": [
+        "Nalinee Wongcharee",
+        "Rohan Sengupta",
+        "Aurélie Desjardins",
+        "Åse Kjellstad"
+      ],
+      "active_vocabulary": {
+        "Nalinee Wongcharee": 50,
+        "Rohan Sengupta": 50,
+        "Aurélie Desjardins": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "c337ab6f80c9b25d99edb36171bcdaf6708284f0f2ddc617ac33c791a564a390"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nalinee",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply_nalinee.arguments.content",
+          "reason": "确认回复对象名"
+        },
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply_aurelie.arguments.content",
+          "reason": "确认回复对象名，含重音"
+        },
+        {
+          "text": "Åse",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply_nalinee.arguments.content",
+          "reason": "邮件署名"
+        }
+      ],
+      "new_terms": [
+        "Nalinee",
+        "Aurélie",
+        "Åse"
+      ],
+      "active_vocabulary": {
+        "Nalinee Wongcharee": 50,
+        "Rohan Sengupta": 50,
+        "Aurélie Desjardins": 50,
+        "Åse Kjellstad": 50,
+        "Nalinee": 50,
+        "Aurélie": 50,
+        "Åse": 50
+      },
+      "vocabulary_sha256": "5e25267e09023e30c345770e70d6eac69cb1d4bcf64244e764c07bc48828c0ce"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Nalinee Wongcharee",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群聊成员完整姓名"
+        },
+        {
+          "text": "Aurélie Desjardins",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群聊成员完整姓名，含重音"
+        },
+        {
+          "text": "Surprise Birthday Logistics",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "自定义群聊名称"
+        }
+      ],
+      "new_terms": [
+        "Surprise Birthday Logistics"
+      ],
+      "active_vocabulary": {
+        "Nalinee Wongcharee": 50,
+        "Rohan Sengupta": 50,
+        "Aurélie Desjardins": 50,
+        "Åse Kjellstad": 50,
+        "Nalinee": 50,
+        "Aurélie": 50,
+        "Åse": 50,
+        "Surprise Birthday Logistics": 50
+      },
+      "vocabulary_sha256": "a5841e6e3bb224f6a112cf7a7e37507ba1aef7ea0f70a437029d72540296910b"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "8e7893f70a295b4994dfbead521d8af5128e00a20729f96ade245b702f5d45a3",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3987,
+        "completion_tokens": 390,
+        "total_tokens": 4377,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3731
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.768,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "8c7d9d0c538820bb940c3a1106388df11082bcc5768228819c5629976885964b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4770,
+        "completion_tokens": 392,
+        "total_tokens": 5162,
+        "prompt_tokens_details": {
+          "cached_tokens": 4352
+        },
+        "prompt_cache_hit_tokens": 4352,
+        "prompt_cache_miss_tokens": 418
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.566
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0853_242ovkbi72tuxkmovexnua7fpsd840vj__repetition_v1",
+  "extracted_at": "2026-11-22T06:46:15.341090+00:00"
+}

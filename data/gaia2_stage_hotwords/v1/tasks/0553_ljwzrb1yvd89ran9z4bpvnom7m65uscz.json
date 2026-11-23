@@ -1,0 +1,192 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0553_ljwzrb1yvd89ran9z4bpvnom7m65uscz",
+  "model": "deepseek-flash",
+  "input_sha256": "5631c6fa69d6d1a060f78e2441f00d48f61901a6e5c7c6162cf6a4dcc8d26d51",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "sims3",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "自定义文件夹名"
+        },
+        {
+          "text": "Story of Resilience",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "邮件标题中的独特短语"
+        },
+        {
+          "text": "complex_dag.png",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b2a69647-0cbf-43eb-bd43-8f17a6b0af1c.arguments.path1",
+          "reason": "特定文件名"
+        }
+      ],
+      "new_terms": [
+        "sims3",
+        "Story of Resilience",
+        "complex_dag.png"
+      ],
+      "active_vocabulary": {
+        "sims3": 50,
+        "Story of Resilience": 50,
+        "complex_dag.png": 50
+      },
+      "vocabulary_sha256": "b87c8bd1c565b4d2ab67eb8bc277ab993ca4c1748091673bdfa3466776da1ede"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Zara Kaur",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email_note.arguments.content",
+          "reason": "发件人姓名"
+        },
+        {
+          "text": "Kymberley Janssen",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email_note.arguments.content",
+          "reason": "发件人姓名"
+        },
+        {
+          "text": "Maureen Kowalski",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email_note.arguments.content",
+          "reason": "发件人姓名"
+        },
+        {
+          "text": "145/7 Macleay St, Potts Point NSW 2011, Australia",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_note.arguments.content",
+          "reason": "具体邮政地址"
+        },
+        {
+          "text": "145/23 St Kilda Road, Melbourne VIC 3004",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_note.arguments.content",
+          "reason": "具体邮政地址"
+        },
+        {
+          "text": "145 Sturt Street, Ballarat VIC 3350",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_note.arguments.content",
+          "reason": "具体邮政地址"
+        },
+        {
+          "text": "Story of Resilience",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_search.arguments.query",
+          "reason": "独特邮件标题短语"
+        }
+      ],
+      "new_terms": [
+        "Zara Kaur",
+        "Kymberley Janssen",
+        "Maureen Kowalski",
+        "145/7 Macleay St, Potts Point NSW 2011, Australia",
+        "145/23 St Kilda Road, Melbourne VIC 3004",
+        "145 Sturt Street, Ballarat VIC 3350"
+      ],
+      "active_vocabulary": {
+        "sims3": 50,
+        "Story of Resilience": 50,
+        "complex_dag.png": 50,
+        "Zara Kaur": 50,
+        "Kymberley Janssen": 50,
+        "Maureen Kowalski": 50,
+        "145/7 Macleay St, Potts Point NSW 2011, Australia": 50,
+        "145/23 St Kilda Road, Melbourne VIC 3004": 50,
+        "145 Sturt Street, Ballarat VIC 3350": 50
+      },
+      "vocabulary_sha256": "20ff4abc96f0680d503b1a1e8c075f34c65780e90254d938a28a49dcbec261aa"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kymberley Janssen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_cal.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "complex_dag.png",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_reply.arguments.attachment_paths[0]",
+          "reason": "特定附件文件名"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply.arguments.content",
+          "reason": "邮件署名姓名"
+        }
+      ],
+      "new_terms": [
+        "Rohan Kumar"
+      ],
+      "active_vocabulary": {
+        "sims3": 50,
+        "Story of Resilience": 50,
+        "complex_dag.png": 50,
+        "Zara Kaur": 50,
+        "Kymberley Janssen": 50,
+        "Maureen Kowalski": 50,
+        "145/7 Macleay St, Potts Point NSW 2011, Australia": 50,
+        "145/23 St Kilda Road, Melbourne VIC 3004": 50,
+        "145 Sturt Street, Ballarat VIC 3350": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "24186af4b1d22601c75e949c5335846f13dbb70bac68e8d14c5096aff03c3983"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "8ca025efc89cb263ff56fe520ce7e3dd05af22f17590c86685f01cc196340690",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2757,
+        "completion_tokens": 970,
+        "total_tokens": 3727,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2501
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 3.407,
+      "error": "Invalid proper-name phrase: 'zkaur75@gaia2mail.com'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "527ee58195b851328f29eb58968c74dd3a0dde0d66936332905f08a2dd05ca66",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4126,
+        "completion_tokens": 560,
+        "total_tokens": 4686,
+        "prompt_tokens_details": {
+          "cached_tokens": 3712
+        },
+        "prompt_cache_hit_tokens": 3712,
+        "prompt_cache_miss_tokens": 414
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.972
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0553_ljwzrb1yvd89ran9z4bpvnom7m65uscz",
+  "extracted_at": "2026-11-22T06:42:46.219961+00:00"
+}

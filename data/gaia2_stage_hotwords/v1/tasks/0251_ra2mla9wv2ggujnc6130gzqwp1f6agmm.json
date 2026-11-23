@@ -1,0 +1,148 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0251_ra2mla9wv2ggujnc6130gzqwp1f6agmm",
+  "model": "deepseek-flash",
+  "input_sha256": "5de9a04bcc2154b9da6d4e8f01cef548a851aff2cf81ab703fdeca0fcfb843da",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Naomi Matsumoto",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "副总理人名"
+        },
+        {
+          "text": "Kenji Nakamura",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "总理人名"
+        },
+        {
+          "text": "Emiko Tanaka",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "内阁官房发言人姓名"
+        },
+        {
+          "text": "Hiroshi Saito",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "医生姓名"
+        },
+        {
+          "text": "Yumi Nakahara",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "医生姓名"
+        },
+        {
+          "text": "Tokyo Medical Center",
+          "kind": "organization",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "医疗机构名称"
+        },
+        {
+          "text": "Japanese Health Ministry",
+          "kind": "organization",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "政府机构名称"
+        },
+        {
+          "text": "Japanese Cancer Association",
+          "kind": "organization",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "协会名称"
+        },
+        {
+          "text": "Tokyo",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "地名"
+        }
+      ],
+      "new_terms": [
+        "Naomi Matsumoto",
+        "Kenji Nakamura",
+        "Emiko Tanaka",
+        "Hiroshi Saito",
+        "Yumi Nakahara",
+        "Tokyo Medical Center",
+        "Japanese Health Ministry",
+        "Japanese Cancer Association",
+        "Tokyo"
+      ],
+      "active_vocabulary": {
+        "Naomi Matsumoto": 50,
+        "Kenji Nakamura": 50,
+        "Emiko Tanaka": 50,
+        "Hiroshi Saito": 50,
+        "Yumi Nakahara": 50,
+        "Tokyo Medical Center": 50,
+        "Japanese Health Ministry": 50,
+        "Japanese Cancer Association": 50,
+        "Tokyo": 50
+      },
+      "vocabulary_sha256": "f3b62b336788337a065f22822691558caf5807276a606b74456acd6bfc2faf76"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "27b3ddcbe41b1fc74c370b645e3ce9e9e4b96fe508b4acc730c8ddf1b888dec1",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1266,
+        "completion_tokens": 73,
+        "total_tokens": 1339,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1010
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 0.736,
+      "error": "3 validation errors for Extraction\nstages.0.kind\n  Extra inputs are not permitted [type=extra_forbidden, input_value='place', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage0.reference_reply.O...a74db.arguments.content', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='普通目录名，非专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "06d24d36e3d5ede624176b163ce20f439f31a639aadffd900ab8ed5f4b0e704d",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1902,
+        "completion_tokens": 334,
+        "total_tokens": 2236,
+        "prompt_tokens_details": {
+          "cached_tokens": 1280
+        },
+        "prompt_cache_hit_tokens": 1280,
+        "prompt_cache_miss_tokens": 622
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.393
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0251_ra2mla9wv2ggujnc6130gzqwp1f6agmm",
+  "extracted_at": "2026-11-22T06:40:58.336452+00:00"
+}

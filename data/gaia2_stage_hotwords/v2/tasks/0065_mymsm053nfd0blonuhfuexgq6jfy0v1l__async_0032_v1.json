@@ -1,0 +1,146 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0065_mymsm053nfd0blonuhfuexgq6jfy0v1l__async_0032_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "bc05b5d65862339a2a58b702344417ed1c028ca64e1a6cebdbd87eba278f4b92",
+  "review_input_sha256": "73f4efbd650952047b1063114bb95c01ba58cf63f9dc6b0a698344542707fb86",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "3738a0701e720c39da89ac05e77597648060556a259a28b4001b60fd9fe45ef8",
+  "reference_results_sha256": "016b64564645af96973bb4af6caaa70660520cf2ce0ef758a64033c354901a54",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Jawaher Al-Mansour",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Spiral Ashley Productions",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Karel Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-fea3ca4f-0696-4980-99d5-f4d5ea764bfb.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "Liesbeth Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-43635c3a-43cd-4dca-9912-7042944941c1.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Nalinee Wongchana",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Jawaher Al-Mansour",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "独特的中东人名，含连字符姓氏，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Spiral Ashley Productions",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.2",
+          "reason": "独特的制作公司名称，非通用机构词",
+          "weight": 50
+        },
+        {
+          "text": "Karel Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "完整姓名，姓氏较难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.6",
+          "reason": "完整姓名，姓氏较难拼写",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Jawaher Al-Mansour",
+        "Spiral Ashley Productions",
+        "Karel Vandenberghe",
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Jawaher Al-Mansour": 50,
+        "Spiral Ashley Productions": 50,
+        "Karel Vandenberghe": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "982fdba370e2d6a1da2c5212df1b5d2b7e246acaaa76a3a2b74fe426dfd7f657"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Jawaher Al-Mansour": 50,
+        "Spiral Ashley Productions": 50,
+        "Karel Vandenberghe": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "982fdba370e2d6a1da2c5212df1b5d2b7e246acaaa76a3a2b74fe426dfd7f657"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Nalinee Wongchana",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "独特的泰式完整姓名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Nalinee Wongchana"
+      ],
+      "active_vocabulary": {
+        "Jawaher Al-Mansour": 50,
+        "Spiral Ashley Productions": 50,
+        "Karel Vandenberghe": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Nalinee Wongchana": 50
+      },
+      "vocabulary_sha256": "10e409d873716f807f816fb3751ed13358e24de6089fb7957b3fccd698e0f609"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Karel",
+    "Ghent Gem",
+    "Ghent Eco-Friendly"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:48.939726+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,154 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0300_dpt0php27086l6z0b7e0t6qdz695fw64",
+  "model": "deepseek-flash",
+  "input_sha256": "60fdff99463517824c740b72f75ccf040764ec9a39506d2ad2d986beb94a4087",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Mumbai Fintech Sounding Board",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_create.arguments.title",
+          "reason": "自定义群组名称"
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "发件人姓名，含特殊字符"
+        },
+        {
+          "text": "Mumbai",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Mumbai Fintech Sounding Board",
+        "Søren Kjær",
+        "Mumbai"
+      ],
+      "active_vocabulary": {
+        "Mumbai Fintech Sounding Board": 50,
+        "Søren Kjær": 50,
+        "Mumbai": 50
+      },
+      "vocabulary_sha256": "f10d96bdea5cb3e5b45176cf43da966eb02c14958df73fae14a1b8f9e9b9cab0"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Mumbai Fintech Sounding Board - first call",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.title",
+          "reason": "自定义事件标题"
+        },
+        {
+          "text": "Aarav Rao",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Rohan Desai",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.attendees[1]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Rohan Mehta",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.attendees[2]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Rohan Sengupta",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.attendees[3]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Rohini Rao",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.attendees[4]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Rohan Deshpande",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_search_email.arguments.query",
+          "reason": "合作方联系人姓名"
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply.arguments.content",
+          "reason": "发件人姓名，含特殊字符"
+        },
+        {
+          "text": "Mumbai",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_reply.arguments.content",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Mumbai Fintech Sounding Board - first call",
+        "Aarav Rao",
+        "Rohan Desai",
+        "Rohan Mehta",
+        "Rohan Sengupta",
+        "Rohini Rao",
+        "Rohan Deshpande"
+      ],
+      "active_vocabulary": {
+        "Mumbai Fintech Sounding Board": 50,
+        "Søren Kjær": 50,
+        "Mumbai": 50,
+        "Mumbai Fintech Sounding Board - first call": 50,
+        "Aarav Rao": 50,
+        "Rohan Desai": 50,
+        "Rohan Mehta": 50,
+        "Rohan Sengupta": 50,
+        "Rohini Rao": 50,
+        "Rohan Deshpande": 50
+      },
+      "vocabulary_sha256": "755398e068ec7c61677a4bf4fa933442411d220fa7b6e3ab5d1a4671e58a7ce7"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "ce3175a152b974468dcb243c31d2a3e6fd2617816d69b7db1a7faebca25362a5",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2270,
+        "completion_tokens": 507,
+        "total_tokens": 2777,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2014
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.718
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0300_dpt0php27086l6z0b7e0t6qdz695fw64",
+  "extracted_at": "2026-11-22T06:41:13.804280+00:00"
+}

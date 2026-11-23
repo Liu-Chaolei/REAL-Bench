@@ -1,0 +1,158 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0098_kv0q6p0s0rtklxfz4udc4w8v1ae4qibk",
+  "model": "deepseek-flash",
+  "input_sha256": "4a0437bc68783f36e90addc8d6450c9914c53945f5ff4c68d40f7ff324c706a8",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaida Nakahara",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Bronwen Pritchard",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Katharina Müller-Schmidt",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名，含变音符号"
+        },
+        {
+          "text": "Saskia Müller",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名，含变音符号"
+        },
+        {
+          "text": "34412 Office Rd, Cambridge",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fbaf5d6c-44da-4fd4-8d05-f43307fdd99d.arguments.end_location",
+          "reason": "目的地地址"
+        }
+      ],
+      "new_terms": [
+        "Kaida Nakahara",
+        "Bronwen Pritchard",
+        "Katharina Müller-Schmidt",
+        "Saskia Müller",
+        "34412 Office Rd, Cambridge"
+      ],
+      "active_vocabulary": {
+        "Kaida Nakahara": 50,
+        "Bronwen Pritchard": 50,
+        "Katharina Müller-Schmidt": 50,
+        "Saskia Müller": 50,
+        "34412 Office Rd, Cambridge": 50
+      },
+      "vocabulary_sha256": "fee227ed6c705b5e5cebf2065e7b8bf6452449bc272aac1232f9995d9e42fd83"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaida Nakahara",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群组成员姓名"
+        },
+        {
+          "text": "Bronwen Pritchard",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群组成员姓名"
+        },
+        {
+          "text": "Katharina Müller-Schmidt",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群组成员姓名，含变音符号"
+        },
+        {
+          "text": "Saskia Müller",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群组成员姓名，含变音符号"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kaida Nakahara": 50,
+        "Bronwen Pritchard": 50,
+        "Katharina Müller-Schmidt": 50,
+        "Saskia Müller": 50,
+        "34412 Office Rd, Cambridge": 50
+      },
+      "vocabulary_sha256": "fee227ed6c705b5e5cebf2065e7b8bf6452449bc272aac1232f9995d9e42fd83"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaida Nakahara",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "嘉宾名单姓名"
+        },
+        {
+          "text": "Bronwen Pritchard",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "嘉宾名单姓名"
+        },
+        {
+          "text": "Katharina Müller-Schmidt",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "嘉宾名单姓名，含变音符号"
+        },
+        {
+          "text": "Saskia Müller",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "嘉宾名单姓名，含变音符号"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kaida Nakahara": 50,
+        "Bronwen Pritchard": 50,
+        "Katharina Müller-Schmidt": 50,
+        "Saskia Müller": 50,
+        "34412 Office Rd, Cambridge": 50
+      },
+      "vocabulary_sha256": "fee227ed6c705b5e5cebf2065e7b8bf6452449bc272aac1232f9995d9e42fd83"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "ba2e679fc98c78c5ebb35f25926fab71b7a0d7871a2357240a900644530e192c",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3125,
+        "completion_tokens": 478,
+        "total_tokens": 3603,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2869
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.645
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0098_kv0q6p0s0rtklxfz4udc4w8v1ae4qibk",
+  "extracted_at": "2026-11-22T06:40:01.744073+00:00"
+}

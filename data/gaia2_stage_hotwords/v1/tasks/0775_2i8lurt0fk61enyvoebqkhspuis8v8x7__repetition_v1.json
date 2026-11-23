@@ -1,0 +1,112 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0775_2i8lurt0fk61enyvoebqkhspuis8v8x7__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "9a7bbd4ccb8e37b00939730a53f37f13017cd57205dad45928d407c6b1ee1b70",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Beatriz Sousa",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "来访的朋友姓名"
+        },
+        {
+          "text": "Stockholm",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Porto",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Content Creation Session",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "日历中的特定事件名"
+        }
+      ],
+      "new_terms": [
+        "Beatriz Sousa",
+        "Stockholm",
+        "Porto",
+        "Content Creation Session"
+      ],
+      "active_vocabulary": {
+        "Beatriz Sousa": 50,
+        "Stockholm": 50,
+        "Porto": 50,
+        "Content Creation Session": 50
+      },
+      "vocabulary_sha256": "db7339faf585a0efa0b9159c946da4c803687bedc65b01b238715bb81344fcca"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Beatriz Sousa",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "参会人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Beatriz Sousa": 50,
+        "Stockholm": 50,
+        "Porto": 50,
+        "Content Creation Session": 50
+      },
+      "vocabulary_sha256": "db7339faf585a0efa0b9159c946da4c803687bedc65b01b238715bb81344fcca"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Beatriz Sousa",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "描述中提及的人名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Beatriz Sousa": 50,
+        "Stockholm": 50,
+        "Porto": 50,
+        "Content Creation Session": 50
+      },
+      "vocabulary_sha256": "db7339faf585a0efa0b9159c946da4c803687bedc65b01b238715bb81344fcca"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "a5d5340ea169a378022d73694b10d07d31627c6388d5bfd65e0c3333acf0c71b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3238,
+        "completion_tokens": 178,
+        "total_tokens": 3416,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2982
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.0
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0775_2i8lurt0fk61enyvoebqkhspuis8v8x7__repetition_v1",
+  "extracted_at": "2026-11-22T06:46:16.693865+00:00"
+}

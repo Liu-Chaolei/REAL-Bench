@@ -1,0 +1,148 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0669_495klcxaz8n9goiax1lueczgn1p5w2qs",
+  "model": "deepseek-flash",
+  "input_sha256": "c87f2deafde638ae56d5fa3bed8393fe3fac1522f7be018b51278f9945e88368",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Dewi Sutanto",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Xóchitl García Ramírez",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "参会人姓名，含特殊字符"
+        },
+        {
+          "text": "Ximena Morales García",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1cf4f169-160e-4640-bb6c-5841cb43ae37.arguments.content",
+          "reason": "邮件署名发件人姓名"
+        }
+      ],
+      "new_terms": [
+        "Dewi Sutanto",
+        "Xóchitl García Ramírez",
+        "Ximena Morales García",
+        "Anastasiya Kuznetsova"
+      ],
+      "active_vocabulary": {
+        "Dewi Sutanto": 50,
+        "Xóchitl García Ramírez": 50,
+        "Ximena Morales García": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "7b6233624f864b6716b092d8de066786c15b966cc54974bbb7c47dc550b6df91"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Dewi Sutanto",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Xóchitl García Ramírez",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "参会人姓名，含特殊字符"
+        },
+        {
+          "text": "Ximena Morales García",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_confirm_email.arguments.content",
+          "reason": "邮件署名发件人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Dewi Sutanto": 50,
+        "Xóchitl García Ramírez": 50,
+        "Ximena Morales García": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "7b6233624f864b6716b092d8de066786c15b966cc54974bbb7c47dc550b6df91"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Dewi Sutanto",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Xóchitl García Ramírez",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "参会人姓名，含特殊字符"
+        },
+        {
+          "text": "Ximena Morales García",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_followup_email.arguments.content",
+          "reason": "邮件署名发件人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Dewi Sutanto": 50,
+        "Xóchitl García Ramírez": 50,
+        "Ximena Morales García": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "7b6233624f864b6716b092d8de066786c15b966cc54974bbb7c47dc550b6df91"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "d8846e5898e9a6d4a6169ddb013172df8cec190bd8e136837c80b1bb8116d5f3",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5336,
+        "completion_tokens": 470,
+        "total_tokens": 5806,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 5080
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.856
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0669_495klcxaz8n9goiax1lueczgn1p5w2qs",
+  "extracted_at": "2026-11-22T06:43:19.765537+00:00"
+}

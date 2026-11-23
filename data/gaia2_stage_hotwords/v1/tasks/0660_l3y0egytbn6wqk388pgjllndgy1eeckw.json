@@ -1,0 +1,143 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0660_l3y0egytbn6wqk388pgjllndgy1eeckw",
+  "model": "deepseek-flash",
+  "input_sha256": "a29b01aea92be1c304648d7d126240e64177f2e53c26428cfa17519a85c0f0ef",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Linnea Åström",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-9d64e3f7-781d-4e6a-8da1-4071c8d06657.arguments.attendees[0]",
+          "reason": "参会人姓名，含特殊字符Å"
+        },
+        {
+          "text": "Sunita Bishwakarma",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-9d64e3f7-781d-4e6a-8da1-4071c8d06657.arguments.attendees[1]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Beshoy Gadallah",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-22fccdba-f121-4108-aaeb-58b808dcf99b.arguments.attendees[1]",
+          "reason": "替补参会人姓名"
+        },
+        {
+          "text": "Stockholm Convention Center",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-537c51bb-db76-43a8-a720-5b476802c8bd.arguments.location",
+          "reason": "活动地点名称"
+        }
+      ],
+      "new_terms": [
+        "Linnea Åström",
+        "Sunita Bishwakarma",
+        "Beshoy Gadallah",
+        "Stockholm Convention Center"
+      ],
+      "active_vocabulary": {
+        "Linnea Åström": 50,
+        "Sunita Bishwakarma": 50,
+        "Beshoy Gadallah": 50,
+        "Stockholm Convention Center": 50
+      },
+      "vocabulary_sha256": "cbdaac7e76aeabef4a2781eee58cba1bf4116c3feaa8efb90fcc850385c587d2"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Beshoy Gadallah",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "替补参会人全名"
+        },
+        {
+          "text": "Stockholm Convention Center",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "活动地点名称"
+        },
+        {
+          "text": "Linnea",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "参会人名字（本阶段仅出现名）"
+        },
+        {
+          "text": "Sunita",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_beshoy_message.arguments.content",
+          "reason": "被替换的参会人名"
+        }
+      ],
+      "new_terms": [
+        "Linnea",
+        "Sunita"
+      ],
+      "active_vocabulary": {
+        "Linnea Åström": 50,
+        "Sunita Bishwakarma": 50,
+        "Beshoy Gadallah": 50,
+        "Stockholm Convention Center": 50,
+        "Linnea": 50,
+        "Sunita": 50
+      },
+      "vocabulary_sha256": "a35bccf0995c85c669765b2c26f601460be5b48ed559b8c29fe88a21d262baf0"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Linnea Åström",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "参会人全名，含特殊字符Å"
+        },
+        {
+          "text": "Beshoy Gadallah",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "参会人全名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Linnea Åström": 50,
+        "Sunita Bishwakarma": 50,
+        "Beshoy Gadallah": 50,
+        "Stockholm Convention Center": 50,
+        "Linnea": 50,
+        "Sunita": 50
+      },
+      "vocabulary_sha256": "a35bccf0995c85c669765b2c26f601460be5b48ed559b8c29fe88a21d262baf0"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "432bd8163856a46bb1ddef71b56d42bdc8bf63ea6e2e8af2581dac99b1bb7c9e",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3702,
+        "completion_tokens": 477,
+        "total_tokens": 4179,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3446
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.843
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0660_l3y0egytbn6wqk388pgjllndgy1eeckw",
+  "extracted_at": "2026-11-22T06:43:17.894573+00:00"
+}

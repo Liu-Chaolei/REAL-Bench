@@ -1,0 +1,297 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0608_f9dnksx1xvs5mvxg8qcax32clsp3b3bo",
+  "model": "deepseek-flash",
+  "input_sha256": "ab639c5a2331576fd55e3e340a5411524397244e4a7315f331b223fc10d2eda7",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Åsa Lindström",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Malmö",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Malmö Majestic",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmöhusvägen 34, Malmö",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-54555ece-7ce3-4a23-b640-5cbcbf78c705.arguments.end_location",
+          "reason": "目的地地址"
+        },
+        {
+          "text": "Malmö Modern",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dd69e374-1d9a-4210-81d6-078b7190f6ca.arguments.content",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmö Marina",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dd69e374-1d9a-4210-81d6-078b7190f6ca.arguments.content",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmö Castle Views",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dd69e374-1d9a-4210-81d6-078b7190f6ca.arguments.content",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmö Marina View",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dd69e374-1d9a-4210-81d6-078b7190f6ca.arguments.content",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmö Harbour",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dd69e374-1d9a-4210-81d6-078b7190f6ca.arguments.content",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmö City Center",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dd69e374-1d9a-4210-81d6-078b7190f6ca.arguments.content",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dd69e374-1d9a-4210-81d6-078b7190f6ca.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Linnea",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-446eb6af-fbfc-4dc4-a987-37a2c5a0a0dc.arguments.content",
+          "reason": "聊天对象姓名"
+        }
+      ],
+      "new_terms": [
+        "Åsa Lindström",
+        "Malmö",
+        "Malmö Majestic",
+        "Malmöhusvägen 34, Malmö",
+        "Malmö Modern",
+        "Malmö Marina",
+        "Malmö Castle Views",
+        "Malmö Marina View",
+        "Malmö Harbour",
+        "Malmö City Center",
+        "Astrid",
+        "Linnea"
+      ],
+      "active_vocabulary": {
+        "Åsa Lindström": 50,
+        "Malmö": 50,
+        "Malmö Majestic": 50,
+        "Malmöhusvägen 34, Malmö": 50,
+        "Malmö Modern": 50,
+        "Malmö Marina": 50,
+        "Malmö Castle Views": 50,
+        "Malmö Marina View": 50,
+        "Malmö Harbour": 50,
+        "Malmö City Center": 50,
+        "Astrid": 50,
+        "Linnea": 50
+      },
+      "vocabulary_sha256": "ec6cdf67122278b0f4a565c9298a4a780e4cb85ca045804d741738340e297fdf"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Åsa Lindström",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Malmöhusvägen 34",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "目的地地址"
+        },
+        {
+          "text": "Malmö",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "城市名"
+        },
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [
+        "Malmöhusvägen 34"
+      ],
+      "active_vocabulary": {
+        "Åsa Lindström": 50,
+        "Malmö": 50,
+        "Malmö Majestic": 50,
+        "Malmöhusvägen 34, Malmö": 50,
+        "Malmö Modern": 50,
+        "Malmö Marina": 50,
+        "Malmö Castle Views": 50,
+        "Malmö Marina View": 50,
+        "Malmö Harbour": 50,
+        "Malmö City Center": 50,
+        "Astrid": 50,
+        "Linnea": 50,
+        "Malmöhusvägen 34": 50
+      },
+      "vocabulary_sha256": "586717f95b37b2c2deff9c79191c06e8a839a1e6776c330a503c3bfee3b10629"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Malmöhusvägen 34, Malmö",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "地点地址"
+        },
+        {
+          "text": "Malmö Modern",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmö Marina",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmö Castle Views",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmö Majestic",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmö Marina View",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmö Harbour",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmö City Center",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Södra Förstadsgatan 20, Malmö",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.description",
+          "reason": "房产地址"
+        },
+        {
+          "text": "Malmöhusvägen 10, Malmö",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.description",
+          "reason": "房产地址"
+        },
+        {
+          "text": "Slottsgatan 12, Malmö",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.description",
+          "reason": "房产地址"
+        },
+        {
+          "text": "Södra Promenaden 25, Malmö",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.description",
+          "reason": "房产地址"
+        },
+        {
+          "text": "Malmö City, Malmö",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.description",
+          "reason": "房产地址"
+        }
+      ],
+      "new_terms": [
+        "Södra Förstadsgatan 20, Malmö",
+        "Malmöhusvägen 10, Malmö",
+        "Slottsgatan 12, Malmö",
+        "Södra Promenaden 25, Malmö",
+        "Malmö City, Malmö"
+      ],
+      "active_vocabulary": {
+        "Åsa Lindström": 50,
+        "Malmö": 50,
+        "Malmö Majestic": 50,
+        "Malmöhusvägen 34, Malmö": 50,
+        "Malmö Modern": 50,
+        "Malmö Marina": 50,
+        "Malmö Castle Views": 50,
+        "Malmö Marina View": 50,
+        "Malmö Harbour": 50,
+        "Malmö City Center": 50,
+        "Astrid": 50,
+        "Linnea": 50,
+        "Malmöhusvägen 34": 50,
+        "Södra Förstadsgatan 20, Malmö": 50,
+        "Malmöhusvägen 10, Malmö": 50,
+        "Slottsgatan 12, Malmö": 50,
+        "Södra Promenaden 25, Malmö": 50,
+        "Malmö City, Malmö": 50
+      },
+      "vocabulary_sha256": "3cbed606123d22ef369d6eabc918a0eb6e4da18077d96dbf4138fb7dff6ea124"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "65a61bd48561145b40396d61c0f4b1841251a73a295a9bb029453e0c41707d36",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3500,
+        "completion_tokens": 1170,
+        "total_tokens": 4670,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3244
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 3.557
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0608_f9dnksx1xvs5mvxg8qcax32clsp3b3bo",
+  "extracted_at": "2026-11-22T06:43:03.599557+00:00"
+}

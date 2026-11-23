@@ -24,6 +24,7 @@ from tau2.utils.transcript.linearization import (
     has_meaningful_content,
     linearize_ticks,
 )
+from tau2.utils.transcript.views import streaming_transcript_content
 from tau2.utils.utils import get_now
 from tau2.voice.utils.audio_preprocessing import pad_audio_with_zeros
 from tau2.voice.utils.probability import poisson_should_trigger
@@ -288,6 +289,20 @@ class StreamingState(BaseModel, Generic[InputMessageType, OutputMessageType]):
             updates = {}
             for field in ("self_chunk", "other_chunk"):
                 chunk = getattr(tick, field)
+                if isinstance(chunk, ParticipantMessageBase):
+                    live = (chunk.raw_data or {}).get("live_transcript") or {}
+                    if isinstance(live, dict) and isinstance(
+                        live.get("fragments"), list
+                    ):
+                        # Tick storage holds cumulative views. LLM history consumes
+                        # each confirmed fragment once, at its actual release tick.
+                        text = streaming_transcript_content(chunk) or ""
+                        if text and (chunk.content or "").endswith(
+                            " [CURRENTLY SPEAKING, INCOMPLETE]"
+                        ):
+                            text += " [CURRENTLY SPEAKING, INCOMPLETE]"
+                        chunk = chunk.model_copy(update={"content": text or None})
+                        updates[field] = chunk
                 if isinstance(chunk, ParticipantMessageBase) and (
                     chunk.audio_content or chunk.audio_script_gold
                 ):

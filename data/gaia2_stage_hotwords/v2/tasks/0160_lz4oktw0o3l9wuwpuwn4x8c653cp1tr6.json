@@ -1,0 +1,396 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0160_lz4oktw0o3l9wuwpuwn4x8c653cp1tr6",
+  "model": "deepseek-flash",
+  "input_sha256": "1a343efcfa1a90c84f784eb3f8c96ac01efcba3e5c1ed5b55d928b2095e868c7",
+  "review_input_sha256": "d72c408572ad0c37c1e3ee896b7674e913515c7570841e386f34020467c995fd",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "e94e998d7ba5a42a7316081305e1ecbcef88d1b2d7e2cc457b635d093b15428b",
+  "reference_results_sha256": "a36ddc36adba43ea43de931782eebe4dfbb1893aac79d54aceec041db5583d4a",
+  "sources": {
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Astrid Nakamura",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Hashbro Farmer's Market",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Skyline Views",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.tool_response.series_s1_saved": {
+      "stage": 1,
+      "text": "{\"e6e2b8c6dcba456993d81a6c5354cb52\": {\"name\": \"Desert Oasis\", \"location\": \"9012 E Apache Blvd, Phoenix\", \"zip_code\": \"85020\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"e6e2b8c6dcba456993d81a6c5354cb52\", \"amenities\": [\"Pool\", \"Gym\"], \"saved\": \"True\"}, \"3c06a0fe301c4cb8b2fa57ef238d2fb8\": {\"name\": \"Harbor Heights\", \"location\": \"789 Harbor Dr, San Diego\", \"zip_code\": \"92101\", \"price\": \"2800\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"3c06a0fe301c4cb8b2fa57ef238d2fb8\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\"], \"saved\": \"True\"}, \"6ee44986361346e98260bda60a6fdd29\": {\"name\": \"Houston Haven\", \"location\": \"3456 Westheimer Rd, Houston\", \"zip_code\": \"77056\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"6ee44986361346e98260bda60a6fdd29\", \"amenities\": [\"Pool\", \"Gym\"], \"saved\": \"True\"}, \"be71ee3e92f94fcf8ddf36efdf8e8bbf\": {\"name\": \"Uptown Lofts\", \"location\": \"789 Uptown Dr, Dallas\", \"zip_code\": \"75201\", \"price\": \"2500\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"be71ee3e92f94fcf8ddf36efdf8e8bbf\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\"], \"saved\": \"True\"}, \"ff3857d6523943eca517a397737a80e3\": {\"name\": \"New York Nest\", \"location\": \"789 Broadway, New York\", \"zip_code\": \"10003\", \"price\": \"2800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1100\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"ff3857d6523943eca517a397737a80e3\", \"amenities\": [\"Laundry\", \"Gym\"], \"saved\": \"True\"}, \"254bdd6338ad4b109f8f325a98944e02\": {\"name\": \"Liberty Place\", \"location\": \"6789 Market St, Philadelphia\", \"zip_code\": \"19107\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1100\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"254bdd6338ad4b109f8f325a98944e02\", \"amenities\": [\"Gym\", \"Laundry\", \"Pool\"], \"saved\": \"True\"}, \"3dab26c9397f4e1b969206dcf6a18ed2\": {\"name\": \"Riverwalk Condos\", \"location\": \"6789 Riverwalk Dr, Philadelphia\", \"zip_code\": \"19123\", \"price\": \"2600\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1600\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"3dab26c9397f4e1b969206dcf6a18ed2\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\", \"Doorman\"], \"saved\": \"True\"}, \"98cb0bf3d9674bdda4cbc5ccac585474\": {\"name\": \"Oceanview Apartments\", \"location\": \"4567 Oceanview Blvd, San Diego\", \"zip_code\": \"92113\", \"price\": \"3000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"98cb0bf3d9674bdda4cbc5ccac585474\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"7c21f91fb0444e2a8662a3cb3c619d9d\": {\"name\": \"The Vue\", \"location\": \"4567 Broadway, New York\", \"zip_code\": \"10013\", \"price\": \"3500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"7c21f91fb0444e2a8662a3cb3c619d9d\", \"amenities\": [\"Pool\", \"Gym\", \"Doorman\"], \"saved\": \"True\"}, \"a1c69f3bb11f4f198d7bf94abd2d0c99\": {\"name\": \"Sunny Slope Apartments\", \"location\": \"3456 E Indian School Rd, Phoenix\", \"zip_code\": \"85018\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"a1c69f3bb11f4f198d7bf94abd2d0c99\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"db54cda569dc43c19447c4e2aedeccc7\": {\"name\": \"Columbus Commons\", \"location\": \"3456 N High St, Columbus\", \"zip_code\": \"43202\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1100\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"db54cda569dc43c19447c4e2aedeccc7\", \"amenities\": [\"Pool\", \"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"a83cef83f1a5464489ca7c5ae5d05cf7\": {\"name\": \"Willow Creek Condos\", \"location\": \"8901 S Interstate 35, Austin\", \"zip_code\": \"78744\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"a83cef83f1a5464489ca7c5ae5d05cf7\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"0b8ba2c497604ca2868bd3ef26a9a466\": {\"name\": \"Lakeside Towers\", \"location\": \"4444 Lakeside Dr, Chicago\", \"zip_code\": \"60611\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"2000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"0b8ba2c497604ca2868bd3ef26a9a466\", \"amenities\": [\"Gym\", \"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"538040cecaff42168b31f5106c07afa8\": {\"name\": \"Pacific Beach Apartments\", \"location\": \"3456 Grand Ave, San Diego\", \"zip_code\": \"92109\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"538040cecaff42168b31f5106c07afa8\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"a7ab855bc8474e82944c6c7c19665939\": {\"name\": \"Jacksonville Landing\", \"location\": \"7890 Riverside Ave, Jacksonville\", \"zip_code\": \"32204\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"a7ab855bc8474e82944c6c7c19665939\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"7b87cf8c4dd6454fb99bd7b027662673\": {\"name\": \"Riverview Lofts\", \"location\": \"901 River Rd, Chicago\", \"zip_code\": \"60611\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"7b87cf8c4dd6454fb99bd7b027662673\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"4393ebe5755b4e8896d82836303ffab1\": {\"name\": \"Lakeview Towers\", \"location\": \"9012 Lakeview Dr, Chicago\", \"zip_code\": \"60611\", \"price\": \"3200\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"4393ebe5755b4e8896d82836303ffab1\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\"], \"saved\": \"True\"}, \"d8a82b545335429d980dec7c503eea67\": {\"name\": \"Azure Oasis\", \"location\": \"4444 Sunset Blvd, Los Angeles\", \"zip_code\": \"90027\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"d8a82b545335429d980dec7c503eea67\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"2c86d65cd5ba41dd8c29ee17aff4ba22\": {\"name\": \"The Grove\", \"location\": \"9012 Grove Dr, Dallas\", \"zip_code\": \"75220\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"2c86d65cd5ba41dd8c29ee17aff4ba22\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"89c2296928ae481aaee1508a341a2228\": {\"name\": \"Bayview Towers\", \"location\": \"1234 Bayview Dr, San Diego\", \"zip_code\": \"92101\", \"price\": \"3000\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"89c2296928ae481aaee1508a341a2228\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"f9c0822f3bac45d79606a14319459a8d\": {\"name\": \"Uptown Apartments\", \"location\": \"4567 McKinney Ave, Dallas\", \"zip_code\": \"75204\", \"price\": \"1600\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"700\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"f9c0822f3bac45d79606a14319459a8d\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"358aa7470d854687bb8c8a1a3659a9ee\": {\"name\": \"Skyview Towers\", \"location\": \"1234 W Olympic Blvd, Los Angeles\", \"zip_code\": \"90015\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"358aa7470d854687bb8c8a1a3659a9ee\", \"amenities\": [\"Pool\", \"Gym\", \"Parking\"], \"saved\": \"True\"}, \"344966c9a115483398df68a5f6be266e\": {\"name\": \"The Retreat at Austin\", \"location\": \"3456 Exposition Blvd, Austin\", \"zip_code\": \"78703\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"344966c9a115483398df68a5f6be266e\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"f0d31b3c7078407da92f72f9468bd520\": {\"name\": \"The Summit\", \"location\": \"1234 S Broadway, San Jose\", \"zip_code\": \"95113\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"f0d31b3c7078407da92f72f9468bd520\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"b87526e033e4459995f2aa3e1329503e\": {\"name\": \"The Madison\", \"location\": \"4567 N Main St, San Jose\", \"zip_code\": \"95112\", \"price\": \"2500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"b87526e033e4459995f2aa3e1329503e\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"6156131369944211bc089475a5de4b3e\": {\"name\": \"Willow Creek Homes\", \"location\": \"901 Willow Creek Dr, Chicago\", \"zip_code\": \"60611\", \"price\": \"2000\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Home\", \"square_footage\": \"2500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"6156131369944211bc089475a5de4b3e\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"185a973528014a37840b3496081019e6\": {\"name\": \"Skyline Views\", \"location\": \"1234 Broadway, New York\", \"zip_code\": \"10001\", \"price\": \"2800\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"185a973528014a37840b3496081019e6\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\"], \"saved\": \"True\"}}",
+      "event_id": "series_s1_saved",
+      "response_sha256": "a27f01e1fb18a12b4d08327700642bb4015e582158b44812a5900695acb630cc"
+    },
+    "stage2.tool_response.series_s2_verify": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"49835add11344f388c81f6e65b6a75ed\", \"title\": \"Wine Tasting\", \"start_datetime\": \"1729278000\", \"end_datetime\": \"1729285200\", \"tag\": \"Work\", \"description\": \"Host a wine tasting event for customers to showcase new wines and build relationships.\", \"location\": \"Restaurant Private Dining Room\", \"attendees\": [\"Aurélien LaFleur\", \"Luís Marques\", \"Jamila Fernandes\"], \"start_strftime\": \"Friday, 2024-10-18 19:00:00\", \"end_strftime\": \"Friday, 2024-10-18 21:00:00\"}, {\"event_id\": \"4f5f15f11f604f8ea2bab2f1b0d8355b\", \"title\": \"Staff Meeting\", \"start_datetime\": \"1729242000\", \"end_datetime\": \"1729245600\", \"tag\": \"Work\", \"description\": \"Weekly staff meeting to discuss updates, share feedback, and align on goals.\", \"location\": \"Restaurant Office\", \"attendees\": [\"Aurélien LaFleur\", \"Nalani Jensen\", \"Kaia Nakamura\"], \"start_strftime\": \"Friday, 2024-10-18 09:00:00\", \"end_strftime\": \"Friday, 2024-10-18 10:00:00\"}, {\"event_id\": \"9022f9537fec4314880609e923620be6\", \"title\": \"Wine Tasting\", \"start_datetime\": \"1729263600\", \"end_datetime\": \"1729274400\", \"tag\": \"Work\", \"description\": \"Taste and evaluate new wines for the restaurant's wine list.\", \"location\": \"Wine Cellar\", \"attendees\": [\"Aurélien LaFleur\", \"Luís Silva\"], \"start_strftime\": \"Friday, 2024-10-18 15:00:00\", \"end_strftime\": \"Friday, 2024-10-18 18:00:00\"}, {\"event_id\": \"e3028e48c650446ba122e787f906df17\", \"title\": \"Wine and Food Pairing Research\", \"start_datetime\": \"1729249200\", \"end_datetime\": \"1729256400\", \"tag\": \"Work\", \"description\": \"Research and experiment with different wine and food pairings to create new menu items.\", \"location\": \"Restaurant Kitchen\", \"attendees\": [\"Aurélien LaFleur\"], \"start_strftime\": \"Friday, 2024-10-18 11:00:00\", \"end_strftime\": \"Friday, 2024-10-18 13:00:00\"}, {\"event_id\": \"d4c2d9f7cdacdf99ad578e25036c7e5f\", \"title\": \"Call with Astrid Nakamura\", \"start_datetime\": \"1729270800.0\", \"end_datetime\": \"1729271700.0\", \"tag\": null, \"description\": \"Eco-friendly wine packaging ideas\", \"location\": null, \"attendees\": [\"Astrid Nakamura\"], \"start_strftime\": \"Friday, 2024-10-18 17:00:00\", \"end_strftime\": \"Friday, 2024-10-18 17:15:00\"}], \"range\": [\"0\", \"5\"], \"total\": \"5\"}",
+      "event_id": "series_s2_verify",
+      "response_sha256": "a661342ceef39a44561c6bdce46beef3c0795eb234a94b0e01fcd26009cb53c6"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Hashbro Farmer's Market",
+          "kind": "product",
+          "source": "stage0.existing_catalog.3",
+          "reason": "独特产品名，含专有名词",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Nakamura",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，含独特姓氏，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Hashbro Farmer's Market",
+        "Astrid Nakamura"
+      ],
+      "active_vocabulary": {
+        "Hashbro Farmer's Market": 50,
+        "Astrid Nakamura": 50
+      },
+      "vocabulary_sha256": "c55f9ecfeed35bcb0dcd8557b6cc0268d8bcbaaae1e65568c1a759840fa1b142"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "The Retreat at Austin",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "New York Nest",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Pacific Beach Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Sunny Slope Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Willow Creek Condos",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Willow Creek Homes",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Azure Oasis",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Bayview Towers",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Columbus Commons",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Desert Oasis",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Harbor Heights",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Houston Haven",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Jacksonville Landing",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Lakeside Towers",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Lakeview Towers",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Liberty Place",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Oceanview Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Riverview Lofts",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Riverwalk Condos",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Skyline Views",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Skyview Towers",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Uptown Lofts",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved",
+          "reason": "独特公寓名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "The Retreat at Austin",
+        "New York Nest",
+        "Pacific Beach Apartments",
+        "Sunny Slope Apartments",
+        "Willow Creek Condos",
+        "Willow Creek Homes",
+        "Azure Oasis",
+        "Bayview Towers",
+        "Columbus Commons",
+        "Desert Oasis",
+        "Harbor Heights",
+        "Houston Haven",
+        "Jacksonville Landing",
+        "Lakeside Towers",
+        "Lakeview Towers",
+        "Liberty Place",
+        "Oceanview Apartments",
+        "Riverview Lofts",
+        "Riverwalk Condos",
+        "Skyline Views",
+        "Skyview Towers",
+        "Uptown Lofts"
+      ],
+      "active_vocabulary": {
+        "Hashbro Farmer's Market": 50,
+        "Astrid Nakamura": 50,
+        "The Retreat at Austin": 50,
+        "New York Nest": 50,
+        "Pacific Beach Apartments": 50,
+        "Sunny Slope Apartments": 50,
+        "Willow Creek Condos": 50,
+        "Willow Creek Homes": 50,
+        "Azure Oasis": 50,
+        "Bayview Towers": 50,
+        "Columbus Commons": 50,
+        "Desert Oasis": 50,
+        "Harbor Heights": 50,
+        "Houston Haven": 50,
+        "Jacksonville Landing": 50,
+        "Lakeside Towers": 50,
+        "Lakeview Towers": 50,
+        "Liberty Place": 50,
+        "Oceanview Apartments": 50,
+        "Riverview Lofts": 50,
+        "Riverwalk Condos": 50,
+        "Skyline Views": 50,
+        "Skyview Towers": 50,
+        "Uptown Lofts": 50
+      },
+      "vocabulary_sha256": "f81392fde376146a67a127e182c69144f8fe83f6a7f587dcd86a7244c8d10597"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_verify",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_verify",
+          "reason": "完整人名，姓氏独特",
+          "weight": 50
+        },
+        {
+          "text": "Kaia Nakamura",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_verify",
+          "reason": "完整人名，姓氏独特",
+          "weight": 50
+        },
+        {
+          "text": "Luís Marques",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_verify",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Luís Silva",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_verify",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_verify",
+          "reason": "完整人名，名字独特",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur",
+        "Jamila Fernandes",
+        "Kaia Nakamura",
+        "Luís Marques",
+        "Luís Silva",
+        "Nalani Jensen"
+      ],
+      "active_vocabulary": {
+        "Hashbro Farmer's Market": 50,
+        "Astrid Nakamura": 50,
+        "The Retreat at Austin": 50,
+        "New York Nest": 50,
+        "Pacific Beach Apartments": 50,
+        "Sunny Slope Apartments": 50,
+        "Willow Creek Condos": 50,
+        "Willow Creek Homes": 50,
+        "Azure Oasis": 50,
+        "Bayview Towers": 50,
+        "Columbus Commons": 50,
+        "Desert Oasis": 50,
+        "Harbor Heights": 50,
+        "Houston Haven": 50,
+        "Jacksonville Landing": 50,
+        "Lakeside Towers": 50,
+        "Lakeview Towers": 50,
+        "Liberty Place": 50,
+        "Oceanview Apartments": 50,
+        "Riverview Lofts": 50,
+        "Riverwalk Condos": 50,
+        "Skyline Views": 50,
+        "Skyview Towers": 50,
+        "Uptown Lofts": 50,
+        "Aurélien LaFleur": 50,
+        "Jamila Fernandes": 50,
+        "Kaia Nakamura": 50,
+        "Luís Marques": 50,
+        "Luís Silva": 50,
+        "Nalani Jensen": 50
+      },
+      "vocabulary_sha256": "b85fe15db131493073af07c38935e268a79e8db2f74726ff0c8e6a2258427401"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Pressman",
+    "Chinese Checkers Board Game",
+    "1234 Broadway",
+    "New York",
+    "Eco-friendly wine packaging ideas",
+    "Wine Cellar"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:18.610354+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

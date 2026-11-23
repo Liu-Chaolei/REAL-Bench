@@ -1,0 +1,167 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0385_ju8hqar6r5r33xwguqcjrx1b7a8suj53__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "1609ff499dcfb4e9c63b7588e4a4129795f4b2479eb7962214a3c11890cfdd80",
+  "review_input_sha256": "bdfdcc4d6f76e1242c9d97c9eb0fa3344445d522851bb0ef7c1aa9e71a7a59a7",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "05c32d8599d3c16e87d9ee36a0783348c1fab15f20b1d8e9aad9fa835b01af56",
+  "reference_results_sha256": "260689019fb970bec8423c8730a628288af5388f3f8a27afd343bda780219526",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kaarina Laitinen",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Blue Orange CooCo",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Kvido Nováček",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.tool_response.series_s1_read_contact": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Kvido\", \"last_name\": \"Nováček\", \"contact_id\": \"11d6feb30e7640a78659d926ca3150ad\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"20\", \"nationality\": \"Czech\", \"city_living\": \"Brno\", \"country\": \"Czech Republic\", \"status\": \"Status.EMPLOYED\", \"job\": \"Junior Marketing Specialist at Škoda Auto\", \"description\": \"Kvido Nováček is a 20-year-old junior marketing specialist at Škoda Auto, one of the largest car manufacturers in the Czech Republic. He is a loyal employee, but his experiences have made him slightly cynical about the corporate world. Kvido is a creative person who enjoys playing guitar in his free time and is part of a local music group. He is also an avid hiker and loves exploring the beautiful Czech countryside. Despite his busy schedule, Kvido tries to read as much Czech literature as possible, and his favorite author is Karel Čapek.\", \"phone\": \"+420777623456\", \"email\": \"kvido.novacek@seznam.cz\", \"address\": \"Křídlovická 17, 603 00 Brno\"}",
+      "event_id": "series_s1_read_contact",
+      "response_sha256": "fd5f342e4ba5992effbe817f60eca1871a5618de22443849fe00265cc49f1125"
+    },
+    "stage2.tool_response.series_s2_product": {
+      "stage": 2,
+      "text": "{\"name\": \"Blue Orange CooCoo\", \"product_id\": \"d8987e6f80e36c540bbbaa5e2111385c\", \"variants\": {\"2f198d4124ff4f939b285a185c6055c9\": {\"price\": \"28\", \"available\": \"True\", \"item_id\": \"2f198d4124ff4f939b285a185c6055c9\", \"options\": {\"flavor\": \"original\", \"material\": \"glass\", \"packaging\": \"bottle\", \"size\": \"small\"}}, \"3409b1b88d7b42f994529cbbfa70e74d\": {\"price\": \"25\", \"available\": \"True\", \"item_id\": \"3409b1b88d7b42f994529cbbfa70e74d\", \"options\": {\"flavor\": \"original\", \"material\": \"plastic\", \"packaging\": \"bottle\", \"size\": \"small\"}}, \"544bf70e2e8647368fbd019375059c46\": {\"price\": \"30\", \"available\": \"True\", \"item_id\": \"544bf70e2e8647368fbd019375059c46\", \"options\": {\"flavor\": \"original\", \"material\": \"plastic\", \"packaging\": \"bottle\", \"size\": \"medium\"}}, \"971592308119409c8e5bd38399c44d95\": {\"price\": \"27\", \"available\": \"True\", \"item_id\": \"971592308119409c8e5bd38399c44d95\", \"options\": {\"flavor\": \"strawberry\", \"material\": \"plastic\", \"packaging\": \"bottle\", \"size\": \"small\"}}, \"eb337c4f4f494fa990e1d372c25a9cbb\": {\"price\": \"22\", \"available\": \"False\", \"item_id\": \"eb337c4f4f494fa990e1d372c25a9cbb\", \"options\": {\"flavor\": \"original\", \"material\": \"plastic\", \"packaging\": \"can\", \"size\": \"small\"}}}}",
+      "event_id": "series_s2_product",
+      "response_sha256": "3c62d0b9ec379119e83b44a41e14e9ccb83ec98609d2f72a580e42f0e2f30d76"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Blue Orange CooCo",
+          "kind": "product",
+          "source": "stage0.existing_catalog.1",
+          "reason": "独特的品牌产品名",
+          "weight": 50
+        },
+        {
+          "text": "Kaarina Laitinen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整的芬兰人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Blue Orange CooCo",
+        "Kaarina Laitinen"
+      ],
+      "active_vocabulary": {
+        "Blue Orange CooCo": 50,
+        "Kaarina Laitinen": 50
+      },
+      "vocabulary_sha256": "8db3f423077f000fd9904d329bb2a08a7edce427215c07dbafc0067b119c4d80"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Karel Čapek",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_contact",
+          "reason": "含变音符号的捷克作家名",
+          "weight": 50
+        },
+        {
+          "text": "Kvido Nováček",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整捷克人名",
+          "weight": 50
+        },
+        {
+          "text": "Škoda Auto",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_contact",
+          "reason": "含变音符号的独特公司名",
+          "weight": 50
+        },
+        {
+          "text": "Křídlovická",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_contact",
+          "reason": "含变音符号的捷克街道名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Karel Čapek",
+        "Kvido Nováček",
+        "Škoda Auto",
+        "Křídlovická"
+      ],
+      "active_vocabulary": {
+        "Blue Orange CooCo": 50,
+        "Kaarina Laitinen": 50,
+        "Karel Čapek": 50,
+        "Kvido Nováček": 50,
+        "Škoda Auto": 50,
+        "Křídlovická": 50
+      },
+      "vocabulary_sha256": "00635ab07675038bac0206ad9c8cf3a93dc783984088b5e42e0006e2d196930f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Blue Orange CooCoo",
+          "kind": "product",
+          "source": "stage2.tool_response.series_s2_product",
+          "reason": "独特的品牌产品名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Blue Orange CooCoo"
+      ],
+      "active_vocabulary": {
+        "Blue Orange CooCo": 50,
+        "Kaarina Laitinen": 50,
+        "Karel Čapek": 50,
+        "Kvido Nováček": 50,
+        "Škoda Auto": 50,
+        "Křídlovická": 50,
+        "Blue Orange CooCoo": 50
+      },
+      "vocabulary_sha256": "7d38c564e5b52751eaa4071932a7953174456b294874a0a5a6ed5914387cb9c1"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Halima",
+    "Matěj"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:09.263789+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

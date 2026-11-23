@@ -34,7 +34,12 @@ def qwen_asr_url(base_url: str) -> str:
     path = parsed.path.rstrip("/")
     endpoint = "/api/v1/services/aigc/multimodal-generation/generation"
     if not path.endswith(endpoint):
-        for suffix in ("/api-ws/v1/realtime", "/compatible-mode/v1", "/api/v1"):
+        for suffix in (
+            "/api-ws/v1/realtime",
+            "/api-ws/v1/inference",
+            "/compatible-mode/v1",
+            "/api/v1",
+        ):
             if path.endswith(suffix):
                 path = path[: -len(suffix)]
                 break
@@ -43,6 +48,16 @@ def qwen_asr_url(base_url: str) -> str:
                 raise ValueError("Unsupported Qwen ASR base URL path")
         path += endpoint
     return urlunsplit((schemes[parsed.scheme], parsed.netloc, path, "", ""))
+
+
+def qwen_streaming_asr_url(base_url: str) -> str:
+    """Resolve streaming ASR in the configured region, without changing hosts."""
+    parsed = urlsplit(base_url)
+    if parsed.path.rstrip("/") == "/api-ws/v1/inference":
+        base_url = urlunsplit(parsed._replace(path=""))
+    parsed = urlsplit(qwen_asr_url(base_url))
+    scheme = "wss" if parsed.scheme == "https" else "ws"
+    return urlunsplit((scheme, parsed.netloc, "/api-ws/v1/inference", "", ""))
 
 
 async def transcribe_qwen(

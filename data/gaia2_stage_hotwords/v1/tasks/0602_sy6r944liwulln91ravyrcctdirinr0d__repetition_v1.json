@@ -1,0 +1,108 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0602_sy6r944liwulln91ravyrcctdirinr0d__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "c8fcfbc185879ef57dd1c1dda424ef0b59734f55a1dc59201a5c9012cf51a539",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6f905404-ff39-4354-baae-14b2a9ae31b0.arguments.attendees[0]",
+          "reason": "与会者姓名"
+        },
+        {
+          "text": "Xóchitl Ramírez-González",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6f905404-ff39-4354-baae-14b2a9ae31b0.arguments.attendees[1]",
+          "reason": "与会者姓名"
+        },
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6f905404-ff39-4354-baae-14b2a9ae31b0.arguments.attendees[2]",
+          "reason": "新增与会者姓名"
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur",
+        "Xóchitl Ramírez-González",
+        "Nalani Jensen"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Xóchitl Ramírez-González": 50,
+        "Nalani Jensen": 50
+      },
+      "vocabulary_sha256": "4dc6e52f7ae524fee327d16f07851ecd3dabca62eb60592236aab32d3ee90ba1"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nalani",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群聊成员名"
+        },
+        {
+          "text": "Xóchitl",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群聊成员名"
+        }
+      ],
+      "new_terms": [
+        "Nalani",
+        "Xóchitl"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Xóchitl Ramírez-González": 50,
+        "Nalani Jensen": 50,
+        "Nalani": 50,
+        "Xóchitl": 50
+      },
+      "vocabulary_sha256": "f26407bc8bc323ed8790b63c0fb286875f1abedbb3267fdee33ff698892cca79"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Xóchitl Ramírez-González": 50,
+        "Nalani Jensen": 50,
+        "Nalani": 50,
+        "Xóchitl": 50
+      },
+      "vocabulary_sha256": "f26407bc8bc323ed8790b63c0fb286875f1abedbb3267fdee33ff698892cca79"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "bad01b938640ecf26888424280c1b228cc4764f502b1bc532a52dadbd072684e",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3490,
+        "completion_tokens": 287,
+        "total_tokens": 3777,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3234
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.19
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0602_sy6r944liwulln91ravyrcctdirinr0d__repetition_v1",
+  "extracted_at": "2026-11-22T06:45:57.269269+00:00"
+}

@@ -1,0 +1,167 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0638_qcto4jn2nd340bdgeuieam0zp8mjk2x1",
+  "model": "deepseek-flash",
+  "input_sha256": "8d33be6f338fea8a3ad9962a8f97c6eb40d5b6c6d022f4ccb59db4c6fe0c2c33",
+  "review_input_sha256": "f29c9ad2411b47b896db92f7755fff0a02beecf3cd1f1f9fe36824b853b26a73",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "e7bab02fa4732d36bc7f879b506fe7551a3efa9535855f69fc71dbf358f8d68a",
+  "reference_results_sha256": "9d702aa8d9113fa9235d65360f907002e6dcf818b1d04e7084c0b32c31130e9f",
+  "sources": {
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Kåre Fjellstad",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-7532e329-b2e7-4710-b333-2c4d12e2f428.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Åse Jensen",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-7532e329-b2e7-4710-b333-2c4d12e2f428.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.7": {
+      "stage": 0,
+      "text": "Solveig Fjellstad",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-7532e329-b2e7-4710-b333-2c4d12e2f428.arguments.attendees[4]"
+    },
+    "stage0.existing_catalog.8": {
+      "stage": 0,
+      "text": "Åse Kjellstad",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-d0840185-fb70-4a50-b1a2-2b852560e73c.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Frognerveien 34",
+      "original_source": "stage2.tool_gt.series_s2_post.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kåre Fjellstad",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含挪威语变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Solveig Fjellstad",
+          "kind": "person",
+          "source": "stage0.existing_catalog.7",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Åse Jensen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage0.existing_catalog.8",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kåre Fjellstad",
+        "Solveig Fjellstad",
+        "Åse Jensen",
+        "Åse Kjellstad"
+      ],
+      "active_vocabulary": {
+        "Kåre Fjellstad": 50,
+        "Solveig Fjellstad": 50,
+        "Åse Jensen": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "7cff62b5513a4ef5b361bd5322e8aa39d20876c7c5370897624409a63ffb168f"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kåre Fjellstad": 50,
+        "Solveig Fjellstad": 50,
+        "Åse Jensen": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "7cff62b5513a4ef5b361bd5322e8aa39d20876c7c5370897624409a63ffb168f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Frognerveien 34",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "挪威语街道地址，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Frognerveien 34"
+      ],
+      "active_vocabulary": {
+        "Kåre Fjellstad": 50,
+        "Solveig Fjellstad": 50,
+        "Åse Jensen": 50,
+        "Åse Kjellstad": 50,
+        "Frognerveien 34": 50
+      },
+      "vocabulary_sha256": "dd2264a3e028985842fc921ef6a2360aa9dc5cac995a04895d5681fa455dca32"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Oslo",
+    "Jensen",
+    "Fjellstad",
+    "Aurora Jensen",
+    "Kari Jensen",
+    "Kåre",
+    "Aurora",
+    "Norway"
+  ],
+  "binary_omissions": [
+    {
+      "path": "$ .messages[0].attachment",
+      "chars": 3133100,
+      "sha256": "5544a17027912106b0d0ec74ec1be27990e68ed99ccac286462a42020fb806c6"
+    },
+    {
+      "path": "$ .attachments.New_Years_Eve_2023.png",
+      "chars": 3133100,
+      "sha256": "5544a17027912106b0d0ec74ec1be27990e68ed99ccac286462a42020fb806c6"
+    },
+    {
+      "path": "$ .messages[1].attachment",
+      "chars": 3133100,
+      "sha256": "5544a17027912106b0d0ec74ec1be27990e68ed99ccac286462a42020fb806c6"
+    }
+  ],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:49.332911+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,329 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0422_x30hjuzzfnrud36wdysyvvlusm21jqxc",
+  "model": "deepseek-flash",
+  "input_sha256": "fe8f8ba60f39811cce2e070d4342ac8f2682d1f6f09ecbbed844bb0ccd8086fc",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "India Network Check-in",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_create.arguments.title",
+          "reason": "自定义群组名称"
+        },
+        {
+          "text": "Rohan",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "发信人署名"
+        }
+      ],
+      "new_terms": [
+        "India Network Check-in",
+        "Rohan"
+      ],
+      "active_vocabulary": {
+        "India Network Check-in": 50,
+        "Rohan": 50
+      },
+      "vocabulary_sha256": "5ca1322d117dbe54a6a99b6976ce0b99ffee0856dc1e1103cbd53b0d2bef7bf8"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Raghavendra Rao",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Rohini Nambiar",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Rohini Iyer",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Raghuram Iyer",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Rohan Nair",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Ravindra Deshpande",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Rohan Srinivasan",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Kavita Rao",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Raghavan Iyer",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Rohan Deshpande",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Sophea Chakraborty",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Rohini Rao",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Kalyan Rao",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Anastasia Kuznetsova",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Rohan Kulkarni",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Rohini Desai",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Rohini Naidu",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Rohan Naidu",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Rohan Mehta",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Rohini Nair",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Kaito Rao",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Nalini Rao",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Rohan Khurana",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Rohan Sengupta",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Aaradhya Rao",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "BJP",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "政党缩写"
+        },
+        {
+          "text": "Ministry of External Affairs",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "政府机构名称"
+        },
+        {
+          "text": "Consumer Goods Manufacturers Association",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "协会名称"
+        }
+      ],
+      "new_terms": [
+        "Raghavendra Rao",
+        "Rohini Nambiar",
+        "Rohini Iyer",
+        "Raghuram Iyer",
+        "Rohan Nair",
+        "Ravindra Deshpande",
+        "Rohan Srinivasan",
+        "Kavita Rao",
+        "Raghavan Iyer",
+        "Rohan Deshpande",
+        "Sophea Chakraborty",
+        "Rohini Rao",
+        "Kalyan Rao",
+        "Rohini Deshpande",
+        "Anastasia Kuznetsova",
+        "Rohan Kulkarni",
+        "Rohini Desai",
+        "Rohini Naidu",
+        "Rohan Naidu",
+        "Rohan Mehta",
+        "Rohini Nair",
+        "Kaito Rao",
+        "Nalini Rao",
+        "Rohan Khurana",
+        "Rohan Sengupta",
+        "Aaradhya Rao",
+        "BJP",
+        "Ministry of External Affairs",
+        "Consumer Goods Manufacturers Association"
+      ],
+      "active_vocabulary": {
+        "India Network Check-in": 50,
+        "Rohan": 50,
+        "Raghavendra Rao": 50,
+        "Rohini Nambiar": 50,
+        "Rohini Iyer": 50,
+        "Raghuram Iyer": 50,
+        "Rohan Nair": 50,
+        "Ravindra Deshpande": 50,
+        "Rohan Srinivasan": 50,
+        "Kavita Rao": 50,
+        "Raghavan Iyer": 50,
+        "Rohan Deshpande": 50,
+        "Sophea Chakraborty": 50,
+        "Rohini Rao": 50,
+        "Kalyan Rao": 50,
+        "Rohini Deshpande": 50,
+        "Anastasia Kuznetsova": 50,
+        "Rohan Kulkarni": 50,
+        "Rohini Desai": 50,
+        "Rohini Naidu": 50,
+        "Rohan Naidu": 50,
+        "Rohan Mehta": 50,
+        "Rohini Nair": 50,
+        "Kaito Rao": 50,
+        "Nalini Rao": 50,
+        "Rohan Khurana": 50,
+        "Rohan Sengupta": 50,
+        "Aaradhya Rao": 50,
+        "BJP": 50,
+        "Ministry of External Affairs": 50,
+        "Consumer Goods Manufacturers Association": 50
+      },
+      "vocabulary_sha256": "6daa268241a3379ae2952ce477d1d580e18f41c2952d0bb0b8cd6cde7a6c4fb6"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "e2b1513f3819221f61c47ff479cba0a7a4fc85c681a4ae1a3ebbb3d8f609b152",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2653,
+        "completion_tokens": 1255,
+        "total_tokens": 3908,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2397
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 3.438,
+      "error": "3 validation errors for Extraction\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='No proper names in stage 0 sources.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Stage 1 proper names.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Stage 2 proper names.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "b9097f055259af1f4ecf774aac937f34e1967f844f51076bfd26f8c58874c20b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4467,
+        "completion_tokens": 1227,
+        "total_tokens": 5694,
+        "prompt_tokens_details": {
+          "cached_tokens": 3840
+        },
+        "prompt_cache_hit_tokens": 3840,
+        "prompt_cache_miss_tokens": 627
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 3.355
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0422_x30hjuzzfnrud36wdysyvvlusm21jqxc",
+  "extracted_at": "2026-11-22T06:41:55.195972+00:00"
+}

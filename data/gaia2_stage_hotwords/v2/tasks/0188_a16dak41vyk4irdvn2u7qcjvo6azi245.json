@@ -1,0 +1,126 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0188_a16dak41vyk4irdvn2u7qcjvo6azi245",
+  "model": "deepseek-flash",
+  "input_sha256": "daef0be3bef8ba0960472e23dfd61ece2045c5047eb051c3fb5264083e3d6ba2",
+  "review_input_sha256": "840ac1ea92a608d4f3e958cc1dacc25fbb8e08711df30fa5f9786e7514098f66",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "90dab74f6d9e0aebd560f183c6b430862e660e57b15ff1c4aaa21244570ae294",
+  "reference_results_sha256": "04b06fe2e9b7c635c882e35a0d6ce48fd00ddc6c0043db4578b19386bc3c10e1",
+  "sources": {
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Aurélie Dumont",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-bb5cf925-e945-4729-a51c-7767b6bd211f.arguments.content"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-bb5cf925-e945-4729-a51c-7767b6bd211f.arguments.content"
+    },
+    "stage1.tool_response.series_s1_read": {
+      "stage": 1,
+      "text": "{\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Follow up with career advisor and find lawyer contact\", \"start_datetime\": \"1729501200.0\", \"end_datetime\": \"1729503000.0\", \"tag\": \"Follow-up\", \"description\": \"Chase Aurélie Dumont’s reply. Find a lawyer’s contact details before requesting legal advice. Cleanup record: 4 contacts of Mary Smith's age (62) were removed.\", \"location\": null, \"attendees\": [], \"start_strftime\": \"Monday, 2024-10-21 09:00:00\", \"end_strftime\": \"Monday, 2024-10-21 09:30:00\"}",
+      "event_id": "series_s1_read",
+      "response_sha256": "b34ea4e82d4d6e633357b3352dedb479f82bc907010f9657d2da94ed6cce8c38"
+    },
+    "stage2.tool_response.series_s2_read": {
+      "stage": 2,
+      "text": "{\"sender\": \"ursula.wiederkehr@gaia2mail.com\", \"recipients\": [\"mary.smith@example.com\"], \"subject\": \"Welcome - now saved in my contacts\", \"content\": \"Dear Mary,\\n\\nI'm Ursula Wiederkehr, and I wanted to send you a short welcome note. You are now saved in my contacts, so we can stay in touch.\\n\\nWarm regards,\\nUrsula Wiederkehr\\n\", \"email_id\": \"52e1ddc06020cc2ed26e5c843a6cc81f\", \"parent_id\": null, \"cc\": [], \"attachments\": {}, \"timestamp\": \"1728975603.0\", \"is_read\": \"True\"}",
+      "event_id": "series_s2_read",
+      "response_sha256": "79b3cc14397b2344f27cd9feaea0e9ec62e321612048c0aae270341aa625a37c"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélie Dumont",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整姓名，较难识别，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélie Dumont",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Aurélie Dumont": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "0b7f91dbc69561a4343d5649775720c761c0becc1567bdf536c393a9f9cc5d46"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélie Dumont",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "含变音符号的完整人名，出现在工具响应中",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélie Dumont": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "0b7f91dbc69561a4343d5649775720c761c0becc1567bdf536c393a9f9cc5d46"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "完整姓名，出现在邮件签名与发件人中",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélie Dumont": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "0b7f91dbc69561a4343d5649775720c761c0becc1567bdf536c393a9f9cc5d46"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Mary Smith",
+    "Miami",
+    "Ursula"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:24.674724+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

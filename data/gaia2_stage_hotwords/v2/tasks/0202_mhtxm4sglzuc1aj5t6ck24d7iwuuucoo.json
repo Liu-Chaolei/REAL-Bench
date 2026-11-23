@@ -1,0 +1,129 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0202_mhtxm4sglzuc1aj5t6ck24d7iwuuucoo",
+  "model": "deepseek-flash",
+  "input_sha256": "827da5097321fadb3301aca6242d66cb69f2dbcdd2e371d081575c6d835cee7c",
+  "review_input_sha256": "c62721abea1117114ccb4a9b961700dea4e930d0d5999d2fdd1ac434fd154811",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "8ce8561e82350ad56d2d5fdc4146293b72e0e6a483f9101e5c485c3fcb0007fc",
+  "reference_results_sha256": "96e254d49c9fca1ae9d34bb3ad8dad5fb45115874d5c6f1a9b475e21571fff3e",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Basel Bliss",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Akira Nakahara",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Basel Bungalow",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "St. Johanns-Vorstadt 10",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Akira Nakahara",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，含独特姓氏，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Basel Bliss",
+          "kind": "custom_name",
+          "source": "stage0.existing_catalog.1",
+          "reason": "独特公寓名称，非普通词汇",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Akira Nakahara",
+        "Basel Bliss"
+      ],
+      "active_vocabulary": {
+        "Akira Nakahara": 50,
+        "Basel Bliss": 50
+      },
+      "vocabulary_sha256": "64165bca3de0a27dfd1d3c29ff0af2e32efc5e8eada7efb40d04d9fc90785a9a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "St. Johanns-Vorstadt 10",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "独特街道地址，含连字符复合词，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Basel Bungalow",
+          "kind": "custom_name",
+          "source": "stage1.existing_catalog.0",
+          "reason": "独特公寓名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "St. Johanns-Vorstadt 10",
+        "Basel Bungalow"
+      ],
+      "active_vocabulary": {
+        "Akira Nakahara": 50,
+        "Basel Bliss": 50,
+        "St. Johanns-Vorstadt 10": 50,
+        "Basel Bungalow": 50
+      },
+      "vocabulary_sha256": "fbfffd9a33ec9a92600b13a402ba88a441c6643d0ebc9f6fdad332f930f2ae57"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Akira Nakahara": 50,
+        "Basel Bliss": 50,
+        "St. Johanns-Vorstadt 10": 50,
+        "Basel Bungalow": 50
+      },
+      "vocabulary_sha256": "fbfffd9a33ec9a92600b13a402ba88a441c6643d0ebc9f6fdad332f930f2ae57"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Oasis",
+    "Basel City"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:30.962134+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

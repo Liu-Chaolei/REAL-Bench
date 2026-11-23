@@ -1,0 +1,110 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0720_up5rgapoxep1thccqw0zxs6qzf2pr6kf",
+  "model": "deepseek-flash",
+  "input_sha256": "cfd1cd549094bce9aea7720eb4e9a5f58f7b5a31941313335f297cd7ef12a482",
+  "review_input_sha256": "78d587d1767ec0a50cb65a74ae48e6b600da874e71a0a1a1566c62b1df37d426",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "3e8be4a8a236bf4b1621535b234a4a63ae08db5c8bd62b033a58a560c4289797",
+  "reference_results_sha256": "00a29de35f2d2e47f64ba9914b04e6452116897edb961d57b7580bb1984593a7",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Carmarace",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Smugglers Family Board Game",
+      "original_source": "stage0.source_task"
+    },
+    "stage2.tool_response.series_s2_product_lookup": {
+      "stage": 2,
+      "text": "{\"name\": \"Smugglers Family Board Game\", \"product_id\": \"2709f23df9a9c200bbedc815ae162d08\", \"variants\": {\"30e0b4a95e5f49e6b5e3b2c87735f815\": {\"price\": \"31.32\", \"available\": \"True\", \"item_id\": \"30e0b4a95e5f49e6b5e3b2c87735f815\", \"options\": {\"Age Range\": \"8-12 years\", \"Language\": \"Spanish\", \"Number of Players\": \"2-4\", \"Playtime\": \"30-60 minutes\"}}, \"376b4197ffdb49ea8afcb5cda374ca03\": {\"price\": \"31.32\", \"available\": \"False\", \"item_id\": \"376b4197ffdb49ea8afcb5cda374ca03\", \"options\": {\"Age Range\": \"8-12 years\", \"Language\": \"English\", \"Number of Players\": \"5-6\", \"Playtime\": \"30-60 minutes\"}}, \"f8bfc7a58ef044a4a9857986863a0d96\": {\"price\": \"31.32\", \"available\": \"True\", \"item_id\": \"f8bfc7a58ef044a4a9857986863a0d96\", \"options\": {\"Age Range\": \"8-12 years\", \"Language\": \"English\", \"Number of Players\": \"2-4\", \"Playtime\": \"30-60 minutes\"}}, \"f8f2f5f100764bd4b6fd253c5d19aa95\": {\"price\": \"35.99\", \"available\": \"True\", \"item_id\": \"f8f2f5f100764bd4b6fd253c5d19aa95\", \"options\": {\"Age Range\": \"13-18 years\", \"Language\": \"English\", \"Number of Players\": \"2-4\", \"Playtime\": \"30-60 minutes\"}}}}",
+      "event_id": "series_s2_product_lookup",
+      "response_sha256": "ea6379e833dd39700470a78f082f5e00fe8a1f4a50c7365fcbe283f2786de3d9"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Smugglers Family Board Game",
+          "kind": "product",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整产品名称，含专有词",
+          "weight": 50
+        },
+        {
+          "text": "Carmarace",
+          "kind": "custom_name",
+          "source": "stage0.existing_catalog.0",
+          "reason": "独特专有名称，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Smugglers Family Board Game",
+        "Carmarace"
+      ],
+      "active_vocabulary": {
+        "Smugglers Family Board Game": 50,
+        "Carmarace": 50
+      },
+      "vocabulary_sha256": "0a2601f8aee6100d5f21b36be9130d8816d087885284b3f9f5d32795a60417cf"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Smugglers Family Board Game": 50,
+        "Carmarace": 50
+      },
+      "vocabulary_sha256": "0a2601f8aee6100d5f21b36be9130d8816d087885284b3f9f5d32795a60417cf"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Smugglers Family Board Game",
+          "kind": "product",
+          "source": "stage2.tool_response.series_s2_product_lookup",
+          "reason": "完整产品名称，含专有词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Smugglers Family Board Game": 50,
+        "Carmarace": 50
+      },
+      "vocabulary_sha256": "0a2601f8aee6100d5f21b36be9130d8816d087885284b3f9f5d32795a60417cf"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Catching up with friends"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:06.629095+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

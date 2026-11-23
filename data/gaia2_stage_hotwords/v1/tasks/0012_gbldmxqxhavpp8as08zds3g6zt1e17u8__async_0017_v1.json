@@ -1,0 +1,109 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0012_gbldmxqxhavpp8as08zds3g6zt1e17u8__async_0017_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "875d3754f247f6b6b72731fd585312ca7cc2db3f2288e75bee22d9eadbcb8aec",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nonglak Suthisakul",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Chiang Mai",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "泰国地名"
+        },
+        {
+          "text": "Oslo",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "挪威城市名"
+        },
+        {
+          "text": "Åse",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [
+        "Nonglak Suthisakul",
+        "Chiang Mai",
+        "Oslo",
+        "Åse"
+      ],
+      "active_vocabulary": {
+        "Nonglak Suthisakul": 50,
+        "Chiang Mai": 50,
+        "Oslo": 50,
+        "Åse": 50
+      },
+      "vocabulary_sha256": "efdf43e19b423e32263f70cc177a8c2a4653090b836d23a925e6665b1c5f82bf"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Nonglak Suthisakul",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Kari Østensen",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "午餐对象人名"
+        }
+      ],
+      "new_terms": [
+        "Kari Østensen"
+      ],
+      "active_vocabulary": {
+        "Nonglak Suthisakul": 50,
+        "Chiang Mai": 50,
+        "Oslo": 50,
+        "Åse": 50,
+        "Kari Østensen": 50
+      },
+      "vocabulary_sha256": "d64883ac34300843f390f27748c9aaee0af0e69c5086a8505abd3edefb7e8136"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "353f02ab07879d67f0d2671d3b14caa378878751bbf3daf294d8522290828b45",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2322,
+        "completion_tokens": 207,
+        "total_tokens": 2529,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2066
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.213
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0012_gbldmxqxhavpp8as08zds3g6zt1e17u8__async_0017_v1",
+  "extracted_at": "2026-11-22T06:46:23.751857+00:00"
+}

@@ -1,0 +1,163 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0838_034mkhw1js0opznl4ir9gk2068q9gic0",
+  "model": "deepseek-flash",
+  "input_sha256": "c6d2ef28863f93cb5d8e274d313cb615df2649f46c8da901aeafb2372ddd49a4",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Lea Müller",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-971a8d41-70fa-4730-943f-6c1103fe89f6.arguments.attendees[0]",
+          "reason": "完整人名，活动参与者"
+        },
+        {
+          "text": "Petrovs Restaurant",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-971a8d41-70fa-4730-943f-6c1103fe89f6.arguments.location",
+          "reason": "餐厅专有名称"
+        },
+        {
+          "text": "Aidan Ó Cuinn",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-471b6e5b-98e3-409a-ae8e-9b9db47edfc3.arguments.content",
+          "reason": "发信人完整姓名，含特殊拼写"
+        },
+        {
+          "text": "Klaus",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3bcb15a1-68aa-4b83-aeb8-aea360a88111.arguments.content",
+          "reason": "邮件收件人姓名"
+        },
+        {
+          "text": "Anastasiya",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3bcb15a1-68aa-4b83-aeb8-aea360a88111.arguments.content",
+          "reason": "署名者姓名"
+        },
+        {
+          "text": "Dublin",
+          "kind": "place",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-471b6e5b-98e3-409a-ae8e-9b9db47edfc3.arguments.content",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Lea Müller",
+        "Petrovs Restaurant",
+        "Aidan Ó Cuinn",
+        "Klaus",
+        "Anastasiya",
+        "Dublin"
+      ],
+      "active_vocabulary": {
+        "Lea Müller": 50,
+        "Petrovs Restaurant": 50,
+        "Aidan Ó Cuinn": 50,
+        "Klaus": 50,
+        "Anastasiya": 50,
+        "Dublin": 50
+      },
+      "vocabulary_sha256": "e8b266d275eeaf2ac5d872ad85eae7366675a104e3a9289045cb7e120fe4a332"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Lea",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "晚餐对象人名"
+        },
+        {
+          "text": "Petrovs",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "餐厅名称"
+        },
+        {
+          "text": "Anastasiya",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_text_lea_confirmation.arguments.content",
+          "reason": "短信署名者姓名"
+        }
+      ],
+      "new_terms": [
+        "Lea",
+        "Petrovs"
+      ],
+      "active_vocabulary": {
+        "Lea Müller": 50,
+        "Petrovs Restaurant": 50,
+        "Aidan Ó Cuinn": 50,
+        "Klaus": 50,
+        "Anastasiya": 50,
+        "Dublin": 50,
+        "Lea": 50,
+        "Petrovs": 50
+      },
+      "vocabulary_sha256": "a937a8e24d2a0c875dd020d06bf4f4fcb6e3b57021a24fe4459d9c58066fa0bd"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Lea",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "晚餐对象人名"
+        },
+        {
+          "text": "Petrovs",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "餐厅名称"
+        },
+        {
+          "text": "Anastasiya",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_text_lea.arguments.content",
+          "reason": "短信署名者姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Lea Müller": 50,
+        "Petrovs Restaurant": 50,
+        "Aidan Ó Cuinn": 50,
+        "Klaus": 50,
+        "Anastasiya": 50,
+        "Dublin": 50,
+        "Lea": 50,
+        "Petrovs": 50
+      },
+      "vocabulary_sha256": "a937a8e24d2a0c875dd020d06bf4f4fcb6e3b57021a24fe4459d9c58066fa0bd"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "584b5f50e485b1d6fdc358b6643bb09fc5c4d869efde098d7f049ebf65aa2286",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3422,
+        "completion_tokens": 576,
+        "total_tokens": 3998,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3166
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.825
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0838_034mkhw1js0opznl4ir9gk2068q9gic0",
+  "extracted_at": "2026-11-22T06:44:06.761473+00:00"
+}

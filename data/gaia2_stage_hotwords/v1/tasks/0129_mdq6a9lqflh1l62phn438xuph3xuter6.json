@@ -1,0 +1,222 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0129_mdq6a9lqflh1l62phn438xuph3xuter6",
+  "model": "deepseek-flash",
+  "input_sha256": "ea2bfdf8e3862c0f22694c8af8e126a5509ec62fdda3db6af63923e965ea28a2",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Ghent Student Residence",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "学生公寓专有名称"
+        },
+        {
+          "text": "Piano Horn",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品名称"
+        },
+        {
+          "text": "Schylling",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "品牌名"
+        },
+        {
+          "text": "Ghent University",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-13d84b40-4d22-4bdf-902f-7b0423750bc5.arguments.end_location",
+          "reason": "大学专有名称"
+        }
+      ],
+      "new_terms": [
+        "Ghent Student Residence",
+        "Piano Horn",
+        "Schylling",
+        "Ghent University"
+      ],
+      "active_vocabulary": {
+        "Ghent Student Residence": 50,
+        "Piano Horn": 50,
+        "Schylling": 50,
+        "Ghent University": 50
+      },
+      "vocabulary_sha256": "fe6e189ae2f3c2512940d690cbb1fde6198e0cd71fe0d67014c0a3f9e330d9f3"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Ghent Student Housing",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "备选公寓专有名称"
+        },
+        {
+          "text": "Korte Meer",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "街道专有名称"
+        },
+        {
+          "text": "Student Arrival at Ghent University",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_add_arrival_event.arguments.title",
+          "reason": "日历事件专有标题"
+        },
+        {
+          "text": "Liesbeth",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "用户人名"
+        },
+        {
+          "text": "Ghent Student Residence",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "学生公寓专有名称"
+        },
+        {
+          "text": "Piano Horn",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "商品名称"
+        },
+        {
+          "text": "Schylling",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "品牌名"
+        }
+      ],
+      "new_terms": [
+        "Ghent Student Housing",
+        "Korte Meer",
+        "Student Arrival at Ghent University",
+        "Liesbeth"
+      ],
+      "active_vocabulary": {
+        "Ghent Student Residence": 50,
+        "Piano Horn": 50,
+        "Schylling": 50,
+        "Ghent University": 50,
+        "Ghent Student Housing": 50,
+        "Korte Meer": 50,
+        "Student Arrival at Ghent University": 50,
+        "Liesbeth": 50
+      },
+      "vocabulary_sha256": "2ff7551b16d2700056851cedd4e6602d1f247c69ab5fbbff69313de434414487"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Ghent Student Housing",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "备选公寓专有名称"
+        },
+        {
+          "text": "Ghent Student Residence",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "学生公寓专有名称"
+        },
+        {
+          "text": "Move-in at Ghent Student Residence",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_add_movein_event.arguments.title",
+          "reason": "日历事件专有标题"
+        },
+        {
+          "text": "Sint-Pietersnieuwstraat",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_movein_event.arguments.location",
+          "reason": "街道专有名称"
+        },
+        {
+          "text": "Liesbeth",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "用户人名"
+        },
+        {
+          "text": "Korte Meer",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "街道专有名称"
+        },
+        {
+          "text": "Student Arrival at Ghent University",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "日历事件专有标题"
+        }
+      ],
+      "new_terms": [
+        "Move-in at Ghent Student Residence",
+        "Sint-Pietersnieuwstraat"
+      ],
+      "active_vocabulary": {
+        "Ghent Student Residence": 50,
+        "Piano Horn": 50,
+        "Schylling": 50,
+        "Ghent University": 50,
+        "Ghent Student Housing": 50,
+        "Korte Meer": 50,
+        "Student Arrival at Ghent University": 50,
+        "Liesbeth": 50,
+        "Move-in at Ghent Student Residence": 50,
+        "Sint-Pietersnieuwstraat": 50
+      },
+      "vocabulary_sha256": "cb8d47ea405bd026468c46e692412cb5a722651968ef3dfdbb92a91a0e0bc5c2"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "464b49e4b4590f5f6fff18ee6d144629d12731f19d9a919f78e1096c6f6559df",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2960,
+        "completion_tokens": 650,
+        "total_tokens": 3610,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2704
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 2.421,
+      "error": "2 validation errors for Extraction\nstages.0.terms.2.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nstages.1.terms.6.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "d50f24b5d1c1141d21aa951fc9e8dd22dbb968cc8ec0d0b8d93622c79ac7d05a",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4144,
+        "completion_tokens": 650,
+        "total_tokens": 4794,
+        "prompt_tokens_details": {
+          "cached_tokens": 3584
+        },
+        "prompt_cache_hit_tokens": 3584,
+        "prompt_cache_miss_tokens": 560
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.151
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0129_mdq6a9lqflh1l62phn438xuph3xuter6",
+  "extracted_at": "2026-11-22T06:40:13.762270+00:00"
+}

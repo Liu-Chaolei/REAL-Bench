@@ -1,0 +1,167 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0493_su3bfdjdmzi5t7g6p6qlanptvrbdj2d5",
+  "model": "deepseek-flash",
+  "input_sha256": "c49180633678ec6d8d32f1db05239819aa99a954773edd63ab1bcdcfe09dbf1f",
+  "review_input_sha256": "78f4d9cfebae9b7fdfd3274f78d6ac2df8879f899c20678ca492ba8494c7ef0f",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "3c03285710481b9caca264d1dc38f453f7ce42279328237ea731a38bb090eab0",
+  "reference_results_sha256": "dde1e7c0d1642301350d013860e2776a4ea5a3bb8f590408781e83b542a4d82c",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Leont'yevskiy Pereulok",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Moscow",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Pooparoos",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.5": {
+      "stage": 1,
+      "text": "Squishy Pooping Pets",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Gulandom Davlatov",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Ulitsa Tverskaya",
+      "original_source": "stage2.tool_gt.series_s2_quote_ride.arguments.end_location"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Leont'yevskiy Pereulok",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含撇号的困难俄语街道名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Moscow",
+          "kind": "place",
+          "source": "stage0.existing_catalog.1",
+          "reason": "常见城市名，但作为地名保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Leont'yevskiy Pereulok",
+        "Moscow"
+      ],
+      "active_vocabulary": {
+        "Leont'yevskiy Pereulok": 50,
+        "Moscow": 50
+      },
+      "vocabulary_sha256": "6d58f6221e2201ea5293d989e981fdb0fb8879ce0759a3a589f95168690a17a3"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Squishy Pooping Pets",
+          "kind": "product",
+          "source": "stage1.existing_catalog.5",
+          "reason": "独特产品名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Pooparoos",
+          "kind": "product",
+          "source": "stage1.existing_catalog.4",
+          "reason": "独特玩具品牌名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Squishy Pooping Pets",
+        "Pooparoos"
+      ],
+      "active_vocabulary": {
+        "Leont'yevskiy Pereulok": 50,
+        "Moscow": 50,
+        "Squishy Pooping Pets": 50,
+        "Pooparoos": 50
+      },
+      "vocabulary_sha256": "7a39d99897a775ed4495da83de648e213b088baea76a5ac2c70efaa42b0d73c5"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Gulandom Davlatov",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "困难完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Ulitsa Tverskaya",
+          "kind": "place",
+          "source": "stage2.existing_catalog.2",
+          "reason": "困难俄语街道名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Gulandom Davlatov",
+        "Ulitsa Tverskaya"
+      ],
+      "active_vocabulary": {
+        "Leont'yevskiy Pereulok": 50,
+        "Moscow": 50,
+        "Squishy Pooping Pets": 50,
+        "Pooparoos": 50,
+        "Gulandom Davlatov": 50,
+        "Ulitsa Tverskaya": 50
+      },
+      "vocabulary_sha256": "66e310d93ee1d3ed5425c2c68b208c9868161f12639810f16f46334315d94b6e"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": [
+        {
+          "text": "Leont’yevskiy Pereulok",
+          "covered_by": "Leont'yevskiy Pereulok"
+        }
+      ]
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Idea Max",
+    "Peek-A-Pet",
+    "Bobble Heads",
+    "Corgi",
+    "Leont’yevskiy Pereulok"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:07.548121+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,131 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0182_n11sbfef9a5rpdgt2ryvrsw68cx3j9hz__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "01949d7e1accb32dfb23566c7c8c0f7233f13f59bea2f12ea70f83d3dd8eb87d",
+  "review_input_sha256": "a18da938dc9100e5d60c3345d1fdaafb547f70ded6d5a156d55baa1ddab1249d",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "49a226eb7d1e24227e0d90f4406f7372ee357446bf93e90d495a0e66092974f8",
+  "reference_results_sha256": "075e61aadccf3393470d4fb9b3c378c31e7684160e3ac14927cfede34d796da1",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Vivitar",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "DRC-333 Air Defender X Camera Drone",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "HANSA",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Café Östermalms",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "DRC-333 Air Defender X Camera Drone",
+          "kind": "product",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含型号与专有修饰的完整产品名",
+          "weight": 50
+        },
+        {
+          "text": "HANSA",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.2",
+          "reason": "品牌专有名词",
+          "weight": 50
+        },
+        {
+          "text": "Vivitar",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.0",
+          "reason": "品牌专有名词，拼写独特",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "DRC-333 Air Defender X Camera Drone",
+        "HANSA",
+        "Vivitar"
+      ],
+      "active_vocabulary": {
+        "DRC-333 Air Defender X Camera Drone": 50,
+        "HANSA": 50,
+        "Vivitar": 50
+      },
+      "vocabulary_sha256": "b2be16d39da80188c8156812061bb7dba349d922bd35da4ff8753fdcb47f0694"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Café Östermalms",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符的完整地名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Café Östermalms"
+      ],
+      "active_vocabulary": {
+        "DRC-333 Air Defender X Camera Drone": 50,
+        "HANSA": 50,
+        "Vivitar": 50,
+        "Café Östermalms": 50
+      },
+      "vocabulary_sha256": "b40f26fcef92c629fa6658bf1255abb18ed7de35bd66ff243bb36e9bf28957a8"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "DRC-333 Air Defender X Camera Drone": 50,
+        "HANSA": 50,
+        "Vivitar": 50,
+        "Café Östermalms": 50
+      },
+      "vocabulary_sha256": "b40f26fcef92c629fa6658bf1255abb18ed7de35bd66ff243bb36e9bf28957a8"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "4688 Plush",
+    "Linnea",
+    "Astrid"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:51.112470+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

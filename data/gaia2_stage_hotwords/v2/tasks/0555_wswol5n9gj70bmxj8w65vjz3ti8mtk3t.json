@@ -1,0 +1,162 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0555_wswol5n9gj70bmxj8w65vjz3ti8mtk3t",
+  "model": "deepseek-flash",
+  "input_sha256": "a0324f7b915e0354138122b4f00fb0c778dae53b84be634b23ae783443ed2c49",
+  "review_input_sha256": "64b0d8e4274e4b19e249a4dfa6e1a5a5e8799fc5fdb38b81404ddac8f6044840",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "cc4b2d5da9c079a37607ba4019d1099673858e74caa275194b8c190505b7a6d6",
+  "reference_results_sha256": "9e9d586da3d75c3da13db09dccb9d3249fb70265271f1fa78e9db775fed832f4",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kazimierz",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-1b276763-7d90-457c-a32b-9304798f3b42.arguments.content"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Aurélien",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-98d7c9a4-ba91-4fc1-9ee2-79efcb9d4df6.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Avengers Mighty Bubble Ball",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Kazimierz Wojciechowski",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Aurélien Van der Straeten",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Avengers Mighty Bubble Ball",
+          "kind": "product",
+          "source": "stage0.existing_catalog.2",
+          "reason": "独特的多词产品名",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含法语变音符号的专有人名",
+          "weight": 50
+        },
+        {
+          "text": "Kazimierz",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "波兰语人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Avengers Mighty Bubble Ball",
+        "Aurélien",
+        "Kazimierz"
+      ],
+      "active_vocabulary": {
+        "Avengers Mighty Bubble Ball": 50,
+        "Aurélien": 50,
+        "Kazimierz": 50
+      },
+      "vocabulary_sha256": "c411e7e883c60ecde09124f57ee4e7a2d8d25275e61020ea401b0758d3690cc8"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien Van der Straeten",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的完整姓名",
+          "weight": 50
+        },
+        {
+          "text": "Kazimierz Wojciechowski",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整波兰语姓名，拼写困难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien Van der Straeten",
+        "Kazimierz Wojciechowski"
+      ],
+      "active_vocabulary": {
+        "Avengers Mighty Bubble Ball": 50,
+        "Aurélien": 50,
+        "Kazimierz": 50,
+        "Aurélien Van der Straeten": 50,
+        "Kazimierz Wojciechowski": 50
+      },
+      "vocabulary_sha256": "aa3c113887d5f970c6a750363c1d7a85c0657cb7da4f6ca6793bf3ca5064c594"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整德语姓名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Avengers Mighty Bubble Ball": 50,
+        "Aurélien": 50,
+        "Kazimierz": 50,
+        "Aurélien Van der Straeten": 50,
+        "Kazimierz Wojciechowski": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "7dc0763476639628cb47f5cbc934f0a2312f21b0997e40ede563913ef7a4ae98"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Ursula",
+    "Sick Day Rescheduling",
+    "Basel"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:24.097443+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

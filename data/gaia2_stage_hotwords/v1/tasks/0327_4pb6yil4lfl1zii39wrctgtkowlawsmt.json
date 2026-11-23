@@ -1,0 +1,135 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0327_4pb6yil4lfl1zii39wrctgtkowlawsmt",
+  "model": "deepseek-flash",
+  "input_sha256": "0e7ef483411f3626bb6663694b95fed7e5a35213bd1d62e8f48f7146623b760a",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Åsa",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fd3ae022-4a81-4048-8368-d1a47d8e1d06.arguments.content",
+          "reason": "参与者人名"
+        },
+        {
+          "text": "Linnea",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-d80ed86f-e534-41df-84a6-7eb396789419.arguments.content",
+          "reason": "参与者人名"
+        }
+      ],
+      "new_terms": [
+        "Åsa",
+        "Linnea"
+      ],
+      "active_vocabulary": {
+        "Åsa": 50,
+        "Linnea": 50
+      },
+      "vocabulary_sha256": "77662b4e2fa0a93ad83ed74005c8c274bf44e6febb173300bccd3c1af1d86d18"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Åsa Lindgren",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create.arguments.attendees[0]",
+          "reason": "参与者完整姓名"
+        },
+        {
+          "text": "Linnea Åström",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create.arguments.attendees[1]",
+          "reason": "参与者完整姓名"
+        },
+        {
+          "text": "Östermalmsgatan 12",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.location",
+          "reason": "活动地点街道名"
+        },
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_msg_asa.arguments.content",
+          "reason": "发信人署名"
+        }
+      ],
+      "new_terms": [
+        "Åsa Lindgren",
+        "Linnea Åström",
+        "Östermalmsgatan 12",
+        "Astrid"
+      ],
+      "active_vocabulary": {
+        "Åsa": 50,
+        "Linnea": 50,
+        "Åsa Lindgren": 50,
+        "Linnea Åström": 50,
+        "Östermalmsgatan 12": 50,
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "473321b423f4cecf5a7c7f601452f7453e64680eb3d0d6f07eabb3654a503882"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Åsa Lindgren",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被通知参与者姓名"
+        },
+        {
+          "text": "Linnea Åström",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被通知参与者姓名"
+        },
+        {
+          "text": "Östermalmsgatan 12",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "新活动地点街道名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Åsa": 50,
+        "Linnea": 50,
+        "Åsa Lindgren": 50,
+        "Linnea Åström": 50,
+        "Östermalmsgatan 12": 50,
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "473321b423f4cecf5a7c7f601452f7453e64680eb3d0d6f07eabb3654a503882"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "4aa5879d854e8869d0ec5c88ed71dd92b5c761bbd8bb38c2b4c29c0e6d6442aa",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3278,
+        "completion_tokens": 408,
+        "total_tokens": 3686,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3022
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.853
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0327_4pb6yil4lfl1zii39wrctgtkowlawsmt",
+  "extracted_at": "2026-11-22T06:41:18.813633+00:00"
+}

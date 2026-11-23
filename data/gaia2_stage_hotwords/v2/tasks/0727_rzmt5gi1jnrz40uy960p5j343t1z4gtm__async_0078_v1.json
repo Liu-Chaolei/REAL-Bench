@@ -1,0 +1,132 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0727_rzmt5gi1jnrz40uy960p5j343t1z4gtm__async_0078_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "c4c96a35d97a5d8295d3c0c4e884bf989d96e8bdb1b83b94111382fbc08f4fd3",
+  "review_input_sha256": "ae8c3ae8b7ee729a2f6e85b4c83da7945f33a377b464ffc2786af138a5b27c64",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "3187b99b37cdd9a970edfff511326d53dad4fcdef709420e2419bb084316a238",
+  "reference_results_sha256": "571e748f6301fa5ae8838d80934244f3e0f02c412ac224297dcb1a1d8885aa88",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Viktor Kuznetsov",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Natalya Kuznetsova",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Sheremetyevo International Airport",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-8bbed51f-0469-46d1-853b-4abe70fd4212.arguments.location"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Ulitsa Bolshaya Dmitrovka, 15/1",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Sheremetyevo International Airport",
+          "kind": "place",
+          "source": "stage0.existing_catalog.3",
+          "reason": "独特机场专名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Natalya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整俄语人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整俄语人名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Sheremetyevo International Airport",
+        "Natalya Kuznetsova",
+        "Viktor Kuznetsov"
+      ],
+      "active_vocabulary": {
+        "Sheremetyevo International Airport": 50,
+        "Natalya Kuznetsova": 50,
+        "Viktor Kuznetsov": 50
+      },
+      "vocabulary_sha256": "fce71503c3316d413e84f53033f6d40a93c665895e6ccf245c07d4ea5d5d08b8"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Sheremetyevo International Airport": 50,
+        "Natalya Kuznetsova": 50,
+        "Viktor Kuznetsov": 50
+      },
+      "vocabulary_sha256": "fce71503c3316d413e84f53033f6d40a93c665895e6ccf245c07d4ea5d5d08b8"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Ulitsa Bolshaya Dmitrovka, 15/1",
+          "kind": "place",
+          "source": "stage2.existing_catalog.1",
+          "reason": "独特俄语街道地址，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Ulitsa Bolshaya Dmitrovka, 15/1"
+      ],
+      "active_vocabulary": {
+        "Sheremetyevo International Airport": 50,
+        "Natalya Kuznetsova": 50,
+        "Viktor Kuznetsov": 50,
+        "Ulitsa Bolshaya Dmitrovka, 15/1": 50
+      },
+      "vocabulary_sha256": "1eff290504fa4d22ec57c561d3715b6825fad255d4afba9fab832cc02940732c"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Yamaha C40 GigMaker Classical Acoustic Guitar Package",
+    "Viktor",
+    "Natalya",
+    "Yamaha",
+    "Moscow Music Museum"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:20:07.419905+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

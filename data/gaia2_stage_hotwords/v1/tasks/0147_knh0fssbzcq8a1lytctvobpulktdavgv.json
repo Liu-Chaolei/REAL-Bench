@@ -1,0 +1,259 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0147_knh0fssbzcq8a1lytctvobpulktdavgv",
+  "model": "deepseek-flash",
+  "input_sha256": "48869b92c5838d58fce483c9d5583a9314194ac2a74d2ae7f8ff76ab4a9a1674",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélie Vandenberghe",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名，含特殊字符"
+        },
+        {
+          "text": "Colette Vandenberghe",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Gent-Sint-Pieters",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "根特火车站地名"
+        },
+        {
+          "text": "Sint-Baafsplein 1",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "根特具体地址地名"
+        },
+        {
+          "text": "WowWee Pinkfong Baby Shark Bath Squirt Toy – 4-Pack",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定商品名称"
+        },
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-228892a4-1433-400c-9b8c-f893f38d2316.arguments.content",
+          "reason": "邮件正文中的收件人名"
+        },
+        {
+          "text": "Colette",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e4420c21-d379-4f3f-8c2e-97448426508a.arguments.content",
+          "reason": "邮件正文中的收件人名"
+        },
+        {
+          "text": "Gent-Sint-Pieter",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e4420c21-d379-4f3f-8c2e-97448426508a.arguments.content",
+          "reason": "邮件正文中的地名变体"
+        },
+        {
+          "text": "WowWee Pinkfong Baby Shark Bath Squirt Toy - 4 Pack",
+          "kind": "product",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-0900dd2f-dacb-4074-af37-ef1e798753b8.arguments.content",
+          "reason": "回复中商品名变体"
+        }
+      ],
+      "new_terms": [
+        "Aurélie Vandenberghe",
+        "Colette Vandenberghe",
+        "Gent-Sint-Pieters",
+        "Sint-Baafsplein 1",
+        "WowWee Pinkfong Baby Shark Bath Squirt Toy – 4-Pack",
+        "Aurélie",
+        "Colette",
+        "Gent-Sint-Pieter",
+        "WowWee Pinkfong Baby Shark Bath Squirt Toy - 4 Pack"
+      ],
+      "active_vocabulary": {
+        "Aurélie Vandenberghe": 50,
+        "Colette Vandenberghe": 50,
+        "Gent-Sint-Pieters": 50,
+        "Sint-Baafsplein 1": 50,
+        "WowWee Pinkfong Baby Shark Bath Squirt Toy – 4-Pack": 50,
+        "Aurélie": 50,
+        "Colette": 50,
+        "Gent-Sint-Pieter": 50,
+        "WowWee Pinkfong Baby Shark Bath Squirt Toy - 4 Pack": 50
+      },
+      "vocabulary_sha256": "4d60f653d4463066301501d34c5c5f187195da0aabafd293b3b2c56e7abea3bc"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Sint-Baafsplein 1",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "提醒地点地址"
+        },
+        {
+          "text": "Sint-Michielsstraat 23",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "返程目的地地址"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "比利时城市名"
+        },
+        {
+          "text": "Gent-Sint-Pieters",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "邮件正文中的出发地地名"
+        }
+      ],
+      "new_terms": [
+        "Sint-Michielsstraat 23",
+        "Leuven"
+      ],
+      "active_vocabulary": {
+        "Aurélie Vandenberghe": 50,
+        "Colette Vandenberghe": 50,
+        "Gent-Sint-Pieters": 50,
+        "Sint-Baafsplein 1": 50,
+        "WowWee Pinkfong Baby Shark Bath Squirt Toy – 4-Pack": 50,
+        "Aurélie": 50,
+        "Colette": 50,
+        "Gent-Sint-Pieter": 50,
+        "WowWee Pinkfong Baby Shark Bath Squirt Toy - 4 Pack": 50,
+        "Sint-Michielsstraat 23": 50,
+        "Leuven": 50
+      },
+      "vocabulary_sha256": "6cc470b94eb664a93bb0cbbbcff17931690f884cecea7078cfebc15affbc2ead"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélie Vandenberghe",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "消息收件人姓名"
+        },
+        {
+          "text": "Colette Vandenberghe",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "聊天收件人姓名"
+        },
+        {
+          "text": "Gent-Sint-Pieters",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "会面地点地名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélie Vandenberghe": 50,
+        "Colette Vandenberghe": 50,
+        "Gent-Sint-Pieters": 50,
+        "Sint-Baafsplein 1": 50,
+        "WowWee Pinkfong Baby Shark Bath Squirt Toy – 4-Pack": 50,
+        "Aurélie": 50,
+        "Colette": 50,
+        "Gent-Sint-Pieter": 50,
+        "WowWee Pinkfong Baby Shark Bath Squirt Toy - 4 Pack": 50,
+        "Sint-Michielsstraat 23": 50,
+        "Leuven": 50
+      },
+      "vocabulary_sha256": "6cc470b94eb664a93bb0cbbbcff17931690f884cecea7078cfebc15affbc2ead"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "504a2bd24031a161aa2a1ece0a0cc9a07e4c31659b8202991b8323b4e6bcd79a",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3427,
+        "completion_tokens": 922,
+        "total_tokens": 4349,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3171
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 3.831,
+      "error": "Not an exact quotation of a source in stage 0: 'Aurélie Vandenberghe' from 'stage0.tool_gt.OracleEvent-AGENT-228892a4-1433-400c-9b8c-f893f38d2316.arguments.content'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "e5a8ac588d2b0930776d7e930db832399d4d3d90532fbd32e67a9005e0eafb93",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4795,
+        "completion_tokens": 914,
+        "total_tokens": 5709,
+        "prompt_tokens_details": {
+          "cached_tokens": 4224
+        },
+        "prompt_cache_hit_tokens": 4224,
+        "prompt_cache_miss_tokens": 571
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 3.001,
+      "error": "Duplicate term within stage 1: 'Sint-Baafsplein 1'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "40e52cd509a2099ee3e5cd538460a61cd80f8a64daef2ce042dc1beb22215475",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4742,
+        "completion_tokens": 791,
+        "total_tokens": 5533,
+        "prompt_tokens_details": {
+          "cached_tokens": 3456
+        },
+        "prompt_cache_hit_tokens": 3456,
+        "prompt_cache_miss_tokens": 1286
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.466,
+      "error": "Duplicate term within stage 2: 'Aurélie Vandenberghe'"
+    },
+    {
+      "attempt": 4,
+      "request_sha256": "eab8230e9f86f24f483a6999e3f6e3ffa86299f3f2f7ca0f346fcd76bd69004e",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4618,
+        "completion_tokens": 664,
+        "total_tokens": 5282,
+        "prompt_tokens_details": {
+          "cached_tokens": 3840
+        },
+        "prompt_cache_hit_tokens": 3840,
+        "prompt_cache_miss_tokens": 778
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.608
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0147_knh0fssbzcq8a1lytctvobpulktdavgv",
+  "extracted_at": "2026-11-22T06:40:31.877203+00:00"
+}

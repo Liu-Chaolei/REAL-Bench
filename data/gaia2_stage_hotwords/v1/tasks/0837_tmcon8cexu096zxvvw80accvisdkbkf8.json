@@ -1,0 +1,162 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0837_tmcon8cexu096zxvvw80accvisdkbkf8",
+  "model": "deepseek-flash",
+  "input_sha256": "8dc6eded02dbd339d83a1b6c53bc7b9a5823387ce277f97619ff56925a844889",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Gerda",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f3884abb-1d44-4bd4-b392-546860fe48ba.arguments.content",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Kuzma",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-bfec67cb-b3c5-44b0-9bea-dc2c030062cc.arguments.content",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Anastasiya",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-bfec67cb-b3c5-44b0-9bea-dc2c030062cc.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Moscow",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5a59483a-5004-4332-99cd-c81c3230e496.arguments.end_location",
+          "reason": "城市名"
+        },
+        {
+          "text": "Ulitsa Tverskaya",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5a59483a-5004-4332-99cd-c81c3230e496.arguments.end_location",
+          "reason": "街道名"
+        }
+      ],
+      "new_terms": [
+        "Gerda",
+        "Kuzma",
+        "Anastasiya",
+        "Moscow",
+        "Ulitsa Tverskaya"
+      ],
+      "active_vocabulary": {
+        "Gerda": 50,
+        "Kuzma": 50,
+        "Anastasiya": 50,
+        "Moscow": 50,
+        "Ulitsa Tverskaya": 50
+      },
+      "vocabulary_sha256": "84be80ed4652d2bcba7c4496cf1dd88376d289ee2bc9764ad931ee9134d15c4c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Gulandom Davlatov",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Tverskaya",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "街道名"
+        },
+        {
+          "text": "Ulitsa Bolshaya Dmitrovka",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "街道名"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "发件人全名"
+        },
+        {
+          "text": "Moscow",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_quote.arguments.end_location",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Gulandom Davlatov",
+        "Tverskaya",
+        "Ulitsa Bolshaya Dmitrovka",
+        "Anastasiya Kuznetsova"
+      ],
+      "active_vocabulary": {
+        "Gerda": 50,
+        "Kuzma": 50,
+        "Anastasiya": 50,
+        "Moscow": 50,
+        "Ulitsa Tverskaya": 50,
+        "Gulandom Davlatov": 50,
+        "Tverskaya": 50,
+        "Ulitsa Bolshaya Dmitrovka": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "f49fb1bd3d4249bdd7984b855232dc064ab154c6cc5dd08d19418537b4ba88c4"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Moscow State University",
+          "kind": "organization",
+          "source": "stage2.source_task",
+          "reason": "机构名称"
+        }
+      ],
+      "new_terms": [
+        "Moscow State University"
+      ],
+      "active_vocabulary": {
+        "Gerda": 50,
+        "Kuzma": 50,
+        "Anastasiya": 50,
+        "Moscow": 50,
+        "Ulitsa Tverskaya": 50,
+        "Gulandom Davlatov": 50,
+        "Tverskaya": 50,
+        "Ulitsa Bolshaya Dmitrovka": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Moscow State University": 50
+      },
+      "vocabulary_sha256": "6b0278c33c61559120ac067ea96929923f78c7a6590499e48d83143ab4bc6a53"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "6b1a42575c8158219a5b276bf7079ee5976f11c1c736be6257e14c6b1ed47697",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3674,
+        "completion_tokens": 501,
+        "total_tokens": 4175,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3418
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.886
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0837_tmcon8cexu096zxvvw80accvisdkbkf8",
+  "extracted_at": "2026-11-22T06:44:05.333999+00:00"
+}

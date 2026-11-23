@@ -1,0 +1,256 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0573_mug2chs6287zgcfq667kl4syngytosq9",
+  "model": "deepseek-flash",
+  "input_sha256": "894e2af4492e216fe73d2ae92b92c7b148d0de555806d394af8f5113e5b7c913",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "India",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "国家名，邀请邮件中的目的地"
+        },
+        {
+          "text": "Future Property Tours",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3c75624b-a9b0-4a26-8691-748e76b7d85b.arguments.subject",
+          "reason": "邮件主题的自定义名称"
+        },
+        {
+          "text": "Yoga class",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "日历事件名称"
+        }
+      ],
+      "new_terms": [
+        "India",
+        "Future Property Tours",
+        "Yoga class"
+      ],
+      "active_vocabulary": {
+        "India": 50,
+        "Future Property Tours": 50,
+        "Yoga class": 50
+      },
+      "vocabulary_sha256": "8e7219b0a22916e0344d094ff626017a413b3b0c84b27cd983cd783b74ef49ae"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Hyderabad",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_search.arguments.location",
+          "reason": "城市名"
+        },
+        {
+          "text": "Rohan",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Hyderabad Habitat",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Golden Nest",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Sai Krupa Apartments",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Tulip Residency",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Sai Ram Residency",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Banjara Hills",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "街区名"
+        },
+        {
+          "text": "KPHB Colony",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "街区名"
+        },
+        {
+          "text": "Kukatpally",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "街区名"
+        },
+        {
+          "text": "Hitech City",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "街区名"
+        },
+        {
+          "text": "Maruti Nagar",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "街区名"
+        }
+      ],
+      "new_terms": [
+        "Hyderabad",
+        "Rohan",
+        "Hyderabad Habitat",
+        "Golden Nest",
+        "Sai Krupa Apartments",
+        "Tulip Residency",
+        "Sai Ram Residency",
+        "Banjara Hills",
+        "KPHB Colony",
+        "Kukatpally",
+        "Hitech City",
+        "Maruti Nagar"
+      ],
+      "active_vocabulary": {
+        "India": 50,
+        "Future Property Tours": 50,
+        "Yoga class": 50,
+        "Hyderabad": 50,
+        "Rohan": 50,
+        "Hyderabad Habitat": 50,
+        "Golden Nest": 50,
+        "Sai Krupa Apartments": 50,
+        "Tulip Residency": 50,
+        "Sai Ram Residency": 50,
+        "Banjara Hills": 50,
+        "KPHB Colony": 50,
+        "Kukatpally": 50,
+        "Hitech City": 50,
+        "Maruti Nagar": 50
+      },
+      "vocabulary_sha256": "0c9fedf57aec16345fcb4759cf36f928d8695280aafbc096c0313a78039e85ce"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaida McKenzie",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add.arguments.description",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Kaitlyn Wong",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add.arguments.description",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Rohini Mehta",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add.arguments.description",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Columbus",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add.arguments.description",
+          "reason": "城市名"
+        },
+        {
+          "text": "Los Angeles",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add.arguments.description",
+          "reason": "城市名"
+        },
+        {
+          "text": "New York City",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add.arguments.description",
+          "reason": "城市名"
+        },
+        {
+          "text": "Follow Up on Future Property Tours",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_add.arguments.title",
+          "reason": "日历事件标题"
+        }
+      ],
+      "new_terms": [
+        "Kaida McKenzie",
+        "Kaitlyn Wong",
+        "Rohini Mehta",
+        "Columbus",
+        "Los Angeles",
+        "New York City",
+        "Follow Up on Future Property Tours"
+      ],
+      "active_vocabulary": {
+        "India": 50,
+        "Future Property Tours": 50,
+        "Yoga class": 50,
+        "Hyderabad": 50,
+        "Rohan": 50,
+        "Hyderabad Habitat": 50,
+        "Golden Nest": 50,
+        "Sai Krupa Apartments": 50,
+        "Tulip Residency": 50,
+        "Sai Ram Residency": 50,
+        "Banjara Hills": 50,
+        "KPHB Colony": 50,
+        "Kukatpally": 50,
+        "Hitech City": 50,
+        "Maruti Nagar": 50,
+        "Kaida McKenzie": 50,
+        "Kaitlyn Wong": 50,
+        "Rohini Mehta": 50,
+        "Columbus": 50,
+        "Los Angeles": 50,
+        "New York City": 50,
+        "Follow Up on Future Property Tours": 50
+      },
+      "vocabulary_sha256": "361f6f2c83a6eb7b0e62977e00859da7ec4ecf8a2f4763ac72a75a4dc11ff07a"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "a695c6ae6c294604d47e57b911f23823ce49ff56a1774573903ca6793b8eef96",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3123,
+        "completion_tokens": 790,
+        "total_tokens": 3913,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2867
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.625
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0573_mug2chs6287zgcfq667kl4syngytosq9",
+  "extracted_at": "2026-11-22T06:42:49.028816+00:00"
+}

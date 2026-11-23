@@ -1,0 +1,194 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0165_r8pvueijvovyaw9gwc9k8k2c3jjrlczp__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "b56d285f585a3eb8fce09f5085ec13da9d6b1dbbf665705f1ff906e3332d8004",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Åke Svensson",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1703da6f-cc98-47e3-be72-713a593e36a7.arguments.attendees[0]",
+          "reason": "与会者姓名"
+        },
+        {
+          "text": "Stortorget 13",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1703da6f-cc98-47e3-be72-713a593e36a7.arguments.location",
+          "reason": "会议地点街道名"
+        },
+        {
+          "text": "Malmö",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1703da6f-cc98-47e3-be72-713a593e36a7.arguments.location",
+          "reason": "城市名"
+        },
+        {
+          "text": "metro_herald_740.txt",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-59a9e41f-a613-4bbb-80fa-86cfaaa5bcf6.arguments.attachment_paths[0]",
+          "reason": "文章文件名"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-59a9e41f-a613-4bbb-80fa-86cfaaa5bcf6.arguments.content",
+          "reason": "发件人签名姓名"
+        },
+        {
+          "text": "Painting Panel Canvas Boards",
+          "kind": "product",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-dd3cd8e3-dbd5-44cb-9da5-987fb2508007.arguments.content",
+          "reason": "产品名称"
+        }
+      ],
+      "new_terms": [
+        "Åke Svensson",
+        "Stortorget 13",
+        "Malmö",
+        "metro_herald_740.txt",
+        "Astrid Lundqvist",
+        "Painting Panel Canvas Boards"
+      ],
+      "active_vocabulary": {
+        "Åke Svensson": 50,
+        "Stortorget 13": 50,
+        "Malmö": 50,
+        "metro_herald_740.txt": 50,
+        "Astrid Lundqvist": 50,
+        "Painting Panel Canvas Boards": 50
+      },
+      "vocabulary_sha256": "c90237a61ad4fd2fcc6a83517137de1401364af591ec38cc30db913e6a828f0a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Östermalmsgatan 12",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_quote.arguments.start_location",
+          "reason": "起点街道名"
+        },
+        {
+          "text": "Stockholm",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_quote.arguments.start_location",
+          "reason": "城市名"
+        },
+        {
+          "text": "Stortorget 13",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_quote.arguments.end_location",
+          "reason": "终点街道名"
+        },
+        {
+          "text": "Malmö",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_quote.arguments.end_location",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Östermalmsgatan 12",
+        "Stockholm"
+      ],
+      "active_vocabulary": {
+        "Åke Svensson": 50,
+        "Stortorget 13": 50,
+        "Malmö": 50,
+        "metro_herald_740.txt": 50,
+        "Astrid Lundqvist": 50,
+        "Painting Panel Canvas Boards": 50,
+        "Östermalmsgatan 12": 50,
+        "Stockholm": 50
+      },
+      "vocabulary_sha256": "7bbc7b8f5e4aa867d1d2e989b716b9bbb7dae58180bbfa05285301ac1816d393"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Åke Svensson",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]",
+          "reason": "跟进电话对象姓名"
+        },
+        {
+          "text": "metro_herald 740",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "文章标识名"
+        },
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_message.arguments.content",
+          "reason": "消息署名"
+        }
+      ],
+      "new_terms": [
+        "metro_herald 740",
+        "Astrid"
+      ],
+      "active_vocabulary": {
+        "Åke Svensson": 50,
+        "Stortorget 13": 50,
+        "Malmö": 50,
+        "metro_herald_740.txt": 50,
+        "Astrid Lundqvist": 50,
+        "Painting Panel Canvas Boards": 50,
+        "Östermalmsgatan 12": 50,
+        "Stockholm": 50,
+        "metro_herald 740": 50,
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "ba66509777dc4b98819886b0fd3f83507e6b70e2d44a4b9c1976a6e28185a72f"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "86608280ea5d1ed8969df65a66ac42e4d3f338fe64d68daf4544e5fd78a23c8d",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2855,
+        "completion_tokens": 657,
+        "total_tokens": 3512,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2599
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.455,
+      "error": "Not an exact quotation of a source in stage 0: 'metro_herald 740' from 'stage0.tool_gt.OracleEvent-AGENT-59a9e41f-a613-4bbb-80fa-86cfaaa5bcf6.arguments.attachment_paths[0]'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "df312b598b98afaa05acf7c422d0cfdce990a6b3aa259a2759e0be5c6c3b89e4",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3962,
+        "completion_tokens": 657,
+        "total_tokens": 4619,
+        "prompt_tokens_details": {
+          "cached_tokens": 3456
+        },
+        "prompt_cache_hit_tokens": 3456,
+        "prompt_cache_miss_tokens": 506
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.451
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0165_r8pvueijvovyaw9gwc9k8k2c3jjrlczp__repetition_v1",
+  "extracted_at": "2026-11-22T06:45:46.637586+00:00"
+}

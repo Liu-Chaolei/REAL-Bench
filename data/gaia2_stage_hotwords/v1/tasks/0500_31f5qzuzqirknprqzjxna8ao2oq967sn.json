@@ -1,0 +1,143 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0500_31f5qzuzqirknprqzjxna8ao2oq967sn",
+  "model": "deepseek-flash",
+  "input_sha256": "8426249f3385db2dc6d21adba746ec2e34addd31fb0aa049ce739c61e26012dd",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Åke Svensson",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-bbae83d1-dafb-4b0f-aaea-d60ffdd2b2ae.arguments.attendees[0]",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Åke",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-bbae83d1-dafb-4b0f-aaea-d60ffdd2b2ae.arguments.title",
+          "reason": "人名，含特殊字符"
+        },
+        {
+          "text": "SCHLEICH North America Showjumper with Horse Figure",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定商品名称"
+        }
+      ],
+      "new_terms": [
+        "Åke Svensson",
+        "Åke",
+        "SCHLEICH North America Showjumper with Horse Figure"
+      ],
+      "active_vocabulary": {
+        "Åke Svensson": 50,
+        "Åke": 50,
+        "SCHLEICH North America Showjumper with Horse Figure": 50
+      },
+      "vocabulary_sha256": "adf222d1ff1516a563732701be4b9bf6d1f583eb133969a25c1570b8bbb51daa"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Karel",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "发件人全名"
+        },
+        {
+          "text": "Khalifa Al-Mansoori",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "人名全名"
+        },
+        {
+          "text": "Åke",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "人名"
+        }
+      ],
+      "new_terms": [
+        "Karel",
+        "Liesbeth Vandenberghe",
+        "Khalifa Al-Mansoori"
+      ],
+      "active_vocabulary": {
+        "Åke Svensson": 50,
+        "Åke": 50,
+        "SCHLEICH North America Showjumper with Horse Figure": 50,
+        "Karel": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Khalifa Al-Mansoori": 50
+      },
+      "vocabulary_sha256": "4b43e955eb3cf54ee75b817c80e6e4c04d4c4a38ccae7d1818276d7e4bb427d1"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Åke Svensson": 50,
+        "Åke": 50,
+        "SCHLEICH North America Showjumper with Horse Figure": 50,
+        "Karel": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Khalifa Al-Mansoori": 50
+      },
+      "vocabulary_sha256": "4b43e955eb3cf54ee75b817c80e6e4c04d4c4a38ccae7d1818276d7e4bb427d1"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "af1e224eb645766d56937a78f6e6c2304571c15a1473f2b23176f84a224998b0",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2220,
+        "completion_tokens": 363,
+        "total_tokens": 2583,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1964
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.511,
+      "error": "Not an exact quotation of a source in stage 2: 'Rohini Deshpande' from 'stage2.tool_gt.series_s2_email.arguments.recipients[0]'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "9daa1487ec407cce716411b14fe6741e59496a3adf59243153b78f3b0d90dfc3",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3008,
+        "completion_tokens": 320,
+        "total_tokens": 3328,
+        "prompt_tokens_details": {
+          "cached_tokens": 2560
+        },
+        "prompt_cache_hit_tokens": 2560,
+        "prompt_cache_miss_tokens": 448
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.267
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0500_31f5qzuzqirknprqzjxna8ao2oq967sn",
+  "extracted_at": "2026-11-22T06:42:24.522167+00:00"
+}

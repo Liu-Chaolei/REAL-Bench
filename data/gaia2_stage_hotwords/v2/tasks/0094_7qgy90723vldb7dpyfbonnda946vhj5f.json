@@ -1,0 +1,130 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0094_7qgy90723vldb7dpyfbonnda946vhj5f",
+  "model": "deepseek-flash",
+  "input_sha256": "504c2e333b2ead641bde7d41aacec51c267fcce06bd6051d5cfabd5ef256c6db",
+  "review_input_sha256": "a1d093bfb5be14d531f63de92148ce9ca8a7152bcf1ba3c5d8a253bed5aed5e8",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "f956815cec0db6eb92914b972a4e93006067ff6226a9e4abb317522f765737e0",
+  "reference_results_sha256": "e8695839bc0b2e0569c08d521d6f9251ebdc8509baca241e7f61f2b7d4bf7262",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Aurélien",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-54ec310d-ee14-4e8d-addf-07059417b26b.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Liesbeth Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-54ec310d-ee14-4e8d-addf-07059417b26b.arguments.content"
+    },
+    "stage1.tool_response.series_s1_read": {
+      "stage": 1,
+      "text": "{\"sender\": \"liesbeth.vandenberghe@gaia2mail.com\", \"recipients\": [\"somsak.wongcharee@gaia2mail.com\"], \"subject\": \"FWD: Renewable Energy Options for Sustainable Architecture\", \"content\": \"> Dear Liesbeth,\\n\\nI hope this email finds you well. I came across your work on net-zero energy architecture and was impressed by your dedication to sustainable design. As a former journalist, I've always been fascinated by innovative solutions that can positively impact our environment.\\n\\nI'd like to share with you an article I wrote a few years ago on renewable energy options in the Middle East. I think you might find it relevant to your current project. The article highlights the potential of solar and wind energy in reducing carbon emissions and promoting sustainable development.\\n\\nI'd be happy to discuss this further with you and explore ways to integrate these options into your design. Please let me know if you're interested, and we can schedule a call at your convenience.\\n\\nBest regards,\\nKhalifa Al-Mansoori\", \"email_id\": \"67005f5df094b3ef5a22f36a14c9ad06\", \"parent_id\": \"74bd4c0171a5493ca38a66256c59bb11\", \"cc\": [], \"attachments\": {}, \"timestamp\": \"1728975603.0\", \"is_read\": \"True\"}",
+      "event_id": "series_s1_read",
+      "response_sha256": "678eab2fb8066126a7aa5e970ac2f3a66f93e15d1d1efe50624bf5ce87a13388"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Khalifa Al-Mansoori",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，含独特姓氏，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的专有名字，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Liesbeth Vandenberghe",
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Liesbeth Vandenberghe": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "ffa1767fb236c2ee7f10bae8b6d6b4392ba4ac726a0c8004884fc5509f89eafb"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Khalifa Al-Mansoori",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "邮件正文中出现的完整独特人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Khalifa Al-Mansoori"
+      ],
+      "active_vocabulary": {
+        "Liesbeth Vandenberghe": 50,
+        "Aurélien": 50,
+        "Khalifa Al-Mansoori": 50
+      },
+      "vocabulary_sha256": "98f0b5d7d2b51fee587c3ed68e3b90f8b88471c41d462cf39ef12e764a275fbe"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Khalifa Al-Mansoori",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "已有目录中的完整独特人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Liesbeth Vandenberghe": 50,
+        "Aurélien": 50,
+        "Khalifa Al-Mansoori": 50
+      },
+      "vocabulary_sha256": "98f0b5d7d2b51fee587c3ed68e3b90f8b88471c41d462cf39ef12e764a275fbe"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Karel",
+    "Deleted Contacts",
+    "FWD: Renewable Energy Options for Sustainable Architecture",
+    "Re: Renewable Energy Options for Sustainable Architecture"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:13:59.160758+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

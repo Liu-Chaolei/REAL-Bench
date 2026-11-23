@@ -1,0 +1,132 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0255_k52itnmgidxhaok6kuax4hzxfdvie0tm",
+  "model": "deepseek-flash",
+  "input_sha256": "31e4850da1983135b7efb7c4cc8d4f849756d186031c1d5d15154275a71b3969",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Beatriz Sousa",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_agent_reply.arguments.content",
+          "reason": "联系人完整姓名"
+        },
+        {
+          "text": "Brand Partnership Meeting",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_agent_reply.arguments.content",
+          "reason": "特定会议名称"
+        },
+        {
+          "text": "Zoom Meeting",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_agent_reply.arguments.content",
+          "reason": "会议平台名称"
+        }
+      ],
+      "new_terms": [
+        "Beatriz Sousa",
+        "Brand Partnership Meeting",
+        "Zoom Meeting"
+      ],
+      "active_vocabulary": {
+        "Beatriz Sousa": 50,
+        "Brand Partnership Meeting": 50,
+        "Zoom Meeting": 50
+      },
+      "vocabulary_sha256": "1c17aebd5b2d405375669eaf954d67a9dd933e79e36c9c4c06cad607ecc1d335"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Beatriz Sousa",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_prep.arguments.title",
+          "reason": "联系人完整姓名"
+        },
+        {
+          "text": "Brand Partnership Meeting",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_add_prep.arguments.title",
+          "reason": "特定会议名称"
+        },
+        {
+          "text": "Home Office",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_prep.arguments.location",
+          "reason": "地点名称"
+        },
+        {
+          "text": "Zoom Meeting",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_add_prep.arguments.description",
+          "reason": "会议平台名称"
+        }
+      ],
+      "new_terms": [
+        "Home Office"
+      ],
+      "active_vocabulary": {
+        "Beatriz Sousa": 50,
+        "Brand Partnership Meeting": 50,
+        "Zoom Meeting": 50,
+        "Home Office": 50
+      },
+      "vocabulary_sha256": "511997891188f108886c331bf20de7b2bcd04a79d349255e996452e73d653e6c"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "ab75400b51b5bb2e6199213526e075669b399d3e773bbcc334751897c5f82ba9",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1532,
+        "completion_tokens": 396,
+        "total_tokens": 1928,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1276
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.671,
+      "error": "2 validation errors for Extraction\nstages.0.note\n  Extra inputs are not permitted [type=extra_forbidden, input_value='邮箱地址按规则不...录，故实际为空', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.note\n  Extra inputs are not permitted [type=extra_forbidden, input_value='邮箱与电话按规则不收录', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "713217e93708f80e0865ea87653e409319d243209ef6bc9886f55f6ba20054eb",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2436,
+        "completion_tokens": 285,
+        "total_tokens": 2721,
+        "prompt_tokens_details": {
+          "cached_tokens": 1920
+        },
+        "prompt_cache_hit_tokens": 1920,
+        "prompt_cache_miss_tokens": 516
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.106
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0255_k52itnmgidxhaok6kuax4hzxfdvie0tm",
+  "extracted_at": "2026-11-22T06:41:01.182910+00:00"
+}

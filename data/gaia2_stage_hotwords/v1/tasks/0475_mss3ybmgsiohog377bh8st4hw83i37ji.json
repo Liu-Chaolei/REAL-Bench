@@ -1,0 +1,153 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0475_mss3ybmgsiohog377bh8st4hw83i37ji",
+  "model": "deepseek-flash",
+  "input_sha256": "7c910391b44ad3762222f178829843e8f1cda3012928ecd768f609006a8647d4",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Thierry",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-67000485-7438-4a05-8cdf-9662737be49e.arguments.content",
+          "reason": "邮件收件人姓名"
+        },
+        {
+          "text": "Nalinee",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c7a5d01e-e016-46b3-9f58-6f50a3993f45.arguments.content",
+          "reason": "邮件收件人姓名"
+        },
+        {
+          "text": "Émile",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f095e55a-9804-4298-bb0a-1377aeb3593a.arguments.content",
+          "reason": "邮件收件人姓名"
+        },
+        {
+          "text": "Karel",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1adef3b7-7640-403f-89cb-1fb790a42afd.arguments.content",
+          "reason": "邮件收件人姓名"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-77f161cb-8a22-431a-ba8f-fe4433e7558b.arguments.content",
+          "reason": "邮件收件人姓名"
+        }
+      ],
+      "new_terms": [
+        "Thierry",
+        "Nalinee",
+        "Émile",
+        "Karel",
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Thierry": 50,
+        "Nalinee": 50,
+        "Émile": 50,
+        "Karel": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "6cb4ebf56512f30299942d387bf2db683b44169c354c99d8c57f45d7f6d2591c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Émile Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_1.arguments.attendees[0]",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Émile",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_1.arguments.title",
+          "reason": "事件标题中的人名"
+        }
+      ],
+      "new_terms": [
+        "Émile Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Thierry": 50,
+        "Nalinee": 50,
+        "Émile": 50,
+        "Karel": 50,
+        "Aurélien": 50,
+        "Émile Vandenberghe": 50
+      },
+      "vocabulary_sha256": "86b5e035cfb64d02bb840356a7a0b1513695fdf73d58ba8a588f623cf84cdd71"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Émile Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_2.arguments.attendees[0]",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Karel Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_2.arguments.attendees[1]",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Émile",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_2.arguments.title",
+          "reason": "事件标题中的人名"
+        },
+        {
+          "text": "Karel",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_2.arguments.title",
+          "reason": "事件标题中的人名"
+        }
+      ],
+      "new_terms": [
+        "Karel Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Thierry": 50,
+        "Nalinee": 50,
+        "Émile": 50,
+        "Karel": 50,
+        "Aurélien": 50,
+        "Émile Vandenberghe": 50,
+        "Karel Vandenberghe": 50
+      },
+      "vocabulary_sha256": "eb253b5dc82fb42474d983cce240d807f0c8a0a83ee2fc6b30492f8622272a81"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "92e095539274c8626ed80e67cc4fafe23a920fa9e182cc39a8f85dfa210895f5",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3764,
+        "completion_tokens": 572,
+        "total_tokens": 4336,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3508
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.799
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0475_mss3ybmgsiohog377bh8st4hw83i37ji",
+  "extracted_at": "2026-11-22T06:42:12.086916+00:00"
+}

@@ -1,0 +1,113 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0155_mcr0x7kbiy1kolvh2l5w9z2naop715zh",
+  "model": "deepseek-flash",
+  "input_sha256": "af11f614978baa0af28dd18e84ef5a2d657894737366e3d2664f84737b5359f4",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Vigdis Rasmussen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Birgitta Rasmussen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-51eff71a-b3fc-4a92-8ba1-8b67058d0588.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Copenhagen",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "目的地城市"
+        }
+      ],
+      "new_terms": [
+        "Vigdis Rasmussen",
+        "Birgitta Rasmussen",
+        "Copenhagen"
+      ],
+      "active_vocabulary": {
+        "Vigdis Rasmussen": 50,
+        "Birgitta Rasmussen": 50,
+        "Copenhagen": 50
+      },
+      "vocabulary_sha256": "2ef058ce63d2ca04aeca52ca394e1ce3fa805401a1580b5696b795d9227794d3"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Birgitta Rasmussen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收信人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Vigdis Rasmussen": 50,
+        "Birgitta Rasmussen": 50,
+        "Copenhagen": 50
+      },
+      "vocabulary_sha256": "2ef058ce63d2ca04aeca52ca394e1ce3fa805401a1580b5696b795d9227794d3"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Østerbrogade 90, 2100 København Ø, Copenhagen",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_order.arguments.start_location",
+          "reason": "上车地址"
+        },
+        {
+          "text": "Østerbrogade 123, 2100 København Ø, Copenhagen",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_order.arguments.end_location",
+          "reason": "下车地址"
+        }
+      ],
+      "new_terms": [
+        "Østerbrogade 90, 2100 København Ø, Copenhagen",
+        "Østerbrogade 123, 2100 København Ø, Copenhagen"
+      ],
+      "active_vocabulary": {
+        "Vigdis Rasmussen": 50,
+        "Birgitta Rasmussen": 50,
+        "Copenhagen": 50,
+        "Østerbrogade 90, 2100 København Ø, Copenhagen": 50,
+        "Østerbrogade 123, 2100 København Ø, Copenhagen": 50
+      },
+      "vocabulary_sha256": "4bef8c94b33f500e0dcf8596406a72102affb59f8e802a18a309d09818cd33b4"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "baf5bf0a79d77efaecaf7850c3e687b36f32c2ca818a58ba07b7fa089475bb0b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2488,
+        "completion_tokens": 267,
+        "total_tokens": 2755,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2232
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.232
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0155_mcr0x7kbiy1kolvh2l5w9z2naop715zh",
+  "extracted_at": "2026-11-22T06:40:19.953324+00:00"
+}

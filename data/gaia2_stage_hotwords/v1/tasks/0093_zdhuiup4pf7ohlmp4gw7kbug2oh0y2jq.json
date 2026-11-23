@@ -1,0 +1,299 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0093_zdhuiup4pf7ohlmp4gw7kbug2oh0y2jq",
+  "model": "deepseek-flash",
+  "input_sha256": "b2b3f432902e32da5e03c46eebaaaf65011d1ba7cd1d9d3535cb7ee58b8116e7",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "kaitlyn.nguyen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-675df1fc-3fce-47bd-8531-406f60db6a62.arguments.recipients[0]",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "kaida.jensen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c186f34e-0840-4ae5-9e33-5c3a80b66554.arguments.recipients[0]",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "rohini.nambiar",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-98641082-f0fb-47bd-9858-08a7631f8dde.arguments.recipients[0]",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "athibault",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f3b79bf3-befe-46d8-b634-3f01ca36e6ba.arguments.recipients[0]",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "ziga.kovacic",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c8911516-dd22-428b-bcad-ff578a436598.arguments.recipients[0]",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "kaitlyn.nwosu",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5adb7de3-9956-4fa7-a793-a27fc66bc3e8.arguments.recipients[0]",
+          "reason": "收件人姓名"
+        }
+      ],
+      "new_terms": [
+        "kaitlyn.nguyen",
+        "kaida.jensen",
+        "rohini.nambiar",
+        "athibault",
+        "ziga.kovacic",
+        "kaitlyn.nwosu"
+      ],
+      "active_vocabulary": {
+        "kaitlyn.nguyen": 50,
+        "kaida.jensen": 50,
+        "rohini.nambiar": 50,
+        "athibault": 50,
+        "ziga.kovacic": 50,
+        "kaitlyn.nwosu": 50
+      },
+      "vocabulary_sha256": "adafc19944dd9772d1fc0c5bac910abd2779d6bb4462ff2320e11aeadbcab8f5"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Red Flag Companies Follow-Up",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_create.arguments.title",
+          "reason": "群组标题"
+        }
+      ],
+      "new_terms": [
+        "Red Flag Companies Follow-Up"
+      ],
+      "active_vocabulary": {
+        "kaitlyn.nguyen": 50,
+        "kaida.jensen": 50,
+        "rohini.nambiar": 50,
+        "athibault": 50,
+        "ziga.kovacic": 50,
+        "kaitlyn.nwosu": 50,
+        "Red Flag Companies Follow-Up": 50
+      },
+      "vocabulary_sha256": "c81d7a8eac8001d2c3d744ed10a062609db338f0be372738c1f3385263e0acb3"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien Thibault",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "收件人全名"
+        },
+        {
+          "text": "Kaida Jensen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "收件人全名"
+        },
+        {
+          "text": "Kaitlyn Nguyen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "收件人全名"
+        },
+        {
+          "text": "Kaitlyn Nwosu",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "收件人全名"
+        },
+        {
+          "text": "Rohini Nambiar",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "收件人全名"
+        },
+        {
+          "text": "Žiga Kovačič",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "收件人全名"
+        },
+        {
+          "text": "Berkshire Hathaway",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "公司名称"
+        },
+        {
+          "text": "UnitedHealth Group",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "公司名称"
+        },
+        {
+          "text": "Johnson & Johnson",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "公司名称"
+        },
+        {
+          "text": "ExxonMobil",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "公司名称"
+        },
+        {
+          "text": "JPMorgan Chase",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "公司名称"
+        },
+        {
+          "text": "Procter & Gamble",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "公司名称"
+        },
+        {
+          "text": "Home Depot",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "公司名称"
+        },
+        {
+          "text": "Eli Lilly",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "公司名称"
+        },
+        {
+          "text": "AbbVie",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "公司名称"
+        },
+        {
+          "text": "Meta Platforms",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "公司名称"
+        },
+        {
+          "text": "Coca-Cola",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "公司名称"
+        },
+        {
+          "text": "PepsiCo",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "公司名称"
+        },
+        {
+          "text": "Broadcom",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "公司名称"
+        },
+        {
+          "text": "Nvidia",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "公司名称"
+        },
+        {
+          "text": "Bank of America",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "公司名称"
+        }
+      ],
+      "new_terms": [
+        "Aurélien Thibault",
+        "Kaida Jensen",
+        "Kaitlyn Nguyen",
+        "Kaitlyn Nwosu",
+        "Rohini Nambiar",
+        "Žiga Kovačič",
+        "Berkshire Hathaway",
+        "UnitedHealth Group",
+        "Johnson & Johnson",
+        "ExxonMobil",
+        "JPMorgan Chase",
+        "Procter & Gamble",
+        "Home Depot",
+        "Eli Lilly",
+        "AbbVie",
+        "Meta Platforms",
+        "Coca-Cola",
+        "PepsiCo",
+        "Broadcom",
+        "Nvidia",
+        "Bank of America"
+      ],
+      "active_vocabulary": {
+        "kaitlyn.nguyen": 50,
+        "kaida.jensen": 50,
+        "rohini.nambiar": 50,
+        "athibault": 50,
+        "ziga.kovacic": 50,
+        "kaitlyn.nwosu": 50,
+        "Red Flag Companies Follow-Up": 50,
+        "Aurélien Thibault": 50,
+        "Kaida Jensen": 50,
+        "Kaitlyn Nguyen": 50,
+        "Kaitlyn Nwosu": 50,
+        "Rohini Nambiar": 50,
+        "Žiga Kovačič": 50,
+        "Berkshire Hathaway": 50,
+        "UnitedHealth Group": 50,
+        "Johnson & Johnson": 50,
+        "ExxonMobil": 50,
+        "JPMorgan Chase": 50,
+        "Procter & Gamble": 50,
+        "Home Depot": 50,
+        "Eli Lilly": 50,
+        "AbbVie": 50,
+        "Meta Platforms": 50,
+        "Coca-Cola": 50,
+        "PepsiCo": 50,
+        "Broadcom": 50,
+        "Nvidia": 50,
+        "Bank of America": 50
+      },
+      "vocabulary_sha256": "20f54a7cba41a526f366df8495821ec062fac8da591e1bf0d4332316e5672f6e"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "74b69eb0a1b490390e49572fa3643303087514a64b50d34db6dd84d6e63eaf19",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3856,
+        "completion_tokens": 1188,
+        "total_tokens": 5044,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3600
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 3.453
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0093_zdhuiup4pf7ohlmp4gw7kbug2oh0y2jq",
+  "extracted_at": "2026-11-22T06:40:01.882361+00:00"
+}

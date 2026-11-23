@@ -1,0 +1,132 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0168_kjdqio93g9vpejwvat71qcwee38mwqu7",
+  "model": "deepseek-flash",
+  "input_sha256": "e085b824af1265e2bf8bf613e6babc04b877a795141a59278abd72be0176f696",
+  "review_input_sha256": "2db86d1fc72afa038eb414b1a77441d14fc2a7e3cf64b5ff50f697b8d48fa7a4",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "d1dea0acbf4eddb968fd261b05c35d49ac3c50182b1b9ebdd01f9ace874dd0ad",
+  "reference_results_sha256": "1fc45c21b720202f0f2be796e75436952a5c384b7290e16ff74c1fa9544169c9",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Ravensburger",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "German Tourists",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Country Cottage",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.tool_response.series_s2_read": {
+      "stage": 2,
+      "text": "{\"event_id\": \"d4c2d9f7cdacdf99ad578e25036c7e5f\", \"title\": \"Puzzle Content Shoot\", \"start_datetime\": \"1729332000.0\", \"end_datetime\": \"1729339200.0\", \"tag\": \"Work\", \"description\": \"Photograph the Ravensburger German Tourists and Ravensburger Country Cottage puzzles for social media posts.\", \"location\": \"Home Studio\", \"attendees\": [], \"start_strftime\": \"Saturday, 2024-10-19 10:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 12:00:00\"}",
+      "event_id": "series_s2_read",
+      "response_sha256": "360ce465ebe6b505d5987c7c06df62586a9d179296da70d2aa9f20a1d560fd73"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "German Tourists",
+          "kind": "product",
+          "source": "stage0.existing_catalog.1",
+          "reason": "拼图产品名，含专有名词组合",
+          "weight": 50
+        },
+        {
+          "text": "Ravensburger",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.0",
+          "reason": "德国拼图品牌专有名词，发音较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "German Tourists",
+        "Ravensburger"
+      ],
+      "active_vocabulary": {
+        "German Tourists": 50,
+        "Ravensburger": 50
+      },
+      "vocabulary_sha256": "0303b8879de4fc49e0d46664263a803523d14a5e6f912c7df2a597aec4020f53"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Country Cottage",
+          "kind": "product",
+          "source": "stage1.existing_catalog.0",
+          "reason": "拼图产品名，专有名称组合",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Country Cottage"
+      ],
+      "active_vocabulary": {
+        "German Tourists": 50,
+        "Ravensburger": 50,
+        "Country Cottage": 50
+      },
+      "vocabulary_sha256": "e3ccae93ae1df467857444d37cb392b1c9db68ab891388e7dd22a2829d9a1c92"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Puzzle Content Shoot",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "日历事件专有名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Puzzle Content Shoot"
+      ],
+      "active_vocabulary": {
+        "German Tourists": 50,
+        "Ravensburger": 50,
+        "Country Cottage": 50,
+        "Puzzle Content Shoot": 50
+      },
+      "vocabulary_sha256": "5d9817bbe9c5094b954bbea2bcd911787b001421a983b9c8115a1f0b0fb71bb0"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "United States",
+    "Home Studio",
+    "Brand Partnership Meeting"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:19.059120+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

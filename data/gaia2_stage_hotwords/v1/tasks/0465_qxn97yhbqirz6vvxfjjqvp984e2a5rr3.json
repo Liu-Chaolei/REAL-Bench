@@ -1,0 +1,326 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0465_qxn97yhbqirz6vvxfjjqvp984e2a5rr3",
+  "model": "deepseek-flash",
+  "input_sha256": "2ac89f5fbe983a7f8935108224d5ca747988491cf0233b86c35389fc75d4ed9f",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Birgitta",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-39b83f78-eabc-450c-8cc7-ec26ca72254b.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Zephyrine",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b266ee75-cc90-4ad6-9a32-d6e5ee08b14b.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Rohan",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-42ff6ff8-9d6e-4414-bc1f-e940f72beb94.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Søren",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-39b83f78-eabc-450c-8cc7-ec26ca72254b.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Aalborg Harbour",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-39b83f78-eabc-450c-8cc7-ec26ca72254b.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Aalborg Apartment",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-39b83f78-eabc-450c-8cc7-ec26ca72254b.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Aalborg Universitet",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-39b83f78-eabc-450c-8cc7-ec26ca72254b.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Aalborg Apartment Living",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-39b83f78-eabc-450c-8cc7-ec26ca72254b.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Aalborg Nord",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-39b83f78-eabc-450c-8cc7-ec26ca72254b.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Aalborg Øst",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-39b83f78-eabc-450c-8cc7-ec26ca72254b.arguments.content",
+          "reason": "房源名称"
+        }
+      ],
+      "new_terms": [
+        "Birgitta",
+        "Zephyrine",
+        "Rohan",
+        "Søren",
+        "Aalborg Harbour",
+        "Aalborg Apartment",
+        "Aalborg Universitet",
+        "Aalborg Apartment Living",
+        "Aalborg Nord",
+        "Aalborg Øst"
+      ],
+      "active_vocabulary": {
+        "Birgitta": 50,
+        "Zephyrine": 50,
+        "Rohan": 50,
+        "Søren": 50,
+        "Aalborg Harbour": 50,
+        "Aalborg Apartment": 50,
+        "Aalborg Universitet": 50,
+        "Aalborg Apartment Living": 50,
+        "Aalborg Nord": 50,
+        "Aalborg Øst": 50
+      },
+      "vocabulary_sha256": "1694fca204496f42cecae9defd915dd1528112c23952b6885ca8860d454119b6"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Birgitta Kjær",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群聊成员全名"
+        },
+        {
+          "text": "Zephyrine De Smet",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群聊成员全名"
+        },
+        {
+          "text": "Rohan Sengupta",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群聊成员全名"
+        },
+        {
+          "text": "Safest-Zip Property Shortlist",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_create.arguments.title",
+          "reason": "群聊标题"
+        },
+        {
+          "text": "Aalborg Harbour",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Aalborg Apartment",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Aalborg Apartment Living",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Aalborg Universitet",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Aalborg Nord",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Aalborg Øst",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "房源名称"
+        }
+      ],
+      "new_terms": [
+        "Birgitta Kjær",
+        "Zephyrine De Smet",
+        "Rohan Sengupta",
+        "Safest-Zip Property Shortlist"
+      ],
+      "active_vocabulary": {
+        "Birgitta": 50,
+        "Zephyrine": 50,
+        "Rohan": 50,
+        "Søren": 50,
+        "Aalborg Harbour": 50,
+        "Aalborg Apartment": 50,
+        "Aalborg Universitet": 50,
+        "Aalborg Apartment Living": 50,
+        "Aalborg Nord": 50,
+        "Aalborg Øst": 50,
+        "Birgitta Kjær": 50,
+        "Zephyrine De Smet": 50,
+        "Rohan Sengupta": 50,
+        "Safest-Zip Property Shortlist": 50
+      },
+      "vocabulary_sha256": "ca177aca805280f8aa7aa7876cdf39ded422f255a68f167a836bb8890da17ccb"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aalborg Harbour",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Kragelundvej 10",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "街道地址"
+        },
+        {
+          "text": "Aalborg Apartment",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Østerå",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "街道地址"
+        },
+        {
+          "text": "Aalborg Apartment Living",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Vestre Havnepromenade",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "街道地址"
+        },
+        {
+          "text": "Aalborg Universitet",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Sønderhøj 10",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "街道地址"
+        },
+        {
+          "text": "Aalborg Nord",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Nørregade 20",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "街道地址"
+        },
+        {
+          "text": "Aalborg Øst",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Østerågade 10",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "街道地址"
+        },
+        {
+          "text": "Aalborg",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.location",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Kragelundvej 10",
+        "Østerå",
+        "Vestre Havnepromenade",
+        "Sønderhøj 10",
+        "Nørregade 20",
+        "Østerågade 10",
+        "Aalborg"
+      ],
+      "active_vocabulary": {
+        "Birgitta": 50,
+        "Zephyrine": 50,
+        "Rohan": 50,
+        "Søren": 50,
+        "Aalborg Harbour": 50,
+        "Aalborg Apartment": 50,
+        "Aalborg Universitet": 50,
+        "Aalborg Apartment Living": 50,
+        "Aalborg Nord": 50,
+        "Aalborg Øst": 50,
+        "Birgitta Kjær": 50,
+        "Zephyrine De Smet": 50,
+        "Rohan Sengupta": 50,
+        "Safest-Zip Property Shortlist": 50,
+        "Kragelundvej 10": 50,
+        "Østerå": 50,
+        "Vestre Havnepromenade": 50,
+        "Sønderhøj 10": 50,
+        "Nørregade 20": 50,
+        "Østerågade 10": 50,
+        "Aalborg": 50
+      },
+      "vocabulary_sha256": "af0198bc206fb460d38493008920f8b56f360afddb92fb179ab1bb141efb9524"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "c166abf95de37fa82569e8b39199d82e3f47577cfd11b81ce3008f69a92c1f37",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3407,
+        "completion_tokens": 1410,
+        "total_tokens": 4817,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3151
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 3.814
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0465_qxn97yhbqirz6vvxfjjqvp984e2a5rr3",
+  "extracted_at": "2026-11-22T06:42:09.899574+00:00"
+}

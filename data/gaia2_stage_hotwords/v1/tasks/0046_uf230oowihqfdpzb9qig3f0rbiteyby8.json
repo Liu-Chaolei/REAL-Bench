@@ -1,0 +1,131 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0046_uf230oowihqfdpzb9qig3f0rbiteyby8",
+  "model": "deepseek-flash",
+  "input_sha256": "f9e4093b93bb14f386cc5da028d1e0a40825fdae5be0f89e3cf8e43d88778c5d",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Film Director",
+          "kind": "custom_name",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-16fba7f0-b929-473e-a3ce-574f31eb2593.arguments.content",
+          "reason": "非联系人中的特殊事件参与者名称"
+        }
+      ],
+      "new_terms": [
+        "Film Director"
+      ],
+      "active_vocabulary": {
+        "Film Director": 50
+      },
+      "vocabulary_sha256": "581aabed9dbcedcb95f6f3b8a79ab5b534191234cae56cc9636a057688729f6b"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Film Director",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_search_film_director.arguments.query",
+          "reason": "会议对象名称"
+        },
+        {
+          "text": "Prep: Film Director Interview",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_add_prep_slot.arguments.title",
+          "reason": "自定义准备时段标题"
+        }
+      ],
+      "new_terms": [
+        "Prep: Film Director Interview"
+      ],
+      "active_vocabulary": {
+        "Film Director": 50,
+        "Prep: Film Director Interview": 50
+      },
+      "vocabulary_sha256": "fc5f7eaf981eb458a3f700b4a68b93a5253e1d230531f62b7878ab952599dad9"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Debrief: Film Director Interview",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_add_debrief.arguments.title",
+          "reason": "自定义复盘时段标题"
+        },
+        {
+          "text": "Interview with Film Director",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "引用中的访谈事件名称"
+        },
+        {
+          "text": "Yoga Class",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "引用中提到的下一日程名称"
+        }
+      ],
+      "new_terms": [
+        "Debrief: Film Director Interview",
+        "Interview with Film Director",
+        "Yoga Class"
+      ],
+      "active_vocabulary": {
+        "Film Director": 50,
+        "Prep: Film Director Interview": 50,
+        "Debrief: Film Director Interview": 50,
+        "Interview with Film Director": 50,
+        "Yoga Class": 50
+      },
+      "vocabulary_sha256": "fe835c3f2a0dff2766141b68b04f84ffbddd794d2b205c45110bacb7dd9fc1e3"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "8768aac3c315316c85ac470696607ef5be4965f46bbba6ce61bf27468ac0026c",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1910,
+        "completion_tokens": 289,
+        "total_tokens": 2199,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1654
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.358,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "5462cce7eeaba9384d54cf42c8994b9212ce13dc94be2acf5c51d972aa120781",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2592,
+        "completion_tokens": 291,
+        "total_tokens": 2883,
+        "prompt_tokens_details": {
+          "cached_tokens": 2176
+        },
+        "prompt_cache_hit_tokens": 2176,
+        "prompt_cache_miss_tokens": 416
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.125
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0046_uf230oowihqfdpzb9qig3f0rbiteyby8",
+  "extracted_at": "2026-11-22T06:39:49.406010+00:00"
+}

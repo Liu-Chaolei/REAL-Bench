@@ -1,0 +1,166 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0605_dydb3p6l38hpusrecwguna7puzvem294",
+  "model": "deepseek-flash",
+  "input_sha256": "639bc7950d6b79af722a5b49bf4780f9347dd1864c71184efb32cbdb5c856ec3",
+  "review_input_sha256": "c0638954f60a0751cd905afa32a8cd2049d2cbd59c96989cde917e26b986103e",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "527cc94d7299961dc36356ff603ea020efcc7afb09c10d8af94b086546825dc2",
+  "reference_results_sha256": "985165393876523cfa92e91a6f3d8ec185fcea45ecb8c9f574d0c0f3a88eecc8",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Aurélie Joensen",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Katarzyna Wojciechowska",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.tool_response.series_s1_read_chat": {
+      "stage": 1,
+      "text": "{\"messages\": [{\"sender_id\": \"84908bb6-c5c9-4973-8a38-4f9f331d0e2c\", \"message_id\": \"24f5f49f6bef01f49ebfd4b8e025926c\", \"timestamp\": \"1728975605.0\", \"content\": \"It's fine, I'll be scheduling another session later.\"}, {\"sender_id\": \"84908bb6-c5c9-4973-8a38-4f9f331d0e2c\", \"message_id\": \"3299fe51d2f1f93984b2cb9522307d84\", \"timestamp\": \"1728975605.0\", \"content\": \"The follow-up session, Chinese Battles Roundtable, is scheduled for Tuesday, 22 October 2024 at 9 pm (21:00-23:00). Please each bring one small battle from a different Chinese dynasty to share at the roundtable.\"}, {\"sender_id\": \"f9b709bd-879e-4d78-bc87-0bcd5b561952\", \"message_id\": \"84148b3bc5976c1777bfffd13ccfbf03\", \"timestamp\": \"1728975604.0\", \"content\": \"I cannot make it to the discussion for today.\"}, {\"sender_id\": \"84908bb6-c5c9-4973-8a38-4f9f331d0e2c\", \"message_id\": \"e70243c91e05d66834b1f6dac414aa5e\", \"timestamp\": \"1728975602.0\", \"content\": \"Hello Aurélie and Katarzyna, the discussion on Chinese Battles is scheduled for today at 9 pm. Looking forward to our conversation.\"}], \"metadata\": {\"message_range\": [\"0\", \"4\"], \"conversation_length\": \"4\", \"conversation_id\": \"c934bb2c5f71e13f0cc5da288112035c\", \"conversation_title\": \"Aurélie Joensen, Aïcha Ramseyer, Katarzyna Wojciechowska, Ursula Ramseyer\"}}",
+      "event_id": "series_s1_read_chat",
+      "response_sha256": "cbcded50094cf48a799ca8627a1805c68fa64172471a9eb7115c13c1af3564f4"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Battle of Muye",
+      "original_source": "stage2.tool_gt.series_s2_brief.arguments.content"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Battle of Red Cliffs",
+      "original_source": "stage2.tool_gt.series_s2_brief.arguments.content"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Battle of Talas",
+      "original_source": "stage2.tool_gt.series_s2_brief.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélie Joensen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Katarzyna Wojciechowska",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "较难拼写的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélie Joensen",
+        "Katarzyna Wojciechowska"
+      ],
+      "active_vocabulary": {
+        "Aurélie Joensen": 50,
+        "Katarzyna Wojciechowska": 50
+      },
+      "vocabulary_sha256": "ac94dc015dd403c496e3edfbc492e13ef85ebf7fc8844667f34e0eafbe893864"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aïcha Ramseyer",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_chat",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Ramseyer",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_chat",
+          "reason": "完整人名，姓氏较难拼写",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aïcha Ramseyer",
+        "Ursula Ramseyer"
+      ],
+      "active_vocabulary": {
+        "Aurélie Joensen": 50,
+        "Katarzyna Wojciechowska": 50,
+        "Aïcha Ramseyer": 50,
+        "Ursula Ramseyer": 50
+      },
+      "vocabulary_sha256": "f5634333aeedb13f29a450b61d8eeccc66c6f1449c62125e5040b41f22df4597"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Battle of Red Cliffs",
+          "kind": "custom_name",
+          "source": "stage2.existing_catalog.1",
+          "reason": "特定历史战役专名",
+          "weight": 50
+        },
+        {
+          "text": "Battle of Muye",
+          "kind": "custom_name",
+          "source": "stage2.existing_catalog.0",
+          "reason": "特定历史战役专名",
+          "weight": 50
+        },
+        {
+          "text": "Battle of Talas",
+          "kind": "custom_name",
+          "source": "stage2.existing_catalog.2",
+          "reason": "特定历史战役专名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Battle of Red Cliffs",
+        "Battle of Muye",
+        "Battle of Talas"
+      ],
+      "active_vocabulary": {
+        "Aurélie Joensen": 50,
+        "Katarzyna Wojciechowska": 50,
+        "Aïcha Ramseyer": 50,
+        "Ursula Ramseyer": 50,
+        "Battle of Red Cliffs": 50,
+        "Battle of Muye": 50,
+        "Battle of Talas": 50
+      },
+      "vocabulary_sha256": "f04751bb1223f5c56c763eb71c8a163b504be72c5bea093c4c646b25a349f1c3"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:41.705218+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

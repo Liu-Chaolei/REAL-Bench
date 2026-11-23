@@ -1,0 +1,368 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0144_vi1f41yua26coj8qk0ffkhxlml2ww326",
+  "model": "deepseek-flash",
+  "input_sha256": "47bca8a4dbe510dafa5ff5559d5c9a77fbc0833a2acef22959a7fcbc8b0cc142",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Dobrý den",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "捷克语问候语，非普通英文词汇，需精确识别"
+        }
+      ],
+      "new_terms": [
+        "Dobrý den"
+      ],
+      "active_vocabulary": {
+        "Dobrý den": 50
+      },
+      "vocabulary_sha256": "8586e98a14a3a94631a164285da68674f527a84c3cc88495f5d8daf8183c2772"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Brno Moderna",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Křenová 123",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "具体街道地址"
+        },
+        {
+          "text": "Brněnský Dvůr",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Mečová 8",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "具体街道地址"
+        },
+        {
+          "text": "Liberec Hills",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Komenského 14",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "具体街道地址"
+        },
+        {
+          "text": "Liberec Moderna",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Šaldova 618",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "具体街道地址"
+        },
+        {
+          "text": "Liberecké Byty",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Pilsner Urquell Apartments",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源专有名称，含品牌名"
+        },
+        {
+          "text": "Prazdroj",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "具体地名"
+        },
+        {
+          "text": "Plzeň City Apartments",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Sady Pětatřicátníků 12",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "具体街道地址"
+        },
+        {
+          "text": "Plzeň City Center",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Sady 5. května 12",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "具体街道地址"
+        },
+        {
+          "text": "Plzeň Family Home",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Borská 12",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "具体街道地址"
+        },
+        {
+          "text": "Plzeň Loft",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Borská 20",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "具体街道地址"
+        },
+        {
+          "text": "Plzeň Panorama",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Slovany",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "具体地名"
+        },
+        {
+          "text": "Plzeň Paradise",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Sady Pětatřicátníků 55",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "具体街道地址"
+        },
+        {
+          "text": "Plzeň Perch",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Křižovatka 20",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "具体街道地址"
+        }
+      ],
+      "new_terms": [
+        "Brno Moderna",
+        "Křenová 123",
+        "Brněnský Dvůr",
+        "Mečová 8",
+        "Liberec Hills",
+        "Komenského 14",
+        "Liberec Moderna",
+        "Šaldova 618",
+        "Liberecké Byty",
+        "Pilsner Urquell Apartments",
+        "Prazdroj",
+        "Plzeň City Apartments",
+        "Sady Pětatřicátníků 12",
+        "Plzeň City Center",
+        "Sady 5. května 12",
+        "Plzeň Family Home",
+        "Borská 12",
+        "Plzeň Loft",
+        "Borská 20",
+        "Plzeň Panorama",
+        "Slovany",
+        "Plzeň Paradise",
+        "Sady Pětatřicátníků 55",
+        "Plzeň Perch",
+        "Křižovatka 20"
+      ],
+      "active_vocabulary": {
+        "Dobrý den": 50,
+        "Brno Moderna": 50,
+        "Křenová 123": 50,
+        "Brněnský Dvůr": 50,
+        "Mečová 8": 50,
+        "Liberec Hills": 50,
+        "Komenského 14": 50,
+        "Liberec Moderna": 50,
+        "Šaldova 618": 50,
+        "Liberecké Byty": 50,
+        "Pilsner Urquell Apartments": 50,
+        "Prazdroj": 50,
+        "Plzeň City Apartments": 50,
+        "Sady Pětatřicátníků 12": 50,
+        "Plzeň City Center": 50,
+        "Sady 5. května 12": 50,
+        "Plzeň Family Home": 50,
+        "Borská 12": 50,
+        "Plzeň Loft": 50,
+        "Borská 20": 50,
+        "Plzeň Panorama": 50,
+        "Slovany": 50,
+        "Plzeň Paradise": 50,
+        "Sady Pětatřicátníků 55": 50,
+        "Plzeň Perch": 50,
+        "Křižovatka 20": 50
+      },
+      "vocabulary_sha256": "b522e439aae8e04d13a29e62cd0e176c75845c6fdf69ef93d9ad78f9d5eeff68"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Plzeň Family Home",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Borská 12",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "具体街道地址"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Dobrý den": 50,
+        "Brno Moderna": 50,
+        "Křenová 123": 50,
+        "Brněnský Dvůr": 50,
+        "Mečová 8": 50,
+        "Liberec Hills": 50,
+        "Komenského 14": 50,
+        "Liberec Moderna": 50,
+        "Šaldova 618": 50,
+        "Liberecké Byty": 50,
+        "Pilsner Urquell Apartments": 50,
+        "Prazdroj": 50,
+        "Plzeň City Apartments": 50,
+        "Sady Pětatřicátníků 12": 50,
+        "Plzeň City Center": 50,
+        "Sady 5. května 12": 50,
+        "Plzeň Family Home": 50,
+        "Borská 12": 50,
+        "Plzeň Loft": 50,
+        "Borská 20": 50,
+        "Plzeň Panorama": 50,
+        "Slovany": 50,
+        "Plzeň Paradise": 50,
+        "Sady Pětatřicátníků 55": 50,
+        "Plzeň Perch": 50,
+        "Křižovatka 20": 50
+      },
+      "vocabulary_sha256": "b522e439aae8e04d13a29e62cd0e176c75845c6fdf69ef93d9ad78f9d5eeff68"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "f2a0c0da30d9b59f22792f5f9cd4015cd0a5c87bf1ce4484ec6a9ebc17e9c7c0",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3091,
+        "completion_tokens": 1300,
+        "total_tokens": 4391,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2835
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 3.824,
+      "error": "Duplicate term within stage 0: 'Dobrý den'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "045c9350cb11a3ccf6ac4dbf702a781045c5ec2d14aab39b6c1a3fdf021a7f93",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4788,
+        "completion_tokens": 1231,
+        "total_tokens": 6019,
+        "prompt_tokens_details": {
+          "cached_tokens": 4352
+        },
+        "prompt_cache_hit_tokens": 4352,
+        "prompt_cache_miss_tokens": 436
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 3.536,
+      "error": "Invalid proper-name phrase: 'matej.novacek@student.cuni.cz'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "99c7d259e330570d4878d4ca582737cffd000033ce312f89db852808910f797a",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4723,
+        "completion_tokens": 1174,
+        "total_tokens": 5897,
+        "prompt_tokens_details": {
+          "cached_tokens": 3072
+        },
+        "prompt_cache_hit_tokens": 3072,
+        "prompt_cache_miss_tokens": 1651
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 3.421,
+      "error": "Duplicate term within stage 2: 'Plzeň Family Home'"
+    },
+    {
+      "attempt": 4,
+      "request_sha256": "dbf71a537fec5adf4b498667b0a955c9153c1f3b7cd676143e7d3827824d247e",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4662,
+        "completion_tokens": 1094,
+        "total_tokens": 5756,
+        "prompt_tokens_details": {
+          "cached_tokens": 3968
+        },
+        "prompt_cache_hit_tokens": 3968,
+        "prompt_cache_miss_tokens": 694
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 3.092
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0144_vi1f41yua26coj8qk0ffkhxlml2ww326",
+  "extracted_at": "2026-11-22T06:40:32.659643+00:00"
+}

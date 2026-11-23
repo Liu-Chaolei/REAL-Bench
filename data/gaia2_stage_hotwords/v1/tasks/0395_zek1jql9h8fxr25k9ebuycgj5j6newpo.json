@@ -1,0 +1,118 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0395_zek1jql9h8fxr25k9ebuycgj5j6newpo",
+  "model": "deepseek-flash",
+  "input_sha256": "7836b5838c44084c9472783e9d36a9355883e302ec7251049f53c551c41f794a",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Rohini Mehta",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-767c4ae1-36e9-4379-9159-b515549722ed.arguments.content",
+          "reason": "联系人中的完整人名"
+        }
+      ],
+      "new_terms": [
+        "Rohini Mehta"
+      ],
+      "active_vocabulary": {
+        "Rohini Mehta": 50
+      },
+      "vocabulary_sha256": "92a0f1c1bdcfc56a67a7a242207dbb45cb8c3df9e61cec9487a109290f4ae92e"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Rohini Mehta",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Rohini Nambiar",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "另一位 Rohini 的完整姓名"
+        }
+      ],
+      "new_terms": [
+        "Rohini Nambiar"
+      ],
+      "active_vocabulary": {
+        "Rohini Mehta": 50,
+        "Rohini Nambiar": 50
+      },
+      "vocabulary_sha256": "7567c706ad9d9f0ef4fae0691693b9fb613f31692beb615c38ed7f7dd6cac0c9"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Rohini Mehta",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.attendees[0]",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Rohini Nambiar",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.attendees[1]",
+          "reason": "参会人完整姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Rohini Mehta": 50,
+        "Rohini Nambiar": 50
+      },
+      "vocabulary_sha256": "7567c706ad9d9f0ef4fae0691693b9fb613f31692beb615c38ed7f7dd6cac0c9"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "425f818bc2d98f1178d186ecc715d8b31b0369220c4b77cac3fdf07499757c8b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1346,
+        "completion_tokens": 250,
+        "total_tokens": 1596,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1090
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.18,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "25733c2d2fc7914f7a7f3ca69d75ed9398f201f8eddbf10bd1cfa5b44032d350",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1989,
+        "completion_tokens": 252,
+        "total_tokens": 2241,
+        "prompt_tokens_details": {
+          "cached_tokens": 1536
+        },
+        "prompt_cache_hit_tokens": 1536,
+        "prompt_cache_miss_tokens": 453
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.084
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0395_zek1jql9h8fxr25k9ebuycgj5j6newpo",
+  "extracted_at": "2026-11-22T06:41:41.766516+00:00"
+}

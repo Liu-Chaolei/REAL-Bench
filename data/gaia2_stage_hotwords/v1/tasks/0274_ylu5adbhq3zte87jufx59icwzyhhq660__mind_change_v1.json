@@ -1,0 +1,196 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0274_ylu5adbhq3zte87jufx59icwzyhhq660__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "25bcffeb412a41bf68a1dfed6cbf446e9e1dfb8b2e9bbf89132f54f891ce6fc4",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Axel",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Stockholm City",
+          "kind": "place",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-b121a325-3fb0-4651-a01f-873015a420ac.arguments.content",
+          "reason": "物业名称"
+        }
+      ],
+      "new_terms": [
+        "Axel",
+        "Stockholm City"
+      ],
+      "active_vocabulary": {
+        "Axel": 50,
+        "Stockholm City": 50
+      },
+      "vocabulary_sha256": "24ffaeafdc1e53c5c9aa45021b7bede5bc7f355e524ab0a7424e125a4003fc4c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Axel",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Stockholm City",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "物业名称"
+        },
+        {
+          "text": "Stockholm Archipelago",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "物业名称"
+        },
+        {
+          "text": "Stockholm Sanctuary",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "物业名称"
+        },
+        {
+          "text": "Drottninggatan 83",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "街道地址"
+        },
+        {
+          "text": "Södra Hammarbyhamnen",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "区域名称"
+        },
+        {
+          "text": "Östermalm",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "区域名称"
+        },
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [
+        "Stockholm Archipelago",
+        "Stockholm Sanctuary",
+        "Drottninggatan 83",
+        "Södra Hammarbyhamnen",
+        "Östermalm",
+        "Astrid"
+      ],
+      "active_vocabulary": {
+        "Axel": 50,
+        "Stockholm City": 50,
+        "Stockholm Archipelago": 50,
+        "Stockholm Sanctuary": 50,
+        "Drottninggatan 83": 50,
+        "Södra Hammarbyhamnen": 50,
+        "Östermalm": 50,
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "0ee600772a8eecfa9367f77dc2091f6e5e53c36cf5e1eab173acf7fd934f57a4"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Stockholm Serenity",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "物业名称"
+        },
+        {
+          "text": "Stockholm Haven",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "物业名称"
+        },
+        {
+          "text": "Stockholm City",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "物业名称"
+        },
+        {
+          "text": "Drottninggatan 83",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_book.arguments.location",
+          "reason": "街道地址"
+        }
+      ],
+      "new_terms": [
+        "Stockholm Serenity",
+        "Stockholm Haven"
+      ],
+      "active_vocabulary": {
+        "Axel": 50,
+        "Stockholm City": 50,
+        "Stockholm Archipelago": 50,
+        "Stockholm Sanctuary": 50,
+        "Drottninggatan 83": 50,
+        "Södra Hammarbyhamnen": 50,
+        "Östermalm": 50,
+        "Astrid": 50,
+        "Stockholm Serenity": 50,
+        "Stockholm Haven": 50
+      },
+      "vocabulary_sha256": "2414e17c6de2a8f14f40e12b9e9b8f3310f937647279b151ab8e615e34339e8d"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "c380f20139f348587747c086d80f40ff5e506e24161b895f63594b69a3b80f0c",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2012,
+        "completion_tokens": 515,
+        "total_tokens": 2527,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1756
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.844,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "50e98bd21621f0f65639d43abba73747a6c9eb8dce3a5977f50d061e294c6f94",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2920,
+        "completion_tokens": 510,
+        "total_tokens": 3430,
+        "prompt_tokens_details": {
+          "cached_tokens": 2432
+        },
+        "prompt_cache_hit_tokens": 2432,
+        "prompt_cache_miss_tokens": 488
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.751
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0274_ylu5adbhq3zte87jufx59icwzyhhq660__mind_change_v1",
+  "extracted_at": "2026-11-22T06:45:04.607423+00:00"
+}

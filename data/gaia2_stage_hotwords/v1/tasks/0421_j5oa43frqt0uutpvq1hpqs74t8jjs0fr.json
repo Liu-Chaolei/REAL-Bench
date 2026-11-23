@@ -1,0 +1,133 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0421_j5oa43frqt0uutpvq1hpqs74t8jjs0fr",
+  "model": "deepseek-flash",
+  "input_sha256": "e3106f8d20901e01da47024d53272979c0afd6bb5529e188acb66ac0bbc6f3ce",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Porto",
+          "kind": "place",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-45978206-5bbf-420d-aa78-c8b85e23b0a2.arguments.content",
+          "reason": "城市专有名词"
+        }
+      ],
+      "new_terms": [
+        "Porto"
+      ],
+      "active_vocabulary": {
+        "Porto": 50
+      },
+      "vocabulary_sha256": "49210eaf22097e472be509c27ec03cbe84059d61197be524fb045ad54f2eb087"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Vasco Sousa",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[1]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Porto",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.description",
+          "reason": "城市专有名词"
+        }
+      ],
+      "new_terms": [
+        "Vasco Sousa",
+        "Aurélien LaFleur"
+      ],
+      "active_vocabulary": {
+        "Porto": 50,
+        "Vasco Sousa": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "9afc5d864cd5ac1f50963f31e74621bb6c2e5a86c85e9735e270faeae9c0ea25"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Vasco Sousa",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "署名姓名"
+        },
+        {
+          "text": "Porto",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "城市专有名词"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Porto": 50,
+        "Vasco Sousa": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "9afc5d864cd5ac1f50963f31e74621bb6c2e5a86c85e9735e270faeae9c0ea25"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "c18ceb070fa6665f79e6f8cc354d78e5400570beef52a56e8cf3a24d08c562c5",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1828,
+        "completion_tokens": 319,
+        "total_tokens": 2147,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1572
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.569,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "31e8c8e036fa5ce3c1927027e446483ee242084fc781c0e3303084ce8d6d29ae",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2540,
+        "completion_tokens": 321,
+        "total_tokens": 2861,
+        "prompt_tokens_details": {
+          "cached_tokens": 2048
+        },
+        "prompt_cache_hit_tokens": 2048,
+        "prompt_cache_miss_tokens": 492
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.56
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0421_j5oa43frqt0uutpvq1hpqs74t8jjs0fr",
+  "extracted_at": "2026-11-22T06:41:50.331176+00:00"
+}

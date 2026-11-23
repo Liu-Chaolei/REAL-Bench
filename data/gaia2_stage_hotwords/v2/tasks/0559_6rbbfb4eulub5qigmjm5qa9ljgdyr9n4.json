@@ -1,0 +1,188 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0559_6rbbfb4eulub5qigmjm5qa9ljgdyr9n4",
+  "model": "deepseek-flash",
+  "input_sha256": "4ef336bccfffc77cc773179380a67518b7750025db084c6b814d71664de55015",
+  "review_input_sha256": "19cb07f22305a1d44f207b58b52e33901f54dceb3101ca7cafd3db52430034fd",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "042daa90b2fd2e82f61cab468274d7bec9e2d266b4a3f28b91e3231072dbede4",
+  "reference_results_sha256": "ef25fd0e2047518260fc8b9471c0ed2aec3f4586db3f7ee47399d3b38aee5739",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Zurich Airport",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Mittlere Strasse 12",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Basel",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.tool_response.series_s1_alessia": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Alessia\", \"last_name\": \"Ramseyer\", \"contact_id\": \"9a543ae730514a1a9621457ed65b6fa0\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"21\", \"nationality\": \"Swiss\", \"city_living\": \"Zurich\", \"country\": \"Switzerland\", \"status\": \"Status.STUDENT\", \"job\": \"Part-time Sales Assistant at a local outdoor gear store\", \"description\": \"Alessia is a bright and adventurous young woman who is currently pursuing a degree in Environmental Engineering at ETH Zurich. She is passionate about sustainability and the outdoors, which is reflected in her hobbies and part-time job at a local outdoor gear store. Alessia is a creative problem solver and enjoys finding innovative solutions to complex environmental issues.\", \"phone\": \"+41794562311\", \"email\": \"alessia.ramseyer@student.ethz.ch\", \"address\": \"Sihlstrasse 15, 8001 Zürich, Switzerland\"}",
+      "event_id": "series_s1_alessia",
+      "response_sha256": "fe4986e354601b420d3feea40309cdc275c60c599e0ae55aadea71b0d801a68e"
+    },
+    "stage1.tool_response.series_s1_home": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Ursula\", \"last_name\": \"Wiederkehr\", \"contact_id\": \"bbaa6b76af014220a764ca01b0203121\", \"is_user\": \"True\", \"gender\": \"Gender.FEMALE\", \"age\": \"61\", \"nationality\": \"Swiss\", \"city_living\": \"Basel\", \"country\": \"Switzerland\", \"status\": \"Status.RETIRED\", \"job\": \"Historian\", \"description\": \"A retired historian who spent most of her career studying the impact of lesser-known battles on geopolitical dynamics.\", \"phone\": \"+41764562317\", \"email\": \"ursula.wiederkehr@gaia2mail.com\", \"address\": \"Mittlere Strasse 12, 4058 Basel, Switzerland\"}",
+      "event_id": "series_s1_home",
+      "response_sha256": "2694e0b56ead2ebcf04e331bc4a252cf69a77986f56bdb8ad928420917b714c3"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Alessia Ramseyer",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Zurich Airport",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "机场专有地名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Zurich Airport"
+      ],
+      "active_vocabulary": {
+        "Zurich Airport": 50
+      },
+      "vocabulary_sha256": "4df16005c30404ee9f09dbc408217de7418410e449e0ba32817b9e615e41019b"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Mittlere Strasse 12",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "德语街道地址，难识别，保留",
+          "weight": 50
+        },
+        {
+          "text": "Basel",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "城市专有地名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Ramseyer",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_alessia",
+          "reason": "难拼姓氏，作为字面字段保留",
+          "weight": 50
+        },
+        {
+          "text": "Wiederkehr",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_home",
+          "reason": "难拼姓氏，作为字面字段保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Mittlere Strasse 12",
+        "Basel",
+        "Ramseyer",
+        "Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Zurich Airport": 50,
+        "Mittlere Strasse 12": 50,
+        "Basel": 50,
+        "Ramseyer": 50,
+        "Wiederkehr": 50
+      },
+      "vocabulary_sha256": "1af3cb8afc785a404731d4b1bcd428e81c0d2447ddccfdb0bee9d5dd1135fe83"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Alessia Ramseyer",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Alessia Ramseyer",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Zurich Airport": 50,
+        "Mittlere Strasse 12": 50,
+        "Basel": 50,
+        "Ramseyer": 50,
+        "Wiederkehr": 50,
+        "Alessia Ramseyer": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "8d37193057583390cb8c31f35f8e22985907fad35f47b1de4d372261a89c944a"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": [
+        {
+          "text": "Zurich",
+          "covered_by": "Zurich Airport"
+        }
+      ]
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [
+    {
+      "text": "Zurich",
+      "from": "stage0.existing_catalog.1",
+      "to": "stage0.existing_catalog.0"
+    }
+  ],
+  "old_terms_removed": [
+    "Zurich",
+    "University",
+    "Switzerland",
+    "Zoom Meeting"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:27.503797+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

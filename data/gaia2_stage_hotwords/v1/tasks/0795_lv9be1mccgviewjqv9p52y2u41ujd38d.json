@@ -1,0 +1,123 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0795_lv9be1mccgviewjqv9p52y2u41ujd38d",
+  "model": "deepseek-flash",
+  "input_sha256": "f1a21a9b03dd1e3b4a4b87ea746fe665d257517647eca67cb5fbe1a9129cf2d6",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Pokemon",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品名称中的品牌专有名词"
+        }
+      ],
+      "new_terms": [
+        "Pokemon"
+      ],
+      "active_vocabulary": {
+        "Pokemon": 50
+      },
+      "vocabulary_sha256": "712acbb7b92d03c0766a72c126283040ddd87324030033d3641c543965e7783d"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Pokemon Starter Decks",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "具体商品名称"
+        }
+      ],
+      "new_terms": [
+        "Pokemon Starter Decks"
+      ],
+      "active_vocabulary": {
+        "Pokemon": 50,
+        "Pokemon Starter Decks": 50
+      },
+      "vocabulary_sha256": "d0455162e75e1d239fa9b2b5882b10b5fbb6b4857c183f609f26d8be63f1fc96"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Pokemon Starter Decks",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "具体商品名称"
+        },
+        {
+          "text": "Fire",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "商品变体名称"
+        },
+        {
+          "text": "Water",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "商品变体名称"
+        }
+      ],
+      "new_terms": [
+        "Fire",
+        "Water"
+      ],
+      "active_vocabulary": {
+        "Pokemon": 50,
+        "Pokemon Starter Decks": 50,
+        "Fire": 50,
+        "Water": 50
+      },
+      "vocabulary_sha256": "e37e8dcc2f7ffc650accdf394bf293cd3000deeb4df3587e644f8c1f9c962213"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "7588f2cc2052f5bdd6b8cd0b5cd6154926993ce73cd7f08f4d917603c937bd50",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1832,
+        "completion_tokens": 178,
+        "total_tokens": 2010,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1576
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 0.9,
+      "error": "4 validation errors for Extraction\nstages.0.terms.0.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage0.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage1.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage2.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "d816519b2c7842189147249a822218e3d5436cd0cae576a45811a44c2fb95c2a",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2633,
+        "completion_tokens": 155,
+        "total_tokens": 2788,
+        "prompt_tokens_details": {
+          "cached_tokens": 1920
+        },
+        "prompt_cache_hit_tokens": 1920,
+        "prompt_cache_miss_tokens": 713
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.76
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0795_lv9be1mccgviewjqv9p52y2u41ujd38d",
+  "extracted_at": "2026-11-22T06:43:53.410014+00:00"
+}

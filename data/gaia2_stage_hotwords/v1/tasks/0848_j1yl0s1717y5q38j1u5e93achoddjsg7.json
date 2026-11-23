@@ -1,0 +1,168 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0848_j1yl0s1717y5q38j1u5e93achoddjsg7",
+  "model": "deepseek-flash",
+  "input_sha256": "1979317af375e62a4edb015a77e185f33e139bfbbbdb403b8ff12720c49d2612",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "12th Precinct",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-38c0570a-3b09-4ee2-8a57-6195c672e35c.arguments.end_location",
+          "reason": "活动地点中的独特场所名"
+        },
+        {
+          "text": "Shivaji Marg",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-38c0570a-3b09-4ee2-8a57-6195c672e35c.arguments.end_location",
+          "reason": "印度街道专名"
+        },
+        {
+          "text": "Andheri West",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-38c0570a-3b09-4ee2-8a57-6195c672e35c.arguments.end_location",
+          "reason": "孟买地区专名"
+        },
+        {
+          "text": "Mumbai",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-38c0570a-3b09-4ee2-8a57-6195c672e35c.arguments.end_location",
+          "reason": "城市名"
+        },
+        {
+          "text": "Maharashtra",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-38c0570a-3b09-4ee2-8a57-6195c672e35c.arguments.end_location",
+          "reason": "邦名"
+        }
+      ],
+      "new_terms": [
+        "12th Precinct",
+        "Shivaji Marg",
+        "Andheri West",
+        "Mumbai",
+        "Maharashtra"
+      ],
+      "active_vocabulary": {
+        "12th Precinct": 50,
+        "Shivaji Marg": 50,
+        "Andheri West": 50,
+        "Mumbai": 50,
+        "Maharashtra": 50
+      },
+      "vocabulary_sha256": "a7830d7cee6444c9854910bcdaee5c9ec634030e71620262970533c3f404e83f"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Raghavendra Rao",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "需精确匹配的联系人姓名"
+        },
+        {
+          "text": "Ravindra Deshpande",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "需精确匹配的联系人姓名"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "被明确排除的相似姓名"
+        }
+      ],
+      "new_terms": [
+        "Raghavendra Rao",
+        "Ravindra Deshpande",
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "12th Precinct": 50,
+        "Shivaji Marg": 50,
+        "Andheri West": 50,
+        "Mumbai": 50,
+        "Maharashtra": 50,
+        "Raghavendra Rao": 50,
+        "Ravindra Deshpande": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "4e09680378b645dd123d0afb3b023f4c294fa428b2d0762c7cc01b818d994f21"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "12th Precinct",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_quotation.arguments.start_location",
+          "reason": "返程起点场所名"
+        },
+        {
+          "text": "Shivaji Marg",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_quotation.arguments.start_location",
+          "reason": "印度街道专名"
+        },
+        {
+          "text": "Andheri West",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_quotation.arguments.start_location",
+          "reason": "孟买地区专名"
+        },
+        {
+          "text": "Mumbai",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_quotation.arguments.start_location",
+          "reason": "城市名"
+        },
+        {
+          "text": "Maharashtra",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_quotation.arguments.start_location",
+          "reason": "邦名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "12th Precinct": 50,
+        "Shivaji Marg": 50,
+        "Andheri West": 50,
+        "Mumbai": 50,
+        "Maharashtra": 50,
+        "Raghavendra Rao": 50,
+        "Ravindra Deshpande": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "4e09680378b645dd123d0afb3b023f4c294fa428b2d0762c7cc01b818d994f21"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "aaaf3df4bf9728ea8f0aec8b762d3a5afad3eee6e8f3115d7e8c7af9aa160429",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2595,
+        "completion_tokens": 633,
+        "total_tokens": 3228,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2339
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.27
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0848_j1yl0s1717y5q38j1u5e93achoddjsg7",
+  "extracted_at": "2026-11-22T06:44:10.333008+00:00"
+}

@@ -1,0 +1,149 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0565_2jrc925ifrssukl69pgrqd7ap2pt1zuz",
+  "model": "deepseek-flash",
+  "input_sha256": "eccec17caad303b766c504ece60d9c9a685fb0f84d73d31112feace35e564166",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aisling",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名，联系人姓名"
+        },
+        {
+          "text": "Aerospace Engineering Consultant",
+          "kind": "technical_term",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-59111d5f-e662-4441-805e-54913d2fbd89.arguments.updates.job",
+          "reason": "特定职位名称"
+        },
+        {
+          "text": "Former Aerospace Engineer",
+          "kind": "technical_term",
+          "source": "stage0.source_task",
+          "reason": "原职位名称"
+        }
+      ],
+      "new_terms": [
+        "Aisling",
+        "Aerospace Engineering Consultant",
+        "Former Aerospace Engineer"
+      ],
+      "active_vocabulary": {
+        "Aisling": 50,
+        "Aerospace Engineering Consultant": 50,
+        "Former Aerospace Engineer": 50
+      },
+      "vocabulary_sha256": "2c0f5e113666febac6eea296b1c0f0ee6c79dcc2b7f6d01749f5110193e63a0b"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kailash Rao",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群成员姓名"
+        },
+        {
+          "text": "Thanawat Suthiwong",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群成员姓名"
+        },
+        {
+          "text": "Aisling Ó Cuinn",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "完整人名，含特殊拼写"
+        },
+        {
+          "text": "Aerospace Engineering Consultant",
+          "kind": "technical_term",
+          "source": "stage1.source_task",
+          "reason": "特定职位名称"
+        }
+      ],
+      "new_terms": [
+        "Kailash Rao",
+        "Thanawat Suthiwong",
+        "Aisling Ó Cuinn"
+      ],
+      "active_vocabulary": {
+        "Aisling": 50,
+        "Aerospace Engineering Consultant": 50,
+        "Former Aerospace Engineer": 50,
+        "Kailash Rao": 50,
+        "Thanawat Suthiwong": 50,
+        "Aisling Ó Cuinn": 50
+      },
+      "vocabulary_sha256": "4c8deefa17c4095743ac90fd518b46dbbee58ba0b0361bb4effd2b4bbe04ebde"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kailash",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群名中的成员名"
+        },
+        {
+          "text": "Thanawat",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群名中的成员名"
+        },
+        {
+          "text": "Catch-up and Startup Updates – Kailash & Thanawat",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_rename.arguments.title",
+          "reason": "自定义会话标题"
+        }
+      ],
+      "new_terms": [
+        "Kailash",
+        "Thanawat",
+        "Catch-up and Startup Updates – Kailash & Thanawat"
+      ],
+      "active_vocabulary": {
+        "Aisling": 50,
+        "Aerospace Engineering Consultant": 50,
+        "Former Aerospace Engineer": 50,
+        "Kailash Rao": 50,
+        "Thanawat Suthiwong": 50,
+        "Aisling Ó Cuinn": 50,
+        "Kailash": 50,
+        "Thanawat": 50,
+        "Catch-up and Startup Updates – Kailash & Thanawat": 50
+      },
+      "vocabulary_sha256": "d418d9d779aef6ba2d166d716361af8b94282d31b43011158e4c1fe9b6fc3fb2"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "3d86dd25da76eb22558a7e32055063098cc76514e60574256f8ad13ed56d8861",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2527,
+        "completion_tokens": 350,
+        "total_tokens": 2877,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2271
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.381
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0565_2jrc925ifrssukl69pgrqd7ap2pt1zuz",
+  "extracted_at": "2026-11-22T06:42:43.849522+00:00"
+}

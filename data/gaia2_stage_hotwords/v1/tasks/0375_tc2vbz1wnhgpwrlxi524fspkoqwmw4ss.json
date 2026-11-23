@@ -1,0 +1,149 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0375_tc2vbz1wnhgpwrlxi524fspkoqwmw4ss",
+  "model": "deepseek-flash",
+  "input_sha256": "998fe6785d51ca692041aab4f85d747c59ed4aa959c7e6ef90d8ddfd5e1b00e9",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Åse",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a512abae-d37b-419d-bc99-57386cbf9092.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Kåre",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-60e7034a-7dcf-4ea8-9e8a-ee1215ae3965.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Oleksandr",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-8212a839-4a58-4da4-8a5a-e36be2f96c84.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Solveig",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-645421ed-6180-4e0a-b9e4-b07b7a7c5ff9.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Cinema Paradiso",
+          "kind": "product",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c794c4a9-e399-495f-97e1-210cb7fb65a7.arguments.title",
+          "reason": "电影名称"
+        }
+      ],
+      "new_terms": [
+        "Åse",
+        "Kåre",
+        "Oleksandr",
+        "Solveig",
+        "Cinema Paradiso"
+      ],
+      "active_vocabulary": {
+        "Åse": 50,
+        "Kåre": 50,
+        "Oleksandr": 50,
+        "Solveig": 50,
+        "Cinema Paradiso": 50
+      },
+      "vocabulary_sha256": "9f33a66443f1fc053bccb2e5bb1eff3ff87110f842c99f2c362286d7a4d5f044"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Cinema Paradiso",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_remind_0.arguments.content",
+          "reason": "电影名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Åse": 50,
+        "Kåre": 50,
+        "Oleksandr": 50,
+        "Solveig": 50,
+        "Cinema Paradiso": 50
+      },
+      "vocabulary_sha256": "9f33a66443f1fc053bccb2e5bb1eff3ff87110f842c99f2c362286d7a4d5f044"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Cinema Paradiso Watch-Along planning",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_create.arguments.title",
+          "reason": "群组标题"
+        },
+        {
+          "text": "Frognerveien 34",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "街道地址"
+        },
+        {
+          "text": "Oslo",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "城市名"
+        },
+        {
+          "text": "Norway",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "国家名"
+        }
+      ],
+      "new_terms": [
+        "Cinema Paradiso Watch-Along planning",
+        "Frognerveien 34",
+        "Oslo",
+        "Norway"
+      ],
+      "active_vocabulary": {
+        "Åse": 50,
+        "Kåre": 50,
+        "Oleksandr": 50,
+        "Solveig": 50,
+        "Cinema Paradiso": 50,
+        "Cinema Paradiso Watch-Along planning": 50,
+        "Frognerveien 34": 50,
+        "Oslo": 50,
+        "Norway": 50
+      },
+      "vocabulary_sha256": "81fdd3f377b583582ae02d7363fb30e64255453398ed22be2eb7c39adfb7756b"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "ff7fbd29af0f51dfc07aa831af7ee085386f5303667504fc077e4f0b9fb68ad8",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4168,
+        "completion_tokens": 503,
+        "total_tokens": 4671,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3912
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.782
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0375_tc2vbz1wnhgpwrlxi524fspkoqwmw4ss",
+  "extracted_at": "2026-11-22T06:41:35.066982+00:00"
+}

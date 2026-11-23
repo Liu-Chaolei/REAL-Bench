@@ -1,0 +1,148 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0753_wmytnmlp2jzc2tij0wu6nhxk6dhzeh53",
+  "model": "deepseek-flash",
+  "input_sha256": "2548d78314436d5de7b7530fccd4e4ac7221872883533e39817f6c44d3878deb",
+  "review_input_sha256": "a165bd6f95373d52c9afa7a7b415c7f49d581d8410b21c0de114573a89d6bf41",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "e7c0d1b8354dfc65b623618f056bea7420cc65d3d3bceae009102219f50f3265",
+  "reference_results_sha256": "cfd8451bcd45452c505a2929407f5cf424cdf519153a39f8b97631e2ef9a00cd",
+  "sources": {
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Søren Kjær",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-3a7aaa4c-6fca-4a92-af71-3e2421b6da4f.arguments.content"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "nordiccollectibles.dk",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-4ed6c836-8744-4d55-83b9-a2e701bb74ea.arguments.recipients[0]"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Kirsten Rasmussen",
+      "original_source": "stage1.reference_reply.series_s1_notify.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Astrid Kjær",
+      "original_source": "stage1.reference_reply.series_s1_notify.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "rohini.deshpande",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.recipients[0]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "nordiccollectibles.dk",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.5",
+          "reason": "独特域名形式的组织名",
+          "weight": 50
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "含特殊字符ø和æ的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "nordiccollectibles.dk",
+        "Søren Kjær"
+      ],
+      "active_vocabulary": {
+        "nordiccollectibles.dk": 50,
+        "Søren Kjær": 50
+      },
+      "vocabulary_sha256": "f7e4b960e438ad7b5871223f96f95c7e17d9dedb536b0131d55f92046e083c3d"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Astrid Kjær",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含特殊字符æ的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Kirsten Rasmussen",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，比单独名字更具辨识度",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Kjær",
+        "Kirsten Rasmussen"
+      ],
+      "active_vocabulary": {
+        "nordiccollectibles.dk": 50,
+        "Søren Kjær": 50,
+        "Astrid Kjær": 50,
+        "Kirsten Rasmussen": 50
+      },
+      "vocabulary_sha256": "5e9c2cb497061c44fe2496022fd254de3ceeb6d02db25c97f081db1923c99a30"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "rohini.deshpande",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "独特完整姓名标识",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "rohini.deshpande"
+      ],
+      "active_vocabulary": {
+        "nordiccollectibles.dk": 50,
+        "Søren Kjær": 50,
+        "Astrid Kjær": 50,
+        "Kirsten Rasmussen": 50,
+        "rohini.deshpande": 50
+      },
+      "vocabulary_sha256": "1848d539aca34bf6ffd316d7c2464a930dddd134d7dc3e18fe77289cd1377190"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Astrid",
+    "Kirsten",
+    "Søren",
+    "Birgitta",
+    "Copenhagen"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:15.490988+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

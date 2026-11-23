@@ -1,0 +1,366 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0731_qkacutnsz97l78cv97dpcvkhz545u8i9",
+  "model": "deepseek-flash",
+  "input_sha256": "809ed72bd7dc63148757ce9ad60979c8a5761da8682a58e1649b73c3e8412be3",
+  "review_input_sha256": "2bb16eea6fb2606a4b5b315a7ed49e75b1baaa29951068af9f9113ff45795907",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "551f6b673aea7a77ebfa8d486f5dfdb9034f48409b8f79133c149290907e492e",
+  "reference_results_sha256": "60637908c6c44a318b406e6c60f3981396def344b53aa04d4640a8980dd94b2b",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kvido Nováček",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Pražský Palác",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.tool_response.series_s1_list_saved": {
+      "stage": 1,
+      "text": "{\"820d222f5600477b836e099bf11620a1\": {\"name\": \"Ostrava City\", \"location\": \"Českobratrská 10, Ostrava-město\", \"zip_code\": \"702 00\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"Month-to-month\", \"apartment_id\": \"820d222f5600477b836e099bf11620a1\", \"amenities\": [\"Gym\"], \"saved\": \"True\"}, \"6b5b37b091ca4d6b8c0785d813420aed\": {\"name\": \"Hradec Králové City Center\", \"location\": \"V Kopečku, Hradec Králové\", \"zip_code\": \"500 02\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"6b5b37b091ca4d6b8c0785d813420aed\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"88064558ff9b4327be5c8eeeb7a94a35\": {\"name\": \"Plzeňská Lochotín\", \"location\": \"Lochotín 20, Plzeň\", \"zip_code\": \"301 00\", \"price\": \"1000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"88064558ff9b4327be5c8eeeb7a94a35\", \"amenities\": [\"Gym\", \"Parking\"], \"saved\": \"True\"}, \"16f5604846684c8f9ae7e453e07c89dd\": {\"name\": \"Plzeňské Apartmány\", \"location\": \"City Center, Plzeň\", \"zip_code\": \"301 00\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"16f5604846684c8f9ae7e453e07c89dd\", \"amenities\": [\"Gym\", \"Laundry\", \"Elevator\"], \"saved\": \"True\"}, \"9f69660230e0437aa35a14f61a871837\": {\"name\": \"Plzeň City Apartments\", \"location\": \"Sady Pětatřicátníků 12, Plzeň\", \"zip_code\": \"301 00\", \"price\": \"1500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"9f69660230e0437aa35a14f61a871837\", \"amenities\": [\"Gym\", \"Parking\"], \"saved\": \"True\"}, \"7c3d47f949b14706bcb63435941985e2\": {\"name\": \"Liberec Moderna\", \"location\": \"Šaldova 618, Liberec\", \"zip_code\": \"460 01\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1100\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"7c3d47f949b14706bcb63435941985e2\", \"amenities\": [\"Parking\", \"Laundry\", \"Gym\"], \"saved\": \"True\"}, \"f25c52f1136e4f87becae634ed0dc431\": {\"name\": \"Plzeň Historical Residence\", \"location\": \"Sedláčkova 18, Plzeň 3\", \"zip_code\": \"301 00\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Second floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"f25c52f1136e4f87becae634ed0dc431\", \"amenities\": [\"Garden\"], \"saved\": \"True\"}, \"ff7278624b3646cd901c07fc7e73ae80\": {\"name\": \"Pilsner Urquell Apartments\", \"location\": \"Prazdroj, Plzeň 3\", \"zip_code\": \"301 00\", \"price\": \"1000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"300\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"ff7278624b3646cd901c07fc7e73ae80\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"e8a87d7d6e5a42c1938a601a0c6bcda0\": {\"name\": \"Liberecké Byty\", \"location\": \"City Center, Liberec\", \"zip_code\": \"460 01\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"e8a87d7d6e5a42c1938a601a0c6bcda0\", \"amenities\": [\"Parking\", \"Laundry\", \"Playground\"], \"saved\": \"True\"}, \"18653787bfaa44629b42c12007c1b542\": {\"name\": \"Ostrava Poruba\", \"location\": \"17. listopadu 10, Ostrava\", \"zip_code\": \"708 00\", \"price\": \"900\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"400\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"18653787bfaa44629b42c12007c1b542\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"4eb316679ee7406c89fbe546b3eefb06\": {\"name\": \"Plzeň Paradise\", \"location\": \"Sady Pětatřicátníků 55, Plzeň\", \"zip_code\": \"301 00\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1100\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"4eb316679ee7406c89fbe546b3eefb06\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"614c4d2b2ef84c41ac853302dbd0b625\": {\"name\": \"Ostrava Riverside\", \"location\": \"Pražská 14, Ostrava\", \"zip_code\": \"702 00\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"614c4d2b2ef84c41ac853302dbd0b625\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"ba08924dc73e425986e4d272239a93a0\": {\"name\": \"Plzeň Perch\", \"location\": \"Křižovatka 20, Plzeň\", \"zip_code\": \"301 00\", \"price\": \"2400\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"ba08924dc73e425986e4d272239a93a0\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"3b2be33b0f7d4363a4e2e474c95b988a\": {\"name\": \"Plzeň City Center\", \"location\": \"Sady 5. května 12, Plzeň 3\", \"zip_code\": \"301 00\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1100\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"3b2be33b0f7d4363a4e2e474c95b988a\", \"amenities\": [\"Pool\", \"Laundry\"], \"saved\": \"True\"}, \"5241ef1823f44731bf2a1dc097d8d24d\": {\"name\": \"Ostravská Rezidence\", \"location\": \"Poruba, Ostrava\", \"zip_code\": \"708 00\", \"price\": \"1500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1100\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"5241ef1823f44731bf2a1dc097d8d24d\", \"amenities\": [\"Parking\", \"Laundry\", \"Playground\"], \"saved\": \"True\"}, \"ec029e0d2f714cf29405b92c35e32afe\": {\"name\": \"Liberec Mountain Views\", \"location\": \"Šaldovo náměstí 22, Liberec\", \"zip_code\": \"460 01\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"ec029e0d2f714cf29405b92c35e32afe\", \"amenities\": [\"Laundry\", \"Mountain views\"], \"saved\": \"True\"}, \"96ffc53bf50e48278b197130140f96e0\": {\"name\": \"Ostravská Nová Karolina\", \"location\": \"Nová Karolina 15, Ostrava\", \"zip_code\": \"709 00\", \"price\": \"1500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"96ffc53bf50e48278b197130140f96e0\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"878e2d3802774a5785fe25927b3fbc72\": {\"name\": \"Plzeň Historic\", \"location\": \"Sady Pětatřicátníků, Plzeň 3\", \"zip_code\": \"301 00\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1100\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"878e2d3802774a5785fe25927b3fbc72\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"8ab94e747ebb448cbf2983c0d553b21c\": {\"name\": \"Pražská brána\", \"location\": \"Pražská 23, Plzeň\", \"zip_code\": \"301 00\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"1500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"8ab94e747ebb448cbf2983c0d553b21c\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"1f7f81a7dab54fbb85ada311b0389c99\": {\"name\": \"Liberec Hills\", \"location\": \"Komenského 14, Liberec\", \"zip_code\": \"460 01\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1100\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"1f7f81a7dab54fbb85ada311b0389c99\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"0bd2d36e7f0f4acda556d50e0cd7cd52\": {\"name\": \"Plzeň Panorama\", \"location\": \"Slovany, Plzeň\", \"zip_code\": \"326 00\", \"price\": \"2800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"0bd2d36e7f0f4acda556d50e0cd7cd52\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"fa7301c71a39441d8168f68406772a26\": {\"name\": \"Plzeň Loft\", \"location\": \"Borská 20, Plzeň 3\", \"zip_code\": \"301 00\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"fa7301c71a39441d8168f68406772a26\", \"amenities\": [\"Pool\", \"Laundry\"], \"saved\": \"True\"}}",
+      "event_id": "series_s1_list_saved",
+      "response_sha256": "a4c8890b664140f832808abd4e43973d813dec3ccad43df7235dbc5ead7d9864"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Plzeň Historical Residence",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Pražská brána",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.3": {
+      "stage": 2,
+      "text": "Plzeň Panorama",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.4": {
+      "stage": 2,
+      "text": "Plzeň Loft",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.5": {
+      "stage": 2,
+      "text": "Plzeňská Lochotín",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.6": {
+      "stage": 2,
+      "text": "Pilsner Urquell Apartments",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kvido Nováček",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kvido Nováček"
+      ],
+      "active_vocabulary": {
+        "Kvido Nováček": 50
+      },
+      "vocabulary_sha256": "07c31060819dd74202ddce0725222d2782a8299d772c6c209be5de238cf4e1ec"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Hradec Králové City Center",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "含变音符号的完整地名",
+          "weight": 50
+        },
+        {
+          "text": "Ostravská Nová Karolina",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "含变音符号的完整专有名",
+          "weight": 50
+        },
+        {
+          "text": "Pilsner Urquell Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特品牌专有公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Plzeň Historical Residence",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "含变音符号的完整专有名",
+          "weight": 50
+        },
+        {
+          "text": "Liberecké Byty",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "含变音符号的专有公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Ostravská Rezidence",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "含变音符号的专有公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Plzeňská Lochotín",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "含变音符号的专有公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Plzeňské Apartmány",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "含变音符号的专有公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Pražská brána",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "含变音符号的专有建筑名",
+          "weight": 50
+        },
+        {
+          "text": "Pražský Palác",
+          "kind": "place",
+          "source": "stage1.existing_catalog.3",
+          "reason": "含变音符号的专有建筑名",
+          "weight": 50
+        },
+        {
+          "text": "Sady Pětatřicátníků",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "含变音符号的街道名",
+          "weight": 50
+        },
+        {
+          "text": "V Kopečku",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "含变音符号的街道名",
+          "weight": 50
+        },
+        {
+          "text": "Šaldovo náměstí",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "含变音符号的街道名",
+          "weight": 50
+        },
+        {
+          "text": "Borská",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "含变音符号的街道名",
+          "weight": 50
+        },
+        {
+          "text": "Komenského",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "含变音符号的街道名",
+          "weight": 50
+        },
+        {
+          "text": "Křižovatka",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "含变音符号的街道名",
+          "weight": 50
+        },
+        {
+          "text": "Sedláčkova",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "含变音符号的街道名",
+          "weight": 50
+        },
+        {
+          "text": "Českobratrská",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "含变音符号的街道名",
+          "weight": 50
+        },
+        {
+          "text": "Šaldova",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "含变音符号的街道名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Hradec Králové City Center",
+        "Ostravská Nová Karolina",
+        "Pilsner Urquell Apartments",
+        "Plzeň Historical Residence",
+        "Liberecké Byty",
+        "Ostravská Rezidence",
+        "Plzeňská Lochotín",
+        "Plzeňské Apartmány",
+        "Pražská brána",
+        "Pražský Palác",
+        "Sady Pětatřicátníků",
+        "V Kopečku",
+        "Šaldovo náměstí",
+        "Borská",
+        "Komenského",
+        "Křižovatka",
+        "Sedláčkova",
+        "Českobratrská",
+        "Šaldova"
+      ],
+      "active_vocabulary": {
+        "Kvido Nováček": 50,
+        "Hradec Králové City Center": 50,
+        "Ostravská Nová Karolina": 50,
+        "Pilsner Urquell Apartments": 50,
+        "Plzeň Historical Residence": 50,
+        "Liberecké Byty": 50,
+        "Ostravská Rezidence": 50,
+        "Plzeňská Lochotín": 50,
+        "Plzeňské Apartmány": 50,
+        "Pražská brána": 50,
+        "Pražský Palác": 50,
+        "Sady Pětatřicátníků": 50,
+        "V Kopečku": 50,
+        "Šaldovo náměstí": 50,
+        "Borská": 50,
+        "Komenského": 50,
+        "Křižovatka": 50,
+        "Sedláčkova": 50,
+        "Českobratrská": 50,
+        "Šaldova": 50
+      },
+      "vocabulary_sha256": "0067c87bed2f4192febbb17b05e8b8bbd82dc78e8de94fe9bcb2ccb817b7afde"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Pilsner Urquell Apartments",
+          "kind": "place",
+          "source": "stage2.existing_catalog.6",
+          "reason": "独特品牌专有公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Plzeň Historical Residence",
+          "kind": "place",
+          "source": "stage2.existing_catalog.1",
+          "reason": "含变音符号的完整专有名",
+          "weight": 50
+        },
+        {
+          "text": "Plzeň Loft",
+          "kind": "place",
+          "source": "stage2.existing_catalog.4",
+          "reason": "含变音符号的专有公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Plzeň Panorama",
+          "kind": "place",
+          "source": "stage2.existing_catalog.3",
+          "reason": "含变音符号的专有公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Plzeňská Lochotín",
+          "kind": "place",
+          "source": "stage2.existing_catalog.5",
+          "reason": "含变音符号的专有公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Pražská brána",
+          "kind": "place",
+          "source": "stage2.existing_catalog.2",
+          "reason": "含变音符号的专有建筑名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Plzeň Loft",
+        "Plzeň Panorama"
+      ],
+      "active_vocabulary": {
+        "Kvido Nováček": 50,
+        "Hradec Králové City Center": 50,
+        "Ostravská Nová Karolina": 50,
+        "Pilsner Urquell Apartments": 50,
+        "Plzeň Historical Residence": 50,
+        "Liberecké Byty": 50,
+        "Ostravská Rezidence": 50,
+        "Plzeňská Lochotín": 50,
+        "Plzeňské Apartmány": 50,
+        "Pražská brána": 50,
+        "Pražský Palác": 50,
+        "Sady Pětatřicátníků": 50,
+        "V Kopečku": 50,
+        "Šaldovo náměstí": 50,
+        "Borská": 50,
+        "Komenského": 50,
+        "Křižovatka": 50,
+        "Sedláčkova": 50,
+        "Českobratrská": 50,
+        "Šaldova": 50,
+        "Plzeň Loft": 50,
+        "Plzeň Panorama": 50
+      },
+      "vocabulary_sha256": "077b933918c319eaf97b347323b36b795a6762c033696a0beaa7e06a7306a01d"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kvido",
+    "Brno",
+    "Prague Palace",
+    "Prague 7",
+    "Prague 6 Luxury",
+    "Plzeň"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:12.053601+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

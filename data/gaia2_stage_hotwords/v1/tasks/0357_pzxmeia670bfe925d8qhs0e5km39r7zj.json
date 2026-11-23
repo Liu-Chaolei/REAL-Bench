@@ -1,0 +1,236 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0357_pzxmeia670bfe925d8qhs0e5km39r7zj",
+  "model": "deepseek-flash",
+  "input_sha256": "4574cda4efceb083d9ea1325cbee15522cbd411388331050f961f2020e74598c",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Anastasia",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a5ba5f22-850e-4fa1-8ab5-64dd51733c59.arguments.content",
+          "reason": "邮件收件人名字"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a5ba5f22-850e-4fa1-8ab5-64dd51733c59.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Kaida",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c0568544-7f9d-49db-bc61-4f75e7b5bd5b.arguments.content",
+          "reason": "邮件收件人名字"
+        },
+        {
+          "text": "Rémi",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a5cf6c05-c20a-4d9b-bdae-d564cb8cf854.arguments.content",
+          "reason": "邮件收件人名字"
+        },
+        {
+          "text": "Bronwyn",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a526c045-9501-4907-ba28-d8e7c1233538.arguments.content",
+          "reason": "邮件收件人名字"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-da99bb82-e8e4-4d39-8134-b8f392f4b59f.arguments.content",
+          "reason": "邮件收件人名字"
+        },
+        {
+          "text": "Léa",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-28ec77dc-7516-4ea5-b04a-e0c77b36ee89.arguments.content",
+          "reason": "邮件收件人名字"
+        }
+      ],
+      "new_terms": [
+        "Anastasia",
+        "Rohan Kumar",
+        "Kaida",
+        "Rémi",
+        "Bronwyn",
+        "Aurélien",
+        "Léa"
+      ],
+      "active_vocabulary": {
+        "Anastasia": 50,
+        "Rohan Kumar": 50,
+        "Kaida": 50,
+        "Rémi": 50,
+        "Bronwyn": 50,
+        "Aurélien": 50,
+        "Léa": 50
+      },
+      "vocabulary_sha256": "e2fa2b4db978a715d4fd84e47333389d4c5066598daaa87ad4abbfc9f19d1bdd"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Weekend Contacts – Chats Outage",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_create.arguments.title",
+          "reason": "新建群聊标题"
+        },
+        {
+          "text": "Anastasia Kuznetsova",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "群成员全名"
+        },
+        {
+          "text": "Kaida Kaur",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "群成员全名"
+        },
+        {
+          "text": "Rémi LaFleur",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "群成员全名"
+        },
+        {
+          "text": "Aurélien Benhamou",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "群成员全名"
+        },
+        {
+          "text": "Léa Dumont",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "群成员全名"
+        },
+        {
+          "text": "Bronwyn McKenzie",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "群成员全名"
+        }
+      ],
+      "new_terms": [
+        "Weekend Contacts – Chats Outage",
+        "Anastasia Kuznetsova",
+        "Kaida Kaur",
+        "Rémi LaFleur",
+        "Aurélien Benhamou",
+        "Léa Dumont",
+        "Bronwyn McKenzie"
+      ],
+      "active_vocabulary": {
+        "Anastasia": 50,
+        "Rohan Kumar": 50,
+        "Kaida": 50,
+        "Rémi": 50,
+        "Bronwyn": 50,
+        "Aurélien": 50,
+        "Léa": 50,
+        "Weekend Contacts – Chats Outage": 50,
+        "Anastasia Kuznetsova": 50,
+        "Kaida Kaur": 50,
+        "Rémi LaFleur": 50,
+        "Aurélien Benhamou": 50,
+        "Léa Dumont": 50,
+        "Bronwyn McKenzie": 50
+      },
+      "vocabulary_sha256": "531d3a49be9b8f99d2bbbd997d00e17cc8f6c2fb97d1466f0c21d10f8b93aa11"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Anastasia Kuznetsova",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "名单中参与者全名"
+        },
+        {
+          "text": "Kaida Kaur",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "名单中参与者全名"
+        },
+        {
+          "text": "Rémi LaFleur",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "名单中参与者全名"
+        },
+        {
+          "text": "Aurélien Benhamou",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "名单中参与者全名"
+        },
+        {
+          "text": "Léa Dumont",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "名单中参与者全名"
+        },
+        {
+          "text": "Bronwyn McKenzie",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "名单中参与者全名"
+        },
+        {
+          "text": "Weekend Contacts – Chats Outage",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "群聊名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Anastasia": 50,
+        "Rohan Kumar": 50,
+        "Kaida": 50,
+        "Rémi": 50,
+        "Bronwyn": 50,
+        "Aurélien": 50,
+        "Léa": 50,
+        "Weekend Contacts – Chats Outage": 50,
+        "Anastasia Kuznetsova": 50,
+        "Kaida Kaur": 50,
+        "Rémi LaFleur": 50,
+        "Aurélien Benhamou": 50,
+        "Léa Dumont": 50,
+        "Bronwyn McKenzie": 50
+      },
+      "vocabulary_sha256": "531d3a49be9b8f99d2bbbd997d00e17cc8f6c2fb97d1466f0c21d10f8b93aa11"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "4e391ee5b10213f1e57560f0289c378b5394c99fc8b85b9bc39ecf7f7b8cd548",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4375,
+        "completion_tokens": 982,
+        "total_tokens": 5357,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4119
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 3.048
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0357_pzxmeia670bfe925d8qhs0e5km39r7zj",
+  "extracted_at": "2026-11-22T06:41:29.325508+00:00"
+}

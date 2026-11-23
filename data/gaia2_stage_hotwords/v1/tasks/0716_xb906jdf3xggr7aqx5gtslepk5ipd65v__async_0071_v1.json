@@ -1,0 +1,180 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0716_xb906jdf3xggr7aqx5gtslepk5ipd65v__async_0071_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "1bd8bdd2698d6837292a6682550f5cb2e6afdd94860507117faf69b2bdad015f",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Yujie Liang",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "室友姓名"
+        },
+        {
+          "text": "Yujie",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "聊天对象名字"
+        },
+        {
+          "text": "Haga, Göteborg",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-bd443c6e-1b9e-4633-8b70-c76f836ca526.arguments.location",
+          "reason": "房产位置地名"
+        }
+      ],
+      "new_terms": [
+        "Yujie Liang",
+        "Yujie",
+        "Haga, Göteborg"
+      ],
+      "active_vocabulary": {
+        "Yujie Liang": 50,
+        "Yujie": 50,
+        "Haga, Göteborg": 50
+      },
+      "vocabulary_sha256": "55ba6787460d92a75a6f9c850f09cf7561949ba942dec6d172ac06411309a80a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Göteborg",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Göteborgs Gård",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "已保存房产名称"
+        },
+        {
+          "text": "Yujie",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "聊天对象名字"
+        },
+        {
+          "text": "Göteborg City Center",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_chat.arguments.content",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Avenyn 10",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_chat.arguments.content",
+          "reason": "房产街道地址"
+        }
+      ],
+      "new_terms": [
+        "Göteborg",
+        "Göteborgs Gård",
+        "Göteborg City Center",
+        "Avenyn 10"
+      ],
+      "active_vocabulary": {
+        "Yujie Liang": 50,
+        "Yujie": 50,
+        "Haga, Göteborg": 50,
+        "Göteborg": 50,
+        "Göteborgs Gård": 50,
+        "Göteborg City Center": 50,
+        "Avenyn 10": 50
+      },
+      "vocabulary_sha256": "a53cb9e4d74e0e04a360529eeb99dbf3bdf373a5f57846f3dfef5ce2a3944e8b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Göteborg City Center",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Avenyn 10, Göteborg",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房产完整地址"
+        },
+        {
+          "text": "Yujie Liang",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Yujie",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "聊天对象名字"
+        }
+      ],
+      "new_terms": [
+        "Avenyn 10, Göteborg"
+      ],
+      "active_vocabulary": {
+        "Yujie Liang": 50,
+        "Yujie": 50,
+        "Haga, Göteborg": 50,
+        "Göteborg": 50,
+        "Göteborgs Gård": 50,
+        "Göteborg City Center": 50,
+        "Avenyn 10": 50,
+        "Avenyn 10, Göteborg": 50
+      },
+      "vocabulary_sha256": "5e62ccb8420f8ab8bc087d7805390b2cbe498adfc2a384ee892e6a9465d1d4d0"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "ad7b720c183bb747d3961e3f1d8cac26271972df48681f355feec7e28ca74a6d",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3127,
+        "completion_tokens": 394,
+        "total_tokens": 3521,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2871
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.691,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "93cdeba5230d9aa4a464f73683f26c999ce961d9e77f01942e88a6b1f6f4f63e",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3914,
+        "completion_tokens": 396,
+        "total_tokens": 4310,
+        "prompt_tokens_details": {
+          "cached_tokens": 3456
+        },
+        "prompt_cache_hit_tokens": 3456,
+        "prompt_cache_miss_tokens": 458
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.62
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0716_xb906jdf3xggr7aqx5gtslepk5ipd65v__async_0071_v1",
+  "extracted_at": "2026-11-22T06:46:50.136588+00:00"
+}

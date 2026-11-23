@@ -1,0 +1,127 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0957_xm2ikmihzmydfednjefg8ncyr071qwej",
+  "model": "deepseek-flash",
+  "input_sha256": "454dd497bf45ef68bd599b77941d0bc4e62b1a646b7ba9cc7e2f290a3e0881b0",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-bb929d8b-02d0-41ba-82d7-d9219e6f7e10.arguments.content",
+          "reason": "邮件收件人名字，含特殊字符"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-bb929d8b-02d0-41ba-82d7-d9219e6f7e10.arguments.content",
+          "reason": "发件人完整姓名"
+        },
+        {
+          "text": "Kiettisak",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-646c97f9-0e6c-40ea-a066-26cb6f92fbd2.arguments.content",
+          "reason": "邮件收件人名字"
+        }
+      ],
+      "new_terms": [
+        "Aurélien",
+        "Liesbeth Vandenberghe",
+        "Kiettisak"
+      ],
+      "active_vocabulary": {
+        "Aurélien": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Kiettisak": 50
+      },
+      "vocabulary_sha256": "512b5a9beb2009d97b3f8df1c1e8f5b37cb2122114fb6fe719d8a1746ca76eea"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Émile Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create_brunch_alt.arguments.attendees[0]",
+          "reason": "参会人完整姓名，含特殊字符"
+        },
+        {
+          "text": "Kiettisak Somsakul",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create_zoom_alt.arguments.attendees[0]",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create_brunch_alt.arguments.attendees[1]",
+          "reason": "参会人完整姓名"
+        }
+      ],
+      "new_terms": [
+        "Émile Vandenberghe",
+        "Kiettisak Somsakul"
+      ],
+      "active_vocabulary": {
+        "Aurélien": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Kiettisak": 50,
+        "Émile Vandenberghe": 50,
+        "Kiettisak Somsakul": 50
+      },
+      "vocabulary_sha256": "a4cf3dfd02b857fd983df647a1547487c942ee55d6a7263e55ec8c6c17452e10"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Émile Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_search_emile_name.arguments.query",
+          "reason": "联系人搜索的完整姓名"
+        },
+        {
+          "text": "Kiettisak Somsakul",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_search_kiettisak_name.arguments.query",
+          "reason": "联系人搜索的完整姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Kiettisak": 50,
+        "Émile Vandenberghe": 50,
+        "Kiettisak Somsakul": 50
+      },
+      "vocabulary_sha256": "a4cf3dfd02b857fd983df647a1547487c942ee55d6a7263e55ec8c6c17452e10"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "c147842586f73f4d022254f841a5067654d9eac163a572c7ef9b4d006e644eee",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4177,
+        "completion_tokens": 467,
+        "total_tokens": 4644,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3921
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.02
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0957_xm2ikmihzmydfednjefg8ncyr071qwej",
+  "extracted_at": "2026-11-22T06:44:42.046999+00:00"
+}

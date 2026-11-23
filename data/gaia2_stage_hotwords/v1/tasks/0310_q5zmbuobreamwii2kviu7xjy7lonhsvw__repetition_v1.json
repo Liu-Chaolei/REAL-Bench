@@ -1,0 +1,157 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0310_q5zmbuobreamwii2kviu7xjy7lonhsvw__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "37e5b80aece78910c6d4bc261b17f7eb3053efba93a37ccae0abe27db7f5c06d",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélie Dumont",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "法国联系人姓名"
+        },
+        {
+          "text": "Aurélie Dupont",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "法国联系人姓名"
+        },
+        {
+          "text": "Aurélien Benhamou",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "法国联系人姓名"
+        },
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "法国联系人姓名"
+        },
+        {
+          "text": "Colette Dumont",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "法国联系人姓名"
+        },
+        {
+          "text": "Colette Dupont",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "法国联系人姓名"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "发信人姓名"
+        }
+      ],
+      "new_terms": [
+        "Aurélie Dumont",
+        "Aurélie Dupont",
+        "Aurélien Benhamou",
+        "Aurélien Dumont",
+        "Colette Dumont",
+        "Colette Dupont",
+        "Rohan Kumar"
+      ],
+      "active_vocabulary": {
+        "Aurélie Dumont": 50,
+        "Aurélie Dupont": 50,
+        "Aurélien Benhamou": 50,
+        "Aurélien Dumont": 50,
+        "Colette Dumont": 50,
+        "Colette Dupont": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "c56b3c6ed52e8b516400374463650a0e61b7f5cae9a2e085037dc192077f1f38"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélie Dumont",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_0.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Aurélie Dupont",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_1.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Aurélien Benhamou",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_2.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_3.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Colette Dumont",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_4.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Colette Dupont",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_5.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélie Dumont": 50,
+        "Aurélie Dupont": 50,
+        "Aurélien Benhamou": 50,
+        "Aurélien Dumont": 50,
+        "Colette Dumont": 50,
+        "Colette Dupont": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "c56b3c6ed52e8b516400374463650a0e61b7f5cae9a2e085037dc192077f1f38"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "743503c8de9f8f8738a9ae1130a6da62e1e2ffe64251c5a496e6c30fe7a9e8e1",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3043,
+        "completion_tokens": 552,
+        "total_tokens": 3595,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2787
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.996
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0310_q5zmbuobreamwii2kviu7xjy7lonhsvw__repetition_v1",
+  "extracted_at": "2026-11-22T06:45:12.064877+00:00"
+}

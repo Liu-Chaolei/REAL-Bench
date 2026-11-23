@@ -1,0 +1,271 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0564_ypwfbc08vasotmlepqmhr7wzbk53ntqv",
+  "model": "deepseek-flash",
+  "input_sha256": "fb3a09958e74fae6e0b2cfb715fcc43f6c38204ea87d640ec83b37e1ee5064d2",
+  "review_input_sha256": "46a7884e62224d1509511ad2bd30884292d49f9404ccb84a300ee82162399524",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "e921fad4b26c0039ddc703c826c457a88756f31428f5b2eb79907180a8c971bc",
+  "reference_results_sha256": "f22ed8715dc5b1172d07ebd1e48f9cee10f9591438d277d2b13df2d4a21f00c0",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Gurgaon",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Akira Kaur",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.10": {
+      "stage": 0,
+      "text": "Aurum Residences",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b9ce43fe-0088-4d9d-9b33-1a07195165fe.arguments.description"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Kymberley Wundke",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Rohini Desai",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "DLF My Pad",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b9ce43fe-0088-4d9d-9b33-1a07195165fe.arguments.description"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "Lodha Belmondo",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b9ce43fe-0088-4d9d-9b33-1a07195165fe.arguments.description"
+    },
+    "stage0.existing_catalog.7": {
+      "stage": 0,
+      "text": "Mahindra Luminare",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b9ce43fe-0088-4d9d-9b33-1a07195165fe.arguments.description"
+    },
+    "stage0.existing_catalog.8": {
+      "stage": 0,
+      "text": "DLF The Crest",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b9ce43fe-0088-4d9d-9b33-1a07195165fe.arguments.description"
+    },
+    "stage0.existing_catalog.9": {
+      "stage": 0,
+      "text": "Ganga Heights",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b9ce43fe-0088-4d9d-9b33-1a07195165fe.arguments.description"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Kaitlyn Nwosu",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Montreal",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Rohan Kumar",
+      "original_source": "stage1.tool_gt.series_s1_email.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "DLF My Pad",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.5",
+          "reason": "独特楼盘名",
+          "weight": 50
+        },
+        {
+          "text": "DLF The Crest",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.8",
+          "reason": "独特楼盘名",
+          "weight": 50
+        },
+        {
+          "text": "Akira Kaur",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Aurum Residences",
+          "kind": "place",
+          "source": "stage0.existing_catalog.10",
+          "reason": "独特楼盘名",
+          "weight": 50
+        },
+        {
+          "text": "Ganga Heights",
+          "kind": "place",
+          "source": "stage0.existing_catalog.9",
+          "reason": "独特楼盘名",
+          "weight": 50
+        },
+        {
+          "text": "Kymberley Wundke",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Lodha Belmondo",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.6",
+          "reason": "独特楼盘名",
+          "weight": 50
+        },
+        {
+          "text": "Mahindra Luminare",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.7",
+          "reason": "独特楼盘名",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Desai",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Gurgaon",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "印度地名，发音不易",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "DLF My Pad",
+        "DLF The Crest",
+        "Akira Kaur",
+        "Aurum Residences",
+        "Ganga Heights",
+        "Kymberley Wundke",
+        "Lodha Belmondo",
+        "Mahindra Luminare",
+        "Rohini Desai",
+        "Gurgaon"
+      ],
+      "active_vocabulary": {
+        "DLF My Pad": 50,
+        "DLF The Crest": 50,
+        "Akira Kaur": 50,
+        "Aurum Residences": 50,
+        "Ganga Heights": 50,
+        "Kymberley Wundke": 50,
+        "Lodha Belmondo": 50,
+        "Mahindra Luminare": 50,
+        "Rohini Desai": 50,
+        "Gurgaon": 50
+      },
+      "vocabulary_sha256": "d21f9666bab0e19470d75301f9b3baa554f3f24b8ef5278175a1c4a9f385056a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaitlyn Nwosu",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Montreal",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "地名，发音不易",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kaitlyn Nwosu",
+        "Rohan Kumar",
+        "Montreal"
+      ],
+      "active_vocabulary": {
+        "DLF My Pad": 50,
+        "DLF The Crest": 50,
+        "Akira Kaur": 50,
+        "Aurum Residences": 50,
+        "Ganga Heights": 50,
+        "Kymberley Wundke": 50,
+        "Lodha Belmondo": 50,
+        "Mahindra Luminare": 50,
+        "Rohini Desai": 50,
+        "Gurgaon": 50,
+        "Kaitlyn Nwosu": 50,
+        "Rohan Kumar": 50,
+        "Montreal": 50
+      },
+      "vocabulary_sha256": "8edda35661ce7c134f30e738119f8f24fc40c6a65343853a0f22d53653892f95"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "DLF My Pad": 50,
+        "DLF The Crest": 50,
+        "Akira Kaur": 50,
+        "Aurum Residences": 50,
+        "Ganga Heights": 50,
+        "Kymberley Wundke": 50,
+        "Lodha Belmondo": 50,
+        "Mahindra Luminare": 50,
+        "Rohini Desai": 50,
+        "Gurgaon": 50,
+        "Kaitlyn Nwosu": 50,
+        "Rohan Kumar": 50,
+        "Montreal": 50
+      },
+      "vocabulary_sha256": "8edda35661ce7c134f30e738119f8f24fc40c6a65343853a0f22d53653892f95"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kaitlyn"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:26.477347+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

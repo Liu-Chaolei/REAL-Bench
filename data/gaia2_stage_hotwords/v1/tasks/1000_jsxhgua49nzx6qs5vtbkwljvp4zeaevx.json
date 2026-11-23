@@ -1,0 +1,236 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "1000_jsxhgua49nzx6qs5vtbkwljvp4zeaevx",
+  "model": "deepseek-flash",
+  "input_sha256": "fbf74a5807c9cd07335b4f8f2ed9afdc30432c85aad12e1bb1dc7d8b3ea7693a",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "RentAFlat",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "应用名称"
+        },
+        {
+          "text": "Save Apartments",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "保存列表名称"
+        }
+      ],
+      "new_terms": [
+        "RentAFlat",
+        "Save Apartments"
+      ],
+      "active_vocabulary": {
+        "RentAFlat": 50,
+        "Save Apartments": 50
+      },
+      "vocabulary_sha256": "c3ad9edfb956af4eeb3f95cbe5b63a6762812f2620a804627a1d66b942198c79"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aarhus 8000 Watch List",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "邮件主题名称"
+        },
+        {
+          "text": "Aarhus Riverside Condo",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Åboulevarden 24",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "街道地址"
+        },
+        {
+          "text": "Aarhus C",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "城市区域名"
+        },
+        {
+          "text": "City View Apartment",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Vester Allé 18",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "街道地址"
+        },
+        {
+          "text": "Aalborg Apartment Living",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Aalborg Værftet",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Aalborg Harbour",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Aalborg Waterfront",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "房源名称"
+        }
+      ],
+      "new_terms": [
+        "Aarhus 8000 Watch List",
+        "Aarhus Riverside Condo",
+        "Åboulevarden 24",
+        "Aarhus C",
+        "City View Apartment",
+        "Vester Allé 18",
+        "Aalborg Apartment Living",
+        "Aalborg Værftet",
+        "Aalborg Harbour",
+        "Aalborg Waterfront"
+      ],
+      "active_vocabulary": {
+        "RentAFlat": 50,
+        "Save Apartments": 50,
+        "Aarhus 8000 Watch List": 50,
+        "Aarhus Riverside Condo": 50,
+        "Åboulevarden 24": 50,
+        "Aarhus C": 50,
+        "City View Apartment": 50,
+        "Vester Allé 18": 50,
+        "Aalborg Apartment Living": 50,
+        "Aalborg Værftet": 50,
+        "Aalborg Harbour": 50,
+        "Aalborg Waterfront": 50
+      },
+      "vocabulary_sha256": "5b5c7259ee0353450549f40f6560e2282cc014192fe60d5db396479a7efa125a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aarhus 8000 Viewing Review",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "日历事件标题"
+        },
+        {
+          "text": "Aarhus 8000 Watch List",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "邮件主题名称"
+        },
+        {
+          "text": "Aarhus Riverside Condo",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Åboulevarden 24",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "街道地址"
+        },
+        {
+          "text": "Aarhus C",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "城市区域名"
+        },
+        {
+          "text": "City View Apartment",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Vester Allé 18",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "街道地址"
+        }
+      ],
+      "new_terms": [
+        "Aarhus 8000 Viewing Review"
+      ],
+      "active_vocabulary": {
+        "RentAFlat": 50,
+        "Save Apartments": 50,
+        "Aarhus 8000 Watch List": 50,
+        "Aarhus Riverside Condo": 50,
+        "Åboulevarden 24": 50,
+        "Aarhus C": 50,
+        "City View Apartment": 50,
+        "Vester Allé 18": 50,
+        "Aalborg Apartment Living": 50,
+        "Aalborg Værftet": 50,
+        "Aalborg Harbour": 50,
+        "Aalborg Waterfront": 50,
+        "Aarhus 8000 Viewing Review": 50
+      },
+      "vocabulary_sha256": "9aef633cbaa5776980dec0b12d5000ccae6c488c2bca2ffda51dc854e46bcec6"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "1d52ad1acecc1185b611eb46bc148420654104659f99bf63ab99346374b820e6",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2531,
+        "completion_tokens": 732,
+        "total_tokens": 3263,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2275
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.601,
+      "error": "Invalid proper-name phrase: 'soren.kjaer@gaia2mail.com'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "979f14bda409aa9eed9a2947752bb701afb166bb12bb8b2aa033435fd7763978",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3664,
+        "completion_tokens": 684,
+        "total_tokens": 4348,
+        "prompt_tokens_details": {
+          "cached_tokens": 3200
+        },
+        "prompt_cache_hit_tokens": 3200,
+        "prompt_cache_miss_tokens": 464
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.443
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/1000_jsxhgua49nzx6qs5vtbkwljvp4zeaevx",
+  "extracted_at": "2026-11-22T06:44:59.786814+00:00"
+}

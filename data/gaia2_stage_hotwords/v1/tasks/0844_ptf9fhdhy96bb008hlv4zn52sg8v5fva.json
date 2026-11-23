@@ -1,0 +1,111 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0844_ptf9fhdhy96bb008hlv4zn52sg8v5fva",
+  "model": "deepseek-flash",
+  "input_sha256": "2be1af58e4263b0999c2e2b94ee317428a6ebe747a848578cf3a7418a34f5bb8",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kjetil Østensen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "丈夫的完整姓名"
+        },
+        {
+          "text": "Kaida Nishimura",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-487c4b10-b8b6-4b7e-9f11-c93e0e74a35b.arguments.attendees[0]",
+          "reason": "律师的完整姓名"
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3308058a-f59e-4edf-bbc0-baa8ea1facf1.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [
+        "Kjetil Østensen",
+        "Kaida Nishimura",
+        "Åse Kjellstad"
+      ],
+      "active_vocabulary": {
+        "Kjetil Østensen": 50,
+        "Kaida Nishimura": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "f89a37b17815673412e5ca8834bb52b9d12cae77c241b2cc99a2ebeb924284c8"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaida Nishimura",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "律师的完整姓名"
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_notify_lawyer.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kjetil Østensen": 50,
+        "Kaida Nishimura": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "f89a37b17815673412e5ca8834bb52b9d12cae77c241b2cc99a2ebeb924284c8"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kjetil",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "丈夫的名字"
+        }
+      ],
+      "new_terms": [
+        "Kjetil"
+      ],
+      "active_vocabulary": {
+        "Kjetil Østensen": 50,
+        "Kaida Nishimura": 50,
+        "Åse Kjellstad": 50,
+        "Kjetil": 50
+      },
+      "vocabulary_sha256": "44c029d0e2ceb7a1298b863dc31a2b643a6c210f0f3cfd8d82497f42d8a2ff1d"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "16e8e3779811df44701bac2dbe237e808d16bbada497ad481aac9f263877ef3e",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3624,
+        "completion_tokens": 279,
+        "total_tokens": 3903,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3368
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.276
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0844_ptf9fhdhy96bb008hlv4zn52sg8v5fva",
+  "extracted_at": "2026-11-22T06:44:08.051819+00:00"
+}

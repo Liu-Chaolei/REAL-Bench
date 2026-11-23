@@ -1,0 +1,121 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0855_fv1g94zbmz4gwcjp36dcnsy82bxnwiut",
+  "model": "deepseek-flash",
+  "input_sha256": "ab3df9813c7c88c943c3047ffbf93e82d00ae64096ad5260eda12432210f5add",
+  "review_input_sha256": "d95adcbc698178e37d5fa2ffc2e46e4859bebd77fc21ea8fc6414e1df910dc51",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "4597547ef8d8bb8d3f0b2b5fb590d33b297ad6d49bc369e78836a34d6af1cd6e",
+  "reference_results_sha256": "0f362b3480c2a30b509524839719f9bb7542f3e9fd1d8ffec7e7ad1fad2f2e23",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Thanakorn Srisombat",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Vigdis Rasmussen",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Birgitta Rasmussen",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Stijn Vandenberghe",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Birgitta Rasmussen",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "完整专有人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Stijn Vandenberghe",
+          "kind": "person",
+          "source": "stage1.existing_catalog.3",
+          "reason": "完整荷兰语专有人名，拼写复杂",
+          "weight": 50
+        },
+        {
+          "text": "Thanakorn Srisombat",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整泰式专有人名，拼写复杂",
+          "weight": 50
+        },
+        {
+          "text": "Vigdis Rasmussen",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整专有人名，含北欧名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Birgitta Rasmussen",
+        "Stijn Vandenberghe",
+        "Thanakorn Srisombat",
+        "Vigdis Rasmussen"
+      ],
+      "active_vocabulary": {
+        "Birgitta Rasmussen": 50,
+        "Stijn Vandenberghe": 50,
+        "Thanakorn Srisombat": 50,
+        "Vigdis Rasmussen": 50
+      },
+      "vocabulary_sha256": "e2151cdea3791adf193d20b37e36eae9f0fc4fdae72a03aa43e0e6381b239f09"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Birgitta Rasmussen": 50,
+        "Stijn Vandenberghe": 50,
+        "Thanakorn Srisombat": 50,
+        "Vigdis Rasmussen": 50
+      },
+      "vocabulary_sha256": "e2151cdea3791adf193d20b37e36eae9f0fc4fdae72a03aa43e0e6381b239f09"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:36.537063+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

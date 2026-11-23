@@ -1,0 +1,104 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0220_ttjxcmc6fpmyp9gqp10lfwf7v5ww6sf0",
+  "model": "deepseek-flash",
+  "input_sha256": "0aedfc6d8a47f5b50801f8936e6faa00c255795da56ae37fcc1ce22554aee11c",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Astrid Møller",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "社工姓名，含特殊字符ø"
+        }
+      ],
+      "new_terms": [
+        "Astrid Møller"
+      ],
+      "active_vocabulary": {
+        "Astrid Møller": 50
+      },
+      "vocabulary_sha256": "1dbb0cd9b375c2f01def2290be2194d98ec1dba18c6b5519c7edcf03622e0d3d"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "cc7194c72665cec1dcbd00f82f24cf5c8c9a398a96733b8b63ed40ecfcb6ff48",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3775,
+        "completion_tokens": 163,
+        "total_tokens": 3938,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3519
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.064,
+      "error": "2 validation errors for Extraction\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无合适专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无合适专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "0a4386ceeef4d3d91e61878744fae93e51750c21196da1c3ba020c755dbc4bc0",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4438,
+        "completion_tokens": 145,
+        "total_tokens": 4583,
+        "prompt_tokens_details": {
+          "cached_tokens": 3840
+        },
+        "prompt_cache_hit_tokens": 3840,
+        "prompt_cache_miss_tokens": 598
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 0.831,
+      "error": "Duplicate term within stage 2: 'Astrid Møller'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "94d3594c635c0cca66ab0f288afc6a36f6fdfcbf878bf16ab77da0c1bf1c3ee2",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4318,
+        "completion_tokens": 61,
+        "total_tokens": 4379,
+        "prompt_tokens_details": {
+          "cached_tokens": 3712
+        },
+        "prompt_cache_hit_tokens": 3712,
+        "prompt_cache_miss_tokens": 606
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.931
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0220_ttjxcmc6fpmyp9gqp10lfwf7v5ww6sf0",
+  "extracted_at": "2026-11-22T06:40:50.631497+00:00"
+}

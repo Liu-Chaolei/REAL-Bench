@@ -1,0 +1,94 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0234_fixyszxhzv4kiz893gvljv4chmeko5v2",
+  "model": "deepseek-flash",
+  "input_sha256": "e26c2d888dd9da5084de0b3a15fc6390b56dad216a1799133216e7aaa26def41",
+  "review_input_sha256": "eaa4f143d28e7b91707762016ad1a7e1aa7d21490ffe6bd98fe157a843b20f7f",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "39ea6c591c5eeef2309d9fd4888d57101dc18a0e73b78a37c7be08714fb974ce",
+  "reference_results_sha256": "dac9d2a76bc300e7babf99dbe0a171705140d853f0d37f75163f29b1ec23d73c",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Ximena García-Ramírez",
+      "original_source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[0]"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Anastasiya Kuznetsova",
+      "original_source": "stage2.tool_gt.series_s2_reply.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Ximena García-Ramírez",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含连字符与重音的完整人名，难以识别，优先保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Ximena García-Ramírez"
+      ],
+      "active_vocabulary": {
+        "Ximena García-Ramírez": 50
+      },
+      "vocabulary_sha256": "4cc83150bd3dc49f8b4310d5156312c170ac8a4d3e0a188afb75497b0ce3acd5"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整外国人名，拼写较难，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Anastasiya Kuznetsova"
+      ],
+      "active_vocabulary": {
+        "Ximena García-Ramírez": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "f5a6c922ab061ae8ac6dcbd052a938187b2b2b454086844483e07373e7f76788"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Zoom"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:38.301032+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,471 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0104_ml3npjoj57xnpy1iu5zb1l4r2mqipey6__repetition_v1__async_0096_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "cc993b7a8a7e3ac5021ff342f1055c509bcb52a4e440b59e2c0071d702da3799",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Anna Parson",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Helmut Eisenstadt",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-36169cf5-4bf3-476a-ad91-f4903c1c67fd.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Gerrit van der Meer",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-36169cf5-4bf3-476a-ad91-f4903c1c67fd.arguments.attendees[1]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "University of Cambridge",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-36169cf5-4bf3-476a-ad91-f4903c1c67fd.arguments.location",
+          "reason": "会议地点机构名"
+        },
+        {
+          "text": "Department of Physics",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-36169cf5-4bf3-476a-ad91-f4903c1c67fd.arguments.location",
+          "reason": "院系名称"
+        },
+        {
+          "text": "The Pint Shop",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-66205084-9641-40bc-b21c-6ae5c8add238.arguments.content",
+          "reason": "餐厅地点名"
+        },
+        {
+          "text": "Cambridge",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-66205084-9641-40bc-b21c-6ae5c8add238.arguments.content",
+          "reason": "城市名"
+        },
+        {
+          "text": "LEGO Creator 3in1 Propeller Plane",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品型号名"
+        },
+        {
+          "text": "Glasgow",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Anna Parson",
+        "Helmut Eisenstadt",
+        "Gerrit van der Meer",
+        "University of Cambridge",
+        "Department of Physics",
+        "The Pint Shop",
+        "Cambridge",
+        "LEGO Creator 3in1 Propeller Plane",
+        "Glasgow"
+      ],
+      "active_vocabulary": {
+        "Anna Parson": 50,
+        "Helmut Eisenstadt": 50,
+        "Gerrit van der Meer": 50,
+        "University of Cambridge": 50,
+        "Department of Physics": 50,
+        "The Pint Shop": 50,
+        "Cambridge": 50,
+        "LEGO Creator 3in1 Propeller Plane": 50,
+        "Glasgow": 50
+      },
+      "vocabulary_sha256": "5018ab5a9060eb510c0f035590d3c04557765a67a7ff841bc66a7a42890d4272"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Anna Parson",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "完整人名，消息群组成员"
+        },
+        {
+          "text": "Evangelia Papadopoulos",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "完整人名，消息群组成员"
+        },
+        {
+          "text": "Kaidën Nakamura",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "含特殊字符的完整人名，消息群组成员"
+        },
+        {
+          "text": "The Pint Shop",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "餐厅专有名称"
+        },
+        {
+          "text": "Cambridge",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "地点名称"
+        }
+      ],
+      "new_terms": [
+        "Evangelia Papadopoulos",
+        "Kaidën Nakamura"
+      ],
+      "active_vocabulary": {
+        "Anna Parson": 50,
+        "Helmut Eisenstadt": 50,
+        "Gerrit van der Meer": 50,
+        "University of Cambridge": 50,
+        "Department of Physics": 50,
+        "The Pint Shop": 50,
+        "Cambridge": 50,
+        "LEGO Creator 3in1 Propeller Plane": 50,
+        "Glasgow": 50,
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50
+      },
+      "vocabulary_sha256": "900a0b0349b3d104a3e8701723c2cb5af3bd8c8edab499036d231c39ea09f67b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Glasgow City Centre Apartments",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "公寓楼名称，含地名与物业类型"
+        },
+        {
+          "text": "George Square",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "格拉斯哥广场地名"
+        },
+        {
+          "text": "Glasgow",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Glasgow Gem",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "公寓房源名称"
+        },
+        {
+          "text": "Glasgow West End Apartment",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "公寓房源名称"
+        },
+        {
+          "text": "Hyndland St",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "街道名"
+        },
+        {
+          "text": "Glasgow West End Apartments",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "公寓房源名称"
+        },
+        {
+          "text": "Scotland",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "地区名"
+        }
+      ],
+      "new_terms": [
+        "Glasgow City Centre Apartments",
+        "George Square",
+        "Glasgow Gem",
+        "Glasgow West End Apartment",
+        "Hyndland St",
+        "Glasgow West End Apartments",
+        "Scotland"
+      ],
+      "active_vocabulary": {
+        "Anna Parson": 50,
+        "Helmut Eisenstadt": 50,
+        "Gerrit van der Meer": 50,
+        "University of Cambridge": 50,
+        "Department of Physics": 50,
+        "The Pint Shop": 50,
+        "Cambridge": 50,
+        "LEGO Creator 3in1 Propeller Plane": 50,
+        "Glasgow": 50,
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Glasgow City Centre Apartments": 50,
+        "George Square": 50,
+        "Glasgow Gem": 50,
+        "Glasgow West End Apartment": 50,
+        "Hyndland St": 50,
+        "Glasgow West End Apartments": 50,
+        "Scotland": 50
+      },
+      "vocabulary_sha256": "ebfe145d3a13bea62742e5eabdbc309a448d9d2c4d4e3f2f69e0fd2a09e1b178"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "2cd3a6b59b63080643adda7db6e7ed6f297d393e1e238fd7c61823d59513671b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3455,
+        "completion_tokens": 817,
+        "total_tokens": 4272,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3199
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.712,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "380b459c89b526a037fcca135f24fc49b486deacc92919a66839f285bb7ee32f",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4665,
+        "completion_tokens": 817,
+        "total_tokens": 5482,
+        "prompt_tokens_details": {
+          "cached_tokens": 4224
+        },
+        "prompt_cache_hit_tokens": 4224,
+        "prompt_cache_miss_tokens": 441
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.662,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "380b459c89b526a037fcca135f24fc49b486deacc92919a66839f285bb7ee32f",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4665,
+        "completion_tokens": 817,
+        "total_tokens": 5482,
+        "prompt_tokens_details": {
+          "cached_tokens": 4480
+        },
+        "prompt_cache_hit_tokens": 4480,
+        "prompt_cache_miss_tokens": 185
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.86,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 4,
+      "request_sha256": "380b459c89b526a037fcca135f24fc49b486deacc92919a66839f285bb7ee32f",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4665,
+        "completion_tokens": 817,
+        "total_tokens": 5482,
+        "prompt_tokens_details": {
+          "cached_tokens": 4480
+        },
+        "prompt_cache_hit_tokens": 4480,
+        "prompt_cache_miss_tokens": 185
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.789,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 5,
+      "request_sha256": "99dee432fe2e6bcc933c19e0019660bd1e05bf13f7e59dd78f992bdb0714830c",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4751,
+        "completion_tokens": 817,
+        "total_tokens": 5568,
+        "prompt_tokens_details": {
+          "cached_tokens": 4224
+        },
+        "prompt_cache_hit_tokens": 4224,
+        "prompt_cache_miss_tokens": 527
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 3.292,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 6,
+      "request_sha256": "b82b2520889d0fd8b24380a4726f81c66e709fbda0bcb52d54117229d873ec92",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4751,
+        "completion_tokens": 817,
+        "total_tokens": 5568,
+        "prompt_tokens_details": {
+          "cached_tokens": 4224
+        },
+        "prompt_cache_hit_tokens": 4224,
+        "prompt_cache_miss_tokens": 527
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.883,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 7,
+      "request_sha256": "cff8ccb3c147971703b8789ec10ee86ca229b2a2f542345cef9aef1ba8a4efa2",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4751,
+        "completion_tokens": 817,
+        "total_tokens": 5568,
+        "prompt_tokens_details": {
+          "cached_tokens": 4224
+        },
+        "prompt_cache_hit_tokens": 4224,
+        "prompt_cache_miss_tokens": 527
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.658,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 8,
+      "request_sha256": "5896c696f3a3ab1335c74e0dd568f26c0ed1efaba66da7b6a394ed18d8bd0739",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4751,
+        "completion_tokens": 817,
+        "total_tokens": 5568,
+        "prompt_tokens_details": {
+          "cached_tokens": 4224
+        },
+        "prompt_cache_hit_tokens": 4224,
+        "prompt_cache_miss_tokens": 527
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.685,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 9,
+      "stage": 0,
+      "request_sha256": "b77c9a2daf7fe15e2ccbb5e4029234b7656f47a2b8dc1e04804d6e87306267c1",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2398,
+        "completion_tokens": 442,
+        "total_tokens": 2840,
+        "prompt_tokens_details": {
+          "cached_tokens": 2176
+        },
+        "prompt_cache_hit_tokens": 2176,
+        "prompt_cache_miss_tokens": 222
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.05
+    },
+    {
+      "attempt": 10,
+      "stage": 1,
+      "request_sha256": "fba3fee8a2400e1f213fbd788fa9d63d109e5a92dc5902246cbddfc8f8ad1731",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 991,
+        "completion_tokens": 149,
+        "total_tokens": 1140,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 735
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.982
+    },
+    {
+      "attempt": 11,
+      "stage": 2,
+      "request_sha256": "5b87df928278e57b695360951cd34ece83f1d93c763be0cae3e1f053ce340bb2",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 962,
+        "completion_tokens": 323,
+        "total_tokens": 1285,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 706
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "error": "Invalid proper-name phrase: 'rohini.deshpande@cam.ac.uk'",
+      "seconds": 1.617
+    },
+    {
+      "attempt": 12,
+      "stage": 2,
+      "request_sha256": "9c4d1d896b0131b262d2fe1235876714b8ceaf85c2f4214ab783eaf4b5d9174e",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1750,
+        "completion_tokens": 272,
+        "total_tokens": 2022,
+        "prompt_tokens_details": {
+          "cached_tokens": 1280
+        },
+        "prompt_cache_hit_tokens": 1280,
+        "prompt_cache_miss_tokens": 470
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.318
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0104_ml3npjoj57xnpy1iu5zb1l4r2mqipey6__repetition_v1__async_0096_v1",
+  "extracted_at": "2026-11-22T06:51:10.760609+00:00",
+  "extraction_mode": "one_stage_per_request_after_full_task_validation_failures"
+}

@@ -1,0 +1,160 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0523_21yi3de4icnafg9uc8odszqol3zhp09n",
+  "model": "deepseek-flash",
+  "input_sha256": "6f089a040c41fe8d14550c7c2e4c393c6a54dab4b8cb4b32eccb89d0dc6ccf58",
+  "review_input_sha256": "caed7b183a0b237deb5227e1746061d09b3d414f029ac794e16592b1babac8b4",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "9e7dc6b37aee0ca018e7935069349b3954b995037d92ae27e71f36ddeca9c487",
+  "reference_results_sha256": "d0063b8f0272d0cfec39a6c101eadbb719966bdde4c6f6e2b1e9cfcca4d37b12",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Astrid Nakamura",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-02ab6727-1db9-4377-b87d-7a4d5067dbdd.arguments.content"
+    },
+    "stage2.tool_response.series_s2_thread": {
+      "stage": 2,
+      "text": "{\"messages\": [{\"sender_id\": \"+12037654321\", \"message_id\": \"bfe531fea5b7b82a8783e573eeb2f0fe\", \"timestamp\": \"1728975602.0\", \"content\": \"Hi everyone! A quick extra note about the wine club: please bring one bottle of wine and a reusable tasting glass each time. Also, please send me any food-allergy information before your first visit. Thanks, and looking forward to seeing you all!\"}, {\"sender_id\": \"+12037654321\", \"message_id\": \"80b778e2010dfb8636b473bc810cef5d\", \"timestamp\": \"1728975601.0\", \"content\": \"Hey everyone, I've started hosting a wine club every Saturday at 4:30PM for two hours and you are all invited.\"}, {\"sender_id\": \"+351222123456\", \"message_id\": \"0c66ee8414c244c8ad9646ef62ae8708\", \"timestamp\": \"1728649800\", \"content\": \"Actually, I went to the Azores last month with my family. It was beautiful! We visited the hot springs and saw the most stunning landscapes.\"}, {\"sender_id\": \"+12037654321\", \"message_id\": \"b6558490fc744081ab32a6a764ec3ef8\", \"timestamp\": \"1728648900\", \"content\": \"I'm so proud of you, Ximena! You're making a real difference. And Adelaide, I've been meaning to ask you, have you traveled anywhere exciting recently?\"}, {\"sender_id\": \"+351222123456\", \"message_id\": \"5d6cdfd03a8b41e89d204352293b3812\", \"timestamp\": \"1728648000\", \"content\": \"Que maravilha, Ximena! That sounds like a wonderful initiative. I'm sure it's making a big difference in people's lives.\"}, {\"sender_id\": \"+523312345678\", \"message_id\": \"fadcae3eb94e4eda92961149288b8dd2\", \"timestamp\": \"1728647100\", \"content\": \"Thanks for asking, Aurélien! We're actually starting a new program to provide medication to underprivileged communities. It's been a lot of work, but it's really rewarding.\"}, {\"sender_id\": \"+12037654321\", \"message_id\": \"26bab9153ff14cc291ef8ae63e5f7b58\", \"timestamp\": \"1728646200\", \"content\": \"Wow, that's really cool, Adelaide! I had no idea. And speaking of transportation, Ximena, how's your work at the hospital going? Any new projects or initiatives?\"}, {\"sender_id\": \"+351222123456\", \"message_id\": \"9b1e29f23a89440883fb5277d6344f2c\", \"timestamp\": \"1728645300\", \"content\": \"Well, did you know that Port wine was first produced in the 17th century by British merchants in Portugal? They added brandy to the wine to fortify it for transportation. Fascinating, right?\"}, {\"sender_id\": \"+523312345678\", \"message_id\": \"a9a74c0f51ff4874a35e9bf984d16b8e\", \"timestamp\": \"1728644400\", \"content\": \"That sounds amazing, Aurélien! I'll have to try it. And Adelaide, please do share, I'm curious about Port wine too.\"}, {\"sender_id\": \"+12037654321\", \"message_id\": \"cca3300f884a4db2ae361889fd0c3c39\", \"timestamp\": \"1728643500\", \"content\": \"Ximena, I actually had a great Mexican Tempranillo last week! It was from a small winery in Valle de Guadalupe. And Adelaide, I'd love to hear more about Port wine. What's the most interesting fact you've learned?\"}, {\"sender_id\": \"+351222123456\", \"message_id\": \"87f6f3e6b1cd4df4a4659b75059430d2\", \"timestamp\": \"1728642600\", \"content\": \"Olá meus amigos! I'm so glad you're talking about wine. I've been reading about the history of Port wine and I'd love to share some interesting facts with you both.\"}, {\"sender_id\": \"+523312345678\", \"message_id\": \"2651b880d59e455d89e42c34457d6774\", \"timestamp\": \"1728641700\", \"content\": \"Hola Aurélien! I'm doing great, thanks for asking. I've been meaning to ask you, have you tried any good Mexican wines lately? We've been getting some great varieties from Baja California.\"}, {\"sender_id\": \"+12037654321\", \"message_id\": \"0c1557eb7c2e4925a0ed952c14664cb9\", \"timestamp\": \"1728640800\", \"content\": \"Hey Ximena, Adelaide! Hope you're both doing well. I just got back from a wine tasting event in NYC and I couldn't stop thinking about our last conversation about Portuguese wines.\"}], \"metadata\": {\"message_range\": [\"0\", \"13\"], \"conversation_length\": \"13\", \"conversation_id\": \"27a5b71628b14182b5ed0201a56a70fd\", \"conversation_title\": \"Wine and Conversation\"}}",
+      "event_id": "series_s2_thread",
+      "response_sha256": "8a3ab343a28c93cfed99e35783d08adef69e53820749c754e0f9d34231991b83"
+    },
+    "stage2.tool_response.series_s2_window": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"466f1d0c8dd74cd9b56c055dd4565332\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729332000\", \"end_datetime\": \"1729335600\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Aurélien LaFleur\", \"Nalani Jensen\"], \"start_strftime\": \"Saturday, 2024-10-19 10:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 11:00:00\"}, {\"event_id\": \"9a7da33ca8f44243bc9c7a93d5ddd6cb\", \"title\": \"Staff Meeting\", \"start_datetime\": \"1729328400\", \"end_datetime\": \"1729332000\", \"tag\": \"Work\", \"description\": \"Discuss upcoming events and menu changes with the restaurant staff.\", \"location\": \"Restaurant\", \"attendees\": [\"Aurélien LaFleur\", \"Xóchitl Ramírez\", \"Luís Silva\"], \"start_strftime\": \"Saturday, 2024-10-19 09:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 10:00:00\"}, {\"event_id\": \"dc6f2799eccd4b5abb74cc820f05f57f\", \"title\": \"Lunch Service\", \"start_datetime\": \"1729339200\", \"end_datetime\": \"1729346400\", \"tag\": \"Work\", \"description\": \"Oversee lunch service to ensure everything runs smoothly and customers have a great experience.\", \"location\": \"Restaurant Dining Area\", \"attendees\": [\"Aurélien LaFleur\"], \"start_strftime\": \"Saturday, 2024-10-19 12:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 14:00:00\"}, {\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Wine Club\", \"start_datetime\": \"1729355400.0\", \"end_datetime\": \"1729362600.0\", \"tag\": null, \"description\": null, \"location\": null, \"attendees\": [], \"start_strftime\": \"Saturday, 2024-10-19 16:30:00\", \"end_strftime\": \"Saturday, 2024-10-19 18:30:00\"}], \"range\": [\"0\", \"4\"], \"total\": \"4\"}",
+      "event_id": "series_s2_window",
+      "response_sha256": "203746a97f60247097337bfacceca6096ce4b25530bd888e38ad90c6619ebd81"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Astrid Nakamura",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，含独特姓氏",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Nakamura",
+        "Aurélien LaFleur"
+      ],
+      "active_vocabulary": {
+        "Astrid Nakamura": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "691db681b7d1829da5081ab5f628e731fdc74f694a52add696c4c8452147e66a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid Nakamura": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "691db681b7d1829da5081ab5f628e731fdc74f694a52add696c4c8452147e66a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Valle de Guadalupe",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_thread",
+          "reason": "独特地名，葡萄酒产区",
+          "weight": 50
+        },
+        {
+          "text": "Luís Silva",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_window",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_window",
+          "reason": "完整人名，姓氏独特",
+          "weight": 50
+        },
+        {
+          "text": "Xóchitl Ramírez",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_window",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Valle de Guadalupe",
+        "Luís Silva",
+        "Nalani Jensen",
+        "Xóchitl Ramírez"
+      ],
+      "active_vocabulary": {
+        "Astrid Nakamura": 50,
+        "Aurélien LaFleur": 50,
+        "Valle de Guadalupe": 50,
+        "Luís Silva": 50,
+        "Nalani Jensen": 50,
+        "Xóchitl Ramírez": 50
+      },
+      "vocabulary_sha256": "e3925d4550e5c54a0f3d8a95da6ea30e54a10563f71a41dd45eee51dcf558113"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [
+    {
+      "text": "Xóchitl Ramírez",
+      "from": "stage2.tool_response.series_s2_thread",
+      "to": "stage2.tool_response.series_s2_window"
+    },
+    {
+      "text": "Luís Silva",
+      "from": "stage2.tool_response.series_s2_thread",
+      "to": "stage2.tool_response.series_s2_window"
+    }
+  ],
+  "old_terms_removed": [
+    "Wine Club",
+    "Wine and Conversation",
+    "Wine club setup",
+    "Astrid"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:16.653426+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

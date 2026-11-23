@@ -1,0 +1,138 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0855_fv1g94zbmz4gwcjp36dcnsy82bxnwiut",
+  "model": "deepseek-flash",
+  "input_sha256": "ab3df9813c7c88c943c3047ffbf93e82d00ae64096ad5260eda12432210f5add",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Thanakorn Srisombat",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "被移除事件的移除者姓名"
+        },
+        {
+          "text": "Vigdis Rasmussen",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "被移除事件的移除者姓名"
+        },
+        {
+          "text": "Birgitta Rasmussen",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "被移除事件的移除者姓名"
+        },
+        {
+          "text": "Stijn Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "被移除事件的移除者姓名"
+        }
+      ],
+      "new_terms": [
+        "Thanakorn Srisombat",
+        "Vigdis Rasmussen",
+        "Birgitta Rasmussen",
+        "Stijn Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Thanakorn Srisombat": 50,
+        "Vigdis Rasmussen": 50,
+        "Birgitta Rasmussen": 50,
+        "Stijn Vandenberghe": 50
+      },
+      "vocabulary_sha256": "e2151cdea3791adf193d20b37e36eae9f0fc4fdae72a03aa43e0e6381b239f09"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Thanakorn Srisombat",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add1.arguments.description",
+          "reason": "Coffee Break 移除者姓名"
+        },
+        {
+          "text": "Vigdis Rasmussen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add2.arguments.description",
+          "reason": "Yoga Class 移除者姓名"
+        },
+        {
+          "text": "Birgitta Rasmussen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add3.arguments.description",
+          "reason": "Dinner with Family 移除者姓名"
+        },
+        {
+          "text": "Stijn Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add4.arguments.description",
+          "reason": "Team Planning Meeting 移除者姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Thanakorn Srisombat": 50,
+        "Vigdis Rasmussen": 50,
+        "Birgitta Rasmussen": 50,
+        "Stijn Vandenberghe": 50
+      },
+      "vocabulary_sha256": "e2151cdea3791adf193d20b37e36eae9f0fc4fdae72a03aa43e0e6381b239f09"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "dbc241599978efaf786d1b0a27ed0c8d3085871faaa3e3e3d4e500cd8dea035a",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3126,
+        "completion_tokens": 393,
+        "total_tokens": 3519,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2870
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.691,
+      "error": "3 validation errors for Extraction\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='No proper names in stage 0 sources.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Stage 1 contains four remover names.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Stage 2 repeats the four... names in descriptions.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "906602a794c161f9c57711259be0cfaf587860198321d9f78a3225b0d8710962",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4086,
+        "completion_tokens": 356,
+        "total_tokens": 4442,
+        "prompt_tokens_details": {
+          "cached_tokens": 3456
+        },
+        "prompt_cache_hit_tokens": 3456,
+        "prompt_cache_miss_tokens": 630
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.429
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0855_fv1g94zbmz4gwcjp36dcnsy82bxnwiut",
+  "extracted_at": "2026-11-22T06:44:13.343094+00:00"
+}

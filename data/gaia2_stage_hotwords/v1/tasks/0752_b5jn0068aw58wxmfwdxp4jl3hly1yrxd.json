@@ -1,0 +1,163 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0752_b5jn0068aw58wxmfwdxp4jl3hly1yrxd",
+  "model": "deepseek-flash",
+  "input_sha256": "2bc12649080e39015f82124d4430ff6fa9ea513bf1db0cfe5e49b7b779d6baa3",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "kaitlyn.nguyen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ade90ddd-815a-4bf4-b4b3-61e76025cf1d.arguments.recipients[0]",
+          "reason": "会议参会人邮箱中的姓名"
+        },
+        {
+          "text": "kaida.jensen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-2c574744-2627-4cfb-be6d-ce9a159153d8.arguments.recipients[0]",
+          "reason": "会议参会人邮箱中的姓名"
+        }
+      ],
+      "new_terms": [
+        "kaitlyn.nguyen",
+        "kaida.jensen"
+      ],
+      "active_vocabulary": {
+        "kaitlyn.nguyen": 50,
+        "kaida.jensen": 50
+      },
+      "vocabulary_sha256": "c1969039fc95f33f535c7260f46ec453549bb4c939271a439a7c0ba3243d6c17"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[0]",
+          "reason": "日历事件参会人姓名"
+        },
+        {
+          "text": "Kaitlyn Nguyen",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[1]",
+          "reason": "日历事件参会人姓名"
+        },
+        {
+          "text": "Kaida Jensen",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[2]",
+          "reason": "日历事件参会人姓名"
+        }
+      ],
+      "new_terms": [
+        "Rohan Kumar",
+        "Kaitlyn Nguyen",
+        "Kaida Jensen"
+      ],
+      "active_vocabulary": {
+        "kaitlyn.nguyen": 50,
+        "kaida.jensen": 50,
+        "Rohan Kumar": 50,
+        "Kaitlyn Nguyen": 50,
+        "Kaida Jensen": 50
+      },
+      "vocabulary_sha256": "f8e40f0ebf90e06949f4148d6682a1f921f3aa6838d3a9f41157d2fa671938b2"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaitlyn",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_kaitlyn.arguments.content",
+          "reason": "邮件收件人称呼"
+        },
+        {
+          "text": "Kaida",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_kaida.arguments.content",
+          "reason": "邮件收件人称呼"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_kaitlyn.arguments.content",
+          "reason": "邮件署名"
+        },
+        {
+          "text": "Kaitlyn Nguyen",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "回复中提及的收件人全名"
+        },
+        {
+          "text": "Kaida Jensen",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "回复中提及的收件人全名"
+        }
+      ],
+      "new_terms": [
+        "Kaitlyn",
+        "Kaida"
+      ],
+      "active_vocabulary": {
+        "kaitlyn.nguyen": 50,
+        "kaida.jensen": 50,
+        "Rohan Kumar": 50,
+        "Kaitlyn Nguyen": 50,
+        "Kaida Jensen": 50,
+        "Kaitlyn": 50,
+        "Kaida": 50
+      },
+      "vocabulary_sha256": "e5732196a326e6a8d199a0808c094959118a0d2269bca0d1f70a83d1920a7dc2"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "5e8f18be6b7c678abb06c87d4605eb21c2f5610414abe850f42839b7949563fc",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3300,
+        "completion_tokens": 481,
+        "total_tokens": 3781,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3044
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.917,
+      "error": "Not an exact quotation of a source in stage 0: 'Kaitlyn Nguyen' from 'stage0.tool_gt.OracleEvent-AGENT-ade90ddd-815a-4bf4-b4b3-61e76025cf1d.arguments.recipients[0]'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "1e78b521f476ce2ac223927048c71b51e209fb1de277769612f26a12ff58ebaa",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4228,
+        "completion_tokens": 488,
+        "total_tokens": 4716,
+        "prompt_tokens_details": {
+          "cached_tokens": 3712
+        },
+        "prompt_cache_hit_tokens": 3712,
+        "prompt_cache_miss_tokens": 516
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.861
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0752_b5jn0068aw58wxmfwdxp4jl3hly1yrxd",
+  "extracted_at": "2026-11-22T06:43:44.510473+00:00"
+}

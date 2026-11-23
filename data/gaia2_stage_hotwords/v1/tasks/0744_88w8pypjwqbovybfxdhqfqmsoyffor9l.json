@@ -1,0 +1,154 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0744_88w8pypjwqbovybfxdhqfqmsoyffor9l",
+  "model": "deepseek-flash",
+  "input_sha256": "22c886c9cbbd4ea445006fc7cabf42cbd20ac9754cd615e21b16527af13ed698",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Mariánské nám. 98/1, 110 00 Josefov, Czechia",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e9ca07b8-608a-4dcd-8299-9e8b7b97ad1e.arguments.end_location",
+          "reason": "捷克布拉格具体地址，含特殊变音符号"
+        },
+        {
+          "text": "Květa",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7a592983-c89f-45c2-8b33-daf4fc335fa9.arguments.content",
+          "reason": "联系人名字，含特殊变音符号"
+        },
+        {
+          "text": "The Origins of Totalitarianism",
+          "kind": "product",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7a592983-c89f-45c2-8b33-daf4fc335fa9.arguments.content",
+          "reason": "书名，专有作品名称"
+        }
+      ],
+      "new_terms": [
+        "Mariánské nám. 98/1, 110 00 Josefov, Czechia",
+        "Květa",
+        "The Origins of Totalitarianism"
+      ],
+      "active_vocabulary": {
+        "Mariánské nám. 98/1, 110 00 Josefov, Czechia": 50,
+        "Květa": 50,
+        "The Origins of Totalitarianism": 50
+      },
+      "vocabulary_sha256": "cdc40d28dd07b5734c6f3b2c25e84d7402eb54f7eaa2594e699376fc984343d4"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Zuzana Nováková",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create.arguments.attendees[0]",
+          "reason": "参会人完整姓名，含变音符号"
+        },
+        {
+          "text": "Květa Nováková",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create.arguments.description",
+          "reason": "图书馆联系人完整姓名"
+        },
+        {
+          "text": "Hannah Arendt",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create.arguments.description",
+          "reason": "作者姓名"
+        },
+        {
+          "text": "The Origins of Totalitarianism",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_create.arguments.description",
+          "reason": "书名"
+        },
+        {
+          "text": "Book Club Room",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.location",
+          "reason": "特定活动地点名称"
+        }
+      ],
+      "new_terms": [
+        "Zuzana Nováková",
+        "Květa Nováková",
+        "Hannah Arendt",
+        "Book Club Room"
+      ],
+      "active_vocabulary": {
+        "Mariánské nám. 98/1, 110 00 Josefov, Czechia": 50,
+        "Květa": 50,
+        "The Origins of Totalitarianism": 50,
+        "Zuzana Nováková": 50,
+        "Květa Nováková": 50,
+        "Hannah Arendt": 50,
+        "Book Club Room": 50
+      },
+      "vocabulary_sha256": "df0165009621cf16007a882e399f0de89b1e86753d2f48fb6d2f0b22aba3d7d1"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Mariánské nám. 98/1, 110 00 Josefov, Czechia",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_ride.arguments.start_location",
+          "reason": "图书馆地址，含变音符号"
+        },
+        {
+          "text": "Božetěchova 3, 110 00 Prague 1",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_ride.arguments.end_location",
+          "reason": "家庭住址，含特殊变音符号"
+        },
+        {
+          "text": "Květa Nováková",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_event.arguments.description",
+          "reason": "图书馆员完整姓名"
+        }
+      ],
+      "new_terms": [
+        "Božetěchova 3, 110 00 Prague 1"
+      ],
+      "active_vocabulary": {
+        "Mariánské nám. 98/1, 110 00 Josefov, Czechia": 50,
+        "Květa": 50,
+        "The Origins of Totalitarianism": 50,
+        "Zuzana Nováková": 50,
+        "Květa Nováková": 50,
+        "Hannah Arendt": 50,
+        "Book Club Room": 50,
+        "Božetěchova 3, 110 00 Prague 1": 50
+      },
+      "vocabulary_sha256": "85b2ead916c10c52cd117e706b465badc7281622d63536c70420c56ff3f13772"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "992736e6986d80fd0bff4a2d27185889b2fd02e5d40d26efd786aab4ce0b35d3",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2862,
+        "completion_tokens": 583,
+        "total_tokens": 3445,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2606
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.236
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0744_88w8pypjwqbovybfxdhqfqmsoyffor9l",
+  "extracted_at": "2026-11-22T06:43:40.747692+00:00"
+}

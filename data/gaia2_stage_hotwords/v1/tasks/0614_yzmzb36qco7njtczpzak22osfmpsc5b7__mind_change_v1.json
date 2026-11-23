@@ -1,0 +1,180 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0614_yzmzb36qco7njtczpzak22osfmpsc5b7__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "d8039697643dfe37c72bd697369ab42db67b01fd2244c32338a94164c50a6426",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Luís",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ac0adb18-ea4a-4049-870e-9e602542fd50.arguments.content",
+          "reason": "与会者人名"
+        },
+        {
+          "text": "Jamila",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ba182f2f-636e-44f0-9d16-f6ac19ff6b74.arguments.content",
+          "reason": "与会者人名"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fd7bc28c-c71f-4b19-be1a-c5831ae4a1c2.arguments.content",
+          "reason": "发件人完整姓名"
+        },
+        {
+          "text": "Luís Marques",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-04f14dff-7688-46c5-99aa-627c82e84145.arguments.attendees[1]",
+          "reason": "与会者完整姓名"
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-04f14dff-7688-46c5-99aa-627c82e84145.arguments.attendees[2]",
+          "reason": "与会者完整姓名"
+        },
+        {
+          "text": "1423 SE Division St, Portland, OR 97202",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1c618d42-b60a-4298-9754-f3ab06451e06.arguments.end_location",
+          "reason": "目的地地址"
+        }
+      ],
+      "new_terms": [
+        "Luís",
+        "Jamila",
+        "Aurélien LaFleur",
+        "Luís Marques",
+        "Jamila Fernandes",
+        "1423 SE Division St, Portland, OR 97202"
+      ],
+      "active_vocabulary": {
+        "Luís": 50,
+        "Jamila": 50,
+        "Aurélien LaFleur": 50,
+        "Luís Marques": 50,
+        "Jamila Fernandes": 50,
+        "1423 SE Division St, Portland, OR 97202": 50
+      },
+      "vocabulary_sha256": "c4addd4845004793f9fe24c646c04cbc18ea6ee6b78eeb1ba46411fed4437515"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Luís",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email_luis.arguments.content",
+          "reason": "收件人名"
+        },
+        {
+          "text": "Jamila",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email_jamila.arguments.content",
+          "reason": "收件人名"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email_luis.arguments.content",
+          "reason": "发件人完整姓名"
+        },
+        {
+          "text": "Luís Marques",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[1]",
+          "reason": "与会者完整姓名"
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[2]",
+          "reason": "与会者完整姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Luís": 50,
+        "Jamila": 50,
+        "Aurélien LaFleur": 50,
+        "Luís Marques": 50,
+        "Jamila Fernandes": 50,
+        "1423 SE Division St, Portland, OR 97202": 50
+      },
+      "vocabulary_sha256": "c4addd4845004793f9fe24c646c04cbc18ea6ee6b78eeb1ba46411fed4437515"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Luís Marques",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群聊成员完整姓名"
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群聊成员完整姓名"
+        },
+        {
+          "text": "Luís",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "群聊消息称呼"
+        },
+        {
+          "text": "Jamila",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "群聊消息称呼"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "发件人完整姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Luís": 50,
+        "Jamila": 50,
+        "Aurélien LaFleur": 50,
+        "Luís Marques": 50,
+        "Jamila Fernandes": 50,
+        "1423 SE Division St, Portland, OR 97202": 50
+      },
+      "vocabulary_sha256": "c4addd4845004793f9fe24c646c04cbc18ea6ee6b78eeb1ba46411fed4437515"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "9c04e00ee3b92534e309f9ec069bd7446f6847b439b37ed7aeba2401a3312222",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4581,
+        "completion_tokens": 765,
+        "total_tokens": 5346,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4325
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 3.034
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0614_yzmzb36qco7njtczpzak22osfmpsc5b7__mind_change_v1",
+  "extracted_at": "2026-11-22T06:45:55.377935+00:00"
+}

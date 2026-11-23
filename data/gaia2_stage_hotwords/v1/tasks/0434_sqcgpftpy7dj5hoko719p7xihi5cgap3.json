@@ -1,0 +1,155 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0434_sqcgpftpy7dj5hoko719p7xihi5cgap3",
+  "model": "deepseek-flash",
+  "input_sha256": "5059e4f8e9eb8a6bc2ab16a197649b64e81495892f5a96f71b0907274f496f19",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Rukmini Sutanto",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "人名"
+        },
+        {
+          "text": "Saskia Römer",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "人名"
+        },
+        {
+          "text": "Saoirse Ní Mhaoldhamhnaigh",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "人名"
+        },
+        {
+          "text": "Áine Ní Chonaill",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "人名"
+        }
+      ],
+      "new_terms": [
+        "Rukmini Sutanto",
+        "Saskia Römer",
+        "Saoirse Ní Mhaoldhamhnaigh",
+        "Áine Ní Chonaill"
+      ],
+      "active_vocabulary": {
+        "Rukmini Sutanto": 50,
+        "Saskia Römer": 50,
+        "Saoirse Ní Mhaoldhamhnaigh": 50,
+        "Áine Ní Chonaill": 50
+      },
+      "vocabulary_sha256": "c1f2e1c4829373058492f1ff956a6ff0f0a0899a024a524a49de720070c50e90"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Rukmini Sutanto",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]",
+          "reason": "人名"
+        },
+        {
+          "text": "Saskia Römer",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[1]",
+          "reason": "人名"
+        },
+        {
+          "text": "Saoirse Ní Mhaoldhamhnaigh",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[2]",
+          "reason": "人名"
+        },
+        {
+          "text": "Áine Ní Chonaill",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[3]",
+          "reason": "人名"
+        },
+        {
+          "text": "Jakarta",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "城市名"
+        },
+        {
+          "text": "Berlin",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Jakarta",
+        "Berlin"
+      ],
+      "active_vocabulary": {
+        "Rukmini Sutanto": 50,
+        "Saskia Römer": 50,
+        "Saoirse Ní Mhaoldhamhnaigh": 50,
+        "Áine Ní Chonaill": 50,
+        "Jakarta": 50,
+        "Berlin": 50
+      },
+      "vocabulary_sha256": "1a1a09ec40f8c0a94ba7092350de9d59e163f2b0ee0b05c95f7012ee8e5231b5"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "db0ce0f137d564973c9e636ef4c115e433f6634babf71afedd8fc156d4fedbab",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1969,
+        "completion_tokens": 421,
+        "total_tokens": 2390,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1713
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.631,
+      "error": "3 validation errors for Extraction\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='人名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='人名与城市', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "4fe2c5f4a8b87c6d31cf610d14363a64fd6891388be04288499020d46d8bdee2",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2939,
+        "completion_tokens": 403,
+        "total_tokens": 3342,
+        "prompt_tokens_details": {
+          "cached_tokens": 2304
+        },
+        "prompt_cache_hit_tokens": 2304,
+        "prompt_cache_miss_tokens": 635
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.471
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0434_sqcgpftpy7dj5hoko719p7xihi5cgap3",
+  "extracted_at": "2026-11-22T06:41:58.898992+00:00"
+}

@@ -15,6 +15,7 @@ from tau2.data_model.message import (
     UserMessage,
 )
 from tau2.data_model.simulation import SimulationRun, TerminationReason
+from tau2.data_model.transcript import LiveTranscriptFragment, LiveTranscriptTick
 
 
 def sample_simulation():
@@ -135,6 +136,54 @@ def test_absent_ids_have_explicit_view_semantics():
     assert {"unknown one", "unknown two"} <= {
         m.content for m in agent_messages(sim.ticks)
     }
+
+
+def test_streaming_asr_cumulative_snapshots_are_consumed_as_fragments():
+    from tau2.utils.transcript.views import (
+        speech_messages,
+        streaming_transcript_content,
+    )
+
+    def tick(tick_id, content, version, snapshot, fragments):
+        return Tick(
+            tick_id=tick_id,
+            timestamp=f"2026-01-01T00:00:0{tick_id}",
+            tick_duration_seconds=0.2,
+            agent_chunk=AssistantMessage(
+                role="assistant",
+                content=content,
+                contains_speech=True,
+                raw_data={
+                    "live_transcript": LiveTranscriptTick(
+                        session_id="streaming-test",
+                        snapshot={
+                            "version": version,
+                            "text": snapshot,
+                            "pending": False,
+                        },
+                        fragments=[
+                            LiveTranscriptFragment(
+                                event_id=f"fragment-{version}",
+                                speaker="agent",
+                                text=text,
+                            )
+                            for text in fragments
+                        ],
+                    ).model_dump(mode="json")
+                },
+            ),
+        )
+
+    ticks = [
+        tick(0, "Hello", 1, "Hello", ["Hello"]),
+        tick(1, "Hello world", 2, "Hello world", [" world"]),
+        tick(2, "Hello world", 2, "Hello world", []),
+    ]
+
+    assert streaming_transcript_content(ticks[0].agent_chunk) == "Hello"
+    assert streaming_transcript_content(ticks[1].agent_chunk) == " world"
+    assert streaming_transcript_content(ticks[2].agent_chunk) is None
+    assert [message.content for message in speech_messages(ticks)] == ["Hello world"]
 
 
 def edge_snapshots():

@@ -40,6 +40,7 @@ from loguru import logger
 
 from tau2.data_model.message import Tick
 from tau2.utils.transcript.segments import contiguous_ranges
+from tau2.utils.transcript.views import streaming_transcript_content
 
 if TYPE_CHECKING:
     import pandas as pd
@@ -551,8 +552,8 @@ def _create_user_segment_start(
 
     # Get text content
     text = ""
-    if user_chunk and user_chunk.content:
-        text = user_chunk.content
+    if user_chunk:
+        text = streaming_transcript_content(user_chunk) or ""
 
     # Get utterance IDs
     utterance_ids = []
@@ -602,8 +603,8 @@ def _extend_user_segment(
 
     # Append text content
     user_chunk = tick.user_chunk
-    if user_chunk and user_chunk.content:
-        segment.transcript += user_chunk.content
+    if user_chunk:
+        segment.transcript += streaming_transcript_content(user_chunk) or ""
 
     # Collect unique utterance IDs
     if user_chunk and user_chunk.utterance_ids:
@@ -680,10 +681,7 @@ def _create_agent_segment_start(
     # Get text content (proportional transcript from raw_data or content)
     text = ""
     if agent_chunk:
-        if agent_chunk.content:
-            text = agent_chunk.content
-        elif agent_chunk.raw_data and isinstance(agent_chunk.raw_data, dict):
-            text = agent_chunk.raw_data.get("proportional_transcript", "")
+        text = streaming_transcript_content(agent_chunk) or ""
 
     # Get utterance IDs
     utterance_ids = []
@@ -733,12 +731,7 @@ def _extend_agent_segment(
 
     # Append text content
     if agent_chunk:
-        if agent_chunk.content:
-            segment.transcript += agent_chunk.content
-        elif agent_chunk.raw_data and isinstance(agent_chunk.raw_data, dict):
-            segment.transcript += agent_chunk.raw_data.get(
-                "proportional_transcript", ""
-            )
+        segment.transcript += streaming_transcript_content(agent_chunk) or ""
 
     # Collect unique utterance IDs
     if agent_chunk and agent_chunk.utterance_ids:

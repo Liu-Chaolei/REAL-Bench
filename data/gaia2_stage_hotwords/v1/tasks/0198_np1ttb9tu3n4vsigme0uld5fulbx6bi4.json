@@ -1,0 +1,102 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0198_np1ttb9tu3n4vsigme0uld5fulbx6bi4",
+  "model": "deepseek-flash",
+  "input_sha256": "6e25c9cf4dbe87d99308d466ee307b83d7fb02445497cb76e4f14a053cb11e0e",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Yoga Studio",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_schedule.arguments.location",
+          "reason": "地点专名"
+        }
+      ],
+      "new_terms": [
+        "Yoga Studio"
+      ],
+      "active_vocabulary": {
+        "Yoga Studio": 50
+      },
+      "vocabulary_sha256": "845f9ff1f96eee09216afb8bda5b1554844bf8c08a2057f3f0892268976efced"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Russian Historiography",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "课程专名"
+        },
+        {
+          "text": "Yoga Studio",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add.arguments.location",
+          "reason": "地点专名"
+        }
+      ],
+      "new_terms": [
+        "Russian Historiography"
+      ],
+      "active_vocabulary": {
+        "Yoga Studio": 50,
+        "Russian Historiography": 50
+      },
+      "vocabulary_sha256": "1643c925cf016b384289d89a2d4d6b7ce9a7f27cf1f58aa0e811b075543b866c"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "a5620f62df4d960fd85e569ca24bef7e831888e776b5d0b5fae889ae558c442b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2686,
+        "completion_tokens": 150,
+        "total_tokens": 2836,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2430
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.189,
+      "error": "3 validation errors for Extraction\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无合适专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='提取地点专名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='提取课程与地点专名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "133c0465f296c384a76c1fa3324651eeb415531213a0e52699bc4a7e99bfa7e7",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3392,
+        "completion_tokens": 125,
+        "total_tokens": 3517,
+        "prompt_tokens_details": {
+          "cached_tokens": 2816
+        },
+        "prompt_cache_hit_tokens": 2816,
+        "prompt_cache_miss_tokens": 576
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.822
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0198_np1ttb9tu3n4vsigme0uld5fulbx6bi4",
+  "extracted_at": "2026-11-22T06:40:40.335527+00:00"
+}

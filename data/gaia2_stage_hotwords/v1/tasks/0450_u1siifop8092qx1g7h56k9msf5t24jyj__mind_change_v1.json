@@ -1,0 +1,182 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0450_u1siifop8092qx1g7h56k9msf5t24jyj__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "c17eda12aeede6e23170c76f00d2fa70bd7e0e9761a1cecbdfeaeb5c97cbc631",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "AmazonBasics",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "品牌名称"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "地名"
+        },
+        {
+          "text": "Fast Fashion Discussion",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-8269ecfc-2c74-48bf-b537-09961cba8909.arguments.title",
+          "reason": "自定义事件名称"
+        }
+      ],
+      "new_terms": [
+        "AmazonBasics",
+        "Leuven",
+        "Fast Fashion Discussion"
+      ],
+      "active_vocabulary": {
+        "AmazonBasics": 50,
+        "Leuven": 50,
+        "Fast Fashion Discussion": 50
+      },
+      "vocabulary_sha256": "570701dba32c91e18940bd7370d034450110a2044d871074b758121699b524ea"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Fast Fashion Discussion",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "自定义事件名称"
+        },
+        {
+          "text": "Community",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_add_tagged_event.arguments.tag",
+          "reason": "自定义标签名称"
+        },
+        {
+          "text": "Elodie Vandenberghe",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "人名"
+        }
+      ],
+      "new_terms": [
+        "Community",
+        "Elodie Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "AmazonBasics": 50,
+        "Leuven": 50,
+        "Fast Fashion Discussion": 50,
+        "Community": 50,
+        "Elodie Vandenberghe": 50
+      },
+      "vocabulary_sha256": "0b0fb48488b60a8cd410fcf9bff77ee2554e20666731cfdbaa8f0d691e35dedc"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Elara Vandenberghe",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Fast Fashion Discussion",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "自定义事件名称"
+        },
+        {
+          "text": "Community",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "自定义标签名称"
+        },
+        {
+          "text": "AmazonBasics",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_send_elara_followup.arguments.content",
+          "reason": "品牌名称"
+        }
+      ],
+      "new_terms": [
+        "Elara Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "AmazonBasics": 50,
+        "Leuven": 50,
+        "Fast Fashion Discussion": 50,
+        "Community": 50,
+        "Elodie Vandenberghe": 50,
+        "Elara Vandenberghe": 50
+      },
+      "vocabulary_sha256": "5ff0762aa7a8d93210ffaf830191cb401cf4830fc835f8641595fee3d355b8a1"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "12ff10aa437343eb74c7f613c8b698836a1878d75cb871e918b3e55cbe3a4fe4",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2173,
+        "completion_tokens": 411,
+        "total_tokens": 2584,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1917
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.703,
+      "error": "2 validation errors for Extraction\nstages.0.terms.0.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nstages.2.terms.3.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "625bc92c3f0d42023bc4317ee8b75640314069f046dd4fb1f646f653da68dfbe",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3118,
+        "completion_tokens": 411,
+        "total_tokens": 3529,
+        "prompt_tokens_details": {
+          "cached_tokens": 2560
+        },
+        "prompt_cache_hit_tokens": 2560,
+        "prompt_cache_miss_tokens": 558
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.67,
+      "error": "Invalid proper-name phrase: \"AmazonBasics Kid's Comforter Set - Soft, Easy-Wash Microfiber - Full/Queen, Blue Scallop\""
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "fe3646b4038244631d221503d65d853845a550ee93bd3f16490381ac3121f164",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3001,
+        "completion_tokens": 331,
+        "total_tokens": 3332,
+        "prompt_tokens_details": {
+          "cached_tokens": 2048
+        },
+        "prompt_cache_hit_tokens": 2048,
+        "prompt_cache_miss_tokens": 953
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.383
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0450_u1siifop8092qx1g7h56k9msf5t24jyj__mind_change_v1",
+  "extracted_at": "2026-11-22T06:45:23.015486+00:00"
+}

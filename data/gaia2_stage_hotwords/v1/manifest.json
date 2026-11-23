@@ -1,0 +1,21 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "tasks": 1100,
+  "stages": 3300,
+  "original_tasks": 1000,
+  "async_tasks": 100,
+  "dataset_sha256": "b2d97b5a14bca324ebb26ac3cda6dce44c7c8a113e75f6438f21c41aed2e4ba8",
+  "inputs_sha256": "30360551dbd16aac83862cab753ae1a7595aa61324ce75af8101238397191f2c",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "model": "deepseek-flash",
+  "key_env": "DEEPSEEK_API_KEY",
+  "base_url_env": "DEEPSEEK_BASE_URL",
+  "sampling": {
+    "temperature": 0,
+    "seed": 42,
+    "thinking": "disabled"
+  },
+  "weight": 50,
+  "max_active_terms": 50,
+  "materials": "stage source requests, reference tool arguments and reference replies only"
+}

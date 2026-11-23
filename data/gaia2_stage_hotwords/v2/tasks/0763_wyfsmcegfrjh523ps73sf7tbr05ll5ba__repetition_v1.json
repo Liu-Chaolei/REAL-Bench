@@ -1,0 +1,270 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0763_wyfsmcegfrjh523ps73sf7tbr05ll5ba__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "a1d12b05ce323a9d54cde9256a06276e5bdf6061172c7433374268157c78645e",
+  "review_input_sha256": "6ec86c65cf899f72b1999688dcce0ac10928e5a62ddd228be041ef2119b70a3d",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "ac794736487f774776de87c9257c8562104756b1a231a2dc044f72ae0ab9f3b0",
+  "reference_results_sha256": "4a916fe799a5a1ced8d5ab8551d0eb128c969ee06e657b39f8be6b45e48b92a2",
+  "sources": {
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Astrid Lindqvist",
+      "original_source": "stage2.tool_gt.series_s2_calendar.arguments.description"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Axel Lindqvist",
+      "original_source": "stage2.tool_gt.series_s2_calendar.arguments.description"
+    },
+    "stage2.existing_catalog.10": {
+      "stage": 2,
+      "text": "Åke Zanström",
+      "original_source": "stage2.tool_gt.series_s2_send_summary.arguments.content"
+    },
+    "stage2.existing_catalog.11": {
+      "stage": 2,
+      "text": "Linnea Åström",
+      "original_source": "stage2.tool_gt.series_s2_send_summary.arguments.content"
+    },
+    "stage2.existing_catalog.12": {
+      "stage": 2,
+      "text": "Åke Svensson",
+      "original_source": "stage2.tool_gt.series_s2_send_summary.arguments.content"
+    },
+    "stage2.existing_catalog.13": {
+      "stage": 2,
+      "text": "Birgitta Larsson",
+      "original_source": "stage2.tool_gt.series_s2_send_summary.arguments.content"
+    },
+    "stage2.existing_catalog.14": {
+      "stage": 2,
+      "text": "Åsa Lindqvist",
+      "original_source": "stage2.tool_gt.series_s2_send_summary.arguments.content"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Linnea Svensson",
+      "original_source": "stage2.tool_gt.series_s2_calendar.arguments.description"
+    },
+    "stage2.existing_catalog.3": {
+      "stage": 2,
+      "text": "Åsa Lundgren",
+      "original_source": "stage2.tool_gt.series_s2_send_summary.arguments.content"
+    },
+    "stage2.existing_catalog.4": {
+      "stage": 2,
+      "text": "Åsa Lindström",
+      "original_source": "stage2.tool_gt.series_s2_send_summary.arguments.content"
+    },
+    "stage2.existing_catalog.5": {
+      "stage": 2,
+      "text": "Mikael Svensson",
+      "original_source": "stage2.tool_gt.series_s2_send_summary.arguments.content"
+    },
+    "stage2.existing_catalog.6": {
+      "stage": 2,
+      "text": "Åke Lindström",
+      "original_source": "stage2.tool_gt.series_s2_send_summary.arguments.content"
+    },
+    "stage2.existing_catalog.7": {
+      "stage": 2,
+      "text": "Åke Lundqvist",
+      "original_source": "stage2.tool_gt.series_s2_send_summary.arguments.content"
+    },
+    "stage2.existing_catalog.8": {
+      "stage": 2,
+      "text": "Åsa Lindgren",
+      "original_source": "stage2.tool_gt.series_s2_send_summary.arguments.content"
+    },
+    "stage2.existing_catalog.9": {
+      "stage": 2,
+      "text": "Astrid Svensson",
+      "original_source": "stage2.tool_gt.series_s2_send_summary.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Astrid Lindqvist",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Svensson",
+          "kind": "person",
+          "source": "stage2.existing_catalog.9",
+          "reason": "完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Axel Lindqvist",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "完整人名，姓氏含特殊拼写",
+          "weight": 50
+        },
+        {
+          "text": "Birgitta Larsson",
+          "kind": "person",
+          "source": "stage2.existing_catalog.13",
+          "reason": "完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Linnea Svensson",
+          "kind": "person",
+          "source": "stage2.existing_catalog.2",
+          "reason": "完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Linnea Åström",
+          "kind": "person",
+          "source": "stage2.existing_catalog.11",
+          "reason": "含Å与ö变音符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Mikael Svensson",
+          "kind": "person",
+          "source": "stage2.existing_catalog.5",
+          "reason": "完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Åke Lindström",
+          "kind": "person",
+          "source": "stage2.existing_catalog.6",
+          "reason": "含Å与ö变音符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Åke Lundqvist",
+          "kind": "person",
+          "source": "stage2.existing_catalog.7",
+          "reason": "含Å变音符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Åke Svensson",
+          "kind": "person",
+          "source": "stage2.existing_catalog.12",
+          "reason": "含Å变音符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Åke Zanström",
+          "kind": "person",
+          "source": "stage2.existing_catalog.10",
+          "reason": "含Å与ö变音符的罕见姓氏人名",
+          "weight": 50
+        },
+        {
+          "text": "Åsa Lindgren",
+          "kind": "person",
+          "source": "stage2.existing_catalog.8",
+          "reason": "含Å变音符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Åsa Lindqvist",
+          "kind": "person",
+          "source": "stage2.existing_catalog.14",
+          "reason": "含Å变音符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Åsa Lindström",
+          "kind": "person",
+          "source": "stage2.existing_catalog.4",
+          "reason": "含Å与ö变音符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Åsa Lundgren",
+          "kind": "person",
+          "source": "stage2.existing_catalog.3",
+          "reason": "含Å变音符的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Lindqvist",
+        "Astrid Svensson",
+        "Axel Lindqvist",
+        "Birgitta Larsson",
+        "Linnea Svensson",
+        "Linnea Åström",
+        "Mikael Svensson",
+        "Åke Lindström",
+        "Åke Lundqvist",
+        "Åke Svensson",
+        "Åke Zanström",
+        "Åsa Lindgren",
+        "Åsa Lindqvist",
+        "Åsa Lindström",
+        "Åsa Lundgren"
+      ],
+      "active_vocabulary": {
+        "Astrid Lindqvist": 50,
+        "Astrid Svensson": 50,
+        "Axel Lindqvist": 50,
+        "Birgitta Larsson": 50,
+        "Linnea Svensson": 50,
+        "Linnea Åström": 50,
+        "Mikael Svensson": 50,
+        "Åke Lindström": 50,
+        "Åke Lundqvist": 50,
+        "Åke Svensson": 50,
+        "Åke Zanström": 50,
+        "Åsa Lindgren": 50,
+        "Åsa Lindqvist": 50,
+        "Åsa Lindström": 50,
+        "Åsa Lundgren": 50
+      },
+      "vocabulary_sha256": "9434843593cc34617ba575279a3b379afe17ea593e2457e44b9424116742d6f3"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:38.668166+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

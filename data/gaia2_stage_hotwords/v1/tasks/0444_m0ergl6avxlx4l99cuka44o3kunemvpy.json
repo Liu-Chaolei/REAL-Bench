@@ -1,0 +1,144 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0444_m0ergl6avxlx4l99cuka44o3kunemvpy",
+  "model": "deepseek-flash",
+  "input_sha256": "7c8f5071d41d48e5e826932af9344beb077d72b35659c52801eb52116391f91d",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "San Diego",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Bayshore Condos",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-128c3c4e-2b62-4c05-933c-f7d391440acb.arguments.title",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "La Jolla Cove Condos",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-8b797f50-284a-4832-8db0-808bd1c47a8e.arguments.title",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Oceanview Towers",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-910f5608-74ac-4a45-9755-057ad41a8de7.arguments.title",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "The Residences at CityCenter",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e971727c-26ff-4b06-be65-ab372d111fe3.arguments.title",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "August",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-039d30b9-771a-493e-b15b-fc61346cb40d.arguments.content",
+          "reason": "联系人姓名"
+        }
+      ],
+      "new_terms": [
+        "San Diego",
+        "Bayshore Condos",
+        "La Jolla Cove Condos",
+        "Oceanview Towers",
+        "The Residences at CityCenter",
+        "August"
+      ],
+      "active_vocabulary": {
+        "San Diego": 50,
+        "Bayshore Condos": 50,
+        "La Jolla Cove Condos": 50,
+        "Oceanview Towers": 50,
+        "The Residences at CityCenter": 50,
+        "August": 50
+      },
+      "vocabulary_sha256": "5f6c4d5fbd522fc39933c76d658429b17fc672717096807386185202e8b6b225"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "August",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_msg_aug_followup.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "San Diego",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_msg_aug_followup.arguments.content",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "San Diego": 50,
+        "Bayshore Condos": 50,
+        "La Jolla Cove Condos": 50,
+        "Oceanview Towers": 50,
+        "The Residences at CityCenter": 50,
+        "August": 50
+      },
+      "vocabulary_sha256": "5f6c4d5fbd522fc39933c76d658429b17fc672717096807386185202e8b6b225"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "August",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_msg_cab_update.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Bayshore Condos",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_msg_cab_update.arguments.content",
+          "reason": "公寓楼名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "San Diego": 50,
+        "Bayshore Condos": 50,
+        "La Jolla Cove Condos": 50,
+        "Oceanview Towers": 50,
+        "The Residences at CityCenter": 50,
+        "August": 50
+      },
+      "vocabulary_sha256": "5f6c4d5fbd522fc39933c76d658429b17fc672717096807386185202e8b6b225"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "d42f8170f16f1fae8d24a3c67e72052527c8bc4fb05458d0fc120ff65e43d380",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3461,
+        "completion_tokens": 492,
+        "total_tokens": 3953,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3205
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.651
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0444_m0ergl6avxlx4l99cuka44o3kunemvpy",
+  "extracted_at": "2026-11-22T06:41:58.812481+00:00"
+}

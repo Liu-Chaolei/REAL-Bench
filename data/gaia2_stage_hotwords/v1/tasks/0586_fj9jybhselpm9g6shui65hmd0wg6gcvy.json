@@ -1,0 +1,123 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0586_fj9jybhselpm9g6shui65hmd0wg6gcvy",
+  "model": "deepseek-flash",
+  "input_sha256": "81f910ad22501c3c13c911b0b874b1132bdaf2ba7cbd22de73b3a5844ecb5d84",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Jianzhi Liang",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名，消息收件人"
+        },
+        {
+          "text": "Jianzhi",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3b6d949a-0ffb-4024-8a65-3ffe14fb09fc.arguments.title",
+          "reason": "人名，事件标题中的访问对象"
+        },
+        {
+          "text": "Stora Södergatan 13, Lund",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3b6d949a-0ffb-4024-8a65-3ffe14fb09fc.arguments.location",
+          "reason": "瑞典隆德的街道地址"
+        }
+      ],
+      "new_terms": [
+        "Jianzhi Liang",
+        "Jianzhi",
+        "Stora Södergatan 13, Lund"
+      ],
+      "active_vocabulary": {
+        "Jianzhi Liang": 50,
+        "Jianzhi": 50,
+        "Stora Södergatan 13, Lund": 50
+      },
+      "vocabulary_sha256": "346e9db02fedabd463257c64328f8f4db3f9e66a33e4d8cd93bb7bf69cffc38e"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Jianzhi Liang",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "人名，消息收件人"
+        },
+        {
+          "text": "Jianzhi",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.title",
+          "reason": "人名，事件标题中的访问对象"
+        },
+        {
+          "text": "Stora Södergatan 13, Lund",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.location",
+          "reason": "瑞典隆德的街道地址"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Jianzhi Liang": 50,
+        "Jianzhi": 50,
+        "Stora Södergatan 13, Lund": 50
+      },
+      "vocabulary_sha256": "346e9db02fedabd463257c64328f8f4db3f9e66a33e4d8cd93bb7bf69cffc38e"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Stora Södergatan 13, Lund",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_order_ride.arguments.end_location",
+          "reason": "瑞典隆德的目的地地址"
+        },
+        {
+          "text": "Premium",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_order_ride.arguments.service_type",
+          "reason": "出租车服务等级名称"
+        }
+      ],
+      "new_terms": [
+        "Premium"
+      ],
+      "active_vocabulary": {
+        "Jianzhi Liang": 50,
+        "Jianzhi": 50,
+        "Stora Södergatan 13, Lund": 50,
+        "Premium": 50
+      },
+      "vocabulary_sha256": "5ff578e57a7e6bf910455dce15c3110e8304c50387b7e38e1dd7c9da55198afe"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "42103f89260c7616d78d7f35cddb9b3414738b6e056f933c304ca2bb0a4b4641",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2179,
+        "completion_tokens": 389,
+        "total_tokens": 2568,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1923
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.637
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0586_fj9jybhselpm9g6shui65hmd0wg6gcvy",
+  "extracted_at": "2026-11-22T06:42:54.333897+00:00"
+}

@@ -1,0 +1,79 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0472_8jsm99azo4ez9vmfc3ogitqjdr0s0kpn__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "41fe6d40773ffce051f93a3be8fcb98a0087f635f3594e376d7c1faee2e1df9c",
+  "review_input_sha256": "6730d53c578945ad1704072fba2acf6aacb8e4463753b40a34bfc7f3b03bfa93",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "02e07784cbe7a3a908ebd20ef21170e2b9d9de55b4f28a181598163fda6d49bc",
+  "reference_results_sha256": "921002c6f8e7ecf5086fb45ee1ffa8720fe2e682a5f9afed012ff86d2c00a5b5",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Šárka Nováková",
+      "original_source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[0]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Šárka Nováková",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Šárka Nováková"
+      ],
+      "active_vocabulary": {
+        "Šárka Nováková": 50
+      },
+      "vocabulary_sha256": "d11f46c0acbd14476e80d4a332bf9b466c7c090030f2362d2986b74d790a9a70"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Šárka Nováková": 50
+      },
+      "vocabulary_sha256": "d11f46c0acbd14476e80d4a332bf9b466c7c090030f2362d2986b74d790a9a70"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Translation Project Meeting",
+    "Zoom Meeting"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:49.556802+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

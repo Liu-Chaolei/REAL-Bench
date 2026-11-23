@@ -1,0 +1,171 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0323_hcjynlo7n1etyqggk9bmx0ni1jr1dzf4",
+  "model": "deepseek-flash",
+  "input_sha256": "ea3e87ed5953b368c39ad36883c29c0fa400f4f8e5531c9c8694ab2c3c202801",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Anna Zoher",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Berlin",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Germany",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "国家名"
+        },
+        {
+          "text": "Central Botanical Garden Centre",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "婚礼场地名称"
+        },
+        {
+          "text": "Kamil",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-66b497de-c364-4586-9e9d-0ee605bdda6a.arguments.content",
+          "reason": "致歉邮件收件人名字"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-66b497de-c364-4586-9e9d-0ee605bdda6a.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-8cfc9611-4727-44e3-a97e-4312045249e2.arguments.content",
+          "reason": "致歉邮件收件人名字"
+        }
+      ],
+      "new_terms": [
+        "Anna Zoher",
+        "Berlin",
+        "Germany",
+        "Central Botanical Garden Centre",
+        "Kamil",
+        "Ursula Wiederkehr",
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Anna Zoher": 50,
+        "Berlin": 50,
+        "Germany": 50,
+        "Central Botanical Garden Centre": 50,
+        "Kamil": 50,
+        "Ursula Wiederkehr": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "be088db909842dfefb78f6467f1b7c75845baa9bd3bdcfec1f817eff0b358267"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Anna Zoher",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "演出者全名"
+        },
+        {
+          "text": "Central Botanical Garden Centre",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "婚礼场地名称"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_followup_email.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Anna Zoher": 50,
+        "Berlin": 50,
+        "Germany": 50,
+        "Central Botanical Garden Centre": 50,
+        "Kamil": 50,
+        "Ursula Wiederkehr": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "be088db909842dfefb78f6467f1b7c75845baa9bd3bdcfec1f817eff0b358267"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Anna Zoher",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Lecture: Swiss History",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "被取消的活动名称"
+        },
+        {
+          "text": "University of Basel",
+          "kind": "organization",
+          "source": "stage2.source_task",
+          "reason": "大学名称"
+        }
+      ],
+      "new_terms": [
+        "Lecture: Swiss History",
+        "University of Basel"
+      ],
+      "active_vocabulary": {
+        "Anna Zoher": 50,
+        "Berlin": 50,
+        "Germany": 50,
+        "Central Botanical Garden Centre": 50,
+        "Kamil": 50,
+        "Ursula Wiederkehr": 50,
+        "Aurélien": 50,
+        "Lecture: Swiss History": 50,
+        "University of Basel": 50
+      },
+      "vocabulary_sha256": "f0e5800ce872809d4f30c0ec2b7e7671d8faacccc2cf39643501721e6a2c0798"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "f633acbc0e3289bdc36a16fa38d02984e8c62b389c89a5037df7bd7a48944d70",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3531,
+        "completion_tokens": 472,
+        "total_tokens": 4003,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3275
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.71
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0323_hcjynlo7n1etyqggk9bmx0ni1jr1dzf4",
+  "extracted_at": "2026-11-22T06:41:16.947828+00:00"
+}

@@ -1,0 +1,107 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0603_pofr8ljj8zqoeamwjnrvlu23397rqasi",
+  "model": "deepseek-flash",
+  "input_sha256": "947fe0a32795c513e22dd83edd59d26768bdbfea4766f1b5a66ddb761cba2beb",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kymberley Nakamura",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1eb5d9cb-adc5-4cbd-99e9-dfd04ebcb693.arguments.content",
+          "reason": "邮件署名"
+        },
+        {
+          "text": "Kymberley",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1eb5d9cb-adc5-4cbd-99e9-dfd04ebcb693.arguments.content",
+          "reason": "邮件称呼"
+        }
+      ],
+      "new_terms": [
+        "Kymberley Nakamura",
+        "Rohan Kumar",
+        "Kymberley"
+      ],
+      "active_vocabulary": {
+        "Kymberley Nakamura": 50,
+        "Rohan Kumar": 50,
+        "Kymberley": 50
+      },
+      "vocabulary_sha256": "870ed7a0c42698ab693376452743728f11e99608faa33962df64f95b2c2f8242"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kymberley Nakamura",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_summary_email.arguments.content",
+          "reason": "邮件署名"
+        },
+        {
+          "text": "Kymberley",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_summary_email.arguments.content",
+          "reason": "邮件称呼"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kymberley Nakamura": 50,
+        "Rohan Kumar": 50,
+        "Kymberley": 50
+      },
+      "vocabulary_sha256": "870ed7a0c42698ab693376452743728f11e99608faa33962df64f95b2c2f8242"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kymberley Nakamura": 50,
+        "Rohan Kumar": 50,
+        "Kymberley": 50
+      },
+      "vocabulary_sha256": "870ed7a0c42698ab693376452743728f11e99608faa33962df64f95b2c2f8242"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "ae6971dde303847774065600e813920a839036ead0db681ec21ddfb0c47e7301",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3549,
+        "completion_tokens": 276,
+        "total_tokens": 3825,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3293
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.155
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0603_pofr8ljj8zqoeamwjnrvlu23397rqasi",
+  "extracted_at": "2026-11-22T06:42:59.419638+00:00"
+}

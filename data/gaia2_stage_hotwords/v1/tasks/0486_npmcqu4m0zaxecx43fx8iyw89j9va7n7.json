@@ -1,0 +1,170 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0486_npmcqu4m0zaxecx43fx8iyw89j9va7n7",
+  "model": "deepseek-flash",
+  "input_sha256": "807303ab50b3dd05373066a913086a42390175fa8c376725e3c8f44556fb573a",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Lukáš Nováček",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ab6d71f3-3f1b-4201-862c-7b99fc2f304f.arguments.attendees[0]",
+          "reason": "与会者完整姓名"
+        },
+        {
+          "text": "Czech Countryside",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ab6d71f3-3f1b-4201-862c-7b99fc2f304f.arguments.location",
+          "reason": "活动地点专名"
+        },
+        {
+          "text": "Eliška",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c8bfd3c4-fc58-4991-ad91-6e77238cbcf0.arguments.content",
+          "reason": "受邀人名字"
+        },
+        {
+          "text": "Matěj",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c8bfd3c4-fc58-4991-ad91-6e77238cbcf0.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Kvido",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-2923d848-baa2-47d7-949b-ccf4d0cb30df.arguments.content",
+          "reason": "受邀人名字"
+        },
+        {
+          "text": "Šárka",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-cc6c8f86-bf73-48b3-a99b-6421352745cc.arguments.content",
+          "reason": "取消通知收件人名字"
+        },
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-cc6c8f86-bf73-48b3-a99b-6421352745cc.arguments.content",
+          "reason": "发件人完整姓名"
+        },
+        {
+          "text": "Lukáš",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-bc705a27-e311-40dd-ac08-4ea000f2c485.arguments.content",
+          "reason": "改期通知收件人名字"
+        }
+      ],
+      "new_terms": [
+        "Lukáš Nováček",
+        "Czech Countryside",
+        "Eliška",
+        "Matěj",
+        "Kvido",
+        "Šárka",
+        "Matěj Nováček",
+        "Lukáš"
+      ],
+      "active_vocabulary": {
+        "Lukáš Nováček": 50,
+        "Czech Countryside": 50,
+        "Eliška": 50,
+        "Matěj": 50,
+        "Kvido": 50,
+        "Šárka": 50,
+        "Matěj Nováček": 50,
+        "Lukáš": 50
+      },
+      "vocabulary_sha256": "2e23fbd018abe5adc6682befb907073ae0234e85f5cd68b1196e2a55f8159052"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Lukáš",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "邮件收件人名字"
+        },
+        {
+          "text": "Matěj",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Lukáš Nováček": 50,
+        "Czech Countryside": 50,
+        "Eliška": 50,
+        "Matěj": 50,
+        "Kvido": 50,
+        "Šárka": 50,
+        "Matěj Nováček": 50,
+        "Lukáš": 50
+      },
+      "vocabulary_sha256": "2e23fbd018abe5adc6682befb907073ae0234e85f5cd68b1196e2a55f8159052"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Lukáš",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_lukas.arguments.content",
+          "reason": "邮件收件人名字"
+        },
+        {
+          "text": "Matěj",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_lukas.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Czech countryside",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_lukas.arguments.content",
+          "reason": "徒步地点专名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Lukáš Nováček": 50,
+        "Czech Countryside": 50,
+        "Eliška": 50,
+        "Matěj": 50,
+        "Kvido": 50,
+        "Šárka": 50,
+        "Matěj Nováček": 50,
+        "Lukáš": 50
+      },
+      "vocabulary_sha256": "2e23fbd018abe5adc6682befb907073ae0234e85f5cd68b1196e2a55f8159052"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "74673ad78a554bf25f065b7b58994e22ad942264dfefc71c07725c0ee3808ab0",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4017,
+        "completion_tokens": 710,
+        "total_tokens": 4727,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3761
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.391
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0486_npmcqu4m0zaxecx43fx8iyw89j9va7n7",
+  "extracted_at": "2026-11-22T06:42:19.313429+00:00"
+}

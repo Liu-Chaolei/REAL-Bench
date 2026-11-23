@@ -1,0 +1,404 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0446_tqbo722zw4l86tpqfs9uqh7nbk8jpnjr",
+  "model": "deepseek-flash",
+  "input_sha256": "037d8a152221d6c62b7fd4810e0cde9435bd1a831e4a41c216bfbf524d6568d6",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Nonglak Srisombat",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "用户指定的联系人姓名"
+        },
+        {
+          "text": "Liege City Loft",
+          "kind": "product",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-343b2933-e392-417b-a753-9f12bbd440ac.arguments.content",
+          "reason": "符合条件的具体房源名称"
+        }
+      ],
+      "new_terms": [
+        "Nonglak Srisombat",
+        "Liege City Loft"
+      ],
+      "active_vocabulary": {
+        "Nonglak Srisombat": 50,
+        "Liege City Loft": 50
+      },
+      "vocabulary_sha256": "1df4b79529242a847abf0d7ecfaf15b940aadf7bcfc966aa45c4c1c0155bc571"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nonglak Srisombat",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "消息接收人姓名"
+        },
+        {
+          "text": "Ghent Canal Living",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "排名第一的房源名称"
+        },
+        {
+          "text": "Liege City Loft",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "排名第二的房源名称"
+        },
+        {
+          "text": "Brugge Historic District",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "排名第三的房源名称"
+        }
+      ],
+      "new_terms": [
+        "Ghent Canal Living",
+        "Brugge Historic District"
+      ],
+      "active_vocabulary": {
+        "Nonglak Srisombat": 50,
+        "Liege City Loft": 50,
+        "Ghent Canal Living": 50,
+        "Brugge Historic District": 50
+      },
+      "vocabulary_sha256": "f8955797c3151170ead83f5bb2e739e5247ec6766a4bf088a38573755252c670"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Antwerp Abode",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Antwerp Dream",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Antwerp Haven",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Antwerp Luxury Loft",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Brussels Boutique",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Brussels Bright",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Brussels Green",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Charleroi Comfort",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Ghent Eco-Friendly",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Ghent Student Apartments",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Le Château d'Eau",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称，含特殊字符"
+        },
+        {
+          "text": "Le Clos des Abbesses",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Leuven Luxury",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Liege City Center",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Liege City Living",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Liege City View",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Liege Living",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Liege Loft",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Liege Luxe",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Liege Luxury",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Mechelen Modern",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Namur City Center",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Namur City Living",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Namur River Views",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Namur Riverfront",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Namur Riverside",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被移除的房源名称"
+        },
+        {
+          "text": "Brussels Luxe Living",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "保留的房源名称"
+        },
+        {
+          "text": "Ghent Canal Living",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "保留的房源名称"
+        },
+        {
+          "text": "Ghent Gem",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "保留的房源名称"
+        },
+        {
+          "text": "Ghent Waterfront",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "保留的房源名称"
+        },
+        {
+          "text": "Liege City Loft",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "保留的房源名称"
+        },
+        {
+          "text": "Ostend Beachside Condo",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "保留的房源名称"
+        }
+      ],
+      "new_terms": [
+        "Antwerp Abode",
+        "Antwerp Dream",
+        "Antwerp Haven",
+        "Antwerp Luxury Loft",
+        "Brussels Boutique",
+        "Brussels Bright",
+        "Brussels Green",
+        "Charleroi Comfort",
+        "Ghent Eco-Friendly",
+        "Ghent Student Apartments",
+        "Le Château d'Eau",
+        "Le Clos des Abbesses",
+        "Leuven Luxury",
+        "Liege City Center",
+        "Liege City Living",
+        "Liege City View",
+        "Liege Living",
+        "Liege Loft",
+        "Liege Luxe",
+        "Liege Luxury",
+        "Mechelen Modern",
+        "Namur City Center",
+        "Namur City Living",
+        "Namur River Views",
+        "Namur Riverfront",
+        "Namur Riverside",
+        "Brussels Luxe Living",
+        "Ghent Gem",
+        "Ghent Waterfront",
+        "Ostend Beachside Condo"
+      ],
+      "active_vocabulary": {
+        "Nonglak Srisombat": 50,
+        "Liege City Loft": 50,
+        "Ghent Canal Living": 50,
+        "Brugge Historic District": 50,
+        "Antwerp Abode": 50,
+        "Antwerp Dream": 50,
+        "Antwerp Haven": 50,
+        "Antwerp Luxury Loft": 50,
+        "Brussels Boutique": 50,
+        "Brussels Bright": 50,
+        "Brussels Green": 50,
+        "Charleroi Comfort": 50,
+        "Ghent Eco-Friendly": 50,
+        "Ghent Student Apartments": 50,
+        "Le Château d'Eau": 50,
+        "Le Clos des Abbesses": 50,
+        "Leuven Luxury": 50,
+        "Liege City Center": 50,
+        "Liege City Living": 50,
+        "Liege City View": 50,
+        "Liege Living": 50,
+        "Liege Loft": 50,
+        "Liege Luxe": 50,
+        "Liege Luxury": 50,
+        "Mechelen Modern": 50,
+        "Namur City Center": 50,
+        "Namur City Living": 50,
+        "Namur River Views": 50,
+        "Namur Riverfront": 50,
+        "Namur Riverside": 50,
+        "Brussels Luxe Living": 50,
+        "Ghent Gem": 50,
+        "Ghent Waterfront": 50,
+        "Ostend Beachside Condo": 50
+      },
+      "vocabulary_sha256": "68efa000c2eb06cce64a187a23d4ff2fcfa60f63ad8ed523d1ab120a59146132"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "760295173cb80fc55345eff9d2246f444faf02ef49d215b60ca19f0a1c2a45ff",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5798,
+        "completion_tokens": 1502,
+        "total_tokens": 7300,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 5542
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 4.171,
+      "error": "3 validation errors for Extraction\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "309b2d7cbe38290ec93bb9d8e9082abe0526f3ad30fadda3fa02919beaea6e40",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 7838,
+        "completion_tokens": 1493,
+        "total_tokens": 9331,
+        "prompt_tokens_details": {
+          "cached_tokens": 7296
+        },
+        "prompt_cache_hit_tokens": 7296,
+        "prompt_cache_miss_tokens": 542
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 4.039,
+      "error": "Invalid proper-name phrase: 'liesbeth.vandenberghe@gaia2mail.com'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "abc39feb2a78aca2bae278aacea9bcc1faa6a67ac9acd9671816009ebb606ee6",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 7693,
+        "completion_tokens": 1448,
+        "total_tokens": 9141,
+        "prompt_tokens_details": {
+          "cached_tokens": 5760
+        },
+        "prompt_cache_hit_tokens": 5760,
+        "prompt_cache_miss_tokens": 1933
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 3.93
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0446_tqbo722zw4l86tpqfs9uqh7nbk8jpnjr",
+  "extracted_at": "2026-11-22T06:42:14.076667+00:00"
+}

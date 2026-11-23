@@ -1,0 +1,102 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0993_3ahejw0mjny98xxbohxa397r69k99f5t",
+  "model": "deepseek-flash",
+  "input_sha256": "482f7714e42237fccfa8a9ee4969741c038575ab58840cd1ace12ac0f11bab9e",
+  "review_input_sha256": "38ef3440523f462c9ed8cbfe9d47ac7d16a7d1c50d5973fbcc42125fc46c082b",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "9ea5cda22c79f09b257bcd8c990aa59b6d5f981045ab60e85e3eff4f82312bea",
+  "reference_results_sha256": "259b5dbc7dd7c4e5b937d2583de2ea21ce641962776dc63ed33a3d74375ac465",
+  "sources": {
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Božetěchova 3, 110 00 Prague 1",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-af22fd49-5e49-4e48-ad92-2d1c7b0ec382.arguments.end_location"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "602 00 Brno-střed, Czechia",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-af22fd49-5e49-4e48-ad92-2d1c7b0ec382.arguments.start_location"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Božetěchova 3, 110 00 Prague 1",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含捷克语变音符号的完整街道地址，识别难度高",
+          "weight": 50
+        },
+        {
+          "text": "602 00 Brno-střed, Czechia",
+          "kind": "place",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含捷克语变音符号的完整地名，识别难度高",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Božetěchova 3, 110 00 Prague 1",
+        "602 00 Brno-střed, Czechia"
+      ],
+      "active_vocabulary": {
+        "Božetěchova 3, 110 00 Prague 1": 50,
+        "602 00 Brno-střed, Czechia": 50
+      },
+      "vocabulary_sha256": "cc8029df39f5b8d949727fff54e500e5e3f633e96572307784d37c31b12fc6a1"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Božetěchova 3, 110 00 Prague 1": 50,
+        "602 00 Brno-střed, Czechia": 50
+      },
+      "vocabulary_sha256": "cc8029df39f5b8d949727fff54e500e5e3f633e96572307784d37c31b12fc6a1"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Božetěchova 3, 110 00 Prague 1": 50,
+        "602 00 Brno-střed, Czechia": 50
+      },
+      "vocabulary_sha256": "cc8029df39f5b8d949727fff54e500e5e3f633e96572307784d37c31b12fc6a1"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Severance",
+    "Brno",
+    "Eliška",
+    "Lukáš",
+    "Kvido",
+    "Severance Watch Party",
+    "Cab pickup reminder"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:12.600763+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

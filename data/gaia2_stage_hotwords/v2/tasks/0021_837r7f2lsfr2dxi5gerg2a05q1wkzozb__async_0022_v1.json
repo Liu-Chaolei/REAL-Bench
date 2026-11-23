@@ -1,0 +1,114 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0021_837r7f2lsfr2dxi5gerg2a05q1wkzozb__async_0022_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "394fe2e22359d97a473f11c18ceff95a77d0d4facaa8bf4fabc15e070636be68",
+  "review_input_sha256": "fc41a7c4278dd41ba52b6883f5b235dedab450a2ae9856ea881a5fae8bf9401d",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "95b80c217c94d151283cfea27aaadba2c6c09f9508cf3e41744e6272c215f5d1",
+  "reference_results_sha256": "fb648d9bef12a7705f7e983a67e7802cfb60969a754eae161d6aac3662b8943e",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Sasha Seahorse",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Curitiba",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.tool_response.series_s1_search_product": {
+      "stage": 1,
+      "text": "[{\"name\": \"First & Main Gal Pals, Sasha Seahorse, 7\\\" H\", \"product_id\": \"09ce9d0a4ed30c2c6c836670f76bf145\", \"variants\": {\"1bd5873185ab4860839cb88b321ba65a\": {\"price\": \"12.1\", \"available\": \"True\", \"item_id\": \"1bd5873185ab4860839cb88b321ba65a\", \"options\": {\"age_range\": \"3-6 years\", \"color\": \"pink\", \"material\": \"plastic\"}}, \"beba2ca44e2048d68a23623bcccd0d19\": {\"price\": \"12.1\", \"available\": \"False\", \"item_id\": \"beba2ca44e2048d68a23623bcccd0d19\", \"options\": {\"age_range\": \"3-6 years\", \"color\": \"blue\", \"material\": \"plastic\"}}}}]",
+      "event_id": "series_s1_search_product",
+      "response_sha256": "8b40462673b54a493631e6a29b77eb0cfe8d006f3a3b2bc06e1e26ee77385cc8"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Sasha Seahorse",
+          "kind": "product",
+          "source": "stage0.existing_catalog.0",
+          "reason": "独特的产品名称，含专有名词组合",
+          "weight": 50
+        },
+        {
+          "text": "Curitiba",
+          "kind": "place",
+          "source": "stage0.existing_catalog.1",
+          "reason": "巴西城市专有地名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Sasha Seahorse",
+        "Curitiba"
+      ],
+      "active_vocabulary": {
+        "Sasha Seahorse": 50,
+        "Curitiba": 50
+      },
+      "vocabulary_sha256": "66ac99c599c5fc5acc5b18f1348ca09115821d8e958390164131c896e35c4235"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "First & Main Gal Pals",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_search_product",
+          "reason": "品牌/产品系列专有名称，拼写独特",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "First & Main Gal Pals"
+      ],
+      "active_vocabulary": {
+        "Sasha Seahorse": 50,
+        "Curitiba": 50,
+        "First & Main Gal Pals": 50
+      },
+      "vocabulary_sha256": "0d5bced95557ce8a205d13fad0302b8e8d47d05625f58fa5d2cf3519fcee42e0"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Sasha Seahorse": 50,
+        "Curitiba": 50,
+        "First & Main Gal Pals": 50
+      },
+      "vocabulary_sha256": "0d5bced95557ce8a205d13fad0302b8e8d47d05625f58fa5d2cf3519fcee42e0"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Prague"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:45.947072+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

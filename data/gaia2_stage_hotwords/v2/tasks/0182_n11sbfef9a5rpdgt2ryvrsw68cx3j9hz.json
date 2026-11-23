@@ -1,0 +1,114 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0182_n11sbfef9a5rpdgt2ryvrsw68cx3j9hz",
+  "model": "deepseek-flash",
+  "input_sha256": "a51bb64b364786a2ad65accf00a819c6e482cda890c8d1e0a04e78f1446fe195",
+  "review_input_sha256": "8d7fd99df7c105adc5a631c02b742f0c88be8e1b26ea513d70f5a2d3b1f52897",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "89df9ef4423ba6bd3c1d6dc9d36c6057a015696f4cc99660e104853e5d22c599",
+  "reference_results_sha256": "45a5ee5e703cc5004aa1da02c9ce5f6ba1c1fe85bf65244e6aee83f8412fa34c",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Vivitar DRC-333 Air Defender X Camera Drone",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "HANSA 4688 Plush",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Café Östermalms",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Vivitar DRC-333 Air Defender X Camera Drone",
+          "kind": "product",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含型号的完整产品名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "HANSA 4688 Plush",
+          "kind": "product",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含编号的品牌产品名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Vivitar DRC-333 Air Defender X Camera Drone",
+        "HANSA 4688 Plush"
+      ],
+      "active_vocabulary": {
+        "Vivitar DRC-333 Air Defender X Camera Drone": 50,
+        "HANSA 4688 Plush": 50
+      },
+      "vocabulary_sha256": "1bdf9df07e1fa05c5b9910a058869d6c605ec1f18b6f986deac5430b236840bb"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Café Östermalms",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的完整地名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Café Östermalms"
+      ],
+      "active_vocabulary": {
+        "Vivitar DRC-333 Air Defender X Camera Drone": 50,
+        "HANSA 4688 Plush": 50,
+        "Café Östermalms": 50
+      },
+      "vocabulary_sha256": "7a7e1cc3236919fdd642c8144c0736beaba5fe7629a384e01ef8a2ca23c3a5ea"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Vivitar DRC-333 Air Defender X Camera Drone": 50,
+        "HANSA 4688 Plush": 50,
+        "Café Östermalms": 50
+      },
+      "vocabulary_sha256": "7a7e1cc3236919fdd642c8144c0736beaba5fe7629a384e01ef8a2ca23c3a5ea"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Linnea",
+    "Astrid"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:22.322889+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

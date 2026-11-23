@@ -1,0 +1,217 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0579_6n668fwqc5g3rgj1nj9stog9dze1vono__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "8ded7c884e227e399806b59f7f6ed62baf42ab10b6cf97fee9175be99e98e4f1",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Saskia Kaiser",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "群聊联系人姓名"
+        },
+        {
+          "text": "Helmut Schneider",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "群聊联系人姓名"
+        },
+        {
+          "text": "Zara",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "邮件收件人姓名"
+        },
+        {
+          "text": "Kavita",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e65a5cc7-18f2-4d18-9b27-2340839a06c9.arguments.content",
+          "reason": "邮件称呼中的联系人名"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e65a5cc7-18f2-4d18-9b27-2340839a06c9.arguments.content",
+          "reason": "邮件署名"
+        },
+        {
+          "text": "Rohan",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c28ebb43-05a2-426c-b709-91f3c668e261.arguments.content",
+          "reason": "短信称呼中的联系人名"
+        },
+        {
+          "text": "Scientific Explorer",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e65a5cc7-18f2-4d18-9b27-2340839a06c9.arguments.content",
+          "reason": "产品品牌名"
+        },
+        {
+          "text": "Glow in The Dark Fun Lab Kids Science Experiment Kit",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "产品完整名称"
+        }
+      ],
+      "new_terms": [
+        "Saskia Kaiser",
+        "Helmut Schneider",
+        "Zara",
+        "Kavita",
+        "Rohini Deshpande",
+        "Rohan",
+        "Scientific Explorer",
+        "Glow in The Dark Fun Lab Kids Science Experiment Kit"
+      ],
+      "active_vocabulary": {
+        "Saskia Kaiser": 50,
+        "Helmut Schneider": 50,
+        "Zara": 50,
+        "Kavita": 50,
+        "Rohini Deshpande": 50,
+        "Rohan": 50,
+        "Scientific Explorer": 50,
+        "Glow in The Dark Fun Lab Kids Science Experiment Kit": 50
+      },
+      "vocabulary_sha256": "0229dd5bf0be8fdce5799a6023a4bcd5a80552b9db5c348f6137aa667e4b257e"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kavita",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "提及的酒店联系人名"
+        },
+        {
+          "text": "Scientific Explorer",
+          "kind": "organization",
+          "source": "stage1.reference_reply.series_s1_speak.arguments.content",
+          "reason": "产品品牌名"
+        },
+        {
+          "text": "Glow in the Dark Fun Lab Kids Science Experiment Kit",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "产品完整名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Saskia Kaiser": 50,
+        "Helmut Schneider": 50,
+        "Zara": 50,
+        "Kavita": 50,
+        "Rohini Deshpande": 50,
+        "Rohan": 50,
+        "Scientific Explorer": 50,
+        "Glow in The Dark Fun Lab Kids Science Experiment Kit": 50
+      },
+      "vocabulary_sha256": "0229dd5bf0be8fdce5799a6023a4bcd5a80552b9db5c348f6137aa667e4b257e"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Saskia Kaiser": 50,
+        "Helmut Schneider": 50,
+        "Zara": 50,
+        "Kavita": 50,
+        "Rohini Deshpande": 50,
+        "Rohan": 50,
+        "Scientific Explorer": 50,
+        "Glow in The Dark Fun Lab Kids Science Experiment Kit": 50
+      },
+      "vocabulary_sha256": "0229dd5bf0be8fdce5799a6023a4bcd5a80552b9db5c348f6137aa667e4b257e"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "891069935bb9aba3bb96440f8b45f1a8c2994c8421b13c80c6fcafee8cde0ed2",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2847,
+        "completion_tokens": 524,
+        "total_tokens": 3371,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2591
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 2.4,
+      "error": "2 validation errors for Extraction\nstages.0.terms.6.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nstages.1.terms.1.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "e5291618a759a7b191fe0d31f2374f31c8a166aaac496feec036d6ada47109e6",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3905,
+        "completion_tokens": 524,
+        "total_tokens": 4429,
+        "prompt_tokens_details": {
+          "cached_tokens": 3328
+        },
+        "prompt_cache_hit_tokens": 3328,
+        "prompt_cache_miss_tokens": 577
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.879,
+      "error": "Not an exact quotation of a source in stage 1: 'Glow in The Dark Fun Lab Kids Science Experiment Kit' from 'stage1.source_task'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "cf714ce0cf15fcab387931c707cae684feaf6350037478a0fd261c9bd1c0548b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3786,
+        "completion_tokens": 524,
+        "total_tokens": 4310,
+        "prompt_tokens_details": {
+          "cached_tokens": 2944
+        },
+        "prompt_cache_hit_tokens": 2944,
+        "prompt_cache_miss_tokens": 842
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.085,
+      "error": "Invalid proper-name phrase: 'rohini.deshpande@gaia2mail.com'"
+    },
+    {
+      "attempt": 4,
+      "request_sha256": "644e74c7e80b2c2c7fd099d1df604fbb1b260c533324e330c8edc9d580336996",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3774,
+        "completion_tokens": 473,
+        "total_tokens": 4247,
+        "prompt_tokens_details": {
+          "cached_tokens": 3072
+        },
+        "prompt_cache_hit_tokens": 3072,
+        "prompt_cache_miss_tokens": 702
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.058
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0579_6n668fwqc5g3rgj1nj9stog9dze1vono__repetition_v1",
+  "extracted_at": "2026-11-22T06:46:02.853403+00:00"
+}

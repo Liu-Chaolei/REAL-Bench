@@ -1,0 +1,156 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0521_h3x8mxz2j3hsqikhyjvrycs08gt9mbth",
+  "model": "deepseek-flash",
+  "input_sha256": "7ba353053c3ef2a4aa0c64eb5a0a57bdc99920941783b670897e3e900204f110",
+  "review_input_sha256": "8bf74b529a302034d7153fcc85e12d3c035cff65eb45bc9ad4adcf5561b5b031",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "7a6c199d53b253acd1aa662da8d3760ee98eda6515a19747b4888ff2652dbc2a",
+  "reference_results_sha256": "de4f0fed0b3f8a7ad2fcb361707237817875cc30afdd49785f13ecd7bab234fc",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kaitlyn McAllister",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Kaidën Rylan",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "The Ruhr Board Games",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage1.tool_gt.series_s1_send_kaitlyn.arguments.content"
+    },
+    "stage2.tool_response.series_s2_check_tasting": {
+      "stage": 2,
+      "text": "{\"event_id\": \"4fcace06944e4c7cbe6354a98945c4c4\", \"title\": \"Wine Tasting\", \"start_datetime\": \"1729710000\", \"end_datetime\": \"1729717200\", \"tag\": \"Work\", \"description\": \"Host a wine tasting event for customers to showcase new wines and build relationships.\", \"location\": \"Restaurant Private Dining Room\", \"attendees\": [\"Aurélien LaFleur\", \"Luís Marques\", \"Jamila Fernandes\"], \"start_strftime\": \"Wednesday, 2024-10-23 19:00:00\", \"end_strftime\": \"Wednesday, 2024-10-23 21:00:00\"}",
+      "event_id": "series_s2_check_tasting",
+      "response_sha256": "bceffdb97bb3ca29779d9c9b5f54864d415f07194674c33d0840bb549f7a2722"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "The Ruhr Board Games",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.2",
+          "reason": "独特组织/产品名",
+          "weight": 50
+        },
+        {
+          "text": "Kaidën Rylan",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Kaitlyn McAllister",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，含独特拼写",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "The Ruhr Board Games",
+        "Kaidën Rylan",
+        "Kaitlyn McAllister"
+      ],
+      "active_vocabulary": {
+        "The Ruhr Board Games": 50,
+        "Kaidën Rylan": 50,
+        "Kaitlyn McAllister": 50
+      },
+      "vocabulary_sha256": "e205d4f7de1aac842f961e11a65542638c99cd4cc7806d928cd5627266bba2cc"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur"
+      ],
+      "active_vocabulary": {
+        "The Ruhr Board Games": 50,
+        "Kaidën Rylan": 50,
+        "Kaitlyn McAllister": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "728528c186e2e3f44c1dddc5f06a56a8e60493fa3d4d38322626cc8ebd194b22"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_check_tasting",
+          "reason": "完整人名，独特拼写",
+          "weight": 50
+        },
+        {
+          "text": "Luís Marques",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_check_tasting",
+          "reason": "含变音符的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Jamila Fernandes",
+        "Luís Marques"
+      ],
+      "active_vocabulary": {
+        "The Ruhr Board Games": 50,
+        "Kaidën Rylan": 50,
+        "Kaitlyn McAllister": 50,
+        "Aurélien LaFleur": 50,
+        "Jamila Fernandes": 50,
+        "Luís Marques": 50
+      },
+      "vocabulary_sha256": "1b53f67ead6ef5f53ea10ec1b8f5a86c86207c7538675109acda1e4da5bbd2aa"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kaitlyn",
+    "Kaidën"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:15.159646+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

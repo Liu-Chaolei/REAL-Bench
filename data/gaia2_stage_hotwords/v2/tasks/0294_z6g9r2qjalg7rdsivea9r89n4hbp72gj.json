@@ -1,0 +1,296 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0294_z6g9r2qjalg7rdsivea9r89n4hbp72gj",
+  "model": "deepseek-flash",
+  "input_sha256": "8e5f43360c455ffb4d2cc8e3a44f3cd9aa8db0ee6162d512b8d9079f3acca6d2",
+  "review_input_sha256": "a6cdd196904525dc19ac44b8f4d9eb5c71f08f71cef07d86ed2e9bbb1bad6baf",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "69bc6f80d8e8ca63fd64e701e403fe658930616b2930ecf4d92c00fc4bb41f0d",
+  "reference_results_sha256": "80f999b556de70702e5fdfe720635bf7b1e6d508566af93dabd7a1707a7f8148",
+  "sources": {
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Nevsky Prospekt Residences",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Viktor Kuznetsov",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.5": {
+      "stage": 1,
+      "text": "Natalya Kuznetsova",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.tool_response.series_s1_contacts_check": {
+      "stage": 1,
+      "text": "[{\"first_name\": \"Sergei\", \"last_name\": \"Kuznetsov\", \"contact_id\": \"3016e7f0ba5548618daf742f47e9aef1\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"76\", \"nationality\": \"Russian\", \"city_living\": \"Moscow\", \"country\": \"Russia\", \"status\": \"Status.RETIRED\", \"job\": \"Former Military Pilot\", \"description\": \"Sergei Kuznetsov is a 76-year-old retired military pilot who spent most of his life flying dangerous missions alongside his fellow pilots, including his lifelong friend. Born and raised in Moscow, Sergei grew up with a passion for aviation and joined the Russian Air Force at a young age. He spent over three decades serving his country, flying various aircraft, and participating in numerous military operations. After retiring from the military, Sergei settled back in Moscow, where he has been enjoying his hobbies and spending time with his family and friends.\", \"phone\": \"+74951834567\", \"email\": \"skuznetsov76@mail.ru\", \"address\": \"14/2, Tverskaya Street, Moscow, 125009, Russia\"}, {\"first_name\": \"Viktor\", \"last_name\": \"Kuznetsov\", \"contact_id\": \"853c15ce69e84583ad9a14720187dba9\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"54\", \"nationality\": \"Russian\", \"city_living\": \"Saint Petersburg\", \"country\": \"Russia\", \"status\": \"Status.RETIRED\", \"job\": \"Former Music Teacher\", \"description\": \"Viktor Kuznetsov is a 54-year-old retired music teacher from Saint Petersburg, Russia. He is a self-proclaimed old-school metalhead who still reminisces about the good old days of physical album releases and cassette tapes.\", \"phone\": \"+79111234567\", \"email\": \"vkuznetsov54@mail.ru\", \"address\": \"14/2, Bolshaya Morskaya Ulitsa, Saint Petersburg, 190000\"}, {\"first_name\": \"Natalya\", \"last_name\": \"Kuznetsova\", \"contact_id\": \"b05af84c06744585acbc9d2f1628fd41\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"62\", \"nationality\": \"Russian\", \"city_living\": \"Saint Petersburg\", \"country\": \"Russia\", \"status\": \"Status.RETIRED\", \"job\": \"Former Professor of Mathematics\", \"description\": \"Natalya Kuznetsova is a retired professor of mathematics who spent most of her career teaching and researching at Saint Petersburg State University. Born and raised in Saint Petersburg, Natalya developed a passion for mathematics from an early age and went on to study at Leningrad State University, where she earned her Ph.D. in mathematics. Her research interests lie in higher category theory and homotopy theory, and she has published numerous papers on these topics in prestigious mathematical journals.\", \"phone\": \"+78121234567\", \"email\": \"nkuznetsova@gaia2mail.com\", \"address\": \"14/2 Nevsky Prospekt, Saint Petersburg, Russia, 191186\"}, {\"first_name\": \"Anastasiya\", \"last_name\": \"Kuznetsova\", \"contact_id\": \"c2290ef376a247f0803fd54c3e38aaee\", \"is_user\": \"True\", \"gender\": \"Gender.FEMALE\", \"age\": \"50\", \"nationality\": \"Russian\", \"city_living\": \"Moscow\", \"country\": \"Russia\", \"status\": \"Status.EMPLOYED\", \"job\": \"History Teacher\", \"description\": \"Anastasiya Kuznetsova is a passionate and dedicated history teacher who has spent her entire career sharing her love for the past with her students.\", \"phone\": \"+79251234567\", \"email\": \"akuznetsova@gaia2mail.com\", \"address\": \"Ulitsa Bolshaya Dmitrovka, 15/1, Moscow, 127006\"}, {\"first_name\": \"Sofía\", \"last_name\": \"Kuznetsova García\", \"contact_id\": \"e3bffc6b7f0040baa17fe52db8b649d1\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"79\", \"nationality\": \"Mexican\", \"city_living\": \"Mexico City\", \"country\": \"Mexico\", \"status\": \"Status.RETIRED\", \"job\": \"Former Customer Service Representative\", \"description\": \"Sofía Kuznetsova García is a 79-year-old retired customer service representative who spent most of her life working for a large telecommunications company in Mexico City. Born to a Mexican mother and a Russian father, Sofía is fluent in both English and Russian, which served her well in her former role. She is a warm and patient person who loves helping others, which made her a beloved figure among her former colleagues and customers. Sofía is a proud grandmother of five and enjoys spending time with her family, whether it's cooking traditional Mexican dishes or playing chess with her grandkids.\", \"phone\": \"+525512385678\", \"email\": \"sofia.kuznetsova@gaia2mail.com\", \"address\": \"Calle de Durango 345, Colonia Roma, Cuauhtémoc, 06700 Ciudad de México, CDMX\"}, {\"first_name\": \"Anastasia\", \"last_name\": \"Kuznetsova\", \"contact_id\": \"f20749fd47c34446a1781114245c14a8\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"51\", \"nationality\": \"Russian\", \"city_living\": \"Moscow\", \"country\": \"Russia\", \"status\": \"Status.EMPLOYED\", \"job\": \"Foreign Affairs Representative\", \"description\": \"A seasoned foreign affairs representative with over 25 years of experience in navigating the complex world of international relations.\", \"phone\": \"+79151234567\", \"email\": \"akuznetsova@mid.ru\", \"address\": \"Ulitsa Arbat, 15/2, Moscow, 119002, Russia\"}]",
+      "event_id": "series_s1_contacts_check",
+      "response_sha256": "7d0ebda3adf3f43976502f27aadd42db28ea069fea7a6801c0c7706808c89de3"
+    },
+    "stage1.tool_response.series_s1_search_flats": {
+      "stage": 1,
+      "text": "{\"03001f781b3d4c469e382f8a552cc42b\": {\"name\": \"Samara City Center\", \"location\": \"Ulitsa Kuibysheva, Samara\", \"zip_code\": \"443000\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"700\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"03001f781b3d4c469e382f8a552cc42b\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"33fb723044034d3ebd7010720281995e\": {\"name\": \"Nevsky Prospekt Residences\", \"location\": \"55 Nevsky Prospekt, Saint Petersburg\", \"zip_code\": \"191186\", \"price\": \"1800\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"33fb723044034d3ebd7010720281995e\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"False\"}, \"64b322111a334fa88836982e4deaa47d\": {\"name\": \"Kazan Pearl\", \"location\": \"Bauman St, 43, Kazan\", \"zip_code\": \"420111\", \"price\": \"1800\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"64b322111a334fa88836982e4deaa47d\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"False\"}, \"9951ab70257145479e12db9bdefb7129\": {\"name\": \"Siberian Oasis\", \"location\": \"Ulitsa Lenina, Novosibirsk\", \"zip_code\": \"630099\", \"price\": \"1800\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"9951ab70257145479e12db9bdefb7129\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"False\"}, \"b5680e069c074d93b96e85387036a37f\": {\"name\": \"Omsk Downtown Lofts\", \"location\": \"10 Ulitsa Lenina, Omsk\", \"zip_code\": \"644007\", \"price\": \"1200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"b5680e069c074d93b96e85387036a37f\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"False\"}, \"b98f38e9521c4f339d305973aa3e8fd2\": {\"name\": \"Krasnodar City Living\", \"location\": \"Krasnaya St, 50, Krasnodar\", \"zip_code\": \"350000\", \"price\": \"1200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"b98f38e9521c4f339d305973aa3e8fd2\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}}",
+      "event_id": "series_s1_search_flats",
+      "response_sha256": "486a6609e544173a8d716dd894901f9fa97f4ae397928feeee185b648dc8f330"
+    },
+    "stage2.tool_response.series_s2_samara_flats": {
+      "stage": 2,
+      "text": "{\"03001f781b3d4c469e382f8a552cc42b\": {\"name\": \"Samara City Center\", \"location\": \"Ulitsa Kuibysheva, Samara\", \"zip_code\": \"443000\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"700\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"03001f781b3d4c469e382f8a552cc42b\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"0e20e095a6a0485a9e5c118bd93aaa1a\": {\"name\": \"Samara City Apartments\", \"location\": \"Kuibysheva Street, Samara\", \"zip_code\": \"443010\", \"price\": \"1200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"0e20e095a6a0485a9e5c118bd93aaa1a\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"11fd1b805f664190bdc265de2f2c18d2\": {\"name\": \"Samara Sunset\", \"location\": \"Leningradskaya Street, Samara\", \"zip_code\": \"443099\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"11fd1b805f664190bdc265de2f2c18d2\", \"amenities\": [\"Parking\"], \"saved\": \"False\"}, \"38b09a5a0840492e9f01aae569c58d53\": {\"name\": \"Samara Riverfront\", \"location\": \"Ulitsa Leningradskaya, Samara\", \"zip_code\": \"443011\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"38b09a5a0840492e9f01aae569c58d53\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"67230a81ed404c4d8cc6a29154786150\": {\"name\": \"Samara Studio\", \"location\": \"Kuibyshev Street, Samara\", \"zip_code\": \"443010\", \"price\": \"1000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Basement\", \"pet_policy\": \"No pets\", \"lease_term\": \"Month-to-month\", \"apartment_id\": \"67230a81ed404c4d8cc6a29154786150\", \"amenities\": [\"Laundry\"], \"saved\": \"False\"}, \"9efd8443880d40ab9bd31b838dbfafa0\": {\"name\": \"Samara Comfort\", \"location\": \"Samara St, 15, Samara\", \"zip_code\": \"443099\", \"price\": \"1200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"9efd8443880d40ab9bd31b838dbfafa0\", \"amenities\": [\"Parking\"], \"saved\": \"False\"}}",
+      "event_id": "series_s2_samara_flats",
+      "response_sha256": "996b1d0a325e3c3e0fefd2e1be5b5b1bf363ab213df6d8a594736064b336d962"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Bolshaya Morskaya Ulitsa",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_contacts_check",
+          "reason": "独特俄语街道名，难发音",
+          "weight": 50
+        },
+        {
+          "text": "Calle de Durango",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_contacts_check",
+          "reason": "西班牙语街道名，难识别",
+          "weight": 50
+        },
+        {
+          "text": "Krasnodar City Living",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_flats",
+          "reason": "独特公寓名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Nevsky Prospekt Residences",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "独特俄语地名公寓名，含难发音专名",
+          "weight": 50
+        },
+        {
+          "text": "Omsk Downtown Lofts",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_flats",
+          "reason": "独特公寓名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Sofía Kuznetsova García",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_contacts_check",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Ulitsa Bolshaya Dmitrovka",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_contacts_check",
+          "reason": "独特俄语街道名，难发音",
+          "weight": 50
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_contacts_check",
+          "reason": "完整俄语人名，难识别",
+          "weight": 50
+        },
+        {
+          "text": "Kazan Pearl",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_flats",
+          "reason": "独特公寓名，含地名专名",
+          "weight": 50
+        },
+        {
+          "text": "Natalya Kuznetsova",
+          "kind": "person",
+          "source": "stage1.existing_catalog.5",
+          "reason": "完整俄语人名，难识别",
+          "weight": 50
+        },
+        {
+          "text": "Sergei Kuznetsov",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_contacts_check",
+          "reason": "完整俄语人名，难识别",
+          "weight": 50
+        },
+        {
+          "text": "Siberian Oasis",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_flats",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage1.existing_catalog.4",
+          "reason": "完整俄语人名，难识别",
+          "weight": 50
+        },
+        {
+          "text": "Cuauhtémoc",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_contacts_check",
+          "reason": "含变音符号的墨西哥地名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Bolshaya Morskaya Ulitsa",
+        "Calle de Durango",
+        "Krasnodar City Living",
+        "Nevsky Prospekt Residences",
+        "Omsk Downtown Lofts",
+        "Sofía Kuznetsova García",
+        "Ulitsa Bolshaya Dmitrovka",
+        "Anastasiya Kuznetsova",
+        "Kazan Pearl",
+        "Natalya Kuznetsova",
+        "Sergei Kuznetsov",
+        "Siberian Oasis",
+        "Viktor Kuznetsov",
+        "Cuauhtémoc"
+      ],
+      "active_vocabulary": {
+        "Bolshaya Morskaya Ulitsa": 50,
+        "Calle de Durango": 50,
+        "Krasnodar City Living": 50,
+        "Nevsky Prospekt Residences": 50,
+        "Omsk Downtown Lofts": 50,
+        "Sofía Kuznetsova García": 50,
+        "Ulitsa Bolshaya Dmitrovka": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Kazan Pearl": 50,
+        "Natalya Kuznetsova": 50,
+        "Sergei Kuznetsov": 50,
+        "Siberian Oasis": 50,
+        "Viktor Kuznetsov": 50,
+        "Cuauhtémoc": 50
+      },
+      "vocabulary_sha256": "64d69a39de5141f774470e93b75e866f2248055bf070ebad83f625041e248a5c"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Samara City Apartments",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_samara_flats",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Leningradskaya Street",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_samara_flats",
+          "reason": "独特俄语街道名，难发音",
+          "weight": 50
+        },
+        {
+          "text": "Samara Comfort",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_samara_flats",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Samara Studio",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_samara_flats",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Samara Sunset",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_samara_flats",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Ulitsa Kuibysheva",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_samara_flats",
+          "reason": "独特俄语街道名，难发音",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Samara City Apartments",
+        "Leningradskaya Street",
+        "Samara Comfort",
+        "Samara Studio",
+        "Samara Sunset",
+        "Ulitsa Kuibysheva"
+      ],
+      "active_vocabulary": {
+        "Bolshaya Morskaya Ulitsa": 50,
+        "Calle de Durango": 50,
+        "Krasnodar City Living": 50,
+        "Nevsky Prospekt Residences": 50,
+        "Omsk Downtown Lofts": 50,
+        "Sofía Kuznetsova García": 50,
+        "Ulitsa Bolshaya Dmitrovka": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Kazan Pearl": 50,
+        "Natalya Kuznetsova": 50,
+        "Sergei Kuznetsov": 50,
+        "Siberian Oasis": 50,
+        "Viktor Kuznetsov": 50,
+        "Cuauhtémoc": 50,
+        "Samara City Apartments": 50,
+        "Leningradskaya Street": 50,
+        "Samara Comfort": 50,
+        "Samara Studio": 50,
+        "Samara Sunset": 50,
+        "Ulitsa Kuibysheva": 50
+      },
+      "vocabulary_sha256": "8ebc5861ccb154f09988773f3d54e98e9be8d388b6a3cc5efd075617339a50a6"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Samara City Center",
+    "Samara",
+    "Saint Petersburg",
+    "Kuznetsov",
+    "Samara Riverfront"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:04.977968+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

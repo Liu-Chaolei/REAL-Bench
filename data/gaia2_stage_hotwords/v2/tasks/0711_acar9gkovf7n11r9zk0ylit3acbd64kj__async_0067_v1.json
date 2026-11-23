@@ -1,0 +1,155 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0711_acar9gkovf7n11r9zk0ylit3acbd64kj__async_0067_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "ee57d505b628e0abf834e9e2f552a0023c33017f8e8d4d53abb5c22d4f958cd5",
+  "review_input_sha256": "ec17c5072f0ddc90dbd69e141b50b701486c5c676940444db858f8e9b580c634",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "669bc1b2b57e38c6fdfb68f9be9674d8f19b02853ccc42ce8c8cc66c3477aa47",
+  "reference_results_sha256": "4225306c79d270ebd9252a57dc8af4fd4ff2fd58e9febe816ad0fa4753eee7d8",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Åke Lindström",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Annoying Uncle Åke",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-fcb51a93-e025-40fb-a45b-4a862e7f6c89.arguments.title"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Östermalmsgatan 12, 114 39 Stockholm, Sweden",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-fcb51a93-e025-40fb-a45b-4a862e7f6c89.arguments.location"
+    },
+    "stage1.tool_response.series_s1_order_ride": {
+      "stage": 1,
+      "text": "{\"ride_id\": \"d1ac07d674773078108c50e673b46150\", \"status\": \"BOOKED\", \"service_type\": \"Premium\", \"start_location\": \"Home\", \"end_location\": \"Östermalmsgatan 12, 114 39 Stockholm, Sweden\", \"price\": \"38.99795727035649\", \"duration\": \"21.719009135712668\", \"time_stamp\": \"1729358100.0\", \"distance_km\": \"14.2603879647533\", \"delay\": \"6\", \"delay_history\": [{\"delay\": \"6\", \"time_stamp\": \"1729358100.0\"}]}",
+      "event_id": "series_s1_order_ride",
+      "response_sha256": "ef493abdb98af27334b7333dc2eac7f7b15df39a8981ea4a0fc6668889c5c809"
+    },
+    "stage2.tool_response.series_s2_get_new_event": {
+      "stage": 2,
+      "text": "{\"event_id\": \"d4c2d9f7cdacdf99ad578e25036c7e5f\", \"title\": \"Annoying Uncle Åke\", \"start_datetime\": \"1729360800.0\", \"end_datetime\": \"1729362600.0\", \"tag\": null, \"description\": null, \"location\": \"Östermalmsgatan 12, 114 39 Stockholm, Sweden\", \"attendees\": [\"Åke Lindström\"], \"start_strftime\": \"Saturday, 2024-10-19 18:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 18:30:00\"}",
+      "event_id": "series_s2_get_new_event",
+      "response_sha256": "f3ade5808e52c48d03fb8d87e13357d8b1069ebe358dca583d371b36c95ebbd3"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Östermalmsgatan 12, 114 39 Stockholm, Sweden",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整瑞典地址",
+          "weight": 50
+        },
+        {
+          "text": "Annoying Uncle Åke",
+          "kind": "custom_name",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的独特自定义名称",
+          "weight": 50
+        },
+        {
+          "text": "Åke Lindström",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含瑞典语变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Östermalmsgatan 12, 114 39 Stockholm, Sweden",
+        "Annoying Uncle Åke",
+        "Åke Lindström"
+      ],
+      "active_vocabulary": {
+        "Östermalmsgatan 12, 114 39 Stockholm, Sweden": 50,
+        "Annoying Uncle Åke": 50,
+        "Åke Lindström": 50
+      },
+      "vocabulary_sha256": "1d2ae54a450ce18ead77414e0dae6084d0d909d0fa45352cbb25723de57f91ac"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Östermalmsgatan 12, 114 39 Stockholm, Sweden",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_order_ride",
+          "reason": "含变音符号的完整地址，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Östermalmsgatan 12, 114 39 Stockholm, Sweden": 50,
+        "Annoying Uncle Åke": 50,
+        "Åke Lindström": 50
+      },
+      "vocabulary_sha256": "1d2ae54a450ce18ead77414e0dae6084d0d909d0fa45352cbb25723de57f91ac"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Östermalmsgatan 12, 114 39 Stockholm, Sweden",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_get_new_event",
+          "reason": "含变音符号的完整地址",
+          "weight": 50
+        },
+        {
+          "text": "Annoying Uncle Åke",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_get_new_event",
+          "reason": "含变音符号的独特事件标题",
+          "weight": 50
+        },
+        {
+          "text": "Åke Lindström",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_get_new_event",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Östermalmsgatan 12, 114 39 Stockholm, Sweden": 50,
+        "Annoying Uncle Åke": 50,
+        "Åke Lindström": 50
+      },
+      "vocabulary_sha256": "1d2ae54a450ce18ead77414e0dae6084d0d909d0fa45352cbb25723de57f91ac"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Zebra Foal",
+    "Astrid"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:20:04.840385+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

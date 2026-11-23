@@ -1,0 +1,116 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0968_awm15kgqgj7s5azcpbf3kygytooq5ucv",
+  "model": "deepseek-flash",
+  "input_sha256": "bcc321ab947d4af09499b55c6539b2b54c9a1efb9752e320b8c512db72115171",
+  "review_input_sha256": "e0e43b17734f32cef76f24da2372ea69e0c9163e2f15d5f107f73702b931f6e0",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "24569383f97c012a361ad43f06dcf124a42f9be024c3eb81e7d6d4b903e59c56",
+  "reference_results_sha256": "a87e17af6956866addff77ac5198b7407d7d90cfe0b9080befbc9b8afac39359",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Aurélien Van der Straeten",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Ursula Ramseyer",
+      "original_source": "stage0.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Akira Kübler",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien Van der Straeten",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，难以识别，保留",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Ramseyer",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，作为困难专名保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien Van der Straeten",
+        "Ursula Ramseyer"
+      ],
+      "active_vocabulary": {
+        "Aurélien Van der Straeten": 50,
+        "Ursula Ramseyer": 50
+      },
+      "vocabulary_sha256": "ac0be70761bde27c3ad76e0523e80b94d4e53cac50e186f1808747ea9dbbfa56"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien Van der Straeten": 50,
+        "Ursula Ramseyer": 50
+      },
+      "vocabulary_sha256": "ac0be70761bde27c3ad76e0523e80b94d4e53cac50e186f1808747ea9dbbfa56"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Akira Kübler",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Akira Kübler"
+      ],
+      "active_vocabulary": {
+        "Aurélien Van der Straeten": 50,
+        "Ursula Ramseyer": 50,
+        "Akira Kübler": 50
+      },
+      "vocabulary_sha256": "570eef11f8213afe18a5ae1ac34b5de7f14a78d64356fdb311cce7a848621b59"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Coffee Break with Aurélien Van der Straeten",
+    "Meditation",
+    "Coffee cancellation and meditation record",
+    "Coffee Break Follow-Up",
+    "Meditation & Coffee"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:02.112449+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

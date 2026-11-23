@@ -1,0 +1,226 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0686_g7xymw4gh5ccwcdpn1rqqnni2jli2g25",
+  "model": "deepseek-flash",
+  "input_sha256": "19545c6e7928632d85f939c71560a5ebe3b925b6683eebd0d0201ce3f9d2fc4b",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélie Dumont",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "群聊参与者姓名"
+        },
+        {
+          "text": "Vasco Sousa",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "群聊参与者姓名"
+        },
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f1851408-7fc9-41ac-8048-52dae641e812.arguments.content",
+          "reason": "邮件收件人名字"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f1851408-7fc9-41ac-8048-52dae641e812.arguments.content",
+          "reason": "邮件署名"
+        },
+        {
+          "text": "Stockholm",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Aurélie Dumont",
+        "Vasco Sousa",
+        "Astrid",
+        "Astrid Lundqvist",
+        "Stockholm"
+      ],
+      "active_vocabulary": {
+        "Aurélie Dumont": 50,
+        "Vasco Sousa": 50,
+        "Astrid": 50,
+        "Astrid Lundqvist": 50,
+        "Stockholm": 50
+      },
+      "vocabulary_sha256": "6fa993944bc07f9836fa6090bfcc72341231dda51f783e86344debd017551702"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Vasco",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "回复对象名字"
+        },
+        {
+          "text": "Lund Living",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_2.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Stora Södergatan 15",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_2.arguments.content",
+          "reason": "公寓地址"
+        },
+        {
+          "text": "Lund",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_2.arguments.content",
+          "reason": "城市名"
+        },
+        {
+          "text": "Lund Linné",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_2.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Linnéstaden",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_2.arguments.content",
+          "reason": "街区名"
+        }
+      ],
+      "new_terms": [
+        "Vasco",
+        "Lund Living",
+        "Stora Södergatan 15",
+        "Lund",
+        "Lund Linné",
+        "Linnéstaden"
+      ],
+      "active_vocabulary": {
+        "Aurélie Dumont": 50,
+        "Vasco Sousa": 50,
+        "Astrid": 50,
+        "Astrid Lundqvist": 50,
+        "Stockholm": 50,
+        "Vasco": 50,
+        "Lund Living": 50,
+        "Stora Södergatan 15": 50,
+        "Lund": 50,
+        "Lund Linné": 50,
+        "Linnéstaden": 50
+      },
+      "vocabulary_sha256": "9286a5cb0497a6e470a10e5cc2a87c253be2b59002469c2a8a263b4a436305a5"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群聊参与者名字"
+        },
+        {
+          "text": "Vasco",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群聊参与者名字"
+        },
+        {
+          "text": "Lund Student Housing",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_2.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Sölvegatan 20",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_2.arguments.content",
+          "reason": "公寓地址"
+        },
+        {
+          "text": "Lund",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_2.arguments.content",
+          "reason": "城市名"
+        },
+        {
+          "text": "Malmö Modern",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_2.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Södra Förstadsgatan 20",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_2.arguments.content",
+          "reason": "公寓地址"
+        },
+        {
+          "text": "Malmö",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_2.arguments.content",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Aurélie",
+        "Lund Student Housing",
+        "Sölvegatan 20",
+        "Malmö Modern",
+        "Södra Förstadsgatan 20",
+        "Malmö"
+      ],
+      "active_vocabulary": {
+        "Aurélie Dumont": 50,
+        "Vasco Sousa": 50,
+        "Astrid": 50,
+        "Astrid Lundqvist": 50,
+        "Stockholm": 50,
+        "Vasco": 50,
+        "Lund Living": 50,
+        "Stora Södergatan 15": 50,
+        "Lund": 50,
+        "Lund Linné": 50,
+        "Linnéstaden": 50,
+        "Aurélie": 50,
+        "Lund Student Housing": 50,
+        "Sölvegatan 20": 50,
+        "Malmö Modern": 50,
+        "Södra Förstadsgatan 20": 50,
+        "Malmö": 50
+      },
+      "vocabulary_sha256": "33fc00949ebd6d7e119e7c09c0f4165d40a685520e606a990af34d8464978eeb"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "4361f7db09001ca1d5208cde4fd5c35383d9fb776cb8a519034d2ec1909093d2",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3115,
+        "completion_tokens": 683,
+        "total_tokens": 3798,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2859
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.247
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0686_g7xymw4gh5ccwcdpn1rqqnni2jli2g25",
+  "extracted_at": "2026-11-22T06:43:23.861393+00:00"
+}

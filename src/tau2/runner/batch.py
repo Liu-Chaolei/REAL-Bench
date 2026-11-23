@@ -38,7 +38,7 @@ from tau2.data_model.simulation import (
     VoiceRunConfig,
 )
 from tau2.data_model.tasks import Task
-from tau2.data_model.voice import SynthesisConfig, VoiceSettings
+from tau2.data_model.voice import QwenTTSConfig, SynthesisConfig, VoiceSettings
 from tau2.data_model.voice_personas import warn_if_non_official_voices
 from tau2.evaluator.evaluator import EvaluationType
 from tau2.evaluator.hallucination_reviewer import failed_hallucination_check
@@ -634,7 +634,8 @@ def make_voice_run_settings(
                     or system.config_env_file,
                 }
             )
-            synthesis = SynthesisConfig(provider="mimo", provider_config=settings)
+            provider = "qwen" if isinstance(settings, QwenTTSConfig) else "mimo"
+            synthesis = SynthesisConfig(provider=provider, provider_config=settings)
     user_voice_settings = VoiceSettings(
         transcription_config=None,
         synthesis_config=synthesis,

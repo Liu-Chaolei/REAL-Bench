@@ -1,0 +1,193 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0069_c6ccebef5z1zicc1hes4d9rxqps58tvl__async_0034_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "27eada99737a05e6c407b00034688c24ad0cd68430f1b223f87d02244f3e9749",
+  "review_input_sha256": "0f7eba5389d7e4bbac76d5657c8eadb5073e006885f3ad3af4d8066de9cc12bb",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "3d57110a3a49b843b900f9bbc167edf9bee798383ff25cad5d892f06203bed22",
+  "reference_results_sha256": "30e0a4771087e74b5f3395302a03eeeb9fd4738f4af00c58d55bd8054e9ff9ce",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Seefeldstrasse 123",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Jigsaw Puzzle Factory",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Abraham Hunter-Good Old Days",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Aurélie",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-09408d30-da78-48d2-a401-b163b42c5186.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Aurélie Wyss",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.tool_response.series_s1_check_window": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"0112d80b0df14caaa35ee4c545fa8d67\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1729539000\", \"end_datetime\": \"1729546200\", \"tag\": \"Social\", \"description\": \"Dinner with friends at a local restaurant.\", \"location\": \"Restaurant in Basel\", \"attendees\": [\"Aurélien Vandenberghe\", \"Liesbeth Vandenberghe\", \"Aurélie Wyss\"], \"start_strftime\": \"Monday, 2024-10-21 19:30:00\", \"end_strftime\": \"Monday, 2024-10-21 21:30:00\"}, {\"event_id\": \"648213eb110645babb697c88f17f38fa\", \"title\": \"Coffee Break\", \"start_datetime\": \"1729504800\", \"end_datetime\": \"1729508400\", \"tag\": \"Social\", \"description\": \"Catch up with friends over coffee.\", \"location\": \"Café in Basel\", \"attendees\": [\"Aurélie Wyss\", \"Saskia Wyss\"], \"start_strftime\": \"Monday, 2024-10-21 10:00:00\", \"end_strftime\": \"Monday, 2024-10-21 11:00:00\"}, {\"event_id\": \"d43ffd0b9f87416f9efd9f04f3ec16c9\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729533600\", \"end_datetime\": \"1729537200\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio in Basel\", \"attendees\": [], \"start_strftime\": \"Monday, 2024-10-21 18:00:00\", \"end_strftime\": \"Monday, 2024-10-21 19:00:00\"}, {\"event_id\": \"e679025bc12541ae926e004cb43a7abe\", \"title\": \"Research Collaboration Meeting\", \"start_datetime\": \"1729519200\", \"end_datetime\": \"1729526400\", \"tag\": \"Research\", \"description\": \"Discuss research collaboration with Katarzyna Zielińska\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Katarzyna Zielińska\"], \"start_strftime\": \"Monday, 2024-10-21 14:00:00\", \"end_strftime\": \"Monday, 2024-10-21 16:00:00\"}], \"range\": [\"0\", \"4\"], \"total\": \"4\"}",
+      "event_id": "series_s1_check_window",
+      "response_sha256": "ebfe97c9cda1507ff3961faa23cccba72a5ce2609d3790616b27d35cd86b86d2"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Abraham Hunter-Good Old Days",
+          "kind": "product",
+          "source": "stage0.existing_catalog.4",
+          "reason": "含连字符的完整产品名",
+          "weight": 50
+        },
+        {
+          "text": "Jigsaw Puzzle Factory",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.3",
+          "reason": "独特品牌/机构名",
+          "weight": 50
+        },
+        {
+          "text": "Seefeldstrasse 123",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含德语街道名的完整地址，发音困难",
+          "weight": 50
+        },
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "含变音符号的专有名字",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Abraham Hunter-Good Old Days",
+        "Jigsaw Puzzle Factory",
+        "Seefeldstrasse 123",
+        "Aurélie"
+      ],
+      "active_vocabulary": {
+        "Abraham Hunter-Good Old Days": 50,
+        "Jigsaw Puzzle Factory": 50,
+        "Seefeldstrasse 123": 50,
+        "Aurélie": 50
+      },
+      "vocabulary_sha256": "894959643cb307d35cb7905a2b62ad2dae51dd37253f0082f2e047dcbda1e78a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélie Wyss",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_check_window",
+          "reason": "含变音符号的困难完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_check_window",
+          "reason": "含变音符号的困难完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_check_window",
+          "reason": "困难完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Wyss",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_check_window",
+          "reason": "困难完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélie Wyss",
+        "Aurélien Vandenberghe",
+        "Katarzyna Zielińska",
+        "Liesbeth Vandenberghe",
+        "Saskia Wyss"
+      ],
+      "active_vocabulary": {
+        "Abraham Hunter-Good Old Days": 50,
+        "Jigsaw Puzzle Factory": 50,
+        "Seefeldstrasse 123": 50,
+        "Aurélie": 50,
+        "Aurélie Wyss": 50,
+        "Aurélien Vandenberghe": 50,
+        "Katarzyna Zielińska": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Saskia Wyss": 50
+      },
+      "vocabulary_sha256": "a9c8c849899dacdc5ac1ec4032eeefc9d3967b32facf791a0a018f0cf3e6eca6"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Abraham Hunter-Good Old Days": 50,
+        "Jigsaw Puzzle Factory": 50,
+        "Seefeldstrasse 123": 50,
+        "Aurélie": 50,
+        "Aurélie Wyss": 50,
+        "Aurélien Vandenberghe": 50,
+        "Katarzyna Zielińska": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Saskia Wyss": 50
+      },
+      "vocabulary_sha256": "a9c8c849899dacdc5ac1ec4032eeefc9d3967b32facf791a0a018f0cf3e6eca6"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Zurich",
+    "Switzerland",
+    "Ursula"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:50.510526+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,140 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0918_8kzhquq1fm25r7w0lgnus7u33g2023yx__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "229a73bffe493e44c03ff57d8d3ec974121df8ba083c8fc81580fcbb809768b8",
+  "review_input_sha256": "b44687cb30f90c6d73638e1ade843fa1a063792e8a2e6b8ff12222b00e5d9f59",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "2178880d9a58fba42af8bacf6fdd5eb27d3368f771b0df0664c9bcccf7ceb822",
+  "reference_results_sha256": "74f87d341600e33b842b3b9951ade15ad4f2c5d427c20634f989507c976f6193",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kaitlyn McAllister",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Adelaide Silva",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-6ed51ea3-6939-44be-a29d-03d0a9d7f2a5.arguments.content"
+    },
+    "stage1.tool_response.series_s1_email_kaitlyn_public_read": {
+      "stage": 1,
+      "text": "{\"sender\": \"aurelien.lafleur@gaia2mail.com\", \"recipients\": [\"kaitlyn.mcallister@gaia2mail.com\"], \"subject\": \"Agenda for our call\", \"content\": \"Hi Kaitlyn,\\n\\nI'm getting ready for our call this Friday, October 18 at 9 AM, and I'd like to make the most of our 30 minutes.\\n\\nCould you send me one topic you want to discuss? Also, please let me know of any document I should read beforehand.\\n\\nOur call stays exactly as scheduled — no changes on my end.\\n\\nBest regards,\\nAurélien LaFleur\", \"email_id\": \"1a5be7e8173deda1cfbf3cd98060e80c\", \"parent_id\": null, \"cc\": [], \"attachments\": {}, \"timestamp\": \"1728975606.0\", \"is_read\": \"True\"}",
+      "event_id": "series_s1_email_kaitlyn_public_read",
+      "response_sha256": "ac3af0cb4b3f5ac0aae1f925048634837ac7b4f28caf58b406b842e405c9139f"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "rohini.deshpande",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.recipients[0]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Adelaide Silva",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，具辨识度",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Kaitlyn McAllister",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Adelaide Silva",
+        "Aurélien LaFleur",
+        "Kaitlyn McAllister"
+      ],
+      "active_vocabulary": {
+        "Adelaide Silva": 50,
+        "Aurélien LaFleur": 50,
+        "Kaitlyn McAllister": 50
+      },
+      "vocabulary_sha256": "9d603e7ac1ddd0fa002275c7318cef334f70076a4299741b99bd60379b7b5495"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_email_kaitlyn_public_read",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Adelaide Silva": 50,
+        "Aurélien LaFleur": 50,
+        "Kaitlyn McAllister": 50
+      },
+      "vocabulary_sha256": "9d603e7ac1ddd0fa002275c7318cef334f70076a4299741b99bd60379b7b5495"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "rohini.deshpande",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "目录中提供的字面人名标识，具辨识度",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "rohini.deshpande"
+      ],
+      "active_vocabulary": {
+        "Adelaide Silva": 50,
+        "Aurélien LaFleur": 50,
+        "Kaitlyn McAllister": 50,
+        "rohini.deshpande": 50
+      },
+      "vocabulary_sha256": "ccd933135d1757c492f107a92c5d38c300e3efa3dc71f5ecfe3d5f87645866a2"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:18.512645+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

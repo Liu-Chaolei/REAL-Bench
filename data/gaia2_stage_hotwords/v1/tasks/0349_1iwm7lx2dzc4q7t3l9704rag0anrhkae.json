@@ -1,0 +1,160 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0349_1iwm7lx2dzc4q7t3l9704rag0anrhkae",
+  "model": "deepseek-flash",
+  "input_sha256": "bf858019314e9ad1cdcb874c88b2efe8999f3eb1c95a2412846c19d117eef301",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Jonas Holgen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Holgen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6409f44a-adf4-49d9-ac7a-4cc12c4b7f2d.arguments.content",
+          "reason": "教授姓氏"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "地名"
+        },
+        {
+          "text": "Karel",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6409f44a-adf4-49d9-ac7a-4cc12c4b7f2d.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Khalifa",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c6b430ee-2750-428f-9304-ca6a4361108f.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Nalinee",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-2c6a2063-add5-48e5-822d-f7b36e176102.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6409f44a-adf4-49d9-ac7a-4cc12c4b7f2d.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [
+        "Jonas Holgen",
+        "Holgen",
+        "Leuven",
+        "Karel",
+        "Khalifa",
+        "Nalinee",
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Jonas Holgen": 50,
+        "Holgen": 50,
+        "Leuven": 50,
+        "Karel": 50,
+        "Khalifa": 50,
+        "Nalinee": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "56f131024119e0c0b09c5c72e5f47d6219d4c42d4b3f6f708d24549035c43cf0"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Jonas Holgen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "晚宴主角姓名"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "地名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Jonas Holgen": 50,
+        "Holgen": 50,
+        "Leuven": 50,
+        "Karel": 50,
+        "Khalifa": 50,
+        "Nalinee": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "56f131024119e0c0b09c5c72e5f47d6219d4c42d4b3f6f708d24549035c43cf0"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Jonas Holgen",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "确认邮件对象姓名"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_confirmation.arguments.content",
+          "reason": "地名"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_confirmation.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Jonas Holgen": 50,
+        "Holgen": 50,
+        "Leuven": 50,
+        "Karel": 50,
+        "Khalifa": 50,
+        "Nalinee": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "56f131024119e0c0b09c5c72e5f47d6219d4c42d4b3f6f708d24549035c43cf0"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "ef657d9719a7752900c023418cb3019e897e630926160eb2e37b89de6a2e63f9",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3176,
+        "completion_tokens": 533,
+        "total_tokens": 3709,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2920
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.852
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0349_1iwm7lx2dzc4q7t3l9704rag0anrhkae",
+  "extracted_at": "2026-11-22T06:41:24.346273+00:00"
+}

@@ -1,0 +1,108 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0425_65ew956wvtg4pbw1ncpavp09p0oc74nj",
+  "model": "deepseek-flash",
+  "input_sha256": "6c941521b98bf216180460237c27188a0afd4adfb1c1ff2786954232df9001d4",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaida Rao",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_1.arguments.content",
+          "reason": "加拿大联系人全名"
+        },
+        {
+          "text": "Café Opus",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_1.arguments.content",
+          "reason": "咖啡会面地点"
+        }
+      ],
+      "new_terms": [
+        "Kaida Rao",
+        "Café Opus"
+      ],
+      "active_vocabulary": {
+        "Kaida Rao": 50,
+        "Café Opus": 50
+      },
+      "vocabulary_sha256": "dd546c0b0eb4076eb859816e8da6c38f7074df16a3ca3e3fd943911f16599207"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaida Rao",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_1.arguments.attendees[0]",
+          "reason": "提醒参会人全名"
+        },
+        {
+          "text": "Café Opus",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_1.arguments.location",
+          "reason": "提醒地点"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kaida Rao": 50,
+        "Café Opus": 50
+      },
+      "vocabulary_sha256": "dd546c0b0eb4076eb859816e8da6c38f7074df16a3ca3e3fd943911f16599207"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "3011e217ed07ec0f74e2ed86b0f2b1c6fe8d82478224a44c098ed95457d90915",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1501,
+        "completion_tokens": 279,
+        "total_tokens": 1780,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1245
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.467,
+      "error": "4 validation errors for Extraction\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage0.reference_reply.O...b1c20.arguments.content', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage1.reference_reply.s..._s1_1.arguments.content', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage2.tool_gt.series_s2....arguments.attendees[0]', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "4aca5f6c280cda36b19844b5752c84e106ac5bfd2227749ead610219e0ddc859",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2422,
+        "completion_tokens": 182,
+        "total_tokens": 2604,
+        "prompt_tokens_details": {
+          "cached_tokens": 1664
+        },
+        "prompt_cache_hit_tokens": 1664,
+        "prompt_cache_miss_tokens": 758
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.856
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0425_65ew956wvtg4pbw1ncpavp09p0oc74nj",
+  "extracted_at": "2026-11-22T06:41:51.293215+00:00"
+}

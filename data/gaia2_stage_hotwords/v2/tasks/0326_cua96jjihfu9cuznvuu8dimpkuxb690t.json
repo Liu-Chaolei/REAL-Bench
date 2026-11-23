@@ -1,0 +1,185 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0326_cua96jjihfu9cuznvuu8dimpkuxb690t",
+  "model": "deepseek-flash",
+  "input_sha256": "38f1cdd4af18b85fdd6d5dd57ad32fb7878bcf79c6cf1569fc7f0e645ad58375",
+  "review_input_sha256": "0d168c202380e973ac859da6ff92caa93d456bf42774c8fa7d2eda937a9d67b2",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "95addc7b90b039d8ab6966def9e1a6d5acfddae17ccdbf965cb531ff5e3c94ac",
+  "reference_results_sha256": "c0e2cc5c0cbf8e5be9898b8be72471728a0a4a5e8e51abf75b5fcd4c7357a429",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Geneva",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Lake View Paradise",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Geneva City Living",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Geneva Glamour",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Geneva Seaside",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Geneva Downtown",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.5": {
+      "stage": 1,
+      "text": "Geneva International",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.6": {
+      "stage": 1,
+      "text": "Geneva Waterfront",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Geneva",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "日内瓦为地名，但属常见城市名，难度一般；按规则保留唯一明确专有地名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Geneva"
+      ],
+      "active_vocabulary": {
+        "Geneva": 50
+      },
+      "vocabulary_sha256": "2146f02daf60f686106867fede8355d3d9a49de7cfb057a770679c3505a84dba"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Geneva City Living",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "独特公寓名称，含地名组合",
+          "weight": 50
+        },
+        {
+          "text": "Lake View Paradise",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "独特公寓名称，含专有名词组合",
+          "weight": 50
+        },
+        {
+          "text": "Geneva Downtown",
+          "kind": "place",
+          "source": "stage1.existing_catalog.4",
+          "reason": "独特公寓名称，含地名组合",
+          "weight": 50
+        },
+        {
+          "text": "Geneva Glamour",
+          "kind": "place",
+          "source": "stage1.existing_catalog.2",
+          "reason": "独特公寓名称，含地名组合",
+          "weight": 50
+        },
+        {
+          "text": "Geneva International",
+          "kind": "place",
+          "source": "stage1.existing_catalog.5",
+          "reason": "独特公寓名称，含地名组合",
+          "weight": 50
+        },
+        {
+          "text": "Geneva Seaside",
+          "kind": "place",
+          "source": "stage1.existing_catalog.3",
+          "reason": "独特公寓名称，含地名组合",
+          "weight": 50
+        },
+        {
+          "text": "Geneva Waterfront",
+          "kind": "place",
+          "source": "stage1.existing_catalog.6",
+          "reason": "独特公寓名称，含地名组合",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Geneva City Living",
+        "Lake View Paradise",
+        "Geneva Downtown",
+        "Geneva Glamour",
+        "Geneva International",
+        "Geneva Seaside",
+        "Geneva Waterfront"
+      ],
+      "active_vocabulary": {
+        "Geneva": 50,
+        "Geneva City Living": 50,
+        "Lake View Paradise": 50,
+        "Geneva Downtown": 50,
+        "Geneva Glamour": 50,
+        "Geneva International": 50,
+        "Geneva Seaside": 50,
+        "Geneva Waterfront": 50
+      },
+      "vocabulary_sha256": "1557906216ac789e7645f4e886736fb760f26c036bb900214ec616b0d3faeccb"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Geneva": 50,
+        "Geneva City Living": 50,
+        "Lake View Paradise": 50,
+        "Geneva Downtown": 50,
+        "Geneva Glamour": 50,
+        "Geneva International": 50,
+        "Geneva Seaside": 50,
+        "Geneva Waterfront": 50
+      },
+      "vocabulary_sha256": "1557906216ac789e7645f4e886736fb760f26c036bb900214ec616b0d3faeccb"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:10.326269+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

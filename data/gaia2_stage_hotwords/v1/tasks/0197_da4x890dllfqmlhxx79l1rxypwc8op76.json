@@ -1,0 +1,153 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0197_da4x890dllfqmlhxx79l1rxypwc8op76",
+  "model": "deepseek-flash",
+  "input_sha256": "e5b6274cc68bbc6e9710281bb37a91a8ba4b2c3bd8297eecae6e0b648a0d4d04",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Alessia",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "派对主角人名"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fda0c49b-6af8-43c4-a8e7-eabdff4605d4.arguments.attendees[0]",
+          "reason": "参会者完整姓名"
+        },
+        {
+          "text": "Kaito Nakamura",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fda0c49b-6af8-43c4-a8e7-eabdff4605d4.arguments.attendees[1]",
+          "reason": "参会者完整姓名"
+        },
+        {
+          "text": "Léon Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fda0c49b-6af8-43c4-a8e7-eabdff4605d4.arguments.attendees[2]",
+          "reason": "参会者完整姓名"
+        },
+        {
+          "text": "Aurélien Kaufmann",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fda0c49b-6af8-43c4-a8e7-eabdff4605d4.arguments.attendees[3]",
+          "reason": "参会者完整姓名"
+        },
+        {
+          "text": "Zurich",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "地名"
+        },
+        {
+          "text": "Marvel Avengers Beverage Napkins",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品名称"
+        }
+      ],
+      "new_terms": [
+        "Alessia",
+        "Ursula Wiederkehr",
+        "Kaito Nakamura",
+        "Léon Vandenberghe",
+        "Aurélien Kaufmann",
+        "Zurich",
+        "Marvel Avengers Beverage Napkins"
+      ],
+      "active_vocabulary": {
+        "Alessia": 50,
+        "Ursula Wiederkehr": 50,
+        "Kaito Nakamura": 50,
+        "Léon Vandenberghe": 50,
+        "Aurélien Kaufmann": 50,
+        "Zurich": 50,
+        "Marvel Avengers Beverage Napkins": 50
+      },
+      "vocabulary_sha256": "ef22c7a7d0988e74f7b59da26dbd3314939ea5211d4484c048f02f9c7d8fc7e0"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_setup.arguments.attendees[0]",
+          "reason": "参会者完整姓名"
+        },
+        {
+          "text": "Kaito Nakamura",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_setup.arguments.attendees[1]",
+          "reason": "参会者完整姓名"
+        },
+        {
+          "text": "Léon Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_setup.arguments.attendees[2]",
+          "reason": "参会者完整姓名"
+        },
+        {
+          "text": "Aurélien Kaufmann",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_setup.arguments.attendees[3]",
+          "reason": "参会者完整姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Alessia": 50,
+        "Ursula Wiederkehr": 50,
+        "Kaito Nakamura": 50,
+        "Léon Vandenberghe": 50,
+        "Aurélien Kaufmann": 50,
+        "Zurich": 50,
+        "Marvel Avengers Beverage Napkins": 50
+      },
+      "vocabulary_sha256": "ef22c7a7d0988e74f7b59da26dbd3314939ea5211d4484c048f02f9c7d8fc7e0"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Alessia": 50,
+        "Ursula Wiederkehr": 50,
+        "Kaito Nakamura": 50,
+        "Léon Vandenberghe": 50,
+        "Aurélien Kaufmann": 50,
+        "Zurich": 50,
+        "Marvel Avengers Beverage Napkins": 50
+      },
+      "vocabulary_sha256": "ef22c7a7d0988e74f7b59da26dbd3314939ea5211d4484c048f02f9c7d8fc7e0"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "751cc34456feae970b4ad4bb2fb5a9a0e5560cf71cf095eb74784687911c276d",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2860,
+        "completion_tokens": 550,
+        "total_tokens": 3410,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2604
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.803
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0197_da4x890dllfqmlhxx79l1rxypwc8op76",
+  "extracted_at": "2026-11-22T06:40:38.817475+00:00"
+}

@@ -1,0 +1,176 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0859_0955qpz7w3j9ib9vml2osvr8fxjzswxs",
+  "model": "deepseek-flash",
+  "input_sha256": "e4067b0f332d154d588172db4192ac7a2c2ea1ca87f5caf29c9f26171dee441c",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Joao",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-223ac9eb-f4d5-4ae3-b0a2-c0cde9e94b5e.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Yuting",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b600fbed-6502-43a2-a6e6-a96045114a74.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-223ac9eb-f4d5-4ae3-b0a2-c0cde9e94b5e.arguments.content",
+          "reason": "发件人完整姓名"
+        },
+        {
+          "text": "Swedish Fashion Brands",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5fca8710-143b-4d31-9e73-ba8b69b82eb3.arguments.title",
+          "reason": "邮件主题中的品牌群体名称"
+        },
+        {
+          "text": "Num Noms Snackables Silly Shakes- Candy Corn Smoothie",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品完整名称"
+        }
+      ],
+      "new_terms": [
+        "Joao",
+        "Yuting",
+        "Astrid Lundqvist",
+        "Swedish Fashion Brands",
+        "Num Noms Snackables Silly Shakes- Candy Corn Smoothie"
+      ],
+      "active_vocabulary": {
+        "Joao": 50,
+        "Yuting": 50,
+        "Astrid Lundqvist": 50,
+        "Swedish Fashion Brands": 50,
+        "Num Noms Snackables Silly Shakes- Candy Corn Smoothie": 50
+      },
+      "vocabulary_sha256": "db0c12059ac42f5a6c5561ef03b2cd026cfe34c10658499cf7d8db07f73691af"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Yuting Liang",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人完整姓名"
+        },
+        {
+          "text": "João Silva",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人完整姓名"
+        },
+        {
+          "text": "Astrid Kjeldsen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人完整姓名"
+        }
+      ],
+      "new_terms": [
+        "Yuting Liang",
+        "João Silva",
+        "Astrid Kjeldsen"
+      ],
+      "active_vocabulary": {
+        "Joao": 50,
+        "Yuting": 50,
+        "Astrid Lundqvist": 50,
+        "Swedish Fashion Brands": 50,
+        "Num Noms Snackables Silly Shakes- Candy Corn Smoothie": 50,
+        "Yuting Liang": 50,
+        "João Silva": 50,
+        "Astrid Kjeldsen": 50
+      },
+      "vocabulary_sha256": "58939309ff9b7d18986e067b452645b2c4643e8d39a85e6bf26c6d0c7f769bac"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Yuting Liang",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "准备会议对象完整姓名"
+        },
+        {
+          "text": "Astrid Kjeldsen",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "准备会议对象完整姓名"
+        },
+        {
+          "text": "João Silva",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "被排除的联系人完整姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Joao": 50,
+        "Yuting": 50,
+        "Astrid Lundqvist": 50,
+        "Swedish Fashion Brands": 50,
+        "Num Noms Snackables Silly Shakes- Candy Corn Smoothie": 50,
+        "Yuting Liang": 50,
+        "João Silva": 50,
+        "Astrid Kjeldsen": 50
+      },
+      "vocabulary_sha256": "58939309ff9b7d18986e067b452645b2c4643e8d39a85e6bf26c6d0c7f769bac"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "38ad2c98da78257c0bc2496b32434157a7f31851dfcec750e88a5622ec6ae97d",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5287,
+        "completion_tokens": 739,
+        "total_tokens": 6026,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 5031
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.634,
+      "error": "Invalid proper-name phrase: 'yuting.liang@emarketingpro.com'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "855f87d9565b7ea2e6f8faaa4444e624f961bf212d236f37741e0c93aebebbe5",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 6426,
+        "completion_tokens": 471,
+        "total_tokens": 6897,
+        "prompt_tokens_details": {
+          "cached_tokens": 6016
+        },
+        "prompt_cache_hit_tokens": 6016,
+        "prompt_cache_miss_tokens": 410
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.723
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0859_0955qpz7w3j9ib9vml2osvr8fxjzswxs",
+  "extracted_at": "2026-11-22T06:44:16.784569+00:00"
+}

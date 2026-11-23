@@ -1,0 +1,172 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0598_3blx2g45b52ajwclty9flruevfytx2ob__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "1db5bb6d34d7fb3ef6c473f3e576ca77058d81cf2b7d0eeb5f1744460c42c8b1",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Basel Kleinbasel",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_speak.arguments.content",
+          "reason": "公寓名称，含地名"
+        },
+        {
+          "text": "Basel City Oasis",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_speak.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Basel Old Town",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_speak.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Basel Modern",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_speak.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Basel City Center",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_speak.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Basel City Loft",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_speak.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Basel Kunsthaus",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_speak.arguments.content",
+          "reason": "公寓专有名称，含德语词"
+        },
+        {
+          "text": "Basel Bahnhof",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_speak.arguments.content",
+          "reason": "公寓专有名称，含德语词"
+        },
+        {
+          "text": "Basel City Living",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_speak.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Basel Breeze",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_speak.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Basel Waterfront",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_speak.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Basel Riverside",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_speak.arguments.content",
+          "reason": "公寓专有名称"
+        }
+      ],
+      "new_terms": [
+        "Basel Kleinbasel",
+        "Basel City Oasis",
+        "Basel Old Town",
+        "Basel Modern",
+        "Basel City Center",
+        "Basel City Loft",
+        "Basel Kunsthaus",
+        "Basel Bahnhof",
+        "Basel City Living",
+        "Basel Breeze",
+        "Basel Waterfront",
+        "Basel Riverside"
+      ],
+      "active_vocabulary": {
+        "Basel Kleinbasel": 50,
+        "Basel City Oasis": 50,
+        "Basel Old Town": 50,
+        "Basel Modern": 50,
+        "Basel City Center": 50,
+        "Basel City Loft": 50,
+        "Basel Kunsthaus": 50,
+        "Basel Bahnhof": 50,
+        "Basel City Living": 50,
+        "Basel Breeze": 50,
+        "Basel Waterfront": 50,
+        "Basel Riverside": 50
+      },
+      "vocabulary_sha256": "45d93b3fd51d9fc98ac6de58db5dc9aceceea11311fdd819429d8ff2f33b5865"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "d679f68426f9b8cd0d4245c5140e4be2ab2e7590d0a2082deb50b331a184d5f5",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2892,
+        "completion_tokens": 563,
+        "total_tokens": 3455,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2636
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 2.019,
+      "error": "6 validation errors for Extraction\nstages.0.kind\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.kind\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "eae45a95da75b81cb907ae2b1ff159275cc89f01d475cff449feabfd4275ece5",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4147,
+        "completion_tokens": 484,
+        "total_tokens": 4631,
+        "prompt_tokens_details": {
+          "cached_tokens": 3328
+        },
+        "prompt_cache_hit_tokens": 3328,
+        "prompt_cache_miss_tokens": 819
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.912
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0598_3blx2g45b52ajwclty9flruevfytx2ob__repetition_v1",
+  "extracted_at": "2026-11-22T06:45:50.932151+00:00"
+}

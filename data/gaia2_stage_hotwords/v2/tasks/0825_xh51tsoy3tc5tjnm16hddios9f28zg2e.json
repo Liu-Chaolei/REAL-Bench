@@ -1,0 +1,159 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0825_xh51tsoy3tc5tjnm16hddios9f28zg2e",
+  "model": "deepseek-flash",
+  "input_sha256": "fe773c555ea1cc39e4e128fa690d3c7747d91d81d1f23b7cb1600a1d1f2fe960",
+  "review_input_sha256": "c7722b85510007c3b347f3f537619771a69e61a0b28fb849650453c5242476e5",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "b9ee4019db09476c431b6410ab65a3f7395f301081a7da47373d614399ea1edb",
+  "reference_results_sha256": "365e319dc42532003cfbd4b98b965c5597392bee25b0bfaaa8f426ffd2c5b134",
+  "sources": {
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Bronwyn McTavish",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Rajputana Residency",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Rohan Kumar",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-7eb35f2c-03cb-480f-bc93-90496d7e61c8.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Ryder McKenzie",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Kaori Nakahara",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Sindhi Camp",
+      "original_source": "stage2.tool_gt.series_s2_calendar.arguments.location"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Bronwyn McTavish",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整且拼写较难的人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Rajputana Residency",
+          "kind": "place",
+          "source": "stage0.existing_catalog.3",
+          "reason": "独特地名/住所名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Bronwyn McTavish",
+        "Rajputana Residency",
+        "Rohan Kumar"
+      ],
+      "active_vocabulary": {
+        "Bronwyn McTavish": 50,
+        "Rajputana Residency": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "41fdd0ba24e3f43e4a88413034514eb9a5fb31ae41ef6d73810bde9789c274b0"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Bronwyn McTavish": 50,
+        "Rajputana Residency": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "41fdd0ba24e3f43e4a88413034514eb9a5fb31ae41ef6d73810bde9789c274b0"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaori Nakahara",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Ryder McKenzie",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整人名，姓氏拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Sindhi Camp",
+          "kind": "place",
+          "source": "stage2.existing_catalog.2",
+          "reason": "独特地名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kaori Nakahara",
+        "Ryder McKenzie",
+        "Sindhi Camp"
+      ],
+      "active_vocabulary": {
+        "Bronwyn McTavish": 50,
+        "Rajputana Residency": 50,
+        "Rohan Kumar": 50,
+        "Kaori Nakahara": 50,
+        "Ryder McKenzie": 50,
+        "Sindhi Camp": 50
+      },
+      "vocabulary_sha256": "7f3a3e326cea7c435ecee3a92b86116e7271294e0078da3054697cf823d52b51"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Ryder",
+    "Kaori",
+    "Bronwyn",
+    "Jaipur"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:30.658967+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

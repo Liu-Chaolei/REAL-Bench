@@ -1,0 +1,213 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0972_dhhwqrrwlcuk0qefe3m3dpusvcj5cuxo",
+  "model": "deepseek-flash",
+  "input_sha256": "2acd621612055e4dca08c7893e704ab83cd7330106a6f29fd3f0354e3331d9a9",
+  "review_input_sha256": "511b33f38fdcb3d06dbcddbac7db53e4abe3dbae57b9aad97c8b78c18f94c8c1",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "9d95d78d534ccbac4dc019a1ec39b467e81ff7660c6e1835c6b4b86855b2cf72",
+  "reference_results_sha256": "6c822cd93da695894eb792681c14f3387362713a62708265bcb08ce1399ff380",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Rohini",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-c3d858dd-085d-4255-9dba-695f55d806fb.arguments.content"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Rohan Kumar",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-c3d858dd-085d-4255-9dba-695f55d806fb.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Rohini Nair",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Rohan Deshpande",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Rohini Iyer",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Rohini Naidu",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.tool_response.series_s1_accepted_0": {
+      "stage": 1,
+      "text": "{\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Event created by Rohini Nair: Meeting with local government working group\", \"start_datetime\": \"1729256400.0\", \"end_datetime\": \"1729260000.0\", \"tag\": \"Work\", \"description\": \"Event created by Rohini Nair: Meeting with local government working group\", \"location\": \"Town hall\", \"attendees\": [\"Rohan Sengupta\", \"Rohan Srinivasan\", \"Rohini Nair\"], \"start_strftime\": \"Friday, 2024-10-18 13:00:00\", \"end_strftime\": \"Friday, 2024-10-18 14:00:00\"}",
+      "event_id": "series_s1_accepted_0",
+      "response_sha256": "f0d5c53c70f8c009a0cff16db166fc7c69ccb20b46765d8049904bc916b550dd"
+    },
+    "stage1.tool_response.series_s1_accepted_1": {
+      "stage": 1,
+      "text": "{\"event_id\": \"d4c2d9f7cdacdf99ad578e25036c7e5f\", \"title\": \"Event created by Rohan Deshpande: Project Planning\", \"start_datetime\": \"1729355400.0\", \"end_datetime\": \"1729359000.0\", \"tag\": null, \"description\": \"Event created by Rohan Deshpande: Continuing the project planning.\", \"location\": \"Office\", \"attendees\": [\"Kaitlyn Nguyen\", \"Kaida Jensen\", \"Rohan Deshpande\"], \"start_strftime\": \"Saturday, 2024-10-19 16:30:00\", \"end_strftime\": \"Saturday, 2024-10-19 17:30:00\"}",
+      "event_id": "series_s1_accepted_1",
+      "response_sha256": "d08d9a98f7da6412f96723f3605d0f27a62a52823043780c2d6e40f50c1aaa34"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，含名与姓，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Rohini",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "印度式专有人名，非普通词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Rohan Kumar",
+        "Rohini"
+      ],
+      "active_vocabulary": {
+        "Rohan Kumar": 50,
+        "Rohini": 50
+      },
+      "vocabulary_sha256": "7e59ac8c4085422129bb147901128650c320fbb64d1dd3fb0cbb3232257d728e"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaida Jensen",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_accepted_1",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Kaitlyn Nguyen",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_accepted_1",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Deshpande",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Sengupta",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_accepted_0",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Srinivasan",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_accepted_0",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Iyer",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Naidu",
+          "kind": "person",
+          "source": "stage1.existing_catalog.3",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Nair",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，跨阶段出现，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kaida Jensen",
+        "Kaitlyn Nguyen",
+        "Rohan Deshpande",
+        "Rohan Sengupta",
+        "Rohan Srinivasan",
+        "Rohini Iyer",
+        "Rohini Naidu",
+        "Rohini Nair"
+      ],
+      "active_vocabulary": {
+        "Rohan Kumar": 50,
+        "Rohini": 50,
+        "Kaida Jensen": 50,
+        "Kaitlyn Nguyen": 50,
+        "Rohan Deshpande": 50,
+        "Rohan Sengupta": 50,
+        "Rohan Srinivasan": 50,
+        "Rohini Iyer": 50,
+        "Rohini Naidu": 50,
+        "Rohini Nair": 50
+      },
+      "vocabulary_sha256": "b4faf40ef4656d2dbf14195558e4f33ed970900ff1c1ee32978cdb876c5d1315"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Rohan Kumar": 50,
+        "Rohini": 50,
+        "Kaida Jensen": 50,
+        "Kaitlyn Nguyen": 50,
+        "Rohan Deshpande": 50,
+        "Rohan Sengupta": 50,
+        "Rohan Srinivasan": 50,
+        "Rohini Iyer": 50,
+        "Rohini Naidu": 50,
+        "Rohini Nair": 50
+      },
+      "vocabulary_sha256": "b4faf40ef4656d2dbf14195558e4f33ed970900ff1c1ee32978cdb876c5d1315"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Rohan",
+    "Lunch with Mentor",
+    "Meeting with local government working group",
+    "Lunch and catch up"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:05.960435+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

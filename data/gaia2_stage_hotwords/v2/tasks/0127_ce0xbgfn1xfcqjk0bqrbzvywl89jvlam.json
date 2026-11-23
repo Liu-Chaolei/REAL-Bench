@@ -1,0 +1,113 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0127_ce0xbgfn1xfcqjk0bqrbzvywl89jvlam",
+  "model": "deepseek-flash",
+  "input_sha256": "a847bb8d5e4ac203c44343acdafbc6ee81008035b7ea477959fd68c644abb12a",
+  "review_input_sha256": "6848cc77f8aa70e3835d5cb0a9757763ab834e0083a9ecfdc0b818366af8c362",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "b2925949057a127c2000eebc0f3409b098391262c21b4f7916e9b40793d76a29",
+  "reference_results_sha256": "d225274fb25dad66254de6b1d6fdd75d30dc05191288ae60c0d02b8f3230136a",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Søren Kjær",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-fd2679aa-3680-4cc4-863d-cf763d7be20a.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Søren Kjærsgaard",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Aarhus University",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含特殊字符ø和æ的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Søren Kjær"
+      ],
+      "active_vocabulary": {
+        "Søren Kjær": 50
+      },
+      "vocabulary_sha256": "385da86b35722cb82860c189e1ad420ed22ce6ac64229fab7a1219055a798f42"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aarhus University",
+          "kind": "organization",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含特殊字符的专有机构名",
+          "weight": 50
+        },
+        {
+          "text": "Søren Kjærsgaard",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含特殊字符ø和æ的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aarhus University",
+        "Søren Kjærsgaard"
+      ],
+      "active_vocabulary": {
+        "Søren Kjær": 50,
+        "Aarhus University": 50,
+        "Søren Kjærsgaard": 50
+      },
+      "vocabulary_sha256": "e7f979748d2583226700ecd8a1023cc6d8576b3332d06034d8709f099f7679d8"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Søren Kjær": 50,
+        "Aarhus University": 50,
+        "Søren Kjærsgaard": 50
+      },
+      "vocabulary_sha256": "e7f979748d2583226700ecd8a1023cc6d8576b3332d06034d8709f099f7679d8"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Astrid",
+    "complex_dag.png"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:06.648065+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

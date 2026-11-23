@@ -1,0 +1,159 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0117_21kzyhlzscui6zvrqouyc1n2xuyhkbal",
+  "model": "deepseek-flash",
+  "input_sha256": "23ab80d85d17feede886e853fc92618ce372e1aff6edf86daac4cbf4a94dfb49",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-810fdd1e-a1d7-403f-8f45-29baa8a160d0.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Karel Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-810fdd1e-a1d7-403f-8f45-29baa8a160d0.arguments.attendees[1]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Émile Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-810fdd1e-a1d7-403f-8f45-29baa8a160d0.arguments.attendees[2]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Liesbeth",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-4d6a31f2-c741-4db3-83cb-164f473a4a09.arguments.content",
+          "reason": "署名发件人姓名"
+        },
+        {
+          "text": "Llama 1",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "论文模型名称"
+        },
+        {
+          "text": "ProjectStuff",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "新建文件夹名称"
+        }
+      ],
+      "new_terms": [
+        "Aurélien Dumont",
+        "Karel Vandenberghe",
+        "Émile Vandenberghe",
+        "Liesbeth",
+        "Llama 1",
+        "ProjectStuff"
+      ],
+      "active_vocabulary": {
+        "Aurélien Dumont": 50,
+        "Karel Vandenberghe": 50,
+        "Émile Vandenberghe": 50,
+        "Liesbeth": 50,
+        "Llama 1": 50,
+        "ProjectStuff": 50
+      },
+      "vocabulary_sha256": "640672d9d2f6ecf21706f8f273b54ba9a1c6f9577819e76b8eff0961363107ca"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_new_event.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Karel Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_new_event.arguments.attendees[1]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Émile Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_new_event.arguments.attendees[2]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Liesbeth",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_group_message.arguments.content",
+          "reason": "署名发件人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien Dumont": 50,
+        "Karel Vandenberghe": 50,
+        "Émile Vandenberghe": 50,
+        "Liesbeth": 50,
+        "Llama 1": 50,
+        "ProjectStuff": 50
+      },
+      "vocabulary_sha256": "640672d9d2f6ecf21706f8f273b54ba9a1c6f9577819e76b8eff0961363107ca"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "私信收件人姓名"
+        },
+        {
+          "text": "Liesbeth",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_message_aurelien.arguments.content",
+          "reason": "署名发件人姓名"
+        }
+      ],
+      "new_terms": [
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Aurélien Dumont": 50,
+        "Karel Vandenberghe": 50,
+        "Émile Vandenberghe": 50,
+        "Liesbeth": 50,
+        "Llama 1": 50,
+        "ProjectStuff": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "0a3b19e2babad9e6a534eeab7eae900557fe6e220010ae8016c0ffd1d09ea714"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "51d5b183690dd7491144c96192c6ca27aaf64526e537a55d82f668c63d20532b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5030,
+        "completion_tokens": 587,
+        "total_tokens": 5617,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4774
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.304
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0117_21kzyhlzscui6zvrqouyc1n2xuyhkbal",
+  "extracted_at": "2026-11-22T06:40:08.167465+00:00"
+}

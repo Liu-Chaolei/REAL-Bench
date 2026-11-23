@@ -1,0 +1,131 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0659_xpfi0s9ueivppstn8gps8ig8h8nnrjn9",
+  "model": "deepseek-flash",
+  "input_sha256": "04793f6ea279b43085b269ef28977826410052855f1a0c28c4068da1848507f8",
+  "review_input_sha256": "d31376b6c7000e7dd657354f6b5e65e88631e338a494f11aa3c3af1bcb50dc38",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "fef8ad8aa3a80ac6a12cd240457ef221f6ece30aa7ec097cb834c85dde205ce9",
+  "reference_results_sha256": "004ac5c6f282ec26f591beca16c8ee6e54ece3bf086c1112e61a47df1b1c33a5",
+  "sources": {
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Šárka Nováková",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-31ec57ec-84a3-40e1-95b9-21fecaf5d5ea.arguments.content"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Korunní 105, 130 00 Prague 3, Czech Republic",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-a3a0ce3a-b0cf-4c80-8a13-c2df12153be4.arguments.end_location"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "Všehrdova 14, 118 00 Praha 1, Czech Republic",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-4bf05f3b-5eef-4fb4-8a87-c9979c44eefa.arguments.end_location"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Kryštof Nováček",
+      "original_source": "stage2.tool_gt.series_s2_add_beer_event.arguments.description"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Korunní 105, 130 00 Prague 3, Czech Republic",
+          "kind": "place",
+          "source": "stage0.existing_catalog.5",
+          "reason": "含捷克语街道名的完整地址，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Všehrdova 14, 118 00 Praha 1, Czech Republic",
+          "kind": "place",
+          "source": "stage0.existing_catalog.6",
+          "reason": "含捷克语街道名的完整地址，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Šárka Nováková",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Korunní 105, 130 00 Prague 3, Czech Republic",
+        "Všehrdova 14, 118 00 Praha 1, Czech Republic",
+        "Šárka Nováková"
+      ],
+      "active_vocabulary": {
+        "Korunní 105, 130 00 Prague 3, Czech Republic": 50,
+        "Všehrdova 14, 118 00 Praha 1, Czech Republic": 50,
+        "Šárka Nováková": 50
+      },
+      "vocabulary_sha256": "400c1d554a32bae04e4fecb54741a6ab7bc5c40c056f6aa641f7ef5ec39d29a0"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Korunní 105, 130 00 Prague 3, Czech Republic": 50,
+        "Všehrdova 14, 118 00 Praha 1, Czech Republic": 50,
+        "Šárka Nováková": 50
+      },
+      "vocabulary_sha256": "400c1d554a32bae04e4fecb54741a6ab7bc5c40c056f6aa641f7ef5ec39d29a0"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kryštof Nováček",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kryštof Nováček"
+      ],
+      "active_vocabulary": {
+        "Korunní 105, 130 00 Prague 3, Czech Republic": 50,
+        "Všehrdova 14, 118 00 Praha 1, Czech Republic": 50,
+        "Šárka Nováková": 50,
+        "Kryštof Nováček": 50
+      },
+      "vocabulary_sha256": "996d8b620ed65a57fadbc5d98a2b8ea29c27fa5a6bb5e0abe8aef4f41907f157"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Šárka",
+    "Matěj",
+    "Ubisoft Six Collection Figure – Ela",
+    "Kryštof"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:54.931834+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

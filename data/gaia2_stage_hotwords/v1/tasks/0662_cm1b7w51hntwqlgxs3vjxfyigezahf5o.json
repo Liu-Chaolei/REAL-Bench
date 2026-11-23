@@ -1,0 +1,142 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0662_cm1b7w51hntwqlgxs3vjxfyigezahf5o",
+  "model": "deepseek-flash",
+  "input_sha256": "6242d4c45fc2cc6eacaa53b58499a9836eaa903af6c89c53aa0e2f7752f5e541",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Sergei Kuznetsov",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1213e372-f36a-41ef-968d-64b9151f64f5.arguments.attendees[0]",
+          "reason": "人名，需准确识别"
+        },
+        {
+          "text": "Saskia Müller-Krüger",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-127f8d90-d255-441d-a664-53034d84ac7c.arguments.attendees[0]",
+          "reason": "含变音符的复杂人名"
+        },
+        {
+          "text": "Katharina Müller-Schneider",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-127f8d90-d255-441d-a664-53034d84ac7c.arguments.attendees[1]",
+          "reason": "含变音符的复杂人名"
+        }
+      ],
+      "new_terms": [
+        "Sergei Kuznetsov",
+        "Saskia Müller-Krüger",
+        "Katharina Müller-Schneider"
+      ],
+      "active_vocabulary": {
+        "Sergei Kuznetsov": 50,
+        "Saskia Müller-Krüger": 50,
+        "Katharina Müller-Schneider": 50
+      },
+      "vocabulary_sha256": "e98e5e1c92effed5487059a795c9cb8b119d775b2c23c811158282f3bd34d3f0"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Bistro Moscow",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add.arguments.location",
+          "reason": "特定餐厅名称"
+        },
+        {
+          "text": "Sergei Kuznetsov",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add.arguments.attendees[2]",
+          "reason": "人名，需准确识别"
+        },
+        {
+          "text": "Saskia Müller-Krüger",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add.arguments.attendees[0]",
+          "reason": "含变音符的复杂人名"
+        },
+        {
+          "text": "Katharina Müller-Schneider",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add.arguments.attendees[1]",
+          "reason": "含变音符的复杂人名"
+        }
+      ],
+      "new_terms": [
+        "Bistro Moscow"
+      ],
+      "active_vocabulary": {
+        "Sergei Kuznetsov": 50,
+        "Saskia Müller-Krüger": 50,
+        "Katharina Müller-Schneider": 50,
+        "Bistro Moscow": 50
+      },
+      "vocabulary_sha256": "72ae5cf5c0148bcd87d28d3ab6288046d441e80cfba81ab261e1012f0665166f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Bistro Moscow",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add.arguments.location",
+          "reason": "特定餐厅名称"
+        },
+        {
+          "text": "Katharina Müller-Schneider",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add.arguments.attendees[1]",
+          "reason": "含变音符的复杂人名"
+        },
+        {
+          "text": "Saskia Müller-Krüger",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add.arguments.attendees[0]",
+          "reason": "含变音符的复杂人名"
+        },
+        {
+          "text": "Sergei Kuznetsov",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add.arguments.attendees[2]",
+          "reason": "人名，需准确识别"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Sergei Kuznetsov": 50,
+        "Saskia Müller-Krüger": 50,
+        "Katharina Müller-Schneider": 50,
+        "Bistro Moscow": 50
+      },
+      "vocabulary_sha256": "72ae5cf5c0148bcd87d28d3ab6288046d441e80cfba81ab261e1012f0665166f"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "9769e57d7a4c3027e3940fb5b3c0eafb408604953e764bd332b147ca2cc9824b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4276,
+        "completion_tokens": 574,
+        "total_tokens": 4850,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4020
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.354
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0662_cm1b7w51hntwqlgxs3vjxfyigezahf5o",
+  "extracted_at": "2026-11-22T06:43:18.803778+00:00"
+}

@@ -1,0 +1,163 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0374_dsbw566w83tsj8gahist6yifo2x2pdwf",
+  "model": "deepseek-flash",
+  "input_sha256": "a9548dde7e80135cf5271468d7e4061957f90d157a80e314618af43456a49d6e",
+  "review_input_sha256": "33d369549dae33082ae7439f246ebaacd07c31a2cd712ae55c6d07f612528e7b",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "7e0bbbf642952cc424558c303b14b078463c5f453f3bda01a6c1125640bc4f3e",
+  "reference_results_sha256": "d94c088389b12180cae4cdb654a32fd731f1d44b1ee7bf5138a49001c31a704d",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Bronwyn McTavish",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Kymberley",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-3475a0e1-c5aa-415e-8f22-b5e62666ad9a.arguments.content"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Kaida",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-af4bde41-6d34-4015-bcd2-6bb47bbe0226.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Kymberley McTavish",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Lunch Bunch – Astrid & Bronwyn",
+      "original_source": "stage1.tool_gt.series_s1_rename_group.arguments.title"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "The Leela Hotel",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Bronwyn McTavish",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整难拼写人名，含不常见拼写",
+          "weight": 50
+        },
+        {
+          "text": "Kaida",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "不常见人名",
+          "weight": 50
+        },
+        {
+          "text": "Kymberley",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "不常见拼写人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Bronwyn McTavish",
+        "Kaida",
+        "Kymberley"
+      ],
+      "active_vocabulary": {
+        "Bronwyn McTavish": 50,
+        "Kaida": 50,
+        "Kymberley": 50
+      },
+      "vocabulary_sha256": "804ece1c43cfb5ba1f460a00e12601a73db28769c0dc53767914b4cc7383a2b7"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Lunch Bunch – Astrid & Bronwyn",
+          "kind": "custom_name",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含难拼写人名的自定义群组名",
+          "weight": 50
+        },
+        {
+          "text": "Kymberley McTavish",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整难拼写人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Lunch Bunch – Astrid & Bronwyn",
+        "Kymberley McTavish"
+      ],
+      "active_vocabulary": {
+        "Bronwyn McTavish": 50,
+        "Kaida": 50,
+        "Kymberley": 50,
+        "Lunch Bunch – Astrid & Bronwyn": 50,
+        "Kymberley McTavish": 50
+      },
+      "vocabulary_sha256": "a5548db198bffe002dc5e92352168b44b7d5f5d8bd8b9a0224d6c774a752301f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "The Leela Hotel",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "特定酒店专有名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "The Leela Hotel"
+      ],
+      "active_vocabulary": {
+        "Bronwyn McTavish": 50,
+        "Kaida": 50,
+        "Kymberley": 50,
+        "Lunch Bunch – Astrid & Bronwyn": 50,
+        "Kymberley McTavish": 50,
+        "The Leela Hotel": 50
+      },
+      "vocabulary_sha256": "38991758f50f8447052092fed28ab0c695891c538cc0a8a6cc61ee58ba743b8e"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Astrid",
+    "Harry Potter Sorting Hat",
+    "Social Skills File Folder Game",
+    "Bronwyn"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:25.921521+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,197 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0848_j1yl0s1717y5q38j1u5e93achoddjsg7__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "3d3b48b9a61901a93cd409387e19e04b296b9bb47838155b7d13e9593c297c4d",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Shivaji Marg",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-38c0570a-3b09-4ee2-8a57-6195c672e35c.arguments.end_location",
+          "reason": "具体街道名"
+        },
+        {
+          "text": "Andheri West",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-38c0570a-3b09-4ee2-8a57-6195c672e35c.arguments.end_location",
+          "reason": "具体区域名"
+        },
+        {
+          "text": "Mumbai",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-38c0570a-3b09-4ee2-8a57-6195c672e35c.arguments.end_location",
+          "reason": "城市名"
+        },
+        {
+          "text": "Maharashtra",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-38c0570a-3b09-4ee2-8a57-6195c672e35c.arguments.end_location",
+          "reason": "邦名"
+        },
+        {
+          "text": "Policeman's Ball",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dd0966bb-e760-421d-82aa-56cc3caefe4c.arguments.title",
+          "reason": "活动专有名称"
+        }
+      ],
+      "new_terms": [
+        "Shivaji Marg",
+        "Andheri West",
+        "Mumbai",
+        "Maharashtra",
+        "Policeman's Ball"
+      ],
+      "active_vocabulary": {
+        "Shivaji Marg": 50,
+        "Andheri West": 50,
+        "Mumbai": 50,
+        "Maharashtra": 50,
+        "Policeman's Ball": 50
+      },
+      "vocabulary_sha256": "d752ec06b6460721f19470422a01bddfe2664409a16ed1fb83be41e2df2113eb"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Policeman's Ball Coordination",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_create.arguments.title",
+          "reason": "群组专有名称"
+        },
+        {
+          "text": "Raghavendra Rao",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Ravindra Deshpande",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "需避免的相似姓名"
+        }
+      ],
+      "new_terms": [
+        "Policeman's Ball Coordination",
+        "Raghavendra Rao",
+        "Ravindra Deshpande",
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "Shivaji Marg": 50,
+        "Andheri West": 50,
+        "Mumbai": 50,
+        "Maharashtra": 50,
+        "Policeman's Ball": 50,
+        "Policeman's Ball Coordination": 50,
+        "Raghavendra Rao": 50,
+        "Ravindra Deshpande": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "92e7f4c40e6469bcb86dcd29733744b195062cfa4c24662fc228ce96c1cf05e5"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Shivaji Marg",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_quotation.arguments.start_location",
+          "reason": "具体街道名"
+        },
+        {
+          "text": "Andheri West",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_quotation.arguments.start_location",
+          "reason": "具体区域名"
+        },
+        {
+          "text": "Mumbai",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_quotation.arguments.start_location",
+          "reason": "城市名"
+        },
+        {
+          "text": "Maharashtra",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_quotation.arguments.start_location",
+          "reason": "邦名"
+        },
+        {
+          "text": "Policeman's Ball",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_reminder.arguments.description",
+          "reason": "活动专有名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Shivaji Marg": 50,
+        "Andheri West": 50,
+        "Mumbai": 50,
+        "Maharashtra": 50,
+        "Policeman's Ball": 50,
+        "Policeman's Ball Coordination": 50,
+        "Raghavendra Rao": 50,
+        "Ravindra Deshpande": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "92e7f4c40e6469bcb86dcd29733744b195062cfa4c24662fc228ce96c1cf05e5"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "5a3482c53d1ba08e882df2b28dc133335cae0d24b512d3d2dd09f3657af1b361",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2697,
+        "completion_tokens": 432,
+        "total_tokens": 3129,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2441
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.735,
+      "error": "Invalid proper-name phrase: '12th Precinct Plot No. 47, Shivaji Marg, Andheri West, Mumbai, Maharashtra, 400053, India'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "5fb78b1057c69b5314c9e345e7beac2df086db70da8cb79edda275dc340963f1",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3547,
+        "completion_tokens": 673,
+        "total_tokens": 4220,
+        "prompt_tokens_details": {
+          "cached_tokens": 3072
+        },
+        "prompt_cache_hit_tokens": 3072,
+        "prompt_cache_miss_tokens": 475
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.545
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0848_j1yl0s1717y5q38j1u5e93achoddjsg7__repetition_v1",
+  "extracted_at": "2026-11-22T06:46:17.193633+00:00"
+}

@@ -1,0 +1,118 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0442_8iwfasr3p6c7xwyuqj9wrfdfk80rwfig",
+  "model": "deepseek-flash",
+  "input_sha256": "af5033eff1dc7b463059bacad0dee4632ce5b6617fe5712c667fa04398c22287",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-c3e8a20f-f3a7-40a7-8fee-17b128e84511.arguments.content",
+          "reason": "参会者姓名"
+        }
+      ],
+      "new_terms": [
+        "Katarzyna Zielińska"
+      ],
+      "active_vocabulary": {
+        "Katarzyna Zielińska": 50
+      },
+      "vocabulary_sha256": "c5268737b262513745ef8dfb30149c229a915f483b90d3296f713d2f50c9032b"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Ursula",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [
+        "Ursula"
+      ],
+      "active_vocabulary": {
+        "Katarzyna Zielińska": 50,
+        "Ursula": 50
+      },
+      "vocabulary_sha256": "1dbe77c5229e30c0a2e8f6b7537f43edb311339caa8ec77f3d72e4477a38efea"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_chat_lookup.arguments.user_name",
+          "reason": "聊天对象姓名"
+        },
+        {
+          "text": "Ursula",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_chat.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Katarzyna Zielińska": 50,
+        "Ursula": 50
+      },
+      "vocabulary_sha256": "1dbe77c5229e30c0a2e8f6b7537f43edb311339caa8ec77f3d72e4477a38efea"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "78e6ab734a67b4035270a9925e02b07aed929afff2a75db272bea1573907a485",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1575,
+        "completion_tokens": 250,
+        "total_tokens": 1825,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1319
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.695,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "abb6ddcc4a1db7f61df54c3ecbcfcad8e2ea1b5c8e9fe600eae36534e3bd4281",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2218,
+        "completion_tokens": 252,
+        "total_tokens": 2470,
+        "prompt_tokens_details": {
+          "cached_tokens": 1792
+        },
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 426
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.094
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0442_8iwfasr3p6c7xwyuqj9wrfdfk80rwfig",
+  "extracted_at": "2026-11-22T06:42:00.908958+00:00"
+}

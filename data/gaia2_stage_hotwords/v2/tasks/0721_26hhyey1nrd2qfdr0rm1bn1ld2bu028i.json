@@ -1,0 +1,127 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0721_26hhyey1nrd2qfdr0rm1bn1ld2bu028i",
+  "model": "deepseek-flash",
+  "input_sha256": "02c04f8bf799ffd3607df8378c4eb680bfee9907e682d10e685cc7e3f34179c1",
+  "review_input_sha256": "b584858742e3d6de3622cf008876144cbcc0140ff7c2679fec864000f5e9e716",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "56aa2554f3d9291c2d4fcf14d8d8d99be67f80a6d43e0983efc4ecbe18d9736d",
+  "reference_results_sha256": "a48e60a6f609130cb584f2bbe7430e2d3b062cc6858dc105b331c2ddce6eab03",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "The Eagle Pub",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-e54e1598-990c-4074-975e-70c72890bdfb.arguments.end_location"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "University of Cambridge",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-e54e1598-990c-4074-975e-70c72890bdfb.arguments.start_location"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Kymberley Janssen",
+      "original_source": "stage2.tool_gt.series_s2_add.arguments.attendees[0]"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Klaasje Van der Meer",
+      "original_source": "stage2.tool_gt.series_s2_add.arguments.attendees[1]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "The Eagle Pub",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "具辨识度的完整酒吧名称",
+          "weight": 50
+        },
+        {
+          "text": "University of Cambridge",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整大学专名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "The Eagle Pub",
+        "University of Cambridge"
+      ],
+      "active_vocabulary": {
+        "The Eagle Pub": 50,
+        "University of Cambridge": 50
+      },
+      "vocabulary_sha256": "be4f7719c07a17dad0efbb789e45ca8f8cdc90c7c6bfe97ced4212df7ee072c2"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "The Eagle Pub": 50,
+        "University of Cambridge": 50
+      },
+      "vocabulary_sha256": "be4f7719c07a17dad0efbb789e45ca8f8cdc90c7c6bfe97ced4212df7ee072c2"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Klaasje Van der Meer",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "含罕见名字的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Kymberley Janssen",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含罕见名字的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Klaasje Van der Meer",
+        "Kymberley Janssen"
+      ],
+      "active_vocabulary": {
+        "The Eagle Pub": 50,
+        "University of Cambridge": 50,
+        "Klaasje Van der Meer": 50,
+        "Kymberley Janssen": 50
+      },
+      "vocabulary_sha256": "a5a5291377a89b546159cce0c58694b0640bf157f929b4ae696c3346883e5855"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Cambridge",
+    "Department of Physics"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:07.556342+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

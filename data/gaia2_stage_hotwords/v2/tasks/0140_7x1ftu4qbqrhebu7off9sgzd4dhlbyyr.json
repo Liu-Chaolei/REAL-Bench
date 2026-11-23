@@ -1,0 +1,126 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0140_7x1ftu4qbqrhebu7off9sgzd4dhlbyyr",
+  "model": "deepseek-flash",
+  "input_sha256": "3f1e83460c1dd66756778a47a93049803302680d6686391fe1c2c21a1ad50e1e",
+  "review_input_sha256": "66af801ff152cd20e748b95ee725399389f6837d6c8f00112f05fda46c8e8771",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "632dbf9fea3dfb3f282abbab008c9dae1ad701bee59e9c43686027851e75a40b",
+  "reference_results_sha256": "1820dfa27f518cd5777a6c67e512a2dd4ac934b0ebca91057cc9a3247e7eddee",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Marie Dubois",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Lucas Vermeulen",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Emma Janssens",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Liesbeth Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-3f289af9-8034-406f-8a86-10fdb3a49250.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Emma Janssens",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，姓氏 Janssens 拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整荷兰语人名，姓氏较长且难",
+          "weight": 50
+        },
+        {
+          "text": "Lucas Vermeulen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整荷兰语人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Marie Dubois",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整法语人名，含独特拼写",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Emma Janssens",
+        "Liesbeth Vandenberghe",
+        "Lucas Vermeulen",
+        "Marie Dubois"
+      ],
+      "active_vocabulary": {
+        "Emma Janssens": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Lucas Vermeulen": 50,
+        "Marie Dubois": 50
+      },
+      "vocabulary_sha256": "2eeda7b259e0200d1121b78cd7202181c944c2a2c26b3668d26f44aa3412a825"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Emma Janssens": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Lucas Vermeulen": 50,
+        "Marie Dubois": 50
+      },
+      "vocabulary_sha256": "2eeda7b259e0200d1121b78cd7202181c944c2a2c26b3668d26f44aa3412a825"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Emma Janssens": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Lucas Vermeulen": 50,
+        "Marie Dubois": 50
+      },
+      "vocabulary_sha256": "2eeda7b259e0200d1121b78cd7202181c944c2a2c26b3668d26f44aa3412a825"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:08.235672+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

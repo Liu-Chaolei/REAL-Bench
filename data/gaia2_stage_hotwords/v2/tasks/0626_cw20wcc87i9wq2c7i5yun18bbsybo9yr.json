@@ -1,0 +1,499 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0626_cw20wcc87i9wq2c7i5yun18bbsybo9yr",
+  "model": "deepseek-flash",
+  "input_sha256": "882d2b66ebdb191d2f7c21af6c36f65f8aad50ec9e5f900db5229ffdf5425011",
+  "review_input_sha256": "4f7bcbb5936db68555ec58c521693e674b426e570b1a41c91db5ce60128c84f6",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "73b5c998317302f2b55fc9d262ecadd9b7f7d4cd69feeb5295ef290b9aa9c5dc",
+  "reference_results_sha256": "1eada7f9ee3776d56121e03f2cb32dd17ca03ad8cc29bd1f1076c59434033906",
+  "sources": {
+    "stage0.existing_catalog.11": {
+      "stage": 0,
+      "text": "Rue de la République",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-601a4971-c85e-4d62-9f93-10ad59bd56f3.arguments.content"
+    },
+    "stage0.existing_catalog.12": {
+      "stage": 0,
+      "text": "Outremeuse",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-601a4971-c85e-4d62-9f93-10ad59bd56f3.arguments.content"
+    },
+    "stage0.existing_catalog.13": {
+      "stage": 0,
+      "text": "Rue des Abbesses",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-601a4971-c85e-4d62-9f93-10ad59bd56f3.arguments.content"
+    },
+    "stage0.existing_catalog.14": {
+      "stage": 0,
+      "text": "Place Saint-Lambert",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-601a4971-c85e-4d62-9f93-10ad59bd56f3.arguments.content"
+    },
+    "stage0.existing_catalog.15": {
+      "stage": 0,
+      "text": "Rue Saint-Gilles",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-601a4971-c85e-4d62-9f93-10ad59bd56f3.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Kritsana Wongcharee",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-fe1ea37c-b8ef-44f0-9380-f64391fb969b.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Nalinee Wongchinda",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-fe1ea37c-b8ef-44f0-9380-f64391fb969b.arguments.content"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Liesbeth Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-601a4971-c85e-4d62-9f93-10ad59bd56f3.arguments.content"
+    },
+    "stage0.existing_catalog.7": {
+      "stage": 0,
+      "text": "Le Clos des Abbesses",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-601a4971-c85e-4d62-9f93-10ad59bd56f3.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Antwerp Luxury Loft",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Antwerp Haven",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Antwerp Abode",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Antwerp Dream",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Schuttershofstraat",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.content"
+    },
+    "stage1.tool_response.series_s1_read": {
+      "stage": 1,
+      "text": "{\"e044b2a4c19f48f4bca2fe85baa0c8a3\": {\"name\": \"Antwerp Dream\", \"location\": \"Meir 100, Antwerp\", \"zip_code\": \"2000\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"e044b2a4c19f48f4bca2fe85baa0c8a3\", \"amenities\": [\"Pool\", \"Gym\"], \"saved\": \"True\"}, \"a608083ccf2c4efc9aba976846533d53\": {\"name\": \"Antwerp Haven\", \"location\": \"Schuttershofstraat, 2000 Antwerp\", \"zip_code\": \"2000\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"2500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"a608083ccf2c4efc9aba976846533d53\", \"amenities\": [\"Laundry\", \"Garden\"], \"saved\": \"True\"}, \"43af12ff057c44f0b526c1936cd74d21\": {\"name\": \"Ghent Gem\", \"location\": \"Patershol, 9000 Ghent\", \"zip_code\": \"9000\", \"price\": \"1200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"43af12ff057c44f0b526c1936cd74d21\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"43b3228ab09e476c94c6ce3d28fc1656\": {\"name\": \"Brugge Bungalow\", \"location\": \"Langestraat, 8000 Brugge\", \"zip_code\": \"8000\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"1800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"43b3228ab09e476c94c6ce3d28fc1656\", \"amenities\": [\"Garden\", \"Laundry\"], \"saved\": \"True\"}, \"a92dc429a0254f77856ca5d77ab0661b\": {\"name\": \"Namur City Living\", \"location\": \"5000 Namur, Namur\", \"zip_code\": \"5000\", \"price\": \"1400\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"a92dc429a0254f77856ca5d77ab0661b\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"5255d5361506475a82ac3c442cf69e42\": {\"name\": \"Brussels Bright\", \"location\": \"Avenue Louise, 1050 Brussels\", \"zip_code\": \"1050\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"5255d5361506475a82ac3c442cf69e42\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"d812492ca0b145ddafe8658b722cceae\": {\"name\": \"Brussels Luxe Living\", \"location\": \"1000 Brussels, Saint-Gilles\", \"zip_code\": \"1000\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"d812492ca0b145ddafe8658b722cceae\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"41a4fe071a9943f99b88902c7007ceb1\": {\"name\": \"Namur River Views\", \"location\": \"5000 Namur, Sambre River\", \"zip_code\": \"5000\", \"price\": \"1500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1100\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"41a4fe071a9943f99b88902c7007ceb1\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"c3341930ecbf4b7085c0b861d4bc1ed2\": {\"name\": \"Namur Riverside\", \"location\": \"Quai des Bateliers, 5000 Namur\", \"zip_code\": \"5000\", \"price\": \"2500\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"c3341930ecbf4b7085c0b861d4bc1ed2\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"5c903fcd884b45679f05248dc5eafde0\": {\"name\": \"Brugge Canal View\", \"location\": \"8000 Brugge, Brugge\", \"zip_code\": \"8000\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1100\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"5c903fcd884b45679f05248dc5eafde0\", \"amenities\": [\"Pool\", \"Laundry\"], \"saved\": \"True\"}, \"d8e4a54335a941ab8cf870aadf6944e2\": {\"name\": \"Ghent Waterfront\", \"location\": \"Korenlei, 9000 Ghent\", \"zip_code\": \"9000\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"d8e4a54335a941ab8cf870aadf6944e2\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"3826b53ecea84af5a7ddb96e757140c8\": {\"name\": \"Ghent Student Apartments\", \"location\": \"9000 Ghent, Overpoort\", \"zip_code\": \"9000\", \"price\": \"1000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"3826b53ecea84af5a7ddb96e757140c8\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"7bc166d1873e43d38ea6fe668ea8ceae\": {\"name\": \"Liege Living\", \"location\": \"Place Saint-Lambert, 4000 Liege\", \"zip_code\": \"4000\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"7bc166d1873e43d38ea6fe668ea8ceae\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"5c239073746842b691fbc1298f407462\": {\"name\": \"Ostend Beachside Condo\", \"location\": \"Koninginnelaan 10, Ostend\", \"zip_code\": \"8400\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"5c239073746842b691fbc1298f407462\", \"amenities\": [\"Parking\", \"Laundry\", \"Garden\"], \"saved\": \"True\"}, \"9723eb6e723b4e21beeba1f7c97bed63\": {\"name\": \"Brugge Historic\", \"location\": \"Markt 10, Brugge\", \"zip_code\": \"8000\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"9723eb6e723b4e21beeba1f7c97bed63\", \"amenities\": [\"Laundry\", \"Gym\"], \"saved\": \"True\"}, \"15572379c06c4755b4f1010268c10f16\": {\"name\": \"Leuven Luxury\", \"location\": \"Tiensestraat 50, Leuven\", \"zip_code\": \"3000\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1300\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"15572379c06c4755b4f1010268c10f16\", \"amenities\": [\"Laundry\", \"Gym\", \"Pool\"], \"saved\": \"True\"}, \"bb63f273ea4c4480aa9f6d8c3c9ba96b\": {\"name\": \"Le Château d'Eau\", \"location\": \"Rue de la Gare, 5000 Namur\", \"zip_code\": \"5000\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"700\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"bb63f273ea4c4480aa9f6d8c3c9ba96b\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"f07016e8e0a5436c8a7dbadfd24c0482\": {\"name\": \"Brugge Historic Home\", \"location\": \"8000 Brugge, Langestraat\", \"zip_code\": \"8000\", \"price\": \"1500\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"House\", \"square_footage\": \"2000\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"f07016e8e0a5436c8a7dbadfd24c0482\", \"amenities\": [\"Garden\"], \"saved\": \"True\"}, \"433134c66856462384f57fad2b1a119d\": {\"name\": \"Namur Riverfront\", \"location\": \"Rue de la Meuse, 5000 Namur\", \"zip_code\": \"5000\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1400\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"Long term lease\", \"apartment_id\": \"433134c66856462384f57fad2b1a119d\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"d8fd20181ea14354bd1e14f9f6d550ba\": {\"name\": \"Ghent Eco-Friendly\", \"location\": \"9000 Ghent, Gentbrugge\", \"zip_code\": \"9000\", \"price\": \"1200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"d8fd20181ea14354bd1e14f9f6d550ba\", \"amenities\": [\"Gym\", \"Pool\"], \"saved\": \"True\"}, \"49a13c88e7e745efa062a15d9e33dcc4\": {\"name\": \"Antwerp Luxury Loft\", \"location\": \"2000 Antwerp, Schuttershofstraat\", \"zip_code\": \"2000\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Loft\", \"square_footage\": \"1500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"49a13c88e7e745efa062a15d9e33dcc4\", \"amenities\": [\"Gym\", \"Laundry\", \"Pool\"], \"saved\": \"True\"}, \"ae3425a13b74458ea6135d8de4ce650f\": {\"name\": \"Antwerp Abode\", \"location\": \"Meir, 2000 Antwerp\", \"zip_code\": \"2000\", \"price\": \"2500\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Home\", \"square_footage\": \"2500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"Long term lease\", \"apartment_id\": \"ae3425a13b74458ea6135d8de4ce650f\", \"amenities\": [\"Garden\", \"Laundry\"], \"saved\": \"True\"}, \"bea0873b80664f79ace2f81f1444000d\": {\"name\": \"Charleroi Comfort\", \"location\": \"Rue de la Station, 6000 Charleroi\", \"zip_code\": \"6000\", \"price\": \"1000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"bea0873b80664f79ace2f81f1444000d\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"f1d4c01c01bd49f3a03f4ea9bd277698\": {\"name\": \"Brugge Breeze\", \"location\": \"Markt, 8000 Brugge\", \"zip_code\": \"8000\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"2200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Second floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"f1d4c01c01bd49f3a03f4ea9bd277698\", \"amenities\": [\"Garden\", \"Laundry\"], \"saved\": \"True\"}, \"c6fd4209a881416b816b7ef6fe70dd9a\": {\"name\": \"Mechelen Modern\", \"location\": \"Rue de l'Eglise, 2800 Mechelen\", \"zip_code\": \"2800\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"c6fd4209a881416b816b7ef6fe70dd9a\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"4d3ff50172534ca8b778de29159347b4\": {\"name\": \"Liege Loft\", \"location\": \"Rue Saint-Gilles, 4000 Liege\", \"zip_code\": \"4000\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"4d3ff50172534ca8b778de29159347b4\", \"amenities\": [\"Gym\"], \"saved\": \"True\"}, \"c77a265131d34a7090b4913a3c5e9c52\": {\"name\": \"Namur City Center\", \"location\": \"Place d'Armes, 5000 Namur\", \"zip_code\": \"5000\", \"price\": \"1200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"c77a265131d34a7090b4913a3c5e9c52\", \"amenities\": [\"Gym\"], \"saved\": \"True\"}, \"27ec2e1196c9423385bae75d32e3ea77\": {\"name\": \"Brussels Green\", \"location\": \"Avenue de Tervuren, 1150 Brussels\", \"zip_code\": \"1150\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"27ec2e1196c9423385bae75d32e3ea77\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"b922e9344c8348e19153a47be70d82af\": {\"name\": \"Brussels Boutique\", \"location\": \"Rue des Chartreux, 1000 Brussels\", \"zip_code\": \"1000\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1100\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"b922e9344c8348e19153a47be70d82af\", \"amenities\": [\"Laundry\", \"Balcony\"], \"saved\": \"True\"}, \"cc3d5e1bbf7940f699b965ce10f5336d\": {\"name\": \"Liege Luxury\", \"location\": \"Rue des Guillemins 45, Liege\", \"zip_code\": \"4000\", \"price\": \"2500\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"cc3d5e1bbf7940f699b965ce10f5336d\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"068667e01c234691a0a612041f196850\": {\"name\": \"Liege City View\", \"location\": \"Place Saint-Lambert 10, Liege\", \"zip_code\": \"4000\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"068667e01c234691a0a612041f196850\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"5c60131fa96746ba8290ff049a0ff893\": {\"name\": \"Liege Luxe\", \"location\": \"Rue Saint-Gilles 15, Liege\", \"zip_code\": \"4000\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"5c60131fa96746ba8290ff049a0ff893\", \"amenities\": [\"Pool\", \"Parking\"], \"saved\": \"True\"}, \"926c8186949e4a3ea720f4eeea600bd5\": {\"name\": \"Liege City Loft\", \"location\": \"4000 Liege, City Center\", \"zip_code\": \"4000\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"926c8186949e4a3ea720f4eeea600bd5\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}}",
+      "event_id": "series_s1_read",
+      "response_sha256": "494e8d751f349eadbf523f32e7d075bbd9d28928f6ba1b828ff8f291f2d572ea"
+    },
+    "stage2.tool_response.series_s2_read": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Property Review Call — Antwerp Saved Properties\", \"start_datetime\": \"1729584000.0\", \"end_datetime\": \"1729585800.0\", \"tag\": \"Work\", \"description\": \"30-minute property review call with Nalinee Wongchinda and Kritsana Wongcharee on 22 October 2024, 08:00-08:30 UTC. Reference email: 'Antwerp Saved Properties Review'. Antwerp crime figures (zip code 2000): violent crime rate 17.33; property crime rate 25.59.\", \"location\": \"Phone Call\", \"attendees\": [\"Nalinee Wongchinda\", \"Kritsana Wongcharee\"], \"start_strftime\": \"Tuesday, 2024-10-22 08:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 08:30:00\"}], \"range\": [\"0\", \"1\"], \"total\": \"1\"}",
+      "event_id": "series_s2_read",
+      "response_sha256": "a4ab0b6c943b3d81e73150444190c642d5e557982f3228a31048942858c685f7"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Le Clos des Abbesses",
+          "kind": "place",
+          "source": "stage0.existing_catalog.7",
+          "reason": "特色法语地名",
+          "weight": 50
+        },
+        {
+          "text": "Rue de la République",
+          "kind": "place",
+          "source": "stage0.existing_catalog.11",
+          "reason": "带变音符的完整法语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Place Saint-Lambert",
+          "kind": "place",
+          "source": "stage0.existing_catalog.14",
+          "reason": "完整广场名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Rue des Abbesses",
+          "kind": "place",
+          "source": "stage0.existing_catalog.13",
+          "reason": "完整法语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Rue Saint-Gilles",
+          "kind": "place",
+          "source": "stage0.existing_catalog.15",
+          "reason": "完整法语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Kritsana Wongcharee",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整泰式人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整弗拉芒人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Nalinee Wongchinda",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整泰式人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Outremeuse",
+          "kind": "place",
+          "source": "stage0.existing_catalog.12",
+          "reason": "列日特色街区名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Le Clos des Abbesses",
+        "Rue de la République",
+        "Place Saint-Lambert",
+        "Rue des Abbesses",
+        "Rue Saint-Gilles",
+        "Kritsana Wongcharee",
+        "Liesbeth Vandenberghe",
+        "Nalinee Wongchinda",
+        "Outremeuse"
+      ],
+      "active_vocabulary": {
+        "Le Clos des Abbesses": 50,
+        "Rue de la République": 50,
+        "Place Saint-Lambert": 50,
+        "Rue des Abbesses": 50,
+        "Rue Saint-Gilles": 50,
+        "Kritsana Wongcharee": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Nalinee Wongchinda": 50,
+        "Outremeuse": 50
+      },
+      "vocabulary_sha256": "42180e8cf64bfb11019693cb2597bc8b62514a609c9010aa9ac03a9dcc5b2bc9"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Le Château d'Eau",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "带变音符的特色法语名称",
+          "weight": 50
+        },
+        {
+          "text": "Rue de l'Eglise",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "完整法语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Rue de la Gare",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "完整法语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Rue de la Meuse",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "完整法语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Rue de la Station",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "完整法语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Antwerp Luxury Loft",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "特色房源名",
+          "weight": 50
+        },
+        {
+          "text": "Avenue de Tervuren",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "完整法语大道名",
+          "weight": 50
+        },
+        {
+          "text": "Place d'Armes",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "完整法语广场名",
+          "weight": 50
+        },
+        {
+          "text": "Quai des Bateliers",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "完整法语河岸街名",
+          "weight": 50
+        },
+        {
+          "text": "Rue des Chartreux",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "完整法语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Rue des Guillemins",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "完整法语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Antwerp Abode",
+          "kind": "place",
+          "source": "stage1.existing_catalog.2",
+          "reason": "特色房源名",
+          "weight": 50
+        },
+        {
+          "text": "Antwerp Dream",
+          "kind": "place",
+          "source": "stage1.existing_catalog.3",
+          "reason": "特色房源名",
+          "weight": 50
+        },
+        {
+          "text": "Antwerp Haven",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "特色房源名",
+          "weight": 50
+        },
+        {
+          "text": "Avenue Louise",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "布鲁塞尔著名大道名",
+          "weight": 50
+        },
+        {
+          "text": "Gentbrugge",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "根特特色地名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Koninginnelaan",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "荷兰语街道名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Korenlei",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "根特河畔街名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Langestraat",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "荷兰语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Overpoort",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "根特学生区街名",
+          "weight": 50
+        },
+        {
+          "text": "Patershol",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "根特特色街区名",
+          "weight": 50
+        },
+        {
+          "text": "Schuttershofstraat",
+          "kind": "place",
+          "source": "stage1.existing_catalog.4",
+          "reason": "荷兰语街道名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Tiensestraat",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "鲁汶街道名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Le Château d'Eau",
+        "Rue de l'Eglise",
+        "Rue de la Gare",
+        "Rue de la Meuse",
+        "Rue de la Station",
+        "Antwerp Luxury Loft",
+        "Avenue de Tervuren",
+        "Place d'Armes",
+        "Quai des Bateliers",
+        "Rue des Chartreux",
+        "Rue des Guillemins",
+        "Antwerp Abode",
+        "Antwerp Dream",
+        "Antwerp Haven",
+        "Avenue Louise",
+        "Gentbrugge",
+        "Koninginnelaan",
+        "Korenlei",
+        "Langestraat",
+        "Overpoort",
+        "Patershol",
+        "Schuttershofstraat",
+        "Tiensestraat"
+      ],
+      "active_vocabulary": {
+        "Le Clos des Abbesses": 50,
+        "Rue de la République": 50,
+        "Place Saint-Lambert": 50,
+        "Rue des Abbesses": 50,
+        "Rue Saint-Gilles": 50,
+        "Kritsana Wongcharee": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Nalinee Wongchinda": 50,
+        "Outremeuse": 50,
+        "Le Château d'Eau": 50,
+        "Rue de l'Eglise": 50,
+        "Rue de la Gare": 50,
+        "Rue de la Meuse": 50,
+        "Rue de la Station": 50,
+        "Antwerp Luxury Loft": 50,
+        "Avenue de Tervuren": 50,
+        "Place d'Armes": 50,
+        "Quai des Bateliers": 50,
+        "Rue des Chartreux": 50,
+        "Rue des Guillemins": 50,
+        "Antwerp Abode": 50,
+        "Antwerp Dream": 50,
+        "Antwerp Haven": 50,
+        "Avenue Louise": 50,
+        "Gentbrugge": 50,
+        "Koninginnelaan": 50,
+        "Korenlei": 50,
+        "Langestraat": 50,
+        "Overpoort": 50,
+        "Patershol": 50,
+        "Schuttershofstraat": 50,
+        "Tiensestraat": 50
+      },
+      "vocabulary_sha256": "3235f0875856c7ab27c6292ad577008a769d826922fa1bb4c484a8c33a34dadb"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kritsana Wongcharee",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "完整泰式人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Nalinee Wongchinda",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "完整泰式人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Le Clos des Abbesses": 50,
+        "Rue de la République": 50,
+        "Place Saint-Lambert": 50,
+        "Rue des Abbesses": 50,
+        "Rue Saint-Gilles": 50,
+        "Kritsana Wongcharee": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Nalinee Wongchinda": 50,
+        "Outremeuse": 50,
+        "Le Château d'Eau": 50,
+        "Rue de l'Eglise": 50,
+        "Rue de la Gare": 50,
+        "Rue de la Meuse": 50,
+        "Rue de la Station": 50,
+        "Antwerp Luxury Loft": 50,
+        "Avenue de Tervuren": 50,
+        "Place d'Armes": 50,
+        "Quai des Bateliers": 50,
+        "Rue des Chartreux": 50,
+        "Rue des Guillemins": 50,
+        "Antwerp Abode": 50,
+        "Antwerp Dream": 50,
+        "Antwerp Haven": 50,
+        "Avenue Louise": 50,
+        "Gentbrugge": 50,
+        "Koninginnelaan": 50,
+        "Korenlei": 50,
+        "Langestraat": 50,
+        "Overpoort": 50,
+        "Patershol": 50,
+        "Schuttershofstraat": 50,
+        "Tiensestraat": 50
+      },
+      "vocabulary_sha256": "3235f0875856c7ab27c6292ad577008a769d826922fa1bb4c484a8c33a34dadb"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kritsana",
+    "Nalinee",
+    "Liege City Living",
+    "Liege City Center",
+    "Liege City View",
+    "Liege Luxe",
+    "Liege City Loft",
+    "Meir"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:50.572891+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

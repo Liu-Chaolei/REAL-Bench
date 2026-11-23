@@ -1,0 +1,132 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0956_8z9q8qtsjkhyodepu3qp522i9qnte9r1",
+  "model": "deepseek-flash",
+  "input_sha256": "40ab197dae2ca1799b14b53211ff393381c5b680c28e61dcd738bbf6776d1600",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Krittin Sricharoen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-25019530-2797-4fcf-ae26-5d841862cb70.arguments.attendees[1]",
+          "reason": "完整人名，出现在多个事件中"
+        },
+        {
+          "text": "Nonglak Saelee",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-25019530-2797-4fcf-ae26-5d841862cb70.arguments.attendees[0]",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Astrid Kleveland",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-d51497a4-6fc2-4aef-960b-6da1a89adee0.arguments.attendees[0]",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Kåre Jensen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-d51497a4-6fc2-4aef-960b-6da1a89adee0.arguments.attendees[1]",
+          "reason": "完整人名，含特殊字符"
+        },
+        {
+          "text": "Oleksandr Hrynchenko",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-d51497a4-6fc2-4aef-960b-6da1a89adee0.arguments.attendees[2]",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Warunee Suthiwong",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b3504b3b-05b3-4680-8a2c-950ed3fef73c.arguments.attendees[0]",
+          "reason": "完整人名"
+        }
+      ],
+      "new_terms": [
+        "Krittin Sricharoen",
+        "Nonglak Saelee",
+        "Astrid Kleveland",
+        "Kåre Jensen",
+        "Oleksandr Hrynchenko",
+        "Warunee Suthiwong"
+      ],
+      "active_vocabulary": {
+        "Krittin Sricharoen": 50,
+        "Nonglak Saelee": 50,
+        "Astrid Kleveland": 50,
+        "Kåre Jensen": 50,
+        "Oleksandr Hrynchenko": 50,
+        "Warunee Suthiwong": 50
+      },
+      "vocabulary_sha256": "adcf3727ab0829f3110436466e8a64752cfec0a057a88c2c5ed196f7565d18bd"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kåre Jensen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "完整人名，含特殊字符"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Krittin Sricharoen": 50,
+        "Nonglak Saelee": 50,
+        "Astrid Kleveland": 50,
+        "Kåre Jensen": 50,
+        "Oleksandr Hrynchenko": 50,
+        "Warunee Suthiwong": 50
+      },
+      "vocabulary_sha256": "adcf3727ab0829f3110436466e8a64752cfec0a057a88c2c5ed196f7565d18bd"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Warunee Suthiwong",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "完整人名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Krittin Sricharoen": 50,
+        "Nonglak Saelee": 50,
+        "Astrid Kleveland": 50,
+        "Kåre Jensen": 50,
+        "Oleksandr Hrynchenko": 50,
+        "Warunee Suthiwong": 50
+      },
+      "vocabulary_sha256": "adcf3727ab0829f3110436466e8a64752cfec0a057a88c2c5ed196f7565d18bd"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "978a3b8a64bf841a7c91cbac63ff0d31ad756a4c329506833d72d081d873f6d5",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3502,
+        "completion_tokens": 489,
+        "total_tokens": 3991,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3246
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.86
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0956_8z9q8qtsjkhyodepu3qp522i9qnte9r1",
+  "extracted_at": "2026-11-22T06:44:41.405032+00:00"
+}

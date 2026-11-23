@@ -1,0 +1,149 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0605_dydb3p6l38hpusrecwguna7puzvem294",
+  "model": "deepseek-flash",
+  "input_sha256": "639bc7950d6b79af722a5b49bf4780f9347dd1864c71184efb32cbdb5c856ec3",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélie Joensen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "参会人姓名，含特殊字符"
+        },
+        {
+          "text": "Katarzyna Wojciechowska",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "参会人姓名，波兰语拼写"
+        }
+      ],
+      "new_terms": [
+        "Aurélie Joensen",
+        "Katarzyna Wojciechowska"
+      ],
+      "active_vocabulary": {
+        "Aurélie Joensen": 50,
+        "Katarzyna Wojciechowska": 50
+      },
+      "vocabulary_sha256": "ac94dc015dd403c496e3edfbc492e13ef85ebf7fc8844667f34e0eafbe893864"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélie Joensen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "受邀人姓名"
+        },
+        {
+          "text": "Katarzyna Wojciechowska",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "受邀人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélie Joensen": 50,
+        "Katarzyna Wojciechowska": 50
+      },
+      "vocabulary_sha256": "ac94dc015dd403c496e3edfbc492e13ef85ebf7fc8844667f34e0eafbe893864"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélie Joensen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_brief.arguments.content",
+          "reason": "群聊参与者姓名"
+        },
+        {
+          "text": "Katarzyna Wojciechowska",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_brief.arguments.content",
+          "reason": "群聊参与者姓名"
+        },
+        {
+          "text": "Battle of Muye",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_brief.arguments.content",
+          "reason": "牧野之战专名"
+        },
+        {
+          "text": "Battle of Red Cliffs",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_brief.arguments.content",
+          "reason": "赤壁之战专名"
+        },
+        {
+          "text": "Battle of Talas",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_brief.arguments.content",
+          "reason": "怛罗斯之战专名"
+        }
+      ],
+      "new_terms": [
+        "Battle of Muye",
+        "Battle of Red Cliffs",
+        "Battle of Talas"
+      ],
+      "active_vocabulary": {
+        "Aurélie Joensen": 50,
+        "Katarzyna Wojciechowska": 50,
+        "Battle of Muye": 50,
+        "Battle of Red Cliffs": 50,
+        "Battle of Talas": 50
+      },
+      "vocabulary_sha256": "8a94a9c211beddd3ef671ed8da43fce1cb78b05418cb07da5ef444c7761a6395"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "af24c9e22b691e258d12f43f2b1a03fecf65281a089647a8d196d51f0bea4747",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3924,
+        "completion_tokens": 327,
+        "total_tokens": 4251,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3668
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.417,
+      "error": "Not an exact quotation of a source in stage 2: 'Aurélie Joensen' from 'stage2.source_task'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "39127927b67aa61b91da15262ef56cb7acb46fb801cabaca61b2eb2c47ffe387",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4661,
+        "completion_tokens": 349,
+        "total_tokens": 5010,
+        "prompt_tokens_details": {
+          "cached_tokens": 4224
+        },
+        "prompt_cache_hit_tokens": 4224,
+        "prompt_cache_miss_tokens": 437
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.357
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0605_dydb3p6l38hpusrecwguna7puzvem294",
+  "extracted_at": "2026-11-22T06:43:02.835869+00:00"
+}

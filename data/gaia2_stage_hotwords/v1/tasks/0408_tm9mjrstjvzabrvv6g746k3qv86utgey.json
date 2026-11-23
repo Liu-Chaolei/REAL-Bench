@@ -1,0 +1,523 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0408_tm9mjrstjvzabrvv6g746k3qv86utgey",
+  "model": "deepseek-flash",
+  "input_sha256": "1b84f88533ad2ea6598c5dd0f4b5cffd3ee23eca3150122c203b22f775f27383",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Áine Ní Chonchobhair",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_person_2.arguments.user_name",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Xiomara Reyes-Rodríguez",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_person_4.arguments.user_name",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Ximena Gutiérrez Ramírez",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_person_6.arguments.user_name",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Žiga Korošec",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_person_8.arguments.user_name",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Katharina Müller-Schmidt",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_person_10.arguments.user_name",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Kacper Szymański",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_person_11.arguments.user_name",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Aoife Ní Chonaill",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_person_12.arguments.user_name",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Saskia Müller-Köhler",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_person_14.arguments.user_name",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Xóchitl Hernández-Gómez",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_person_16.arguments.user_name",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Aoife Ní Chonchúir",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Gulandom Davlatov",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "难拼姓名"
+        },
+        {
+          "text": "Rogelio García-Mendoza",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Sutrisno Widyatama",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "难拼姓名"
+        },
+        {
+          "text": "Saoirse Ní Mhaoldhamhnaigh",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Xóchitl García Ramírez",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Leonhard Krüger",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Kunto Wijayanto",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "难拼姓名"
+        },
+        {
+          "text": "Saoirse Ní Bhroin",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Saskia Müller-Fischer",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Kaspar Eisenstadt",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "难拼姓名"
+        },
+        {
+          "text": "Helga Eisenstadt",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "难拼姓名"
+        },
+        {
+          "text": "Anastasia Kuznetsova",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "难拼姓名"
+        },
+        {
+          "text": "Helga Müller-Schneider",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Saint Petersburg Palace",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "房产专名"
+        },
+        {
+          "text": "Saint Petersburg Suites",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "房产专名"
+        },
+        {
+          "text": "Omsk Luxury Residences",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "房产专名"
+        },
+        {
+          "text": "Krasnodar Luxury Apartments",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "房产专名"
+        },
+        {
+          "text": "Kremlin View Apartments",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "房产专名"
+        },
+        {
+          "text": "Kremlin Views",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "房产专名"
+        },
+        {
+          "text": "Moscow City Lights",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "房产专名"
+        },
+        {
+          "text": "Rostov-on-Don Riverside",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "房产专名"
+        },
+        {
+          "text": "Yekaterinburg Modern",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "房产专名"
+        }
+      ],
+      "new_terms": [
+        "Áine Ní Chonchobhair",
+        "Xiomara Reyes-Rodríguez",
+        "Ximena Gutiérrez Ramírez",
+        "Žiga Korošec",
+        "Katharina Müller-Schmidt",
+        "Kacper Szymański",
+        "Aoife Ní Chonaill",
+        "Saskia Müller-Köhler",
+        "Xóchitl Hernández-Gómez",
+        "Aoife Ní Chonchúir",
+        "Gulandom Davlatov",
+        "Rogelio García-Mendoza",
+        "Sutrisno Widyatama",
+        "Saoirse Ní Mhaoldhamhnaigh",
+        "Xóchitl García Ramírez",
+        "Leonhard Krüger",
+        "Kunto Wijayanto",
+        "Saoirse Ní Bhroin",
+        "Saskia Müller-Fischer",
+        "Kaspar Eisenstadt",
+        "Helga Eisenstadt",
+        "Anastasia Kuznetsova",
+        "Helga Müller-Schneider",
+        "Saint Petersburg Palace",
+        "Saint Petersburg Suites",
+        "Omsk Luxury Residences",
+        "Krasnodar Luxury Apartments",
+        "Kremlin View Apartments",
+        "Kremlin Views",
+        "Moscow City Lights",
+        "Rostov-on-Don Riverside",
+        "Yekaterinburg Modern"
+      ],
+      "active_vocabulary": {
+        "Áine Ní Chonchobhair": 50,
+        "Xiomara Reyes-Rodríguez": 50,
+        "Ximena Gutiérrez Ramírez": 50,
+        "Žiga Korošec": 50,
+        "Katharina Müller-Schmidt": 50,
+        "Kacper Szymański": 50,
+        "Aoife Ní Chonaill": 50,
+        "Saskia Müller-Köhler": 50,
+        "Xóchitl Hernández-Gómez": 50,
+        "Aoife Ní Chonchúir": 50,
+        "Gulandom Davlatov": 50,
+        "Rogelio García-Mendoza": 50,
+        "Sutrisno Widyatama": 50,
+        "Saoirse Ní Mhaoldhamhnaigh": 50,
+        "Xóchitl García Ramírez": 50,
+        "Leonhard Krüger": 50,
+        "Kunto Wijayanto": 50,
+        "Saoirse Ní Bhroin": 50,
+        "Saskia Müller-Fischer": 50,
+        "Kaspar Eisenstadt": 50,
+        "Helga Eisenstadt": 50,
+        "Anastasia Kuznetsova": 50,
+        "Helga Müller-Schneider": 50,
+        "Saint Petersburg Palace": 50,
+        "Saint Petersburg Suites": 50,
+        "Omsk Luxury Residences": 50,
+        "Krasnodar Luxury Apartments": 50,
+        "Kremlin View Apartments": 50,
+        "Kremlin Views": 50,
+        "Moscow City Lights": 50,
+        "Rostov-on-Don Riverside": 50,
+        "Yekaterinburg Modern": 50
+      },
+      "vocabulary_sha256": "3e792702a3507a7c376ff69637897e455ff84ead746d939b5c44449c23ef4b9f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Moscow State University",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_create.arguments.location",
+          "reason": "大学机构专名"
+        },
+        {
+          "text": "Áine Ní Chonchobhair",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[2]",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Xiomara Reyes-Rodríguez",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[4]",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Ximena Gutiérrez Ramírez",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[6]",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Žiga Korošec",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[8]",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Katharina Müller-Schmidt",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[10]",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Kacper Szymański",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[11]",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Aoife Ní Chonaill",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[12]",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Saskia Müller-Köhler",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[14]",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Xóchitl Hernández-Gómez",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[16]",
+          "reason": "含变音符号的难拼姓名"
+        },
+        {
+          "text": "Saint Petersburg Palace",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "房产专名"
+        },
+        {
+          "text": "Saint Petersburg Suites",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "房产专名"
+        },
+        {
+          "text": "Omsk Luxury Residences",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "房产专名"
+        },
+        {
+          "text": "Krasnodar Luxury Apartments",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "房产专名"
+        },
+        {
+          "text": "Kremlin View Apartments",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "房产专名"
+        },
+        {
+          "text": "Kremlin Views",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "房产专名"
+        },
+        {
+          "text": "Moscow City Lights",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "房产专名"
+        },
+        {
+          "text": "Rostov-on-Don Riverside",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "房产专名"
+        },
+        {
+          "text": "Yekaterinburg Modern",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "房产专名"
+        }
+      ],
+      "new_terms": [
+        "Moscow State University"
+      ],
+      "active_vocabulary": {
+        "Áine Ní Chonchobhair": 50,
+        "Xiomara Reyes-Rodríguez": 50,
+        "Ximena Gutiérrez Ramírez": 50,
+        "Žiga Korošec": 50,
+        "Katharina Müller-Schmidt": 50,
+        "Kacper Szymański": 50,
+        "Aoife Ní Chonaill": 50,
+        "Saskia Müller-Köhler": 50,
+        "Xóchitl Hernández-Gómez": 50,
+        "Aoife Ní Chonchúir": 50,
+        "Gulandom Davlatov": 50,
+        "Rogelio García-Mendoza": 50,
+        "Sutrisno Widyatama": 50,
+        "Saoirse Ní Mhaoldhamhnaigh": 50,
+        "Xóchitl García Ramírez": 50,
+        "Leonhard Krüger": 50,
+        "Kunto Wijayanto": 50,
+        "Saoirse Ní Bhroin": 50,
+        "Saskia Müller-Fischer": 50,
+        "Kaspar Eisenstadt": 50,
+        "Helga Eisenstadt": 50,
+        "Anastasia Kuznetsova": 50,
+        "Helga Müller-Schneider": 50,
+        "Saint Petersburg Palace": 50,
+        "Saint Petersburg Suites": 50,
+        "Omsk Luxury Residences": 50,
+        "Krasnodar Luxury Apartments": 50,
+        "Kremlin View Apartments": 50,
+        "Kremlin Views": 50,
+        "Moscow City Lights": 50,
+        "Rostov-on-Don Riverside": 50,
+        "Yekaterinburg Modern": 50,
+        "Moscow State University": 50
+      },
+      "vocabulary_sha256": "1d9ee59577cd387dd9e26589f2e4e108c909b7f7b96d96d70b675ddcacd0239b"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "4c23c2b65023184f49d8b22304e07f7232189e4ae02ced575a53f3c3bd8a9304",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 6682,
+        "completion_tokens": 3160,
+        "total_tokens": 9842,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 6426
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 8.835,
+      "error": "7 validation errors for Extraction\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage0.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='该阶段无专有名称', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.terms\n  List should have at most 50 items after validation, not 51 [type=too_long, input_value=[{'text': 'Leonie Schwarz...on': '联系人姓名'}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/too_long\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage1.tool_gt.series_s1_send.arguments.content', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='该阶段包含大量联...姓名与房产名称', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage2.tool_gt.series_s2...e.arguments.description', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='该阶段包含参会人...机构与房产名称', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "7c00e3ef7b83429eea411e525c1dba6b46f900ff19f5f80344e894bc463b4f37",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 10665,
+        "completion_tokens": 3081,
+        "total_tokens": 13746,
+        "prompt_tokens_details": {
+          "cached_tokens": 9728
+        },
+        "prompt_cache_hit_tokens": 9728,
+        "prompt_cache_miss_tokens": 937
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 7.86,
+      "error": "1 validation error for Extraction\nstages.1.terms\n  List should have at most 50 items after validation, not 51 [type=too_long, input_value=[{'text': 'Leonie Schwarz...on': '联系人姓名'}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/too_long"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "b61b3a9ee45798527548e1f91152e7e76429c09dde20faae0df58000b3cacb27",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 10223,
+        "completion_tokens": 3044,
+        "total_tokens": 13267,
+        "prompt_tokens_details": {
+          "cached_tokens": 6656
+        },
+        "prompt_cache_hit_tokens": 6656,
+        "prompt_cache_miss_tokens": 3567
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 7.76,
+      "error": "Cumulative vocabulary exceeds 50 super hotwords; retain only difficult proper names"
+    },
+    {
+      "attempt": 4,
+      "request_sha256": "181eed3b37226132f551b49dbe41bfb1e7932d8292463182e6f3b670297de0cd",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 10125,
+        "completion_tokens": 2164,
+        "total_tokens": 12289,
+        "prompt_tokens_details": {
+          "cached_tokens": 8448
+        },
+        "prompt_cache_hit_tokens": 8448,
+        "prompt_cache_miss_tokens": 1677
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 6.033
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0408_tm9mjrstjvzabrvv6g746k3qv86utgey",
+  "extracted_at": "2026-11-22T06:42:19.159419+00:00"
+}

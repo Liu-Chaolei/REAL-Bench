@@ -1,0 +1,98 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0231_8psanhd6g8y7jrqnd0n0s977eucupkxn",
+  "model": "deepseek-flash",
+  "input_sha256": "2434cb1f462a7940f3d1416b83f5c4008f686736914effdaa9af4f903b405db3",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Khalid Al-Mansoori",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-e5e5891c-6c93-4f85-bd9c-ab52a82ea426.arguments.content",
+          "reason": "与会者姓名，需精确识别"
+        }
+      ],
+      "new_terms": [
+        "Khalid Al-Mansoori"
+      ],
+      "active_vocabulary": {
+        "Khalid Al-Mansoori": 50
+      },
+      "vocabulary_sha256": "29ecccae3b7616de8e1382fab8841fdb1426afe880a61e5be3d1a04b3b4974a8"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Khalid Al-Mansoori",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add.arguments.attendees[0]",
+          "reason": "跟进电话的参会人姓名"
+        },
+        {
+          "text": "Home Office",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add.arguments.location",
+          "reason": "会议地点专有名称"
+        }
+      ],
+      "new_terms": [
+        "Home Office"
+      ],
+      "active_vocabulary": {
+        "Khalid Al-Mansoori": 50,
+        "Home Office": 50
+      },
+      "vocabulary_sha256": "f05fba8f097738460580fcd934b0418d40e82347d41af05ac7f9f15cd5743a2f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Khalid Al-Mansoori",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add.arguments.description",
+          "reason": "准备事项关联的人名"
+        },
+        {
+          "text": "Home Office",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add.arguments.location",
+          "reason": "准备会议地点专有名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Khalid Al-Mansoori": 50,
+        "Home Office": 50
+      },
+      "vocabulary_sha256": "f05fba8f097738460580fcd934b0418d40e82347d41af05ac7f9f15cd5743a2f"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "f2c434436d3258f350a71e32c25b209182863080738d15e0425f5d48fc15e2bf",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1684,
+        "completion_tokens": 257,
+        "total_tokens": 1941,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1428
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.194
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0231_8psanhd6g8y7jrqnd0n0s977eucupkxn",
+  "extracted_at": "2026-11-22T06:40:50.383559+00:00"
+}

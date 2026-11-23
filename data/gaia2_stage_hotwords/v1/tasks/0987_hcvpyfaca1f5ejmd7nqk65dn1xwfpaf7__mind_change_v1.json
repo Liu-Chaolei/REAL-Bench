@@ -1,0 +1,115 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0987_hcvpyfaca1f5ejmd7nqk65dn1xwfpaf7__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "91d7e11afc00a03400ddb6ae635637375af4d812dfc0b06dc32d06721e1be9bd",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaidën Rylan",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名，含特殊字符"
+        }
+      ],
+      "new_terms": [
+        "Kaidën Rylan"
+      ],
+      "active_vocabulary": {
+        "Kaidën Rylan": 50
+      },
+      "vocabulary_sha256": "d0252b85e954cf6c81358997242b004171e038fa24e27ec9e18647b05ae1cde1"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaidën",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "需确认会面时间的联系人名"
+        }
+      ],
+      "new_terms": [
+        "Kaidën"
+      ],
+      "active_vocabulary": {
+        "Kaidën Rylan": 50,
+        "Kaidën": 50
+      },
+      "vocabulary_sha256": "feba8d3d5a63e1bb273faba82cac4e0ac8c4aea6cb56f017533912cf291505db"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaidën Rylan",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群聊参与者姓名"
+        },
+        {
+          "text": "Jesús García Hernández",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "被提及但最终未加入的联系人姓名"
+        }
+      ],
+      "new_terms": [
+        "Jesús García Hernández"
+      ],
+      "active_vocabulary": {
+        "Kaidën Rylan": 50,
+        "Kaidën": 50,
+        "Jesús García Hernández": 50
+      },
+      "vocabulary_sha256": "5176eb52d7bf859ba64a5c5c330c2fb3584b99b4ebb8c2198291f8943446916b"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "607b8ab04fdbd314aa778418f0e43bf66ee9e9796777966fbb061cc1c398b113",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3711,
+        "completion_tokens": 223,
+        "total_tokens": 3934,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3455
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.69,
+      "error": "Invalid proper-name phrase: 'aurelien.lafleur@gaia2mail.com'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "c1826070619a4e4ad5facec4db7c56d6e80db0fc738281c2a7a28d7f7ce4c286",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4337,
+        "completion_tokens": 148,
+        "total_tokens": 4485,
+        "prompt_tokens_details": {
+          "cached_tokens": 3840
+        },
+        "prompt_cache_hit_tokens": 3840,
+        "prompt_cache_miss_tokens": 497
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.094
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0987_hcvpyfaca1f5ejmd7nqk65dn1xwfpaf7__mind_change_v1",
+  "extracted_at": "2026-11-22T06:46:10.968609+00:00"
+}

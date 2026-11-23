@@ -1,0 +1,113 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0591_ki3cgrlql0qph5k418vxpvtxzttm72f1",
+  "model": "deepseek-flash",
+  "input_sha256": "0ac148d359b2bdbbe9f48e042b6207a89bb3d7e82f3f2f675c946224aa7f3db5",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Linnea Svensson",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "朋友姓名"
+        },
+        {
+          "text": "Dungeons and Dragons",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "桌游品牌名"
+        },
+        {
+          "text": "Girls Night",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "自定义活动标题"
+        }
+      ],
+      "new_terms": [
+        "Linnea Svensson",
+        "Dungeons and Dragons",
+        "Girls Night"
+      ],
+      "active_vocabulary": {
+        "Linnea Svensson": 50,
+        "Dungeons and Dragons": 50,
+        "Girls Night": 50
+      },
+      "vocabulary_sha256": "8a2ad5d302222dbb0bec426625ff42053503ff9b1d1a18a2fe68ac83f8583c52"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Linnea Svensson",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收信人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Linnea Svensson": 50,
+        "Dungeons and Dragons": 50,
+        "Girls Night": 50
+      },
+      "vocabulary_sha256": "8a2ad5d302222dbb0bec426625ff42053503ff9b1d1a18a2fe68ac83f8583c52"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Södermannagatan 12, 118 27 Stockholm, Sweden",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_order.arguments.end_location",
+          "reason": "目的地地址"
+        },
+        {
+          "text": "Östermalmsgatan 12, 114 39 Stockholm, Sweden",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_order.arguments.start_location",
+          "reason": "出发地地址"
+        }
+      ],
+      "new_terms": [
+        "Södermannagatan 12, 118 27 Stockholm, Sweden",
+        "Östermalmsgatan 12, 114 39 Stockholm, Sweden"
+      ],
+      "active_vocabulary": {
+        "Linnea Svensson": 50,
+        "Dungeons and Dragons": 50,
+        "Girls Night": 50,
+        "Södermannagatan 12, 118 27 Stockholm, Sweden": 50,
+        "Östermalmsgatan 12, 114 39 Stockholm, Sweden": 50
+      },
+      "vocabulary_sha256": "6ed88ba515d2744e45705f6349d27afa77b9d2a6b0e15ac917ab35057c977467"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "d9f6f0f742567caf2eb2746f7011b01acb1fe0c5f8a879d1d0db28666fda77ce",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2189,
+        "completion_tokens": 225,
+        "total_tokens": 2414,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1933
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.173
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0591_ki3cgrlql0qph5k418vxpvtxzttm72f1",
+  "extracted_at": "2026-11-22T06:42:55.738699+00:00"
+}

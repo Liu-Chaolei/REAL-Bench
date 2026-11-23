@@ -1,0 +1,132 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0691_aw5sqbzfv1bjmj3vmxwpxmj0l3rx5br2",
+  "model": "deepseek-flash",
+  "input_sha256": "5d3ad1000c3636c4cf670655f25f84fca2c0e03a0501fe456272ea04fab4e2b3",
+  "review_input_sha256": "e6f0d08e07675479dbf00f4829e0a529f54bd5916277bc381c92effc48c4b67a",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "a3f5bc622604998dd360fb9920e69564034cc33995caf1bcf48e340df353ae56",
+  "reference_results_sha256": "2805ca09b0cca085c227f7a16a110eefdb1705689b03cd1b049b7818465a072b",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Lukáš Nováček",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Štefánikova 646/76",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Brno-sever",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Božetěchova 3",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Štefánikova 646/76",
+          "kind": "place",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的完整街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Brno-sever",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "布尔诺市辖区专名",
+          "weight": 50
+        },
+        {
+          "text": "Lukáš Nováček",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Štefánikova 646/76",
+        "Brno-sever",
+        "Lukáš Nováček"
+      ],
+      "active_vocabulary": {
+        "Štefánikova 646/76": 50,
+        "Brno-sever": 50,
+        "Lukáš Nováček": 50
+      },
+      "vocabulary_sha256": "dfbb0a12cfc21c112fda8fee6761635ed923544e76571f6d7b0111e26e798de0"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Božetěchova 3",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的街道地址",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Božetěchova 3"
+      ],
+      "active_vocabulary": {
+        "Štefánikova 646/76": 50,
+        "Brno-sever": 50,
+        "Lukáš Nováček": 50,
+        "Božetěchova 3": 50
+      },
+      "vocabulary_sha256": "0b00799c104535012eca1c7bff3d9a15bf5599dcd2038ac321459379a67184d4"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Štefánikova 646/76": 50,
+        "Brno-sever": 50,
+        "Lukáš Nováček": 50,
+        "Božetěchova 3": 50
+      },
+      "vocabulary_sha256": "0b00799c104535012eca1c7bff3d9a15bf5599dcd2038ac321459379a67184d4"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Czech Countryside",
+    "stellaluna.cz",
+    "Prague 1",
+    "student.cuni.cz"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:01.767613+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

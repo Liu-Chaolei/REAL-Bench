@@ -1,0 +1,188 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0561_0cq6chl83t8o2z1s86oewv57fcvu3cor",
+  "model": "deepseek-flash",
+  "input_sha256": "eaa2d9ce99f41f15d1b8aa182d708083bbc11a0f0952bd8bbacdc996aaeb21e7",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Arya",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人中的专有人名"
+        }
+      ],
+      "new_terms": [
+        "Arya"
+      ],
+      "active_vocabulary": {
+        "Arya": 50
+      },
+      "vocabulary_sha256": "a406ff6d06b8ee1966cdfd40229ad79eb39a806d0775488b1139891a4366872d"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nizhny Novgorod City Center",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Omsk Riverfront",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Samara Studio",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Omsk City Center",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "房源专有名称"
+        }
+      ],
+      "new_terms": [
+        "Nizhny Novgorod City Center",
+        "Omsk Riverfront",
+        "Samara Studio",
+        "Omsk City Center"
+      ],
+      "active_vocabulary": {
+        "Arya": 50,
+        "Nizhny Novgorod City Center": 50,
+        "Omsk Riverfront": 50,
+        "Samara Studio": 50,
+        "Omsk City Center": 50
+      },
+      "vocabulary_sha256": "f9f621c32bc6fddbe3be42d48f66ef65dd07612dbc5f29e8a0ff2d51b32160bd"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Nizhny Novgorod City Center",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Minin Square",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "房源所在街道地名"
+        },
+        {
+          "text": "Nizhny Novgorod",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "城市专有名称"
+        },
+        {
+          "text": "Omsk Riverfront",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Ulitsa Lenina",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "房源所在街道地名"
+        },
+        {
+          "text": "Omsk",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "城市专有名称"
+        },
+        {
+          "text": "Samara Studio",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Kuibyshev Street",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "房源所在街道地名"
+        },
+        {
+          "text": "Samara",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "城市专有名称"
+        },
+        {
+          "text": "Omsk City Center",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Lenina Street 20",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "房源具体地址"
+        }
+      ],
+      "new_terms": [
+        "Minin Square",
+        "Nizhny Novgorod",
+        "Ulitsa Lenina",
+        "Omsk",
+        "Kuibyshev Street",
+        "Samara",
+        "Lenina Street 20"
+      ],
+      "active_vocabulary": {
+        "Arya": 50,
+        "Nizhny Novgorod City Center": 50,
+        "Omsk Riverfront": 50,
+        "Samara Studio": 50,
+        "Omsk City Center": 50,
+        "Minin Square": 50,
+        "Nizhny Novgorod": 50,
+        "Ulitsa Lenina": 50,
+        "Omsk": 50,
+        "Kuibyshev Street": 50,
+        "Samara": 50,
+        "Lenina Street 20": 50
+      },
+      "vocabulary_sha256": "d2b10ec836e83ab73f3ed25c21987b5d63e5cea22f6df0fafa64cf41c9f8c011"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "16280b36d49292f5f359ade99e9cea0415a1bdfa7753ccef23ef480dd3d9b951",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2330,
+        "completion_tokens": 642,
+        "total_tokens": 2972,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2074
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.133
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0561_0cq6chl83t8o2z1s86oewv57fcvu3cor",
+  "extracted_at": "2026-11-22T06:42:43.478693+00:00"
+}

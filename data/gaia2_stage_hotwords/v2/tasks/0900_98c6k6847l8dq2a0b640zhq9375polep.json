@@ -1,0 +1,145 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0900_98c6k6847l8dq2a0b640zhq9375polep",
+  "model": "deepseek-flash",
+  "input_sha256": "c71c98dae22dc5324358dfce6c12344bd8a6a00aed36e2b37325eb23ba2bb579",
+  "review_input_sha256": "7a022b5a73759ea902bf20be6248c774a2f1c560d928634841f07189c59a6507",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "73c13c6bfe47b956bc7c0e1ad243c8422ce7fcdbc939c20bf9b46a4a3f2a6051",
+  "reference_results_sha256": "fe8d3706c3f3fe06d88ae48e0e0b56580df615931effef92ac0edf0987b00461",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Karel Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-aa4f5a50-dbe4-4ed4-a54e-a0b2d8451cc3.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Khalifa Al-Mansoori",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-8405cff1-684c-4362-9822-288976be3f41.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Liesbeth Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-fbe4ebe7-17b0-4e5f-b4a5-b2ae083dc6d0.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Board & Dice Inuit: The Snow Folk",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Schuttershofstraat",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-abaee972-2fba-46ad-8a1e-8b45d4699e1a.arguments.address"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Board & Dice Inuit: The Snow Folk",
+          "kind": "product",
+          "source": "stage0.existing_catalog.3",
+          "reason": "独特产品名",
+          "weight": 50
+        },
+        {
+          "text": "Khalifa Al-Mansoori",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，含独特姓氏",
+          "weight": 50
+        },
+        {
+          "text": "Karel Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，含独特姓氏",
+          "weight": 50
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，含独特姓氏",
+          "weight": 50
+        },
+        {
+          "text": "Schuttershofstraat",
+          "kind": "place",
+          "source": "stage0.existing_catalog.4",
+          "reason": "独特街道名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Board & Dice Inuit: The Snow Folk",
+        "Khalifa Al-Mansoori",
+        "Karel Vandenberghe",
+        "Liesbeth Vandenberghe",
+        "Schuttershofstraat"
+      ],
+      "active_vocabulary": {
+        "Board & Dice Inuit: The Snow Folk": 50,
+        "Khalifa Al-Mansoori": 50,
+        "Karel Vandenberghe": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Schuttershofstraat": 50
+      },
+      "vocabulary_sha256": "04a6407c8ee5596b61c95496ad32198cebd964e5fccb81a707d3fbb52c2d1250"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Board & Dice Inuit: The Snow Folk": 50,
+        "Khalifa Al-Mansoori": 50,
+        "Karel Vandenberghe": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Schuttershofstraat": 50
+      },
+      "vocabulary_sha256": "04a6407c8ee5596b61c95496ad32198cebd964e5fccb81a707d3fbb52c2d1250"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Board & Dice Inuit: The Snow Folk": 50,
+        "Khalifa Al-Mansoori": 50,
+        "Karel Vandenberghe": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Schuttershofstraat": 50
+      },
+      "vocabulary_sha256": "04a6407c8ee5596b61c95496ad32198cebd964e5fccb81a707d3fbb52c2d1250"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Antwerpen",
+    "Belgian Armed Forces"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:46.140179+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

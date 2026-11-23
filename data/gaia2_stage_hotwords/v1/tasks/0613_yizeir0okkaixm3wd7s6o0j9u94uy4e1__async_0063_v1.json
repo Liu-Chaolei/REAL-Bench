@@ -1,0 +1,157 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0613_yizeir0okkaixm3wd7s6o0j9u94uy4e1__async_0063_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "0b87721ff173204c2ce4afc09bacfee5fc68e81a01ee643ae8f271cd0de91979",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kjersti Fjellstad",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "关键联系人姓名"
+        },
+        {
+          "text": "Astrid Kleveland",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f9253161-a7e4-4bcf-b71a-7c73f9f139ab.arguments.attendees[0]",
+          "reason": "活动参与者姓名"
+        },
+        {
+          "text": "Kåre Jensen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f9253161-a7e4-4bcf-b71a-7c73f9f139ab.arguments.attendees[1]",
+          "reason": "活动参与者姓名"
+        },
+        {
+          "text": "Oleksandr Hrynchenko",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f9253161-a7e4-4bcf-b71a-7c73f9f139ab.arguments.attendees[2]",
+          "reason": "活动参与者姓名"
+        },
+        {
+          "text": "Oslo Film Museum",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f9253161-a7e4-4bcf-b71a-7c73f9f139ab.arguments.location",
+          "reason": "活动地点名称"
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c96ce1e1-64fc-4ec8-9a2b-59a46ed7f5a9.arguments.content",
+          "reason": "发件人签名姓名"
+        }
+      ],
+      "new_terms": [
+        "Kjersti Fjellstad",
+        "Astrid Kleveland",
+        "Kåre Jensen",
+        "Oleksandr Hrynchenko",
+        "Oslo Film Museum",
+        "Åse Kjellstad"
+      ],
+      "active_vocabulary": {
+        "Kjersti Fjellstad": 50,
+        "Astrid Kleveland": 50,
+        "Kåre Jensen": 50,
+        "Oleksandr Hrynchenko": 50,
+        "Oslo Film Museum": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "c9bd550d893584736d4434ddccc92c4f39c0a0a7e46b8bdaad9e870d6fe635ce"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Filmteateret",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "放映场地名称"
+        },
+        {
+          "text": "Astrid Kleveland",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[0]",
+          "reason": "活动参与者姓名"
+        },
+        {
+          "text": "Kåre Jensen",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[1]",
+          "reason": "活动参与者姓名"
+        },
+        {
+          "text": "Oleksandr Hrynchenko",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[2]",
+          "reason": "活动参与者姓名"
+        }
+      ],
+      "new_terms": [
+        "Filmteateret"
+      ],
+      "active_vocabulary": {
+        "Kjersti Fjellstad": 50,
+        "Astrid Kleveland": 50,
+        "Kåre Jensen": 50,
+        "Oleksandr Hrynchenko": 50,
+        "Oslo Film Museum": 50,
+        "Åse Kjellstad": 50,
+        "Filmteateret": 50
+      },
+      "vocabulary_sha256": "e862641c74aaf4ff41fb6c53785275254b480f5712fb3d808618f3998d02ed1f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "rohini.deshpande",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.recipients[0]",
+          "reason": "收件人姓名标识"
+        }
+      ],
+      "new_terms": [
+        "rohini.deshpande"
+      ],
+      "active_vocabulary": {
+        "Kjersti Fjellstad": 50,
+        "Astrid Kleveland": 50,
+        "Kåre Jensen": 50,
+        "Oleksandr Hrynchenko": 50,
+        "Oslo Film Museum": 50,
+        "Åse Kjellstad": 50,
+        "Filmteateret": 50,
+        "rohini.deshpande": 50
+      },
+      "vocabulary_sha256": "f06948d0e5204b9823ffb54c1800ac689f5fa6665b87a983fa3ea716970bf17d"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "d9ae7d0c6cc10d3b31d1ca97cce6e329b1f3dced2f481173abf4f6e1bd335388",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4517,
+        "completion_tokens": 580,
+        "total_tokens": 5097,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4261
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.333
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0613_yizeir0okkaixm3wd7s6o0j9u94uy4e1__async_0063_v1",
+  "extracted_at": "2026-11-22T06:46:44.727668+00:00"
+}

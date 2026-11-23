@@ -1,0 +1,183 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0961_mhh5cjqipkkn20s7b6wfogqtq8g4mxho",
+  "model": "deepseek-flash",
+  "input_sha256": "486c7b8ab84fb10f14d689c778bc81985f701e307e3e466380e04db94689090b",
+  "review_input_sha256": "b9537f00944793f51bd5aa41b85044a90ce77d5dac5edff21769ce9a2ec3627b",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "cc73aa8032767b34409f39ff0e200823242d81c65d8569157f3a79af0a9dd6fe",
+  "reference_results_sha256": "19b06386ee956c96172453abf90ea6ba2e51a9a6a7ca6f53073f1fe6a14e57c2",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Amscan Glamourous Party Wig Costume, White",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Amscan Super Hero Mask, Party Accessory, White",
+      "original_source": "stage0.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Luísa Silva e Sousa",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.tool_response.series_s2_read_review_dates": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"02132dcbdcde45d398fc2e114e502d69\", \"title\": \"Networking Event\", \"start_datetime\": \"1729623600\", \"end_datetime\": \"1729630800\", \"tag\": \"Social\", \"description\": \"Attend a networking event for social media influencers and brands.\", \"location\": \"Stockholm Convention Center\", \"attendees\": [\"Linnea Åström\", \"Sunita Bishwakarma\"], \"start_strftime\": \"Tuesday, 2024-10-22 19:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 21:00:00\"}, {\"event_id\": \"14d7f35e62ce485dac2c19a80147765c\", \"title\": \"Social Media Management\", \"start_datetime\": \"1730019600\", \"end_datetime\": \"1730026800\", \"tag\": \"Work\", \"description\": \"Schedule and manage social media posts for the week.\", \"location\": \"Home Office\", \"attendees\": [], \"start_strftime\": \"Sunday, 2024-10-27 09:00:00\", \"end_strftime\": \"Sunday, 2024-10-27 11:00:00\"}, {\"event_id\": \"1b1df251b5044fab93d395277aff298a\", \"title\": \"Content Creation Session\", \"start_datetime\": \"1729245600\", \"end_datetime\": \"1729252800\", \"tag\": \"Work\", \"description\": \"Create content for upcoming brand partnership.\", \"location\": \"Home Office\", \"attendees\": [], \"start_strftime\": \"Friday, 2024-10-18 10:00:00\", \"end_strftime\": \"Friday, 2024-10-18 12:00:00\"}, {\"event_id\": \"23ff2e41249940288e488a0fb8f5a756\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729533600\", \"end_datetime\": \"1729537200\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Linnea Åström\"], \"start_strftime\": \"Monday, 2024-10-21 18:00:00\", \"end_strftime\": \"Monday, 2024-10-21 19:00:00\"}, {\"event_id\": \"34a7b40d268c4cad8a36277700628699\", \"title\": \"Networking Event\", \"start_datetime\": \"1729882800\", \"end_datetime\": \"1729890000\", \"tag\": \"Social\", \"description\": \"Attend a networking event for social media influencers and brands.\", \"location\": \"Stockholm Convention Center\", \"attendees\": [\"Linnea Åström\", \"Sunita Bishwakarma\"], \"start_strftime\": \"Friday, 2024-10-25 19:00:00\", \"end_strftime\": \"Friday, 2024-10-25 21:00:00\"}, {\"event_id\": \"3ee1ddd748ed44abb59443861ab2d658\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729274400\", \"end_datetime\": \"1729278000\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Åsa Lindgren\"], \"start_strftime\": \"Friday, 2024-10-18 18:00:00\", \"end_strftime\": \"Friday, 2024-10-18 19:00:00\"}, {\"event_id\": \"400401c4fa454b14a184b848a5a64d95\", \"title\": \"Content Calendar Planning\", \"start_datetime\": \"1729764000\", \"end_datetime\": \"1729771200\", \"tag\": \"Work\", \"description\": \"Plan and schedule content for the upcoming month.\", \"location\": \"Home Office\", \"attendees\": [], \"start_strftime\": \"Thursday, 2024-10-24 10:00:00\", \"end_strftime\": \"Thursday, 2024-10-24 12:00:00\"}, {\"event_id\": \"4b9997daa5184481b7ac6909cf6aae34\", \"title\": \"Brand Partnership Meeting\", \"start_datetime\": \"1729605600\", \"end_datetime\": \"1729612800\", \"tag\": \"Work\", \"description\": \"Discuss potential partnership opportunities with a new brand.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Beatriz Sousa\"], \"start_strftime\": \"Tuesday, 2024-10-22 14:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 16:00:00\"}, {\"event_id\": \"68e3b5e0eb4244c98bf243453fc27059\", \"title\": \"Coffee Break with Linnea\", \"start_datetime\": \"1729692000\", \"end_datetime\": \"1729695600\", \"tag\": \"Social\", \"description\": \"Catch up with Linnea over coffee and discuss upcoming projects.\", \"location\": \"Coffee Shop\", \"attendees\": [\"Linnea Åström\"], \"start_strftime\": \"Wednesday, 2024-10-23 14:00:00\", \"end_strftime\": \"Wednesday, 2024-10-23 15:00:00\"}, {\"event_id\": \"845a95a84b70414385a357118559ba0a\", \"title\": \"Content Creation Session\", \"start_datetime\": \"1729418400\", \"end_datetime\": \"1729425600\", \"tag\": \"Work\", \"description\": \"Create content for upcoming brand partnership.\", \"location\": \"Home Office\", \"attendees\": [], \"start_strftime\": \"Sunday, 2024-10-20 10:00:00\", \"end_strftime\": \"Sunday, 2024-10-20 12:00:00\"}, {\"event_id\": \"8822dd753a8e4728abe46cbd63977d20\", \"title\": \"Content Creation Session\", \"start_datetime\": \"1729504800\", \"end_datetime\": \"1729512000\", \"tag\": \"Work\", \"description\": \"Plan and create content for upcoming social media posts.\", \"location\": \"Home Office\", \"attendees\": [], \"start_strftime\": \"Monday, 2024-10-21 10:00:00\", \"end_strftime\": \"Monday, 2024-10-21 12:00:00\"}, {\"event_id\": \"8b721e7b0dcf4390b81f7297cc0f6ed2\", \"title\": \"Social Media Analytics\", \"start_datetime\": \"1729846800\", \"end_datetime\": \"1729854000\", \"tag\": \"Work\", \"description\": \"Analyze social media performance and adjust strategy.\", \"location\": \"Home Office\", \"attendees\": [], \"start_strftime\": \"Friday, 2024-10-25 09:00:00\", \"end_strftime\": \"Friday, 2024-10-25 11:00:00\"}, {\"event_id\": \"8d73e5b1f6c0415d80a91159ffbcced5\", \"title\": \"Self-Care Routine\", \"start_datetime\": \"1730059200\", \"end_datetime\": \"1730062800\", \"tag\": \"Health\", \"description\": \"Practice self-care and relaxation techniques to unwind.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Sunday, 2024-10-27 20:00:00\", \"end_strftime\": \"Sunday, 2024-10-27 21:00:00\"}, {\"event_id\": \"a554ccb20a3e4e43a1925ff10b40bb50\", \"title\": \"Brand Research\", \"start_datetime\": \"1729936800\", \"end_datetime\": \"1729944000\", \"tag\": \"Work\", \"description\": \"Research and analyze potential brands for partnerships.\", \"location\": \"Home Office\", \"attendees\": [], \"start_strftime\": \"Saturday, 2024-10-26 10:00:00\", \"end_strftime\": \"Saturday, 2024-10-26 12:00:00\"}, {\"event_id\": \"b0422b3c66074c74a8a1ddad9153b7f6\", \"title\": \"Lunch Break with Sunita\", \"start_datetime\": \"1729774800\", \"end_datetime\": \"1729778400\", \"tag\": \"Social\", \"description\": \"Catch up with Sunita over lunch and discuss upcoming projects.\", \"location\": \"Restaurant\", \"attendees\": [\"Sunita Bishwakarma\"], \"start_strftime\": \"Thursday, 2024-10-24 13:00:00\", \"end_strftime\": \"Thursday, 2024-10-24 14:00:00\"}, {\"event_id\": \"b4dcf0f1b5054df3b6e938a5de4fa4c4\", \"title\": \"Coffee Break with Linnea\", \"start_datetime\": \"1729864800\", \"end_datetime\": \"1729868400\", \"tag\": \"Social\", \"description\": \"Catch up with Linnea over coffee and discuss upcoming projects.\", \"location\": \"Coffee Shop\", \"attendees\": [\"Linnea Åström\"], \"start_strftime\": \"Friday, 2024-10-25 14:00:00\", \"end_strftime\": \"Friday, 2024-10-25 15:00:00\"}, {\"event_id\": \"b87b0e6f2b1a4f58a19e1bc5d694b315\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729879200\", \"end_datetime\": \"1729882800\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Linnea Åström\"], \"start_strftime\": \"Friday, 2024-10-25 18:00:00\", \"end_strftime\": \"Friday, 2024-10-25 19:00:00\"}, {\"event_id\": \"b8a39b7f91994ee3b2be84cc45eca8cf\", \"title\": \"Lunch Break with Sunita\", \"start_datetime\": \"1729947600\", \"end_datetime\": \"1729951200\", \"tag\": \"Social\", \"description\": \"Catch up with Sunita over lunch and discuss upcoming projects.\", \"location\": \"Restaurant\", \"attendees\": [\"Sunita Bishwakarma\"], \"start_strftime\": \"Saturday, 2024-10-26 13:00:00\", \"end_strftime\": \"Saturday, 2024-10-26 14:00:00\"}, {\"event_id\": \"be936d6b1c3a4e5480a82e571fe84079\", \"title\": \"Yoga Class\", \"start_datetime\": \"1730052000\", \"end_datetime\": \"1730055600\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Linnea Åström\"], \"start_strftime\": \"Sunday, 2024-10-27 18:00:00\", \"end_strftime\": \"Sunday, 2024-10-27 19:00:00\"}, {\"event_id\": \"da2a225c7b9c4a9fb257699bfe065f13\", \"title\": \"Social Media Management\", \"start_datetime\": \"1729674000\", \"end_datetime\": \"1729681200\", \"tag\": \"Work\", \"description\": \"Schedule and manage social media posts for the week.\", \"location\": \"Home Office\", \"attendees\": [], \"start_strftime\": \"Wednesday, 2024-10-23 09:00:00\", \"end_strftime\": \"Wednesday, 2024-10-23 11:00:00\"}, {\"event_id\": \"f041377cce14424692cf96b15fc4fd0b\", \"title\": \"Brand Partnership Meeting\", \"start_datetime\": \"1729346400\", \"end_datetime\": \"1729353600\", \"tag\": \"Work\", \"description\": \"Discuss brand partnership details and expectations.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Åke Svensson\"], \"start_strftime\": \"Saturday, 2024-10-19 14:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 16:00:00\"}, {\"event_id\": \"f23460dd8cca42d1ac6d3042b9fcc5ef\", \"title\": \"Brand Research\", \"start_datetime\": \"1729782000\", \"end_datetime\": \"1729789200\", \"tag\": \"Work\", \"description\": \"Research and analyze potential brands for partnerships.\", \"location\": \"Home Office\", \"attendees\": [], \"start_strftime\": \"Thursday, 2024-10-24 15:00:00\", \"end_strftime\": \"Thursday, 2024-10-24 17:00:00\"}, {\"event_id\": \"f44e0ce2307547e683bf2b7d4a2e3b3a\", \"title\": \"Self-Care Routine\", \"start_datetime\": \"1729713600\", \"end_datetime\": \"1729717200\", \"tag\": \"Health\", \"description\": \"Practice self-care and relaxation techniques to unwind.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Wednesday, 2024-10-23 20:00:00\", \"end_strftime\": \"Wednesday, 2024-10-23 21:00:00\"}, {\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Reviewing Mask\", \"start_datetime\": \"1729951200.0\", \"end_datetime\": \"1729954800.0\", \"tag\": null, \"description\": null, \"location\": null, \"attendees\": [], \"start_strftime\": \"Saturday, 2024-10-26 14:00:00\", \"end_strftime\": \"Saturday, 2024-10-26 15:00:00\"}, {\"event_id\": \"d4c2d9f7cdacdf99ad578e25036c7e5f\", \"title\": \"Reviewing Wig\", \"start_datetime\": \"1729342800.0\", \"end_datetime\": \"1729346400.0\", \"tag\": null, \"description\": null, \"location\": null, \"attendees\": [], \"start_strftime\": \"Saturday, 2024-10-19 13:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 14:00:00\"}, {\"event_id\": \"1eb633f381cb1a19fbaa26def26885d9\", \"title\": \"Prepping Wig Review\", \"start_datetime\": \"1729256400.0\", \"end_datetime\": \"1729260000.0\", \"tag\": \"Work\", \"description\": \"Prepare for the Amscan Glamourous Party Wig review on 19 October 2024.\", \"location\": null, \"attendees\": [], \"start_strftime\": \"Friday, 2024-10-18 13:00:00\", \"end_strftime\": \"Friday, 2024-10-18 14:00:00\"}, {\"event_id\": \"633353a8e6d114a9be65378058a68b17\", \"title\": \"Prepping Mask Review\", \"start_datetime\": \"1729861200.0\", \"end_datetime\": \"1729864800.0\", \"tag\": \"Work\", \"description\": \"Prepare for the Amscan Super Hero Mask review on 26 October 2024.\", \"location\": null, \"attendees\": [], \"start_strftime\": \"Friday, 2024-10-25 13:00:00\", \"end_strftime\": \"Friday, 2024-10-25 14:00:00\"}], \"range\": [\"0\", \"27\"], \"total\": \"27\"}",
+      "event_id": "series_s2_read_review_dates",
+      "response_sha256": "de6b11a050ad03b89edd8f06402533a2f9a11da5d8f689019e43f7710eb6e855"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Amscan Super Hero Mask, Party Accessory, White",
+          "kind": "product",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含品牌与完整产品名的困难专有名称",
+          "weight": 50
+        },
+        {
+          "text": "Amscan Glamourous Party Wig Costume, White",
+          "kind": "product",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含品牌与完整产品名的困难专有名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Amscan Super Hero Mask, Party Accessory, White",
+        "Amscan Glamourous Party Wig Costume, White"
+      ],
+      "active_vocabulary": {
+        "Amscan Super Hero Mask, Party Accessory, White": 50,
+        "Amscan Glamourous Party Wig Costume, White": 50
+      },
+      "vocabulary_sha256": "934294694f2a81aff46623473eef233938300c6326661106739f8072750e34ed"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Amscan Super Hero Mask, Party Accessory, White": 50,
+        "Amscan Glamourous Party Wig Costume, White": 50
+      },
+      "vocabulary_sha256": "934294694f2a81aff46623473eef233938300c6326661106739f8072750e34ed"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Luísa Silva e Sousa",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Stockholm Convention Center",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_read_review_dates",
+          "reason": "困难完整地点名称",
+          "weight": 50
+        },
+        {
+          "text": "Beatriz Sousa",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_review_dates",
+          "reason": "困难完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Linnea Åström",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_review_dates",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Sunita Bishwakarma",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_review_dates",
+          "reason": "困难完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Åke Svensson",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_review_dates",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Åsa Lindgren",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_review_dates",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Luísa Silva e Sousa",
+        "Stockholm Convention Center",
+        "Beatriz Sousa",
+        "Linnea Åström",
+        "Sunita Bishwakarma",
+        "Åke Svensson",
+        "Åsa Lindgren"
+      ],
+      "active_vocabulary": {
+        "Amscan Super Hero Mask, Party Accessory, White": 50,
+        "Amscan Glamourous Party Wig Costume, White": 50,
+        "Luísa Silva e Sousa": 50,
+        "Stockholm Convention Center": 50,
+        "Beatriz Sousa": 50,
+        "Linnea Åström": 50,
+        "Sunita Bishwakarma": 50,
+        "Åke Svensson": 50,
+        "Åsa Lindgren": 50
+      },
+      "vocabulary_sha256": "231536a1fce10ca00799cf38a018bfefe5dc55e75d51ea449f7b171b27c3b93d"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": [
+        {
+          "text": "Amscan Glamourous Party Wig",
+          "covered_by": "Amscan Glamourous Party Wig Costume, White"
+        },
+        {
+          "text": "Amscan Super Hero Mask",
+          "covered_by": "Amscan Super Hero Mask, Party Accessory, White"
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Amscan",
+    "Amscan Glamourous Party Wig",
+    "Amscan Super Hero Mask"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:00.203197+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

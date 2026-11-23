@@ -1,0 +1,136 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0420_9vhu2kjcclmt3w0y7r3tt9deag511lw1",
+  "model": "deepseek-flash",
+  "input_sha256": "9e0910ce3f6fd474b1c9244b7ed4f0d9b121631e22931a71bee3ca565d2844ae",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Ireland",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "国家名，用于筛选对话"
+        }
+      ],
+      "new_terms": [
+        "Ireland"
+      ],
+      "active_vocabulary": {
+        "Ireland": 50
+      },
+      "vocabulary_sha256": "0183ae25f3c01b25dc5a30b5f5fe247d6a203700991d7c0062563e9dac6e8bc2"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Moscow",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "城市名，用于定位公寓"
+        },
+        {
+          "text": "Nizhny Novgorod",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "城市名，用于定位公寓"
+        },
+        {
+          "text": "Moscow Metro Apartments",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Volga Riverwalk",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "公寓专有名称"
+        }
+      ],
+      "new_terms": [
+        "Moscow",
+        "Nizhny Novgorod",
+        "Moscow Metro Apartments",
+        "Volga Riverwalk"
+      ],
+      "active_vocabulary": {
+        "Ireland": 50,
+        "Moscow": 50,
+        "Nizhny Novgorod": 50,
+        "Moscow Metro Apartments": 50,
+        "Volga Riverwalk": 50
+      },
+      "vocabulary_sha256": "e15f472e1bbe8479df6191bc5aeeadbe16222df7ce981ba7eae6b924e0a030ea"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Volga Riverwalk",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Nizhny Novgorod",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "St. Petersburg Suites",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Samara Suites",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓专有名称"
+        }
+      ],
+      "new_terms": [
+        "St. Petersburg Suites",
+        "Samara Suites"
+      ],
+      "active_vocabulary": {
+        "Ireland": 50,
+        "Moscow": 50,
+        "Nizhny Novgorod": 50,
+        "Moscow Metro Apartments": 50,
+        "Volga Riverwalk": 50,
+        "St. Petersburg Suites": 50,
+        "Samara Suites": 50
+      },
+      "vocabulary_sha256": "94a0108a554320f2bc4091b220de5f76ebabc7c6a6004fcf2d006611f30f95a2"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "0cedb8d8cb0f114a3c787b81c67be407493401ad26c1522261f5c91ba43c0d1c",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1398,
+        "completion_tokens": 316,
+        "total_tokens": 1714,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1142
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.36
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0420_9vhu2kjcclmt3w0y7r3tt9deag511lw1",
+  "extracted_at": "2026-11-22T06:41:46.176868+00:00"
+}

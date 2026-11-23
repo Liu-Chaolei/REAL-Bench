@@ -1,0 +1,174 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0478_ak7k87nial5i4qbqu0ugpyss7zida6hg",
+  "model": "deepseek-flash",
+  "input_sha256": "4d53e9ca89a2edf1c3cea88f32fcadd5a36a79e8b2dba62cc4676113cb919409",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "PokerCo",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-8f7b3b4d-4d4a-446c-8338-3118ab63e245.arguments.content",
+          "reason": "公司专有名称"
+        },
+        {
+          "text": "Poker Tiles",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "产品品牌名称"
+        }
+      ],
+      "new_terms": [
+        "PokerCo",
+        "Poker Tiles"
+      ],
+      "active_vocabulary": {
+        "PokerCo": 50,
+        "Poker Tiles": 50
+      },
+      "vocabulary_sha256": "b6f269a4416e5dfd255dc1a346804e59e66c1098ba2b0fac485a5ca5fa8b8a6f"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Jianhua Wang",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "教师完整姓名"
+        },
+        {
+          "text": "Maria Luísa Sousa e Silva",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "教师完整姓名含变音符号"
+        },
+        {
+          "text": "Vasco Oliveira",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "教师完整姓名"
+        },
+        {
+          "text": "Vasco Pinto",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "教师完整姓名"
+        },
+        {
+          "text": "Åke Zanström",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "教师完整姓名含特殊字符"
+        },
+        {
+          "text": "Poker Tiles",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "产品品牌名称"
+        }
+      ],
+      "new_terms": [
+        "Jianhua Wang",
+        "Maria Luísa Sousa e Silva",
+        "Vasco Oliveira",
+        "Vasco Pinto",
+        "Åke Zanström"
+      ],
+      "active_vocabulary": {
+        "PokerCo": 50,
+        "Poker Tiles": 50,
+        "Jianhua Wang": 50,
+        "Maria Luísa Sousa e Silva": 50,
+        "Vasco Oliveira": 50,
+        "Vasco Pinto": 50,
+        "Åke Zanström": 50
+      },
+      "vocabulary_sha256": "6d63dea9e33c027011b7d736acfd2a9c47b4a0ed2c5198fa3716f143b94e152f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Jianhua Wang",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_0.arguments.content",
+          "reason": "收件教师完整姓名"
+        },
+        {
+          "text": "Maria Luísa Sousa e Silva",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_1.arguments.content",
+          "reason": "收件教师完整姓名含变音符号"
+        },
+        {
+          "text": "Vasco Oliveira",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_2.arguments.content",
+          "reason": "收件教师完整姓名"
+        },
+        {
+          "text": "Vasco Pinto",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_3.arguments.content",
+          "reason": "收件教师完整姓名"
+        },
+        {
+          "text": "Åke Zanström",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_4.arguments.content",
+          "reason": "收件教师完整姓名含特殊字符"
+        },
+        {
+          "text": "PokerCo",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_send_0.arguments.subject",
+          "reason": "公司专有名称"
+        },
+        {
+          "text": "Poker Tiles",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_send_0.arguments.content",
+          "reason": "产品品牌名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "PokerCo": 50,
+        "Poker Tiles": 50,
+        "Jianhua Wang": 50,
+        "Maria Luísa Sousa e Silva": 50,
+        "Vasco Oliveira": 50,
+        "Vasco Pinto": 50,
+        "Åke Zanström": 50
+      },
+      "vocabulary_sha256": "6d63dea9e33c027011b7d736acfd2a9c47b4a0ed2c5198fa3716f143b94e152f"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "9fd4421bcb0d58d331c3742a2826e78305e10600d50e03dd1d3d48651a2f8dd6",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5519,
+        "completion_tokens": 617,
+        "total_tokens": 6136,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 5263
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.171
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0478_ak7k87nial5i4qbqu0ugpyss7zida6hg",
+  "extracted_at": "2026-11-22T06:42:14.273365+00:00"
+}

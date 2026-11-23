@@ -1,0 +1,168 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0999_zvr6x3f73ec0cpjkhxwhuhdajj2chw4w",
+  "model": "deepseek-flash",
+  "input_sha256": "1883367a6775b92ea0752fbd80d67c282d246968b23bd92bbf43f36f00945a47",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Helmut Eisenstadt",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Gerrit van der Meer",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-385f2348-8ca8-4601-b708-da19ed836acc.arguments.content",
+          "reason": "邮件署名"
+        },
+        {
+          "text": "123 Spa Nature Rd.",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7cc97a92-0d0f-479a-83b5-a5238166b0b0.arguments.start_location",
+          "reason": "出租车起点地址"
+        },
+        {
+          "text": "456 The Old Schools St.",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7cc97a92-0d0f-479a-83b5-a5238166b0b0.arguments.end_location",
+          "reason": "出租车终点地址"
+        }
+      ],
+      "new_terms": [
+        "Helmut Eisenstadt",
+        "Gerrit van der Meer",
+        "Rohini Deshpande",
+        "123 Spa Nature Rd.",
+        "456 The Old Schools St."
+      ],
+      "active_vocabulary": {
+        "Helmut Eisenstadt": 50,
+        "Gerrit van der Meer": 50,
+        "Rohini Deshpande": 50,
+        "123 Spa Nature Rd.": 50,
+        "456 The Old Schools St.": 50
+      },
+      "vocabulary_sha256": "043ac48bf396b87da6321c6f268ac120bd2e540b8acbb6e3d0ff1f14cf43fba7"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Serenity Spa, Cambridge",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_spa.arguments.location",
+          "reason": "水疗地点"
+        },
+        {
+          "text": "Spa Morning at Serenity",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_add_spa.arguments.title",
+          "reason": "日历事件自定义名称"
+        },
+        {
+          "text": "Helmut Eisenstadt",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_spa.arguments.description",
+          "reason": "被取消会议的参会人"
+        },
+        {
+          "text": "Gerrit van der Meer",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_spa.arguments.description",
+          "reason": "被取消会议的参会人"
+        }
+      ],
+      "new_terms": [
+        "Serenity Spa, Cambridge",
+        "Spa Morning at Serenity"
+      ],
+      "active_vocabulary": {
+        "Helmut Eisenstadt": 50,
+        "Gerrit van der Meer": 50,
+        "Rohini Deshpande": 50,
+        "123 Spa Nature Rd.": 50,
+        "456 The Old Schools St.": 50,
+        "Serenity Spa, Cambridge": 50,
+        "Spa Morning at Serenity": 50
+      },
+      "vocabulary_sha256": "51c10a24ceecabe515df2178fe3a640d8cf737bf38f79016101ac9926f5d9b87"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Helmut Eisenstadt",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_meeting.arguments.attendees[0]",
+          "reason": "会议参会人"
+        },
+        {
+          "text": "Gerrit van der Meer",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_meeting.arguments.attendees[1]",
+          "reason": "会议参会人"
+        },
+        {
+          "text": "Collaboration Follow-up",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_add_meeting.arguments.title",
+          "reason": "日历事件自定义名称"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_invite.arguments.content",
+          "reason": "邮件署名"
+        }
+      ],
+      "new_terms": [
+        "Collaboration Follow-up"
+      ],
+      "active_vocabulary": {
+        "Helmut Eisenstadt": 50,
+        "Gerrit van der Meer": 50,
+        "Rohini Deshpande": 50,
+        "123 Spa Nature Rd.": 50,
+        "456 The Old Schools St.": 50,
+        "Serenity Spa, Cambridge": 50,
+        "Spa Morning at Serenity": 50,
+        "Collaboration Follow-up": 50
+      },
+      "vocabulary_sha256": "303e42747c6628a82e13d006d8d67ed25f3a011779f70254cff2a3a6d89ab56f"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "7bf16d268d0069fb92867d891e7f496b4bb8a2cfd285f8f1074ae1c143d15004",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3943,
+        "completion_tokens": 591,
+        "total_tokens": 4534,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3687
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.602
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0999_zvr6x3f73ec0cpjkhxwhuhdajj2chw4w",
+  "extracted_at": "2026-11-22T06:44:55.975522+00:00"
+}

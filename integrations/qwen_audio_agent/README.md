@@ -265,6 +265,12 @@ Speech-to-Speech configuration additionally supplies a MiMo key to its Agent
 frontend. The generic defaults retain ElevenLabs/Deepgram for other runs; this
 custom integration selects MiMo through `tts` and `asr_provider` settings.
 
+The active `config.gaia2.realtime.dynamic.metrics.deepseek-user.json` profile is
+the Qwen-TTS variant: caller TTS uses DashScope `qwen-audio-3.1-tts-flash` and
+the English voices `Andy_v3.1`/`Abby_v3.1`, sharing `QWEN_API_KEY` and
+`QWEN_BASE_URL` with the Qwen observer ASR. The legacy MiMo caller profiles
+remain available when their configs explicitly select `mimo`.
+
 The simulated caller waits at least 30 seconds of silence before starting an
 unsolicited check-in. Fresh Agent speech or text, initial requests and tool replies
 retain their ordinary response timing. `QwenAgentConfig.user_silence_checkin_seconds`
@@ -386,6 +392,109 @@ as `recorded_audio` evidence; the observation setup is recorded in
 `agent_system_metadata`. ASR finalization can delay the simulated user's semantic
 reaction. It does not change the measured physical Agent playback timeline;
 comparisons must use the same observer setup and report its latency.
+
+### Streaming Qwen observer
+
+`config.gaia2.realtime.dynamic.metrics.deepseek-user.json` selects the streaming
+observer with the following evaluation-side settings:
+
+```json
+{
+  "asr_provider": "qwen",
+  "asr_model": "qwen-audio-3.1-asr-flash-streaming",
+  "asr_api_key_env": "QWEN_API_KEY",
+  "asr_base_url_env": "QWEN_BASE_URL",
+  "asr_append_seconds": 2.0,
+  "playback_sample_rate": 24000
+}
+```
+
+The agent's native PCM16 output is played, recorded and sent to this observer at
+its original rate (24 kHz in the supplied configuration), without mu-law encoding
+or resampling. `playback_sample_rate` must match the actual source events; a
+mismatch raises an error rather than silently converting the audio. Caller input
+retains its independently configured format. A 200 ms tick carries 9600 bytes of
+24 kHz PCM16 output and 1600 bytes of 8 kHz mu-law caller input: both represent
+the same duration.
+
+The observer starts a WebSocket task when played speech begins. It buffers at
+most two seconds of audio before each append. Only the audio that remains after
+playback capping and cancellation is sent, so buffered future speech never enters
+the ASR input. After 0.6 seconds of played silence, a playback interruption,
+or shutdown, it flushes the short remaining batch and sends `finish-task`. It
+receives the final results before closing the connection. Tool work without
+speech does not keep an ASR connection open.
+
+Only the contiguous prefix of sentences marked `sentence_end=true` becomes
+visible. Confirmed sentences include all words; there is no three-word holdback.
+Two seconds is an audio batching limit, not a guarantee of final text every two
+seconds. The implementation follows the
+[Qwen streaming WebSocket protocol](https://www.alibabacloud.com/help/en/model-studio/qwen-audio-asr-streaming-websocket-api).
+
+Every tick stores the complete confirmed text and its version in
+`live_transcript.snapshot`. Newly confirmed fragments retain unique IDs and
+played-audio timestamps. Caller LLM history consumes each fragment once at its
+actual release tick, so cumulative snapshots do not repeat previous text or
+rewrite older observations. Grading continues to use the recorded fragments and
+their audio alignment. Observer provenance includes session boundaries, appends,
+intermediate hypotheses, confirmed versions and usage. Existing file-ASR profiles
+remain available with `qwen-audio-3.1-asr-flash`.
+
+### Fixed stage hotwords for the user-side observer
+
+The current Gaia2 Realtime configuration enables the catalog extracted with
+DeepSeek for all 1100 task IDs (including the 100 async variants):
+
+```json
+{
+  "asr_hotwords": {
+    "enabled": true,
+    "mode": "gaia2_stage_gt",
+    "weight": 50,
+    "max_terms": 2000
+  }
+}
+```
+
+The catalog defaults to `data/gaia2_stage_hotwords/v2` under `TAU2_DATA_DIR`.
+`asr_hotwords.catalog_dir` can explicitly select another catalog. This mode
+requires English Gaia2 and the Qwen streaming observer. Before Agent startup,
+the loader checks the task ID, source/GT fingerprint, stage-local citations,
+vocabulary hashes and cumulative activation. Missing or stale entries fail
+preparation. It loads the saved extraction; no extraction LLM or environment
+entity scan runs during the conversation. The older `user_background` mode
+retains its previous call-level extraction behavior.
+
+Stage zero enables its own words. When the next scripted request starts actual
+speech transport to the Agent, the observer enables the union of all words up to
+that stage. Merely queuing/generating the next request does not activate its
+words. A leading silent metadata chunk waits for speech before activation. If
+an older ASR episode is still active, its audio is flushed and finished; the next
+episode uses the new stage. Every queued session freezes its own vocabulary at
+creation, so connection/recognition delays cannot apply future words to old
+audio. Rechecks use the vocabulary associated with the original fragments.
+
+Version 2 reviews the earlier vocabulary and adds difficult names from recorded
+reference tool responses. The first 50 cumulative phrases use weight 50,
+regardless of source; only subsequent additions use weight 5. Weights remain
+fixed after activation. The catalog embeds the cited textual evidence and pins
+each profile hash, so runtime loading needs neither the large GT dump nor a new
+model request. Version 1 remains available via an explicit `catalog_dir`.
+
+The total limit is 2000 phrases; weight 50 supports at most 50 super hotwords per request. Empty
+stage vocabularies are valid. For task 0007, the active words are `Lysverket` at
+stage zero, then `Lysverket` plus `Kaida Rao`, then those names plus `Åse`.
+
+These words go only to evaluation-side observer ASR, not to the frontend or
+backend Agent prompt, tools or container environment. `observer_hotwords.json`
+records the selected task's stage catalog. Observer provenance also records
+activation times, each ASR session's stage, actual vocabulary and its hash.
+See [the catalog](../../data/gaia2_stage_hotwords/v2/README.md).
+
+The output tap `agent_output.wav` retains native PCM. When exporting a combined
+stereo recording, only the lower-rate channel is upsampled to the higher rate;
+the native agent channel remains unchanged. Existing saved 8 kHz recordings
+cannot recover details already removed by downsampling.
 
 The Gateway does not expose a complete billable usage ledger for both models.
 Agent cost is therefore recorded as unknown, rather than zero; observer ASR and

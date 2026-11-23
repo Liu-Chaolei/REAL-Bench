@@ -1,0 +1,116 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0141_2v7u2xwuricaq88si4purwtnp4sbo5fw",
+  "model": "deepseek-flash",
+  "input_sha256": "cddd9ff8b7fab5ed910e66d6864ee53009f9536fb7988dc1ea36a825ce490ef7",
+  "review_input_sha256": "e82377eb4b82f9485929133cf7e749fe8f8e12fa5a28e09bf7e575d26c1fcf41",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "592d365d2d7939003dff1b428efcd1469a7a2e04bc2a70e7267e14aa791e9b01",
+  "reference_results_sha256": "5336383648c2b5150ece785ee531839538694d85439f40fc4d6ca91f178cdd52",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Travbaneplan 10",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Solvalla",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Hästsportens hus",
+      "original_source": "stage0.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Hästsportens hus",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含瑞典语变音字符的专有建筑名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Travbaneplan 10",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "瑞典具体街道地址，含专有地名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Solvalla",
+          "kind": "place",
+          "source": "stage0.existing_catalog.1",
+          "reason": "瑞典赛马场专有地名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Hästsportens hus",
+        "Travbaneplan 10",
+        "Solvalla"
+      ],
+      "active_vocabulary": {
+        "Hästsportens hus": 50,
+        "Travbaneplan 10": 50,
+        "Solvalla": 50
+      },
+      "vocabulary_sha256": "aed1a1088df305ed91f480d036657da30451ea18eeedf1c3de4721287530a8eb"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Hästsportens hus": 50,
+        "Travbaneplan 10": 50,
+        "Solvalla": 50
+      },
+      "vocabulary_sha256": "aed1a1088df305ed91f480d036657da30451ea18eeedf1c3de4721287530a8eb"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Hästsportens hus": 50,
+        "Travbaneplan 10": 50,
+        "Solvalla": 50
+      },
+      "vocabulary_sha256": "aed1a1088df305ed91f480d036657da30451ea18eeedf1c3de4721287530a8eb"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Stockholm",
+    "Sweden",
+    "New York Yankees",
+    "Astrid",
+    "Yankees"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:11.323041+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,95 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0240_kz6i37hfujt1637fkq85ubtbn55x4inr",
+  "model": "deepseek-flash",
+  "input_sha256": "9aa8e92062bc464192f15a7bd97d6e709b81b7f5f465a18680f7e4bd49bf48a1",
+  "review_input_sha256": "92819957d4c9a3fba71df73b781cb16d73029424a2fb750284cdfe33a9436425",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "561c96831560898bc36f32f58ee3c2888e294159fbf9a4194e694b39cbb84470",
+  "reference_results_sha256": "c89bcd8bfbf8314d5f420769892c409805a222084b92ec54a6e5327246e38ad1",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Koenraad Vandenberghe",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-517e9369-d200-4ced-8d04-9a80ced1f00f.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Liesbeth Vandenberghe",
+      "original_source": "stage1.tool_gt.series_s1_add_lunch.arguments.attendees[0]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Koenraad Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，拼写较难，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Koenraad Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Koenraad Vandenberghe": 50
+      },
+      "vocabulary_sha256": "a632d618447c4ffbf8970fb780bb127a1c55557df748498ee8e8d2393cbf8273"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，姓氏拼写较难，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Koenraad Vandenberghe": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "abdb68560ad480b527292f9f13772a618c4a83aa6c38d376fef18c5fa5dc508d"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Koenraad Vandenberghe": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "abdb68560ad480b527292f9f13772a618c4a83aa6c38d376fef18c5fa5dc508d"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:41.021170+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

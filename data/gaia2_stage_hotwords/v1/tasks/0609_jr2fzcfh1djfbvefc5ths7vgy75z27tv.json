@@ -1,0 +1,180 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0609_jr2fzcfh1djfbvefc5ths7vgy75z27tv",
+  "model": "deepseek-flash",
+  "input_sha256": "cb7af3cdc986677e9c9a39cb762f4569b413cae706f60958166dfa5f572b99d7",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Yuting",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5803f242-9e8a-4931-a7da-9c2277c92160.arguments.content",
+          "reason": "邮件中称呼的人名"
+        },
+        {
+          "text": "Åke Svensson",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7c6e5ee8-84e6-47e7-970f-97639a5bb957.arguments.attendees[0]",
+          "reason": "日历事件参与者姓名"
+        },
+        {
+          "text": "Ake",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6ef481d1-5a0f-4a76-9d74-c52f1d872e85.arguments.content",
+          "reason": "邮件称呼的人名"
+        },
+        {
+          "text": "João",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-003113ce-202e-49f2-ae84-cb363a0c38f3.arguments.content",
+          "reason": "邮件中称呼的人名"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5803f242-9e8a-4931-a7da-9c2277c92160.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Brand Partnership Meeting",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7c6e5ee8-84e6-47e7-970f-97639a5bb957.arguments.title",
+          "reason": "日历事件标题"
+        }
+      ],
+      "new_terms": [
+        "Yuting",
+        "Åke Svensson",
+        "Ake",
+        "João",
+        "Astrid Lundqvist",
+        "Brand Partnership Meeting"
+      ],
+      "active_vocabulary": {
+        "Yuting": 50,
+        "Åke Svensson": 50,
+        "Ake": 50,
+        "João": 50,
+        "Astrid Lundqvist": 50,
+        "Brand Partnership Meeting": 50
+      },
+      "vocabulary_sha256": "8eaf060cccea0e59ccb0d9ea5d9cd135877fe612e96c31a6cd1eafc7270cb749"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Yuting Liang",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "João Silva",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Brand Call Preparation",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "日历块标题"
+        },
+        {
+          "text": "Fashion Call",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "会议名称"
+        }
+      ],
+      "new_terms": [
+        "Yuting Liang",
+        "João Silva",
+        "Brand Call Preparation",
+        "Fashion Call"
+      ],
+      "active_vocabulary": {
+        "Yuting": 50,
+        "Åke Svensson": 50,
+        "Ake": 50,
+        "João": 50,
+        "Astrid Lundqvist": 50,
+        "Brand Partnership Meeting": 50,
+        "Yuting Liang": 50,
+        "João Silva": 50,
+        "Brand Call Preparation": 50,
+        "Fashion Call": 50
+      },
+      "vocabulary_sha256": "9fc80a6c53e32f024bbe68a6ad082dc8e8d0ea22ad599776949f619a00e911e5"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "João",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "邮件称呼的人名"
+        },
+        {
+          "text": "Social Media Call Preparation",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "日历块标题"
+        },
+        {
+          "text": "Social Media Call",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "会议名称"
+        }
+      ],
+      "new_terms": [
+        "Social Media Call Preparation",
+        "Social Media Call"
+      ],
+      "active_vocabulary": {
+        "Yuting": 50,
+        "Åke Svensson": 50,
+        "Ake": 50,
+        "João": 50,
+        "Astrid Lundqvist": 50,
+        "Brand Partnership Meeting": 50,
+        "Yuting Liang": 50,
+        "João Silva": 50,
+        "Brand Call Preparation": 50,
+        "Fashion Call": 50,
+        "Social Media Call Preparation": 50,
+        "Social Media Call": 50
+      },
+      "vocabulary_sha256": "ac7ebcdd09a54686390e457148b85ebb72287d633df96178c54ad31ee9647d0c"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "7ec909d0584034212bd138dafb2d57998ec5d2e582208dae15dc4af89dcab3a7",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4278,
+        "completion_tokens": 573,
+        "total_tokens": 4851,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4022
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.137
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0609_jr2fzcfh1djfbvefc5ths7vgy75z27tv",
+  "extracted_at": "2026-11-22T06:43:02.555524+00:00"
+}

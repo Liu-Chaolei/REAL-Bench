@@ -1,0 +1,161 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0619_tgha7t9yspde6hqhw3u744d5mrhvl923",
+  "model": "deepseek-flash",
+  "input_sha256": "9cb3e899fa1c77e5dc6c83a455676fa5ade6781d94a3775c280d112430bc12d0",
+  "review_input_sha256": "4ff831feb63d68c1a10087eec5bc7f313f7062f6dc419aba3ea675f83687d465",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "fe6aa5d2be9da64f7b88e062d25abb87c4faafd74eb59d2b16f0962ca8b6efd6",
+  "reference_results_sha256": "4cdda467649d0b0535683f0d57fc02d8f88c2227d98a4b5003299668ae226142",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Astrid Lundqvist",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f916c9ac-e63e-4919-b932-5e395bb1acc2.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Malmö-Sturup",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-18f8b6fe-8133-4125-88e1-bc414049606e.arguments.start_location"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Norra Vallgatan 60",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-18f8b6fe-8133-4125-88e1-bc414049606e.arguments.end_location"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Malmö-Sturup Airport",
+      "original_source": "stage1.tool_gt.series_s1_add_calendar_event.arguments.location"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Astrid Mikkelsen",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Beshoy Gadallah",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Norra Vallgatan 60",
+          "kind": "place",
+          "source": "stage0.existing_catalog.4",
+          "reason": "独特街道地址名",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，含独特拼写，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Malmö-Sturup",
+          "kind": "place",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含变音符的独特地名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Norra Vallgatan 60",
+        "Astrid Lundqvist",
+        "Malmö-Sturup"
+      ],
+      "active_vocabulary": {
+        "Norra Vallgatan 60": 50,
+        "Astrid Lundqvist": 50,
+        "Malmö-Sturup": 50
+      },
+      "vocabulary_sha256": "1377169aace9a436eda9f8de7701dcae99fd351f55f8e8d68a2f1231cd4a600d"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Malmö-Sturup Airport",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符的完整机场地名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Malmö-Sturup Airport"
+      ],
+      "active_vocabulary": {
+        "Norra Vallgatan 60": 50,
+        "Astrid Lundqvist": 50,
+        "Malmö-Sturup": 50,
+        "Malmö-Sturup Airport": 50
+      },
+      "vocabulary_sha256": "4765be91d3ddcb6cd1750a1a58e0370b6197fd76149a430dd3c81a02f3281243"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Astrid Mikkelsen",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整人名，独特拼写",
+          "weight": 50
+        },
+        {
+          "text": "Beshoy Gadallah",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "完整人名，独特拼写",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Mikkelsen",
+        "Beshoy Gadallah"
+      ],
+      "active_vocabulary": {
+        "Norra Vallgatan 60": 50,
+        "Astrid Lundqvist": 50,
+        "Malmö-Sturup": 50,
+        "Malmö-Sturup Airport": 50,
+        "Astrid Mikkelsen": 50,
+        "Beshoy Gadallah": 50
+      },
+      "vocabulary_sha256": "9f32d17ffef591b07a070d11452d80b2d8f12e08b4fecc3a3a8dab19e816043b"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Astrid",
+    "Beshoy",
+    "Malmö"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:46.110665+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

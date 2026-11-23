@@ -1,0 +1,246 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0022_bfecjsp9maplnofl92t81qkj2q2lfjrx",
+  "model": "deepseek-flash",
+  "input_sha256": "d0d7bad449f059e02c3e5d579943b6db68b3e7b6471523622a7192f3f1564909",
+  "review_input_sha256": "edc830b74068ffddb7ec0133818bc62810bc57f30d59e5436d6eb53a48bbb31a",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "150a2fc7d98aa09b293a873097bd12bee79005753aaa7d68b02d2f1340e40481",
+  "reference_results_sha256": "528681e9113fc4773ef29ef5ec4ebd50de74508a657e522a790f563bb00ee87e",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Katarzyna Szymańska",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Léa Dumont",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.tool_response.series_s1_calendar_day_after": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"1427a5c17d96439499d5bb803d17a41a\", \"title\": \"Botanical Garden Walk\", \"start_datetime\": \"1725296400\", \"end_datetime\": \"1725301800\", \"tag\": \"Leisure\", \"description\": \"Leisurely walk in the botanical garden to clear my mind.\", \"location\": \"Botanical Garden\", \"attendees\": [], \"start_strftime\": \"Monday, 2024-09-02 17:00:00\", \"end_strftime\": \"Monday, 2024-09-02 18:30:00\"}, {\"event_id\": \"4e78f7ee35e44c8a95d4239da83fe148\", \"title\": \"Yoga Class\", \"start_datetime\": \"1725271200\", \"end_datetime\": \"1725274800\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Ursula Wiederkehr\", \"Aurélie Janssens\"], \"start_strftime\": \"Monday, 2024-09-02 10:00:00\", \"end_strftime\": \"Monday, 2024-09-02 11:00:00\"}, {\"event_id\": \"59e3b4e5997e49e6aef7f67e7bcada06\", \"title\": \"Coffee with Colleagues\", \"start_datetime\": \"1725289200\", \"end_datetime\": \"1725294600\", \"tag\": \"Social\", \"description\": \"Catching up with colleagues over coffee.\", \"location\": \"Café\", \"attendees\": [\"Ursula Wiederkehr\", \"Aurélie De Smet\", \"Aurélien Janssens\"], \"start_strftime\": \"Monday, 2024-09-02 15:00:00\", \"end_strftime\": \"Monday, 2024-09-02 16:30:00\"}, {\"event_id\": \"b9d3d0ce4919429b8f0d7f5d36b0f0fa\", \"title\": \"Research Meeting\", \"start_datetime\": \"1725282000\", \"end_datetime\": \"1725287400\", \"tag\": \"Work\", \"description\": \"Meeting with research team to discuss ongoing projects.\", \"location\": \"University\", \"attendees\": [\"Ursula Wiederkehr\", \"Akira Nakahara\", \"Katarzyna Kwiatkowska\"], \"start_strftime\": \"Monday, 2024-09-02 13:00:00\", \"end_strftime\": \"Monday, 2024-09-02 14:30:00\"}], \"range\": [\"0\", \"4\"], \"total\": \"4\"}",
+      "event_id": "series_s1_calendar_day_after",
+      "response_sha256": "886ce5aff407766ec6e5404d13dba3334f5a189448503e456bfb6ad0c9413838"
+    },
+    "stage1.tool_response.series_s1_search_tie": {
+      "stage": 1,
+      "text": "[{\"first_name\": \"Aurélie\", \"last_name\": \"Dumont\", \"contact_id\": \"3143681745fc41728328487620b31c09\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"57\", \"nationality\": \"French\", \"city_living\": \"Lyon\", \"country\": \"France\", \"status\": \"Status.EMPLOYED\", \"job\": \"Career Advisor\", \"description\": \"A seasoned career advisor with over 20 years of experience helping students prepare for interviews and develop strong resumes for international organizations.\", \"phone\": \"+33678452312\", \"email\": \"adumont@lyon-career-advice.fr\", \"address\": \"14 Rue de la République, 69002 Lyon, France\"}, {\"first_name\": \"Colette\", \"last_name\": \"Dumont\", \"contact_id\": \"36e9a173a675483f9dc36b2e74477104\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"78\", \"nationality\": \"French\", \"city_living\": \"Lyon\", \"country\": \"France\", \"status\": \"Status.RETIRED\", \"job\": \"Former Research Librarian\", \"description\": \"Colette Dumont is a warm and knowledgeable individual who spent most of her career assisting students and professionals in finding the right resources and information for their career paths.\", \"phone\": \"+33472345678\", \"email\": \"cdumont@gaia2mail.com\", \"address\": \"12 Rue de la République, 69002 Lyon, France\"}, {\"first_name\": \"Léa\", \"last_name\": \"Dumont\", \"contact_id\": \"70ed42da6f25450995293aef8bcade28\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"30\", \"nationality\": \"French\", \"city_living\": \"Marseille\", \"country\": \"France\", \"status\": \"Status.EMPLOYED\", \"job\": \"Art Director at a local non-profit organization\", \"description\": \"Léa Dumont is a vibrant and passionate young artist from Marseille, France. She is the founder and leader of a grassroots movement aimed at revitalizing dying cultural practices in her community.\", \"phone\": \"+33612345678\", \"email\": \"lea.dumont@gaia2mail.com\", \"address\": \"14 Rue de la République, 13001 Marseille, France\"}, {\"first_name\": \"Aurélien\", \"last_name\": \"Dumont\", \"contact_id\": \"efa15c1d612a440bbd394757e0d0587d\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"31\", \"nationality\": \"French\", \"city_living\": \"Lyon\", \"country\": \"France\", \"status\": \"Status.EMPLOYED\", \"job\": \"Founder and CEO of Bistro Bliss, a traditional dine-in restaurant chain\", \"description\": \"Aurélien Dumont is a passionate entrepreneur and food enthusiast who has spent his entire career in the culinary industry.\", \"phone\": \"+33678452310\", \"email\": \"aurelien.dumont@bistrobliss.fr\", \"address\": \"14 Rue de la République, 69002 Lyon, France\"}]",
+      "event_id": "series_s1_search_tie",
+      "response_sha256": "566e0e1cb4b4b5fc6e198ebbc07b3082eb417614d7645388ae9faed250b10598"
+    },
+    "stage1.tool_response.series_s1_search_youngest": {
+      "stage": 1,
+      "text": "[{\"first_name\": \"Katarzyna\", \"last_name\": \"Szymańska\", \"contact_id\": \"42c34531533e45a193fcd488ca407c69\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"30\", \"nationality\": \"Polish\", \"city_living\": \"Chicago, IL\", \"country\": \"United States\", \"status\": \"Status.EMPLOYED\", \"job\": \"Urban Planner\", \"description\": \"Katarzyna Szymańska, or Kasia to her friends, is a 30-year-old urban planner who grew up in a small town near the Hawthorne Transportation Center in Chicago's South Side. Born to Polish immigrant parents, Kasia developed a strong connection to her heritage and a passion for community development. She pursued a degree in Urban Planning from the University of Illinois at Chicago, where she honed her skills in sustainable design and transportation planning. After working for a few years in a private firm, Kasia joined the City of Chicago's Department of Planning and Development, where she focuses on revitalizing underutilized public spaces and improving pedestrian accessibility.\", \"phone\": \"+17734567890\", \"email\": \"kszymanska@gaia2mail.com\", \"address\": \"2345 N. Damen Ave, Apt 3, Chicago, IL 60647\"}, {\"first_name\": \"Katarzyna\", \"last_name\": \"Woźniak\", \"contact_id\": \"85b4567f9eae483ea47caace0aa46405\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"78\", \"nationality\": \"Polish\", \"city_living\": \"Kraków\", \"country\": \"Poland\", \"status\": \"Status.RETIRED\", \"job\": \"Former Nurse\", \"description\": \"Katarzyna Woźniak is a retired nurse who spent most of her life working in healthcare, with a particular focus on addressing healthcare disparities in Poland.\", \"phone\": \"+081234567890\", \"email\": \"kwozniak@gaia2mail.com\", \"address\": \"ul. Floriańska 12/3, 31-019 Kraków\"}, {\"first_name\": \"Katarzyna\", \"last_name\": \"Zielińska\", \"contact_id\": \"b0211081a4a641e3ae311fde8a3c1c04\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"21\", \"nationality\": \"Polish\", \"city_living\": \"Kraków\", \"country\": \"Poland\", \"status\": \"Status.STUDENT\", \"job\": \"Museum Intern\", \"description\": \"History enthusiast and student at the Jagiellonian University in Kraków, Poland. Passionate about preserving the past and making it accessible to the public.\", \"phone\": \"+48512345678\", \"email\": \"kzielinska@student.uj.edu.pl\", \"address\": \"ul. Floriańska 12, 31-019 Kraków, Poland\"}, {\"first_name\": \"Katarzyna\", \"last_name\": \"Kwiatkowska\", \"contact_id\": \"bfa0288dd3c14d31b1b1b8aa435d1638\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"34\", \"nationality\": \"Polish\", \"city_living\": \"Kraków\", \"country\": \"Poland\", \"status\": \"Status.EMPLOYED\", \"job\": \"Founder and CEO of a successful marketing agency\", \"description\": \"Katarzyna Kwiatkowska is a driven and compassionate entrepreneur who has built a thriving marketing agency in Kraków. With a strong passion for business and a desire to give back to her community, she has become a respected figure in the city's philanthropic scene. Katarzyna is particularly dedicated to supporting local hospices, regularly donating funds and resources to help those in need. She is also an avid supporter of teachers and education, often using her social media platforms to promote events and initiatives that benefit the local teaching community.\", \"phone\": \"+481234567890\", \"email\": \"k.kwiatkowska@kwiatkowska.marketing\", \"address\": \"ul. Floriańska 12/4, 31-019 Kraków\"}, {\"first_name\": \"Katarzyna\", \"last_name\": \"Wojciechowska\", \"contact_id\": \"f249f2b0ec9d46e39e5dc010f7da47a0\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"27\", \"nationality\": \"Polish\", \"city_living\": \"Gdańsk\", \"country\": \"Poland\", \"status\": \"Status.EMPLOYED\", \"job\": \"Marine Biologist and TV Personality\", \"description\": \"Katarzyna Wojciechowska is a young and ambitious marine biologist who has made a name for herself in Poland and beyond.\", \"phone\": \"+48512345628\", \"email\": \"kwojciechowska@oceanographic.pl\", \"address\": \"ul. Mariacka 12/4, 80-833 Gdańsk, Poland\"}]",
+      "event_id": "series_s1_search_youngest",
+      "response_sha256": "72e8dd48c0fef994f97ebc23abae8715b2c35afa5df29eb3e8d92ec76817932c"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage2.tool_gt.series_s2_add_lea_call.arguments.attendees[0]"
+    },
+    "stage2.tool_response.series_s2_get_new_event": {
+      "stage": 2,
+      "text": "{\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Call with Léa Dumont\", \"start_datetime\": \"1725278400.0\", \"end_datetime\": \"1725282000.0\", \"tag\": \"Social\", \"description\": \"lea.dumont@gaia2mail.com\", \"location\": \"Phone\", \"attendees\": [\"Ursula Wiederkehr\", \"Léa Dumont\"], \"start_strftime\": \"Monday, 2024-09-02 12:00:00\", \"end_strftime\": \"Monday, 2024-09-02 13:00:00\"}",
+      "event_id": "series_s2_get_new_event",
+      "response_sha256": "94d48556515c3dc52e9b934a0b66aa3211b0f98aefbb1c6ad43a508b536173c5"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélie De Smet",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_calendar_day_after",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Akira Nakahara",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_calendar_day_after",
+          "reason": "完整日本人名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Aurélie Janssens",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_calendar_day_after",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_search_tie",
+          "reason": "含法语变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Janssens",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_calendar_day_after",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Colette Dumont",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_search_tie",
+          "reason": "完整法语人名",
+          "weight": 50
+        },
+        {
+          "text": "Katarzyna Kwiatkowska",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_search_youngest",
+          "reason": "完整波兰人名，拼写复杂",
+          "weight": 50
+        },
+        {
+          "text": "Katarzyna Szymańska",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含波兰语变音符号的完整人名，ASR 识别困难",
+          "weight": 50
+        },
+        {
+          "text": "Katarzyna Wojciechowska",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_search_youngest",
+          "reason": "完整波兰人名，拼写复杂",
+          "weight": 50
+        },
+        {
+          "text": "Katarzyna Woźniak",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_search_youngest",
+          "reason": "含变音符号的完整波兰人名",
+          "weight": 50
+        },
+        {
+          "text": "Léa Dumont",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含法语变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_calendar_day_after",
+          "reason": "完整德语人名，拼写困难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélie De Smet",
+        "Akira Nakahara",
+        "Aurélie Janssens",
+        "Aurélien Dumont",
+        "Aurélien Janssens",
+        "Colette Dumont",
+        "Katarzyna Kwiatkowska",
+        "Katarzyna Szymańska",
+        "Katarzyna Wojciechowska",
+        "Katarzyna Woźniak",
+        "Léa Dumont",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Aurélie De Smet": 50,
+        "Akira Nakahara": 50,
+        "Aurélie Janssens": 50,
+        "Aurélien Dumont": 50,
+        "Aurélien Janssens": 50,
+        "Colette Dumont": 50,
+        "Katarzyna Kwiatkowska": 50,
+        "Katarzyna Szymańska": 50,
+        "Katarzyna Wojciechowska": 50,
+        "Katarzyna Woźniak": 50,
+        "Léa Dumont": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "ee7db29debafd197a02a6d7e3256cff1a311c508b834ab0f42d3be1b28f3a4da"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Léa Dumont",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_get_new_event",
+          "reason": "含法语变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整德语人名，拼写困难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélie De Smet": 50,
+        "Akira Nakahara": 50,
+        "Aurélie Janssens": 50,
+        "Aurélien Dumont": 50,
+        "Aurélien Janssens": 50,
+        "Colette Dumont": 50,
+        "Katarzyna Kwiatkowska": 50,
+        "Katarzyna Szymańska": 50,
+        "Katarzyna Wojciechowska": 50,
+        "Katarzyna Woźniak": 50,
+        "Léa Dumont": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "ee7db29debafd197a02a6d7e3256cff1a311c508b834ab0f42d3be1b28f3a4da"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [
+    {
+      "text": "Ursula Wiederkehr",
+      "from": "stage1.tool_response.series_s1_find_emails",
+      "to": "stage1.tool_response.series_s1_calendar_day_after"
+    }
+  ],
+  "old_terms_removed": [
+    "Chicago",
+    "Marseille",
+    "Katarzyna",
+    "Dumont"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:13:49.764290+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

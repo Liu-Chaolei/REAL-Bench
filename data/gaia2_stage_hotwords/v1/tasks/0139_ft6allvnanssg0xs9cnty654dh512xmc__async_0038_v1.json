@@ -1,0 +1,137 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0139_ft6allvnanssg0xs9cnty654dh512xmc__async_0038_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "3682f17d617fc06a5ebf4b1e9e79c7f17bf93613d219fbde23ecce90537e9a5d",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Akira",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "瑜伽教练人名"
+        },
+        {
+          "text": "Yoga Classes",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "日历事件名称"
+        }
+      ],
+      "new_terms": [
+        "Akira",
+        "Yoga Classes"
+      ],
+      "active_vocabulary": {
+        "Akira": 50,
+        "Yoga Classes": 50
+      },
+      "vocabulary_sha256": "93d164df0a13ebbb6dab088ec6ab91192917d1af5b18b52ea5822bee6bc757cc"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Akira",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "邀请人姓名"
+        },
+        {
+          "text": "Basel",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply.arguments.content",
+          "reason": "回信署名"
+        },
+        {
+          "text": "Yoga for Seniors Workshop in Basel",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "工作坊名称"
+        }
+      ],
+      "new_terms": [
+        "Basel",
+        "Ursula Wiederkehr",
+        "Yoga for Seniors Workshop in Basel"
+      ],
+      "active_vocabulary": {
+        "Akira": 50,
+        "Yoga Classes": 50,
+        "Basel": 50,
+        "Ursula Wiederkehr": 50,
+        "Yoga for Seniors Workshop in Basel": 50
+      },
+      "vocabulary_sha256": "3544f68df37e17ba95386550859bc1e57f067eb6613deeff318c0f2e9aa2cc25"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Mittlere Strasse 12",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "街道地址名"
+        },
+        {
+          "text": "Basel",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Yoga Studio in Basel",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "目的地名称"
+        }
+      ],
+      "new_terms": [
+        "Mittlere Strasse 12",
+        "Yoga Studio in Basel"
+      ],
+      "active_vocabulary": {
+        "Akira": 50,
+        "Yoga Classes": 50,
+        "Basel": 50,
+        "Ursula Wiederkehr": 50,
+        "Yoga for Seniors Workshop in Basel": 50,
+        "Mittlere Strasse 12": 50,
+        "Yoga Studio in Basel": 50
+      },
+      "vocabulary_sha256": "44037681162b3849dcd15409f87adf372d539ea94b771ecd8d73e6960229e7b5"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "938ef71fceb76c0974548a5da334a7f8e8435f57b7278ddd767c8c71295b98b4",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2269,
+        "completion_tokens": 274,
+        "total_tokens": 2543,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2013
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.458
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0139_ft6allvnanssg0xs9cnty654dh512xmc__async_0038_v1",
+  "extracted_at": "2026-11-22T06:46:31.592630+00:00"
+}

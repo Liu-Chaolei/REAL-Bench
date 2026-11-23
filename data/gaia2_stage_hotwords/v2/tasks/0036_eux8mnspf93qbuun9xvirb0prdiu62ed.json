@@ -1,0 +1,111 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0036_eux8mnspf93qbuun9xvirb0prdiu62ed",
+  "model": "deepseek-flash",
+  "input_sha256": "95346c68b73be4cba04066d10d715515c0929bf0b572b5e6c26fcc27aa575d15",
+  "review_input_sha256": "fd0ddf829e140940c5e65c9650022d5cbfcec029a5e3d867cd5d2799e6092f34",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "5d8372fa57e27baa065dc1f8d34ddeb3db564d8ee49fb017a055817c98445eb0",
+  "reference_results_sha256": "664d3dce062d4ce4159888dcdee5da323a8a293cae7decac323503f48d00504a",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Luísa",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Sebastião Salgado",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Luísa Silva",
+      "original_source": "stage2.tool_gt.series_s2_add_event.arguments.attendees[0]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Sebastião Salgado",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的完整人名，难以识别，优先保留",
+          "weight": 50
+        },
+        {
+          "text": "Luísa",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的名字，但仅为名，按规则应优先保留完整名；此处无完整名来源，保留该字面形式",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Sebastião Salgado",
+        "Luísa"
+      ],
+      "active_vocabulary": {
+        "Sebastião Salgado": 50,
+        "Luísa": 50
+      },
+      "vocabulary_sha256": "63bc0e38d10eafea6a4548aef376631d2a63066df2bd7460663caef738d7bb77"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Luísa Silva",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Luísa Silva"
+      ],
+      "active_vocabulary": {
+        "Sebastião Salgado": 50,
+        "Luísa": 50,
+        "Luísa Silva": 50
+      },
+      "vocabulary_sha256": "38c916dce95ce40a0c07667dda8892b7ff017adc29f7652cc6e22a07b082b87e"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Lisbon Photoshoot",
+    "Lisbon",
+    "Stockholm"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:13:44.288982+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

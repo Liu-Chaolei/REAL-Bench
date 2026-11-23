@@ -1,0 +1,150 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0428_eg8nqta3u6yyv6f1i2ytz1qx7gkmbcm0",
+  "model": "deepseek-flash",
+  "input_sha256": "d233832141f2e528a994bb4fac7cafe2ba8b37028b9ff2ba0f2a3768f831497a",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Thailand",
+          "kind": "place",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-c2be601b-054b-4773-9d02-5f4210944b20.arguments.content",
+          "reason": "国家名称，需精确识别"
+        }
+      ],
+      "new_terms": [
+        "Thailand"
+      ],
+      "active_vocabulary": {
+        "Thailand": 50
+      },
+      "vocabulary_sha256": "18566bb3f67bf4fbf59cd0b6e42ccc20b4540b9c68ca5d7932068b9411a6859d"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nalinee Wongwanich",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人完整姓名"
+        },
+        {
+          "text": "Chiang Mai University",
+          "kind": "organization",
+          "source": "stage1.source_task",
+          "reason": "大学机构名称"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "署名者完整姓名"
+        },
+        {
+          "text": "rammed earth",
+          "kind": "technical_term",
+          "source": "stage1.source_task",
+          "reason": "特色建筑技术术语"
+        }
+      ],
+      "new_terms": [
+        "Nalinee Wongwanich",
+        "Chiang Mai University",
+        "Liesbeth Vandenberghe",
+        "rammed earth"
+      ],
+      "active_vocabulary": {
+        "Thailand": 50,
+        "Nalinee Wongwanich": 50,
+        "Chiang Mai University": 50,
+        "Liesbeth Vandenberghe": 50,
+        "rammed earth": 50
+      },
+      "vocabulary_sha256": "38edecde3ea7bea1a6f8e484a2ed0c23a32166b07f6d3046572c9040fdeed557"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Nalinee Wongwanich",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Rammed Earth Case Studies",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_add.arguments.title",
+          "reason": "事件标题中的专有短语"
+        },
+        {
+          "text": "Historical Precedents for Sustainable Architecture",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_add.arguments.description",
+          "reason": "邮件标题专有名称"
+        }
+      ],
+      "new_terms": [
+        "Rammed Earth Case Studies",
+        "Historical Precedents for Sustainable Architecture"
+      ],
+      "active_vocabulary": {
+        "Thailand": 50,
+        "Nalinee Wongwanich": 50,
+        "Chiang Mai University": 50,
+        "Liesbeth Vandenberghe": 50,
+        "rammed earth": 50,
+        "Rammed Earth Case Studies": 50,
+        "Historical Precedents for Sustainable Architecture": 50
+      },
+      "vocabulary_sha256": "0189eb5ad3bbec23ad2a00afe6971d5846211cab07ea4c4bfb28d074a9cd176c"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "866da13d3c51d3473952f808818c330a2ce7278f5a5fb6fa4ab944a82954f288",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1644,
+        "completion_tokens": 353,
+        "total_tokens": 1997,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1388
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.702,
+      "error": "Invalid proper-name phrase: 'nalinee.wongwanich@cmu.ac.th'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "13f6e3cbe200865062fec7ce254bdaeeb09bbdb0c9dedc260ae130f8183d6813",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2398,
+        "completion_tokens": 306,
+        "total_tokens": 2704,
+        "prompt_tokens_details": {
+          "cached_tokens": 1920
+        },
+        "prompt_cache_hit_tokens": 1920,
+        "prompt_cache_miss_tokens": 478
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.617
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0428_eg8nqta3u6yyv6f1i2ytz1qx7gkmbcm0",
+  "extracted_at": "2026-11-22T06:41:55.026657+00:00"
+}

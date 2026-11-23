@@ -1,0 +1,184 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0143_s99906zxfpwrfl5dnv983b1diotgpzoy__async_0041_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "1c78474b8ab43c2610e273fb5db904dcd86fc3711472f2080e2968abc6fb9be9",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Lianying Wang",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "301 Cecelia Avenue",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "目的地地址"
+        },
+        {
+          "text": "Massive Makeover Beauty Spa",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "美容院名称"
+        },
+        {
+          "text": "Steve Spangler Science Halloween Decorating Kit",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品名称"
+        },
+        {
+          "text": "HALLOWEEN DUCKY MIX",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品名称"
+        },
+        {
+          "text": "Åsa",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "邮件联系人名"
+        }
+      ],
+      "new_terms": [
+        "Lianying Wang",
+        "301 Cecelia Avenue",
+        "Massive Makeover Beauty Spa",
+        "Steve Spangler Science Halloween Decorating Kit",
+        "HALLOWEEN DUCKY MIX",
+        "Åsa"
+      ],
+      "active_vocabulary": {
+        "Lianying Wang": 50,
+        "301 Cecelia Avenue": 50,
+        "Massive Makeover Beauty Spa": 50,
+        "Steve Spangler Science Halloween Decorating Kit": 50,
+        "HALLOWEEN DUCKY MIX": 50,
+        "Åsa": 50
+      },
+      "vocabulary_sha256": "af280fee8013a7af9aed50926f775039c1973c7d570ebf395edeb8213424a051"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "301 Cecelia Avenue",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "地址"
+        },
+        {
+          "text": "Östermalmsgatan 12",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "瑞典街道地址"
+        },
+        {
+          "text": "Stockholm",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Sweden",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "国家名"
+        }
+      ],
+      "new_terms": [
+        "Östermalmsgatan 12",
+        "Stockholm",
+        "Sweden"
+      ],
+      "active_vocabulary": {
+        "Lianying Wang": 50,
+        "301 Cecelia Avenue": 50,
+        "Massive Makeover Beauty Spa": 50,
+        "Steve Spangler Science Halloween Decorating Kit": 50,
+        "HALLOWEEN DUCKY MIX": 50,
+        "Åsa": 50,
+        "Östermalmsgatan 12": 50,
+        "Stockholm": 50,
+        "Sweden": 50
+      },
+      "vocabulary_sha256": "0ba1d2369d9ea05efe107a1e013e4174de35e8e7eed9d3e4e4950919361257d5"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Östermalmsgatan 12",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "活动地点地址"
+        },
+        {
+          "text": "Stockholm",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Sweden",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "国家名"
+        },
+        {
+          "text": "HALLOWEEN DUCKY MIX",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "商品名称"
+        },
+        {
+          "text": "Steve Spangler Science Halloween Decorating Kit",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "商品名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Lianying Wang": 50,
+        "301 Cecelia Avenue": 50,
+        "Massive Makeover Beauty Spa": 50,
+        "Steve Spangler Science Halloween Decorating Kit": 50,
+        "HALLOWEEN DUCKY MIX": 50,
+        "Åsa": 50,
+        "Östermalmsgatan 12": 50,
+        "Stockholm": 50,
+        "Sweden": 50
+      },
+      "vocabulary_sha256": "0ba1d2369d9ea05efe107a1e013e4174de35e8e7eed9d3e4e4950919361257d5"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "a218aba905c3479795c8c82678525a4311657a91a0f5828e70e1b2ca309b2959",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2981,
+        "completion_tokens": 413,
+        "total_tokens": 3394,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2725
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.677
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0143_s99906zxfpwrfl5dnv983b1diotgpzoy__async_0041_v1",
+  "extracted_at": "2026-11-22T06:46:33.200109+00:00"
+}

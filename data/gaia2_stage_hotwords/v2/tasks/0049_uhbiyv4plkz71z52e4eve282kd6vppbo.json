@@ -1,0 +1,125 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0049_uhbiyv4plkz71z52e4eve282kd6vppbo",
+  "model": "deepseek-flash",
+  "input_sha256": "bf1904f30ff5bcd4759beb5bf769cc64123cb779b85fceca8c5ade7c8fd5f9a7",
+  "review_input_sha256": "3ce290c94e3b3b3823054c6b183e3f0200a6ea71ebd36e5b526e44c14b89a7fd",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "9686bf72de4760a74286ba5d2ea1e60777f9c758ede33e75f38ee3409da9c406",
+  "reference_results_sha256": "704e76ed6c1b97a028c5f8c7988c7face298df6995965b570fee593d46ecdae5",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Xóchitl Ramírez-García",
+      "original_source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[0]"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage1.tool_gt.series_s1_reply.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Alexandru Mihăilescu",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Luís Pereira",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Xóchitl Ramírez-García",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Xóchitl Ramírez-García",
+        "Aurélien LaFleur"
+      ],
+      "active_vocabulary": {
+        "Xóchitl Ramírez-García": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "e54a15fef0ef1ac80f8212605fe8d0b14fe7a14a62c1246bf5371f3e9ac23e26"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Alexandru Mihăilescu",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Luís Pereira",
+          "kind": "person",
+          "source": "stage2.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Alexandru Mihăilescu",
+        "Luís Pereira"
+      ],
+      "active_vocabulary": {
+        "Xóchitl Ramírez-García": 50,
+        "Aurélien LaFleur": 50,
+        "Alexandru Mihăilescu": 50,
+        "Luís Pereira": 50
+      },
+      "vocabulary_sha256": "8c37fdec61fcf44977c66e757510a44cdeb6691ea108f4876643736e8b162405"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Garcia Enterprises",
+    "Kaitlyn Reyes",
+    "Portland"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:13:46.264036+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

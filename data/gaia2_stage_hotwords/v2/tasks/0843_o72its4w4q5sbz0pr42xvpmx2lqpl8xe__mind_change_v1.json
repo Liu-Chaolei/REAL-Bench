@@ -1,0 +1,132 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0843_o72its4w4q5sbz0pr42xvpmx2lqpl8xe__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "0dc55925890959f2f60a1d28fe3a04c63f20dac0dddf88e52c8bd36b1221bf5c",
+  "review_input_sha256": "88e5f8ac461c3c01acf7160942cfad7897008590005413b10a191bec02c2d63e",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "49aca0fa8665f7ab8ae7e96acbf99b2a4d12333f010115d5fd81ce9aaff4c847",
+  "reference_results_sha256": "0bad9c89cae6c22bc52edfb2d52ccf2c12afafcae677bfa3b6d5793fd947c6b5",
+  "sources": {
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Jamun Gulab Cafe",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Evangelia Papadopoulos",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-254cf94c-1197-4211-aeff-feddec5edc07.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "Kaidën Nakamura",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-254cf94c-1197-4211-aeff-feddec5edc07.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.7": {
+      "stage": 0,
+      "text": "Rohini Deshpande",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-cf2a49e7-f83e-4c1a-b563-1eb144c1b915.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Jamun Gulab Cafe",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "独特店名，含外来词",
+          "weight": 50
+        },
+        {
+          "text": "Evangelia Papadopoulos",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "完整人名，含少见希腊姓氏",
+          "weight": 50
+        },
+        {
+          "text": "Kaidën Nakamura",
+          "kind": "person",
+          "source": "stage0.existing_catalog.6",
+          "reason": "含变音符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage0.existing_catalog.7",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Jamun Gulab Cafe",
+        "Evangelia Papadopoulos",
+        "Kaidën Nakamura",
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "Jamun Gulab Cafe": 50,
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "1d08280da69a087f66ec402618fb01d86d8d224e6c239cc6009c18281f3a08b9"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Jamun Gulab Cafe": 50,
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "1d08280da69a087f66ec402618fb01d86d8d224e6c239cc6009c18281f3a08b9"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Jamun Gulab Cafe": 50,
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "1d08280da69a087f66ec402618fb01d86d8d224e6c239cc6009c18281f3a08b9"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Evangelia",
+    "Kaidën",
+    "The Pint Shop",
+    "Cambridge",
+    "Kaidëns"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:30.113973+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,136 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0489_3d0b4g9b6n7w1b87br37xdl0hve5e0yb",
+  "model": "deepseek-flash",
+  "input_sha256": "259cbfc92ba894af78ea53dbb67a3037de1ee7e589b65ef7c25908770804d18a",
+  "review_input_sha256": "7f9db920e6c2a4ba7836a98338233ad0f13c21e424adf98c1c5c11b87b5db853",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "a0629203b27488daf155878d73210bd084079fc87aca01f08fa178ea40d5be44",
+  "reference_results_sha256": "b20a5fa2e9c7c645926ade44ec924c5b082876674c89daec8cd0092d34c4be37",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Marvel",
+      "original_source": "stage0.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Funko Marvel Captain America Pop Vinyl Figure",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.tool_response.series_s2_search": {
+      "stage": 2,
+      "text": "[{\"name\": \"Marvel Select: Hulk Unleashed Action Figure\", \"product_id\": \"49f3c6b312e7fecbf0ddadd4a080add7\", \"variants\": {\"1d7c84ebaba74ed5959825667ff4b37c\": {\"price\": \"19.99\", \"available\": \"False\", \"item_id\": \"1d7c84ebaba74ed5959825667ff4b37c\", \"options\": {\"Age Range\": \"8+\", \"Material\": \"PVC\", \"Scale\": \"7-inch\"}}, \"65f253b7f2bf4ec49ab28dad2a60b779\": {\"price\": \"22.28\", \"available\": \"True\", \"item_id\": \"65f253b7f2bf4ec49ab28dad2a60b779\", \"options\": {\"Age Range\": \"14+\", \"Material\": \"PVC\", \"Scale\": \"7-inch\"}}, \"b280b946d4df4da5965a6e8318b6f1a1\": {\"price\": \"24.99\", \"available\": \"True\", \"item_id\": \"b280b946d4df4da5965a6e8318b6f1a1\", \"options\": {\"Age Range\": \"14+\", \"Material\": \"ABS\", \"Scale\": \"7-inch\"}}}}, {\"name\": \"Funko Marvel Captain America Pop Vinyl Figure\", \"product_id\": \"8f21b6c62369d46f49232bcdf5e9aa6f\", \"variants\": {\"50daa552c64748d9a06bd212b6a45a3c\": {\"price\": \"14.99\", \"available\": \"False\", \"item_id\": \"50daa552c64748d9a06bd212b6a45a3c\", \"options\": {\"Material\": \"Vinyl\", \"Packaging\": \"Window Box\", \"Size\": \"6 inches\"}}, \"de4cc50a1b3a4b67b9e85a53a6849921\": {\"price\": \"9.99\", \"available\": \"True\", \"item_id\": \"de4cc50a1b3a4b67b9e85a53a6849921\", \"options\": {\"Material\": \"Vinyl\", \"Packaging\": \"Window Box\", \"Size\": \"3.75 inches\"}}}}, {\"name\": \"Marvel Avengers 2-In-1 Muscle Chest Hulk/Captain America Deluxe Costume, Small\", \"product_id\": \"96ae3a263bcae1ffd757103d9b936e24\", \"variants\": {\"1dfedbf97e724b3e9185ce4156062d47\": {\"price\": \"27.99\", \"available\": \"True\", \"item_id\": \"1dfedbf97e724b3e9185ce4156062d47\", \"options\": {\"Age Range\": \"7-9 years\", \"Material\": \"Polyester\", \"Package Quantity\": \"1\"}}, \"2acd7e48385848649e348824c23c2084\": {\"price\": \"24.42\", \"available\": \"True\", \"item_id\": \"2acd7e48385848649e348824c23c2084\", \"options\": {\"Age Range\": \"4-6 years\", \"Material\": \"Polyester\", \"Package Quantity\": \"1\"}}, \"8e72e1f2c8ed4ff58696a8d20c2773bd\": {\"price\": \"29.99\", \"available\": \"True\", \"item_id\": \"8e72e1f2c8ed4ff58696a8d20c2773bd\", \"options\": {\"Age Range\": \"4-6 years\", \"Material\": \"Cotton\", \"Package Quantity\": \"1\"}}, \"947460522e624548a22a70b13a218313\": {\"price\": \"32.99\", \"available\": \"False\", \"item_id\": \"947460522e624548a22a70b13a218313\", \"options\": {\"Age Range\": \"7-9 years\", \"Material\": \"Cotton\", \"Package Quantity\": \"1\"}}, \"d862f148526d41e681f98f9d98518ea7\": {\"price\": \"39.99\", \"available\": \"True\", \"item_id\": \"d862f148526d41e681f98f9d98518ea7\", \"options\": {\"Age Range\": \"4-6 years\", \"Material\": \"Polyester\", \"Package Quantity\": \"2\"}}}}, {\"name\": \"Funko POP! Marvel: Venom - Thanos\", \"product_id\": \"c7ca925aee6d87c6b5685c6427d1affc\", \"variants\": {\"3d3570aeef1a40dc98300e1eaba07f12\": {\"price\": \"12.99\", \"available\": \"False\", \"item_id\": \"3d3570aeef1a40dc98300e1eaba07f12\", \"options\": {\"Material\": \"Vinyl\", \"Packaging\": \"Blind Box\", \"Size\": \"6 inches\"}}, \"7cdc8dcb63f4489295e3f4e5f01e525a\": {\"price\": \"8.78\", \"available\": \"True\", \"item_id\": \"7cdc8dcb63f4489295e3f4e5f01e525a\", \"options\": {\"Material\": \"Vinyl\", \"Packaging\": \"Window Box\", \"Size\": \"3.75 inches\"}}}}, {\"name\": \"SCHLEICH Marvel Black Widow Diorama Character\", \"product_id\": \"e228af45d7699c42fada3a125f61cac3\", \"variants\": {\"2c95e152a1d4434085c232d84456a1ae\": {\"price\": \"10.99\", \"available\": \"True\", \"item_id\": \"2c95e152a1d4434085c232d84456a1ae\", \"options\": {\"Age Range\": \"8-14 years\", \"Figure Scale\": \"1:12\", \"Material\": \"Plastic\", \"Packaging\": \"Blister Pack\"}}, \"62a409f4d1ae487fab9f5ea470d43639\": {\"price\": \"19.99\", \"available\": \"True\", \"item_id\": \"62a409f4d1ae487fab9f5ea470d43639\", \"options\": {\"Age Range\": \"8-14 years\", \"Figure Scale\": \"1:6\", \"Material\": \"Plastic\", \"Packaging\": \"Window Box\"}}, \"633d03ec0bcb4181a5e644c725e811a8\": {\"price\": \"14.99\", \"available\": \"True\", \"item_id\": \"633d03ec0bcb4181a5e644c725e811a8\", \"options\": {\"Age Range\": \"8-14 years\", \"Figure Scale\": \"1:12\", \"Material\": \"Vinyl\", \"Packaging\": \"Window Box\"}}, \"79c20d03c1264732b4b76fc4a44a26dd\": {\"price\": \"12.03\", \"available\": \"True\", \"item_id\": \"79c20d03c1264732b4b76fc4a44a26dd\", \"options\": {\"Age Range\": \"8-14 years\", \"Figure Scale\": \"1:12\", \"Material\": \"Plastic\", \"Packaging\": \"Window Box\"}}, \"cd261b968aee41679c33ab2e18f39f8f\": {\"price\": \"15.99\", \"available\": \"True\", \"item_id\": \"cd261b968aee41679c33ab2e18f39f8f\", \"options\": {\"Age Range\": \"15-18 years\", \"Figure Scale\": \"1:12\", \"Material\": \"Plastic\", \"Packaging\": \"Window Box\"}}}}]",
+      "event_id": "series_s2_search",
+      "response_sha256": "b968ff942454b8964b37f7367eb5cc888d3f66ee3c817f47dd889ef229a5e211"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Marvel",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.0",
+          "reason": "品牌专有名词，但较常见且简短，保留价值有限",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Marvel"
+      ],
+      "active_vocabulary": {
+        "Marvel": 50
+      },
+      "vocabulary_sha256": "510458ad100f86e24237c71d00025221a517d6023d9171232c69cb96bbb5b226"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Marvel": 50
+      },
+      "vocabulary_sha256": "510458ad100f86e24237c71d00025221a517d6023d9171232c69cb96bbb5b226"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Marvel Avengers 2-In-1 Muscle Chest Hulk/Captain America Deluxe Costume, Small",
+          "kind": "product",
+          "source": "stage2.tool_response.series_s2_search",
+          "reason": "含多个专有名词的复杂产品名",
+          "weight": 50
+        },
+        {
+          "text": "Funko Marvel Captain America Pop Vinyl Figure",
+          "kind": "product",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含品牌与角色的完整产品名",
+          "weight": 50
+        },
+        {
+          "text": "Marvel Select: Hulk Unleashed Action Figure",
+          "kind": "product",
+          "source": "stage2.tool_response.series_s2_search",
+          "reason": "含专有角色与系列名的完整产品名",
+          "weight": 50
+        },
+        {
+          "text": "SCHLEICH Marvel Black Widow Diorama Character",
+          "kind": "product",
+          "source": "stage2.tool_response.series_s2_search",
+          "reason": "含品牌与角色名的完整产品名",
+          "weight": 50
+        },
+        {
+          "text": "Funko POP! Marvel: Venom - Thanos",
+          "kind": "product",
+          "source": "stage2.tool_response.series_s2_search",
+          "reason": "含品牌与角色名的产品名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Marvel Avengers 2-In-1 Muscle Chest Hulk/Captain America Deluxe Costume, Small",
+        "Funko Marvel Captain America Pop Vinyl Figure",
+        "Marvel Select: Hulk Unleashed Action Figure",
+        "SCHLEICH Marvel Black Widow Diorama Character",
+        "Funko POP! Marvel: Venom - Thanos"
+      ],
+      "active_vocabulary": {
+        "Marvel": 50,
+        "Marvel Avengers 2-In-1 Muscle Chest Hulk/Captain America Deluxe Costume, Small": 50,
+        "Funko Marvel Captain America Pop Vinyl Figure": 50,
+        "Marvel Select: Hulk Unleashed Action Figure": 50,
+        "SCHLEICH Marvel Black Widow Diorama Character": 50,
+        "Funko POP! Marvel: Venom - Thanos": 50
+      },
+      "vocabulary_sha256": "bfae247c46607da369887e9a6cd451dcafa3bcf71dcd0c7fa8fb94c45f052dc6"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:06.795460+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

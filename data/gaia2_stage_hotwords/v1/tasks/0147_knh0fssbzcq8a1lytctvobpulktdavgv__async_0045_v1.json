@@ -1,0 +1,179 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0147_knh0fssbzcq8a1lytctvobpulktdavgv__async_0045_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "c21256d00dfb3d6f1df5ad954310ca518e6962816a90f3dca74b14b7c0e04188",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélie Vandenberghe",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Colette Vandenberghe",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Gent-Sint-Pieters",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "起点车站名"
+        },
+        {
+          "text": "Sint-Baafsplein 1",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "目的地地址"
+        },
+        {
+          "text": "WowWee Pinkfong Baby Shark Bath Squirt Toy – 4-Pack",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品全名"
+        },
+        {
+          "text": "WowWee Pinkfong Baby Shark Bath Squirt Toy - 4 Pack",
+          "kind": "product",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-0900dd2f-dacb-4074-af37-ef1e798753b8.arguments.content",
+          "reason": "回复中商品名变体"
+        },
+        {
+          "text": "Gent-Sint-Pieter",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e4420c21-d379-4f3f-8c2e-97448426508a.arguments.content",
+          "reason": "邮件中地点拼写"
+        }
+      ],
+      "new_terms": [
+        "Aurélie Vandenberghe",
+        "Colette Vandenberghe",
+        "Gent-Sint-Pieters",
+        "Sint-Baafsplein 1",
+        "WowWee Pinkfong Baby Shark Bath Squirt Toy – 4-Pack",
+        "WowWee Pinkfong Baby Shark Bath Squirt Toy - 4 Pack",
+        "Gent-Sint-Pieter"
+      ],
+      "active_vocabulary": {
+        "Aurélie Vandenberghe": 50,
+        "Colette Vandenberghe": 50,
+        "Gent-Sint-Pieters": 50,
+        "Sint-Baafsplein 1": 50,
+        "WowWee Pinkfong Baby Shark Bath Squirt Toy – 4-Pack": 50,
+        "WowWee Pinkfong Baby Shark Bath Squirt Toy - 4 Pack": 50,
+        "Gent-Sint-Pieter": 50
+      },
+      "vocabulary_sha256": "b51fbd8228075f0b251b3891f74f888fcd887bfb4308f820dd7b565a1e25c639"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Sint-Baafsplein 1",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "提醒地点"
+        },
+        {
+          "text": "Sint-Michielsstraat 23",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "返程目的地"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Gent-Sint-Pieters",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "去程起点"
+        }
+      ],
+      "new_terms": [
+        "Sint-Michielsstraat 23",
+        "Leuven"
+      ],
+      "active_vocabulary": {
+        "Aurélie Vandenberghe": 50,
+        "Colette Vandenberghe": 50,
+        "Gent-Sint-Pieters": 50,
+        "Sint-Baafsplein 1": 50,
+        "WowWee Pinkfong Baby Shark Bath Squirt Toy – 4-Pack": 50,
+        "WowWee Pinkfong Baby Shark Bath Squirt Toy - 4 Pack": 50,
+        "Gent-Sint-Pieter": 50,
+        "Sint-Michielsstraat 23": 50,
+        "Leuven": 50
+      },
+      "vocabulary_sha256": "11d7943a652c21c27d12a837120248ec90385dd9942cdeaca10005408fddf9f1"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélie Vandenberghe",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "消息收件人"
+        },
+        {
+          "text": "Colette Vandenberghe",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "聊天收件人"
+        },
+        {
+          "text": "Gent-Sint-Pieters",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "会面地点"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélie Vandenberghe": 50,
+        "Colette Vandenberghe": 50,
+        "Gent-Sint-Pieters": 50,
+        "Sint-Baafsplein 1": 50,
+        "WowWee Pinkfong Baby Shark Bath Squirt Toy – 4-Pack": 50,
+        "WowWee Pinkfong Baby Shark Bath Squirt Toy - 4 Pack": 50,
+        "Gent-Sint-Pieter": 50,
+        "Sint-Michielsstraat 23": 50,
+        "Leuven": 50
+      },
+      "vocabulary_sha256": "11d7943a652c21c27d12a837120248ec90385dd9942cdeaca10005408fddf9f1"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "8b4ebf748a975668a4c7113bc1c70b0de4fa2f40627baba6eeefe51738197c3b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3434,
+        "completion_tokens": 524,
+        "total_tokens": 3958,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3178
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.114
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0147_knh0fssbzcq8a1lytctvobpulktdavgv__async_0045_v1",
+  "extracted_at": "2026-11-22T06:46:35.513422+00:00"
+}

@@ -1,0 +1,219 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0858_a5qwuxpnuybrw05twxj4t4wd8p8wewtw",
+  "model": "deepseek-flash",
+  "input_sha256": "16db589e54c5f4aaa3675fa692fbc608e80508ac74b485078170d8090a349612",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kavita Jensen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Manchester",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Manchester Modern",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1cde4529-566e-4ca3-a418-20d8c16b23ea.arguments.content",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Manchester Marvel",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1cde4529-566e-4ca3-a418-20d8c16b23ea.arguments.content",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Manchester Mansions",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1cde4529-566e-4ca3-a418-20d8c16b23ea.arguments.content",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1cde4529-566e-4ca3-a418-20d8c16b23ea.arguments.content",
+          "reason": "发件人姓名"
+        }
+      ],
+      "new_terms": [
+        "Kavita Jensen",
+        "Manchester",
+        "Manchester Modern",
+        "Manchester Marvel",
+        "Manchester Mansions",
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "Kavita Jensen": 50,
+        "Manchester": 50,
+        "Manchester Modern": 50,
+        "Manchester Marvel": 50,
+        "Manchester Mansions": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "6ea71c94838e84ed3802c5391b03c71810e8cbda53fd44794f8805ce444d6ab7"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kavita",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "人物名"
+        },
+        {
+          "text": "Manchester",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Manchester Maison",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Jaeho Kim",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply_maison_email.arguments.content",
+          "reason": "发件人姓名"
+        }
+      ],
+      "new_terms": [
+        "Kavita",
+        "Manchester Maison",
+        "Jaeho Kim"
+      ],
+      "active_vocabulary": {
+        "Kavita Jensen": 50,
+        "Manchester": 50,
+        "Manchester Modern": 50,
+        "Manchester Marvel": 50,
+        "Manchester Mansions": 50,
+        "Rohini Deshpande": 50,
+        "Kavita": 50,
+        "Manchester Maison": 50,
+        "Jaeho Kim": 50
+      },
+      "vocabulary_sha256": "d99e8587f63a7df969bded6af06b28d95b9a74e0fe06723245d53f96e0184a61"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Manchester Maison",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Kavita Jensen",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Manchester Properties",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "邮件主题名称"
+        },
+        {
+          "text": "Manchester",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "234 Deansgate",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_reply_kavita_overinflation.arguments.content",
+          "reason": "房产地址"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply_kavita_overinflation.arguments.content",
+          "reason": "发件人姓名"
+        },
+        {
+          "text": "Manchester Modern",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_confirmation.arguments.content",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Manchester Marvel",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_confirmation.arguments.content",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Manchester Mansions",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_confirmation.arguments.content",
+          "reason": "房产名称"
+        }
+      ],
+      "new_terms": [
+        "Manchester Properties",
+        "234 Deansgate"
+      ],
+      "active_vocabulary": {
+        "Kavita Jensen": 50,
+        "Manchester": 50,
+        "Manchester Modern": 50,
+        "Manchester Marvel": 50,
+        "Manchester Mansions": 50,
+        "Rohini Deshpande": 50,
+        "Kavita": 50,
+        "Manchester Maison": 50,
+        "Jaeho Kim": 50,
+        "Manchester Properties": 50,
+        "234 Deansgate": 50
+      },
+      "vocabulary_sha256": "60d266e219d38f6a3a155c6f81ac1d1590877c39d7e0ba7c27dc5b035baa3818"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "07547961b0d7d376330dfe0e996e299213532a33bac1d26dbe8057563f5f0412",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2962,
+        "completion_tokens": 734,
+        "total_tokens": 3696,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2706
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.401
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0858_a5qwuxpnuybrw05twxj4t4wd8p8wewtw",
+  "extracted_at": "2026-11-22T06:44:13.076170+00:00"
+}

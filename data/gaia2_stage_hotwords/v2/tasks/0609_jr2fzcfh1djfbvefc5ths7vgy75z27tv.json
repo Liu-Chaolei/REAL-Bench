@@ -1,0 +1,135 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0609_jr2fzcfh1djfbvefc5ths7vgy75z27tv",
+  "model": "deepseek-flash",
+  "input_sha256": "cb7af3cdc986677e9c9a39cb762f4569b413cae706f60958166dfa5f572b99d7",
+  "review_input_sha256": "87a5601e38ae66fb8583d86f112e13337b0ead32a527342d1b16a0b0e2cc97da",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "4fe6eb0fc041d4d1163b7ce3bba8ecad629fde8401314704486e0cb1ca8764fc",
+  "reference_results_sha256": "146070b99c40ade4dd24c42f51e023f26ec729c3f5ed41c80a5e4f6df2cd6608",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Åke Svensson",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-7c6e5ee8-84e6-47e7-970f-97639a5bb957.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Astrid Lundqvist",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-5803f242-9e8a-4931-a7da-9c2277c92160.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Yuting Liang",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "João Silva",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Åke Svensson",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含特殊字符的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Lundqvist",
+        "Åke Svensson"
+      ],
+      "active_vocabulary": {
+        "Astrid Lundqvist": 50,
+        "Åke Svensson": 50
+      },
+      "vocabulary_sha256": "28c587b84d19ee433bd1d6e89fa74f06281516a2a4aaf04d679ebfbde13377c2"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "João Silva",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Yuting Liang",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "João Silva",
+        "Yuting Liang"
+      ],
+      "active_vocabulary": {
+        "Astrid Lundqvist": 50,
+        "Åke Svensson": 50,
+        "João Silva": 50,
+        "Yuting Liang": 50
+      },
+      "vocabulary_sha256": "22f359ebc3a7a8bff6430a03543961bcf76a39266b16f525329b30aa2780efb0"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid Lundqvist": 50,
+        "Åke Svensson": 50,
+        "João Silva": 50,
+        "Yuting Liang": 50
+      },
+      "vocabulary_sha256": "22f359ebc3a7a8bff6430a03543961bcf76a39266b16f525329b30aa2780efb0"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Yuting",
+    "Ake",
+    "João",
+    "Brand Partnership Meeting",
+    "Brand Call Preparation",
+    "Fashion Call",
+    "Social Media Call Preparation",
+    "Social Media Call"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:43.522845+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

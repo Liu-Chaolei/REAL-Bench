@@ -1,0 +1,159 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0942_ittipbqa3jcxj9dgt8loojtlh354c1i2",
+  "model": "deepseek-flash",
+  "input_sha256": "63793562f836072610236f33d799bb99ce3b80178491e011c7894de6782b4e03",
+  "review_input_sha256": "a9f37229bb7a02b4f590fb2d9f32bce0498e0e38db3618831a5cc3b753663bb1",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "53725bca22361898c5db28e6e2f69f4884e9e502020e2ec8dceceabbcbc82664",
+  "reference_results_sha256": "2a7bad72e1e98898e02bd4f52d80247c227018e9f841ee6ddf5eba59119bf786",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kaida Schönberger",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Antsy Labs",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Spider Man Fidget Cube",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Spider Man Cube Check",
+      "original_source": "stage1.tool_gt.series_s1_e2.arguments.title"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "International Relations Lecture",
+      "original_source": "stage2.reference_reply.series_s2_e5.arguments.content"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Aurélio Silva",
+      "original_source": "stage2.reference_reply.series_s2_e5.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Spider Man Fidget Cube",
+          "kind": "product",
+          "source": "stage0.existing_catalog.2",
+          "reason": "独特产品名，含专有名词组合",
+          "weight": 50
+        },
+        {
+          "text": "Antsy Labs",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.1",
+          "reason": "独特品牌/机构名，难以泛化识别",
+          "weight": 50
+        },
+        {
+          "text": "Kaida Schönberger",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Spider Man Fidget Cube",
+        "Antsy Labs",
+        "Kaida Schönberger"
+      ],
+      "active_vocabulary": {
+        "Spider Man Fidget Cube": 50,
+        "Antsy Labs": 50,
+        "Kaida Schönberger": 50
+      },
+      "vocabulary_sha256": "954630d9f9e7d4e269b6c060cb16c780f5eb13797c605f3ada431199a95d4d50"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Spider Man Cube Check",
+          "kind": "custom_name",
+          "source": "stage1.existing_catalog.0",
+          "reason": "独特自定义事件名，非普通词汇",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Spider Man Cube Check"
+      ],
+      "active_vocabulary": {
+        "Spider Man Fidget Cube": 50,
+        "Antsy Labs": 50,
+        "Kaida Schönberger": 50,
+        "Spider Man Cube Check": 50
+      },
+      "vocabulary_sha256": "645158511b020faf65f43f2d0ccd1fbe9e641930b0417f4ee16f0462467f8ff4"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "International Relations Lecture",
+          "kind": "custom_name",
+          "source": "stage2.existing_catalog.0",
+          "reason": "独特讲座事件名，含专有主题词",
+          "weight": 50
+        },
+        {
+          "text": "Aurélio Silva",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "International Relations Lecture",
+        "Aurélio Silva"
+      ],
+      "active_vocabulary": {
+        "Spider Man Fidget Cube": 50,
+        "Antsy Labs": 50,
+        "Kaida Schönberger": 50,
+        "Spider Man Cube Check": 50,
+        "International Relations Lecture": 50,
+        "Aurélio Silva": 50
+      },
+      "vocabulary_sha256": "d1f70f33e569a3ba71aef3d555b12a196853d87e9648eabd9a39b757ac963113"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Spider Man Party"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:56.767856+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

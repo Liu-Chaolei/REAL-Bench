@@ -1,0 +1,179 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0597_i77vx78n59ry1r4q85yec0padqwoqpnc",
+  "model": "deepseek-flash",
+  "input_sha256": "e19825a0d0031753ad6704be5e21cc3bf3847f8cbd0f0123300cf91b356becfd",
+  "review_input_sha256": "d381762f35cbfdd35080037dfd22b19bf73e830bc0b78db5c0361f0722f10ecf",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "07fe4dec189cecab74e9d9a3ae477d7d57edf1a744c8d76e7f990764971cc7f4",
+  "reference_results_sha256": "59c80a09c127f1f1416278b74d17c408b743085dc0cfc963689dd82b0a230141",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Chennai Chateau",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Kaveri Apartments",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Kolkata Residency",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "Sophea Chakraborty",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-35f9666f-264f-440a-90cd-b757db16c85e.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.7": {
+      "stage": 0,
+      "text": "Ravindra Deshpande",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-2e2216b1-348e-4188-b7df-c282351202f3.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.8": {
+      "stage": 0,
+      "text": "T. Nagar",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-35f9666f-264f-440a-90cd-b757db16c85e.arguments.location"
+    },
+    "stage0.existing_catalog.9": {
+      "stage": 0,
+      "text": "Rohan Kumar",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f5df495a-1fa7-4b8c-844d-8163a804ab06.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Chennai Chateau",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "独特物业名称，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Kaveri Apartments",
+          "kind": "place",
+          "source": "stage0.existing_catalog.1",
+          "reason": "独特物业名称，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Kolkata Residency",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "独特物业名称，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Ravindra Deshpande",
+          "kind": "person",
+          "source": "stage0.existing_catalog.7",
+          "reason": "完整人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.existing_catalog.9",
+          "reason": "完整人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Sophea Chakraborty",
+          "kind": "person",
+          "source": "stage0.existing_catalog.6",
+          "reason": "完整人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "T. Nagar",
+          "kind": "place",
+          "source": "stage0.existing_catalog.8",
+          "reason": "独特地名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Chennai Chateau",
+        "Kaveri Apartments",
+        "Kolkata Residency",
+        "Ravindra Deshpande",
+        "Rohan Kumar",
+        "Sophea Chakraborty",
+        "T. Nagar"
+      ],
+      "active_vocabulary": {
+        "Chennai Chateau": 50,
+        "Kaveri Apartments": 50,
+        "Kolkata Residency": 50,
+        "Ravindra Deshpande": 50,
+        "Rohan Kumar": 50,
+        "Sophea Chakraborty": 50,
+        "T. Nagar": 50
+      },
+      "vocabulary_sha256": "ae08fafec050f13b342ba1428df7fd1fbab26deb2696b1de65c1339cdc9ba3ed"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Chennai Chateau": 50,
+        "Kaveri Apartments": 50,
+        "Kolkata Residency": 50,
+        "Ravindra Deshpande": 50,
+        "Rohan Kumar": 50,
+        "Sophea Chakraborty": 50,
+        "T. Nagar": 50
+      },
+      "vocabulary_sha256": "ae08fafec050f13b342ba1428df7fd1fbab26deb2696b1de65c1339cdc9ba3ed"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Chennai Chateau": 50,
+        "Kaveri Apartments": 50,
+        "Kolkata Residency": 50,
+        "Ravindra Deshpande": 50,
+        "Rohan Kumar": 50,
+        "Sophea Chakraborty": 50,
+        "T. Nagar": 50
+      },
+      "vocabulary_sha256": "ae08fafec050f13b342ba1428df7fd1fbab26deb2696b1de65c1339cdc9ba3ed"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Sophea",
+    "Ravindra",
+    "Rohini",
+    "Salt Lake"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:40.332681+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

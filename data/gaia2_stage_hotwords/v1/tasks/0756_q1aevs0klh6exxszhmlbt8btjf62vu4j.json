@@ -1,0 +1,151 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0756_q1aevs0klh6exxszhmlbt8btjf62vu4j",
+  "model": "deepseek-flash",
+  "input_sha256": "a5b94d1869b4624984602449e9374e3f86342b0275e22974b8adb10307840b79",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Eliška",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名，朋友的名字"
+        },
+        {
+          "text": "Vladimíra",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dfa47f1f-2e17-4310-ada6-b1831d684ffc.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Pavla",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-71d02749-bfa8-46ce-8106-9e95b125a1f2.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Lucie",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-415b33fb-af2f-4291-a246-e813fb301c30.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Zbyněk",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-82784ba6-3182-4227-ad02-54cc699fa14e.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Šárka",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-27e1031a-03e9-465d-a642-b068ad6f549c.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Květa",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-af887f83-5529-42d7-822e-9ef4cbc0cfb1.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Štefánikova 25, 150 00 Prague 5",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a0ac1242-d8f9-4bdd-b3b9-d43a4bff387b.arguments.start_location",
+          "reason": "具体地址"
+        }
+      ],
+      "new_terms": [
+        "Eliška",
+        "Vladimíra",
+        "Pavla",
+        "Lucie",
+        "Zbyněk",
+        "Šárka",
+        "Květa",
+        "Štefánikova 25, 150 00 Prague 5"
+      ],
+      "active_vocabulary": {
+        "Eliška": 50,
+        "Vladimíra": 50,
+        "Pavla": 50,
+        "Lucie": 50,
+        "Zbyněk": 50,
+        "Šárka": 50,
+        "Květa": 50,
+        "Štefánikova 25, 150 00 Prague 5": 50
+      },
+      "vocabulary_sha256": "aa8767e78029a0540dbedf6211213e87a7f5b7f9bf4d6cc3bcfbe9c525caa651"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Eliška": 50,
+        "Vladimíra": 50,
+        "Pavla": 50,
+        "Lucie": 50,
+        "Zbyněk": 50,
+        "Šárka": 50,
+        "Květa": 50,
+        "Štefánikova 25, 150 00 Prague 5": 50
+      },
+      "vocabulary_sha256": "aa8767e78029a0540dbedf6211213e87a7f5b7f9bf4d6cc3bcfbe9c525caa651"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Eliška",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "人名，地址所属者"
+        },
+        {
+          "text": "Štefánikova 25, 150 00 Prague 5",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_order_ride.arguments.start_location",
+          "reason": "具体地址"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Eliška": 50,
+        "Vladimíra": 50,
+        "Pavla": 50,
+        "Lucie": 50,
+        "Zbyněk": 50,
+        "Šárka": 50,
+        "Květa": 50,
+        "Štefánikova 25, 150 00 Prague 5": 50
+      },
+      "vocabulary_sha256": "aa8767e78029a0540dbedf6211213e87a7f5b7f9bf4d6cc3bcfbe9c525caa651"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "e0ab72a18b781ee90c6ab786117614ce8b6a0e8ba85c2715aff1acb8f446519e",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3719,
+        "completion_tokens": 543,
+        "total_tokens": 4262,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3463
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.926
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0756_q1aevs0klh6exxszhmlbt8btjf62vu4j",
+  "extracted_at": "2026-11-22T06:43:42.686341+00:00"
+}

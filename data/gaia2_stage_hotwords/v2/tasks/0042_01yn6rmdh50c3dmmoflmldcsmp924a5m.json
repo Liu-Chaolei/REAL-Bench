@@ -1,0 +1,125 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0042_01yn6rmdh50c3dmmoflmldcsmp924a5m",
+  "model": "deepseek-flash",
+  "input_sha256": "5f303d1db1a86487de956dca2cd3f83ac73cb4dab6a75372c31053bd07ade463",
+  "review_input_sha256": "d6ee78a8fd16cce581042e21302118d56b4dcceea1254e3204c3fb1ef91dbe60",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "4ef16d945af8afa09a83aad18c8cabcb5f9418f05e01c29d7a30aa8f81239d40",
+  "reference_results_sha256": "5314cbc818d28df0fc1a27647a5a409a0205005ae5caaaa644340a683c9ef6f4",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Karel Vandenberghe",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Schuttershofstraat",
+      "original_source": "stage1.tool_gt.series_s1_add_event.arguments.location"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Antwerpen",
+      "original_source": "stage1.tool_gt.series_s1_add_event.arguments.location"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Liesbeth Vandenberghe",
+      "original_source": "stage2.tool_gt.series_s2_send_email.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Karel Vandenberghe",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，含较难姓氏",
+          "weight": 50
+        },
+        {
+          "text": "Antwerpen",
+          "kind": "place",
+          "source": "stage1.existing_catalog.2",
+          "reason": "地名，与Antwerp区分",
+          "weight": 50
+        },
+        {
+          "text": "Schuttershofstraat",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "难拼写的街道名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Karel Vandenberghe",
+        "Antwerpen",
+        "Schuttershofstraat"
+      ],
+      "active_vocabulary": {
+        "Karel Vandenberghe": 50,
+        "Antwerpen": 50,
+        "Schuttershofstraat": 50
+      },
+      "vocabulary_sha256": "bd34cf51e99b348b539e2ba2f45470b3ec3618ae03a6c9f9b0521355b5af0f0f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整人名，含较难姓氏",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Karel Vandenberghe": 50,
+        "Antwerpen": 50,
+        "Schuttershofstraat": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "608f00444270166137728a97bb5e5c723fd640d9862de2c8b47371def4333638"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Antwerp",
+    "Brussels"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:13:44.589296+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

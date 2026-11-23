@@ -1,0 +1,447 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0278_qryi6hivnodloj8njbisq0mbxceu26ge",
+  "model": "deepseek-flash",
+  "input_sha256": "df71fd6417769cbe7135857cb43de4a03a841bd6fe9abb06d08484f45f189c7b",
+  "review_input_sha256": "87af00be7e2bbebfbd744eb84612fc5544a51aa69997c45a24a458eb1e0f0a15",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "e88b5c0e3f58c1e86ab85ec197d1d82af8396db4f27536bc047a882fbaaf1651",
+  "reference_results_sha256": "a374bc48ec039837a71821494ee855f6f1eb01ba1de1e7dce66dae57d4ef4208",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Kirsten Ravnkilde",
+      "original_source": "stage1.tool_gt.series_s1_email_summary.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Restaurant Schønnemann's",
+      "original_source": "stage1.tool_gt.series_s1_email_summary.arguments.content"
+    },
+    "stage1.tool_response.series_s1_cal_w1": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"01d5eca7e094403e812f97c3944349f6\", \"title\": \"Lunch with Colleague\", \"start_datetime\": \"1728046800\", \"end_datetime\": \"1728052200\", \"tag\": \"Social\", \"description\": \"Lunch with a colleague to discuss work-related topics and share experiences.\", \"location\": \"Restaurant Kong Hans Kælder\", \"attendees\": [\"Pichaya Wongthip\"], \"start_strftime\": \"Friday, 2024-10-04 13:00:00\", \"end_strftime\": \"Friday, 2024-10-04 14:30:00\"}, {\"event_id\": \"03bf5fdcdd624b62b1c7b49c266b8867\", \"title\": \"Yoga Class\", \"start_datetime\": \"1728118800\", \"end_datetime\": \"1728124200\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Colette Vandenberghe\", \"Nonglak Srisombat\"], \"start_strftime\": \"Saturday, 2024-10-05 09:00:00\", \"end_strftime\": \"Saturday, 2024-10-05 10:30:00\"}, {\"event_id\": \"063d1b9b57de49fa949fc3d3d084ca42\", \"title\": \"Project Update Meeting\", \"start_datetime\": \"1727791200\", \"end_datetime\": \"1727798400\", \"tag\": \"Work\", \"description\": \"Meeting with my team to discuss project updates and progress.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Narin Suthiwong\", \"Pichaya Wongthip\", \"Astrid Jensen\"], \"start_strftime\": \"Tuesday, 2024-10-01 14:00:00\", \"end_strftime\": \"Tuesday, 2024-10-01 16:00:00\"}, {\"event_id\": \"2fed75be471146dc9d1b31cde9e881c7\", \"title\": \"Project Update Meeting\", \"start_datetime\": \"1727964000\", \"end_datetime\": \"1727971200\", \"tag\": \"Work\", \"description\": \"Meeting with my team to discuss project updates and progress.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Narin Suthiwong\", \"Pichaya Wongthip\", \"Astrid Jensen\"], \"start_strftime\": \"Thursday, 2024-10-03 14:00:00\", \"end_strftime\": \"Thursday, 2024-10-03 16:00:00\"}, {\"event_id\": \"30b6d00aa2614521be8a0bce4e8d9e16\", \"title\": \"Networking Event\", \"start_datetime\": \"1727974800\", \"end_datetime\": \"1727982000\", \"tag\": \"Social\", \"description\": \"Networking event for entrepreneurs and investors to connect and share ideas.\", \"location\": \"Copenhagen Business Network\", \"attendees\": [\"Rohini Iyer\", \"Colette Vandenberghe\", \"Nonglak Srisombat\"], \"start_strftime\": \"Thursday, 2024-10-03 17:00:00\", \"end_strftime\": \"Thursday, 2024-10-03 19:00:00\"}, {\"event_id\": \"58cc5e7ff9e24f79bea01e165a64aca1\", \"title\": \"Lunch with Mentor\", \"start_datetime\": \"1727874000\", \"end_datetime\": \"1727879400\", \"tag\": \"Social\", \"description\": \"Lunch with my mentor to discuss business strategies and seek advice.\", \"location\": \"Restaurant Kong Hans Kælder\", \"attendees\": [\"Pichaya Wongthip\"], \"start_strftime\": \"Wednesday, 2024-10-02 13:00:00\", \"end_strftime\": \"Wednesday, 2024-10-02 14:30:00\"}, {\"event_id\": \"633f15efc3454cafad59af0fe6c4533a\", \"title\": \"Project Planning\", \"start_datetime\": \"1727881200\", \"end_datetime\": \"1727888400\", \"tag\": \"Work\", \"description\": \"Planning and brainstorming session for upcoming projects.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Wednesday, 2024-10-02 15:00:00\", \"end_strftime\": \"Wednesday, 2024-10-02 17:00:00\"}, {\"event_id\": \"71cc23512a114dff87afbce6372d5d87\", \"title\": \"Startup Workshop\", \"start_datetime\": \"1727780400\", \"end_datetime\": \"1727791200\", \"tag\": \"Work\", \"description\": \"Workshop on startup growth strategies and fundraising techniques.\", \"location\": \"Copenhagen Startup Lab\", \"attendees\": [\"Rohini Iyer\", \"Saoirse Ní Chonaill\"], \"start_strftime\": \"Tuesday, 2024-10-01 11:00:00\", \"end_strftime\": \"Tuesday, 2024-10-01 14:00:00\"}, {\"event_id\": \"7b3903fd31b9442d8e4fc0b9c7ae7a80\", \"title\": \"Team Meeting\", \"start_datetime\": \"1728036000\", \"end_datetime\": \"1728043200\", \"tag\": \"Work\", \"description\": \"Meeting with my team to discuss ongoing projects and share updates.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Astrid Jensen\", \"Kirsten Ravnkilde\", \"Narin Suthiwong\"], \"start_strftime\": \"Friday, 2024-10-04 10:00:00\", \"end_strftime\": \"Friday, 2024-10-04 12:00:00\"}, {\"event_id\": \"7cd11ac17db04d4188593135e714da6d\", \"title\": \"Meditation Session\", \"start_datetime\": \"1728284400\", \"end_datetime\": \"1728288000\", \"tag\": \"Wellness\", \"description\": \"Daily meditation session to clear my mind and focus on the day ahead.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Monday, 2024-10-07 07:00:00\", \"end_strftime\": \"Monday, 2024-10-07 08:00:00\"}, {\"event_id\": \"9c3199f8098a476da225025151ae59f9\", \"title\": \"Investor Meeting\", \"start_datetime\": \"1727953200\", \"end_datetime\": \"1727960400\", \"tag\": \"Work\", \"description\": \"Meeting with potential investors to discuss funding opportunities for my startup.\", \"location\": \"Copenhagen Business Hub\", \"attendees\": [\"Rohini Iyer\", \"Saoirse Ní Chonaill\"], \"start_strftime\": \"Thursday, 2024-10-03 11:00:00\", \"end_strftime\": \"Thursday, 2024-10-03 13:00:00\"}, {\"event_id\": \"ac746a9aaf7a432ea6817c7fda55043c\", \"title\": \"Yoga Class\", \"start_datetime\": \"1727773200\", \"end_datetime\": \"1727778600\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Colette Vandenberghe\", \"Nonglak Srisombat\"], \"start_strftime\": \"Tuesday, 2024-10-01 09:00:00\", \"end_strftime\": \"Tuesday, 2024-10-01 10:30:00\"}, {\"event_id\": \"acee1a3be0da4544bdf3fdb1e7cf2d93\", \"title\": \"Meditation Session\", \"start_datetime\": \"1727852400\", \"end_datetime\": \"1727856000\", \"tag\": \"Wellness\", \"description\": \"Daily meditation session to clear my mind and set intentions for the day.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Wednesday, 2024-10-02 07:00:00\", \"end_strftime\": \"Wednesday, 2024-10-02 08:00:00\"}, {\"event_id\": \"bb2a01cc4cef40c9998a533f20c2d557\", \"title\": \"Investor Meeting\", \"start_datetime\": \"1728313200\", \"end_datetime\": \"1728320400\", \"tag\": \"Work\", \"description\": \"Meeting with potential investors to discuss funding opportunities for my startup.\", \"location\": \"Conference Room\", \"attendees\": [\"Rohan Deshpande\", \"Rohini Deshpande\"], \"start_strftime\": \"Monday, 2024-10-07 15:00:00\", \"end_strftime\": \"Monday, 2024-10-07 17:00:00\"}, {\"event_id\": \"bd61603f24c04d98bcf7100a9ff88ddb\", \"title\": \"Networking Event\", \"start_datetime\": \"1727802000\", \"end_datetime\": \"1727809200\", \"tag\": \"Social\", \"description\": \"Networking event for entrepreneurs and investors to connect and share ideas.\", \"location\": \"Copenhagen Business Network\", \"attendees\": [\"Rohini Iyer\", \"Colette Vandenberghe\", \"Nonglak Srisombat\"], \"start_strftime\": \"Tuesday, 2024-10-01 17:00:00\", \"end_strftime\": \"Tuesday, 2024-10-01 19:00:00\"}, {\"event_id\": \"c127c19c68094c51844ddaed8458bace\", \"title\": \"Meditation Session\", \"start_datetime\": \"1728025200\", \"end_datetime\": \"1728028800\", \"tag\": \"Wellness\", \"description\": \"Daily meditation session to clear my mind and set intentions for the day.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Friday, 2024-10-04 07:00:00\", \"end_strftime\": \"Friday, 2024-10-04 08:00:00\"}, {\"event_id\": \"c406046ec4f149ca9eb93f730ea6b973\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1728151200\", \"end_datetime\": \"1728160200\", \"tag\": \"Social\", \"description\": \"Dinner with close friends to catch up and share stories.\", \"location\": \"Restaurant Schønnemann's\", \"attendees\": [\"Astrid Jensen\", \"Kirsten Ravnkilde\", \"Aoife Ní Chonchobhair\"], \"start_strftime\": \"Saturday, 2024-10-05 18:00:00\", \"end_strftime\": \"Saturday, 2024-10-05 20:30:00\"}, {\"event_id\": \"df9a9f7c9631446aa8b86a29d822ea60\", \"title\": \"Team Lunch\", \"start_datetime\": \"1728302400\", \"end_datetime\": \"1728307800\", \"tag\": \"Social\", \"description\": \"Catch up with the team over lunch and discuss ongoing projects.\", \"location\": \"Restaurant\", \"attendees\": [\"Astrid Rasmussen\", \"Kirsten Ravnkilde\"], \"start_strftime\": \"Monday, 2024-10-07 12:00:00\", \"end_strftime\": \"Monday, 2024-10-07 13:30:00\"}, {\"event_id\": \"e98c27f2079e4bca9dc0e71f5abb4784\", \"title\": \"Meditation Session\", \"start_datetime\": \"1728198000\", \"end_datetime\": \"1728201600\", \"tag\": \"Wellness\", \"description\": \"Daily meditation session to clear my mind and set intentions for the day.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Sunday, 2024-10-06 07:00:00\", \"end_strftime\": \"Sunday, 2024-10-06 08:00:00\"}, {\"event_id\": \"ee800d7c01cf442da12a723575c76eb6\", \"title\": \"Yoga Class\", \"start_datetime\": \"1727946000\", \"end_datetime\": \"1727951400\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Colette Vandenberghe\", \"Nonglak Srisombat\"], \"start_strftime\": \"Thursday, 2024-10-03 09:00:00\", \"end_strftime\": \"Thursday, 2024-10-03 10:30:00\"}, {\"event_id\": \"f14b4fcda64947df9c8b29fcaf6216cd\", \"title\": \"Project Planning\", \"start_datetime\": \"1728126000\", \"end_datetime\": \"1728133200\", \"tag\": \"Work\", \"description\": \"Planning and brainstorming session for upcoming projects.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Saturday, 2024-10-05 11:00:00\", \"end_strftime\": \"Saturday, 2024-10-05 13:00:00\"}, {\"event_id\": \"f6a24b36e4924f9b9703c68f73d9bb6d\", \"title\": \"Team Meeting\", \"start_datetime\": \"1727863200\", \"end_datetime\": \"1727870400\", \"tag\": \"Work\", \"description\": \"Meeting with my team to discuss ongoing projects and share updates.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Astrid Jensen\", \"Kirsten Ravnkilde\", \"Narin Suthiwong\"], \"start_strftime\": \"Wednesday, 2024-10-02 10:00:00\", \"end_strftime\": \"Wednesday, 2024-10-02 12:00:00\"}], \"range\": [\"0\", \"22\"], \"total\": \"22\"}",
+      "event_id": "series_s1_cal_w1",
+      "response_sha256": "8fddd9c56f7961ebaa4c7b63f33d345234ba1b754929fcb1e471e3e926af05eb"
+    },
+    "stage1.tool_response.series_s1_cal_w2": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"0c0b66cbd2414a938e5f3b1aa37f1d3e\", \"title\": \"Team Meeting\", \"start_datetime\": \"1728640800\", \"end_datetime\": \"1728648000\", \"tag\": \"Work\", \"description\": \"Weekly team meeting to discuss progress and plan tasks.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Astrid Rasmussen\", \"Kirsten Ravnkilde\"], \"start_strftime\": \"Friday, 2024-10-11 10:00:00\", \"end_strftime\": \"Friday, 2024-10-11 12:00:00\"}, {\"event_id\": \"0fc4a781cdac4c15b21fd52f1a1baac1\", \"title\": \"Lunch with Mentor\", \"start_datetime\": \"1728477000\", \"end_datetime\": \"1728482400\", \"tag\": \"Social\", \"description\": \"Meet with my mentor to discuss progress and seek guidance.\", \"location\": \"Restaurant\", \"attendees\": [\"Rohan Deshpande\"], \"start_strftime\": \"Wednesday, 2024-10-09 12:30:00\", \"end_strftime\": \"Wednesday, 2024-10-09 14:00:00\"}, {\"event_id\": \"31f686d097c843c5baacb9dbaaa5b333\", \"title\": \"Meditation Session\", \"start_datetime\": \"1728630000\", \"end_datetime\": \"1728633600\", \"tag\": \"Wellness\", \"description\": \"Daily meditation session to clear my mind and focus on the day ahead.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Friday, 2024-10-11 07:00:00\", \"end_strftime\": \"Friday, 2024-10-11 08:00:00\"}, {\"event_id\": \"47279d3ed88e4e1299e4f8c6509221a4\", \"title\": \"Meditation Session\", \"start_datetime\": \"1728457200\", \"end_datetime\": \"1728460800\", \"tag\": \"Wellness\", \"description\": \"Daily meditation session to clear my mind and focus on the day ahead.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Wednesday, 2024-10-09 07:00:00\", \"end_strftime\": \"Wednesday, 2024-10-09 08:00:00\"}, {\"event_id\": \"4ba7f292d38d4178b9862968e8fe7352\", \"title\": \"Marketing Strategy Session\", \"start_datetime\": \"1728468000\", \"end_datetime\": \"1728475200\", \"tag\": \"Work\", \"description\": \"Session to discuss and plan marketing strategies for the startup.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Astrid Rasmussen\", \"Ajla Delić\"], \"start_strftime\": \"Wednesday, 2024-10-09 10:00:00\", \"end_strftime\": \"Wednesday, 2024-10-09 12:00:00\"}, {\"event_id\": \"59470fe63c074da480b3e5225c0f5697\", \"title\": \"Yoga Class\", \"start_datetime\": \"1728723600\", \"end_datetime\": \"1728729000\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Astrid Rasmussen\", \"Kirsten Ravnkilde\"], \"start_strftime\": \"Saturday, 2024-10-12 09:00:00\", \"end_strftime\": \"Saturday, 2024-10-12 10:30:00\"}, {\"event_id\": \"5b7a63e5094849d6b61281fd34281ade\", \"title\": \"Team Update\", \"start_datetime\": \"1728396000\", \"end_datetime\": \"1728401400\", \"tag\": \"Work\", \"description\": \"Update the team on progress and discuss any challenges or concerns.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Astrid Rasmussen\", \"Kirsten Ravnkilde\"], \"start_strftime\": \"Tuesday, 2024-10-08 14:00:00\", \"end_strftime\": \"Tuesday, 2024-10-08 15:30:00\"}, {\"event_id\": \"5d8e1aa4288641e0986da9d51d7466bd\", \"title\": \"Marketing Strategy Discussion\", \"start_datetime\": \"1728914400\", \"end_datetime\": \"1728921600\", \"tag\": \"Work\", \"description\": \"Discuss marketing strategy with the team\", \"location\": \"Startup Office\", \"attendees\": [\"Nalini Rao\", \"Kavita Rao\"], \"start_strftime\": \"Monday, 2024-10-14 14:00:00\", \"end_strftime\": \"Monday, 2024-10-14 16:00:00\"}, {\"event_id\": \"5e9b4dfe37b24655b59fd86c1e8e5410\", \"title\": \"Meditation Session\", \"start_datetime\": \"1728892800\", \"end_datetime\": \"1728896400\", \"tag\": \"Health\", \"description\": \"Daily meditation session to clear mind and focus\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Monday, 2024-10-14 08:00:00\", \"end_strftime\": \"Monday, 2024-10-14 09:00:00\"}, {\"event_id\": \"66b441a7b29943bdad946fb9568481a6\", \"title\": \"Networking Event\", \"start_datetime\": \"1728928800\", \"end_datetime\": \"1728936000\", \"tag\": \"Social\", \"description\": \"Attend a networking event to connect with potential investors\", \"location\": \"Copenhagen Business Park\", \"attendees\": [\"Prasert Suthipong\", \"Birgitta Rasmussen\"], \"start_strftime\": \"Monday, 2024-10-14 18:00:00\", \"end_strftime\": \"Monday, 2024-10-14 20:00:00\"}, {\"event_id\": \"6ffc78b726694806b798752dc0cd4d81\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1728763200\", \"end_datetime\": \"1728772200\", \"tag\": \"Social\", \"description\": \"Catch up with friends over dinner and share stories.\", \"location\": \"Restaurant\", \"attendees\": [\"Astrid Rasmussen\", \"Kirsten Ravnkilde\", \"Narin Suthiwong\"], \"start_strftime\": \"Saturday, 2024-10-12 20:00:00\", \"end_strftime\": \"Saturday, 2024-10-12 22:30:00\"}, {\"event_id\": \"7e7bcd16a1f840b59a68cbb12f990c3c\", \"title\": \"Dinner with Family\", \"start_datetime\": \"1728583200\", \"end_datetime\": \"1728592200\", \"tag\": \"Social\", \"description\": \"Spend quality time with family over dinner.\", \"location\": \"Home\", \"attendees\": [\"Kirsten Ravnkilde\"], \"start_strftime\": \"Thursday, 2024-10-10 18:00:00\", \"end_strftime\": \"Thursday, 2024-10-10 20:30:00\"}, {\"event_id\": \"810eb93ea0df421697c40a6438fd0b3f\", \"title\": \"Networking Event\", \"start_datetime\": \"1728666000\", \"end_datetime\": \"1728676800\", \"tag\": \"Social\", \"description\": \"Attend a networking event to connect with other entrepreneurs and industry professionals.\", \"location\": \"Hotel Ballroom\", \"attendees\": [\"Rohan Deshpande\", \"Rohini Deshpande\", \"Ajla Delić\"], \"start_strftime\": \"Friday, 2024-10-11 17:00:00\", \"end_strftime\": \"Friday, 2024-10-11 20:00:00\"}, {\"event_id\": \"8cc41e80b5b24cd2a8576dccd77788d8\", \"title\": \"Project Planning Session\", \"start_datetime\": \"1728385200\", \"end_datetime\": \"1728392400\", \"tag\": \"Work\", \"description\": \"Session to plan and prioritize tasks for the upcoming week.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Astrid Rasmussen\", \"Kirsten Ravnkilde\"], \"start_strftime\": \"Tuesday, 2024-10-08 11:00:00\", \"end_strftime\": \"Tuesday, 2024-10-08 13:00:00\"}, {\"event_id\": \"917f6625c1e549a69adecf61fa832441\", \"title\": \"Networking Event\", \"start_datetime\": \"1728406800\", \"end_datetime\": \"1728417600\", \"tag\": \"Social\", \"description\": \"Attend a networking event to connect with other entrepreneurs and industry professionals.\", \"location\": \"Hotel Ballroom\", \"attendees\": [\"Rohan Deshpande\", \"Rohini Deshpande\", \"Ajla Delić\"], \"start_strftime\": \"Tuesday, 2024-10-08 17:00:00\", \"end_strftime\": \"Tuesday, 2024-10-08 20:00:00\"}, {\"event_id\": \"954756d69e4b4cc6865155cae1d80750\", \"title\": \"Yoga Class\", \"start_datetime\": \"1728378000\", \"end_datetime\": \"1728383400\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Astrid Rasmussen\", \"Kirsten Ravnkilde\"], \"start_strftime\": \"Tuesday, 2024-10-08 09:00:00\", \"end_strftime\": \"Tuesday, 2024-10-08 10:30:00\"}, {\"event_id\": \"9abd8ec5a7c34bfa89f110c92ef8e874\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1728417600\", \"end_datetime\": \"1728426600\", \"tag\": \"Social\", \"description\": \"Catch up with friends over dinner and share stories.\", \"location\": \"Restaurant\", \"attendees\": [\"Astrid Rasmussen\", \"Kirsten Ravnkilde\", \"Narin Suthiwong\"], \"start_strftime\": \"Tuesday, 2024-10-08 20:00:00\", \"end_strftime\": \"Tuesday, 2024-10-08 22:30:00\"}, {\"event_id\": \"9e44a97d3de14b79b807dc846d9a0f47\", \"title\": \"Project Review\", \"start_datetime\": \"1728558000\", \"end_datetime\": \"1728565200\", \"tag\": \"Work\", \"description\": \"Review progress on ongoing projects and discuss any challenges or concerns.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Astrid Rasmussen\", \"Kirsten Ravnkilde\"], \"start_strftime\": \"Thursday, 2024-10-10 11:00:00\", \"end_strftime\": \"Thursday, 2024-10-10 13:00:00\"}, {\"event_id\": \"a5594959c7384bdabc0557354c7e5e53\", \"title\": \"Team Planning Meeting\", \"start_datetime\": \"1728900000\", \"end_datetime\": \"1728907200\", \"tag\": \"Work\", \"description\": \"Weekly team planning meeting to discuss project progress\", \"location\": \"Startup Office\", \"attendees\": [\"Stijn Vandenberghe\", \"Thanakorn Srisombat\"], \"start_strftime\": \"Monday, 2024-10-14 10:00:00\", \"end_strftime\": \"Monday, 2024-10-14 12:00:00\"}, {\"event_id\": \"ad8ab78bf31f4469b2e3cdcfaf7f512c\", \"title\": \"Project Planning Session\", \"start_datetime\": \"1728730800\", \"end_datetime\": \"1728738000\", \"tag\": \"Work\", \"description\": \"Session to plan and prioritize tasks for the upcoming week.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Astrid Rasmussen\", \"Kirsten Ravnkilde\"], \"start_strftime\": \"Saturday, 2024-10-12 11:00:00\", \"end_strftime\": \"Saturday, 2024-10-12 13:00:00\"}, {\"event_id\": \"b24921faf65b49108e73e24fa57208d4\", \"title\": \"Coffee Break\", \"start_datetime\": \"1728655200\", \"end_datetime\": \"1728658800\", \"tag\": \"Social\", \"description\": \"Take a break and catch up with colleagues over coffee.\", \"location\": \"Coffee Shop\", \"attendees\": [\"Astrid Rasmussen\", \"Kirsten Ravnkilde\"], \"start_strftime\": \"Friday, 2024-10-11 14:00:00\", \"end_strftime\": \"Friday, 2024-10-11 15:00:00\"}, {\"event_id\": \"bc58461c7f58422695971bd138365197\", \"title\": \"Dinner with Family\", \"start_datetime\": \"1728936000\", \"end_datetime\": \"1728943200\", \"tag\": \"Social\", \"description\": \"Dinner with family to catch up and relax\", \"location\": \"Home\", \"attendees\": [\"Birgitta Rasmussen\", \"Vigdis Rasmussen\"], \"start_strftime\": \"Monday, 2024-10-14 20:00:00\", \"end_strftime\": \"Monday, 2024-10-14 22:00:00\"}, {\"event_id\": \"e3990309a2e149fdbf9b726887297579\", \"title\": \"Yoga Class\", \"start_datetime\": \"1728550800\", \"end_datetime\": \"1728556200\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Astrid Rasmussen\", \"Kirsten Ravnkilde\"], \"start_strftime\": \"Thursday, 2024-10-10 09:00:00\", \"end_strftime\": \"Thursday, 2024-10-10 10:30:00\"}], \"range\": [\"0\", \"23\"], \"total\": \"23\"}",
+      "event_id": "series_s1_cal_w2",
+      "response_sha256": "db3994ba3fa9006d360ba1786faaa4b9901fbda8762e67b748265f01b5ce77f2"
+    },
+    "stage1.tool_response.series_s1_cal_w3": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"01ab3aa81bc44afb9be63d3222456f52\", \"title\": \"Networking Event\", \"start_datetime\": \"1729188000\", \"end_datetime\": \"1729195200\", \"tag\": \"Social\", \"description\": \"Attend a networking event to connect with potential investors\", \"location\": \"Copenhagen Business Park\", \"attendees\": [\"Prasert Suthipong\", \"Birgitta Rasmussen\"], \"start_strftime\": \"Thursday, 2024-10-17 18:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 20:00:00\"}, {\"event_id\": \"1f53c1e1faff41e6b1ea8b4ca4d2f5a2\", \"title\": \"Meditation Session\", \"start_datetime\": \"1729411200\", \"end_datetime\": \"1729414800\", \"tag\": \"Health\", \"description\": \"Daily meditation session to clear mind and focus\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Sunday, 2024-10-20 08:00:00\", \"end_strftime\": \"Sunday, 2024-10-20 09:00:00\"}, {\"event_id\": \"207c99cf033b48c282206cdc95d0b053\", \"title\": \"Investor Meeting\", \"start_datetime\": \"1728986400\", \"end_datetime\": \"1728993600\", \"tag\": \"Work\", \"description\": \"Meeting with potential investor to discuss funding\", \"location\": \"Startup Office\", \"attendees\": [\"Prasert Suthipong\"], \"start_strftime\": \"Tuesday, 2024-10-15 10:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 12:00:00\"}, {\"event_id\": \"26dfaf4699f5473aae23f76b5831f9c2\", \"title\": \"Meditation Session\", \"start_datetime\": \"1728979200\", \"end_datetime\": \"1728982800\", \"tag\": \"Health\", \"description\": \"Daily meditation session to clear mind and focus\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-15 08:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 09:00:00\"}, {\"event_id\": \"34f949b5b34a4424b490b765243475a0\", \"title\": \"Meditation Session\", \"start_datetime\": \"1729238400\", \"end_datetime\": \"1729242000\", \"tag\": \"Health\", \"description\": \"Daily meditation session to clear mind and focus\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Friday, 2024-10-18 08:00:00\", \"end_strftime\": \"Friday, 2024-10-18 09:00:00\"}, {\"event_id\": \"4013c3045e7f4cebbbca10a772ba287f\", \"title\": \"Marketing Strategy Discussion\", \"start_datetime\": \"1729087200\", \"end_datetime\": \"1729094400\", \"tag\": \"Work\", \"description\": \"Discuss marketing strategy with the team\", \"location\": \"Startup Office\", \"attendees\": [\"Nalini Rao\", \"Kavita Rao\"], \"start_strftime\": \"Wednesday, 2024-10-16 14:00:00\", \"end_strftime\": \"Wednesday, 2024-10-16 16:00:00\"}, {\"event_id\": \"500d76dc2e4846b6bb7deaae90f03e05\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1729108800\", \"end_datetime\": \"1729116000\", \"tag\": \"Social\", \"description\": \"Dinner with friends to catch up and relax\", \"location\": \"Restaurant\", \"attendees\": [\"Birgitta Rasmussen\", \"Vigdis Rasmussen\"], \"start_strftime\": \"Wednesday, 2024-10-16 20:00:00\", \"end_strftime\": \"Wednesday, 2024-10-16 22:00:00\"}, {\"event_id\": \"69dde19cbfcc4473b8b91f21bbb7fbc6\", \"title\": \"Coffee Break\", \"start_datetime\": \"1729000800\", \"end_datetime\": \"1729004400\", \"tag\": \"Social\", \"description\": \"Coffee break with colleagues to discuss project progress\", \"location\": \"Startup Office\", \"attendees\": [\"Stijn Vandenberghe\", \"Thanakorn Srisombat\"], \"start_strftime\": \"Tuesday, 2024-10-15 14:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 15:00:00\"}, {\"event_id\": \"8149d015f35446b4adc5771d28c186e0\", \"title\": \"Coffee Break\", \"start_datetime\": \"1729173600\", \"end_datetime\": \"1729177200\", \"tag\": \"Social\", \"description\": \"Coffee break with colleagues to discuss project progress\", \"location\": \"Startup Office\", \"attendees\": [\"Stijn Vandenberghe\", \"Thanakorn Srisombat\"], \"start_strftime\": \"Thursday, 2024-10-17 14:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 15:00:00\"}, {\"event_id\": \"8267eb1302e748ab8cf0eaa7364e7177\", \"title\": \"Networking Event\", \"start_datetime\": \"1729533600\", \"end_datetime\": \"1729540800\", \"tag\": \"Networking\", \"description\": \"Attend a networking event to connect with potential investors and partners.\", \"location\": \"Copenhagen Business Center\", \"attendees\": [\"Aoife Ó Cuinn\", \"Kirsten Ravnkilde\"], \"start_strftime\": \"Monday, 2024-10-21 18:00:00\", \"end_strftime\": \"Monday, 2024-10-21 20:00:00\"}, {\"event_id\": \"851746d0b0984b6491d9a6847152abac\", \"title\": \"Meditation Session\", \"start_datetime\": \"1729152000\", \"end_datetime\": \"1729155600\", \"tag\": \"Health\", \"description\": \"Daily meditation session to clear mind and focus\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Thursday, 2024-10-17 08:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 09:00:00\"}, {\"event_id\": \"8c5a00bb461b431ca7d1709b9a2ae611\", \"title\": \"Investor Meeting\", \"start_datetime\": \"1729159200\", \"end_datetime\": \"1729166400\", \"tag\": \"Work\", \"description\": \"Meeting with potential investor to discuss funding\", \"location\": \"Startup Office\", \"attendees\": [\"Prasert Suthipong\"], \"start_strftime\": \"Thursday, 2024-10-17 10:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 12:00:00\"}, {\"event_id\": \"91b2f65be9dd486d9364e8757055e253\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729105200\", \"end_datetime\": \"1729108800\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit\", \"location\": \"Yoga Studio\", \"attendees\": [\"Vigdis Rasmussen\"], \"start_strftime\": \"Wednesday, 2024-10-16 19:00:00\", \"end_strftime\": \"Wednesday, 2024-10-16 20:00:00\"}, {\"event_id\": \"a385737a81c84fc393d4fa0a4cf02464\", \"title\": \"Coffee Break\", \"start_datetime\": \"1729260000\", \"end_datetime\": \"1729263600\", \"tag\": \"Social\", \"description\": \"Coffee break with colleagues to discuss project progress\", \"location\": \"Startup Office\", \"attendees\": [\"Stijn Vandenberghe\", \"Thanakorn Srisombat\"], \"start_strftime\": \"Friday, 2024-10-18 14:00:00\", \"end_strftime\": \"Friday, 2024-10-18 15:00:00\"}, {\"event_id\": \"aad2c9d3723d42958fdc4a4b6484b700\", \"title\": \"Dinner with Family\", \"start_datetime\": \"1729368000\", \"end_datetime\": \"1729375200\", \"tag\": \"Social\", \"description\": \"Dinner with family to catch up and relax\", \"location\": \"Home\", \"attendees\": [\"Birgitta Rasmussen\", \"Vigdis Rasmussen\"], \"start_strftime\": \"Saturday, 2024-10-19 20:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 22:00:00\"}, {\"event_id\": \"bda7b06309844e51a164798cd5f3c31f\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729364400\", \"end_datetime\": \"1729368000\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit\", \"location\": \"Yoga Studio\", \"attendees\": [\"Vigdis Rasmussen\"], \"start_strftime\": \"Saturday, 2024-10-19 19:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 20:00:00\"}, {\"event_id\": \"be30d34914ed4cb38b31bfdb45ad62bb\", \"title\": \"Meditation Session\", \"start_datetime\": \"1729497600\", \"end_datetime\": \"1729501200\", \"tag\": \"Wellness\", \"description\": \"Daily meditation session to clear my mind and focus on the day ahead.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Monday, 2024-10-21 08:00:00\", \"end_strftime\": \"Monday, 2024-10-21 09:00:00\"}, {\"event_id\": \"caa8c31cec284ec1b87d2ac18d59c432\", \"title\": \"Team Planning Meeting\", \"start_datetime\": \"1729072800\", \"end_datetime\": \"1729080000\", \"tag\": \"Work\", \"description\": \"Weekly team planning meeting to discuss project progress\", \"location\": \"Startup Office\", \"attendees\": [\"Stijn Vandenberghe\", \"Thanakorn Srisombat\"], \"start_strftime\": \"Wednesday, 2024-10-16 10:00:00\", \"end_strftime\": \"Wednesday, 2024-10-16 12:00:00\"}, {\"event_id\": \"f4bbbeac628e4071a96f5bf3c602eaa6\", \"title\": \"Team Planning Meeting\", \"start_datetime\": \"1729504800\", \"end_datetime\": \"1729512000\", \"tag\": \"Work\", \"description\": \"Weekly team planning meeting to discuss project progress and goals.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Aurélien Vandenberghe\", \"Vigdis Rasmussen\"], \"start_strftime\": \"Monday, 2024-10-21 10:00:00\", \"end_strftime\": \"Monday, 2024-10-21 12:00:00\"}, {\"event_id\": \"fc31ad57bdd84633a81c337112c9ea52\", \"title\": \"Team Planning Meeting\", \"start_datetime\": \"1729418400\", \"end_datetime\": \"1729425600\", \"tag\": \"Work\", \"description\": \"Weekly team planning meeting to discuss project progress\", \"location\": \"Startup Office\", \"attendees\": [\"Stijn Vandenberghe\", \"Thanakorn Srisombat\"], \"start_strftime\": \"Sunday, 2024-10-20 10:00:00\", \"end_strftime\": \"Sunday, 2024-10-20 12:00:00\"}], \"range\": [\"0\", \"20\"], \"total\": \"20\"}",
+      "event_id": "series_s1_cal_w3",
+      "response_sha256": "f5dcb4a512ad195913ffc7f44fbffeecbab5ba401dbc6a7d3c47cd5dd2ee0627"
+    },
+    "stage1.tool_response.series_s1_cal_w4": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"0dcab20d81dc4deab01ed68741a8a47a\", \"title\": \"Team Brainstorming Session\", \"start_datetime\": \"1729677600\", \"end_datetime\": \"1729684800\", \"tag\": \"Work\", \"description\": \"Weekly team brainstorming session to generate new ideas and solutions.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Aurélien Vandenberghe\", \"Vigdis Rasmussen\", \"Astrid Kjær\"], \"start_strftime\": \"Wednesday, 2024-10-23 10:00:00\", \"end_strftime\": \"Wednesday, 2024-10-23 12:00:00\"}, {\"event_id\": \"3dc0ce96e2f947709c9946ccecbc2913\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1729710000\", \"end_datetime\": \"1729717200\", \"tag\": \"Personal\", \"description\": \"Spend quality time with friends over dinner.\", \"location\": \"Restaurant\", \"attendees\": [\"Aoife Ó Cuinn\", \"Kirsten Ravnkilde\", \"Elodie Vandenberghe\"], \"start_strftime\": \"Wednesday, 2024-10-23 19:00:00\", \"end_strftime\": \"Wednesday, 2024-10-23 21:00:00\"}, {\"event_id\": \"3dd6b367a92c4d8e93474c79219076f7\", \"title\": \"Meditation Session\", \"start_datetime\": \"1730098800\", \"end_datetime\": \"1730100600\", \"tag\": \"Wellness\", \"description\": \"Daily meditation session to clear mind and focus on the day ahead.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Monday, 2024-10-28 07:00:00\", \"end_strftime\": \"Monday, 2024-10-28 07:30:00\"}, {\"event_id\": \"3f55f650e659482b9d5b12e9c5f7f821\", \"title\": \"Dinner with Family\", \"start_datetime\": \"1729882800\", \"end_datetime\": \"1729890000\", \"tag\": \"Personal\", \"description\": \"Spend quality time with family over dinner.\", \"location\": \"Home\", \"attendees\": [\"Astrid Kjær\", \"Kirsten Ravnkilde\"], \"start_strftime\": \"Friday, 2024-10-25 19:00:00\", \"end_strftime\": \"Friday, 2024-10-25 21:00:00\"}, {\"event_id\": \"586b4756ea074f04b1bc1c2d1c83592e\", \"title\": \"Startup Meeting with Rohini\", \"start_datetime\": \"1730109600\", \"end_datetime\": \"1730115000\", \"tag\": \"Work\", \"description\": \"Meeting with Rohini to discuss potential partnership opportunities for the startup.\", \"location\": \"Copenhagen Co-working Space\", \"attendees\": [\"Rohini Naidu\"], \"start_strftime\": \"Monday, 2024-10-28 10:00:00\", \"end_strftime\": \"Monday, 2024-10-28 11:30:00\"}, {\"event_id\": \"58fe532e05384da5a9b62452568b4119\", \"title\": \"Lunch with Aisling\", \"start_datetime\": \"1730118600\", \"end_datetime\": \"1730124000\", \"tag\": \"Social\", \"description\": \"Catching up with Aisling over lunch to discuss her latest projects.\", \"location\": \"Copenhagen Restaurant\", \"attendees\": [\"Aisling O'Connor\"], \"start_strftime\": \"Monday, 2024-10-28 12:30:00\", \"end_strftime\": \"Monday, 2024-10-28 14:00:00\"}, {\"event_id\": \"612c0d5adf114df5b8dedd15de2da061\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729587600\", \"end_datetime\": \"1729591200\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Astrid Kjær\", \"Elodie Vandenberghe\"], \"start_strftime\": \"Tuesday, 2024-10-22 09:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 10:00:00\"}, {\"event_id\": \"6a358846c215425bacc5b4989ac63fc2\", \"title\": \"Marketing Strategy Discussion\", \"start_datetime\": \"1729594800\", \"end_datetime\": \"1729602000\", \"tag\": \"Work\", \"description\": \"Discuss marketing strategy and opportunities with the team.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Aurélien Vandenberghe\", \"Vigdis Rasmussen\", \"Prasert Suthipong\"], \"start_strftime\": \"Tuesday, 2024-10-22 11:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 13:00:00\"}, {\"event_id\": \"7072a749fe904d13a24def0cb26af374\", \"title\": \"Meditation Session\", \"start_datetime\": \"1729843200\", \"end_datetime\": \"1729846800\", \"tag\": \"Wellness\", \"description\": \"Daily meditation session to clear my mind and focus on the day ahead.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Friday, 2024-10-25 08:00:00\", \"end_strftime\": \"Friday, 2024-10-25 09:00:00\"}, {\"event_id\": \"708fd6f76acc428a840deebf35f41462\", \"title\": \"Lunch with Colleagues\", \"start_datetime\": \"1729861200\", \"end_datetime\": \"1729868400\", \"tag\": \"Personal\", \"description\": \"Spend quality time with colleagues over lunch.\", \"location\": \"Restaurant\", \"attendees\": [\"Aurélien Vandenberghe\", \"Vigdis Rasmussen\"], \"start_strftime\": \"Friday, 2024-10-25 13:00:00\", \"end_strftime\": \"Friday, 2024-10-25 15:00:00\"}, {\"event_id\": \"794740fb358d46558bd3c7e3a7f592e4\", \"title\": \"Project X Update\", \"start_datetime\": \"1729616400\", \"end_datetime\": \"1729620000\", \"tag\": \"Work\", \"description\": \"Update on Project X progress and next steps.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Aurélien Vandenberghe\", \"Vigdis Rasmussen\"], \"start_strftime\": \"Tuesday, 2024-10-22 17:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 18:00:00\"}, {\"event_id\": \"7d36fbe7b0a94db39d399163a86e02e3\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729760400\", \"end_datetime\": \"1729764000\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Astrid Kjær\", \"Elodie Vandenberghe\"], \"start_strftime\": \"Thursday, 2024-10-24 09:00:00\", \"end_strftime\": \"Thursday, 2024-10-24 10:00:00\"}, {\"event_id\": \"861024dd4f97489dbfc2cbf6c5ae66dd\", \"title\": \"Project X Meeting\", \"start_datetime\": \"1729767600\", \"end_datetime\": \"1729774800\", \"tag\": \"Work\", \"description\": \"Meeting with the Project X team to discuss progress and next steps.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Aurélien Vandenberghe\", \"Vigdis Rasmussen\", \"Prasert Suthipong\"], \"start_strftime\": \"Thursday, 2024-10-24 11:00:00\", \"end_strftime\": \"Thursday, 2024-10-24 13:00:00\"}, {\"event_id\": \"883f7b9aa3ad46389ca462d9e9f7172f\", \"title\": \"Networking Call\", \"start_datetime\": \"1729785600\", \"end_datetime\": \"1729789200\", \"tag\": \"Networking\", \"description\": \"Call with a potential investor to discuss opportunities.\", \"location\": \"Phone Call\", \"attendees\": [\"Aoife Ó Cuinn\"], \"start_strftime\": \"Thursday, 2024-10-24 16:00:00\", \"end_strftime\": \"Thursday, 2024-10-24 17:00:00\"}, {\"event_id\": \"993488f422c94c648e36f9340ad6e58e\", \"title\": \"Lunch Break\", \"start_datetime\": \"1729778400\", \"end_datetime\": \"1729782000\", \"tag\": \"Personal\", \"description\": \"Take a break and recharge over lunch.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Thursday, 2024-10-24 14:00:00\", \"end_strftime\": \"Thursday, 2024-10-24 15:00:00\"}, {\"event_id\": \"b464afac15804e4f8ceddbb5413b267b\", \"title\": \"Yoga Class\", \"start_datetime\": \"1730134800\", \"end_datetime\": \"1730138400\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Monday, 2024-10-28 17:00:00\", \"end_strftime\": \"Monday, 2024-10-28 18:00:00\"}, {\"event_id\": \"c89146ccd4d14322847c787bf07198c0\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729933200\", \"end_datetime\": \"1729936800\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Astrid Kjær\", \"Elodie Vandenberghe\"], \"start_strftime\": \"Saturday, 2024-10-26 09:00:00\", \"end_strftime\": \"Saturday, 2024-10-26 10:00:00\"}, {\"event_id\": \"e08975bffde346e9ac02c4c5aa1573a6\", \"title\": \"Lunch with Family\", \"start_datetime\": \"1729605600\", \"end_datetime\": \"1729612800\", \"tag\": \"Personal\", \"description\": \"Spend quality time with family over lunch.\", \"location\": \"Home\", \"attendees\": [\"Astrid Kjær\", \"Kirsten Ravnkilde\"], \"start_strftime\": \"Tuesday, 2024-10-22 14:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 16:00:00\"}, {\"event_id\": \"f4caebb337ef463c81d80f693d79f5c1\", \"title\": \"Project X Update\", \"start_datetime\": \"1729872000\", \"end_datetime\": \"1729875600\", \"tag\": \"Work\", \"description\": \"Update on Project X progress and next steps.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Aurélien Vandenberghe\", \"Vigdis Rasmussen\"], \"start_strftime\": \"Friday, 2024-10-25 16:00:00\", \"end_strftime\": \"Friday, 2024-10-25 17:00:00\"}, {\"event_id\": \"f78eb8b7cfe04c46b86403b124a40255\", \"title\": \"Meditation Session\", \"start_datetime\": \"1729670400\", \"end_datetime\": \"1729674000\", \"tag\": \"Wellness\", \"description\": \"Daily meditation session to clear my mind and focus on the day ahead.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Wednesday, 2024-10-23 08:00:00\", \"end_strftime\": \"Wednesday, 2024-10-23 09:00:00\"}, {\"event_id\": \"fc004a8526ce48ecbd6b6ef0639f50fb\", \"title\": \"Team Meeting\", \"start_datetime\": \"1729850400\", \"end_datetime\": \"1729857600\", \"tag\": \"Work\", \"description\": \"Weekly team meeting to discuss progress and goals.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Aurélien Vandenberghe\", \"Vigdis Rasmussen\", \"Astrid Kjær\"], \"start_strftime\": \"Friday, 2024-10-25 10:00:00\", \"end_strftime\": \"Friday, 2024-10-25 12:00:00\"}, {\"event_id\": \"fe4f55796e2d48f7aebe0c78a6bde192\", \"title\": \"Dinner with Family\", \"start_datetime\": \"1730142000\", \"end_datetime\": \"1730149200\", \"tag\": \"Personal\", \"description\": \"Family dinner to catch up and spend quality time together.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Monday, 2024-10-28 19:00:00\", \"end_strftime\": \"Monday, 2024-10-28 21:00:00\"}], \"range\": [\"0\", \"22\"], \"total\": \"22\"}",
+      "event_id": "series_s1_cal_w4",
+      "response_sha256": "ea037990e7d19ed64022cbd12f1e3d26ea196763df401954e07c3237336fbf84"
+    },
+    "stage1.tool_response.series_s1_cal_w5": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"099112d1059e4b13b384b7dd5cde8528\", \"title\": \"Meditation Session\", \"start_datetime\": \"1730358000\", \"end_datetime\": \"1730359800\", \"tag\": \"Wellness\", \"description\": \"Daily meditation session to clear mind and focus on the day ahead.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Thursday, 2024-10-31 07:00:00\", \"end_strftime\": \"Thursday, 2024-10-31 07:30:00\"}, {\"event_id\": \"5e08c13069f342b9911340f1c401cc25\", \"title\": \"Networking Event\", \"start_datetime\": \"1730199600\", \"end_datetime\": \"1730206800\", \"tag\": \"Work\", \"description\": \"Attending a networking event to connect with potential investors and partners.\", \"location\": \"Copenhagen Conference Center\", \"attendees\": [\"Aidan Ó Cuinn\", \"Zephyrine De Smet\"], \"start_strftime\": \"Tuesday, 2024-10-29 11:00:00\", \"end_strftime\": \"Tuesday, 2024-10-29 13:00:00\"}, {\"event_id\": \"64d78cf86dd247d7a11ad8f1a2592778\", \"title\": \"Lunch with Zephyrine\", \"start_datetime\": \"1730291400\", \"end_datetime\": \"1730296800\", \"tag\": \"Social\", \"description\": \"Catching up with Zephyrine over lunch to discuss her latest projects.\", \"location\": \"Copenhagen Restaurant\", \"attendees\": [\"Zephyrine De Smet\"], \"start_strftime\": \"Wednesday, 2024-10-30 12:30:00\", \"end_strftime\": \"Wednesday, 2024-10-30 14:00:00\"}, {\"event_id\": \"8a756024d0404761b1e71316e693d2a1\", \"title\": \"Dinner with Family\", \"start_datetime\": \"1730314800\", \"end_datetime\": \"1730322000\", \"tag\": \"Personal\", \"description\": \"Family dinner to catch up and spend quality time together.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Wednesday, 2024-10-30 19:00:00\", \"end_strftime\": \"Wednesday, 2024-10-30 21:00:00\"}, {\"event_id\": \"8be053cdbb9b4cc8939b68dfb2c32e09\", \"title\": \"Yoga Class\", \"start_datetime\": \"1730394000\", \"end_datetime\": \"1730397600\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Thursday, 2024-10-31 17:00:00\", \"end_strftime\": \"Thursday, 2024-10-31 18:00:00\"}, {\"event_id\": \"a74ecd718fdf420aa0145dae6749c801\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1730401200\", \"end_datetime\": \"1730408400\", \"tag\": \"Social\", \"description\": \"Catching up with friends over dinner.\", \"location\": \"Copenhagen Restaurant\", \"attendees\": [\"Aisling Ó Cuinn\", \"Karel Vandermeulen\"], \"start_strftime\": \"Thursday, 2024-10-31 19:00:00\", \"end_strftime\": \"Thursday, 2024-10-31 21:00:00\"}, {\"event_id\": \"ad5610664c13439bbae288b6fe00feee\", \"title\": \"Meditation Session\", \"start_datetime\": \"1730210400\", \"end_datetime\": \"1730212200\", \"tag\": \"Wellness\", \"description\": \"Daily meditation session to clear mind and focus on the day ahead.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-29 14:00:00\", \"end_strftime\": \"Tuesday, 2024-10-29 14:30:00\"}, {\"event_id\": \"ae33eac1af06459ca44d334721ec39c8\", \"title\": \"Personal Project Work\", \"start_datetime\": \"1730410200\", \"end_datetime\": \"1730415600\", \"tag\": \"Personal\", \"description\": \"Working on personal projects and hobbies.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Thursday, 2024-10-31 21:30:00\", \"end_strftime\": \"Thursday, 2024-10-31 23:00:00\"}, {\"event_id\": \"b788a86380754007be9eab658afe76bb\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1730228400\", \"end_datetime\": \"1730235600\", \"tag\": \"Social\", \"description\": \"Catching up with friends over dinner.\", \"location\": \"Copenhagen Restaurant\", \"attendees\": [\"Aisling Ó Cuinn\", \"Karel Vandermeulen\"], \"start_strftime\": \"Tuesday, 2024-10-29 19:00:00\", \"end_strftime\": \"Tuesday, 2024-10-29 21:00:00\"}, {\"event_id\": \"bb64345c8923425f9948f70261a591e5\", \"title\": \"Team Meeting\", \"start_datetime\": \"1730192400\", \"end_datetime\": \"1730197800\", \"tag\": \"Work\", \"description\": \"Weekly team meeting to discuss progress and align on goals.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Karel Vandermeulen\", \"Aurélie Vandenberghe\"], \"start_strftime\": \"Tuesday, 2024-10-29 09:00:00\", \"end_strftime\": \"Tuesday, 2024-10-29 10:30:00\"}, {\"event_id\": \"dfbfb8ab221d4b1b99275b4822b12122\", \"title\": \"Meditation Session\", \"start_datetime\": \"1730271600\", \"end_datetime\": \"1730273400\", \"tag\": \"Wellness\", \"description\": \"Daily meditation session to clear mind and focus on the day ahead.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Wednesday, 2024-10-30 07:00:00\", \"end_strftime\": \"Wednesday, 2024-10-30 07:30:00\"}, {\"event_id\": \"e58630eebc04414184b8bfcbdb01fec2\", \"title\": \"Yoga Class\", \"start_datetime\": \"1730307600\", \"end_datetime\": \"1730311200\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Wednesday, 2024-10-30 17:00:00\", \"end_strftime\": \"Wednesday, 2024-10-30 18:00:00\"}, {\"event_id\": \"e949af4e6f6b44af963cb077e2565bb7\", \"title\": \"Yoga Class\", \"start_datetime\": \"1730221200\", \"end_datetime\": \"1730224800\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-29 17:00:00\", \"end_strftime\": \"Tuesday, 2024-10-29 18:00:00\"}, {\"event_id\": \"ea5b7c0d6faa4a21906e52dd928af1c5\", \"title\": \"Startup Meeting with Aaradhya\", \"start_datetime\": \"1730282400\", \"end_datetime\": \"1730287800\", \"tag\": \"Work\", \"description\": \"Meeting with Aaradhya to discuss potential partnership opportunities for the startup.\", \"location\": \"Copenhagen Co-working Space\", \"attendees\": [\"Aaradhya Rao\"], \"start_strftime\": \"Wednesday, 2024-10-30 10:00:00\", \"end_strftime\": \"Wednesday, 2024-10-30 11:30:00\"}, {\"event_id\": \"eee2e262046d4e2eae6ede279d9da497\", \"title\": \"Team Meeting\", \"start_datetime\": \"1730365200\", \"end_datetime\": \"1730370600\", \"tag\": \"Work\", \"description\": \"Weekly team meeting to discuss progress and align on goals.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Karel Vandermeulen\", \"Aurélie Vandenberghe\"], \"start_strftime\": \"Thursday, 2024-10-31 09:00:00\", \"end_strftime\": \"Thursday, 2024-10-31 10:30:00\"}, {\"event_id\": \"f1fdf593387c432886ee92087379dd60\", \"title\": \"Networking Event\", \"start_datetime\": \"1730372400\", \"end_datetime\": \"1730379600\", \"tag\": \"Work\", \"description\": \"Attending a networking event to connect with potential investors and partners.\", \"location\": \"Copenhagen Conference Center\", \"attendees\": [\"Aidan Ó Cuinn\", \"Zephyrine De Smet\"], \"start_strftime\": \"Thursday, 2024-10-31 11:00:00\", \"end_strftime\": \"Thursday, 2024-10-31 13:00:00\"}], \"range\": [\"0\", \"16\"], \"total\": \"16\"}",
+      "event_id": "series_s1_cal_w5",
+      "response_sha256": "778fcbb9d92c1e3eaef155b742c84eb5c833db4743d8d8e666b784280078a6f1"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Søren Kjær",
+      "original_source": "stage2.tool_gt.series_s2_send.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aidan Ó Cuinn",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w5",
+          "reason": "爱尔兰语人名，含变音符号，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Aisling O'Connor",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w4",
+          "reason": "爱尔兰语完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Aisling Ó Cuinn",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w5",
+          "reason": "爱尔兰语人名，含变音符号，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Aoife Ní Chonchobhair",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w1",
+          "reason": "爱尔兰语人名，含变音符号，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Aoife Ó Cuinn",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w3",
+          "reason": "爱尔兰语人名，含变音符号，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Restaurant Schønnemann's",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含ø的丹麦餐厅专名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Saoirse Ní Chonaill",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w1",
+          "reason": "爱尔兰语人名，含变音符号，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Zephyrine De Smet",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w5",
+          "reason": "罕见完整人名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Aaradhya Rao",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w5",
+          "reason": "印度语完整人名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Ajla Delić",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w2",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Jensen",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w1",
+          "reason": "完整人名，姓氏拼写易错",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Kjær",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w4",
+          "reason": "含æ的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Rasmussen",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w1",
+          "reason": "完整人名，姓氏拼写易错",
+          "weight": 50
+        },
+        {
+          "text": "Aurélie Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w5",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w3",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Birgitta Rasmussen",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w2",
+          "reason": "完整人名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Colette Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w1",
+          "reason": "含复杂姓氏的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Elodie Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w4",
+          "reason": "完整人名，姓氏拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Karel Vandermeulen",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w5",
+          "reason": "荷兰语完整人名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Kavita Rao",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w2",
+          "reason": "印度语完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Kirsten Ravnkilde",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "丹麦语完整人名，含特殊拼写，ASR易错",
+          "weight": 50
+        },
+        {
+          "text": "Nalini Rao",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w2",
+          "reason": "印度语完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Narin Suthiwong",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w1",
+          "reason": "泰语完整人名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Nonglak Srisombat",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w1",
+          "reason": "泰语完整人名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Pichaya Wongthip",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w1",
+          "reason": "泰语完整人名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Prasert Suthipong",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w2",
+          "reason": "泰语完整人名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Deshpande",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w1",
+          "reason": "印度语完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w1",
+          "reason": "印度语完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Iyer",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w1",
+          "reason": "印度语完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Naidu",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w4",
+          "reason": "印度语完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Stijn Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w2",
+          "reason": "荷兰语完整人名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Thanakorn Srisombat",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w2",
+          "reason": "泰语完整人名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Vigdis Rasmussen",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_w2",
+          "reason": "北欧语完整人名，拼写困难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aidan Ó Cuinn",
+        "Aisling O'Connor",
+        "Aisling Ó Cuinn",
+        "Aoife Ní Chonchobhair",
+        "Aoife Ó Cuinn",
+        "Restaurant Schønnemann's",
+        "Saoirse Ní Chonaill",
+        "Zephyrine De Smet",
+        "Aaradhya Rao",
+        "Ajla Delić",
+        "Astrid Jensen",
+        "Astrid Kjær",
+        "Astrid Rasmussen",
+        "Aurélie Vandenberghe",
+        "Aurélien Vandenberghe",
+        "Birgitta Rasmussen",
+        "Colette Vandenberghe",
+        "Elodie Vandenberghe",
+        "Karel Vandermeulen",
+        "Kavita Rao",
+        "Kirsten Ravnkilde",
+        "Nalini Rao",
+        "Narin Suthiwong",
+        "Nonglak Srisombat",
+        "Pichaya Wongthip",
+        "Prasert Suthipong",
+        "Rohan Deshpande",
+        "Rohini Deshpande",
+        "Rohini Iyer",
+        "Rohini Naidu",
+        "Stijn Vandenberghe",
+        "Thanakorn Srisombat",
+        "Vigdis Rasmussen"
+      ],
+      "active_vocabulary": {
+        "Aidan Ó Cuinn": 50,
+        "Aisling O'Connor": 50,
+        "Aisling Ó Cuinn": 50,
+        "Aoife Ní Chonchobhair": 50,
+        "Aoife Ó Cuinn": 50,
+        "Restaurant Schønnemann's": 50,
+        "Saoirse Ní Chonaill": 50,
+        "Zephyrine De Smet": 50,
+        "Aaradhya Rao": 50,
+        "Ajla Delić": 50,
+        "Astrid Jensen": 50,
+        "Astrid Kjær": 50,
+        "Astrid Rasmussen": 50,
+        "Aurélie Vandenberghe": 50,
+        "Aurélien Vandenberghe": 50,
+        "Birgitta Rasmussen": 50,
+        "Colette Vandenberghe": 50,
+        "Elodie Vandenberghe": 50,
+        "Karel Vandermeulen": 50,
+        "Kavita Rao": 50,
+        "Kirsten Ravnkilde": 50,
+        "Nalini Rao": 50,
+        "Narin Suthiwong": 50,
+        "Nonglak Srisombat": 50,
+        "Pichaya Wongthip": 50,
+        "Prasert Suthipong": 50,
+        "Rohan Deshpande": 50,
+        "Rohini Deshpande": 50,
+        "Rohini Iyer": 50,
+        "Rohini Naidu": 50,
+        "Stijn Vandenberghe": 50,
+        "Thanakorn Srisombat": 50,
+        "Vigdis Rasmussen": 50
+      },
+      "vocabulary_sha256": "3cd399c2640996a2803c72be067dd1cae17f2fa024e4e7d95c797fd53ac60e06"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含ø和æ的丹麦语人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Søren Kjær"
+      ],
+      "active_vocabulary": {
+        "Aidan Ó Cuinn": 50,
+        "Aisling O'Connor": 50,
+        "Aisling Ó Cuinn": 50,
+        "Aoife Ní Chonchobhair": 50,
+        "Aoife Ó Cuinn": 50,
+        "Restaurant Schønnemann's": 50,
+        "Saoirse Ní Chonaill": 50,
+        "Zephyrine De Smet": 50,
+        "Aaradhya Rao": 50,
+        "Ajla Delić": 50,
+        "Astrid Jensen": 50,
+        "Astrid Kjær": 50,
+        "Astrid Rasmussen": 50,
+        "Aurélie Vandenberghe": 50,
+        "Aurélien Vandenberghe": 50,
+        "Birgitta Rasmussen": 50,
+        "Colette Vandenberghe": 50,
+        "Elodie Vandenberghe": 50,
+        "Karel Vandermeulen": 50,
+        "Kavita Rao": 50,
+        "Kirsten Ravnkilde": 50,
+        "Nalini Rao": 50,
+        "Narin Suthiwong": 50,
+        "Nonglak Srisombat": 50,
+        "Pichaya Wongthip": 50,
+        "Prasert Suthipong": 50,
+        "Rohan Deshpande": 50,
+        "Rohini Deshpande": 50,
+        "Rohini Iyer": 50,
+        "Rohini Naidu": 50,
+        "Stijn Vandenberghe": 50,
+        "Thanakorn Srisombat": 50,
+        "Vigdis Rasmussen": 50,
+        "Søren Kjær": 50
+      },
+      "vocabulary_sha256": "fc5b833012c216050b58aa92a31543dc8b4349fdb36987a45eab1c6bbc8e6da2"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:58.445130+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

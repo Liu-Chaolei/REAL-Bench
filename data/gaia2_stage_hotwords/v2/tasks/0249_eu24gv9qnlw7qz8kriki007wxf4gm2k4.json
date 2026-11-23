@@ -1,0 +1,132 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0249_eu24gv9qnlw7qz8kriki007wxf4gm2k4",
+  "model": "deepseek-flash",
+  "input_sha256": "9f83c876c08d623fc3b5bd817657fe6d42d02aab5d8f8b1a7a36c1e8c5ea15fb",
+  "review_input_sha256": "8f928c843296fc9d60fe3c11ff720115051dc68314ab26ebdacea31b50f2162f",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "99fe9f10fab3ca4bda1ec6fa00a07d0e0e57db04fa678dce08e7c55b97a707b7",
+  "reference_results_sha256": "65f1d0839d8bd78e3f6692ce7ac83b8440982f96197cc121144b84f1509f83da",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Astrid Svensson",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Axel Lindqvist",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Restaurant Östermalms",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage2.tool_response.series_s2_search": {
+      "stage": 2,
+      "text": "[{\"event_id\": \"02f5d64f072d40048f222f42ff714c25\", \"title\": \"Photoshoot for Campaign X\", \"start_datetime\": \"1725354000\", \"end_datetime\": \"1725364800\", \"tag\": \"Work\", \"description\": \"Photoshoot for upcoming campaign with brand X.\", \"location\": \"Photoshoot Location\", \"attendees\": [\"Astrid Lundqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Tuesday, 2024-09-03 09:00:00\", \"end_strftime\": \"Tuesday, 2024-09-03 12:00:00\"}, {\"event_id\": \"2cb50f22070e445ca8723fb5f5b81cac\", \"title\": \"Dinner Date with Axel\", \"start_datetime\": \"1725566400\", \"end_datetime\": \"1725573600\", \"tag\": \"Social\", \"description\": \"Catching up with Axel over dinner at a new restaurant.\", \"location\": \"Restaurant\", \"attendees\": [\"Astrid Lundqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Thursday, 2024-09-05 20:00:00\", \"end_strftime\": \"Thursday, 2024-09-05 22:00:00\"}, {\"event_id\": \"2f956ce132e347e3929d23794fcc9659\", \"title\": \"Meeting with Brand X\", \"start_datetime\": \"1725789600\", \"end_datetime\": \"1725796800\", \"tag\": \"Work\", \"description\": \"Meeting with brand X to discuss potential collaboration.\", \"location\": \"Stockholm Office\", \"attendees\": [\"Astrid Lundqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Sunday, 2024-09-08 10:00:00\", \"end_strftime\": \"Sunday, 2024-09-08 12:00:00\"}, {\"event_id\": \"5c2bdcfa7fd8470cbf869d8564887797\", \"title\": \"Brand Partnership Meeting\", \"start_datetime\": \"1730282400\", \"end_datetime\": \"1730289600\", \"tag\": \"Work\", \"description\": \"Discuss potential partnership with new fashion brand.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Astrid Lundqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Wednesday, 2024-10-30 10:00:00\", \"end_strftime\": \"Wednesday, 2024-10-30 12:00:00\"}, {\"event_id\": \"5f012117a8164ec3b3b2346c8414594b\", \"title\": \"Influencer Gathering\", \"start_datetime\": \"1727200800\", \"end_datetime\": \"1727211600\", \"tag\": \"Work\", \"description\": \"Networking event with fellow influencers and brands\", \"location\": \"Stockholm Influencer Lounge\", \"attendees\": [\"Astrid Lindqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Tuesday, 2024-09-24 18:00:00\", \"end_strftime\": \"Tuesday, 2024-09-24 21:00:00\"}, {\"event_id\": \"65f47f866f154377a88ab09e91a39367\", \"title\": \"Meeting with Agency\", \"start_datetime\": \"1725616800\", \"end_datetime\": \"1725624000\", \"tag\": \"Work\", \"description\": \"Meeting with agency to discuss upcoming projects.\", \"location\": \"Stockholm Office\", \"attendees\": [\"Astrid Lundqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Friday, 2024-09-06 10:00:00\", \"end_strftime\": \"Friday, 2024-09-06 12:00:00\"}, {\"event_id\": \"6b8fc82a334a47c0a3b0f39c5018a71e\", \"title\": \"Dinner with Axel\", \"start_datetime\": \"1730574000\", \"end_datetime\": \"1730581200\", \"tag\": \"Social\", \"description\": \"Catch up with Axel Lindqvist, marketing manager.\", \"location\": \"Restaurant Östermalms\", \"attendees\": [\"Astrid Lundqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Saturday, 2024-11-02 19:00:00\", \"end_strftime\": \"Saturday, 2024-11-02 21:00:00\"}, {\"event_id\": \"6c8d48e7acc8420fbaab87acf2df3c8d\", \"title\": \"Networking Event\", \"start_datetime\": \"1727373600\", \"end_datetime\": \"1727384400\", \"tag\": \"Work\", \"description\": \"Networking event with industry professionals\", \"location\": \"Stockholm Networking Venue\", \"attendees\": [\"Astrid Lindqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Thursday, 2024-09-26 18:00:00\", \"end_strftime\": \"Thursday, 2024-09-26 21:00:00\"}, {\"event_id\": \"a21e10b5b39645babbc489093a86464e\", \"title\": \"Photoshoot for Campaign Y\", \"start_datetime\": \"1725872400\", \"end_datetime\": \"1725883200\", \"tag\": \"Work\", \"description\": \"Photoshoot for upcoming campaign with brand Y.\", \"location\": \"Photoshoot Location\", \"attendees\": [\"Astrid Lundqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Monday, 2024-09-09 09:00:00\", \"end_strftime\": \"Monday, 2024-09-09 12:00:00\"}, {\"event_id\": \"a33cb4a50ef04bf58b38599735fe78f5\", \"title\": \"Meeting with Agency\", \"start_datetime\": \"1725962400\", \"end_datetime\": \"1725969600\", \"tag\": \"Work\", \"description\": \"Meeting with agency to discuss upcoming projects.\", \"location\": \"Stockholm Office\", \"attendees\": [\"Astrid Lundqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Tuesday, 2024-09-10 10:00:00\", \"end_strftime\": \"Tuesday, 2024-09-10 12:00:00\"}, {\"event_id\": \"a71dda8e8f8b4686a0e48ddc64129823\", \"title\": \"Networking Event\", \"start_datetime\": \"1727546400\", \"end_datetime\": \"1727557200\", \"tag\": \"Work\", \"description\": \"Networking event with industry professionals\", \"location\": \"Stockholm Networking Venue\", \"attendees\": [\"Astrid Lindqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Saturday, 2024-09-28 18:00:00\", \"end_strftime\": \"Saturday, 2024-09-28 21:00:00\"}, {\"event_id\": \"bf1001e0ac33498e873e23060bc254f7\", \"title\": \"Photoshoot for Campaign Z\", \"start_datetime\": \"1725526800\", \"end_datetime\": \"1725537600\", \"tag\": \"Work\", \"description\": \"Photoshoot for upcoming campaign with brand Z.\", \"location\": \"Photoshoot Location\", \"attendees\": [\"Astrid Lundqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Thursday, 2024-09-05 09:00:00\", \"end_strftime\": \"Thursday, 2024-09-05 12:00:00\"}, {\"event_id\": \"d8c00626455a49c68998d107f90f7f59\", \"title\": \"Content Creation Meeting\", \"start_datetime\": \"1725271200\", \"end_datetime\": \"1725278400\", \"tag\": \"Work\", \"description\": \"Meeting with team to discuss upcoming content creation projects.\", \"location\": \"Stockholm Office\", \"attendees\": [\"Astrid Lundqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Monday, 2024-09-02 10:00:00\", \"end_strftime\": \"Monday, 2024-09-02 12:00:00\"}, {\"event_id\": \"fd004c82bad74ee28ccd8e235aff67b2\", \"title\": \"Meeting with Brand Y\", \"start_datetime\": \"1725444000\", \"end_datetime\": \"1725451200\", \"tag\": \"Work\", \"description\": \"Meeting with brand Y to discuss potential collaboration.\", \"location\": \"Stockholm Office\", \"attendees\": [\"Astrid Lundqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Wednesday, 2024-09-04 10:00:00\", \"end_strftime\": \"Wednesday, 2024-09-04 12:00:00\"}]",
+      "event_id": "series_s2_search",
+      "response_sha256": "e43774c03464747ebe72336d4780f8b496825eb6fa6a15719822c2258c3e9289"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Astrid Svensson",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Axel Lindqvist",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Restaurant Östermalms",
+          "kind": "place",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含变音符的餐厅名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Svensson",
+        "Axel Lindqvist",
+        "Restaurant Östermalms"
+      ],
+      "active_vocabulary": {
+        "Astrid Svensson": 50,
+        "Axel Lindqvist": 50,
+        "Restaurant Östermalms": 50
+      },
+      "vocabulary_sha256": "4c6582bfebbe6eb94e35f4e97291879fa8a91974466fee8845a8d1319c499904"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Astrid Lindqvist",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_search",
+          "reason": "新出现的完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_search",
+          "reason": "新出现的完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Lindqvist",
+        "Astrid Lundqvist"
+      ],
+      "active_vocabulary": {
+        "Astrid Svensson": 50,
+        "Axel Lindqvist": 50,
+        "Restaurant Östermalms": 50,
+        "Astrid Lindqvist": 50,
+        "Astrid Lundqvist": 50
+      },
+      "vocabulary_sha256": "d1a37e8e37946c01a9c8c4df461ce6298f9bb02210e8cab839870216de03dccd"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:43.701539+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

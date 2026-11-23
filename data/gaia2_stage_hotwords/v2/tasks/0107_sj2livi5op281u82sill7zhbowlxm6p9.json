@@ -1,0 +1,131 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0107_sj2livi5op281u82sill7zhbowlxm6p9",
+  "model": "deepseek-flash",
+  "input_sha256": "771f019cd645d4fd22ec56e016e9435e3d67392f4a486ebb6405ef1873b81a1c",
+  "review_input_sha256": "94541487d9bd4879624907420c65fbac9e69a515155d48339599b79e02cd15b4",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "aa2775819539e302dd83e8416de141bdea10395d3107ed27dfec69b71404ca7f",
+  "reference_results_sha256": "b298f145c2b5e7c11051d259539c2bc2c249b78bb3874c18a3f234d463cf5541",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Chocolatiers",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Dachshund-opoly",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Mittlere Strasse 12",
+      "original_source": "stage1.tool_gt.series_s1_2.arguments.location"
+    },
+    "stage2.tool_response.series_s2_3": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"01f14a4fd2514216953c8c834c993ab5\", \"title\": \"Dinner with Kaito Kaufmann\", \"start_datetime\": \"1729278000\", \"end_datetime\": \"1729288800\", \"tag\": \"Social\", \"description\": \"Catch up with Kaito Kaufmann over dinner\", \"location\": \"Restaurant in Zurich\", \"attendees\": [\"Kaito Kaufmann\"], \"start_strftime\": \"Friday, 2024-10-18 19:00:00\", \"end_strftime\": \"Friday, 2024-10-18 22:00:00\"}, {\"event_id\": \"d4c2d9f7cdacdf99ad578e25036c7e5f\", \"title\": \"Party Games Night\", \"start_datetime\": \"1729278000.0\", \"end_datetime\": \"1729285200.0\", \"tag\": \"Social\", \"description\": \"Game night before the housewarming party - we'll try out the three games from the order: Chocolatiers, Dachshund-opoly and the Party Pictures Game.\", \"location\": \"Mittlere Strasse 12, 4058 Basel\", \"attendees\": [], \"start_strftime\": \"Friday, 2024-10-18 19:00:00\", \"end_strftime\": \"Friday, 2024-10-18 21:00:00\"}], \"range\": [\"0\", \"2\"], \"total\": \"2\"}",
+      "event_id": "series_s2_3",
+      "response_sha256": "7fd6db8053b0109f18257093d20bf344221ecde237fcabee5aa8c2ed6f97fd14"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Dachshund-opoly",
+          "kind": "product",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含连字符的独特桌游名称，ASR 易错",
+          "weight": 50
+        },
+        {
+          "text": "Chocolatiers",
+          "kind": "product",
+          "source": "stage0.existing_catalog.0",
+          "reason": "独特桌游名称，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Dachshund-opoly",
+        "Chocolatiers"
+      ],
+      "active_vocabulary": {
+        "Dachshund-opoly": 50,
+        "Chocolatiers": 50
+      },
+      "vocabulary_sha256": "098bff20ec141ebe3bb3de4962c11644e09cc25c2591ca35d3891e965818345e"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Mittlere Strasse 12",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "德语街道地址，含难拼写地名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Mittlere Strasse 12"
+      ],
+      "active_vocabulary": {
+        "Dachshund-opoly": 50,
+        "Chocolatiers": 50,
+        "Mittlere Strasse 12": 50
+      },
+      "vocabulary_sha256": "640f7f191e9b206c14aaf42ad4a8012b646bbed82fb533fbe1541177a2e39c6e"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaito Kaufmann",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_3",
+          "reason": "完整人名，含难拼写姓氏，ASR 易错",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kaito Kaufmann"
+      ],
+      "active_vocabulary": {
+        "Dachshund-opoly": 50,
+        "Chocolatiers": 50,
+        "Mittlere Strasse 12": 50,
+        "Kaito Kaufmann": 50
+      },
+      "vocabulary_sha256": "09782cc6f69ef27ffef32ef71ed9864ea6ee10efd18650a12eb4c9150f117cf0"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Party Pictures Game",
+    "Basel"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:02.540282+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

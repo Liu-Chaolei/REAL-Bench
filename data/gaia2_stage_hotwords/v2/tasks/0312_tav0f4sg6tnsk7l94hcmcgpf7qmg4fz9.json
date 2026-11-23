@@ -1,0 +1,124 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0312_tav0f4sg6tnsk7l94hcmcgpf7qmg4fz9",
+  "model": "deepseek-flash",
+  "input_sha256": "3b3d5cc1d0fddf2f05284dcaba1f65c82800b3e73f01ebe7207d91f9f7c35c6e",
+  "review_input_sha256": "a7f67ea828483c9eb41cab2c4352958fb15f7d76447804382ac0138d27723dee",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "55cf9a096679e82b480a95adcf954f64c45ba413e4e2195e7566d2f4d3ad869e",
+  "reference_results_sha256": "1388ce4249893901744d9a44b3a2dab06d7f2c32528d4eaaceab8c963e3e0d02",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Kirsti Virtanen",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Matěj Nováček",
+      "original_source": "stage1.tool_gt.series_s1_email.arguments.content"
+    },
+    "stage1.existing_catalog.5": {
+      "stage": 1,
+      "text": "Mannerheimintie 34",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage2.tool_response.series_s2_read": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Post letter to Kirsti Virtanen\", \"start_datetime\": \"1729024200.0\", \"end_datetime\": \"1729026000.0\", \"tag\": \"Personal\", \"description\": \"Write and post the letter to Kirsti Virtanen. Contact: kirsti.virtanen@gaia2mail.com, +358501034567. I already emailed her today, 15 October, saying hello and asking about her years teaching music in Helsinki.\", \"location\": \"Mannerheimintie 34, 00100 Helsinki, Finland\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-15 20:30:00\", \"end_strftime\": \"Tuesday, 2024-10-15 21:00:00\"}], \"range\": [\"0\", \"1\"], \"total\": \"1\"}",
+      "event_id": "series_s2_read",
+      "response_sha256": "c4ad9ceafd672d2b2d68dd4fece67b1a4cfa302d714ba0c9d6efda5fadc8d7db"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kirsti Virtanen",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，含独特拼写，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Mannerheimintie 34",
+          "kind": "place",
+          "source": "stage1.existing_catalog.5",
+          "reason": "独特芬兰街道名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含拉丁变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kirsti Virtanen",
+        "Mannerheimintie 34",
+        "Matěj Nováček"
+      ],
+      "active_vocabulary": {
+        "Kirsti Virtanen": 50,
+        "Mannerheimintie 34": 50,
+        "Matěj Nováček": 50
+      },
+      "vocabulary_sha256": "f836c26eb2f12aea18e304bb5b3d496e2fd608e0d13993be7f32480d7614badc"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kirsti Virtanen",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "工具响应中出现的完整人名，保留为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kirsti Virtanen": 50,
+        "Mannerheimintie 34": 50,
+        "Matěj Nováček": 50
+      },
+      "vocabulary_sha256": "f836c26eb2f12aea18e304bb5b3d496e2fd608e0d13993be7f32480d7614badc"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Charles University",
+    "Prague",
+    "Helsinki"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:04.654577+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

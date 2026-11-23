@@ -1,0 +1,162 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0521_h3x8mxz2j3hsqikhyjvrycs08gt9mbth",
+  "model": "deepseek-flash",
+  "input_sha256": "7ba353053c3ef2a4aa0c64eb5a0a57bdc99920941783b670897e3e900204f110",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaitlyn McAllister",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Kaidën Rylan",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "完整人名，含变音符号"
+        },
+        {
+          "text": "The Ruhr Board Games",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定产品名称"
+        },
+        {
+          "text": "Kaitlyn",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f1c6b82a-0526-45c5-9685-0de5aedff479.arguments.content",
+          "reason": "消息中称呼的名字"
+        },
+        {
+          "text": "Kaidën",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-9be457cb-abfe-4ba2-89b6-243fa67b61ff.arguments.content",
+          "reason": "消息中称呼的名字"
+        }
+      ],
+      "new_terms": [
+        "Kaitlyn McAllister",
+        "Kaidën Rylan",
+        "The Ruhr Board Games",
+        "Kaitlyn",
+        "Kaidën"
+      ],
+      "active_vocabulary": {
+        "Kaitlyn McAllister": 50,
+        "Kaidën Rylan": 50,
+        "The Ruhr Board Games": 50,
+        "Kaitlyn": 50,
+        "Kaidën": 50
+      },
+      "vocabulary_sha256": "ec33807acbf0c7679ca2575f8a8baee067ef5b51bb9c246629d225da20fad8b4"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaitlyn McAllister",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Kaidën Rylan",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_kaitlyn.arguments.content",
+          "reason": "签名中的完整人名"
+        },
+        {
+          "text": "Kaitlyn",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_kaitlyn.arguments.content",
+          "reason": "邮件称呼的名字"
+        },
+        {
+          "text": "Kaidën",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_kaiden.arguments.content",
+          "reason": "邮件称呼的名字"
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur"
+      ],
+      "active_vocabulary": {
+        "Kaitlyn McAllister": 50,
+        "Kaidën Rylan": 50,
+        "The Ruhr Board Games": 50,
+        "Kaitlyn": 50,
+        "Kaidën": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "1f26bfdd3b856155944936e2e8d8d29edabc9014685809ba4f1f426282543669"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add.arguments.attendees[0]",
+          "reason": "参会人完整人名"
+        },
+        {
+          "text": "The Ruhr Board Games",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_add.arguments.description",
+          "reason": "特定产品名称"
+        },
+        {
+          "text": "Kaidën",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "回复中提及的名字"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kaitlyn McAllister": 50,
+        "Kaidën Rylan": 50,
+        "The Ruhr Board Games": 50,
+        "Kaitlyn": 50,
+        "Kaidën": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "1f26bfdd3b856155944936e2e8d8d29edabc9014685809ba4f1f426282543669"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "15387ffd58759ee085f3ebb898b14f3922fa115f068717e7d3c7d78654f18111",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2894,
+        "completion_tokens": 517,
+        "total_tokens": 3411,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2638
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.973
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0521_h3x8mxz2j3hsqikhyjvrycs08gt9mbth",
+  "extracted_at": "2026-11-22T06:42:32.204912+00:00"
+}

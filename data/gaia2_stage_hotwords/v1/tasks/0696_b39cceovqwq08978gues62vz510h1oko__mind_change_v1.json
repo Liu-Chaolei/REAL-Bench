@@ -1,0 +1,198 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0696_b39cceovqwq08978gues62vz510h1oko__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "1d91127de91c90e4783d3bf6f22935470ebc9864921c607d748cebf0d5b13e6d",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Luís Pimentel",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名，聊天对象"
+        },
+        {
+          "text": "Aurélia Silva e Castro",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名，聊天对象"
+        },
+        {
+          "text": "Porto",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Jamila Patel",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Joaquim Pereira",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ba2edefa-22c0-499c-9ad8-3fd8f4091c26.arguments.content",
+          "reason": "邮件署名"
+        },
+        {
+          "text": "Luís",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-749150f2-807b-4d86-82d7-1eb6dd183e83.arguments.content",
+          "reason": "人名简称"
+        },
+        {
+          "text": "Aurélia",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-749150f2-807b-4d86-82d7-1eb6dd183e83.arguments.content",
+          "reason": "人名简称"
+        }
+      ],
+      "new_terms": [
+        "Luís Pimentel",
+        "Aurélia Silva e Castro",
+        "Porto",
+        "Jamila Patel",
+        "Jamila Fernandes",
+        "Joaquim Pereira",
+        "Aurélien LaFleur",
+        "Luís",
+        "Aurélia"
+      ],
+      "active_vocabulary": {
+        "Luís Pimentel": 50,
+        "Aurélia Silva e Castro": 50,
+        "Porto": 50,
+        "Jamila Patel": 50,
+        "Jamila Fernandes": 50,
+        "Joaquim Pereira": 50,
+        "Aurélien LaFleur": 50,
+        "Luís": 50,
+        "Aurélia": 50
+      },
+      "vocabulary_sha256": "4c30de76ec51734c69d69c7612d86d1ec8f6c6c4e9c0921e714276b9653fc689"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Luís",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Aurélia",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Porto",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Luís Pimentel": 50,
+        "Aurélia Silva e Castro": 50,
+        "Porto": 50,
+        "Jamila Patel": 50,
+        "Jamila Fernandes": 50,
+        "Joaquim Pereira": 50,
+        "Aurélien LaFleur": 50,
+        "Luís": 50,
+        "Aurélia": 50
+      },
+      "vocabulary_sha256": "4c30de76ec51734c69d69c7612d86d1ec8f6c6c4e9c0921e714276b9653fc689"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Luís Pimentel",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_tour_event.arguments.description",
+          "reason": "人名"
+        },
+        {
+          "text": "Aurélia Silva e Castro",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_tour_event.arguments.description",
+          "reason": "人名"
+        },
+        {
+          "text": "Porto",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Luís",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_tour_event.arguments.title",
+          "reason": "人名简称"
+        },
+        {
+          "text": "Aurélia",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_tour_event.arguments.title",
+          "reason": "人名简称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Luís Pimentel": 50,
+        "Aurélia Silva e Castro": 50,
+        "Porto": 50,
+        "Jamila Patel": 50,
+        "Jamila Fernandes": 50,
+        "Joaquim Pereira": 50,
+        "Aurélien LaFleur": 50,
+        "Luís": 50,
+        "Aurélia": 50
+      },
+      "vocabulary_sha256": "4c30de76ec51734c69d69c7612d86d1ec8f6c6c4e9c0921e714276b9653fc689"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "f67b580f472a06202cc553ddbe67666405f57cf845f0522af315d2a29336efa0",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4385,
+        "completion_tokens": 600,
+        "total_tokens": 4985,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4129
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.265
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0696_b39cceovqwq08978gues62vz510h1oko__mind_change_v1",
+  "extracted_at": "2026-11-22T06:45:51.258945+00:00"
+}

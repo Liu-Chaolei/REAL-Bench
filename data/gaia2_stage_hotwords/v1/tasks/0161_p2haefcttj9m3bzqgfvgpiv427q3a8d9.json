@@ -1,0 +1,117 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0161_p2haefcttj9m3bzqgfvgpiv427q3a8d9",
+  "model": "deepseek-flash",
+  "input_sha256": "8c02e32d306ad387241aada260ba33e630863ae62527e26987dde438a402b2f0",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "In the Breeze Butterfly Bali Kite",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定风筝商品名"
+        },
+        {
+          "text": "Early Modern Russian History",
+          "kind": "custom_name",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-2ee1741c-4bf3-4d27-94a2-3bfe0821e1c7.arguments.content",
+          "reason": "冲突事件标题中的专有课程名"
+        }
+      ],
+      "new_terms": [
+        "In the Breeze Butterfly Bali Kite",
+        "Early Modern Russian History"
+      ],
+      "active_vocabulary": {
+        "In the Breeze Butterfly Bali Kite": 50,
+        "Early Modern Russian History": 50
+      },
+      "vocabulary_sha256": "48fe8f02df8253d307cb52ccab1f2d71e2a3356a4347ec7d53f3be7efb25bf14"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Early Modern Russian History",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "讲座事件标题中的专有课程名"
+        },
+        {
+          "text": "Moscow State University",
+          "kind": "organization",
+          "source": "stage1.tool_gt.series_s1_2.arguments.location",
+          "reason": "地点中的大学机构名"
+        },
+        {
+          "text": "History Department",
+          "kind": "organization",
+          "source": "stage1.tool_gt.series_s1_2.arguments.location",
+          "reason": "地点中的院系名"
+        },
+        {
+          "text": "In the Breeze Butterfly Bali Kite",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "特定风筝商品名"
+        }
+      ],
+      "new_terms": [
+        "Moscow State University",
+        "History Department"
+      ],
+      "active_vocabulary": {
+        "In the Breeze Butterfly Bali Kite": 50,
+        "Early Modern Russian History": 50,
+        "Moscow State University": 50,
+        "History Department": 50
+      },
+      "vocabulary_sha256": "0c10e82fcca368f7af1954e24755d1949a7ddc59cbd090e2bb5e4e52b2692ba8"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Early Modern Russian History",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "讲座事件标题中的专有课程名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "In the Breeze Butterfly Bali Kite": 50,
+        "Early Modern Russian History": 50,
+        "Moscow State University": 50,
+        "History Department": 50
+      },
+      "vocabulary_sha256": "0c10e82fcca368f7af1954e24755d1949a7ddc59cbd090e2bb5e4e52b2692ba8"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "5cab5a0d52eb2932435003f36f3b7533a3d70112b2fc27bbfdd14d3d7abbd8ec",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2374,
+        "completion_tokens": 296,
+        "total_tokens": 2670,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2118
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.342
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0161_p2haefcttj9m3bzqgfvgpiv427q3a8d9",
+  "extracted_at": "2026-11-22T06:40:22.123413+00:00"
+}

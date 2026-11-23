@@ -1,0 +1,524 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0477_hjy54c1dxzy4uxjtcklavu7wz86q6xwl",
+  "model": "deepseek-flash",
+  "input_sha256": "ec6abfbde4b9631342d4bdaae180b250f64d959de709178d6707ca9846a9efb7",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kwame",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3d9e88db-9dab-41b5-8fcf-02511ff8ef9a.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Nadia",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3d9e88db-9dab-41b5-8fcf-02511ff8ef9a.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Nadja",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3d9e88db-9dab-41b5-8fcf-02511ff8ef9a.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3d9e88db-9dab-41b5-8fcf-02511ff8ef9a.arguments.content",
+          "reason": "发件人全名"
+        }
+      ],
+      "new_terms": [
+        "Kwame",
+        "Nadia",
+        "Nadja",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Kwame": 50,
+        "Nadia": 50,
+        "Nadja": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "87fae6738098dd7f7a4377e6182dd062ff446edbb0f1539204d15748fa5ec9e6"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Zug",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "目标城市名"
+        },
+        {
+          "text": "Lausanne",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "目标城市名"
+        },
+        {
+          "text": "Bern",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "目标城市名"
+        },
+        {
+          "text": "Bern Beauty",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Kornhausgasse 3",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓地址"
+        },
+        {
+          "text": "Bern City Apartments",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Bundesplatz",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "地标地址"
+        },
+        {
+          "text": "Bern Haven",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Gerechtigkeitsgasse 12",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓地址"
+        },
+        {
+          "text": "Bernese Mountain Retreat",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Gerechtigkeitsgasse",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "街道名"
+        },
+        {
+          "text": "Lausanne Hills",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Rue de la Vigie",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "街道名"
+        },
+        {
+          "text": "Zug City Living",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Baarerstrasse",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "街道名"
+        },
+        {
+          "text": "Bern Bliss",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Marktgasse 30",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓地址"
+        },
+        {
+          "text": "Bern City Center",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Marktgasse",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "街道名"
+        },
+        {
+          "text": "Zug Waterfront",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Bahnhofstrasse",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "街道名"
+        },
+        {
+          "text": "Bern Bärenplatz",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Bärenplatz",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "广场名"
+        },
+        {
+          "text": "Bern Old Town",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Zug Lake Views",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Zug Mountain Views",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Haldenstrasse",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "街道名"
+        },
+        {
+          "text": "Zug Zest",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Baarerstrasse 12",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓地址"
+        },
+        {
+          "text": "Zug City Center",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Altstadt",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "城区名"
+        },
+        {
+          "text": "Zug Lake Apartments",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Bahnhofstrasse 12",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓地址"
+        },
+        {
+          "text": "Zug Lakeside",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Zug Old Town",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Zug Zen",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Baarerstrasse 15",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓地址"
+        },
+        {
+          "text": "Lausanne Lake Views",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Avenue de Rhodanie",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "街道名"
+        },
+        {
+          "text": "Lausanne Lakefront",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Quai de la Gare 2",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓地址"
+        },
+        {
+          "text": "Lausanne Lakeview",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Rue du Lac 20",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓地址"
+        },
+        {
+          "text": "Zug Lakefront",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Seestrasse",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content",
+          "reason": "街道名"
+        }
+      ],
+      "new_terms": [
+        "Zug",
+        "Lausanne",
+        "Bern",
+        "Bern Beauty",
+        "Kornhausgasse 3",
+        "Bern City Apartments",
+        "Bundesplatz",
+        "Bern Haven",
+        "Gerechtigkeitsgasse 12",
+        "Bernese Mountain Retreat",
+        "Gerechtigkeitsgasse",
+        "Lausanne Hills",
+        "Rue de la Vigie",
+        "Zug City Living",
+        "Baarerstrasse",
+        "Bern Bliss",
+        "Marktgasse 30",
+        "Bern City Center",
+        "Marktgasse",
+        "Zug Waterfront",
+        "Bahnhofstrasse",
+        "Bern Bärenplatz",
+        "Bärenplatz",
+        "Bern Old Town",
+        "Zug Lake Views",
+        "Zug Mountain Views",
+        "Haldenstrasse",
+        "Zug Zest",
+        "Baarerstrasse 12",
+        "Zug City Center",
+        "Altstadt",
+        "Zug Lake Apartments",
+        "Bahnhofstrasse 12",
+        "Zug Lakeside",
+        "Zug Old Town",
+        "Zug Zen",
+        "Baarerstrasse 15",
+        "Lausanne Lake Views",
+        "Avenue de Rhodanie",
+        "Lausanne Lakefront",
+        "Quai de la Gare 2",
+        "Lausanne Lakeview",
+        "Rue du Lac 20",
+        "Zug Lakefront",
+        "Seestrasse"
+      ],
+      "active_vocabulary": {
+        "Kwame": 50,
+        "Nadia": 50,
+        "Nadja": 50,
+        "Ursula Wiederkehr": 50,
+        "Zug": 50,
+        "Lausanne": 50,
+        "Bern": 50,
+        "Bern Beauty": 50,
+        "Kornhausgasse 3": 50,
+        "Bern City Apartments": 50,
+        "Bundesplatz": 50,
+        "Bern Haven": 50,
+        "Gerechtigkeitsgasse 12": 50,
+        "Bernese Mountain Retreat": 50,
+        "Gerechtigkeitsgasse": 50,
+        "Lausanne Hills": 50,
+        "Rue de la Vigie": 50,
+        "Zug City Living": 50,
+        "Baarerstrasse": 50,
+        "Bern Bliss": 50,
+        "Marktgasse 30": 50,
+        "Bern City Center": 50,
+        "Marktgasse": 50,
+        "Zug Waterfront": 50,
+        "Bahnhofstrasse": 50,
+        "Bern Bärenplatz": 50,
+        "Bärenplatz": 50,
+        "Bern Old Town": 50,
+        "Zug Lake Views": 50,
+        "Zug Mountain Views": 50,
+        "Haldenstrasse": 50,
+        "Zug Zest": 50,
+        "Baarerstrasse 12": 50,
+        "Zug City Center": 50,
+        "Altstadt": 50,
+        "Zug Lake Apartments": 50,
+        "Bahnhofstrasse 12": 50,
+        "Zug Lakeside": 50,
+        "Zug Old Town": 50,
+        "Zug Zen": 50,
+        "Baarerstrasse 15": 50,
+        "Lausanne Lake Views": 50,
+        "Avenue de Rhodanie": 50,
+        "Lausanne Lakefront": 50,
+        "Quai de la Gare 2": 50,
+        "Lausanne Lakeview": 50,
+        "Rue du Lac 20": 50,
+        "Zug Lakefront": 50,
+        "Seestrasse": 50
+      },
+      "vocabulary_sha256": "0900a8feb6c40f362828311aa7b55201f12b5d65e98a345c4b6133db56ae51a1"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Zug",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "搜索城市名"
+        },
+        {
+          "text": "Lausanne",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "搜索城市名"
+        },
+        {
+          "text": "Bern",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "搜索城市名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kwame": 50,
+        "Nadia": 50,
+        "Nadja": 50,
+        "Ursula Wiederkehr": 50,
+        "Zug": 50,
+        "Lausanne": 50,
+        "Bern": 50,
+        "Bern Beauty": 50,
+        "Kornhausgasse 3": 50,
+        "Bern City Apartments": 50,
+        "Bundesplatz": 50,
+        "Bern Haven": 50,
+        "Gerechtigkeitsgasse 12": 50,
+        "Bernese Mountain Retreat": 50,
+        "Gerechtigkeitsgasse": 50,
+        "Lausanne Hills": 50,
+        "Rue de la Vigie": 50,
+        "Zug City Living": 50,
+        "Baarerstrasse": 50,
+        "Bern Bliss": 50,
+        "Marktgasse 30": 50,
+        "Bern City Center": 50,
+        "Marktgasse": 50,
+        "Zug Waterfront": 50,
+        "Bahnhofstrasse": 50,
+        "Bern Bärenplatz": 50,
+        "Bärenplatz": 50,
+        "Bern Old Town": 50,
+        "Zug Lake Views": 50,
+        "Zug Mountain Views": 50,
+        "Haldenstrasse": 50,
+        "Zug Zest": 50,
+        "Baarerstrasse 12": 50,
+        "Zug City Center": 50,
+        "Altstadt": 50,
+        "Zug Lake Apartments": 50,
+        "Bahnhofstrasse 12": 50,
+        "Zug Lakeside": 50,
+        "Zug Old Town": 50,
+        "Zug Zen": 50,
+        "Baarerstrasse 15": 50,
+        "Lausanne Lake Views": 50,
+        "Avenue de Rhodanie": 50,
+        "Lausanne Lakefront": 50,
+        "Quai de la Gare 2": 50,
+        "Lausanne Lakeview": 50,
+        "Rue du Lac 20": 50,
+        "Zug Lakefront": 50,
+        "Seestrasse": 50
+      },
+      "vocabulary_sha256": "0900a8feb6c40f362828311aa7b55201f12b5d65e98a345c4b6133db56ae51a1"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "c61aca36e1192987af96678b96d2a8edbe87958a6f223ad8d389211afb6a51ea",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4660,
+        "completion_tokens": 2082,
+        "total_tokens": 6742,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4404
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 5.808
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0477_hjy54c1dxzy4uxjtcklavu7wz86q6xwl",
+  "extracted_at": "2026-11-22T06:42:16.899139+00:00"
+}

@@ -1,0 +1,121 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0382_pqfuln99gfxe5mmrqg9yvkfp2miwrt9q",
+  "model": "deepseek-flash",
+  "input_sha256": "6b989e9c25d237fac14e19e14364f0f8eb256d6f39dc6acffb048866ac97dd3c",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Linnégatan 18, 413 04 Goteborg",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c7944766-c566-4f69-9e58-dcf7d9796353.arguments.end_location",
+          "reason": "瑞典哥德堡诊所地址，含特殊字符é"
+        },
+        {
+          "text": "Bachmann Trains Great Northern Gondola",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定模型火车产品名称"
+        },
+        {
+          "text": "Kasper",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b1338106-ce9b-4045-a076-719ca6e20e2c.arguments.content",
+          "reason": "消息接收人姓名"
+        }
+      ],
+      "new_terms": [
+        "Linnégatan 18, 413 04 Goteborg",
+        "Bachmann Trains Great Northern Gondola",
+        "Kasper"
+      ],
+      "active_vocabulary": {
+        "Linnégatan 18, 413 04 Goteborg": 50,
+        "Bachmann Trains Great Northern Gondola": 50,
+        "Kasper": 50
+      },
+      "vocabulary_sha256": "5f6197746c797aba85e4aba2c2eadebd12f0fa685d8a91083a0f5d7b2d4aafbc"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kasper Rønnow",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create.arguments.attendees[0]",
+          "reason": "参会人完整姓名，含特殊字符ø"
+        },
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_message.arguments.content",
+          "reason": "消息署名者姓名"
+        }
+      ],
+      "new_terms": [
+        "Kasper Rønnow",
+        "Astrid"
+      ],
+      "active_vocabulary": {
+        "Linnégatan 18, 413 04 Goteborg": 50,
+        "Bachmann Trains Great Northern Gondola": 50,
+        "Kasper": 50,
+        "Kasper Rønnow": 50,
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "4a2b79bf475293ef054dd8785dc35510a15be38a1b1d660c7b1844a661b00f97"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Linnégatan 18, 413 04 Goteborg",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "诊所地址，含特殊字符é"
+        },
+        {
+          "text": "Bachmann Trains Great Northern Gondola",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "特定模型火车产品名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Linnégatan 18, 413 04 Goteborg": 50,
+        "Bachmann Trains Great Northern Gondola": 50,
+        "Kasper": 50,
+        "Kasper Rønnow": 50,
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "4a2b79bf475293ef054dd8785dc35510a15be38a1b1d660c7b1844a661b00f97"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "cbe03ef401b217667a00f5713b531e3855a4b9e2b20e14f5e9ab17c31a57c3c8",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3150,
+        "completion_tokens": 366,
+        "total_tokens": 3516,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2894
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.585
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0382_pqfuln99gfxe5mmrqg9yvkfp2miwrt9q",
+  "extracted_at": "2026-11-22T06:41:36.665251+00:00"
+}

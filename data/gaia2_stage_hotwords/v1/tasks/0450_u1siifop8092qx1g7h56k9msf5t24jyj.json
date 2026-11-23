@@ -1,0 +1,157 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0450_u1siifop8092qx1g7h56k9msf5t24jyj",
+  "model": "deepseek-flash",
+  "input_sha256": "daaa99dba38c89de512b61374166fe8c68684deedcb478a30fb88014ffcaeafc",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "AmazonBasics",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "品牌/产品名称"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "地名"
+        },
+        {
+          "text": "Fast Fashion Discussion",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "自定义事件名称"
+        }
+      ],
+      "new_terms": [
+        "AmazonBasics",
+        "Leuven",
+        "Fast Fashion Discussion"
+      ],
+      "active_vocabulary": {
+        "AmazonBasics": 50,
+        "Leuven": 50,
+        "Fast Fashion Discussion": 50
+      },
+      "vocabulary_sha256": "570701dba32c91e18940bd7370d034450110a2044d871074b758121699b524ea"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Fast Fashion Discussion",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "自定义事件名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "AmazonBasics": 50,
+        "Leuven": 50,
+        "Fast Fashion Discussion": 50
+      },
+      "vocabulary_sha256": "570701dba32c91e18940bd7370d034450110a2044d871074b758121699b524ea"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Elara Vandenberghe",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Fast Fashion Discussion",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "自定义事件名称"
+        },
+        {
+          "text": "AmazonBasics",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_send_elara_followup.arguments.content",
+          "reason": "品牌/产品名称"
+        }
+      ],
+      "new_terms": [
+        "Elara Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "AmazonBasics": 50,
+        "Leuven": 50,
+        "Fast Fashion Discussion": 50,
+        "Elara Vandenberghe": 50
+      },
+      "vocabulary_sha256": "c0235e51416730d4a975039e01a5a72bb06ca1e216a6749f871df52a7ac00615"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "7381667bf0ddf36609fb5016e056c0727b2c6d7a3227f58b3e3a250723119f1e",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2126,
+        "completion_tokens": 296,
+        "total_tokens": 2422,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1870
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.43,
+      "error": "2 validation errors for Extraction\nstages.0.terms.0.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nstages.2.terms.2.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "556ad51b4227d34f079288352584e0a1d94e4ffa4b25b1870aec46c99dce2e3a",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2956,
+        "completion_tokens": 300,
+        "total_tokens": 3256,
+        "prompt_tokens_details": {
+          "cached_tokens": 2304
+        },
+        "prompt_cache_hit_tokens": 2304,
+        "prompt_cache_miss_tokens": 652
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.313,
+      "error": "Invalid proper-name phrase: \"AmazonBasics Kid's Comforter Set - Soft, Easy-Wash Microfiber - Full/Queen, Blue Scallop\""
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "35b97f9c092b9449382f46cbb8de479228ff5fce1c27a106266f836a241751bd",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2843,
+        "completion_tokens": 220,
+        "total_tokens": 3063,
+        "prompt_tokens_details": {
+          "cached_tokens": 2048
+        },
+        "prompt_cache_hit_tokens": 2048,
+        "prompt_cache_miss_tokens": 795
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.03
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0450_u1siifop8092qx1g7h56k9msf5t24jyj",
+  "extracted_at": "2026-11-22T06:42:06.072460+00:00"
+}

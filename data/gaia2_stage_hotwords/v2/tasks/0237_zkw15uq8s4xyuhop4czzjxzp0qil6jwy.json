@@ -1,0 +1,297 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0237_zkw15uq8s4xyuhop4czzjxzp0qil6jwy",
+  "model": "deepseek-flash",
+  "input_sha256": "4daa5ad852c9e1ad334697bec8bf0d3f0511ff1a63fa02b43f8114cd519b19fb",
+  "review_input_sha256": "49d4a6ad7451d2f37f3f77c753b5e4684f3197ff2e3350cd3e0c427293127cfa",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "118ece87ff200a6d52c871aa966b4f9f391dca1642658f2c7feace01c8908a75",
+  "reference_results_sha256": "edd6bf7040acb9eaf359d6d7c69095fd7a717eea83c63e88026549372c595f0b",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Rohan Patel",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-006c89e8-1ed9-4526-a620-8cf4354822df.arguments.content"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "London",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-006c89e8-1ed9-4526-a620-8cf4354822df.arguments.content"
+    },
+    "stage1.tool_response.series_s1_1": {
+      "stage": 1,
+      "text": "[{\"sender\": \"rohini.deshpande@cam.ac.uk\", \"recipients\": [\"rohan.patel@globalcorp.com\"], \"subject\": \"Exploring Potential Applications of Quantum Computing in Global Business\", \"content\": \"Dear Rohan,\\n\\nI hope this email finds you well. I've been following your work at GlobalCorp with great interest, and I'm impressed by the innovative approaches you've been taking to drive growth and efficiency. As a theoretical physicist working on quantum algorithms, I've been thinking a lot about the potential applications of quantum computing in global business.\\n\\nI'd love to discuss some ideas I have about how quantum computing could be used to optimize complex systems and processes in multinational corporations like yours. I think there could be some exciting opportunities for collaboration and mutual benefit.\\n\\nWould you be available for a call to explore this further? I'm based in Cambridge, but I'm happy to schedule a call at a time that suits you.\\n\\nBest regards,\\nRohini Deshpande\", \"email_id\": \"ba9d7d0722934941823ff2114d684b23\", \"parent_id\": null, \"cc\": [], \"attachments\": {}, \"timestamp\": \"1723042089.88\", \"is_read\": null}]",
+      "event_id": "series_s1_1",
+      "response_sha256": "9976c00b331b14462b69fe91f49f3a4c2e9d4b018d796513d22acea0a1ac815c"
+    },
+    "stage2.tool_response.series_s2_1": {
+      "stage": 2,
+      "text": "[{\"event_id\": \"017eee1bd3a647adb1dc8f0a25776fcb\", \"title\": \"Research Meeting with Colleagues\", \"start_datetime\": \"1725876000\", \"end_datetime\": \"1725883200\", \"tag\": \"Work\", \"description\": \"Discuss ongoing research projects and share updates.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [\"Rohan Patel\", \"Saskia van der Meer\"], \"start_strftime\": \"Monday, 2024-09-09 10:00:00\", \"end_strftime\": \"Monday, 2024-09-09 12:00:00\"}, {\"event_id\": \"143f3c53bf4a4c05a22c540fe534ba4e\", \"title\": \"Research Meeting with Colleagues\", \"start_datetime\": \"1726221600\", \"end_datetime\": \"1726228800\", \"tag\": \"Work\", \"description\": \"Discuss ongoing research projects and share updates.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [\"Rohan Patel\", \"Saskia van der Meer\"], \"start_strftime\": \"Friday, 2024-09-13 10:00:00\", \"end_strftime\": \"Friday, 2024-09-13 12:00:00\"}, {\"event_id\": \"17c1411cf33d4640af4ce16104da4a3a\", \"title\": \"Meeting with Research Collaborator\", \"start_datetime\": \"1724940000\", \"end_datetime\": \"1724947200\", \"tag\": \"Work\", \"description\": \"Discuss ongoing research project with collaborator.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [\"Rohan Patel\"], \"start_strftime\": \"Thursday, 2024-08-29 14:00:00\", \"end_strftime\": \"Thursday, 2024-08-29 16:00:00\"}, {\"event_id\": \"1bad0cda56e3483ab082b8855f81354e\", \"title\": \"Research Meeting\", \"start_datetime\": \"1725184800\", \"end_datetime\": \"1725192000\", \"tag\": \"Work\", \"description\": \"Discuss ongoing research projects with team members.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [\"Rohan Patel\", \"Kavita Rao\"], \"start_strftime\": \"Sunday, 2024-09-01 10:00:00\", \"end_strftime\": \"Sunday, 2024-09-01 12:00:00\"}, {\"event_id\": \"1df39e1c30614b359986f32043f6b5b6\", \"title\": \"Meeting with Research Collaborator\", \"start_datetime\": \"1724767200\", \"end_datetime\": \"1724774400\", \"tag\": \"Work\", \"description\": \"Discuss ongoing research project with collaborator.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [\"Rohan Patel\"], \"start_strftime\": \"Tuesday, 2024-08-27 14:00:00\", \"end_strftime\": \"Tuesday, 2024-08-27 16:00:00\"}, {\"event_id\": \"224fa779e2fc4aa0a882c19385be4364\", \"title\": \"Research Collaboration Meeting\", \"start_datetime\": \"1732809600\", \"end_datetime\": \"1732816800\", \"tag\": \"Work\", \"description\": \"Discuss ongoing research projects with colleagues.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [\"Rohini Deshpande\", \"Rowan Fothergill\", \"Rohan Patel\"], \"start_strftime\": \"Thursday, 2024-11-28 16:00:00\", \"end_strftime\": \"Thursday, 2024-11-28 18:00:00\"}, {\"event_id\": \"3decf910c065438da0144e6e2de3eb5a\", \"title\": \"Seminar on Quantum Mechanics\", \"start_datetime\": \"1726135200\", \"end_datetime\": \"1726140600\", \"tag\": \"Work\", \"description\": \"Attend a seminar on quantum mechanics.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [\"Rohan Patel\", \"Saskia van der Meer\"], \"start_strftime\": \"Thursday, 2024-09-12 10:00:00\", \"end_strftime\": \"Thursday, 2024-09-12 11:30:00\"}, {\"event_id\": \"3fb05908a31a443abd7b8006f7c1b70e\", \"title\": \"Dinner with Colleagues\", \"start_datetime\": \"1726428600\", \"end_datetime\": \"1726435800\", \"tag\": \"Social\", \"description\": \"Catch up with colleagues over dinner.\", \"location\": \"The Pint Shop, Cambridge\", \"attendees\": [\"Rohan Patel\", \"Saskia van der Meer\"], \"start_strftime\": \"Sunday, 2024-09-15 19:30:00\", \"end_strftime\": \"Sunday, 2024-09-15 21:30:00\"}, {\"event_id\": \"53328cb4cd154ab391993585a9e2d21a\", \"title\": \"Dinner with Colleagues\", \"start_datetime\": \"1726860600\", \"end_datetime\": \"1726867800\", \"tag\": \"Social\", \"description\": \"Catch up with colleagues over dinner.\", \"location\": \"The Pint Shop, Cambridge\", \"attendees\": [\"Rohan Patel\", \"Saskia van der Meer\"], \"start_strftime\": \"Friday, 2024-09-20 19:30:00\", \"end_strftime\": \"Friday, 2024-09-20 21:30:00\"}, {\"event_id\": \"63eb0c5f5d2840d48eef2f1b117d063f\", \"title\": \"Meeting with Rohan Patel\", \"start_datetime\": \"1731420000\", \"end_datetime\": \"1731427200\", \"tag\": \"Work\", \"description\": \"Discussion on potential research collaboration with Rohan Patel from GlobalCorp.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Rohan Patel\"], \"start_strftime\": \"Tuesday, 2024-11-12 14:00:00\", \"end_strftime\": \"Tuesday, 2024-11-12 16:00:00\"}, {\"event_id\": \"73fbb28192204127bd8f15848842a0da\", \"title\": \"Research Meeting with Colleagues\", \"start_datetime\": \"1726740000\", \"end_datetime\": \"1726747200\", \"tag\": \"Work\", \"description\": \"Discuss ongoing research projects and share updates.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [\"Rohan Patel\", \"Saskia van der Meer\"], \"start_strftime\": \"Thursday, 2024-09-19 10:00:00\", \"end_strftime\": \"Thursday, 2024-09-19 12:00:00\"}, {\"event_id\": \"973330e3ae5a419390107048c28125fa\", \"title\": \"Research Meeting with Colleagues\", \"start_datetime\": \"1726480800\", \"end_datetime\": \"1726488000\", \"tag\": \"Work\", \"description\": \"Discuss ongoing research projects and share updates.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [\"Rohan Patel\", \"Saskia van der Meer\"], \"start_strftime\": \"Monday, 2024-09-16 10:00:00\", \"end_strftime\": \"Monday, 2024-09-16 12:00:00\"}, {\"event_id\": \"9c3d2394eb124354bbf8be0710919531\", \"title\": \"Seminar on Quantum Information\", \"start_datetime\": \"1732888800\", \"end_datetime\": \"1732896000\", \"tag\": \"Work\", \"description\": \"Attend a seminar on recent advancements in quantum information.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [\"Rohini Deshpande\", \"Rohan Patel\"], \"start_strftime\": \"Friday, 2024-11-29 14:00:00\", \"end_strftime\": \"Friday, 2024-11-29 16:00:00\"}, {\"event_id\": \"a34887b1bec748cda254c5b3e1bcbeac\", \"title\": \"Computational Chemistry Workshop\", \"start_datetime\": \"1725962400\", \"end_datetime\": \"1725987600\", \"tag\": \"Work\", \"description\": \"Attend a workshop on computational chemistry to learn from experts.\", \"location\": \"University of Cambridge, Department of Chemistry\", \"attendees\": [\"Rohan Patel\", \"Saskia van der Meer\", \"Kaidën Nakamura\"], \"start_strftime\": \"Tuesday, 2024-09-10 10:00:00\", \"end_strftime\": \"Tuesday, 2024-09-10 17:00:00\"}, {\"event_id\": \"a59acfac77ee4834a4b8a4e2d821eb1e\", \"title\": \"Seminar on Quantum Mechanics\", \"start_datetime\": \"1726653600\", \"end_datetime\": \"1726659000\", \"tag\": \"Work\", \"description\": \"Attend a seminar on quantum mechanics.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [\"Rohan Patel\", \"Saskia van der Meer\"], \"start_strftime\": \"Wednesday, 2024-09-18 10:00:00\", \"end_strftime\": \"Wednesday, 2024-09-18 11:30:00\"}, {\"event_id\": \"a83586167de646d998dfb99d9845c65e\", \"title\": \"Dinner with Colleagues\", \"start_datetime\": \"1732908600\", \"end_datetime\": \"1732915800\", \"tag\": \"Social\", \"description\": \"Catch up with colleagues over dinner.\", \"location\": \"The Pint Shop, Cambridge\", \"attendees\": [\"Rohini Deshpande\", \"Rowan Fothergill\", \"Rohan Patel\"], \"start_strftime\": \"Friday, 2024-11-29 19:30:00\", \"end_strftime\": \"Friday, 2024-11-29 21:30:00\"}, {\"event_id\": \"c1ddcc6eb9574158b54bc06e90245ab7\", \"title\": \"Research Meeting\", \"start_datetime\": \"1724839200\", \"end_datetime\": \"1724846400\", \"tag\": \"Work\", \"description\": \"Discuss ongoing research projects with team members.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [\"Rohan Patel\", \"Kavita Rao\"], \"start_strftime\": \"Wednesday, 2024-08-28 10:00:00\", \"end_strftime\": \"Wednesday, 2024-08-28 12:00:00\"}, {\"event_id\": \"c448f47be5e24febb8238e512bd4b3dd\", \"title\": \"Research Meeting\", \"start_datetime\": \"1725012000\", \"end_datetime\": \"1725019200\", \"tag\": \"Work\", \"description\": \"Discuss ongoing research projects with team members.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [\"Rohan Patel\", \"Kavita Rao\"], \"start_strftime\": \"Friday, 2024-08-30 10:00:00\", \"end_strftime\": \"Friday, 2024-08-30 12:00:00\"}, {\"event_id\": \"d6a0466d9c7746a6a19edca9986db3e1\", \"title\": \"Seminar on Computational Chemistry\", \"start_datetime\": \"1726394400\", \"end_datetime\": \"1726399800\", \"tag\": \"Work\", \"description\": \"Attend a seminar on computational chemistry.\", \"location\": \"University of Cambridge, Department of Chemistry\", \"attendees\": [\"Rohan Patel\", \"Saskia van der Meer\"], \"start_strftime\": \"Sunday, 2024-09-15 10:00:00\", \"end_strftime\": \"Sunday, 2024-09-15 11:30:00\"}, {\"event_id\": \"e07f3239caf14eb693666bbf32c34227\", \"title\": \"Dinner with Colleagues\", \"start_datetime\": \"1732563000\", \"end_datetime\": \"1732570200\", \"tag\": \"Social\", \"description\": \"Catch up with colleagues over dinner.\", \"location\": \"The Pint Shop, Cambridge\", \"attendees\": [\"Rohini Deshpande\", \"Rowan Fothergill\", \"Rohan Patel\"], \"start_strftime\": \"Monday, 2024-11-25 19:30:00\", \"end_strftime\": \"Monday, 2024-11-25 21:30:00\"}, {\"event_id\": \"f79ab0a53c4f464f8e7ff48f31389f59\", \"title\": \"Dinner with Colleagues\", \"start_datetime\": \"1725910200\", \"end_datetime\": \"1725917400\", \"tag\": \"Social\", \"description\": \"Catch up with colleagues over dinner.\", \"location\": \"The Pint Shop, Cambridge\", \"attendees\": [\"Rohan Patel\", \"Saskia van der Meer\"], \"start_strftime\": \"Monday, 2024-09-09 19:30:00\", \"end_strftime\": \"Monday, 2024-09-09 21:30:00\"}]",
+      "event_id": "series_s2_1",
+      "response_sha256": "76579756188894e64d329eb0ff2b60e332a28076831079ea2d963ee83020ce8a"
+    },
+    "stage2.tool_response.series_s2_2": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"0158a50daaf64b1aac7fd5c9f1f1513f\", \"title\": \"Research Paper Writing\", \"start_datetime\": \"1731574800\", \"end_datetime\": \"1731585600\", \"tag\": \"Work\", \"description\": \"Writing a research paper on quantum mechanics and its applications.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [], \"start_strftime\": \"Thursday, 2024-11-14 09:00:00\", \"end_strftime\": \"Thursday, 2024-11-14 12:00:00\"}, {\"event_id\": \"0381397b633744c2b634eb9b3f349eb3\", \"title\": \"Seminar Preparation\", \"start_datetime\": \"1732006800\", \"end_datetime\": \"1732014000\", \"tag\": \"Work\", \"description\": \"Prepare for upcoming seminar on quantum mechanics.\", \"location\": \"Office\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-11-19 09:00:00\", \"end_strftime\": \"Tuesday, 2024-11-19 11:00:00\"}, {\"event_id\": \"09e53d21f1cb403b8b5b64ba77233021\", \"title\": \"Yoga Class\", \"start_datetime\": \"1731952800\", \"end_datetime\": \"1731956400\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Monday, 2024-11-18 18:00:00\", \"end_strftime\": \"Monday, 2024-11-18 19:00:00\"}, {\"event_id\": \"0b79c40c322e4e7cb42368dc06125a29\", \"title\": \"Lunch with Colleagues\", \"start_datetime\": \"1731672000\", \"end_datetime\": \"1731675600\", \"tag\": \"Social\", \"description\": \"Informal lunch with colleagues from the physics department.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [], \"start_strftime\": \"Friday, 2024-11-15 12:00:00\", \"end_strftime\": \"Friday, 2024-11-15 13:00:00\"}, {\"event_id\": \"0ead6056677047269e985110dadb7842\", \"title\": \"Seminar on Quantum Mechanics\", \"start_datetime\": \"1732197600\", \"end_datetime\": \"1732204800\", \"tag\": \"Work\", \"description\": \"Present research on quantum mechanics and computing.\", \"location\": \"Conference Room\", \"attendees\": [\"Akira Kaur\", \"Min-Jae Kim\", \"Evangelia Papadopoulos\"], \"start_strftime\": \"Thursday, 2024-11-21 14:00:00\", \"end_strftime\": \"Thursday, 2024-11-21 16:00:00\"}, {\"event_id\": \"13ecf67ed15e433183d76b3d94b30631\", \"title\": \"Yoga Class\", \"start_datetime\": \"1732471200\", \"end_datetime\": \"1732474800\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Sunday, 2024-11-24 18:00:00\", \"end_strftime\": \"Sunday, 2024-11-24 19:00:00\"}, {\"event_id\": \"1e58db7c2d20457bbb10a3fa02190caa\", \"title\": \"Team Meeting\", \"start_datetime\": \"1732716000\", \"end_datetime\": \"1732719600\", \"tag\": \"Work\", \"description\": \"Discuss ongoing projects and team updates.\", \"location\": \"Conference Room\", \"attendees\": [\"Min-Jae Kim\", \"Zara Naylor\"], \"start_strftime\": \"Wednesday, 2024-11-27 14:00:00\", \"end_strftime\": \"Wednesday, 2024-11-27 15:00:00\"}, {\"event_id\": \"22208f034b8e49028cf323a03b691c35\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1731783600\", \"end_datetime\": \"1731790800\", \"tag\": \"Social\", \"description\": \"Dinner with friends at a local restaurant.\", \"location\": \"The Pint Shop, Cambridge\", \"attendees\": [], \"start_strftime\": \"Saturday, 2024-11-16 19:00:00\", \"end_strftime\": \"Saturday, 2024-11-16 21:00:00\"}, {\"event_id\": \"224fa779e2fc4aa0a882c19385be4364\", \"title\": \"Research Collaboration Meeting\", \"start_datetime\": \"1732809600\", \"end_datetime\": \"1732816800\", \"tag\": \"Work\", \"description\": \"Discuss ongoing research projects with colleagues.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [\"Rohini Deshpande\", \"Rowan Fothergill\", \"Rohan Patel\"], \"start_strftime\": \"Thursday, 2024-11-28 16:00:00\", \"end_strftime\": \"Thursday, 2024-11-28 18:00:00\"}, {\"event_id\": \"22ad4faef7da46918faf03a9afef24be\", \"title\": \"Meeting with Evangelia Papadopoulos\", \"start_datetime\": \"1732701600\", \"end_datetime\": \"1732707000\", \"tag\": \"Work\", \"description\": \"Discuss potential collaboration on quantum mechanics and computing.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Evangelia Papadopoulos\"], \"start_strftime\": \"Wednesday, 2024-11-27 10:00:00\", \"end_strftime\": \"Wednesday, 2024-11-27 11:30:00\"}, {\"event_id\": \"2597b0dee2f948cbaf6d40c1fab41f99\", \"title\": \"Yoga Class\", \"start_datetime\": \"1732903200\", \"end_datetime\": \"1732906800\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio, Cambridge\", \"attendees\": [\"Rohini Deshpande\"], \"start_strftime\": \"Friday, 2024-11-29 18:00:00\", \"end_strftime\": \"Friday, 2024-11-29 19:00:00\"}, {\"event_id\": \"28e3dd18b38f44389fca31a20aedf633\", \"title\": \"Research Meeting with Bronwyn Kaur\", \"start_datetime\": \"1732960800\", \"end_datetime\": \"1732968000\", \"tag\": \"Work\", \"description\": \"Discuss potential research collaborations and share knowledge on quantum mechanics and computing.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Bronwyn Kaur\"], \"start_strftime\": \"Saturday, 2024-11-30 10:00:00\", \"end_strftime\": \"Saturday, 2024-11-30 12:00:00\"}, {\"event_id\": \"31faa5806dfa48d382d220d9d4af77ad\", \"title\": \"Team Meeting\", \"start_datetime\": \"1732024800\", \"end_datetime\": \"1732028400\", \"tag\": \"Work\", \"description\": \"Discuss ongoing projects and team updates.\", \"location\": \"Conference Room\", \"attendees\": [\"Min-Jae Kim\", \"Evangelia Papadopoulos\"], \"start_strftime\": \"Tuesday, 2024-11-19 14:00:00\", \"end_strftime\": \"Tuesday, 2024-11-19 15:00:00\"}, {\"event_id\": \"32832854c67942f2827d91229bd1826e\", \"title\": \"Yoga Class\", \"start_datetime\": \"1732557600\", \"end_datetime\": \"1732561200\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio, Cambridge\", \"attendees\": [\"Rohini Deshpande\"], \"start_strftime\": \"Monday, 2024-11-25 18:00:00\", \"end_strftime\": \"Monday, 2024-11-25 19:00:00\"}, {\"event_id\": \"33ef22dfddd4481eb0bcae6bbc46f426\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1732649400\", \"end_datetime\": \"1732656600\", \"tag\": \"Social\", \"description\": \"Catch up with friends over dinner and discuss recent projects.\", \"location\": \"Restaurant\", \"attendees\": [\"Bronwyn Fothergill\", \"Luana Silva\"], \"start_strftime\": \"Tuesday, 2024-11-26 19:30:00\", \"end_strftime\": \"Tuesday, 2024-11-26 21:30:00\"}, {\"event_id\": \"38308fed049f4f50ad46bc1ccae3a8fa\", \"title\": \"Research Group Meeting\", \"start_datetime\": \"1731769200\", \"end_datetime\": \"1731776400\", \"tag\": \"Work\", \"description\": \"Meeting with research group to discuss ongoing projects.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [], \"start_strftime\": \"Saturday, 2024-11-16 15:00:00\", \"end_strftime\": \"Saturday, 2024-11-16 17:00:00\"}, {\"event_id\": \"46798e23e1ff45b4b82751862c7d2ee7\", \"title\": \"Dinner with Colleagues\", \"start_datetime\": \"1732476600\", \"end_datetime\": \"1732483800\", \"tag\": \"Social\", \"description\": \"Catch up with colleagues over dinner and discuss recent projects.\", \"location\": \"Restaurant\", \"attendees\": [\"Luana Silva\", \"Jamila Özdemir\"], \"start_strftime\": \"Sunday, 2024-11-24 19:30:00\", \"end_strftime\": \"Sunday, 2024-11-24 21:30:00\"}, {\"event_id\": \"4a897b52786641f295d5bf13ee7dabab\", \"title\": \"Meeting with Helmut Eisenstadt\", \"start_datetime\": \"1731492000\", \"end_datetime\": \"1731499200\", \"tag\": \"Work\", \"description\": \"Discussion on potential research collaboration with Helmut Eisenstadt from Berlin.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Helmut Eisenstadt\"], \"start_strftime\": \"Wednesday, 2024-11-13 10:00:00\", \"end_strftime\": \"Wednesday, 2024-11-13 12:00:00\"}, {\"event_id\": \"5746ca4dea034e0cbae9288c794a6d28\", \"title\": \"Yoga Class\", \"start_datetime\": \"1732730400\", \"end_datetime\": \"1732734000\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio, Cambridge\", \"attendees\": [\"Rohini Deshpande\"], \"start_strftime\": \"Wednesday, 2024-11-27 18:00:00\", \"end_strftime\": \"Wednesday, 2024-11-27 19:00:00\"}, {\"event_id\": \"59f533422380478dbf546919ca614c45\", \"title\": \"Seminar Preparation\", \"start_datetime\": \"1732870800\", \"end_datetime\": \"1732878000\", \"tag\": \"Work\", \"description\": \"Prepare for upcoming seminar on quantum mechanics.\", \"location\": \"Office\", \"attendees\": [], \"start_strftime\": \"Friday, 2024-11-29 09:00:00\", \"end_strftime\": \"Friday, 2024-11-29 11:00:00\"}, {\"event_id\": \"5d7e8f105d1f49f89d5a3340c269cdb1\", \"title\": \"Meeting with Kaitlyn Nguyen\", \"start_datetime\": \"1732183200\", \"end_datetime\": \"1732188600\", \"tag\": \"Work\", \"description\": \"Discuss potential collaboration on financial planning and quantum mechanics.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Kaitlyn Nguyen\"], \"start_strftime\": \"Thursday, 2024-11-21 10:00:00\", \"end_strftime\": \"Thursday, 2024-11-21 11:30:00\"}, {\"event_id\": \"60b51cc79af84c62a181489a5b2fa7e4\", \"title\": \"Yoga Class\", \"start_datetime\": \"1732816800\", \"end_datetime\": \"1732820400\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Thursday, 2024-11-28 18:00:00\", \"end_strftime\": \"Thursday, 2024-11-28 19:00:00\"}, {\"event_id\": \"6211cd1d784842f4a7373de6f167ce40\", \"title\": \"Yoga Class\", \"start_datetime\": \"1732644000\", \"end_datetime\": \"1732647600\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-11-26 18:00:00\", \"end_strftime\": \"Tuesday, 2024-11-26 19:00:00\"}, {\"event_id\": \"621c71fa702242cf9d59408295f9332b\", \"title\": \"Dinner with Family\", \"start_datetime\": \"1731524400\", \"end_datetime\": \"1731531600\", \"tag\": \"Social\", \"description\": \"Dinner with family at home.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Wednesday, 2024-11-13 19:00:00\", \"end_strftime\": \"Wednesday, 2024-11-13 21:00:00\"}, {\"event_id\": \"6b15067560084aa28861b59e67903edd\", \"title\": \"Research Meeting with Akira Kaur\", \"start_datetime\": \"1732788000\", \"end_datetime\": \"1732795200\", \"tag\": \"Work\", \"description\": \"Discuss potential research collaborations and share knowledge on quantum mechanics and computing.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Akira Kaur\"], \"start_strftime\": \"Thursday, 2024-11-28 10:00:00\", \"end_strftime\": \"Thursday, 2024-11-28 12:00:00\"}, {\"event_id\": \"6cd34101e7134314a37a0c3a9cce9b9e\", \"title\": \"Coffee Break\", \"start_datetime\": \"1732806000\", \"end_datetime\": \"1732807800\", \"tag\": \"Break\", \"description\": \"Take a short break to grab a coffee.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [\"Rohini Deshpande\"], \"start_strftime\": \"Thursday, 2024-11-28 15:00:00\", \"end_strftime\": \"Thursday, 2024-11-28 15:30:00\"}, {\"event_id\": \"72d7238544904f6ab4c4cbe298283016\", \"title\": \"Yoga Class\", \"start_datetime\": \"1732125600\", \"end_datetime\": \"1732129200\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Wednesday, 2024-11-20 18:00:00\", \"end_strftime\": \"Wednesday, 2024-11-20 19:00:00\"}, {\"event_id\": \"78f058c8c06745ac860c804361af3ddf\", \"title\": \"Team Meeting\", \"start_datetime\": \"1732370400\", \"end_datetime\": \"1732374000\", \"tag\": \"Work\", \"description\": \"Discuss ongoing projects and team updates.\", \"location\": \"Conference Room\", \"attendees\": [\"Min-Jae Kim\", \"Evangelia Papadopoulos\"], \"start_strftime\": \"Saturday, 2024-11-23 14:00:00\", \"end_strftime\": \"Saturday, 2024-11-23 15:00:00\"}, {\"event_id\": \"7c3bfcdd536d4ce6b71d82b211d71efa\", \"title\": \"Yoga Class\", \"start_datetime\": \"1731693600\", \"end_datetime\": \"1731697200\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Friday, 2024-11-15 18:00:00\", \"end_strftime\": \"Friday, 2024-11-15 19:00:00\"}, {\"event_id\": \"83662659bd4046928420da119f3bf175\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1732215600\", \"end_datetime\": \"1732222800\", \"tag\": \"Social\", \"description\": \"Catch up with friends over dinner and discuss recent projects.\", \"location\": \"Restaurant\", \"attendees\": [\"Bronwyn Fothergill\", \"Luana Silva\"], \"start_strftime\": \"Thursday, 2024-11-21 19:00:00\", \"end_strftime\": \"Thursday, 2024-11-21 21:00:00\"}, {\"event_id\": \"84ed3a8b256f4716bcd3cd9c43ca63de\", \"title\": \"Quantum Mechanics Seminar\", \"start_datetime\": \"1731852000\", \"end_datetime\": \"1731859200\", \"tag\": \"Work\", \"description\": \"Seminar on recent advances in quantum mechanics.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [], \"start_strftime\": \"Sunday, 2024-11-17 14:00:00\", \"end_strftime\": \"Sunday, 2024-11-17 16:00:00\"}, {\"event_id\": \"9306466628b84eceb1222141fd785374\", \"title\": \"Yoga Class\", \"start_datetime\": \"1731520800\", \"end_datetime\": \"1731524400\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Wednesday, 2024-11-13 18:00:00\", \"end_strftime\": \"Wednesday, 2024-11-13 19:00:00\"}, {\"event_id\": \"96e47a70fa2440e887dfaec4dc2fb1f5\", \"title\": \"Dinner with Colleagues\", \"start_datetime\": \"1731958200\", \"end_datetime\": \"1731965400\", \"tag\": \"Social\", \"description\": \"Catch up with colleagues over dinner and discuss recent projects.\", \"location\": \"Restaurant\", \"attendees\": [\"Bronwyn Fothergill\", \"Luana Silva\"], \"start_strftime\": \"Monday, 2024-11-18 19:30:00\", \"end_strftime\": \"Monday, 2024-11-18 21:30:00\"}, {\"event_id\": \"99afd09e345d446387a7025b8fdef43c\", \"title\": \"Coffee Break\", \"start_datetime\": \"1732633200\", \"end_datetime\": \"1732635000\", \"tag\": \"Break\", \"description\": \"Take a short break to grab a coffee.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [\"Rohini Deshpande\"], \"start_strftime\": \"Tuesday, 2024-11-26 15:00:00\", \"end_strftime\": \"Tuesday, 2024-11-26 15:30:00\"}, {\"event_id\": \"9b352d7f7cd144a782b81386a018183c\", \"title\": \"Research Meeting with Akira Kaur\", \"start_datetime\": \"1731924000\", \"end_datetime\": \"1731931200\", \"tag\": \"Work\", \"description\": \"Discuss potential research collaborations and share knowledge on quantum mechanics and computing.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Akira Kaur\"], \"start_strftime\": \"Monday, 2024-11-18 10:00:00\", \"end_strftime\": \"Monday, 2024-11-18 12:00:00\"}, {\"event_id\": \"9c2394be034a45c293e533deeac31783\", \"title\": \"Research Meeting with Bronwyn Kaur\", \"start_datetime\": \"1732442400\", \"end_datetime\": \"1732449600\", \"tag\": \"Work\", \"description\": \"Discuss potential research collaborations and share knowledge on quantum mechanics and computing.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Bronwyn Kaur\"], \"start_strftime\": \"Sunday, 2024-11-24 10:00:00\", \"end_strftime\": \"Sunday, 2024-11-24 12:00:00\"}, {\"event_id\": \"9c3d2394eb124354bbf8be0710919531\", \"title\": \"Seminar on Quantum Information\", \"start_datetime\": \"1732888800\", \"end_datetime\": \"1732896000\", \"tag\": \"Work\", \"description\": \"Attend a seminar on recent advancements in quantum information.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [\"Rohini Deshpande\", \"Rohan Patel\"], \"start_strftime\": \"Friday, 2024-11-29 14:00:00\", \"end_strftime\": \"Friday, 2024-11-29 16:00:00\"}, {\"event_id\": \"a185102453f448c3b991f09b18bedc06\", \"title\": \"Team Meeting\", \"start_datetime\": \"1732543200\", \"end_datetime\": \"1732546800\", \"tag\": \"Work\", \"description\": \"Discuss ongoing projects and team updates.\", \"location\": \"Conference Room\", \"attendees\": [\"Min-Jae Kim\", \"Evangelia Papadopoulos\"], \"start_strftime\": \"Monday, 2024-11-25 14:00:00\", \"end_strftime\": \"Monday, 2024-11-25 15:00:00\"}, {\"event_id\": \"a29a7ba4bdf445a7b4370eaaee5505ae\", \"title\": \"Meeting with Zara Naylor\", \"start_datetime\": \"1732528800\", \"end_datetime\": \"1732534200\", \"tag\": \"Work\", \"description\": \"Discuss potential collaboration on data analysis and quantum mechanics.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Zara Naylor\"], \"start_strftime\": \"Monday, 2024-11-25 10:00:00\", \"end_strftime\": \"Monday, 2024-11-25 11:30:00\"}, {\"event_id\": \"a3c0149a51c742b4a3b2bb1d433027e0\", \"title\": \"Meeting with Sjef van der Meer\", \"start_datetime\": \"1731664800\", \"end_datetime\": \"1731672000\", \"tag\": \"Work\", \"description\": \"Discussion on potential research collaboration with Sjef van der Meer from Amsterdam.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Sjef van der Meer\"], \"start_strftime\": \"Friday, 2024-11-15 10:00:00\", \"end_strftime\": \"Friday, 2024-11-15 12:00:00\"}, {\"event_id\": \"a7127468c9f54861b784ac5ec6c8908b\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1731438000\", \"end_datetime\": \"1731445200\", \"tag\": \"Social\", \"description\": \"Dinner with friends at a local restaurant.\", \"location\": \"The Pint Shop, Cambridge\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-11-12 19:00:00\", \"end_strftime\": \"Tuesday, 2024-11-12 21:00:00\"}, {\"event_id\": \"a83586167de646d998dfb99d9845c65e\", \"title\": \"Dinner with Colleagues\", \"start_datetime\": \"1732908600\", \"end_datetime\": \"1732915800\", \"tag\": \"Social\", \"description\": \"Catch up with colleagues over dinner.\", \"location\": \"The Pint Shop, Cambridge\", \"attendees\": [\"Rohini Deshpande\", \"Rowan Fothergill\", \"Rohan Patel\"], \"start_strftime\": \"Friday, 2024-11-29 19:30:00\", \"end_strftime\": \"Friday, 2024-11-29 21:30:00\"}, {\"event_id\": \"b4411cc6338146e39d9a3b28bafa002e\", \"title\": \"Team Meeting\", \"start_datetime\": \"1732975200\", \"end_datetime\": \"1732978800\", \"tag\": \"Work\", \"description\": \"Discuss ongoing projects and team updates.\", \"location\": \"Conference Room\", \"attendees\": [\"Min-Jae Kim\", \"Evangelia Papadopoulos\"], \"start_strftime\": \"Saturday, 2024-11-30 14:00:00\", \"end_strftime\": \"Saturday, 2024-11-30 15:00:00\"}, {\"event_id\": \"b78f452c9aa24553a4fc9514389d0f6f\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1732735800\", \"end_datetime\": \"1732743000\", \"tag\": \"Social\", \"description\": \"Catch up with friends over dinner.\", \"location\": \"The Pint Shop, Cambridge\", \"attendees\": [\"Rohini Deshpande\", \"Aartje van der Meer\", \"Kymberley MacTavish\"], \"start_strftime\": \"Wednesday, 2024-11-27 19:30:00\", \"end_strftime\": \"Wednesday, 2024-11-27 21:30:00\"}, {\"event_id\": \"bf22d1cad2f24f6db25cf1bc169e7f53\", \"title\": \"Yoga Class\", \"start_datetime\": \"1732298400\", \"end_datetime\": \"1732302000\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Friday, 2024-11-22 18:00:00\", \"end_strftime\": \"Friday, 2024-11-22 19:00:00\"}, {\"event_id\": \"ccaa09d81e14437ea45e64a22e642b77\", \"title\": \"Lunch with Jamila Özdemir\", \"start_datetime\": \"1732104000\", \"end_datetime\": \"1732109400\", \"tag\": \"Social\", \"description\": \"Catch up with Jamila over lunch and discuss recent projects.\", \"location\": \"Café\", \"attendees\": [\"Jamila Özdemir\"], \"start_strftime\": \"Wednesday, 2024-11-20 12:00:00\", \"end_strftime\": \"Wednesday, 2024-11-20 13:30:00\"}, {\"event_id\": \"d6ec8dc733194a84995faeb45c085323\", \"title\": \"Meeting with Park Geun-hye\", \"start_datetime\": \"1731592800\", \"end_datetime\": \"1731600000\", \"tag\": \"Work\", \"description\": \"Discussion on potential research collaboration with Park Geun-hye from Seoul.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Park Geun-hye\"], \"start_strftime\": \"Thursday, 2024-11-14 14:00:00\", \"end_strftime\": \"Thursday, 2024-11-14 16:00:00\"}, {\"event_id\": \"e07f3239caf14eb693666bbf32c34227\", \"title\": \"Dinner with Colleagues\", \"start_datetime\": \"1732563000\", \"end_datetime\": \"1732570200\", \"tag\": \"Social\", \"description\": \"Catch up with colleagues over dinner.\", \"location\": \"The Pint Shop, Cambridge\", \"attendees\": [\"Rohini Deshpande\", \"Rowan Fothergill\", \"Rohan Patel\"], \"start_strftime\": \"Monday, 2024-11-25 19:30:00\", \"end_strftime\": \"Monday, 2024-11-25 21:30:00\"}, {\"event_id\": \"e66326bc9c0443ff8da88741cf348ed7\", \"title\": \"Quantum Mechanics Seminar\", \"start_datetime\": \"1731506400\", \"end_datetime\": \"1731513600\", \"tag\": \"Work\", \"description\": \"Seminar on recent advances in quantum mechanics.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [], \"start_strftime\": \"Wednesday, 2024-11-13 14:00:00\", \"end_strftime\": \"Wednesday, 2024-11-13 16:00:00\"}, {\"event_id\": \"ec77458a829047fba123a7374dd754cd\", \"title\": \"Lunch with Colleagues\", \"start_datetime\": \"1731499200\", \"end_datetime\": \"1731502800\", \"tag\": \"Social\", \"description\": \"Informal lunch with colleagues from the physics department.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [], \"start_strftime\": \"Wednesday, 2024-11-13 12:00:00\", \"end_strftime\": \"Wednesday, 2024-11-13 13:00:00\"}, {\"event_id\": \"eda12444a9a64cd1811f708377c0c510\", \"title\": \"Quantum Computing Lecture\", \"start_datetime\": \"1731679200\", \"end_datetime\": \"1731686400\", \"tag\": \"Work\", \"description\": \"Lecture on quantum computing and its applications in materials science.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [], \"start_strftime\": \"Friday, 2024-11-15 14:00:00\", \"end_strftime\": \"Friday, 2024-11-15 16:00:00\"}, {\"event_id\": \"ede755c40787492283fecd19a68f8f69\", \"title\": \"Meeting with Gulab Shahzad\", \"start_datetime\": \"1732356000\", \"end_datetime\": \"1732361400\", \"tag\": \"Work\", \"description\": \"Discuss potential collaboration on quantum mechanics and computing.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Gulab Shahzad\"], \"start_strftime\": \"Saturday, 2024-11-23 10:00:00\", \"end_strftime\": \"Saturday, 2024-11-23 11:30:00\"}, {\"event_id\": \"eee9a08c3f544f6f95125c0c703a2f78\", \"title\": \"Seminar Preparation\", \"start_datetime\": \"1732611600\", \"end_datetime\": \"1732618800\", \"tag\": \"Work\", \"description\": \"Prepare for upcoming seminar on quantum mechanics.\", \"location\": \"Office\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-11-26 09:00:00\", \"end_strftime\": \"Tuesday, 2024-11-26 11:00:00\"}], \"range\": [\"0\", \"53\"], \"total\": \"53\"}",
+      "event_id": "series_s2_2",
+      "response_sha256": "c2bbc5794a7ca31a64c36b0f290f1ba1957682ccefa89bca1d26cd5ca3f4005e"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Rohan Patel",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "London",
+          "kind": "place",
+          "source": "stage0.existing_catalog.1",
+          "reason": "地名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Rohan Patel",
+        "London"
+      ],
+      "active_vocabulary": {
+        "Rohan Patel": 50,
+        "London": 50
+      },
+      "vocabulary_sha256": "84517c7a4d1616615c09375e06f3dcc021e7a6831afc34d4e6a7fe1234dadc78"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_1",
+          "reason": "较难完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "Rohan Patel": 50,
+        "London": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "e6e270de693e6194e877ad926415610317769d7f817965bc31658c3213b6458f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aartje van der Meer",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_2",
+          "reason": "含介词的多段人名，较难",
+          "weight": 50
+        },
+        {
+          "text": "Saskia van der Meer",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "含介词的多段人名，较难",
+          "weight": 50
+        },
+        {
+          "text": "Sjef van der Meer",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_2",
+          "reason": "含介词的多段人名，较难",
+          "weight": 50
+        },
+        {
+          "text": "Min-Jae Kim",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_2",
+          "reason": "含连字符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Park Geun-hye",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_2",
+          "reason": "含连字符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Akira Kaur",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_2",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Bronwyn Fothergill",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_2",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Bronwyn Kaur",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_2",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Evangelia Papadopoulos",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_2",
+          "reason": "较难完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Gulab Shahzad",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_2",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Helmut Eisenstadt",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_2",
+          "reason": "较难完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Jamila Özdemir",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_2",
+          "reason": "含变音符的完整人名，高优先",
+          "weight": 50
+        },
+        {
+          "text": "Kaidën Nakamura",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "含变音符的完整人名，高优先",
+          "weight": 50
+        },
+        {
+          "text": "Kaitlyn Nguyen",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_2",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Kavita Rao",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Kymberley MacTavish",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_2",
+          "reason": "较难完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Luana Silva",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_2",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Rowan Fothergill",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Zara Naylor",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_2",
+          "reason": "完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aartje van der Meer",
+        "Saskia van der Meer",
+        "Sjef van der Meer",
+        "Min-Jae Kim",
+        "Park Geun-hye",
+        "Akira Kaur",
+        "Bronwyn Fothergill",
+        "Bronwyn Kaur",
+        "Evangelia Papadopoulos",
+        "Gulab Shahzad",
+        "Helmut Eisenstadt",
+        "Jamila Özdemir",
+        "Kaidën Nakamura",
+        "Kaitlyn Nguyen",
+        "Kavita Rao",
+        "Kymberley MacTavish",
+        "Luana Silva",
+        "Rowan Fothergill",
+        "Zara Naylor"
+      ],
+      "active_vocabulary": {
+        "Rohan Patel": 50,
+        "London": 50,
+        "Rohini Deshpande": 50,
+        "Aartje van der Meer": 50,
+        "Saskia van der Meer": 50,
+        "Sjef van der Meer": 50,
+        "Min-Jae Kim": 50,
+        "Park Geun-hye": 50,
+        "Akira Kaur": 50,
+        "Bronwyn Fothergill": 50,
+        "Bronwyn Kaur": 50,
+        "Evangelia Papadopoulos": 50,
+        "Gulab Shahzad": 50,
+        "Helmut Eisenstadt": 50,
+        "Jamila Özdemir": 50,
+        "Kaidën Nakamura": 50,
+        "Kaitlyn Nguyen": 50,
+        "Kavita Rao": 50,
+        "Kymberley MacTavish": 50,
+        "Luana Silva": 50,
+        "Rowan Fothergill": 50,
+        "Zara Naylor": 50
+      },
+      "vocabulary_sha256": "b2c5c6a5f75486021171780410a48dcbd4ec6c2a9618313fb7fe02db18892569"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:41.878657+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

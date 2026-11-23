@@ -1,0 +1,218 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0741_0uetwq6bp7jrofwsyy9uel4puv0c3kb2__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "578d51f620df40de1581c3268d85573ede29b26900211ce728a679e513bf2701",
+  "review_input_sha256": "6523f7ce2344a83b83e068fdf9704476a8ff6d8abbfaaa1c6e436629febaf9c2",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "a51e36bb09b545e05e947d98897b107be2025653b3c455bc9ddff39ac9ea2ab7",
+  "reference_results_sha256": "5f9eef33aa5b7e94b394e2f3844b367005a8e8a2a5e8722ac90aa75cd2f61d6a",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Linnea Svensson",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Södermalm Heaven",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-0778d8dd-31cf-4210-a9e3-a1fd54f77340.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Vasastan Serenity",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-744766bd-b88a-4e42-bdad-8d54779c911a.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Östermalmsgatan 12",
+      "original_source": "stage1.tool_gt.series_s1_msg.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Södermalm Haven",
+      "original_source": "stage1.tool_gt.series_s1_msg.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Södermalmsallén 12",
+      "original_source": "stage1.tool_gt.series_s1_msg.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Stockholm Haven",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Östermalm Oasis",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Nordic Oasis",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.3": {
+      "stage": 2,
+      "text": "Södermalm Oasis",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Linnea Svensson",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整的瑞典语人名，含特殊拼写，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Södermalm Heaven",
+          "kind": "place",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号 ö 的独特地名组合",
+          "weight": 50
+        },
+        {
+          "text": "Vasastan Serenity",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "独特地名组合，较难识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Linnea Svensson",
+        "Södermalm Heaven",
+        "Vasastan Serenity"
+      ],
+      "active_vocabulary": {
+        "Linnea Svensson": 50,
+        "Södermalm Heaven": 50,
+        "Vasastan Serenity": 50
+      },
+      "vocabulary_sha256": "ce35bf780baff438f551c791bf322955dfb2b3a703861d1cb086367b8341937c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Södermalm Haven",
+          "kind": "place",
+          "source": "stage1.existing_catalog.3",
+          "reason": "含变音符号 ö 的独特地名组合",
+          "weight": 50
+        },
+        {
+          "text": "Södermalmsallén 12",
+          "kind": "place",
+          "source": "stage1.existing_catalog.4",
+          "reason": "含变音符号 ö 和 é 的瑞典语街道名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Östermalmsgatan 12",
+          "kind": "place",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含变音符号 Ö 的瑞典语街道名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Södermalm Haven",
+        "Södermalmsallén 12",
+        "Östermalmsgatan 12"
+      ],
+      "active_vocabulary": {
+        "Linnea Svensson": 50,
+        "Södermalm Heaven": 50,
+        "Vasastan Serenity": 50,
+        "Södermalm Haven": 50,
+        "Södermalmsallén 12": 50,
+        "Östermalmsgatan 12": 50
+      },
+      "vocabulary_sha256": "a454ff7027327e8c2ff7bf98e05b163880b96beb14a434d83c74b87e21bf9f12"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Nordic Oasis",
+          "kind": "place",
+          "source": "stage2.existing_catalog.2",
+          "reason": "独特地名组合",
+          "weight": 50
+        },
+        {
+          "text": "Stockholm Haven",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "独特地名组合",
+          "weight": 50
+        },
+        {
+          "text": "Södermalm Oasis",
+          "kind": "place",
+          "source": "stage2.existing_catalog.3",
+          "reason": "含变音符号 ö 的独特地名组合",
+          "weight": 50
+        },
+        {
+          "text": "Östermalm Oasis",
+          "kind": "place",
+          "source": "stage2.existing_catalog.1",
+          "reason": "含变音符号 Ö 的独特地名组合",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Nordic Oasis",
+        "Stockholm Haven",
+        "Södermalm Oasis",
+        "Östermalm Oasis"
+      ],
+      "active_vocabulary": {
+        "Linnea Svensson": 50,
+        "Södermalm Heaven": 50,
+        "Vasastan Serenity": 50,
+        "Södermalm Haven": 50,
+        "Södermalmsallén 12": 50,
+        "Östermalmsgatan 12": 50,
+        "Nordic Oasis": 50,
+        "Stockholm Haven": 50,
+        "Södermalm Oasis": 50,
+        "Östermalm Oasis": 50
+      },
+      "vocabulary_sha256": "0ff8494f902d04cfebf99001f9adfe42a6a4968d4cd5e005b6653faa5056f353"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Linnea",
+    "Stockholm Serenity"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:35.394588+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

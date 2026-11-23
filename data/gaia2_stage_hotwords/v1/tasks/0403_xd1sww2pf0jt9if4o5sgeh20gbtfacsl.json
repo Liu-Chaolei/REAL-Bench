@@ -1,0 +1,173 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0403_xd1sww2pf0jt9if4o5sgeh20gbtfacsl",
+  "model": "deepseek-flash",
+  "input_sha256": "22394d2416dcb1b0178f9574c06a5cb2c8da41ff4269e6847f6c97d335953331",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-72d5b493-d9b4-4b8e-aaec-45d70566aac7.arguments.content",
+          "reason": "参与者名字，含重音符号"
+        }
+      ],
+      "new_terms": [
+        "Aurélie"
+      ],
+      "active_vocabulary": {
+        "Aurélie": 50
+      },
+      "vocabulary_sha256": "1fe1c5c21c251e6fcd8b9376aa8d0a93ecda01063f535a3adb4d3e4156442241"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélie Dumont",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_prompt.arguments.content",
+          "reason": "完整人名，含重音符号"
+        },
+        {
+          "text": "Kiyoshi Nakahara",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Nadja Ramadanović",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "完整人名，含特殊字符"
+        },
+        {
+          "text": "Swiss-Japanese Relations and Cultural Exchange",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "群组名称"
+        },
+        {
+          "text": "Seeking Insights on Career Transitions for Historians",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send_prompt.arguments.content",
+          "reason": "邮件主题名称"
+        }
+      ],
+      "new_terms": [
+        "Aurélie Dumont",
+        "Kiyoshi Nakahara",
+        "Nadja Ramadanović",
+        "Swiss-Japanese Relations and Cultural Exchange",
+        "Seeking Insights on Career Transitions for Historians"
+      ],
+      "active_vocabulary": {
+        "Aurélie": 50,
+        "Aurélie Dumont": 50,
+        "Kiyoshi Nakahara": 50,
+        "Nadja Ramadanović": 50,
+        "Swiss-Japanese Relations and Cultural Exchange": 50,
+        "Seeking Insights on Career Transitions for Historians": 50
+      },
+      "vocabulary_sha256": "d063f573bb6c4d197a5a3a861610522f417fb40ef545808a60eb731826738ad5"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_title.arguments.title",
+          "reason": "参与者名字，含重音符号"
+        },
+        {
+          "text": "Kiyoshi",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_title.arguments.title",
+          "reason": "参与者名字"
+        },
+        {
+          "text": "Nadja",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_title.arguments.title",
+          "reason": "参与者名字"
+        },
+        {
+          "text": "Ursula",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_title.arguments.title",
+          "reason": "参与者名字"
+        },
+        {
+          "text": "Swiss-Japanese Relations and Cultural Exchange",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "原群组名称"
+        }
+      ],
+      "new_terms": [
+        "Kiyoshi",
+        "Nadja",
+        "Ursula"
+      ],
+      "active_vocabulary": {
+        "Aurélie": 50,
+        "Aurélie Dumont": 50,
+        "Kiyoshi Nakahara": 50,
+        "Nadja Ramadanović": 50,
+        "Swiss-Japanese Relations and Cultural Exchange": 50,
+        "Seeking Insights on Career Transitions for Historians": 50,
+        "Kiyoshi": 50,
+        "Nadja": 50,
+        "Ursula": 50
+      },
+      "vocabulary_sha256": "8cfe8463dd66fb7a2a9783338b3cdb6eec868725cd49d37023b62fde9062c677"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "40ab3567341f37dec9db3cc418dab0f4f452469729be0b828b04d5a38990035d",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1901,
+        "completion_tokens": 480,
+        "total_tokens": 2381,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1645
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.719,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "1bae3844bce5fbea80d2aaa3ea6979a95d6534bc7fc3552f13e78bf27460ac7d",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2774,
+        "completion_tokens": 482,
+        "total_tokens": 3256,
+        "prompt_tokens_details": {
+          "cached_tokens": 2304
+        },
+        "prompt_cache_hit_tokens": 2304,
+        "prompt_cache_miss_tokens": 470
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.641
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0403_xd1sww2pf0jt9if4o5sgeh20gbtfacsl",
+  "extracted_at": "2026-11-22T06:41:44.387910+00:00"
+}

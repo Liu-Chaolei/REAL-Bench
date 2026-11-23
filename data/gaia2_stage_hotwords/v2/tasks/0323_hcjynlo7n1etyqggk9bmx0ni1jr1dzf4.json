@@ -1,0 +1,203 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0323_hcjynlo7n1etyqggk9bmx0ni1jr1dzf4",
+  "model": "deepseek-flash",
+  "input_sha256": "ea3e87ed5953b368c39ad36883c29c0fa400f4f8e5531c9c8694ab2c3c202801",
+  "review_input_sha256": "c709a90c3180371d7ebb9c9174014dfbfa96bd8f154d7be75c2625a77d786d65",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "5066f2cd4487ff1aa0249a4504d132ce56fa904be81d007101fe006598cb0d1b",
+  "reference_results_sha256": "7fd2863fd39f4e8d9a4b90553c673c14e52bc16c2e7fbddc40a54eef111b438f",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Anna Zoher",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Central Botanical Garden Centre",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-66b497de-c364-4586-9e9d-0ee605bdda6a.arguments.content"
+    },
+    "stage1.tool_response.series_s1_read_reminder": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"23733fc27c934747af43f8e47779ac80\", \"title\": \"Dinner with Family\", \"start_datetime\": \"1731092400\", \"end_datetime\": \"1731099600\", \"tag\": \"Social\", \"description\": \"Spend quality time with family over dinner.\", \"location\": \"Home\", \"attendees\": [\"Ursula Zbinden\", \"Colette Vandenberghe\"], \"start_strftime\": \"Friday, 2024-11-08 19:00:00\", \"end_strftime\": \"Friday, 2024-11-08 21:00:00\"}, {\"event_id\": \"e449c6d0260549ce8c10d41c2ed8d1e3\", \"title\": \"Yoga Class\", \"start_datetime\": \"1731088800\", \"end_datetime\": \"1731092400\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio Basel\", \"attendees\": [], \"start_strftime\": \"Friday, 2024-11-08 18:00:00\", \"end_strftime\": \"Friday, 2024-11-08 19:00:00\"}, {\"event_id\": \"d4c2d9f7cdacdf99ad578e25036c7e5f\", \"title\": \"Follow up with Anna Zoher (performer)\", \"start_datetime\": \"1731056400.0\", \"end_datetime\": \"1731058200.0\", \"tag\": null, \"description\": \"Reminder to confirm the wedding performance details with Anna Zoher.\", \"location\": null, \"attendees\": [], \"start_strftime\": \"Friday, 2024-11-08 09:00:00\", \"end_strftime\": \"Friday, 2024-11-08 09:30:00\"}], \"range\": [\"0\", \"3\"], \"total\": \"3\"}",
+      "event_id": "series_s1_read_reminder",
+      "response_sha256": "d4008a86ccaa0fa8822189227a8eefb86c3e1ddaa8b2aa6fc3fd7631bbb53748"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "University of Basel",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.tool_response.series_s2_verify_calendar": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"905b2e94ee1b4abb9d61d0a9dc2dc481\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1731520800\", \"end_datetime\": \"1731528000\", \"tag\": \"Social\", \"description\": \"Spend quality time with friends over dinner.\", \"location\": \"Restaurant\", \"attendees\": [\"Ursula Wiederkehr\", \"Aurélien Benhamou\", \"Leïla Vandenberghe\"], \"start_strftime\": \"Wednesday, 2024-11-13 18:00:00\", \"end_strftime\": \"Wednesday, 2024-11-13 20:00:00\"}, {\"event_id\": \"ae9da45990f5495fbc482df5b689f9b1\", \"title\": \"Research Meeting\", \"start_datetime\": \"1731499200\", \"end_datetime\": \"1731504600\", \"tag\": \"Work\", \"description\": \"Discuss ongoing research projects with colleagues.\", \"location\": \"University of Basel\", \"attendees\": [\"Ursula Wiederkehr\", \"Aurélien Zbinden\"], \"start_strftime\": \"Wednesday, 2024-11-13 12:00:00\", \"end_strftime\": \"Wednesday, 2024-11-13 13:30:00\"}, {\"event_id\": \"f801618f5ccf40d98c3804ca988fe392\", \"title\": \"Yoga Class\", \"start_datetime\": \"1731492000\", \"end_datetime\": \"1731495600\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Ursula Wiederkehr\"], \"start_strftime\": \"Wednesday, 2024-11-13 10:00:00\", \"end_strftime\": \"Wednesday, 2024-11-13 11:00:00\"}], \"range\": [\"0\", \"3\"], \"total\": \"3\"}",
+      "event_id": "series_s2_verify_calendar",
+      "response_sha256": "3c4bd08fc0aeb4c67e56f806188503ae9f2f156b1d591c6a72c25fd66b0c74f9"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Central Botanical Garden Centre",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整机构名，较难",
+          "weight": 50
+        },
+        {
+          "text": "Anna Zoher",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "完整人名，较难拼写",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Central Botanical Garden Centre",
+        "Anna Zoher",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Central Botanical Garden Centre": 50,
+        "Anna Zoher": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "4924c8c9a9c4e2d8f44b812bae7424280ccac89578a16022d62bcea7e9d2698f"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Yoga Studio Basel",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_reminder",
+          "reason": "完整地点名",
+          "weight": 50
+        },
+        {
+          "text": "Colette Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_reminder",
+          "reason": "完整人名，较难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Zbinden",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_reminder",
+          "reason": "完整人名，较难拼写",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Yoga Studio Basel",
+        "Colette Vandenberghe",
+        "Ursula Zbinden"
+      ],
+      "active_vocabulary": {
+        "Central Botanical Garden Centre": 50,
+        "Anna Zoher": 50,
+        "Ursula Wiederkehr": 50,
+        "Yoga Studio Basel": 50,
+        "Colette Vandenberghe": 50,
+        "Ursula Zbinden": 50
+      },
+      "vocabulary_sha256": "af285345eff3308b45a92df0434134cdaa1438a5641f79a864d20767538dea05"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "University of Basel",
+          "kind": "organization",
+          "source": "stage2.existing_catalog.1",
+          "reason": "完整机构名",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Benhamou",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_verify_calendar",
+          "reason": "含变音符号的完整人名，高优先",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Zbinden",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_verify_calendar",
+          "reason": "含变音符号的完整人名，高优先",
+          "weight": 50
+        },
+        {
+          "text": "Leïla Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_verify_calendar",
+          "reason": "含变音符号的完整人名，高优先",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "University of Basel",
+        "Aurélien Benhamou",
+        "Aurélien Zbinden",
+        "Leïla Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Central Botanical Garden Centre": 50,
+        "Anna Zoher": 50,
+        "Ursula Wiederkehr": 50,
+        "Yoga Studio Basel": 50,
+        "Colette Vandenberghe": 50,
+        "Ursula Zbinden": 50,
+        "University of Basel": 50,
+        "Aurélien Benhamou": 50,
+        "Aurélien Zbinden": 50,
+        "Leïla Vandenberghe": 50
+      },
+      "vocabulary_sha256": "ba8764b51920a2b762284c1fa70d09cb5aa0605691a263708f6bb53354cece83"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Berlin",
+    "Germany",
+    "Kamil",
+    "Aurélien",
+    "Lecture: Swiss History"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:08.435750+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,195 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0544_wjcnkvefzwp4xvw547eoxgx6jqy5nle7__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "c609d0caac21337be3505d8b8bf11f0790dbd1e8f2ff5cb6668fb2fadb50e018",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kofi Owusu",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "对话参与者姓名"
+        },
+        {
+          "text": "Zara Kaur",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "对话参与者姓名"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-d4664bda-8bae-4805-8a6a-12a967042493.arguments.attendees[0]",
+          "reason": "晚餐参与者姓名"
+        },
+        {
+          "text": "Astrid McKenzie",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-d4664bda-8bae-4805-8a6a-12a967042493.arguments.attendees[1]",
+          "reason": "晚餐参与者姓名"
+        },
+        {
+          "text": "Akira Jensen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-d4664bda-8bae-4805-8a6a-12a967042493.arguments.attendees[2]",
+          "reason": "晚餐参与者姓名"
+        },
+        {
+          "text": "The Oberoi Hotel",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-d4664bda-8bae-4805-8a6a-12a967042493.arguments.location",
+          "reason": "晚餐地点名称"
+        },
+        {
+          "text": "Kaitlyn Nguyen",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-2290930f-2b6c-4563-acba-3fce29d2f614.arguments.content",
+          "reason": "待选参会人姓名"
+        },
+        {
+          "text": "Kaida Jensen",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-2290930f-2b6c-4563-acba-3fce29d2f614.arguments.content",
+          "reason": "待选参会人姓名"
+        },
+        {
+          "text": "Rohini Mehta",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-2290930f-2b6c-4563-acba-3fce29d2f614.arguments.content",
+          "reason": "待选参会人姓名"
+        }
+      ],
+      "new_terms": [
+        "Kofi Owusu",
+        "Zara Kaur",
+        "Rohan Kumar",
+        "Astrid McKenzie",
+        "Akira Jensen",
+        "The Oberoi Hotel",
+        "Kaitlyn Nguyen",
+        "Kaida Jensen",
+        "Rohini Mehta"
+      ],
+      "active_vocabulary": {
+        "Kofi Owusu": 50,
+        "Zara Kaur": 50,
+        "Rohan Kumar": 50,
+        "Astrid McKenzie": 50,
+        "Akira Jensen": 50,
+        "The Oberoi Hotel": 50,
+        "Kaitlyn Nguyen": 50,
+        "Kaida Jensen": 50,
+        "Rohini Mehta": 50
+      },
+      "vocabulary_sha256": "5b8f65013867928971b36b3bc3734b55f14085c7e45b8f5e916f44b0aec85ebb"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kofi Owusu",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "研讨会受邀人姓名"
+        },
+        {
+          "text": "Zara Kaur",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "研讨会受邀人姓名"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_kofi.arguments.content",
+          "reason": "邮件署名发件人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kofi Owusu": 50,
+        "Zara Kaur": 50,
+        "Rohan Kumar": 50,
+        "Astrid McKenzie": 50,
+        "Akira Jensen": 50,
+        "The Oberoi Hotel": 50,
+        "Kaitlyn Nguyen": 50,
+        "Kaida Jensen": 50,
+        "Rohini Mehta": 50
+      },
+      "vocabulary_sha256": "5b8f65013867928971b36b3bc3734b55f14085c7e45b8f5e916f44b0aec85ebb"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaida Kaur",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "被替换的参会人姓名"
+        },
+        {
+          "text": "Kofi Owusu",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "准备会参会人姓名"
+        },
+        {
+          "text": "Zara Kaur",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "准备会参会人姓名"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]",
+          "reason": "准备会参会人姓名"
+        }
+      ],
+      "new_terms": [
+        "Kaida Kaur"
+      ],
+      "active_vocabulary": {
+        "Kofi Owusu": 50,
+        "Zara Kaur": 50,
+        "Rohan Kumar": 50,
+        "Astrid McKenzie": 50,
+        "Akira Jensen": 50,
+        "The Oberoi Hotel": 50,
+        "Kaitlyn Nguyen": 50,
+        "Kaida Jensen": 50,
+        "Rohini Mehta": 50,
+        "Kaida Kaur": 50
+      },
+      "vocabulary_sha256": "4ba5e6a25deddd13c32cf331214b8e4397e8c687e824fae265896fc2a29d27f3"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "adaf93efd0702a51f2a0995267f144f25c98f7fb42ac98c2e66e0e7257353f38",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4257,
+        "completion_tokens": 729,
+        "total_tokens": 4986,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4001
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 3.005
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0544_wjcnkvefzwp4xvw547eoxgx6jqy5nle7__mind_change_v1",
+  "extracted_at": "2026-11-22T06:45:40.506109+00:00"
+}

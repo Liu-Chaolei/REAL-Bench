@@ -1,0 +1,130 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0656_3drd9ztjpzcq0jv0akdvfqfubkgwkove__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "4e264e5120a02e6f8bacf777a977a1bde9c0a962b84416712e32d14a6608e9a7",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Náměstí Míru 15",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "布拉格具体地址地名"
+        },
+        {
+          "text": "Eliška Nováková",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人完整姓名"
+        },
+        {
+          "text": "Eliška",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人名字"
+        },
+        {
+          "text": "Matěj",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3d5711f4-d802-4836-9610-762543d42984.arguments.content",
+          "reason": "邮件署名"
+        }
+      ],
+      "new_terms": [
+        "Náměstí Míru 15",
+        "Eliška Nováková",
+        "Eliška",
+        "Matěj"
+      ],
+      "active_vocabulary": {
+        "Náměstí Míru 15": 50,
+        "Eliška Nováková": 50,
+        "Eliška": 50,
+        "Matěj": 50
+      },
+      "vocabulary_sha256": "3a2e091cabb8f1344f14b6c471ab5d6f08abbfdbed1259a7d6ac2c22d860b05c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Eliška",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人名字"
+        },
+        {
+          "text": "Matěj",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "邮件署名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Náměstí Míru 15": 50,
+        "Eliška Nováková": 50,
+        "Eliška": 50,
+        "Matěj": 50
+      },
+      "vocabulary_sha256": "3a2e091cabb8f1344f14b6c471ab5d6f08abbfdbed1259a7d6ac2c22d860b05c"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Eliška",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "联系人名字"
+        },
+        {
+          "text": "Náměstí Míru 15",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "会面地点地名"
+        },
+        {
+          "text": "Matěj",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "邮件署名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Náměstí Míru 15": 50,
+        "Eliška Nováková": 50,
+        "Eliška": 50,
+        "Matěj": 50
+      },
+      "vocabulary_sha256": "3a2e091cabb8f1344f14b6c471ab5d6f08abbfdbed1259a7d6ac2c22d860b05c"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "4466ca56aa78475cd8e34bdcc185c5135fa3c0fe744629431705c712473f1af1",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4414,
+        "completion_tokens": 312,
+        "total_tokens": 4726,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4158
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.511
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0656_3drd9ztjpzcq0jv0akdvfqfubkgwkove__mind_change_v1",
+  "extracted_at": "2026-11-22T06:45:50.313795+00:00"
+}

@@ -1,0 +1,346 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0423_x3tzm1ngva7s6frdodkx9fwdj7m56ob7",
+  "model": "deepseek-flash",
+  "input_sha256": "a2cfa3bad4b274a05e99ea0004d523947bd269d470590866cd1b6e87ba3f45f5",
+  "review_input_sha256": "38e55de8ee3ac23d256655ca2a712f82828a288d0e39826ee57ee8e968187c9b",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "57795887f9e9d53364cd19c13c3dc8cd792f38a6edfd2de100693dd9f5e1b17f",
+  "reference_results_sha256": "9441edaf9b5acb764866b8695bdbe770c250b9ebdd0ce85d08f31b86db7490c4",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Nalinee Srisombat",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Jawaher Al-Mansour",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.10": {
+      "stage": 1,
+      "text": "Fatima Al-Khateeb",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.11": {
+      "stage": 1,
+      "text": "Amal Al-Khateeb",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.12": {
+      "stage": 1,
+      "text": "Séamus Vandenberghe",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Elara Vandenberghe",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Thanakorn Sombat",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Nalinee Wongtrakul",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.5": {
+      "stage": 1,
+      "text": "Nalinee Wongthanawat",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.6": {
+      "stage": 1,
+      "text": "Lars Svensson",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.7": {
+      "stage": 1,
+      "text": "Aurélien Van den Broeck",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.8": {
+      "stage": 1,
+      "text": "Aurélien Dumont",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.9": {
+      "stage": 1,
+      "text": "Åsa Lundström",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.tool_response.series_s1_conversation_12": {
+      "stage": 1,
+      "text": "{\"messages\": [{\"sender_id\": \"+46707123456\", \"message_id\": \"5b789ce99b8649c48c1d6be8bc29584e\", \"timestamp\": \"1724672100\", \"content\": \"Actually, Liesbeth, there's a great company called Stora Enso that offers a range of sustainable building materials, including wood products and biocomposites. I can put you in touch with their team if you'd like.\"}], \"metadata\": {\"message_range\": [\"0\", \"1\"], \"conversation_length\": \"10\", \"conversation_id\": \"6f783660ce4a4bd89e0905a5fb818e9f\", \"conversation_title\": \"Net-Zero Energy Building Project Discussion\"}}",
+      "event_id": "series_s1_conversation_12",
+      "response_sha256": "5ca86c0fd9289794a0f4bba132ddbd6c8c0120a2bec97d390a4827b4918b9000"
+    },
+    "stage1.tool_response.series_s1_conversation_27": {
+      "stage": 1,
+      "text": "{\"messages\": [{\"sender_id\": \"+32472123456\", \"message_id\": \"91af3c98425849ea9c69fbee42543367\", \"timestamp\": \"1728731700\", \"content\": \"That sounds like a great idea, Kiettisak. Aurélien, thank you for your valuable insights. I'm looking forward to reviewing those case studies and continuing this conversation soon.\"}], \"metadata\": {\"message_range\": [\"0\", \"1\"], \"conversation_length\": \"10\", \"conversation_id\": \"edca3854b35141d2a9c6241d0aa6bfce\", \"conversation_title\": \"Net-Zero Energy Building Project Discussion\"}}",
+      "event_id": "series_s1_conversation_27",
+      "response_sha256": "3ec02ea899ed85df4353eb9cc1dcb5451a0a365ce360ca187426398a7cf47070"
+    },
+    "stage1.tool_response.series_s1_conversation_29": {
+      "stage": 1,
+      "text": "{\"messages\": [{\"sender_id\": \"+32498123456\", \"message_id\": \"ea622e779950437fa4406e52535b6ff1\", \"timestamp\": \"1723980600\", \"content\": \"I think it's a great idea, Liesbeth. We could also explore crowdfunding options to support the project. Pichaya, would you be willing to share some more information on how community-based solar projects are funded in Thailand?\"}], \"metadata\": {\"message_range\": [\"0\", \"1\"], \"conversation_length\": \"10\", \"conversation_id\": \"f4563c5abe184274b99519c2e4f774ac\", \"conversation_title\": \"Net-Zero Energy Building Project Discussion\"}}",
+      "event_id": "series_s1_conversation_29",
+      "response_sha256": "4cd1e7b6a50cc9401640c2158f9d131043b4408c520c9b294fd81a7d2cdc583f"
+    },
+    "stage1.tool_response.series_s1_conversation_5": {
+      "stage": 1,
+      "text": "{\"messages\": [{\"sender_id\": \"+32472123456\", \"message_id\": \"0afb286e2fe84b9fae0e13f778753323\", \"timestamp\": \"1728816300\", \"content\": \"I'm so excited about the possibilities, Kritsana and Kritsana! Let's schedule a follow-up meeting to discuss the next steps. Thank you both for your valuable insights today!\"}], \"metadata\": {\"message_range\": [\"0\", \"1\"], \"conversation_length\": \"10\", \"conversation_id\": \"4243242eaa9d4c37b64dbc01fca9804e\", \"conversation_title\": \"Net-Zero Energy Building Project Discussion\"}}",
+      "event_id": "series_s1_conversation_5",
+      "response_sha256": "3e598f62b183f26db8857f3f015c91e253967750aa61891a35f72dd7859803c8"
+    },
+    "stage1.tool_response.series_s1_conversation_7": {
+      "stage": 1,
+      "text": "{\"messages\": [{\"sender_id\": \"+32472123456\", \"message_id\": \"1d9bc080ffe34b0bac1365d733f4ff91\", \"timestamp\": \"1726227300\", \"content\": \"Actually, Nonglak, I'm more of a fan of Hal Patino's work. But I do appreciate King Diamond's music. Maybe we can discuss more about music and sustainability at the conference?\"}], \"metadata\": {\"message_range\": [\"0\", \"1\"], \"conversation_length\": \"10\", \"conversation_id\": \"5d8855e0ce374332a187ad5451214360\", \"conversation_title\": \"Net-Zero Energy Building Project Discussion\"}}",
+      "event_id": "series_s1_conversation_7",
+      "response_sha256": "407b75f020a97e7647cc75f289f62661bdac72e9b42d782014e715af61538877"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien Van den Broeck",
+          "kind": "person",
+          "source": "stage1.existing_catalog.7",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Amal Al-Khateeb",
+          "kind": "person",
+          "source": "stage1.existing_catalog.11",
+          "reason": "阿拉伯语完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Fatima Al-Khateeb",
+          "kind": "person",
+          "source": "stage1.existing_catalog.10",
+          "reason": "阿拉伯语完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Jawaher Al-Mansour",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "阿拉伯语完整人名，含连字符",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage1.existing_catalog.8",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Elara Vandenberghe",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Hal Patino",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_conversation_7",
+          "reason": "完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Lars Svensson",
+          "kind": "person",
+          "source": "stage1.existing_catalog.6",
+          "reason": "瑞典语完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Nalinee Srisombat",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "泰语完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Nalinee Wongthanawat",
+          "kind": "person",
+          "source": "stage1.existing_catalog.5",
+          "reason": "泰语完整人名，拼写复杂",
+          "weight": 50
+        },
+        {
+          "text": "Nalinee Wongtrakul",
+          "kind": "person",
+          "source": "stage1.existing_catalog.4",
+          "reason": "泰语完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Stora Enso",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_conversation_12",
+          "reason": "公司专名",
+          "weight": 50
+        },
+        {
+          "text": "Séamus Vandenberghe",
+          "kind": "person",
+          "source": "stage1.existing_catalog.12",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Thanakorn Sombat",
+          "kind": "person",
+          "source": "stage1.existing_catalog.3",
+          "reason": "泰语完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Åsa Lundström",
+          "kind": "person",
+          "source": "stage1.existing_catalog.9",
+          "reason": "含变音符号的瑞典语人名",
+          "weight": 50
+        },
+        {
+          "text": "Kiettisak",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_conversation_27",
+          "reason": "泰语名字，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Kritsana",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_conversation_5",
+          "reason": "泰语名字，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Nonglak",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_conversation_7",
+          "reason": "泰语名字，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Pichaya",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_conversation_29",
+          "reason": "泰语名字，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien Van den Broeck",
+        "Amal Al-Khateeb",
+        "Fatima Al-Khateeb",
+        "Jawaher Al-Mansour",
+        "Aurélien Dumont",
+        "Elara Vandenberghe",
+        "Hal Patino",
+        "Lars Svensson",
+        "Nalinee Srisombat",
+        "Nalinee Wongthanawat",
+        "Nalinee Wongtrakul",
+        "Stora Enso",
+        "Séamus Vandenberghe",
+        "Thanakorn Sombat",
+        "Åsa Lundström",
+        "Kiettisak",
+        "Kritsana",
+        "Nonglak",
+        "Pichaya"
+      ],
+      "active_vocabulary": {
+        "Aurélien Van den Broeck": 50,
+        "Amal Al-Khateeb": 50,
+        "Fatima Al-Khateeb": 50,
+        "Jawaher Al-Mansour": 50,
+        "Aurélien Dumont": 50,
+        "Elara Vandenberghe": 50,
+        "Hal Patino": 50,
+        "Lars Svensson": 50,
+        "Nalinee Srisombat": 50,
+        "Nalinee Wongthanawat": 50,
+        "Nalinee Wongtrakul": 50,
+        "Stora Enso": 50,
+        "Séamus Vandenberghe": 50,
+        "Thanakorn Sombat": 50,
+        "Åsa Lundström": 50,
+        "Kiettisak": 50,
+        "Kritsana": 50,
+        "Nonglak": 50,
+        "Pichaya": 50
+      },
+      "vocabulary_sha256": "cde77942a7dc01a50e4eec28a57db6f6ec2b982f12137fa1b8a2c1833e7bd742"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien Van den Broeck": 50,
+        "Amal Al-Khateeb": 50,
+        "Fatima Al-Khateeb": 50,
+        "Jawaher Al-Mansour": 50,
+        "Aurélien Dumont": 50,
+        "Elara Vandenberghe": 50,
+        "Hal Patino": 50,
+        "Lars Svensson": 50,
+        "Nalinee Srisombat": 50,
+        "Nalinee Wongthanawat": 50,
+        "Nalinee Wongtrakul": 50,
+        "Stora Enso": 50,
+        "Séamus Vandenberghe": 50,
+        "Thanakorn Sombat": 50,
+        "Åsa Lundström": 50,
+        "Kiettisak": 50,
+        "Kritsana": 50,
+        "Nonglak": 50,
+        "Pichaya": 50
+      },
+      "vocabulary_sha256": "cde77942a7dc01a50e4eec28a57db6f6ec2b982f12137fa1b8a2c1833e7bd742"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:46.144527+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,51 @@
+{
+  "image": "tau-qwen-persistent:0.2-realtime-flash",
+  "config_env_file": "/hpc_stor03/sjtu_home/chaolei.liu/.config/qwaudio/config.env",
+  "environment": {
+    "OPENAI_API_KEY": "DEEPSEEK_API_KEY",
+    "OPENAI_BASE_URL": "DEEPSEEK_BASE_URL",
+    "OPENAI_MODEL": "DEEPSEEK_MODEL",
+    "QWEN_AUDIO_REALTIME_API_KEY": "DASHSCOPE_API_KEY",
+    "QWEN_AUDIO_REALTIME_URL": "QWEN_AUDIO_REALTIME_BASE_URL",
+    "QWEN_AUDIO_REALTIME_PROVIDER": "QWEN_AUDIO_REALTIME_PROVIDER",
+    "QWEN_AUDIO_REALTIME_MODEL": "QWEN_AUDIO_REALTIME_MODEL"
+  },
+  "boot_timeout_seconds": 180,
+  "tool_timeout_seconds": 120,
+  "max_buffer_seconds": 1200,
+  "asr_provider": "qwen",
+  "asr_model": "qwen-audio-3.1-asr-flash-streaming",
+  "asr_append_seconds": 2.0,
+  "playback_sample_rate": 24000,
+  "asr_api_key_env": "QWEN_API_KEY",
+  "asr_provider_env": "QWEN_AUDIO_REALTIME_PROVIDER",
+  "asr_base_url_env": "QWEN_BASE_URL",
+  "tts": {
+    "provider": "qwen",
+    "model_id": "qwen-audio-3.1-tts-flash",
+    "base_url_env": "QWEN_BASE_URL",
+    "api_key_env": "QWEN_API_KEY",
+    "voices": {
+      "mamadou_diallo": "Andy_v3.1",
+      "priya_patil": "Abby_v3.1"
+    },
+    "voice_id": "Andy_v3.1",
+    "language_code": "en",
+    "sample_rate": 24000
+  },
+  "asr_hotwords": {
+    "enabled": true,
+    "mode": "gaia2_stage_gt",
+    "weight": 50,
+    "max_terms": 2000
+  },
+  "user_llm_api_key_env": "DEEPSEEK_API_KEY",
+  "user_llm_base_url_env": "DEEPSEEK_BASE_URL",
+  "user_llm_model_env": "DEEPSEEK_MODEL",
+  "dynamic_followup": {
+    "enabled": true,
+    "stages": [1, 2],
+    "max_context_characters": 24000,
+    "max_retries": 1
+  }
+}

@@ -1,0 +1,195 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0825_xh51tsoy3tc5tjnm16hddios9f28zg2e",
+  "model": "deepseek-flash",
+  "input_sha256": "fe773c555ea1cc39e4e128fa690d3c7747d91d81d1f23b7cb1600a1d1f2fe960",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Ryder",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人之一的人名"
+        },
+        {
+          "text": "Kaori",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人之一的人名"
+        },
+        {
+          "text": "Bronwyn McTavish",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人之一的完整人名"
+        },
+        {
+          "text": "Rajputana Residency",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "公寓物业名称"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7eb35f2c-03cb-480f-bc93-90496d7e61c8.arguments.content",
+          "reason": "邮件署名的人名"
+        }
+      ],
+      "new_terms": [
+        "Ryder",
+        "Kaori",
+        "Bronwyn McTavish",
+        "Rajputana Residency",
+        "Rohan Kumar"
+      ],
+      "active_vocabulary": {
+        "Ryder": 50,
+        "Kaori": 50,
+        "Bronwyn McTavish": 50,
+        "Rajputana Residency": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "4c3ffa703493d8a4c4dc100accec86b7bafb0faf32f876774a82ae1bb982d8e8"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Ryder",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人之一的人名"
+        },
+        {
+          "text": "Kaori",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人之一的人名"
+        },
+        {
+          "text": "Bronwyn",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人之一的人名"
+        },
+        {
+          "text": "Rajputana Residency",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "公寓物业名称"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_confirm_email.arguments.content",
+          "reason": "邮件署名的人名"
+        }
+      ],
+      "new_terms": [
+        "Bronwyn"
+      ],
+      "active_vocabulary": {
+        "Ryder": 50,
+        "Kaori": 50,
+        "Bronwyn McTavish": 50,
+        "Rajputana Residency": 50,
+        "Rohan Kumar": 50,
+        "Bronwyn": 50
+      },
+      "vocabulary_sha256": "2999d352a597a56f7a96c7ae81de7e585f23287d8c9b17ff8e6aaf8a31dd7fc4"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Rajputana Residency",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "会议地点物业名称"
+        },
+        {
+          "text": "Ryder McKenzie",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "参会人完整人名"
+        },
+        {
+          "text": "Kaori Nakahara",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "参会人完整人名"
+        },
+        {
+          "text": "Bronwyn McTavish",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "参会人完整人名"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_calendar.arguments.attendees[0]",
+          "reason": "参会人完整人名"
+        },
+        {
+          "text": "Sindhi Camp",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_calendar.arguments.location",
+          "reason": "地址中的地名"
+        },
+        {
+          "text": "Jaipur",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_calendar.arguments.location",
+          "reason": "地址中的城市名"
+        }
+      ],
+      "new_terms": [
+        "Ryder McKenzie",
+        "Kaori Nakahara",
+        "Sindhi Camp",
+        "Jaipur"
+      ],
+      "active_vocabulary": {
+        "Ryder": 50,
+        "Kaori": 50,
+        "Bronwyn McTavish": 50,
+        "Rajputana Residency": 50,
+        "Rohan Kumar": 50,
+        "Bronwyn": 50,
+        "Ryder McKenzie": 50,
+        "Kaori Nakahara": 50,
+        "Sindhi Camp": 50,
+        "Jaipur": 50
+      },
+      "vocabulary_sha256": "90cc15d5079263119fbe2f88d08de8b2f3bcd56ae01e1e4e0f1a49e4b969e7d9"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "163591d273a532d4eca3c7e031a211287eeafd23b4a1c0c0a69441f846c306e3",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2653,
+        "completion_tokens": 561,
+        "total_tokens": 3214,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2397
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.131
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0825_xh51tsoy3tc5tjnm16hddios9f28zg2e",
+  "extracted_at": "2026-11-22T06:44:01.741598+00:00"
+}

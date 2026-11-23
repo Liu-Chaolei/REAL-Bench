@@ -8,7 +8,11 @@ from tau2.data_model.message import Message, ParticipantMessageBase, Participant
 from tau2.data_model.simulation import SimulationRun
 from tau2.orchestrator.modes import CommunicationMode
 from tau2.voice.utils.audio_io import load_wav_file, play_audio, save_wav_file
-from tau2.voice.utils.audio_preprocessing import convert_to_stereo, merge_audio_datas
+from tau2.voice.utils.audio_preprocessing import (
+    convert_to_stereo,
+    merge_audio_datas,
+    resample_audio,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -136,6 +140,16 @@ def generate_simulation_audio(
             merged_assistant = merge_audio_datas(
                 assistant_audio_only, silence_duration_ms=None
             )
+            # Input and output may use different native rates. A stereo WAV
+            # needs one rate; preserve the higher-rate channel and upsample only
+            # the lower-rate channel before comparing sample counts.
+            stereo_rate = max(
+                merged_user.format.sample_rate, merged_assistant.format.sample_rate
+            )
+            if merged_user.format.sample_rate != stereo_rate:
+                merged_user = resample_audio(merged_user, stereo_rate)
+            if merged_assistant.format.sample_rate != stereo_rate:
+                merged_assistant = resample_audio(merged_assistant, stereo_rate)
             # Pad shorter audio to match longer one (for discrete-time simulations
             # where user and agent audio may have different lengths)
             from tau2.voice.utils.audio_preprocessing import pad_audio_with_zeros

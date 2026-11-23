@@ -1,0 +1,356 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0516_1xv9btt2d876mjh70tspq59bb1bcnwbh",
+  "model": "deepseek-flash",
+  "input_sha256": "e5b5697729817d19fde111d8b50fd288dd1fa36b1b1b216c7fd13424135ad041",
+  "review_input_sha256": "a706d6745cb0ae15d0d6dfd1f388ac588bbff8225f8b2e8a22b71509ff9ba1aa",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "3e9ee3c8390139073448ebfe4221bf7be9c308c3a667c56c4a5937e22dfd634e",
+  "reference_results_sha256": "5280ab9ba640bbb29c6a088c655e8f6c4c3be3ebcfad89d667f0f015eff4909b",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-4a25c3b4-f9a6-4259-8cbe-b1a034883904.arguments.content"
+    },
+    "stage1.tool_response.series_s1_original": {
+      "stage": 1,
+      "text": "{\"sender\": \"ursula.wiederkehr@gaia2mail.com\", \"recipients\": [\"enakahara@gaia2mail.com\", \"yuna.nakahara@gaia2mail.com\", \"tmatsumoto@jmtronics.co.jp\", \"kaito.nakamura@gaia2mail.com\", \"knakamura@mcaproductions.jp\", \"knakahara70@gaia2mail.com\", \"kmatsumoto@tokyo-u.ac.jp\"], \"subject\": \"Earthquake\", \"content\": \"Dear all,\\n\\nAre you all okay?\\n\\nBest,\\nUrsula Wiederkehr\", \"email_id\": \"42f498866abc915a2df3857468b71eab\", \"parent_id\": null, \"cc\": [], \"attachments\": {}, \"timestamp\": \"1728975601.0\", \"is_read\": \"True\"}",
+      "event_id": "series_s1_original",
+      "response_sha256": "9afc90fe9167e67f8393e97aeac68d1ae7ce8443ea20c7ae3f5f7322cb33d79d"
+    },
+    "stage1.tool_response.series_s1_person_0": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Emiko\", \"last_name\": \"Nakahara\", \"contact_id\": \"2bc03d9df77e4265a07ad1d406c92c77\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"65\", \"nationality\": \"Japanese\", \"city_living\": \"Tokyo\", \"country\": \"Japan\", \"status\": \"Status.RETIRED\", \"job\": \"Former High School Teacher\", \"description\": \"Emiko Nakahara is a 65-year-old retired high school teacher living in Tokyo, Japan. She spent most of her life teaching sociology and history to high school students and is now enjoying her retirement. Emiko is a curious and open-minded person who loves learning new things and exploring different cultures. She is particularly interested in social issues and is an avid reader of books on sociology and philosophy. In her free time, Emiko enjoys practicing calligraphy, gardening, and cooking traditional Japanese dishes.\", \"phone\": \"+81312345648\", \"email\": \"enakahara@gaia2mail.com\", \"address\": \"3-14-15 Yushima, Bunkyo-ku, Tokyo 113-0034\"}",
+      "event_id": "series_s1_person_0",
+      "response_sha256": "96fe008b0b7110ce5fd36af43a9572b72abaf41f2e6719f1db7b2fbc439b09fa"
+    },
+    "stage1.tool_response.series_s1_person_1": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Kaito\", \"last_name\": \"Matsumoto\", \"contact_id\": \"ab7182879e5040a2bfb9c6bae207ed94\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"57\", \"nationality\": \"Japanese\", \"city_living\": \"Tokyo\", \"country\": \"Japan\", \"status\": \"Status.EMPLOYED\", \"job\": \"Professor of Japanese History and Culture\", \"description\": \"Kaito Matsumoto is a renowned professor of Japanese History and Culture at the University of Tokyo. Born and raised in Tokyo, Kaito developed a strong interest in Japan's complex history, particularly its colonial past and the country's struggles with identity and liberation. His academic work focuses on the intersection of Japanese culture and politics, exploring how the country's history continues to shape its contemporary society. Kaito is a prolific writer and has published numerous books and articles on these topics, both in Japanese and English.\", \"phone\": \"+81312345677\", \"email\": \"kmatsumoto@tokyo-u.ac.jp\", \"address\": \"2-14-3 Yushima, Bunkyo-ku, Tokyo 113-0034, Japan\"}",
+      "event_id": "series_s1_person_1",
+      "response_sha256": "33afe96b17be93c75bba90338ac8d57d6236b0ab4c1012f38d838717ce5a2557"
+    },
+    "stage1.tool_response.series_s1_person_2": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Kaito\", \"last_name\": \"Nakamura\", \"contact_id\": \"b2c53ea45e88419b90491a612dca49fa\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"79\", \"nationality\": \"Japanese\", \"city_living\": \"Tokyo\", \"country\": \"Japan\", \"status\": \"Status.RETIRED\", \"job\": \"Formerly a Venture Capitalist\", \"description\": \"Kaito Nakamura is a charismatic and seasoned individual who has lived a life filled with adventure and accomplishment.\", \"phone\": \"+81312345678\", \"email\": \"kaito.nakamura@gaia2mail.com\", \"address\": \"2-14-3 Yushima, Bunkyo-ku, Tokyo 113-0034, Japan\"}",
+      "event_id": "series_s1_person_2",
+      "response_sha256": "9d69aac315cc7e52e0580f9f848567b9895f6e3fbdffb111843e6bbd5141b129"
+    },
+    "stage1.tool_response.series_s1_person_3": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Kenji\", \"last_name\": \"Nakamura\", \"contact_id\": \"efccf7ba9f61472193d0ce902d0d69eb\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"53\", \"nationality\": \"Japanese\", \"city_living\": \"Tokyo\", \"country\": \"Japan\", \"status\": \"Status.EMPLOYED\", \"job\": \"Motion Capture Producer\", \"description\": \"Kenji Nakamura is a meticulous and organized individual who has spent over two decades in the film and video game industry, specializing in motion capture production. As a producer, he is responsible for coordinating logistics, managing teams, and ensuring timely delivery of assets. His attention to detail and ability to work under pressure have earned him a reputation as one of the most reliable professionals in the field.\", \"phone\": \"+81310345678\", \"email\": \"knakamura@mcaproductions.jp\", \"address\": \"3-14-15 Yushima, Bunkyo-ku, Tokyo 113-0034, Japan\"}",
+      "event_id": "series_s1_person_3",
+      "response_sha256": "e514b27be0770b798e9cb700ba05df0b3194100c4c3d71a890f511036332eb14"
+    },
+    "stage1.tool_response.series_s1_person_4": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Kiyoshi\", \"last_name\": \"Nakahara\", \"contact_id\": \"ad82163c08134e46b65144af17f46320\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"70\", \"nationality\": \"Japanese\", \"city_living\": \"Tokyo\", \"country\": \"Japan\", \"status\": \"Status.RETIRED\", \"job\": \"Former Cognitive Scientist\", \"description\": \"Kiyoshi Nakahara is a retired cognitive scientist who spent most of his career studying human behavior and cognition.\", \"phone\": \"+81312345278\", \"email\": \"knakahara70@gaia2mail.com\", \"address\": \"3-14-15 Shimokitazawa, Setagaya-ku, Tokyo 155-0031, Japan\"}",
+      "event_id": "series_s1_person_4",
+      "response_sha256": "26bee48b48a76bba9ebd837a4563c49c8c8a34e1345813a572c34a0614db217e"
+    },
+    "stage1.tool_response.series_s1_person_5": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Taro\", \"last_name\": \"Matsumoto\", \"contact_id\": \"f19f2e2ced594df49f1f9d33f12e9657\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"66\", \"nationality\": \"Japanese\", \"city_living\": \"Tokyo\", \"country\": \"Japan\", \"status\": \"Status.EMPLOYED\", \"job\": \"CEO of a leading electronics company\", \"description\": \"A seasoned executive with over three decades of experience in the electronics industry.\", \"phone\": \"+81812345678\", \"email\": \"tmatsumoto@jmtronics.co.jp\", \"address\": \"3-14-15 Roppongi, Minato-ku, Tokyo 106-0032\"}",
+      "event_id": "series_s1_person_5",
+      "response_sha256": "2189aa0a83533e1f1c6cb3ca89cce5fef97af5ac42f32e5641f69e062dda53d6"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Emiko Nakahara",
+      "original_source": "stage2.tool_gt.series_s2_person_0.arguments.user_name"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Kaito Nakamura",
+      "original_source": "stage2.tool_gt.series_s2_person_1.arguments.user_name"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Kenji Nakamura",
+      "original_source": "stage2.tool_gt.series_s2_person_2.arguments.user_name"
+    },
+    "stage2.existing_catalog.3": {
+      "stage": 2,
+      "text": "Kiyoshi Nakahara",
+      "original_source": "stage2.tool_gt.series_s2_person_3.arguments.user_name"
+    },
+    "stage2.existing_catalog.4": {
+      "stage": 2,
+      "text": "Taro Matsumoto",
+      "original_source": "stage2.tool_gt.series_s2_person_4.arguments.user_name"
+    },
+    "stage2.existing_catalog.5": {
+      "stage": 2,
+      "text": "Yuna Nakahara",
+      "original_source": "stage2.tool_gt.series_s2_person_5.arguments.user_name"
+    },
+    "stage2.existing_catalog.6": {
+      "stage": 2,
+      "text": "Kaito Matsumoto",
+      "original_source": "stage2.tool_gt.series_s2_kaito.arguments.user_name"
+    },
+    "stage2.tool_response.series_s2_read_k": {
+      "stage": 2,
+      "text": "{\"messages\": [{\"sender_id\": \"84908bb6-c5c9-4973-8a38-4f9f331d0e2c\", \"message_id\": \"c934bb2c5f71e13f0cc5da288112035c\", \"timestamp\": \"1728975602.0\", \"content\": \"Earthquake Check-In: I have sent the Earthquake email and a separate request for verified relief-research sources. Please confirm whether you are okay and whether you need any help. Replies are not assumed; I will track your actual responses.\"}, {\"sender_id\": \"156aada0-d2a8-45db-a5dd-90352666ae9c\", \"message_id\": \"bc92f052abee41d686c36dc7f1f03513\", \"timestamp\": \"1725016500\", \"content\": \"Ah, I'm glad I could inspire some culinary cravings! If you ever find yourself in Tokyo, you'll have to come visit me and I'll take you to some of my favorite noodle shops. Deal?\"}, {\"sender_id\": \"84908bb6-c5c9-4973-8a38-4f9f331d0e2c\", \"message_id\": \"c0b247bd9ae94d339da1beabad1b8bb8\", \"timestamp\": \"1725015600\", \"content\": \"Everyone's doing well, thank you for asking. My grandkids are keeping me busy, as always. But I have to say, I've been feeling a bit nostalgic for Japan lately. Maybe it's the influence of your book, but I've been craving some good ramen and udon noodles.\"}, {\"sender_id\": \"156aada0-d2a8-45db-a5dd-90352666ae9c\", \"message_id\": \"54a07c88fb10491ea3d8091ede27c34c\", \"timestamp\": \"1725014700\", \"content\": \"Ah, thank you for asking! My wife's garden is thriving, as always. She's been experimenting with new varieties of Japanese tea plants, and I've been enjoying the fruits of her labor. And how about you, Ursula-san? How's your family doing?\"}, {\"sender_id\": \"84908bb6-c5c9-4973-8a38-4f9f331d0e2c\", \"message_id\": \"a6f3ad882b3b471a9dbbd12077bd4212\", \"timestamp\": \"1725013800\", \"content\": \"That sounds like a great idea! I'll have to check with my colleagues, but I think we'd be very interested in hosting a joint event. And on a personal note, how's your family doing? I always enjoy hearing about your wife's gardening adventures.\"}, {\"sender_id\": \"156aada0-d2a8-45db-a5dd-90352666ae9c\", \"message_id\": \"83259305bdb0409a8dd6e335e617b9af\", \"timestamp\": \"1725012900\", \"content\": \"Yes, I'm familiar with Yoshida-san's work! His research on the Ainu people is indeed groundbreaking. I've been meaning to invite him to speak at our university, actually. Perhaps we could organize a joint event with your institution in Basel?\"}, {\"sender_id\": \"84908bb6-c5c9-4973-8a38-4f9f331d0e2c\", \"message_id\": \"02ba90b7a4454b22bac952665dbe46be\", \"timestamp\": \"1725012000\", \"content\": \"Actually, I've been reading a lot about the impact of colonialism on indigenous cultures. There's a great book by a historian named Takashi Yoshida that explores the experiences of the Ainu people in Japan. Have you come across his work?\"}, {\"sender_id\": \"156aada0-d2a8-45db-a5dd-90352666ae9c\", \"message_id\": \"84f78d634e16413fbaf030f3b8a5a16e\", \"timestamp\": \"1725011100\", \"content\": \"That's fascinating! I'd love to hear more about your thoughts on the exhibit. And speaking of colonialism, have you come across any interesting research on the topic lately? I'm always looking for new perspectives to incorporate into my own work.\"}, {\"sender_id\": \"84908bb6-c5c9-4973-8a38-4f9f331d0e2c\", \"message_id\": \"f8eedc82581b4ebfb3adbfc76b590740\", \"timestamp\": \"1725010200\", \"content\": \"Actually, I visited the exhibit last week! It's indeed impressive, and I was struck by the similarities between Basel's history and some of the themes you explored in your book. The way the exhibit highlights the city's complex relationships with its neighbors and the impact of colonialism on local culture... it really resonated with me.\"}, {\"sender_id\": \"156aada0-d2a8-45db-a5dd-90352666ae9c\", \"message_id\": \"7da76864ac6c418c91c459da96a82459\", \"timestamp\": \"1725009300\", \"content\": \"Ah, Ursula-san, thank you so much for your kind words! I'm glad you enjoyed the book. I've been meaning to ask you, have you had a chance to visit the new museum exhibit on the history of Basel? I heard it's quite impressive.\"}], \"metadata\": {\"message_range\": [\"0\", \"10\"], \"conversation_length\": \"11\", \"conversation_id\": \"3d67ff5b711445caa1907284d5d48f82\", \"conversation_title\": \"Kaito Matsumoto\"}}",
+      "event_id": "series_s2_read_k",
+      "response_sha256": "8becc79a996db01199512ae72a39cb36cfc0fc20ebd2e1748f01fb0dd17053f7"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，拼写较难，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "d95c9da3be30654558667f62ae333c7b63393c188d4c6e532a2fa195afe3db23"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Bunkyo-ku",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_person_0",
+          "reason": "东京行政区名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Emiko Nakahara",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_person_0",
+          "reason": "完整人名，含日文专名",
+          "weight": 50
+        },
+        {
+          "text": "Kaito Matsumoto",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_person_1",
+          "reason": "完整人名，含日文专名",
+          "weight": 50
+        },
+        {
+          "text": "Kaito Nakamura",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_person_2",
+          "reason": "完整人名，含日文专名",
+          "weight": 50
+        },
+        {
+          "text": "Kenji Nakamura",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_person_3",
+          "reason": "完整人名，含日文专名",
+          "weight": 50
+        },
+        {
+          "text": "Kiyoshi Nakahara",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_person_4",
+          "reason": "完整人名，含日文专名",
+          "weight": 50
+        },
+        {
+          "text": "Minato-ku",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_person_5",
+          "reason": "东京行政区名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Setagaya-ku",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_person_4",
+          "reason": "东京行政区名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_original",
+          "reason": "完整人名，含不常见姓氏，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Roppongi",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_person_5",
+          "reason": "东京地名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Shimokitazawa",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_person_4",
+          "reason": "日本地名，拼写较难，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Yushima",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_person_0",
+          "reason": "东京地名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Bunkyo-ku",
+        "Emiko Nakahara",
+        "Kaito Matsumoto",
+        "Kaito Nakamura",
+        "Kenji Nakamura",
+        "Kiyoshi Nakahara",
+        "Minato-ku",
+        "Setagaya-ku",
+        "Roppongi",
+        "Shimokitazawa",
+        "Yushima"
+      ],
+      "active_vocabulary": {
+        "Ursula Wiederkehr": 50,
+        "Bunkyo-ku": 50,
+        "Emiko Nakahara": 50,
+        "Kaito Matsumoto": 50,
+        "Kaito Nakamura": 50,
+        "Kenji Nakamura": 50,
+        "Kiyoshi Nakahara": 50,
+        "Minato-ku": 50,
+        "Setagaya-ku": 50,
+        "Roppongi": 50,
+        "Shimokitazawa": 50,
+        "Yushima": 50
+      },
+      "vocabulary_sha256": "26bb34242c89cdb8fbd491a37049f56062d9f42442bfa04a9c49e76b758bee40"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Emiko Nakahara",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Kaito Matsumoto",
+          "kind": "person",
+          "source": "stage2.existing_catalog.6",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Kaito Nakamura",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Kenji Nakamura",
+          "kind": "person",
+          "source": "stage2.existing_catalog.2",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Kiyoshi Nakahara",
+          "kind": "person",
+          "source": "stage2.existing_catalog.3",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Takashi Yoshida",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_k",
+          "reason": "工具响应中出现的完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Taro Matsumoto",
+          "kind": "person",
+          "source": "stage2.existing_catalog.4",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Ursula-san",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_k",
+          "reason": "工具响应中出现的独特称呼名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Yuna Nakahara",
+          "kind": "person",
+          "source": "stage2.existing_catalog.5",
+          "reason": "完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Takashi Yoshida",
+        "Taro Matsumoto",
+        "Ursula-san",
+        "Yuna Nakahara"
+      ],
+      "active_vocabulary": {
+        "Ursula Wiederkehr": 50,
+        "Bunkyo-ku": 50,
+        "Emiko Nakahara": 50,
+        "Kaito Matsumoto": 50,
+        "Kaito Nakamura": 50,
+        "Kenji Nakamura": 50,
+        "Kiyoshi Nakahara": 50,
+        "Minato-ku": 50,
+        "Setagaya-ku": 50,
+        "Roppongi": 50,
+        "Shimokitazawa": 50,
+        "Yushima": 50,
+        "Takashi Yoshida": 50,
+        "Taro Matsumoto": 50,
+        "Ursula-san": 50,
+        "Yuna Nakahara": 50
+      },
+      "vocabulary_sha256": "1a3f5c41479d7d027e6793a0fddb3f9b2038914a9b557f67622c9e89966a99d5"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Antwerp",
+    "Tokyo"
+  ],
+  "binary_omissions": [],
+  "request_parts": 3,
+  "extracted_at": "2026-11-23T02:22:41.346388+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

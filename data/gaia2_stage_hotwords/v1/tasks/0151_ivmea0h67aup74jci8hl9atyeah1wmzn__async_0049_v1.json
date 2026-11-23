@@ -1,0 +1,134 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0151_ivmea0h67aup74jci8hl9atyeah1wmzn__async_0049_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "f0a3f8cc87a2e4cd887023ef36271ee03f64a886986bac91b1e3dbf89e63c6fc",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "需保留的邮件发件人姓名"
+        }
+      ],
+      "new_terms": [
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "202ddec9e4313928156bc6592746ccdd38af7f224b07d02fce35cdd91a88cf1c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien Dupont",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "跟进电话标题中的完整人名"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply.arguments.content",
+          "reason": "回复邮件中的称呼"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply.arguments.content",
+          "reason": "回复邮件署名"
+        }
+      ],
+      "new_terms": [
+        "Aurélien Dupont",
+        "Rohan Kumar"
+      ],
+      "active_vocabulary": {
+        "Aurélien": 50,
+        "Aurélien Dupont": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "75ff335f6b568429839b3681bdce8f95d4dba3a023b1492344cfbfb93c9605e3"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien": 50,
+        "Aurélien Dupont": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "75ff335f6b568429839b3681bdce8f95d4dba3a023b1492344cfbfb93c9605e3"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "ba7dc8f6e7ed2fa457e2b7721802afe796910cfdafe3a69320860fb2025faabd",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3034,
+        "completion_tokens": 842,
+        "total_tokens": 3876,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2778
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.906,
+      "error": "Duplicate term within stage 0: 'Aurélien'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "f36e5d3b4d0ea7317d7f4a10c1e103307d31e8df1404ce90e0427508c837fee9",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4272,
+        "completion_tokens": 241,
+        "total_tokens": 4513,
+        "prompt_tokens_details": {
+          "cached_tokens": 3840
+        },
+        "prompt_cache_hit_tokens": 3840,
+        "prompt_cache_miss_tokens": 432
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.129,
+      "error": "Duplicate term within stage 1: 'Aurélien Dupont'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "1c7d2840c73e5a82fcac66b6741afb16fa0de3bd62baa1d001f968e0036019f9",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3673,
+        "completion_tokens": 162,
+        "total_tokens": 3835,
+        "prompt_tokens_details": {
+          "cached_tokens": 2944
+        },
+        "prompt_cache_hit_tokens": 2944,
+        "prompt_cache_miss_tokens": 729
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.611
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0151_ivmea0h67aup74jci8hl9atyeah1wmzn__async_0049_v1",
+  "extracted_at": "2026-11-22T06:46:44.031398+00:00"
+}

@@ -1,0 +1,162 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0599_k85r3osbcdy1xz12mdupt739oev45qe4",
+  "model": "deepseek-flash",
+  "input_sha256": "ffd12eeef66844f3dbc04400bb26386f6d2913e4622be326abe84564d903ac3e",
+  "review_input_sha256": "b61eac538745da5c2a156fb970d8e86c4daec2c79f967256a2c953ef8b313d34",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "cd3d7a29f765ebcc2fec103a7cb611daa21c26bea54ddf1030f26c0563005671",
+  "reference_results_sha256": "efc53807427cfdae278ad29eb8522777d4560bfb8d5a91aaf20ffbbf5e64b2e4",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Luís Marques",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-7f2e74f7-6986-40a3-aefd-1e464e2cd6cb.arguments.content"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Jamila Fernandes",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-7f2e74f7-6986-40a3-aefd-1e464e2cd6cb.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Luís Silva",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-7f2e74f7-6986-40a3-aefd-1e464e2cd6cb.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-7f2e74f7-6986-40a3-aefd-1e464e2cd6cb.arguments.content"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Soho Oasis",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-63ea419a-cf31-4263-b29c-722fb351d771.arguments.content"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Skyline Views",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-63ea419a-cf31-4263-b29c-722fb351d771.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "较难拼写的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Luís Marques",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Luís Silva",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Skyline Views",
+          "kind": "place",
+          "source": "stage0.existing_catalog.5",
+          "reason": "独特地名",
+          "weight": 50
+        },
+        {
+          "text": "Soho Oasis",
+          "kind": "place",
+          "source": "stage0.existing_catalog.4",
+          "reason": "独特地名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur",
+        "Jamila Fernandes",
+        "Luís Marques",
+        "Luís Silva",
+        "Skyline Views",
+        "Soho Oasis"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Jamila Fernandes": 50,
+        "Luís Marques": 50,
+        "Luís Silva": 50,
+        "Skyline Views": 50,
+        "Soho Oasis": 50
+      },
+      "vocabulary_sha256": "ccf589e160f18a2484288b1d8db084f25f9ff59466a628781aa926c76e1187b0"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Jamila Fernandes": 50,
+        "Luís Marques": 50,
+        "Luís Silva": 50,
+        "Skyline Views": 50,
+        "Soho Oasis": 50
+      },
+      "vocabulary_sha256": "ccf589e160f18a2484288b1d8db084f25f9ff59466a628781aa926c76e1187b0"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Jamila Fernandes": 50,
+        "Luís Marques": 50,
+        "Luís Silva": 50,
+        "Skyline Views": 50,
+        "Soho Oasis": 50
+      },
+      "vocabulary_sha256": "ccf589e160f18a2484288b1d8db084f25f9ff59466a628781aa926c76e1187b0"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "155 Wooster St",
+    "1234 Broadway",
+    "1234 NW 23rd Ave"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:40.289189+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

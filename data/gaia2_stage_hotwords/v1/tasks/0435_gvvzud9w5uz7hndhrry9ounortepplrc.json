@@ -1,0 +1,128 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0435_gvvzud9w5uz7hndhrry9ounortepplrc",
+  "model": "deepseek-flash",
+  "input_sha256": "e5b15862bf7adfa2f2b0598ec35264227266586fcbfee0f66afd06c8900d4883",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Bronwen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人姓名"
+        }
+      ],
+      "new_terms": [
+        "Bronwen"
+      ],
+      "active_vocabulary": {
+        "Bronwen": 50
+      },
+      "vocabulary_sha256": "6733e009a6567ed1e19a981b29019b00d92ed7973fafc9a2ad15e8dd001c8702"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Cardiff",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "城市名"
+        },
+        {
+          "text": "Cardiff Bay Apartment",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "公寓房源名称"
+        }
+      ],
+      "new_terms": [
+        "Cardiff",
+        "Cardiff Bay Apartment"
+      ],
+      "active_vocabulary": {
+        "Bronwen": 50,
+        "Cardiff": 50,
+        "Cardiff Bay Apartment": 50
+      },
+      "vocabulary_sha256": "0e2d8a58a7294997ceb01044486ac04df4ef264b614f637a9ce30d142130ae83"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Bronwen",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Cambridge",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Cardiff City Centre",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "公寓房源名称"
+        },
+        {
+          "text": "Bute Street",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "街道名"
+        },
+        {
+          "text": "Rohini",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [
+        "Cambridge",
+        "Cardiff City Centre",
+        "Bute Street",
+        "Rohini"
+      ],
+      "active_vocabulary": {
+        "Bronwen": 50,
+        "Cardiff": 50,
+        "Cardiff Bay Apartment": 50,
+        "Cambridge": 50,
+        "Cardiff City Centre": 50,
+        "Bute Street": 50,
+        "Rohini": 50
+      },
+      "vocabulary_sha256": "deafe20565035eefdd877da26a14ad323f9f0df2141fbc74dfa232d82a59d7ed"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "62c9b9e9ab5e5a6f3639d93b07223b4f4ce7a61e466bab05116fdc9681596f96",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2133,
+        "completion_tokens": 270,
+        "total_tokens": 2403,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1877
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.245
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0435_gvvzud9w5uz7hndhrry9ounortepplrc",
+  "extracted_at": "2026-11-22T06:41:56.283148+00:00"
+}

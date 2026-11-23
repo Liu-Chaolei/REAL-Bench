@@ -1,0 +1,127 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0806_0zjfrj2mic9yhnox27ekqhid14o86ezd",
+  "model": "deepseek-flash",
+  "input_sha256": "ef572ce044ffd6035a72bfdeebbc693c9933575e5f4f06ea7a897d36d016e493",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaida Schönberger",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-866fde4d-9ea7-42d3-9555-ff5344121501.arguments.path",
+          "reason": "发送者姓名，含特殊字符"
+        },
+        {
+          "text": "František Šťastný",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-271848c3-32c3-4570-b955-00b6bfaea9ae.arguments.path",
+          "reason": "发送者姓名，含捷克语变音符号"
+        }
+      ],
+      "new_terms": [
+        "Kaida Schönberger",
+        "František Šťastný"
+      ],
+      "active_vocabulary": {
+        "Kaida Schönberger": 50,
+        "František Šťastný": 50
+      },
+      "vocabulary_sha256": "ccfc3e00c5a3fe519175a294840945f283ef0f2b35012f62f6c55a595bdb2b9f"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaida Schönberger",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_search_kaida.arguments.query",
+          "reason": "联系人姓名，含特殊字符"
+        },
+        {
+          "text": "František Šťastný",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_search_frantisek.arguments.query",
+          "reason": "联系人姓名，含捷克语变音符号"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kaida Schönberger": 50,
+        "František Šťastný": 50
+      },
+      "vocabulary_sha256": "ccfc3e00c5a3fe519175a294840945f283ef0f2b35012f62f6c55a595bdb2b9f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaida Schönberger",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reminder.arguments.description",
+          "reason": "重复发送者姓名，含特殊字符"
+        },
+        {
+          "text": "František",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reminder.arguments.description",
+          "reason": "一次性发送者名字"
+        }
+      ],
+      "new_terms": [
+        "František"
+      ],
+      "active_vocabulary": {
+        "Kaida Schönberger": 50,
+        "František Šťastný": 50,
+        "František": 50
+      },
+      "vocabulary_sha256": "214bf7921b360083b0aef8b63d9e0ff839782dabe010647310b77845dc379eeb"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "2d3200a431ba5f38906506fe31cfbafa71be973c382b0203b8c51666bb0c60f9",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2405,
+        "completion_tokens": 392,
+        "total_tokens": 2797,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2149
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.527,
+      "error": "Invalid proper-name phrase: 'matej.novacek@student.cuni.cz'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "64eb87556c329da2e5de76089c431382f80b2a2438f95372c09407a25d40f0d2",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3198,
+        "completion_tokens": 332,
+        "total_tokens": 3530,
+        "prompt_tokens_details": {
+          "cached_tokens": 2688
+        },
+        "prompt_cache_hit_tokens": 2688,
+        "prompt_cache_miss_tokens": 510
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.224
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0806_0zjfrj2mic9yhnox27ekqhid14o86ezd",
+  "extracted_at": "2026-11-22T06:43:57.973942+00:00"
+}

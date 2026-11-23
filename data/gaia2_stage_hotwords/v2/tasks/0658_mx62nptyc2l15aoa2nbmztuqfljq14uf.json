@@ -1,0 +1,170 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0658_mx62nptyc2l15aoa2nbmztuqfljq14uf",
+  "model": "deepseek-flash",
+  "input_sha256": "448c94197b60289dd70b8b41aadffcb7d591f60c29d0ec45dd4f72632c4a851c",
+  "review_input_sha256": "a659272edb58157fa05e73bfce0d421780af5ae0fd0eb0f9792554fba2781074",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "835a07f406af2a842341e47862a451e05ea537304daef1184af0844cea9dcdcd",
+  "reference_results_sha256": "dafa9c35f06e2816a23b7dedc853be2d65b29dedef8039cee7f47365b82463df",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Rohini Kumar",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Rohan Kumar",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-801ab175-b587-4c6d-b1f7-be440208649b.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Zara Saeed",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Rohan Deshpande",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Kavita Rao",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.3": {
+      "stage": 2,
+      "text": "Sahyadri Apartments",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.4": {
+      "stage": 2,
+      "text": "Bandra West",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Kumar",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Rohan Kumar",
+        "Rohini Kumar"
+      ],
+      "active_vocabulary": {
+        "Rohan Kumar": 50,
+        "Rohini Kumar": 50
+      },
+      "vocabulary_sha256": "ecfe10df4cc7f165dd872a8c8a5d5822245c04239c587100c8e00a5fb41d7719"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Rohan Kumar": 50,
+        "Rohini Kumar": 50
+      },
+      "vocabulary_sha256": "ecfe10df4cc7f165dd872a8c8a5d5822245c04239c587100c8e00a5fb41d7719"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Bandra West",
+          "kind": "place",
+          "source": "stage2.existing_catalog.4",
+          "reason": "独特地名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Kavita Rao",
+          "kind": "person",
+          "source": "stage2.existing_catalog.2",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Deshpande",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Sahyadri Apartments",
+          "kind": "place",
+          "source": "stage2.existing_catalog.3",
+          "reason": "独特地名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Zara Saeed",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Bandra West",
+        "Kavita Rao",
+        "Rohan Deshpande",
+        "Sahyadri Apartments",
+        "Zara Saeed"
+      ],
+      "active_vocabulary": {
+        "Rohan Kumar": 50,
+        "Rohini Kumar": 50,
+        "Bandra West": 50,
+        "Kavita Rao": 50,
+        "Rohan Deshpande": 50,
+        "Sahyadri Apartments": 50,
+        "Zara Saeed": 50
+      },
+      "vocabulary_sha256": "2b015fae70a53d6793710ad136ec7c5bef5cda936c13e8e010304f4443d88c0d"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "My First Doll Stroller Denim for Baby Doll",
+    "Mumbai",
+    "Maharashtra"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:54.699596+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

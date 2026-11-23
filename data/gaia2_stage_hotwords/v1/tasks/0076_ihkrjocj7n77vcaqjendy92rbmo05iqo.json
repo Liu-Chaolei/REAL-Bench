@@ -1,0 +1,161 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0076_ihkrjocj7n77vcaqjendy92rbmo05iqo",
+  "model": "deepseek-flash",
+  "input_sha256": "b21d4e8d1a200924970d32dce7fd6c68566c5448ca13b4fb5780bc2cece30690",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Grote Markt 5",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "比利时鲁汶的具体地点名称"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "比利时城市名"
+        },
+        {
+          "text": "Belgium",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "国家名"
+        },
+        {
+          "text": "Meir 90",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "鲁汶的具体街道地址"
+        }
+      ],
+      "new_terms": [
+        "Grote Markt 5",
+        "Leuven",
+        "Belgium",
+        "Meir 90"
+      ],
+      "active_vocabulary": {
+        "Grote Markt 5": 50,
+        "Leuven": 50,
+        "Belgium": 50,
+        "Meir 90": 50
+      },
+      "vocabulary_sha256": "3745d2907698c001fdb63e5198d067b07e622b8ea84aeccd258fc4ed5b765249"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Grote Markt 5",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "提醒地点中的具体地址"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "比利时城市名"
+        },
+        {
+          "text": "Meir",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "提醒标题中的街道名"
+        },
+        {
+          "text": "Van to Meir",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "日历提醒的自定义标题"
+        }
+      ],
+      "new_terms": [
+        "Meir",
+        "Van to Meir"
+      ],
+      "active_vocabulary": {
+        "Grote Markt 5": 50,
+        "Leuven": 50,
+        "Belgium": 50,
+        "Meir 90": 50,
+        "Meir": 50,
+        "Van to Meir": 50
+      },
+      "vocabulary_sha256": "472029aba0dfa8f4dfee0d15627babf6323d131b8fbe6a7bcb99f7c4977bb102"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Grote Markt 5",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "行程起点具体地址"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "比利时城市名"
+        },
+        {
+          "text": "Belgium",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "国家名"
+        },
+        {
+          "text": "Meir 90",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "行程终点具体地址"
+        },
+        {
+          "text": "Van to Meir",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "日历提醒的自定义标题"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Grote Markt 5": 50,
+        "Leuven": 50,
+        "Belgium": 50,
+        "Meir 90": 50,
+        "Meir": 50,
+        "Van to Meir": 50
+      },
+      "vocabulary_sha256": "472029aba0dfa8f4dfee0d15627babf6323d131b8fbe6a7bcb99f7c4977bb102"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "5b0ef4f6be9cda01df2c09b192764f443c4846b9c2d9ef2eeb00d8072482ed66",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2608,
+        "completion_tokens": 367,
+        "total_tokens": 2975,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2352
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.437
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0076_ihkrjocj7n77vcaqjendy92rbmo05iqo",
+  "extracted_at": "2026-11-22T06:39:55.534255+00:00"
+}

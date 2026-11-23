@@ -1,0 +1,136 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0036_eux8mnspf93qbuun9xvirb0prdiu62ed",
+  "model": "deepseek-flash",
+  "input_sha256": "95346c68b73be4cba04066d10d715515c0929bf0b572b5e6c26fcc27aa575d15",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Luísa",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Sebastião Salgado",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "摄影师全名"
+        },
+        {
+          "text": "Lisbon Photoshoot",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "群聊名称"
+        }
+      ],
+      "new_terms": [
+        "Luísa",
+        "Sebastião Salgado",
+        "Lisbon Photoshoot"
+      ],
+      "active_vocabulary": {
+        "Luísa": 50,
+        "Sebastião Salgado": 50,
+        "Lisbon Photoshoot": 50
+      },
+      "vocabulary_sha256": "1b494dfd9dfc1922d45f3203a31b52ac5b21225d9a600f6577607b2795c76487"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Luísa Silva",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.attendees[0]",
+          "reason": "参会人全名"
+        },
+        {
+          "text": "Sebastião Salgado",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.description",
+          "reason": "摄影师全名"
+        },
+        {
+          "text": "Lisbon",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "地名"
+        },
+        {
+          "text": "Stockholm",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "地名"
+        }
+      ],
+      "new_terms": [
+        "Luísa Silva",
+        "Lisbon",
+        "Stockholm"
+      ],
+      "active_vocabulary": {
+        "Luísa": 50,
+        "Sebastião Salgado": 50,
+        "Lisbon Photoshoot": 50,
+        "Luísa Silva": 50,
+        "Lisbon": 50,
+        "Stockholm": 50
+      },
+      "vocabulary_sha256": "fde817bc410605783ce840c170a75fa778ca124d7f850f8f2bae8380de7bd19f"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "84fe129935a6b1af48930352791a4bc60ed0380427c39aa2f9b14403e235a26c",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1682,
+        "completion_tokens": 281,
+        "total_tokens": 1963,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1426
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.706,
+      "error": "3 validation errors for Extraction\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无具体专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='提取人名与群聊名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='提取人名与地名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "192411cd69ab1c9327b610867f2bd49cb5e989ea71f23b30b5194f4957d4e573",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2519,
+        "completion_tokens": 256,
+        "total_tokens": 2775,
+        "prompt_tokens_details": {
+          "cached_tokens": 1920
+        },
+        "prompt_cache_hit_tokens": 1920,
+        "prompt_cache_miss_tokens": 599
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.113
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0036_eux8mnspf93qbuun9xvirb0prdiu62ed",
+  "extracted_at": "2026-11-22T06:39:45.714915+00:00"
+}

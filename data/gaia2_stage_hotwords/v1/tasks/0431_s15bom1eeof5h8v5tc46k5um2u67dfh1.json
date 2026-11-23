@@ -1,0 +1,114 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0431_s15bom1eeof5h8v5tc46k5um2u67dfh1",
+  "model": "deepseek-flash",
+  "input_sha256": "28497b527e01f26a39376b3f7b6b82a94805157dbf36e0c84d98e734c50b2c12",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Brugge Historic",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "公寓自定义名称"
+        },
+        {
+          "text": "Markt 10",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "公寓地址"
+        },
+        {
+          "text": "Brugge",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "比利时城市名"
+        }
+      ],
+      "new_terms": [
+        "Brugge Historic",
+        "Markt 10",
+        "Brugge"
+      ],
+      "active_vocabulary": {
+        "Brugge Historic": 50,
+        "Markt 10": 50,
+        "Brugge": 50
+      },
+      "vocabulary_sha256": "ac9fc181d8048aac00561142faf1aea3c8ec79c9580f1a3fa4bacc2ba7c8ecd3"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Liege Luxury",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_send.arguments.content",
+          "reason": "公寓自定义名称"
+        }
+      ],
+      "new_terms": [
+        "Liege Luxury"
+      ],
+      "active_vocabulary": {
+        "Brugge Historic": 50,
+        "Markt 10": 50,
+        "Brugge": 50,
+        "Liege Luxury": 50
+      },
+      "vocabulary_sha256": "be2aaa592eafa3b7ed7bcc4ece8e1143f8e9053f3583760e46e44452bba2a39f"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "8d5b4620816d64ee287abb50ab97facba952db1ffd82053a8c5e5e6fa1b27d95",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1339,
+        "completion_tokens": 194,
+        "total_tokens": 1533,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1083
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.069,
+      "error": "6 validation errors for Extraction\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage0.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage1.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='提取公寓名与地名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage2.reference_reply.s..._send.arguments.content', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='提取公寓名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "db6324492996f036c76b3af35f9c1ae54af94f13ee14fa044e8914d91aa46f93",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2257,
+        "completion_tokens": 140,
+        "total_tokens": 2397,
+        "prompt_tokens_details": {
+          "cached_tokens": 1408
+        },
+        "prompt_cache_hit_tokens": 1408,
+        "prompt_cache_miss_tokens": 849
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.781
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0431_s15bom1eeof5h8v5tc46k5um2u67dfh1",
+  "extracted_at": "2026-11-22T06:41:55.580266+00:00"
+}

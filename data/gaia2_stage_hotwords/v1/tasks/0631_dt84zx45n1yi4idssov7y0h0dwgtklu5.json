@@ -1,0 +1,131 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0631_dt84zx45n1yi4idssov7y0h0dwgtklu5",
+  "model": "deepseek-flash",
+  "input_sha256": "689afe7254b4ee7d29ca5c20c44d3e7f275f56ceba49d66e3bdab1569e397824",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Darth Vader",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "星球大战角色专有名称"
+        },
+        {
+          "text": "Star Wars",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "品牌/系列专有名称"
+        }
+      ],
+      "new_terms": [
+        "Darth Vader",
+        "Star Wars"
+      ],
+      "active_vocabulary": {
+        "Darth Vader": 50,
+        "Star Wars": 50
+      },
+      "vocabulary_sha256": "5aad2c8ee9a6221b2271e63a835f91fd3da43db6ae4688cd699d14210e334981"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Polyester",
+          "kind": "technical_term",
+          "source": "stage1.reference_reply.series_s1_report.arguments.content",
+          "reason": "服装材质专有术语"
+        },
+        {
+          "text": "Spandex",
+          "kind": "technical_term",
+          "source": "stage1.reference_reply.series_s1_report.arguments.content",
+          "reason": "服装材质专有术语"
+        }
+      ],
+      "new_terms": [
+        "Polyester",
+        "Spandex"
+      ],
+      "active_vocabulary": {
+        "Darth Vader": 50,
+        "Star Wars": 50,
+        "Polyester": 50,
+        "Spandex": 50
+      },
+      "vocabulary_sha256": "a72aa44fee29605140476e320739d6f19428da6d75205153a8c1ff262f7f85f1"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Polyester",
+          "kind": "technical_term",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "服装材质专有术语"
+        },
+        {
+          "text": "Spandex",
+          "kind": "technical_term",
+          "source": "stage2.tool_gt.series_s2_send_audit.arguments.content",
+          "reason": "服装材质专有术语"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Darth Vader": 50,
+        "Star Wars": 50,
+        "Polyester": 50,
+        "Spandex": 50
+      },
+      "vocabulary_sha256": "a72aa44fee29605140476e320739d6f19428da6d75205153a8c1ff262f7f85f1"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "efdf5ada54a55f90a451b5272742417255ca086a51bd497c06905ba77e54ef78",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3812,
+        "completion_tokens": 292,
+        "total_tokens": 4104,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3556
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.499,
+      "error": "Invalid proper-name phrase: 'rohankumar.advocate@gaia2mail.com'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "eb0ca15843fd5845432992eb44f46fdf7de409cbe7ff4f34e431b1555ec9df18",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4506,
+        "completion_tokens": 238,
+        "total_tokens": 4744,
+        "prompt_tokens_details": {
+          "cached_tokens": 4096
+        },
+        "prompt_cache_hit_tokens": 4096,
+        "prompt_cache_miss_tokens": 410
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.048
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0631_dt84zx45n1yi4idssov7y0h0dwgtklu5",
+  "extracted_at": "2026-11-22T06:43:12.700218+00:00"
+}

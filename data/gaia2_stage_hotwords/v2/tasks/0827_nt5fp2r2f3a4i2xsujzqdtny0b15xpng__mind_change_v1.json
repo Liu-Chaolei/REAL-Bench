@@ -1,0 +1,134 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0827_nt5fp2r2f3a4i2xsujzqdtny0b15xpng__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "d0d9317fbb4434902a280aa6a0befe8692554967207f5a054567c9705b38c1d5",
+  "review_input_sha256": "572fcdb26ac41bbde1c6402accb3044a754ac3a24196a91422ee3e0ab5360fe5",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "381d6a78dcb0c43d1bdc6977783d7d120d4cec2b2aea70fe9f63e6a086534b69",
+  "reference_results_sha256": "4ef9bd3a19ab7a63e1f2252c86bff739248a86df5df3a32e68e9555ba204a005",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Liverpool Mini Studio",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-2dbb73ab-fb61-488b-9da4-ade37311b721.arguments.title"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Liverpool Luxe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-9e4c9755-caef-4ca8-93b1-c9804c82c17c.arguments.title"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Liverpool Waterfront",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f8fd0de4-fb8b-4345-9fcc-ef71fe8c7c80.arguments.title"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Liverpool City Centre Apartment",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-1dd1fe83-45c0-4c31-9dec-336511f4df1f.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Liverpool City Centre Apartment",
+          "kind": "place",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整房源专名，含地名与房型",
+          "weight": 50
+        },
+        {
+          "text": "Liverpool Mini Studio",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整房源专名，含地名与房型，识别难度较高",
+          "weight": 50
+        },
+        {
+          "text": "Liverpool Luxe",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整房源专名，含独特品牌词",
+          "weight": 50
+        },
+        {
+          "text": "Liverpool Waterfront",
+          "kind": "place",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整地名专名，识别难度较高",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Liverpool City Centre Apartment",
+        "Liverpool Mini Studio",
+        "Liverpool Luxe",
+        "Liverpool Waterfront"
+      ],
+      "active_vocabulary": {
+        "Liverpool City Centre Apartment": 50,
+        "Liverpool Mini Studio": 50,
+        "Liverpool Luxe": 50,
+        "Liverpool Waterfront": 50
+      },
+      "vocabulary_sha256": "9a4f3b0099adc7d08f78e6f630cea078243fd6c944e61372c62bf16daaf08072"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Liverpool City Centre Apartment": 50,
+        "Liverpool Mini Studio": 50,
+        "Liverpool Luxe": 50,
+        "Liverpool Waterfront": 50
+      },
+      "vocabulary_sha256": "9a4f3b0099adc7d08f78e6f630cea078243fd6c944e61372c62bf16daaf08072"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Liverpool City Centre Apartment": 50,
+        "Liverpool Mini Studio": 50,
+        "Liverpool Luxe": 50,
+        "Liverpool Waterfront": 50
+      },
+      "vocabulary_sha256": "9a4f3b0099adc7d08f78e6f630cea078243fd6c944e61372c62bf16daaf08072"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": [
+        {
+          "text": "Liverpool City Centre",
+          "covered_by": "Liverpool City Centre Apartment"
+        }
+      ]
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Liverpool City Centre",
+    "Liverpool Waterfront Apartment"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:31.810712+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

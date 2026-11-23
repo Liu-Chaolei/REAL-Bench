@@ -1,0 +1,117 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0474_nvrutne256q0mv5mwcdytmpozvpjjy8y",
+  "model": "deepseek-flash",
+  "input_sha256": "8e61e05db60727becd2833ed13db4e7b54a9c3ae4c5f3e6576a3d24e6facb69c",
+  "review_input_sha256": "24711aabbbf7131b73c5a3614315f44d34f3801dfa9e69a3085baa583df4390f",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "8eb5b1ce7e4ecac9034e315baf18a09d1fad1005a2e378a286d4c55a75b1a62d",
+  "reference_results_sha256": "5a90eb6fbd46c9fbb9d25c8bff8d3e0ee6c9d57ddac55af4a68bea7ac93c71a2",
+  "sources": {
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Södra Förstadsgatan 20, Malmö",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-0a403262-2c50-4b21-853b-f9b0eff1bc1b.arguments.end_location"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Astrid Lundqvist",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-349f91d9-3361-4698-9bfc-e1960e02f41a.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Södra Promenaden 25, Malmö",
+      "original_source": "stage1.tool_gt.series_s1_add_viewing.arguments.location"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Södra Förstadsgatan 20, Malmö",
+          "kind": "place",
+          "source": "stage0.existing_catalog.4",
+          "reason": "含变音符号的瑞典语街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "含瑞典语拼写的完整人名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Södra Förstadsgatan 20, Malmö",
+        "Astrid Lundqvist"
+      ],
+      "active_vocabulary": {
+        "Södra Förstadsgatan 20, Malmö": 50,
+        "Astrid Lundqvist": 50
+      },
+      "vocabulary_sha256": "7210bd41cf0052535f53152a74c37e99a1c441af37101f7d24f98a01dabc69a4"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Södra Promenaden 25, Malmö",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的瑞典语街道地址",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Södra Promenaden 25, Malmö"
+      ],
+      "active_vocabulary": {
+        "Södra Förstadsgatan 20, Malmö": 50,
+        "Astrid Lundqvist": 50,
+        "Södra Promenaden 25, Malmö": 50
+      },
+      "vocabulary_sha256": "49ec2a608fccff9c7a5a08364c62502eb9ce42602be929c8337938f67695d7ba"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Södra Förstadsgatan 20, Malmö": 50,
+        "Astrid Lundqvist": 50,
+        "Södra Promenaden 25, Malmö": 50
+      },
+      "vocabulary_sha256": "49ec2a608fccff9c7a5a08364c62502eb9ce42602be929c8337938f67695d7ba"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Arnold",
+    "Schwarzenegger",
+    "Vasco Pinto",
+    "Malmö Modern",
+    "Malmö Harbour"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:03.067204+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

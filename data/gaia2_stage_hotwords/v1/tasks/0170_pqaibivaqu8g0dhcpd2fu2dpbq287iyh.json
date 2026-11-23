@@ -1,0 +1,138 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0170_pqaibivaqu8g0dhcpd2fu2dpbq287iyh",
+  "model": "deepseek-flash",
+  "input_sha256": "3348590176199facc7e0bbd384cdafd33c6e261f21d5d9e94c3d79bf2120484f",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Alexandru Munteanu",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-560529c7-e1ad-471d-84a2-25ed9ee41954.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Guillermo",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-9f523fb0-0c51-4e10-a83b-234413a39ed2.arguments.content",
+          "reason": "被邀请人姓名"
+        },
+        {
+          "text": "Los Angeles Dodgers Major League Baseball Collection",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品系列名称"
+        },
+        {
+          "text": "Toronto",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "新闻涉及的城市名"
+        }
+      ],
+      "new_terms": [
+        "Alexandru Munteanu",
+        "Aurélien",
+        "Guillermo",
+        "Los Angeles Dodgers Major League Baseball Collection",
+        "Toronto"
+      ],
+      "active_vocabulary": {
+        "Alexandru Munteanu": 50,
+        "Aurélien": 50,
+        "Guillermo": 50,
+        "Los Angeles Dodgers Major League Baseball Collection": 50,
+        "Toronto": 50
+      },
+      "vocabulary_sha256": "a161120955a4a60619936ab89631565894e13e8e80003928239c453484100479"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Los Angeles Dodgers",
+          "kind": "organization",
+          "source": "stage1.reference_reply.series_s1_speech.arguments.content",
+          "reason": "球队品牌名"
+        }
+      ],
+      "new_terms": [
+        "Los Angeles Dodgers"
+      ],
+      "active_vocabulary": {
+        "Alexandru Munteanu": 50,
+        "Aurélien": 50,
+        "Guillermo": 50,
+        "Los Angeles Dodgers Major League Baseball Collection": 50,
+        "Toronto": 50,
+        "Los Angeles Dodgers": 50
+      },
+      "vocabulary_sha256": "09e8712740a6eafb8f42dc1d0157da4a624f42771d95cb5b01fc3969f28b725a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Guillermo",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_guillermo.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Los Angeles Dodgers",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_email_guillermo.arguments.content",
+          "reason": "球队品牌名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Alexandru Munteanu": 50,
+        "Aurélien": 50,
+        "Guillermo": 50,
+        "Los Angeles Dodgers Major League Baseball Collection": 50,
+        "Toronto": 50,
+        "Los Angeles Dodgers": 50
+      },
+      "vocabulary_sha256": "09e8712740a6eafb8f42dc1d0157da4a624f42771d95cb5b01fc3969f28b725a"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "9adad445ad53d64897feed1a961f5e2625c70cbfe3c82abbfe4c740262c51bde",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2346,
+        "completion_tokens": 366,
+        "total_tokens": 2712,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2090
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.553
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0170_pqaibivaqu8g0dhcpd2fu2dpbq287iyh",
+  "extracted_at": "2026-11-22T06:40:27.582087+00:00"
+}

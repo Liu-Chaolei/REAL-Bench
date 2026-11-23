@@ -1,0 +1,132 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0447_hx0udx10pbzd6572irb7w9e86zsiom3c",
+  "model": "deepseek-flash",
+  "input_sha256": "605ab984979332145cd6333bbbe765baad279b1d7fcc591c4e97a76598cccc8e",
+  "review_input_sha256": "4b089c929662beeda2ec619a9882b015f6fc57c6c70bbbef16f89bfda2ca0dc3",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "74ca219220cc85ea51f9a83b18fda63cda4945bd56f6ef720d8630a90a94da83",
+  "reference_results_sha256": "219ac4277dc92b20b2c5c241dd0e6ec039445ed024401d9bfa3b5e20cee5bb42",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Avinash Kuldeep",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Sai Sankalp",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-ffdf6704-12f9-4ea4-83fb-74fb2422c36c.arguments.content"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Sai Kripa Apartments",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-ffdf6704-12f9-4ea4-83fb-74fb2422c36c.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Kalyan Nagar",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Sai Kripa Apartments",
+          "kind": "place",
+          "source": "stage0.existing_catalog.4",
+          "reason": "独特公寓名称，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Avinash Kuldeep",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Sai Sankalp",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Sai Kripa Apartments",
+        "Avinash Kuldeep",
+        "Sai Sankalp"
+      ],
+      "active_vocabulary": {
+        "Sai Kripa Apartments": 50,
+        "Avinash Kuldeep": 50,
+        "Sai Sankalp": 50
+      },
+      "vocabulary_sha256": "095655f4acf4524910756b2a03a8038864fbd16ef7ed160be4c89bb3d365bc12"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kalyan Nagar",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "地名，较难识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kalyan Nagar"
+      ],
+      "active_vocabulary": {
+        "Sai Kripa Apartments": 50,
+        "Avinash Kuldeep": 50,
+        "Sai Sankalp": 50,
+        "Kalyan Nagar": 50
+      },
+      "vocabulary_sha256": "6a7f555ecef61a58ede80ee7a040fde2badcd5e30525b5fd9c0ec1c760c05413"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Sai Kripa Apartments": 50,
+        "Avinash Kuldeep": 50,
+        "Sai Sankalp": 50,
+        "Kalyan Nagar": 50
+      },
+      "vocabulary_sha256": "6a7f555ecef61a58ede80ee7a040fde2badcd5e30525b5fd9c0ec1c760c05413"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Avinash",
+    "Kuldeep",
+    "Bengaluru",
+    "Rohan Kumar"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:54.987671+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

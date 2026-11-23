@@ -1,0 +1,118 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0601_mz4dh4tml93gims9dxwrcz7i16t0p5ud",
+  "model": "deepseek-flash",
+  "input_sha256": "e64b4918ff047e1b01f0f33dd818fa0bf8a357ab45a3c7f13af45b18648107cf",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Åke Lindström",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-9ca29aa0-de61-43b9-8784-1181580bc6b2.arguments.attendees[0]",
+          "reason": "好友的完整姓名"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-8ad56d85-3053-444a-9141-9fdcba7aac68.arguments.content",
+          "reason": "邮件署名中的用户姓名"
+        },
+        {
+          "text": "Stockholm",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Åke Lindström",
+        "Astrid Lundqvist",
+        "Stockholm"
+      ],
+      "active_vocabulary": {
+        "Åke Lindström": 50,
+        "Astrid Lundqvist": 50,
+        "Stockholm": 50
+      },
+      "vocabulary_sha256": "759150b1745ddbb627ec2e2fe0dada2f27aff1adcbd57f9977f69e055ff81d0e"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Åke",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply_email.arguments.content",
+          "reason": "邮件署名中的用户姓名"
+        }
+      ],
+      "new_terms": [
+        "Åke"
+      ],
+      "active_vocabulary": {
+        "Åke Lindström": 50,
+        "Astrid Lundqvist": 50,
+        "Stockholm": 50,
+        "Åke": 50
+      },
+      "vocabulary_sha256": "685080b2589f4f0a9fe28f2a24cdf55110e6b6fbb4e2065a6947db6c1ad1b06c"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Åke Lindström",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Stockholm",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_updated_event.arguments.location",
+          "reason": "事件地点城市名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Åke Lindström": 50,
+        "Astrid Lundqvist": 50,
+        "Stockholm": 50,
+        "Åke": 50
+      },
+      "vocabulary_sha256": "685080b2589f4f0a9fe28f2a24cdf55110e6b6fbb4e2065a6947db6c1ad1b06c"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "cb1dca877b01972ede34873c90cf035cf69b0f10d5bb2bc9d876e73b94dd2251",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3319,
+        "completion_tokens": 305,
+        "total_tokens": 3624,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3063
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.29
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0601_mz4dh4tml93gims9dxwrcz7i16t0p5ud",
+  "extracted_at": "2026-11-22T06:42:58.059464+00:00"
+}

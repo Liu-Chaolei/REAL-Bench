@@ -1,0 +1,174 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0682_1uar8bic22j0mqn5dcobx595b7227d1y",
+  "model": "deepseek-flash",
+  "input_sha256": "6eaaa36d5a3c989da9181d391d31d7d6a47469adff5ba1867a347575126862c6",
+  "review_input_sha256": "9c3f10fa65a7f68eed76bdfee92badfc990c125dd8fedef3632fe8d87b0ecc9b",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "2c86ba6bd29f9f2e2c87d3c526f24145a07aa19c545a24c35e4e8b9fd5ad9924",
+  "reference_results_sha256": "5b2cdd1abea4461193e51e2db67fefd866d4a16c3f22f0d5eee420be7f748bed",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Bollovi Confetti Balloons",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Eliška Nováková",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Matěj Nováček",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-d452fb6a-3639-4a0d-a4aa-4c4416b56d3a.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "American Greetings",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Paw Patrol",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "PIONEER BALLOON COMPANY",
+      "original_source": "stage2.tool_gt.series_s2_create.arguments.description"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "68810 Bubble Balloon",
+      "original_source": "stage2.tool_gt.series_s2_create.arguments.description"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Bollovi Confetti Balloons",
+          "kind": "product",
+          "source": "stage0.existing_catalog.0",
+          "reason": "独特的产品名称",
+          "weight": 50
+        },
+        {
+          "text": "Eliška Nováková",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Bollovi Confetti Balloons",
+        "Eliška Nováková",
+        "Matěj Nováček"
+      ],
+      "active_vocabulary": {
+        "Bollovi Confetti Balloons": 50,
+        "Eliška Nováková": 50,
+        "Matěj Nováček": 50
+      },
+      "vocabulary_sha256": "a4d4603fa16c743a65bcdb99943c5bee06a995dadb012e8a716fb724496b5501"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "American Greetings",
+          "kind": "organization",
+          "source": "stage1.existing_catalog.0",
+          "reason": "独特品牌机构名",
+          "weight": 50
+        },
+        {
+          "text": "Paw Patrol",
+          "kind": "product",
+          "source": "stage1.existing_catalog.1",
+          "reason": "独特品牌/产品名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "American Greetings",
+        "Paw Patrol"
+      ],
+      "active_vocabulary": {
+        "Bollovi Confetti Balloons": 50,
+        "Eliška Nováková": 50,
+        "Matěj Nováček": 50,
+        "American Greetings": 50,
+        "Paw Patrol": 50
+      },
+      "vocabulary_sha256": "c5c38cf075ca15af05c3747e6c0e9ed1063832008468d9323fb893ef0062ed03"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "68810 Bubble Balloon",
+          "kind": "product",
+          "source": "stage2.existing_catalog.1",
+          "reason": "含型号的独特产品名",
+          "weight": 50
+        },
+        {
+          "text": "PIONEER BALLOON COMPANY",
+          "kind": "organization",
+          "source": "stage2.existing_catalog.0",
+          "reason": "独特公司名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "68810 Bubble Balloon",
+        "PIONEER BALLOON COMPANY"
+      ],
+      "active_vocabulary": {
+        "Bollovi Confetti Balloons": 50,
+        "Eliška Nováková": 50,
+        "Matěj Nováček": 50,
+        "American Greetings": 50,
+        "Paw Patrol": 50,
+        "68810 Bubble Balloon": 50,
+        "PIONEER BALLOON COMPANY": 50
+      },
+      "vocabulary_sha256": "2f3806eda9c54435a90514cab49f5da0116104fe3d6f707ea81974445cdaac8a"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Eliška"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:00.756882+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

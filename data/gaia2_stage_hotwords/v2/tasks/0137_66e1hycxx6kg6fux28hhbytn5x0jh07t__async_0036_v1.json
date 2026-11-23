@@ -1,0 +1,143 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0137_66e1hycxx6kg6fux28hhbytn5x0jh07t__async_0036_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "40bc24c3f3d01730c4bc9cfe4f52cada88b46043bea25c7729978c35ec65d833",
+  "review_input_sha256": "7ba1523bbb3054324c92074089be383a9aefbcfe1942a68c62e409f2a8a054d8",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "3b1dc2e98cd766b7001bbbbaea5c413d6350cd8719a5a95eb7eae9b74c9252a2",
+  "reference_results_sha256": "1ee297877d60a3916d18a3f7c10f48c78bd58ddeadb147895d44a61746ac619f",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Warunee Srisuk",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Åse Kjellstad",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-04021fa5-4bbe-4a1e-a31e-0b04560b123d.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Karl Johans gate 12",
+      "original_source": "stage1.tool_gt.series_s1_order_ride.arguments.end_location"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Frognerveien 34",
+      "original_source": "stage1.tool_gt.series_s1_order_ride.arguments.start_location"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Oslo Central",
+      "original_source": "stage1.tool_gt.series_s1_calendar_event.arguments.title"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Warunee Srisuk",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，拼写较难，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含拉丁变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Warunee Srisuk",
+        "Åse Kjellstad"
+      ],
+      "active_vocabulary": {
+        "Warunee Srisuk": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "de1c883b74ee0d118a71a3be915a75b377f0d717b549e894ebeb914e2918b458"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Karl Johans gate 12",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "具体街道地址，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Frognerveien 34",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "挪威语街道名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Oslo Central",
+          "kind": "place",
+          "source": "stage1.existing_catalog.2",
+          "reason": "具体地点名称，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Karl Johans gate 12",
+        "Frognerveien 34",
+        "Oslo Central"
+      ],
+      "active_vocabulary": {
+        "Warunee Srisuk": 50,
+        "Åse Kjellstad": 50,
+        "Karl Johans gate 12": 50,
+        "Frognerveien 34": 50,
+        "Oslo Central": 50
+      },
+      "vocabulary_sha256": "5ba009b2bf2b97b8edd2950e6d0185dcb88a038d3ab5754135fa80279fa3420c"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Warunee Srisuk": 50,
+        "Åse Kjellstad": 50,
+        "Karl Johans gate 12": 50,
+        "Frognerveien 34": 50,
+        "Oslo Central": 50
+      },
+      "vocabulary_sha256": "5ba009b2bf2b97b8edd2950e6d0185dcb88a038d3ab5754135fa80279fa3420c"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Oslo"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:49.649759+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,322 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0598_3blx2g45b52ajwclty9flruevfytx2ob",
+  "model": "deepseek-flash",
+  "input_sha256": "e1e6d04e575d6ee03c1f8848e04e6699249efb66ddababeb86e7e9d56ea319e2",
+  "review_input_sha256": "5f2f1e763483d2d6bcd1a3ed946d501db0b9cdd04778714183bc682ae123ba5c",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "5427482362a43116d4db735476b2c42be9aa499b0d918be34f735c53c2afa75a",
+  "reference_results_sha256": "dedf7e7b0949f4c47e17e5b072ac3371f285ee66714b9efb3c8253741a9bc7fd",
+  "sources": {
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Basel Kleinbasel",
+      "original_source": "stage2.reference_reply.series_s2_speak.arguments.content"
+    },
+    "stage2.existing_catalog.7": {
+      "stage": 2,
+      "text": "Basel Kunsthaus",
+      "original_source": "stage2.reference_reply.series_s2_speak.arguments.content"
+    },
+    "stage2.existing_catalog.8": {
+      "stage": 2,
+      "text": "Basel Bahnhof",
+      "original_source": "stage2.reference_reply.series_s2_speak.arguments.content"
+    },
+    "stage2.tool_response.series_s2_saved": {
+      "stage": 2,
+      "text": "{\"529836869ae74c4f9a290df0a4d82d09\": {\"name\": \"Zurich Uptown\", \"location\": \"Talstrasse, Zurich\", \"zip_code\": \"8001\", \"price\": \"3800\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"2000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"529836869ae74c4f9a290df0a4d82d09\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"7b284299112d4acd9081fa338d5404ce\": {\"name\": \"Zug City Center\", \"location\": \"Zug, Altstadt\", \"zip_code\": \"6300\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"7b284299112d4acd9081fa338d5404ce\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"99a91b059bd244cdb1207d8c76e23875\": {\"name\": \"Geneva Haven\", \"location\": \"Rue de Genève, 1201 Geneva\", \"zip_code\": \"1201\", \"price\": \"2000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Basement\", \"pet_policy\": \"No pets\", \"lease_term\": \"Month-to-month\", \"apartment_id\": \"99a91b059bd244cdb1207d8c76e23875\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"9d43e37dabe647f1be3975f70ca6945d\": {\"name\": \"Zurichberg Oasis\", \"location\": \"Zurichbergstrasse, Zurich\", \"zip_code\": \"8044\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"9d43e37dabe647f1be3975f70ca6945d\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"4436d025bd074a8a9cf18e299c09d089\": {\"name\": \"Lugano Lake View\", \"location\": \"Via Nassa, 6900 Lugano\", \"zip_code\": \"6900\", \"price\": \"3200\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"4436d025bd074a8a9cf18e299c09d089\", \"amenities\": [\"Pool\", \"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"8c4ae6c041f543ddbe2e698d01c50f9c\": {\"name\": \"Bern Bliss\", \"location\": \"Marktgasse 30, Bern\", \"zip_code\": \"3011\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"8c4ae6c041f543ddbe2e698d01c50f9c\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"992ce357f1c54de5916cbc374e1b44e8\": {\"name\": \"Locarno City Center\", \"location\": \"6600 Locarno, Switzerland\", \"zip_code\": \"6600\", \"price\": \"2200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"992ce357f1c54de5916cbc374e1b44e8\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"7d1c66f47ade476eb81b0d06865e19f3\": {\"name\": \"Geneva Lakeside\", \"location\": \"1200 Geneva, Quai du Général-Guisan\", \"zip_code\": \"1200\", \"price\": \"3500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"7d1c66f47ade476eb81b0d06865e19f3\", \"amenities\": [\"Pool\", \"Parking\"], \"saved\": \"True\"}, \"c332937007d14072a432ac902e58af07\": {\"name\": \"Geneva Luxury\", \"location\": \"Rue de Lausanne 45, Geneva\", \"zip_code\": \"1201\", \"price\": \"4000\", \"bedrooms\": \"5\", \"bathrooms\": \"4\", \"property_type\": \"Condo\", \"square_footage\": \"2000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"No pets\", \"lease_term\": \"Long term lease\", \"apartment_id\": \"c332937007d14072a432ac902e58af07\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"84d63e1fd26b474e9448f147261641f8\": {\"name\": \"Bern Old Town\", \"location\": \"3011 Bern, Kornhausgasse\", \"zip_code\": \"3011\", \"price\": \"2500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"84d63e1fd26b474e9448f147261641f8\", \"amenities\": [\"Laundry\", \"Bike storage\"], \"saved\": \"True\"}, \"65e7072fb05d4777b2bd51382ac54278\": {\"name\": \"Geneva Lakefront\", \"location\": \"Geneva, Eaux-Vives\", \"zip_code\": \"1207\", \"price\": \"3500\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"Long term lease\", \"apartment_id\": \"65e7072fb05d4777b2bd51382ac54278\", \"amenities\": [\"Parking\", \"Laundry\", \"Sauna\"], \"saved\": \"True\"}, \"7116e85ac6b34ff9a00d4ec5244a9b32\": {\"name\": \"Geneva Gem\", \"location\": \"Rue de Lausanne 23, Geneva\", \"zip_code\": \"1201\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"7116e85ac6b34ff9a00d4ec5244a9b32\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"7cb90e8930c644f08dedafdcfde1f3e6\": {\"name\": \"Lausanne Charm\", \"location\": \"Rue de Genève 23, Lausanne\", \"zip_code\": \"1004\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"7cb90e8930c644f08dedafdcfde1f3e6\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"173edb3cc3574905a317b206195c0d7b\": {\"name\": \"Basel City\", \"location\": \"Marktplatz, 4051 Basel\", \"zip_code\": \"4051\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"173edb3cc3574905a317b206195c0d7b\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"8137fa0ad8634db7a4f1796cc9d6fefd\": {\"name\": \"Bern Bärenplatz\", \"location\": \"Bärenplatz, Bern\", \"zip_code\": \"3011\", \"price\": \"2500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Second floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"8137fa0ad8634db7a4f1796cc9d6fefd\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"3655dbac534e45b780e4c303ac681831\": {\"name\": \"Zug City Living\", \"location\": \"Baarerstrasse, Zug\", \"zip_code\": \"6300\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"3655dbac534e45b780e4c303ac681831\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"97cc588061fb466486b374a4c29a6f8f\": {\"name\": \"Lugano Living\", \"location\": \"Via Nassa 24, Lugano\", \"zip_code\": \"6900\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"97cc588061fb466486b374a4c29a6f8f\", \"amenities\": [\"Pool\", \"Gym\"], \"saved\": \"True\"}, \"52040401c03a484a9df4247a45a49d7e\": {\"name\": \"Zug Lake Views\", \"location\": \"6300 Zug, Switzerland\", \"zip_code\": \"6300\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"52040401c03a484a9df4247a45a49d7e\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"b7369f55d0534af997c7544bd5c01b23\": {\"name\": \"Zug Zest\", \"location\": \"Baarerstrasse 12, Zug\", \"zip_code\": \"6300\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"b7369f55d0534af997c7544bd5c01b23\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"473e5c7f56104443b0998d8a565dbb56\": {\"name\": \"Lausanne Lakeview\", \"location\": \"Rue du Lac 20, 1000 Lausanne\", \"zip_code\": \"1000\", \"price\": \"3000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"473e5c7f56104443b0998d8a565dbb56\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"fc087ca2b37a477f97a3d9c79f88843c\": {\"name\": \"Lugano Lakefront\", \"location\": \"Via Nassa, Lugano\", \"zip_code\": \"6900\", \"price\": \"3000\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"fc087ca2b37a477f97a3d9c79f88843c\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"05a7d223cbad49cdac60afa8b80a1d7f\": {\"name\": \"Zug Mountain Views\", \"location\": \"Haldenstrasse, Zug\", \"zip_code\": \"6300\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"05a7d223cbad49cdac60afa8b80a1d7f\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"0f92aa441816488eb59c8b2b9c918a14\": {\"name\": \"Lakeview Oasis\", \"location\": \"Quai du Mont-Blanc, Geneva\", \"zip_code\": \"1201\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"0f92aa441816488eb59c8b2b9c918a14\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"70627b484c8a489d80e457c80eadb2aa\": {\"name\": \"Locarno Loft\", \"location\": \"Via della Pace 12, 6600 Locarno\", \"zip_code\": \"6600\", \"price\": \"2000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"70627b484c8a489d80e457c80eadb2aa\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"a3c80c2d4a14471fab146a44297dc638\": {\"name\": \"Lausanne Luxury\", \"location\": \"Avenue de Cour 10, Lausanne\", \"zip_code\": \"1007\", \"price\": \"3500\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"a3c80c2d4a14471fab146a44297dc638\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"b76612a950bb414b9dde114a5fb20308\": {\"name\": \"Geneva Oasis\", \"location\": \"1201 Geneva, Rue de Lausanne\", \"zip_code\": \"1201\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"b76612a950bb414b9dde114a5fb20308\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"4f2aa4bb298c474da6fb2041a8d1f7a5\": {\"name\": \"Locarno Living\", \"location\": \"Via Verbano 12, 6600 Locarno\", \"zip_code\": \"6600\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"4f2aa4bb298c474da6fb2041a8d1f7a5\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"1d92d06cd6544dee8c2923900b6852b3\": {\"name\": \"Geneva City Center\", \"location\": \"1200 Geneva, Switzerland\", \"zip_code\": \"1200\", \"price\": \"2800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"1d92d06cd6544dee8c2923900b6852b3\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"9e212fbabafb4d679a1020b4ec957d59\": {\"name\": \"Zurich Zen\", \"location\": \"Limmatstrasse 123, Zurich\", \"zip_code\": \"8001\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"9e212fbabafb4d679a1020b4ec957d59\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"e8c74931b5d0476b998ff5a8bbaa45f9\": {\"name\": \"Lake Geneva Oasis\", \"location\": \"Rue de Lausanne, 1003 Lausanne\", \"zip_code\": \"1003\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"e8c74931b5d0476b998ff5a8bbaa45f9\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"57d9f1be74c14498b0ec093e83ed4f89\": {\"name\": \"Basel Kleinbasel\", \"location\": \"Kleinbasler Strasse, Basel\", \"zip_code\": \"4051\", \"price\": \"1800\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"57d9f1be74c14498b0ec093e83ed4f89\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"5d6e8decfab74a81baaaee6668f15deb\": {\"name\": \"Basel City Oasis\", \"location\": \"4051 Basel, Steinenberg\", \"zip_code\": \"4051\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"5d6e8decfab74a81baaaee6668f15deb\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"5fbd676c33fa4963acf39894729ede15\": {\"name\": \"Basel Old Town\", \"location\": \"4051 Basel, Switzerland\", \"zip_code\": \"4051\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"5fbd676c33fa4963acf39894729ede15\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"72b6e6ddf8364bd581997061f10dd0c3\": {\"name\": \"Basel Modern\", \"location\": \"Steinenberg 25, Basel\", \"zip_code\": \"4051\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"72b6e6ddf8364bd581997061f10dd0c3\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"aed7077846544189a21722dfb097d195\": {\"name\": \"Basel City Center\", \"location\": \"4051 Basel, Marktplatz\", \"zip_code\": \"4051\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"aed7077846544189a21722dfb097d195\", \"amenities\": [\"Laundry\", \"Bike storage\"], \"saved\": \"True\"}, \"b082df719d4a48ebb2c0c4e3f18b38fd\": {\"name\": \"Basel City Loft\", \"location\": \"Steinenvorstadt, Basel\", \"zip_code\": \"4051\", \"price\": \"1800\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"700\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"Month-to-month\", \"apartment_id\": \"b082df719d4a48ebb2c0c4e3f18b38fd\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"b1d1ecabfef64726ae01da673af0d54c\": {\"name\": \"Basel Kunsthaus\", \"location\": \"Steinenring, Basel\", \"zip_code\": \"4051\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"b1d1ecabfef64726ae01da673af0d54c\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"c4cc5543a11e4787808b892cfe882aa7\": {\"name\": \"Basel Bahnhof\", \"location\": \"Centralbahnplatz, Basel\", \"zip_code\": \"4051\", \"price\": \"2200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"c4cc5543a11e4787808b892cfe882aa7\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"e8e54412ee574e8782938599cbe398b7\": {\"name\": \"Basel City Living\", \"location\": \"Steinenberg 12, Basel\", \"zip_code\": \"4051\", \"price\": \"1800\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"e8e54412ee574e8782938599cbe398b7\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"1236ac706e9945a89fd6b317f7b3866b\": {\"name\": \"Basel Breeze\", \"location\": \"Kleinbaslerstrasse, Basel\", \"zip_code\": \"4058\", \"price\": \"2200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"1236ac706e9945a89fd6b317f7b3866b\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"7a4cb6825356464eb6b7e5008ee15d6a\": {\"name\": \"Basel Waterfront\", \"location\": \"Rheingasse, 4058 Basel\", \"zip_code\": \"4058\", \"price\": \"1800\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"7a4cb6825356464eb6b7e5008ee15d6a\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"94020f91d8d54214accca0d3aaf2c5c6\": {\"name\": \"Basel Riverside\", \"location\": \"Rheingasse, Basel\", \"zip_code\": \"4058\", \"price\": \"3000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"94020f91d8d54214accca0d3aaf2c5c6\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}}",
+      "event_id": "series_s2_saved",
+      "response_sha256": "9a518e7b0ec8074b1d436221387a803b44378992af4ef221f2244b45d9c13d51"
+    },
+    "stage2.tool_response.series_s2_search_4051": {
+      "stage": 2,
+      "text": "{\"173edb3cc3574905a317b206195c0d7b\": {\"name\": \"Basel City\", \"location\": \"Marktplatz, 4051 Basel\", \"zip_code\": \"4051\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"173edb3cc3574905a317b206195c0d7b\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"57d9f1be74c14498b0ec093e83ed4f89\": {\"name\": \"Basel Kleinbasel\", \"location\": \"Kleinbasler Strasse, Basel\", \"zip_code\": \"4051\", \"price\": \"1800\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"57d9f1be74c14498b0ec093e83ed4f89\", \"amenities\": [\"Laundry\"], \"saved\": \"False\"}, \"5d6e8decfab74a81baaaee6668f15deb\": {\"name\": \"Basel City Oasis\", \"location\": \"4051 Basel, Steinenberg\", \"zip_code\": \"4051\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"5d6e8decfab74a81baaaee6668f15deb\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"False\"}, \"5fbd676c33fa4963acf39894729ede15\": {\"name\": \"Basel Old Town\", \"location\": \"4051 Basel, Switzerland\", \"zip_code\": \"4051\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"5fbd676c33fa4963acf39894729ede15\", \"amenities\": [\"Laundry\"], \"saved\": \"False\"}, \"72b6e6ddf8364bd581997061f10dd0c3\": {\"name\": \"Basel Modern\", \"location\": \"Steinenberg 25, Basel\", \"zip_code\": \"4051\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"72b6e6ddf8364bd581997061f10dd0c3\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"False\"}, \"aed7077846544189a21722dfb097d195\": {\"name\": \"Basel City Center\", \"location\": \"4051 Basel, Marktplatz\", \"zip_code\": \"4051\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"aed7077846544189a21722dfb097d195\", \"amenities\": [\"Laundry\", \"Bike storage\"], \"saved\": \"False\"}, \"b082df719d4a48ebb2c0c4e3f18b38fd\": {\"name\": \"Basel City Loft\", \"location\": \"Steinenvorstadt, Basel\", \"zip_code\": \"4051\", \"price\": \"1800\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"700\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"Month-to-month\", \"apartment_id\": \"b082df719d4a48ebb2c0c4e3f18b38fd\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"False\"}, \"b1d1ecabfef64726ae01da673af0d54c\": {\"name\": \"Basel Kunsthaus\", \"location\": \"Steinenring, Basel\", \"zip_code\": \"4051\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"b1d1ecabfef64726ae01da673af0d54c\", \"amenities\": [\"Laundry\"], \"saved\": \"False\"}, \"c4cc5543a11e4787808b892cfe882aa7\": {\"name\": \"Basel Bahnhof\", \"location\": \"Centralbahnplatz, Basel\", \"zip_code\": \"4051\", \"price\": \"2200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"c4cc5543a11e4787808b892cfe882aa7\", \"amenities\": [\"Parking\"], \"saved\": \"False\"}, \"e8e54412ee574e8782938599cbe398b7\": {\"name\": \"Basel City Living\", \"location\": \"Steinenberg 12, Basel\", \"zip_code\": \"4051\", \"price\": \"1800\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"e8e54412ee574e8782938599cbe398b7\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"False\"}}",
+      "event_id": "series_s2_search_4051",
+      "response_sha256": "169c4f1b0f151717c669265f9eb55da04ed5eecd61e7cad57796dfa996527d18"
+    },
+    "stage2.tool_response.series_s2_search_4058": {
+      "stage": 2,
+      "text": "{\"1236ac706e9945a89fd6b317f7b3866b\": {\"name\": \"Basel Breeze\", \"location\": \"Kleinbaslerstrasse, Basel\", \"zip_code\": \"4058\", \"price\": \"2200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"1236ac706e9945a89fd6b317f7b3866b\", \"amenities\": [\"Laundry\"], \"saved\": \"False\"}, \"7a4cb6825356464eb6b7e5008ee15d6a\": {\"name\": \"Basel Waterfront\", \"location\": \"Rheingasse, 4058 Basel\", \"zip_code\": \"4058\", \"price\": \"1800\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"7a4cb6825356464eb6b7e5008ee15d6a\", \"amenities\": [\"Laundry\"], \"saved\": \"False\"}, \"94020f91d8d54214accca0d3aaf2c5c6\": {\"name\": \"Basel Riverside\", \"location\": \"Rheingasse, Basel\", \"zip_code\": \"4058\", \"price\": \"3000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"94020f91d8d54214accca0d3aaf2c5c6\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"False\"}}",
+      "event_id": "series_s2_search_4058",
+      "response_sha256": "69f5bfcecc2e7ef65794f10356c00ffdaf73140eb10095ea931af8632ba3e40e"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Quai du Général-Guisan",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_saved",
+          "reason": "含法语变音符号的日内瓦地名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Quai du Mont-Blanc",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_saved",
+          "reason": "日内瓦地名，含连字符专名",
+          "weight": 50
+        },
+        {
+          "text": "Avenue de Cour",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_saved",
+          "reason": "洛桑街道专名",
+          "weight": 50
+        },
+        {
+          "text": "Via della Pace",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_saved",
+          "reason": "洛迦诺街道专名",
+          "weight": 50
+        },
+        {
+          "text": "Basel Bahnhof",
+          "kind": "place",
+          "source": "stage2.existing_catalog.8",
+          "reason": "含德语专名 Bahnhof，属难识别地名",
+          "weight": 50
+        },
+        {
+          "text": "Basel Kleinbasel",
+          "kind": "place",
+          "source": "stage2.existing_catalog.1",
+          "reason": "巴塞尔区名，含地方专名 Kleinbasel，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Basel Kunsthaus",
+          "kind": "place",
+          "source": "stage2.existing_catalog.7",
+          "reason": "含德语专名 Kunsthaus，属难识别地名",
+          "weight": 50
+        },
+        {
+          "text": "Eaux-Vives",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_saved",
+          "reason": "日内瓦区名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Kleinbasler Strasse",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_4051",
+          "reason": "德语街道名，含 Kleinbasler 专名",
+          "weight": 50
+        },
+        {
+          "text": "Via Nassa",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_saved",
+          "reason": "卢加诺街道专名",
+          "weight": 50
+        },
+        {
+          "text": "Via Verbano",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_saved",
+          "reason": "洛迦诺街道专名",
+          "weight": 50
+        },
+        {
+          "text": "Altstadt",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_saved",
+          "reason": "楚格老城区专名",
+          "weight": 50
+        },
+        {
+          "text": "Baarerstrasse",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_saved",
+          "reason": "楚格街道专名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Bärenplatz",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_saved",
+          "reason": "含变音符号的伯尔尼广场专名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Centralbahnplatz",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_4051",
+          "reason": "巴塞尔广场专名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Haldenstrasse",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_saved",
+          "reason": "楚格街道专名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Kleinbaslerstrasse",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_4058",
+          "reason": "德语街道专名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Kornhausgasse",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_saved",
+          "reason": "伯尔尼街道专名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Limmatstrasse",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_saved",
+          "reason": "苏黎世街道专名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Rheingasse",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_4058",
+          "reason": "巴塞尔街道专名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Steinenberg",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_4051",
+          "reason": "巴塞尔街道专名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Steinenring",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_4051",
+          "reason": "巴塞尔街道专名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Steinenvorstadt",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_4051",
+          "reason": "巴塞尔街道专名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Zurichbergstrasse",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_saved",
+          "reason": "苏黎世街道专名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Quai du Général-Guisan",
+        "Quai du Mont-Blanc",
+        "Avenue de Cour",
+        "Via della Pace",
+        "Basel Bahnhof",
+        "Basel Kleinbasel",
+        "Basel Kunsthaus",
+        "Eaux-Vives",
+        "Kleinbasler Strasse",
+        "Via Nassa",
+        "Via Verbano",
+        "Altstadt",
+        "Baarerstrasse",
+        "Bärenplatz",
+        "Centralbahnplatz",
+        "Haldenstrasse",
+        "Kleinbaslerstrasse",
+        "Kornhausgasse",
+        "Limmatstrasse",
+        "Rheingasse",
+        "Steinenberg",
+        "Steinenring",
+        "Steinenvorstadt",
+        "Zurichbergstrasse"
+      ],
+      "active_vocabulary": {
+        "Quai du Général-Guisan": 50,
+        "Quai du Mont-Blanc": 50,
+        "Avenue de Cour": 50,
+        "Via della Pace": 50,
+        "Basel Bahnhof": 50,
+        "Basel Kleinbasel": 50,
+        "Basel Kunsthaus": 50,
+        "Eaux-Vives": 50,
+        "Kleinbasler Strasse": 50,
+        "Via Nassa": 50,
+        "Via Verbano": 50,
+        "Altstadt": 50,
+        "Baarerstrasse": 50,
+        "Bärenplatz": 50,
+        "Centralbahnplatz": 50,
+        "Haldenstrasse": 50,
+        "Kleinbaslerstrasse": 50,
+        "Kornhausgasse": 50,
+        "Limmatstrasse": 50,
+        "Rheingasse": 50,
+        "Steinenberg": 50,
+        "Steinenring": 50,
+        "Steinenvorstadt": 50,
+        "Zurichbergstrasse": 50
+      },
+      "vocabulary_sha256": "62377c98c51dcf2f2178a9c614227f0bf692d1bbc10b8e8936c2113876dd9b87"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Four-postcode crime summary",
+    "Basel",
+    "Basel City Oasis",
+    "Basel Old Town",
+    "Basel Modern",
+    "Basel City Center",
+    "Basel City Loft",
+    "Basel City Living",
+    "Basel City",
+    "Basel Breeze",
+    "Basel Waterfront",
+    "Basel Riverside"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:42.518181+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

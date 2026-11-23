@@ -1,0 +1,204 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0063_dqqradqydvtjkat8ce1sen472uq5yolq__async_0031_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "cf727e0328dc0d33003fc05836efad68572423f9fa6caa2167c4d251efc98fb1",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kofi Nkrumah",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "邮件收件人姓名"
+        },
+        {
+          "text": "Gulab",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5d189d6a-3b78-4bb2-ad1f-142ddebb1c57.arguments.content",
+          "reason": "回复邮件中的收件人名字"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5d189d6a-3b78-4bb2-ad1f-142ddebb1c57.arguments.content",
+          "reason": "邮件署名"
+        },
+        {
+          "text": "Kymberley",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-bfa9cd6b-25aa-4457-a0fa-5fe2c51f29b2.arguments.content",
+          "reason": "回复邮件中的收件人名字"
+        },
+        {
+          "text": "Gulab Shahzad",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-18646440-32ff-4a4b-8396-2e6e5cd3cd1a.arguments.attendees[0]",
+          "reason": "日历事件参会人全名"
+        },
+        {
+          "text": "Kymberley McTavish",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-18646440-32ff-4a4b-8396-2e6e5cd3cd1a.arguments.attendees[1]",
+          "reason": "日历事件参会人全名"
+        },
+        {
+          "text": "Meeting with Collaborators",
+          "kind": "custom_name",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-4502869e-466d-4e94-b296-6eebf4de6da0.arguments.content",
+          "reason": "日历事件名称"
+        },
+        {
+          "text": "Reading Time",
+          "kind": "custom_name",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-4502869e-466d-4e94-b296-6eebf4de6da0.arguments.content",
+          "reason": "日历事件名称"
+        }
+      ],
+      "new_terms": [
+        "Kofi Nkrumah",
+        "Gulab",
+        "Rohini Deshpande",
+        "Kymberley",
+        "Gulab Shahzad",
+        "Kymberley McTavish",
+        "Meeting with Collaborators",
+        "Reading Time"
+      ],
+      "active_vocabulary": {
+        "Kofi Nkrumah": 50,
+        "Gulab": 50,
+        "Rohini Deshpande": 50,
+        "Kymberley": 50,
+        "Gulab Shahzad": 50,
+        "Kymberley McTavish": 50,
+        "Meeting with Collaborators": 50,
+        "Reading Time": 50
+      },
+      "vocabulary_sha256": "c2b13e5d7889406cd70a09864a32f65795dfc235b8bf172ba1bf2404e2aa8ede"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Catch-up Conversation",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "群聊会话名称"
+        },
+        {
+          "text": "Gulab",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群聊成员名字"
+        },
+        {
+          "text": "Kymberley",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群聊成员名字"
+        },
+        {
+          "text": "Gulab Shahzad",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "参会人全名"
+        },
+        {
+          "text": "Kymberley McTavish",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "参会人全名"
+        }
+      ],
+      "new_terms": [
+        "Catch-up Conversation"
+      ],
+      "active_vocabulary": {
+        "Kofi Nkrumah": 50,
+        "Gulab": 50,
+        "Rohini Deshpande": 50,
+        "Kymberley": 50,
+        "Gulab Shahzad": 50,
+        "Kymberley McTavish": 50,
+        "Meeting with Collaborators": 50,
+        "Reading Time": 50,
+        "Catch-up Conversation": 50
+      },
+      "vocabulary_sha256": "df67c46f8343d21c4fd869b1c404f20076ba84f20c9b1e3c199629c93ffacb01"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Catch-up Conversation",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "群聊会话名称"
+        },
+        {
+          "text": "Gulab",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "群聊成员名字"
+        },
+        {
+          "text": "Kymberley",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "群聊成员名字"
+        },
+        {
+          "text": "Gulab Shahzad",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "参会人全名"
+        },
+        {
+          "text": "Kymberley McTavish",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "参会人全名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kofi Nkrumah": 50,
+        "Gulab": 50,
+        "Rohini Deshpande": 50,
+        "Kymberley": 50,
+        "Gulab Shahzad": 50,
+        "Kymberley McTavish": 50,
+        "Meeting with Collaborators": 50,
+        "Reading Time": 50,
+        "Catch-up Conversation": 50
+      },
+      "vocabulary_sha256": "df67c46f8343d21c4fd869b1c404f20076ba84f20c9b1e3c199629c93ffacb01"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "b4306da065dcb1a4dbd102d679709ca0a0bf005a7ec6392bb062bcb0274a4d34",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2889,
+        "completion_tokens": 860,
+        "total_tokens": 3749,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2633
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.824
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0063_dqqradqydvtjkat8ce1sen472uq5yolq__async_0031_v1",
+  "extracted_at": "2026-11-22T06:46:30.623585+00:00"
+}

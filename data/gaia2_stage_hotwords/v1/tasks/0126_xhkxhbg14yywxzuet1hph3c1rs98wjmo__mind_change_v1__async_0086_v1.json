@@ -1,0 +1,190 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0126_xhkxhbg14yywxzuet1hph3c1rs98wjmo__mind_change_v1__async_0086_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "ccf57f433667070fe60ce4ea06a717d30e8049861732b53523eeb84057eaf296",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Spalding Basketball Net",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定商品名称"
+        },
+        {
+          "text": "Brussels International",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Ghent Gem",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Zayed Al-Mansoori",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Dubai",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Spalding Basketball Net",
+        "Brussels International",
+        "Ghent Gem",
+        "Zayed Al-Mansoori",
+        "Dubai"
+      ],
+      "active_vocabulary": {
+        "Spalding Basketball Net": 50,
+        "Brussels International": 50,
+        "Ghent Gem": 50,
+        "Zayed Al-Mansoori": 50,
+        "Dubai": 50
+      },
+      "vocabulary_sha256": "11f2b38115b8d535af6bf4c25ab5402b28211e27ae438ddaec8c0955f63dfe2e"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Ghent Waterfront",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Ghent Student Apartments",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Brussels International",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "公寓名称"
+        }
+      ],
+      "new_terms": [
+        "Ghent Waterfront",
+        "Ghent Student Apartments"
+      ],
+      "active_vocabulary": {
+        "Spalding Basketball Net": 50,
+        "Brussels International": 50,
+        "Ghent Gem": 50,
+        "Zayed Al-Mansoori": 50,
+        "Dubai": 50,
+        "Ghent Waterfront": 50,
+        "Ghent Student Apartments": 50
+      },
+      "vocabulary_sha256": "1755e5f2a985182cf860b6f61bb4c7fb915f205d62e5d9d5e2a8e4c9f9bd55fb"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Brussels Apartment Shortlist Review",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "日历事件标题"
+        },
+        {
+          "text": "Brussels International",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Brussels Bright",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Brussels Luxe Living",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Brussels Green",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Brussels Boutique",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Review Meeting: Net-Zero Energy Building",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "已有日历事件标题"
+        }
+      ],
+      "new_terms": [
+        "Brussels Apartment Shortlist Review",
+        "Brussels Bright",
+        "Brussels Luxe Living",
+        "Brussels Green",
+        "Brussels Boutique",
+        "Review Meeting: Net-Zero Energy Building"
+      ],
+      "active_vocabulary": {
+        "Spalding Basketball Net": 50,
+        "Brussels International": 50,
+        "Ghent Gem": 50,
+        "Zayed Al-Mansoori": 50,
+        "Dubai": 50,
+        "Ghent Waterfront": 50,
+        "Ghent Student Apartments": 50,
+        "Brussels Apartment Shortlist Review": 50,
+        "Brussels Bright": 50,
+        "Brussels Luxe Living": 50,
+        "Brussels Green": 50,
+        "Brussels Boutique": 50,
+        "Review Meeting: Net-Zero Energy Building": 50
+      },
+      "vocabulary_sha256": "d8726934e399911b39a5bf34016d33b211e25de32f2ef45ed224782c18b5f5b1"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "010094a7064d7f9fb836dcd8052b1960469386f38ce31c370e5d4d95c6bbd85a",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2431,
+        "completion_tokens": 467,
+        "total_tokens": 2898,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2175
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.724
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0126_xhkxhbg14yywxzuet1hph3c1rs98wjmo__mind_change_v1__async_0086_v1",
+  "extracted_at": "2026-11-22T06:46:54.004594+00:00"
+}

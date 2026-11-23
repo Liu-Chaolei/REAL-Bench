@@ -1,0 +1,205 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0146_l478wa9xwglv1bbo4bscuehkamc74vmi__async_0044_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "5b291d74a9b42981ec87e096a96394ad8830dd664cabcf50c890a59dcd2b6449",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Rodrigo",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "待删除的联系人名字，存在重名歧义"
+        }
+      ],
+      "new_terms": [
+        "Rodrigo"
+      ],
+      "active_vocabulary": {
+        "Rodrigo": 50
+      },
+      "vocabulary_sha256": "5e602ca915f2d3c16e139d2a536c778442c25fedbc426e4f564c4ff1c708890f"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Rodrigo",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "用户澄清所指的联系人"
+        },
+        {
+          "text": "Guadalajara",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "用于区分联系人的城市名"
+        },
+        {
+          "text": "Rodrigo Gutiérrez",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "需删除的完整人名"
+        },
+        {
+          "text": "Rodrigo García López",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "需保留的完整人名"
+        },
+        {
+          "text": "Cancún",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "回复中用于区分联系人的城市名"
+        }
+      ],
+      "new_terms": [
+        "Guadalajara",
+        "Rodrigo Gutiérrez",
+        "Rodrigo García López",
+        "Cancún"
+      ],
+      "active_vocabulary": {
+        "Rodrigo": 50,
+        "Guadalajara": 50,
+        "Rodrigo Gutiérrez": 50,
+        "Rodrigo García López": 50,
+        "Cancún": 50
+      },
+      "vocabulary_sha256": "4726196044d7174ab69cbe46d85faceb6fbad297a4cf0cad590949e0d730b055"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Rodrigo García López",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "需编辑记录的联系人完整人名"
+        },
+        {
+          "text": "Cancún",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "回复中用于区分联系人的城市名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Rodrigo": 50,
+        "Guadalajara": 50,
+        "Rodrigo Gutiérrez": 50,
+        "Rodrigo García López": 50,
+        "Cancún": 50
+      },
+      "vocabulary_sha256": "4726196044d7174ab69cbe46d85faceb6fbad297a4cf0cad590949e0d730b055"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "957970bdaef22608dce3cc921172c55ab6ab796a99b13a091401287de850faf4",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1884,
+        "completion_tokens": 551,
+        "total_tokens": 2435,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1628
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.402,
+      "error": "Duplicate term within stage 0: 'Rodrigo'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "8447b5a9814c68633665198b2ab86c8238815cb201aaa7fd33f6e486a14d8d8d",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2830,
+        "completion_tokens": 491,
+        "total_tokens": 3321,
+        "prompt_tokens_details": {
+          "cached_tokens": 2432
+        },
+        "prompt_cache_hit_tokens": 2432,
+        "prompt_cache_miss_tokens": 398
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.799,
+      "error": "Duplicate term within stage 1: 'Rodrigo Gutiérrez'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "16a0797a7f06bc4a0d2f4cc4f7b47fdf9a620dcd896d222779c07ff60a9a4b16",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2774,
+        "completion_tokens": 491,
+        "total_tokens": 3265,
+        "prompt_tokens_details": {
+          "cached_tokens": 1792
+        },
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 982
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.19,
+      "error": "Duplicate term within stage 1: 'Rodrigo Gutiérrez'"
+    },
+    {
+      "attempt": 4,
+      "request_sha256": "16a0797a7f06bc4a0d2f4cc4f7b47fdf9a620dcd896d222779c07ff60a9a4b16",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2774,
+        "completion_tokens": 491,
+        "total_tokens": 3265,
+        "prompt_tokens_details": {
+          "cached_tokens": 2560
+        },
+        "prompt_cache_hit_tokens": 2560,
+        "prompt_cache_miss_tokens": 214
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.838,
+      "error": "Duplicate term within stage 1: 'Rodrigo Gutiérrez'"
+    },
+    {
+      "attempt": 5,
+      "request_sha256": "1c307b48008e6ab9f0a1605404e97af217ef912d8695360135c9cf3686a3f8d3",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2860,
+        "completion_tokens": 282,
+        "total_tokens": 3142,
+        "prompt_tokens_details": {
+          "cached_tokens": 2176
+        },
+        "prompt_cache_hit_tokens": 2176,
+        "prompt_cache_miss_tokens": 684
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.479
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0146_l478wa9xwglv1bbo4bscuehkamc74vmi__async_0044_v1",
+  "extracted_at": "2026-11-22T06:48:32.095891+00:00"
+}

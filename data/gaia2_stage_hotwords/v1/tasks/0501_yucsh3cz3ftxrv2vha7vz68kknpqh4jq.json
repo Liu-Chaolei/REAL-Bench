@@ -1,0 +1,142 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0501_yucsh3cz3ftxrv2vha7vz68kknpqh4jq",
+  "model": "deepseek-flash",
+  "input_sha256": "33d16b7fbdc37b421bd707be426b7c689bd44e676e6a3f9c4189354a9600837d",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Khalifa Al-Mansoori",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Karel Vandenberghe",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Nalinee Wongwanich",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Amal Al-Mansour",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Liesbeth",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_khalifa.arguments.content",
+          "reason": "署名"
+        }
+      ],
+      "new_terms": [
+        "Khalifa Al-Mansoori",
+        "Karel Vandenberghe",
+        "Nalinee Wongwanich",
+        "Amal Al-Mansour",
+        "Liesbeth"
+      ],
+      "active_vocabulary": {
+        "Khalifa Al-Mansoori": 50,
+        "Karel Vandenberghe": 50,
+        "Nalinee Wongwanich": 50,
+        "Amal Al-Mansour": 50,
+        "Liesbeth": 50
+      },
+      "vocabulary_sha256": "a06e22c77b7e9de589280a55db3ea279208bbeb0de4439f5b83ed9e935fd390d"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Khalifa Al-Mansoori": 50,
+        "Karel Vandenberghe": 50,
+        "Nalinee Wongwanich": 50,
+        "Amal Al-Mansour": 50,
+        "Liesbeth": 50
+      },
+      "vocabulary_sha256": "a06e22c77b7e9de589280a55db3ea279208bbeb0de4439f5b83ed9e935fd390d"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "c4771d8f2f7dd479b698520dde5c1c2e2f65a67a9d62e6ad4314a983d013031c",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2857,
+        "completion_tokens": 291,
+        "total_tokens": 3148,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2601
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.29,
+      "error": "9 validation errors for Extraction\nstages.0.kind\n  Extra inputs are not permitted [type=extra_forbidden, input_value='custom_name', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage0.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.kind\n  Extra inputs are not permitted [type=extra_forbidden, input_value='person', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage1.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='联系人姓名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.kind\n  Extra inputs are not permitted [type=extra_forbidden, input_value='person', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage2.tool_gt.series_s2...arguments.recipients[0]', input_type=str]\n    For further informati"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "9505621f971d785bf44475236f23b7c4f201dbd5f737c831941b9aeec914714f",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3961,
+        "completion_tokens": 222,
+        "total_tokens": 4183,
+        "prompt_tokens_details": {
+          "cached_tokens": 3072
+        },
+        "prompt_cache_hit_tokens": 3072,
+        "prompt_cache_miss_tokens": 889
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.262,
+      "error": "Invalid proper-name phrase: 'rohini.deshpande@gaia2mail.com'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "85c2890f891ca46184121eb0320fbabe9e1f87eb70bf3b4b3597c5c01143f19d",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3482,
+        "completion_tokens": 172,
+        "total_tokens": 3654,
+        "prompt_tokens_details": {
+          "cached_tokens": 2816
+        },
+        "prompt_cache_hit_tokens": 2816,
+        "prompt_cache_miss_tokens": 666
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.921
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0501_yucsh3cz3ftxrv2vha7vz68kknpqh4jq",
+  "extracted_at": "2026-11-22T06:42:28.512539+00:00"
+}

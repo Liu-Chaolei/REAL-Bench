@@ -1,0 +1,147 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0292_wopgj6c0zg1s0l9ifolkbgqw05vjd720",
+  "model": "deepseek-flash",
+  "input_sha256": "c8e9adcfdc92aee1b7fce3684fa45ebc401acb4e6fc6c9cfa335b799eddb1f62",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Saint Petersburg Palace",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_calendar.arguments.title",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Nevsky Prospekt",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_calendar.arguments.location",
+          "reason": "街道名称"
+        },
+        {
+          "text": "Saint Petersburg",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_calendar.arguments.location",
+          "reason": "城市名称"
+        },
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_calendar.arguments.description",
+          "reason": "联系人姓名"
+        }
+      ],
+      "new_terms": [
+        "Saint Petersburg Palace",
+        "Nevsky Prospekt",
+        "Saint Petersburg",
+        "Viktor Kuznetsov"
+      ],
+      "active_vocabulary": {
+        "Saint Petersburg Palace": 50,
+        "Nevsky Prospekt": 50,
+        "Saint Petersburg": 50,
+        "Viktor Kuznetsov": 50
+      },
+      "vocabulary_sha256": "5c2170f48b919ef689cf83125c5a14ee1caf418ad4ff7ed1b996537a517ffa05"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Saint Petersburg Palace",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_calendar.arguments.description",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Saint Petersburg Suites",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_calendar.arguments.title",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Nevsky Prospekt",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_calendar.arguments.description",
+          "reason": "街道名称"
+        },
+        {
+          "text": "Saint Petersburg",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_calendar.arguments.description",
+          "reason": "城市名称"
+        },
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_calendar.arguments.description",
+          "reason": "联系人姓名"
+        }
+      ],
+      "new_terms": [
+        "Saint Petersburg Suites"
+      ],
+      "active_vocabulary": {
+        "Saint Petersburg Palace": 50,
+        "Nevsky Prospekt": 50,
+        "Saint Petersburg": 50,
+        "Viktor Kuznetsov": 50,
+        "Saint Petersburg Suites": 50
+      },
+      "vocabulary_sha256": "3cf2cb466e1735a771601e8fc2193ce0f8a2c8b7b79e76a6c37c7bc715d07718"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "2082386dd3531eb7c9d7f76078f13e59bddc56450ff270eb1440408c558b687f",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1673,
+        "completion_tokens": 385,
+        "total_tokens": 2058,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1417
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.513,
+      "error": "3 validation errors for Extraction\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='圣彼得堡房产及联系人', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='圣彼得堡房产及联系人', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "dfc0f9bdce8d0228062a1bcdc36a76825afed4412af1c18a79032b5c9c3aa1f9",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2615,
+        "completion_tokens": 359,
+        "total_tokens": 2974,
+        "prompt_tokens_details": {
+          "cached_tokens": 2048
+        },
+        "prompt_cache_hit_tokens": 2048,
+        "prompt_cache_miss_tokens": 567
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.383
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0292_wopgj6c0zg1s0l9ifolkbgqw05vjd720",
+  "extracted_at": "2026-11-22T06:41:12.188541+00:00"
+}

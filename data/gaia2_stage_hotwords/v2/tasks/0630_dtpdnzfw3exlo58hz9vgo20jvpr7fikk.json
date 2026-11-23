@@ -1,0 +1,83 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0630_dtpdnzfw3exlo58hz9vgo20jvpr7fikk",
+  "model": "deepseek-flash",
+  "input_sha256": "17f1711708764c41b1b242da204df671c44fb1d4d4e7e6b4919e15dcf2212142",
+  "review_input_sha256": "f0ee9de2efec96656a8144284a45c14b8cc49374cb67893ce5a1813d78c93fad",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "bfc85fbd49860eab013c2b9ee76b98eba78b6e4cbc1971f3b1da0b4a07ee02dc",
+  "reference_results_sha256": "26a617e6417065532ae28f97264b5e8a1083026972c7af5b3dae63bc80350f9e",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "K letišti 1019/6 Prague 6, 161 00, Czech Republic",
+      "original_source": "stage0.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "K letišti 1019/6 Prague 6, 161 00, Czech Republic",
+          "kind": "place",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含捷克语变音符的完整地址，识别难度高",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "K letišti 1019/6 Prague 6, 161 00, Czech Republic"
+      ],
+      "active_vocabulary": {
+        "K letišti 1019/6 Prague 6, 161 00, Czech Republic": 50
+      },
+      "vocabulary_sha256": "1c443a0cec3270d5c8ec2c91b3c7527b1d7926711fe4be7cff321f9f03002758"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "K letišti 1019/6 Prague 6, 161 00, Czech Republic": 50
+      },
+      "vocabulary_sha256": "1c443a0cec3270d5c8ec2c91b3c7527b1d7926711fe4be7cff321f9f03002758"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "K letišti 1019/6 Prague 6, 161 00, Czech Republic": 50
+      },
+      "vocabulary_sha256": "1c443a0cec3270d5c8ec2c91b3c7527b1d7926711fe4be7cff321f9f03002758"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Prague Airport",
+    "Prague",
+    "Czech Republic",
+    "Japan"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:47.290297+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

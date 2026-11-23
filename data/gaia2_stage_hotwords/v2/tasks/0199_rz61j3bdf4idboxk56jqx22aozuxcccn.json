@@ -1,0 +1,112 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0199_rz61j3bdf4idboxk56jqx22aozuxcccn",
+  "model": "deepseek-flash",
+  "input_sha256": "1f1767f9db8edb196c60f40265db7f115841a65a4772fcee5a107fc968ebcd8a",
+  "review_input_sha256": "91aab145e6b0c8f45f16304e5548fe11affb5286151e76b0ff63efa9e2cf4f2a",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "563722e159071fe11ebf84155afca86c6c8d2ae3aeb89043877c25a77cd0e16b",
+  "reference_results_sha256": "8daad830a14bcd518adaa2f4c8a06e27dc65e67e7bad04a3d76af29e421a6689",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Xóchitl Hernández García",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Arya Widyastuti",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "HBO Game of Thrones: Westeros Intrigue",
+      "original_source": "stage0.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "HBO Game of Thrones: Westeros Intrigue",
+          "kind": "product",
+          "source": "stage0.existing_catalog.2",
+          "reason": "独特完整产品名",
+          "weight": 50
+        },
+        {
+          "text": "Xóchitl Hernández García",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Arya Widyastuti",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "较难拼写的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "HBO Game of Thrones: Westeros Intrigue",
+        "Xóchitl Hernández García",
+        "Arya Widyastuti"
+      ],
+      "active_vocabulary": {
+        "HBO Game of Thrones: Westeros Intrigue": 50,
+        "Xóchitl Hernández García": 50,
+        "Arya Widyastuti": 50
+      },
+      "vocabulary_sha256": "0ce8c91a777dbc57dd2d1bf84e6b729bf250c8d267467ccd503363e9b9b1d960"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "HBO Game of Thrones: Westeros Intrigue": 50,
+        "Xóchitl Hernández García": 50,
+        "Arya Widyastuti": 50
+      },
+      "vocabulary_sha256": "0ce8c91a777dbc57dd2d1bf84e6b729bf250c8d267467ccd503363e9b9b1d960"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "HBO Game of Thrones: Westeros Intrigue": 50,
+        "Xóchitl Hernández García": 50,
+        "Arya Widyastuti": 50
+      },
+      "vocabulary_sha256": "0ce8c91a777dbc57dd2d1bf84e6b729bf250c8d267467ccd503363e9b9b1d960"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Park Pavilion"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:27.490352+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,127 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0595_s6i7gx6fbdg6g6fr80yfnrrqf8esei9n",
+  "model": "deepseek-flash",
+  "input_sha256": "c3fdcf481039b38850dccca68ca1f3ae03ec9da508b4f13bfee6f1bd767c371e",
+  "review_input_sha256": "8f279161573989e5fbe16992bc719801b82089d99fc446bbbc296302fd4fd888",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "6fe41f30f3eeceb2fc934b79dd2885cd5306415fb8249b673a06b799830942f4",
+  "reference_results_sha256": "b77b51622e33c3ac10d397757453a91429d82378ad712ce532a6461d6e57f294",
+  "sources": {
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "34, Storey's Way, Cambridge CB3 0DT",
+      "original_source": "stage1.tool_gt.series_s1_order_return.arguments.end_location"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "789 Kirkgate, Leeds, LS2 7DJ",
+      "original_source": "stage1.tool_gt.series_s1_order_return.arguments.start_location"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Evangelia Papadopoulos",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "34, Storey's Way, Cambridge CB3 0DT",
+          "kind": "place",
+          "source": "stage1.existing_catalog.3",
+          "reason": "完整具体地址，含街道与邮编，属难识别地名",
+          "weight": 50
+        },
+        {
+          "text": "789 Kirkgate, Leeds, LS2 7DJ",
+          "kind": "place",
+          "source": "stage1.existing_catalog.4",
+          "reason": "完整具体地址，含街道与邮编，属难识别地名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "34, Storey's Way, Cambridge CB3 0DT",
+        "789 Kirkgate, Leeds, LS2 7DJ"
+      ],
+      "active_vocabulary": {
+        "34, Storey's Way, Cambridge CB3 0DT": 50,
+        "789 Kirkgate, Leeds, LS2 7DJ": 50
+      },
+      "vocabulary_sha256": "2b36c2f49fa53f907294f30504e667d6bf40f15b07632f4572acec62afae9714"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Evangelia Papadopoulos",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整人名，拼写较难，保留全名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Evangelia Papadopoulos"
+      ],
+      "active_vocabulary": {
+        "34, Storey's Way, Cambridge CB3 0DT": 50,
+        "789 Kirkgate, Leeds, LS2 7DJ": 50,
+        "Evangelia Papadopoulos": 50
+      },
+      "vocabulary_sha256": "018b07374aa9b6e00fd5fae95e8dc6ade13f716120fcc33dbc41f3bff91b6e62"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [
+    {
+      "text": "789 Kirkgate, Leeds, LS2 7DJ",
+      "from": "stage1.tool_response.series_s1_order_return",
+      "to": "stage1.existing_catalog.4"
+    },
+    {
+      "text": "34, Storey's Way, Cambridge CB3 0DT",
+      "from": "stage1.tool_response.series_s1_order_return",
+      "to": "stage1.existing_catalog.3"
+    }
+  ],
+  "old_terms_removed": [
+    "LS2 7DJ",
+    "Apartment Moving Day",
+    "Home Office",
+    "Leeds",
+    "789 Kirkgate",
+    "Cambridge",
+    "Check Leeds viewing travel",
+    "Evangelia"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:38.862358+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

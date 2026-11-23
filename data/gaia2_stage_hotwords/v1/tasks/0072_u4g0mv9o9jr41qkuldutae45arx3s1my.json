@@ -1,0 +1,127 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0072_u4g0mv9o9jr41qkuldutae45arx3s1my",
+  "model": "deepseek-flash",
+  "input_sha256": "58d83b13f86859c2850a80d1cbfac28532de068992102d34107feba935918b45",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Bicycle Rider Back",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "扑克牌品牌型号"
+        },
+        {
+          "text": "Šárka Nováková",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-395cfc86-718a-459f-8e9f-019cb69caa3b.arguments.attendees[0]",
+          "reason": "人名，含变音符号"
+        },
+        {
+          "text": "ul. Pražská 15, Plzeň",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-9be9e494-ee9f-4fb3-8cfa-495acc66fbae.arguments.end_location",
+          "reason": "捷克地址"
+        },
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-032c04f7-e8d6-42e1-bab7-8ac6a987dcb7.arguments.content",
+          "reason": "发件人姓名"
+        }
+      ],
+      "new_terms": [
+        "Bicycle Rider Back",
+        "Šárka Nováková",
+        "ul. Pražská 15, Plzeň",
+        "Matěj Nováček"
+      ],
+      "active_vocabulary": {
+        "Bicycle Rider Back": 50,
+        "Šárka Nováková": 50,
+        "ul. Pražská 15, Plzeň": 50,
+        "Matěj Nováček": 50
+      },
+      "vocabulary_sha256": "78ebc2026e7c4283ed9784d83f71ac6cfa9a4e7542147ef0b74c4a13f61ceda1"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Bicycle Rider Back",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "扑克牌品牌型号"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Bicycle Rider Back": 50,
+        "Šárka Nováková": 50,
+        "ul. Pražská 15, Plzeň": 50,
+        "Matěj Nováček": 50
+      },
+      "vocabulary_sha256": "78ebc2026e7c4283ed9784d83f71ac6cfa9a4e7542147ef0b74c4a13f61ceda1"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Šárka Nováková",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Plzeň Loft Living",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓/看房地点专名"
+        },
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "发件人姓名"
+        }
+      ],
+      "new_terms": [
+        "Plzeň Loft Living"
+      ],
+      "active_vocabulary": {
+        "Bicycle Rider Back": 50,
+        "Šárka Nováková": 50,
+        "ul. Pražská 15, Plzeň": 50,
+        "Matěj Nováček": 50,
+        "Plzeň Loft Living": 50
+      },
+      "vocabulary_sha256": "90f645fda541e29ad9b125efddcefdee735d8cbc124487edda52c0512ee25798"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "b03656a8f827295e1894af38cb50304450cf2ff108f51ac6d1423d71f97e4485",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3438,
+        "completion_tokens": 408,
+        "total_tokens": 3846,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3182
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.67
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0072_u4g0mv9o9jr41qkuldutae45arx3s1my",
+  "extracted_at": "2026-11-22T06:39:54.814824+00:00"
+}

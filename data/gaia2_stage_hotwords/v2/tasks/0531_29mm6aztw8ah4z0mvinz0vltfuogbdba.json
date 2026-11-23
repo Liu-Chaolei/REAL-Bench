@@ -1,0 +1,162 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0531_29mm6aztw8ah4z0mvinz0vltfuogbdba",
+  "model": "deepseek-flash",
+  "input_sha256": "19e72fee90cf57f2421c7b08281c78eb399c822b15ad0825ee19fceca03a03ce",
+  "review_input_sha256": "aad85a69c026c4b4e3e17883a4c5896342d5aa43706e046642ec785f57f8e860",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "c7352ec233c4be961c47b6db0ddc78cfbbbf65098b816ee07c6f8709bf8a6633",
+  "reference_results_sha256": "5fb6ab0fe896fe767c7bbce57d484ea78a5a907f99a612feb249703c1a4c3b97",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Kaitlyn Nakamura",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-14350a68-9dfb-44b7-8409-958e1b991f1d.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-14350a68-9dfb-44b7-8409-958e1b991f1d.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Luís Marques",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-74c3b3aa-78de-41d0-99db-01910b7af010.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Jamila Fernandes",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-74c3b3aa-78de-41d0-99db-01910b7af010.arguments.attendees[2]"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "August Blackwood",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Bernadette Fothergill",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整人名，拼写较难，保留",
+          "weight": 50
+        },
+        {
+          "text": "Kaitlyn Nakamura",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，姓氏拼写较难，保留",
+          "weight": 50
+        },
+        {
+          "text": "Luís Marques",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur",
+        "Jamila Fernandes",
+        "Kaitlyn Nakamura",
+        "Luís Marques"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Jamila Fernandes": 50,
+        "Kaitlyn Nakamura": 50,
+        "Luís Marques": 50
+      },
+      "vocabulary_sha256": "d2622eb945e930b113c443af655f03617844d8b0c464ed9e2f54e1fd3cba0d96"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "August Blackwood",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，姓氏拼写较难，保留",
+          "weight": 50
+        },
+        {
+          "text": "Bernadette Fothergill",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，姓氏拼写困难，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "August Blackwood",
+        "Bernadette Fothergill"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Jamila Fernandes": 50,
+        "Kaitlyn Nakamura": 50,
+        "Luís Marques": 50,
+        "August Blackwood": 50,
+        "Bernadette Fothergill": 50
+      },
+      "vocabulary_sha256": "f0aab5789782544dcbfb2a3c1392ba9e8730ee9f4bb2ccee1bbccdd816c3f0cf"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Jamila Fernandes": 50,
+        "Kaitlyn Nakamura": 50,
+        "Luís Marques": 50,
+        "August Blackwood": 50,
+        "Bernadette Fothergill": 50
+      },
+      "vocabulary_sha256": "f0aab5789782544dcbfb2a3c1392ba9e8730ee9f4bb2ccee1bbccdd816c3f0cf"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kaitlyn Nguyen",
+    "Restaurant Private Dining Room",
+    "Evelyn Nakamura"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:17.876040+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

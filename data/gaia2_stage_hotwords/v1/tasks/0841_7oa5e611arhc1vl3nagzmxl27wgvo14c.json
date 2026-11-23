@@ -1,0 +1,205 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0841_7oa5e611arhc1vl3nagzmxl27wgvo14c",
+  "model": "deepseek-flash",
+  "input_sha256": "497062d38a16924231cd6de34f8ef375e6f6e56cce6bc7b9b77c5d8727d7275d",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Khalid",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-81db1915-035d-4871-a6f4-c5c3b7f8016b.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Lianying",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-4c46c9ec-3738-47ad-80ca-0c4c3c56bd5c.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Luísa",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-8358b745-0149-4422-8122-f7ca4d940ddc.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Khalid Ma",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-629721ff-dca6-44e3-9e3f-bfc0094fc7e8.arguments.content",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Lianying Wang",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-629721ff-dca6-44e3-9e3f-bfc0094fc7e8.arguments.content",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Luísa Sousa",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-629721ff-dca6-44e3-9e3f-bfc0094fc7e8.arguments.content",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Uppsala Castle",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-4fa145ba-14a7-45fb-89db-ff442f9c1858.arguments.location",
+          "reason": "地点名称"
+        },
+        {
+          "text": "A Conversation Across Cultures",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "聊天群组名称"
+        }
+      ],
+      "new_terms": [
+        "Khalid",
+        "Lianying",
+        "Luísa",
+        "Khalid Ma",
+        "Lianying Wang",
+        "Luísa Sousa",
+        "Uppsala Castle",
+        "A Conversation Across Cultures"
+      ],
+      "active_vocabulary": {
+        "Khalid": 50,
+        "Lianying": 50,
+        "Luísa": 50,
+        "Khalid Ma": 50,
+        "Lianying Wang": 50,
+        "Luísa Sousa": 50,
+        "Uppsala Castle": 50,
+        "A Conversation Across Cultures": 50
+      },
+      "vocabulary_sha256": "57d462b6f247cbc234ae0eda647e7f3278423e9f03e955762d12743bb61b770e"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Dinner at Uppsala Castle",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_create.arguments.title",
+          "reason": "新建群组标题"
+        },
+        {
+          "text": "Khalid Ma",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Lianying Wang",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Luísa Sousa",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Uppsala Castle",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "地点名称"
+        }
+      ],
+      "new_terms": [
+        "Dinner at Uppsala Castle"
+      ],
+      "active_vocabulary": {
+        "Khalid": 50,
+        "Lianying": 50,
+        "Luísa": 50,
+        "Khalid Ma": 50,
+        "Lianying Wang": 50,
+        "Luísa Sousa": 50,
+        "Uppsala Castle": 50,
+        "A Conversation Across Cultures": 50,
+        "Dinner at Uppsala Castle": 50
+      },
+      "vocabulary_sha256": "370bdd113b3bf0aa8f2de9707865d8e750d75a5b512d195cfa3aab59409f9c75"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Uppsala Castle",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_quote.arguments.start_location",
+          "reason": "出发地点"
+        },
+        {
+          "text": "Östermalmsgatan 12",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_quote.arguments.end_location",
+          "reason": "街道地址"
+        },
+        {
+          "text": "Stockholm",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_quote.arguments.end_location",
+          "reason": "城市名"
+        },
+        {
+          "text": "Sweden",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_quote.arguments.end_location",
+          "reason": "国家名"
+        }
+      ],
+      "new_terms": [
+        "Östermalmsgatan 12",
+        "Stockholm",
+        "Sweden"
+      ],
+      "active_vocabulary": {
+        "Khalid": 50,
+        "Lianying": 50,
+        "Luísa": 50,
+        "Khalid Ma": 50,
+        "Lianying Wang": 50,
+        "Luísa Sousa": 50,
+        "Uppsala Castle": 50,
+        "A Conversation Across Cultures": 50,
+        "Dinner at Uppsala Castle": 50,
+        "Östermalmsgatan 12": 50,
+        "Stockholm": 50,
+        "Sweden": 50
+      },
+      "vocabulary_sha256": "aa84f19f3c22a8307d11f03260df4de84b8b8a44fd980b479e88f2074d1bacdf"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "8bda4a06bae59b8eb45eb3ccc293a771e981760d6c17e1ad15777e27859d6d20",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3442,
+        "completion_tokens": 794,
+        "total_tokens": 4236,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3186
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.654
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0841_7oa5e611arhc1vl3nagzmxl27wgvo14c",
+  "extracted_at": "2026-11-22T06:44:08.006072+00:00"
+}

@@ -1,0 +1,215 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0059_kno73dy3r2gh7qnt88919x4uhtnugxok__async_0028_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "938ec1412503712235a5dcc44cf006333eca6a2ee38410424b711a65ca61ae2d",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Moscow",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Saint Petersburg",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Sutopo",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-121c0844-6412-45f7-a7fd-bc8c39d5840d.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Link Breath Of The Wild Deluxe Bow Set",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品全名"
+        },
+        {
+          "text": "Nevsky Prospekt Residence",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ed7a8a7f-1641-467d-9f0d-d852baf2fd6f.arguments.content",
+          "reason": "公寓名"
+        },
+        {
+          "text": "Nevsky Prospekt Residences",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ed7a8a7f-1641-467d-9f0d-d852baf2fd6f.arguments.content",
+          "reason": "公寓名"
+        },
+        {
+          "text": "Riverfront Residence",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ed7a8a7f-1641-467d-9f0d-d852baf2fd6f.arguments.content",
+          "reason": "公寓名"
+        }
+      ],
+      "new_terms": [
+        "Moscow",
+        "Saint Petersburg",
+        "Sutopo",
+        "Link Breath Of The Wild Deluxe Bow Set",
+        "Nevsky Prospekt Residence",
+        "Nevsky Prospekt Residences",
+        "Riverfront Residence"
+      ],
+      "active_vocabulary": {
+        "Moscow": 50,
+        "Saint Petersburg": 50,
+        "Sutopo": 50,
+        "Link Breath Of The Wild Deluxe Bow Set": 50,
+        "Nevsky Prospekt Residence": 50,
+        "Nevsky Prospekt Residences": 50,
+        "Riverfront Residence": 50
+      },
+      "vocabulary_sha256": "c541e1c6eb112a001e2e5cc6eee649cc90782710b1e35b224fe9243c57edf455"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Sutopo Widyatama",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Yogyakarta",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_update_contact.arguments.updates.city_living",
+          "reason": "城市名"
+        },
+        {
+          "text": "Indonesia",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_update_contact.arguments.updates.country",
+          "reason": "国家名"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_update_contact.arguments.updates.description",
+          "reason": "用户全名"
+        },
+        {
+          "text": "Link Breath Of The Wild Deluxe Bow Set",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "商品全名"
+        },
+        {
+          "text": "Saint Petersburg",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Sutopo Widyatama",
+        "Yogyakarta",
+        "Indonesia",
+        "Anastasiya Kuznetsova"
+      ],
+      "active_vocabulary": {
+        "Moscow": 50,
+        "Saint Petersburg": 50,
+        "Sutopo": 50,
+        "Link Breath Of The Wild Deluxe Bow Set": 50,
+        "Nevsky Prospekt Residence": 50,
+        "Nevsky Prospekt Residences": 50,
+        "Riverfront Residence": 50,
+        "Sutopo Widyatama": 50,
+        "Yogyakarta": 50,
+        "Indonesia": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "e00a894aa43f1cb24aa8d6dc83cebe3a70f4a5ad06a4fbcc43840753e328a668"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Sutopo Widyatama",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Saint Petersburg",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Nevsky Prospekt Residences",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "公寓名"
+        },
+        {
+          "text": "Nevsky Prospekt Residence",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "公寓名"
+        },
+        {
+          "text": "Riverfront Residence",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "公寓名"
+        },
+        {
+          "text": "Link Breath Of The Wild Deluxe Bow Set",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "商品全名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Moscow": 50,
+        "Saint Petersburg": 50,
+        "Sutopo": 50,
+        "Link Breath Of The Wild Deluxe Bow Set": 50,
+        "Nevsky Prospekt Residence": 50,
+        "Nevsky Prospekt Residences": 50,
+        "Riverfront Residence": 50,
+        "Sutopo Widyatama": 50,
+        "Yogyakarta": 50,
+        "Indonesia": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "e00a894aa43f1cb24aa8d6dc83cebe3a70f4a5ad06a4fbcc43840753e328a668"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "860a2e8b61fb2c1724d42b9ef51726532425d2a6de734390358f8c37d8861332",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3384,
+        "completion_tokens": 739,
+        "total_tokens": 4123,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3128
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.503
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0059_kno73dy3r2gh7qnt88919x4uhtnugxok__async_0028_v1",
+  "extracted_at": "2026-11-22T06:46:29.593479+00:00"
+}

@@ -1,0 +1,114 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0722_fvkmflhob7blr325ifgvys8onydq7nqi__async_0076_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "4a02de47d9b9003278ecc69c10c6086a7d2fbadf675fecdd89302d37f1a270b4",
+  "review_input_sha256": "b5ba79c0ea9e82de9c97e4be6624ce917124f51c67733902c67fbfc10ecb05ed",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "99dba06b7cd5c084c76887d49c6d4db9f7f201724252d62a813889e7e9cb8a97",
+  "reference_results_sha256": "dc8537acabc7368b3dbde87286a274b15d1b53cc1f888819385b2ddd99538ea4",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Nalani Jensen",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Kaia Nakamura",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Aurélien",
+      "original_source": "stage2.tool_gt.series_s2_send_proposal.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，含独特姓氏，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Nalani Jensen"
+      ],
+      "active_vocabulary": {
+        "Nalani Jensen": 50
+      },
+      "vocabulary_sha256": "d609e41907be35e83661df303a5afccdadf638b9d6ff8eca890c52826699bb45"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaia Nakamura",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整人名，含独特姓氏，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "含变音符号的专有人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kaia Nakamura",
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Nalani Jensen": 50,
+        "Kaia Nakamura": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "e902666dcdfc1a5368535a4c2beb67b942e4841dba0bb29a003f581fc4dc42d1"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "VIP Wine Tasting Event",
+    "Staff Meeting",
+    "Yoga Class",
+    "Wine List Review",
+    "French-inspired restaurant",
+    "Restaurant Office",
+    "Yoga Studio"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:20:08.921557+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

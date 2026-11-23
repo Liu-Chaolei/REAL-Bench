@@ -1,0 +1,155 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0080_8st555dtg372vfx0440tcdgt6x5wsoot",
+  "model": "deepseek-flash",
+  "input_sha256": "9b14492827da65e83270fabe4cd9bc494ab59c00bdeac1ece13f35a84b9f5722",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Alethea",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5567ea42-405e-41d1-9053-2f54ed808abf.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5567ea42-405e-41d1-9053-2f54ed808abf.arguments.content",
+          "reason": "发件人全名"
+        },
+        {
+          "text": "Elara",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-173b1ebe-c332-4e86-b05b-c807220423d7.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "EuroAirport Basel-Mulhouse-Freiburg",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3535dc41-cd69-4ae5-9f5a-995ffdd04da1.arguments.end_location",
+          "reason": "机场名称"
+        },
+        {
+          "text": "Anastasiya",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f3915a07-57b2-4c2f-b09a-4a6949a2fff7.arguments.content",
+          "reason": "消息收件人名字"
+        }
+      ],
+      "new_terms": [
+        "Alethea",
+        "Ursula Wiederkehr",
+        "Elara",
+        "EuroAirport Basel-Mulhouse-Freiburg",
+        "Anastasiya"
+      ],
+      "active_vocabulary": {
+        "Alethea": 50,
+        "Ursula Wiederkehr": 50,
+        "Elara": 50,
+        "EuroAirport Basel-Mulhouse-Freiburg": 50,
+        "Anastasiya": 50
+      },
+      "vocabulary_sha256": "c29125a6c2fa02925a05e8612214c6be3f727001e151e6acd05d7c6ec5dd8a71"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "EuroAirport Basel-Mulhouse-Freiburg",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.location",
+          "reason": "机场名称"
+        },
+        {
+          "text": "Mittlere Strasse 12",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.description",
+          "reason": "家庭住址街道名"
+        }
+      ],
+      "new_terms": [
+        "Mittlere Strasse 12"
+      ],
+      "active_vocabulary": {
+        "Alethea": 50,
+        "Ursula Wiederkehr": 50,
+        "Elara": 50,
+        "EuroAirport Basel-Mulhouse-Freiburg": 50,
+        "Anastasiya": 50,
+        "Mittlere Strasse 12": 50
+      },
+      "vocabulary_sha256": "ffbc2d0f2329ca042c5d8b34020b6c3c0efa78146bdc7f7c9677874c723070a4"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Alethea Fothergill",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "英国联系人全名"
+        },
+        {
+          "text": "Elara von Allmen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "英国联系人全名"
+        },
+        {
+          "text": "EuroAirport Basel-Mulhouse-Freiburg",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "机场名称"
+        },
+        {
+          "text": "Mittlere Strasse 12",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "家庭住址街道名"
+        }
+      ],
+      "new_terms": [
+        "Alethea Fothergill",
+        "Elara von Allmen"
+      ],
+      "active_vocabulary": {
+        "Alethea": 50,
+        "Ursula Wiederkehr": 50,
+        "Elara": 50,
+        "EuroAirport Basel-Mulhouse-Freiburg": 50,
+        "Anastasiya": 50,
+        "Mittlere Strasse 12": 50,
+        "Alethea Fothergill": 50,
+        "Elara von Allmen": 50
+      },
+      "vocabulary_sha256": "a275b790a84438355c537e034a0f91d65106ece361551c159dbc25dd624d5312"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "98576b6b5c3786046742e87e8eb81c7e53d5489e994a257ce376cc5ac4e7ba12",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3289,
+        "completion_tokens": 577,
+        "total_tokens": 3866,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3033
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.076
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0080_8st555dtg372vfx0440tcdgt6x5wsoot",
+  "extracted_at": "2026-11-22T06:39:57.719771+00:00"
+}

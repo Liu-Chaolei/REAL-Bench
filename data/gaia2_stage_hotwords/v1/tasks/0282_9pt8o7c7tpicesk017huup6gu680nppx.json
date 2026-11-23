@@ -1,0 +1,202 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0282_9pt8o7c7tpicesk017huup6gu680nppx",
+  "model": "deepseek-flash",
+  "input_sha256": "7050831020fbc3228530bb52ff84c67c91ac63060bbe181033baa6cf0ecca69a",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Bengaluru",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Sai Kripa Residency",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "公寓名"
+        },
+        {
+          "text": "Sai Sankalp",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "公寓名"
+        },
+        {
+          "text": "Kaveri Enclave",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "公寓名"
+        },
+        {
+          "text": "Vishal Residency",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "公寓名"
+        },
+        {
+          "text": "Brigade Northridge",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "公寓名"
+        },
+        {
+          "text": "Kalyan Nagar",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "地区名"
+        }
+      ],
+      "new_terms": [
+        "Bengaluru",
+        "Sai Kripa Residency",
+        "Sai Sankalp",
+        "Kaveri Enclave",
+        "Vishal Residency",
+        "Brigade Northridge",
+        "Kalyan Nagar"
+      ],
+      "active_vocabulary": {
+        "Bengaluru": 50,
+        "Sai Kripa Residency": 50,
+        "Sai Sankalp": 50,
+        "Kaveri Enclave": 50,
+        "Vishal Residency": 50,
+        "Brigade Northridge": 50,
+        "Kalyan Nagar": 50
+      },
+      "vocabulary_sha256": "233fd68f394da793a3236db3bb435c5b0dcf22505613146bc03ca308a14cb088"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Brigade Northridge",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "公寓名"
+        },
+        {
+          "text": "Bengaluru",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Serenity Homes",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓名"
+        },
+        {
+          "text": "Prestige Kensington Gardens",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓名"
+        },
+        {
+          "text": "Prestige Jindal City",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓名"
+        },
+        {
+          "text": "Riviera Apartments",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓名"
+        },
+        {
+          "text": "Sobha Indraprastha",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓名"
+        },
+        {
+          "text": "Prestige Shantiniketan",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓名"
+        }
+      ],
+      "new_terms": [
+        "Serenity Homes",
+        "Prestige Kensington Gardens",
+        "Prestige Jindal City",
+        "Riviera Apartments",
+        "Sobha Indraprastha",
+        "Prestige Shantiniketan"
+      ],
+      "active_vocabulary": {
+        "Bengaluru": 50,
+        "Sai Kripa Residency": 50,
+        "Sai Sankalp": 50,
+        "Kaveri Enclave": 50,
+        "Vishal Residency": 50,
+        "Brigade Northridge": 50,
+        "Kalyan Nagar": 50,
+        "Serenity Homes": 50,
+        "Prestige Kensington Gardens": 50,
+        "Prestige Jindal City": 50,
+        "Riviera Apartments": 50,
+        "Sobha Indraprastha": 50,
+        "Prestige Shantiniketan": 50
+      },
+      "vocabulary_sha256": "5bf3c2eb18d3f7fdc328b59343cee614632b156a8951b001947741a367f1e2f3"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "7d2e951fb7fbb5d996af3d897d129bb805e106e9f0d5c0bf4512a08e8e534623",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1880,
+        "completion_tokens": 536,
+        "total_tokens": 2416,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1624
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.767,
+      "error": "1 validation error for Extraction\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "4159a6b44626fd25b410943e5ecd60720a3b073694effb793b14d75760cf68c8",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2859,
+        "completion_tokens": 528,
+        "total_tokens": 3387,
+        "prompt_tokens_details": {
+          "cached_tokens": 2304
+        },
+        "prompt_cache_hit_tokens": 2304,
+        "prompt_cache_miss_tokens": 555
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.661
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0282_9pt8o7c7tpicesk017huup6gu680nppx",
+  "extracted_at": "2026-11-22T06:41:09.736270+00:00"
+}

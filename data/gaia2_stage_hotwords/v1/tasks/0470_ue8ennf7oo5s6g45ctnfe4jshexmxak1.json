@@ -1,0 +1,139 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0470_ue8ennf7oo5s6g45ctnfe4jshexmxak1",
+  "model": "deepseek-flash",
+  "input_sha256": "c37cdd20994040cababf19f92c856b8d42952c0c564a0330c4a12c5b842f19e5",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6e431cfe-5654-411b-a1e2-547971180a6f.arguments.attendees[0]",
+          "reason": "组织者/发件人姓名"
+        },
+        {
+          "text": "Xóchitl García López",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6e431cfe-5654-411b-a1e2-547971180a6f.arguments.attendees[1]",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Luís Marques",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6e431cfe-5654-411b-a1e2-547971180a6f.arguments.attendees[2]",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6e431cfe-5654-411b-a1e2-547971180a6f.arguments.attendees[3]",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Luís Silva",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6e431cfe-5654-411b-a1e2-547971180a6f.arguments.attendees[4]",
+          "reason": "参会人完整姓名"
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur",
+        "Xóchitl García López",
+        "Luís Marques",
+        "Jamila Fernandes",
+        "Luís Silva"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Xóchitl García López": 50,
+        "Luís Marques": 50,
+        "Jamila Fernandes": 50,
+        "Luís Silva": 50
+      },
+      "vocabulary_sha256": "055af363969ec75ee00ebcd2e97c6ba145069b34a22b09b17e5b1121965a7e12"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Xóchitl García López",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_report.arguments.content",
+          "reason": "收件人完整姓名"
+        },
+        {
+          "text": "Luís Marques",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_report.arguments.content",
+          "reason": "收件人完整姓名"
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_report.arguments.content",
+          "reason": "收件人完整姓名"
+        },
+        {
+          "text": "Luís Silva",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_report.arguments.content",
+          "reason": "收件人完整姓名"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email_xochitl.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Xóchitl García López": 50,
+        "Luís Marques": 50,
+        "Jamila Fernandes": 50,
+        "Luís Silva": 50
+      },
+      "vocabulary_sha256": "055af363969ec75ee00ebcd2e97c6ba145069b34a22b09b17e5b1121965a7e12"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Xóchitl García López": 50,
+        "Luís Marques": 50,
+        "Jamila Fernandes": 50,
+        "Luís Silva": 50
+      },
+      "vocabulary_sha256": "055af363969ec75ee00ebcd2e97c6ba145069b34a22b09b17e5b1121965a7e12"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "0678c3ec8e2a3eea534fa08aff89c010e0fc6b7b8d0f8f4034e90f063902454e",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4967,
+        "completion_tokens": 552,
+        "total_tokens": 5519,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4711
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.043
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0470_ue8ennf7oo5s6g45ctnfe4jshexmxak1",
+  "extracted_at": "2026-11-22T06:42:10.442796+00:00"
+}

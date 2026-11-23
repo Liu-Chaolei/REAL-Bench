@@ -1,0 +1,204 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0352_b7uecfza17nhvbz3geq9eaghqb877csu",
+  "model": "deepseek-flash",
+  "input_sha256": "0f825926c9a5eddd35878b753519e9595acd17a646d3c24046197c4c21029757",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "创始人姓名"
+        },
+        {
+          "text": "Astrid Rasmussen",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "经理姓名"
+        },
+        {
+          "text": "Nongnuch Panya",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "经理姓名"
+        },
+        {
+          "text": "Rohan Deshpande",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "经理姓名"
+        },
+        {
+          "text": "Aoife Ní Bhroin",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "经理姓名"
+        },
+        {
+          "text": "Aurélien Vandenberghe",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "经理姓名"
+        },
+        {
+          "text": "Emilie Møller",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "经理姓名"
+        },
+        {
+          "text": "Nalinee Srisombat",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "经理姓名"
+        },
+        {
+          "text": "Narong Wongsombat",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "经理姓名"
+        },
+        {
+          "text": "Søren Rasmussen",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "经理姓名"
+        }
+      ],
+      "new_terms": [
+        "Søren Kjær",
+        "Astrid Rasmussen",
+        "Nongnuch Panya",
+        "Rohan Deshpande",
+        "Aoife Ní Bhroin",
+        "Aurélien Vandenberghe",
+        "Emilie Møller",
+        "Nalinee Srisombat",
+        "Narong Wongsombat",
+        "Søren Rasmussen"
+      ],
+      "active_vocabulary": {
+        "Søren Kjær": 50,
+        "Astrid Rasmussen": 50,
+        "Nongnuch Panya": 50,
+        "Rohan Deshpande": 50,
+        "Aoife Ní Bhroin": 50,
+        "Aurélien Vandenberghe": 50,
+        "Emilie Møller": 50,
+        "Nalinee Srisombat": 50,
+        "Narong Wongsombat": 50,
+        "Søren Rasmussen": 50
+      },
+      "vocabulary_sha256": "6abb10dc4738be8f87a6d62a457b3049293c4642196c79006d284080b8eca4b6"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aoife Ní Bhroin",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Astrid Rasmussen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[1]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Emilie Møller",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[2]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Nalinee Srisombat",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[3]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Narong Wongsombat",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[4]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Rohan Deshpande",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[5]",
+          "reason": "参会人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Søren Kjær": 50,
+        "Astrid Rasmussen": 50,
+        "Nongnuch Panya": 50,
+        "Rohan Deshpande": 50,
+        "Aoife Ní Bhroin": 50,
+        "Aurélien Vandenberghe": 50,
+        "Emilie Møller": 50,
+        "Nalinee Srisombat": 50,
+        "Narong Wongsombat": 50,
+        "Søren Rasmussen": 50
+      },
+      "vocabulary_sha256": "6abb10dc4738be8f87a6d62a457b3049293c4642196c79006d284080b8eca4b6"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "1fa979a0161746cb96356660e7c110bd28e8a201885bc60888bb4999ff001ff2",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3965,
+        "completion_tokens": 696,
+        "total_tokens": 4661,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3709
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 2.597,
+      "error": "6 validation errors for Extraction\nstages.0.kind\n  Extra inputs are not permitted [type=extra_forbidden, input_value='person', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage0.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无具体人名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.kind\n  Extra inputs are not permitted [type=extra_forbidden, input_value='person', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage1.reference_reply.s...reply.arguments.content', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='经理姓名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "4c1a106c5444feffbb3a43c418393614baa42aa1c6baf207f19e7897769d706b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5376,
+        "completion_tokens": 651,
+        "total_tokens": 6027,
+        "prompt_tokens_details": {
+          "cached_tokens": 4608
+        },
+        "prompt_cache_hit_tokens": 4608,
+        "prompt_cache_miss_tokens": 768
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.116
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0352_b7uecfza17nhvbz3geq9eaghqb877csu",
+  "extracted_at": "2026-11-22T06:41:29.644060+00:00"
+}

@@ -1,0 +1,102 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0546_thyowfbi0uxq8niuyvg8jq519cqrvc06__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "7bf068b704fef108e6658100f08d22840a758f2b8525a8dc3039322afde17754",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Dubininskaya Ulitsa, 2, Moscow, Russia, 115054",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "诊所的完整地址，属于专有地名"
+        }
+      ],
+      "new_terms": [
+        "Dubininskaya Ulitsa, 2, Moscow, Russia, 115054"
+      ],
+      "active_vocabulary": {
+        "Dubininskaya Ulitsa, 2, Moscow, Russia, 115054": 50
+      },
+      "vocabulary_sha256": "81e3ed72477764a0c8662f21f1fb3ab1a833920d14509a46ce0ff81922c77aa7"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Dubininskaya Ulitsa, 2, Moscow, Russia, 115054",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "诊所完整地址"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Dubininskaya Ulitsa, 2, Moscow, Russia, 115054": 50
+      },
+      "vocabulary_sha256": "81e3ed72477764a0c8662f21f1fb3ab1a833920d14509a46ce0ff81922c77aa7"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Dubininskaya Ulitsa, 2, Moscow, Russia, 115054",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "提醒描述中的诊所完整地址"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Dubininskaya Ulitsa, 2, Moscow, Russia, 115054": 50
+      },
+      "vocabulary_sha256": "81e3ed72477764a0c8662f21f1fb3ab1a833920d14509a46ce0ff81922c77aa7"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "5d6b91c78be0c4efc71609601a290365ee532ff5f030eae3b0446f3cfb5ce4b1",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3327,
+        "completion_tokens": 445,
+        "total_tokens": 3772,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3071
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.085,
+      "error": "Duplicate term within stage 0: 'Dubininskaya Ulitsa, 2, Moscow, Russia, 115054'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "248d9535904f80dc0afc5acbbc944d0eff7f704ad8c8fdf8949f0fb611e28547",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4182,
+        "completion_tokens": 156,
+        "total_tokens": 4338,
+        "prompt_tokens_details": {
+          "cached_tokens": 3712
+        },
+        "prompt_cache_hit_tokens": 3712,
+        "prompt_cache_miss_tokens": 470
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.947
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0546_thyowfbi0uxq8niuyvg8jq519cqrvc06__repetition_v1",
+  "extracted_at": "2026-11-22T06:45:43.160876+00:00"
+}

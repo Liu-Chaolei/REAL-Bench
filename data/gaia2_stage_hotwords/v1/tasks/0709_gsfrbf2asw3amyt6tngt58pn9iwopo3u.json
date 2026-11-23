@@ -1,0 +1,115 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0709_gsfrbf2asw3amyt6tngt58pn9iwopo3u",
+  "model": "deepseek-flash",
+  "input_sha256": "c9ab582df2127af5ea52e63bf6af2ab574df4a0e41e9d8382158f48c92246489",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Joana Silva",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "朋友姓名"
+        },
+        {
+          "text": "Joana",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c9025dfa-f792-44fa-a855-281b7f1edba9.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c9025dfa-f792-44fa-a855-281b7f1edba9.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Red Paper Mache Acoustic Guitar",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定商品名称"
+        }
+      ],
+      "new_terms": [
+        "Joana Silva",
+        "Joana",
+        "Astrid Lundqvist",
+        "Red Paper Mache Acoustic Guitar"
+      ],
+      "active_vocabulary": {
+        "Joana Silva": 50,
+        "Joana": 50,
+        "Astrid Lundqvist": 50,
+        "Red Paper Mache Acoustic Guitar": 50
+      },
+      "vocabulary_sha256": "1b368ce3a6ff28cd7c4fe3c595fbb2a013743841bd35839ae93c7e2de7273b74"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Joana",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "孩子母亲的名字"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Joana Silva": 50,
+        "Joana": 50,
+        "Astrid Lundqvist": 50,
+        "Red Paper Mache Acoustic Guitar": 50
+      },
+      "vocabulary_sha256": "1b368ce3a6ff28cd7c4fe3c595fbb2a013743841bd35839ae93c7e2de7273b74"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "rohini.deshpande",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.recipients[0]",
+          "reason": "收件人姓名"
+        }
+      ],
+      "new_terms": [
+        "rohini.deshpande"
+      ],
+      "active_vocabulary": {
+        "Joana Silva": 50,
+        "Joana": 50,
+        "Astrid Lundqvist": 50,
+        "Red Paper Mache Acoustic Guitar": 50,
+        "rohini.deshpande": 50
+      },
+      "vocabulary_sha256": "124f1bf9f5c9bf1c705e762aac4ea25b3d25a8761a21fdc74ccb6e47e7f06d85"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "ae6914deaecec12f71a6a65f8182e1e2d039895682a3d2cd024413e5feb7bfc6",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2327,
+        "completion_tokens": 262,
+        "total_tokens": 2589,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2071
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.33
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0709_gsfrbf2asw3amyt6tngt58pn9iwopo3u",
+  "extracted_at": "2026-11-22T06:43:27.804413+00:00"
+}

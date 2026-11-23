@@ -1,0 +1,250 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0464_vjzcjf9sfs0lre4hkzzk0ojathorvdmg__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "4f8b6ce07dd6f0eda074cb513289106d80e2728390354aebeac4d94d2fd4e6d7",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Liverpool",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名，作为房产所在地的专有地名"
+        },
+        {
+          "text": "Nigel Fothergill",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-124e683d-949d-425a-829f-6b58fc2dab0a.arguments.content",
+          "reason": "收件人完整人名"
+        },
+        {
+          "text": "Aisha Patel",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-831d823c-399e-4da3-bf77-482a83f15308.arguments.content",
+          "reason": "收件人完整人名"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-124e683d-949d-425a-829f-6b58fc2dab0a.arguments.content",
+          "reason": "发件人签名完整人名"
+        },
+        {
+          "text": "Liverpool Luxury Living",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6792951f-37e4-40c7-acac-cb5cad71b3c1.arguments.content",
+          "reason": "已保存公寓的专有名称"
+        },
+        {
+          "text": "Liverpool Waterfront Apartments",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6792951f-37e4-40c7-acac-cb5cad71b3c1.arguments.content",
+          "reason": "已保存公寓的专有名称"
+        },
+        {
+          "text": "Liverpool Properties Visit",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-67101b39-8e56-429a-9746-c3a3810eb55e.arguments.title",
+          "reason": "日历事件的自定义标题"
+        }
+      ],
+      "new_terms": [
+        "Liverpool",
+        "Nigel Fothergill",
+        "Aisha Patel",
+        "Rohini Deshpande",
+        "Liverpool Luxury Living",
+        "Liverpool Waterfront Apartments",
+        "Liverpool Properties Visit"
+      ],
+      "active_vocabulary": {
+        "Liverpool": 50,
+        "Nigel Fothergill": 50,
+        "Aisha Patel": 50,
+        "Rohini Deshpande": 50,
+        "Liverpool Luxury Living": 50,
+        "Liverpool Waterfront Apartments": 50,
+        "Liverpool Properties Visit": 50
+      },
+      "vocabulary_sha256": "680233ec4de787e97bd80229a294702f112ed6fb8db58eb9c37f3d387b366dad"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Liverpool Property Viewing",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_create.arguments.title",
+          "reason": "群聊会话的自定义名称"
+        },
+        {
+          "text": "Nigel Fothergill",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_get_nigel_id.arguments.user_name",
+          "reason": "群聊成员完整人名"
+        },
+        {
+          "text": "Aisha Patel",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_get_aisha_id.arguments.user_name",
+          "reason": "群聊成员完整人名"
+        },
+        {
+          "text": "Liverpool Luxury Living",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Liverpool Waterfront Apartments",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "901 Albert Dock",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "公寓地址中的专有地名"
+        },
+        {
+          "text": "10 Princes Dock",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "公寓地址中的专有地名"
+        },
+        {
+          "text": "Liverpool Properties Visit",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "日历事件的自定义标题"
+        },
+        {
+          "text": "Rohini",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "消息签名中的名字"
+        }
+      ],
+      "new_terms": [
+        "Liverpool Property Viewing",
+        "901 Albert Dock",
+        "10 Princes Dock",
+        "Rohini"
+      ],
+      "active_vocabulary": {
+        "Liverpool": 50,
+        "Nigel Fothergill": 50,
+        "Aisha Patel": 50,
+        "Rohini Deshpande": 50,
+        "Liverpool Luxury Living": 50,
+        "Liverpool Waterfront Apartments": 50,
+        "Liverpool Properties Visit": 50,
+        "Liverpool Property Viewing": 50,
+        "901 Albert Dock": 50,
+        "10 Princes Dock": 50,
+        "Rohini": 50
+      },
+      "vocabulary_sha256": "7f1657eeb58c37d60b8955815ca5a273dab56b2874b56ca41db78d206fa1fc37"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Liverpool Property Visit Prep",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_create.arguments.title",
+          "reason": "日历事件的自定义标题"
+        },
+        {
+          "text": "Liverpool Luxury Living",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Liverpool Waterfront Apartments",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "901 Albert Dock",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "公寓地址中的专有地名"
+        },
+        {
+          "text": "10 Princes Dock",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "公寓地址中的专有地名"
+        },
+        {
+          "text": "Liverpool Properties Visit",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "日历事件的自定义标题"
+        },
+        {
+          "text": "Liverpool Property Viewing",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "群聊会话的自定义名称"
+        },
+        {
+          "text": "Dinner with Friends",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_speak.arguments.content",
+          "reason": "已有日历事件的自定义标题"
+        }
+      ],
+      "new_terms": [
+        "Liverpool Property Visit Prep",
+        "Dinner with Friends"
+      ],
+      "active_vocabulary": {
+        "Liverpool": 50,
+        "Nigel Fothergill": 50,
+        "Aisha Patel": 50,
+        "Rohini Deshpande": 50,
+        "Liverpool Luxury Living": 50,
+        "Liverpool Waterfront Apartments": 50,
+        "Liverpool Properties Visit": 50,
+        "Liverpool Property Viewing": 50,
+        "901 Albert Dock": 50,
+        "10 Princes Dock": 50,
+        "Rohini": 50,
+        "Liverpool Property Visit Prep": 50,
+        "Dinner with Friends": 50
+      },
+      "vocabulary_sha256": "82766d1a1a62ab8e8634bbbd8afbf3b08056c491b164a7a86c405cf0acd046f8"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "2648963e2098a7458cefd2d621506e5cd2cfd4aa90ce64e4f161c68542441f90",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3141,
+        "completion_tokens": 1090,
+        "total_tokens": 4231,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2885
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 3.729
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0464_vjzcjf9sfs0lre4hkzzk0ojathorvdmg__repetition_v1",
+  "extracted_at": "2026-11-22T06:45:26.755244+00:00"
+}

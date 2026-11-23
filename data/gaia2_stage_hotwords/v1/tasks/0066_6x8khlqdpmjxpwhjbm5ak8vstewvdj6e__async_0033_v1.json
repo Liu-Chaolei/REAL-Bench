@@ -1,0 +1,137 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0066_6x8khlqdpmjxpwhjbm5ak8vstewvdj6e__async_0033_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "0282914d198989b32866212d405a49d430e4ac7932a231e020734775af771ec5",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Linnea",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Sunita",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "João Silva",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "邮件回复对象姓名"
+        },
+        {
+          "text": "Social Media Campaign",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "新建事件名称"
+        }
+      ],
+      "new_terms": [
+        "Linnea",
+        "Sunita",
+        "João Silva",
+        "Social Media Campaign"
+      ],
+      "active_vocabulary": {
+        "Linnea": 50,
+        "Sunita": 50,
+        "João Silva": 50,
+        "Social Media Campaign": 50
+      },
+      "vocabulary_sha256": "544dba0bb05adf94a411e509c47f8de3c1ddd7947799877a0e3b5c2f2fa14079"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Stockholm Office",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "更新后的地点名称"
+        },
+        {
+          "text": "João Silva",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "通知对象姓名"
+        }
+      ],
+      "new_terms": [
+        "Stockholm Office"
+      ],
+      "active_vocabulary": {
+        "Linnea": 50,
+        "Sunita": 50,
+        "João Silva": 50,
+        "Social Media Campaign": 50,
+        "Stockholm Office": 50
+      },
+      "vocabulary_sha256": "87dab02ce730361d0e665de8231e8a187b07118f48a7f882e29f152a4073790f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Campaign Wrap-Up",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "新增会议标题"
+        },
+        {
+          "text": "Stockholm Office",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "会议地点名称"
+        },
+        {
+          "text": "João Silva",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "通知对象姓名"
+        }
+      ],
+      "new_terms": [
+        "Campaign Wrap-Up"
+      ],
+      "active_vocabulary": {
+        "Linnea": 50,
+        "Sunita": 50,
+        "João Silva": 50,
+        "Social Media Campaign": 50,
+        "Stockholm Office": 50,
+        "Campaign Wrap-Up": 50
+      },
+      "vocabulary_sha256": "8ea2f6abbbc9fd77d91765c29832850c2cdc4fcd7de5a315072903b301fa0597"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "add462486600bd12687a4b0f856d1ccf0ca2a06a70d9b355fbe2f375a2ab05eb",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3430,
+        "completion_tokens": 251,
+        "total_tokens": 3681,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3174
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.129
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0066_6x8khlqdpmjxpwhjbm5ak8vstewvdj6e__async_0033_v1",
+  "extracted_at": "2026-11-22T06:46:29.737405+00:00"
+}

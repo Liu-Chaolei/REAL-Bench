@@ -1,0 +1,128 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0442_8iwfasr3p6c7xwyuqj9wrfdfk80rwfig",
+  "model": "deepseek-flash",
+  "input_sha256": "af5033eff1dc7b463059bacad0dee4632ce5b6617fe5712c667fa04398c22287",
+  "review_input_sha256": "769601f0ead0c63daad060f41f00f46522dfd6ad23137744ae227f4027d758fc",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "03deef384c863e30fec34b27eb1b05df85d3a3d5e1047806193d8d7188a36111",
+  "reference_results_sha256": "4e23f548915cf1673de0e53080494493fd669701a200d92d7549b645653250c2",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Katarzyna Zielińska",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-c3e8a20f-f3a7-40a7-8fee-17b128e84511.arguments.content"
+    },
+    "stage1.tool_response.series_s1_calendar_read": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"5c6f2e09f3ce4060bc46e44f7f4e66a4\", \"title\": \"Historical Society Meeting\", \"start_datetime\": \"1729180800\", \"end_datetime\": \"1729188000\", \"tag\": \"Work\", \"description\": \"Discussion on the impact of lesser-known battles on geopolitical dynamics.\", \"location\": \"Basel Historical Society\", \"attendees\": [\"Ursula Wiederkehr\"], \"start_strftime\": \"Thursday, 2024-10-17 16:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 18:00:00\"}, {\"event_id\": \"98eaed1ae6294aaba008edcf6d12b2b5\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729188000\", \"end_datetime\": \"1729191600\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio in Basel\", \"attendees\": [\"Ursula Wiederkehr\"], \"start_strftime\": \"Thursday, 2024-10-17 18:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 19:00:00\"}, {\"event_id\": \"b69f8090a3404e98a6cc7ee2bb9ccf5d\", \"title\": \"Research Collaboration with Katarzyna Zielińska\", \"start_datetime\": \"1729173600\", \"end_datetime\": \"1729180800\", \"tag\": \"Work\", \"description\": \"Discuss research on the impact of battles on geopolitical dynamics.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Ursula Wiederkehr\", \"Katarzyna Zielińska\"], \"start_strftime\": \"Thursday, 2024-10-17 14:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 16:00:00\"}, {\"event_id\": \"b9124ba67bdf49a8849b338fddf22d48\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729159200\", \"end_datetime\": \"1729162800\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Thursday, 2024-10-17 10:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 11:00:00\"}, {\"event_id\": \"bfd0b3afbb884bee9b47b7a4c5bee9eb\", \"title\": \"Dinner with Liesbeth Vandenberghe\", \"start_datetime\": \"1729193400\", \"end_datetime\": \"1729200600\", \"tag\": \"Social\", \"description\": \"Catch up with Liesbeth Vandenberghe over dinner.\", \"location\": \"Restaurant in Basel\", \"attendees\": [\"Ursula Wiederkehr\", \"Liesbeth Vandenberghe\"], \"start_strftime\": \"Thursday, 2024-10-17 19:30:00\", \"end_strftime\": \"Thursday, 2024-10-17 21:30:00\"}, {\"event_id\": \"fea17f26447248d39ec986a79ce3b4ee\", \"title\": \"Coffee Break with Aurélien von Allmen\", \"start_datetime\": \"1729166400\", \"end_datetime\": \"1729170000\", \"tag\": \"Social\", \"description\": \"Catch up with Aurélien von Allmen over coffee.\", \"location\": \"Café in Basel\", \"attendees\": [\"Ursula Wiederkehr\", \"Aurélien von Allmen\"], \"start_strftime\": \"Thursday, 2024-10-17 12:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 13:00:00\"}], \"range\": [\"0\", \"6\"], \"total\": \"6\"}",
+      "event_id": "series_s1_calendar_read",
+      "response_sha256": "6ad066e48eb699119bd6aacc9a69e6984df4da3a13df9821a319e89c5d05e800"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，难以识别，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Katarzyna Zielińska"
+      ],
+      "active_vocabulary": {
+        "Katarzyna Zielińska": 50
+      },
+      "vocabulary_sha256": "c5268737b262513745ef8dfb30149c229a915f483b90d3296f713d2f50c9032b"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien von Allmen",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_calendar_read",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Basel Historical Society",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_calendar_read",
+          "reason": "特定机构名称，保留",
+          "weight": 50
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_calendar_read",
+          "reason": "完整人名，姓氏拼写困难，保留",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_calendar_read",
+          "reason": "完整人名，姓氏较难，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien von Allmen",
+        "Basel Historical Society",
+        "Liesbeth Vandenberghe",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Katarzyna Zielińska": 50,
+        "Aurélien von Allmen": 50,
+        "Basel Historical Society": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "1efac8f0a663236c96c6ee7b404655826f03b00ba6b6b9215bda09c869e23df3"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Katarzyna Zielińska": 50,
+        "Aurélien von Allmen": 50,
+        "Basel Historical Society": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "1efac8f0a663236c96c6ee7b404655826f03b00ba6b6b9215bda09c869e23df3"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Ursula"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:53.126764+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

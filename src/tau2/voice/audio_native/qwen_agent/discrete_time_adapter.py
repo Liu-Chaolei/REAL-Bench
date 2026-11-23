@@ -4,8 +4,11 @@ import audioop
 import base64
 from collections import Counter
 
-from tau2.config import DEFAULT_AUDIO_NATIVE_DISCONNECT_TIMEOUT
-from tau2.data_model.audio import TELEPHONY_AUDIO_FORMAT
+from tau2.config import (
+    DEFAULT_AUDIO_NATIVE_DISCONNECT_TIMEOUT,
+    DEFAULT_QWEN_ASR_STREAMING_MODEL,
+)
+from tau2.data_model.audio import TELEPHONY_AUDIO_FORMAT, AudioEncoding, AudioFormat
 from tau2.data_model.message import ToolCall
 from tau2.data_model.transcript import LiveTranscriptTick
 from tau2.voice.audio_native.adapter import DiscreteTimeAdapter
@@ -45,13 +48,16 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
         if transcriber is not None:
             self.transcriber = transcriber
         elif config.asr_provider == "qwen":
-            from tau2.voice.audio_native.qwen_agent.qwen_transcription import (
-                QwenPlayedAudioTranscriber,
-            )
+            if config.asr_model == DEFAULT_QWEN_ASR_STREAMING_MODEL:
+                from tau2.voice.audio_native.qwen_agent.qwen_streaming_transcription import (
+                    QwenStreamingPlayedAudioTranscriber as QwenObserver,
+                )
+            else:
+                from tau2.voice.audio_native.qwen_agent.qwen_transcription import (
+                    QwenPlayedAudioTranscriber as QwenObserver,
+                )
 
-            self.transcriber = QwenPlayedAudioTranscriber(
-                config, hotwords=observer_hotwords
-            )
+            self.transcriber = QwenObserver(config, hotwords=observer_hotwords)
         elif config.asr_provider == "mimo":
             from tau2.voice.audio_native.qwen_agent.mimo_transcription import (
                 MiMoPlayedAudioTranscriber,
@@ -62,6 +68,15 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
             self.transcriber = PlayedAudioTranscriber(
                 config.asr_model, config.asr_api_key_env, "en"
             )
+        self._native_playback = hasattr(self.transcriber, "send_native")
+        self._playback_format = (
+            AudioFormat(
+                encoding=AudioEncoding.PCM_S16LE,
+                sample_rate=config.playback_sample_rate,
+            )
+            if self._native_playback
+            else self.audio_format
+        )
         self._bg_loop = BackgroundAsyncLoop()
         self._connected = False
         self._converters = {}
@@ -183,6 +198,14 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
         except Exception:
             return {"status": "error"}
 
+    def set_observer_stage(self, stage):
+        """Advance only the evaluator-side listener, on its own event loop."""
+
+        async def advance():
+            self.transcriber.activate_stage(stage)
+
+        self._bg_loop.run_coroutine(advance(), timeout=10)
+
     async def _execute_tick(self, user_audio, tick_number, result, tick_start):
         result.playback_cancellations = []
         pcm = self._input_converter.convert_input(user_audio)
@@ -203,15 +226,17 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
         for event in self.provider.drain():
             self._process_event(result, event)
         buffered = sum(len(data) for data, _ in result.agent_audio_chunks)
-        if (
-            buffered
-            > self.config.max_buffer_seconds * self.audio_format.bytes_per_second
-        ):
+        if buffered > self.config.max_buffer_seconds * result.bytes_per_second:
             raise RuntimeError(
                 "Qwen playback backlog exceeded the configured limit "
-                f"({buffered / self.audio_format.bytes_per_second:.1f}s queued, "
+                f"({buffered / result.bytes_per_second:.1f}s queued, "
                 f"{self.config.max_buffer_seconds:.1f}s allowed)"
             )
+
+    @property
+    def playback_audio_format(self):
+        """Preserve native PCM for playback, recording and the streaming observer."""
+        return self._playback_format
 
     @property
     def has_pending_output(self) -> bool:
@@ -239,12 +264,21 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
             if response_id in self._cancelled:
                 return
             rate = int(event["sample_rate"])
-            converter = self._converters.setdefault(
-                rate, StreamingTelephonyConverter(output_sample_rate=rate)
-            )
-            data = converter.convert_output(
-                base64.b64decode(event["audio"], validate=True)
-            )
+            pcm = base64.b64decode(event["audio"], validate=True)
+            if self._native_playback:
+                if rate != self._playback_format.sample_rate:
+                    raise ValueError(
+                        "Agent PCM rate differs from playback_sample_rate; "
+                        "configure the actual source rate instead of resampling"
+                    )
+                if len(pcm) % 2:
+                    raise ValueError("Agent PCM16 chunk has an incomplete sample")
+                data = pcm
+            else:
+                converter = self._converters.setdefault(
+                    rate, StreamingTelephonyConverter(output_sample_rate=rate)
+                )
+                data = converter.convert_output(pcm)
             self._received[response_id] += len(data)
             result.agent_audio_chunks.append((data, response_id))
         elif kind == "audio_done":
@@ -393,26 +427,47 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
                 await self._receipt("playback.ended", response_id)
                 self._terminal.add(response_id)
         played = result.get_played_agent_audio()
-        result.contains_speech = bool(
-            played and audioop.rms(audioop.ulaw2lin(played, 2), 2)
-        )
-        await self.transcriber.send(audioop.ulaw2lin(played, 2))
-        if result.was_truncated and result.contains_speech:
+        playback_format = result.playback_audio_format or self.audio_format
+        if (
+            self._native_playback
+            and playback_format.encoding == AudioEncoding.PCM_S16LE
+        ):
+            # A cancelled response was removed before capping. End the previous
+            # ASR episode before sending any new reply from this tick.
+            if result.was_truncated:
+                self.transcriber.queue_pending()
+            result.contains_speech = bool(played and audioop.rms(played, 2))
+            await self.transcriber.send_native(played, playback_format.sample_rate)
+        else:
+            pcm = audioop.ulaw2lin(played, 2)
+            result.contains_speech = bool(pcm and audioop.rms(pcm, 2))
+            await self.transcriber.send(pcm)
+        if (
+            not self._native_playback
+            and result.was_truncated
+            and result.contains_speech
+        ):
             queue_partial = getattr(self.transcriber, "queue_pending", None)
             if queue_partial is not None:
                 queue_partial()
         fragments = self.transcriber.drain()
-        result.proportional_transcript = " ".join(f.text for f in fragments)
+        snapshot = getattr(self.transcriber, "snapshot", lambda: None)()
+        result.proportional_transcript = (
+            snapshot.text
+            if snapshot is not None
+            else " ".join(f.text for f in fragments)
+        )
         result.live_transcript = LiveTranscriptTick(
             session_id=self.provider.session_id,
             origin="recorded_audio",
             alignment="played_audio",
             fragments=fragments,
+            snapshot=snapshot,
             speech_intervals_ms=(
                 [
                     (
                         0,
-                        len(played) / self.audio_format.bytes_per_second * 1000,
+                        len(played) / result.bytes_per_second * 1000,
                     )
                 ]
                 if result.contains_speech
@@ -461,6 +516,7 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
                 origin="recorded_audio",
                 alignment="played_audio",
                 fragments=fragments,
+                snapshot=getattr(self.transcriber, "snapshot", lambda: None)(),
                 speech_intervals_ms=intervals,
             )
         except Exception as error:

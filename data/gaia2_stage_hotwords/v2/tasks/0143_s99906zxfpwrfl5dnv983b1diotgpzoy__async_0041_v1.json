@@ -1,0 +1,164 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0143_s99906zxfpwrfl5dnv983b1diotgpzoy__async_0041_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "1c78474b8ab43c2610e273fb5db904dcd86fc3711472f2080e2968abc6fb9be9",
+  "review_input_sha256": "fcb8038f7834cf05c13e66e3997896c8ced5dafcd40320f76753cc88309500b5",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "f83fe91cc6b80b770995001bcf4f880255cbd443c9863a3bf2de153c647b409a",
+  "reference_results_sha256": "c99a6ec1f67afb65057ef74c7ab2cbf00cca1f20aa6cacf35e2111cd3aa902fe",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Lianying Wang",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Massive Makeover Beauty Spa",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Steve Spangler Science Halloween Decorating Kit",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "HALLOWEEN DUCKY MIX",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Östermalmsgatan 12",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.tool_response.series_s1_home_contact": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Astrid\", \"last_name\": \"Lundqvist\", \"contact_id\": \"0d1b1d002eba4fdfa48e04d226bf4425\", \"is_user\": \"True\", \"gender\": \"Gender.FEMALE\", \"age\": \"23\", \"nationality\": \"Swedish\", \"city_living\": \"Stockholm\", \"country\": \"Sweden\", \"status\": \"Status.EMPLOYED\", \"job\": \"Social Media Influencer\", \"description\": \"Astrid Lundqvist is a 23-year-old social media influencer from Stockholm, Sweden. She has built a significant following on Instagram, where she shares her passion for fashion, photography, and travel. With over 200,000 followers, Astrid has become a trusted voice in the Swedish influencer scene, collaborating with top brands to promote their products. She is known for her impeccable style, creativity, and engaging content.\", \"phone\": \"+46734567890\", \"email\": \"astrid.lundqvist@gaia2mail.com\", \"address\": \"Östermalmsgatan 12, 114 39 Stockholm, Sweden\"}",
+      "event_id": "series_s1_home_contact",
+      "response_sha256": "17d7d1d42b4ee98f246a12b76d4fc83368a332a02bf629e6efbb960397a71be1"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Steve Spangler Science Halloween Decorating Kit",
+          "kind": "product",
+          "source": "stage0.existing_catalog.3",
+          "reason": "独特产品全名",
+          "weight": 50
+        },
+        {
+          "text": "Massive Makeover Beauty Spa",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.2",
+          "reason": "独特机构名称",
+          "weight": 50
+        },
+        {
+          "text": "HALLOWEEN DUCKY MIX",
+          "kind": "product",
+          "source": "stage0.existing_catalog.4",
+          "reason": "独特产品名",
+          "weight": 50
+        },
+        {
+          "text": "Lianying Wang",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Steve Spangler Science Halloween Decorating Kit",
+        "Massive Makeover Beauty Spa",
+        "HALLOWEEN DUCKY MIX",
+        "Lianying Wang"
+      ],
+      "active_vocabulary": {
+        "Steve Spangler Science Halloween Decorating Kit": 50,
+        "Massive Makeover Beauty Spa": 50,
+        "HALLOWEEN DUCKY MIX": 50,
+        "Lianying Wang": 50
+      },
+      "vocabulary_sha256": "c7f69441c04bf4e5f0b72f10d9403292ac93819f387221aba322c8f5bd2f1c96"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_home_contact",
+          "reason": "完整人名，含独特拼写",
+          "weight": 50
+        },
+        {
+          "text": "Östermalmsgatan 12",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符的街道地址",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Lundqvist",
+        "Östermalmsgatan 12"
+      ],
+      "active_vocabulary": {
+        "Steve Spangler Science Halloween Decorating Kit": 50,
+        "Massive Makeover Beauty Spa": 50,
+        "HALLOWEEN DUCKY MIX": 50,
+        "Lianying Wang": 50,
+        "Astrid Lundqvist": 50,
+        "Östermalmsgatan 12": 50
+      },
+      "vocabulary_sha256": "68f4cad362bf84511a119b8088a4dcb49d87112067125e15ce15610cf5751538"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Steve Spangler Science Halloween Decorating Kit": 50,
+        "Massive Makeover Beauty Spa": 50,
+        "HALLOWEEN DUCKY MIX": 50,
+        "Lianying Wang": 50,
+        "Astrid Lundqvist": 50,
+        "Östermalmsgatan 12": 50
+      },
+      "vocabulary_sha256": "68f4cad362bf84511a119b8088a4dcb49d87112067125e15ce15610cf5751538"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "301 Cecelia Avenue",
+    "Åsa",
+    "Stockholm",
+    "Sweden"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:52.724666+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

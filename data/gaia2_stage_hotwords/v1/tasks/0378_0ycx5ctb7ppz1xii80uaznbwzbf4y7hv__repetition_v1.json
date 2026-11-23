@@ -1,0 +1,203 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0378_0ycx5ctb7ppz1xii80uaznbwzbf4y7hv__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "773db854d79d2ed11fed77521c60566811b6a71250b9715d32089acf0e6735a4",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Stockholm",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "地名，用户与前任共同居住的城市"
+        },
+        {
+          "text": "TRASH",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1405707a-b302-4963-b99b-0c10cc4c5351.arguments.dest_folder_name",
+          "reason": "邮件目标文件夹名称"
+        }
+      ],
+      "new_terms": [
+        "Stockholm",
+        "TRASH"
+      ],
+      "active_vocabulary": {
+        "Stockholm": 50,
+        "TRASH": 50
+      },
+      "vocabulary_sha256": "dfdf6fd6488d3da32f1b47452795921addd7f634a560825e96e74839459c5023"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Axel",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "需取消约会的对象人名"
+        },
+        {
+          "text": "Restaurant Östermalms",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "餐厅专有名称"
+        },
+        {
+          "text": "Campaign Z",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "拍摄活动专有名称"
+        },
+        {
+          "text": "Campaign X",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "拍摄活动专有名称"
+        },
+        {
+          "text": "Campaign Y",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "拍摄活动专有名称"
+        },
+        {
+          "text": "Brand X",
+          "kind": "organization",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "品牌方专有名称"
+        },
+        {
+          "text": "Brand Y",
+          "kind": "organization",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "品牌方专有名称"
+        }
+      ],
+      "new_terms": [
+        "Axel",
+        "Restaurant Östermalms",
+        "Campaign Z",
+        "Campaign X",
+        "Campaign Y",
+        "Brand X",
+        "Brand Y"
+      ],
+      "active_vocabulary": {
+        "Stockholm": 50,
+        "TRASH": 50,
+        "Axel": 50,
+        "Restaurant Östermalms": 50,
+        "Campaign Z": 50,
+        "Campaign X": 50,
+        "Campaign Y": 50,
+        "Brand X": 50,
+        "Brand Y": 50
+      },
+      "vocabulary_sha256": "f57581d9f667d153dbc135747fe93cf0b39b5a52d9e4c0876b6fa0f28172f837"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Restaurant Östermalms",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "餐厅专有名称"
+        },
+        {
+          "text": "Axel",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "相关人名"
+        },
+        {
+          "text": "Stockholm",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "找房城市名"
+        },
+        {
+          "text": "Östermalmsgatan 12",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "需排除的旧住址专有名称"
+        },
+        {
+          "text": "Södermalm Haven",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Södermalmsallén 12",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓街道地址"
+        },
+        {
+          "text": "Stockholm City Living",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Norrmalm",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "斯德哥尔摩城区名"
+        }
+      ],
+      "new_terms": [
+        "Östermalmsgatan 12",
+        "Södermalm Haven",
+        "Södermalmsallén 12",
+        "Stockholm City Living",
+        "Norrmalm"
+      ],
+      "active_vocabulary": {
+        "Stockholm": 50,
+        "TRASH": 50,
+        "Axel": 50,
+        "Restaurant Östermalms": 50,
+        "Campaign Z": 50,
+        "Campaign X": 50,
+        "Campaign Y": 50,
+        "Brand X": 50,
+        "Brand Y": 50,
+        "Östermalmsgatan 12": 50,
+        "Södermalm Haven": 50,
+        "Södermalmsallén 12": 50,
+        "Stockholm City Living": 50,
+        "Norrmalm": 50
+      },
+      "vocabulary_sha256": "2347790311c742a39b3962e9e164610a434af8ce4e09d0ba54a933e8eea30813"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "a852e2eab21d1d714c18e44382c5ac1cedb8899c2e9ef3f50bcf6e1f68f38b50",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3103,
+        "completion_tokens": 614,
+        "total_tokens": 3717,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2847
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.285
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0378_0ycx5ctb7ppz1xii80uaznbwzbf4y7hv__repetition_v1",
+  "extracted_at": "2026-11-22T06:45:29.053580+00:00"
+}

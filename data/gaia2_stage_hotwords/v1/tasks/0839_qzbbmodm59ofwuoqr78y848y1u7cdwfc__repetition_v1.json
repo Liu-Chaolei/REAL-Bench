@@ -1,0 +1,130 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0839_qzbbmodm59ofwuoqr78y848y1u7cdwfc__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "547bc5e0b5f55081acfa6b80c2d91c4b4862022f0c8a5258a35d1d442dc83d4f",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Zofia Kowalczyk",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "关键人名，需优先遵循其请求"
+        },
+        {
+          "text": "Ursula Ramseyer",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "需单独联系的人名"
+        },
+        {
+          "text": "Aurélie De Clercq",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名，含特殊字符"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b6947501-842e-4a63-bbb7-9e8b130bb12f.arguments.content",
+          "reason": "邮件签名中的独特人名"
+        }
+      ],
+      "new_terms": [
+        "Zofia Kowalczyk",
+        "Ursula Ramseyer",
+        "Aurélie De Clercq",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Zofia Kowalczyk": 50,
+        "Ursula Ramseyer": 50,
+        "Aurélie De Clercq": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "a2d6411ef6733144060f5f80401dee3a0bfd570fe6f1ff71942b67ed5052fed2"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélie De Clercq",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "邮件收件人姓名"
+        },
+        {
+          "text": "Zofia Kowalczyk",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "最终规格提供者姓名"
+        },
+        {
+          "text": "Ursula Ramseyer",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "邮件正文提及的人名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Zofia Kowalczyk": 50,
+        "Ursula Ramseyer": 50,
+        "Aurélie De Clercq": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "a2d6411ef6733144060f5f80401dee3a0bfd570fe6f1ff71942b67ed5052fed2"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Zofia Kowalczyk",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "需发送聊天更新的人名"
+        },
+        {
+          "text": "Ursula Ramseyer",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "需发送聊天更新的人名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Zofia Kowalczyk": 50,
+        "Ursula Ramseyer": 50,
+        "Aurélie De Clercq": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "a2d6411ef6733144060f5f80401dee3a0bfd570fe6f1ff71942b67ed5052fed2"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "fd10f25dfc0d8d120a1b8a94773c65cbbdf32248f25d563589b68fa40c0520a3",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3387,
+        "completion_tokens": 353,
+        "total_tokens": 3740,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3131
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.597
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0839_qzbbmodm59ofwuoqr78y848y1u7cdwfc__repetition_v1",
+  "extracted_at": "2026-11-22T06:46:12.458915+00:00"
+}

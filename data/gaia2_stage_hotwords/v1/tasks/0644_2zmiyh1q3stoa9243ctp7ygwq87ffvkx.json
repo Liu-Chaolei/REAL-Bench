@@ -1,0 +1,167 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0644_2zmiyh1q3stoa9243ctp7ygwq87ffvkx",
+  "model": "deepseek-flash",
+  "input_sha256": "116c5a2712e7f4276cefaeb8a01c50b548a9da1d04964e0db4e9bacb39663108",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélie Wyss",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-118c4854-0a3e-4e65-987d-e1a22ade9e3f.arguments.attendees[0]",
+          "reason": "邮件收件人及会议参会人姓名"
+        },
+        {
+          "text": "Saskia",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1bc115cb-69df-4233-bf5e-52315101506c.arguments.content",
+          "reason": "取消活动通知邮件中的收件人名字"
+        },
+        {
+          "text": "Ursula",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1bc115cb-69df-4233-bf5e-52315101506c.arguments.content",
+          "reason": "取消活动通知邮件署名"
+        }
+      ],
+      "new_terms": [
+        "Aurélie Wyss",
+        "Saskia",
+        "Ursula"
+      ],
+      "active_vocabulary": {
+        "Aurélie Wyss": 50,
+        "Saskia": 50,
+        "Ursula": 50
+      },
+      "vocabulary_sha256": "bb13d54a0506f8a646908d528544ca667a6fb847226d50e6d8b71b38249a869a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email_confirm.arguments.content",
+          "reason": "确认邮件中提及的会议对象名字"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_prep.arguments.attendees[0]",
+          "reason": "准备日程的参会人完整姓名"
+        },
+        {
+          "text": "ETH Zurich",
+          "kind": "organization",
+          "source": "stage1.source_task",
+          "reason": "收件人所属机构名称"
+        }
+      ],
+      "new_terms": [
+        "Aurélie",
+        "Ursula Wiederkehr",
+        "ETH Zurich"
+      ],
+      "active_vocabulary": {
+        "Aurélie Wyss": 50,
+        "Saskia": 50,
+        "Ursula": 50,
+        "Aurélie": 50,
+        "Ursula Wiederkehr": 50,
+        "ETH Zurich": 50
+      },
+      "vocabulary_sha256": "54edb63524bd4b7b051db17026ba352afa0c8e7215613099a681207cee088675"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélie Wyss",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_prep.arguments.description",
+          "reason": "准备说明中提及的会议对象姓名"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_prep.arguments.attendees[0]",
+          "reason": "准备日程的参会人完整姓名"
+        },
+        {
+          "text": "Historical Research Seminar",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "冲突的研讨会活动名称"
+        },
+        {
+          "text": "Historical Research Meeting",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "回复中提及的日程活动名称"
+        }
+      ],
+      "new_terms": [
+        "Historical Research Seminar",
+        "Historical Research Meeting"
+      ],
+      "active_vocabulary": {
+        "Aurélie Wyss": 50,
+        "Saskia": 50,
+        "Ursula": 50,
+        "Aurélie": 50,
+        "Ursula Wiederkehr": 50,
+        "ETH Zurich": 50,
+        "Historical Research Seminar": 50,
+        "Historical Research Meeting": 50
+      },
+      "vocabulary_sha256": "4676a5eba9e2a2fd226424b1ec8d7c955665dcc9842e12f11fd7610b58a64676"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "f728e9feb98c35b5cdc24989ca3eed175a2802a6ad9e0dd32b60b6d07d7850f4",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3906,
+        "completion_tokens": 498,
+        "total_tokens": 4404,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3650
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.995,
+      "error": "Not an exact quotation of a source in stage 1: 'Aurélie Wyss' from 'stage1.tool_gt.series_s1_email_confirm.arguments.content'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "5c6f2bb046ca133d6ee60a73400165b4610bf3a778cba1f41c0ca3968cef2310",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4826,
+        "completion_tokens": 496,
+        "total_tokens": 5322,
+        "prompt_tokens_details": {
+          "cached_tokens": 4352
+        },
+        "prompt_cache_hit_tokens": 4352,
+        "prompt_cache_miss_tokens": 474
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.706
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0644_2zmiyh1q3stoa9243ctp7ygwq87ffvkx",
+  "extracted_at": "2026-11-22T06:43:16.836417+00:00"
+}

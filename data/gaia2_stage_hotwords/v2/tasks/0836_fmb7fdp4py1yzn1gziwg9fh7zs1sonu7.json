@@ -1,0 +1,405 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0836_fmb7fdp4py1yzn1gziwg9fh7zs1sonu7",
+  "model": "deepseek-flash",
+  "input_sha256": "4286ffe7817409777ebfd590a5aba05c29f93483b13c876de5d66ba94084ddf8",
+  "review_input_sha256": "9af7631c7968d2b0c8adad4be8196a07eadb916f681ec7e891499a2454032453",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "11f519db3e932f0bc8353e3af6ae77dd6de3ef40d19596d358bc1e3d3b13e4a6",
+  "reference_results_sha256": "a5b229888b19c37cdf10943876fe0162ba9ad55291f5c16560f31e7c0166fe4b",
+  "sources": {
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "La Jolla Cove Condos",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-bccda3a5-cda8-4178-b553-c37c49ef2356.arguments.content"
+    },
+    "stage0.existing_catalog.7": {
+      "stage": 0,
+      "text": "3456 SE Division St, Portland, OR 97202",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-70ef5ad1-aa55-4f05-8f80-95d90b8fd276.arguments.end_location"
+    },
+    "stage1.tool_response.series_s1_list_saved": {
+      "stage": 1,
+      "text": "{\"f0fa6894d3d24d4ab2d35ccee61afff0\": {\"name\": \"The Vue Apartments\", \"location\": \"4567 San Jacinto Blvd, Houston\", \"zip_code\": \"77004\", \"price\": \"1400\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"Month-to-month\", \"apartment_id\": \"f0fa6894d3d24d4ab2d35ccee61afff0\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"e6e2b8c6dcba456993d81a6c5354cb52\": {\"name\": \"Desert Oasis\", \"location\": \"9012 E Apache Blvd, Phoenix\", \"zip_code\": \"85020\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"e6e2b8c6dcba456993d81a6c5354cb52\", \"amenities\": [\"Pool\", \"Gym\"], \"saved\": \"True\"}, \"3c06a0fe301c4cb8b2fa57ef238d2fb8\": {\"name\": \"Harbor Heights\", \"location\": \"789 Harbor Dr, San Diego\", \"zip_code\": \"92101\", \"price\": \"2800\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"3c06a0fe301c4cb8b2fa57ef238d2fb8\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\"], \"saved\": \"True\"}, \"34c89eecd0244de9b7900e06c0d4f083\": {\"name\": \"Sunnybrook Apartments\", \"location\": \"2345 W Fullerton Ave, Chicago\", \"zip_code\": \"60647\", \"price\": \"1100\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"700\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"34c89eecd0244de9b7900e06c0d4f083\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"6ee44986361346e98260bda60a6fdd29\": {\"name\": \"Houston Haven\", \"location\": \"3456 Westheimer Rd, Houston\", \"zip_code\": \"77056\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"6ee44986361346e98260bda60a6fdd29\", \"amenities\": [\"Pool\", \"Gym\"], \"saved\": \"True\"}, \"be71ee3e92f94fcf8ddf36efdf8e8bbf\": {\"name\": \"Uptown Lofts\", \"location\": \"789 Uptown Dr, Dallas\", \"zip_code\": \"75201\", \"price\": \"2500\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"be71ee3e92f94fcf8ddf36efdf8e8bbf\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\"], \"saved\": \"True\"}, \"ff3857d6523943eca517a397737a80e3\": {\"name\": \"New York Nest\", \"location\": \"789 Broadway, New York\", \"zip_code\": \"10003\", \"price\": \"2800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1100\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"ff3857d6523943eca517a397737a80e3\", \"amenities\": [\"Laundry\", \"Gym\"], \"saved\": \"True\"}, \"254bdd6338ad4b109f8f325a98944e02\": {\"name\": \"Liberty Place\", \"location\": \"6789 Market St, Philadelphia\", \"zip_code\": \"19107\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1100\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"254bdd6338ad4b109f8f325a98944e02\", \"amenities\": [\"Gym\", \"Laundry\", \"Pool\"], \"saved\": \"True\"}, \"3dab26c9397f4e1b969206dcf6a18ed2\": {\"name\": \"Riverwalk Condos\", \"location\": \"6789 Riverwalk Dr, Philadelphia\", \"zip_code\": \"19123\", \"price\": \"2600\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1600\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"3dab26c9397f4e1b969206dcf6a18ed2\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\", \"Doorman\"], \"saved\": \"True\"}, \"98cb0bf3d9674bdda4cbc5ccac585474\": {\"name\": \"Oceanview Apartments\", \"location\": \"4567 Oceanview Blvd, San Diego\", \"zip_code\": \"92113\", \"price\": \"3000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"98cb0bf3d9674bdda4cbc5ccac585474\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"7c21f91fb0444e2a8662a3cb3c619d9d\": {\"name\": \"The Vue\", \"location\": \"4567 Broadway, New York\", \"zip_code\": \"10013\", \"price\": \"3500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"7c21f91fb0444e2a8662a3cb3c619d9d\", \"amenities\": [\"Pool\", \"Gym\", \"Doorman\"], \"saved\": \"True\"}, \"a1c69f3bb11f4f198d7bf94abd2d0c99\": {\"name\": \"Sunny Slope Apartments\", \"location\": \"3456 E Indian School Rd, Phoenix\", \"zip_code\": \"85018\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"a1c69f3bb11f4f198d7bf94abd2d0c99\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"db54cda569dc43c19447c4e2aedeccc7\": {\"name\": \"Columbus Commons\", \"location\": \"3456 N High St, Columbus\", \"zip_code\": \"43202\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1100\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"db54cda569dc43c19447c4e2aedeccc7\", \"amenities\": [\"Pool\", \"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"a83cef83f1a5464489ca7c5ae5d05cf7\": {\"name\": \"Willow Creek Condos\", \"location\": \"8901 S Interstate 35, Austin\", \"zip_code\": \"78744\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"a83cef83f1a5464489ca7c5ae5d05cf7\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"0b8ba2c497604ca2868bd3ef26a9a466\": {\"name\": \"Lakeside Towers\", \"location\": \"4444 Lakeside Dr, Chicago\", \"zip_code\": \"60611\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"2000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"0b8ba2c497604ca2868bd3ef26a9a466\", \"amenities\": [\"Gym\", \"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"538040cecaff42168b31f5106c07afa8\": {\"name\": \"Pacific Beach Apartments\", \"location\": \"3456 Grand Ave, San Diego\", \"zip_code\": \"92109\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"538040cecaff42168b31f5106c07afa8\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"a7ab855bc8474e82944c6c7c19665939\": {\"name\": \"Jacksonville Landing\", \"location\": \"7890 Riverside Ave, Jacksonville\", \"zip_code\": \"32204\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"a7ab855bc8474e82944c6c7c19665939\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"7b87cf8c4dd6454fb99bd7b027662673\": {\"name\": \"Riverview Lofts\", \"location\": \"901 River Rd, Chicago\", \"zip_code\": \"60611\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"7b87cf8c4dd6454fb99bd7b027662673\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"4393ebe5755b4e8896d82836303ffab1\": {\"name\": \"Lakeview Towers\", \"location\": \"9012 Lakeview Dr, Chicago\", \"zip_code\": \"60611\", \"price\": \"3200\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"4393ebe5755b4e8896d82836303ffab1\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\"], \"saved\": \"True\"}, \"d8a82b545335429d980dec7c503eea67\": {\"name\": \"Azure Oasis\", \"location\": \"4444 Sunset Blvd, Los Angeles\", \"zip_code\": \"90027\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"d8a82b545335429d980dec7c503eea67\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"2c86d65cd5ba41dd8c29ee17aff4ba22\": {\"name\": \"The Grove\", \"location\": \"9012 Grove Dr, Dallas\", \"zip_code\": \"75220\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"2c86d65cd5ba41dd8c29ee17aff4ba22\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"b16169f730284ea4a6034b75158f43ad\": {\"name\": \"Willow Creek Apartments\", \"location\": \"7890 Willow Creek Dr, Phoenix\", \"zip_code\": \"85053\", \"price\": \"1400\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"b16169f730284ea4a6034b75158f43ad\", \"amenities\": [\"Parking\", \"Laundry\", \"Pool\"], \"saved\": \"True\"}, \"89c2296928ae481aaee1508a341a2228\": {\"name\": \"Bayview Towers\", \"location\": \"1234 Bayview Dr, San Diego\", \"zip_code\": \"92101\", \"price\": \"3000\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"89c2296928ae481aaee1508a341a2228\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"f9c0822f3bac45d79606a14319459a8d\": {\"name\": \"Uptown Apartments\", \"location\": \"4567 McKinney Ave, Dallas\", \"zip_code\": \"75204\", \"price\": \"1600\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"700\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"f9c0822f3bac45d79606a14319459a8d\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"358aa7470d854687bb8c8a1a3659a9ee\": {\"name\": \"Skyview Towers\", \"location\": \"1234 W Olympic Blvd, Los Angeles\", \"zip_code\": \"90015\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"358aa7470d854687bb8c8a1a3659a9ee\", \"amenities\": [\"Pool\", \"Gym\", \"Parking\"], \"saved\": \"True\"}, \"e46e29d5ec8f45a098c635f61f8cc57d\": {\"name\": \"Village Green Apartments\", \"location\": \"2345 S Congress Ave, Austin\", \"zip_code\": \"78704\", \"price\": \"1200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"e46e29d5ec8f45a098c635f61f8cc57d\", \"amenities\": [\"Pool\", \"Laundry\"], \"saved\": \"True\"}, \"344966c9a115483398df68a5f6be266e\": {\"name\": \"The Retreat at Austin\", \"location\": \"3456 Exposition Blvd, Austin\", \"zip_code\": \"78703\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"344966c9a115483398df68a5f6be266e\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"f0d31b3c7078407da92f72f9468bd520\": {\"name\": \"The Summit\", \"location\": \"1234 S Broadway, San Jose\", \"zip_code\": \"95113\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"f0d31b3c7078407da92f72f9468bd520\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"b87526e033e4459995f2aa3e1329503e\": {\"name\": \"The Madison\", \"location\": \"4567 N Main St, San Jose\", \"zip_code\": \"95112\", \"price\": \"2500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"b87526e033e4459995f2aa3e1329503e\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"6156131369944211bc089475a5de4b3e\": {\"name\": \"Willow Creek Homes\", \"location\": \"901 Willow Creek Dr, Chicago\", \"zip_code\": \"60611\", \"price\": \"2000\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Home\", \"square_footage\": \"2500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"6156131369944211bc089475a5de4b3e\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"03c5b45c05024a548a9d929d49876a15\": {\"name\": \"Lake Shore Towers\", \"location\": \"4567 N Lake Shore Dr, Chicago\", \"zip_code\": \"60640\", \"price\": \"3000\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"03c5b45c05024a548a9d929d49876a15\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"c492ed02e69a4c7f9c3144fd72a461d0\": {\"name\": \"Oceanview Towers\", \"location\": \"901 W Oceanview Dr, San Diego\", \"zip_code\": \"92109\", \"price\": \"3000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1600\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"c492ed02e69a4c7f9c3144fd72a461d0\", \"amenities\": [\"Pool\", \"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"a31094b1d29a488bafb50ef8c383491a\": {\"name\": \"The Lexington\", \"location\": \"9012 Lexington Ave, New York\", \"zip_code\": \"10021\", \"price\": \"3000\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"a31094b1d29a488bafb50ef8c383491a\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"38ded46f7a814625a88c06dbbe5bd455\": {\"name\": \"Park Place\", \"location\": \"9012 Park Ave, New York\", \"zip_code\": \"10028\", \"price\": \"3000\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"38ded46f7a814625a88c06dbbe5bd455\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"a52c65a6b7ba4715a3dba5c2aab882a1\": {\"name\": \"La Jolla Cove Condos\", \"location\": \"7890 La Jolla Blvd, San Diego\", \"zip_code\": \"92037\", \"price\": \"3000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1600\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"a52c65a6b7ba4715a3dba5c2aab882a1\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\"], \"saved\": \"True\"}}",
+      "event_id": "series_s1_list_saved",
+      "response_sha256": "63439dbe5aff03f4447afe019d94fb8cba2890c488a10dd606888e2ca33aa346"
+    },
+    "stage2.tool_response.series_s2_read": {
+      "stage": 2,
+      "text": "{\"sender\": \"aurelien.lafleur@gaia2mail.com\", \"recipients\": [\"rohini.deshpande@gaia2mail.com\"], \"subject\": \"0836_fmb7fdp4py1yzn1gziwg9fh7zs1sonu7 follow-up record\", \"content\": \"Follow-up record for 0836_fmb7fdp4py1yzn1gziwg9fh7zs1sonu7: the first stage result is preserved. This email records the actual current follow-up status without inventing a file, reply, booking, or future action.\", \"email_id\": \"1a5be7e8173deda1cfbf3cd98060e80c\", \"parent_id\": null, \"cc\": [], \"attachments\": {}, \"timestamp\": \"1728975873.0\", \"is_read\": \"True\"}",
+      "event_id": "series_s2_read",
+      "response_sha256": "1fef3191ddb5b0ee1fd8b6b71b4e37f9afa1dbaf9d0fa304e19a001fe0fd3fc7"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "3456 SE Division St, Portland, OR 97202",
+          "kind": "place",
+          "source": "stage0.existing_catalog.7",
+          "reason": "完整街道地址，含缩写与邮编，识别难度高",
+          "weight": 50
+        },
+        {
+          "text": "La Jolla Cove Condos",
+          "kind": "place",
+          "source": "stage0.existing_catalog.6",
+          "reason": "独特完整地名，含西班牙语地名 La Jolla，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "3456 SE Division St, Portland, OR 97202",
+        "La Jolla Cove Condos"
+      ],
+      "active_vocabulary": {
+        "3456 SE Division St, Portland, OR 97202": 50,
+        "La Jolla Cove Condos": 50
+      },
+      "vocabulary_sha256": "33e1a2af10d5ecef1cb809ca0c2d0f98b57dc28ed15951788dd8a784b761aa12"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "The Retreat at Austin",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓楼名",
+          "weight": 50
+        },
+        {
+          "text": "New York Nest",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Pacific Beach Apartments",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓楼名",
+          "weight": 50
+        },
+        {
+          "text": "Sunny Slope Apartments",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓楼名",
+          "weight": 50
+        },
+        {
+          "text": "The Vue Apartments",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓楼名，含法语词 Vue",
+          "weight": 50
+        },
+        {
+          "text": "Village Green Apartments",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓楼名",
+          "weight": 50
+        },
+        {
+          "text": "Willow Creek Apartments",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓楼名",
+          "weight": 50
+        },
+        {
+          "text": "Willow Creek Condos",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓楼名",
+          "weight": 50
+        },
+        {
+          "text": "Willow Creek Homes",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓楼名",
+          "weight": 50
+        },
+        {
+          "text": "Azure Oasis",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Columbus Commons",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓楼名",
+          "weight": 50
+        },
+        {
+          "text": "Desert Oasis",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓名，非普通词汇组合",
+          "weight": 50
+        },
+        {
+          "text": "Harbor Heights",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓楼名",
+          "weight": 50
+        },
+        {
+          "text": "Houston Haven",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Jacksonville Landing",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓楼名",
+          "weight": 50
+        },
+        {
+          "text": "Lakeside Towers",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓楼名",
+          "weight": 50
+        },
+        {
+          "text": "Lakeview Towers",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓楼名",
+          "weight": 50
+        },
+        {
+          "text": "Liberty Place",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓楼名",
+          "weight": 50
+        },
+        {
+          "text": "Riverview Lofts",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓楼名",
+          "weight": 50
+        },
+        {
+          "text": "Riverwalk Condos",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓楼名",
+          "weight": 50
+        },
+        {
+          "text": "Skyview Towers",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓楼名",
+          "weight": 50
+        },
+        {
+          "text": "Sunnybrook Apartments",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特复合楼名",
+          "weight": 50
+        },
+        {
+          "text": "The Grove",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "The Madison",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "The Summit",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Uptown Apartments",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓楼名",
+          "weight": 50
+        },
+        {
+          "text": "Uptown Lofts",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特公寓楼名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "The Retreat at Austin",
+        "New York Nest",
+        "Pacific Beach Apartments",
+        "Sunny Slope Apartments",
+        "The Vue Apartments",
+        "Village Green Apartments",
+        "Willow Creek Apartments",
+        "Willow Creek Condos",
+        "Willow Creek Homes",
+        "Azure Oasis",
+        "Columbus Commons",
+        "Desert Oasis",
+        "Harbor Heights",
+        "Houston Haven",
+        "Jacksonville Landing",
+        "Lakeside Towers",
+        "Lakeview Towers",
+        "Liberty Place",
+        "Riverview Lofts",
+        "Riverwalk Condos",
+        "Skyview Towers",
+        "Sunnybrook Apartments",
+        "The Grove",
+        "The Madison",
+        "The Summit",
+        "Uptown Apartments",
+        "Uptown Lofts"
+      ],
+      "active_vocabulary": {
+        "3456 SE Division St, Portland, OR 97202": 50,
+        "La Jolla Cove Condos": 50,
+        "The Retreat at Austin": 50,
+        "New York Nest": 50,
+        "Pacific Beach Apartments": 50,
+        "Sunny Slope Apartments": 50,
+        "The Vue Apartments": 50,
+        "Village Green Apartments": 50,
+        "Willow Creek Apartments": 50,
+        "Willow Creek Condos": 50,
+        "Willow Creek Homes": 50,
+        "Azure Oasis": 50,
+        "Columbus Commons": 50,
+        "Desert Oasis": 50,
+        "Harbor Heights": 50,
+        "Houston Haven": 50,
+        "Jacksonville Landing": 50,
+        "Lakeside Towers": 50,
+        "Lakeview Towers": 50,
+        "Liberty Place": 50,
+        "Riverview Lofts": 50,
+        "Riverwalk Condos": 50,
+        "Skyview Towers": 50,
+        "Sunnybrook Apartments": 50,
+        "The Grove": 50,
+        "The Madison": 50,
+        "The Summit": 50,
+        "Uptown Apartments": 50,
+        "Uptown Lofts": 50
+      },
+      "vocabulary_sha256": "50bd625bd6923cd31146ff20d2617736c4ac96f63073f29a0de8e28f7d8a94f2"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "aurelien.lafleur",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "含法语名字 Aurélien Lafleur 的邮箱本地部分，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "rohini.deshpande",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "含印度名字 Rohini Deshpande 的邮箱本地部分，拼写困难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "aurelien.lafleur",
+        "rohini.deshpande"
+      ],
+      "active_vocabulary": {
+        "3456 SE Division St, Portland, OR 97202": 50,
+        "La Jolla Cove Condos": 50,
+        "The Retreat at Austin": 50,
+        "New York Nest": 50,
+        "Pacific Beach Apartments": 50,
+        "Sunny Slope Apartments": 50,
+        "The Vue Apartments": 50,
+        "Village Green Apartments": 50,
+        "Willow Creek Apartments": 50,
+        "Willow Creek Condos": 50,
+        "Willow Creek Homes": 50,
+        "Azure Oasis": 50,
+        "Columbus Commons": 50,
+        "Desert Oasis": 50,
+        "Harbor Heights": 50,
+        "Houston Haven": 50,
+        "Jacksonville Landing": 50,
+        "Lakeside Towers": 50,
+        "Lakeview Towers": 50,
+        "Liberty Place": 50,
+        "Riverview Lofts": 50,
+        "Riverwalk Condos": 50,
+        "Skyview Towers": 50,
+        "Sunnybrook Apartments": 50,
+        "The Grove": 50,
+        "The Madison": 50,
+        "The Summit": 50,
+        "Uptown Apartments": 50,
+        "Uptown Lofts": 50,
+        "aurelien.lafleur": 50,
+        "rohini.deshpande": 50
+      },
+      "vocabulary_sha256": "a43b726da2f9b75fc4894360b90a4089c86d0063ac29f938d5f28b0f20debab6"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Oceanview Apartments",
+    "Lake Shore Towers",
+    "Oceanview Towers",
+    "Bayview Towers",
+    "The Lexington",
+    "Park Place"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:40.338296+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

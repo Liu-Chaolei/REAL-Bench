@@ -1,0 +1,173 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0909_q04sd2kko687gwcdg4liz0dr07kqkqbw__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "af8780c42a63f701e98baa706115292ea478be329e29fabdabec96fbae2dd506",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kofi Ogunlesi",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Fosswinckels gate 10, Bergen",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a932d076-c54f-4271-a2a7-46d28d33b9e6.arguments.end_location",
+          "reason": "地址"
+        },
+        {
+          "text": "Frognerveien 34, 0266 Oslo, Norway",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a932d076-c54f-4271-a2a7-46d28d33b9e6.arguments.start_location",
+          "reason": "地址"
+        },
+        {
+          "text": "Filipstad Brygge 2, Oslo",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1315e0aa-facf-422d-98e8-12650339c56d.arguments.end_location",
+          "reason": "地址"
+        }
+      ],
+      "new_terms": [
+        "Kofi Ogunlesi",
+        "Fosswinckels gate 10, Bergen",
+        "Frognerveien 34, 0266 Oslo, Norway",
+        "Filipstad Brygge 2, Oslo"
+      ],
+      "active_vocabulary": {
+        "Kofi Ogunlesi": 50,
+        "Fosswinckels gate 10, Bergen": 50,
+        "Frognerveien 34, 0266 Oslo, Norway": 50,
+        "Filipstad Brygge 2, Oslo": 50
+      },
+      "vocabulary_sha256": "15c81f509fa505bda931cabee9e73b8d2f3f2131fbf1a7a30b1f06075c4fd165"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Bergen Fjord Apartments",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Fjordgata 12, Bergen",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "地址"
+        },
+        {
+          "text": "Kofi Ogunlesi",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Bergen Student Housing",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Fosswinckels gate 10, Bergen",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "地址"
+        }
+      ],
+      "new_terms": [
+        "Bergen Fjord Apartments",
+        "Fjordgata 12, Bergen",
+        "Bergen Student Housing"
+      ],
+      "active_vocabulary": {
+        "Kofi Ogunlesi": 50,
+        "Fosswinckels gate 10, Bergen": 50,
+        "Frognerveien 34, 0266 Oslo, Norway": 50,
+        "Filipstad Brygge 2, Oslo": 50,
+        "Bergen Fjord Apartments": 50,
+        "Fjordgata 12, Bergen": 50,
+        "Bergen Student Housing": 50
+      },
+      "vocabulary_sha256": "0c1eb21b254e6dcafee13a3ecffbfffc3535f806b741be4e28f0f40dc691b439"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Bergen apartment details review",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "事件标题"
+        },
+        {
+          "text": "Fosswinckels gate 10, Bergen",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "地址"
+        },
+        {
+          "text": "Kofi Ogunlesi",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Bergen Student Housing",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Filipstad Brygge 2, Oslo",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "地址"
+        }
+      ],
+      "new_terms": [
+        "Bergen apartment details review"
+      ],
+      "active_vocabulary": {
+        "Kofi Ogunlesi": 50,
+        "Fosswinckels gate 10, Bergen": 50,
+        "Frognerveien 34, 0266 Oslo, Norway": 50,
+        "Filipstad Brygge 2, Oslo": 50,
+        "Bergen Fjord Apartments": 50,
+        "Fjordgata 12, Bergen": 50,
+        "Bergen Student Housing": 50,
+        "Bergen apartment details review": 50
+      },
+      "vocabulary_sha256": "acc884da3b8b4ab2110bab433b4afbaa8b8fca18b0afb36cf6029a453a9c8237"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "5b19e6f98bcc4f9438249dceae3520263bef5386932285bcbe166ad7df8273c8",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3415,
+        "completion_tokens": 541,
+        "total_tokens": 3956,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3159
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.946
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0909_q04sd2kko687gwcdg4liz0dr07kqkqbw__mind_change_v1",
+  "extracted_at": "2026-11-22T06:45:52.273068+00:00"
+}

@@ -110,6 +110,20 @@ class StreamingTelephonyConverter:
         )
         return result
 
+    def convert_input_pcm(self, pcm16_8khz: bytes) -> bytes:
+        """Resample already decoded telephony PCM while preserving input state."""
+        if not pcm16_8khz:
+            return b""
+        result, self._input_resample_state = audioop.ratecv(
+            pcm16_8khz,
+            2,
+            1,
+            TELEPHONY_SAMPLE_RATE,
+            self.input_sample_rate,
+            self._input_resample_state,
+        )
+        return result
+
     def convert_output(self, provider_audio: bytes) -> bytes:
         """Convert provider output (PCM16) to telephony (8kHz mu-law)."""
         result, self._output_resample_state = pcm16_to_telephony(

@@ -1,0 +1,183 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0700_mubpxjo0yifsfjiu1knon2rqnqhy83kq__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "4f5d02c0aa7bec009e3142eea216341975d276de48104cf2e1a5a96a6fbfdc9c",
+  "review_input_sha256": "fbb424dcd2fbd19aa1ee61caf4765a778f27a44b198cdeec17fa1101084c1aa0",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "74ca36904c48ba18ba05e79ae10e7cbcd5f572be18773088e55ebb02852688b6",
+  "reference_results_sha256": "042765c7607dd45d67a99d3197560c30f12df1aae1ab9c7115d6dd3859e89697",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Birgitta Kjær",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Odense Nord",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-875b168c-ffba-4843-9e66-c9c7e5a48b00.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Odense River Views",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-875b168c-ffba-4843-9e66-c9c7e5a48b00.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Odense Nørrebro",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-875b168c-ffba-4843-9e66-c9c7e5a48b00.arguments.content"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Esbjerg Strand",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-937281cd-bc07-4a07-9b7b-2f3feace2d07.arguments.content"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "Esbjerg Exclusive",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-937281cd-bc07-4a07-9b7b-2f3feace2d07.arguments.content"
+    },
+    "stage2.tool_response.series_s2_get_kept_apartment": {
+      "stage": 2,
+      "text": "{\"name\": \"Esbjerg Exclusive\", \"location\": \"Midtbyen, Esbjerg\", \"zip_code\": \"6700\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"9f6c521362f243738de4cfe24fc6e49d\", \"amenities\": [\"Gym\", \"Laundry\", \"Pool\"], \"saved\": \"True\"}",
+      "event_id": "series_s2_get_kept_apartment",
+      "response_sha256": "0b8888cb351c74adb98218729d3626359ecefec09f3262f67778bcfeee0c1a62"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Odense River Views",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "特定公寓/地点名称",
+          "weight": 50
+        },
+        {
+          "text": "Birgitta Kjær",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含特殊字符æ的完整人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Esbjerg Exclusive",
+          "kind": "place",
+          "source": "stage0.existing_catalog.6",
+          "reason": "特定公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Esbjerg Strand",
+          "kind": "place",
+          "source": "stage0.existing_catalog.5",
+          "reason": "特定地点名称",
+          "weight": 50
+        },
+        {
+          "text": "Odense Nord",
+          "kind": "place",
+          "source": "stage0.existing_catalog.1",
+          "reason": "丹麦语地名，含特殊拼写",
+          "weight": 50
+        },
+        {
+          "text": "Odense Nørrebro",
+          "kind": "place",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含特殊字符ø的地名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Odense River Views",
+        "Birgitta Kjær",
+        "Esbjerg Exclusive",
+        "Esbjerg Strand",
+        "Odense Nord",
+        "Odense Nørrebro"
+      ],
+      "active_vocabulary": {
+        "Odense River Views": 50,
+        "Birgitta Kjær": 50,
+        "Esbjerg Exclusive": 50,
+        "Esbjerg Strand": 50,
+        "Odense Nord": 50,
+        "Odense Nørrebro": 50
+      },
+      "vocabulary_sha256": "e98d14220db66d8befc8453f1ab0eac91290c65cb5e7ec1901704fb4dfc41106"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Odense River Views": 50,
+        "Birgitta Kjær": 50,
+        "Esbjerg Exclusive": 50,
+        "Esbjerg Strand": 50,
+        "Odense Nord": 50,
+        "Odense Nørrebro": 50
+      },
+      "vocabulary_sha256": "e98d14220db66d8befc8453f1ab0eac91290c65cb5e7ec1901704fb4dfc41106"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Midtbyen, Esbjerg",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_get_kept_apartment",
+          "reason": "含丹麦语区名的完整地点",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Midtbyen, Esbjerg"
+      ],
+      "active_vocabulary": {
+        "Odense River Views": 50,
+        "Birgitta Kjær": 50,
+        "Esbjerg Exclusive": 50,
+        "Esbjerg Strand": 50,
+        "Odense Nord": 50,
+        "Odense Nørrebro": 50,
+        "Midtbyen, Esbjerg": 50
+      },
+      "vocabulary_sha256": "1c1772a4a36f497766d502934afe9363757f08fcd96731b65fda3c18d0a07ca0"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": [
+        {
+          "text": "Birgitta",
+          "covered_by": "Birgitta Kjær"
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Søren",
+    "Birgitta"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:20.967507+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

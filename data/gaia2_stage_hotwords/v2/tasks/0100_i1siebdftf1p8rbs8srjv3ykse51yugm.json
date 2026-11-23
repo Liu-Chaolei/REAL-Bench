@@ -1,0 +1,646 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0100_i1siebdftf1p8rbs8srjv3ykse51yugm",
+  "model": "deepseek-flash",
+  "input_sha256": "edd126e5526606cd65216cf13d11da440c0fe4f4b8ebb953869e0c3d60311323",
+  "review_input_sha256": "d37214882b1511ae87744334fa2675a18a0abcf8322b354da57a958ef2d6d3f0",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "c4bdd116c1f7e7b0cc619c1317104a86bca9c84e1b26b86862d86d88fee80500",
+  "reference_results_sha256": "f4d0f926ef433a270fdd3cdea38e54f839f5e824c92c07abaabc292c1486df0a",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Sutanto Wijaya",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Aurora Pig Plush",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Anastasiya Kuznetsova",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-25956437-74ba-4283-8bfa-6b9f7ca068e3.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Samara Suites",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Kuybyshev Street",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Volga Riverwalk",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Minina Street",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.6": {
+      "stage": 1,
+      "text": "Omsk Luxury Residences",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.9": {
+      "stage": 1,
+      "text": "St. Petersburg Suites",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.tool_response.series_s1_list_saved": {
+      "stage": 1,
+      "text": "{\"423534a64f494b8baaa3ee8efe5feeb4\": {\"name\": \"Krasnodar City View\", \"location\": \"Krasnaya, Krasnodar\", \"zip_code\": \"350000\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"423534a64f494b8baaa3ee8efe5feeb4\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"c01d02fdb6834b3f950a130e81cd3488\": {\"name\": \"Nizhny Novgorod View\", \"location\": \"Bolshaya Pokrovskaya Street 15, Nizhny Novgorod\", \"zip_code\": \"603002\", \"price\": \"1200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"700\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"c01d02fdb6834b3f950a130e81cd3488\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"30fb06900743441e8405ed4536517121\": {\"name\": \"Kazan Kremlin\", \"location\": \"Bauman, Kazan\", \"zip_code\": \"420111\", \"price\": \"1800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1100\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"30fb06900743441e8405ed4536517121\", \"amenities\": [\"Pool\", \"Laundry\"], \"saved\": \"True\"}, \"0afc7cc770d54863820def89ac05bb5b\": {\"name\": \"Ural Mountains View\", \"location\": \"Lenina Street 45, Yekaterinburg\", \"zip_code\": \"620075\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"0afc7cc770d54863820def89ac05bb5b\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"376e6fe118ed4ed288f06ea4674b8f49\": {\"name\": \"Omsk Oasis\", \"location\": \"Lenin St, 25, Omsk\", \"zip_code\": \"644024\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"376e6fe118ed4ed288f06ea4674b8f49\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\"], \"saved\": \"True\"}, \"e1a55e51564d4585a6d22306365f761a\": {\"name\": \"Moscow City Lights\", \"location\": \"20 Tverskaya Street, Moscow\", \"zip_code\": \"125009\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1600\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"e1a55e51564d4585a6d22306365f761a\", \"amenities\": [\"Pool\", \"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"ab09cb66d0154060b9b5a7515956c04f\": {\"name\": \"Omsk Comfort\", \"location\": \"Lenina, Omsk\", \"zip_code\": \"644043\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"ab09cb66d0154060b9b5a7515956c04f\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"c6e7f6caeca1452c988d63c174c1d2fd\": {\"name\": \"Nizhny Novgorod Suites\", \"location\": \"25 Bolshaya Pokrovskaya Street, Nizhny Novgorod\", \"zip_code\": \"603005\", \"price\": \"1200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"c6e7f6caeca1452c988d63c174c1d2fd\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"ac0851a1e4cd471a912f975617ee2276\": {\"name\": \"Don River Apartments\", \"location\": \"Bolshaya Sadovaya Street 12, Rostov-on-Don\", \"zip_code\": \"344006\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"ac0851a1e4cd471a912f975617ee2276\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"c08baebfb97c4c96b883e53424281bef\": {\"name\": \"Omsk Luxury Residences\", \"location\": \"Lenina Street, Omsk\", \"zip_code\": \"644043\", \"price\": \"2800\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"c08baebfb97c4c96b883e53424281bef\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\", \"Pool\"], \"saved\": \"True\"}, \"4460c82d7fdd4b75b666221664c87445\": {\"name\": \"Kazan Riverfront\", \"location\": \"Kremlevskaya Street, Kazan\", \"zip_code\": \"420111\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"4460c82d7fdd4b75b666221664c87445\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"39f1f3ede2d44451b4bf03d8538b82e7\": {\"name\": \"Volga River Residence\", \"location\": \"Ulitsa Lenina, Nizhny Novgorod\", \"zip_code\": \"603000\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"39f1f3ede2d44451b4bf03d8538b82e7\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"b98f38e9521c4f339d305973aa3e8fd2\": {\"name\": \"Krasnodar City Living\", \"location\": \"Krasnaya St, 50, Krasnodar\", \"zip_code\": \"350000\", \"price\": \"1200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"b98f38e9521c4f339d305973aa3e8fd2\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"2a8bf1dfc4da4c52bfc5aade02577534\": {\"name\": \"Yekaterinburg Heights\", \"location\": \"10 Boris Yeltsin Street, Yekaterinburg\", \"zip_code\": \"620075\", \"price\": \"1800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"2a8bf1dfc4da4c52bfc5aade02577534\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"54222d39fa0c4e9796449d3e11caf6fb\": {\"name\": \"Siberian Dreams\", \"location\": \"Krasny Prospekt, Novosibirsk\", \"zip_code\": \"630007\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"54222d39fa0c4e9796449d3e11caf6fb\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"8861ed114ac64207a06379353f586e4b\": {\"name\": \"Krasnodar Luxury Apartments\", \"location\": \"Krasnaya Street, Krasnodar\", \"zip_code\": \"350000\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"8861ed114ac64207a06379353f586e4b\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"470d45616d0c4e08b8949654ada20409\": {\"name\": \"Novosibirsk Downtown\", \"location\": \"Krasny Avenue, Novosibirsk\", \"zip_code\": \"630000\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"470d45616d0c4e08b8949654ada20409\", \"amenities\": [\"Gym\", \"Parking\"], \"saved\": \"True\"}, \"4f9374cd26f448deb3a293c71e8b61de\": {\"name\": \"Saint Petersburg Bay Apartments\", \"location\": \"10 Vasilievsky Island, Saint Petersburg\", \"zip_code\": \"199034\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"4f9374cd26f448deb3a293c71e8b61de\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"03001f781b3d4c469e382f8a552cc42b\": {\"name\": \"Samara City Center\", \"location\": \"Ulitsa Kuibysheva, Samara\", \"zip_code\": \"443000\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"700\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"03001f781b3d4c469e382f8a552cc42b\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"06b768622d35425ea3139a8f33f48516\": {\"name\": \"Saint Petersburg Suites\", \"location\": \"Nevsky Prospekt, Saint Petersburg\", \"zip_code\": \"191186\", \"price\": \"3000\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"06b768622d35425ea3139a8f33f48516\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"af5a6aa7a887486ea77eb2ff37c7afd4\": {\"name\": \"Yekaterinburg Modern\", \"location\": \"8 Marta Street, Yekaterinburg\", \"zip_code\": \"620075\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"2200\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"af5a6aa7a887486ea77eb2ff37c7afd4\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"c1c4ae4634ac4fbca49c33d4604e2c66\": {\"name\": \"Nizhny Novgorod Oasis\", \"location\": \"Bolshaya Pokrovskaya Street, Nizhny Novgorod\", \"zip_code\": \"603005\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"c1c4ae4634ac4fbca49c33d4604e2c66\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"38b09a5a0840492e9f01aae569c58d53\": {\"name\": \"Samara Riverfront\", \"location\": \"Ulitsa Leningradskaya, Samara\", \"zip_code\": \"443011\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"38b09a5a0840492e9f01aae569c58d53\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"0e20e095a6a0485a9e5c118bd93aaa1a\": {\"name\": \"Samara City Apartments\", \"location\": \"Kuibysheva Street, Samara\", \"zip_code\": \"443010\", \"price\": \"1200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"0e20e095a6a0485a9e5c118bd93aaa1a\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"fefe0f38f9d14020a3ca392d57d54034\": {\"name\": \"Yekaterinburg Hills\", \"location\": \"Ulitsa Malysheva, Yekaterinburg\", \"zip_code\": \"620000\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"2000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"fefe0f38f9d14020a3ca392d57d54034\", \"amenities\": [\"Gym\", \"Pool\", \"Parking\"], \"saved\": \"True\"}, \"0029938a2d92410e95fe0a79f41a991e\": {\"name\": \"Rostov-on-Don Riverside\", \"location\": \"Bolshaya Sadovaya, Rostov-on-Don\", \"zip_code\": \"344006\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"0029938a2d92410e95fe0a79f41a991e\", \"amenities\": [\"Pool\", \"Laundry\"], \"saved\": \"True\"}, \"ff68f282183d48d8bebdf9a4c974913d\": {\"name\": \"Kremlin View Apartments\", \"location\": \"Tverskaya Street, Moscow\", \"zip_code\": \"101000\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"ff68f282183d48d8bebdf9a4c974913d\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"a1f59f7dacd14302a4ce293392186048\": {\"name\": \"Moscow Oasis\", \"location\": \"12 Tverskaya Street, Moscow\", \"zip_code\": \"125009\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"a1f59f7dacd14302a4ce293392186048\", \"amenities\": [\"Gym\", \"Parking\"], \"saved\": \"True\"}, \"d2e906487a2e4e879a3e07009db23bfd\": {\"name\": \"Saint Petersburg Palace\", \"location\": \"Nevsky Prospekt, 50, Saint Petersburg\", \"zip_code\": \"191011\", \"price\": \"3500\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"2000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"d2e906487a2e4e879a3e07009db23bfd\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"e30064a6b1204048b3555bf2eb3a92d1\": {\"name\": \"Kremlin Views\", \"location\": \"Tverskaya St, Moscow\", \"zip_code\": \"125009\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"e30064a6b1204048b3555bf2eb3a92d1\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"43e79bbb6b1b4b9d8e16a09b743eaef5\": {\"name\": \"Samara Suites\", \"location\": \"Kuybyshev Street, Samara\", \"zip_code\": \"443099\", \"price\": \"2800\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Apartment\", \"square_footage\": \"1400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"43e79bbb6b1b4b9d8e16a09b743eaef5\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"398f7cbf6d5a47bcb35ebace29976202\": {\"name\": \"St. Petersburg Suites\", \"location\": \"Nevsky Prospekt, St. Petersburg\", \"zip_code\": \"191186\", \"price\": \"2800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1100\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"398f7cbf6d5a47bcb35ebace29976202\", \"amenities\": [\"Gym\", \"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"8c9971a78f90466ba3c131972a148040\": {\"name\": \"Volga Riverwalk\", \"location\": \"Minina Street, Nizhny Novgorod\", \"zip_code\": \"603000\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"1500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"8c9971a78f90466ba3c131972a148040\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}}",
+      "event_id": "series_s1_list_saved",
+      "response_sha256": "50d23115c46113a8eda378cf936c578fb16693cf8b1115b3482e9c96a0d55fa8"
+    },
+    "stage2.tool_response.series_s2_get_calendar": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"0f00f7ea336343989fb16ff5f8c756c6\", \"title\": \"Meeting with Rogelio García-Mendoza\", \"start_datetime\": \"1729944000\", \"end_datetime\": \"1729947600\", \"tag\": \"Social\", \"description\": \"Meet with Rogelio García-Mendoza to discuss our shared interest in history.\", \"location\": \"Coffee Shop\", \"attendees\": [\"Rogelio García-Mendoza\"], \"start_strftime\": \"Saturday, 2024-10-26 12:00:00\", \"end_strftime\": \"Saturday, 2024-10-26 13:00:00\"}, {\"event_id\": \"1359830ba380477c83b6a0afa756cb50\", \"title\": \"Dinner with Colleagues\", \"start_datetime\": \"1729539000\", \"end_datetime\": \"1729546200\", \"tag\": \"Social\", \"description\": \"Meet with colleagues for dinner and discussion.\", \"location\": \"Restaurant\", \"attendees\": [\"Saskia Müller-Krüger\", \"Katharina Müller-Schneider\"], \"start_strftime\": \"Monday, 2024-10-21 19:30:00\", \"end_strftime\": \"Monday, 2024-10-21 21:30:00\"}, {\"event_id\": \"26ee466b48414bbf953ef94c29c1ce51\", \"title\": \"Research on 20th-Century Russia\", \"start_datetime\": \"1729778400\", \"end_datetime\": \"1729785600\", \"tag\": \"Work\", \"description\": \"Conduct research on 20th-century Russia for my ongoing project.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Thursday, 2024-10-24 14:00:00\", \"end_strftime\": \"Thursday, 2024-10-24 16:00:00\"}, {\"event_id\": \"340e1b2dbd9e4dfdbbe48226734f7b15\", \"title\": \"Office Hours\", \"start_datetime\": \"1729767600\", \"end_datetime\": \"1729771200\", \"tag\": \"Work\", \"description\": \"Hold office hours for students to discuss their progress and answer questions.\", \"location\": \"Moscow University\", \"attendees\": [], \"start_strftime\": \"Thursday, 2024-10-24 11:00:00\", \"end_strftime\": \"Thursday, 2024-10-24 12:00:00\"}, {\"event_id\": \"3a14ed14c6b9401581214e32922b671a\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729879200\", \"end_datetime\": \"1729882800\", \"tag\": \"Health\", \"description\": \"Attend a yoga class to unwind and relax.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Katharina Müller-Schneider\"], \"start_strftime\": \"Friday, 2024-10-25 18:00:00\", \"end_strftime\": \"Friday, 2024-10-25 19:00:00\"}, {\"event_id\": \"40445fd308384ee0940c09342ade0df9\", \"title\": \"Grading Papers\", \"start_datetime\": \"1730019600\", \"end_datetime\": \"1730026800\", \"tag\": \"Work\", \"description\": \"Grade papers and assignments for my history class.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Sunday, 2024-10-27 09:00:00\", \"end_strftime\": \"Sunday, 2024-10-27 11:00:00\"}, {\"event_id\": \"43102f68261f4672a32730f760447421\", \"title\": \"Dinner with Family\", \"start_datetime\": \"1729711800\", \"end_datetime\": \"1729719000\", \"tag\": \"Social\", \"description\": \"Meet with family for dinner and discussion.\", \"location\": \"Home\", \"attendees\": [\"Viktor Kuznetsov\", \"Katharina Müller-Schneider\"], \"start_strftime\": \"Wednesday, 2024-10-23 19:30:00\", \"end_strftime\": \"Wednesday, 2024-10-23 21:30:00\"}, {\"event_id\": \"4af2e842ce3c4dedba539c3213f72650\", \"title\": \"Office Hours\", \"start_datetime\": \"1729508400\", \"end_datetime\": \"1729512000\", \"tag\": \"Work\", \"description\": \"Hold office hours for students to discuss their progress and answer questions.\", \"location\": \"Moscow University\", \"attendees\": [], \"start_strftime\": \"Monday, 2024-10-21 11:00:00\", \"end_strftime\": \"Monday, 2024-10-21 12:00:00\"}, {\"event_id\": \"4bb641eddec64e5092b8da24226171e3\", \"title\": \"Office Hours\", \"start_datetime\": \"1729854000\", \"end_datetime\": \"1729857600\", \"tag\": \"Work\", \"description\": \"Hold office hours for students to discuss their progress and answer questions.\", \"location\": \"Moscow University\", \"attendees\": [], \"start_strftime\": \"Friday, 2024-10-25 11:00:00\", \"end_strftime\": \"Friday, 2024-10-25 12:00:00\"}, {\"event_id\": \"52b7f0d056ff42b69c4105417be76b66\", \"title\": \"Grading Papers\", \"start_datetime\": \"1729807200\", \"end_datetime\": \"1729814400\", \"tag\": \"Work\", \"description\": \"Grade papers and assignments for my history class.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Thursday, 2024-10-24 22:00:00\", \"end_strftime\": \"Friday, 2024-10-25 00:00:00\"}, {\"event_id\": \"54b1fc735349487e8aa57c65cf469608\", \"title\": \"Lecture on Russian Culture\", \"start_datetime\": \"1729674000\", \"end_datetime\": \"1729679400\", \"tag\": \"Work\", \"description\": \"Deliver a lecture on Russian culture to my history class.\", \"location\": \"Moscow University\", \"attendees\": [], \"start_strftime\": \"Wednesday, 2024-10-23 09:00:00\", \"end_strftime\": \"Wednesday, 2024-10-23 10:30:00\"}, {\"event_id\": \"56b22e85d093486dab5d83d676339683\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729706400\", \"end_datetime\": \"1729710000\", \"tag\": \"Health\", \"description\": \"Attend a yoga class to unwind and relax.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Katharina Müller-Schneider\"], \"start_strftime\": \"Wednesday, 2024-10-23 18:00:00\", \"end_strftime\": \"Wednesday, 2024-10-23 19:00:00\"}, {\"event_id\": \"58e49d6ef5b644ad945627c2a681e554\", \"title\": \"Research on 19th-Century Russia\", \"start_datetime\": \"1729933200\", \"end_datetime\": \"1729940400\", \"tag\": \"Work\", \"description\": \"Conduct research on 19th-century Russia for my ongoing project.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Saturday, 2024-10-26 09:00:00\", \"end_strftime\": \"Saturday, 2024-10-26 11:00:00\"}, {\"event_id\": \"6eb157d280ca484c890f0797045174ee\", \"title\": \"Lecture on Soviet Era\", \"start_datetime\": \"1729587600\", \"end_datetime\": \"1729593000\", \"tag\": \"Work\", \"description\": \"Deliver a lecture on the Soviet era to my history class.\", \"location\": \"Moscow University\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-22 09:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 10:30:00\"}, {\"event_id\": \"769fdd6ff9d6482e9a1b94f5a2d9f145\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729533600\", \"end_datetime\": \"1729537200\", \"tag\": \"Health\", \"description\": \"Attend a yoga class to unwind and relax.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Katharina Müller-Schneider\"], \"start_strftime\": \"Monday, 2024-10-21 18:00:00\", \"end_strftime\": \"Monday, 2024-10-21 19:00:00\"}, {\"event_id\": \"76c08eeb94ea4d5db317fe0f73f5ff99\", \"title\": \"Lecture on Russian History\", \"start_datetime\": \"1729760400\", \"end_datetime\": \"1729765800\", \"tag\": \"Work\", \"description\": \"Deliver a lecture on Russian history to my history class.\", \"location\": \"Moscow University\", \"attendees\": [], \"start_strftime\": \"Thursday, 2024-10-24 09:00:00\", \"end_strftime\": \"Thursday, 2024-10-24 10:30:00\"}, {\"event_id\": \"7706b426d15a494782642daef49e5dcc\", \"title\": \"Grading Papers\", \"start_datetime\": \"1729605600\", \"end_datetime\": \"1729612800\", \"tag\": \"Work\", \"description\": \"Grade papers and assignments for my history class.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-22 14:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 16:00:00\"}, {\"event_id\": \"9202e1d5de3d4737ab85553f83614c4f\", \"title\": \"Dinner with Colleagues\", \"start_datetime\": \"1729798200\", \"end_datetime\": \"1729805400\", \"tag\": \"Social\", \"description\": \"Meet with colleagues for dinner and discussion.\", \"location\": \"Restaurant\", \"attendees\": [\"Saskia Müller-Krüger\", \"Katharina Müller-Schneider\"], \"start_strftime\": \"Thursday, 2024-10-24 19:30:00\", \"end_strftime\": \"Thursday, 2024-10-24 21:30:00\"}, {\"event_id\": \"a53af039b28d4412ae991cb5b33f287a\", \"title\": \"Research on 19th-Century Russia\", \"start_datetime\": \"1729548000\", \"end_datetime\": \"1729555200\", \"tag\": \"Work\", \"description\": \"Conduct research on 19th-century Russia for my ongoing project.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Monday, 2024-10-21 22:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 00:00:00\"}, {\"event_id\": \"cfdd8095457d4061b577a38253717bd9\", \"title\": \"Meeting with Viktor Kuznetsov\", \"start_datetime\": \"1729594800\", \"end_datetime\": \"1729598400\", \"tag\": \"Social\", \"description\": \"Meet with Viktor Kuznetsov to discuss our shared interest in Russian history.\", \"location\": \"Coffee Shop\", \"attendees\": [\"Viktor Kuznetsov\"], \"start_strftime\": \"Tuesday, 2024-10-22 11:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 12:00:00\"}, {\"event_id\": \"d138edc8ef9a46be9402220f431c4339\", \"title\": \"Office Hours\", \"start_datetime\": \"1729681200\", \"end_datetime\": \"1729684800\", \"tag\": \"Work\", \"description\": \"Hold office hours for students to discuss their progress and answer questions.\", \"location\": \"Moscow University\", \"attendees\": [], \"start_strftime\": \"Wednesday, 2024-10-23 11:00:00\", \"end_strftime\": \"Wednesday, 2024-10-23 12:00:00\"}, {\"event_id\": \"d7d3c2a379b34aeda49dc66e11b3f738\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729792800\", \"end_datetime\": \"1729796400\", \"tag\": \"Health\", \"description\": \"Attend a yoga class to unwind and relax.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Katharina Müller-Schneider\"], \"start_strftime\": \"Thursday, 2024-10-24 18:00:00\", \"end_strftime\": \"Thursday, 2024-10-24 19:00:00\"}, {\"event_id\": \"f0874d70781f478597c173f0a134b887\", \"title\": \"Lecture on Russian Politics\", \"start_datetime\": \"1729846800\", \"end_datetime\": \"1729852200\", \"tag\": \"Work\", \"description\": \"Deliver a lecture on Russian politics to my history class.\", \"location\": \"Moscow University\", \"attendees\": [], \"start_strftime\": \"Friday, 2024-10-25 09:00:00\", \"end_strftime\": \"Friday, 2024-10-25 10:30:00\"}, {\"event_id\": \"f17e28d08d6b4677b731bea6192fed85\", \"title\": \"Lecture on Russian Revolution\", \"start_datetime\": \"1729501200\", \"end_datetime\": \"1729506600\", \"tag\": \"Work\", \"description\": \"Deliver a lecture on the Russian Revolution to my history class.\", \"location\": \"Moscow University\", \"attendees\": [], \"start_strftime\": \"Monday, 2024-10-21 09:00:00\", \"end_strftime\": \"Monday, 2024-10-21 10:30:00\"}, {\"event_id\": \"f27afc8cbbeb4166ae995a50eb6cd4ab\", \"title\": \"Meeting with Saskia Müller-Krüger\", \"start_datetime\": \"1729771200\", \"end_datetime\": \"1729774800\", \"tag\": \"Social\", \"description\": \"Meet with Saskia Müller-Krüger to discuss our shared interest in history.\", \"location\": \"Coffee Shop\", \"attendees\": [\"Saskia Müller-Krüger\"], \"start_strftime\": \"Thursday, 2024-10-24 12:00:00\", \"end_strftime\": \"Thursday, 2024-10-24 13:00:00\"}, {\"event_id\": \"f6691fdce4c14364957a300e9c502540\", \"title\": \"Dinner with Family\", \"start_datetime\": \"1729884600\", \"end_datetime\": \"1729891800\", \"tag\": \"Social\", \"description\": \"Meet with family for dinner and discussion.\", \"location\": \"Home\", \"attendees\": [\"Viktor Kuznetsov\", \"Katharina Müller-Schneider\"], \"start_strftime\": \"Friday, 2024-10-25 19:30:00\", \"end_strftime\": \"Friday, 2024-10-25 21:30:00\"}], \"range\": [\"0\", \"26\"], \"total\": \"26\"}",
+      "event_id": "series_s2_get_calendar",
+      "response_sha256": "c927e63b154a8ef73b88ab9b78d143f7b0e6d707221f45b663d166be3a6319be"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurora Pig Plush",
+          "kind": "product",
+          "source": "stage0.existing_catalog.1",
+          "reason": "独特商品名",
+          "weight": 50
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Sutanto Wijaya",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurora Pig Plush",
+        "Anastasiya Kuznetsova",
+        "Sutanto Wijaya"
+      ],
+      "active_vocabulary": {
+        "Aurora Pig Plush": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Sutanto Wijaya": 50
+      },
+      "vocabulary_sha256": "b53e5c9c0db0752662e365bcb3499600b00be2524037844fb52ab95086f8b689"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Rostov-on-Don Riverside",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Saint Petersburg Bay Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Bolshaya Pokrovskaya Street",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "难拼写街道名",
+          "weight": 50
+        },
+        {
+          "text": "Bolshaya Sadovaya Street",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "难拼写街道名",
+          "weight": 50
+        },
+        {
+          "text": "Boris Yeltsin Street",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "难拼写街道名",
+          "weight": 50
+        },
+        {
+          "text": "Don River Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Krasnodar City Living",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Krasnodar City View",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Krasnodar Luxury Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Kremlin View Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Moscow City Lights",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Nizhny Novgorod Oasis",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Nizhny Novgorod Suites",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Nizhny Novgorod View",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Omsk Luxury Residences",
+          "kind": "place",
+          "source": "stage1.existing_catalog.6",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Saint Petersburg Palace",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Saint Petersburg Suites",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Samara City Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Samara City Center",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "St. Petersburg Suites",
+          "kind": "place",
+          "source": "stage1.existing_catalog.9",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Ural Mountains View",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Volga River Residence",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Kazan Kremlin",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Kazan Riverfront",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Krasny Prospekt",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "难拼写街道名",
+          "weight": 50
+        },
+        {
+          "text": "Kremlevskaya Street",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "难拼写街道名",
+          "weight": 50
+        },
+        {
+          "text": "Kremlin Views",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Kuybyshev Street",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "难拼写街道名",
+          "weight": 50
+        },
+        {
+          "text": "Minina Street",
+          "kind": "place",
+          "source": "stage1.existing_catalog.4",
+          "reason": "难拼写街道名",
+          "weight": 50
+        },
+        {
+          "text": "Moscow Oasis",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Nevsky Prospekt",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "难拼写街道名",
+          "weight": 50
+        },
+        {
+          "text": "Novosibirsk Downtown",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Omsk Comfort",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Omsk Oasis",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Samara Riverfront",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Samara Suites",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Siberian Dreams",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Ulitsa Leningradskaya",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "难拼写街道名",
+          "weight": 50
+        },
+        {
+          "text": "Ulitsa Malysheva",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "难拼写街道名",
+          "weight": 50
+        },
+        {
+          "text": "Vasilievsky Island",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "难拼写地名",
+          "weight": 50
+        },
+        {
+          "text": "Volga Riverwalk",
+          "kind": "place",
+          "source": "stage1.existing_catalog.3",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Yekaterinburg Heights",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Yekaterinburg Hills",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Yekaterinburg Modern",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Rostov-on-Don Riverside",
+        "Saint Petersburg Bay Apartments",
+        "Bolshaya Pokrovskaya Street",
+        "Bolshaya Sadovaya Street",
+        "Boris Yeltsin Street",
+        "Don River Apartments",
+        "Krasnodar City Living",
+        "Krasnodar City View",
+        "Krasnodar Luxury Apartments",
+        "Kremlin View Apartments",
+        "Moscow City Lights",
+        "Nizhny Novgorod Oasis",
+        "Nizhny Novgorod Suites",
+        "Nizhny Novgorod View",
+        "Omsk Luxury Residences",
+        "Saint Petersburg Palace",
+        "Saint Petersburg Suites",
+        "Samara City Apartments",
+        "Samara City Center",
+        "St. Petersburg Suites",
+        "Ural Mountains View",
+        "Volga River Residence",
+        "Kazan Kremlin",
+        "Kazan Riverfront",
+        "Krasny Prospekt",
+        "Kremlevskaya Street",
+        "Kremlin Views",
+        "Kuybyshev Street",
+        "Minina Street",
+        "Moscow Oasis",
+        "Nevsky Prospekt",
+        "Novosibirsk Downtown",
+        "Omsk Comfort",
+        "Omsk Oasis",
+        "Samara Riverfront",
+        "Samara Suites",
+        "Siberian Dreams",
+        "Ulitsa Leningradskaya",
+        "Ulitsa Malysheva",
+        "Vasilievsky Island",
+        "Volga Riverwalk",
+        "Yekaterinburg Heights",
+        "Yekaterinburg Hills",
+        "Yekaterinburg Modern"
+      ],
+      "active_vocabulary": {
+        "Aurora Pig Plush": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Sutanto Wijaya": 50,
+        "Rostov-on-Don Riverside": 50,
+        "Saint Petersburg Bay Apartments": 50,
+        "Bolshaya Pokrovskaya Street": 50,
+        "Bolshaya Sadovaya Street": 50,
+        "Boris Yeltsin Street": 50,
+        "Don River Apartments": 50,
+        "Krasnodar City Living": 50,
+        "Krasnodar City View": 50,
+        "Krasnodar Luxury Apartments": 50,
+        "Kremlin View Apartments": 50,
+        "Moscow City Lights": 50,
+        "Nizhny Novgorod Oasis": 50,
+        "Nizhny Novgorod Suites": 50,
+        "Nizhny Novgorod View": 50,
+        "Omsk Luxury Residences": 50,
+        "Saint Petersburg Palace": 50,
+        "Saint Petersburg Suites": 50,
+        "Samara City Apartments": 50,
+        "Samara City Center": 50,
+        "St. Petersburg Suites": 50,
+        "Ural Mountains View": 50,
+        "Volga River Residence": 50,
+        "Kazan Kremlin": 50,
+        "Kazan Riverfront": 50,
+        "Krasny Prospekt": 50,
+        "Kremlevskaya Street": 50,
+        "Kremlin Views": 50,
+        "Kuybyshev Street": 50,
+        "Minina Street": 50,
+        "Moscow Oasis": 50,
+        "Nevsky Prospekt": 50,
+        "Novosibirsk Downtown": 50,
+        "Omsk Comfort": 50,
+        "Omsk Oasis": 50,
+        "Samara Riverfront": 50,
+        "Samara Suites": 50,
+        "Siberian Dreams": 50,
+        "Ulitsa Leningradskaya": 50,
+        "Ulitsa Malysheva": 50,
+        "Vasilievsky Island": 50,
+        "Volga Riverwalk": 50,
+        "Yekaterinburg Heights": 50,
+        "Yekaterinburg Hills": 50,
+        "Yekaterinburg Modern": 50
+      },
+      "vocabulary_sha256": "e6c2c8420d4153f3b47b536dfaec6c515d342441530731b0c0e0f5121a2e5195"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Katharina Müller-Schneider",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_get_calendar",
+          "reason": "含变音符的完整人名，高优先",
+          "weight": 50
+        },
+        {
+          "text": "Rogelio García-Mendoza",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_get_calendar",
+          "reason": "含变音符的完整人名，高优先",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Müller-Krüger",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_get_calendar",
+          "reason": "含变音符的完整人名，高优先",
+          "weight": 50
+        },
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_get_calendar",
+          "reason": "完整人名，拼写较难",
+          "weight": 5
+        }
+      ],
+      "new_terms": [
+        "Katharina Müller-Schneider",
+        "Rogelio García-Mendoza",
+        "Saskia Müller-Krüger",
+        "Viktor Kuznetsov"
+      ],
+      "active_vocabulary": {
+        "Aurora Pig Plush": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Sutanto Wijaya": 50,
+        "Rostov-on-Don Riverside": 50,
+        "Saint Petersburg Bay Apartments": 50,
+        "Bolshaya Pokrovskaya Street": 50,
+        "Bolshaya Sadovaya Street": 50,
+        "Boris Yeltsin Street": 50,
+        "Don River Apartments": 50,
+        "Krasnodar City Living": 50,
+        "Krasnodar City View": 50,
+        "Krasnodar Luxury Apartments": 50,
+        "Kremlin View Apartments": 50,
+        "Moscow City Lights": 50,
+        "Nizhny Novgorod Oasis": 50,
+        "Nizhny Novgorod Suites": 50,
+        "Nizhny Novgorod View": 50,
+        "Omsk Luxury Residences": 50,
+        "Saint Petersburg Palace": 50,
+        "Saint Petersburg Suites": 50,
+        "Samara City Apartments": 50,
+        "Samara City Center": 50,
+        "St. Petersburg Suites": 50,
+        "Ural Mountains View": 50,
+        "Volga River Residence": 50,
+        "Kazan Kremlin": 50,
+        "Kazan Riverfront": 50,
+        "Krasny Prospekt": 50,
+        "Kremlevskaya Street": 50,
+        "Kremlin Views": 50,
+        "Kuybyshev Street": 50,
+        "Minina Street": 50,
+        "Moscow Oasis": 50,
+        "Nevsky Prospekt": 50,
+        "Novosibirsk Downtown": 50,
+        "Omsk Comfort": 50,
+        "Omsk Oasis": 50,
+        "Samara Riverfront": 50,
+        "Samara Suites": 50,
+        "Siberian Dreams": 50,
+        "Ulitsa Leningradskaya": 50,
+        "Ulitsa Malysheva": 50,
+        "Vasilievsky Island": 50,
+        "Volga Riverwalk": 50,
+        "Yekaterinburg Heights": 50,
+        "Yekaterinburg Hills": 50,
+        "Yekaterinburg Modern": 50,
+        "Katharina Müller-Schneider": 50,
+        "Rogelio García-Mendoza": 50,
+        "Saskia Müller-Krüger": 50,
+        "Viktor Kuznetsov": 5
+      },
+      "vocabulary_sha256": "69bf5d40b751b2500ea4d488520b6ecce7f154cf0633604e6757de908099d430"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [
+    {
+      "text": "Saint Petersburg Suites",
+      "from": "stage1.existing_catalog.9",
+      "to": "stage1.tool_response.series_s1_list_saved"
+    }
+  ],
+  "old_terms_removed": [
+    "gloom of thrones",
+    "Samara",
+    "Nizhny Novgorod",
+    "Lenina Street",
+    "Omsk",
+    "Sutanto",
+    "Research on 20th-Century Russia"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:05.498794+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

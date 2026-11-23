@@ -1,0 +1,158 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0191_bxuo60q82dwb40o1xcehpz4nhslqmmtb",
+  "model": "deepseek-flash",
+  "input_sha256": "a7deec589e1c5477154fd14dd506b03a5b533196ac8dcc9d5fbb9cd8be8e2d4b",
+  "review_input_sha256": "8bb2ed940f3b8744b879b361c027bab13edb214cf70f38d72af268fe152e52c3",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "21f41d1cc7e3e586302327d77c967b060326db3551814a460278d7db39abecf9",
+  "reference_results_sha256": "44c77b99f24afdc48a0143aede3af7fbe2e0e0acb0efc99a98d50108649b8218",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Riemann",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Spooky Hollow Halloween Window Cling Sheet",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Samara City Center",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Samara Studio",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Kuibyshev Street",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Spooky Hollow Halloween Window Cling Sheets",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Spooky Hollow Halloween Window Cling Sheet",
+          "kind": "product",
+          "source": "stage0.existing_catalog.1",
+          "reason": "独特产品名，含多个专有词",
+          "weight": 50
+        },
+        {
+          "text": "Samara City Center",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "地名，含专有城市名",
+          "weight": 50
+        },
+        {
+          "text": "Riemann",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "数学家姓氏，拼写较难，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Spooky Hollow Halloween Window Cling Sheet",
+        "Samara City Center",
+        "Riemann"
+      ],
+      "active_vocabulary": {
+        "Spooky Hollow Halloween Window Cling Sheet": 50,
+        "Samara City Center": 50,
+        "Riemann": 50
+      },
+      "vocabulary_sha256": "61920c6e731036843448fe92cb2d56c80256b5415bbc7f5d9e9899dbaddcb103"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kuibyshev Street",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "难拼写街道名",
+          "weight": 50
+        },
+        {
+          "text": "Samara Studio",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "专有场所名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kuibyshev Street",
+        "Samara Studio"
+      ],
+      "active_vocabulary": {
+        "Spooky Hollow Halloween Window Cling Sheet": 50,
+        "Samara City Center": 50,
+        "Riemann": 50,
+        "Kuibyshev Street": 50,
+        "Samara Studio": 50
+      },
+      "vocabulary_sha256": "d73d1805645525790aa061fabeb5e5951e22b6a277406ac493faca9340b9ec70"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Spooky Hollow Halloween Window Cling Sheets",
+          "kind": "product",
+          "source": "stage2.existing_catalog.0",
+          "reason": "独特产品名，含多个专有词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Spooky Hollow Halloween Window Cling Sheets"
+      ],
+      "active_vocabulary": {
+        "Spooky Hollow Halloween Window Cling Sheet": 50,
+        "Samara City Center": 50,
+        "Riemann": 50,
+        "Kuibyshev Street": 50,
+        "Samara Studio": 50,
+        "Spooky Hollow Halloween Window Cling Sheets": 50
+      },
+      "vocabulary_sha256": "2b44357070b26886cc0ecdbb841c567dc9f089e9d801dc9baa21d111185c4dcb"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:26.989934+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

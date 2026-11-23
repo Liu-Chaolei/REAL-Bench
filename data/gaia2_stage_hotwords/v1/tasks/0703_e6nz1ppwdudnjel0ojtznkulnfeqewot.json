@@ -1,0 +1,227 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0703_e6nz1ppwdudnjel0ojtznkulnfeqewot",
+  "model": "deepseek-flash",
+  "input_sha256": "cd672cb328a637de6003d55497f813a36cbedd50f9baa1209dbd7e139898fe56",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Elara",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "组织会议的人名"
+        },
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人完整姓名"
+        },
+        {
+          "text": "Aurélie De Smet",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人完整姓名"
+        },
+        {
+          "text": "Château de la Hulpe",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "会议地点专有名称"
+        },
+        {
+          "text": "Chaussée de Bruxelles 111",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "街道地址专有名称"
+        },
+        {
+          "text": "La Hulpe",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "比利时地名"
+        },
+        {
+          "text": "Net-Zero Multidisciplinary Brainstorming",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "会议自定义标题"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a8c20102-a883-47d4-b770-5b54bc1cc50b.arguments.content",
+          "reason": "邮件署名姓名"
+        },
+        {
+          "text": "Irish College Leuven",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-73d6f878-46dc-4022-b09e-2d63bba3667d.arguments.content",
+          "reason": "更正后的会场机构名"
+        },
+        {
+          "text": "Janseniusstraat 1",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-73d6f878-46dc-4022-b09e-2d63bba3667d.arguments.content",
+          "reason": "街道地址专有名称"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-73d6f878-46dc-4022-b09e-2d63bba3667d.arguments.content",
+          "reason": "比利时城市名"
+        }
+      ],
+      "new_terms": [
+        "Elara",
+        "Aurélien Dumont",
+        "Aurélie De Smet",
+        "Château de la Hulpe",
+        "Chaussée de Bruxelles 111",
+        "La Hulpe",
+        "Net-Zero Multidisciplinary Brainstorming",
+        "Liesbeth Vandenberghe",
+        "Irish College Leuven",
+        "Janseniusstraat 1",
+        "Leuven"
+      ],
+      "active_vocabulary": {
+        "Elara": 50,
+        "Aurélien Dumont": 50,
+        "Aurélie De Smet": 50,
+        "Château de la Hulpe": 50,
+        "Chaussée de Bruxelles 111": 50,
+        "La Hulpe": 50,
+        "Net-Zero Multidisciplinary Brainstorming": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Irish College Leuven": 50,
+        "Janseniusstraat 1": 50,
+        "Leuven": 50
+      },
+      "vocabulary_sha256": "d88ed68aaf875227bc60b4db4a81fdba09c4543b3145a086f3e207288a7f87a2"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélie De Smet",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "回复对象完整姓名"
+        },
+        {
+          "text": "Irish College Leuven",
+          "kind": "organization",
+          "source": "stage1.source_task",
+          "reason": "会场机构名"
+        },
+        {
+          "text": "Janseniusstraat 1",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "街道地址专有名称"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "比利时城市名"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply_aurelie.arguments.content",
+          "reason": "邮件署名姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Elara": 50,
+        "Aurélien Dumont": 50,
+        "Aurélie De Smet": 50,
+        "Château de la Hulpe": 50,
+        "Chaussée de Bruxelles 111": 50,
+        "La Hulpe": 50,
+        "Net-Zero Multidisciplinary Brainstorming": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Irish College Leuven": 50,
+        "Janseniusstraat 1": 50,
+        "Leuven": 50
+      },
+      "vocabulary_sha256": "d88ed68aaf875227bc60b4db4a81fdba09c4543b3145a086f3e207288a7f87a2"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "确认出席的人名"
+        },
+        {
+          "text": "Irish College Leuven",
+          "kind": "organization",
+          "source": "stage2.source_task",
+          "reason": "目的地机构名"
+        },
+        {
+          "text": "Janseniusstraat 1",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_order.arguments.end_location",
+          "reason": "街道地址专有名称"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_order.arguments.end_location",
+          "reason": "比利时城市名"
+        }
+      ],
+      "new_terms": [
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Elara": 50,
+        "Aurélien Dumont": 50,
+        "Aurélie De Smet": 50,
+        "Château de la Hulpe": 50,
+        "Chaussée de Bruxelles 111": 50,
+        "La Hulpe": 50,
+        "Net-Zero Multidisciplinary Brainstorming": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Irish College Leuven": 50,
+        "Janseniusstraat 1": 50,
+        "Leuven": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "1b8e868d3ad9ec22658ef4094db6c7d9637923e5566850794de2d99e3cd19d78"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "4eaf1c0ebc64fc0a1c2c0c9985bbc443d918f966f1d59942fd4f592d76918756",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3669,
+        "completion_tokens": 748,
+        "total_tokens": 4417,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3413
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.579
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0703_e6nz1ppwdudnjel0ojtznkulnfeqewot",
+  "extracted_at": "2026-11-22T06:43:28.213282+00:00"
+}

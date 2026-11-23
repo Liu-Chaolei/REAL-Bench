@@ -22,6 +22,14 @@ class LiveTranscriptFragment(BaseModel):
     ingress_audio_bytes: int | None = Field(default=None, ge=0)
 
 
+class LiveTranscriptSnapshot(BaseModel):
+    """Complete confirmed text available at this tick, never future ASR results."""
+
+    version: int = Field(default=0, ge=0)
+    text: str = ""
+    pending: bool = False
+
+
 class LiveTranscriptTick(BaseModel):
     """Serializable evidence; playback activity uses tick-relative audio time."""
 
@@ -29,6 +37,7 @@ class LiveTranscriptTick(BaseModel):
     origin: Literal["provider", "recorded_audio"] = "provider"
     alignment: Literal["release_tick", "played_audio"] = "release_tick"
     fragments: list[LiveTranscriptFragment] = Field(default_factory=list)
+    snapshot: LiveTranscriptSnapshot | None = None
     speech_intervals_ms: list[tuple[float, float]] = Field(default_factory=list)
 
 

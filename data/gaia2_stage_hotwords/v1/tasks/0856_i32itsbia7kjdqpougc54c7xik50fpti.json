@@ -1,0 +1,147 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0856_i32itsbia7kjdqpougc54c7xik50fpti",
+  "model": "deepseek-flash",
+  "input_sha256": "9d5f5539a8d0f222a9e3582dea6ada53cf9d7bc3f392e39ab256df23b79807ea",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Luís Marques",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名，需保留重音"
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-608d43b8-18d7-4bda-aad1-dfca3519355b.arguments.attendees[0]",
+          "reason": "人名，需保留重音"
+        },
+        {
+          "text": "Restaurant Private Dining Room",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-608d43b8-18d7-4bda-aad1-dfca3519355b.arguments.location",
+          "reason": "特定地点名称"
+        }
+      ],
+      "new_terms": [
+        "Luís Marques",
+        "Jamila Fernandes",
+        "Aurélien LaFleur",
+        "Restaurant Private Dining Room"
+      ],
+      "active_vocabulary": {
+        "Luís Marques": 50,
+        "Jamila Fernandes": 50,
+        "Aurélien LaFleur": 50,
+        "Restaurant Private Dining Room": 50
+      },
+      "vocabulary_sha256": "78b726a03655e041dba7650f3606b65eac06803bebc0f6a19475e50bff4ce2ee"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Luís Marques",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[1]",
+          "reason": "人名，需保留重音"
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[2]",
+          "reason": "人名"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[0]",
+          "reason": "人名，需保留重音"
+        },
+        {
+          "text": "Restaurant Private Dining Room",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.location",
+          "reason": "特定地点名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Luís Marques": 50,
+        "Jamila Fernandes": 50,
+        "Aurélien LaFleur": 50,
+        "Restaurant Private Dining Room": 50
+      },
+      "vocabulary_sha256": "78b726a03655e041dba7650f3606b65eac06803bebc0f6a19475e50bff4ce2ee"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Wine Tasting Debrief",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_add_debrief.arguments.title",
+          "reason": "特定自定义事件名称"
+        },
+        {
+          "text": "Restaurant Office",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_debrief.arguments.location",
+          "reason": "特定地点名称"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_debrief.arguments.attendees[0]",
+          "reason": "人名，需保留重音"
+        }
+      ],
+      "new_terms": [
+        "Wine Tasting Debrief",
+        "Restaurant Office"
+      ],
+      "active_vocabulary": {
+        "Luís Marques": 50,
+        "Jamila Fernandes": 50,
+        "Aurélien LaFleur": 50,
+        "Restaurant Private Dining Room": 50,
+        "Wine Tasting Debrief": 50,
+        "Restaurant Office": 50
+      },
+      "vocabulary_sha256": "8acbd9a1ad0105213ad07102bbbb2a149cf1afd7c94755d4dc19f23aafd15577"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "845133909266b7d6626ad9beee316f476d9a7e4bd902935aa4219f7ff8b125c8",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3933,
+        "completion_tokens": 503,
+        "total_tokens": 4436,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3677
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.241
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0856_i32itsbia7kjdqpougc54c7xik50fpti",
+  "extracted_at": "2026-11-22T06:44:12.538166+00:00"
+}

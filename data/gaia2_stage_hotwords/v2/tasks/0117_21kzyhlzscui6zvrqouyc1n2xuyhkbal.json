@@ -1,0 +1,171 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0117_21kzyhlzscui6zvrqouyc1n2xuyhkbal",
+  "model": "deepseek-flash",
+  "input_sha256": "23ab80d85d17feede886e853fc92618ce372e1aff6edf86daac4cbf4a94dfb49",
+  "review_input_sha256": "c48f45c6e00c1a536ba2bb4c9eaefc36f0646be679ad16cf00c871831496465c",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "1c9385248728535c070411f351a841940626d8d8389464b281eba46ac8839603",
+  "reference_results_sha256": "a47e1b2f5d5e31a692fd33f3fe5bd5055360d0f8f238a830be14f0734efbaf56",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Aurélien Dumont",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-810fdd1e-a1d7-403f-8f45-29baa8a160d0.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Karel Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-810fdd1e-a1d7-403f-8f45-29baa8a160d0.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Émile Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-810fdd1e-a1d7-403f-8f45-29baa8a160d0.arguments.attendees[2]"
+    },
+    "stage1.tool_response.series_s1_read_events": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"d4c2d9f7cdacdf99ad578e25036c7e5f\", \"title\": \"Project update\", \"start_datetime\": \"1729346400.0\", \"end_datetime\": \"1729353600.0\", \"tag\": \"Work\", \"description\": null, \"location\": \"Zoom call\", \"attendees\": [\"Aurélien Dumont\", \"Karel Vandenberghe\", \"Émile Vandenberghe\"], \"start_strftime\": \"Saturday, 2024-10-19 14:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 16:00:00\"}], \"range\": [\"0\", \"1\"], \"total\": \"1\"}",
+      "event_id": "series_s1_read_events",
+      "response_sha256": "7d7b96511f9ff93bd50c3c3e783bbbfe398b4587d2edae72879d8c3b85d43879"
+    },
+    "stage2.tool_response.series_s2_read_19": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"d4c2d9f7cdacdf99ad578e25036c7e5f\", \"title\": \"Project update\", \"start_datetime\": \"1729346400.0\", \"end_datetime\": \"1729353600.0\", \"tag\": \"Work\", \"description\": null, \"location\": \"Zoom call\", \"attendees\": [\"Aurélien Dumont\", \"Karel Vandenberghe\", \"Émile Vandenberghe\"], \"start_strftime\": \"Saturday, 2024-10-19 14:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 16:00:00\"}], \"range\": [\"0\", \"1\"], \"total\": \"1\"}",
+      "event_id": "series_s2_read_19",
+      "response_sha256": "7d7b96511f9ff93bd50c3c3e783bbbfe398b4587d2edae72879d8c3b85d43879"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Karel Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "较难拼写的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Émile Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien Dumont",
+        "Karel Vandenberghe",
+        "Émile Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Aurélien Dumont": 50,
+        "Karel Vandenberghe": 50,
+        "Émile Vandenberghe": 50
+      },
+      "vocabulary_sha256": "fbeaeafd507b9d4a5aad12e92b158ad332550a14abb12b31c0f02ebf1dc8d753"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_events",
+          "reason": "工具响应中出现的含变音符号完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Karel Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_events",
+          "reason": "工具响应中出现的较难完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Émile Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_events",
+          "reason": "工具响应中出现的含变音符号完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien Dumont": 50,
+        "Karel Vandenberghe": 50,
+        "Émile Vandenberghe": 50
+      },
+      "vocabulary_sha256": "fbeaeafd507b9d4a5aad12e92b158ad332550a14abb12b31c0f02ebf1dc8d753"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_19",
+          "reason": "工具响应中出现的含变音符号完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Karel Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_19",
+          "reason": "工具响应中出现的较难完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Émile Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_19",
+          "reason": "工具响应中出现的含变音符号完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien Dumont": 50,
+        "Karel Vandenberghe": 50,
+        "Émile Vandenberghe": 50
+      },
+      "vocabulary_sha256": "fbeaeafd507b9d4a5aad12e92b158ad332550a14abb12b31c0f02ebf1dc8d753"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Liesbeth",
+    "Llama 1",
+    "ProjectStuff",
+    "Aurélien"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:04.979313+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

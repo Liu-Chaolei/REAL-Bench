@@ -1,0 +1,168 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0891_orvr2n92xivf9rm5s6ih12473ypo6t18",
+  "model": "deepseek-flash",
+  "input_sha256": "bcaff0cff1b8bc5a787fb0fabfeaf0d79f7be74294fedc4fd26ecc208bcbd826",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Leuven City Hall",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "地名，会议地点"
+        },
+        {
+          "text": "Elara",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Émile Vandenberghe",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "完整人名，含姓氏"
+        },
+        {
+          "text": "Elara Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c4a70bac-dea3-41e2-bf16-923a678738d3.arguments.attendees[0]",
+          "reason": "完整人名，含姓氏"
+        },
+        {
+          "text": "Leuven City Hall, 3000 Leuven, Belgium",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f272192d-ceeb-4bd6-b4c0-1c898df762ca.arguments.end_location",
+          "reason": "完整地址"
+        }
+      ],
+      "new_terms": [
+        "Leuven City Hall",
+        "Elara",
+        "Émile Vandenberghe",
+        "Elara Vandenberghe",
+        "Leuven City Hall, 3000 Leuven, Belgium"
+      ],
+      "active_vocabulary": {
+        "Leuven City Hall": 50,
+        "Elara": 50,
+        "Émile Vandenberghe": 50,
+        "Elara Vandenberghe": 50,
+        "Leuven City Hall, 3000 Leuven, Belgium": 50
+      },
+      "vocabulary_sha256": "6bddd4f0f6f2cc4ad1495245a4426df02491b0ebd6f089d68274fd38f1dfffe8"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Leuven Book Club",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "群聊自定义名称"
+        },
+        {
+          "text": "Elara",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Émile",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Leuven City Hall",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "地名，会议地点"
+        }
+      ],
+      "new_terms": [
+        "Leuven Book Club",
+        "Émile"
+      ],
+      "active_vocabulary": {
+        "Leuven City Hall": 50,
+        "Elara": 50,
+        "Émile Vandenberghe": 50,
+        "Elara Vandenberghe": 50,
+        "Leuven City Hall, 3000 Leuven, Belgium": 50,
+        "Leuven Book Club": 50,
+        "Émile": 50
+      },
+      "vocabulary_sha256": "06d177bc0191ea47fe8b24cd639a003575fddc4e29c7426e712c0bdfd7f6e93d"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Émile Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add.arguments.attendees[0]",
+          "reason": "完整人名，含姓氏"
+        },
+        {
+          "text": "Elara Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add.arguments.attendees[1]",
+          "reason": "完整人名，含姓氏"
+        },
+        {
+          "text": "Leuven City Hall",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add.arguments.location",
+          "reason": "地名，会议地点"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "邮件署名中的完整人名"
+        }
+      ],
+      "new_terms": [
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Leuven City Hall": 50,
+        "Elara": 50,
+        "Émile Vandenberghe": 50,
+        "Elara Vandenberghe": 50,
+        "Leuven City Hall, 3000 Leuven, Belgium": 50,
+        "Leuven Book Club": 50,
+        "Émile": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "c39c777064feea0b5a38ecf90009a6608c6446fd0a981189466e0efcd7b951af"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "706a38a2601a52d197ba9b1d7cc5bf09ac8450c31047095e0039f9b772bb1a77",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3717,
+        "completion_tokens": 502,
+        "total_tokens": 4219,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3461
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.82
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0891_orvr2n92xivf9rm5s6ih12473ypo6t18",
+  "extracted_at": "2026-11-22T06:44:22.777764+00:00"
+}

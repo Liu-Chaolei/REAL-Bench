@@ -1,0 +1,110 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0041_fkn8vrtiutuen4aj3raqef2cmic1qpr8",
+  "model": "deepseek-flash",
+  "input_sha256": "cc028436874ee32a4ba02f1c669dc1fbfafb86efc41d8f8ec245a4c4d8d026c8",
+  "review_input_sha256": "5c823cf08270cb4615eefabd316848fbec473fdcf5e67aff9181b443f14dc3c5",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "0e6c238b73607f3f3de4f83c54586da1cb58f7a10fc8fc727808e4a5d097fcd8",
+  "reference_results_sha256": "105ffe606011d16b5f6f461f3bb48899e549089d4db4f1917fccda6015166125",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Kymberley MacTavish",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Kaia Jensen",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.tool_response.series_s2_get_kymberley": {
+      "stage": 2,
+      "text": "{\"first_name\": \"Kymberley\", \"last_name\": \"MacTavish\", \"contact_id\": \"63481df1f4644859b754c7c3df5e0ad3\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"60\", \"nationality\": \"Australian\", \"city_living\": \"Hobart\", \"country\": \"Australia\", \"status\": \"Status.RETIRED\", \"job\": \"Former Park Ranger\", \"description\": \"Kymberley MacTavish is a warm and gentle soul, with a deep love for the natural world. As a retired park ranger, she spent most of her career working in Tasmania's stunning national parks, where she developed a profound respect for the land and its creatures. Now, in her retirement, Kymberley dedicates her time to volunteering at a local organic farm, where she can be found tending to the gardens, feeding the animals, and simply soaking up the serene atmosphere. Her friends and family describe her as a kind and nurturing person, always willing to lend a helping hand.\", \"phone\": \"+61362310456\", \"email\": \"kymberleymactavish@gaia2mail.com\", \"address\": \"14/25 Salamanca Place, Hobart TAS 7000\"}",
+      "event_id": "series_s2_get_kymberley",
+      "response_sha256": "aaa16d067326f7531366a937279f0df4521c0b86e3eb8d1d276b7eda2909439b"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaia Jensen",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Kymberley MacTavish",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，含较难拼写，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kaia Jensen",
+        "Kymberley MacTavish"
+      ],
+      "active_vocabulary": {
+        "Kaia Jensen": 50,
+        "Kymberley MacTavish": 50
+      },
+      "vocabulary_sha256": "202ad0c2445631956e30522899d00ccd69d9e33782eaed5c1fe114d3de2509a5"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Salamanca Place",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_get_kymberley",
+          "reason": "具体街道地名，拼写较难，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Salamanca Place"
+      ],
+      "active_vocabulary": {
+        "Kaia Jensen": 50,
+        "Kymberley MacTavish": 50,
+        "Salamanca Place": 50
+      },
+      "vocabulary_sha256": "b0e9a85a2898290ffcf766d0b9b634820dc3981c8d3227f5c99119eed20f9c46"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Hobart"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:13:44.503773+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

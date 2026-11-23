@@ -1,0 +1,73 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0149_ev3wncotaounq2vooedt0t7v528hzvh5",
+  "model": "deepseek-flash",
+  "input_sha256": "46086a0a44b193fa6495f577079b120f90b31c9c061b2959383a4bd4030c24ea",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "2f3971aef972202acbc3e57709be771a009b1ddc66a7636260336c873a7d538f",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4725,
+        "completion_tokens": 875,
+        "total_tokens": 5600,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4469
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 3.097,
+      "error": "Invalid proper-name phrase: 'knkrumah@gaia2mail.com'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "e4ae69ddf1bd3043f25bc9dd059866948f81ba719846fb8fdd873a04cb14a6fe",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 6000,
+        "completion_tokens": 30,
+        "total_tokens": 6030,
+        "prompt_tokens_details": {
+          "cached_tokens": 5504
+        },
+        "prompt_cache_hit_tokens": 5504,
+        "prompt_cache_miss_tokens": 496
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.898
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0149_ev3wncotaounq2vooedt0t7v528hzvh5",
+  "extracted_at": "2026-11-22T06:40:19.828830+00:00"
+}

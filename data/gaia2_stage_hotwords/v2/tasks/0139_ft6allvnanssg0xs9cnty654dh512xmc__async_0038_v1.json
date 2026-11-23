@@ -1,0 +1,112 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0139_ft6allvnanssg0xs9cnty654dh512xmc__async_0038_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "3682f17d617fc06a5ebf4b1e9e79c7f17bf93613d219fbde23ecce90537e9a5d",
+  "review_input_sha256": "7714d8caa7fdd56614ac54a4e25f1c2547b405183d01f7ce2a5abb1db2ecf14b",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "6f688690e2d3f5cb7fb2c6ba133427f225ca2d59da0db2ec33237cbadcc52fa0",
+  "reference_results_sha256": "0739234de416cb77680ccca3d40e8be2b95bf4bace44ff77839c24aa4b3a89c6",
+  "sources": {
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage1.tool_gt.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Yoga for Seniors Workshop in Basel",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Mittlere Strasse 12",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Yoga for Seniors Workshop in Basel",
+          "kind": "custom_name",
+          "source": "stage1.existing_catalog.2",
+          "reason": "独特活动名称，含地名，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，含独特姓氏，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Yoga for Seniors Workshop in Basel",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Yoga for Seniors Workshop in Basel": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "a21d59facaa9a5314b97246a9a07ad7f90da1a64f129cc3eccf2f716046833ec"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Mittlere Strasse 12",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含德语街道名的完整地址，发音困难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Mittlere Strasse 12"
+      ],
+      "active_vocabulary": {
+        "Yoga for Seniors Workshop in Basel": 50,
+        "Ursula Wiederkehr": 50,
+        "Mittlere Strasse 12": 50
+      },
+      "vocabulary_sha256": "1ecfca9fd92dab5a1326fb3dcc040f7b0a410eca29ff549269b27a453c1ab35b"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Akira",
+    "Yoga Classes",
+    "Basel",
+    "Yoga Studio in Basel"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:50.925371+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,226 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0905_l3bugrndhn72gal5rh0xdhcfw7ahwdb9__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "ac10f5f35b48a99e4853ecbdbc3d375b059cb6f45a7edacac3b9d8b9c68cdd0e",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Vigdis Rasmussen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名，需准确识别"
+        },
+        {
+          "text": "Birgitta Kjær",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "含特殊字符的人名"
+        },
+        {
+          "text": "Astrid Jensen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名，需准确识别"
+        }
+      ],
+      "new_terms": [
+        "Vigdis Rasmussen",
+        "Birgitta Kjær",
+        "Astrid Jensen"
+      ],
+      "active_vocabulary": {
+        "Vigdis Rasmussen": 50,
+        "Birgitta Kjær": 50,
+        "Astrid Jensen": 50
+      },
+      "vocabulary_sha256": "2da9cc0b5bd57e7f8e3abd0ceaacbc9cf60e2ec950b4dfc9f7a89197796ab63d"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Vigdis",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "源任务中仅出现名字"
+        },
+        {
+          "text": "Birgitta",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "源任务中仅出现名字"
+        },
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "源任务中仅出现名字"
+        },
+        {
+          "text": "Vigdis Rasmussen",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "完整人名，需准确识别"
+        },
+        {
+          "text": "Birgitta Kjær",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "含特殊字符的完整人名"
+        },
+        {
+          "text": "Astrid Jensen",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "完整人名，需准确识别"
+        }
+      ],
+      "new_terms": [
+        "Vigdis",
+        "Birgitta",
+        "Astrid"
+      ],
+      "active_vocabulary": {
+        "Vigdis Rasmussen": 50,
+        "Birgitta Kjær": 50,
+        "Astrid Jensen": 50,
+        "Vigdis": 50,
+        "Birgitta": 50,
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "7594657422b29cd5d24f680226db44688ae36c5ff39efa091a58878c9165fadc"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Vigdis",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "源任务中仅出现名字"
+        },
+        {
+          "text": "Birgitta",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "源任务中仅出现名字"
+        },
+        {
+          "text": "Vigdis Rasmussen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_0.arguments.content",
+          "reason": "完整人名，需准确识别"
+        },
+        {
+          "text": "Birgitta Kjær",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_1.arguments.content",
+          "reason": "含特殊字符的完整人名"
+        },
+        {
+          "text": "Astrid Jensen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_2.arguments.content",
+          "reason": "完整人名，需准确识别"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Vigdis Rasmussen": 50,
+        "Birgitta Kjær": 50,
+        "Astrid Jensen": 50,
+        "Vigdis": 50,
+        "Birgitta": 50,
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "7594657422b29cd5d24f680226db44688ae36c5ff39efa091a58878c9165fadc"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "df6d085a699b9fcd91dc488cff5cab9521600fbca983af5cf7b6ba3f1d914ca0",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4554,
+        "completion_tokens": 321,
+        "total_tokens": 4875,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4298
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.425,
+      "error": "Not an exact quotation of a source in stage 1: 'Vigdis Rasmussen' from 'stage1.source_task'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "b76b4fdddb9a7b6fc9975852c1f4cfb1c1b257da978528ff2fa3274382190ecb",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5283,
+        "completion_tokens": 437,
+        "total_tokens": 5720,
+        "prompt_tokens_details": {
+          "cached_tokens": 4864
+        },
+        "prompt_cache_hit_tokens": 4864,
+        "prompt_cache_miss_tokens": 419
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.721,
+      "error": "Invalid proper-name phrase: 'vigdis.rasmussen@gaia2mail.com'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "057ad5c26ba717b5914ea66f79ae657f6df2f05ae1d9df4a74d8235d9e7cf95b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5393,
+        "completion_tokens": 389,
+        "total_tokens": 5782,
+        "prompt_tokens_details": {
+          "cached_tokens": 4480
+        },
+        "prompt_cache_hit_tokens": 4480,
+        "prompt_cache_miss_tokens": 913
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.608,
+      "error": "Not an exact quotation of a source in stage 2: 'Vigdis Rasmussen' from 'stage2.source_task'"
+    },
+    {
+      "attempt": 4,
+      "request_sha256": "1b9d8260257e8ddb66cb7a59ead0d224567a0040df7ff532f5c158537edf92a8",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5351,
+        "completion_tokens": 485,
+        "total_tokens": 5836,
+        "prompt_tokens_details": {
+          "cached_tokens": 4608
+        },
+        "prompt_cache_hit_tokens": 4608,
+        "prompt_cache_miss_tokens": 743
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.695
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0905_l3bugrndhn72gal5rh0xdhcfw7ahwdb9__repetition_v1",
+  "extracted_at": "2026-11-22T06:46:10.001305+00:00"
+}

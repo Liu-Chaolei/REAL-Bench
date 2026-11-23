@@ -1,0 +1,159 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0005_nlme4nanrpyu7ny7c55biii97somt6x8__async_0012_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "5488d7e0ac0a60456a4583e626282fc844de3eac27ada646ac8bb9da8c3b2bef",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Prague 6 Luxury",
+          "kind": "product",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-280cc9d6-2264-4466-8a7f-59a1709ec93e.arguments.content",
+          "reason": "房产名称，专有产品名"
+        }
+      ],
+      "new_terms": [
+        "Prague 6 Luxury"
+      ],
+      "active_vocabulary": {
+        "Prague 6 Luxury": 50
+      },
+      "vocabulary_sha256": "9d5ab6b01b159d3072572b213ee37a12fb2769c75937928058d9bc035dec48aa"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Prague Palace",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "被移除的房产专名"
+        },
+        {
+          "text": "Prague 6 Luxury",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "保留的最贵房产专名"
+        },
+        {
+          "text": "Prague 7",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "已保存房产专名"
+        },
+        {
+          "text": "Pražský Palác",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "已保存房产专名，含变音符号"
+        }
+      ],
+      "new_terms": [
+        "Prague Palace",
+        "Prague 7",
+        "Pražský Palác"
+      ],
+      "active_vocabulary": {
+        "Prague 6 Luxury": 50,
+        "Prague Palace": 50,
+        "Prague 7": 50,
+        "Pražský Palác": 50
+      },
+      "vocabulary_sha256": "e91ce7a4459f683741a9110071a35f69ddd626d856d87e14f3d91deed8e494b9"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Pražská Perla",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "新增房产专名"
+        },
+        {
+          "text": "Karlov náměstí 12",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "房产所在地址专名"
+        },
+        {
+          "text": "Prague 6 Luxury",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "已保存房产专名"
+        },
+        {
+          "text": "Prague 7",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "已保存房产专名"
+        },
+        {
+          "text": "Pražský Palác",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "已保存房产专名"
+        }
+      ],
+      "new_terms": [
+        "Pražská Perla",
+        "Karlov náměstí 12"
+      ],
+      "active_vocabulary": {
+        "Prague 6 Luxury": 50,
+        "Prague Palace": 50,
+        "Prague 7": 50,
+        "Pražský Palác": 50,
+        "Pražská Perla": 50,
+        "Karlov náměstí 12": 50
+      },
+      "vocabulary_sha256": "9fe905b3d2dc4194dc35382f80dc53c2ede79755f41a523a4ef46f1d6df1d230"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "a67e9cfc9147984fbe65be5497e64f2fce25034bcd840505f80ecedb61c5c195",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1397,
+        "completion_tokens": 449,
+        "total_tokens": 1846,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1141
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.929,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "7c7d9449ab71503559ce28ad050c76465172ce5bd30dbca159005b3415cd44fc",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2239,
+        "completion_tokens": 451,
+        "total_tokens": 2690,
+        "prompt_tokens_details": {
+          "cached_tokens": 1792
+        },
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 447
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.571
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0005_nlme4nanrpyu7ny7c55biii97somt6x8__async_0012_v1",
+  "extracted_at": "2026-11-22T06:46:25.715468+00:00"
+}

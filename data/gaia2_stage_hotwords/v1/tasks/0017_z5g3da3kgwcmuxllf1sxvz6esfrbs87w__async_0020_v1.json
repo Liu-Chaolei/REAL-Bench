@@ -1,0 +1,109 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0017_z5g3da3kgwcmuxllf1sxvz6esfrbs87w__async_0020_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "72b8e035a233b56efaac0fbd3852cfa92047d7bc4ca58608042f7633d22dca60",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Shanghai",
+          "kind": "place",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-83b9f348-7c39-42aa-80e2-012c098b6c44.arguments.content",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Shanghai"
+      ],
+      "active_vocabulary": {
+        "Shanghai": 50
+      },
+      "vocabulary_sha256": "f28ee7f2543d85bc5e285880edc51d9dcb307b94fc80a8ed105d6853af29a07c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Lian Wong",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Shanghai",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "联系人所在城市"
+        }
+      ],
+      "new_terms": [
+        "Lian Wong"
+      ],
+      "active_vocabulary": {
+        "Shanghai": 50,
+        "Lian Wong": 50
+      },
+      "vocabulary_sha256": "606ae62b33b0693f6267540c60e6fca6bfb6159a7c8cff01f1a409bde8635cb0"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Lian Wong",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Svenska Mode",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "品牌名称"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "署名姓名"
+        }
+      ],
+      "new_terms": [
+        "Svenska Mode",
+        "Astrid Lundqvist"
+      ],
+      "active_vocabulary": {
+        "Shanghai": 50,
+        "Lian Wong": 50,
+        "Svenska Mode": 50,
+        "Astrid Lundqvist": 50
+      },
+      "vocabulary_sha256": "e0b62991ddc099403350a083be591ea193bb13cf9e15d450d52ee5d65bf6924b"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "aa62dcb702dfe099d7264bb78052543230c529d38e169d74df79ea12eab1ef05",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1280,
+        "completion_tokens": 261,
+        "total_tokens": 1541,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1024
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.162
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0017_z5g3da3kgwcmuxllf1sxvz6esfrbs87w__async_0020_v1",
+  "extracted_at": "2026-11-22T06:46:24.972482+00:00"
+}

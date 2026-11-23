@@ -1,0 +1,155 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0331_1vd6x6oirw0he7a6zc8xs700f24b497r__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "24b7a46042ec2fecfcfaecbb4038ad53d68b98a3700dad6491926711cd65cbba",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Åke",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5577437d-7e9a-4836-9ce8-26e93eed009b.arguments.content",
+          "reason": "收件人姓名，含特殊字符"
+        },
+        {
+          "text": "Koen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-8cb6bd0e-0776-41f2-915f-d39b92af2ef7.arguments.content",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Jawaher",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b174e51e-005e-41cd-83c8-d032715f405a.arguments.content",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Nalinee",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f85ae27b-8911-410a-b2d7-0f7129301908.arguments.content",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Elara",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-626a8d15-811a-43a5-81df-79cfbe33fc63.arguments.content",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5577437d-7e9a-4836-9ce8-26e93eed009b.arguments.content",
+          "reason": "发件人完整姓名"
+        }
+      ],
+      "new_terms": [
+        "Åke",
+        "Koen",
+        "Jawaher",
+        "Nalinee",
+        "Elara",
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Åke": 50,
+        "Koen": 50,
+        "Jawaher": 50,
+        "Nalinee": 50,
+        "Elara": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "9d3939320c2df6bb492255381a73e2e07a0bd0c1bc75d7080e8d82c4b1f05627"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Åke": 50,
+        "Koen": 50,
+        "Jawaher": 50,
+        "Nalinee": 50,
+        "Elara": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "9d3939320c2df6bb492255381a73e2e07a0bd0c1bc75d7080e8d82c4b1f05627"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Åke",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply_ake.arguments.content",
+          "reason": "跟进邮件收件人姓名"
+        },
+        {
+          "text": "Koen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply_koen.arguments.content",
+          "reason": "跟进邮件收件人姓名"
+        },
+        {
+          "text": "Jawaher",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply_jawaher.arguments.content",
+          "reason": "跟进邮件收件人姓名"
+        },
+        {
+          "text": "Nalinee",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply_nalinee.arguments.content",
+          "reason": "跟进邮件收件人姓名"
+        },
+        {
+          "text": "Elara",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply_elara.arguments.content",
+          "reason": "跟进邮件收件人姓名"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply_ake.arguments.content",
+          "reason": "发件人完整姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Åke": 50,
+        "Koen": 50,
+        "Jawaher": 50,
+        "Nalinee": 50,
+        "Elara": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "9d3939320c2df6bb492255381a73e2e07a0bd0c1bc75d7080e8d82c4b1f05627"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "e2b939718276b4f425c6e9358a5b2e203e0911e0c97161a62553cb4d4e608c28",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4263,
+        "completion_tokens": 635,
+        "total_tokens": 4898,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4007
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.188
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0331_1vd6x6oirw0he7a6zc8xs700f24b497r__mind_change_v1",
+  "extracted_at": "2026-11-22T06:45:15.399336+00:00"
+}

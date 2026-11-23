@@ -1,0 +1,133 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0502_balldxxoinki1i9lnv51gd8ja38nvzi3__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "82c37d9beab136720e7b8ea52cfe750dbd8e8ae65e7d4848f006f92b2c52774f",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Fisher-Price",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "品牌名，需准确识别"
+        },
+        {
+          "text": "Riverboat",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定商品名"
+        }
+      ],
+      "new_terms": [
+        "Fisher-Price",
+        "Riverboat"
+      ],
+      "active_vocabulary": {
+        "Fisher-Price": 50,
+        "Riverboat": 50
+      },
+      "vocabulary_sha256": "40a34c636862ff8db9f19aaa724af13fc76aba91e6ce29bb1b4f208d8129f9ce"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Fisher-Price Musical Smart Phone",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_search_phone.arguments.product_name",
+          "reason": "完整商品名"
+        }
+      ],
+      "new_terms": [
+        "Fisher-Price Musical Smart Phone"
+      ],
+      "active_vocabulary": {
+        "Fisher-Price": 50,
+        "Riverboat": 50,
+        "Fisher-Price Musical Smart Phone": 50
+      },
+      "vocabulary_sha256": "63428cae3cab0fe4153b8714f8604968b6ad084735fbea8ddc50191488f7225b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Ursula Zbinden",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "邮件署名中的完整人名"
+        },
+        {
+          "text": "Fisher-Price Musical Smart Phone",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "邮件中列出的完整商品名"
+        }
+      ],
+      "new_terms": [
+        "Ursula Zbinden",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Fisher-Price": 50,
+        "Riverboat": 50,
+        "Fisher-Price Musical Smart Phone": 50,
+        "Ursula Zbinden": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "c57de092dd5752ad30600c72c73db771b3dbdef687a844b11a3a034c235ca8ce"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "ddb385499e5c1e45b92eaaf9bad40af6c4ce04f04615bb96847e187d8e1025de",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2195,
+        "completion_tokens": 230,
+        "total_tokens": 2425,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1939
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.087,
+      "error": "1 validation error for Extraction\nstages.0.terms.0.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "fe0d0ba468264c1dad92e8a17510a0b81c847d513c068d2440776bbb57fa3cd1",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2886,
+        "completion_tokens": 230,
+        "total_tokens": 3116,
+        "prompt_tokens_details": {
+          "cached_tokens": 2304
+        },
+        "prompt_cache_hit_tokens": 2304,
+        "prompt_cache_miss_tokens": 582
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.035
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0502_balldxxoinki1i9lnv51gd8ja38nvzi3__mind_change_v1",
+  "extracted_at": "2026-11-22T06:45:32.950997+00:00"
+}

@@ -1,0 +1,174 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0192_cosvjo75ypeswhkbz3tqbn8tb3vnoh3f",
+  "model": "deepseek-flash",
+  "input_sha256": "01d6578017bf565488a4174023bf843865a3a7b1577bb680c0143a576752156c",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Samara",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "地名，指萨马拉的房产"
+        },
+        {
+          "text": "Natalya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        }
+      ],
+      "new_terms": [
+        "Samara",
+        "Natalya Kuznetsova",
+        "Viktor Kuznetsov"
+      ],
+      "active_vocabulary": {
+        "Samara": 50,
+        "Natalya Kuznetsova": 50,
+        "Viktor Kuznetsov": 50
+      },
+      "vocabulary_sha256": "ce9a9e48de01cc8f13e2ab20f87ca359ccbc21fd7bf2cd0b8d4fdcda951ea547"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Samara City Center",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Ulitsa Kuibysheva",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "街道名称"
+        },
+        {
+          "text": "Samara",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Natalya Kuznetsova",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群组成员姓名"
+        },
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群组成员姓名"
+        }
+      ],
+      "new_terms": [
+        "Samara City Center",
+        "Ulitsa Kuibysheva"
+      ],
+      "active_vocabulary": {
+        "Samara": 50,
+        "Natalya Kuznetsova": 50,
+        "Viktor Kuznetsov": 50,
+        "Samara City Center": 50,
+        "Ulitsa Kuibysheva": 50
+      },
+      "vocabulary_sha256": "6cbaf50c6f7cfbe507033f232d23bfc67c35e926e4d72e8c3e2ce3c7f0dddbb5"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Samara Railway Station",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "上车地点"
+        },
+        {
+          "text": "Samara",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Ulitsa Kuibysheva",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "目的地街道"
+        },
+        {
+          "text": "Samara City Center",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房产名称"
+        }
+      ],
+      "new_terms": [
+        "Samara Railway Station"
+      ],
+      "active_vocabulary": {
+        "Samara": 50,
+        "Natalya Kuznetsova": 50,
+        "Viktor Kuznetsov": 50,
+        "Samara City Center": 50,
+        "Ulitsa Kuibysheva": 50,
+        "Samara Railway Station": 50
+      },
+      "vocabulary_sha256": "2bfb77fa0fc2d14b11b26cd2e1095bf6b6bcad9d2dd34b47b19fa108560b65ed"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "141444d097f39d6378aead670068d81e7e4feabf61a248c1b31954997225d9e6",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1460,
+        "completion_tokens": 348,
+        "total_tokens": 1808,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1204
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.482,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "e0064ece66120e893b4416f2334d50288fe66c6b45c6fa1943d5749456a37a05",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2201,
+        "completion_tokens": 339,
+        "total_tokens": 2540,
+        "prompt_tokens_details": {
+          "cached_tokens": 1792
+        },
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 409
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.474
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0192_cosvjo75ypeswhkbz3tqbn8tb3vnoh3f",
+  "extracted_at": "2026-11-22T06:40:38.531977+00:00"
+}

@@ -1,0 +1,140 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0692_0titoqjx5uvsesykkno5fxxjccpdd827",
+  "model": "deepseek-flash",
+  "input_sha256": "3b99014ad2b23d0f301e9c6f4da839b67469b1a043344c99eedc279949c037a4",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-06d1bae6-bf38-4dd9-91f6-f55fab67ed1e.arguments.attendees[0]",
+          "reason": "完整人名，需准确识别重音"
+        },
+        {
+          "text": "Luís Marques",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-06d1bae6-bf38-4dd9-91f6-f55fab67ed1e.arguments.attendees[1]",
+          "reason": "完整人名，含特殊重音"
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-06d1bae6-bf38-4dd9-91f6-f55fab67ed1e.arguments.attendees[2]",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Çağla Öztürk",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-06d1bae6-bf38-4dd9-91f6-f55fab67ed1e.arguments.attendees[3]",
+          "reason": "完整人名，含土耳其语特殊字符"
+        },
+        {
+          "text": "Çağla",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-26754828-d361-421b-aa37-8f94047dce4f.arguments.content",
+          "reason": "欢迎消息中使用的名字"
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur",
+        "Luís Marques",
+        "Jamila Fernandes",
+        "Çağla Öztürk",
+        "Çağla"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Luís Marques": 50,
+        "Jamila Fernandes": 50,
+        "Çağla Öztürk": 50,
+        "Çağla": 50
+      },
+      "vocabulary_sha256": "05837abbe073fc7e2348f4b7c4534263e59609b1c788fe75ea8ca5eb2018f654"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Luís Marques": 50,
+        "Jamila Fernandes": 50,
+        "Çağla Öztürk": 50,
+        "Çağla": 50
+      },
+      "vocabulary_sha256": "05837abbe073fc7e2348f4b7c4534263e59609b1c788fe75ea8ca5eb2018f654"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_1.arguments.content",
+          "reason": "确认嘉宾名字"
+        },
+        {
+          "text": "Luís",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_1.arguments.content",
+          "reason": "确认嘉宾名字"
+        },
+        {
+          "text": "Jamila",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_1.arguments.content",
+          "reason": "确认嘉宾名字"
+        },
+        {
+          "text": "Çağla",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_1.arguments.content",
+          "reason": "确认嘉宾名字"
+        }
+      ],
+      "new_terms": [
+        "Aurélien",
+        "Luís",
+        "Jamila"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Luís Marques": 50,
+        "Jamila Fernandes": 50,
+        "Çağla Öztürk": 50,
+        "Çağla": 50,
+        "Aurélien": 50,
+        "Luís": 50,
+        "Jamila": 50
+      },
+      "vocabulary_sha256": "df34a2465adaf7f0eee22fafe8daf2ac89fbb9424cfb7c844157d57473535f88"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "2282d9e674bd5a0ad851aa136ce1d1fbda4f60b8ec325dff2487a4dc71487081",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3084,
+        "completion_tokens": 512,
+        "total_tokens": 3596,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2828
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.772
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0692_0titoqjx5uvsesykkno5fxxjccpdd827",
+  "extracted_at": "2026-11-22T06:43:24.682845+00:00"
+}

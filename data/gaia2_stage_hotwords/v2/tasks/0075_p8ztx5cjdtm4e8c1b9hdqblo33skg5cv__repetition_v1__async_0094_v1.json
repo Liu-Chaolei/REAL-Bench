@@ -1,0 +1,220 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0075_p8ztx5cjdtm4e8c1b9hdqblo33skg5cv__repetition_v1__async_0094_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "007d137cb016c7cdb5943efea1d8420908c52a777a8aa5b1c68ec5205a750b86",
+  "review_input_sha256": "e9112dc606ab9b19ca5fdc502d78f1c73707fe24cfc196238cc7f7a1a5b852a4",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "f2ad6eadddcbb812a91274c8a69e2da23c6b36e64b70fd05fd62041f25348694",
+  "reference_results_sha256": "b803862e9f9280d4de7345f80832025a135c9ccb28b90c5ab23acd33cc4c6e36",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Khalifa Al-Mansoori",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Asheville",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Leuven",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Nonglak Srisombat",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-d1d09eef-92ac-41b6-9352-76bb8f334603.arguments.content"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Émile Vandenberghe",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-d1d09eef-92ac-41b6-9352-76bb8f334603.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Khalifa Cleanup Deletion Record",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Phone Call with Khalifa Al-Mansoori",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Lunch Meeting with Khalifa Al-Mansoori",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Renewable Energy Options for Sustainable Architecture",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Follow up with Nonglak and Émile",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Khalifa Al-Mansoori",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，含独特姓氏，适合热词",
+          "weight": 50
+        },
+        {
+          "text": "Nonglak Srisombat",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整泰式人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Émile Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Asheville",
+          "kind": "place",
+          "source": "stage0.existing_catalog.1",
+          "reason": "地名，拼写不易",
+          "weight": 50
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "比利时地名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Khalifa Al-Mansoori",
+        "Nonglak Srisombat",
+        "Émile Vandenberghe",
+        "Asheville",
+        "Leuven"
+      ],
+      "active_vocabulary": {
+        "Khalifa Al-Mansoori": 50,
+        "Nonglak Srisombat": 50,
+        "Émile Vandenberghe": 50,
+        "Asheville": 50,
+        "Leuven": 50
+      },
+      "vocabulary_sha256": "2b561c5e2f935cf44c11b51a1dd834a16ba1e4c8411bee88f9e004f6b95a9ff9"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Lunch Meeting with Khalifa Al-Mansoori",
+          "kind": "custom_name",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含完整人名的独特事件名",
+          "weight": 50
+        },
+        {
+          "text": "Phone Call with Khalifa Al-Mansoori",
+          "kind": "custom_name",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含完整人名的独特事件名",
+          "weight": 50
+        },
+        {
+          "text": "Renewable Energy Options for Sustainable Architecture",
+          "kind": "custom_name",
+          "source": "stage1.existing_catalog.3",
+          "reason": "较长独特标题，适合热词",
+          "weight": 50
+        },
+        {
+          "text": "Khalifa Cleanup Deletion Record",
+          "kind": "custom_name",
+          "source": "stage1.existing_catalog.0",
+          "reason": "独特自定义记录名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Lunch Meeting with Khalifa Al-Mansoori",
+        "Phone Call with Khalifa Al-Mansoori",
+        "Renewable Energy Options for Sustainable Architecture",
+        "Khalifa Cleanup Deletion Record"
+      ],
+      "active_vocabulary": {
+        "Khalifa Al-Mansoori": 50,
+        "Nonglak Srisombat": 50,
+        "Émile Vandenberghe": 50,
+        "Asheville": 50,
+        "Leuven": 50,
+        "Lunch Meeting with Khalifa Al-Mansoori": 50,
+        "Phone Call with Khalifa Al-Mansoori": 50,
+        "Renewable Energy Options for Sustainable Architecture": 50,
+        "Khalifa Cleanup Deletion Record": 50
+      },
+      "vocabulary_sha256": "feabc26c255ec3693ec8fb06356819bf19c4d2ef8b537da02aba56de90e3c870"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Follow up with Nonglak and Émile",
+          "kind": "custom_name",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号人名的独特事件名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Follow up with Nonglak and Émile"
+      ],
+      "active_vocabulary": {
+        "Khalifa Al-Mansoori": 50,
+        "Nonglak Srisombat": 50,
+        "Émile Vandenberghe": 50,
+        "Asheville": 50,
+        "Leuven": 50,
+        "Lunch Meeting with Khalifa Al-Mansoori": 50,
+        "Phone Call with Khalifa Al-Mansoori": 50,
+        "Renewable Energy Options for Sustainable Architecture": 50,
+        "Khalifa Cleanup Deletion Record": 50,
+        "Follow up with Nonglak and Émile": 50
+      },
+      "vocabulary_sha256": "23728f588f70d57cc976b6fc62cca1625e87751b13b9f3ac982b2f43ccac0ab6"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:20:16.556885+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

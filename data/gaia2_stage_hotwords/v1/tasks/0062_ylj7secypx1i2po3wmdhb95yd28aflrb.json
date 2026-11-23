@@ -1,0 +1,169 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0062_ylj7secypx1i2po3wmdhb95yd28aflrb",
+  "model": "deepseek-flash",
+  "input_sha256": "445662e39b11f89c2d8d14f047bbbf4314aba44bcc2863a32290d33f590d03dd",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurora Heights",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "New York Nest",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Skyline Views",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Soho Oasis",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Park Place",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "The Lexington",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Parkside Residences",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "The Vue",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓楼名称"
+        }
+      ],
+      "new_terms": [
+        "Aurora Heights",
+        "New York Nest",
+        "Skyline Views",
+        "Soho Oasis",
+        "Park Place",
+        "The Lexington",
+        "Parkside Residences",
+        "The Vue"
+      ],
+      "active_vocabulary": {
+        "Aurora Heights": 50,
+        "New York Nest": 50,
+        "Skyline Views": 50,
+        "Soho Oasis": 50,
+        "Park Place": 50,
+        "The Lexington": 50,
+        "Parkside Residences": 50,
+        "The Vue": 50
+      },
+      "vocabulary_sha256": "7726812b106f4e6bf675650b2a7833f59a8529ff11af05c711ebbfbdb370ef2e"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurora Heights": 50,
+        "New York Nest": 50,
+        "Skyline Views": 50,
+        "Soho Oasis": 50,
+        "Park Place": 50,
+        "The Lexington": 50,
+        "Parkside Residences": 50,
+        "The Vue": 50
+      },
+      "vocabulary_sha256": "7726812b106f4e6bf675650b2a7833f59a8529ff11af05c711ebbfbdb370ef2e"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "54badd1aed9db1c27fa1b62dbe35fabe84905805d1b4009e00a2a26fddd034bb",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2995,
+        "completion_tokens": 408,
+        "total_tokens": 3403,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2739
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.789,
+      "error": "3 validation errors for Extraction\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='No proper names in sourc...nt IDs are identifiers.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Stage 1 contains apartme...es and recipient email.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='No proper names beyond g...itle and email subject.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "838b87105a898476a202ec1b796d5b150b0c9e4717683fafca0ec8aa77f50ca1",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3976,
+        "completion_tokens": 363,
+        "total_tokens": 4339,
+        "prompt_tokens_details": {
+          "cached_tokens": 3328
+        },
+        "prompt_cache_hit_tokens": 3328,
+        "prompt_cache_miss_tokens": 648
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.377,
+      "error": "Invalid proper-name phrase: 'aurelien.lafleur@gaia2mail.com'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "d9cc5cb96c3aec7e6e3ccefe825336a59190fdff49572b85413c95d43bf313a6",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3761,
+        "completion_tokens": 311,
+        "total_tokens": 4072,
+        "prompt_tokens_details": {
+          "cached_tokens": 2944
+        },
+        "prompt_cache_hit_tokens": 2944,
+        "prompt_cache_miss_tokens": 817
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.274
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0062_ylj7secypx1i2po3wmdhb95yd28aflrb",
+  "extracted_at": "2026-11-22T06:39:58.157631+00:00"
+}

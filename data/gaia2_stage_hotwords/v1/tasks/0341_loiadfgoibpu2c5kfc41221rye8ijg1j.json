@@ -1,0 +1,115 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0341_loiadfgoibpu2c5kfc41221rye8ijg1j",
+  "model": "deepseek-flash",
+  "input_sha256": "c53cbee17ccaa876bfb0569aa384787b8c3d755c10aca8b2eafb3dc3e049d725",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Fatima",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f501d4fa-fbd2-4140-bb3e-6f70a78fb11c.arguments.content",
+          "reason": "收件人名字，属于联系人中的专有名词"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f501d4fa-fbd2-4140-bb3e-6f70a78fb11c.arguments.content",
+          "reason": "邮件署名中的完整人名"
+        },
+        {
+          "text": "Star Wars",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "产品名称中的品牌专有名词"
+        }
+      ],
+      "new_terms": [
+        "Fatima",
+        "Liesbeth Vandenberghe",
+        "Star Wars"
+      ],
+      "active_vocabulary": {
+        "Fatima": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Star Wars": 50
+      },
+      "vocabulary_sha256": "18cc04806c38d1f30b478978aa60141ac0775262eb7ad45657c1ec9b116f213a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Star Wars Order Follow-up",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_cal.arguments.title",
+          "reason": "日历提醒的自定义标题名称"
+        }
+      ],
+      "new_terms": [
+        "Star Wars Order Follow-up"
+      ],
+      "active_vocabulary": {
+        "Fatima": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Star Wars": 50,
+        "Star Wars Order Follow-up": 50
+      },
+      "vocabulary_sha256": "eb81e6c5fc8f162c003a613fabf6296041cf8ab9d6e330ec4b89f90bc502e653"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Star Wars Order Follow-up",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_add.arguments.title",
+          "reason": "日历提醒的自定义标题名称"
+        },
+        {
+          "text": "Project Planning Session",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "冲突的日历事件专有名称"
+        }
+      ],
+      "new_terms": [
+        "Project Planning Session"
+      ],
+      "active_vocabulary": {
+        "Fatima": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Star Wars": 50,
+        "Star Wars Order Follow-up": 50,
+        "Project Planning Session": 50
+      },
+      "vocabulary_sha256": "d60c96b9f7b20662d24239c54e09d799284ca83dcfb4e662e882936e70d38a13"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "d8885eb3997e8ae2df7f0ad1b1b3ad3db490d2a609311c33f35fffe98a7b24e8",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2773,
+        "completion_tokens": 298,
+        "total_tokens": 3071,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2517
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.415
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0341_loiadfgoibpu2c5kfc41221rye8ijg1j",
+  "extracted_at": "2026-11-22T06:41:22.479025+00:00"
+}

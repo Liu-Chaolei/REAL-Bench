@@ -1,0 +1,200 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0263_hgcckr1ihm38w12jl1viy51m81fybg32__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "63f61e139a1643946aa548a7358a7fa535077f6c879c15192225d82804050928",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaito Matsumoto",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-967b36ce-bc71-4aa3-88aa-7956a8e32449.arguments.content",
+          "reason": "被识别出的日本联系人全名"
+        }
+      ],
+      "new_terms": [
+        "Kaito Matsumoto"
+      ],
+      "active_vocabulary": {
+        "Kaito Matsumoto": 50
+      },
+      "vocabulary_sha256": "ed2edb44140bd6669cff684f41b7b123a1e28f2748d7c86eba75b6d67723e14a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Basel Academic Circle",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_create.arguments.title",
+          "reason": "新建群组名称"
+        },
+        {
+          "text": "Kaito Matsumoto",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "欢迎消息中提及的参会者姓名"
+        },
+        {
+          "text": "Anastasiya Zolotova",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "群组成员姓名"
+        },
+        {
+          "text": "Aurélie Vandenberghe",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "群组成员姓名"
+        },
+        {
+          "text": "Aurélien Ramseyer",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "群组成员姓名"
+        },
+        {
+          "text": "Colette Vandenberghe",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "群组成员姓名"
+        },
+        {
+          "text": "Karel De Clercq",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "群组成员姓名"
+        },
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "群组成员姓名"
+        },
+        {
+          "text": "Zofia Kwiatkowska",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "群组成员姓名"
+        }
+      ],
+      "new_terms": [
+        "Basel Academic Circle",
+        "Anastasiya Zolotova",
+        "Aurélie Vandenberghe",
+        "Aurélien Ramseyer",
+        "Colette Vandenberghe",
+        "Karel De Clercq",
+        "Katarzyna Zielińska",
+        "Zofia Kwiatkowska"
+      ],
+      "active_vocabulary": {
+        "Kaito Matsumoto": 50,
+        "Basel Academic Circle": 50,
+        "Anastasiya Zolotova": 50,
+        "Aurélie Vandenberghe": 50,
+        "Aurélien Ramseyer": 50,
+        "Colette Vandenberghe": 50,
+        "Karel De Clercq": 50,
+        "Katarzyna Zielińska": 50,
+        "Zofia Kwiatkowska": 50
+      },
+      "vocabulary_sha256": "8c39533361dc2adb1c9e98be738b02c7f8782b8eddab214658b7cd2707912452"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaito Matsumoto",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]",
+          "reason": "活动参会者姓名"
+        },
+        {
+          "text": "University of Basel",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_create.arguments.location",
+          "reason": "活动地点机构名称"
+        },
+        {
+          "text": "Academic Meetup Follow-up",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_create.arguments.title",
+          "reason": "新建日历活动标题"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "邮件署名发件人姓名"
+        }
+      ],
+      "new_terms": [
+        "University of Basel",
+        "Academic Meetup Follow-up",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Kaito Matsumoto": 50,
+        "Basel Academic Circle": 50,
+        "Anastasiya Zolotova": 50,
+        "Aurélie Vandenberghe": 50,
+        "Aurélien Ramseyer": 50,
+        "Colette Vandenberghe": 50,
+        "Karel De Clercq": 50,
+        "Katarzyna Zielińska": 50,
+        "Zofia Kwiatkowska": 50,
+        "University of Basel": 50,
+        "Academic Meetup Follow-up": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "411b899a218471df917f80c62529418ea83bf8dd4dd92e115fa2cd4f90d90bef"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "ca734478da03f9d63b4c642adfa2668c2430beca40b454dbecab7b7b4a5a018c",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2259,
+        "completion_tokens": 589,
+        "total_tokens": 2848,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2003
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.196,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "ae230b003b9ad65baab0beed1e34efc52533495bb09e0550b3ed5f7a66aadbc3",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3241,
+        "completion_tokens": 591,
+        "total_tokens": 3832,
+        "prompt_tokens_details": {
+          "cached_tokens": 2816
+        },
+        "prompt_cache_hit_tokens": 2816,
+        "prompt_cache_miss_tokens": 425
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.939
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0263_hgcckr1ihm38w12jl1viy51m81fybg32__repetition_v1",
+  "extracted_at": "2026-11-22T06:45:10.057149+00:00"
+}

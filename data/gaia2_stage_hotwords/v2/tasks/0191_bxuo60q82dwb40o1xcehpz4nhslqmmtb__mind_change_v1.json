@@ -1,0 +1,174 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0191_bxuo60q82dwb40o1xcehpz4nhslqmmtb__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "04fd2af462b7696cf4e4f2918065860f1579262f0693928f0d10f7b707c47baa",
+  "review_input_sha256": "119d3bb23a594c207e2243bb4cafc885e0a55ae0dde36d3af7d29b2ee63d2737",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "0720843722ebcf1177824762a4a2339cabcd3a8321347b15b95c5e3380b34f58",
+  "reference_results_sha256": "665b8308a5f62ae60c17623c5dae55c02090e066d5967762a7bba4e499c13691",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Riemann",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Spooky Hollow Halloween Window Cling Sheet",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Samara City Center",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Samara Studio",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Kuibyshev Street",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Spooky Hollow Halloween Window Cling Sheets",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Put Up Halloween Window Clings",
+      "original_source": "stage2.tool_gt.series_s2_calendar.arguments.title"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Spooky Hollow Halloween Window Cling Sheet",
+          "kind": "product",
+          "source": "stage0.existing_catalog.1",
+          "reason": "独特产品名，含专有名词",
+          "weight": 50
+        },
+        {
+          "text": "Samara City Center",
+          "kind": "place",
+          "source": "stage0.existing_catalog.3",
+          "reason": "地名，含专有名词",
+          "weight": 50
+        },
+        {
+          "text": "Riemann",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "数学家姓氏，发音困难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Spooky Hollow Halloween Window Cling Sheet",
+        "Samara City Center",
+        "Riemann"
+      ],
+      "active_vocabulary": {
+        "Spooky Hollow Halloween Window Cling Sheet": 50,
+        "Samara City Center": 50,
+        "Riemann": 50
+      },
+      "vocabulary_sha256": "61920c6e731036843448fe92cb2d56c80256b5415bbc7f5d9e9899dbaddcb103"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kuibyshev Street",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "街道名，发音困难",
+          "weight": 50
+        },
+        {
+          "text": "Samara Studio",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "独特地点名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kuibyshev Street",
+        "Samara Studio"
+      ],
+      "active_vocabulary": {
+        "Spooky Hollow Halloween Window Cling Sheet": 50,
+        "Samara City Center": 50,
+        "Riemann": 50,
+        "Kuibyshev Street": 50,
+        "Samara Studio": 50
+      },
+      "vocabulary_sha256": "d73d1805645525790aa061fabeb5e5951e22b6a277406ac493faca9340b9ec70"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Spooky Hollow Halloween Window Cling Sheets",
+          "kind": "product",
+          "source": "stage2.existing_catalog.0",
+          "reason": "独特产品名，含专有名词",
+          "weight": 50
+        },
+        {
+          "text": "Put Up Halloween Window Clings",
+          "kind": "custom_name",
+          "source": "stage2.existing_catalog.1",
+          "reason": "独特事件标题",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Spooky Hollow Halloween Window Cling Sheets",
+        "Put Up Halloween Window Clings"
+      ],
+      "active_vocabulary": {
+        "Spooky Hollow Halloween Window Cling Sheet": 50,
+        "Samara City Center": 50,
+        "Riemann": 50,
+        "Kuibyshev Street": 50,
+        "Samara Studio": 50,
+        "Spooky Hollow Halloween Window Cling Sheets": 50,
+        "Put Up Halloween Window Clings": 50
+      },
+      "vocabulary_sha256": "8f8a81f345215e8c81d6e20b303f652b8e9382fb69a120ccd618a826ac279c47"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Vinyl"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:51.719507+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

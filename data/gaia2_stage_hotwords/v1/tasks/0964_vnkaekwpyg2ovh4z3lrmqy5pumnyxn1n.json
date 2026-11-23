@@ -1,0 +1,201 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0964_vnkaekwpyg2ovh4z3lrmqy5pumnyxn1n",
+  "model": "deepseek-flash",
+  "input_sha256": "df5a44a53c04587be8702117e2777a41b7797e178f26458c8cc4de0799f91cf2",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Sofía Kuznetsova García",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-4c719264-41e5-40d7-b664-ae16f4fe7036.arguments.content",
+          "reason": "完整人名，邮件收件人"
+        },
+        {
+          "text": "Rukmini Widyastuti",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-4c719264-41e5-40d7-b664-ae16f4fe7036.arguments.content",
+          "reason": "完整人名，邮件收件人"
+        },
+        {
+          "text": "Žiga Korošec",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-4c719264-41e5-40d7-b664-ae16f4fe7036.arguments.content",
+          "reason": "完整人名，含特殊字符"
+        },
+        {
+          "text": "Sri Widyastuti",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-4c719264-41e5-40d7-b664-ae16f4fe7036.arguments.content",
+          "reason": "完整人名，邮件收件人"
+        },
+        {
+          "text": "Sutopo Widyatmoko",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-4c719264-41e5-40d7-b664-ae16f4fe7036.arguments.content",
+          "reason": "完整人名，邮件收件人"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-09051c3a-ecaf-4f4b-82d0-258536597ff3.arguments.attendees[0]",
+          "reason": "完整人名，活动参与者"
+        },
+        {
+          "text": "Rubber Bracelets | Disney Princess Dream Big Collection",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定商品名称"
+        }
+      ],
+      "new_terms": [
+        "Sofía Kuznetsova García",
+        "Rukmini Widyastuti",
+        "Žiga Korošec",
+        "Sri Widyastuti",
+        "Sutopo Widyatmoko",
+        "Anastasiya Kuznetsova",
+        "Rubber Bracelets | Disney Princess Dream Big Collection"
+      ],
+      "active_vocabulary": {
+        "Sofía Kuznetsova García": 50,
+        "Rukmini Widyastuti": 50,
+        "Žiga Korošec": 50,
+        "Sri Widyastuti": 50,
+        "Sutopo Widyatmoko": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Rubber Bracelets | Disney Princess Dream Big Collection": 50
+      },
+      "vocabulary_sha256": "e2cdeb5f807566d79bcf0dff2cba81ecbee8c82ec68ff67c033f4a6ffaa8f419"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_checklist_event.arguments.description",
+          "reason": "完整人名，参与者"
+        },
+        {
+          "text": "Žiga Korošec",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_checklist_event.arguments.description",
+          "reason": "完整人名，参与者"
+        },
+        {
+          "text": "Sutopo Widyatmoko",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_checklist_event.arguments.description",
+          "reason": "完整人名，参与者"
+        },
+        {
+          "text": "Rukmini Widyastuti",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_checklist_event.arguments.description",
+          "reason": "完整人名，参与者"
+        },
+        {
+          "text": "Rubber Bracelets | Disney Princess Dream Big Collection",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_add_checklist_event.arguments.description",
+          "reason": "特定商品名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Sofía Kuznetsova García": 50,
+        "Rukmini Widyastuti": 50,
+        "Žiga Korošec": 50,
+        "Sri Widyastuti": 50,
+        "Sutopo Widyatmoko": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Rubber Bracelets | Disney Princess Dream Big Collection": 50
+      },
+      "vocabulary_sha256": "e2cdeb5f807566d79bcf0dff2cba81ecbee8c82ec68ff67c033f4a6ffaa8f419"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Sofía",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply_to_sofia.arguments.content",
+          "reason": "收件人名字，本阶段无完整姓名对应"
+        },
+        {
+          "text": "Rukmini",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply_to_sofia.arguments.content",
+          "reason": "参与者名字，本阶段无完整姓名对应"
+        },
+        {
+          "text": "Žiga",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply_to_sofia.arguments.content",
+          "reason": "参与者名字，本阶段无完整姓名对应"
+        },
+        {
+          "text": "Sutopo",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply_to_sofia.arguments.content",
+          "reason": "参与者名字，本阶段无完整姓名对应"
+        },
+        {
+          "text": "Anastasiya",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply_to_sofia.arguments.content",
+          "reason": "发件人署名，本阶段无完整姓名对应"
+        }
+      ],
+      "new_terms": [
+        "Sofía",
+        "Rukmini",
+        "Žiga",
+        "Sutopo",
+        "Anastasiya"
+      ],
+      "active_vocabulary": {
+        "Sofía Kuznetsova García": 50,
+        "Rukmini Widyastuti": 50,
+        "Žiga Korošec": 50,
+        "Sri Widyastuti": 50,
+        "Sutopo Widyatmoko": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Rubber Bracelets | Disney Princess Dream Big Collection": 50,
+        "Sofía": 50,
+        "Rukmini": 50,
+        "Žiga": 50,
+        "Sutopo": 50,
+        "Anastasiya": 50
+      },
+      "vocabulary_sha256": "b299964b4244aa5b994bc8f12233b8708daf962dd639273faf61748bd01fcfbc"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "1f5d52273a91999c9e6fda5c0a22864b85a8d4971bc8a5d4e0b2e1307665a6ec",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3732,
+        "completion_tokens": 897,
+        "total_tokens": 4629,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3476
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 3.095
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0964_vnkaekwpyg2ovh4z3lrmqy5pumnyxn1n",
+  "extracted_at": "2026-11-22T06:44:45.153761+00:00"
+}

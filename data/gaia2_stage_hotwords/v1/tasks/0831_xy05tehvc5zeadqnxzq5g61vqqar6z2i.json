@@ -1,0 +1,112 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0831_xy05tehvc5zeadqnxzq5g61vqqar6z2i",
+  "model": "deepseek-flash",
+  "input_sha256": "fafa3b8ad38a83607f54377339f5c72d415563351d4545ff211edb886ec6791b",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Liberecký Park",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7c1d2456-4e81-4d6a-8fe9-cf73ea70c0c6.arguments.location",
+          "reason": "公寓所在地名，含特殊变音符号"
+        },
+        {
+          "text": "Pražská 10, Liberec",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e9ba80ca-d520-4880-9cb6-7356f2d3ddb1.arguments.end_location",
+          "reason": "出租车目的地地址"
+        },
+        {
+          "text": "Brno Nový Lískovec",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fd923cf4-0901-4499-9b7f-4fadb6f6e441.arguments.location",
+          "reason": "新公寓所在地名"
+        },
+        {
+          "text": "Lískovec 10, Brno",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a8779f7f-dd1a-432f-8be5-427b012b359d.arguments.end_location",
+          "reason": "新出租车目的地地址"
+        }
+      ],
+      "new_terms": [
+        "Liberecký Park",
+        "Pražská 10, Liberec",
+        "Brno Nový Lískovec",
+        "Lískovec 10, Brno"
+      ],
+      "active_vocabulary": {
+        "Liberecký Park": 50,
+        "Pražská 10, Liberec": 50,
+        "Brno Nový Lískovec": 50,
+        "Lískovec 10, Brno": 50
+      },
+      "vocabulary_sha256": "456b80492428b7096aa0cbcec03ac7ac1b4a868f6ee4a32dd6bad6b4a7bfe7d2"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Lískovec 10, Brno",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_order_van.arguments.end_location",
+          "reason": "面包车目的地地址"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Liberecký Park": 50,
+        "Pražská 10, Liberec": 50,
+        "Brno Nový Lískovec": 50,
+        "Lískovec 10, Brno": 50
+      },
+      "vocabulary_sha256": "456b80492428b7096aa0cbcec03ac7ac1b4a868f6ee4a32dd6bad6b4a7bfe7d2"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Lískovec 10, Brno",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_moving_event.arguments.location",
+          "reason": "搬家事件地点地址"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Liberecký Park": 50,
+        "Pražská 10, Liberec": 50,
+        "Brno Nový Lískovec": 50,
+        "Lískovec 10, Brno": 50
+      },
+      "vocabulary_sha256": "456b80492428b7096aa0cbcec03ac7ac1b4a868f6ee4a32dd6bad6b4a7bfe7d2"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "fbaa7c2d40d5e9c3597306b83459f957bccc1981d6a266166eaf10092eec5151",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3405,
+        "completion_tokens": 386,
+        "total_tokens": 3791,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3149
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.676
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0831_xy05tehvc5zeadqnxzq5g61vqqar6z2i",
+  "extracted_at": "2026-11-22T06:44:03.431711+00:00"
+}

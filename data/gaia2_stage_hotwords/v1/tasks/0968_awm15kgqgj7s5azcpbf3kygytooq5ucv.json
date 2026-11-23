@@ -1,0 +1,154 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0968_awm15kgqgj7s5azcpbf3kygytooq5ucv",
+  "model": "deepseek-flash",
+  "input_sha256": "bcc321ab947d4af09499b55c6539b2b54c9a1efb9752e320b8c512db72115171",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien Van der Straeten",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "完整人名，含特殊字符"
+        },
+        {
+          "text": "Ursula Ramseyer",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Coffee Break with Aurélien Van der Straeten",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "日历事件自定义名称"
+        },
+        {
+          "text": "Meditation",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "日历事件标题"
+        }
+      ],
+      "new_terms": [
+        "Aurélien Van der Straeten",
+        "Ursula Ramseyer",
+        "Coffee Break with Aurélien Van der Straeten",
+        "Meditation"
+      ],
+      "active_vocabulary": {
+        "Aurélien Van der Straeten": 50,
+        "Ursula Ramseyer": 50,
+        "Coffee Break with Aurélien Van der Straeten": 50,
+        "Meditation": 50
+      },
+      "vocabulary_sha256": "9dec9775f060ebcb8899a9409e4d7386fc23e8b483506cfda5302d9a58cd2f52"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien Van der Straeten",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Ursula Ramseyer",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email_audit.arguments.content",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Coffee cancellation and meditation record",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "邮件主题自定义名称"
+        },
+        {
+          "text": "Coffee Break Follow-Up",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_email_audit.arguments.content",
+          "reason": "自定义事件名称"
+        }
+      ],
+      "new_terms": [
+        "Coffee cancellation and meditation record",
+        "Coffee Break Follow-Up"
+      ],
+      "active_vocabulary": {
+        "Aurélien Van der Straeten": 50,
+        "Ursula Ramseyer": 50,
+        "Coffee Break with Aurélien Van der Straeten": 50,
+        "Meditation": 50,
+        "Coffee cancellation and meditation record": 50,
+        "Coffee Break Follow-Up": 50
+      },
+      "vocabulary_sha256": "25a5a1b7806fa020d66fceb3da6d1487a3ccede13628ef604f0bef81a2edaf1f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Ursula Ramseyer",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Akira Kübler",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "完整人名，含特殊字符"
+        },
+        {
+          "text": "Meditation & Coffee",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "群聊自定义标题"
+        }
+      ],
+      "new_terms": [
+        "Akira Kübler",
+        "Meditation & Coffee"
+      ],
+      "active_vocabulary": {
+        "Aurélien Van der Straeten": 50,
+        "Ursula Ramseyer": 50,
+        "Coffee Break with Aurélien Van der Straeten": 50,
+        "Meditation": 50,
+        "Coffee cancellation and meditation record": 50,
+        "Coffee Break Follow-Up": 50,
+        "Akira Kübler": 50,
+        "Meditation & Coffee": 50
+      },
+      "vocabulary_sha256": "a4b5afaeb5b329cc6d3e60a1ccd497f8e5d9816dad9bbbdcda40893fffe853d8"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "b394d470875248a6906a124360f21c4e977930d8733fed833796a0ef9c2390c3",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3563,
+        "completion_tokens": 361,
+        "total_tokens": 3924,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3307
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.462
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0968_awm15kgqgj7s5azcpbf3kygytooq5ucv",
+  "extracted_at": "2026-11-22T06:44:45.119697+00:00"
+}

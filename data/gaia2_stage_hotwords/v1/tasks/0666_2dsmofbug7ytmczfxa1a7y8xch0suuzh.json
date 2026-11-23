@@ -1,0 +1,176 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0666_2dsmofbug7ytmczfxa1a7y8xch0suuzh",
+  "model": "deepseek-flash",
+  "input_sha256": "9f6a8ddf6052571f76b0a9024a2cdba416afa50dbe755a6f458125788e6d5226",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Axel",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名，对话对象"
+        },
+        {
+          "text": "Kungsholmsgatan 10, 112 27 Stockholm",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "咖啡店地址"
+        },
+        {
+          "text": "Coffee Shop",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "咖啡店名称"
+        },
+        {
+          "text": "Coffee Break with Axel",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "日历事件名称"
+        }
+      ],
+      "new_terms": [
+        "Axel",
+        "Kungsholmsgatan 10, 112 27 Stockholm",
+        "Coffee Shop",
+        "Coffee Break with Axel"
+      ],
+      "active_vocabulary": {
+        "Axel": 50,
+        "Kungsholmsgatan 10, 112 27 Stockholm": 50,
+        "Coffee Shop": 50,
+        "Coffee Break with Axel": 50
+      },
+      "vocabulary_sha256": "27f7e65193ee6dbe4f2926241898df272e42ab2f2761ed9abe4a909d748481ab"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Axel",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Kungsholmsgatan 10, 112 27 Stockholm",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "目的地地址"
+        },
+        {
+          "text": "Home Office",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "地点名称"
+        },
+        {
+          "text": "Plan next week's content",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "日历事件标题"
+        },
+        {
+          "text": "Coffee Break with Axel",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "日历事件名称"
+        }
+      ],
+      "new_terms": [
+        "Home Office",
+        "Plan next week's content"
+      ],
+      "active_vocabulary": {
+        "Axel": 50,
+        "Kungsholmsgatan 10, 112 27 Stockholm": 50,
+        "Coffee Shop": 50,
+        "Coffee Break with Axel": 50,
+        "Home Office": 50,
+        "Plan next week's content": 50
+      },
+      "vocabulary_sha256": "bfba8916557c9ebdb6c6e74b3b259ac60d8e4364cb25a2a4a8389427e91a96ef"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Axel",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Kungsholmsgatan 10, 112 27 Stockholm",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "咖啡店地址"
+        },
+        {
+          "text": "Coffee Shop",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "咖啡店名称"
+        },
+        {
+          "text": "Edit Instagram captions",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "日历事件标题"
+        },
+        {
+          "text": "Home Office",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "地点名称"
+        },
+        {
+          "text": "Coffee Break with Axel",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "日历事件名称"
+        }
+      ],
+      "new_terms": [
+        "Edit Instagram captions"
+      ],
+      "active_vocabulary": {
+        "Axel": 50,
+        "Kungsholmsgatan 10, 112 27 Stockholm": 50,
+        "Coffee Shop": 50,
+        "Coffee Break with Axel": 50,
+        "Home Office": 50,
+        "Plan next week's content": 50,
+        "Edit Instagram captions": 50
+      },
+      "vocabulary_sha256": "2785acce642f5cde255d3ed2ff49d18f0ba83a13171f69d2d26bf99b0e8b3c01"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "f8582afe8de9a9b9795f9dfc2e68a9466f3775f0dbce8948c996e077aa7680b8",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3977,
+        "completion_tokens": 421,
+        "total_tokens": 4398,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3721
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.509
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0666_2dsmofbug7ytmczfxa1a7y8xch0suuzh",
+  "extracted_at": "2026-11-22T06:43:18.638716+00:00"
+}

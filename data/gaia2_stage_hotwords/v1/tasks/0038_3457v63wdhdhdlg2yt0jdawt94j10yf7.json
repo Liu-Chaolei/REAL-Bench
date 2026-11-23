@@ -1,0 +1,102 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0038_3457v63wdhdhdlg2yt0jdawt94j10yf7",
+  "model": "deepseek-flash",
+  "input_sha256": "f968ebf480662acf8b37fdb5938e73ab66c04e92d24babdc35181e66321c143d",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Prasert Suthipong",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_2.arguments.content",
+          "reason": "泰国联系人姓名"
+        }
+      ],
+      "new_terms": [
+        "Prasert Suthipong"
+      ],
+      "active_vocabulary": {
+        "Prasert Suthipong": 50
+      },
+      "vocabulary_sha256": "401b80da584e1ec500e2e9a14864c947aeaf7b14bf4efdb7c4be0c0961a6d000"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Prasert Suthipong",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "泰国联系人姓名"
+        },
+        {
+          "text": "Exploring Opportunities for Financial Inclusion in Thailand",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_3.arguments.content",
+          "reason": "邮件主题名称"
+        }
+      ],
+      "new_terms": [
+        "Exploring Opportunities for Financial Inclusion in Thailand"
+      ],
+      "active_vocabulary": {
+        "Prasert Suthipong": 50,
+        "Exploring Opportunities for Financial Inclusion in Thailand": 50
+      },
+      "vocabulary_sha256": "867d1d25188a20a1a7c821b9978b1915891a226e8dc538acd8cac1232f521709"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "7a986d07f8ea28bd26ef0d3fc562a025de7cbd641092d3faf8ff5c45a427a045",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1090,
+        "completion_tokens": 175,
+        "total_tokens": 1265,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 834
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 0.965,
+      "error": "4 validation errors for Extraction\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage0.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage1.reference_reply.s..._s1_2.arguments.content', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage2.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "ef2b340d0ee0f9d0d4906305af3ac0d8e3d0d92f38b0c6823f64863c3641363c",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1882,
+        "completion_tokens": 135,
+        "total_tokens": 2017,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        },
+        "prompt_cache_hit_tokens": 1152,
+        "prompt_cache_miss_tokens": 730
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.827
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0038_3457v63wdhdhdlg2yt0jdawt94j10yf7",
+  "extracted_at": "2026-11-22T06:39:45.387210+00:00"
+}

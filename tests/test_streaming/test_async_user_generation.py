@@ -76,6 +76,32 @@ def agent(text="", speech=False, event_id=None):
     )
 
 
+def test_unchanged_streaming_snapshot_does_not_invent_new_heard_text(caller):
+    user, state, _ = caller
+
+    def chunk(fragments):
+        return AssistantMessage(
+            role="assistant",
+            content="Already confirmed words",
+            contains_speech=False,
+            raw_data={
+                "live_transcript": {
+                    "snapshot": {"version": 1, "text": "Already confirmed words"},
+                    "fragments": fragments,
+                }
+            },
+        )
+
+    user._observe_agent_input(state, chunk([]))
+    assert state.agent_input_revision == 0
+    fresh = chunk([{"event_id": "confirmed-1", "text": "Already confirmed words"}])
+    user._observe_agent_input(state, fresh)
+    assert state.agent_input_revision == 1
+    user._observe_agent_input(state, fresh)
+    user._observe_agent_input(state, chunk([]))
+    assert state.agent_input_revision == 1
+
+
 @pytest.fixture
 def caller(monkeypatch):
     user = VoiceStreamingUserSimulator(

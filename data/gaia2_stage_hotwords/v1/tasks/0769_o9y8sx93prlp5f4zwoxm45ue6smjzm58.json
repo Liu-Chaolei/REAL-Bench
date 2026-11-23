@@ -1,0 +1,220 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0769_o9y8sx93prlp5f4zwoxm45ue6smjzm58",
+  "model": "deepseek-flash",
+  "input_sha256": "0027fcf480f4d5d85370ef1d025e95c355fba7eb0e28b6061f06cce97a19e89d",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Humboldt University of Berlin",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "柏林洪堡大学，专有机构名"
+        },
+        {
+          "text": "Leonie Krüger",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-8a54eb4c-6e67-4c3f-a51f-19d9e4a2d445.arguments.title",
+          "reason": "学生姓名，含变音符号"
+        },
+        {
+          "text": "Lea Müller",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dd1de566-5bda-43a5-954b-dd9462c57198.arguments.title",
+          "reason": "学生姓名，含变音符号"
+        },
+        {
+          "text": "Leila Özdemir",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-88a17689-f786-4d9b-bbe6-473c6db4ee7a.arguments.title",
+          "reason": "学生姓名，含变音符号"
+        },
+        {
+          "text": "Premium Wooden Case",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "骰子产品包装名称"
+        }
+      ],
+      "new_terms": [
+        "Humboldt University of Berlin",
+        "Leonie Krüger",
+        "Lea Müller",
+        "Leila Özdemir",
+        "Premium Wooden Case"
+      ],
+      "active_vocabulary": {
+        "Humboldt University of Berlin": 50,
+        "Leonie Krüger": 50,
+        "Lea Müller": 50,
+        "Leila Özdemir": 50,
+        "Premium Wooden Case": 50
+      },
+      "vocabulary_sha256": "731e9acf7c88580b42ab4b927cf4f8afa7b3d9ed1a8f5e429dabb130e8415799"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Humboldt Office Hours",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_create.arguments.title",
+          "reason": "群组自定义名称"
+        },
+        {
+          "text": "Leonie Krüger",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_lookup_0.arguments.user_name",
+          "reason": "学生姓名，含变音符号"
+        },
+        {
+          "text": "Saskia Müller-Friedrich",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_lookup_1.arguments.user_name",
+          "reason": "学生姓名，含连字符复合姓"
+        },
+        {
+          "text": "Lea Müller",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_lookup_2.arguments.user_name",
+          "reason": "学生姓名，含变音符号"
+        },
+        {
+          "text": "Leila Özdemir",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_lookup_3.arguments.user_name",
+          "reason": "学生姓名，含变音符号"
+        }
+      ],
+      "new_terms": [
+        "Humboldt Office Hours",
+        "Saskia Müller-Friedrich"
+      ],
+      "active_vocabulary": {
+        "Humboldt University of Berlin": 50,
+        "Leonie Krüger": 50,
+        "Lea Müller": 50,
+        "Leila Özdemir": 50,
+        "Premium Wooden Case": 50,
+        "Humboldt Office Hours": 50,
+        "Saskia Müller-Friedrich": 50
+      },
+      "vocabulary_sha256": "0f61f0c171e8b4bab343d1e9d7f041a88c87a8a4f27d793c26cccf767ab4ac26"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Leila Özdemir",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "学生姓名，含变音符号"
+        },
+        {
+          "text": "Leonie Krüger",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "学生姓名，含变音符号"
+        },
+        {
+          "text": "Lea Müller",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "学生姓名，含变音符号"
+        },
+        {
+          "text": "Saskia Müller-Friedrich",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "学生姓名，含连字符复合姓"
+        },
+        {
+          "text": "Humboldt University of Berlin",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_note_0.arguments.updates.description",
+          "reason": "柏林洪堡大学，专有机构名"
+        },
+        {
+          "text": "Rainbow Plastic",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "骰子产品品牌/型号名"
+        },
+        {
+          "text": "Premium Wooden Case",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "骰子产品包装名称"
+        },
+        {
+          "text": "Humboldt office-hours cohort",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "联系人描述中追加的自定义标签"
+        }
+      ],
+      "new_terms": [
+        "Rainbow Plastic",
+        "Humboldt office-hours cohort"
+      ],
+      "active_vocabulary": {
+        "Humboldt University of Berlin": 50,
+        "Leonie Krüger": 50,
+        "Lea Müller": 50,
+        "Leila Özdemir": 50,
+        "Premium Wooden Case": 50,
+        "Humboldt Office Hours": 50,
+        "Saskia Müller-Friedrich": 50,
+        "Rainbow Plastic": 50,
+        "Humboldt office-hours cohort": 50
+      },
+      "vocabulary_sha256": "d84f824398ca1dcda24a167c773bcc8adc18cf86c37a0b5b7f9ecab245139c00"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "c8d17f90a1f189062c83f56ef6f333711a7c2d87ed54ea7561f697c9e07f12ec",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 6438,
+        "completion_tokens": 912,
+        "total_tokens": 7350,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 6182
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 3.565,
+      "error": "Not an exact quotation of a source in stage 0: 'Saskia Müller-Friedrich' from 'stage0.tool_gt.OracleEvent-AGENT-b2444dd0-d765-4cfc-acf7-5a2e869e8a14.arguments.recipients[1]'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "58eabe8389c8c035efbbc5dc32d3cd4e5659f50102483a1731388376ee36c370",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 7801,
+        "completion_tokens": 839,
+        "total_tokens": 8640,
+        "prompt_tokens_details": {
+          "cached_tokens": 7296
+        },
+        "prompt_cache_hit_tokens": 7296,
+        "prompt_cache_miss_tokens": 505
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 3.245
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0769_o9y8sx93prlp5f4zwoxm45ue6smjzm58",
+  "extracted_at": "2026-11-22T06:43:51.763123+00:00"
+}

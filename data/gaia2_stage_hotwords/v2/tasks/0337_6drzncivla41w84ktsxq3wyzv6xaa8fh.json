@@ -1,0 +1,224 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0337_6drzncivla41w84ktsxq3wyzv6xaa8fh",
+  "model": "deepseek-flash",
+  "input_sha256": "92674245ccbd1902d1cc3b877aceb80121e53424bb392c9bdb5f691dedb4d117",
+  "review_input_sha256": "00cb58d4b328d843849af70470b6a9711a0af4cf5eab37c6d99c3e85b2a86610",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "44f543bc1a03bf68c1114978577fcc82d145b1eacf37821735ff29ffdc32ea0d",
+  "reference_results_sha256": "06946e924c158fb0290f5d587d22f77b02f4af12825f578b665d00996425c7f7",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Fatima Al-Khaja",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b8d2322d-f239-4da9-b66c-3ccb6768a27b.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Fatima Al-Mansoori",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b8d2322d-f239-4da9-b66c-3ccb6768a27b.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Fatima Al-Khateeb",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b8d2322d-f239-4da9-b66c-3ccb6768a27b.arguments.attendees[2]"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Fatima Al-Khansa",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b8d2322d-f239-4da9-b66c-3ccb6768a27b.arguments.attendees[3]"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Jameela Al-Farsi",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b8d2322d-f239-4da9-b66c-3ccb6768a27b.arguments.attendees[4]"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Jamila Al-Khateeb",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b8d2322d-f239-4da9-b66c-3ccb6768a27b.arguments.attendees[5]"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "Jamila Al-Farsi",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b8d2322d-f239-4da9-b66c-3ccb6768a27b.arguments.attendees[6]"
+    },
+    "stage0.existing_catalog.7": {
+      "stage": 0,
+      "text": "Jawaher Al-Mansour",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b8d2322d-f239-4da9-b66c-3ccb6768a27b.arguments.attendees[7]"
+    },
+    "stage0.existing_catalog.8": {
+      "stage": 0,
+      "text": "Liesbeth Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-7e651c3a-6746-4422-a0e6-6535fc3c34d3.arguments.content"
+    },
+    "stage0.existing_catalog.9": {
+      "stage": 0,
+      "text": "Ubisoft Six Collection Figure",
+      "original_source": "stage0.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Ubisoft Six Collection Figure",
+          "kind": "product",
+          "source": "stage0.existing_catalog.9",
+          "reason": "特定产品名，含品牌与系列名",
+          "weight": 50
+        },
+        {
+          "text": "Fatima Al-Khaja",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整阿拉伯语人名，含连字符姓氏，ASR易错",
+          "weight": 50
+        },
+        {
+          "text": "Fatima Al-Khansa",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整阿拉伯语人名，罕见姓氏",
+          "weight": 50
+        },
+        {
+          "text": "Fatima Al-Khateeb",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整阿拉伯语人名，拼写特殊",
+          "weight": 50
+        },
+        {
+          "text": "Fatima Al-Mansoori",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整阿拉伯语人名，长姓氏易误识",
+          "weight": 50
+        },
+        {
+          "text": "Jameela Al-Farsi",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整阿拉伯语人名，拼写易混",
+          "weight": 50
+        },
+        {
+          "text": "Jamila Al-Farsi",
+          "kind": "person",
+          "source": "stage0.existing_catalog.6",
+          "reason": "完整阿拉伯语人名，易与Jameela混淆",
+          "weight": 50
+        },
+        {
+          "text": "Jamila Al-Khateeb",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "完整阿拉伯语人名，与Jameela易混",
+          "weight": 50
+        },
+        {
+          "text": "Jawaher Al-Mansour",
+          "kind": "person",
+          "source": "stage0.existing_catalog.7",
+          "reason": "完整阿拉伯语人名，罕见名Jawaher",
+          "weight": 50
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.8",
+          "reason": "完整荷兰语人名，拼写困难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Ubisoft Six Collection Figure",
+        "Fatima Al-Khaja",
+        "Fatima Al-Khansa",
+        "Fatima Al-Khateeb",
+        "Fatima Al-Mansoori",
+        "Jameela Al-Farsi",
+        "Jamila Al-Farsi",
+        "Jamila Al-Khateeb",
+        "Jawaher Al-Mansour",
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Ubisoft Six Collection Figure": 50,
+        "Fatima Al-Khaja": 50,
+        "Fatima Al-Khansa": 50,
+        "Fatima Al-Khateeb": 50,
+        "Fatima Al-Mansoori": 50,
+        "Jameela Al-Farsi": 50,
+        "Jamila Al-Farsi": 50,
+        "Jamila Al-Khateeb": 50,
+        "Jawaher Al-Mansour": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "550aec098f01e9a458f76dfb723033652fc97b177cb691cd0e862ccfdcf4fe02"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Ubisoft Six Collection Figure": 50,
+        "Fatima Al-Khaja": 50,
+        "Fatima Al-Khansa": 50,
+        "Fatima Al-Khateeb": 50,
+        "Fatima Al-Mansoori": 50,
+        "Jameela Al-Farsi": 50,
+        "Jamila Al-Farsi": 50,
+        "Jamila Al-Khateeb": 50,
+        "Jawaher Al-Mansour": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "550aec098f01e9a458f76dfb723033652fc97b177cb691cd0e862ccfdcf4fe02"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Ubisoft Six Collection Figure": 50,
+        "Fatima Al-Khaja": 50,
+        "Fatima Al-Khansa": 50,
+        "Fatima Al-Khateeb": 50,
+        "Fatima Al-Mansoori": 50,
+        "Jameela Al-Farsi": 50,
+        "Jamila Al-Farsi": 50,
+        "Jamila Al-Khateeb": 50,
+        "Jawaher Al-Mansour": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "550aec098f01e9a458f76dfb723033652fc97b177cb691cd0e862ccfdcf4fe02"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Ela"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:15.556165+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

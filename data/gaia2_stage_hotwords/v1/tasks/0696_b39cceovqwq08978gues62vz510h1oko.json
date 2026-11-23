@@ -1,0 +1,183 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0696_b39cceovqwq08978gues62vz510h1oko",
+  "model": "deepseek-flash",
+  "input_sha256": "c0e7eabc8f973e676fd8394587ccbb3b3fdcef6837cc8bad59ce9e49433ffac4",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Luís Pimentel",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Aurélia Silva e Castro",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Porto",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "地名"
+        },
+        {
+          "text": "Jamila Patel",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Joaquim Pereira",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ba2edefa-22c0-499c-9ad8-3fd8f4091c26.arguments.content",
+          "reason": "签名人名"
+        },
+        {
+          "text": "Supply Chain & Manufacturing Plant Walk-Through",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "活动专名"
+        }
+      ],
+      "new_terms": [
+        "Luís Pimentel",
+        "Aurélia Silva e Castro",
+        "Porto",
+        "Jamila Patel",
+        "Jamila Fernandes",
+        "Joaquim Pereira",
+        "Aurélien LaFleur",
+        "Supply Chain & Manufacturing Plant Walk-Through"
+      ],
+      "active_vocabulary": {
+        "Luís Pimentel": 50,
+        "Aurélia Silva e Castro": 50,
+        "Porto": 50,
+        "Jamila Patel": 50,
+        "Jamila Fernandes": 50,
+        "Joaquim Pereira": 50,
+        "Aurélien LaFleur": 50,
+        "Supply Chain & Manufacturing Plant Walk-Through": 50
+      },
+      "vocabulary_sha256": "440ea864fe2c7ff4ce0f4f0ef76a69322fe0586f55b89976b844dbb8b8c10ac2"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Luís",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Aurélia",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Porto",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "地名"
+        }
+      ],
+      "new_terms": [
+        "Luís",
+        "Aurélia"
+      ],
+      "active_vocabulary": {
+        "Luís Pimentel": 50,
+        "Aurélia Silva e Castro": 50,
+        "Porto": 50,
+        "Jamila Patel": 50,
+        "Jamila Fernandes": 50,
+        "Joaquim Pereira": 50,
+        "Aurélien LaFleur": 50,
+        "Supply Chain & Manufacturing Plant Walk-Through": 50,
+        "Luís": 50,
+        "Aurélia": 50
+      },
+      "vocabulary_sha256": "1e14afbe8a7f9594af790aab8b0cc181fd6d65a69d6291ebdea37ab7e1aa1e93"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Luís Pimentel",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_tour_event.arguments.description",
+          "reason": "人名"
+        },
+        {
+          "text": "Aurélia Silva e Castro",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_tour_event.arguments.description",
+          "reason": "人名"
+        },
+        {
+          "text": "Porto",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "地名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Luís Pimentel": 50,
+        "Aurélia Silva e Castro": 50,
+        "Porto": 50,
+        "Jamila Patel": 50,
+        "Jamila Fernandes": 50,
+        "Joaquim Pereira": 50,
+        "Aurélien LaFleur": 50,
+        "Supply Chain & Manufacturing Plant Walk-Through": 50,
+        "Luís": 50,
+        "Aurélia": 50
+      },
+      "vocabulary_sha256": "1e14afbe8a7f9594af790aab8b0cc181fd6d65a69d6291ebdea37ab7e1aa1e93"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "4d8f6a1d9a709bdc1f48ba3b208e1876bc8028ad0a0f447be72cef40d5219580",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4349,
+        "completion_tokens": 424,
+        "total_tokens": 4773,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4093
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.597
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0696_b39cceovqwq08978gues62vz510h1oko",
+  "extracted_at": "2026-11-22T06:43:25.468746+00:00"
+}

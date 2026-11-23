@@ -1,0 +1,141 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0883_20h78i8ptuul6yuhk6cke8lzvmp929c2",
+  "model": "deepseek-flash",
+  "input_sha256": "4759f4464dd74a031c3601aa7c116002bf717b8f016e5ddd5a27ee5ef860c6bf",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Nadira Jensen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "HMS Dolores",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品名称"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1ec54f2a-1bdd-4786-a6b0-b550e3da3c63.arguments.content",
+          "reason": "邮件署名"
+        }
+      ],
+      "new_terms": [
+        "Nadira Jensen",
+        "Nalani Jensen",
+        "HMS Dolores",
+        "Aurélien LaFleur"
+      ],
+      "active_vocabulary": {
+        "Nadira Jensen": 50,
+        "Nalani Jensen": 50,
+        "HMS Dolores": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "5837547ebe4cf63c993f83ce5333c635b3aa68fc73391b61e6c0ba62f2736105"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Nadira Jensen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "HMS Dolores",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "商品名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Nadira Jensen": 50,
+        "Nalani Jensen": 50,
+        "HMS Dolores": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "5837547ebe4cf63c993f83ce5333c635b3aa68fc73391b61e6c0ba62f2736105"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Nalani",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Nadira",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "HMS Dolores",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "商品名称"
+        }
+      ],
+      "new_terms": [
+        "Nalani",
+        "Nadira"
+      ],
+      "active_vocabulary": {
+        "Nadira Jensen": 50,
+        "Nalani Jensen": 50,
+        "HMS Dolores": 50,
+        "Aurélien LaFleur": 50,
+        "Nalani": 50,
+        "Nadira": 50
+      },
+      "vocabulary_sha256": "c2d19775defc56e68a9d2eb4d58ba91db41f2ea7b139b563c9c2b78d9c21e766"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "0261c834bb935e9a6b288dc79b4325c7bb61471ef94af6f4a0e6b8fe579e6549",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3485,
+        "completion_tokens": 316,
+        "total_tokens": 3801,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3229
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.226
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0883_20h78i8ptuul6yuhk6cke8lzvmp929c2",
+  "extracted_at": "2026-11-22T06:44:19.707262+00:00"
+}

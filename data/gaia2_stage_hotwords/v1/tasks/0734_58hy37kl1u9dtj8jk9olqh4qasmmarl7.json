@@ -1,0 +1,231 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0734_58hy37kl1u9dtj8jk9olqh4qasmmarl7",
+  "model": "deepseek-flash",
+  "input_sha256": "331f0044c0ec1e8d835f49022e97d2ce42163c0600ff6983545035ed2a82ddb6",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Katarína Nováková",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Katarína",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1de7b666-c945-4d43-89ff-92f6db42085e.arguments.content",
+          "reason": "邮件称呼中的名字"
+        },
+        {
+          "text": "Revell",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1de7b666-c945-4d43-89ff-92f6db42085e.arguments.content",
+          "reason": "模型品牌名"
+        },
+        {
+          "text": "'68 Dodge Charger",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "产品型号名"
+        },
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1de7b666-c945-4d43-89ff-92f6db42085e.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Matěj",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-cc9f7d4a-6572-41b3-a4ed-03048678558f.arguments.content",
+          "reason": "邮件署名"
+        }
+      ],
+      "new_terms": [
+        "Katarína Nováková",
+        "Katarína",
+        "Revell",
+        "'68 Dodge Charger",
+        "Matěj Nováček",
+        "Matěj"
+      ],
+      "active_vocabulary": {
+        "Katarína Nováková": 50,
+        "Katarína": 50,
+        "Revell": 50,
+        "'68 Dodge Charger": 50,
+        "Matěj Nováček": 50,
+        "Matěj": 50
+      },
+      "vocabulary_sha256": "de6785bd89f6858923858b8cc6e1389521325ed4a464371912203225b12d3219"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Bohumil",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "发件人名字"
+        },
+        {
+          "text": "Cloud Strife",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "手办角色名"
+        },
+        {
+          "text": "Square Enix",
+          "kind": "organization",
+          "source": "stage1.source_task",
+          "reason": "厂商名"
+        },
+        {
+          "text": "Final Fantasy",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "作品系列名"
+        },
+        {
+          "text": "Bring Arts",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "产品线名"
+        },
+        {
+          "text": "Another Form Variation",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "产品变体名"
+        },
+        {
+          "text": "Bohumil Nováček",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人全名"
+        },
+        {
+          "text": "Matěj",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "邮件署名"
+        }
+      ],
+      "new_terms": [
+        "Bohumil",
+        "Cloud Strife",
+        "Square Enix",
+        "Final Fantasy",
+        "Bring Arts",
+        "Another Form Variation",
+        "Bohumil Nováček"
+      ],
+      "active_vocabulary": {
+        "Katarína Nováková": 50,
+        "Katarína": 50,
+        "Revell": 50,
+        "'68 Dodge Charger": 50,
+        "Matěj Nováček": 50,
+        "Matěj": 50,
+        "Bohumil": 50,
+        "Cloud Strife": 50,
+        "Square Enix": 50,
+        "Final Fantasy": 50,
+        "Bring Arts": 50,
+        "Another Form Variation": 50,
+        "Bohumil Nováček": 50
+      },
+      "vocabulary_sha256": "6ae8425011382d6ccbe2aefd43c9d4b16d79f67f3d8827e6e0cb4c88180db314"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Bohumil",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "提及的人名"
+        },
+        {
+          "text": "Cloud Strife",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "手办角色名"
+        },
+        {
+          "text": "XWE4N0PJ1Q",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "折扣码"
+        }
+      ],
+      "new_terms": [
+        "XWE4N0PJ1Q"
+      ],
+      "active_vocabulary": {
+        "Katarína Nováková": 50,
+        "Katarína": 50,
+        "Revell": 50,
+        "'68 Dodge Charger": 50,
+        "Matěj Nováček": 50,
+        "Matěj": 50,
+        "Bohumil": 50,
+        "Cloud Strife": 50,
+        "Square Enix": 50,
+        "Final Fantasy": 50,
+        "Bring Arts": 50,
+        "Another Form Variation": 50,
+        "Bohumil Nováček": 50,
+        "XWE4N0PJ1Q": 50
+      },
+      "vocabulary_sha256": "f86a8632faaf5b894743fb62326bf3ff2df38c7317b3c8d26002d18b9368179c"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "ce185d18ba6b8fa77655c091bf50f216a5ae3ddda7c80f44a80f546bfadb7f10",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2107,
+        "completion_tokens": 608,
+        "total_tokens": 2715,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1851
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 2.208,
+      "error": "1 validation error for Extraction\nstages.0.terms.2.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "fffd5ecdc7f9968dd5a810dc4bf392d3969a98e602c20920de03a8f6deb589d5",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3176,
+        "completion_tokens": 608,
+        "total_tokens": 3784,
+        "prompt_tokens_details": {
+          "cached_tokens": 2688
+        },
+        "prompt_cache_hit_tokens": 2688,
+        "prompt_cache_miss_tokens": 488
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.07
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0734_58hy37kl1u9dtj8jk9olqh4qasmmarl7",
+  "extracted_at": "2026-11-22T06:43:39.706079+00:00"
+}

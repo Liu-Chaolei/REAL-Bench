@@ -1,0 +1,144 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0495_3tljy1ty3llg3ndo0s65pwiewd1xhxu7",
+  "model": "deepseek-flash",
+  "input_sha256": "29e2d882ed8432b5dbe1af815ddfdf3942160d95197c2c22e75e687312493144",
+  "review_input_sha256": "c51601c1453fb6427faee6d74440ef0694361c3fb0e70c9631922e0f454e18ca",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "e629eddb80bc8a268eea50db2d3eae8dca9ffb273e81f12307f951b82ab255d7",
+  "reference_results_sha256": "57349280d9c2593fa7b49fac32001eda5387bca5039168df12b8fbfc2e2ed58d",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Koenraad",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Thierry",
+      "original_source": "stage0.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Koenraad Vandenberghe",
+      "original_source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Thierry Vandenberghe",
+      "original_source": "stage2.tool_gt.series_s2_create.arguments.attendees[1]"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Sint-Michielsstraat 23, 3000 Leuven, Belgium",
+      "original_source": "stage2.tool_gt.series_s2_create.arguments.location"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Koenraad",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "荷兰语专有名字，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Thierry",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "法语专有名字，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Koenraad",
+        "Thierry"
+      ],
+      "active_vocabulary": {
+        "Koenraad": 50,
+        "Thierry": 50
+      },
+      "vocabulary_sha256": "ac2726b0892dd35232ba78d6cef3f91747bf6e745da7878f332f57c81a9915cd"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Koenraad": 50,
+        "Thierry": 50
+      },
+      "vocabulary_sha256": "ac2726b0892dd35232ba78d6cef3f91747bf6e745da7878f332f57c81a9915cd"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Sint-Michielsstraat 23, 3000 Leuven, Belgium",
+          "kind": "place",
+          "source": "stage2.existing_catalog.2",
+          "reason": "含荷兰语街道名的完整地址",
+          "weight": 50
+        },
+        {
+          "text": "Koenraad Vandenberghe",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整荷兰语人名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Thierry Vandenberghe",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "完整人名，姓氏拼写困难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Sint-Michielsstraat 23, 3000 Leuven, Belgium",
+        "Koenraad Vandenberghe",
+        "Thierry Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Koenraad": 50,
+        "Thierry": 50,
+        "Sint-Michielsstraat 23, 3000 Leuven, Belgium": 50,
+        "Koenraad Vandenberghe": 50,
+        "Thierry Vandenberghe": 50
+      },
+      "vocabulary_sha256": "4a73d22ec9fcdcabb719e8f23b13b7c5cb8a98651d95624e18f84cfdae0eb597"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [
+    {
+      "path": "$ .messages[1].attachment",
+      "chars": 3133100,
+      "sha256": "5544a17027912106b0d0ec74ec1be27990e68ed99ccac286462a42020fb806c6"
+    }
+  ],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:08.160568+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

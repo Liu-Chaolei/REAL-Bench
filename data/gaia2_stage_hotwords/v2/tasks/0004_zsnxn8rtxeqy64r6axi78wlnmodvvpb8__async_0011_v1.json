@@ -1,0 +1,142 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0004_zsnxn8rtxeqy64r6axi78wlnmodvvpb8__async_0011_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "d33e515844b9091031b149688aebb1b4b7a1419f1f5ad3eb676dbc7c41b28c38",
+  "review_input_sha256": "ace5565ba98fee1b3a9e2fef78e1172cc8793899e222a3ff5a6dc153991145e4",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "ac75e547b0b9d4843205f7c8ee8e6dae957d5f95d5d9dc29a62a37b5e1265faa",
+  "reference_results_sha256": "588ec6a2f391773e2d830014a47de7e5f765e01a8e8eb04417f1530455ec9f2c",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Frantz Fanon",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Vladimíra Nováková",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-6d426bab-bfc7-42b1-9204-db67ff3ea9dc.arguments.content"
+    },
+    "stage1.tool_response.series_s1_lookup": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Vladimíra\", \"last_name\": \"Nováková\", \"contact_id\": \"8988ec18948f46469c3740381bcbdf6d\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"46\", \"nationality\": \"Czech\", \"city_living\": \"Prague\", \"country\": \"Czech Republic\", \"status\": \"Status.EMPLOYED\", \"job\": \"Detective Inspector\", \"description\": \"Vladimíra Nováková is a highly respected and accomplished Detective Inspector in the Prague Police Department.\", \"phone\": \"+420732456789\", \"email\": \"vnovakova@pcr.cz\", \"address\": \"Křižovnická 86/4, 110 00 Prague 1, Czech Republic\"}",
+      "event_id": "series_s1_lookup",
+      "response_sha256": "036532b59535cc590a0adc952c65b4c77f3a24bbc3fa7670ad112248190f4ff8"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Křižovnická 86/4, 110 00 Prague 1, Czech Republic",
+      "original_source": "stage2.tool_gt.series_s2_add.arguments.location"
+    },
+    "stage2.tool_response.series_s2_daycheck": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"6b4b375b95c14327a1fcf95f7d782822\", \"title\": \"Coffee Break with Colleagues\", \"start_datetime\": \"1729249200\", \"end_datetime\": \"1729252800\", \"tag\": \"Social\", \"description\": \"Catch up with colleagues over coffee and discuss ongoing projects.\", \"location\": \"Charles University, Prague\", \"attendees\": [\"Šárka Nováková\"], \"start_strftime\": \"Friday, 2024-10-18 11:00:00\", \"end_strftime\": \"Friday, 2024-10-18 12:00:00\"}, {\"event_id\": \"c6b5d3f388174b84a5dc8fe77cbcef01\", \"title\": \"International Relations Lecture\", \"start_datetime\": \"1729242000\", \"end_datetime\": \"1729249200\", \"tag\": \"Academics\", \"description\": \"Lecture on global governance and international relations at Charles University.\", \"location\": \"Charles University, Prague\", \"attendees\": [], \"start_strftime\": \"Friday, 2024-10-18 09:00:00\", \"end_strftime\": \"Friday, 2024-10-18 11:00:00\"}, {\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Follow-up Meeting with Vladimíra Nováková\", \"start_datetime\": \"1729263600.0\", \"end_datetime\": \"1729267200.0\", \"tag\": \"Networking\", \"description\": null, \"location\": \"Křižovnická 86/4, 110 00 Prague 1, Czech Republic\", \"attendees\": [\"Vladimíra Nováková\"], \"start_strftime\": \"Friday, 2024-10-18 15:00:00\", \"end_strftime\": \"Friday, 2024-10-18 16:00:00\"}], \"range\": [\"0\", \"3\"], \"total\": \"3\"}",
+      "event_id": "series_s2_daycheck",
+      "response_sha256": "42052dc260f983cf196638b31e550ac4fc68572374f819c6c1284d417ab6b114"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Frantz Fanon",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，具有辨识度",
+          "weight": 50
+        },
+        {
+          "text": "Vladimíra Nováková",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Frantz Fanon",
+        "Vladimíra Nováková"
+      ],
+      "active_vocabulary": {
+        "Frantz Fanon": 50,
+        "Vladimíra Nováková": 50
+      },
+      "vocabulary_sha256": "eafa2712fd4fddc6ef3ab7237d3fad002de8fed022737b90c0faffd1f0e6b74b"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Vladimíra Nováková",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_lookup",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Frantz Fanon": 50,
+        "Vladimíra Nováková": 50
+      },
+      "vocabulary_sha256": "eafa2712fd4fddc6ef3ab7237d3fad002de8fed022737b90c0faffd1f0e6b74b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Šárka Nováková",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_daycheck",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Křižovnická",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号的困难街道名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Šárka Nováková",
+        "Křižovnická"
+      ],
+      "active_vocabulary": {
+        "Frantz Fanon": 50,
+        "Vladimíra Nováková": 50,
+        "Šárka Nováková": 50,
+        "Křižovnická": 50
+      },
+      "vocabulary_sha256": "799744d5b8d6d4fcf4a50648cc27a0630051c140485254355dd7f59a7364d4c3"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Detective Inspector",
+    "Křižovnická 86/4, 110 00 Prague 1, Czech Republic"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:42.012152+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

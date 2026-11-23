@@ -1,0 +1,228 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0084_wvmtc5auy4ioyglwkyxuer2zfdr1xnw8__mind_change_v1__async_0084_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "21ba318a370cbb8580ea0e8f5216327e86e15dbaa5559e9c417270a7ff3dfc86",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Åshild Nystad",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "100% Wool Navy Aurora 8\" Woolsey",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品型号名称"
+        },
+        {
+          "text": "Tromsø",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "挪威城市名"
+        },
+        {
+          "text": "Stavanger Cathedral",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "上车地点名称"
+        },
+        {
+          "text": "Stavanger Airport, Sola",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "机场地点名称"
+        },
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7fc938f6-936c-4a6f-830a-59ba15895a15.arguments.content",
+          "reason": "邮件收件人姓名"
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7fc938f6-936c-4a6f-830a-59ba15895a15.arguments.content",
+          "reason": "邮件署名姓名"
+        }
+      ],
+      "new_terms": [
+        "Åshild Nystad",
+        "100% Wool Navy Aurora 8\" Woolsey",
+        "Tromsø",
+        "Stavanger Cathedral",
+        "Stavanger Airport, Sola",
+        "Astrid",
+        "Åse Kjellstad"
+      ],
+      "active_vocabulary": {
+        "Åshild Nystad": 50,
+        "100% Wool Navy Aurora 8\" Woolsey": 50,
+        "Tromsø": 50,
+        "Stavanger Cathedral": 50,
+        "Stavanger Airport, Sola": 50,
+        "Astrid": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "3fafe2213a307928bbf5f1945bc31fe3320264c2a7db38176483d40ec06f2ef4"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Stavanger",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "挪威城市名"
+        },
+        {
+          "text": "Kåre Fjellstad",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Stavanger Suites",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Kongsgata 20",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "公寓地址"
+        },
+        {
+          "text": "Stavanger City Apartment",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Kirkelivatnet 12",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "公寓地址"
+        },
+        {
+          "text": "Stavanger City Living",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Kvadraturen 12",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "公寓地址"
+        }
+      ],
+      "new_terms": [
+        "Stavanger",
+        "Kåre Fjellstad",
+        "Stavanger Suites",
+        "Kongsgata 20",
+        "Stavanger City Apartment",
+        "Kirkelivatnet 12",
+        "Stavanger City Living",
+        "Kvadraturen 12"
+      ],
+      "active_vocabulary": {
+        "Åshild Nystad": 50,
+        "100% Wool Navy Aurora 8\" Woolsey": 50,
+        "Tromsø": 50,
+        "Stavanger Cathedral": 50,
+        "Stavanger Airport, Sola": 50,
+        "Astrid": 50,
+        "Åse Kjellstad": 50,
+        "Stavanger": 50,
+        "Kåre Fjellstad": 50,
+        "Stavanger Suites": 50,
+        "Kongsgata 20": 50,
+        "Stavanger City Apartment": 50,
+        "Kirkelivatnet 12": 50,
+        "Stavanger City Living": 50,
+        "Kvadraturen 12": 50
+      },
+      "vocabulary_sha256": "e08c83060300dc9ea716333d3d0f0d07a5566fab225d4e084d8b99429e4da2da"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Nordic Film Picks",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "群组标题名称"
+        },
+        {
+          "text": "Kofi Owusu",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Alejandro Moreno-González",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "联系人姓名"
+        }
+      ],
+      "new_terms": [
+        "Nordic Film Picks",
+        "Kofi Owusu",
+        "Alejandro Moreno-González"
+      ],
+      "active_vocabulary": {
+        "Åshild Nystad": 50,
+        "100% Wool Navy Aurora 8\" Woolsey": 50,
+        "Tromsø": 50,
+        "Stavanger Cathedral": 50,
+        "Stavanger Airport, Sola": 50,
+        "Astrid": 50,
+        "Åse Kjellstad": 50,
+        "Stavanger": 50,
+        "Kåre Fjellstad": 50,
+        "Stavanger Suites": 50,
+        "Kongsgata 20": 50,
+        "Stavanger City Apartment": 50,
+        "Kirkelivatnet 12": 50,
+        "Stavanger City Living": 50,
+        "Kvadraturen 12": 50,
+        "Nordic Film Picks": 50,
+        "Kofi Owusu": 50,
+        "Alejandro Moreno-González": 50
+      },
+      "vocabulary_sha256": "eb29dd3cc9ab7ebe59997be4c655b71eadb9d84a8ca2567525c12682b3d08e57"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "d946722439ffed31023e0f5b6957582374cd79d9158e6f6ba96b14103661565f",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3388,
+        "completion_tokens": 638,
+        "total_tokens": 4026,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3132
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.369
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0084_wvmtc5auy4ioyglwkyxuer2zfdr1xnw8__mind_change_v1__async_0084_v1",
+  "extracted_at": "2026-11-22T06:46:53.045289+00:00"
+}

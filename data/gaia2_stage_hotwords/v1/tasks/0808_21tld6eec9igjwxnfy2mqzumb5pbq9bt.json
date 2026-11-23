@@ -1,0 +1,153 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0808_21tld6eec9igjwxnfy2mqzumb5pbq9bt",
+  "model": "deepseek-flash",
+  "input_sha256": "833b85c245a9f3e0806d2385b0f81735c118be757d90a4e423ca17ab3d52019a",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Disney Princess Heart Strong Snow White Dress",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定商品名称"
+        },
+        {
+          "text": "Rubie's Costume Co Men's Minion Unisex Hoodie",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定商品名称"
+        },
+        {
+          "text": "Anastasiya",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-cea5e857-2134-432f-bf95-88b6971124f1.arguments.content",
+          "reason": "邮件署名"
+        },
+        {
+          "text": "aoifenichonchuir",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-cea5e857-2134-432f-bf95-88b6971124f1.arguments.recipients[0]",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "saoirse.nimhaoldhamhnaigh",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-79787d90-4047-4bb5-bd51-e8c737fd7762.arguments.recipients[0]",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "xochitl hgarcia",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-09b26b3b-20be-4682-bae7-e5c774014111.arguments.recipients[0]",
+          "reason": "收件人姓名"
+        }
+      ],
+      "new_terms": [
+        "Disney Princess Heart Strong Snow White Dress",
+        "Rubie's Costume Co Men's Minion Unisex Hoodie",
+        "Anastasiya",
+        "aoifenichonchuir",
+        "saoirse.nimhaoldhamhnaigh",
+        "xochitl hgarcia"
+      ],
+      "active_vocabulary": {
+        "Disney Princess Heart Strong Snow White Dress": 50,
+        "Rubie's Costume Co Men's Minion Unisex Hoodie": 50,
+        "Anastasiya": 50,
+        "aoifenichonchuir": 50,
+        "saoirse.nimhaoldhamhnaigh": 50,
+        "xochitl hgarcia": 50
+      },
+      "vocabulary_sha256": "d0201fd8ed60a51cb898cc791e4e4fa2389b86b458b1a143e94f4f3a8ae62770"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aoife",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "教师名字"
+        },
+        {
+          "text": "Saoirse",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "教师名字"
+        },
+        {
+          "text": "Xóchitl",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "教师名字"
+        },
+        {
+          "text": "Anastasiya",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email_aoife.arguments.content",
+          "reason": "邮件署名"
+        }
+      ],
+      "new_terms": [
+        "Aoife",
+        "Saoirse",
+        "Xóchitl"
+      ],
+      "active_vocabulary": {
+        "Disney Princess Heart Strong Snow White Dress": 50,
+        "Rubie's Costume Co Men's Minion Unisex Hoodie": 50,
+        "Anastasiya": 50,
+        "aoifenichonchuir": 50,
+        "saoirse.nimhaoldhamhnaigh": 50,
+        "xochitl hgarcia": 50,
+        "Aoife": 50,
+        "Saoirse": 50,
+        "Xóchitl": 50
+      },
+      "vocabulary_sha256": "b1f36029ffcddc5cb1ea5b1516a5170d93069c57b7e7cec39abf9b8eceff824c"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Disney Princess Heart Strong Snow White Dress": 50,
+        "Rubie's Costume Co Men's Minion Unisex Hoodie": 50,
+        "Anastasiya": 50,
+        "aoifenichonchuir": 50,
+        "saoirse.nimhaoldhamhnaigh": 50,
+        "xochitl hgarcia": 50,
+        "Aoife": 50,
+        "Saoirse": 50,
+        "Xóchitl": 50
+      },
+      "vocabulary_sha256": "b1f36029ffcddc5cb1ea5b1516a5170d93069c57b7e7cec39abf9b8eceff824c"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "c9835c176e14e68cca6b22acc5590f337d93c284695c6cf11aec84763be36cf9",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2983,
+        "completion_tokens": 494,
+        "total_tokens": 3477,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2727
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.121
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0808_21tld6eec9igjwxnfy2mqzumb5pbq9bt",
+  "extracted_at": "2026-11-22T06:43:56.904479+00:00"
+}

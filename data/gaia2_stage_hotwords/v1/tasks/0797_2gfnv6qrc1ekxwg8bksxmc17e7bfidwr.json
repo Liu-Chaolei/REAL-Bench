@@ -1,0 +1,166 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0797_2gfnv6qrc1ekxwg8bksxmc17e7bfidwr",
+  "model": "deepseek-flash",
+  "input_sha256": "2dd3ae4127ede06f186be4fd92393b5a2dc24acbcedab0d718b0dfeaa81e0e34",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaidën Rylan",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "核心人物姓名，含特殊字符"
+        },
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-423de391-2d16-493a-85d6-9437f99e0992.arguments.content",
+          "reason": "消息收件人名字"
+        },
+        {
+          "text": "Çağla",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-deb11ee9-dae3-4513-acd2-71e53d83385e.arguments.content",
+          "reason": "邮件收件人名字，含特殊字符"
+        }
+      ],
+      "new_terms": [
+        "Kaidën Rylan",
+        "Astrid",
+        "Çağla"
+      ],
+      "active_vocabulary": {
+        "Kaidën Rylan": 50,
+        "Astrid": 50,
+        "Çağla": 50
+      },
+      "vocabulary_sha256": "9568c4a116740a52de424ec2a779f06b9e1f5a3075297cfaac7b52d8b2ab30b6"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaitlyn McAllister",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "发消息询问的人物全名"
+        },
+        {
+          "text": "Kaidën Rylan",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "核心人物姓名"
+        },
+        {
+          "text": "Astrid Nakamura",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "已联系人物全名"
+        },
+        {
+          "text": "Çağla Öztürk",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "已联系人物全名，含特殊字符"
+        },
+        {
+          "text": "Ximena Reyes García",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "已联系人物全名，含特殊字符"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email_cagla.arguments.content",
+          "reason": "邮件署名，含特殊字符"
+        }
+      ],
+      "new_terms": [
+        "Kaitlyn McAllister",
+        "Astrid Nakamura",
+        "Çağla Öztürk",
+        "Ximena Reyes García",
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Kaidën Rylan": 50,
+        "Astrid": 50,
+        "Çağla": 50,
+        "Kaitlyn McAllister": 50,
+        "Astrid Nakamura": 50,
+        "Çağla Öztürk": 50,
+        "Ximena Reyes García": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "64d2d4e551eca3a1c055b9e335ed0a5e4f9f38f4374d5dffda704030123d7516"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Astrid Nakamura",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "回复消息的人物全名"
+        },
+        {
+          "text": "Kaidën Rylan",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "核心人物姓名"
+        },
+        {
+          "text": "Çağla Öztürk",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "邮件收件人全名，含特殊字符"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_cagla.arguments.content",
+          "reason": "邮件署名，含特殊字符"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kaidën Rylan": 50,
+        "Astrid": 50,
+        "Çağla": 50,
+        "Kaitlyn McAllister": 50,
+        "Astrid Nakamura": 50,
+        "Çağla Öztürk": 50,
+        "Ximena Reyes García": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "64d2d4e551eca3a1c055b9e335ed0a5e4f9f38f4374d5dffda704030123d7516"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "5486f4d38e93d9b8733319d1513cafafb77f6a68f942cf9524ed9e240e48ca38",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2208,
+        "completion_tokens": 502,
+        "total_tokens": 2710,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1952
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.866
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0797_2gfnv6qrc1ekxwg8bksxmc17e7bfidwr",
+  "extracted_at": "2026-11-22T06:43:53.614940+00:00"
+}

@@ -1,0 +1,152 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0365_kv615q5mkhbl595t41sah1c7uumw7r9u__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "078cc2ca93831d8936f293b7636a2a05495c440c1927d3b848f8acc7aa14481b",
+  "review_input_sha256": "7224aa5ababc57ba34817e0915a18cc6a0569a9f52f29d7d73cb967acb00fa32",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "fb4063b7efdb44ef423894ab0aaffb84c6ebe5313067ccf0cb75ed37cceb66e3",
+  "reference_results_sha256": "14a04055f0e429925327854af74002d97a4ecafb33dda16e33dba5cf100b2be6",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Søren Kjær",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-ae432e0a-d0cc-4297-99d3-7c117d2dfb9d.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Vigdis Rasmussen",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Aurélien Vandenberghe",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage2.tool_response.series_s2_list_sent": {
+      "stage": 2,
+      "text": "{\"emails\": [{\"sender\": \"soren.kjaer@gaia2mail.com\", \"recipients\": [\"aoife.ocuinne@un.org\"], \"subject\": \"PTO\", \"content\": \"Dear Aoife,\\nI won't be attending the Networking Event on October 21, 2024.\\nBest regards,\\nSøren Kjær\", \"email_id\": \"42f498866abc915a2df3857468b71eab\", \"parent_id\": null, \"cc\": [], \"attachments\": {}, \"timestamp\": \"1728975601.0\", \"is_read\": \"False\"}, {\"sender\": \"soren.kjaer@gaia2mail.com\", \"recipients\": [\"kirsten.ravnkilde@gaia2mail.com\"], \"subject\": \"PTO\", \"content\": \"Dear Kirsten,\\nI won't be attending the Networking Event on October 21, 2024.\\nBest regards,\\nSøren Kjær\", \"email_id\": \"52e1ddc06020cc2ed26e5c843a6cc81f\", \"parent_id\": null, \"cc\": [], \"attachments\": {}, \"timestamp\": \"1728975601.0\", \"is_read\": \"False\"}, {\"sender\": \"soren.kjaer@gaia2mail.com\", \"recipients\": [\"astrid.kjaer@gaia2mail.com\"], \"subject\": \"PTO\", \"content\": \"Dear Astrid,\\nI won't be attending the Yoga Class on October 26, 2024.\\nBest regards,\\nSøren Kjær\", \"email_id\": \"67005f5df094b3ef5a22f36a14c9ad06\", \"parent_id\": null, \"cc\": [], \"attachments\": {}, \"timestamp\": \"1728975601.0\", \"is_read\": \"False\"}, {\"sender\": \"soren.kjaer@gaia2mail.com\", \"recipients\": [\"elodie.vandenberghe@gaia2mail.com\"], \"subject\": \"PTO\", \"content\": \"Dear Elodie,\\nI won't be attending the Yoga Class on October 26, 2024.\\nBest regards,\\nSøren Kjær\", \"email_id\": \"f91179cf5bee959124d28921284df251\", \"parent_id\": null, \"cc\": [], \"attachments\": {}, \"timestamp\": \"1728975601.0\", \"is_read\": \"False\"}, {\"sender\": \"soren.kjaer@gaia2mail.com\", \"recipients\": [\"nonglak.srisawat@gaia2mail.com\"], \"subject\": \"Exploring Opportunities for Financial Inclusion in Thailand\", \"content\": \"Dear Nonglak,\\n\\nI hope this email finds you well in Chiang Mai. As a fellow retiree and entrepreneur, I came across your impressive work in real estate investment and couldn’t help but think of the potential synergies between our fields. My startup, which aims to provide secure and accessible financial services to the underbanked population, has been gaining traction in Denmark, and I’m eager to explore opportunities for expansion in Southeast Asia.\\n\\nThailand, with its growing economy and aging population, presents an exciting market for our mobile application. I’d love to discuss how our platform could complement your existing real estate investments and potentially provide new revenue streams. Perhaps we could schedule a call to explore this further?\\n\\nBest regards,\\nSøren Kjær\", \"email_id\": \"b5844fb2e1dc4d61b8103078ada5cc55\", \"parent_id\": null, \"cc\": [], \"attachments\": {}, \"timestamp\": \"1728849674.11\", \"is_read\": null}, {\"sender\": \"soren.kjaer@gaia2mail.com\", \"recipients\": [\"nalinee.srisombat@gaia2mail.com\"], \"subject\": \"Exploring Opportunities for Financial Inclusion in Thailand\", \"content\": \"Dear Nalinee,\\n\\nI hope this email finds you well. As a startup founder, I've been following your work in marketing and was impressed by your creative approach to reaching new audiences. I'm reaching out because I believe our goals align, and I'd love to explore potential opportunities for collaboration.\\n\\nMy startup aims to provide secure and accessible financial services to the underbanked population in Denmark and beyond. I'm interested in learning more about the financial landscape in Thailand and potential partnerships that could help us expand our reach.\\n\\nGiven your experience in marketing and your knowledge of the Thai market, I'd appreciate any insights you might be able to share. Perhaps we could schedule a call to discuss further?\\n\\nBest regards,\\nSøren Kjær\", \"email_id\": \"bc02bf70f9294af6b229f8ef224a56dd\", \"parent_id\": null, \"cc\": [], \"attachments\": {}, \"timestamp\": \"1728724237.89\", \"is_read\": null}], \"emails_range\": [\"0\", \"6\"], \"total_returned_emails\": \"7\", \"total_emails\": \"108\"}",
+      "event_id": "series_s2_list_sent",
+      "response_sha256": "d713f94f13601f76cb5a2248e1b95af29bca3e6e631858379d1437c2acb95024"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含特殊字符的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Søren Kjær"
+      ],
+      "active_vocabulary": {
+        "Søren Kjær": 50
+      },
+      "vocabulary_sha256": "385da86b35722cb82860c189e1ad420ed22ce6ac64229fab7a1219055a798f42"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien Vandenberghe",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Vigdis Rasmussen",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien Vandenberghe",
+        "Vigdis Rasmussen"
+      ],
+      "active_vocabulary": {
+        "Søren Kjær": 50,
+        "Aurélien Vandenberghe": 50,
+        "Vigdis Rasmussen": 50
+      },
+      "vocabulary_sha256": "71edd911ebcfed2aa3705942f9fb7091ba243ab52226979c2d2a9222418bdb76"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Chiang Mai",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_sent",
+          "reason": "泰国地名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Nalinee",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_list_sent",
+          "reason": "泰国名字，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Nonglak",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_list_sent",
+          "reason": "泰国名字，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Chiang Mai",
+        "Nalinee",
+        "Nonglak"
+      ],
+      "active_vocabulary": {
+        "Søren Kjær": 50,
+        "Aurélien Vandenberghe": 50,
+        "Vigdis Rasmussen": 50,
+        "Chiang Mai": 50,
+        "Nalinee": 50,
+        "Nonglak": 50
+      },
+      "vocabulary_sha256": "d6166b0fcc303d95a4d4b88d05f6620d329b8683d3dc22c7f2b1c259f1be93c7"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Aoife",
+    "Kirsten",
+    "Astrid",
+    "Elodie",
+    "Vigdis",
+    "Aurélien"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:54.126364+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

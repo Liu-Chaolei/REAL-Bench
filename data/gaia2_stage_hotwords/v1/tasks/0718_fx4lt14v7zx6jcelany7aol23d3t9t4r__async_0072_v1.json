@@ -1,0 +1,114 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0718_fx4lt14v7zx6jcelany7aol23d3t9t4r__async_0072_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "4abc15128032c2f8aaf2dc7e11f0cb29eb466ae0a7e46a6c449165d31b565eda",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aïcha",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "护士朋友的名字，含特殊字符"
+        },
+        {
+          "text": "Universitätsspital CH",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a71ebe6b-4b43-47d2-ac11-c6906b373f70.arguments.end_location",
+          "reason": "瑞士医院专有名称"
+        },
+        {
+          "text": "Petersgraben",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a71ebe6b-4b43-47d2-ac11-c6906b373f70.arguments.end_location",
+          "reason": "巴塞尔街道专名"
+        }
+      ],
+      "new_terms": [
+        "Aïcha",
+        "Universitätsspital CH",
+        "Petersgraben"
+      ],
+      "active_vocabulary": {
+        "Aïcha": 50,
+        "Universitätsspital CH": 50,
+        "Petersgraben": 50
+      },
+      "vocabulary_sha256": "8a904549cc9db22c4d71260b0fa443400c0e4e29a859f3bbcf617a9c1855b930"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Universitätsspital CH",
+          "kind": "organization",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.location",
+          "reason": "医院专有名称"
+        },
+        {
+          "text": "Petersgraben",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.location",
+          "reason": "巴塞尔街道专名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aïcha": 50,
+        "Universitätsspital CH": 50,
+        "Petersgraben": 50
+      },
+      "vocabulary_sha256": "8a904549cc9db22c4d71260b0fa443400c0e4e29a859f3bbcf617a9c1855b930"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aïcha",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.title",
+          "reason": "护士朋友的名字，含特殊字符"
+        },
+        {
+          "text": "Universitätsspital CH",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.description",
+          "reason": "医院专有名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aïcha": 50,
+        "Universitätsspital CH": 50,
+        "Petersgraben": 50
+      },
+      "vocabulary_sha256": "8a904549cc9db22c4d71260b0fa443400c0e4e29a859f3bbcf617a9c1855b930"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "5e3fc997d70be7e51c27d6e7e8300372dd2b031a44a0fc27c68e73c20d8aaab0",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2549,
+        "completion_tokens": 336,
+        "total_tokens": 2885,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2293
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.424
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0718_fx4lt14v7zx6jcelany7aol23d3t9t4r__async_0072_v1",
+  "extracted_at": "2026-11-22T06:46:47.473826+00:00"
+}

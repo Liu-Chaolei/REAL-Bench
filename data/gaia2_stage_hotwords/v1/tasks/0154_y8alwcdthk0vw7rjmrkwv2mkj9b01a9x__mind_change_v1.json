@@ -1,0 +1,248 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0154_y8alwcdthk0vw7rjmrkwv2mkj9b01a9x__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "dba8e2640179471e4d74237d0c1ebae57977711dace17004e222f53bdae57420",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Søren",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名，含特殊字符"
+        }
+      ],
+      "new_terms": [
+        "Søren"
+      ],
+      "active_vocabulary": {
+        "Søren": 50
+      },
+      "vocabulary_sha256": "6ba9740268792c4c1cad3500c674183b13637db530060768cf4af26252173693"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Uppsala Urban",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Göteborgs Gård",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源名称，含瑞典语字符"
+        },
+        {
+          "text": "Västerås View",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Göteborgs Garden",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Norrköping Nest",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Göteborgs Gem",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Lund Lyckås",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源名称，含特殊字符"
+        },
+        {
+          "text": "Uppsala Utopia",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Uppsala University Heights",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Uppsala Oaks",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Søren",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "邮件正文中提到的联系人姓名"
+        }
+      ],
+      "new_terms": [
+        "Uppsala Urban",
+        "Göteborgs Gård",
+        "Västerås View",
+        "Göteborgs Garden",
+        "Norrköping Nest",
+        "Göteborgs Gem",
+        "Lund Lyckås",
+        "Uppsala Utopia",
+        "Uppsala University Heights",
+        "Uppsala Oaks"
+      ],
+      "active_vocabulary": {
+        "Søren": 50,
+        "Uppsala Urban": 50,
+        "Göteborgs Gård": 50,
+        "Västerås View": 50,
+        "Göteborgs Garden": 50,
+        "Norrköping Nest": 50,
+        "Göteborgs Gem": 50,
+        "Lund Lyckås": 50,
+        "Uppsala Utopia": 50,
+        "Uppsala University Heights": 50,
+        "Uppsala Oaks": 50
+      },
+      "vocabulary_sha256": "fe1f84c0ccf00811396bb0e30ca0b54efc6bf6bddfe30f66909f8b6a3422e6d5"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Malmö City Center",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "被移除房源名称"
+        },
+        {
+          "text": "Malmö Harbour",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "被移除房源名称"
+        },
+        {
+          "text": "Malmö Majestic",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "被移除房源名称"
+        },
+        {
+          "text": "Malmö Marina View",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "被移除房源名称"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "任务中提到的收件人姓名"
+        }
+      ],
+      "new_terms": [
+        "Malmö City Center",
+        "Malmö Harbour",
+        "Malmö Majestic",
+        "Malmö Marina View",
+        "Astrid Lundqvist"
+      ],
+      "active_vocabulary": {
+        "Søren": 50,
+        "Uppsala Urban": 50,
+        "Göteborgs Gård": 50,
+        "Västerås View": 50,
+        "Göteborgs Garden": 50,
+        "Norrköping Nest": 50,
+        "Göteborgs Gem": 50,
+        "Lund Lyckås": 50,
+        "Uppsala Utopia": 50,
+        "Uppsala University Heights": 50,
+        "Uppsala Oaks": 50,
+        "Malmö City Center": 50,
+        "Malmö Harbour": 50,
+        "Malmö Majestic": 50,
+        "Malmö Marina View": 50,
+        "Astrid Lundqvist": 50
+      },
+      "vocabulary_sha256": "7bdd3ebd5bef7aeefa57b3c881cf16c77a10836a7b229444d1eb6b371c359ea8"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "9d882e1f131f818b90842cf0de842b68dbdd443c1567e4f24d3c18587a03d3b8",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4120,
+        "completion_tokens": 808,
+        "total_tokens": 4928,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3864
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.655,
+      "error": "Duplicate term within stage 0: 'Søren'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "f6552075b4dedf0fd28ab38f7be79772bc61a8589a5cd2d22da787e7a6d6e69e",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5323,
+        "completion_tokens": 746,
+        "total_tokens": 6069,
+        "prompt_tokens_details": {
+          "cached_tokens": 4864
+        },
+        "prompt_cache_hit_tokens": 4864,
+        "prompt_cache_miss_tokens": 459
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.387,
+      "error": "Invalid proper-name phrase: 'astrid.lundqvist@gaia2mail.com'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "f052507a71c91d388414d4b7a166769c1a5d3ebc997d2700c6a701ee50515218",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5267,
+        "completion_tokens": 646,
+        "total_tokens": 5913,
+        "prompt_tokens_details": {
+          "cached_tokens": 4096
+        },
+        "prompt_cache_hit_tokens": 4096,
+        "prompt_cache_miss_tokens": 1171
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.395
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0154_y8alwcdthk0vw7rjmrkwv2mkj9b01a9x__mind_change_v1",
+  "extracted_at": "2026-11-22T06:45:45.978490+00:00"
+}

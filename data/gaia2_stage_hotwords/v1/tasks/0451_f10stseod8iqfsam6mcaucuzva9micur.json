@@ -1,0 +1,189 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0451_f10stseod8iqfsam6mcaucuzva9micur",
+  "model": "deepseek-flash",
+  "input_sha256": "0f8f41551c29cf8b046fad867931d33f446efb11c7bb1fd1b73c25b6638bed2c",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaya",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e8526c6e-8c1f-4c1a-a671-feba336b3668.arguments.content",
+          "reason": "邮件收件人姓名"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e8526c6e-8c1f-4c1a-a671-feba336b3668.arguments.content",
+          "reason": "发件人完整姓名"
+        },
+        {
+          "text": "Søren",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dddc90da-7f38-4677-a59f-61519d22f6bd.arguments.content",
+          "reason": "含特殊字符的收件人名"
+        },
+        {
+          "text": "Zara",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-13b92abc-ea0d-4f73-8b71-48c34790359c.arguments.content",
+          "reason": "邮件收件人姓名"
+        },
+        {
+          "text": "Rohini",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-004bb010-54b1-4a31-84e5-873e2325ea03.arguments.content",
+          "reason": "邮件收件人姓名"
+        }
+      ],
+      "new_terms": [
+        "Kaya",
+        "Rohan Kumar",
+        "Søren",
+        "Zara",
+        "Rohini"
+      ],
+      "active_vocabulary": {
+        "Kaya": 50,
+        "Rohan Kumar": 50,
+        "Søren": 50,
+        "Zara": 50,
+        "Rohini": 50
+      },
+      "vocabulary_sha256": "73e6072c51329730ffda02904c848015a7028273b442df4cdd2c07e7273da8e0"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaya Nakoda",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_get_kaya.arguments.user_name",
+          "reason": "群组成员完整姓名"
+        },
+        {
+          "text": "Søren Jensen",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_get_soren.arguments.user_name",
+          "reason": "群组成员完整姓名"
+        },
+        {
+          "text": "Zara Kaur",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_get_zara.arguments.user_name",
+          "reason": "群组成员完整姓名"
+        },
+        {
+          "text": "Rohini Mehta",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_get_rohini.arguments.user_name",
+          "reason": "群组成员完整姓名"
+        },
+        {
+          "text": "Prison Reform Calls 22-23 Oct",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_create.arguments.title",
+          "reason": "自定义群组标题"
+        }
+      ],
+      "new_terms": [
+        "Kaya Nakoda",
+        "Søren Jensen",
+        "Zara Kaur",
+        "Rohini Mehta",
+        "Prison Reform Calls 22-23 Oct"
+      ],
+      "active_vocabulary": {
+        "Kaya": 50,
+        "Rohan Kumar": 50,
+        "Søren": 50,
+        "Zara": 50,
+        "Rohini": 50,
+        "Kaya Nakoda": 50,
+        "Søren Jensen": 50,
+        "Zara Kaur": 50,
+        "Rohini Mehta": 50,
+        "Prison Reform Calls 22-23 Oct": 50
+      },
+      "vocabulary_sha256": "bff4e6546cdf82161e885b292fac57e122bcc61ad32d2126a642aa05dea66cda"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaya Nakoda",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_tue_hold.arguments.title",
+          "reason": "可用时段标题中的人名"
+        },
+        {
+          "text": "Søren Jensen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_tue_hold.arguments.title",
+          "reason": "可用时段标题中的人名"
+        },
+        {
+          "text": "Zara Kaur",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_tue_hold.arguments.title",
+          "reason": "可用时段标题中的人名"
+        },
+        {
+          "text": "Rohini Mehta",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_tue_hold.arguments.title",
+          "reason": "可用时段标题中的人名"
+        },
+        {
+          "text": "Project Update",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_notify.arguments.content",
+          "reason": "既有日历事件名称"
+        }
+      ],
+      "new_terms": [
+        "Project Update"
+      ],
+      "active_vocabulary": {
+        "Kaya": 50,
+        "Rohan Kumar": 50,
+        "Søren": 50,
+        "Zara": 50,
+        "Rohini": 50,
+        "Kaya Nakoda": 50,
+        "Søren Jensen": 50,
+        "Zara Kaur": 50,
+        "Rohini Mehta": 50,
+        "Prison Reform Calls 22-23 Oct": 50,
+        "Project Update": 50
+      },
+      "vocabulary_sha256": "3baa71f1919679bd8304202af518fbbf0df77a30ba9b5e58732d19969a0464a0"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "0d9c6916baef86e04e174f28599bac3e2b29bf14c32b9d6b5601ef6fb61e7791",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5512,
+        "completion_tokens": 739,
+        "total_tokens": 6251,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 5256
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.386
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0451_f10stseod8iqfsam6mcaucuzva9micur",
+  "extracted_at": "2026-11-22T06:42:02.064211+00:00"
+}

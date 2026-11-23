@@ -1,0 +1,222 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0818_psh7hxdpc0vdbe39j7e5j5qem0tzu646",
+  "model": "deepseek-flash",
+  "input_sha256": "4bafd7886721f05cee77dd6ef696106ba825532e2f8a4f10a69117fac7f238d5",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kavita",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-266e3dc9-2baa-44ed-9dff-e6df448bc11e.arguments.content",
+          "reason": "联系人名字"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-266e3dc9-2baa-44ed-9dff-e6df448bc11e.arguments.content",
+          "reason": "发件人全名"
+        },
+        {
+          "text": "Luana",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-62d2c9e6-0d5d-4e55-9442-8d2432cc4541.arguments.content",
+          "reason": "联系人名字"
+        },
+        {
+          "text": "Rohan",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-2b5bf910-5124-4109-8e5c-868933b60fdf.arguments.content",
+          "reason": "联系人名字"
+        },
+        {
+          "text": "Aisha",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-d3276a42-26db-4eea-bd07-efa161032795.arguments.content",
+          "reason": "联系人名字"
+        },
+        {
+          "text": "Kavita Deshpande",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c4098732-9f58-4b71-8062-87f89aefde0c.arguments.attendees[0]",
+          "reason": "确认出席者全名"
+        },
+        {
+          "text": "Kavita Rao",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c4098732-9f58-4b71-8062-87f89aefde0c.arguments.attendees[1]",
+          "reason": "确认出席者全名"
+        },
+        {
+          "text": "Rohan Patel",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c4098732-9f58-4b71-8062-87f89aefde0c.arguments.attendees[2]",
+          "reason": "确认出席者全名"
+        },
+        {
+          "text": "Rohan Jensen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c4098732-9f58-4b71-8062-87f89aefde0c.arguments.attendees[3]",
+          "reason": "确认出席者全名"
+        },
+        {
+          "text": "Luana Silva",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c4098732-9f58-4b71-8062-87f89aefde0c.arguments.attendees[4]",
+          "reason": "确认出席者全名"
+        },
+        {
+          "text": "London Luxury",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "901 Oxford Street, London, W1C 1DA",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-266e3dc9-2baa-44ed-9dff-e6df448bc11e.arguments.content",
+          "reason": "聚会地址"
+        }
+      ],
+      "new_terms": [
+        "Kavita",
+        "Rohini Deshpande",
+        "Luana",
+        "Rohan",
+        "Aisha",
+        "Kavita Deshpande",
+        "Kavita Rao",
+        "Rohan Patel",
+        "Rohan Jensen",
+        "Luana Silva",
+        "London Luxury",
+        "901 Oxford Street, London, W1C 1DA"
+      ],
+      "active_vocabulary": {
+        "Kavita": 50,
+        "Rohini Deshpande": 50,
+        "Luana": 50,
+        "Rohan": 50,
+        "Aisha": 50,
+        "Kavita Deshpande": 50,
+        "Kavita Rao": 50,
+        "Rohan Patel": 50,
+        "Rohan Jensen": 50,
+        "Luana Silva": 50,
+        "London Luxury": 50,
+        "901 Oxford Street, London, W1C 1DA": 50
+      },
+      "vocabulary_sha256": "e8c0f904ca3757cf9cf1c4b8c731ca6afc1bb0df6c9835c72b0a22aebaa80301"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kavita Deshpande",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_party.arguments.attendees[0]",
+          "reason": "确认出席者全名"
+        },
+        {
+          "text": "Kavita Rao",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_party.arguments.attendees[1]",
+          "reason": "确认出席者全名"
+        },
+        {
+          "text": "Rohan Patel",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_party.arguments.attendees[2]",
+          "reason": "确认出席者全名"
+        },
+        {
+          "text": "Rohan Jensen",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_party.arguments.attendees[3]",
+          "reason": "确认出席者全名"
+        },
+        {
+          "text": "Luana Silva",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_party.arguments.attendees[4]",
+          "reason": "确认出席者全名"
+        },
+        {
+          "text": "901 Oxford Street, London, W1C 1DA",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_party.arguments.location",
+          "reason": "聚会地点"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kavita": 50,
+        "Rohini Deshpande": 50,
+        "Luana": 50,
+        "Rohan": 50,
+        "Aisha": 50,
+        "Kavita Deshpande": 50,
+        "Kavita Rao": 50,
+        "Rohan Patel": 50,
+        "Rohan Jensen": 50,
+        "Luana Silva": 50,
+        "London Luxury": 50,
+        "901 Oxford Street, London, W1C 1DA": 50
+      },
+      "vocabulary_sha256": "e8c0f904ca3757cf9cf1c4b8c731ca6afc1bb0df6c9835c72b0a22aebaa80301"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "901 Oxford Street, London, W1C 1DA",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_prep.arguments.location",
+          "reason": "准备活动地点"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kavita": 50,
+        "Rohini Deshpande": 50,
+        "Luana": 50,
+        "Rohan": 50,
+        "Aisha": 50,
+        "Kavita Deshpande": 50,
+        "Kavita Rao": 50,
+        "Rohan Patel": 50,
+        "Rohan Jensen": 50,
+        "Luana Silva": 50,
+        "London Luxury": 50,
+        "901 Oxford Street, London, W1C 1DA": 50
+      },
+      "vocabulary_sha256": "e8c0f904ca3757cf9cf1c4b8c731ca6afc1bb0df6c9835c72b0a22aebaa80301"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "d776bb7448314ba532f4e0806e59dcc1fffaa9e61d97ff8787662cd08910374b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4751,
+        "completion_tokens": 1054,
+        "total_tokens": 5805,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4495
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 3.132
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0818_psh7hxdpc0vdbe39j7e5j5qem0tzu646",
+  "extracted_at": "2026-11-22T06:44:01.126375+00:00"
+}

@@ -1,0 +1,244 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0576_omzb4hpeh7pjitjsu3imypkxtzc73rs4",
+  "model": "deepseek-flash",
+  "input_sha256": "3e1ac0a86cd5216ed0e208f80d94ba3b826ca96c024c358cb53ff9eb6457c781",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaja",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人姓名，需更新城市"
+        },
+        {
+          "text": "United States",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "需删除联系人的国家"
+        }
+      ],
+      "new_terms": [
+        "Kaja",
+        "United States"
+      ],
+      "active_vocabulary": {
+        "Kaja": 50,
+        "United States": 50
+      },
+      "vocabulary_sha256": "00edb83ce213115dd05975aed8b1a36a0386d3c06be3d184045e339f78953d07"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaja Tammemäe",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "需更新城市的温哥华联系人全名"
+        },
+        {
+          "text": "Kaja Fjellstad",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "特罗姆瑟联系人全名，需保持不变"
+        },
+        {
+          "text": "Vancouver",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "区分联系人的城市"
+        },
+        {
+          "text": "Tromsø",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "区分联系人的城市"
+        },
+        {
+          "text": "Toronto",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "目标城市"
+        },
+        {
+          "text": "Nonglak Wongchai",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "被删除联系人全名"
+        },
+        {
+          "text": "Kåre Jensen",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "被删除联系人全名"
+        },
+        {
+          "text": "Nonglak Suthiphong",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "被删除联系人全名"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "被删除联系人全名"
+        },
+        {
+          "text": "Dovetail",
+          "kind": "organization",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "描述中提及的已关闭餐厅名"
+        },
+        {
+          "text": "Great Smoky Mountains",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "描述中提及的山脉名"
+        },
+        {
+          "text": "Tennessee River",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "描述中提及的河流名"
+        }
+      ],
+      "new_terms": [
+        "Kaja Tammemäe",
+        "Kaja Fjellstad",
+        "Vancouver",
+        "Tromsø",
+        "Toronto",
+        "Nonglak Wongchai",
+        "Kåre Jensen",
+        "Nonglak Suthiphong",
+        "Rohini Deshpande",
+        "Dovetail",
+        "Great Smoky Mountains",
+        "Tennessee River"
+      ],
+      "active_vocabulary": {
+        "Kaja": 50,
+        "United States": 50,
+        "Kaja Tammemäe": 50,
+        "Kaja Fjellstad": 50,
+        "Vancouver": 50,
+        "Tromsø": 50,
+        "Toronto": 50,
+        "Nonglak Wongchai": 50,
+        "Kåre Jensen": 50,
+        "Nonglak Suthiphong": 50,
+        "Rohini Deshpande": 50,
+        "Dovetail": 50,
+        "Great Smoky Mountains": 50,
+        "Tennessee River": 50
+      },
+      "vocabulary_sha256": "f67b891e9a66e7c1659e451b975b7b6a407d117d2d49ffa5b9d68f2239afd22f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaja Tammemäe",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "需补全卡片的联系人全名"
+        },
+        {
+          "text": "Kaja Fjellstad",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "需保持不变的联系人全名"
+        },
+        {
+          "text": "Toronto",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "目标城市"
+        },
+        {
+          "text": "Canada",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "目标国家"
+        },
+        {
+          "text": "88 Harbour Street, Apt 1207, Toronto, ON M5J 0C3",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "需写入的完整地址"
+        }
+      ],
+      "new_terms": [
+        "Canada",
+        "88 Harbour Street, Apt 1207, Toronto, ON M5J 0C3"
+      ],
+      "active_vocabulary": {
+        "Kaja": 50,
+        "United States": 50,
+        "Kaja Tammemäe": 50,
+        "Kaja Fjellstad": 50,
+        "Vancouver": 50,
+        "Tromsø": 50,
+        "Toronto": 50,
+        "Nonglak Wongchai": 50,
+        "Kåre Jensen": 50,
+        "Nonglak Suthiphong": 50,
+        "Rohini Deshpande": 50,
+        "Dovetail": 50,
+        "Great Smoky Mountains": 50,
+        "Tennessee River": 50,
+        "Canada": 50,
+        "88 Harbour Street, Apt 1207, Toronto, ON M5J 0C3": 50
+      },
+      "vocabulary_sha256": "257f1067d17c8e67f9cd75c288e73a2e7810151eaed771c39c73d2dadd0ae034"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "9c6714a5bbe2846db0d9bdf6b388f54eda9d1d0908853ec9fd5ee52810463e15",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3534,
+        "completion_tokens": 662,
+        "total_tokens": 4196,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3278
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 2.464,
+      "error": "3 validation errors for Extraction\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage0.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage1.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage2.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "3841f5f965b189c95a6b8a4e1eea32673c32bb31bad858096d4844b3625db959",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4746,
+        "completion_tokens": 641,
+        "total_tokens": 5387,
+        "prompt_tokens_details": {
+          "cached_tokens": 4096
+        },
+        "prompt_cache_hit_tokens": 4096,
+        "prompt_cache_miss_tokens": 650
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.041
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0576_omzb4hpeh7pjitjsu3imypkxtzc73rs4",
+  "extracted_at": "2026-11-22T06:42:53.394049+00:00"
+}

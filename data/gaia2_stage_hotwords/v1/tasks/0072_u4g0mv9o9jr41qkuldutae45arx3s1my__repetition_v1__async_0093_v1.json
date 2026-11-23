@@ -1,0 +1,153 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0072_u4g0mv9o9jr41qkuldutae45arx3s1my__repetition_v1__async_0093_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "27282e60038c84072ab5b1299d4fb6e97812f4f069b7d32b44f6e1a4a85923d7",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Bicycle Rider Back",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "扑克牌品牌型号"
+        },
+        {
+          "text": "Šárka Nováková",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "ul. Pražská 15, Plzeň",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "出租车目的地地址"
+        },
+        {
+          "text": "Translation Project Meeting",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "会议事件名称"
+        },
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-032c04f7-e8d6-42e1-bab7-8ac6a987dcb7.arguments.content",
+          "reason": "邮件署名姓名"
+        }
+      ],
+      "new_terms": [
+        "Bicycle Rider Back",
+        "Šárka Nováková",
+        "ul. Pražská 15, Plzeň",
+        "Translation Project Meeting",
+        "Matěj Nováček"
+      ],
+      "active_vocabulary": {
+        "Bicycle Rider Back": 50,
+        "Šárka Nováková": 50,
+        "ul. Pražská 15, Plzeň": 50,
+        "Translation Project Meeting": 50,
+        "Matěj Nováček": 50
+      },
+      "vocabulary_sha256": "2ce7473731d9f3609babfbdff2aa83a9efeb69fd0fed69c17a3d8b3f5f26631c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Bicycle Rider Back",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "扑克牌品牌型号"
+        },
+        {
+          "text": "Gym-and-Cards Party",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "派对事件名称"
+        }
+      ],
+      "new_terms": [
+        "Gym-and-Cards Party"
+      ],
+      "active_vocabulary": {
+        "Bicycle Rider Back": 50,
+        "Šárka Nováková": 50,
+        "ul. Pražská 15, Plzeň": 50,
+        "Translation Project Meeting": 50,
+        "Matěj Nováček": 50,
+        "Gym-and-Cards Party": 50
+      },
+      "vocabulary_sha256": "bfefc95791f973b0498be4844a2d5cc3dd2d1822f94b12fb6404dfa722894120"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Šárka Nováková",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Gym-and-Cards Party",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "派对事件名称"
+        },
+        {
+          "text": "Plzeň Loft Living",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓/看房名称"
+        },
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "邮件署名姓名"
+        }
+      ],
+      "new_terms": [
+        "Plzeň Loft Living"
+      ],
+      "active_vocabulary": {
+        "Bicycle Rider Back": 50,
+        "Šárka Nováková": 50,
+        "ul. Pražská 15, Plzeň": 50,
+        "Translation Project Meeting": 50,
+        "Matěj Nováček": 50,
+        "Gym-and-Cards Party": 50,
+        "Plzeň Loft Living": 50
+      },
+      "vocabulary_sha256": "249273b0ee816aab3dad248ee699e3334991237dc9400cec74493ecd57ea2dbc"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "4873d6e62617a91a2d94aae24cb27639ba3f6f6b1e368586471e01645340e4ca",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3537,
+        "completion_tokens": 396,
+        "total_tokens": 3933,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3281
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.656
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0072_u4g0mv9o9jr41qkuldutae45arx3s1my__repetition_v1__async_0093_v1",
+  "extracted_at": "2026-11-22T06:46:56.572950+00:00"
+}

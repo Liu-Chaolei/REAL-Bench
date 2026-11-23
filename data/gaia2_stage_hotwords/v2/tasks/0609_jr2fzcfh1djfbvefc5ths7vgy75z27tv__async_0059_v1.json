@@ -1,0 +1,164 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0609_jr2fzcfh1djfbvefc5ths7vgy75z27tv__async_0059_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "6dd62eeb2a4f10bf938737fcd1bcba29626751b7af1717b71bd2c252fef8be7d",
+  "review_input_sha256": "f5c898ef0e04695d7bf1215909ad4f5cedbe46fd9b0d0c552761b3dc082dfe84",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "3c3a6b741e73c000ef1ad1e282bd422dd514145127af88a54d848901905c12bc",
+  "reference_results_sha256": "aacd79c32ee5bb5e99e23547e2109f33ed7a9c0194d3e018120d85c04fd15b55",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Yuting",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-5803f242-9e8a-4931-a7da-9c2277c92160.arguments.content"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Åke Svensson",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-7c6e5ee8-84e6-47e7-970f-97639a5bb957.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Astrid Lundqvist",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-5803f242-9e8a-4931-a7da-9c2277c92160.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Yuting Liang",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "João Silva",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.tool_response.series_s2_search_joao": {
+      "stage": 2,
+      "text": "[{\"first_name\": \"João\", \"last_name\": \"Silva\", \"contact_id\": \"bd7f2f79caac454cbdd0c430b6e6b93a\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"27\", \"nationality\": \"Portuguese\", \"city_living\": \"Lisbon\", \"country\": \"Portugal\", \"status\": \"Status.EMPLOYED\", \"job\": \"Mechanic\", \"description\": \"João Silva is a 27-year-old Portuguese man who has been living in Lisbon for most of his life. He grew up in a tough neighborhood, where he got involved with a local gang at a young age. However, after a few years, João decided to leave the gang and start a new life. This decision was not well received by the gang leader, who has been holding a grudge against João ever since. João has been working as a mechanic in a small garage in Lisbon for the past three years. He enjoys his job and takes pride in his work. In his free time, João loves to play football with his friends, go hiking in the nearby mountains, and play guitar. He is a creative person who expresses himself through music and art. Despite his tough past, João is a kind and gentle soul who always tries to see the best in people. He is fiercely loyal to his friends and family and will do anything to protect them. João is also very determined and has worked hard to build a new life for himself, free from the influence of the gang.\", \"phone\": \"+351912345678\", \"email\": \"joaosilva87@gaia2mail.com\", \"address\": \"Rua da Larga, 12, 1200-201 Lisboa, Portugal\"}]",
+      "event_id": "series_s2_search_joao",
+      "response_sha256": "db4e99b7bbac59f73f7f07f203de1ff5de236d9a7413d8d928ae6ef071f557cb"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Åke Svensson",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含瑞典语变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Yuting",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "非拉丁语源人名，发音困难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Lundqvist",
+        "Åke Svensson",
+        "Yuting"
+      ],
+      "active_vocabulary": {
+        "Astrid Lundqvist": 50,
+        "Åke Svensson": 50,
+        "Yuting": 50
+      },
+      "vocabulary_sha256": "21b8f0edaf7f8cb7af36e54b82ce9daea6ba1a9bbbf2ad44e4628ca6d7e4072d"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "João Silva",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Yuting Liang",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整中文拼音人名，拼写困难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "João Silva",
+        "Yuting Liang"
+      ],
+      "active_vocabulary": {
+        "Astrid Lundqvist": 50,
+        "Åke Svensson": 50,
+        "Yuting": 50,
+        "João Silva": 50,
+        "Yuting Liang": 50
+      },
+      "vocabulary_sha256": "bfb2d7865aae5e1bd5a840212d4c8a554371acc594f6d141e4a5ff4698762b69"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "João Silva",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_search_joao",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid Lundqvist": 50,
+        "Åke Svensson": 50,
+        "Yuting": 50,
+        "João Silva": 50,
+        "Yuting Liang": 50
+      },
+      "vocabulary_sha256": "bfb2d7865aae5e1bd5a840212d4c8a554371acc594f6d141e4a5ff4698762b69"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Ake",
+    "João",
+    "emarketingpro",
+    "gaia2mail",
+    "Brand Call Preparation",
+    "Fashion Call",
+    "Social Media Call Preparation"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:20:01.900804+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,177 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0860_eb73aw922n6616jbjhv4clst7899rlwa",
+  "model": "deepseek-flash",
+  "input_sha256": "d050e4831b79cfd844191bb8085a5d2ad3fd911bc451109366f5e9df8a2e757a",
+  "review_input_sha256": "24e9a432f22646350ba7d258beaf3a1eb7c312c488ecf2483c53d020e8f5e785",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "27997b0935f52c5176439ceeb3b208c8618bfe790bc76e91f985c465e1be4f21",
+  "reference_results_sha256": "16cc9328cb18fe26f806d48d77a52deed62e89a0b04d3e10223f7f985be849c6",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Aurélien Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-e2759e57-d5c9-4406-ae16-acd45fd8c8b5.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Liesbeth Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-e2759e57-d5c9-4406-ae16-acd45fd8c8b5.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Aurélie Wyss",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-e2759e57-d5c9-4406-ae16-acd45fd8c8b5.arguments.attendees[2]"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Bruderholzallee 42, 4059 Basel, Switzerland",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-e2759e57-d5c9-4406-ae16-acd45fd8c8b5.arguments.location"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Ursula Ramseyer",
+      "original_source": "stage1.reference_reply.series_s1_notify.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Aurélien Kübler",
+      "original_source": "stage1.reference_reply.series_s1_notify.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Aurélie Joensen",
+      "original_source": "stage1.reference_reply.series_s1_notify.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélie Wyss",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Bruderholzallee",
+          "kind": "place",
+          "source": "stage0.existing_catalog.3",
+          "reason": "难拼写的街道名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélie Wyss",
+        "Aurélien Vandenberghe",
+        "Liesbeth Vandenberghe",
+        "Bruderholzallee"
+      ],
+      "active_vocabulary": {
+        "Aurélie Wyss": 50,
+        "Aurélien Vandenberghe": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Bruderholzallee": 50
+      },
+      "vocabulary_sha256": "25b741ecbadcf6ec5659d7a593ef4271ee1bb373a64c2179fcec2ec5859ea3e8"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélie Joensen",
+          "kind": "person",
+          "source": "stage1.existing_catalog.3",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Kübler",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Ramseyer",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélie Joensen",
+        "Aurélien Kübler",
+        "Ursula Ramseyer"
+      ],
+      "active_vocabulary": {
+        "Aurélie Wyss": 50,
+        "Aurélien Vandenberghe": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Bruderholzallee": 50,
+        "Aurélie Joensen": 50,
+        "Aurélien Kübler": 50,
+        "Ursula Ramseyer": 50
+      },
+      "vocabulary_sha256": "e8bc96d09731316bb7a087a9bd3184e1387e5645290997967c8d313b5809bd45"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélie Wyss": 50,
+        "Aurélien Vandenberghe": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Bruderholzallee": 50,
+        "Aurélie Joensen": 50,
+        "Aurélien Kübler": 50,
+        "Ursula Ramseyer": 50
+      },
+      "vocabulary_sha256": "e8bc96d09731316bb7a087a9bd3184e1387e5645290997967c8d313b5809bd45"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Bruderholzallee 42, 4059 Basel, Switzerland",
+    "Basel SBB Railway Station, 4051 Basel, Switzerland",
+    "Basel Get-Together"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:37.741427+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

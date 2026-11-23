@@ -1,0 +1,273 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0608_f9dnksx1xvs5mvxg8qcax32clsp3b3bo__async_0058_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "dd40f3fbd30198210833ab252c3890790832944a6a372ecbc23dbe7ca00b0e14",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Åsa Lindström",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名，邮件收件人"
+        },
+        {
+          "text": "Malmö",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Malmö Majestic",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmöhusvägen 34, Malmö",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-54555ece-7ce3-4a23-b640-5cbcbf78c705.arguments.end_location",
+          "reason": "目的地地址"
+        },
+        {
+          "text": "Malmö Modern",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dd69e374-1d9a-4210-81d6-078b7190f6ca.arguments.content",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmö Marina",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dd69e374-1d9a-4210-81d6-078b7190f6ca.arguments.content",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmö Castle Views",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dd69e374-1d9a-4210-81d6-078b7190f6ca.arguments.content",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmö Marina View",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dd69e374-1d9a-4210-81d6-078b7190f6ca.arguments.content",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmö Harbour",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dd69e374-1d9a-4210-81d6-078b7190f6ca.arguments.content",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmö City Center",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dd69e374-1d9a-4210-81d6-078b7190f6ca.arguments.content",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Linnea",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-446eb6af-fbfc-4dc4-a987-37a2c5a0a0dc.arguments.content",
+          "reason": "被取消活动相关人名"
+        }
+      ],
+      "new_terms": [
+        "Åsa Lindström",
+        "Malmö",
+        "Malmö Majestic",
+        "Malmöhusvägen 34, Malmö",
+        "Malmö Modern",
+        "Malmö Marina",
+        "Malmö Castle Views",
+        "Malmö Marina View",
+        "Malmö Harbour",
+        "Malmö City Center",
+        "Linnea"
+      ],
+      "active_vocabulary": {
+        "Åsa Lindström": 50,
+        "Malmö": 50,
+        "Malmö Majestic": 50,
+        "Malmöhusvägen 34, Malmö": 50,
+        "Malmö Modern": 50,
+        "Malmö Marina": 50,
+        "Malmö Castle Views": 50,
+        "Malmö Marina View": 50,
+        "Malmö Harbour": 50,
+        "Malmö City Center": 50,
+        "Linnea": 50
+      },
+      "vocabulary_sha256": "c226dab9d58153fc0092c61cffe23818e36ea8f1a713218b36b185a3b4ed6a77"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Åsa Lindström",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "人名，邮件收件人"
+        },
+        {
+          "text": "Malmöhusvägen 34",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "目的地地址"
+        },
+        {
+          "text": "Malmöhusvägen 34, Malmö",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "完整目的地地址"
+        }
+      ],
+      "new_terms": [
+        "Malmöhusvägen 34"
+      ],
+      "active_vocabulary": {
+        "Åsa Lindström": 50,
+        "Malmö": 50,
+        "Malmö Majestic": 50,
+        "Malmöhusvägen 34, Malmö": 50,
+        "Malmö Modern": 50,
+        "Malmö Marina": 50,
+        "Malmö Castle Views": 50,
+        "Malmö Marina View": 50,
+        "Malmö Harbour": 50,
+        "Malmö City Center": 50,
+        "Linnea": 50,
+        "Malmöhusvägen 34": 50
+      },
+      "vocabulary_sha256": "639207555bf96758eb099082685b706725f35b083c54c8bfc78564ae332da36c"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Malmöhusvägen 34, Malmö",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "日历地点"
+        },
+        {
+          "text": "Malmö Modern",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmö Marina",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmö Castle Views",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmö Majestic",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmö Marina View",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmö Harbour",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Malmö City Center",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Södra Förstadsgatan 20, Malmö",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.description",
+          "reason": "房产地址"
+        },
+        {
+          "text": "Malmöhusvägen 10, Malmö",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.description",
+          "reason": "房产地址"
+        },
+        {
+          "text": "Slottsgatan 12, Malmö",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.description",
+          "reason": "房产地址"
+        },
+        {
+          "text": "Södra Promenaden 25, Malmö",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.description",
+          "reason": "房产地址"
+        }
+      ],
+      "new_terms": [
+        "Södra Förstadsgatan 20, Malmö",
+        "Malmöhusvägen 10, Malmö",
+        "Slottsgatan 12, Malmö",
+        "Södra Promenaden 25, Malmö"
+      ],
+      "active_vocabulary": {
+        "Åsa Lindström": 50,
+        "Malmö": 50,
+        "Malmö Majestic": 50,
+        "Malmöhusvägen 34, Malmö": 50,
+        "Malmö Modern": 50,
+        "Malmö Marina": 50,
+        "Malmö Castle Views": 50,
+        "Malmö Marina View": 50,
+        "Malmö Harbour": 50,
+        "Malmö City Center": 50,
+        "Linnea": 50,
+        "Malmöhusvägen 34": 50,
+        "Södra Förstadsgatan 20, Malmö": 50,
+        "Malmöhusvägen 10, Malmö": 50,
+        "Slottsgatan 12, Malmö": 50,
+        "Södra Promenaden 25, Malmö": 50
+      },
+      "vocabulary_sha256": "eda09d9a299442df7cb9a7359e199bcc1850fbf83c0113cbaa9a00b6b67f4737"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "5ee3809d342d52cdcae7b8075d416081ee38fa554b5d8699af42798411016af3",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3507,
+        "completion_tokens": 1059,
+        "total_tokens": 4566,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3251
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 3.252
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0608_f9dnksx1xvs5mvxg8qcax32clsp3b3bo__async_0058_v1",
+  "extracted_at": "2026-11-22T06:46:42.786336+00:00"
+}

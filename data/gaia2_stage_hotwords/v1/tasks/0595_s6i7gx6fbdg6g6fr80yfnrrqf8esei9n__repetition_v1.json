@@ -1,0 +1,228 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0595_s6i7gx6fbdg6g6fr80yfnrrqf8esei9n__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "8d521bbf3b5700fe24ba6abec45216f8cc63ffd5bb169969a09b1103ae991786",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Apartment Moving Day",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "自定义事件名称"
+        },
+        {
+          "text": "LS2 7DJ",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "公寓邮编地址"
+        },
+        {
+          "text": "Home Office",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-016f5eeb-3788-434f-9ec1-8e968060ba5c.arguments.location",
+          "reason": "事件地点名称"
+        }
+      ],
+      "new_terms": [
+        "Apartment Moving Day",
+        "LS2 7DJ",
+        "Home Office"
+      ],
+      "active_vocabulary": {
+        "Apartment Moving Day": 50,
+        "LS2 7DJ": 50,
+        "Home Office": 50
+      },
+      "vocabulary_sha256": "7185c047efad278029024d097df42b8cb6759f97e466a88625eeb00804acd3ae"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Leeds",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "LS2 7DJ",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "公寓邮编地址"
+        },
+        {
+          "text": "789 Kirkgate",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "街道地址"
+        },
+        {
+          "text": "Cambridge",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Check Leeds viewing travel",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "提醒标题"
+        },
+        {
+          "text": "34, Storey's Way, Cambridge CB3 0DT",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_order_return.arguments.end_location",
+          "reason": "完整家庭地址"
+        },
+        {
+          "text": "789 Kirkgate, Leeds, LS2 7DJ",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_order_return.arguments.start_location",
+          "reason": "完整起点地址"
+        }
+      ],
+      "new_terms": [
+        "Leeds",
+        "789 Kirkgate",
+        "Cambridge",
+        "Check Leeds viewing travel",
+        "34, Storey's Way, Cambridge CB3 0DT",
+        "789 Kirkgate, Leeds, LS2 7DJ"
+      ],
+      "active_vocabulary": {
+        "Apartment Moving Day": 50,
+        "LS2 7DJ": 50,
+        "Home Office": 50,
+        "Leeds": 50,
+        "789 Kirkgate": 50,
+        "Cambridge": 50,
+        "Check Leeds viewing travel": 50,
+        "34, Storey's Way, Cambridge CB3 0DT": 50,
+        "789 Kirkgate, Leeds, LS2 7DJ": 50
+      },
+      "vocabulary_sha256": "8a84e009fa5dd71ebfb82d101905a3a2a3d54b719ce63f4fafab6a0cd1b3b54a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Evangelia Papadopoulos",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Leeds",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "LS2 7DJ",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_plan.arguments.content",
+          "reason": "公寓邮编地址"
+        },
+        {
+          "text": "Leeds packing-supply plan",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_send_plan.arguments.subject",
+          "reason": "邮件主题名称"
+        },
+        {
+          "text": "Evangelia",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_friend.arguments.content",
+          "reason": "消息中称呼的名字"
+        }
+      ],
+      "new_terms": [
+        "Evangelia Papadopoulos",
+        "Leeds packing-supply plan",
+        "Evangelia"
+      ],
+      "active_vocabulary": {
+        "Apartment Moving Day": 50,
+        "LS2 7DJ": 50,
+        "Home Office": 50,
+        "Leeds": 50,
+        "789 Kirkgate": 50,
+        "Cambridge": 50,
+        "Check Leeds viewing travel": 50,
+        "34, Storey's Way, Cambridge CB3 0DT": 50,
+        "789 Kirkgate, Leeds, LS2 7DJ": 50,
+        "Evangelia Papadopoulos": 50,
+        "Leeds packing-supply plan": 50,
+        "Evangelia": 50
+      },
+      "vocabulary_sha256": "90472cad89e27033d067b376bfedd853eb1a22a77809aeed03cc4c9b5e81f405"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "5d97870fb905c0b60a46d69e87a228d3e1ca2f4c499694219cba43c117e8b178",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2657,
+        "completion_tokens": 524,
+        "total_tokens": 3181,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2401
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.959,
+      "error": "Not an exact quotation of a source in stage 2: '789 Kirkgate' from 'stage2.source_task'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "7c5042445bdd4e959e22fde2d7a4635bf116704cf16c2fa82ab056a8aae0320a",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3588,
+        "completion_tokens": 501,
+        "total_tokens": 4089,
+        "prompt_tokens_details": {
+          "cached_tokens": 3072
+        },
+        "prompt_cache_hit_tokens": 3072,
+        "prompt_cache_miss_tokens": 516
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.681,
+      "error": "Not an exact quotation of a source in stage 2: 'LS2 7DJ' from 'stage2.source_task'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "88f577fde37271e9f5992bbb358d5aa139058c2b683ec3cdc284c05be1fc8e3d",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3567,
+        "completion_tokens": 514,
+        "total_tokens": 4081,
+        "prompt_tokens_details": {
+          "cached_tokens": 2816
+        },
+        "prompt_cache_hit_tokens": 2816,
+        "prompt_cache_miss_tokens": 751
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.75
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0595_s6i7gx6fbdg6g6fr80yfnrrqf8esei9n__repetition_v1",
+  "extracted_at": "2026-11-22T06:45:56.051662+00:00"
+}

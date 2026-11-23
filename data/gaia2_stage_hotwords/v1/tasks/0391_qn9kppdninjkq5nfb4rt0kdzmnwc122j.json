@@ -1,0 +1,276 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0391_qn9kppdninjkq5nfb4rt0kdzmnwc122j",
+  "model": "deepseek-flash",
+  "input_sha256": "ff08a5daef331ee3fa180d2ff74d4e99e745647018318bffd076fbd666d1dee9",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Bengaluru",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "印度城市名，用于筛选联系人"
+        },
+        {
+          "text": "Rohini",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Kolkata",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "印度城市名，用于筛选联系人"
+        }
+      ],
+      "new_terms": [
+        "Bengaluru",
+        "Rohini",
+        "Kolkata"
+      ],
+      "active_vocabulary": {
+        "Bengaluru": 50,
+        "Rohini": 50,
+        "Kolkata": 50
+      },
+      "vocabulary_sha256": "e6c3e403d49607c81a9f91684236cf12d0fd9e3e74770fc571e9f2eb59948dcc"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Rohini Rao",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "完整人名，需切断联系的对象"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_cutoff.arguments.content",
+          "reason": "消息署名中的发件人姓名"
+        },
+        {
+          "text": "Kolkata Coordination",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_create_kolkata.arguments.title",
+          "reason": "新建群聊的自定义名称"
+        },
+        {
+          "text": "Prison Reform in India",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "共享群聊名称"
+        },
+        {
+          "text": "Prison Reform Initiative Discussion",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "共享群聊名称"
+        },
+        {
+          "text": "Catch-up with Rohini and Akira",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "共享群聊名称，含人名"
+        },
+        {
+          "text": "Prison Reform and Rehabilitation",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "共享群聊名称"
+        },
+        {
+          "text": "Catch-up and Collaboration",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "共享群聊名称"
+        },
+        {
+          "text": "Prison Reform and Social Justice",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "共享群聊名称"
+        },
+        {
+          "text": "Sophea Chakraborty",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "Kolkata群成员姓名"
+        },
+        {
+          "text": "Rohan Sengupta",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "Kolkata群成员姓名"
+        }
+      ],
+      "new_terms": [
+        "Rohini Rao",
+        "Rohan Kumar",
+        "Kolkata Coordination",
+        "Prison Reform in India",
+        "Prison Reform Initiative Discussion",
+        "Catch-up with Rohini and Akira",
+        "Prison Reform and Rehabilitation",
+        "Catch-up and Collaboration",
+        "Prison Reform and Social Justice",
+        "Sophea Chakraborty",
+        "Rohan Sengupta"
+      ],
+      "active_vocabulary": {
+        "Bengaluru": 50,
+        "Rohini": 50,
+        "Kolkata": 50,
+        "Rohini Rao": 50,
+        "Rohan Kumar": 50,
+        "Kolkata Coordination": 50,
+        "Prison Reform in India": 50,
+        "Prison Reform Initiative Discussion": 50,
+        "Catch-up with Rohini and Akira": 50,
+        "Prison Reform and Rehabilitation": 50,
+        "Catch-up and Collaboration": 50,
+        "Prison Reform and Social Justice": 50,
+        "Sophea Chakraborty": 50,
+        "Rohan Sengupta": 50
+      },
+      "vocabulary_sha256": "d54902507eb5ec5dc0cea6e3098d415723ff6954c641d7a5b7e12613629402c8"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Rohini Rao",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "需记录的人名"
+        },
+        {
+          "text": "Bengaluru",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_record.arguments.content",
+          "reason": "联系人所在城市"
+        },
+        {
+          "text": "Prison Reform in India",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_email_record.arguments.content",
+          "reason": "被移除的群聊名称"
+        },
+        {
+          "text": "Prison Reform Initiative Discussion",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_email_record.arguments.content",
+          "reason": "被移除的群聊名称"
+        },
+        {
+          "text": "Catch-up with Rohini and Akira",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_email_record.arguments.content",
+          "reason": "被移除的群聊名称"
+        },
+        {
+          "text": "Prison Reform and Rehabilitation",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_email_record.arguments.content",
+          "reason": "被移除的群聊名称"
+        },
+        {
+          "text": "Catch-up and Collaboration",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_email_record.arguments.content",
+          "reason": "被移除的群聊名称"
+        },
+        {
+          "text": "Prison Reform and Social Justice",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_email_record.arguments.content",
+          "reason": "被移除的群聊名称"
+        },
+        {
+          "text": "Kolkata Coordination",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_email_record.arguments.content",
+          "reason": "新建群聊名称"
+        },
+        {
+          "text": "Sophea Chakraborty",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_record.arguments.content",
+          "reason": "Kolkata群成员姓名"
+        },
+        {
+          "text": "Rohan Sengupta",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_record.arguments.content",
+          "reason": "Kolkata群成员姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Bengaluru": 50,
+        "Rohini": 50,
+        "Kolkata": 50,
+        "Rohini Rao": 50,
+        "Rohan Kumar": 50,
+        "Kolkata Coordination": 50,
+        "Prison Reform in India": 50,
+        "Prison Reform Initiative Discussion": 50,
+        "Catch-up with Rohini and Akira": 50,
+        "Prison Reform and Rehabilitation": 50,
+        "Catch-up and Collaboration": 50,
+        "Prison Reform and Social Justice": 50,
+        "Sophea Chakraborty": 50,
+        "Rohan Sengupta": 50
+      },
+      "vocabulary_sha256": "d54902507eb5ec5dc0cea6e3098d415723ff6954c641d7a5b7e12613629402c8"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "a31705b81ddb36f528da756d2e57de11adb6191c69e96666326d98051c900519",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2477,
+        "completion_tokens": 956,
+        "total_tokens": 3433,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2221
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.899,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "111b665443d226be7230ee47dbe0d7912c51bf3b9d5b91642d524dff0f1523c7",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3826,
+        "completion_tokens": 958,
+        "total_tokens": 4784,
+        "prompt_tokens_details": {
+          "cached_tokens": 3328
+        },
+        "prompt_cache_hit_tokens": 3328,
+        "prompt_cache_miss_tokens": 498
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.858
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0391_qn9kppdninjkq5nfb4rt0kdzmnwc122j",
+  "extracted_at": "2026-11-22T06:41:43.465682+00:00"
+}

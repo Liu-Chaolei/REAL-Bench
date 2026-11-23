@@ -1,0 +1,192 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0978_3iswnd7l3vmtlyrq5uxo0uv043da3qiq",
+  "model": "deepseek-flash",
+  "input_sha256": "8d0e83d6777657f94c3d2546e2223215fd682f1376a885236288b219d566fd85",
+  "review_input_sha256": "db6456579ca6f4caedf77948829281c58c2a8b334eb27e4193aa5fed87fe1e60",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "f841e74df33a1c3a1af75e0720944e6d55d2bc4330eb3796e5b3721dce00a6bb",
+  "reference_results_sha256": "3542a259806db375d151ddb2561e082bfccb22cd6296416d6eb6c3b91fffe28f",
+  "sources": {
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Søren Kjær",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-3d48d23f-4008-4dca-9ad4-dc0dd111508d.arguments.content"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "kirsten.ravnkilde",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-3d48d23f-4008-4dca-9ad4-dc0dd111508d.arguments.recipients[0]"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "aisling.oconnor",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-3d48d23f-4008-4dca-9ad4-dc0dd111508d.arguments.recipients[1]"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "somchai.wongtrakul",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-3d48d23f-4008-4dca-9ad4-dc0dd111508d.arguments.recipients[2]"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Astrid Kjær",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Stainless Steel Humbrol AG9150 The Modeller's Tool Set",
+      "original_source": "stage2.reference_reply.series_s2_send_message.arguments.content"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Beige HANSA 4825 Plush",
+      "original_source": "stage2.reference_reply.series_s2_send_message.arguments.content"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Blue Champion Sports Rhino Mini Promax Ball",
+      "original_source": "stage2.reference_reply.series_s2_send_message.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "aisling.oconnor",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "独特完整姓名标识，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "kirsten.ravnkilde",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "独特完整姓名标识，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "somchai.wongtrakul",
+          "kind": "person",
+          "source": "stage0.existing_catalog.6",
+          "reason": "独特完整姓名标识，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含特殊字符的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "aisling.oconnor",
+        "kirsten.ravnkilde",
+        "somchai.wongtrakul",
+        "Søren Kjær"
+      ],
+      "active_vocabulary": {
+        "aisling.oconnor": 50,
+        "kirsten.ravnkilde": 50,
+        "somchai.wongtrakul": 50,
+        "Søren Kjær": 50
+      },
+      "vocabulary_sha256": "588746d80560d77bee9126a7f8e60112db79afbd9a803b31b44e3d2e16bf8168"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Astrid Kjær",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含特殊字符的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Kjær"
+      ],
+      "active_vocabulary": {
+        "aisling.oconnor": 50,
+        "kirsten.ravnkilde": 50,
+        "somchai.wongtrakul": 50,
+        "Søren Kjær": 50,
+        "Astrid Kjær": 50
+      },
+      "vocabulary_sha256": "679c0e35c0130b207b5198f453ea47ee0b96bda46a77c2bc6d6f20d6fdc83d7c"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Stainless Steel Humbrol AG9150 The Modeller's Tool Set",
+          "kind": "product",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含品牌与型号的复杂产品名",
+          "weight": 50
+        },
+        {
+          "text": "Blue Champion Sports Rhino Mini Promax Ball",
+          "kind": "product",
+          "source": "stage2.existing_catalog.2",
+          "reason": "含多品牌词的复杂产品名",
+          "weight": 50
+        },
+        {
+          "text": "Beige HANSA 4825 Plush",
+          "kind": "product",
+          "source": "stage2.existing_catalog.1",
+          "reason": "含品牌与型号的复杂产品名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Stainless Steel Humbrol AG9150 The Modeller's Tool Set",
+        "Blue Champion Sports Rhino Mini Promax Ball",
+        "Beige HANSA 4825 Plush"
+      ],
+      "active_vocabulary": {
+        "aisling.oconnor": 50,
+        "kirsten.ravnkilde": 50,
+        "somchai.wongtrakul": 50,
+        "Søren Kjær": 50,
+        "Astrid Kjær": 50,
+        "Stainless Steel Humbrol AG9150 The Modeller's Tool Set": 50,
+        "Blue Champion Sports Rhino Mini Promax Ball": 50,
+        "Beige HANSA 4825 Plush": 50
+      },
+      "vocabulary_sha256": "63a14d7e4fdabe1fc7b3bf5320e34a6993a9c6d68019e896727ad4c22357494c"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kirsten",
+    "Aisling",
+    "Somchai",
+    "Ikea"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:07.778217+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

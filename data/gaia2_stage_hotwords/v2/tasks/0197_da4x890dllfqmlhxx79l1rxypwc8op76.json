@@ -1,0 +1,145 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0197_da4x890dllfqmlhxx79l1rxypwc8op76",
+  "model": "deepseek-flash",
+  "input_sha256": "e5b6274cc68bbc6e9710281bb37a91a8ba4b2c3bd8297eecae6e0b648a0d4d04",
+  "review_input_sha256": "caefbceba9e1680422485223a909b3d680e31581f2b9f05eece72f2b444d84c3",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "31a1f81a43937c8063b382163cc89276dd4e56de4bfdb1cae4a31ad8dc13c04c",
+  "reference_results_sha256": "ba0129d5814b484e7cd3bbeff079859c964b8cbff739a7fb3b312142cb21bc43",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-fda0c49b-6af8-43c4-a8e7-eabdff4605d4.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Kaito Nakamura",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-fda0c49b-6af8-43c4-a8e7-eabdff4605d4.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Léon Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-fda0c49b-6af8-43c4-a8e7-eabdff4605d4.arguments.attendees[2]"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Aurélien Kaufmann",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-fda0c49b-6af8-43c4-a8e7-eabdff4605d4.arguments.attendees[3]"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "Marvel Avengers Beverage Napkins",
+      "original_source": "stage0.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Marvel Avengers Beverage Napkins",
+          "kind": "product",
+          "source": "stage0.existing_catalog.6",
+          "reason": "独特完整产品名，适合热词",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Kaufmann",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Kaito Nakamura",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，日文专名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Léon Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，含独特姓氏，适合热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Marvel Avengers Beverage Napkins",
+        "Aurélien Kaufmann",
+        "Kaito Nakamura",
+        "Léon Vandenberghe",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Marvel Avengers Beverage Napkins": 50,
+        "Aurélien Kaufmann": 50,
+        "Kaito Nakamura": 50,
+        "Léon Vandenberghe": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "17053f066beb072b3db94510133756e0ea51795ef0c9373531aacdc794697c6a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Marvel Avengers Beverage Napkins": 50,
+        "Aurélien Kaufmann": 50,
+        "Kaito Nakamura": 50,
+        "Léon Vandenberghe": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "17053f066beb072b3db94510133756e0ea51795ef0c9373531aacdc794697c6a"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Marvel Avengers Beverage Napkins": 50,
+        "Aurélien Kaufmann": 50,
+        "Kaito Nakamura": 50,
+        "Léon Vandenberghe": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "17053f066beb072b3db94510133756e0ea51795ef0c9373531aacdc794697c6a"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Alessia",
+    "Zurich"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:27.445179+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

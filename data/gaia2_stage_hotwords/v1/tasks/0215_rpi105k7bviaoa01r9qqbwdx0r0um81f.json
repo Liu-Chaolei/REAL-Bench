@@ -1,0 +1,97 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0215_rpi105k7bviaoa01r9qqbwdx0r0um81f",
+  "model": "deepseek-flash",
+  "input_sha256": "aa9e8f198fc1c67ed93dc4b4619e6b70ac69cdc323dabb875385e0a06fac2c44",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Xóchitl García Hernández",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_seminar.arguments.attendees[0]",
+          "reason": "参会人完整姓名，含特殊字符"
+        },
+        {
+          "text": "Moscow University",
+          "kind": "organization",
+          "source": "stage1.tool_gt.series_s1_add_seminar.arguments.location",
+          "reason": "地点所属大学名称"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "邮件署名中的发件人姓名"
+        }
+      ],
+      "new_terms": [
+        "Xóchitl García Hernández",
+        "Moscow University",
+        "Anastasiya Kuznetsova"
+      ],
+      "active_vocabulary": {
+        "Xóchitl García Hernández": 50,
+        "Moscow University": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "89acbf0059f063e8971c06ab75576cfc762d04322505e066764247db6806a0f6"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Xóchitl García Hernández",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_record.arguments.content",
+          "reason": "记录中被通知的参会人姓名"
+        },
+        {
+          "text": "Moscow University",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_email_record.arguments.content",
+          "reason": "记录中地点所属大学名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Xóchitl García Hernández": 50,
+        "Moscow University": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "89acbf0059f063e8971c06ab75576cfc762d04322505e066764247db6806a0f6"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "b8b05026a1932bbf9dbe62df14d3d893e35e6824f5615dcecd1f0dadf6b79d57",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2794,
+        "completion_tokens": 240,
+        "total_tokens": 3034,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2538
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.14
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0215_rpi105k7bviaoa01r9qqbwdx0r0um81f",
+  "extracted_at": "2026-11-22T06:40:43.712080+00:00"
+}

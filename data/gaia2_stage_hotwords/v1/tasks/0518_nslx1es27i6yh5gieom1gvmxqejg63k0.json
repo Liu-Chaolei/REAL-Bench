@@ -1,0 +1,163 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0518_nslx1es27i6yh5gieom1gvmxqejg63k0",
+  "model": "deepseek-flash",
+  "input_sha256": "9b6f3f776c6758916632b322a13d846c50d767e3b407e8a3db773830067bd716",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Malmö Opera",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "歌剧院专有名称"
+        },
+        {
+          "text": "Norra Vallgatan 62",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "街道地址专有名称"
+        },
+        {
+          "text": "Vasco",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Night at the Opera",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "活动自定义名称"
+        }
+      ],
+      "new_terms": [
+        "Malmö Opera",
+        "Norra Vallgatan 62",
+        "Vasco",
+        "Night at the Opera"
+      ],
+      "active_vocabulary": {
+        "Malmö Opera": 50,
+        "Norra Vallgatan 62": 50,
+        "Vasco": 50,
+        "Night at the Opera": 50
+      },
+      "vocabulary_sha256": "8bf72805e4963082411d22f04d0f22eaf408c0e20e7e2d3774981f0e93b3ded0"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Malmö Opera",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "歌剧院专有名称"
+        },
+        {
+          "text": "Norra Vallgatan 62",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "街道地址专有名称"
+        },
+        {
+          "text": "Opera Ride Home",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "规划条目自定义名称"
+        }
+      ],
+      "new_terms": [
+        "Opera Ride Home"
+      ],
+      "active_vocabulary": {
+        "Malmö Opera": 50,
+        "Norra Vallgatan 62": 50,
+        "Vasco": 50,
+        "Night at the Opera": 50,
+        "Opera Ride Home": 50
+      },
+      "vocabulary_sha256": "6d778963f8e56174a650dda9f46e3edaf840e734c3b79fe102015d3f261d6a6d"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Åsa Lindgren",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "受邀人姓名"
+        },
+        {
+          "text": "Night at the Opera",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "活动自定义名称"
+        },
+        {
+          "text": "Norra Vallgatan 62",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "街道地址专有名称"
+        },
+        {
+          "text": "Malmö Opera",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "歌剧院专有名称"
+        },
+        {
+          "text": "Vasco",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "人名"
+        },
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "邮件署名人名"
+        }
+      ],
+      "new_terms": [
+        "Åsa Lindgren",
+        "Astrid"
+      ],
+      "active_vocabulary": {
+        "Malmö Opera": 50,
+        "Norra Vallgatan 62": 50,
+        "Vasco": 50,
+        "Night at the Opera": 50,
+        "Opera Ride Home": 50,
+        "Åsa Lindgren": 50,
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "106f5b71896972250cc200ab0ee9479db763e7af46263a1ba48e20f54fa7d320"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "c7423bed48d061af740cd2ad56b1f7bb17617732c7c0afa5557c210a0491fbef",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3298,
+        "completion_tokens": 380,
+        "total_tokens": 3678,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3042
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.408
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0518_nslx1es27i6yh5gieom1gvmxqejg63k0",
+  "extracted_at": "2026-11-22T06:42:30.044575+00:00"
+}

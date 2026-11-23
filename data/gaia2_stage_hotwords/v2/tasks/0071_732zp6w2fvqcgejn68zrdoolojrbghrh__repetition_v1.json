@@ -1,0 +1,112 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0071_732zp6w2fvqcgejn68zrdoolojrbghrh__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "847785aa763fb74e9e8c4ff25fce2a2ea85460ac5a8fac6a5b977aba09056ca3",
+  "review_input_sha256": "0f8d21f204a23814391882446c3ff72de8e839ca4adb17957d92919bdaf5b86b",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "cf0d99de26982588e7418fcd44f8ad2e410135cb9bc6ad29ca38c9fdab9b699f",
+  "reference_results_sha256": "29f4d543f0e14ec79705aa440b5c41996b460e5fbf1889e3eac784504f10e88d",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Rohan Sengupta",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-0209a43c-ff3b-4a18-81e7-e901226e6206.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Kipenzi Mwanga",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-0209a43c-ff3b-4a18-81e7-e901226e6206.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Snake Oil Game",
+      "original_source": "stage0.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Snake Oil Game",
+          "kind": "product",
+          "source": "stage0.existing_catalog.2",
+          "reason": "独特产品/游戏名称，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Kipenzi Mwanga",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，拼写较难，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Sengupta",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，含独特姓氏，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Snake Oil Game",
+        "Kipenzi Mwanga",
+        "Rohan Sengupta"
+      ],
+      "active_vocabulary": {
+        "Snake Oil Game": 50,
+        "Kipenzi Mwanga": 50,
+        "Rohan Sengupta": 50
+      },
+      "vocabulary_sha256": "58f42ca8265a8ae0985e72ca12a806a86bdf57ed1b95f8f0999de2eb9aea6642"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Snake Oil Game": 50,
+        "Kipenzi Mwanga": 50,
+        "Rohan Sengupta": 50
+      },
+      "vocabulary_sha256": "58f42ca8265a8ae0985e72ca12a806a86bdf57ed1b95f8f0999de2eb9aea6642"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Snake Oil Game": 50,
+        "Kipenzi Mwanga": 50,
+        "Rohan Sengupta": 50
+      },
+      "vocabulary_sha256": "58f42ca8265a8ae0985e72ca12a806a86bdf57ed1b95f8f0999de2eb9aea6642"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Rohan Kumar"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:18.712475+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

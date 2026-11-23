@@ -1,0 +1,177 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0727_rzmt5gi1jnrz40uy960p5j343t1z4gtm__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "f6f2331e6393f6cbca62a132c4d7cb7a2e5b7be9b462e677d3c25b6b7f20e7f2",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名，任务中提到的兄弟"
+        },
+        {
+          "text": "Natalya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名，Viktor的妻子"
+        },
+        {
+          "text": "Yamaha C40 GigMaker Classical Acoustic Guitar Package",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定商品型号名称"
+        },
+        {
+          "text": "Sheremetyevo International Airport",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-8bbed51f-0469-46d1-853b-4abe70fd4212.arguments.location",
+          "reason": "机场专有地名"
+        }
+      ],
+      "new_terms": [
+        "Viktor Kuznetsov",
+        "Natalya Kuznetsova",
+        "Yamaha C40 GigMaker Classical Acoustic Guitar Package",
+        "Sheremetyevo International Airport"
+      ],
+      "active_vocabulary": {
+        "Viktor Kuznetsov": 50,
+        "Natalya Kuznetsova": 50,
+        "Yamaha C40 GigMaker Classical Acoustic Guitar Package": 50,
+        "Sheremetyevo International Airport": 50
+      },
+      "vocabulary_sha256": "45c8bebc249d204b34eb70bde505360c01bc0166117b2a9878a520a5c5f6f2be"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Viktor",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "人名，收件人"
+        },
+        {
+          "text": "Natalya",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "人名，收件人"
+        },
+        {
+          "text": "Yamaha",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "品牌名，作为产品标识"
+        }
+      ],
+      "new_terms": [
+        "Viktor",
+        "Natalya",
+        "Yamaha"
+      ],
+      "active_vocabulary": {
+        "Viktor Kuznetsov": 50,
+        "Natalya Kuznetsova": 50,
+        "Yamaha C40 GigMaker Classical Acoustic Guitar Package": 50,
+        "Sheremetyevo International Airport": 50,
+        "Viktor": 50,
+        "Natalya": 50,
+        "Yamaha": 50
+      },
+      "vocabulary_sha256": "c6770dd4b157f0ed1af64df1821518c977d53723393cd68e4793d36d840d0977"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Viktor",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "人名，受邀人"
+        },
+        {
+          "text": "Natalya",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "人名，受邀人"
+        },
+        {
+          "text": "Moscow Music Museum",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "博物馆专有名称"
+        },
+        {
+          "text": "Ulitsa Bolshaya Dmitrovka, 15/1",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "具体街道地址"
+        }
+      ],
+      "new_terms": [
+        "Moscow Music Museum",
+        "Ulitsa Bolshaya Dmitrovka, 15/1"
+      ],
+      "active_vocabulary": {
+        "Viktor Kuznetsov": 50,
+        "Natalya Kuznetsova": 50,
+        "Yamaha C40 GigMaker Classical Acoustic Guitar Package": 50,
+        "Sheremetyevo International Airport": 50,
+        "Viktor": 50,
+        "Natalya": 50,
+        "Yamaha": 50,
+        "Moscow Music Museum": 50,
+        "Ulitsa Bolshaya Dmitrovka, 15/1": 50
+      },
+      "vocabulary_sha256": "e2e27c6df4e6f248093f7f75367acdec8f2e2bfc846fdcf22a1cf7068ffe2d16"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "8322c1911c5f00eca46c9b7f59774a2817c17ccbccc67fa7dc1834b9b21a9ca4",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3355,
+        "completion_tokens": 372,
+        "total_tokens": 3727,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3099
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.538,
+      "error": "1 validation error for Extraction\nstages.1.terms.2.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "703c0e920c540e00b0a9e0917ee63f775ced6c9d567d894f505104e4b52aebad",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4188,
+        "completion_tokens": 376,
+        "total_tokens": 4564,
+        "prompt_tokens_details": {
+          "cached_tokens": 3712
+        },
+        "prompt_cache_hit_tokens": 3712,
+        "prompt_cache_miss_tokens": 476
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.819
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0727_rzmt5gi1jnrz40uy960p5j343t1z4gtm__repetition_v1",
+  "extracted_at": "2026-11-22T06:46:20.466015+00:00"
+}

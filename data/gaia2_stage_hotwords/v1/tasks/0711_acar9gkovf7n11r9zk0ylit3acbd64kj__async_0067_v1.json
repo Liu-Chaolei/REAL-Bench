@@ -1,0 +1,134 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0711_acar9gkovf7n11r9zk0ylit3acbd64kj__async_0067_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "ee57d505b628e0abf834e9e2f552a0023c33017f8e8d4d53abb5c22d4f958cd5",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Åke Lindström",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "叔叔的完整姓名"
+        },
+        {
+          "text": "Annoying Uncle Åke",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fcb51a93-e025-40fb-a45b-4a862e7f6c89.arguments.title",
+          "reason": "自定义日历事件名称"
+        },
+        {
+          "text": "Östermalmsgatan 12, 114 39 Stockholm, Sweden",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fcb51a93-e025-40fb-a45b-4a862e7f6c89.arguments.location",
+          "reason": "叔叔的地址"
+        },
+        {
+          "text": "Zebra Foal",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定玩具产品名"
+        },
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-2acf4e1b-d270-49ed-ba09-30f1a154c9dc.arguments.content",
+          "reason": "用户的名字"
+        }
+      ],
+      "new_terms": [
+        "Åke Lindström",
+        "Annoying Uncle Åke",
+        "Östermalmsgatan 12, 114 39 Stockholm, Sweden",
+        "Zebra Foal",
+        "Astrid"
+      ],
+      "active_vocabulary": {
+        "Åke Lindström": 50,
+        "Annoying Uncle Åke": 50,
+        "Östermalmsgatan 12, 114 39 Stockholm, Sweden": 50,
+        "Zebra Foal": 50,
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "196b0b1e7e807f97e8f2afcf3846b6d7b9cf4bb5b612abda4e64935ff64a1d65"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Östermalmsgatan 12, 114 39 Stockholm, Sweden",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "目的地地址"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Åke Lindström": 50,
+        "Annoying Uncle Åke": 50,
+        "Östermalmsgatan 12, 114 39 Stockholm, Sweden": 50,
+        "Zebra Foal": 50,
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "196b0b1e7e807f97e8f2afcf3846b6d7b9cf4bb5b612abda4e64935ff64a1d65"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Åke Lindström",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.attendees[0]",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Annoying Uncle Åke",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.title",
+          "reason": "自定义日历事件名称"
+        },
+        {
+          "text": "Östermalmsgatan 12, 114 39 Stockholm, Sweden",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.location",
+          "reason": "事件地点地址"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Åke Lindström": 50,
+        "Annoying Uncle Åke": 50,
+        "Östermalmsgatan 12, 114 39 Stockholm, Sweden": 50,
+        "Zebra Foal": 50,
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "196b0b1e7e807f97e8f2afcf3846b6d7b9cf4bb5b612abda4e64935ff64a1d65"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "5bae4beb802e8df680d2309535fc7ce08e4d88c5afe3df526e1460b9cdf8daac",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3264,
+        "completion_tokens": 437,
+        "total_tokens": 3701,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3008
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.757
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0711_acar9gkovf7n11r9zk0ylit3acbd64kj__async_0067_v1",
+  "extracted_at": "2026-11-22T06:46:45.805398+00:00"
+}

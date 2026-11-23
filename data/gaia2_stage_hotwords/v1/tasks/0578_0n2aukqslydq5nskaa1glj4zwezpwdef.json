@@ -1,0 +1,147 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0578_0n2aukqslydq5nskaa1glj4zwezpwdef",
+  "model": "deepseek-flash",
+  "input_sha256": "353494426229ce622bc1db721fc02669f67d1990cb97d09f4474f5e888bdd7d3",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Rowzay",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f7bdb624-0010-4314-ab48-84fb48c0943b.arguments.first_name",
+          "reason": "侄女的名字"
+        },
+        {
+          "text": "Kate",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f7bdb624-0010-4314-ab48-84fb48c0943b.arguments.last_name",
+          "reason": "侄女的姓氏"
+        },
+        {
+          "text": "Leicester",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f7bdb624-0010-4314-ab48-84fb48c0943b.arguments.city_living",
+          "reason": "居住城市"
+        },
+        {
+          "text": "England",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f7bdb624-0010-4314-ab48-84fb48c0943b.arguments.country",
+          "reason": "居住国家"
+        },
+        {
+          "text": "3.75” Vinyl Funko POP Anime",
+          "kind": "product",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-25c85f48-ed01-495d-9ec3-9ababb7be5af.arguments.content",
+          "reason": "特定商品名称"
+        },
+        {
+          "text": "3.75” Funko Pop! Disney Bunny",
+          "kind": "product",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-25c85f48-ed01-495d-9ec3-9ababb7be5af.arguments.content",
+          "reason": "特定商品名称"
+        }
+      ],
+      "new_terms": [
+        "Rowzay",
+        "Kate",
+        "Leicester",
+        "England",
+        "3.75” Vinyl Funko POP Anime",
+        "3.75” Funko Pop! Disney Bunny"
+      ],
+      "active_vocabulary": {
+        "Rowzay": 50,
+        "Kate": 50,
+        "Leicester": 50,
+        "England": 50,
+        "3.75” Vinyl Funko POP Anime": 50,
+        "3.75” Funko Pop! Disney Bunny": 50
+      },
+      "vocabulary_sha256": "b6eeb927f035147311cc026cd0e7d91c8791b521b2548b5cd92c0305efd6cdf7"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Rowzay",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_prep.arguments.title",
+          "reason": "生日派对主角名字"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Rowzay": 50,
+        "Kate": 50,
+        "Leicester": 50,
+        "England": 50,
+        "3.75” Vinyl Funko POP Anime": 50,
+        "3.75” Funko Pop! Disney Bunny": 50
+      },
+      "vocabulary_sha256": "b6eeb927f035147311cc026cd0e7d91c8791b521b2548b5cd92c0305efd6cdf7"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Rowzay",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.title",
+          "reason": "群组标题中的名字"
+        },
+        {
+          "text": "Kate",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "群组成员姓氏"
+        },
+        {
+          "text": "Rohini Kumar",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "群组成员全名"
+        }
+      ],
+      "new_terms": [
+        "Rohini Kumar"
+      ],
+      "active_vocabulary": {
+        "Rowzay": 50,
+        "Kate": 50,
+        "Leicester": 50,
+        "England": 50,
+        "3.75” Vinyl Funko POP Anime": 50,
+        "3.75” Funko Pop! Disney Bunny": 50,
+        "Rohini Kumar": 50
+      },
+      "vocabulary_sha256": "04a31170e799d637714f4f800e559f41e2b6156e2030b8a3b67faca2cf48f6ac"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "075653c5c444a0716bab08b543e34f2a12ac34c4228ee43d3fa220459a9d85d1",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2876,
+        "completion_tokens": 525,
+        "total_tokens": 3401,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2620
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.836
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0578_0n2aukqslydq5nskaa1glj4zwezpwdef",
+  "extracted_at": "2026-11-22T06:42:50.243576+00:00"
+}

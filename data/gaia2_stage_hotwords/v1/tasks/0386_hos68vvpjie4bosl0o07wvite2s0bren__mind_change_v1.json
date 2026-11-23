@@ -1,0 +1,216 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0386_hos68vvpjie4bosl0o07wvite2s0bren__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "78707b93cb43a3da5982123cc7322f8e093ecfab5a90bed10cbe337b768f91ad",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Astrid Lindqvist",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-37c5d9ab-4e94-4d61-979f-edd90ed4e36b.arguments.content",
+          "reason": "需要区分的收件人全名"
+        },
+        {
+          "text": "Astrid Svensson",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-37c5d9ab-4e94-4d61-979f-edd90ed4e36b.arguments.content",
+          "reason": "需要区分的收件人全名"
+        },
+        {
+          "text": "Uppsala",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "需清理收藏房源的城市名"
+        }
+      ],
+      "new_terms": [
+        "Astrid Lindqvist",
+        "Astrid Svensson",
+        "Uppsala"
+      ],
+      "active_vocabulary": {
+        "Astrid Lindqvist": 50,
+        "Astrid Svensson": 50,
+        "Uppsala": 50
+      },
+      "vocabulary_sha256": "2dbade69dc51ded60931c80c105f8fb5d7ab3fa9ee2dd79fe1aad91112534a9c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Göteborgs Kulturhus",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "需保留的房源专名"
+        },
+        {
+          "text": "Göteborgs Gnist",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "被移除的房源专名"
+        },
+        {
+          "text": "Göteborgsbo",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "被移除的房源专名"
+        },
+        {
+          "text": "Göteborgs Hamn",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "被移除的房源专名"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "邮件收件人全名"
+        },
+        {
+          "text": "Göteborg",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "清理范围城市名"
+        }
+      ],
+      "new_terms": [
+        "Göteborgs Kulturhus",
+        "Göteborgs Gnist",
+        "Göteborgsbo",
+        "Göteborgs Hamn",
+        "Astrid Lundqvist",
+        "Göteborg"
+      ],
+      "active_vocabulary": {
+        "Astrid Lindqvist": 50,
+        "Astrid Svensson": 50,
+        "Uppsala": 50,
+        "Göteborgs Kulturhus": 50,
+        "Göteborgs Gnist": 50,
+        "Göteborgsbo": 50,
+        "Göteborgs Hamn": 50,
+        "Astrid Lundqvist": 50,
+        "Göteborg": 50
+      },
+      "vocabulary_sha256": "6b64dc2be632e1234da6f7bffe002929b12d58315d0a51dc24151567dcb7e141"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Göteborgs Kulturhus",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "需保持不变的房源专名"
+        },
+        {
+          "text": "Lund Centrum",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "被移除的房源专名"
+        },
+        {
+          "text": "Lund Luxury Living",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "被移除的房源专名"
+        },
+        {
+          "text": "Lund Botaniska",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "被移除的房源专名"
+        },
+        {
+          "text": "Lund Living",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "保留的房源专名"
+        },
+        {
+          "text": "Lund Linné",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "保留的房源专名"
+        },
+        {
+          "text": "Lund Student Housing",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "保留的房源专名"
+        },
+        {
+          "text": "Lund Lägenhet",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "保留的房源专名"
+        },
+        {
+          "text": "Lund",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "清理范围城市名"
+        }
+      ],
+      "new_terms": [
+        "Lund Centrum",
+        "Lund Luxury Living",
+        "Lund Botaniska",
+        "Lund Living",
+        "Lund Linné",
+        "Lund Student Housing",
+        "Lund Lägenhet",
+        "Lund"
+      ],
+      "active_vocabulary": {
+        "Astrid Lindqvist": 50,
+        "Astrid Svensson": 50,
+        "Uppsala": 50,
+        "Göteborgs Kulturhus": 50,
+        "Göteborgs Gnist": 50,
+        "Göteborgsbo": 50,
+        "Göteborgs Hamn": 50,
+        "Astrid Lundqvist": 50,
+        "Göteborg": 50,
+        "Lund Centrum": 50,
+        "Lund Luxury Living": 50,
+        "Lund Botaniska": 50,
+        "Lund Living": 50,
+        "Lund Linné": 50,
+        "Lund Student Housing": 50,
+        "Lund Lägenhet": 50,
+        "Lund": 50
+      },
+      "vocabulary_sha256": "fa6e87a6232bc6acff850b8d9767523a9afb52423c4bc8acca8989465c81fcd7"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "49c0f79ea84ea0a474ce87b0f1f33257748da599862023b2291f3d34599ec4b4",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2747,
+        "completion_tokens": 737,
+        "total_tokens": 3484,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2491
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.472
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0386_hos68vvpjie4bosl0o07wvite2s0bren__mind_change_v1",
+  "extracted_at": "2026-11-22T06:45:37.484605+00:00"
+}

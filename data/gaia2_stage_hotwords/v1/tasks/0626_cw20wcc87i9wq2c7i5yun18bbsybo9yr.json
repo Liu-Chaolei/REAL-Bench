@@ -1,0 +1,311 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0626_cw20wcc87i9wq2c7i5yun18bbsybo9yr",
+  "model": "deepseek-flash",
+  "input_sha256": "882d2b66ebdb191d2f7c21af6c36f65f8aad50ec9e5f900db5229ffdf5425011",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kritsana",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-601a4971-c85e-4d62-9f93-10ad59bd56f3.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Nalinee",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-601a4971-c85e-4d62-9f93-10ad59bd56f3.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Kritsana Wongcharee",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-fe1ea37c-b8ef-44f0-9380-f64391fb969b.arguments.content",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Nalinee Wongchinda",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-fe1ea37c-b8ef-44f0-9380-f64391fb969b.arguments.content",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-601a4971-c85e-4d62-9f93-10ad59bd56f3.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Liege City Living",
+          "kind": "product",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-601a4971-c85e-4d62-9f93-10ad59bd56f3.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Liege City Center",
+          "kind": "product",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-601a4971-c85e-4d62-9f93-10ad59bd56f3.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Le Clos des Abbesses",
+          "kind": "product",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-601a4971-c85e-4d62-9f93-10ad59bd56f3.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Liege City View",
+          "kind": "product",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-601a4971-c85e-4d62-9f93-10ad59bd56f3.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Liege Luxe",
+          "kind": "product",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-601a4971-c85e-4d62-9f93-10ad59bd56f3.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Liege City Loft",
+          "kind": "product",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-601a4971-c85e-4d62-9f93-10ad59bd56f3.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Rue de la République",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-601a4971-c85e-4d62-9f93-10ad59bd56f3.arguments.content",
+          "reason": "街道名"
+        },
+        {
+          "text": "Outremeuse",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-601a4971-c85e-4d62-9f93-10ad59bd56f3.arguments.content",
+          "reason": "地名"
+        },
+        {
+          "text": "Rue des Abbesses",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-601a4971-c85e-4d62-9f93-10ad59bd56f3.arguments.content",
+          "reason": "街道名"
+        },
+        {
+          "text": "Place Saint-Lambert",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-601a4971-c85e-4d62-9f93-10ad59bd56f3.arguments.content",
+          "reason": "广场名"
+        },
+        {
+          "text": "Rue Saint-Gilles",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-601a4971-c85e-4d62-9f93-10ad59bd56f3.arguments.content",
+          "reason": "街道名"
+        }
+      ],
+      "new_terms": [
+        "Kritsana",
+        "Nalinee",
+        "Kritsana Wongcharee",
+        "Nalinee Wongchinda",
+        "Liesbeth Vandenberghe",
+        "Liege City Living",
+        "Liege City Center",
+        "Le Clos des Abbesses",
+        "Liege City View",
+        "Liege Luxe",
+        "Liege City Loft",
+        "Rue de la République",
+        "Outremeuse",
+        "Rue des Abbesses",
+        "Place Saint-Lambert",
+        "Rue Saint-Gilles"
+      ],
+      "active_vocabulary": {
+        "Kritsana": 50,
+        "Nalinee": 50,
+        "Kritsana Wongcharee": 50,
+        "Nalinee Wongchinda": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Liege City Living": 50,
+        "Liege City Center": 50,
+        "Le Clos des Abbesses": 50,
+        "Liege City View": 50,
+        "Liege Luxe": 50,
+        "Liege City Loft": 50,
+        "Rue de la République": 50,
+        "Outremeuse": 50,
+        "Rue des Abbesses": 50,
+        "Place Saint-Lambert": 50,
+        "Rue Saint-Gilles": 50
+      },
+      "vocabulary_sha256": "6c00e24b8a395faf046be58aefd00c5b35861a269d19545cf66f0779b6ea4a1b"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create.arguments.content",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Antwerp Luxury Loft",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_create.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Antwerp Haven",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_create.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Antwerp Abode",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_create.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Antwerp Dream",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_create.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Schuttershofstraat",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.content",
+          "reason": "街道名"
+        },
+        {
+          "text": "Meir",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.content",
+          "reason": "街道名"
+        },
+        {
+          "text": "Liege City View",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_create.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Liege Luxe",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_create.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Liege City Loft",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_create.arguments.content",
+          "reason": "房源名称"
+        }
+      ],
+      "new_terms": [
+        "Antwerp Luxury Loft",
+        "Antwerp Haven",
+        "Antwerp Abode",
+        "Antwerp Dream",
+        "Schuttershofstraat",
+        "Meir"
+      ],
+      "active_vocabulary": {
+        "Kritsana": 50,
+        "Nalinee": 50,
+        "Kritsana Wongcharee": 50,
+        "Nalinee Wongchinda": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Liege City Living": 50,
+        "Liege City Center": 50,
+        "Le Clos des Abbesses": 50,
+        "Liege City View": 50,
+        "Liege Luxe": 50,
+        "Liege City Loft": 50,
+        "Rue de la République": 50,
+        "Outremeuse": 50,
+        "Rue des Abbesses": 50,
+        "Place Saint-Lambert": 50,
+        "Rue Saint-Gilles": 50,
+        "Antwerp Luxury Loft": 50,
+        "Antwerp Haven": 50,
+        "Antwerp Abode": 50,
+        "Antwerp Dream": 50,
+        "Schuttershofstraat": 50,
+        "Meir": 50
+      },
+      "vocabulary_sha256": "cd5ec494e428ced0e7677c6b24327dc46e430e7b8d27873363006e06613ad6ff"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Nalinee Wongchinda",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Kritsana Wongcharee",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[1]",
+          "reason": "参会人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kritsana": 50,
+        "Nalinee": 50,
+        "Kritsana Wongcharee": 50,
+        "Nalinee Wongchinda": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Liege City Living": 50,
+        "Liege City Center": 50,
+        "Le Clos des Abbesses": 50,
+        "Liege City View": 50,
+        "Liege Luxe": 50,
+        "Liege City Loft": 50,
+        "Rue de la République": 50,
+        "Outremeuse": 50,
+        "Rue des Abbesses": 50,
+        "Place Saint-Lambert": 50,
+        "Rue Saint-Gilles": 50,
+        "Antwerp Luxury Loft": 50,
+        "Antwerp Haven": 50,
+        "Antwerp Abode": 50,
+        "Antwerp Dream": 50,
+        "Schuttershofstraat": 50,
+        "Meir": 50
+      },
+      "vocabulary_sha256": "cd5ec494e428ced0e7677c6b24327dc46e430e7b8d27873363006e06613ad6ff"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "89030d95d0f69bd16ab6ab8fa7b25802db7110e47448403a40abc16fd2d72f8b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4170,
+        "completion_tokens": 1415,
+        "total_tokens": 5585,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3914
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 3.949
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0626_cw20wcc87i9wq2c7i5yun18bbsybo9yr",
+  "extracted_at": "2026-11-22T06:43:12.045086+00:00"
+}

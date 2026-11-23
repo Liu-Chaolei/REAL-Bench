@@ -1,0 +1,169 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0776_vpzh2fx1pkz7y5t2aaqxfy07wi9tww16",
+  "model": "deepseek-flash",
+  "input_sha256": "2caad7dfb7592c4312c517793a35737b080022cc1e98a433478247648a613407",
+  "review_input_sha256": "36581494d1bfdb9dd7a6ecc62ea09ffe5b131c643033b394b6a264f31e48f01e",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "6030927cee53171b5695ef3dd49c66b1a99f3adcbef383c6ba1c5edc3fcd8c54",
+  "reference_results_sha256": "003ff4af4f3c9430f8f3216f4d20d999f201e435444b6760bf6ad28756bdb44b",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kaitlyn Nakamura",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Aurélien",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-89971c18-396b-48b9-b745-8798d805fa17.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Nalani Jensen",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Kaia Nakamura",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage1.tool_gt.series_s1_send_0.arguments.content"
+    },
+    "stage1.tool_response.series_s1_read_thursday": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"062a6e9f509f416c8d7a2c5493cdb4b8\", \"title\": \"Lunch Service\", \"start_datetime\": \"1729166400\", \"end_datetime\": \"1729173600\", \"tag\": \"Work\", \"description\": \"Oversee lunch service to ensure everything runs smoothly and customers have a great experience.\", \"location\": \"Restaurant Dining Area\", \"attendees\": [\"Aurélien LaFleur\"], \"start_strftime\": \"Thursday, 2024-10-17 12:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 14:00:00\"}, {\"event_id\": \"0c708cfd17d9480f95490b9d0a96255d\", \"title\": \"Wine List Update\", \"start_datetime\": \"1729173600\", \"end_datetime\": \"1729180800\", \"tag\": \"Work\", \"description\": \"Update the restaurant's wine list to reflect new wines and changes.\", \"location\": \"Restaurant Office\", \"attendees\": [\"Aurélien LaFleur\"], \"start_strftime\": \"Thursday, 2024-10-17 14:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 16:00:00\"}, {\"event_id\": \"83ab2c6f07cd4cdcbec2f4d93187f0f6\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1729191600\", \"end_datetime\": \"1729202400\", \"tag\": \"Personal\", \"description\": \"Catch up with friends over dinner.\", \"location\": \"Home\", \"attendees\": [\"Aurélien LaFleur\", \"Xóchitl Ramírez-González\"], \"start_strftime\": \"Thursday, 2024-10-17 19:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 22:00:00\"}, {\"event_id\": \"c2a73ef876ae4fcd8db74295ddb60c75\", \"title\": \"Staff Training: Wine Service\", \"start_datetime\": \"1729159200\", \"end_datetime\": \"1729166400\", \"tag\": \"Work\", \"description\": \"Train staff on wine service techniques to enhance the customer experience.\", \"location\": \"Restaurant Dining Area\", \"attendees\": [\"Aurélien LaFleur\", \"Nalani Jensen\", \"Kaia Nakamura\"], \"start_strftime\": \"Thursday, 2024-10-17 10:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 12:00:00\"}], \"range\": [\"0\", \"4\"], \"total\": \"4\"}",
+      "event_id": "series_s1_read_thursday",
+      "response_sha256": "5cfda704de13757d766d56abf3bdee6c25b4d46a5e87509d2afe27f82754de42"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaitlyn Nakamura",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，含较难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的难拼写名字",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kaitlyn Nakamura",
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Kaitlyn Nakamura": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "2e3280fff0fe4d3d2a56e8c878cf061f28106390602e653b2e1a542cd4b9b58a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Xóchitl Ramírez-González",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_thursday",
+          "reason": "含变音符号的完整复合姓氏人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.existing_catalog.3",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Kaia Nakamura",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Xóchitl Ramírez-González",
+        "Aurélien LaFleur",
+        "Kaia Nakamura",
+        "Nalani Jensen"
+      ],
+      "active_vocabulary": {
+        "Kaitlyn Nakamura": 50,
+        "Aurélien": 50,
+        "Xóchitl Ramírez-González": 50,
+        "Aurélien LaFleur": 50,
+        "Kaia Nakamura": 50,
+        "Nalani Jensen": 50
+      },
+      "vocabulary_sha256": "7f3449acb9e0154da67cf7f360ba046048d469fa3a1a9470f82345dfddbd06e7"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kaitlyn Nakamura": 50,
+        "Aurélien": 50,
+        "Xóchitl Ramírez-González": 50,
+        "Aurélien LaFleur": 50,
+        "Kaia Nakamura": 50,
+        "Nalani Jensen": 50
+      },
+      "vocabulary_sha256": "7f3449acb9e0154da67cf7f360ba046048d469fa3a1a9470f82345dfddbd06e7"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": [
+        {
+          "text": "Xóchitl Ramírez",
+          "covered_by": "Xóchitl Ramírez-González"
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kaitlyn",
+    "Xóchitl Ramírez",
+    "Wine and Cheese Pairing Research",
+    "Wine List Update",
+    "Staff Training: Wine Service",
+    "Proposed 17 Oct schedule"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:20.526262+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

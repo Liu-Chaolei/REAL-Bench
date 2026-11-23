@@ -1,0 +1,192 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0140_7x1ftu4qbqrhebu7off9sgzd4dhlbyyr__async_0039_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "01b980294054cd824009fa87bc5f3d9970532b86dda3d5c5ec8d371f58f59aa1",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Marie Dubois",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "新联系人姓名"
+        },
+        {
+          "text": "Lucas Vermeulen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "新联系人姓名"
+        },
+        {
+          "text": "Emma Janssens",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "新联系人姓名"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3f289af9-8034-406f-8a86-10fdb3a49250.arguments.content",
+          "reason": "邮件署名中的发件人姓名"
+        },
+        {
+          "text": "zayed.almansoori",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "需移入垃圾邮件的邮箱所属人名"
+        }
+      ],
+      "new_terms": [
+        "Marie Dubois",
+        "Lucas Vermeulen",
+        "Emma Janssens",
+        "Liesbeth Vandenberghe",
+        "zayed.almansoori"
+      ],
+      "active_vocabulary": {
+        "Marie Dubois": 50,
+        "Lucas Vermeulen": 50,
+        "Emma Janssens": 50,
+        "Liesbeth Vandenberghe": 50,
+        "zayed.almansoori": 50
+      },
+      "vocabulary_sha256": "072897370bf593cccff1d61eed37c54a1e94f91b2dd7e19b2a760376ce653a69"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Marie Dubois",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Lucas Vermeulen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Emma Janssens",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_marie.arguments.content",
+          "reason": "邮件署名中的发件人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Marie Dubois": 50,
+        "Lucas Vermeulen": 50,
+        "Emma Janssens": 50,
+        "Liesbeth Vandenberghe": 50,
+        "zayed.almansoori": 50
+      },
+      "vocabulary_sha256": "072897370bf593cccff1d61eed37c54a1e94f91b2dd7e19b2a760376ce653a69"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Marie Dubois",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "联系人表中的姓名"
+        },
+        {
+          "text": "Lucas Vermeulen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "联系人表中的姓名"
+        },
+        {
+          "text": "Emma Janssens",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "联系人表中的姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Marie Dubois": 50,
+        "Lucas Vermeulen": 50,
+        "Emma Janssens": 50,
+        "Liesbeth Vandenberghe": 50,
+        "zayed.almansoori": 50
+      },
+      "vocabulary_sha256": "072897370bf593cccff1d61eed37c54a1e94f91b2dd7e19b2a760376ce653a69"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "35d92f12e2a963e62756256d53fb9a5e44b0558a0dace78e0918d23d336bba48",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3945,
+        "completion_tokens": 448,
+        "total_tokens": 4393,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3689
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.273,
+      "error": "Not an exact quotation of a source in stage 2: 'Marie Dubois' from 'stage2.source_task'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "92aceb7c141acca8fe91f53cce1e1df4946b99588b94ee06dde8a700a54f4af2",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4800,
+        "completion_tokens": 478,
+        "total_tokens": 5278,
+        "prompt_tokens_details": {
+          "cached_tokens": 4352
+        },
+        "prompt_cache_hit_tokens": 4352,
+        "prompt_cache_miss_tokens": 448
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.875,
+      "error": "Not an exact quotation of a source in stage 2: 'Liesbeth Vandenberghe' from 'stage2.tool_gt.series_s2_email.arguments.recipients[0]'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "ab13216de3c0e1bfec2e0b12977f1e050266be60092a545f53e26e7624304833",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4849,
+        "completion_tokens": 432,
+        "total_tokens": 5281,
+        "prompt_tokens_details": {
+          "cached_tokens": 4096
+        },
+        "prompt_cache_hit_tokens": 4096,
+        "prompt_cache_miss_tokens": 753
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.707
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0140_7x1ftu4qbqrhebu7off9sgzd4dhlbyyr__async_0039_v1",
+  "extracted_at": "2026-11-22T06:46:39.517982+00:00"
+}

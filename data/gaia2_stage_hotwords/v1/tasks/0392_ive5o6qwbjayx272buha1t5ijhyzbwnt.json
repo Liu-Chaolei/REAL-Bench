@@ -1,0 +1,115 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0392_ive5o6qwbjayx272buha1t5ijhyzbwnt",
+  "model": "deepseek-flash",
+  "input_sha256": "722d5062ef3626b956d7aee99f8ee380516c11d0d55a6f1d55627bb2aa552407",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Evangelia Papadopoulos",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-07aceb1d-8c5d-4b41-933b-c8ec4ac2d6e3.arguments.attendees[0]",
+          "reason": "参与者完整姓名"
+        },
+        {
+          "text": "Kaidën Nakamura",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-07aceb1d-8c5d-4b41-933b-c8ec4ac2d6e3.arguments.attendees[1]",
+          "reason": "参与者完整姓名，含特殊字符"
+        },
+        {
+          "text": "Sushi Villa",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-07aceb1d-8c5d-4b41-933b-c8ec4ac2d6e3.arguments.location",
+          "reason": "活动地点名称"
+        },
+        {
+          "text": "Dallas Cowboys Collection",
+          "kind": "product",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-640b4e11-4056-486f-9e1b-2804b008a82c.arguments.content",
+          "reason": "商品系列名称"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-aef04387-1f68-4a6a-aaca-6601991cf868.arguments.content",
+          "reason": "邮件署名人物姓名"
+        }
+      ],
+      "new_terms": [
+        "Evangelia Papadopoulos",
+        "Kaidën Nakamura",
+        "Sushi Villa",
+        "Dallas Cowboys Collection",
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Sushi Villa": 50,
+        "Dallas Cowboys Collection": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "d016b35e3affa1e9b9ff16e2015fded318cc142ac05b35e29fd5ad99d90cbd04"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Sushi Villa",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create_thursday.arguments.location",
+          "reason": "活动地点名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Sushi Villa": 50,
+        "Dallas Cowboys Collection": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "d016b35e3affa1e9b9ff16e2015fded318cc142ac05b35e29fd5ad99d90cbd04"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Sushi Villa": 50,
+        "Dallas Cowboys Collection": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "d016b35e3affa1e9b9ff16e2015fded318cc142ac05b35e29fd5ad99d90cbd04"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "2447fe83ebb5c4a047c06f11d83f0917055158b7d2032eda843e877091e7c802",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3746,
+        "completion_tokens": 394,
+        "total_tokens": 4140,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3490
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.726
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0392_ive5o6qwbjayx272buha1t5ijhyzbwnt",
+  "extracted_at": "2026-11-22T06:41:38.478696+00:00"
+}

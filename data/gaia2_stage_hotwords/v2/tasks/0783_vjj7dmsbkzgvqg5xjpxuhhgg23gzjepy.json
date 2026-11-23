@@ -1,0 +1,80 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0783_vjj7dmsbkzgvqg5xjpxuhhgg23gzjepy",
+  "model": "deepseek-flash",
+  "input_sha256": "b2e641273777d86aa3818d47ceafcd75ed0dfcb278a0a2946f112d43d9916460",
+  "review_input_sha256": "ece8cf7cc5cf8b0816c11f980652678711197566f6f71b86813b576bb5328fc4",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "58f9e6d480346da1a4657f55b53914aa88d2229d8cacbaa186a1d11f99b7dc69",
+  "reference_results_sha256": "597a334f5e50649bed60c20f635cab20d8c7f1e2874d9e73548dd72873c587fb",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Astrid Kjær",
+      "original_source": "stage0.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Astrid Kjær",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含特殊字符æ的完整人名，难以识别，优先保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Kjær"
+      ],
+      "active_vocabulary": {
+        "Astrid Kjær": 50
+      },
+      "vocabulary_sha256": "c9f3f7ff3ea1e6e41a1a726d5b81b34398b0ff62501b8c52aceb8f5ca1a2458b"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid Kjær": 50
+      },
+      "vocabulary_sha256": "c9f3f7ff3ea1e6e41a1a726d5b81b34398b0ff62501b8c52aceb8f5ca1a2458b"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid Kjær": 50
+      },
+      "vocabulary_sha256": "c9f3f7ff3ea1e6e41a1a726d5b81b34398b0ff62501b8c52aceb8f5ca1a2458b"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Spend Day with Granddaughters"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:20.265684+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

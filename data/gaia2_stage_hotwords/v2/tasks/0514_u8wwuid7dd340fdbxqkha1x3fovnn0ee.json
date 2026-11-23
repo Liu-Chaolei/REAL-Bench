@@ -1,0 +1,555 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0514_u8wwuid7dd340fdbxqkha1x3fovnn0ee",
+  "model": "deepseek-flash",
+  "input_sha256": "339ae1a9d501df6080b9ab60c7e6004f45d2e3a4ab517140e76869ffa90d5311",
+  "review_input_sha256": "45d2876fa151e3fbf4fe6be06f9b14e3ba1d9598c738461e38ede93a68198439",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "a180c1c2ffd005e3430adf489f6cab7a3f8fc3f06669e28aee2fccd5ed7e2bc5",
+  "reference_results_sha256": "5fc838d3628b1b186a131e4e7affe43d612d22f8eb1e903de171d76f0709c644",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "O'Connor",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Aidan O'Connor",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Aisling O'Connor",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.11": {
+      "stage": 1,
+      "text": "Caoimhe Ni Chonaill",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.12": {
+      "stage": 1,
+      "text": "Aine Ni Chonaill",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.13": {
+      "stage": 1,
+      "text": "Aoife Ni Chonaill",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.14": {
+      "stage": 1,
+      "text": "Aine Ni Chonchobhair",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.15": {
+      "stage": 1,
+      "text": "Aoife Ni Chonchobhair",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.16": {
+      "stage": 1,
+      "text": "Saoirse Ni Chonchobhair",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.17": {
+      "stage": 1,
+      "text": "Aoife Ni Chonchuir",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.18": {
+      "stage": 1,
+      "text": "Anastasiya Kuznetsova",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.19": {
+      "stage": 1,
+      "text": "Rogelio García-Mendoza",
+      "original_source": "stage1.tool_gt.series_s1_check_event.arguments.query"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Ronan O'Connor",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.20": {
+      "stage": 1,
+      "text": "Saskia Müller-Krüger",
+      "original_source": "stage1.reference_reply.series_s1_say.arguments.content"
+    },
+    "stage1.existing_catalog.21": {
+      "stage": 1,
+      "text": "Ní Chonaill",
+      "original_source": "stage1.reference_reply.series_s1_say.arguments.content"
+    },
+    "stage1.existing_catalog.22": {
+      "stage": 1,
+      "text": "Ní Chonchobhair",
+      "original_source": "stage1.reference_reply.series_s1_say.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Saoirse O'Connor",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Seamus O'Connor",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.5": {
+      "stage": 1,
+      "text": "Viktor Kuznetsov",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.6": {
+      "stage": 1,
+      "text": "Saskia Mueller-Krueger",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.7": {
+      "stage": 1,
+      "text": "Rogelio Garcia-Mendoza",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.8": {
+      "stage": 1,
+      "text": "Kazan Kremlin",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.tool_response.series_s1_read_saved": {
+      "stage": 1,
+      "text": "{\"423534a64f494b8baaa3ee8efe5feeb4\": {\"name\": \"Krasnodar City View\", \"location\": \"Krasnaya, Krasnodar\", \"zip_code\": \"350000\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"423534a64f494b8baaa3ee8efe5feeb4\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"c01d02fdb6834b3f950a130e81cd3488\": {\"name\": \"Nizhny Novgorod View\", \"location\": \"Bolshaya Pokrovskaya Street 15, Nizhny Novgorod\", \"zip_code\": \"603002\", \"price\": \"1200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"700\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"c01d02fdb6834b3f950a130e81cd3488\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"30fb06900743441e8405ed4536517121\": {\"name\": \"Kazan Kremlin\", \"location\": \"Bauman, Kazan\", \"zip_code\": \"420111\", \"price\": \"1800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1100\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"30fb06900743441e8405ed4536517121\", \"amenities\": [\"Pool\", \"Laundry\"], \"saved\": \"True\"}, \"0afc7cc770d54863820def89ac05bb5b\": {\"name\": \"Ural Mountains View\", \"location\": \"Lenina Street 45, Yekaterinburg\", \"zip_code\": \"620075\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"0afc7cc770d54863820def89ac05bb5b\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"376e6fe118ed4ed288f06ea4674b8f49\": {\"name\": \"Omsk Oasis\", \"location\": \"Lenin St, 25, Omsk\", \"zip_code\": \"644024\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"376e6fe118ed4ed288f06ea4674b8f49\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\"], \"saved\": \"True\"}, \"e1a55e51564d4585a6d22306365f761a\": {\"name\": \"Moscow City Lights\", \"location\": \"20 Tverskaya Street, Moscow\", \"zip_code\": \"125009\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1600\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"e1a55e51564d4585a6d22306365f761a\", \"amenities\": [\"Pool\", \"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"ab09cb66d0154060b9b5a7515956c04f\": {\"name\": \"Omsk Comfort\", \"location\": \"Lenina, Omsk\", \"zip_code\": \"644043\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"ab09cb66d0154060b9b5a7515956c04f\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"c6e7f6caeca1452c988d63c174c1d2fd\": {\"name\": \"Nizhny Novgorod Suites\", \"location\": \"25 Bolshaya Pokrovskaya Street, Nizhny Novgorod\", \"zip_code\": \"603005\", \"price\": \"1200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"c6e7f6caeca1452c988d63c174c1d2fd\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"ac0851a1e4cd471a912f975617ee2276\": {\"name\": \"Don River Apartments\", \"location\": \"Bolshaya Sadovaya Street 12, Rostov-on-Don\", \"zip_code\": \"344006\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"ac0851a1e4cd471a912f975617ee2276\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"c08baebfb97c4c96b883e53424281bef\": {\"name\": \"Omsk Luxury Residences\", \"location\": \"Lenina Street, Omsk\", \"zip_code\": \"644043\", \"price\": \"2800\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"c08baebfb97c4c96b883e53424281bef\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\", \"Pool\"], \"saved\": \"True\"}, \"4460c82d7fdd4b75b666221664c87445\": {\"name\": \"Kazan Riverfront\", \"location\": \"Kremlevskaya Street, Kazan\", \"zip_code\": \"420111\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"4460c82d7fdd4b75b666221664c87445\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"39f1f3ede2d44451b4bf03d8538b82e7\": {\"name\": \"Volga River Residence\", \"location\": \"Ulitsa Lenina, Nizhny Novgorod\", \"zip_code\": \"603000\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"39f1f3ede2d44451b4bf03d8538b82e7\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"b98f38e9521c4f339d305973aa3e8fd2\": {\"name\": \"Krasnodar City Living\", \"location\": \"Krasnaya St, 50, Krasnodar\", \"zip_code\": \"350000\", \"price\": \"1200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"b98f38e9521c4f339d305973aa3e8fd2\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"2a8bf1dfc4da4c52bfc5aade02577534\": {\"name\": \"Yekaterinburg Heights\", \"location\": \"10 Boris Yeltsin Street, Yekaterinburg\", \"zip_code\": \"620075\", \"price\": \"1800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"2a8bf1dfc4da4c52bfc5aade02577534\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"54222d39fa0c4e9796449d3e11caf6fb\": {\"name\": \"Siberian Dreams\", \"location\": \"Krasny Prospekt, Novosibirsk\", \"zip_code\": \"630007\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"54222d39fa0c4e9796449d3e11caf6fb\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"8861ed114ac64207a06379353f586e4b\": {\"name\": \"Krasnodar Luxury Apartments\", \"location\": \"Krasnaya Street, Krasnodar\", \"zip_code\": \"350000\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"8861ed114ac64207a06379353f586e4b\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"470d45616d0c4e08b8949654ada20409\": {\"name\": \"Novosibirsk Downtown\", \"location\": \"Krasny Avenue, Novosibirsk\", \"zip_code\": \"630000\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"470d45616d0c4e08b8949654ada20409\", \"amenities\": [\"Gym\", \"Parking\"], \"saved\": \"True\"}, \"4f9374cd26f448deb3a293c71e8b61de\": {\"name\": \"Saint Petersburg Bay Apartments\", \"location\": \"10 Vasilievsky Island, Saint Petersburg\", \"zip_code\": \"199034\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"4f9374cd26f448deb3a293c71e8b61de\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"03001f781b3d4c469e382f8a552cc42b\": {\"name\": \"Samara City Center\", \"location\": \"Ulitsa Kuibysheva, Samara\", \"zip_code\": \"443000\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"700\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"03001f781b3d4c469e382f8a552cc42b\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"06b768622d35425ea3139a8f33f48516\": {\"name\": \"Saint Petersburg Suites\", \"location\": \"Nevsky Prospekt, Saint Petersburg\", \"zip_code\": \"191186\", \"price\": \"3000\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"06b768622d35425ea3139a8f33f48516\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"af5a6aa7a887486ea77eb2ff37c7afd4\": {\"name\": \"Yekaterinburg Modern\", \"location\": \"8 Marta Street, Yekaterinburg\", \"zip_code\": \"620075\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"2200\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"af5a6aa7a887486ea77eb2ff37c7afd4\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"c1c4ae4634ac4fbca49c33d4604e2c66\": {\"name\": \"Nizhny Novgorod Oasis\", \"location\": \"Bolshaya Pokrovskaya Street, Nizhny Novgorod\", \"zip_code\": \"603005\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"c1c4ae4634ac4fbca49c33d4604e2c66\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"38b09a5a0840492e9f01aae569c58d53\": {\"name\": \"Samara Riverfront\", \"location\": \"Ulitsa Leningradskaya, Samara\", \"zip_code\": \"443011\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"38b09a5a0840492e9f01aae569c58d53\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"0e20e095a6a0485a9e5c118bd93aaa1a\": {\"name\": \"Samara City Apartments\", \"location\": \"Kuibysheva Street, Samara\", \"zip_code\": \"443010\", \"price\": \"1200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"0e20e095a6a0485a9e5c118bd93aaa1a\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"fefe0f38f9d14020a3ca392d57d54034\": {\"name\": \"Yekaterinburg Hills\", \"location\": \"Ulitsa Malysheva, Yekaterinburg\", \"zip_code\": \"620000\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"2000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"fefe0f38f9d14020a3ca392d57d54034\", \"amenities\": [\"Gym\", \"Pool\", \"Parking\"], \"saved\": \"True\"}, \"0029938a2d92410e95fe0a79f41a991e\": {\"name\": \"Rostov-on-Don Riverside\", \"location\": \"Bolshaya Sadovaya, Rostov-on-Don\", \"zip_code\": \"344006\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"0029938a2d92410e95fe0a79f41a991e\", \"amenities\": [\"Pool\", \"Laundry\"], \"saved\": \"True\"}, \"ff68f282183d48d8bebdf9a4c974913d\": {\"name\": \"Kremlin View Apartments\", \"location\": \"Tverskaya Street, Moscow\", \"zip_code\": \"101000\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"ff68f282183d48d8bebdf9a4c974913d\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"a1f59f7dacd14302a4ce293392186048\": {\"name\": \"Moscow Oasis\", \"location\": \"12 Tverskaya Street, Moscow\", \"zip_code\": \"125009\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"a1f59f7dacd14302a4ce293392186048\", \"amenities\": [\"Gym\", \"Parking\"], \"saved\": \"True\"}, \"d2e906487a2e4e879a3e07009db23bfd\": {\"name\": \"Saint Petersburg Palace\", \"location\": \"Nevsky Prospekt, 50, Saint Petersburg\", \"zip_code\": \"191011\", \"price\": \"3500\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"2000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"d2e906487a2e4e879a3e07009db23bfd\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"e30064a6b1204048b3555bf2eb3a92d1\": {\"name\": \"Kremlin Views\", \"location\": \"Tverskaya St, Moscow\", \"zip_code\": \"125009\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"e30064a6b1204048b3555bf2eb3a92d1\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}}",
+      "event_id": "series_s1_read_saved",
+      "response_sha256": "c4ef33fedab4af2c699b3ac613f80ef5b3e4f6fe0399e2e899db5fa7109ea93b"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "O'Connor",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "爱尔兰姓氏，含撇号，发音困难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "O'Connor"
+      ],
+      "active_vocabulary": {
+        "O'Connor": 50
+      },
+      "vocabulary_sha256": "b1244b90d7ceeee369bacb1b4d7f5144f6d1640906d58bca6951a655ecf99cbf"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aidan O'Connor",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整爱尔兰人名",
+          "weight": 50
+        },
+        {
+          "text": "Aine Ni Chonaill",
+          "kind": "person",
+          "source": "stage1.existing_catalog.12",
+          "reason": "爱尔兰语人名",
+          "weight": 50
+        },
+        {
+          "text": "Aine Ni Chonchobhair",
+          "kind": "person",
+          "source": "stage1.existing_catalog.14",
+          "reason": "爱尔兰语人名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Aisling O'Connor",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整爱尔兰人名，Aisling 拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Aoife Ni Chonaill",
+          "kind": "person",
+          "source": "stage1.existing_catalog.13",
+          "reason": "爱尔兰语人名",
+          "weight": 50
+        },
+        {
+          "text": "Aoife Ni Chonchobhair",
+          "kind": "person",
+          "source": "stage1.existing_catalog.15",
+          "reason": "爱尔兰语人名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Aoife Ni Chonchuir",
+          "kind": "person",
+          "source": "stage1.existing_catalog.17",
+          "reason": "爱尔兰语人名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Bolshaya Pokrovskaya Street",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "俄语街道名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Bolshaya Sadovaya Street",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "俄语街道名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Boris Yeltsin Street",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "俄语街道名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Caoimhe Ni Chonaill",
+          "kind": "person",
+          "source": "stage1.existing_catalog.11",
+          "reason": "爱尔兰语人名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Krasnodar City View",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "房产名，Krasnodar 拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Nizhny Novgorod View",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "房产名，Nizhny Novgorod 拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Rogelio Garcia-Mendoza",
+          "kind": "person",
+          "source": "stage1.existing_catalog.7",
+          "reason": "含连字符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Rogelio García-Mendoza",
+          "kind": "person",
+          "source": "stage1.existing_catalog.19",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Ronan O'Connor",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "完整爱尔兰人名",
+          "weight": 50
+        },
+        {
+          "text": "Rostov-on-Don",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "地名，含连字符，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Saoirse Ni Chonchobhair",
+          "kind": "person",
+          "source": "stage1.existing_catalog.16",
+          "reason": "爱尔兰语人名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Saoirse O'Connor",
+          "kind": "person",
+          "source": "stage1.existing_catalog.3",
+          "reason": "完整爱尔兰人名，Saoirse 发音困难",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Mueller-Krueger",
+          "kind": "person",
+          "source": "stage1.existing_catalog.6",
+          "reason": "含连字符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Müller-Krüger",
+          "kind": "person",
+          "source": "stage1.existing_catalog.20",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Seamus O'Connor",
+          "kind": "person",
+          "source": "stage1.existing_catalog.4",
+          "reason": "完整爱尔兰人名",
+          "weight": 50
+        },
+        {
+          "text": "Ural Mountains View",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "房产名，Ural 拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage1.existing_catalog.18",
+          "reason": "完整俄语人名",
+          "weight": 50
+        },
+        {
+          "text": "Kazan Kremlin",
+          "kind": "place",
+          "source": "stage1.existing_catalog.8",
+          "reason": "地名，Kazan 拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Krasny Prospekt",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "俄语街道名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Kremlevskaya Street",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "俄语街道名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Nevsky Prospekt",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "俄语街道名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Ní Chonaill",
+          "kind": "person",
+          "source": "stage1.existing_catalog.21",
+          "reason": "爱尔兰语姓氏，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Ní Chonchobhair",
+          "kind": "person",
+          "source": "stage1.existing_catalog.22",
+          "reason": "爱尔兰语姓氏，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Ulitsa Kuibysheva",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "俄语街道名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Ulitsa Leningradskaya",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "俄语街道名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Ulitsa Malysheva",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "俄语街道名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Vasilievsky Island",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "地名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage1.existing_catalog.5",
+          "reason": "完整俄语人名",
+          "weight": 50
+        },
+        {
+          "text": "Yekaterinburg Heights",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "房产名，Yekaterinburg 拼写困难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aidan O'Connor",
+        "Aine Ni Chonaill",
+        "Aine Ni Chonchobhair",
+        "Aisling O'Connor",
+        "Aoife Ni Chonaill",
+        "Aoife Ni Chonchobhair",
+        "Aoife Ni Chonchuir",
+        "Bolshaya Pokrovskaya Street",
+        "Bolshaya Sadovaya Street",
+        "Boris Yeltsin Street",
+        "Caoimhe Ni Chonaill",
+        "Krasnodar City View",
+        "Nizhny Novgorod View",
+        "Rogelio Garcia-Mendoza",
+        "Rogelio García-Mendoza",
+        "Ronan O'Connor",
+        "Rostov-on-Don",
+        "Saoirse Ni Chonchobhair",
+        "Saoirse O'Connor",
+        "Saskia Mueller-Krueger",
+        "Saskia Müller-Krüger",
+        "Seamus O'Connor",
+        "Ural Mountains View",
+        "Anastasiya Kuznetsova",
+        "Kazan Kremlin",
+        "Krasny Prospekt",
+        "Kremlevskaya Street",
+        "Nevsky Prospekt",
+        "Ní Chonaill",
+        "Ní Chonchobhair",
+        "Ulitsa Kuibysheva",
+        "Ulitsa Leningradskaya",
+        "Ulitsa Malysheva",
+        "Vasilievsky Island",
+        "Viktor Kuznetsov",
+        "Yekaterinburg Heights"
+      ],
+      "active_vocabulary": {
+        "O'Connor": 50,
+        "Aidan O'Connor": 50,
+        "Aine Ni Chonaill": 50,
+        "Aine Ni Chonchobhair": 50,
+        "Aisling O'Connor": 50,
+        "Aoife Ni Chonaill": 50,
+        "Aoife Ni Chonchobhair": 50,
+        "Aoife Ni Chonchuir": 50,
+        "Bolshaya Pokrovskaya Street": 50,
+        "Bolshaya Sadovaya Street": 50,
+        "Boris Yeltsin Street": 50,
+        "Caoimhe Ni Chonaill": 50,
+        "Krasnodar City View": 50,
+        "Nizhny Novgorod View": 50,
+        "Rogelio Garcia-Mendoza": 50,
+        "Rogelio García-Mendoza": 50,
+        "Ronan O'Connor": 50,
+        "Rostov-on-Don": 50,
+        "Saoirse Ni Chonchobhair": 50,
+        "Saoirse O'Connor": 50,
+        "Saskia Mueller-Krueger": 50,
+        "Saskia Müller-Krüger": 50,
+        "Seamus O'Connor": 50,
+        "Ural Mountains View": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Kazan Kremlin": 50,
+        "Krasny Prospekt": 50,
+        "Kremlevskaya Street": 50,
+        "Nevsky Prospekt": 50,
+        "Ní Chonaill": 50,
+        "Ní Chonchobhair": 50,
+        "Ulitsa Kuibysheva": 50,
+        "Ulitsa Leningradskaya": 50,
+        "Ulitsa Malysheva": 50,
+        "Vasilievsky Island": 50,
+        "Viktor Kuznetsov": 50,
+        "Yekaterinburg Heights": 50
+      },
+      "vocabulary_sha256": "ddfd8605cf5aa097bed02b3fb60672cda757418659bad3a586e84d0196fc2208"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "O'Connor": 50,
+        "Aidan O'Connor": 50,
+        "Aine Ni Chonaill": 50,
+        "Aine Ni Chonchobhair": 50,
+        "Aisling O'Connor": 50,
+        "Aoife Ni Chonaill": 50,
+        "Aoife Ni Chonchobhair": 50,
+        "Aoife Ni Chonchuir": 50,
+        "Bolshaya Pokrovskaya Street": 50,
+        "Bolshaya Sadovaya Street": 50,
+        "Boris Yeltsin Street": 50,
+        "Caoimhe Ni Chonaill": 50,
+        "Krasnodar City View": 50,
+        "Nizhny Novgorod View": 50,
+        "Rogelio Garcia-Mendoza": 50,
+        "Rogelio García-Mendoza": 50,
+        "Ronan O'Connor": 50,
+        "Rostov-on-Don": 50,
+        "Saoirse Ni Chonchobhair": 50,
+        "Saoirse O'Connor": 50,
+        "Saskia Mueller-Krueger": 50,
+        "Saskia Müller-Krüger": 50,
+        "Seamus O'Connor": 50,
+        "Ural Mountains View": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Kazan Kremlin": 50,
+        "Krasny Prospekt": 50,
+        "Kremlevskaya Street": 50,
+        "Nevsky Prospekt": 50,
+        "Ní Chonaill": 50,
+        "Ní Chonchobhair": 50,
+        "Ulitsa Kuibysheva": 50,
+        "Ulitsa Leningradskaya": 50,
+        "Ulitsa Malysheva": 50,
+        "Vasilievsky Island": 50,
+        "Viktor Kuznetsov": 50,
+        "Yekaterinburg Heights": 50
+      },
+      "vocabulary_sha256": "ddfd8605cf5aa097bed02b3fb60672cda757418659bad3a586e84d0196fc2208"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kremlin",
+    "Kremlin Views",
+    "Kremlin View Apartments"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:16.398943+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

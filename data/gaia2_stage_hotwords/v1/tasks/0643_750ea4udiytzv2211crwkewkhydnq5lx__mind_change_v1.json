@@ -1,0 +1,218 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0643_750ea4udiytzv2211crwkewkhydnq5lx__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "4cd48e2509c774fd4f4edf44b7fea6b9f1bfc2ed7a9d748109623186fc4bf87e",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Věra Nováková",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b50aafb6-9c5d-4e0a-ab4a-8836c5a1485e.arguments.attendees[0]",
+          "reason": "捷克人名，含变音符号"
+        },
+        {
+          "text": "Zdeněk Nováček",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b50aafb6-9c5d-4e0a-ab4a-8836c5a1485e.arguments.attendees[1]",
+          "reason": "捷克人名，含变音符号"
+        },
+        {
+          "text": "Katharina Fuchs",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b50aafb6-9c5d-4e0a-ab4a-8836c5a1485e.arguments.attendees[2]",
+          "reason": "德语人名"
+        },
+        {
+          "text": "Saskia König",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b50aafb6-9c5d-4e0a-ab4a-8836c5a1485e.arguments.attendees[3]",
+          "reason": "德语人名，含变音符号"
+        },
+        {
+          "text": "Charles University",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-2b479baf-db25-4509-be87-8703da033ad0.arguments.start_location",
+          "reason": "大学机构名"
+        },
+        {
+          "text": "Ovocný trh 560/5, Prague 1, 116 36",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-2b479baf-db25-4509-be87-8703da033ad0.arguments.start_location",
+          "reason": "具体地址，含捷克语地名"
+        },
+        {
+          "text": "Tic Tac Two",
+          "kind": "product",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c99624e3-3a1d-41a6-90c8-b60865e19227.arguments.content",
+          "reason": "桌游产品名"
+        }
+      ],
+      "new_terms": [
+        "Věra Nováková",
+        "Zdeněk Nováček",
+        "Katharina Fuchs",
+        "Saskia König",
+        "Charles University",
+        "Ovocný trh 560/5, Prague 1, 116 36",
+        "Tic Tac Two"
+      ],
+      "active_vocabulary": {
+        "Věra Nováková": 50,
+        "Zdeněk Nováček": 50,
+        "Katharina Fuchs": 50,
+        "Saskia König": 50,
+        "Charles University": 50,
+        "Ovocný trh 560/5, Prague 1, 116 36": 50,
+        "Tic Tac Two": 50
+      },
+      "vocabulary_sha256": "e232b1dc25700783fc96d56a98bd5263b8d9b154fe7ec572c2ba7d4f43075fe8"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Helmut Grünewald",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "德语人名，含变音符号"
+        },
+        {
+          "text": "Věra",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "捷克名字，含变音符号"
+        },
+        {
+          "text": "Katharina",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "德语名字"
+        },
+        {
+          "text": "Saskia",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "德语名字"
+        },
+        {
+          "text": "Zdeněk",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "捷克名字，含变音符号"
+        },
+        {
+          "text": "Charles University",
+          "kind": "organization",
+          "source": "stage1.tool_gt.series_s1_send_vera.arguments.content",
+          "reason": "大学机构名"
+        },
+        {
+          "text": "Ovocný trh 560/5, Prague 1, 116 36",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send_vera.arguments.content",
+          "reason": "具体地址，含捷克语地名"
+        }
+      ],
+      "new_terms": [
+        "Helmut Grünewald",
+        "Věra",
+        "Katharina",
+        "Saskia",
+        "Zdeněk"
+      ],
+      "active_vocabulary": {
+        "Věra Nováková": 50,
+        "Zdeněk Nováček": 50,
+        "Katharina Fuchs": 50,
+        "Saskia König": 50,
+        "Charles University": 50,
+        "Ovocný trh 560/5, Prague 1, 116 36": 50,
+        "Tic Tac Two": 50,
+        "Helmut Grünewald": 50,
+        "Věra": 50,
+        "Katharina": 50,
+        "Saskia": 50,
+        "Zdeněk": 50
+      },
+      "vocabulary_sha256": "f37a49e78cdc51f6d7646d1d07f2a40b296b9dcefd01d1dbf93af196d35410d6"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Věra",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "捷克名字，含变音符号"
+        },
+        {
+          "text": "Katharina",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "德语名字"
+        },
+        {
+          "text": "Saskia",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "德语名字"
+        },
+        {
+          "text": "Zdeněk",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "捷克名字，含变音符号"
+        },
+        {
+          "text": "Tic Tac Two",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "桌游产品名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Věra Nováková": 50,
+        "Zdeněk Nováček": 50,
+        "Katharina Fuchs": 50,
+        "Saskia König": 50,
+        "Charles University": 50,
+        "Ovocný trh 560/5, Prague 1, 116 36": 50,
+        "Tic Tac Two": 50,
+        "Helmut Grünewald": 50,
+        "Věra": 50,
+        "Katharina": 50,
+        "Saskia": 50,
+        "Zdeněk": 50
+      },
+      "vocabulary_sha256": "f37a49e78cdc51f6d7646d1d07f2a40b296b9dcefd01d1dbf93af196d35410d6"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "9c0c918edb0d0577ab40d540b8d6c03dc5a310cbc2facd98fa0b3829d0190bcb",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3659,
+        "completion_tokens": 863,
+        "total_tokens": 4522,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3403
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 3.214
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0643_750ea4udiytzv2211crwkewkhydnq5lx__mind_change_v1",
+  "extracted_at": "2026-11-22T06:45:56.510152+00:00"
+}

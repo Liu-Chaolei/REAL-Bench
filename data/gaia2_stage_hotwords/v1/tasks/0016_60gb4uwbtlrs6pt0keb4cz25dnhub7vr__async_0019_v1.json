@@ -1,0 +1,121 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0016_60gb4uwbtlrs6pt0keb4cz25dnhub7vr__async_0019_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "b80349eb494d9f654a6aa39c3b5d3bbb8a8c8dfbf9a8a04ed45de67aa79f2c49",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Antwerp City Hall",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "安特卫普市政厅，具体地点名"
+        },
+        {
+          "text": "Antwerp International Airport",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "安特卫普国际机场，具体地点名"
+        }
+      ],
+      "new_terms": [
+        "Antwerp City Hall",
+        "Antwerp International Airport"
+      ],
+      "active_vocabulary": {
+        "Antwerp City Hall": 50,
+        "Antwerp International Airport": 50
+      },
+      "vocabulary_sha256": "46be91219cb4b10ad1eb23c821feb2410144ced7b3bf68597ffbf838e785eb92"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélie De Waele",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Bruges",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "比利时城市名"
+        },
+        {
+          "text": "Rue des Carmes",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_send_answer.arguments.content",
+          "reason": "街道名"
+        }
+      ],
+      "new_terms": [
+        "Aurélie De Waele",
+        "Bruges",
+        "Rue des Carmes"
+      ],
+      "active_vocabulary": {
+        "Antwerp City Hall": 50,
+        "Antwerp International Airport": 50,
+        "Aurélie De Waele": 50,
+        "Bruges": 50,
+        "Rue des Carmes": 50
+      },
+      "vocabulary_sha256": "4bdbf7bfa706341d12261682598edc29f8b29ea97fe20986c0f3357b9dbaab3d"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "77777257508488c453ca6e6eb573718a1351966c4498a28a5b2e0ecc40de77f0",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1187,
+        "completion_tokens": 206,
+        "total_tokens": 1393,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 931
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.186,
+      "error": "3 validation errors for Extraction\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='提取地点专名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='提取人名与地名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "59ca3f2b91c443084f5cc23b99c59192ed2aace4a722de8a882a12de1e947e31",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1946,
+        "completion_tokens": 184,
+        "total_tokens": 2130,
+        "prompt_tokens_details": {
+          "cached_tokens": 1280
+        },
+        "prompt_cache_hit_tokens": 1280,
+        "prompt_cache_miss_tokens": 666
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.882
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0016_60gb4uwbtlrs6pt0keb4cz25dnhub7vr__async_0019_v1",
+  "extracted_at": "2026-11-22T06:46:26.844868+00:00"
+}

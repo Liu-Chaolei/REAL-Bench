@@ -1,0 +1,133 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0751_hg05wxw1rn37kk3f8t1v1mwk7el8a7nz",
+  "model": "deepseek-flash",
+  "input_sha256": "c3d8eb291839c5f09b35d943176e5db57abc1767ee954178c70c2b08facbe47c",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Emiko",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-4728ce25-968b-47f0-8f6b-02fa65b4f7c9.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Wonder Woman Cape and Sword Set",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品名称"
+        }
+      ],
+      "new_terms": [
+        "Emiko",
+        "Åse Kjellstad",
+        "Wonder Woman Cape and Sword Set"
+      ],
+      "active_vocabulary": {
+        "Emiko": 50,
+        "Åse Kjellstad": 50,
+        "Wonder Woman Cape and Sword Set": 50
+      },
+      "vocabulary_sha256": "be257a851580f9a234c927662a2b444244c0bbe2fa74b76cb0e5864c331437a3"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Emiko",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "回复人姓名"
+        },
+        {
+          "text": "Wonder Woman Cape and Sword Set",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "商品名称"
+        },
+        {
+          "text": "Wonder Woman Purchase",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_mkdir.arguments.path",
+          "reason": "文件夹名称"
+        }
+      ],
+      "new_terms": [
+        "Wonder Woman Purchase"
+      ],
+      "active_vocabulary": {
+        "Emiko": 50,
+        "Åse Kjellstad": 50,
+        "Wonder Woman Cape and Sword Set": 50,
+        "Wonder Woman Purchase": 50
+      },
+      "vocabulary_sha256": "bd6773ed0dd7df7d2b1e0224500e559f21ec82f08855f6c42dc3a10c151e3b35"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Emiko",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "会面人姓名"
+        },
+        {
+          "text": "Café Opéra",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "咖啡馆地点名称"
+        },
+        {
+          "text": "Wonder Woman Cape and Sword Set",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "商品名称"
+        }
+      ],
+      "new_terms": [
+        "Café Opéra"
+      ],
+      "active_vocabulary": {
+        "Emiko": 50,
+        "Åse Kjellstad": 50,
+        "Wonder Woman Cape and Sword Set": 50,
+        "Wonder Woman Purchase": 50,
+        "Café Opéra": 50
+      },
+      "vocabulary_sha256": "99623f9bd0e9367ee467b668ff90718f41f36bbfbf463fe9eef596286da70ed5"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "6dba187e74d38564a531bec007fd0dfbe429797353d79febbb091fdc8ba068b6",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2684,
+        "completion_tokens": 327,
+        "total_tokens": 3011,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2428
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.372
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0751_hg05wxw1rn37kk3f8t1v1mwk7el8a7nz",
+  "extracted_at": "2026-11-22T06:43:40.939608+00:00"
+}

@@ -1,0 +1,187 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0339_illr8uvhjagekw54zj9cx0p62adx6abu",
+  "model": "deepseek-flash",
+  "input_sha256": "7b1b4f4b2804995c31cdf33b375ab3182aa38ec141e20818b63cde68975011f5",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Jensen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "涉事人物姓氏，需精确识别"
+        },
+        {
+          "text": "CISA",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "机构缩写，易被误识别"
+        },
+        {
+          "text": "Stockholm",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "地名，用于筛选联系人"
+        }
+      ],
+      "new_terms": [
+        "Jensen",
+        "CISA",
+        "Stockholm"
+      ],
+      "active_vocabulary": {
+        "Jensen": 50,
+        "CISA": 50,
+        "Stockholm": 50
+      },
+      "vocabulary_sha256": "3f84ff9cf16e98ece5ebbeba8a28dc7991dcbe47cdfd63c1000e75bc7dbbac1e"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Jensen CISA file",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_create.arguments.title",
+          "reason": "群组自定义标题"
+        },
+        {
+          "text": "Maya R. Jensen",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "完整人名，含中间名缩写"
+        },
+        {
+          "text": "Rachel Kim",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "律师完整人名"
+        },
+        {
+          "text": "Astrid Lindqvist",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "收件人完整人名"
+        },
+        {
+          "text": "Linnea Svensson",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "收件人完整人名"
+        },
+        {
+          "text": "Åsa Lindgren",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "收件人完整人名，含特殊字符"
+        },
+        {
+          "text": "Åsa Lindqvist",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "收件人完整人名，含特殊字符"
+        },
+        {
+          "text": "Linnea Åström",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "收件人完整人名，含特殊字符"
+        },
+        {
+          "text": "Axel Lindqvist",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "收件人完整人名"
+        }
+      ],
+      "new_terms": [
+        "Jensen CISA file",
+        "Maya R. Jensen",
+        "Rachel Kim",
+        "Astrid Lindqvist",
+        "Linnea Svensson",
+        "Åsa Lindgren",
+        "Åsa Lindqvist",
+        "Linnea Åström",
+        "Axel Lindqvist"
+      ],
+      "active_vocabulary": {
+        "Jensen": 50,
+        "CISA": 50,
+        "Stockholm": 50,
+        "Jensen CISA file": 50,
+        "Maya R. Jensen": 50,
+        "Rachel Kim": 50,
+        "Astrid Lindqvist": 50,
+        "Linnea Svensson": 50,
+        "Åsa Lindgren": 50,
+        "Åsa Lindqvist": 50,
+        "Linnea Åström": 50,
+        "Axel Lindqvist": 50
+      },
+      "vocabulary_sha256": "1ff1829d4592be9eadca3febc47949a6a129a020f49da56701e9df222fa8963e"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Maya R. Jensen",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "完整人名，用于区分同姓者"
+        },
+        {
+          "text": "Jensen CISA source audit",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "邮件主题自定义名称"
+        }
+      ],
+      "new_terms": [
+        "Jensen CISA source audit"
+      ],
+      "active_vocabulary": {
+        "Jensen": 50,
+        "CISA": 50,
+        "Stockholm": 50,
+        "Jensen CISA file": 50,
+        "Maya R. Jensen": 50,
+        "Rachel Kim": 50,
+        "Astrid Lindqvist": 50,
+        "Linnea Svensson": 50,
+        "Åsa Lindgren": 50,
+        "Åsa Lindqvist": 50,
+        "Linnea Åström": 50,
+        "Axel Lindqvist": 50,
+        "Jensen CISA source audit": 50
+      },
+      "vocabulary_sha256": "33ebff3bd352485846e0c5b24f3595d2ddfc4bfd4d4c54f675ca8dfcd4630913"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "62171ccb5da3f36d94bc4ab074e34c11d983dfe68b77fe6c99d9f155c6c812a5",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 10487,
+        "completion_tokens": 523,
+        "total_tokens": 11010,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 10231
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.077
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0339_illr8uvhjagekw54zj9cx0p62adx6abu",
+  "extracted_at": "2026-11-22T06:41:21.919604+00:00"
+}

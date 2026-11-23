@@ -1,0 +1,108 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0269_6tegdtelhtysjrlrer6zo3uul9kdym5v",
+  "model": "deepseek-flash",
+  "input_sha256": "865c21a8873fbe56857d7aad8ff15667aeb14aceca8e18fb3d68761ca78111d5",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Colette Van der Meulen",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_calendar.arguments.attendees[1]",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_calendar.arguments.attendees[0]",
+          "reason": "完整人名，含特殊字符"
+        }
+      ],
+      "new_terms": [
+        "Colette Van der Meulen",
+        "Søren Kjær"
+      ],
+      "active_vocabulary": {
+        "Colette Van der Meulen": 50,
+        "Søren Kjær": 50
+      },
+      "vocabulary_sha256": "b79b499a19dc8ea09b80eb267a5520d9f04705507a7e06ac08ca4e8687d13578"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Colette Van der Meulen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_prep.arguments.title",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_prep.arguments.attendees[0]",
+          "reason": "完整人名，含特殊字符"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Colette Van der Meulen": 50,
+        "Søren Kjær": 50
+      },
+      "vocabulary_sha256": "b79b499a19dc8ea09b80eb267a5520d9f04705507a7e06ac08ca4e8687d13578"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "22ecf052b8adbbbdbfee84a99416de879504c0a69f098e4f4d89d6439f83555f",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2611,
+        "completion_tokens": 381,
+        "total_tokens": 2992,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2355
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.474,
+      "error": "Invalid proper-name phrase: 'colette.vandermeulen@gaia2mail.com'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "feeb91e74109f552b5cac1dd8615744d96d956b35aeb1641b87b5acba7c7d47a",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3394,
+        "completion_tokens": 201,
+        "total_tokens": 3595,
+        "prompt_tokens_details": {
+          "cached_tokens": 2944
+        },
+        "prompt_cache_hit_tokens": 2944,
+        "prompt_cache_miss_tokens": 450
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.896
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0269_6tegdtelhtysjrlrer6zo3uul9kdym5v",
+  "extracted_at": "2026-11-22T06:41:04.576203+00:00"
+}

@@ -1,0 +1,127 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0985_ojj1dneuxh8kmau03zzr8ilptk4jc8p7",
+  "model": "deepseek-flash",
+  "input_sha256": "1f78bd4ea59ebf56b0aacc5d60ce3a62308526db34b471e613cb7914b1613e09",
+  "review_input_sha256": "e14f3414a5a5f6821716373dc53aad34d7aea57cda6ea1e01aeb2143fccbd533",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "861cd2fcf89254a0d0b540f9fe99c2f0e3ce006faa797f93e34d2a5ea26792f1",
+  "reference_results_sha256": "fbb9cbf569c628de4a0343d85c2011b6ae9f532cf479dd449bb032c5efa1bfd3",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kaitlyn Nguyen-Tran",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Kaya Nakoda",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Rémi LaFleur",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Kaori Nakahara",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaitlyn Nguyen-Tran",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含连字符的完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Kaya Nakoda",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，专有名词",
+          "weight": 50
+        },
+        {
+          "text": "Rémi LaFleur",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kaitlyn Nguyen-Tran",
+        "Kaya Nakoda",
+        "Rémi LaFleur"
+      ],
+      "active_vocabulary": {
+        "Kaitlyn Nguyen-Tran": 50,
+        "Kaya Nakoda": 50,
+        "Rémi LaFleur": 50
+      },
+      "vocabulary_sha256": "e83844c9960e628c7559ce7819f7b93334f284c3b0cbdc28c5e71588521db363"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaori Nakahara",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，专有名词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kaori Nakahara"
+      ],
+      "active_vocabulary": {
+        "Kaitlyn Nguyen-Tran": 50,
+        "Kaya Nakoda": 50,
+        "Rémi LaFleur": 50,
+        "Kaori Nakahara": 50
+      },
+      "vocabulary_sha256": "b8da0df2ec6e6e767a8b4a05aa14ac75bdbbe82e78e8733a2262a758a8424c82"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kaitlyn Nguyen-Tran": 50,
+        "Kaya Nakoda": 50,
+        "Rémi LaFleur": 50,
+        "Kaori Nakahara": 50
+      },
+      "vocabulary_sha256": "b8da0df2ec6e6e767a8b4a05aa14ac75bdbbe82e78e8733a2262a758a8424c82"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:10.686323+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

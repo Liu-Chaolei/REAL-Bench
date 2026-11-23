@@ -1,0 +1,137 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0863_77j2gnywa1mxhzecvsrep6ejbvj2tzra",
+  "model": "deepseek-flash",
+  "input_sha256": "21adfa5932b647d875a431e49a6898d21da3e2121842cf2263f9e4b5f3ba252d",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Birgitta Larsson",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Paw Patrol Boys' Group Short Sleeve T-Shirt",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品名称"
+        },
+        {
+          "text": "Cute Kids Fidget Spinner T-Shirt",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品名称"
+        },
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-92362fd4-c091-4815-9394-3c1ebebeb434.arguments.content",
+          "reason": "邮件署名"
+        }
+      ],
+      "new_terms": [
+        "Birgitta Larsson",
+        "Paw Patrol Boys' Group Short Sleeve T-Shirt",
+        "Cute Kids Fidget Spinner T-Shirt",
+        "Astrid"
+      ],
+      "active_vocabulary": {
+        "Birgitta Larsson": 50,
+        "Paw Patrol Boys' Group Short Sleeve T-Shirt": 50,
+        "Cute Kids Fidget Spinner T-Shirt": 50,
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "2860883b0abd7e90a6c25001e6ad0ac7a2df7fb829e491fb077061bf2ccc44a4"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Paw Patrol Boys' Group Short Sleeve T-Shirt",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "商品名称"
+        },
+        {
+          "text": "Cute Kids Fidget Spinner T-Shirt",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "商品名称"
+        },
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "邮件署名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Birgitta Larsson": 50,
+        "Paw Patrol Boys' Group Short Sleeve T-Shirt": 50,
+        "Cute Kids Fidget Spinner T-Shirt": 50,
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "2860883b0abd7e90a6c25001e6ad0ac7a2df7fb829e491fb077061bf2ccc44a4"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Birgitta Larsson": 50,
+        "Paw Patrol Boys' Group Short Sleeve T-Shirt": 50,
+        "Cute Kids Fidget Spinner T-Shirt": 50,
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "2860883b0abd7e90a6c25001e6ad0ac7a2df7fb829e491fb077061bf2ccc44a4"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "db4918d6a79ca069d3250cf80084e4f965b3f9793f6764517112f3c6050fc4e2",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2539,
+        "completion_tokens": 312,
+        "total_tokens": 2851,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2283
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.347,
+      "error": "Not an exact quotation of a source in stage 2: 'Rohini Deshpande' from 'stage2.tool_gt.series_s2_email.arguments.recipients[0]'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "d00483135c4ee2c258c047239aa0fb2f94e0631b2c31abf55acd1046723a461b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3276,
+        "completion_tokens": 269,
+        "total_tokens": 3545,
+        "prompt_tokens_details": {
+          "cached_tokens": 2816
+        },
+        "prompt_cache_hit_tokens": 2816,
+        "prompt_cache_miss_tokens": 460
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.478
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0863_77j2gnywa1mxhzecvsrep6ejbvj2tzra",
+  "extracted_at": "2026-11-22T06:44:16.903519+00:00"
+}

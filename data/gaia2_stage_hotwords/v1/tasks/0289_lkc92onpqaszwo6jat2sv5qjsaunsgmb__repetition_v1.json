@@ -1,0 +1,97 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0289_lkc92onpqaszwo6jat2sv5qjsaunsgmb__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "d6ae883fa3b91a2ecb64aebfab8ab0fc5ae2173807399da259f41a0eb316d253",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Edinburgh New Town Flat",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_add_viewing.arguments.title",
+          "reason": "房源自定义名称"
+        },
+        {
+          "text": "50 George St, Edinburgh",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_viewing.arguments.location",
+          "reason": "房源地址地名"
+        }
+      ],
+      "new_terms": [
+        "Edinburgh New Town Flat",
+        "50 George St, Edinburgh"
+      ],
+      "active_vocabulary": {
+        "Edinburgh New Town Flat": 50,
+        "50 George St, Edinburgh": 50
+      },
+      "vocabulary_sha256": "c8d13157aeb9a79a29f6b47ac8c870f2be82261ec3fb1fabe36c5d6a7cb22df0"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Edinburgh New Town Flat",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_move_viewing.arguments.title",
+          "reason": "房源自定义名称"
+        },
+        {
+          "text": "50 George St, Edinburgh",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_move_viewing.arguments.location",
+          "reason": "房源地址地名"
+        },
+        {
+          "text": "Lab Meeting",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "冲突事件名称"
+        }
+      ],
+      "new_terms": [
+        "Lab Meeting"
+      ],
+      "active_vocabulary": {
+        "Edinburgh New Town Flat": 50,
+        "50 George St, Edinburgh": 50,
+        "Lab Meeting": 50
+      },
+      "vocabulary_sha256": "74fd77289131fbbc464161268dcad003ceeacd7adc8d80a1bfcdd682634a1888"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "ea8fa991548bb7214a65d7d04e219be5e2feebb86fd9567ca1775568fee9f0d4",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1803,
+        "completion_tokens": 218,
+        "total_tokens": 2021,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1547
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.059
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0289_lkc92onpqaszwo6jat2sv5qjsaunsgmb__repetition_v1",
+  "extracted_at": "2026-11-22T06:45:09.570615+00:00"
+}

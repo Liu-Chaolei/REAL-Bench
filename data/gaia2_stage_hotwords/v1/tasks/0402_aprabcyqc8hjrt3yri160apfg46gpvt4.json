@@ -1,0 +1,154 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0402_aprabcyqc8hjrt3yri160apfg46gpvt4",
+  "model": "deepseek-flash",
+  "input_sha256": "cef34ef12c24ff24f03a2119b4fb96b921b88850f9c9935b53e9966db9a7659b",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Melbourne",
+          "kind": "place",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-638f8504-c7b6-48aa-b881-eed9cbae4aca.arguments.content",
+          "reason": "城市名"
+        },
+        {
+          "text": "Australia",
+          "kind": "place",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-638f8504-c7b6-48aa-b881-eed9cbae4aca.arguments.content",
+          "reason": "国家名"
+        }
+      ],
+      "new_terms": [
+        "Melbourne",
+        "Australia"
+      ],
+      "active_vocabulary": {
+        "Melbourne": 50,
+        "Australia": 50
+      },
+      "vocabulary_sha256": "b1ad219fb8004ae49cd1745261d0133e94294aef623d907a05e76f543d3c9f94"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Axel Hernández-García",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[1]",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Melbourne",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.description",
+          "reason": "城市名"
+        },
+        {
+          "text": "Australia",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.description",
+          "reason": "国家名"
+        }
+      ],
+      "new_terms": [
+        "Rohan Kumar",
+        "Axel Hernández-García"
+      ],
+      "active_vocabulary": {
+        "Melbourne": 50,
+        "Australia": 50,
+        "Rohan Kumar": 50,
+        "Axel Hernández-García": 50
+      },
+      "vocabulary_sha256": "731b6d37139c482e7d48e01ea7e138c67a890ebdea6a2512bcff3cb286f23e73"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Axel",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Melbourne",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "城市名"
+        },
+        {
+          "text": "Australia",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "国家名"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "发件人姓名"
+        },
+        {
+          "text": "Mumbai",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "城市名"
+        },
+        {
+          "text": "India",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "国家名"
+        }
+      ],
+      "new_terms": [
+        "Axel",
+        "Mumbai",
+        "India"
+      ],
+      "active_vocabulary": {
+        "Melbourne": 50,
+        "Australia": 50,
+        "Rohan Kumar": 50,
+        "Axel Hernández-García": 50,
+        "Axel": 50,
+        "Mumbai": 50,
+        "India": 50
+      },
+      "vocabulary_sha256": "39a7db1847a43268d6df012152a7716cf10283b2a945b35d83c6d05bb6ba879f"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "8009d984c8e4fb4fabe84191a047b05bf9a0c99692cf22a8366d40c8b03958f5",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1778,
+        "completion_tokens": 493,
+        "total_tokens": 2271,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1522
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.639
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0402_aprabcyqc8hjrt3yri160apfg46gpvt4",
+  "extracted_at": "2026-11-22T06:41:41.642217+00:00"
+}

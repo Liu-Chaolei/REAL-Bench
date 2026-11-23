@@ -1,0 +1,178 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0649_gp4sofsqx8szhnsbwg7bqv4isvgpb7sw",
+  "model": "deepseek-flash",
+  "input_sha256": "6a706420bb6c29943af34e22fc7e3a6878f2ef14c61380884e10ae1fd9f92cf4",
+  "review_input_sha256": "edce3e6f1b216b7c93171f32274ee4a9eae164a4475254f513f3a369ecbeff94",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "331f93abe162f0cdce0d657bd5f6c6b17e5aa190652a249bfe9abb92f24e9257",
+  "reference_results_sha256": "4f092ea59dd5a0ad2284b70eb7be26818940fa00802eefb5306091a44aa2f15d",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Sheryl's Sweets",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Östermalm Oasis",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Luísa Silva e Sousa",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Åke Svensson",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-2f9f65f0-fe85-47b0-bfc1-4674ffc2df94.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Valhallavägen 22, Stockholm",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-48a4a4ef-e16a-4703-8e67-fb660b8fe68a.arguments.end_location"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Astrid Lundqvist",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-ce60da21-0d91-409e-a4ec-261714db199c.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "42 Valhallavägen 30, Stockholm",
+      "original_source": "stage1.tool_gt.series_s1_order_ride.arguments.end_location"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Luísa Silva e Sousa",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Sheryl's Sweets",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.0",
+          "reason": "独特商户名",
+          "weight": 50
+        },
+        {
+          "text": "Valhallavägen 22, Stockholm",
+          "kind": "place",
+          "source": "stage0.existing_catalog.4",
+          "reason": "含变音符号的完整地址",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "较难拼写的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Åke Svensson",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Östermalm Oasis",
+          "kind": "place",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的专有地名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Luísa Silva e Sousa",
+        "Sheryl's Sweets",
+        "Valhallavägen 22, Stockholm",
+        "Astrid Lundqvist",
+        "Åke Svensson",
+        "Östermalm Oasis"
+      ],
+      "active_vocabulary": {
+        "Luísa Silva e Sousa": 50,
+        "Sheryl's Sweets": 50,
+        "Valhallavägen 22, Stockholm": 50,
+        "Astrid Lundqvist": 50,
+        "Åke Svensson": 50,
+        "Östermalm Oasis": 50
+      },
+      "vocabulary_sha256": "e41e1b4726d63ae07ff23eb0f24199087f220e723d87201d64079d9c82213c1f"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "42 Valhallavägen 30, Stockholm",
+          "kind": "place",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含变音符号的完整地址",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "42 Valhallavägen 30, Stockholm"
+      ],
+      "active_vocabulary": {
+        "Luísa Silva e Sousa": 50,
+        "Sheryl's Sweets": 50,
+        "Valhallavägen 22, Stockholm": 50,
+        "Astrid Lundqvist": 50,
+        "Åke Svensson": 50,
+        "Östermalm Oasis": 50,
+        "42 Valhallavägen 30, Stockholm": 50
+      },
+      "vocabulary_sha256": "4b776d0ad2d030079dafedf191b5fd92524059c2a991e2a742319b95e0fffd9a"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Luísa Silva e Sousa": 50,
+        "Sheryl's Sweets": 50,
+        "Valhallavägen 22, Stockholm": 50,
+        "Astrid Lundqvist": 50,
+        "Åke Svensson": 50,
+        "Östermalm Oasis": 50,
+        "42 Valhallavägen 30, Stockholm": 50
+      },
+      "vocabulary_sha256": "4b776d0ad2d030079dafedf191b5fd92524059c2a991e2a742319b95e0fffd9a"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kasper",
+    "Åke"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:52.827959+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

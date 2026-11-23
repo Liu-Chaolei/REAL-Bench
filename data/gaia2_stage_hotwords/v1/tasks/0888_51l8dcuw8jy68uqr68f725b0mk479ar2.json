@@ -1,0 +1,104 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0888_51l8dcuw8jy68uqr68f725b0mk479ar2",
+  "model": "deepseek-flash",
+  "input_sha256": "b9e4b184843232070cecd21277f865e480731fa1c42599cc9d32abfc014befee",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Astrid Kjærsgaard",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "参会人姓名，含特殊字符æ"
+        },
+        {
+          "text": "Beshoy Gadallah",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "参会人姓名"
+        }
+      ],
+      "new_terms": [
+        "Astrid Kjærsgaard",
+        "Beshoy Gadallah"
+      ],
+      "active_vocabulary": {
+        "Astrid Kjærsgaard": 50,
+        "Beshoy Gadallah": 50
+      },
+      "vocabulary_sha256": "984f476085c7e6eaac0f6be113d0d14f557b75aa6dcdb24b607189c22fc1c9b7"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Astrid Kjærsgaard",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "确认消息收件人姓名"
+        },
+        {
+          "text": "Beshoy Gadallah",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "确认消息收件人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid Kjærsgaard": 50,
+        "Beshoy Gadallah": 50
+      },
+      "vocabulary_sha256": "984f476085c7e6eaac0f6be113d0d14f557b75aa6dcdb24b607189c22fc1c9b7"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Astrid Kjærsgaard",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群聊成员姓名"
+        },
+        {
+          "text": "Beshoy Gadallah",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群聊成员姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid Kjærsgaard": 50,
+        "Beshoy Gadallah": 50
+      },
+      "vocabulary_sha256": "984f476085c7e6eaac0f6be113d0d14f557b75aa6dcdb24b607189c22fc1c9b7"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "3129ba6c4d24fdd9d25d87183a3be599726b39cf8404295536465a98c75609f2",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2797,
+        "completion_tokens": 202,
+        "total_tokens": 2999,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2541
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.058
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0888_51l8dcuw8jy68uqr68f725b0mk479ar2",
+  "extracted_at": "2026-11-22T06:44:20.815416+00:00"
+}

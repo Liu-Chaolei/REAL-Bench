@@ -1,0 +1,172 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0630_dtpdnzfw3exlo58hz9vgo20jvpr7fikk",
+  "model": "deepseek-flash",
+  "input_sha256": "17f1711708764c41b1b242da204df671c44fb1d4d4e7e6b4919e15dcf2212142",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Prague Airport",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "机场专有地名"
+        },
+        {
+          "text": "K letišti 1019/6 Prague 6, 161 00, Czech Republic",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "完整地址专有名词"
+        },
+        {
+          "text": "Prague",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Czech Republic",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "国家名"
+        },
+        {
+          "text": "Japan",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "国家名"
+        }
+      ],
+      "new_terms": [
+        "Prague Airport",
+        "K letišti 1019/6 Prague 6, 161 00, Czech Republic",
+        "Prague",
+        "Czech Republic",
+        "Japan"
+      ],
+      "active_vocabulary": {
+        "Prague Airport": 50,
+        "K letišti 1019/6 Prague 6, 161 00, Czech Republic": 50,
+        "Prague": 50,
+        "Czech Republic": 50,
+        "Japan": 50
+      },
+      "vocabulary_sha256": "490726ae19e2f377d3097c740c350ab513c05fa94644c6d3da6de5a662e7141d"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Prague Airport",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "机场专有地名"
+        },
+        {
+          "text": "K letišti 1019/6 Prague 6, 161 00, Czech Republic",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "完整地址专有名词"
+        },
+        {
+          "text": "Prague",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Czech Republic",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "国家名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Prague Airport": 50,
+        "K letišti 1019/6 Prague 6, 161 00, Czech Republic": 50,
+        "Prague": 50,
+        "Czech Republic": 50,
+        "Japan": 50
+      },
+      "vocabulary_sha256": "490726ae19e2f377d3097c740c350ab513c05fa94644c6d3da6de5a662e7141d"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "K letišti 1019/6 Prague 6, 161 00, Czech Republic",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "完整地址专有名词"
+        },
+        {
+          "text": "Prague",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Czech Republic",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "国家名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Prague Airport": 50,
+        "K letišti 1019/6 Prague 6, 161 00, Czech Republic": 50,
+        "Prague": 50,
+        "Czech Republic": 50,
+        "Japan": 50
+      },
+      "vocabulary_sha256": "490726ae19e2f377d3097c740c350ab513c05fa94644c6d3da6de5a662e7141d"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "b6638352aca6b1d5b8befab18ac8f0719cc32da42f952623bd146072fe7c6210",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2917,
+        "completion_tokens": 433,
+        "total_tokens": 3350,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2661
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.618,
+      "error": "Invalid proper-name phrase: 'k.novacek@gaia2mail.com'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "04281ed8fde23d53747662d377f152da846ac738644c04835a6e88aa7256fa81",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3751,
+        "completion_tokens": 362,
+        "total_tokens": 4113,
+        "prompt_tokens_details": {
+          "cached_tokens": 3328
+        },
+        "prompt_cache_hit_tokens": 3328,
+        "prompt_cache_miss_tokens": 423
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.316
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0630_dtpdnzfw3exlo58hz9vgo20jvpr7fikk",
+  "extracted_at": "2026-11-22T06:43:12.111008+00:00"
+}

@@ -1,0 +1,141 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0032_fwfr1ffsqyuq7vxq3jrwyh94ijhbh8wt",
+  "model": "deepseek-flash",
+  "input_sha256": "d4b2dc5d7021299255f8b2f665077b8376668586a4c49a6156d6faaa12acd6e0",
+  "review_input_sha256": "c7c2cd061e5e6873d5f87f19f23b2622180a96377d7cd2a02d9e6b33a0adacf5",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "f7cc3042d0e072ecb8659011578227fea3a704b0cf36ea62b93a73136af0f27f",
+  "reference_results_sha256": "0a34c7af2bab0dd94586924fbd35926884ccfbf35b21a6e23680fd55030a171f",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kaidën",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-b30ae8ab-5cb2-42bd-94ee-54bb28a67070.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Kaidën Jelani",
+      "original_source": "stage1.tool_gt.series_s1_edit.arguments.updates.description"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Melbourne",
+      "original_source": "stage1.tool_gt.series_s1_edit.arguments.updates.description"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Australia",
+      "original_source": "stage1.tool_gt.series_s1_edit.arguments.updates.description"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Rohini",
+      "original_source": "stage2.tool_gt.series_s2_send.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaidën",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符的专有人名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kaidën"
+      ],
+      "active_vocabulary": {
+        "Kaidën": 50
+      },
+      "vocabulary_sha256": "15999a1d1a784b1d986b56a7860012d7847b1a552d4e3ab30a9269c58d64310b"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaidën Jelani",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符的完整专有人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Australia",
+          "kind": "place",
+          "source": "stage1.existing_catalog.2",
+          "reason": "地名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Melbourne",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "地名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kaidën Jelani",
+        "Australia",
+        "Melbourne"
+      ],
+      "active_vocabulary": {
+        "Kaidën": 50,
+        "Kaidën Jelani": 50,
+        "Australia": 50,
+        "Melbourne": 50
+      },
+      "vocabulary_sha256": "c8696bb7bc1501b5ff383879e66e911fc72cb7807dfa4c6b0843614f91df9b51"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Rohini",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "专有人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Rohini"
+      ],
+      "active_vocabulary": {
+        "Kaidën": 50,
+        "Kaidën Jelani": 50,
+        "Australia": 50,
+        "Melbourne": 50,
+        "Rohini": 50
+      },
+      "vocabulary_sha256": "add56cc627f1a19e9d01a6158ffdbfdb2f6b3c977d461e473efbc8387efa1c7f"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:13:42.191094+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

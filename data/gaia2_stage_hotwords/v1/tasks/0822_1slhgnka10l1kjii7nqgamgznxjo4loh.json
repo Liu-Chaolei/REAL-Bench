@@ -1,0 +1,160 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0822_1slhgnka10l1kjii7nqgamgznxjo4loh",
+  "model": "deepseek-flash",
+  "input_sha256": "0648662d0643b601fceea58dd3d9dc903580a223131ce8a4ca344a06454ea160",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Hatchimals",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "品牌/产品名"
+        },
+        {
+          "text": "Unique Party Pink Balloons",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "具体产品名"
+        },
+        {
+          "text": "Georgia Bulldogs",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "球队/品牌名"
+        },
+        {
+          "text": "Patriotic Sequin Sparkle Costume Dress",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "具体产品名"
+        },
+        {
+          "text": "Viktor",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-73a705cd-9409-457d-9fb8-c0d956a10b80.arguments.content",
+          "reason": "收件人名"
+        },
+        {
+          "text": "Katharina",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-73a705cd-9409-457d-9fb8-c0d956a10b80.arguments.content",
+          "reason": "收件人名"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-73a705cd-9409-457d-9fb8-c0d956a10b80.arguments.content",
+          "reason": "发件人全名"
+        }
+      ],
+      "new_terms": [
+        "Hatchimals",
+        "Unique Party Pink Balloons",
+        "Georgia Bulldogs",
+        "Patriotic Sequin Sparkle Costume Dress",
+        "Viktor",
+        "Katharina",
+        "Anastasiya Kuznetsova"
+      ],
+      "active_vocabulary": {
+        "Hatchimals": 50,
+        "Unique Party Pink Balloons": 50,
+        "Georgia Bulldogs": 50,
+        "Patriotic Sequin Sparkle Costume Dress": 50,
+        "Viktor": 50,
+        "Katharina": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "5ce4033563ab8cdedccc08a11ea311b467ddd014df848dacb1c2e21c551da250"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Georgia Bulldogs",
+          "kind": "organization",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "球队/品牌名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Hatchimals": 50,
+        "Unique Party Pink Balloons": 50,
+        "Georgia Bulldogs": 50,
+        "Patriotic Sequin Sparkle Costume Dress": 50,
+        "Viktor": 50,
+        "Katharina": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "5ce4033563ab8cdedccc08a11ea311b467ddd014df848dacb1c2e21c551da250"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Katharina",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "提及的人名"
+        },
+        {
+          "text": "Georgia Bulldogs",
+          "kind": "organization",
+          "source": "stage2.source_task",
+          "reason": "球队/品牌名"
+        },
+        {
+          "text": "Viktor",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_correction.arguments.content",
+          "reason": "收件人名"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_correction.arguments.content",
+          "reason": "发件人全名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Hatchimals": 50,
+        "Unique Party Pink Balloons": 50,
+        "Georgia Bulldogs": 50,
+        "Patriotic Sequin Sparkle Costume Dress": 50,
+        "Viktor": 50,
+        "Katharina": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "5ce4033563ab8cdedccc08a11ea311b467ddd014df848dacb1c2e21c551da250"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "d5c1c9f7e99469cce2c961098b00effbe9cf31729fcde520ff8aeb1fc098ecbe",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3545,
+        "completion_tokens": 478,
+        "total_tokens": 4023,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3289
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.772
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0822_1slhgnka10l1kjii7nqgamgznxjo4loh",
+  "extracted_at": "2026-11-22T06:44:00.322113+00:00"
+}

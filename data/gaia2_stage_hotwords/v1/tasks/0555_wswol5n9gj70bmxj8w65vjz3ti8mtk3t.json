@@ -1,0 +1,157 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0555_wswol5n9gj70bmxj8w65vjz3ti8mtk3t",
+  "model": "deepseek-flash",
+  "input_sha256": "a0324f7b915e0354138122b4f00fb0c778dae53b84be634b23ae783443ed2c49",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kazimierz",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1b276763-7d90-457c-a32b-9304798f3b42.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-98d7c9a4-ba91-4fc1-9ee2-79efcb9d4df6.arguments.content",
+          "reason": "收件人名字，含重音"
+        },
+        {
+          "text": "Avengers Mighty Bubble Ball",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品名称"
+        },
+        {
+          "text": "Ursula",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1b276763-7d90-457c-a32b-9304798f3b42.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [
+        "Kazimierz",
+        "Aurélien",
+        "Avengers Mighty Bubble Ball",
+        "Ursula"
+      ],
+      "active_vocabulary": {
+        "Kazimierz": 50,
+        "Aurélien": 50,
+        "Avengers Mighty Bubble Ball": 50,
+        "Ursula": 50
+      },
+      "vocabulary_sha256": "e13677b242d3d4f2126d46411d561e9fcaf97e55e75a37271022f957d1dac7d0"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kazimierz Wojciechowski",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群组成员全名"
+        },
+        {
+          "text": "Aurélien Van der Straeten",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群组成员全名，含重音"
+        },
+        {
+          "text": "Sick Day Rescheduling",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "群组标题"
+        },
+        {
+          "text": "Ursula",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_notice.arguments.content",
+          "reason": "消息署名"
+        }
+      ],
+      "new_terms": [
+        "Kazimierz Wojciechowski",
+        "Aurélien Van der Straeten",
+        "Sick Day Rescheduling"
+      ],
+      "active_vocabulary": {
+        "Kazimierz": 50,
+        "Aurélien": 50,
+        "Avengers Mighty Bubble Ball": 50,
+        "Ursula": 50,
+        "Kazimierz Wojciechowski": 50,
+        "Aurélien Van der Straeten": 50,
+        "Sick Day Rescheduling": 50
+      },
+      "vocabulary_sha256": "21585ca55813c045060bf3298bcb833480aeedf63ea07f32534e4e12ae2f3452"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "下单人全名"
+        },
+        {
+          "text": "Avengers Mighty Bubble Ball",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "商品名称"
+        },
+        {
+          "text": "Basel",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "地名"
+        }
+      ],
+      "new_terms": [
+        "Ursula Wiederkehr",
+        "Basel"
+      ],
+      "active_vocabulary": {
+        "Kazimierz": 50,
+        "Aurélien": 50,
+        "Avengers Mighty Bubble Ball": 50,
+        "Ursula": 50,
+        "Kazimierz Wojciechowski": 50,
+        "Aurélien Van der Straeten": 50,
+        "Sick Day Rescheduling": 50,
+        "Ursula Wiederkehr": 50,
+        "Basel": 50
+      },
+      "vocabulary_sha256": "19765be39ba72722dba07285c8353714127d63bd960a79dcd874a22e8185cb58"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "a8e7e4ca1c224e75c6e7a14b40fce409183cc757e99e9c2de6b3224649aa8d4a",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2550,
+        "completion_tokens": 454,
+        "total_tokens": 3004,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2294
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.687
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0555_wswol5n9gj70bmxj8w65vjz3ti8mtk3t",
+  "extracted_at": "2026-11-22T06:42:42.221618+00:00"
+}

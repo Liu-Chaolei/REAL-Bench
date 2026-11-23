@@ -1,0 +1,296 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0297_jhd7aawqx40b5mulr9u69nw7fugcgmtf",
+  "model": "deepseek-flash",
+  "input_sha256": "e81dfc26717735191d577a643aa7ecb84647733a4180c72b1f8afc746c9cbd66",
+  "review_input_sha256": "8421ba610c150f9a406293cc6ac378efc6b0f1fb853e3f1ca2877d59cee0db72",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "602538cfca954a0986a0b71ad4e1dcad5a1a8ffa55a9ae8a9c8f948f12389b81",
+  "reference_results_sha256": "6d687040f9a07a5dd1f022e7f2591a3087cfd0f34eb82a915080a5bb30fb640f",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "København Kaj",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.tool_response.series_s1_property_0": {
+      "stage": 1,
+      "text": "{\"name\": \"Copenhagen Canal\", \"location\": \"Christianshavn 32, 1414 København K, Copenhagen\", \"zip_code\": \"1414\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"b12ebff8858f41df868559e5c0863326\", \"amenities\": [\"Gym\", \"Parking\"], \"saved\": \"False\"}",
+      "event_id": "series_s1_property_0",
+      "response_sha256": "63205ee8830e07c1ab3fb5d18b970990aca6e3706b2932a9e7a24ff7de66ec52"
+    },
+    "stage1.tool_response.series_s1_property_1": {
+      "stage": 1,
+      "text": "{\"name\": \"Copenhagen City Living\", \"location\": \"Vesterbro, Copenhagen\", \"zip_code\": \"1620\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"069d74e2a3e940778e8859cf26c66c3d\", \"amenities\": [\"Gym\", \"Laundry\", \"Pool\"], \"saved\": \"True\"}",
+      "event_id": "series_s1_property_1",
+      "response_sha256": "9bf12ac65ddaf32da8b7aad441a2d1724891c3789b835ed312985587c1c28661"
+    },
+    "stage1.tool_response.series_s1_property_2": {
+      "stage": 1,
+      "text": "{\"name\": \"København Harbour View\", \"location\": \"Islands Brygge 43, Copenhagen\", \"zip_code\": \"2300\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"992ad08d7dd04cfda0ab76a28e773081\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\"], \"saved\": \"False\"}",
+      "event_id": "series_s1_property_2",
+      "response_sha256": "ceca0a497c6b90065b15b014e3b3b08efa442d720299f8d94e8bcab616e1d5f3"
+    },
+    "stage1.tool_response.series_s1_property_3": {
+      "stage": 1,
+      "text": "{\"name\": \"København Haven\", \"location\": \"Islands Brygge, Copenhagen\", \"zip_code\": \"2300\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"8624c1ff0b7b4bf299f98d815af281de\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"False\"}",
+      "event_id": "series_s1_property_3",
+      "response_sha256": "128b97705cd77c4b8c32f0fef460857f04c273e192f1e5d5610cd474c7cd70ee"
+    },
+    "stage1.tool_response.series_s1_property_4": {
+      "stage": 1,
+      "text": "{\"name\": \"København Østerbro\", \"location\": \"Østerbrogade, Copenhagen\", \"zip_code\": \"2100\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1100\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"43a112f55eec4427800888ff5a0bced4\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"False\"}",
+      "event_id": "series_s1_property_4",
+      "response_sha256": "85da6f6d52dca9fea60da190680ef0a65dfbb99c976f0e594a5ee5abb9f981ea"
+    },
+    "stage1.tool_response.series_s1_property_5": {
+      "stage": 1,
+      "text": "{\"name\": \"Nyhavn Oasis\", \"location\": \"2200 København N, Copenhagen\", \"zip_code\": \"2200\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"5c342d8cb32d410ba740afa1b1c3f1f6\", \"amenities\": [\"Gym\", \"Laundry\", \"Balcony\"], \"saved\": \"False\"}",
+      "event_id": "series_s1_property_5",
+      "response_sha256": "5e6c9e312f5aa506eee10d1e6ecfd729d44ec6e9f45636aa07598b169427d632"
+    },
+    "stage1.tool_response.series_s1_property_6": {
+      "stage": 1,
+      "text": "{\"name\": \"København K\", \"location\": \"Købmagergade 20, Copenhagen\", \"zip_code\": \"1150\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1400\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"d8ffe9fa58e94f7e8428cf32f643ecd5\", \"amenities\": [\"Pool\", \"Parking\"], \"saved\": \"True\"}",
+      "event_id": "series_s1_property_6",
+      "response_sha256": "05deb5b70ccfb1b59b69237687f19dba6979e8a763479a3bc8c0f9ef783d5528"
+    },
+    "stage1.tool_response.series_s1_property_7": {
+      "stage": 1,
+      "text": "{\"name\": \"København Kaj\", \"location\": \"Nordhavn, Copenhagen\", \"zip_code\": \"2100\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"c8dbacd4138242b88da89920943eccbe\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\"], \"saved\": \"True\"}",
+      "event_id": "series_s1_property_7",
+      "response_sha256": "6cf17ffc5cd02c09a9feadaeab2469ac349fea36ad30b5ef3ab7333bf72d7035"
+    },
+    "stage1.tool_response.series_s1_property_8": {
+      "stage": 1,
+      "text": "{\"name\": \"København Kvarter\", \"location\": \"Enghavevej 14, Copenhagen\", \"zip_code\": \"1670\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"1800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"ce60cc438c3d474aa128ac073fe36d88\", \"amenities\": [\"Garden\", \"Laundry\", \"Balcony\"], \"saved\": \"True\"}",
+      "event_id": "series_s1_property_8",
+      "response_sha256": "7bc79a2c02087d53d92582afd41c80ca248f6c996313a594a8ac9e712bce2345"
+    },
+    "stage1.tool_response.series_s1_property_9": {
+      "stage": 1,
+      "text": "{\"name\": \"København Øst\", \"location\": \"Østerbrogade 100, Copenhagen\", \"zip_code\": \"2100\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"1500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"249d86bb2e8e42028f6d8de738f1441d\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"False\"}",
+      "event_id": "series_s1_property_9",
+      "response_sha256": "cd543efa59db1ae18ad1f19ab440db86b134e1423f872730ca11e41577d07d38"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "København Harbour View",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "København K",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "København Harbour View",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_property_2",
+          "reason": "含特殊字符的完整房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Islands Brygge",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_property_2",
+          "reason": "丹麦地名，识别困难",
+          "weight": 50
+        },
+        {
+          "text": "København Haven",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_property_3",
+          "reason": "含特殊字符的完整房产名称",
+          "weight": 50
+        },
+        {
+          "text": "København Kaj",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含丹麦语特殊字符的完整地名，ASR 识别困难",
+          "weight": 50
+        },
+        {
+          "text": "København Kvarter",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_property_8",
+          "reason": "含特殊字符的完整房产名称",
+          "weight": 50
+        },
+        {
+          "text": "København Øst",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_property_9",
+          "reason": "含特殊字符的完整地名",
+          "weight": 50
+        },
+        {
+          "text": "København Østerbro",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_property_4",
+          "reason": "含特殊字符的完整地名",
+          "weight": 50
+        },
+        {
+          "text": "Nyhavn Oasis",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_property_5",
+          "reason": "独特房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Christianshavn",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_property_0",
+          "reason": "丹麦地名，识别困难",
+          "weight": 50
+        },
+        {
+          "text": "Enghavevej",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_property_8",
+          "reason": "丹麦街道名，ASR 易错",
+          "weight": 50
+        },
+        {
+          "text": "Købmagergade",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_property_6",
+          "reason": "含特殊字符的丹麦街道名",
+          "weight": 50
+        },
+        {
+          "text": "Nordhavn",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_property_7",
+          "reason": "丹麦地名，识别困难",
+          "weight": 50
+        },
+        {
+          "text": "Vesterbro",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_property_1",
+          "reason": "丹麦地名，识别困难",
+          "weight": 50
+        },
+        {
+          "text": "Østerbrogade",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_property_9",
+          "reason": "含特殊字符的丹麦街道名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "København Harbour View",
+        "Islands Brygge",
+        "København Haven",
+        "København Kaj",
+        "København Kvarter",
+        "København Øst",
+        "København Østerbro",
+        "Nyhavn Oasis",
+        "Christianshavn",
+        "Enghavevej",
+        "Købmagergade",
+        "Nordhavn",
+        "Vesterbro",
+        "Østerbrogade"
+      ],
+      "active_vocabulary": {
+        "København Harbour View": 50,
+        "Islands Brygge": 50,
+        "København Haven": 50,
+        "København Kaj": 50,
+        "København Kvarter": 50,
+        "København Øst": 50,
+        "København Østerbro": 50,
+        "Nyhavn Oasis": 50,
+        "Christianshavn": 50,
+        "Enghavevej": 50,
+        "Købmagergade": 50,
+        "Nordhavn": 50,
+        "Vesterbro": 50,
+        "Østerbrogade": 50
+      },
+      "vocabulary_sha256": "84ab26b0c498e0ca77b77f8b34117cba796f5f6636caa3cf30be859971635a76"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "København Harbour View",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含特殊字符的完整房产名称",
+          "weight": 50
+        },
+        {
+          "text": "København K",
+          "kind": "place",
+          "source": "stage2.existing_catalog.1",
+          "reason": "含特殊字符的完整地名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "København K"
+      ],
+      "active_vocabulary": {
+        "København Harbour View": 50,
+        "Islands Brygge": 50,
+        "København Haven": 50,
+        "København Kaj": 50,
+        "København Kvarter": 50,
+        "København Øst": 50,
+        "København Østerbro": 50,
+        "Nyhavn Oasis": 50,
+        "Christianshavn": 50,
+        "Enghavevej": 50,
+        "Købmagergade": 50,
+        "Nordhavn": 50,
+        "Vesterbro": 50,
+        "Østerbrogade": 50,
+        "København K": 50
+      },
+      "vocabulary_sha256": "a33dc2018144edd2e3752dc8de42a3b1166497db8e7132f46cd281e273165e0f"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Copenhagen"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:01.805238+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

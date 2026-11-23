@@ -1,0 +1,209 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0934_99zgszdgzsqhouza9b9zxf6uyalahvth",
+  "model": "deepseek-flash",
+  "input_sha256": "8d88374977c993fd6d7ce550bc2baba0eb4c175c83f08cbfeb7f44572e5cc19e",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Koenraad Vandenberghe",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Elara Vandenberghe",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Thierry Vandenberghe",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Aurélien Vandenberghe",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "参会人完整姓名，含特殊字符"
+        }
+      ],
+      "new_terms": [
+        "Koenraad Vandenberghe",
+        "Elara Vandenberghe",
+        "Thierry Vandenberghe",
+        "Aurélien Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Koenraad Vandenberghe": 50,
+        "Elara Vandenberghe": 50,
+        "Thierry Vandenberghe": 50,
+        "Aurélien Vandenberghe": 50
+      },
+      "vocabulary_sha256": "2f58ba03c3501898a78ee5d01cb2e07b48d7366218fea646b1b4bceee42a749b"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Koenraad",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "重复系列参会人名字"
+        },
+        {
+          "text": "Elara",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "重复系列参会人名字"
+        },
+        {
+          "text": "Thierry",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "重复系列参会人名字"
+        },
+        {
+          "text": "Aurélien Vandenberghe",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "重复系列参会人完整姓名，含特殊字符"
+        }
+      ],
+      "new_terms": [
+        "Koenraad",
+        "Elara",
+        "Thierry"
+      ],
+      "active_vocabulary": {
+        "Koenraad Vandenberghe": 50,
+        "Elara Vandenberghe": 50,
+        "Thierry Vandenberghe": 50,
+        "Aurélien Vandenberghe": 50,
+        "Koenraad": 50,
+        "Elara": 50,
+        "Thierry": 50
+      },
+      "vocabulary_sha256": "7b2230fb8060433977afd50fd825f7a40cc5c9620a5decc365c64ac450ce652f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Vandenberghe Family Breakfasts",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "自定义群聊名称"
+        },
+        {
+          "text": "Koenraad",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群聊成员名字"
+        },
+        {
+          "text": "Elara",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群聊成员名字"
+        },
+        {
+          "text": "Thierry",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群聊成员名字"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群聊成员名字，含特殊字符"
+        }
+      ],
+      "new_terms": [
+        "Vandenberghe Family Breakfasts",
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Koenraad Vandenberghe": 50,
+        "Elara Vandenberghe": 50,
+        "Thierry Vandenberghe": 50,
+        "Aurélien Vandenberghe": 50,
+        "Koenraad": 50,
+        "Elara": 50,
+        "Thierry": 50,
+        "Vandenberghe Family Breakfasts": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "a1e4d5551584d880c6f1a8dcbbeacbee908fc41618d39624c78239473fd73e0d"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "4bf89d12a0a12f9b3d29b720ca8273649513d030e034722cc7a59c543603d724",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5300,
+        "completion_tokens": 435,
+        "total_tokens": 5735,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 5044
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.681,
+      "error": "Not an exact quotation of a source in stage 1: 'Koenraad Vandenberghe' from 'stage1.source_task'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "865d0afb9834691faab9a24d240c42aec07d223e38d71e882fcb666c09181045",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 6147,
+        "completion_tokens": 460,
+        "total_tokens": 6607,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        },
+        "prompt_cache_hit_tokens": 5632,
+        "prompt_cache_miss_tokens": 515
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.716,
+      "error": "Not an exact quotation of a source in stage 2: 'Koenraad Vandenberghe' from 'stage2.source_task'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "e82ecf4ca0539a0cbc9b6e3cee721c8ce4d84ec6f4e85454a1132802546713d9",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 6172,
+        "completion_tokens": 440,
+        "total_tokens": 6612,
+        "prompt_tokens_details": {
+          "cached_tokens": 5248
+        },
+        "prompt_cache_hit_tokens": 5248,
+        "prompt_cache_miss_tokens": 924
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.715
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0934_99zgszdgzsqhouza9b9zxf6uyalahvth",
+  "extracted_at": "2026-11-22T06:44:40.015071+00:00"
+}

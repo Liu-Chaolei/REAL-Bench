@@ -1,0 +1,181 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0698_pkyb3pflukov2hhnolhiv5cs9rfkf5tr",
+  "model": "deepseek-flash",
+  "input_sha256": "ee3109f739a3b163770a75406bfc132adfefa98523d8e05422d25c79c273fe57",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Fjordview Apartments",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "房源名称，专有名词"
+        },
+        {
+          "text": "Karl Johans gate 31",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "奥斯陆街道地址专名"
+        },
+        {
+          "text": "Kåre Jensen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Øvre Slottsgate 14",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b1b33df7-617c-48b5-8ac4-ddcbab64ef8c.arguments.end_location",
+          "reason": "修正后的房源地址专名"
+        },
+        {
+          "text": "Kåre",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-9d32bf9f-fabd-4f95-a0c8-c4fe1ba7a920.arguments.content",
+          "reason": "邮件正文中的收件人名"
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-9d32bf9f-fabd-4f95-a0c8-c4fe1ba7a920.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Frognerveien 20",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a0a49331-68f5-4b1f-8ad5-8a1653ba8d06.arguments.end_location",
+          "reason": "修正后房源地址专名"
+        }
+      ],
+      "new_terms": [
+        "Fjordview Apartments",
+        "Karl Johans gate 31",
+        "Kåre Jensen",
+        "Øvre Slottsgate 14",
+        "Kåre",
+        "Åse Kjellstad",
+        "Frognerveien 20"
+      ],
+      "active_vocabulary": {
+        "Fjordview Apartments": 50,
+        "Karl Johans gate 31": 50,
+        "Kåre Jensen": 50,
+        "Øvre Slottsgate 14": 50,
+        "Kåre": 50,
+        "Åse Kjellstad": 50,
+        "Frognerveien 20": 50
+      },
+      "vocabulary_sha256": "82d8f206455ccbaa354559a30e7cc3f19373a7b8d774e7fb7527efdc1fc978dc"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Oslo Luxe Apartments",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "房源名称，专有名词"
+        },
+        {
+          "text": "Frognerveien 20",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "房源地址专名"
+        },
+        {
+          "text": "Karl Johans gate 31",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "上车点街道专名"
+        }
+      ],
+      "new_terms": [
+        "Oslo Luxe Apartments"
+      ],
+      "active_vocabulary": {
+        "Fjordview Apartments": 50,
+        "Karl Johans gate 31": 50,
+        "Kåre Jensen": 50,
+        "Øvre Slottsgate 14": 50,
+        "Kåre": 50,
+        "Åse Kjellstad": 50,
+        "Frognerveien 20": 50,
+        "Oslo Luxe Apartments": 50
+      },
+      "vocabulary_sha256": "3bcd442a8863476dfe0d197ed6477921f9f4d12a19d841c169dd0fe537ea1755"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Oslo Luxe",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房源名称简称，专有名词"
+        },
+        {
+          "text": "Frognerveien 34",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "家庭住址专名"
+        },
+        {
+          "text": "Frognerveien 20",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_quote.arguments.start_location",
+          "reason": "返程起点地址专名"
+        },
+        {
+          "text": "Karl Johans gate 31",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add.arguments.description",
+          "reason": "去程上车点街道专名"
+        }
+      ],
+      "new_terms": [
+        "Oslo Luxe",
+        "Frognerveien 34"
+      ],
+      "active_vocabulary": {
+        "Fjordview Apartments": 50,
+        "Karl Johans gate 31": 50,
+        "Kåre Jensen": 50,
+        "Øvre Slottsgate 14": 50,
+        "Kåre": 50,
+        "Åse Kjellstad": 50,
+        "Frognerveien 20": 50,
+        "Oslo Luxe Apartments": 50,
+        "Oslo Luxe": 50,
+        "Frognerveien 34": 50
+      },
+      "vocabulary_sha256": "4871a4857c1340eb7b5721d3e5b3cea0249ed7f6615cdb52a93b51dc8206432f"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "ac45815d24a85aa61ea0943e371a566d430182ef763e123d0c266820bfaae28e",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3380,
+        "completion_tokens": 610,
+        "total_tokens": 3990,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3124
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.213
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0698_pkyb3pflukov2hhnolhiv5cs9rfkf5tr",
+  "extracted_at": "2026-11-22T06:43:26.240469+00:00"
+}

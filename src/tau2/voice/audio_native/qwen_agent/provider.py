@@ -72,7 +72,13 @@ class QwenAgentProvider:
         }:
             if self.diagnostics_enabled and event.get("type") == "diagnostic_backend":
                 self.backend_inputs[event.get("id", str(len(self.backend_inputs)))] = {
-                    k: v for k, v in event.items() if k not in {"type"}
+                    # ``received_monotonic`` is transport bookkeeping used by
+                    # persistent-task observers.  BackendInput is the public
+                    # diagnostic contract and deliberately rejects unknown
+                    # fields, so keep this timing value out of the snapshot.
+                    k: v
+                    for k, v in event.items()
+                    if k not in {"type", "received_monotonic"}
                 }
             if self.persistent_tasks_enabled:
                 payload = dict(

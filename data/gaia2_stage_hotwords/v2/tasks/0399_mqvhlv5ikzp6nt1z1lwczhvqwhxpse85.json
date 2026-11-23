@@ -1,0 +1,197 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0399_mqvhlv5ikzp6nt1z1lwczhvqwhxpse85",
+  "model": "deepseek-flash",
+  "input_sha256": "55461b9f35a003852546348527a7f86c4965b92088308300674579f7c3c1fc28",
+  "review_input_sha256": "a5ee798a9a8a7be256b0bd6dbad772d55dbf32ea5c4a1c0a725727dad334cffb",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "13497ab4fd5cd094ff06f169e2f7bb85167e17d1e98dd64ef47ed8161695c1d5",
+  "reference_results_sha256": "70a8212d744bb0683d88da2ab9cfed1dfa42a3f85d9c6a3601cda970daf189a9",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Yīnghuá Liáng",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.tool_response.series_s2_lookup_contact": {
+      "stage": 2,
+      "text": "{\"contacts\": [{\"first_name\": \"Jian\", \"last_name\": \"Wong\", \"contact_id\": \"0a1fe15e7f034a8083984b3d0c18932a\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"37\", \"nationality\": \"Chinese\", \"city_living\": \"Shanghai\", \"country\": \"China\", \"status\": \"Status.EMPLOYED\", \"job\": \"Marketing Manager\", \"description\": \"Jian Wong is a 37-year-old marketing manager living in Shanghai, China. He is a passionate fan of A Tribe Called Quest and still mourns the loss of Phife Dawg, often listening to their albums on his daily commute. Jian is a creative and laid-back individual who enjoys playing basketball in his free time and collecting vinyl records of his favorite hip-hop artists. He is also an avid hiker and loves exploring the scenic trails around Shanghai. On weekends, Jian can be found cooking Sichuan cuisine for his friends and family, experimenting with new recipes and flavors.\", \"phone\": \"+8618302118765\", \"email\": \"jian.wong@gaia2mail.com\", \"address\": \"345 Wukang Road, Xuhui District, Shanghai, China 200031\"}, {\"first_name\": \"Astrid\", \"last_name\": \"Lundqvist\", \"contact_id\": \"0d1b1d002eba4fdfa48e04d226bf4425\", \"is_user\": \"True\", \"gender\": \"Gender.FEMALE\", \"age\": \"23\", \"nationality\": \"Swedish\", \"city_living\": \"Stockholm\", \"country\": \"Sweden\", \"status\": \"Status.EMPLOYED\", \"job\": \"Social Media Influencer\", \"description\": \"Astrid Lundqvist is a 23-year-old social media influencer from Stockholm, Sweden. She has built a significant following on Instagram, where she shares her passion for fashion, photography, and travel. With over 200,000 followers, Astrid has become a trusted voice in the Swedish influencer scene, collaborating with top brands to promote their products. She is known for her impeccable style, creativity, and engaging content.\", \"phone\": \"+46734567890\", \"email\": \"astrid.lundqvist@gaia2mail.com\", \"address\": \"Östermalmsgatan 12, 114 39 Stockholm, Sweden\"}, {\"first_name\": \"Yujie\", \"last_name\": \"Liang\", \"contact_id\": \"0dfaea9c3eb4452b83a60d3bd8e5f9c3\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"31\", \"nationality\": \"Chinese\", \"city_living\": \"Shanghai\", \"country\": \"China\", \"status\": \"Status.EMPLOYED\", \"job\": \"Biomedical Engineer\", \"description\": \"Yujie Liang is a driven and resourceful biomedical engineer with a passion for turning innovative ideas into reality. Born and raised in Shanghai, Yujie developed a strong interest in science and technology from a young age. She pursued her undergraduate degree in Biomedical Engineering at Fudan University and later earned her master's degree from the University of Shanghai for Science and Technology. With over 5 years of experience in the field, Yujie has worked on various projects, from developing medical devices to creating prosthetic limbs.\", \"phone\": \"+8613816438291\", \"email\": \"yujie.liang@sinotech.com\", \"address\": \"345 Tianlin Road, Xuhui District, Shanghai, 200030\"}, {\"first_name\": \"Jianhua\", \"last_name\": \"Wang\", \"contact_id\": \"0eaff34d30d64a21ada0f969526ded6b\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"68\", \"nationality\": \"Chinese\", \"city_living\": \"Shanghai\", \"country\": \"China\", \"status\": \"Status.RETIRED\", \"job\": \"Former High School History Teacher\", \"description\": \"Jianhua Wang is a proud and supportive father of Ridho Syuhada, his only child. He was born and raised in Shanghai, China, and has lived there his entire life. Jianhua is a retired high school history teacher, having spent 35 years educating young minds about the rich history of China. He is a kind and gentle soul, loved by his family, friends, and former students alike. Jianhua is an avid gardener and takes great pride in his small garden, where he grows a variety of herbs and vegetables. He is also a skilled calligrapher and enjoys practicing this traditional Chinese art form in his free time. Cooking is another one of Jianhua's passions, and he loves to experiment with new recipes in the kitchen.\", \"phone\": \"+862162395678\", \"email\": \"jianhua.wang1964@gaia2mail.com\", \"address\": \"345 Lane 123, Wukang Road, Xuhui District, Shanghai, 200031\"}, {\"first_name\": \"Kasper\", \"last_name\": \"Mikkelsen\", \"contact_id\": \"1392cf7a8bdc4725b456a0d65a8eac33\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"34\", \"nationality\": \"Danish\", \"city_living\": \"Copenhagen\", \"country\": \"Denmark\", \"status\": \"Status.EMPLOYED\", \"job\": \"Software Engineer\", \"description\": \"Kasper Mikkelsen is a 34-year-old software engineer living in Copenhagen, Denmark. He is a cryptocurrency enthusiast who spends a significant amount of his free time reading about and discussing the latest developments in the field. Kasper is a regular contributor to online forums, where he shares his knowledge and insights with others. He is known for his respectful and informative approach, often helping to mediate discussions and keep the conversation on track.\", \"phone\": \"+4531123457\", \"email\": \"kasper.mikkelsen@gaia2mail.com\", \"address\": \"Sønder Boulevard 55, 4th floor, 1720 Copenhagen V, Denmark\"}, {\"first_name\": \"Vasco\", \"last_name\": \"Pereira\", \"contact_id\": \"173316bea26942adb7ad5532033371f6\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"48\", \"nationality\": \"Portuguese\", \"city_living\": \"Porto\", \"country\": \"Portugal\", \"status\": \"Status.EMPLOYED\", \"job\": \"Mechanical Engineer\", \"description\": \"Vasco Pereira is a 48-year-old mechanical engineer with a passion for classic cars. Born and raised in Porto, Portugal, Vasco has always been fascinated by the beauty and craftsmanship of vintage vehicles. In his free time, he enjoys restoring classic cars and participating in local motorsports events. Vasco is a strong believer that electric motors in motorsports don't have the same appeal as traditional combustion engines, and he often finds himself debating with friends and fellow enthusiasts about the merits of each.\", \"phone\": \"+351934123556\", \"email\": \"vpereira@classicmotors.pt\", \"address\": \"Rua do Almada, 345, 4050-038 Porto, Portugal\"}, {\"first_name\": \"Yīnghuá\", \"last_name\": \"Liáng\", \"contact_id\": \"1b11cf92d64f4d63a5d00d0e8253db8c\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"39\", \"nationality\": \"Chinese\", \"city_living\": \"Shanghai\", \"country\": \"China\", \"status\": \"Status.EMPLOYED\", \"job\": \"Graphic Designer\", \"description\": \"Yīnghuá Liáng is a creative and tech-savvy graphic designer living in Shanghai, China. As a Photoshop enthusiast, she spends most of her free time experimenting with new design techniques and sharing her knowledge with others through online tutorials and workshops. With a passion for helping others, Yīnghuá has built a reputation as a go-to expert for thumbnail design, and her YouTube channel has gained a significant following among aspiring designers.\", \"phone\": \"+882112345678\", \"email\": \"ivy.liang@gaia2mail.com\", \"address\": \"345 Jiaozhou Road, Jing'an District, Shanghai, China 200040\"}, {\"first_name\": \"Meixiang\", \"last_name\": \"Li\", \"contact_id\": \"1b346743ebcc44e18e5daaba2c6747dc\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"78\", \"nationality\": \"Chinese\", \"city_living\": \"Shanghai\", \"country\": \"China\", \"status\": \"Status.RETIRED\", \"job\": \"Former Child Psychologist\", \"description\": \"\", \"phone\": \"+062162345678\", \"email\": \"meixiangli@163.com\", \"address\": \"345 Jiaozhou Road, Jing'an District, Shanghai, China\"}, {\"first_name\": \"Åsa\", \"last_name\": \"Lundgren\", \"contact_id\": \"1b838c30b921461ba2b61c7dc310a274\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"56\", \"nationality\": \"Swedish\", \"city_living\": \"Stockholm\", \"country\": \"Sweden\", \"status\": \"Status.EMPLOYED\", \"job\": \"Theoretical Physicist\", \"description\": \"Åsa Lundgren is a renowned theoretical physicist with a passion for challenging established theories.\", \"phone\": \"+46706234567\", \"email\": \"asa.lundgren@su.se\", \"address\": \"Östermalmsgatan 87, 114 59 Stockholm\"}, {\"first_name\": \"Søren\", \"last_name\": \"Mikkelsen\", \"contact_id\": \"1b8f4d7b46414ed3b8af48ec5a4e941c\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"69\", \"nationality\": \"Danish\", \"city_living\": \"Aarhus\", \"country\": \"Denmark\", \"status\": \"Status.RETIRED\", \"job\": \"Former Android Developer\", \"description\": \"A 69-year-old retired Android developer who spent most of his career working on various projects, including developing secure mobile applications that utilized SSL certificates and HTTPClient.\", \"phone\": \"+4530123436\", \"email\": \"soren.mikkelsen@gaia2mail.com\", \"address\": \"Åboulevarden 25, 3.tv, 8000 Aarhus C\"}], \"metadata\": {\"range\": [\"0\", \"10\"], \"total\": \"125\"}}",
+      "event_id": "series_s2_lookup_contact",
+      "response_sha256": "4b8aa8c2f73c875b62457078ff55a9c83a178e2c4ad579f489e798223a69e4b7"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Yīnghuá Liáng",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含拉丁变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Yīnghuá Liáng"
+      ],
+      "active_vocabulary": {
+        "Yīnghuá Liáng": 50
+      },
+      "vocabulary_sha256": "60fd64e1bf8bd149db7f8bcae0011b07f9a5d3b93c3a20b4b046c60ce6a4bb55"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Rua do Almada",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_lookup_contact",
+          "reason": "葡萄牙语街道名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_lookup_contact",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Jianhua Wang",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_lookup_contact",
+          "reason": "完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Kasper Mikkelsen",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_lookup_contact",
+          "reason": "完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Sønder Boulevard",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_lookup_contact",
+          "reason": "含变音符号的街道名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Vasco Pereira",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_lookup_contact",
+          "reason": "完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Yujie Liang",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_lookup_contact",
+          "reason": "完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Åsa Lundgren",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_lookup_contact",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Meixiang",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_lookup_contact",
+          "reason": "名字字段字面值，完整名未连续出现",
+          "weight": 50
+        },
+        {
+          "text": "Søren",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_lookup_contact",
+          "reason": "含变音符号的名字字段字面值，完整名未连续出现",
+          "weight": 50
+        },
+        {
+          "text": "Åboulevarden",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_lookup_contact",
+          "reason": "含变音符号的丹麦街道名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Östermalmsgatan",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_lookup_contact",
+          "reason": "含变音符号的瑞典街道名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Rua do Almada",
+        "Astrid Lundqvist",
+        "Jianhua Wang",
+        "Kasper Mikkelsen",
+        "Sønder Boulevard",
+        "Vasco Pereira",
+        "Yujie Liang",
+        "Åsa Lundgren",
+        "Meixiang",
+        "Søren",
+        "Åboulevarden",
+        "Östermalmsgatan"
+      ],
+      "active_vocabulary": {
+        "Yīnghuá Liáng": 50,
+        "Rua do Almada": 50,
+        "Astrid Lundqvist": 50,
+        "Jianhua Wang": 50,
+        "Kasper Mikkelsen": 50,
+        "Sønder Boulevard": 50,
+        "Vasco Pereira": 50,
+        "Yujie Liang": 50,
+        "Åsa Lundgren": 50,
+        "Meixiang": 50,
+        "Søren": 50,
+        "Åboulevarden": 50,
+        "Östermalmsgatan": 50
+      },
+      "vocabulary_sha256": "c1cd00b4c168f358c931439e00c0f191aa4fd7754bb0631d368d956f7da6ee41"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Shanghai",
+    "345 Jiaozhou Road",
+    "Jing'an District",
+    "China"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:45.767586+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

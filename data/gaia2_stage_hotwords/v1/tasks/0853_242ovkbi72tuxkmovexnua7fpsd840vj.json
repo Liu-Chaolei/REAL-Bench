@@ -1,0 +1,149 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0853_242ovkbi72tuxkmovexnua7fpsd840vj",
+  "model": "deepseek-flash",
+  "input_sha256": "e0cd3e18c6ad49c98959379ff6a5cd1c5ff0c3994fc7f8accd1ca86b752bd6d8",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Nalinee Wongcharee",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "受邀好友的完整姓名"
+        },
+        {
+          "text": "Rohan Sengupta",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "受邀好友的完整姓名"
+        },
+        {
+          "text": "Aurélie Desjardins",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "受邀好友的完整姓名，含重音"
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-57e33911-6857-407b-83b5-6fd1449bff9b.arguments.content",
+          "reason": "邮件署名中的特殊姓名"
+        }
+      ],
+      "new_terms": [
+        "Nalinee Wongcharee",
+        "Rohan Sengupta",
+        "Aurélie Desjardins",
+        "Åse Kjellstad"
+      ],
+      "active_vocabulary": {
+        "Nalinee Wongcharee": 50,
+        "Rohan Sengupta": 50,
+        "Aurélie Desjardins": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "c337ab6f80c9b25d99edb36171bcdaf6708284f0f2ddc617ac33c791a564a390"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nalinee",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "确认回复对象的名字"
+        },
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "确认回复对象的名字，含重音"
+        },
+        {
+          "text": "Åse",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply_nalinee.arguments.content",
+          "reason": "回复邮件署名中的名字"
+        }
+      ],
+      "new_terms": [
+        "Nalinee",
+        "Aurélie",
+        "Åse"
+      ],
+      "active_vocabulary": {
+        "Nalinee Wongcharee": 50,
+        "Rohan Sengupta": 50,
+        "Aurélie Desjardins": 50,
+        "Åse Kjellstad": 50,
+        "Nalinee": 50,
+        "Aurélie": 50,
+        "Åse": 50
+      },
+      "vocabulary_sha256": "5e25267e09023e30c345770e70d6eac69cb1d4bcf64244e764c07bc48828c0ce"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Nalinee Wongcharee",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群聊成员的完整姓名"
+        },
+        {
+          "text": "Aurélie Desjardins",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群聊成员的完整姓名，含重音"
+        },
+        {
+          "text": "Surprise Birthday Logistics",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "自定义群聊名称"
+        }
+      ],
+      "new_terms": [
+        "Surprise Birthday Logistics"
+      ],
+      "active_vocabulary": {
+        "Nalinee Wongcharee": 50,
+        "Rohan Sengupta": 50,
+        "Aurélie Desjardins": 50,
+        "Åse Kjellstad": 50,
+        "Nalinee": 50,
+        "Aurélie": 50,
+        "Åse": 50,
+        "Surprise Birthday Logistics": 50
+      },
+      "vocabulary_sha256": "a5841e6e3bb224f6a112cf7a7e37507ba1aef7ea0f70a437029d72540296910b"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "282569a60b50ad9a9455a86628ada96bbc12c3c25593723a1d878851359847d9",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3907,
+        "completion_tokens": 372,
+        "total_tokens": 4279,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3651
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.892
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0853_242ovkbi72tuxkmovexnua7fpsd840vj",
+  "extracted_at": "2026-11-22T06:44:10.655929+00:00"
+}

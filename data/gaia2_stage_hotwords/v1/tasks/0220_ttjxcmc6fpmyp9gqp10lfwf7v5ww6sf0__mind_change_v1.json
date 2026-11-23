@@ -1,0 +1,84 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0220_ttjxcmc6fpmyp9gqp10lfwf7v5ww6sf0__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "bbb9e8524cea699525f37d4c5ed785809cef0d18917232f15ce855ba776d34e9",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Astrid Møller",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "社会工作者姓名，含特殊字符ø，为需识别的专有名词。"
+        }
+      ],
+      "new_terms": [
+        "Astrid Møller"
+      ],
+      "active_vocabulary": {
+        "Astrid Møller": 50
+      },
+      "vocabulary_sha256": "1dbb0cd9b375c2f01def2290be2194d98ec1dba18c6b5519c7edcf03622e0d3d"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "ec3eefc645637c60124584b04b483714bc98787032b613d7ec341a49cf9431df",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3823,
+        "completion_tokens": 125,
+        "total_tokens": 3948,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3567
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.061,
+      "error": "2 validation errors for Extraction\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='该阶段仅包含通用...取的专有名词。', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value=\"该阶段仅包含通用...取的专有名词。\", input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "92fc9a55f2c6631f1f41a2616acdcd50b7149d02bc3a0132680bb4ab0e78a783",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4460,
+        "completion_tokens": 70,
+        "total_tokens": 4530,
+        "prompt_tokens_details": {
+          "cached_tokens": 3840
+        },
+        "prompt_cache_hit_tokens": 3840,
+        "prompt_cache_miss_tokens": 620
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.708
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0220_ttjxcmc6fpmyp9gqp10lfwf7v5ww6sf0__mind_change_v1",
+  "extracted_at": "2026-11-22T06:45:39.107591+00:00"
+}

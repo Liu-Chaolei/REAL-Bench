@@ -1,0 +1,184 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0574_3x70omb0stj3hf0lv7hw5a3rnd6xhyzi",
+  "model": "deepseek-flash",
+  "input_sha256": "61476af3c5625b635c6b5027da67525702a22378c209833f89ff7cc8c5b8e7e6",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Luís",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7fc9fd0e-7585-4bc3-a263-7a6230ac7637.arguments.content",
+          "reason": "收件人名字，含重音符号"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7fc9fd0e-7585-4bc3-a263-7a6230ac7637.arguments.content",
+          "reason": "发件人完整姓名，含特殊拼写"
+        },
+        {
+          "text": "Jamila",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7cdd5606-d952-4be7-91af-d76556ae0889.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Conan The Brigand",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定皮革产品名称"
+        }
+      ],
+      "new_terms": [
+        "Luís",
+        "Aurélien LaFleur",
+        "Jamila",
+        "Conan The Brigand"
+      ],
+      "active_vocabulary": {
+        "Luís": 50,
+        "Aurélien LaFleur": 50,
+        "Jamila": 50,
+        "Conan The Brigand": 50
+      },
+      "vocabulary_sha256": "72488be29d67bcae4367100dfb0fc75858e603fd3301d4f9c30408f410bd68c3"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Luís Marques",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create.arguments.attendees[0]",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create.arguments.attendees[1]",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_msg_luis.arguments.content",
+          "reason": "发件人完整姓名"
+        }
+      ],
+      "new_terms": [
+        "Luís Marques",
+        "Jamila Fernandes"
+      ],
+      "active_vocabulary": {
+        "Luís": 50,
+        "Aurélien LaFleur": 50,
+        "Jamila": 50,
+        "Conan The Brigand": 50,
+        "Luís Marques": 50,
+        "Jamila Fernandes": 50
+      },
+      "vocabulary_sha256": "84dc92b03d6e6d4cb9a56a0459f5b632a0975ac6edd046cd9713a1e2bc492279"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Luís": 50,
+        "Aurélien LaFleur": 50,
+        "Jamila": 50,
+        "Conan The Brigand": 50,
+        "Luís Marques": 50,
+        "Jamila Fernandes": 50
+      },
+      "vocabulary_sha256": "84dc92b03d6e6d4cb9a56a0459f5b632a0975ac6edd046cd9713a1e2bc492279"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "8c4dc6f77cfa1fe112f88ca0a925c1846fe0461e0bdfb76e4b16b4b5fb1dcfef",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2924,
+        "completion_tokens": 487,
+        "total_tokens": 3411,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2668
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.998,
+      "error": "Not an exact quotation of a source in stage 0: 'Luís Marques' from 'stage0.tool_gt.OracleEvent-AGENT-524a4d54-e7b1-40f4-98ee-3f95d799bfd9.arguments.content'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "a1460bc2dfa5de7da6cf721e5fa1a3defdb7b060d4841c6dc2a3006f6d98250e",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3856,
+        "completion_tokens": 489,
+        "total_tokens": 4345,
+        "prompt_tokens_details": {
+          "cached_tokens": 3328
+        },
+        "prompt_cache_hit_tokens": 3328,
+        "prompt_cache_miss_tokens": 528
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.782,
+      "error": "Duplicate term within stage 0: 'Luís'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "e918f6b2d00e9aa1fc8d07ced2c20a520b1fea49674e01db309bef953d81b859",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3807,
+        "completion_tokens": 423,
+        "total_tokens": 4230,
+        "prompt_tokens_details": {
+          "cached_tokens": 2944
+        },
+        "prompt_cache_hit_tokens": 2944,
+        "prompt_cache_miss_tokens": 863
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.654,
+      "error": "Invalid proper-name phrase: 'rohini.deshpande@gaia2mail.com'"
+    },
+    {
+      "attempt": 4,
+      "request_sha256": "c9d34008fc31c3f32ca3dadfc5ffe6673dcbac20ab6fbc23af3d756b83388475",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3750,
+        "completion_tokens": 370,
+        "total_tokens": 4120,
+        "prompt_tokens_details": {
+          "cached_tokens": 2944
+        },
+        "prompt_cache_hit_tokens": 2944,
+        "prompt_cache_miss_tokens": 806
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.417
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0574_3x70omb0stj3hf0lv7hw5a3rnd6xhyzi",
+  "extracted_at": "2026-11-22T06:43:00.885877+00:00"
+}

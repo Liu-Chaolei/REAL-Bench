@@ -1,0 +1,138 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0767_1jkadbmrdbmkz6a3aup2j6fgti1vdttj__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "fa746895c4bc1e22eb9c71db6991ff5f2a6344266ae00b9d267b8824a90ac3d8",
+  "review_input_sha256": "342aac0c0b299f438b3d48322c18ae5982f997c2706e49cff5f0e2b977389d4f",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "4b36518943538e789edb7718065542e44be30b587a7dcd0c5788bd9361588163",
+  "reference_results_sha256": "ca67814c538bbc60f355afb46be3010a48b544bb68c93f6a6f884a0a9ff680ca",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Akira Tanaka",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-c451bfbf-593e-46b7-9c60-743914d63893.arguments.title"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Helmut Krüger",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-fa509f93-ff8b-426b-a131-97d7824f6d76.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Rohini Deshpande",
+      "original_source": "stage1.tool_gt.series_s1_send_reply.arguments.content"
+    },
+    "stage1.tool_response.series_s1_read_meeting": {
+      "stage": 1,
+      "text": "{\"event_id\": \"1eb633f381cb1a19fbaa26def26885d9\", \"title\": \"Meeting with Helmut Krüger\", \"start_datetime\": \"1729263600.0\", \"end_datetime\": \"1729267200.0\", \"tag\": null, \"description\": null, \"location\": null, \"attendees\": [], \"start_strftime\": \"Friday, 2024-10-18 15:00:00\", \"end_strftime\": \"Friday, 2024-10-18 16:00:00\"}",
+      "event_id": "series_s1_read_meeting",
+      "response_sha256": "222732ef536e9397cd0297ca717ca79fa50c060ad9b002018c7142ae26cc1fda"
+    },
+    "stage2.tool_response.series_s2_read_meeting": {
+      "stage": 2,
+      "text": "{\"event_id\": \"633353a8e6d114a9be65378058a68b17\", \"title\": \"Meeting with Helmut Krüger\", \"start_datetime\": \"1729170000.0\", \"end_datetime\": \"1729173600.0\", \"tag\": null, \"description\": null, \"location\": null, \"attendees\": [], \"start_strftime\": \"Thursday, 2024-10-17 13:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 14:00:00\"}",
+      "event_id": "series_s2_read_meeting",
+      "response_sha256": "a20ef78907d6c1e36f596ea44cdd631d29aa46b3dc58ae50fe37144ec5c3702d"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Akira Tanaka",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Helmut Krüger",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Akira Tanaka",
+        "Helmut Krüger"
+      ],
+      "active_vocabulary": {
+        "Akira Tanaka": 50,
+        "Helmut Krüger": 50
+      },
+      "vocabulary_sha256": "0ff0cea54f8bf1fb1b3fc78d9373eaaa3121459a375bdad882a896d7bfeae65a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Helmut Krüger",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_meeting",
+          "reason": "含变音符的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "Akira Tanaka": 50,
+        "Helmut Krüger": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "5cb7e529f055f224d0200bd340bfb40427d75ea25baf90453b2c90648662f848"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Helmut Krüger",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_meeting",
+          "reason": "含变音符的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Akira Tanaka": 50,
+        "Helmut Krüger": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "5cb7e529f055f224d0200bd340bfb40427d75ea25baf90453b2c90648662f848"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:26.256523+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

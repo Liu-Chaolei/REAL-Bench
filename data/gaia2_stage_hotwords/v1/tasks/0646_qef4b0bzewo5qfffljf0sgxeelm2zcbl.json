@@ -1,0 +1,191 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0646_qef4b0bzewo5qfffljf0sgxeelm2zcbl",
+  "model": "deepseek-flash",
+  "input_sha256": "09dcffc68bd34c9db190dcaf97181f0d9ad3d779cadbf30a742f608eb35a308b",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Eliška Nováková",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "受邀参加晚宴的人名"
+        },
+        {
+          "text": "Tereza Nováková",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "受邀参加晚宴的人名"
+        },
+        {
+          "text": "Bohumil",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7634c05c-a071-40ef-aa8d-12a07d4baf93.arguments.content",
+          "reason": "被取消晚宴的收件人名"
+        },
+        {
+          "text": "Lukas",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7634c05c-a071-40ef-aa8d-12a07d4baf93.arguments.content",
+          "reason": "被取消晚宴的收件人名"
+        },
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7634c05c-a071-40ef-aa8d-12a07d4baf93.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Kvido",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b1e1e8ed-999a-4d1b-bf25-cf520004edea.arguments.content",
+          "reason": "被取消国际象棋俱乐部会议的收件人名"
+        }
+      ],
+      "new_terms": [
+        "Eliška Nováková",
+        "Tereza Nováková",
+        "Bohumil",
+        "Lukas",
+        "Matěj Nováček",
+        "Kvido"
+      ],
+      "active_vocabulary": {
+        "Eliška Nováková": 50,
+        "Tereza Nováková": 50,
+        "Bohumil": 50,
+        "Lukas": 50,
+        "Matěj Nováček": 50,
+        "Kvido": 50
+      },
+      "vocabulary_sha256": "f67055b626a1c34a5bc5250a82670ded05bf20d79b645c37eacb98ac100c3924"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Tereza",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "回复并确认晚宴的人名"
+        },
+        {
+          "text": "Eliška",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "确认将出席晚宴的人名"
+        },
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply_tereza.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Translation Project Meeting",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "日历中已有的会议名称"
+        }
+      ],
+      "new_terms": [
+        "Tereza",
+        "Eliška",
+        "Translation Project Meeting"
+      ],
+      "active_vocabulary": {
+        "Eliška Nováková": 50,
+        "Tereza Nováková": 50,
+        "Bohumil": 50,
+        "Lukas": 50,
+        "Matěj Nováček": 50,
+        "Kvido": 50,
+        "Tereza": 50,
+        "Eliška": 50,
+        "Translation Project Meeting": 50
+      },
+      "vocabulary_sha256": "f2c6d05bb0ecc89003d8ae9ca307ab2bec4ebf0b47b23282bdbd036944551639"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Bohumil",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "改期晚宴的来信人"
+        },
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply_bohumil.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Lukáš Nováček",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "家庭晚宴参与者姓名"
+        },
+        {
+          "text": "Dinner with Family",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "日历中已有的家庭晚宴事件名"
+        },
+        {
+          "text": "Yoga Class",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "日历中已有的瑜伽课事件名"
+        }
+      ],
+      "new_terms": [
+        "Lukáš Nováček",
+        "Dinner with Family",
+        "Yoga Class"
+      ],
+      "active_vocabulary": {
+        "Eliška Nováková": 50,
+        "Tereza Nováková": 50,
+        "Bohumil": 50,
+        "Lukas": 50,
+        "Matěj Nováček": 50,
+        "Kvido": 50,
+        "Tereza": 50,
+        "Eliška": 50,
+        "Translation Project Meeting": 50,
+        "Lukáš Nováček": 50,
+        "Dinner with Family": 50,
+        "Yoga Class": 50
+      },
+      "vocabulary_sha256": "4411256efc40a0068690624aa881ab32f3d92c278a4f743bef140c8b97efdda7"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "5f8f64511d0ae78c629931f96fb072949de60a8e72a90a3e87f7ed1c57d97a23",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4115,
+        "completion_tokens": 673,
+        "total_tokens": 4788,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3859
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.616
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0646_qef4b0bzewo5qfffljf0sgxeelm2zcbl",
+  "extracted_at": "2026-11-22T06:43:15.350591+00:00"
+}

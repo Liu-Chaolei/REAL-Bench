@@ -1,0 +1,150 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0839_qzbbmodm59ofwuoqr78y848y1u7cdwfc",
+  "model": "deepseek-flash",
+  "input_sha256": "3d2b6f6ca365c4d09ca1ab4380a3a1d24eb4694799443654d41e04f24d02bbfb",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Zofia Kowalczyk",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "关键人名，用于冲突决策"
+        },
+        {
+          "text": "Ursula Ramseyer",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "需单独联系的人名"
+        },
+        {
+          "text": "Aurélie De Clercq",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名，含特殊字符"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b6947501-842e-4a63-bbb7-9e8b130bb12f.arguments.content",
+          "reason": "邮件签名中的独特人名"
+        }
+      ],
+      "new_terms": [
+        "Zofia Kowalczyk",
+        "Ursula Ramseyer",
+        "Aurélie De Clercq",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Zofia Kowalczyk": 50,
+        "Ursula Ramseyer": 50,
+        "Aurélie De Clercq": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "a2d6411ef6733144060f5f80401dee3a0bfd570fe6f1ff71942b67ed5052fed2"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélie De Clercq",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "邮件收件人姓名"
+        },
+        {
+          "text": "Zofia Kowalczyk",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "最终规格提供者姓名"
+        },
+        {
+          "text": "Ursula Ramseyer",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "相关联系人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Zofia Kowalczyk": 50,
+        "Ursula Ramseyer": 50,
+        "Aurélie De Clercq": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "a2d6411ef6733144060f5f80401dee3a0bfd570fe6f1ff71942b67ed5052fed2"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Zofia Kowalczyk",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "需发送更新的人名"
+        },
+        {
+          "text": "Ursula Ramseyer",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "需发送更新的人名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Zofia Kowalczyk": 50,
+        "Ursula Ramseyer": 50,
+        "Aurélie De Clercq": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "a2d6411ef6733144060f5f80401dee3a0bfd570fe6f1ff71942b67ed5052fed2"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "5b7e1edd1586d6b0d72ab17a89fcf951001777026f3a4bf5cdd319d37e249f50",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3312,
+        "completion_tokens": 356,
+        "total_tokens": 3668,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3056
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.452,
+      "error": "3 validation errors for Extraction\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "869bd1352614ce980385eec8eeff6be1192652a4e576c3faacbf90e50b1db5f8",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4206,
+        "completion_tokens": 347,
+        "total_tokens": 4553,
+        "prompt_tokens_details": {
+          "cached_tokens": 3584
+        },
+        "prompt_cache_hit_tokens": 3584,
+        "prompt_cache_miss_tokens": 622
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.633
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0839_qzbbmodm59ofwuoqr78y848y1u7cdwfc",
+  "extracted_at": "2026-11-22T06:44:08.079196+00:00"
+}

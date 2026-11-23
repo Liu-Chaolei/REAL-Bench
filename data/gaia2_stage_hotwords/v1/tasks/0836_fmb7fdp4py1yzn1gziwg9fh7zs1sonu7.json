@@ -1,0 +1,221 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0836_fmb7fdp4py1yzn1gziwg9fh7zs1sonu7",
+  "model": "deepseek-flash",
+  "input_sha256": "4286ffe7817409777ebfd590a5aba05c29f93483b13c876de5d66ba94084ddf8",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Oceanview Apartments",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-bccda3a5-cda8-4178-b553-c37c49ef2356.arguments.content",
+          "reason": "出租物业名称"
+        },
+        {
+          "text": "Lake Shore Towers",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-bccda3a5-cda8-4178-b553-c37c49ef2356.arguments.content",
+          "reason": "出租物业名称"
+        },
+        {
+          "text": "Oceanview Towers",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-bccda3a5-cda8-4178-b553-c37c49ef2356.arguments.content",
+          "reason": "出租物业名称"
+        },
+        {
+          "text": "Bayview Towers",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-bccda3a5-cda8-4178-b553-c37c49ef2356.arguments.content",
+          "reason": "出租物业名称"
+        },
+        {
+          "text": "The Lexington",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-bccda3a5-cda8-4178-b553-c37c49ef2356.arguments.content",
+          "reason": "出租物业名称"
+        },
+        {
+          "text": "Park Place",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-bccda3a5-cda8-4178-b553-c37c49ef2356.arguments.content",
+          "reason": "出租物业名称"
+        },
+        {
+          "text": "La Jolla Cove Condos",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-bccda3a5-cda8-4178-b553-c37c49ef2356.arguments.content",
+          "reason": "出租物业名称"
+        },
+        {
+          "text": "3456 SE Division St, Portland, OR 97202",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-70ef5ad1-aa55-4f05-8f80-95d90b8fd276.arguments.end_location",
+          "reason": "目的地地址"
+        }
+      ],
+      "new_terms": [
+        "Oceanview Apartments",
+        "Lake Shore Towers",
+        "Oceanview Towers",
+        "Bayview Towers",
+        "The Lexington",
+        "Park Place",
+        "La Jolla Cove Condos",
+        "3456 SE Division St, Portland, OR 97202"
+      ],
+      "active_vocabulary": {
+        "Oceanview Apartments": 50,
+        "Lake Shore Towers": 50,
+        "Oceanview Towers": 50,
+        "Bayview Towers": 50,
+        "The Lexington": 50,
+        "Park Place": 50,
+        "La Jolla Cove Condos": 50,
+        "3456 SE Division St, Portland, OR 97202": 50
+      },
+      "vocabulary_sha256": "2f7bbe4151b604e5eac974a5b1ce3573c1c5dc5b072abcf6ca0a37b8614f58b6"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Oceanview Apartments",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.kwargs.content",
+          "reason": "候选物业名称"
+        },
+        {
+          "text": "Lake Shore Towers",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.kwargs.content",
+          "reason": "候选物业名称"
+        },
+        {
+          "text": "Oceanview Towers",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.kwargs.content",
+          "reason": "候选物业名称"
+        },
+        {
+          "text": "Bayview Towers",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.kwargs.content",
+          "reason": "候选物业名称"
+        },
+        {
+          "text": "The Lexington",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.kwargs.content",
+          "reason": "候选物业名称"
+        },
+        {
+          "text": "Park Place",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.kwargs.content",
+          "reason": "候选物业名称"
+        },
+        {
+          "text": "La Jolla Cove Condos",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.kwargs.content",
+          "reason": "候选物业名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Oceanview Apartments": 50,
+        "Lake Shore Towers": 50,
+        "Oceanview Towers": 50,
+        "Bayview Towers": 50,
+        "The Lexington": 50,
+        "Park Place": 50,
+        "La Jolla Cove Condos": 50,
+        "3456 SE Division St, Portland, OR 97202": 50
+      },
+      "vocabulary_sha256": "2f7bbe4151b604e5eac974a5b1ce3573c1c5dc5b072abcf6ca0a37b8614f58b6"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Oceanview Apartments": 50,
+        "Lake Shore Towers": 50,
+        "Oceanview Towers": 50,
+        "Bayview Towers": 50,
+        "The Lexington": 50,
+        "Park Place": 50,
+        "La Jolla Cove Condos": 50,
+        "3456 SE Division St, Portland, OR 97202": 50
+      },
+      "vocabulary_sha256": "2f7bbe4151b604e5eac974a5b1ce3573c1c5dc5b072abcf6ca0a37b8614f58b6"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "0e31249d986b314a89a91368216ab05da95c3d9dd84830fd72c4bd05ea01300d",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3885,
+        "completion_tokens": 928,
+        "total_tokens": 4813,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3629
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 3.352,
+      "error": "Not an exact quotation of a source in stage 0: 'Luis Marques' from 'stage0.tool_gt.OracleEvent-AGENT-d3fc417a-c92d-49f1-a7c8-5b80a6155092.arguments.recipients[0]'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "2f827791e0e0e58b9c552f83d86dd4c5f536c2087c0bd1d9d286de4756cad65d",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5261,
+        "completion_tokens": 955,
+        "total_tokens": 6216,
+        "prompt_tokens_details": {
+          "cached_tokens": 4736
+        },
+        "prompt_cache_hit_tokens": 4736,
+        "prompt_cache_miss_tokens": 525
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.823,
+      "error": "Invalid proper-name phrase: 'luis.marques.tours@gaia2mail.com'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "09ea36c743f878a8fdb6940ddbf7d20ee968811fd17be895b365d1cfd75b4e30",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5243,
+        "completion_tokens": 754,
+        "total_tokens": 5997,
+        "prompt_tokens_details": {
+          "cached_tokens": 3840
+        },
+        "prompt_cache_hit_tokens": 3840,
+        "prompt_cache_miss_tokens": 1403
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.411
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0836_fmb7fdp4py1yzn1gziwg9fh7zs1sonu7",
+  "extracted_at": "2026-11-22T06:44:15.030107+00:00"
+}

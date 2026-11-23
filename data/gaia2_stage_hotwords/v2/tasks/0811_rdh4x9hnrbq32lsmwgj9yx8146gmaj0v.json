@@ -1,0 +1,131 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0811_rdh4x9hnrbq32lsmwgj9yx8146gmaj0v",
+  "model": "deepseek-flash",
+  "input_sha256": "87bc3755bf22e252f2d531a0dc7434455e2f3fdc47b5d17640a31d0dfe1bdfd5",
+  "review_input_sha256": "940c2b7c8afc01faef251f4e37b552eb6ccdd3ead24bd2923520d5ca704095d4",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "fd846fd382e0a9dff174f8fd3c14a411c34facfc846ae09183c9acf2f14d0242",
+  "reference_results_sha256": "6e0941cb35b5a6445542afc6110bbdd6c26f0e907f52fd59aab235368ea3f26e",
+  "sources": {
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Herrington Woods",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-09814b2c-684f-4269-b277-3855ebe84590.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Breckenridge Station",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-8f56c018-b548-4c4e-b974-fc6174df9052.arguments.content"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Turnberry Estates",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-c00a5583-3182-473c-a0af-f3032b1b2bd4.arguments.content"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Leuven Luxury",
+      "original_source": "stage2.tool_gt.series_s2_msg.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Breckenridge Station",
+          "kind": "place",
+          "source": "stage0.existing_catalog.3",
+          "reason": "独特的地产/社区专名，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Herrington Woods",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "独特的地产/社区专名，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Turnberry Estates",
+          "kind": "place",
+          "source": "stage0.existing_catalog.5",
+          "reason": "独特的地产/社区专名，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Breckenridge Station",
+        "Herrington Woods",
+        "Turnberry Estates"
+      ],
+      "active_vocabulary": {
+        "Breckenridge Station": 50,
+        "Herrington Woods": 50,
+        "Turnberry Estates": 50
+      },
+      "vocabulary_sha256": "35f5b83a5374df6597a0448497caf7d22c279a0fbe21147e9a79f416751f47b5"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Breckenridge Station": 50,
+        "Herrington Woods": 50,
+        "Turnberry Estates": 50
+      },
+      "vocabulary_sha256": "35f5b83a5374df6597a0448497caf7d22c279a0fbe21147e9a79f416751f47b5"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Leuven Luxury",
+          "kind": "organization",
+          "source": "stage2.existing_catalog.1",
+          "reason": "独特的品牌/机构专名，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Leuven Luxury"
+      ],
+      "active_vocabulary": {
+        "Breckenridge Station": 50,
+        "Herrington Woods": 50,
+        "Turnberry Estates": 50,
+        "Leuven Luxury": 50
+      },
+      "vocabulary_sha256": "5d26322503e1ca31fde17487539302c9c4e90f34f8cf1e38e4953a08d8e01866"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Linnea",
+    "The Preserve",
+    "The Avalon",
+    "Leuven"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:25.140533+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

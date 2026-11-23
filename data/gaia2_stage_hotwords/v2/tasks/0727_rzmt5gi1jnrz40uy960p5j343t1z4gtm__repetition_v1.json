@@ -1,0 +1,160 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0727_rzmt5gi1jnrz40uy960p5j343t1z4gtm__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "f6f2331e6393f6cbca62a132c4d7cb7a2e5b7be9b462e677d3c25b6b7f20e7f2",
+  "review_input_sha256": "8201c458d5fbe96aaa70859ee05bef9066fe400406c9afc027bd6f68ab1463ec",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "ecb4e9b587880f5fb74bae7c67a0bb96545ddebbd683630c99e76e57c462b1a5",
+  "reference_results_sha256": "618a398e9e02f2a31890cd2eeb4c440c915492bbd614ad1b0bde97981b1c348d",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Viktor Kuznetsov",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Natalya Kuznetsova",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Yamaha C40 GigMaker Classical Acoustic Guitar Package",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Sheremetyevo International Airport",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-8bbed51f-0469-46d1-853b-4abe70fd4212.arguments.location"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Moscow Music Museum",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Ulitsa Bolshaya Dmitrovka, 15/1",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Yamaha C40 GigMaker Classical Acoustic Guitar Package",
+          "kind": "product",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含品牌与型号的完整产品名",
+          "weight": 50
+        },
+        {
+          "text": "Sheremetyevo International Airport",
+          "kind": "place",
+          "source": "stage0.existing_catalog.3",
+          "reason": "难拼写的机场专名",
+          "weight": 50
+        },
+        {
+          "text": "Natalya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整俄语人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整俄语人名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Yamaha C40 GigMaker Classical Acoustic Guitar Package",
+        "Sheremetyevo International Airport",
+        "Natalya Kuznetsova",
+        "Viktor Kuznetsov"
+      ],
+      "active_vocabulary": {
+        "Yamaha C40 GigMaker Classical Acoustic Guitar Package": 50,
+        "Sheremetyevo International Airport": 50,
+        "Natalya Kuznetsova": 50,
+        "Viktor Kuznetsov": 50
+      },
+      "vocabulary_sha256": "45c8bebc249d204b34eb70bde505360c01bc0166117b2a9878a520a5c5f6f2be"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Yamaha C40 GigMaker Classical Acoustic Guitar Package": 50,
+        "Sheremetyevo International Airport": 50,
+        "Natalya Kuznetsova": 50,
+        "Viktor Kuznetsov": 50
+      },
+      "vocabulary_sha256": "45c8bebc249d204b34eb70bde505360c01bc0166117b2a9878a520a5c5f6f2be"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Ulitsa Bolshaya Dmitrovka, 15/1",
+          "kind": "place",
+          "source": "stage2.existing_catalog.1",
+          "reason": "难拼写的俄语街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Moscow Music Museum",
+          "kind": "organization",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整机构专名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Ulitsa Bolshaya Dmitrovka, 15/1",
+        "Moscow Music Museum"
+      ],
+      "active_vocabulary": {
+        "Yamaha C40 GigMaker Classical Acoustic Guitar Package": 50,
+        "Sheremetyevo International Airport": 50,
+        "Natalya Kuznetsova": 50,
+        "Viktor Kuznetsov": 50,
+        "Ulitsa Bolshaya Dmitrovka, 15/1": 50,
+        "Moscow Music Museum": 50
+      },
+      "vocabulary_sha256": "25d5e9e9e80b1194f54ed7d67250e802ec9fe9ad2875116d4664f22050c28848"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Viktor",
+    "Natalya",
+    "Yamaha"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:37.536775+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

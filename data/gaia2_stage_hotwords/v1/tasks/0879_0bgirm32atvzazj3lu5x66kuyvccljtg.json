@@ -1,0 +1,154 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0879_0bgirm32atvzazj3lu5x66kuyvccljtg",
+  "model": "deepseek-flash",
+  "input_sha256": "680468e5e3d577cdb331a805f73dfcfe68c6102e09bad7d10112727c9f03a698",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Rubie's",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "品牌名，需保留撇号"
+        },
+        {
+          "text": "Ghostbusters",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "产品系列专名"
+        },
+        {
+          "text": "Espoo",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "芬兰城市名"
+        }
+      ],
+      "new_terms": [
+        "Rubie's",
+        "Ghostbusters",
+        "Espoo"
+      ],
+      "active_vocabulary": {
+        "Rubie's": 50,
+        "Ghostbusters": 50,
+        "Espoo": 50
+      },
+      "vocabulary_sha256": "8708b6e71a69acb0dd85598693d5ca763630af177b103f94940895e55dbb1c97"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Rubie's",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_send_final.arguments.content",
+          "reason": "品牌名，需保留撇号"
+        },
+        {
+          "text": "Ghostbusters",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_send_final.arguments.content",
+          "reason": "产品系列专名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Rubie's": 50,
+        "Ghostbusters": 50,
+        "Espoo": 50
+      },
+      "vocabulary_sha256": "8708b6e71a69acb0dd85598693d5ca763630af177b103f94940895e55dbb1c97"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Rubie's",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_send_receipt.arguments.content",
+          "reason": "品牌名，需保留撇号"
+        },
+        {
+          "text": "Ghostbusters",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_send_receipt.arguments.content",
+          "reason": "产品系列专名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Rubie's": 50,
+        "Ghostbusters": 50,
+        "Espoo": 50
+      },
+      "vocabulary_sha256": "8708b6e71a69acb0dd85598693d5ca763630af177b103f94940895e55dbb1c97"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "25424732b3b647c56b6d9303566a3cc9dd83ed9b736489af8a01458525034940",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2420,
+        "completion_tokens": 264,
+        "total_tokens": 2684,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2164
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.141,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "17df3d7ae3f8e260d13697df96f155bca47b77ceeffe9405855f1d320a21e584",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3077,
+        "completion_tokens": 266,
+        "total_tokens": 3343,
+        "prompt_tokens_details": {
+          "cached_tokens": 2560
+        },
+        "prompt_cache_hit_tokens": 2560,
+        "prompt_cache_miss_tokens": 517
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.016,
+      "error": "3 validation errors for Extraction\nstages.0.terms.0.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nstages.1.terms.0.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nstages.2.terms.0.kind\n  Input should be 'person', 'place', 'organization', 'product', 'technical_term' or 'custom_name' [type=literal_error, input_value='brand', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "30056097d89569ee528d519a4668f4588ecabcc187ea686b51843ea789ae6445",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3293,
+        "completion_tokens": 266,
+        "total_tokens": 3559,
+        "prompt_tokens_details": {
+          "cached_tokens": 2304
+        },
+        "prompt_cache_hit_tokens": 2304,
+        "prompt_cache_miss_tokens": 989
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.018
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0879_0bgirm32atvzazj3lu5x66kuyvccljtg",
+  "extracted_at": "2026-11-22T06:44:23.111284+00:00"
+}

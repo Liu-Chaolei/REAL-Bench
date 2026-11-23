@@ -1,0 +1,211 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0615_jm4ojcw236ntst78utcy7lbavn40o141__async_0065_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "f5b73d12b543a0a23b5fa700123b5ccce25543e97214f40895ddea5f10f62209",
+  "review_input_sha256": "df768c047955d71798d75c7b88801d0e080a899d752f9ac1ff86e734dd842a10",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "08387712ed472559f5492645e75ecd9fb792ab620f203dda7dd771df35342b42",
+  "reference_results_sha256": "cafbd3667336dc11408b140b3f6a5846017844dad0612d4d0f35b2655506b116",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Vesterbro Haven",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Stijn Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-3ac8afd2-c633-4de2-b6d2-ac334819e316.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Thanakorn Srisombat",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-3ac8afd2-c633-4de2-b6d2-ac334819e316.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Astrid Kjær",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-6f584907-952c-4290-b8a3-b9b5725e0e39.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Kirsten Ravnkilde",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-6f584907-952c-4290-b8a3-b9b5725e0e39.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "Søren Kjær",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-c21ff2d1-6de5-4b24-92b2-708309e04c49.arguments.content"
+    },
+    "stage0.existing_catalog.9": {
+      "stage": 0,
+      "text": "Vesterbrogade 42, Copenhagen",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-db0208a3-f0e9-47ab-a219-fac4eafe0ee5.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Astrid Kjærsgaard",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Birgitta Kjær",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Vesterbrogade 42, Copenhagen",
+          "kind": "place",
+          "source": "stage0.existing_catalog.9",
+          "reason": "distinctive street address",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Kjær",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "full name with diacritic æ",
+          "weight": 50
+        },
+        {
+          "text": "Kirsten Ravnkilde",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "distinctive Danish surname",
+          "weight": 50
+        },
+        {
+          "text": "Stijn Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "difficult foreign full name",
+          "weight": 50
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage0.existing_catalog.6",
+          "reason": "full name with diacritic ø and æ",
+          "weight": 50
+        },
+        {
+          "text": "Thanakorn Srisombat",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "difficult Thai full name",
+          "weight": 50
+        },
+        {
+          "text": "Vesterbro Haven",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "distinctive place name",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Vesterbrogade 42, Copenhagen",
+        "Astrid Kjær",
+        "Kirsten Ravnkilde",
+        "Stijn Vandenberghe",
+        "Søren Kjær",
+        "Thanakorn Srisombat",
+        "Vesterbro Haven"
+      ],
+      "active_vocabulary": {
+        "Vesterbrogade 42, Copenhagen": 50,
+        "Astrid Kjær": 50,
+        "Kirsten Ravnkilde": 50,
+        "Stijn Vandenberghe": 50,
+        "Søren Kjær": 50,
+        "Thanakorn Srisombat": 50,
+        "Vesterbro Haven": 50
+      },
+      "vocabulary_sha256": "a08099c2cbda8ed6aecfa0c75d3756293dee7c304ef97a148c7921ff24e27aa5"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Astrid Kjærsgaard",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "full name with diacritic æ",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Kjærsgaard"
+      ],
+      "active_vocabulary": {
+        "Vesterbrogade 42, Copenhagen": 50,
+        "Astrid Kjær": 50,
+        "Kirsten Ravnkilde": 50,
+        "Stijn Vandenberghe": 50,
+        "Søren Kjær": 50,
+        "Thanakorn Srisombat": 50,
+        "Vesterbro Haven": 50,
+        "Astrid Kjærsgaard": 50
+      },
+      "vocabulary_sha256": "be42def3dc67a6e38454b2b17f008c5efa3d4897a0d5d67dd58adc6a77a1eb85"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Birgitta Kjær",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "full name with diacritic æ",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Birgitta Kjær"
+      ],
+      "active_vocabulary": {
+        "Vesterbrogade 42, Copenhagen": 50,
+        "Astrid Kjær": 50,
+        "Kirsten Ravnkilde": 50,
+        "Stijn Vandenberghe": 50,
+        "Søren Kjær": 50,
+        "Thanakorn Srisombat": 50,
+        "Vesterbro Haven": 50,
+        "Astrid Kjærsgaard": 50,
+        "Birgitta Kjær": 50
+      },
+      "vocabulary_sha256": "c2bc39c3e6713647385c941f818a1d48e38cbe15b3968e9b4da263e435423ca7"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Nonglak",
+    "Viggo",
+    "Birgitta"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:20:03.674462+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

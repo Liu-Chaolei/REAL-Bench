@@ -1,0 +1,110 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0053_aanknwl7oew08yda60lfw6ii37zmbn27__async_0023_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "ef26d8338e020ad3a33da21b835c19d2846c8b92cf42c84a0aaf89b2d8a36c22",
+  "review_input_sha256": "b3d47bf100f2632801ee7ddf49b11e880b2de8011e64255c70b92a1c9380cae4",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "430c25cd51fe68925743fa92314c3caef33fe5bb8e4aea2e496eccf75470073b",
+  "reference_results_sha256": "003d19dd36b8578892da342bc3272a1a5701871fe6e30d2a8d3270271bcecbb2",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Beatriz Silva",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.tool_response.series_s1_original": {
+      "stage": 1,
+      "text": "{\"messages\": [{\"sender_id\": \"4a9702a2-0c98-459e-93e0-ff4b01fac807\", \"message_id\": \"815a70b14f3944adb3e9384660deaf93\", \"timestamp\": \"1728975601.0\", \"content\": \"Long time no see! Remember this?\", \"attachment\": \"[binary attachment omitted]\", \"attachment_name\": \"Portugal_2019.jpg\"}, {\"sender_id\": \"78f44bc8-d2c5-4494-8f0c-210f342de09f\", \"message_id\": \"caeccf7699814379b6c48aa6d435cdae\", \"timestamp\": \"1724686500\", \"content\": \"Sounds perfect! I'll start looking into flights. Thanks for catching up with me, Aurélien. It's always great talking to you.\"}, {\"sender_id\": \"4a9702a2-0c98-459e-93e0-ff4b01fac807\", \"message_id\": \"27f8dc7ad7c64e30a55354b12087695f\", \"timestamp\": \"1724685900\", \"content\": \"That sounds like a plan! I'd love to show you around the city and take you to some of my favorite wine spots. We can make it happen soon.\"}, {\"sender_id\": \"78f44bc8-d2c5-4494-8f0c-210f342de09f\", \"message_id\": \"a42f6870fe4a4580ba8ff8bcac5917b0\", \"timestamp\": \"1724685300\", \"content\": \"No way! I hadn't heard about that. You'll have to let me know what you think of it. Maybe we can even plan a trip for me to come visit you in NYC soon?\"}, {\"sender_id\": \"4a9702a2-0c98-459e-93e0-ff4b01fac807\", \"message_id\": \"7cce881f54184f438754ca6970911e2f\", \"timestamp\": \"1724684700\", \"content\": \"Mmm, bacalhau à brás is one of my favorites too! I'm definitely craving it now. By the way, have you heard about the new Portuguese restaurant that just opened up in NYC? I've been meaning to check it out.\"}, {\"sender_id\": \"78f44bc8-d2c5-4494-8f0c-210f342de09f\", \"message_id\": \"598dcac7cb0a47fb8cf01c87a9550757\", \"timestamp\": \"1724684100\", \"content\": \"Aw, thanks for asking! My mom is doing great, still cooking up a storm in the kitchen. She actually just made a big batch of bacalhau à brás for my birthday last week. You know how much I love that dish!\"}, {\"sender_id\": \"4a9702a2-0c98-459e-93e0-ff4b01fac807\", \"message_id\": \"6e5086c9bff6475283eb70fed943e83a\", \"timestamp\": \"1724683500\", \"content\": \"Will do! So, what's new with your family? How's your mom doing? I always loved her cooking when I visited Lisbon.\"}, {\"sender_id\": \"78f44bc8-d2c5-4494-8f0c-210f342de09f\", \"message_id\": \"0e37a5151ae245d88124f929b3285f69\", \"timestamp\": \"1724682900\", \"content\": \"Haha, yeah, I've been trying to learn more about wine, but it's hard when you're surrounded by all these amazing Portuguese wines and you don't know where to start! Please do send me some recs, I'd love to learn from a pro like you.\"}, {\"sender_id\": \"4a9702a2-0c98-459e-93e0-ff4b01fac807\", \"message_id\": \"207551d842784047a8c1d1358c72cd81\", \"timestamp\": \"1724682300\", \"content\": \"Porto, eh? I've heard great things about the wine region there. Speaking of which, how's your wine knowledge coming along? I've been meaning to send you some wine recommendations.\"}, {\"sender_id\": \"78f44bc8-d2c5-4494-8f0c-210f342de09f\", \"message_id\": \"3966ecf631f54b978b8cbbe3c3b12dfd\", \"timestamp\": \"1724681700\", \"content\": \"Aurélien! It's so great to hear from you! Life in Lisbon is good, can't complain. Work is keeping me busy, but I did just get back from an amazing weekend in Porto. You should totally come visit soon!\"}], \"metadata\": {\"message_range\": [\"0\", \"10\"], \"conversation_length\": \"11\", \"conversation_id\": \"72ab6ec4c97a4d86835d5171c7f61ef6\", \"conversation_title\": \"Beatriz Silva\"}}",
+      "event_id": "series_s1_original",
+      "response_sha256": "b72db8ece54f6ff590d814786ca397cada68b56232d8052e16b51d11e1bae349"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Beatriz Silva",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，已有目录候选",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_original",
+          "reason": "含变音符号的困难人名，出现在对话中",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Beatriz Silva",
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Beatriz Silva": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "cdb7f9a394afe7b8f75ce9bbba0c1466e5b20f08af40e0c1624eb756e6257a07"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Beatriz Silva": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "cdb7f9a394afe7b8f75ce9bbba0c1466e5b20f08af40e0c1624eb756e6257a07"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Portugal",
+    "Canada",
+    "Czech_Republic",
+    "Jordan",
+    "Kenya",
+    "Morocco"
+  ],
+  "binary_omissions": [
+    {
+      "path": "$ .messages[0].attachment",
+      "chars": 3217320,
+      "sha256": "dd80d4b3a2fa0fba8e843ebce2d4c2bdd800f13529c74187703d0f01ae711b3f"
+    },
+    {
+      "path": "$ .messages[1].attachment",
+      "chars": 3217320,
+      "sha256": "dd80d4b3a2fa0fba8e843ebce2d4c2bdd800f13529c74187703d0f01ae711b3f"
+    }
+  ],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:46.033484+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

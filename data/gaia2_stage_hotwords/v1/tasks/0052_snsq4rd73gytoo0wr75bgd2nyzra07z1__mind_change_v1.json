@@ -1,0 +1,143 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0052_snsq4rd73gytoo0wr75bgd2nyzra07z1__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "1335eb29bd788328dab67d1084250a520963c768b726498e3288e6cca1f69f6a",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Émile",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-af2c0298-4698-4344-a799-761eee5651da.arguments.content",
+          "reason": "收件人名字，含特殊字符"
+        },
+        {
+          "text": "Elara",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ac421119-c7de-480e-a5f7-ae32bb09b430.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Liesbeth",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-af2c0298-4698-4344-a799-761eee5651da.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Mechelen Mansion",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-af2c0298-4698-4344-a799-761eee5651da.arguments.content",
+          "reason": "房产专有名称"
+        },
+        {
+          "text": "Mechelen Maison",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-af2c0298-4698-4344-a799-761eee5651da.arguments.content",
+          "reason": "房产专有名称"
+        }
+      ],
+      "new_terms": [
+        "Émile",
+        "Elara",
+        "Liesbeth",
+        "Mechelen Mansion",
+        "Mechelen Maison"
+      ],
+      "active_vocabulary": {
+        "Émile": 50,
+        "Elara": 50,
+        "Liesbeth": 50,
+        "Mechelen Mansion": 50,
+        "Mechelen Maison": 50
+      },
+      "vocabulary_sha256": "0b8e7e5c20205c88f8f3795b94f01b612af9add850cdd1fb7b353b06e8c7b44f"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Mechelen Mansion",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "房产专有名称"
+        },
+        {
+          "text": "Mechelen Maison",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "房产专有名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Émile": 50,
+        "Elara": 50,
+        "Liesbeth": 50,
+        "Mechelen Mansion": 50,
+        "Mechelen Maison": 50
+      },
+      "vocabulary_sha256": "0b8e7e5c20205c88f8f3795b94f01b612af9add850cdd1fb7b353b06e8c7b44f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Mechelen Mansion",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房产专有名称"
+        },
+        {
+          "text": "Mechelen Maison",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房产专有名称"
+        },
+        {
+          "text": "Mechelen Modern",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房产专有名称"
+        }
+      ],
+      "new_terms": [
+        "Mechelen Modern"
+      ],
+      "active_vocabulary": {
+        "Émile": 50,
+        "Elara": 50,
+        "Liesbeth": 50,
+        "Mechelen Mansion": 50,
+        "Mechelen Maison": 50,
+        "Mechelen Modern": 50
+      },
+      "vocabulary_sha256": "867c469b32c0bf691c695b6132c0648d4b0a8f87e332fcd6c1a219a8a5344801"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "feb54866faa7e0f872230b56fba4ed26d364902cb39065af611a960a8d157521",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2762,
+        "completion_tokens": 450,
+        "total_tokens": 3212,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2506
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.601
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0052_snsq4rd73gytoo0wr75bgd2nyzra07z1__mind_change_v1",
+  "extracted_at": "2026-11-22T06:44:55.654599+00:00"
+}

@@ -1,0 +1,287 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0368_71ga6g2c6igrl2m4y1hls2ivk2fze31v",
+  "model": "deepseek-flash",
+  "input_sha256": "89e75aa6e346b763db9e4fe4803b7795d2aa01602b8a4f8ec8d862558e2d5796",
+  "review_input_sha256": "031be0bfc87c5b44016ddff86b2cd237894681fba14b6737dd5f60fc42429535",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "c60fdc198ac7df07f2be134ecfee9b4924afaae15114b6f1aacd10f767f8f49a",
+  "reference_results_sha256": "e1a150db7be99695b8511da6dcc00a7ac27fb437226be385cd219c342f597be8",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Kazan River View",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Kremlyovskaya Street",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.10": {
+      "stage": 1,
+      "text": "Volga Dreams",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.11": {
+      "stage": 1,
+      "text": "Kazan Pearl",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Kazan City Center",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Kazan Oasis",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.5": {
+      "stage": 1,
+      "text": "Samara Riverside",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.6": {
+      "stage": 1,
+      "text": "Kazan Kremlin Apartments",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.7": {
+      "stage": 1,
+      "text": "Kazan Kremlin Suites",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.8": {
+      "stage": 1,
+      "text": "Moscow River Apartments",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Kazanskaya Street",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Nizhny Novgorod View",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.3": {
+      "stage": 2,
+      "text": "Nizhny Novgorod Suites",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.4": {
+      "stage": 2,
+      "text": "Krasnodar City Living",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.5": {
+      "stage": 2,
+      "text": "Samara City Apartments",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kazan City Center",
+          "kind": "place",
+          "source": "stage1.existing_catalog.3",
+          "reason": "含专有地名的完整地点名称",
+          "weight": 50
+        },
+        {
+          "text": "Kazan Kremlin Apartments",
+          "kind": "place",
+          "source": "stage1.existing_catalog.6",
+          "reason": "含专有地名与建筑名的完整名称",
+          "weight": 50
+        },
+        {
+          "text": "Kazan Kremlin Suites",
+          "kind": "place",
+          "source": "stage1.existing_catalog.7",
+          "reason": "含专有地名与建筑名的完整名称",
+          "weight": 50
+        },
+        {
+          "text": "Kazan River View",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含专有地名的完整住宿名称",
+          "weight": 50
+        },
+        {
+          "text": "Moscow River Apartments",
+          "kind": "place",
+          "source": "stage1.existing_catalog.8",
+          "reason": "含专有地名的完整名称",
+          "weight": 50
+        },
+        {
+          "text": "Kazan Oasis",
+          "kind": "place",
+          "source": "stage1.existing_catalog.4",
+          "reason": "含专有地名的完整名称",
+          "weight": 50
+        },
+        {
+          "text": "Kazan Pearl",
+          "kind": "place",
+          "source": "stage1.existing_catalog.11",
+          "reason": "含专有地名的完整名称",
+          "weight": 50
+        },
+        {
+          "text": "Kremlyovskaya Street",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含俄语转写专有街道名，发音较难",
+          "weight": 50
+        },
+        {
+          "text": "Samara Riverside",
+          "kind": "place",
+          "source": "stage1.existing_catalog.5",
+          "reason": "含专有地名的完整名称",
+          "weight": 50
+        },
+        {
+          "text": "Volga Dreams",
+          "kind": "place",
+          "source": "stage1.existing_catalog.10",
+          "reason": "含专有河名的完整名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kazan City Center",
+        "Kazan Kremlin Apartments",
+        "Kazan Kremlin Suites",
+        "Kazan River View",
+        "Moscow River Apartments",
+        "Kazan Oasis",
+        "Kazan Pearl",
+        "Kremlyovskaya Street",
+        "Samara Riverside",
+        "Volga Dreams"
+      ],
+      "active_vocabulary": {
+        "Kazan City Center": 50,
+        "Kazan Kremlin Apartments": 50,
+        "Kazan Kremlin Suites": 50,
+        "Kazan River View": 50,
+        "Moscow River Apartments": 50,
+        "Kazan Oasis": 50,
+        "Kazan Pearl": 50,
+        "Kremlyovskaya Street": 50,
+        "Samara Riverside": 50,
+        "Volga Dreams": 50
+      },
+      "vocabulary_sha256": "51201729da4854254dec299d94ef0188c01a281b2a772f8db8ec58149fad0280"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Krasnodar City Living",
+          "kind": "place",
+          "source": "stage2.existing_catalog.4",
+          "reason": "含专有城市名的完整名称",
+          "weight": 50
+        },
+        {
+          "text": "Nizhny Novgorod Suites",
+          "kind": "place",
+          "source": "stage2.existing_catalog.3",
+          "reason": "含难读专有城市名的完整名称",
+          "weight": 50
+        },
+        {
+          "text": "Nizhny Novgorod View",
+          "kind": "place",
+          "source": "stage2.existing_catalog.2",
+          "reason": "含难读专有城市名的完整名称",
+          "weight": 50
+        },
+        {
+          "text": "Samara City Apartments",
+          "kind": "place",
+          "source": "stage2.existing_catalog.5",
+          "reason": "含专有城市名的完整名称",
+          "weight": 50
+        },
+        {
+          "text": "Kazanskaya Street",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含俄语转写专有街道名，发音较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Krasnodar City Living",
+        "Nizhny Novgorod Suites",
+        "Nizhny Novgorod View",
+        "Samara City Apartments",
+        "Kazanskaya Street"
+      ],
+      "active_vocabulary": {
+        "Kazan City Center": 50,
+        "Kazan Kremlin Apartments": 50,
+        "Kazan Kremlin Suites": 50,
+        "Kazan River View": 50,
+        "Moscow River Apartments": 50,
+        "Kazan Oasis": 50,
+        "Kazan Pearl": 50,
+        "Kremlyovskaya Street": 50,
+        "Samara Riverside": 50,
+        "Volga Dreams": 50,
+        "Krasnodar City Living": 50,
+        "Nizhny Novgorod Suites": 50,
+        "Nizhny Novgorod View": 50,
+        "Samara City Apartments": 50,
+        "Kazanskaya Street": 50
+      },
+      "vocabulary_sha256": "c849608c21d0fa74b5115b9366324ef44f3e648fc50d7cae82808f9404dba438"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kazan",
+    "Moscow Modern",
+    "Bauman St, 43"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:25.055613+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

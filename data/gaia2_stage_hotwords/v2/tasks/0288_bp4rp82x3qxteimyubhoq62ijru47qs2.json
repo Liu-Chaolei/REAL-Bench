@@ -1,0 +1,123 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0288_bp4rp82x3qxteimyubhoq62ijru47qs2",
+  "model": "deepseek-flash",
+  "input_sha256": "726db29a0d72913b4ea059877c11f3202b41d62368f3ac8a6392aa99827ed6bf",
+  "review_input_sha256": "0ea0e0f6719a6ece99e385f5180d202ab4d5078c621718d106b3e468c648c8b5",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "54a2c12b8e1612e05f37e033536530db44743b5033ebd702fe630fb792dbe3eb",
+  "reference_results_sha256": "cf88f42be118a2a33d2aedcba292172610422b0e5edb8eeb4172aa9ec85b6906",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Åsa Lindgren",
+      "original_source": "stage1.tool_gt.series_s1_add_asa.arguments.attendees[1]"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "João Pereira",
+      "original_source": "stage1.tool_gt.series_s1_add_joao.arguments.attendees[1]"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Astrid Lundqvist",
+      "original_source": "stage1.tool_gt.series_s1_add_asa.arguments.attendees[0]"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Café Östermalms",
+      "original_source": "stage1.tool_gt.series_s1_add_asa.arguments.location"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "较难拼写的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Café Östermalms",
+          "kind": "place",
+          "source": "stage1.existing_catalog.3",
+          "reason": "含变音符号的独特场所名",
+          "weight": 50
+        },
+        {
+          "text": "João Pereira",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含葡萄牙语变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Åsa Lindgren",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含瑞典语变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Lundqvist",
+        "Café Östermalms",
+        "João Pereira",
+        "Åsa Lindgren"
+      ],
+      "active_vocabulary": {
+        "Astrid Lundqvist": 50,
+        "Café Östermalms": 50,
+        "João Pereira": 50,
+        "Åsa Lindgren": 50
+      },
+      "vocabulary_sha256": "6584036fc3ca057e9e79a937c4e4d93889de390fcb4aa033276456358e31a5c7"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid Lundqvist": 50,
+        "Café Östermalms": 50,
+        "João Pereira": 50,
+        "Åsa Lindgren": 50
+      },
+      "vocabulary_sha256": "6584036fc3ca057e9e79a937c4e4d93889de390fcb4aa033276456358e31a5c7"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Engagement and Outreach"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:57.574805+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

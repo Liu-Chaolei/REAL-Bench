@@ -1,0 +1,113 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0247_c16x4txva9r4t61yspma0fw98js66kx3",
+  "model": "deepseek-flash",
+  "input_sha256": "41e0e214381f398b6d900692bfb6133da50ee09dcc6c444855a928500033feca",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Jianyu Liang",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人姓名"
+        }
+      ],
+      "new_terms": [
+        "Jianyu Liang"
+      ],
+      "active_vocabulary": {
+        "Jianyu Liang": 50
+      },
+      "vocabulary_sha256": "8d9aa57f5c3e89284014d93a6d4c17146b5a836a810d5a8e534ebd84cba7d8d5"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Jianyu Liang",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "联系人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Jianyu Liang": 50
+      },
+      "vocabulary_sha256": "8d9aa57f5c3e89284014d93a6d4c17146b5a836a810d5a8e534ebd84cba7d8d5"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "e934fe64b3d4622ef0973d7ac3dec6a029432b7cc0e163232786453345a7d5af",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1516,
+        "completion_tokens": 207,
+        "total_tokens": 1723,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1260
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.049,
+      "error": "6 validation errors for Extraction\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage0.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage1.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='包含人名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage2.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='包含人名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "20ec4cd24b34e162d7b3a2d431892cb725e2d5c5c0205813a4d2b1ab106dce06",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2434,
+        "completion_tokens": 168,
+        "total_tokens": 2602,
+        "prompt_tokens_details": {
+          "cached_tokens": 1664
+        },
+        "prompt_cache_hit_tokens": 1664,
+        "prompt_cache_miss_tokens": 770
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 0.8,
+      "error": "Invalid proper-name phrase: 'jianyu.liang@fudan.edu.cn'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "2f2674713ebfbe549d632e52ba5bbcaaaf94c2add5e98277201b8e10bcf98297",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2085,
+        "completion_tokens": 78,
+        "total_tokens": 2163,
+        "prompt_tokens_details": {
+          "cached_tokens": 1408
+        },
+        "prompt_cache_hit_tokens": 1408,
+        "prompt_cache_miss_tokens": 677
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.602
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0247_c16x4txva9r4t61yspma0fw98js66kx3",
+  "extracted_at": "2026-11-22T06:40:59.139164+00:00"
+}

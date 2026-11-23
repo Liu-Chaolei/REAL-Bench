@@ -1,0 +1,207 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0406_m5kptomc8qot72ii5in4jpouyg2cszuq",
+  "model": "deepseek-flash",
+  "input_sha256": "9763b57a89d9cfa6cc485dc7119d9f42945eb18e8898d90a3555e7666dd12a07",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Akua Nkrumah",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "最年轻发件人姓名"
+        },
+        {
+          "text": "Leïla Vandenberghe",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "最年轻发件人姓名"
+        },
+        {
+          "text": "Aurélie Joensen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "最年轻发件人姓名"
+        },
+        {
+          "text": "Seeking Insights — Early-Career Researchers",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_create.arguments.title",
+          "reason": "群聊自定义名称"
+        },
+        {
+          "text": "Akua",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "问候中的名字"
+        },
+        {
+          "text": "Leïla",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "问候中的名字"
+        },
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "问候中的名字"
+        },
+        {
+          "text": "Battle of Narva",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "历史战役名称"
+        },
+        {
+          "text": "Great Northern War",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "历史战争名称"
+        },
+        {
+          "text": "Ursula",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "署名人名"
+        }
+      ],
+      "new_terms": [
+        "Akua Nkrumah",
+        "Leïla Vandenberghe",
+        "Aurélie Joensen",
+        "Seeking Insights — Early-Career Researchers",
+        "Akua",
+        "Leïla",
+        "Aurélie",
+        "Battle of Narva",
+        "Great Northern War",
+        "Ursula"
+      ],
+      "active_vocabulary": {
+        "Akua Nkrumah": 50,
+        "Leïla Vandenberghe": 50,
+        "Aurélie Joensen": 50,
+        "Seeking Insights — Early-Career Researchers": 50,
+        "Akua": 50,
+        "Leïla": 50,
+        "Aurélie": 50,
+        "Battle of Narva": 50,
+        "Great Northern War": 50,
+        "Ursula": 50
+      },
+      "vocabulary_sha256": "d13407f297947d399967923d84f49f351235f80b47d0818739220a8336cdeeea"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Akua Nkrumah": 50,
+        "Leïla Vandenberghe": 50,
+        "Aurélie Joensen": 50,
+        "Seeking Insights — Early-Career Researchers": 50,
+        "Akua": 50,
+        "Leïla": 50,
+        "Aurélie": 50,
+        "Battle of Narva": 50,
+        "Great Northern War": 50,
+        "Ursula": 50
+      },
+      "vocabulary_sha256": "d13407f297947d399967923d84f49f351235f80b47d0818739220a8336cdeeea"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "f1b90cec896a1ff25cf83e092661a412d0f59d573ae7d61b295e1916c7a67e05",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1422,
+        "completion_tokens": 445,
+        "total_tokens": 1867,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1166
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.782,
+      "error": "3 validation errors for Extraction\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "e604f5a47716629faf0725ab1517ff5e935b00e243add43cdf20ef671088a753",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2419,
+        "completion_tokens": 438,
+        "total_tokens": 2857,
+        "prompt_tokens_details": {
+          "cached_tokens": 1536
+        },
+        "prompt_cache_hit_tokens": 1536,
+        "prompt_cache_miss_tokens": 883
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.84,
+      "error": "2 validation errors for Extraction\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "19dffd78b8d30334aec26db2757034cb42064a4e32f59cf50bee10140ff68389",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2356,
+        "completion_tokens": 426,
+        "total_tokens": 2782,
+        "prompt_tokens_details": {
+          "cached_tokens": 1408
+        },
+        "prompt_cache_hit_tokens": 1408,
+        "prompt_cache_miss_tokens": 948
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.616,
+      "error": "Invalid proper-name phrase: 'rohini.deshpande@gaia2mail.com'"
+    },
+    {
+      "attempt": 4,
+      "request_sha256": "1032e1730c11683f64d071ef58bddcd5e0da6459c0628e7064040b2644ca0e78",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2251,
+        "completion_tokens": 376,
+        "total_tokens": 2627,
+        "prompt_tokens_details": {
+          "cached_tokens": 1536
+        },
+        "prompt_cache_hit_tokens": 1536,
+        "prompt_cache_miss_tokens": 715
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.363
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0406_m5kptomc8qot72ii5in4jpouyg2cszuq",
+  "extracted_at": "2026-11-22T06:41:55.244411+00:00"
+}

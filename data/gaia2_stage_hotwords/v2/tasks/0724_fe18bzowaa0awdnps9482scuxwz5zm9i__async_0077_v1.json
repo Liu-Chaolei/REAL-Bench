@@ -1,0 +1,161 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0724_fe18bzowaa0awdnps9482scuxwz5zm9i__async_0077_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "bd17e9242b5d878a4ffe84dadac25f42d943b2f480ec883611193eb865b08ec3",
+  "review_input_sha256": "815a6c7db5c5bc54ecd9a68419a0a1b5c81fe4ec7682558bc86037081177d7f5",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "f2208846a44eb1be6e6fffd9244c18fcdaa703eab6cc8bf53c57e1379921b0cb",
+  "reference_results_sha256": "d216255fb759d2914f2cef915fe1ac38a3d2c15df2c7ba3fa96bd2ff6086bcf3",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Birgitta Rasmussen",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Kaatje De Smet",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "DJECO Puzz Art Sea Horse Jig Saw Puzzle",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-cf3293f3-3416-47d8-bd7c-922703a60371.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Mickey and Friends: Activity Pinball Ride On",
+      "original_source": "stage1.tool_gt.series_s1_send_email.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "BRIO World - 33319 Battery Operated Action Train",
+      "original_source": "stage1.tool_gt.series_s1_send_email.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "4M Tin Can Edge Detector Science Kit",
+      "original_source": "stage2.tool_gt.series_s2_send_summary.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "DJECO Puzz Art Sea Horse Jig Saw Puzzle",
+          "kind": "product",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整品牌产品名，拼写复杂",
+          "weight": 50
+        },
+        {
+          "text": "Kaatje De Smet",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，含较难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Birgitta Rasmussen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "DJECO Puzz Art Sea Horse Jig Saw Puzzle",
+        "Kaatje De Smet",
+        "Birgitta Rasmussen"
+      ],
+      "active_vocabulary": {
+        "DJECO Puzz Art Sea Horse Jig Saw Puzzle": 50,
+        "Kaatje De Smet": 50,
+        "Birgitta Rasmussen": 50
+      },
+      "vocabulary_sha256": "a9aecc7212164ed45044a1e0a7544ecacf963961d63be71c2cbcea6623948b4f"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "BRIO World - 33319 Battery Operated Action Train",
+          "kind": "product",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整品牌产品名，含型号",
+          "weight": 50
+        },
+        {
+          "text": "Mickey and Friends: Activity Pinball Ride On",
+          "kind": "product",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整产品名，含专有名词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "BRIO World - 33319 Battery Operated Action Train",
+        "Mickey and Friends: Activity Pinball Ride On"
+      ],
+      "active_vocabulary": {
+        "DJECO Puzz Art Sea Horse Jig Saw Puzzle": 50,
+        "Kaatje De Smet": 50,
+        "Birgitta Rasmussen": 50,
+        "BRIO World - 33319 Battery Operated Action Train": 50,
+        "Mickey and Friends: Activity Pinball Ride On": 50
+      },
+      "vocabulary_sha256": "f0a622b74d7d5f527fdee6ae7bb234d2d58f14b226c4998c71cae1fc742ec4e7"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "4M Tin Can Edge Detector Science Kit",
+          "kind": "product",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整产品名，含型号与专有词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "4M Tin Can Edge Detector Science Kit"
+      ],
+      "active_vocabulary": {
+        "DJECO Puzz Art Sea Horse Jig Saw Puzzle": 50,
+        "Kaatje De Smet": 50,
+        "Birgitta Rasmussen": 50,
+        "BRIO World - 33319 Battery Operated Action Train": 50,
+        "Mickey and Friends: Activity Pinball Ride On": 50,
+        "4M Tin Can Edge Detector Science Kit": 50
+      },
+      "vocabulary_sha256": "93157818131c2a5d52cd43a2e342a016316f78f312e81a69544e9de13533d5b4"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "UglyDolls",
+    "BRIO"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:20:07.523374+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

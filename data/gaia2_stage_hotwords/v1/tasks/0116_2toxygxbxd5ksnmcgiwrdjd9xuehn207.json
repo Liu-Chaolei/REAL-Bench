@@ -1,0 +1,216 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0116_2toxygxbxd5ksnmcgiwrdjd9xuehn207",
+  "model": "deepseek-flash",
+  "input_sha256": "d526235f9e9d72b3fb1609276d92f0c55fac2949ae658efa4962faf1d8acf3b8",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Yumi Nakahara",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "需删除邮件的联系人姓名"
+        },
+        {
+          "text": "Leon Vandenberghe",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "需移动邮件的联系人姓名"
+        },
+        {
+          "text": "Kazimierz Wojciechowski",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "需取消会议的参与者姓名"
+        },
+        {
+          "text": "Wild Republic Cuddlekins",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "毛绒玩具品牌与系列名"
+        },
+        {
+          "text": "Golden Tamarin Lion",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品具体名称"
+        },
+        {
+          "text": "PROLINE 344100",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "遥控车壳型号"
+        },
+        {
+          "text": "Ram 2500",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "车型名称"
+        },
+        {
+          "text": "Fantasy Flight Games",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "桌游出版公司名"
+        },
+        {
+          "text": "The Ghost of Framsburg Adventure",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "桌游产品名称"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c75c29c2-450c-4864-9599-3f018cb03df8.arguments.content",
+          "reason": "回复邮件署名"
+        }
+      ],
+      "new_terms": [
+        "Yumi Nakahara",
+        "Katarzyna Zielińska",
+        "Leon Vandenberghe",
+        "Kazimierz Wojciechowski",
+        "Wild Republic Cuddlekins",
+        "Golden Tamarin Lion",
+        "PROLINE 344100",
+        "Ram 2500",
+        "Fantasy Flight Games",
+        "The Ghost of Framsburg Adventure",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Yumi Nakahara": 50,
+        "Katarzyna Zielińska": 50,
+        "Leon Vandenberghe": 50,
+        "Kazimierz Wojciechowski": 50,
+        "Wild Republic Cuddlekins": 50,
+        "Golden Tamarin Lion": 50,
+        "PROLINE 344100": 50,
+        "Ram 2500": 50,
+        "Fantasy Flight Games": 50,
+        "The Ghost of Framsburg Adventure": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "2f010974d98e8830a8bda7c15318dd504abfd73ed853eb7a81474808dc2746ce"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Yumi",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "订单收件人名字"
+        },
+        {
+          "text": "Wild Republic Cuddlekins",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "毛绒玩具品牌与系列名"
+        },
+        {
+          "text": "Golden Tamarin Lion",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "商品具体名称"
+        }
+      ],
+      "new_terms": [
+        "Yumi"
+      ],
+      "active_vocabulary": {
+        "Yumi Nakahara": 50,
+        "Katarzyna Zielińska": 50,
+        "Leon Vandenberghe": 50,
+        "Kazimierz Wojciechowski": 50,
+        "Wild Republic Cuddlekins": 50,
+        "Golden Tamarin Lion": 50,
+        "PROLINE 344100": 50,
+        "Ram 2500": 50,
+        "Fantasy Flight Games": 50,
+        "The Ghost of Framsburg Adventure": 50,
+        "Ursula Wiederkehr": 50,
+        "Yumi": 50
+      },
+      "vocabulary_sha256": "d9f487ebc43c7badeff4e98b2d183e7c3d661c5580c77de45fb2dc17d70f0fad"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Yumi Nakahara",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "邮件收件人姓名"
+        },
+        {
+          "text": "Wild Republic Cuddlekins",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "毛绒玩具品牌与系列名"
+        },
+        {
+          "text": "Golden Tamarin Lion",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "商品具体名称"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_yumi.arguments.content",
+          "reason": "邮件署名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Yumi Nakahara": 50,
+        "Katarzyna Zielińska": 50,
+        "Leon Vandenberghe": 50,
+        "Kazimierz Wojciechowski": 50,
+        "Wild Republic Cuddlekins": 50,
+        "Golden Tamarin Lion": 50,
+        "PROLINE 344100": 50,
+        "Ram 2500": 50,
+        "Fantasy Flight Games": 50,
+        "The Ghost of Framsburg Adventure": 50,
+        "Ursula Wiederkehr": 50,
+        "Yumi": 50
+      },
+      "vocabulary_sha256": "d9f487ebc43c7badeff4e98b2d183e7c3d661c5580c77de45fb2dc17d70f0fad"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "b3c917e4e4dda25135a53eba39a0c1ad74fa4f4ece8d8c0e42f50cbac0855378",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2522,
+        "completion_tokens": 569,
+        "total_tokens": 3091,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2266
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.177
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0116_2toxygxbxd5ksnmcgiwrdjd9xuehn207",
+  "extracted_at": "2026-11-22T06:40:06.988941+00:00"
+}

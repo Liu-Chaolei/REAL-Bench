@@ -1,0 +1,204 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0973_39wafq8ceuc1afdfh7xucv36hrr7ul2w",
+  "model": "deepseek-flash",
+  "input_sha256": "8055db4e1bb10be6ee16adb4915c3e3d9de1bda6703315713b9dce17d6b8985c",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kiyoshi",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-46c3303e-c248-4f25-85e1-39b97987fd7d.arguments.content",
+          "reason": "收件人之一的人名"
+        },
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-46c3303e-c248-4f25-85e1-39b97987fd7d.arguments.content",
+          "reason": "收件人之一的人名，含重音"
+        },
+        {
+          "text": "Nadja",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-46c3303e-c248-4f25-85e1-39b97987fd7d.arguments.content",
+          "reason": "收件人之一的人名"
+        },
+        {
+          "text": "Ursula",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-46c3303e-c248-4f25-85e1-39b97987fd7d.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-d9d66405-b529-46e8-9ad4-632bc8689495.arguments.content",
+          "reason": "发件人完整姓名"
+        },
+        {
+          "text": "Swiss-Japanese Relations and Cultural Exchange",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "Messages 会话标题专名"
+        },
+        {
+          "text": "Swiss-Japanese Project Meeting",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "日历事件专名"
+        }
+      ],
+      "new_terms": [
+        "Kiyoshi",
+        "Aurélie",
+        "Nadja",
+        "Ursula",
+        "Ursula Wiederkehr",
+        "Swiss-Japanese Relations and Cultural Exchange",
+        "Swiss-Japanese Project Meeting"
+      ],
+      "active_vocabulary": {
+        "Kiyoshi": 50,
+        "Aurélie": 50,
+        "Nadja": 50,
+        "Ursula": 50,
+        "Ursula Wiederkehr": 50,
+        "Swiss-Japanese Relations and Cultural Exchange": 50,
+        "Swiss-Japanese Project Meeting": 50
+      },
+      "vocabulary_sha256": "3ec66cc021357658666562f3742bb0ea2e3d5b2fa354ca04f2ab5ef6df3aa05f"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kiyoshi Nakahara",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "确认会议参与者完整姓名"
+        },
+        {
+          "text": "Nadja Ramadanović",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "确认会议参与者完整姓名，含变音符"
+        },
+        {
+          "text": "Aurélie Dumont",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_post.arguments.content",
+          "reason": "确认会议参与者完整姓名"
+        },
+        {
+          "text": "Swiss-Japanese Project Kickoff Agenda",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.subject",
+          "reason": "邮件主题中的议程专名"
+        }
+      ],
+      "new_terms": [
+        "Kiyoshi Nakahara",
+        "Nadja Ramadanović",
+        "Aurélie Dumont",
+        "Swiss-Japanese Project Kickoff Agenda"
+      ],
+      "active_vocabulary": {
+        "Kiyoshi": 50,
+        "Aurélie": 50,
+        "Nadja": 50,
+        "Ursula": 50,
+        "Ursula Wiederkehr": 50,
+        "Swiss-Japanese Relations and Cultural Exchange": 50,
+        "Swiss-Japanese Project Meeting": 50,
+        "Kiyoshi Nakahara": 50,
+        "Nadja Ramadanović": 50,
+        "Aurélie Dumont": 50,
+        "Swiss-Japanese Project Kickoff Agenda": 50
+      },
+      "vocabulary_sha256": "0fce6313f1ee0eec22bf99dd0ebfcf45dc9f4d2c686a9ed49a18f73585a46a4c"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaito Matsumoto",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "被介绍的新联系人完整姓名"
+        },
+        {
+          "text": "Kaito",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_post.arguments.content",
+          "reason": "Chats 欢迎消息中的称呼"
+        }
+      ],
+      "new_terms": [
+        "Kaito Matsumoto",
+        "Kaito"
+      ],
+      "active_vocabulary": {
+        "Kiyoshi": 50,
+        "Aurélie": 50,
+        "Nadja": 50,
+        "Ursula": 50,
+        "Ursula Wiederkehr": 50,
+        "Swiss-Japanese Relations and Cultural Exchange": 50,
+        "Swiss-Japanese Project Meeting": 50,
+        "Kiyoshi Nakahara": 50,
+        "Nadja Ramadanović": 50,
+        "Aurélie Dumont": 50,
+        "Swiss-Japanese Project Kickoff Agenda": 50,
+        "Kaito Matsumoto": 50,
+        "Kaito": 50
+      },
+      "vocabulary_sha256": "777e22ae8ec72b78d68dcc373ba07e6a1f48d22b4d5667eddc465522f1362139"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "2dc7cbdb6bd69c198cf095a7e802b958458aae953783149f011a9c868eccbbf9",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4537,
+        "completion_tokens": 692,
+        "total_tokens": 5229,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4281
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.494,
+      "error": "Invalid proper-name phrase: 'kmatsumoto@tokyo-u.ac.jp'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "62c113333d06524abac1c1f8f6537847cfae483cbedda4d25bc1bb461d72e1e7",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5629,
+        "completion_tokens": 642,
+        "total_tokens": 6271,
+        "prompt_tokens_details": {
+          "cached_tokens": 5120
+        },
+        "prompt_cache_hit_tokens": 5120,
+        "prompt_cache_miss_tokens": 509
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.332
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0973_39wafq8ceuc1afdfh7xucv36hrr7ul2w",
+  "extracted_at": "2026-11-22T06:44:50.965692+00:00"
+}

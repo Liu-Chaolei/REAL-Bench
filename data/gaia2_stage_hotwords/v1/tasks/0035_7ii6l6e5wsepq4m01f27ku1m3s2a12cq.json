@@ -1,0 +1,200 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0035_7ii6l6e5wsepq4m01f27ku1m3s2a12cq",
+  "model": "deepseek-flash",
+  "input_sha256": "2c6d1c0716442c276e773361f8451a4f3beafe156421c18e1d3830d1693ef12a",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Geneva Luxury",
+          "kind": "product",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-fc75bb5d-7b04-406e-809d-5f45568735d3.arguments.content",
+          "reason": "公寓房源专有名称"
+        }
+      ],
+      "new_terms": [
+        "Geneva Luxury"
+      ],
+      "active_vocabulary": {
+        "Geneva Luxury": 50
+      },
+      "vocabulary_sha256": "d559723daf1861c9aaabed2d4bf40578899882406118a3d300d20b526843e70d"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Lake View Paradise",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "公寓房源专有名称"
+        },
+        {
+          "text": "Quai du Général-Guisan",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "日内瓦街道专有地名"
+        },
+        {
+          "text": "Geneva Luxury",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "公寓房源专有名称"
+        }
+      ],
+      "new_terms": [
+        "Lake View Paradise",
+        "Quai du Général-Guisan"
+      ],
+      "active_vocabulary": {
+        "Geneva Luxury": 50,
+        "Lake View Paradise": 50,
+        "Quai du Général-Guisan": 50
+      },
+      "vocabulary_sha256": "9e4a699986b64288ad6581044c264fa2baec48caec739b59c08808e05cc8fd38"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Lake View Paradise",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓房源专有名称"
+        },
+        {
+          "text": "Geneva Luxury",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓房源专有名称"
+        },
+        {
+          "text": "Rue de Lausanne 45",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "日内瓦街道门牌专有地名"
+        },
+        {
+          "text": "Lakeview Oasis",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓房源专有名称"
+        },
+        {
+          "text": "Quai du Mont-Blanc",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "日内瓦街道专有地名"
+        },
+        {
+          "text": "Geneva Gem",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓房源专有名称"
+        },
+        {
+          "text": "Rue de Lausanne 23",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "日内瓦街道门牌专有地名"
+        },
+        {
+          "text": "Geneva Oasis",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓房源专有名称"
+        },
+        {
+          "text": "Rue de Lausanne",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "日内瓦街道专有地名"
+        },
+        {
+          "text": "Geneva Haven",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "公寓房源专有名称"
+        },
+        {
+          "text": "Rue de Genève",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "日内瓦街道专有地名"
+        }
+      ],
+      "new_terms": [
+        "Rue de Lausanne 45",
+        "Lakeview Oasis",
+        "Quai du Mont-Blanc",
+        "Geneva Gem",
+        "Rue de Lausanne 23",
+        "Geneva Oasis",
+        "Rue de Lausanne",
+        "Geneva Haven",
+        "Rue de Genève"
+      ],
+      "active_vocabulary": {
+        "Geneva Luxury": 50,
+        "Lake View Paradise": 50,
+        "Quai du Général-Guisan": 50,
+        "Rue de Lausanne 45": 50,
+        "Lakeview Oasis": 50,
+        "Quai du Mont-Blanc": 50,
+        "Geneva Gem": 50,
+        "Rue de Lausanne 23": 50,
+        "Geneva Oasis": 50,
+        "Rue de Lausanne": 50,
+        "Geneva Haven": 50,
+        "Rue de Genève": 50
+      },
+      "vocabulary_sha256": "87585df936b94fd43aa8d389afba381c126773a92b7028a97f3e1537229ff2a7"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "7f10d259422e76801331052fa6a67f05a2befdb478c0fed2a114ecfb5fba923d",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1384,
+        "completion_tokens": 639,
+        "total_tokens": 2023,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1128
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.048,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "d6739fb684f5c93a159e81e1d0c59fa993e6b6a1a724626597457b91f88f385e",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2416,
+        "completion_tokens": 641,
+        "total_tokens": 3057,
+        "prompt_tokens_details": {
+          "cached_tokens": 1920
+        },
+        "prompt_cache_hit_tokens": 1920,
+        "prompt_cache_miss_tokens": 496
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.057
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0035_7ii6l6e5wsepq4m01f27ku1m3s2a12cq",
+  "extracted_at": "2026-11-22T06:39:46.969440+00:00"
+}

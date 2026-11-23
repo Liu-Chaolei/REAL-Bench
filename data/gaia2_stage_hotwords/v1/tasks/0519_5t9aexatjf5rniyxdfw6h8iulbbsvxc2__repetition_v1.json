@@ -1,0 +1,147 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0519_5t9aexatjf5rniyxdfw6h8iulbbsvxc2__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "6d37cdfacaf0e0896ba2dcbce7c597676e9d5d625d348a7db910002bff765482",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Leela Rao",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Nalini Rao",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Ulrich",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "消息收件人姓名"
+        },
+        {
+          "text": "Oleksandr Hrynchenko",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-2ac96f6d-d200-4229-9a21-abd538c2ad61.arguments.content",
+          "reason": "午餐事件相关人名"
+        },
+        {
+          "text": "Hand Weight",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品名称"
+        }
+      ],
+      "new_terms": [
+        "Leela Rao",
+        "Nalini Rao",
+        "Ulrich",
+        "Oleksandr Hrynchenko",
+        "Hand Weight"
+      ],
+      "active_vocabulary": {
+        "Leela Rao": 50,
+        "Nalini Rao": 50,
+        "Ulrich": 50,
+        "Oleksandr Hrynchenko": 50,
+        "Hand Weight": 50
+      },
+      "vocabulary_sha256": "ee8efbd2a678f67fe20b437f02cd15524a23f213b0d4ea531676545f982b26bf"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Leela Rao",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "被删除联系人姓名"
+        },
+        {
+          "text": "Nalini Rao",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "被删除联系人姓名"
+        },
+        {
+          "text": "Hand Weight, Large",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "商品变体名称"
+        }
+      ],
+      "new_terms": [
+        "Hand Weight, Large"
+      ],
+      "active_vocabulary": {
+        "Leela Rao": 50,
+        "Nalini Rao": 50,
+        "Ulrich": 50,
+        "Oleksandr Hrynchenko": 50,
+        "Hand Weight": 50,
+        "Hand Weight, Large": 50
+      },
+      "vocabulary_sha256": "a26a26822f573c4dd3cf4e24cea6f8f86001cbda422678fb7ac6cb0f23fb6a7b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Hand Weight, Large",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "训练所用商品套装名称"
+        },
+        {
+          "text": "Film Review Writing",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "日历中已有事件名称"
+        }
+      ],
+      "new_terms": [
+        "Film Review Writing"
+      ],
+      "active_vocabulary": {
+        "Leela Rao": 50,
+        "Nalini Rao": 50,
+        "Ulrich": 50,
+        "Oleksandr Hrynchenko": 50,
+        "Hand Weight": 50,
+        "Hand Weight, Large": 50,
+        "Film Review Writing": 50
+      },
+      "vocabulary_sha256": "4b6a1db176f053b9f2e9a001bee29cd2dc14bb1779a48e1b66ac90fd32e3de9b"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "97a417f74c0074f7f20359d3169eaf3ad0021a84abbf3757a7ebe3dd496cc222",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3392,
+        "completion_tokens": 328,
+        "total_tokens": 3720,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3136
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.57
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0519_5t9aexatjf5rniyxdfw6h8iulbbsvxc2__repetition_v1",
+  "extracted_at": "2026-11-22T06:45:47.184051+00:00"
+}

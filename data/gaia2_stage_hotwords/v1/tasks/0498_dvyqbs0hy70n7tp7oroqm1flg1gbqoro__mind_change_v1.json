@@ -1,0 +1,125 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0498_dvyqbs0hy70n7tp7oroqm1flg1gbqoro__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "90ac2e780eceb8f70fe43b4132cd3e93cc31c9bffb50b1804896e19c54dc9dfc",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7a89efa8-3d36-4f98-a0bb-1825aa74c85a.arguments.content",
+          "reason": "群聊消息中提到的收件人名字"
+        },
+        {
+          "text": "Kenji",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7a89efa8-3d36-4f98-a0bb-1825aa74c85a.arguments.content",
+          "reason": "群聊消息中提到的收件人名字"
+        }
+      ],
+      "new_terms": [
+        "Aurélie",
+        "Kenji"
+      ],
+      "active_vocabulary": {
+        "Aurélie": 50,
+        "Kenji": 50
+      },
+      "vocabulary_sha256": "fdc650bead4bb03b17879bc4356805301036e9bc8d2e3e39c9f143bde0a13644"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create.arguments.description",
+          "reason": "日历描述中提到的同行者名字"
+        },
+        {
+          "text": "Kenji",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create.arguments.description",
+          "reason": "日历描述中提到的同行者名字"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélie": 50,
+        "Kenji": 50
+      },
+      "vocabulary_sha256": "fdc650bead4bb03b17879bc4356805301036e9bc8d2e3e39c9f143bde0a13644"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Léon Vandenberghe",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "被邀请的退休人员全名"
+        },
+        {
+          "text": "Rik Vandenberghe",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "被邀请的退休人员全名"
+        },
+        {
+          "text": "Yumi Nakahara",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "被邀请的退休人员全名"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_leon.arguments.content",
+          "reason": "邮件署名中的发件人姓名"
+        }
+      ],
+      "new_terms": [
+        "Léon Vandenberghe",
+        "Rik Vandenberghe",
+        "Yumi Nakahara",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Aurélie": 50,
+        "Kenji": 50,
+        "Léon Vandenberghe": 50,
+        "Rik Vandenberghe": 50,
+        "Yumi Nakahara": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "c5d641d6817ee2cb0b12b497b4527a17a40b3952c8ffbf7194e499391f94c774"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "44c5bce323f0b22b63c61a5f138c84cbdf49c2326e1f5ae4fa5ad060ef1f2679",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3705,
+        "completion_tokens": 401,
+        "total_tokens": 4106,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3449
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.651
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0498_dvyqbs0hy70n7tp7oroqm1flg1gbqoro__mind_change_v1",
+  "extracted_at": "2026-11-22T06:45:17.086328+00:00"
+}

@@ -12,6 +12,11 @@ from tau2.config import (
     DEFAULT_MIMO_API_KEY_ENV,
     DEFAULT_MIMO_TTS_MODEL,
     DEFAULT_MIMO_TTS_VOICE,
+    DEFAULT_QWEN_TTS_API_KEY_ENV,
+    DEFAULT_QWEN_TTS_BASE_URL_ENV,
+    DEFAULT_QWEN_TTS_MODEL,
+    DEFAULT_QWEN_TTS_SAMPLE_RATE,
+    DEFAULT_QWEN_TTS_VOICE,
     DEFAULT_SEED,
     DEFAULT_SPEECH_EFFECTS_MODE,
 )
@@ -191,7 +196,35 @@ class MiMoTTSConfig(BaseModel):
     request_timeout_seconds: float = Field(default=60, gt=0)
 
 
-ProviderConfig = ElevenLabsTTSConfig | MiMoTTSConfig
+class QwenTTSConfig(BaseModel):
+    """DashScope Qwen-Audio TTS settings with private credential references."""
+
+    model_config = ConfigDict(extra="forbid", hide_input_in_errors=True)
+    provider: Literal["qwen"] = "qwen"
+    model_id: str = DEFAULT_QWEN_TTS_MODEL
+    base_url: str | None = None
+    base_url_env: str = Field(
+        default=DEFAULT_QWEN_TTS_BASE_URL_ENV,
+        pattern=r"^[A-Z_][A-Z0-9_]*$",
+    )
+    api_key_env: str = Field(
+        default=DEFAULT_QWEN_TTS_API_KEY_ENV,
+        pattern=r"^[A-Z_][A-Z0-9_]*$",
+    )
+    config_env_file: str | None = None
+    voice_id: str = DEFAULT_QWEN_TTS_VOICE
+    voices: dict[str, str] = Field(
+        default_factory=lambda: {
+            "mamadou_diallo": "Andy_v3.1",
+            "priya_patil": "Abby_v3.1",
+        }
+    )
+    language_code: str | None = "en"
+    sample_rate: int = Field(default=DEFAULT_QWEN_TTS_SAMPLE_RATE, ge=8000, le=48000)
+    request_timeout_seconds: float = Field(default=60, gt=0)
+
+
+ProviderConfig = ElevenLabsTTSConfig | MiMoTTSConfig | QwenTTSConfig
 
 
 # ============================================================================
@@ -279,6 +312,12 @@ class SynthesisConfig(BaseModel):
             settings = value.get("provider_config") or {}
             if not isinstance(settings, MiMoTTSConfig):
                 settings = MiMoTTSConfig.model_validate(settings)
+            value["provider_config"] = settings
+        elif isinstance(value, dict) and value.get("provider") == "qwen":
+            value = dict(value)
+            settings = value.get("provider_config") or {}
+            if not isinstance(settings, QwenTTSConfig):
+                settings = QwenTTSConfig.model_validate(settings)
             value["provider_config"] = settings
         return value
 

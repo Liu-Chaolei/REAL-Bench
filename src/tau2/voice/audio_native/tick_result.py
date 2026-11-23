@@ -13,6 +13,7 @@ from typing import Any, List, Literal, Optional, Tuple
 from pydantic import BaseModel, ConfigDict, Field
 
 from tau2.config import DEFAULT_TELEPHONY_RATE, TELEPHONY_ULAW_SILENCE
+from tau2.data_model.audio import AudioFormat
 from tau2.data_model.message import ToolCall
 from tau2.data_model.transcript import LiveTranscriptTick
 from tau2.data_model.usage import UsageRecord
@@ -114,6 +115,10 @@ class TickResult(BaseModel):
         exclude=True,  # Exclude from serialization (may contain bytes)
     )
     live_transcript: LiveTranscriptTick | None = None
+    playback_audio_format: AudioFormat | None = Field(
+        default=None,
+        description="Actual agent playback format, which may differ from user input",
+    )
     generated_text: List[dict] = Field(
         default_factory=list,
         description="Provider-generated response text, independent of played-audio ASR.",

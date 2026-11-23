@@ -1,0 +1,205 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0330_h6ntdw2gguzrc2peafuk7czgh2j3w3tq",
+  "model": "deepseek-flash",
+  "input_sha256": "e7f52ff5581fbb5383f5c69da1b08f6f57709452520218d2194842a746e3d299",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Sofía Kuznetsova García",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-81612803-dd7b-463b-97e1-a49e0e211fe0.arguments.content",
+          "reason": "最年长联系人全名"
+        },
+        {
+          "text": "Rukmini",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3946bb77-d943-43eb-9407-171da6da4305.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Žiga",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3946bb77-d943-43eb-9407-171da6da4305.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Sri",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3946bb77-d943-43eb-9407-171da6da4305.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Sutopo",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3946bb77-d943-43eb-9407-171da6da4305.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3946bb77-d943-43eb-9407-171da6da4305.arguments.content",
+          "reason": "发件人全名"
+        },
+        {
+          "text": "Jolly Elf Adult Costume",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品名称"
+        }
+      ],
+      "new_terms": [
+        "Sofía Kuznetsova García",
+        "Rukmini",
+        "Žiga",
+        "Sri",
+        "Sutopo",
+        "Anastasiya Kuznetsova",
+        "Jolly Elf Adult Costume"
+      ],
+      "active_vocabulary": {
+        "Sofía Kuznetsova García": 50,
+        "Rukmini": 50,
+        "Žiga": 50,
+        "Sri": 50,
+        "Sutopo": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Jolly Elf Adult Costume": 50
+      },
+      "vocabulary_sha256": "b13de5d0232a17ad9d240cb98dd564a9e65cd7cbc2ca0057c0efc12ecf7d5597"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Sofía Kuznetsova García",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create_event.arguments.attendees[0]",
+          "reason": "参会人全名"
+        },
+        {
+          "text": "Žiga Korošec",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create_event.arguments.attendees[1]",
+          "reason": "参会人全名"
+        },
+        {
+          "text": "Rukmini Widyastuti",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create_event.arguments.attendees[2]",
+          "reason": "参会人全名"
+        },
+        {
+          "text": "Sri Widyastuti",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create_event.arguments.attendees[3]",
+          "reason": "参会人全名"
+        },
+        {
+          "text": "Sutopo Widyatmoko",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create_event.arguments.attendees[4]",
+          "reason": "参会人全名"
+        },
+        {
+          "text": "Moscow",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create_event.arguments.location",
+          "reason": "活动地点"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "发件人全名"
+        }
+      ],
+      "new_terms": [
+        "Žiga Korošec",
+        "Rukmini Widyastuti",
+        "Sri Widyastuti",
+        "Sutopo Widyatmoko",
+        "Moscow"
+      ],
+      "active_vocabulary": {
+        "Sofía Kuznetsova García": 50,
+        "Rukmini": 50,
+        "Žiga": 50,
+        "Sri": 50,
+        "Sutopo": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Jolly Elf Adult Costume": 50,
+        "Žiga Korošec": 50,
+        "Rukmini Widyastuti": 50,
+        "Sri Widyastuti": 50,
+        "Sutopo Widyatmoko": 50,
+        "Moscow": 50
+      },
+      "vocabulary_sha256": "459c114464dc0134090334a7cc4d082830a1d8985bd98ae29d095ab741ffa940"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Jolly Elf Friends",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_create_group.arguments.title",
+          "reason": "群组名称"
+        },
+        {
+          "text": "Anastasiya",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_welcome.arguments.content",
+          "reason": "消息署名"
+        }
+      ],
+      "new_terms": [
+        "Jolly Elf Friends",
+        "Anastasiya"
+      ],
+      "active_vocabulary": {
+        "Sofía Kuznetsova García": 50,
+        "Rukmini": 50,
+        "Žiga": 50,
+        "Sri": 50,
+        "Sutopo": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Jolly Elf Adult Costume": 50,
+        "Žiga Korošec": 50,
+        "Rukmini Widyastuti": 50,
+        "Sri Widyastuti": 50,
+        "Sutopo Widyatmoko": 50,
+        "Moscow": 50,
+        "Jolly Elf Friends": 50,
+        "Anastasiya": 50
+      },
+      "vocabulary_sha256": "4fa89cfa73f87b7199df7b2e5c9d4171e2334275137e7bed13700a430f7adfed"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "9b8cbee887435f81ddbdab3bbbf93b7299a30ad38b804889efb1976140455087",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3274,
+        "completion_tokens": 773,
+        "total_tokens": 4047,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3018
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.437
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0330_h6ntdw2gguzrc2peafuk7czgh2j3w3tq",
+  "extracted_at": "2026-11-22T06:41:19.829485+00:00"
+}

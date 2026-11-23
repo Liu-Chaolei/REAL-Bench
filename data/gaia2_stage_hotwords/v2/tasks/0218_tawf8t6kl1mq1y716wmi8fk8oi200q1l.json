@@ -1,0 +1,78 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0218_tawf8t6kl1mq1y716wmi8fk8oi200q1l",
+  "model": "deepseek-flash",
+  "input_sha256": "405f46cb725fdd065be8f2f9092fc72b29e3449d3f0f6ed4c0b9f4c6a23c39ff",
+  "review_input_sha256": "ed234104a75ba8c10ab865420db03405aa36bef99483beeae2d63b886b7723c9",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "a26ec75139c8dae9594b585d348836ffccfd9f84bc4981cc45c383c9d9af5389",
+  "reference_results_sha256": "32175548e6dc322d92f5f772432f537ae0116acbf5afa014dc6807df2bd97d34",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-e8215a1f-98a1-444b-812a-1f32b0331461.arguments.attendees[0]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "德语人名，拼写较难，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "d95c9da3be30654558667f62ae333c7b63393c188d4c6e532a2fa195afe3db23"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "d95c9da3be30654558667f62ae333c7b63393c188d4c6e532a2fa195afe3db23"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "d95c9da3be30654558667f62ae333c7b63393c188d4c6e532a2fa195afe3db23"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:34.106129+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

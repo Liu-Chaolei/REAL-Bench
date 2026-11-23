@@ -1,0 +1,105 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0992_9qbjfw81l62wlgmcmsbxamzi98szmdu0",
+  "model": "deepseek-flash",
+  "input_sha256": "57b26feb5a5933be65ef63272a289a4c42db7929f1fd5536f4ad3ec0611e705c",
+  "review_input_sha256": "c549e5436b01ee0e1de8cc574591485ddf642249f87d394801dba2fd200fcedb",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "a81ac27042478976db747b13f0705a3bd754a7ac107a2c7d8b4128851f0f8eb4",
+  "reference_results_sha256": "97f45041cf11eb271c55f0fa7b924ddea8392fe0437de2ec0e85a443815ef6cd",
+  "sources": {
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Liverpool City Centre Apartment",
+      "original_source": "stage1.reference_reply.series_s1_5.arguments.content"
+    },
+    "stage1.tool_response.series_s1_1": {
+      "stage": 1,
+      "text": "{\"551d10469f07407795e65a25bb4a379f\": {\"name\": \"Liverpool Waterfront Apartment\", \"location\": \"10 The Strand, Liverpool\", \"zip_code\": \"L1 8LT\", \"price\": \"1200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"551d10469f07407795e65a25bb4a379f\", \"amenities\": [\"Parking\", \"Waterfront location\"], \"saved\": \"False\"}, \"ad5d79e59d70476e99d51e616ab87b56\": {\"name\": \"Liverpool Luxe\", \"location\": \"Liverpool City Centre, Liverpool\", \"zip_code\": \"L1 8BU\", \"price\": \"1000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"700\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"ad5d79e59d70476e99d51e616ab87b56\", \"amenities\": [\"Parking\"], \"saved\": \"False\"}, \"c1f772e52bf54b22bb2f6352857eeea0\": {\"name\": \"Liverpool City Centre Apartment\", \"location\": \"901 Liverpool Rd, Liverpool\", \"zip_code\": \"L3 8HT\", \"price\": \"1000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"c1f772e52bf54b22bb2f6352857eeea0\", \"amenities\": [\"Parking\"], \"saved\": \"False\"}}",
+      "event_id": "series_s1_1",
+      "response_sha256": "b1d31ed9dc5752e41f01f3b6c60dacab7953f3fb50cc1ce4123b82b5d916a87e"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Liverpool City Centre Apartment",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整公寓专名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Liverpool Waterfront Apartment",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_1",
+          "reason": "含地名的完整公寓专名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Liverpool Luxe",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_1",
+          "reason": "独特公寓专名，含地名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Liverpool City Centre Apartment",
+        "Liverpool Waterfront Apartment",
+        "Liverpool Luxe"
+      ],
+      "active_vocabulary": {
+        "Liverpool City Centre Apartment": 50,
+        "Liverpool Waterfront Apartment": 50,
+        "Liverpool Luxe": 50
+      },
+      "vocabulary_sha256": "3b296d576b23d23aca1bdbdf50afaa6e1d95ef619b5cfe4f87f869087dd60366"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Liverpool City Centre Apartment": 50,
+        "Liverpool Waterfront Apartment": 50,
+        "Liverpool Luxe": 50
+      },
+      "vocabulary_sha256": "3b296d576b23d23aca1bdbdf50afaa6e1d95ef619b5cfe4f87f869087dd60366"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Liverpool",
+    "901 Liverpool Rd"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:11.643925+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

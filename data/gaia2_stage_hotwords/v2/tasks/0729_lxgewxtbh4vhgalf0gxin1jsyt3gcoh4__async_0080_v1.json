@@ -1,0 +1,130 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0729_lxgewxtbh4vhgalf0gxin1jsyt3gcoh4__async_0080_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "2e263ae42974c8943bdf4dafb9b0dc3a2dc0f2d5d2ed0f508275d67e69dbfb32",
+  "review_input_sha256": "93bdbe1dc18457df921e954aeb22e146701d9950878c6c4ca9f94b824b46147d",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "b097d450ae6bae112f57c96874c2f179fe74ae9bf4c0b6986a351ba283a41478",
+  "reference_results_sha256": "c69588bd336df2508fa39a7c0b16f9cc1c179c6096c0b7d93967ceb26ce02d5c",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Deniz Öztürk",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-64420011-569a-48ef-8d7d-70189c225ec5.arguments.attendees[0]"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Nalani Jensen",
+      "original_source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[0]"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Kaia Nakamura",
+      "original_source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[1]"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage1.tool_gt.series_s1_send_email.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Deniz Öztürk",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Deniz Öztürk"
+      ],
+      "active_vocabulary": {
+        "Deniz Öztürk": 50
+      },
+      "vocabulary_sha256": "32c14c431c45483cca945a4ff4ec45f0f311b44fdb322ac9b60e4f370c7da9be"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.existing_catalog.3",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Kaia Nakamura",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur",
+        "Kaia Nakamura",
+        "Nalani Jensen"
+      ],
+      "active_vocabulary": {
+        "Deniz Öztürk": 50,
+        "Aurélien LaFleur": 50,
+        "Kaia Nakamura": 50,
+        "Nalani Jensen": 50
+      },
+      "vocabulary_sha256": "bc7d9cb0c04b0bc6d06e47ee4d4228f75d6e4c148869a493b40f9cb164e3f5be"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Deniz Öztürk": 50,
+        "Aurélien LaFleur": 50,
+        "Kaia Nakamura": 50,
+        "Nalani Jensen": 50
+      },
+      "vocabulary_sha256": "bc7d9cb0c04b0bc6d06e47ee4d4228f75d6e4c148869a493b40f9cb164e3f5be"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Exclusive Wine Bar",
+    "Client Confirmation",
+    "Reservation Confirmed",
+    "VIP Evening Prep Briefing"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:20:19.102618+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

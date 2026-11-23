@@ -1,0 +1,173 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0468_zh5zoync3yepme11k112jsebclkwcf6c",
+  "model": "deepseek-flash",
+  "input_sha256": "03cf4baed965e32fd10b2afd6bdef92644cc9673a0e625f2305e83a1de2ad2a9",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Leonie Schwarz",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-d99a732c-ef35-43e2-a3d0-35fdc234990f.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Lea Müller",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-d99a732c-ef35-43e2-a3d0-35fdc234990f.arguments.attendees[1]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Saskia Krauss",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-d99a732c-ef35-43e2-a3d0-35fdc234990f.arguments.attendees[2]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Research on Human Pathology",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-d99a732c-ef35-43e2-a3d0-35fdc234990f.arguments.title",
+          "reason": "事件标题专名"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-24b7366b-fe4f-43c6-9e61-5164c8e3c21e.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [
+        "Leonie Schwarz",
+        "Lea Müller",
+        "Saskia Krauss",
+        "Research on Human Pathology",
+        "Anastasiya Kuznetsova"
+      ],
+      "active_vocabulary": {
+        "Leonie Schwarz": 50,
+        "Lea Müller": 50,
+        "Saskia Krauss": 50,
+        "Research on Human Pathology": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "49f424cf67282af5da248aa49ce3d4ee9350f1f450f95760b613cba3cdbcefc3"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Leonie Schwarz",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Lea Müller",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add.arguments.attendees[1]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Saskia Krauss",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add.arguments.attendees[2]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Research on Human Pathology",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_add.arguments.title",
+          "reason": "事件标题专名"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_mail_leonie.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Leonie Schwarz": 50,
+        "Lea Müller": 50,
+        "Saskia Krauss": 50,
+        "Research on Human Pathology": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "49f424cf67282af5da248aa49ce3d4ee9350f1f450f95760b613cba3cdbcefc3"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Leonie Schwarz",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Lea Müller",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add.arguments.attendees[1]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Saskia Krauss",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add.arguments.attendees[2]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Research on Human Pathology Session 2",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_add.arguments.title",
+          "reason": "后续会议标题专名"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_mail.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [
+        "Research on Human Pathology Session 2"
+      ],
+      "active_vocabulary": {
+        "Leonie Schwarz": 50,
+        "Lea Müller": 50,
+        "Saskia Krauss": 50,
+        "Research on Human Pathology": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Research on Human Pathology Session 2": 50
+      },
+      "vocabulary_sha256": "396d461d7fcb7ecdc6e42444975de5d076dfdf3a83049831b5f4ecfc68780fa4"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "6b9836043f8fb9d9c2f90102431c228644d99eec4a9c191942122f42946211d3",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4378,
+        "completion_tokens": 747,
+        "total_tokens": 5125,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4122
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.541
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0468_zh5zoync3yepme11k112jsebclkwcf6c",
+  "extracted_at": "2026-11-22T06:42:10.277192+00:00"
+}

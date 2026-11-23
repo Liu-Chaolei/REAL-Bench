@@ -1,0 +1,118 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0089_5l97vaxbt1jq3ba1c55c9z2d4yc7opdj",
+  "model": "deepseek-flash",
+  "input_sha256": "e19730de9de801af9925bb367ea9861cd22038b491c3e41efe6421275bacbb06",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "American Girl Pink Owl Bedroom Decor Girls Craft Kit",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定商品名称"
+        },
+        {
+          "text": "Sergei Kuznetsov",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-559b950e-1cc6-4fd6-9b36-0786ab89d083.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-559b950e-1cc6-4fd6-9b36-0786ab89d083.arguments.attendees[1]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f31257fb-47fc-44d4-837a-787041328f50.arguments.content",
+          "reason": "邮件署名姓名"
+        }
+      ],
+      "new_terms": [
+        "American Girl Pink Owl Bedroom Decor Girls Craft Kit",
+        "Sergei Kuznetsov",
+        "Viktor Kuznetsov",
+        "Anastasiya Kuznetsova"
+      ],
+      "active_vocabulary": {
+        "American Girl Pink Owl Bedroom Decor Girls Craft Kit": 50,
+        "Sergei Kuznetsov": 50,
+        "Viktor Kuznetsov": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "92e314f7d7e1421b2ab90a1f3b7be13f478ac292d714996da782fef64f21c3ca"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "American Girl Pink Owl Bedroom Decor Girls Craft Kit",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_confirm_order.arguments.content",
+          "reason": "特定商品名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "American Girl Pink Owl Bedroom Decor Girls Craft Kit": 50,
+        "Sergei Kuznetsov": 50,
+        "Viktor Kuznetsov": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "92e314f7d7e1421b2ab90a1f3b7be13f478ac292d714996da782fef64f21c3ca"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Sergei Kuznetsov",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "参会人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "American Girl Pink Owl Bedroom Decor Girls Craft Kit": 50,
+        "Sergei Kuznetsov": 50,
+        "Viktor Kuznetsov": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "92e314f7d7e1421b2ab90a1f3b7be13f478ac292d714996da782fef64f21c3ca"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "a20ee8d03b6ea211f5c0f7185c20305ac4c0a42d0e2251ca6a199c90c75aad84",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2388,
+        "completion_tokens": 351,
+        "total_tokens": 2739,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2132
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.456
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0089_5l97vaxbt1jq3ba1c55c9z2d4yc7opdj",
+  "extracted_at": "2026-11-22T06:39:59.628162+00:00"
+}

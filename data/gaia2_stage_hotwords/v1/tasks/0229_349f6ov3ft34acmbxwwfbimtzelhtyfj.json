@@ -1,0 +1,299 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0229_349f6ov3ft34acmbxwwfbimtzelhtyfj",
+  "model": "deepseek-flash",
+  "input_sha256": "7b8fe10b5c6d1f168ac4e125b343f01dd18d4c85e058cab878f15c96b9bb4626",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "The Lightning Shoplifter",
+          "kind": "product",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-3f2a673c-b18c-43e6-a438-4dd9c00bba2c.arguments.content",
+          "reason": "电影专有名称"
+        }
+      ],
+      "new_terms": [
+        "The Lightning Shoplifter"
+      ],
+      "active_vocabulary": {
+        "The Lightning Shoplifter": 50
+      },
+      "vocabulary_sha256": "2e999d5ef4abf3ca1e6927f8540d98e9f380364d07d66f3daf704ed8245695d8"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "The Lightning Shoplifter",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "电影专有名称"
+        },
+        {
+          "text": "Chris Columbust",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "导演姓名"
+        }
+      ],
+      "new_terms": [
+        "Chris Columbust"
+      ],
+      "active_vocabulary": {
+        "The Lightning Shoplifter": 50,
+        "Chris Columbust": 50
+      },
+      "vocabulary_sha256": "afbe3f39d16e87b07b3382fa35c677a5801053dc9376f71d675d0ccb94ee5596"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "The Lightning Shoplifter",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "电影专有名称"
+        },
+        {
+          "text": "Chris Columbust",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "导演姓名"
+        },
+        {
+          "text": "Anastasia Kuznetsova",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Doon",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "电影专有名称"
+        },
+        {
+          "text": "Dennis Villain-oove",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "导演姓名"
+        },
+        {
+          "text": "Gulandom Davlatov",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "The Hangry Olympics",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "电影专有名称"
+        },
+        {
+          "text": "Francis Lawrencium",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "导演姓名"
+        },
+        {
+          "text": "Gary Gross",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "导演姓名"
+        },
+        {
+          "text": "The Hitchhiker's GPS to the Galaxy",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "电影专有名称"
+        },
+        {
+          "text": "Garth Jenkem",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "导演姓名"
+        },
+        {
+          "text": "Kuzma Petrovich",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Star Peace",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "电影专有名称"
+        },
+        {
+          "text": "George Lukas",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "导演姓名"
+        },
+        {
+          "text": "Guardians of the Grocery Store",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "电影专有名称"
+        },
+        {
+          "text": "James Gunn-Powder",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "导演姓名"
+        },
+        {
+          "text": "Natalya Kuznetsova",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Hallelujah",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "电影专有名称"
+        },
+        {
+          "text": "John Carpentry",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "导演姓名"
+        },
+        {
+          "text": "Harry Pottery and the Goblin of Fire",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "电影专有名称"
+        },
+        {
+          "text": "Mike Newborn",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "导演姓名"
+        },
+        {
+          "text": "Spider-Ham",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "电影专有名称"
+        },
+        {
+          "text": "Sam Rainier",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "导演姓名"
+        },
+        {
+          "text": "Sergei Kuznetsov",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Jurassic Parking Lot",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "电影专有名称"
+        },
+        {
+          "text": "Stephen Spielburger",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "导演姓名"
+        },
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_shortlist.arguments.content",
+          "reason": "联系人姓名"
+        }
+      ],
+      "new_terms": [
+        "Anastasia Kuznetsova",
+        "Doon",
+        "Dennis Villain-oove",
+        "Gulandom Davlatov",
+        "The Hangry Olympics",
+        "Francis Lawrencium",
+        "Gary Gross",
+        "The Hitchhiker's GPS to the Galaxy",
+        "Garth Jenkem",
+        "Kuzma Petrovich",
+        "Star Peace",
+        "George Lukas",
+        "Guardians of the Grocery Store",
+        "James Gunn-Powder",
+        "Natalya Kuznetsova",
+        "Hallelujah",
+        "John Carpentry",
+        "Harry Pottery and the Goblin of Fire",
+        "Mike Newborn",
+        "Spider-Ham",
+        "Sam Rainier",
+        "Sergei Kuznetsov",
+        "Jurassic Parking Lot",
+        "Stephen Spielburger",
+        "Viktor Kuznetsov"
+      ],
+      "active_vocabulary": {
+        "The Lightning Shoplifter": 50,
+        "Chris Columbust": 50,
+        "Anastasia Kuznetsova": 50,
+        "Doon": 50,
+        "Dennis Villain-oove": 50,
+        "Gulandom Davlatov": 50,
+        "The Hangry Olympics": 50,
+        "Francis Lawrencium": 50,
+        "Gary Gross": 50,
+        "The Hitchhiker's GPS to the Galaxy": 50,
+        "Garth Jenkem": 50,
+        "Kuzma Petrovich": 50,
+        "Star Peace": 50,
+        "George Lukas": 50,
+        "Guardians of the Grocery Store": 50,
+        "James Gunn-Powder": 50,
+        "Natalya Kuznetsova": 50,
+        "Hallelujah": 50,
+        "John Carpentry": 50,
+        "Harry Pottery and the Goblin of Fire": 50,
+        "Mike Newborn": 50,
+        "Spider-Ham": 50,
+        "Sam Rainier": 50,
+        "Sergei Kuznetsov": 50,
+        "Jurassic Parking Lot": 50,
+        "Stephen Spielburger": 50,
+        "Viktor Kuznetsov": 50
+      },
+      "vocabulary_sha256": "c59ced842ee8ee091ab24473ee3997c3318c8e8bd54e0c313929b69aec2d7f4d"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "3eb0dd8a0d9c3f4367fb2749e52a22e7ba252daede9a479cb73a4c3e868b4b80",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1731,
+        "completion_tokens": 1200,
+        "total_tokens": 2931,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1475
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 3.32
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0229_349f6ov3ft34acmbxwwfbimtzelhtyfj",
+  "extracted_at": "2026-11-22T06:40:51.769919+00:00"
+}

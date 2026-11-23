@@ -1,0 +1,158 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0138_t6mwmx3ilpme496q17bhcx0f39vm1a9o",
+  "model": "deepseek-flash",
+  "input_sha256": "52f46223f908cf8fd9ff7bf1c94085eeb6e576a501ab74c5429811fd45af3910",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurelia",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Phoenix",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Aurelia",
+        "Phoenix"
+      ],
+      "active_vocabulary": {
+        "Aurelia": 50,
+        "Phoenix": 50
+      },
+      "vocabulary_sha256": "3f5a22db9c9b8641023e5dd4da9d8cf4f50280d604fc5cb8987b6ba8099f66ad"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurelia Păunescu",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人完整姓名"
+        },
+        {
+          "text": "Desert Bloom Apartments",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Desert Bloom",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Sunset Villas",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "发件人签名姓名"
+        }
+      ],
+      "new_terms": [
+        "Aurelia Păunescu",
+        "Desert Bloom Apartments",
+        "Desert Bloom",
+        "Sunset Villas",
+        "Aurélien LaFleur"
+      ],
+      "active_vocabulary": {
+        "Aurelia": 50,
+        "Phoenix": 50,
+        "Aurelia Păunescu": 50,
+        "Desert Bloom Apartments": 50,
+        "Desert Bloom": 50,
+        "Sunset Villas": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "e63b2d6cb871b15f66f984d1a1e6cde9d910b5ca472f55d4eacec4a7d21fb073"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurelia Păunescu",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Desert Bloom Apartments",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "地点公寓名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurelia": 50,
+        "Phoenix": 50,
+        "Aurelia Păunescu": 50,
+        "Desert Bloom Apartments": 50,
+        "Desert Bloom": 50,
+        "Sunset Villas": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "e63b2d6cb871b15f66f984d1a1e6cde9d910b5ca472f55d4eacec4a7d21fb073"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "a173ded8aac379031992c5de82536b985f408b27cc06a65319df409665e83d76",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2068,
+        "completion_tokens": 304,
+        "total_tokens": 2372,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1812
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.291,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "2b2fd131257a4b26822012e3ad98c54df2f1e6c179141709bcdc178ee275f3f0",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2765,
+        "completion_tokens": 306,
+        "total_tokens": 3071,
+        "prompt_tokens_details": {
+          "cached_tokens": 2304
+        },
+        "prompt_cache_hit_tokens": 2304,
+        "prompt_cache_miss_tokens": 461
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.211
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0138_t6mwmx3ilpme496q17bhcx0f39vm1a9o",
+  "extracted_at": "2026-11-22T06:40:12.826546+00:00"
+}

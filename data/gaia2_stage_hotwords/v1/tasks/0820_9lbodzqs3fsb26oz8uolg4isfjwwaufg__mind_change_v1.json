@@ -1,0 +1,162 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0820_9lbodzqs3fsb26oz8uolg4isfjwwaufg__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "b1137825eb7252ba3d841c4e3067101565e336deec9c13114a3f185a1677e9fe",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaito",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e443b476-0c5f-4eb5-bfee-3df8378a1fe9.arguments.content",
+          "reason": "邮件收件人名字"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e443b476-0c5f-4eb5-bfee-3df8378a1fe9.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Tokyo",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "联系人所在城市"
+        }
+      ],
+      "new_terms": [
+        "Kaito",
+        "Ursula Wiederkehr",
+        "Tokyo"
+      ],
+      "active_vocabulary": {
+        "Kaito": 50,
+        "Ursula Wiederkehr": 50,
+        "Tokyo": 50
+      },
+      "vocabulary_sha256": "27c75d3ccaf0ca8c6aa31d5afa5ee18bb37c19d78958b030796505fba41f6c13"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Léonie Ramseyer",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "被更正的联系人全名"
+        },
+        {
+          "text": "Alessia",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "实际联系人名字"
+        },
+        {
+          "text": "Alessia Ramseyer",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_cal.arguments.attendees[0]",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Zoom",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_cal.arguments.location",
+          "reason": "会议平台品牌"
+        }
+      ],
+      "new_terms": [
+        "Léonie Ramseyer",
+        "Alessia",
+        "Alessia Ramseyer",
+        "Zoom"
+      ],
+      "active_vocabulary": {
+        "Kaito": 50,
+        "Ursula Wiederkehr": 50,
+        "Tokyo": 50,
+        "Léonie Ramseyer": 50,
+        "Alessia": 50,
+        "Alessia Ramseyer": 50,
+        "Zoom": 50
+      },
+      "vocabulary_sha256": "ba096d902beebd344df1d240155dd0730cffb9f48720d0cc79d3efd7363b5424"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Alessia",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "会议联系人名字"
+        },
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "咖啡休息参与者名字"
+        },
+        {
+          "text": "Saskia",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "咖啡休息参与者名字"
+        },
+        {
+          "text": "Alessia Ramseyer",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add.arguments.attendees[0]",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Zoom",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_add.arguments.location",
+          "reason": "会议平台品牌"
+        }
+      ],
+      "new_terms": [
+        "Aurélie",
+        "Saskia"
+      ],
+      "active_vocabulary": {
+        "Kaito": 50,
+        "Ursula Wiederkehr": 50,
+        "Tokyo": 50,
+        "Léonie Ramseyer": 50,
+        "Alessia": 50,
+        "Alessia Ramseyer": 50,
+        "Zoom": 50,
+        "Aurélie": 50,
+        "Saskia": 50
+      },
+      "vocabulary_sha256": "a4b039e64b092a05d25cf6f6d3e4ace06ebf088e187932805b19baabf9d23df5"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "9087f6082793be85c5ee942cbde228062163ce304b887b5e768d511161ce87e3",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3308,
+        "completion_tokens": 455,
+        "total_tokens": 3763,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3052
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.799
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0820_9lbodzqs3fsb26oz8uolg4isfjwwaufg__mind_change_v1",
+  "extracted_at": "2026-11-22T06:46:11.716643+00:00"
+}

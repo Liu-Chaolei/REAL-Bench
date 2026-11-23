@@ -1,0 +1,136 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0458_k7t4jcii267xoiny9fnk3cjx7f36a4pc",
+  "model": "deepseek-flash",
+  "input_sha256": "c62282dab5028c387e04f72e9bd7c5ca4dbef7136c8d0281e8b8bcda5e994d77",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Odense",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "丹麦城市名，房源筛选地点"
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-eaf2a200-8c42-4196-b96a-26d518d875a1.arguments.content",
+          "reason": "邮件署名，含特殊字符的丹麦人名"
+        }
+      ],
+      "new_terms": [
+        "Odense",
+        "Søren Kjær"
+      ],
+      "active_vocabulary": {
+        "Odense": 50,
+        "Søren Kjær": 50
+      },
+      "vocabulary_sha256": "611ba411d18d101487a471726d98d17982c4ae826a6caf0b1bfea06009a5ea4a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Odense Family Home",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_calendar1.arguments.description",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Odense SV",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_calendar1.arguments.description",
+          "reason": "房源所在地区名"
+        }
+      ],
+      "new_terms": [
+        "Odense Family Home",
+        "Odense SV"
+      ],
+      "active_vocabulary": {
+        "Odense": 50,
+        "Søren Kjær": 50,
+        "Odense Family Home": 50,
+        "Odense SV": 50
+      },
+      "vocabulary_sha256": "fd73a9dbbf8e06e625231400e19f015c25d85934c341748d0102d1a49b3c6a56"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Odense Family Home",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_calendar1.arguments.description",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Odense SV",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_calendar1.arguments.description",
+          "reason": "房源所在地区名"
+        },
+        {
+          "text": "Odense River Views",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_calendar1.arguments.description",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Odense Kanal",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_calendar1.arguments.description",
+          "reason": "房源专有名称"
+        },
+        {
+          "text": "Odense Nørre",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_calendar1.arguments.description",
+          "reason": "房源专有名称，含特殊字符"
+        }
+      ],
+      "new_terms": [
+        "Odense River Views",
+        "Odense Kanal",
+        "Odense Nørre"
+      ],
+      "active_vocabulary": {
+        "Odense": 50,
+        "Søren Kjær": 50,
+        "Odense Family Home": 50,
+        "Odense SV": 50,
+        "Odense River Views": 50,
+        "Odense Kanal": 50,
+        "Odense Nørre": 50
+      },
+      "vocabulary_sha256": "cdeb932ec94e78cf7aa6d0a75f5a96cae69a1d241bc8833c2740e9bc8faca2d4"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "156c6e250fa3ba3d05211388726c5b6d2f94a2dce2e971ddbc62075d7e3438df",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4136,
+        "completion_tokens": 399,
+        "total_tokens": 4535,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3880
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.505
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0458_k7t4jcii267xoiny9fnk3cjx7f36a4pc",
+  "extracted_at": "2026-11-22T06:42:04.276979+00:00"
+}

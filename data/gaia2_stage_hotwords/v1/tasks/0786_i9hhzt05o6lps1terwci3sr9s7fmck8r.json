@@ -1,0 +1,147 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0786_i9hhzt05o6lps1terwci3sr9s7fmck8r",
+  "model": "deepseek-flash",
+  "input_sha256": "ce1a5f5245b3c7fc882ca12e4f5e29837b56516c644b28d56c1ee9807902be5b",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Emil Rasmussen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Emil",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dc446e92-0f21-446f-a820-308d67d0d23a.arguments.content",
+          "reason": "消息中称呼的名字"
+        }
+      ],
+      "new_terms": [
+        "Emil Rasmussen",
+        "Emil"
+      ],
+      "active_vocabulary": {
+        "Emil Rasmussen": 50,
+        "Emil": 50
+      },
+      "vocabulary_sha256": "f03e5978e479660754317833939cea7be16fd26f7606af947fb14c6b9b161a25"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Uppsala University Living",
+          "kind": "organization",
+          "source": "stage1.source_task",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Emil",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Lund Lyckås",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_msg.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Uppsala Stad",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_msg.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Västerås Västra",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_msg.arguments.content",
+          "reason": "房源名称"
+        }
+      ],
+      "new_terms": [
+        "Uppsala University Living",
+        "Lund Lyckås",
+        "Uppsala Stad",
+        "Västerås Västra"
+      ],
+      "active_vocabulary": {
+        "Emil Rasmussen": 50,
+        "Emil": 50,
+        "Uppsala University Living": 50,
+        "Lund Lyckås": 50,
+        "Uppsala Stad": 50,
+        "Västerås Västra": 50
+      },
+      "vocabulary_sha256": "4b1a4bbdfcfb38eef16db6cb4af866c178a45688de6302f9b99a59880d0296b7"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Emil",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Lund Lyckås",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_msg.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Uppsala Stad",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_msg.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Västerås Västra",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_msg.arguments.content",
+          "reason": "房源名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Emil Rasmussen": 50,
+        "Emil": 50,
+        "Uppsala University Living": 50,
+        "Lund Lyckås": 50,
+        "Uppsala Stad": 50,
+        "Västerås Västra": 50
+      },
+      "vocabulary_sha256": "4b1a4bbdfcfb38eef16db6cb4af866c178a45688de6302f9b99a59880d0296b7"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "9a31cfba4597a4f057b994363c45181dbd6109a4b1be5cd143015a71c6225389",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2510,
+        "completion_tokens": 397,
+        "total_tokens": 2907,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2254
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.6
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0786_i9hhzt05o6lps1terwci3sr9s7fmck8r",
+  "extracted_at": "2026-11-22T06:43:50.682305+00:00"
+}

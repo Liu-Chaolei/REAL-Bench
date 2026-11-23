@@ -1,0 +1,235 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0991_44h1mwl30n2teeem5bgtv7b6i4n1by3m",
+  "model": "deepseek-flash",
+  "input_sha256": "4120059e92f58701c83d2c4b05be1aebbfdfd3ae5b11beea9f51ecde25f45453",
+  "review_input_sha256": "fee77f2f7fdbd06523ce8cee73631605cbe4cd22647b82b53b5112d5e1fef5dd",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "2d46737b013feb84888b5a096e41377b00c821ac8c30461c4c98d4d32cc7b0b1",
+  "reference_results_sha256": "86d20661799437678ec5d08c04d104159b5d35e4f22c2ec2a823095a81d4fc04",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Åsa Lundqvist",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-8e4fcf55-b253-4826-a081-834aa43ca375.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Astrid Rasmussen",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-8e4fcf55-b253-4826-a081-834aa43ca375.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Lund Luxury Living",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-8e4fcf55-b253-4826-a081-834aa43ca375.arguments.location"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Klostergatan 15",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-8e4fcf55-b253-4826-a081-834aa43ca375.arguments.location"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Stora Södergatan 25",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-1feb05f2-6fea-4477-b3aa-d4c35a893514.arguments.start_location"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Lund Luxury Suites",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-8739a5ea-8803-4812-a76e-4bea6ec73fc1.arguments.location"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "Norra Vallgatan 15",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-8739a5ea-8803-4812-a76e-4bea6ec73fc1.arguments.location"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Lund Tour Crew",
+      "original_source": "stage1.tool_gt.series_s1_create_conversation.arguments.title"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Axel Lindqvist",
+      "original_source": "stage2.tool_gt.series_s2_recreate_lund_tour.arguments.attendees[2]"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Lund Stadsparken",
+      "original_source": "stage2.tool_gt.series_s2_add_second_tour.arguments.location"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Stadsparken 17",
+      "original_source": "stage2.tool_gt.series_s2_add_second_tour.arguments.location"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Lund Luxury Living",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.2",
+          "reason": "独特机构名称",
+          "weight": 50
+        },
+        {
+          "text": "Lund Luxury Suites",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.5",
+          "reason": "独特机构名称",
+          "weight": 50
+        },
+        {
+          "text": "Norra Vallgatan 15",
+          "kind": "place",
+          "source": "stage0.existing_catalog.6",
+          "reason": "瑞典语街道地址，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Stora Södergatan 25",
+          "kind": "place",
+          "source": "stage0.existing_catalog.4",
+          "reason": "含变音符号的瑞典语街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Rasmussen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Klostergatan 15",
+          "kind": "place",
+          "source": "stage0.existing_catalog.3",
+          "reason": "瑞典语街道名，含难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Åsa Lundqvist",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含瑞典语变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Lund Luxury Living",
+        "Lund Luxury Suites",
+        "Norra Vallgatan 15",
+        "Stora Södergatan 25",
+        "Astrid Rasmussen",
+        "Klostergatan 15",
+        "Åsa Lundqvist"
+      ],
+      "active_vocabulary": {
+        "Lund Luxury Living": 50,
+        "Lund Luxury Suites": 50,
+        "Norra Vallgatan 15": 50,
+        "Stora Södergatan 25": 50,
+        "Astrid Rasmussen": 50,
+        "Klostergatan 15": 50,
+        "Åsa Lundqvist": 50
+      },
+      "vocabulary_sha256": "8a2bcc3f741ac2433c81d07e0fb8a94d81588be4380d0809ee17b9b80f8e3ab9"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Lund Tour Crew",
+          "kind": "organization",
+          "source": "stage1.existing_catalog.0",
+          "reason": "独特组织名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Lund Tour Crew"
+      ],
+      "active_vocabulary": {
+        "Lund Luxury Living": 50,
+        "Lund Luxury Suites": 50,
+        "Norra Vallgatan 15": 50,
+        "Stora Södergatan 25": 50,
+        "Astrid Rasmussen": 50,
+        "Klostergatan 15": 50,
+        "Åsa Lundqvist": 50,
+        "Lund Tour Crew": 50
+      },
+      "vocabulary_sha256": "4579856c6f08a5e5b6f1c5679d4016c33242c541e0f3abaad775bebcb84f0ded"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Axel Lindqvist",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Lund Stadsparken",
+          "kind": "place",
+          "source": "stage2.existing_catalog.1",
+          "reason": "瑞典语地名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Stadsparken 17",
+          "kind": "place",
+          "source": "stage2.existing_catalog.2",
+          "reason": "瑞典语街道地址",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Axel Lindqvist",
+        "Lund Stadsparken",
+        "Stadsparken 17"
+      ],
+      "active_vocabulary": {
+        "Lund Luxury Living": 50,
+        "Lund Luxury Suites": 50,
+        "Norra Vallgatan 15": 50,
+        "Stora Södergatan 25": 50,
+        "Astrid Rasmussen": 50,
+        "Klostergatan 15": 50,
+        "Åsa Lundqvist": 50,
+        "Lund Tour Crew": 50,
+        "Axel Lindqvist": 50,
+        "Lund Stadsparken": 50,
+        "Stadsparken 17": 50
+      },
+      "vocabulary_sha256": "5bed816e41cd90f398bad3aee89bbda72940be4512c61209f065069da323ae5f"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:12.061225+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

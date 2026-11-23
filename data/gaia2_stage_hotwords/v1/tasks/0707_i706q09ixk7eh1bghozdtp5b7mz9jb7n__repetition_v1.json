@@ -1,0 +1,142 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0707_i706q09ixk7eh1bghozdtp5b7mz9jb7n__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "3a25461f739a301a1e6e67a7cace64c6e5ae4ee38aeb81ff76d84622fbb054a5",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Astrid Nakamura",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c54600cf-772f-4d1b-9266-728b91cdfbc9.arguments.attendees[0]",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Çağla Öztürk",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6660a2f2-3f97-40a3-8362-8e3c56f4600b.arguments.attendees[0]",
+          "reason": "联系人姓名，含特殊字符"
+        },
+        {
+          "text": "Ximena Reyes García",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1da5c341-35f0-42f6-869d-432144ce5c77.arguments.attendees[0]",
+          "reason": "联系人姓名，含重音"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a3cca8bc-ef26-4a4c-9a79-6217391d68d5.arguments.content",
+          "reason": "发件人签名姓名"
+        }
+      ],
+      "new_terms": [
+        "Astrid Nakamura",
+        "Çağla Öztürk",
+        "Ximena Reyes García",
+        "Aurélien LaFleur"
+      ],
+      "active_vocabulary": {
+        "Astrid Nakamura": 50,
+        "Çağla Öztürk": 50,
+        "Ximena Reyes García": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "8dbb06591e6eeb903e90040172342f11aa913911402f56e55648d14531db1152"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Astrid Nakamura",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Çağla Öztürk",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人全名，含特殊字符"
+        },
+        {
+          "text": "Ximena Reyes García",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人全名，含重音"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_1.arguments.content",
+          "reason": "发件人签名姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid Nakamura": 50,
+        "Çağla Öztürk": 50,
+        "Ximena Reyes García": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "8dbb06591e6eeb903e90040172342f11aa913911402f56e55648d14531db1152"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Astrid Nakamura",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_5.arguments.attendees[0]",
+          "reason": "参会人全名"
+        },
+        {
+          "text": "Çağla Öztürk",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_5.arguments.attendees[1]",
+          "reason": "参会人全名，含特殊字符"
+        },
+        {
+          "text": "Ximena Reyes García",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_5.arguments.attendees[2]",
+          "reason": "参会人全名，含重音"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid Nakamura": 50,
+        "Çağla Öztürk": 50,
+        "Ximena Reyes García": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "8dbb06591e6eeb903e90040172342f11aa913911402f56e55648d14531db1152"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "6e97932bd0a5281bff0285f617fa7bf1906feae20d8c2141707a99f50810b843",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5294,
+        "completion_tokens": 569,
+        "total_tokens": 5863,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 5038
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.1
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0707_i706q09ixk7eh1bghozdtp5b7mz9jb7n__repetition_v1",
+  "extracted_at": "2026-11-22T06:46:05.455861+00:00"
+}

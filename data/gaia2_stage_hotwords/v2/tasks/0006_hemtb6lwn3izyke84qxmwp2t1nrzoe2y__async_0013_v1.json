@@ -1,0 +1,197 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0006_hemtb6lwn3izyke84qxmwp2t1nrzoe2y__async_0013_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "ef660847605b368e83a2e1fbb6d01ca3820799c99de7c06d74fd004fd1debf95",
+  "review_input_sha256": "e3a68abaddd64a496df7c5a7ac26897a19c894ee4ed206ed36cb71fe722c435c",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "f887bd20f41573da59fb18dc6aa7c889ea05f44d324ae1e7b4bcd2cf5de47efa",
+  "reference_results_sha256": "2d0b5da70df4d3c8636a8855256ed25ba8df96f04b97eb280f6b402a65c65052",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Niamh Okoro",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Aoife Byrne",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Áine Ní Bhroin",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Caoimhe Ní Chonchobhair",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Áine Ní Chonaill",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.5": {
+      "stage": 1,
+      "text": "Aisling Ó Cuinn",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.6": {
+      "stage": 1,
+      "text": "Aoife Ní Chonail",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.7": {
+      "stage": 1,
+      "text": "Saoirse Ní Chonaill",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Aoife Ní Chonaill",
+      "original_source": "stage2.reference_reply.series_s2_reply.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aisling Ó Cuinn",
+          "kind": "person",
+          "source": "stage1.existing_catalog.5",
+          "reason": "含 Ó 变音符号的爱尔兰人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Aoife Ní Chonail",
+          "kind": "person",
+          "source": "stage1.existing_catalog.6",
+          "reason": "含变音符号的爱尔兰人名，拼写易混",
+          "weight": 50
+        },
+        {
+          "text": "Caoimhe Ní Chonchobhair",
+          "kind": "person",
+          "source": "stage1.existing_catalog.3",
+          "reason": "含变音符号且姓氏复杂的爱尔兰人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Saoirse Ní Chonaill",
+          "kind": "person",
+          "source": "stage1.existing_catalog.7",
+          "reason": "含变音符号的完整爱尔兰人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Áine Ní Bhroin",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含爱尔兰语变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Áine Ní Chonaill",
+          "kind": "person",
+          "source": "stage1.existing_catalog.4",
+          "reason": "含变音符号的完整爱尔兰人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Aoife Byrne",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，姓氏 Byrne 拼写易混",
+          "weight": 50
+        },
+        {
+          "text": "Niamh Okoro",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "爱尔兰人名，含少见姓氏 Okoro，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aisling Ó Cuinn",
+        "Aoife Ní Chonail",
+        "Caoimhe Ní Chonchobhair",
+        "Saoirse Ní Chonaill",
+        "Áine Ní Bhroin",
+        "Áine Ní Chonaill",
+        "Aoife Byrne",
+        "Niamh Okoro"
+      ],
+      "active_vocabulary": {
+        "Aisling Ó Cuinn": 50,
+        "Aoife Ní Chonail": 50,
+        "Caoimhe Ní Chonchobhair": 50,
+        "Saoirse Ní Chonaill": 50,
+        "Áine Ní Bhroin": 50,
+        "Áine Ní Chonaill": 50,
+        "Aoife Byrne": 50,
+        "Niamh Okoro": 50
+      },
+      "vocabulary_sha256": "267656d524d54e38cc11c019159b0df95ab6dc706a92d8c5a20a7ec0dff2da7e"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aoife Ní Chonaill",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号的完整爱尔兰人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aoife Ní Chonaill"
+      ],
+      "active_vocabulary": {
+        "Aisling Ó Cuinn": 50,
+        "Aoife Ní Chonail": 50,
+        "Caoimhe Ní Chonchobhair": 50,
+        "Saoirse Ní Chonaill": 50,
+        "Áine Ní Bhroin": 50,
+        "Áine Ní Chonaill": 50,
+        "Aoife Byrne": 50,
+        "Niamh Okoro": 50,
+        "Aoife Ní Chonaill": 50
+      },
+      "vocabulary_sha256": "d5ff1dfdd314f704b9bb96c48fe68298df802c3e9d717dc8cd3ed6bdbcbbd978"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:43.304334+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

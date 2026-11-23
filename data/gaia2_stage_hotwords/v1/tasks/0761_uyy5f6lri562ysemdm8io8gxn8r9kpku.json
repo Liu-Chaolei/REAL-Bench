@@ -1,0 +1,98 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0761_uyy5f6lri562ysemdm8io8gxn8r9kpku",
+  "model": "deepseek-flash",
+  "input_sha256": "ba09bdecd5f253b6c0fe40324d2b3688b6995028b285bac920fa959875bf473a",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kazimierz Wojciechowski",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "完整人名，事件与邮件收件人"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c48905d7-e50c-4c48-beaf-e1fe8ad99913.arguments.content",
+          "reason": "邮件署名中的完整人名"
+        }
+      ],
+      "new_terms": [
+        "Kazimierz Wojciechowski",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Kazimierz Wojciechowski": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "86d6b0b5bdde3d447d929799b471b85d26af1f2253ad9e3be7f4de538ec3e7a8"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kazimierz Wojciechowski",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "完整人名，事件标题与参会人"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_hold.arguments.attendees[0]",
+          "reason": "参会人完整人名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kazimierz Wojciechowski": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "86d6b0b5bdde3d447d929799b471b85d26af1f2253ad9e3be7f4de538ec3e7a8"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kazimierz Wojciechowski",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "完整人名，事件标题与消息对象"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kazimierz Wojciechowski": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "86d6b0b5bdde3d447d929799b471b85d26af1f2253ad9e3be7f4de538ec3e7a8"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "768deed58d1cefbd5497fbb4d3e14dc5e9e5011fcdf3c112753e668b958b4df0",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3182,
+        "completion_tokens": 237,
+        "total_tokens": 3419,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2926
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.428
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0761_uyy5f6lri562ysemdm8io8gxn8r9kpku",
+  "extracted_at": "2026-11-22T06:43:43.400318+00:00"
+}

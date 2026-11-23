@@ -1,0 +1,164 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0820_9lbodzqs3fsb26oz8uolg4isfjwwaufg",
+  "model": "deepseek-flash",
+  "input_sha256": "e94cc264516b549be046d2d5342463ac746210702fc292c7cbb3d4bc16739677",
+  "review_input_sha256": "9848b1c0a22004a5e426dab2795555d1cec4dd963e41b1fd8a38d419983e83d3",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "45f0565777eabf29f4e25f658fe64f3a3e27de3571e9d4b7ac10afc04abfe91f",
+  "reference_results_sha256": "644759bcb8fe687ff2b2b28ceb7ecd9d4050f11c8661a14f7b173919da524b94",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-e443b476-0c5f-4eb5-bfee-3df8378a1fe9.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Alessia Ramseyer",
+      "original_source": "stage1.tool_gt.series_s1_cal.arguments.attendees[0]"
+    },
+    "stage1.tool_response.series_s1_cal_read": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"0112d80b0df14caaa35ee4c545fa8d67\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1729539000\", \"end_datetime\": \"1729546200\", \"tag\": \"Social\", \"description\": \"Dinner with friends at a local restaurant.\", \"location\": \"Restaurant in Basel\", \"attendees\": [\"Aurélien Vandenberghe\", \"Liesbeth Vandenberghe\", \"Aurélie Wyss\"], \"start_strftime\": \"Monday, 2024-10-21 19:30:00\", \"end_strftime\": \"Monday, 2024-10-21 21:30:00\"}, {\"event_id\": \"648213eb110645babb697c88f17f38fa\", \"title\": \"Coffee Break\", \"start_datetime\": \"1729504800\", \"end_datetime\": \"1729508400\", \"tag\": \"Social\", \"description\": \"Catch up with friends over coffee.\", \"location\": \"Café in Basel\", \"attendees\": [\"Aurélie Wyss\", \"Saskia Wyss\"], \"start_strftime\": \"Monday, 2024-10-21 10:00:00\", \"end_strftime\": \"Monday, 2024-10-21 11:00:00\"}, {\"event_id\": \"d43ffd0b9f87416f9efd9f04f3ec16c9\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729533600\", \"end_datetime\": \"1729537200\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio in Basel\", \"attendees\": [], \"start_strftime\": \"Monday, 2024-10-21 18:00:00\", \"end_strftime\": \"Monday, 2024-10-21 19:00:00\"}, {\"event_id\": \"e679025bc12541ae926e004cb43a7abe\", \"title\": \"Research Collaboration Meeting\", \"start_datetime\": \"1729519200\", \"end_datetime\": \"1729526400\", \"tag\": \"Research\", \"description\": \"Discuss research collaboration with Katarzyna Zielińska\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Katarzyna Zielińska\"], \"start_strftime\": \"Monday, 2024-10-21 14:00:00\", \"end_strftime\": \"Monday, 2024-10-21 16:00:00\"}, {\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Research Collaboration with Alessia Ramseyer\", \"start_datetime\": \"1729504800.0\", \"end_datetime\": \"1729508400.0\", \"tag\": \"Research\", \"description\": \"Discuss research on the impact of battles on geopolitical dynamics.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Alessia Ramseyer\"], \"start_strftime\": \"Monday, 2024-10-21 10:00:00\", \"end_strftime\": \"Monday, 2024-10-21 11:00:00\"}], \"range\": [\"0\", \"5\"], \"total\": \"5\"}",
+      "event_id": "series_s1_cal_read",
+      "response_sha256": "8d9ec92d2ecb9823df64d41c39dabccae0e8e12250b90961d8310ddbdc5c9b8f"
+    },
+    "stage2.tool_response.series_s2_read_morning": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"648213eb110645babb697c88f17f38fa\", \"title\": \"Coffee Break\", \"start_datetime\": \"1729504800\", \"end_datetime\": \"1729508400\", \"tag\": \"Social\", \"description\": \"Catch up with friends over coffee.\", \"location\": \"Café in Basel\", \"attendees\": [\"Aurélie Wyss\", \"Saskia Wyss\"], \"start_strftime\": \"Monday, 2024-10-21 10:00:00\", \"end_strftime\": \"Monday, 2024-10-21 11:00:00\"}], \"range\": [\"0\", \"1\"], \"total\": \"1\"}",
+      "event_id": "series_s2_read_morning",
+      "response_sha256": "78b533aafb2583b0f5ca0b7476036cefadc7398889e2e1a24b9947d1417df892"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，含独特姓氏，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "d95c9da3be30654558667f62ae333c7b63393c188d4c6e532a2fa195afe3db23"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Alessia Ramseyer",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，姓氏独特，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Aurélie Wyss",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_read",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_read",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_read",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_cal_read",
+          "reason": "完整人名，姓氏独特",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Alessia Ramseyer",
+        "Aurélie Wyss",
+        "Aurélien Vandenberghe",
+        "Katarzyna Zielińska",
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Ursula Wiederkehr": 50,
+        "Alessia Ramseyer": 50,
+        "Aurélie Wyss": 50,
+        "Aurélien Vandenberghe": 50,
+        "Katarzyna Zielińska": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "bac65284f33886b172c916881a5fbdcb2ede99279a5ff48186976330d81d3a69"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Saskia Wyss",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_morning",
+          "reason": "完整人名，姓氏独特",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Saskia Wyss"
+      ],
+      "active_vocabulary": {
+        "Ursula Wiederkehr": 50,
+        "Alessia Ramseyer": 50,
+        "Aurélie Wyss": 50,
+        "Aurélien Vandenberghe": 50,
+        "Katarzyna Zielińska": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Saskia Wyss": 50
+      },
+      "vocabulary_sha256": "715ad6295360f3c4da5350aec76837e5defffada944875d82178afefdf0de0e4"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kaito",
+    "Tokyo",
+    "Zoom",
+    "Aurélie",
+    "Saskia"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:28.647642+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

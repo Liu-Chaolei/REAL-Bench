@@ -1,0 +1,186 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0074_o4zylqu4lbtumngdld10niqy7q2a2sd6",
+  "model": "deepseek-flash",
+  "input_sha256": "936b3329d976114f0cd08922bb5ddccae744a70bc920f1b8c4239e24ccf00ce6",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Copa América 2024",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "赛事专有名称"
+        },
+        {
+          "text": "metro_herald_833.txt",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7d84d0fe-ef3e-485f-aa6d-511a9a3c726f.arguments.attachment_path",
+          "reason": "特定新闻文件名"
+        },
+        {
+          "text": "Family_Game_Night_2021.png",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6685d50e-8796-4eea-9c78-00970018e29c.arguments.path",
+          "reason": "特定图片文件名"
+        },
+        {
+          "text": "Family_Movie_Night_2022.png",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a5589f86-aced-46c0-889d-5065d2602bbc.arguments.path",
+          "reason": "特定图片文件名"
+        }
+      ],
+      "new_terms": [
+        "Copa América 2024",
+        "metro_herald_833.txt",
+        "Family_Game_Night_2021.png",
+        "Family_Movie_Night_2022.png"
+      ],
+      "active_vocabulary": {
+        "Copa América 2024": 50,
+        "metro_herald_833.txt": 50,
+        "Family_Game_Night_2021.png": 50,
+        "Family_Movie_Night_2022.png": 50
+      },
+      "vocabulary_sha256": "2e839df306cbdf18277f5335423bdb0a572e40452059ff1eb574b4906e50798c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Axel Lindqvist",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Jian Li",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Copa América 2024",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "赛事专有名称"
+        }
+      ],
+      "new_terms": [
+        "Axel Lindqvist",
+        "Jian Li"
+      ],
+      "active_vocabulary": {
+        "Copa América 2024": 50,
+        "metro_herald_833.txt": 50,
+        "Family_Game_Night_2021.png": 50,
+        "Family_Movie_Night_2022.png": 50,
+        "Axel Lindqvist": 50,
+        "Jian Li": 50
+      },
+      "vocabulary_sha256": "0acc8f45f22681304afa9cb230a88d87d468738cc4b64bc6d075d6ee15548a5c"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Family Firsts",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "索引专有名称"
+        },
+        {
+          "text": "First_Bike_Ride_2021.png",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_file_0.arguments.path",
+          "reason": "特定图片文件名"
+        },
+        {
+          "text": "First_Day_of_School_2021.png",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_file_1.arguments.path",
+          "reason": "特定图片文件名"
+        },
+        {
+          "text": "First_Day_of_Summer_2021.png",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_file_2.arguments.path",
+          "reason": "特定图片文件名"
+        },
+        {
+          "text": "First_Lost_Tooth_2023.png",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_file_3.arguments.path",
+          "reason": "特定图片文件名"
+        }
+      ],
+      "new_terms": [
+        "Family Firsts",
+        "First_Bike_Ride_2021.png",
+        "First_Day_of_School_2021.png",
+        "First_Day_of_Summer_2021.png",
+        "First_Lost_Tooth_2023.png"
+      ],
+      "active_vocabulary": {
+        "Copa América 2024": 50,
+        "metro_herald_833.txt": 50,
+        "Family_Game_Night_2021.png": 50,
+        "Family_Movie_Night_2022.png": 50,
+        "Axel Lindqvist": 50,
+        "Jian Li": 50,
+        "Family Firsts": 50,
+        "First_Bike_Ride_2021.png": 50,
+        "First_Day_of_School_2021.png": 50,
+        "First_Day_of_Summer_2021.png": 50,
+        "First_Lost_Tooth_2023.png": 50
+      },
+      "vocabulary_sha256": "9c053124f62aa516c2d191587f71a4629aaad510676474b1e0234fb9b7eb3888"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "d999ea728b43fd4df6457fc67af69fe7eed85407a91ffa32ea6994764a27d3f2",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2841,
+        "completion_tokens": 687,
+        "total_tokens": 3528,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2585
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.279,
+      "error": "Invalid proper-name phrase: 'axel.lindqvist@gaia2mail.com'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "177c5bd93d5e0b7623c9c5a09a7f1375f76ae1d738fe7d453feb3f44ea6082f5",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3928,
+        "completion_tokens": 538,
+        "total_tokens": 4466,
+        "prompt_tokens_details": {
+          "cached_tokens": 3456
+        },
+        "prompt_cache_hit_tokens": 3456,
+        "prompt_cache_miss_tokens": 472
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.819
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0074_o4zylqu4lbtumngdld10niqy7q2a2sd6",
+  "extracted_at": "2026-11-22T06:39:58.379029+00:00"
+}

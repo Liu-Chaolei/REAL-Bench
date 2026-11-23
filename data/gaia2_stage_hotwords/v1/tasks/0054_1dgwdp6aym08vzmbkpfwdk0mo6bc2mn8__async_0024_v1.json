@@ -1,0 +1,147 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0054_1dgwdp6aym08vzmbkpfwdk0mo6bc2mn8__async_0024_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "514ec2d3ff5b662af4cb7d944686e4481e724cf256cc5ed6686e1a5dc419521d",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6fb98f7d-eaa6-45f5-967b-a5a0013786af.arguments.content",
+          "reason": "发件人签名中的完整人名"
+        },
+        {
+          "text": "Saskia",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7826d3b1-1e3e-4c09-a0e8-0bb263f1d280.arguments.content",
+          "reason": "单独消息中提及的收件人名"
+        }
+      ],
+      "new_terms": [
+        "Ursula Wiederkehr",
+        "Saskia"
+      ],
+      "active_vocabulary": {
+        "Ursula Wiederkehr": 50,
+        "Saskia": 50
+      },
+      "vocabulary_sha256": "5ce391c87088f1aa80534e4163bb89d896bfae1d12ef3184b51e8680b54ddd48"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien Van der Straeten",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create_event.arguments.attendees[0]",
+          "reason": "参会人完整姓名，含特殊字符"
+        },
+        {
+          "text": "Aurélie Wyss",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create_event.arguments.attendees[1]",
+          "reason": "参会人完整姓名，含特殊字符"
+        },
+        {
+          "text": "Saskia Wyss",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create_event.arguments.attendees[2]",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Café in Basel",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create_event.arguments.location",
+          "reason": "活动地点名称，含特殊字符"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "邮件签名中的完整人名"
+        }
+      ],
+      "new_terms": [
+        "Aurélien Van der Straeten",
+        "Aurélie Wyss",
+        "Saskia Wyss",
+        "Café in Basel"
+      ],
+      "active_vocabulary": {
+        "Ursula Wiederkehr": 50,
+        "Saskia": 50,
+        "Aurélien Van der Straeten": 50,
+        "Aurélie Wyss": 50,
+        "Saskia Wyss": 50,
+        "Café in Basel": 50
+      },
+      "vocabulary_sha256": "e19fcd35499faf697b17a837b9907fcf0b894e87587df69b932d2615220e9a0b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien Van der Straeten",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "记录中列出的参会人完整姓名"
+        },
+        {
+          "text": "Aurélie Wyss",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "记录中列出的参会人完整姓名"
+        },
+        {
+          "text": "Saskia Wyss",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "记录中列出的参会人完整姓名"
+        },
+        {
+          "text": "Café in Basel",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "新提议活动的地点名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Ursula Wiederkehr": 50,
+        "Saskia": 50,
+        "Aurélien Van der Straeten": 50,
+        "Aurélie Wyss": 50,
+        "Saskia Wyss": 50,
+        "Café in Basel": 50
+      },
+      "vocabulary_sha256": "e19fcd35499faf697b17a837b9907fcf0b894e87587df69b932d2615220e9a0b"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "44a7f631788fb424b109ab1794e72f61d195fb9bc0dc3b58b0e4e6ed0fd45cbb",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3495,
+        "completion_tokens": 550,
+        "total_tokens": 4045,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3239
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.149
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0054_1dgwdp6aym08vzmbkpfwdk0mo6bc2mn8__async_0024_v1",
+  "extracted_at": "2026-11-22T06:46:27.668401+00:00"
+}

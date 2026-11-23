@@ -1,0 +1,259 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0368_71ga6g2c6igrl2m4y1hls2ivk2fze31v",
+  "model": "deepseek-flash",
+  "input_sha256": "89e75aa6e346b763db9e4fe4803b7795d2aa01602b8a4f8ec8d862558e2d5796",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kazan River View",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Kremlyovskaya Street",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "街道专有名称"
+        },
+        {
+          "text": "Kazan",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "城市名称"
+        },
+        {
+          "text": "Kazan City Center",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Kazan Oasis",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Samara Riverside",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Kazan Kremlin Apartments",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Kazan Kremlin Suites",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Moscow River Apartments",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Moscow Modern",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Volga Dreams",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Kazan Pearl",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "公寓专有名称"
+        }
+      ],
+      "new_terms": [
+        "Kazan River View",
+        "Kremlyovskaya Street",
+        "Kazan",
+        "Kazan City Center",
+        "Kazan Oasis",
+        "Samara Riverside",
+        "Kazan Kremlin Apartments",
+        "Kazan Kremlin Suites",
+        "Moscow River Apartments",
+        "Moscow Modern",
+        "Volga Dreams",
+        "Kazan Pearl"
+      ],
+      "active_vocabulary": {
+        "Kazan River View": 50,
+        "Kremlyovskaya Street": 50,
+        "Kazan": 50,
+        "Kazan City Center": 50,
+        "Kazan Oasis": 50,
+        "Samara Riverside": 50,
+        "Kazan Kremlin Apartments": 50,
+        "Kazan Kremlin Suites": 50,
+        "Moscow River Apartments": 50,
+        "Moscow Modern": 50,
+        "Volga Dreams": 50,
+        "Kazan Pearl": 50
+      },
+      "vocabulary_sha256": "ada16194c0d6f20f597886d3555d8871f9d89f190b50c9907e79d129f5b73d0a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Volga Dreams",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Kazan Pearl",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Kazanskaya Street",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "街道专有名称"
+        },
+        {
+          "text": "Kazan",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "城市名称"
+        },
+        {
+          "text": "Bauman St, 43",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "街道地址专有名称"
+        },
+        {
+          "text": "Kazan River View",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Nizhny Novgorod View",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Nizhny Novgorod Suites",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Krasnodar City Living",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓专有名称"
+        },
+        {
+          "text": "Samara City Apartments",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "公寓专有名称"
+        }
+      ],
+      "new_terms": [
+        "Kazanskaya Street",
+        "Bauman St, 43",
+        "Nizhny Novgorod View",
+        "Nizhny Novgorod Suites",
+        "Krasnodar City Living",
+        "Samara City Apartments"
+      ],
+      "active_vocabulary": {
+        "Kazan River View": 50,
+        "Kremlyovskaya Street": 50,
+        "Kazan": 50,
+        "Kazan City Center": 50,
+        "Kazan Oasis": 50,
+        "Samara Riverside": 50,
+        "Kazan Kremlin Apartments": 50,
+        "Kazan Kremlin Suites": 50,
+        "Moscow River Apartments": 50,
+        "Moscow Modern": 50,
+        "Volga Dreams": 50,
+        "Kazan Pearl": 50,
+        "Kazanskaya Street": 50,
+        "Bauman St, 43": 50,
+        "Nizhny Novgorod View": 50,
+        "Nizhny Novgorod Suites": 50,
+        "Krasnodar City Living": 50,
+        "Samara City Apartments": 50
+      },
+      "vocabulary_sha256": "67b174b0c0cd97e3fc5a3fae262012907dc219fde8e8c6034235cab241e1adab"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "e7b945597c2727e58b9b41b7d723c24720b5f548ba37d4299208126065df301a",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2516,
+        "completion_tokens": 848,
+        "total_tokens": 3364,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2260
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 2.591,
+      "error": "6 validation errors for Extraction\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage0.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage1.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='提取公寓与地名专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage2.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='提取公寓与地名专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "ea96e4e6c913ce016d3b628879811693c3b79e8e21924df68c1c26c910b79a35",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4085,
+        "completion_tokens": 799,
+        "total_tokens": 4884,
+        "prompt_tokens_details": {
+          "cached_tokens": 3328
+        },
+        "prompt_cache_hit_tokens": 3328,
+        "prompt_cache_miss_tokens": 757
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.732
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0368_71ga6g2c6igrl2m4y1hls2ivk2fze31v",
+  "extracted_at": "2026-11-22T06:41:36.687678+00:00"
+}

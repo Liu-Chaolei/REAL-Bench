@@ -1,0 +1,150 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0254_qb5m2mayzadgk39jz5ddsxpq0uyb10wu__async_0008_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "3da02efea002262c135e86ecdf15d680678f2eca97d1858082acd83ae3749eeb",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-72ce888b-0360-4673-a758-a5ff2fbc0620.arguments.content",
+          "reason": "邮件往来最多者的完整姓名"
+        }
+      ],
+      "new_terms": [
+        "Katarzyna Zielińska"
+      ],
+      "active_vocabulary": {
+        "Katarzyna Zielińska": 50
+      },
+      "vocabulary_sha256": "c5268737b262513745ef8dfb30149c229a915f483b90d3296f713d2f50c9032b"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_speech.arguments.content",
+          "reason": "收件人完整姓名"
+        },
+        {
+          "text": "Katarzyna",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply.arguments.content",
+          "reason": "邮件称呼中的名字"
+        },
+        {
+          "text": "Kraków",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_reply.arguments.content",
+          "reason": "波兰城市专名"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply.arguments.content",
+          "reason": "发件人署名完整姓名"
+        }
+      ],
+      "new_terms": [
+        "Katarzyna",
+        "Kraków",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Katarzyna Zielińska": 50,
+        "Katarzyna": 50,
+        "Kraków": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "9c4f402ce74fd6dd15ce76dd29ee47d0a1adce078b4f2e26ec97e210cb53b258"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]",
+          "reason": "参会人完整姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Katarzyna Zielińska": 50,
+        "Katarzyna": 50,
+        "Kraków": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "9c4f402ce74fd6dd15ce76dd29ee47d0a1adce078b4f2e26ec97e210cb53b258"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "a3bf6e44f1685aafb0f231d55a4d036831a737e05fcebb64fdbcc26d1ab369a6",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1721,
+        "completion_tokens": 331,
+        "total_tokens": 2052,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1465
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.684,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "032ebec095899c12a9170d1774324f1991670494fdb3edf645f7b4b409c89b92",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2445,
+        "completion_tokens": 333,
+        "total_tokens": 2778,
+        "prompt_tokens_details": {
+          "cached_tokens": 2048
+        },
+        "prompt_cache_hit_tokens": 2048,
+        "prompt_cache_miss_tokens": 397
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.361,
+      "error": "Invalid proper-name phrase: 'kzielinska@student.uj.edu.pl'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "83d3baab6a5d984425ebfd383732dc9c94ae0e4c1732a5e0feb1e794b8eeaf2e",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2453,
+        "completion_tokens": 291,
+        "total_tokens": 2744,
+        "prompt_tokens_details": {
+          "cached_tokens": 1664
+        },
+        "prompt_cache_hit_tokens": 1664,
+        "prompt_cache_miss_tokens": 789
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.529
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0254_qb5m2mayzadgk39jz5ddsxpq0uyb10wu__async_0008_v1",
+  "extracted_at": "2026-11-22T06:46:27.785752+00:00"
+}

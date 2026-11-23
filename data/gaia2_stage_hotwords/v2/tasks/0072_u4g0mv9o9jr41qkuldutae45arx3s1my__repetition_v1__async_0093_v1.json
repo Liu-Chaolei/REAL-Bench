@@ -1,0 +1,146 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0072_u4g0mv9o9jr41qkuldutae45arx3s1my__repetition_v1__async_0093_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "27282e60038c84072ab5b1299d4fb6e97812f4f069b7d32b44f6e1a4a85923d7",
+  "review_input_sha256": "132ad64d2d1ec03d1dc2386862694244b450941e2806cd512334abe8c6fe2fde",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "a6538584fcedda904b4c8b7458e3103a8540df2a45ca5cb070df90dd9c0597df",
+  "reference_results_sha256": "daa550e70de9e30552d301ed335fd498a3dab4e9c2f779771c75bdbb9aaac926",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Šárka Nováková",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "ul. Pražská 15, Plzeň",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Matěj Nováček",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-032c04f7-e8d6-42e1-bab7-8ac6a987dcb7.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Gym-and-Cards Party",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Plzeň Loft Living",
+      "original_source": "stage2.reference_reply.series_s2_reply.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "ul. Pražská 15, Plzeň",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的具体地址地名",
+          "weight": 50
+        },
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Šárka Nováková",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "ul. Pražská 15, Plzeň",
+        "Matěj Nováček",
+        "Šárka Nováková"
+      ],
+      "active_vocabulary": {
+        "ul. Pražská 15, Plzeň": 50,
+        "Matěj Nováček": 50,
+        "Šárka Nováková": 50
+      },
+      "vocabulary_sha256": "2aa26d84ebaf3b4383dc747d0879477ae01da9253c873dad91c3de4b71c52da4"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Gym-and-Cards Party",
+          "kind": "custom_name",
+          "source": "stage1.existing_catalog.0",
+          "reason": "独特自定义活动名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Gym-and-Cards Party"
+      ],
+      "active_vocabulary": {
+        "ul. Pražská 15, Plzeň": 50,
+        "Matěj Nováček": 50,
+        "Šárka Nováková": 50,
+        "Gym-and-Cards Party": 50
+      },
+      "vocabulary_sha256": "45f2c5ae90444ea802bcf2bf6b602a3238003c53e50522378ab09abd4e71190e"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Plzeň Loft Living",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号的独特地点/场所名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Plzeň Loft Living"
+      ],
+      "active_vocabulary": {
+        "ul. Pražská 15, Plzeň": 50,
+        "Matěj Nováček": 50,
+        "Šárka Nováková": 50,
+        "Gym-and-Cards Party": 50,
+        "Plzeň Loft Living": 50
+      },
+      "vocabulary_sha256": "931c16274f7750fd2e14708e6c6f5a337f696100f7b58aa5d8722dd09e0c023a"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Bicycle Rider Back",
+    "Translation Project Meeting"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:20:16.040689+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

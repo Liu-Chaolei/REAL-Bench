@@ -1,0 +1,137 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0980_s0b6q9czn1wkjlkl9p6qesjd792a9zbz",
+  "model": "deepseek-flash",
+  "input_sha256": "aec44a6604593d4add0b532b14d7da4558bc564f89bf1dfef152f70a4c0a2aaa",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Sip & Savor Soirée",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f05be255-3344-4b5f-8c8c-46c44e65dbae.arguments.title",
+          "reason": "特色活动名称"
+        },
+        {
+          "text": "Vintner's Selection Night",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-83f587ce-9258-4fab-b6f3-3efa6ef185fc.arguments.title",
+          "reason": "特色活动名称"
+        },
+        {
+          "text": "Wines of the World Tasting",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5ab772fc-9c19-4cf6-8031-050edfca76a1.arguments.title",
+          "reason": "特色活动名称"
+        },
+        {
+          "text": "1234 NW Davis St",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-bf62b992-c571-4ff9-9430-374a89283e95.arguments.end_location",
+          "reason": "活动场地地址"
+        }
+      ],
+      "new_terms": [
+        "Sip & Savor Soirée",
+        "Vintner's Selection Night",
+        "Wines of the World Tasting",
+        "1234 NW Davis St"
+      ],
+      "active_vocabulary": {
+        "Sip & Savor Soirée": 50,
+        "Vintner's Selection Night": 50,
+        "Wines of the World Tasting": 50,
+        "1234 NW Davis St": 50
+      },
+      "vocabulary_sha256": "0edf60014f7e46e728f05f4c4999cb482c1344bc4f3ed299e9aae75dac238bc9"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_confirm.arguments.content",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Sip & Savor Soirée",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "特色活动名称"
+        },
+        {
+          "text": "1234 NW Davis St",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "活动场地地址"
+        }
+      ],
+      "new_terms": [
+        "Nalani Jensen"
+      ],
+      "active_vocabulary": {
+        "Sip & Savor Soirée": 50,
+        "Vintner's Selection Night": 50,
+        "Wines of the World Tasting": 50,
+        "1234 NW Davis St": 50,
+        "Nalani Jensen": 50
+      },
+      "vocabulary_sha256": "f292c2d1ee548824d738e088842c1eccf1e37e1df7138c30155e79219fa6781f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "1234 NW Davis St",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_quote.arguments.start_location",
+          "reason": "返程起点地址"
+        },
+        {
+          "text": "1234 NW 23rd Ave",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_quote.arguments.end_location",
+          "reason": "返程终点地址"
+        }
+      ],
+      "new_terms": [
+        "1234 NW 23rd Ave"
+      ],
+      "active_vocabulary": {
+        "Sip & Savor Soirée": 50,
+        "Vintner's Selection Night": 50,
+        "Wines of the World Tasting": 50,
+        "1234 NW Davis St": 50,
+        "Nalani Jensen": 50,
+        "1234 NW 23rd Ave": 50
+      },
+      "vocabulary_sha256": "e8ea0055ceb148662f8a0f02b8ecf8649070e39463c33ec8f01606ebb916d6e5"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "8c18805a120b23bb085028023316a472877ba85272b1cf3e23e31cfc4fd27049",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3033,
+        "completion_tokens": 473,
+        "total_tokens": 3506,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2777
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.818
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0980_s0b6q9czn1wkjlkl9p6qesjd792a9zbz",
+  "extracted_at": "2026-11-22T06:44:48.531875+00:00"
+}

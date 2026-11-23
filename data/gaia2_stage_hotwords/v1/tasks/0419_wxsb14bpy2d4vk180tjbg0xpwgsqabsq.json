@@ -1,0 +1,119 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0419_wxsb14bpy2d4vk180tjbg0xpwgsqabsq",
+  "model": "deepseek-flash",
+  "input_sha256": "8638d3c41278fe9b9afc912a77dab4d095fae2d1557b5cf02e0f201c4799a42c",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Fatima Al-Khaja",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-81baef10-6372-4219-9fb8-af65d13eb07d.arguments.content",
+          "reason": "联系人全名"
+        }
+      ],
+      "new_terms": [
+        "Fatima Al-Khaja"
+      ],
+      "active_vocabulary": {
+        "Fatima Al-Khaja": 50
+      },
+      "vocabulary_sha256": "fcf63f90ef6bf591197b53c564b231a68c996e8a85234d87cf9580ec075bab62"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Fatima Al-Khaja",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "联系人全名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Fatima Al-Khaja": 50
+      },
+      "vocabulary_sha256": "fcf63f90ef6bf591197b53c564b231a68c996e8a85234d87cf9580ec075bab62"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Fatima Al-Khaja",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Elian Toledano",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Luiz Oliveira",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "联系人全名"
+        }
+      ],
+      "new_terms": [
+        "Elian Toledano",
+        "Luiz Oliveira"
+      ],
+      "active_vocabulary": {
+        "Fatima Al-Khaja": 50,
+        "Elian Toledano": 50,
+        "Luiz Oliveira": 50
+      },
+      "vocabulary_sha256": "a31da90db7064415dd92c75f72aa351491de100a9c6f9da2a2485ac0b910ec41"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "1c7b893865665ebc3a8d477937a200b8eab1b3ad6d8262a7068435f7c3a42f81",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1674,
+        "completion_tokens": 236,
+        "total_tokens": 1910,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1418
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.172,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "9936da6c003419ce43e6e6b48737d93d8ceaf6934178ddd2053baa2d90f0c79d",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2303,
+        "completion_tokens": 238,
+        "total_tokens": 2541,
+        "prompt_tokens_details": {
+          "cached_tokens": 1792
+        },
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 511
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.367
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0419_wxsb14bpy2d4vk180tjbg0xpwgsqabsq",
+  "extracted_at": "2026-11-22T06:41:47.947729+00:00"
+}

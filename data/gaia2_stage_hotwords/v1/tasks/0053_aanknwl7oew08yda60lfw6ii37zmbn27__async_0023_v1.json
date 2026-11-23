@@ -1,0 +1,172 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0053_aanknwl7oew08yda60lfw6ii37zmbn27__async_0023_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "ef26d8338e020ad3a33da21b835c19d2846c8b92cf42c84a0aaf89b2d8a36c22",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Portugal",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-16b101f8-265e-4d23-9a06-17738a7a4576.arguments.attachment_path",
+          "reason": "国家名，作为照片目的地专名"
+        },
+        {
+          "text": "Canada",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3125cbb5-a273-45d4-94d3-9ccbc6911a19.arguments.path1",
+          "reason": "国家名，照片目的地专名"
+        },
+        {
+          "text": "Czech_Republic",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fb1a7f7f-0b2a-46fc-8072-5015c5e1f90b.arguments.path1",
+          "reason": "国家名，照片文件名中的目的地专名"
+        },
+        {
+          "text": "Jordan",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-4bac71f0-be08-420d-ad51-6fb3c850e753.arguments.path1",
+          "reason": "国家名，照片目的地专名"
+        },
+        {
+          "text": "Kenya",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-70bffe48-1446-4aa2-9d5e-83d0e293dfa7.arguments.path1",
+          "reason": "国家名，照片目的地专名"
+        },
+        {
+          "text": "Morocco",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6803d043-b634-4252-8871-a1e428997dcc.arguments.path1",
+          "reason": "国家名，照片目的地专名"
+        }
+      ],
+      "new_terms": [
+        "Portugal",
+        "Canada",
+        "Czech_Republic",
+        "Jordan",
+        "Kenya",
+        "Morocco"
+      ],
+      "active_vocabulary": {
+        "Portugal": 50,
+        "Canada": 50,
+        "Czech_Republic": 50,
+        "Jordan": 50,
+        "Kenya": 50,
+        "Morocco": 50
+      },
+      "vocabulary_sha256": "5aece6582bb4716cde066b2a86f6128416a50f1e0a33200152eba9d1794cd8d3"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Canada",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_photo_0.arguments.path",
+          "reason": "索引块中的国家专名"
+        },
+        {
+          "text": "Czech_Republic",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_photo_1.arguments.path",
+          "reason": "索引块中的国家专名"
+        },
+        {
+          "text": "Jordan",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_photo_2.arguments.path",
+          "reason": "索引块中的国家专名"
+        },
+        {
+          "text": "Kenya",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_photo_3.arguments.path",
+          "reason": "索引块中的国家专名"
+        },
+        {
+          "text": "Morocco",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_photo_4.arguments.path",
+          "reason": "索引块中的国家专名"
+        },
+        {
+          "text": "Portugal",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_photo_5.arguments.path",
+          "reason": "索引块中的国家专名"
+        },
+        {
+          "text": "Beatriz Silva",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "最年轻联系人全名"
+        }
+      ],
+      "new_terms": [
+        "Beatriz Silva"
+      ],
+      "active_vocabulary": {
+        "Portugal": 50,
+        "Canada": 50,
+        "Czech_Republic": 50,
+        "Jordan": 50,
+        "Kenya": 50,
+        "Morocco": 50,
+        "Beatriz Silva": 50
+      },
+      "vocabulary_sha256": "61ac7c045012d947cdc0459f90a84414badeb1da09680e136eaa3d6718448549"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Beatriz Silva",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_person.arguments.user_name",
+          "reason": "联系人全名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Portugal": 50,
+        "Canada": 50,
+        "Czech_Republic": 50,
+        "Jordan": 50,
+        "Kenya": 50,
+        "Morocco": 50,
+        "Beatriz Silva": 50
+      },
+      "vocabulary_sha256": "61ac7c045012d947cdc0459f90a84414badeb1da09680e136eaa3d6718448549"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "c60be252b41e932086aabf19da26ded0dc867278eb1b6c007ae7da4988fcd321",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3542,
+        "completion_tokens": 718,
+        "total_tokens": 4260,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3286
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.567
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0053_aanknwl7oew08yda60lfw6ii37zmbn27__async_0023_v1",
+  "extracted_at": "2026-11-22T06:46:27.622282+00:00"
+}

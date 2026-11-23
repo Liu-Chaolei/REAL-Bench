@@ -1,0 +1,107 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0266_gef24v6rsyxif5eijwuyoxz35c0of62r",
+  "model": "deepseek-flash",
+  "input_sha256": "66103b4e15c207096f1cb3309eac86e6096a83bbc2a10e19010b337ea5925010",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "France",
+          "kind": "place",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-96c5e250-6ecc-4110-bfaa-72afa49e506d.arguments.content",
+          "reason": "国家名称"
+        }
+      ],
+      "new_terms": [
+        "France"
+      ],
+      "active_vocabulary": {
+        "France": 50
+      },
+      "vocabulary_sha256": "941cb2c451ecc3a6971eadbbf0382b0218baffae298ccc539e5dd145b74ac419"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.title",
+          "reason": "法国退休联系人姓名"
+        },
+        {
+          "text": "France",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.description",
+          "reason": "国家名称"
+        }
+      ],
+      "new_terms": [
+        "Aurélien Dumont"
+      ],
+      "active_vocabulary": {
+        "France": 50,
+        "Aurélien Dumont": 50
+      },
+      "vocabulary_sha256": "f4723818cd69699ceeafe271a74f1c4b05647ea0713091db7f20d385713c24c6"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Colette Dumont",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.title",
+          "reason": "法国退休联系人姓名"
+        },
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "前序联系人姓名"
+        },
+        {
+          "text": "France",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.description",
+          "reason": "国家名称"
+        }
+      ],
+      "new_terms": [
+        "Colette Dumont"
+      ],
+      "active_vocabulary": {
+        "France": 50,
+        "Aurélien Dumont": 50,
+        "Colette Dumont": 50
+      },
+      "vocabulary_sha256": "f7606af0c2a57d081fd3916d224c5afbfacebbb18706721498d986941528fcc6"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "de256ea817f134cf7c1654558c0b61553e5297ff21381b5da25dbff63f9c328a",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1734,
+        "completion_tokens": 264,
+        "total_tokens": 1998,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1478
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.132
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0266_gef24v6rsyxif5eijwuyoxz35c0of62r",
+  "extracted_at": "2026-11-22T06:41:02.148334+00:00"
+}

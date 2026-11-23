@@ -1,0 +1,174 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0106_mipxayaatquvuvr2y5e0di3ns7h69dl1",
+  "model": "deepseek-flash",
+  "input_sha256": "776b4b68b34645c25182b232ffb22fd748a6e85e903e53dbe4ec7d5a7cf1ea50",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Tim Horton",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Montreal",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "WWE Tug Toys",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "商品名称"
+        },
+        {
+          "text": "Liverpool Luxe",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Bristol Blissful",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "房产名称"
+        }
+      ],
+      "new_terms": [
+        "Tim Horton",
+        "Montreal",
+        "WWE Tug Toys",
+        "Liverpool Luxe",
+        "Bristol Blissful"
+      ],
+      "active_vocabulary": {
+        "Tim Horton": 50,
+        "Montreal": 50,
+        "WWE Tug Toys": 50,
+        "Liverpool Luxe": 50,
+        "Bristol Blissful": 50
+      },
+      "vocabulary_sha256": "2ff2b2a85300f91cd23813d70bb5c98e42d0472d31e0b8ad7a27771c635396ce"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Liverpool Luxe",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Bristol Blissful",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "房产名称"
+        },
+        {
+          "text": "Liverpool City Centre",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_liverpool_viewing.arguments.location",
+          "reason": "地址地点"
+        },
+        {
+          "text": "Liverpool",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_liverpool_viewing.arguments.location",
+          "reason": "城市名"
+        },
+        {
+          "text": "101 Victoria Street",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_bristol_viewing.arguments.location",
+          "reason": "地址地点"
+        },
+        {
+          "text": "Bristol",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_bristol_viewing.arguments.location",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Liverpool City Centre",
+        "Liverpool",
+        "101 Victoria Street",
+        "Bristol"
+      ],
+      "active_vocabulary": {
+        "Tim Horton": 50,
+        "Montreal": 50,
+        "WWE Tug Toys": 50,
+        "Liverpool Luxe": 50,
+        "Bristol Blissful": 50,
+        "Liverpool City Centre": 50,
+        "Liverpool": 50,
+        "101 Victoria Street": 50,
+        "Bristol": 50
+      },
+      "vocabulary_sha256": "74796f6b1e9836a5a47cc40cf9964f22d40dba0263f825950cb3894a10ec9f49"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "WWE Tug Toys",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "商品名称"
+        },
+        {
+          "text": "Large Red Rubber",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_report_order.arguments.content",
+          "reason": "商品变体名称"
+        }
+      ],
+      "new_terms": [
+        "Large Red Rubber"
+      ],
+      "active_vocabulary": {
+        "Tim Horton": 50,
+        "Montreal": 50,
+        "WWE Tug Toys": 50,
+        "Liverpool Luxe": 50,
+        "Bristol Blissful": 50,
+        "Liverpool City Centre": 50,
+        "Liverpool": 50,
+        "101 Victoria Street": 50,
+        "Bristol": 50,
+        "Large Red Rubber": 50
+      },
+      "vocabulary_sha256": "0323137a70a04516dc89fa22d76d122f9c00e4f6d0be6c2fb5f6eb35ef1edae6"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "351d78e975ce892408f5639e91aba779cf8d13a4db77909b036cd8a7c64977f1",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2769,
+        "completion_tokens": 409,
+        "total_tokens": 3178,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2513
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.487
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0106_mipxayaatquvuvr2y5e0di3ns7h69dl1",
+  "extracted_at": "2026-11-22T06:40:03.692197+00:00"
+}

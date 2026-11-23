@@ -1,0 +1,129 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0396_4h1ozlei9bclo7xlsltfykc9dmvidj1j",
+  "model": "deepseek-flash",
+  "input_sha256": "ace7cab0fce106adf7f2c7deb2e99ff2582b2a8dad0f5a512b09b538634409de",
+  "review_input_sha256": "7d4ca1b5993a0fe151ffb0d36886aeab2cc7199dd94c82e779ffb4e37a194f40",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "cdd87b433fa87876028f8242dc0408eba14a7561dc79cf5994a2d2759f91fbf8",
+  "reference_results_sha256": "96bde5b41c88a9b68fc45ea70c422d38985ba3647c2b13a59b2538b3611dcfc4",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Oslo",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "LEGO Storage Brick 4",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.tool_response.series_s1_lookup_brick": {
+      "stage": 1,
+      "text": "[{\"name\": \"LEGO 8-Brick Storage Box, Bright Red\", \"product_id\": \"0678767f2ff24c5c2330ed0d4456c199\", \"variants\": {\"005dd4a62bbb482187aa13df1b1576a1\": {\"price\": \"24.98\", \"available\": \"True\", \"item_id\": \"005dd4a62bbb482187aa13df1b1576a1\", \"options\": {\"Closure Type\": \"Snap-On\", \"Material\": \"Plastic\", \"Size\": \"Small\"}}, \"0cc9233cf56c40bf9c57343cb3a92093\": {\"price\": \"26.99\", \"available\": \"True\", \"item_id\": \"0cc9233cf56c40bf9c57343cb3a92093\", \"options\": {\"Closure Type\": \"Snap-On\", \"Material\": \"Recycled Plastic\", \"Size\": \"Small\"}}, \"7f2cc5c53ba2459da086db299064564b\": {\"price\": \"27.49\", \"available\": \"True\", \"item_id\": \"7f2cc5c53ba2459da086db299064564b\", \"options\": {\"Closure Type\": \"Hinged\", \"Material\": \"Plastic\", \"Size\": \"Small\"}}, \"f3aabeca8a3d41e59b2c9c5164480110\": {\"price\": \"29.99\", \"available\": \"True\", \"item_id\": \"f3aabeca8a3d41e59b2c9c5164480110\", \"options\": {\"Closure Type\": \"Snap-On\", \"Material\": \"Plastic\", \"Size\": \"Medium\"}}}}, {\"name\": \"LEGO Storage Brick 4, Lime Green\", \"product_id\": \"95be0e7d00ae982b990b94e9ab39d2ec\", \"variants\": {\"12ab4407eb6a4b3e96e2714ea1677012\": {\"price\": \"39.99\", \"available\": \"True\", \"item_id\": \"12ab4407eb6a4b3e96e2714ea1677012\", \"options\": {\"Color\": \"Lime Green\", \"Material\": \"Plastic\", \"Size\": \"Large\", \"Weight Capacity\": \"5kg\"}}, \"3f120d24eecf4756bc59c323e81d4902\": {\"price\": \"44.99\", \"available\": \"True\", \"item_id\": \"3f120d24eecf4756bc59c323e81d4902\", \"options\": {\"Color\": \"Lime Green\", \"Material\": \"Plastic\", \"Size\": \"Medium\", \"Weight Capacity\": \"10kg\"}}, \"5b20371df8694c088a35a1fcac745119\": {\"price\": \"36.99\", \"available\": \"True\", \"item_id\": \"5b20371df8694c088a35a1fcac745119\", \"options\": {\"Color\": \"Lime Green\", \"Material\": \"Recycled Plastic\", \"Size\": \"Medium\", \"Weight Capacity\": \"5kg\"}}, \"daf9221191d04f3eaf91694d8d489270\": {\"price\": \"34.99\", \"available\": \"True\", \"item_id\": \"daf9221191d04f3eaf91694d8d489270\", \"options\": {\"Color\": \"Lime Green\", \"Material\": \"Plastic\", \"Size\": \"Medium\", \"Weight Capacity\": \"5kg\"}}}}, {\"name\": \"LEGO Technic Power Functions Motor Set 8293 (10 Pieces)\", \"product_id\": \"c62585c13e47179bc4680213b47748f3\", \"variants\": {\"14714cbc5cfa460b891383e998dda062\": {\"price\": \"32.99\", \"available\": \"True\", \"item_id\": \"14714cbc5cfa460b891383e998dda062\", \"options\": {\"Age Range\": \"9-16 years\", \"Material\": \"Plastic\", \"Weight\": \"1.0 lbs\"}}, \"21fdc5364ef349d3bb2a9c871b7bdfd8\": {\"price\": \"35.99\", \"available\": \"False\", \"item_id\": \"21fdc5364ef349d3bb2a9c871b7bdfd8\", \"options\": {\"Age Range\": \"9-16 years\", \"Material\": \"Metal\", \"Weight\": \"0.5 lbs\"}}, \"5bcdc454c6e747b0b03bb4e894dd8ead\": {\"price\": \"25.99\", \"available\": \"True\", \"item_id\": \"5bcdc454c6e747b0b03bb4e894dd8ead\", \"options\": {\"Age Range\": \"5-8 years\", \"Material\": \"Plastic\", \"Weight\": \"0.5 lbs\"}}, \"a71b5b42556744dbb53b499831edd4d0\": {\"price\": \"28.82\", \"available\": \"True\", \"item_id\": \"a71b5b42556744dbb53b499831edd4d0\", \"options\": {\"Age Range\": \"9-16 years\", \"Material\": \"Plastic\", \"Weight\": \"0.5 lbs\"}}}}]",
+      "event_id": "series_s1_lookup_brick",
+      "response_sha256": "1e1687d98fe01b7da12c29ccb2452b74e3c9916da4b388d35c482fe2e5ac4f00"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "LEGO 8-Brick Storage Box",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Oslo",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "挪威首都地名，发音不易，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Oslo"
+      ],
+      "active_vocabulary": {
+        "Oslo": 50
+      },
+      "vocabulary_sha256": "fd157d1b59ed0355a3d428956ca5c0ca60b479af2d783a35540926a0ec04c557"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "LEGO Technic Power Functions Motor Set 8293",
+          "kind": "product",
+          "source": "stage1.tool_response.series_s1_lookup_brick",
+          "reason": "含技术词与型号的完整产品名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "LEGO Storage Brick 4",
+          "kind": "product",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整产品名，含数字型号",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "LEGO Technic Power Functions Motor Set 8293",
+        "LEGO Storage Brick 4"
+      ],
+      "active_vocabulary": {
+        "Oslo": 50,
+        "LEGO Technic Power Functions Motor Set 8293": 50,
+        "LEGO Storage Brick 4": 50
+      },
+      "vocabulary_sha256": "f526e312277bc843cace06cdc998bf80d683b44f09a5628878434e3f96d164f9"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "LEGO 8-Brick Storage Box",
+          "kind": "product",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整产品名，含数字与复合词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "LEGO 8-Brick Storage Box"
+      ],
+      "active_vocabulary": {
+        "Oslo": 50,
+        "LEGO Technic Power Functions Motor Set 8293": 50,
+        "LEGO Storage Brick 4": 50,
+        "LEGO 8-Brick Storage Box": 50
+      },
+      "vocabulary_sha256": "8e9ba50203569f37059b43a8c85db1b86942bbdd41dd8e76d1cd2d351f51e48f"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "LEGO"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:34.420925+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

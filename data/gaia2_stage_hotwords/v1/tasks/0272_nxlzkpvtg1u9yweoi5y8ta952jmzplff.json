@@ -1,0 +1,133 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0272_nxlzkpvtg1u9yweoi5y8ta952jmzplff",
+  "model": "deepseek-flash",
+  "input_sha256": "410fc2277aa5b87f441c4ef849764b335e8505b6eddb76a54ed370f8aaac2cae",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Prague Vinohrady",
+          "kind": "place",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-fb84e39c-27f7-40e3-b2e5-efd4b43ef0c4.arguments.content",
+          "reason": "布拉格具体街区房产名"
+        }
+      ],
+      "new_terms": [
+        "Prague Vinohrady"
+      ],
+      "active_vocabulary": {
+        "Prague Vinohrady": 50
+      },
+      "vocabulary_sha256": "063374d4f93774d1dc583832fab82dfd67fb97822cbee222e829d50e0259a72e"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Prague Vinohrady",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "房产所在街区名"
+        },
+        {
+          "text": "Bělehradská",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "带变音符的街道专名"
+        }
+      ],
+      "new_terms": [
+        "Bělehradská"
+      ],
+      "active_vocabulary": {
+        "Prague Vinohrady": 50,
+        "Bělehradská": 50
+      },
+      "vocabulary_sha256": "b1be3a371c97acfc72fc0e2868101396b323e8d6c711f3ee7cff8872246244bf"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Prague Vinohrady",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "保留的房产街区名"
+        },
+        {
+          "text": "Milady Horákové",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "带变音符的街道专名"
+        },
+        {
+          "text": "Prague Palace",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "被移除的房产专名"
+        },
+        {
+          "text": "Náměstí Republiky",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "带变音符的广场专名"
+        },
+        {
+          "text": "Pražský Palác",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "带变音符的房产专名"
+        },
+        {
+          "text": "Prague 6 Luxury",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "房产专名"
+        }
+      ],
+      "new_terms": [
+        "Milady Horákové",
+        "Prague Palace",
+        "Náměstí Republiky",
+        "Pražský Palác",
+        "Prague 6 Luxury"
+      ],
+      "active_vocabulary": {
+        "Prague Vinohrady": 50,
+        "Bělehradská": 50,
+        "Milady Horákové": 50,
+        "Prague Palace": 50,
+        "Náměstí Republiky": 50,
+        "Pražský Palác": 50,
+        "Prague 6 Luxury": 50
+      },
+      "vocabulary_sha256": "feb1bf2b28730c70e003e5b2955a24b479f6d5f586811b227802f96bab4cee9a"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "18bb1dd01990af789d0aafa0488bffddabf83ba2125e1d4db44d197aa50f5f00",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1286,
+        "completion_tokens": 407,
+        "total_tokens": 1693,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1030
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.977
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0272_nxlzkpvtg1u9yweoi5y8ta952jmzplff",
+  "extracted_at": "2026-11-22T06:41:03.972695+00:00"
+}

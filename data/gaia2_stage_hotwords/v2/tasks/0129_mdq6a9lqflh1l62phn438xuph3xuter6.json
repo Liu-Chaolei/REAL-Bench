@@ -1,0 +1,201 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0129_mdq6a9lqflh1l62phn438xuph3xuter6",
+  "model": "deepseek-flash",
+  "input_sha256": "ea2bfdf8e3862c0f22694c8af8e126a5509ec62fdda3db6af63923e965ea28a2",
+  "review_input_sha256": "f6b3ecfed61a7cb5ba19f107619b16bc65e032a5cd402ffdaa3dd374324ec6bd",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "609e9db4764ed96a8ae76d754196f77a45b9df06d87799b97761fbc782ad64bd",
+  "reference_results_sha256": "85fec7196e6bfc0d4669213f2042f89f8a744aee58d4a8c8a363714038a7c903",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Ghent Student Residence",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Ghent University",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-13d84b40-4d22-4bdf-902f-7b0423750bc5.arguments.end_location"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Ghent Student Housing",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Korte Meer",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.tool_response.series_s1_read_day": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"85640861b39240959e25ed7feb8e96ed\", \"title\": \"Project Planning Meeting\", \"start_datetime\": \"1728982800\", \"end_datetime\": \"1728990000\", \"tag\": \"Work\", \"description\": \"Discuss project timeline and milestones.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Aurélien Dumont\"], \"start_strftime\": \"Tuesday, 2024-10-15 09:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 11:00:00\"}, {\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Student Arrival at Ghent University\", \"start_datetime\": \"1729013400.0\", \"end_datetime\": \"1729015200.0\", \"tag\": \"Personal\", \"description\": \"Premium cab from Home for the student's first day at the university.\", \"location\": \"Ghent University, 9000 Ghent\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-15 17:30:00\", \"end_strftime\": \"Tuesday, 2024-10-15 18:00:00\"}], \"range\": [\"0\", \"2\"], \"total\": \"2\"}",
+      "event_id": "series_s1_read_day",
+      "response_sha256": "a250541c6dbcd1e00e90bd2e784488c488f696993eaddb0e8b0264af5fa8439e"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Move-in at Ghent Student Residence",
+      "original_source": "stage2.tool_gt.series_s2_add_movein_event.arguments.title"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Sint-Pietersnieuwstraat",
+      "original_source": "stage2.tool_gt.series_s2_add_movein_event.arguments.location"
+    },
+    "stage2.tool_response.series_s2_read_day_16": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"0a8a20aec5084ef4b7ea2365bd01401f\", \"title\": \"Phone Call with Khalifa Al-Mansoori\", \"start_datetime\": \"1729090800\", \"end_datetime\": \"1729094400\", \"tag\": \"Personal\", \"description\": \"Catch up with Khalifa Al-Mansoori and discuss potential collaboration opportunities.\", \"location\": \"Home\", \"attendees\": [\"Khalifa Al-Mansoori\"], \"start_strftime\": \"Wednesday, 2024-10-16 15:00:00\", \"end_strftime\": \"Wednesday, 2024-10-16 16:00:00\"}, {\"event_id\": \"a4c127f4a42240c08ec4155b1bfcf344\", \"title\": \"Follow-up Call with Karel\", \"start_datetime\": \"1729072800\", \"end_datetime\": \"1729076400\", \"tag\": \"Work\", \"description\": \"Discuss progress on the project.\", \"location\": \"Phone Call\", \"attendees\": [\"Karel Vandenberghe\"], \"start_strftime\": \"Wednesday, 2024-10-16 10:00:00\", \"end_strftime\": \"Wednesday, 2024-10-16 11:00:00\"}, {\"event_id\": \"d4c2d9f7cdacdf99ad578e25036c7e5f\", \"title\": \"Move-in at Ghent Student Residence\", \"start_datetime\": \"1729083600.0\", \"end_datetime\": \"1729089000.0\", \"tag\": \"Personal\", \"description\": \"Move-in follows the premium cab arrival at Ghent University at 17:30 on 15 October 2024.\", \"location\": \"Sint-Pietersnieuwstraat, 9000 Ghent\", \"attendees\": [], \"start_strftime\": \"Wednesday, 2024-10-16 13:00:00\", \"end_strftime\": \"Wednesday, 2024-10-16 14:30:00\"}], \"range\": [\"0\", \"3\"], \"total\": \"3\"}",
+      "event_id": "series_s2_read_day_16",
+      "response_sha256": "4656eb5dc51196018d93461237d658861ea314c5a7a6ba3cf374e84c7d44b591"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Ghent Student Residence",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "根特学生公寓，专有地点名",
+          "weight": 50
+        },
+        {
+          "text": "Ghent University",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.3",
+          "reason": "根特大学，专有机构名，含地名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Ghent Student Residence",
+        "Ghent University"
+      ],
+      "active_vocabulary": {
+        "Ghent Student Residence": 50,
+        "Ghent University": 50
+      },
+      "vocabulary_sha256": "aa2ef6253cbf43a65c44e1e372026680e9a795e4ded1355330b5c361d2e297f7"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Ghent Student Housing",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "根特学生住宿专有名称",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_day",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Korte Meer",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "根特街道专有地名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Ghent Student Housing",
+        "Aurélien Dumont",
+        "Korte Meer"
+      ],
+      "active_vocabulary": {
+        "Ghent Student Residence": 50,
+        "Ghent University": 50,
+        "Ghent Student Housing": 50,
+        "Aurélien Dumont": 50,
+        "Korte Meer": 50
+      },
+      "vocabulary_sha256": "7d4f31423805f6d4e6867a1d25baf16da09097da62caf352d63e8d0f9c4ad826"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Move-in at Ghent Student Residence",
+          "kind": "custom_name",
+          "source": "stage2.existing_catalog.0",
+          "reason": "专有事件名称",
+          "weight": 50
+        },
+        {
+          "text": "Khalifa Al-Mansoori",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_day_16",
+          "reason": "完整专有人名，含连字符姓氏",
+          "weight": 50
+        },
+        {
+          "text": "Karel Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_day_16",
+          "reason": "完整专有人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Sint-Pietersnieuwstraat",
+          "kind": "place",
+          "source": "stage2.existing_catalog.1",
+          "reason": "根特街道专有地名，拼写复杂",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Move-in at Ghent Student Residence",
+        "Khalifa Al-Mansoori",
+        "Karel Vandenberghe",
+        "Sint-Pietersnieuwstraat"
+      ],
+      "active_vocabulary": {
+        "Ghent Student Residence": 50,
+        "Ghent University": 50,
+        "Ghent Student Housing": 50,
+        "Aurélien Dumont": 50,
+        "Korte Meer": 50,
+        "Move-in at Ghent Student Residence": 50,
+        "Khalifa Al-Mansoori": 50,
+        "Karel Vandenberghe": 50,
+        "Sint-Pietersnieuwstraat": 50
+      },
+      "vocabulary_sha256": "d51b5848e97b5de68739e75d4d3ebfb306fc028d7e985a64b7b0b62bf1e36c28"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Piano Horn",
+    "Schylling",
+    "Student Arrival at Ghent University",
+    "Liesbeth"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:06.987664+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

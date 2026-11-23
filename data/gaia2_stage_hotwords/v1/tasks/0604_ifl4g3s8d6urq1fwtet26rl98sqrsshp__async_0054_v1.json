@@ -1,0 +1,202 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0604_ifl4g3s8d6urq1fwtet26rl98sqrsshp__async_0054_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "bd428b785bf9a328fe6bfc2cc3ff35f309de28ccdd08dc916daedeb7b319a421",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Åsa Lindström",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "前建筑师人名，需精确识别"
+        },
+        {
+          "text": "Liege Luxe",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "房产查看活动名称中的房产名"
+        },
+        {
+          "text": "Brugge Beauty",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "房产查看活动名称中的房产名"
+        },
+        {
+          "text": "Belgium",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "国家地名"
+        }
+      ],
+      "new_terms": [
+        "Åsa Lindström",
+        "Liege Luxe",
+        "Brugge Beauty",
+        "Belgium"
+      ],
+      "active_vocabulary": {
+        "Åsa Lindström": 50,
+        "Liege Luxe": 50,
+        "Brugge Beauty": 50,
+        "Belgium": 50
+      },
+      "vocabulary_sha256": "c99a860810c2462bf4f8b90454a79d5eabc8297d0b728a621531711d51f244e1"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Liege Luxe",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "待比较房产名"
+        },
+        {
+          "text": "Brugge Beauty",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "待比较房产名"
+        },
+        {
+          "text": "Rue Saint-Gilles 15",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "Liege Luxe 的具体地址"
+        },
+        {
+          "text": "Langestraat 10",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "Brugge Beauty 的具体地址"
+        },
+        {
+          "text": "Liege",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "房产所在城市"
+        },
+        {
+          "text": "Brugge",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "房产所在城市"
+        }
+      ],
+      "new_terms": [
+        "Rue Saint-Gilles 15",
+        "Langestraat 10",
+        "Liege",
+        "Brugge"
+      ],
+      "active_vocabulary": {
+        "Åsa Lindström": 50,
+        "Liege Luxe": 50,
+        "Brugge Beauty": 50,
+        "Belgium": 50,
+        "Rue Saint-Gilles 15": 50,
+        "Langestraat 10": 50,
+        "Liege": 50,
+        "Brugge": 50
+      },
+      "vocabulary_sha256": "479480809c1ffb3188a9fc24cbdc12c597d285514ac064a0ee518fc6c687c267"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Sint-Michielsstraat 23",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "出租车出发地址"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "出发及返程城市"
+        },
+        {
+          "text": "Liege Luxe",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "去程目的地房产名"
+        },
+        {
+          "text": "Rue Saint-Gilles 15",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "去程目的地具体地址"
+        },
+        {
+          "text": "Brugge Beauty",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "返程出发房产名"
+        },
+        {
+          "text": "Langestraat 10",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "返程出发具体地址"
+        },
+        {
+          "text": "Brugge",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "返程出发城市"
+        },
+        {
+          "text": "Åsa Lindström",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "需私下告知行程的人名"
+        }
+      ],
+      "new_terms": [
+        "Sint-Michielsstraat 23",
+        "Leuven"
+      ],
+      "active_vocabulary": {
+        "Åsa Lindström": 50,
+        "Liege Luxe": 50,
+        "Brugge Beauty": 50,
+        "Belgium": 50,
+        "Rue Saint-Gilles 15": 50,
+        "Langestraat 10": 50,
+        "Liege": 50,
+        "Brugge": 50,
+        "Sint-Michielsstraat 23": 50,
+        "Leuven": 50
+      },
+      "vocabulary_sha256": "7475189e5f99766e9125168be3a314708029625becc6b05ad48e90cf0043ffce"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "d063e0964d2b18d54f6c645bdf2b3ef2358fbf74b89cd4531f34730155c0ffae",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3875,
+        "completion_tokens": 571,
+        "total_tokens": 4446,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3619
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.304
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0604_ifl4g3s8d6urq1fwtet26rl98sqrsshp__async_0054_v1",
+  "extracted_at": "2026-11-22T06:46:40.637613+00:00"
+}

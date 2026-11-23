@@ -1,0 +1,246 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0212_4kl91t4i080jqmqltb3c53erd7t922rg",
+  "model": "deepseek-flash",
+  "input_sha256": "21def21423cb0e7c89fa23a837cc5d6610f68812b8d51a957cc3264ac8a2f6ac",
+  "review_input_sha256": "13191ac98474a10178b5e80a0c4c8cdf39f3ec71c0b6ec74fa926d6cc51191b4",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "75682c449566bdbbdc3793ca67a1432bed408a52dd313f585bc413ad04bddd75",
+  "reference_results_sha256": "6ee4b0d36cf3ed4f38d59186a7ef4923ff203ba168362efc3444f860f4c68c1a",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Aashiana Apartments",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Delhi Darshan Apartments",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.10": {
+      "stage": 1,
+      "text": "Hinjewadi",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.12": {
+      "stage": 1,
+      "text": "Kalyan Nagar",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Surya Apartments",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Raj Residency",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Pinnacle Heights",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.5": {
+      "stage": 1,
+      "text": "Pune Pride Apartments",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.6": {
+      "stage": 1,
+      "text": "Brigade Northridge",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.7": {
+      "stage": 1,
+      "text": "Sai Kripa Apartments",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.8": {
+      "stage": 1,
+      "text": "Sai Sankalp",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Kipenzi Mwanga",
+      "original_source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Delhi Darshan Apartments",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Pune Pride Apartments",
+          "kind": "place",
+          "source": "stage1.existing_catalog.5",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Sai Kripa Apartments",
+          "kind": "place",
+          "source": "stage1.existing_catalog.7",
+          "reason": "独特公寓名，含印地语词",
+          "weight": 50
+        },
+        {
+          "text": "Aashiana Apartments",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "独特公寓名，含非英语拼写",
+          "weight": 50
+        },
+        {
+          "text": "Brigade Northridge",
+          "kind": "place",
+          "source": "stage1.existing_catalog.6",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Kalyan Nagar",
+          "kind": "place",
+          "source": "stage1.existing_catalog.12",
+          "reason": "难读地名",
+          "weight": 50
+        },
+        {
+          "text": "Pinnacle Heights",
+          "kind": "place",
+          "source": "stage1.existing_catalog.4",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Raj Residency",
+          "kind": "place",
+          "source": "stage1.existing_catalog.3",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Sai Sankalp",
+          "kind": "place",
+          "source": "stage1.existing_catalog.8",
+          "reason": "独特公寓名，含印地语词",
+          "weight": 50
+        },
+        {
+          "text": "Surya Apartments",
+          "kind": "place",
+          "source": "stage1.existing_catalog.2",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Hinjewadi",
+          "kind": "place",
+          "source": "stage1.existing_catalog.10",
+          "reason": "难读地名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Delhi Darshan Apartments",
+        "Pune Pride Apartments",
+        "Sai Kripa Apartments",
+        "Aashiana Apartments",
+        "Brigade Northridge",
+        "Kalyan Nagar",
+        "Pinnacle Heights",
+        "Raj Residency",
+        "Sai Sankalp",
+        "Surya Apartments",
+        "Hinjewadi"
+      ],
+      "active_vocabulary": {
+        "Delhi Darshan Apartments": 50,
+        "Pune Pride Apartments": 50,
+        "Sai Kripa Apartments": 50,
+        "Aashiana Apartments": 50,
+        "Brigade Northridge": 50,
+        "Kalyan Nagar": 50,
+        "Pinnacle Heights": 50,
+        "Raj Residency": 50,
+        "Sai Sankalp": 50,
+        "Surya Apartments": 50,
+        "Hinjewadi": 50
+      },
+      "vocabulary_sha256": "51e6720af93d0e2f1017a5a4a5689100db7892449c43941d4b2631547180155a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kipenzi Mwanga",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "独特完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kipenzi Mwanga"
+      ],
+      "active_vocabulary": {
+        "Delhi Darshan Apartments": 50,
+        "Pune Pride Apartments": 50,
+        "Sai Kripa Apartments": 50,
+        "Aashiana Apartments": 50,
+        "Brigade Northridge": 50,
+        "Kalyan Nagar": 50,
+        "Pinnacle Heights": 50,
+        "Raj Residency": 50,
+        "Sai Sankalp": 50,
+        "Surya Apartments": 50,
+        "Hinjewadi": 50,
+        "Kipenzi Mwanga": 50
+      },
+      "vocabulary_sha256": "d498e527e7a2df34f8fd26997c62a656580df9c97a416b4f381206193d743428"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Dwarka",
+    "Wakad",
+    "Sector 11, Dwarka, Delhi"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:33.225949+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

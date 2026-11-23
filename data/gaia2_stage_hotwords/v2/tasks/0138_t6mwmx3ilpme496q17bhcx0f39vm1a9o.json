@@ -1,0 +1,143 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0138_t6mwmx3ilpme496q17bhcx0f39vm1a9o",
+  "model": "deepseek-flash",
+  "input_sha256": "52f46223f908cf8fd9ff7bf1c94085eeb6e576a501ab74c5429811fd45af3910",
+  "review_input_sha256": "1d9df307ab39e13d8cc22e6944175c681d03ff0a2e928391ad39ef58cc50f5b6",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "88ed687474b7cf46b320200cb90ba4fb02f494daa26db8f48a0790a788260495",
+  "reference_results_sha256": "c61286ab42e32e9af3795a1aff3bce89e7289229be1ef4a7e022614352c45b50",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Aurelia",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Aurelia Păunescu",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Desert Bloom Apartments",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Sunset Villas",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurelia",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "人名，但仅为名字部分，且较简单，不保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurelia"
+      ],
+      "active_vocabulary": {
+        "Aurelia": 50
+      },
+      "vocabulary_sha256": "b5efd9e8173ed788e0cecdfca5e9a1684c9d4bcfd175f2d5af648808733f7c82"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Desert Bloom Apartments",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整公寓名称，较难识别，保留",
+          "weight": 50
+        },
+        {
+          "text": "Aurelia Păunescu",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.existing_catalog.4",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Sunset Villas",
+          "kind": "place",
+          "source": "stage1.existing_catalog.3",
+          "reason": "完整公寓名称，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Desert Bloom Apartments",
+        "Aurelia Păunescu",
+        "Aurélien LaFleur",
+        "Sunset Villas"
+      ],
+      "active_vocabulary": {
+        "Aurelia": 50,
+        "Desert Bloom Apartments": 50,
+        "Aurelia Păunescu": 50,
+        "Aurélien LaFleur": 50,
+        "Sunset Villas": 50
+      },
+      "vocabulary_sha256": "05f9920e8c840b5f344633f0e46f3629ff4d1cc322edef66b004427263f2b7fd"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurelia": 50,
+        "Desert Bloom Apartments": 50,
+        "Aurelia Păunescu": 50,
+        "Aurélien LaFleur": 50,
+        "Sunset Villas": 50
+      },
+      "vocabulary_sha256": "05f9920e8c840b5f344633f0e46f3629ff4d1cc322edef66b004427263f2b7fd"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Phoenix",
+    "Desert Bloom"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:07.903551+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

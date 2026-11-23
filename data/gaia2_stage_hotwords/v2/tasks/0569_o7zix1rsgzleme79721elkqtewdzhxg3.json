@@ -1,0 +1,147 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0569_o7zix1rsgzleme79721elkqtewdzhxg3",
+  "model": "deepseek-flash",
+  "input_sha256": "523e663d4a1475b1ebce7efe8338bba932515000129ecd4cff29ec7f09eb9e55",
+  "review_input_sha256": "ca46df2209c799df384703145a229d05588c2ead98f5c91e274c2add52ea7bff",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "2d44003360281a40b91803962726147f48dd4257cc9cc114bcfdc7a903ad9920",
+  "reference_results_sha256": "6a582cb17ee261dc17a059a4cfc5bf15bf121d6c625f5b4e570a222247cb8c43",
+  "sources": {
+    "stage1.tool_response.series_s1_conflicts_0": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"51a48fc5bced4da896ae5ad281cd341c\", \"title\": \"Project Meeting\", \"start_datetime\": \"1729936800\", \"end_datetime\": \"1729944000\", \"tag\": \"Work\", \"description\": \"Meeting with team to discuss project progress.\", \"location\": \"Conference Room\", \"attendees\": [\"Aaradhya Rao\", \"Kuldip Saini\", \"François Tremblay\"], \"start_strftime\": \"Saturday, 2024-10-26 10:00:00\", \"end_strftime\": \"Saturday, 2024-10-26 12:00:00\"}], \"range\": [\"0\", \"1\"], \"total\": \"1\"}",
+      "event_id": "series_s1_conflicts_0",
+      "response_sha256": "c7714e4eedbc789bbcd168f520fb7e18faa2cd9ba997b8453cf922937e26244e"
+    },
+    "stage2.tool_response.series_s2_20241102_0": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"26b67daee8014a1081296059a01db976\", \"title\": \"Project Update Meeting\", \"start_datetime\": \"1730538000\", \"end_datetime\": \"1730545200\", \"tag\": \"Work\", \"description\": \"Sync on the status of Project X and discuss next steps.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Rohan Sengupta\", \"Kipenzi Mwanga\"], \"start_strftime\": \"Saturday, 2024-11-02 09:00:00\", \"end_strftime\": \"Saturday, 2024-11-02 11:00:00\"}], \"range\": [\"0\", \"1\"], \"total\": \"1\"}",
+      "event_id": "series_s2_20241102_0",
+      "response_sha256": "627ccd27886f1a413bb8f7964cf5c42ebb367caa210084a47aa18cb2c7b51db4"
+    },
+    "stage2.tool_response.series_s2_20241109_0": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"e8abf980f81f4223b4d2b6bc9e6189ff\", \"title\": \"Project Update\", \"start_datetime\": \"1731142800\", \"end_datetime\": \"1731150000\", \"tag\": \"Work\", \"description\": \"Updating team on project progress and discussing next steps.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Rohan Kumar\", \"Astrid McKenzie\", \"Akira Jensen\"], \"start_strftime\": \"Saturday, 2024-11-09 09:00:00\", \"end_strftime\": \"Saturday, 2024-11-09 11:00:00\"}], \"range\": [\"0\", \"1\"], \"total\": \"1\"}",
+      "event_id": "series_s2_20241109_0",
+      "response_sha256": "03de2ab18028da886f207cb93240ebc2830e2718569e04c3406cc3f2693b2c3d"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aaradhya Rao",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_conflicts_0",
+          "reason": "完整人名，含独特拼写，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "François Tremblay",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_conflicts_0",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Kuldip Saini",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_conflicts_0",
+          "reason": "完整人名，拼写较难，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aaradhya Rao",
+        "François Tremblay",
+        "Kuldip Saini"
+      ],
+      "active_vocabulary": {
+        "Aaradhya Rao": 50,
+        "François Tremblay": 50,
+        "Kuldip Saini": 50
+      },
+      "vocabulary_sha256": "18625e99d1881dad8c892815f5499abd4acc89060b181f53281bbaa8c973f39e"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Akira Jensen",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_20241109_0",
+          "reason": "完整人名，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Astrid McKenzie",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_20241109_0",
+          "reason": "完整人名，姓氏拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Kipenzi Mwanga",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_20241102_0",
+          "reason": "完整人名，拼写独特较难",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Sengupta",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_20241102_0",
+          "reason": "完整人名，姓氏拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Akira Jensen",
+        "Astrid McKenzie",
+        "Kipenzi Mwanga",
+        "Rohan Sengupta"
+      ],
+      "active_vocabulary": {
+        "Aaradhya Rao": 50,
+        "François Tremblay": 50,
+        "Kuldip Saini": 50,
+        "Akira Jensen": 50,
+        "Astrid McKenzie": 50,
+        "Kipenzi Mwanga": 50,
+        "Rohan Sengupta": 50
+      },
+      "vocabulary_sha256": "3cf51bf2e47df36aafc9734b7c936d4236cb5a6c3734427540c4e2627bbc991d"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:26.532658+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

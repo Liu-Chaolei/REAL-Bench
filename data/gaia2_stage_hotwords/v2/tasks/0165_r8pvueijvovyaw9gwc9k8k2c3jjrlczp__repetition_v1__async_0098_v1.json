@@ -1,0 +1,163 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0165_r8pvueijvovyaw9gwc9k8k2c3jjrlczp__repetition_v1__async_0098_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "7a4327574d8b50d8c88e87554f5f1ca686cfe874da8d772ae13c0a655adc22f1",
+  "review_input_sha256": "665ef518c9ac54e07753c8964cfe8d9e1582d79fff13c5415f78923964242adc",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "505b8b92ca148ad546f58bed3b93e0afbdd6b37e0a0767d2248fb25062e1e0c4",
+  "reference_results_sha256": "c41d12dc64e84c920f07316e6a7f3f107ee5a99be403ac0bc89574cb6b8447d8",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Åke Svensson",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-1703da6f-cc98-47e3-be72-713a593e36a7.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Stortorget 13",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-1703da6f-cc98-47e3-be72-713a593e36a7.arguments.location"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Malmö",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-1703da6f-cc98-47e3-be72-713a593e36a7.arguments.location"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Astrid Lundqvist",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-59a9e41f-a613-4bbb-80fa-86cfaaa5bcf6.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Östermalmsgatan 12",
+      "original_source": "stage1.tool_gt.series_s1_quote.arguments.start_location"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Stockholm",
+      "original_source": "stage1.tool_gt.series_s1_quote.arguments.start_location"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整人名，拼写较难，适合热词",
+          "weight": 50
+        },
+        {
+          "text": "Stortorget 13",
+          "kind": "place",
+          "source": "stage0.existing_catalog.1",
+          "reason": "瑞典语街道地址，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Åke Svensson",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含瑞典语变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Malmö",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的地名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Lundqvist",
+        "Stortorget 13",
+        "Åke Svensson",
+        "Malmö"
+      ],
+      "active_vocabulary": {
+        "Astrid Lundqvist": 50,
+        "Stortorget 13": 50,
+        "Åke Svensson": 50,
+        "Malmö": 50
+      },
+      "vocabulary_sha256": "aa719ec2b3c93a6a0dd81b0cf3c27b628e5a43fc743f432421e2d17ae19032eb"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Östermalmsgatan 12",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的瑞典语街道地址，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Stockholm",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "地名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Östermalmsgatan 12",
+        "Stockholm"
+      ],
+      "active_vocabulary": {
+        "Astrid Lundqvist": 50,
+        "Stortorget 13": 50,
+        "Åke Svensson": 50,
+        "Malmö": 50,
+        "Östermalmsgatan 12": 50,
+        "Stockholm": 50
+      },
+      "vocabulary_sha256": "7f803f85b5ba63f0e3e173970c9a24069c7e35f01823dc90ffd1bbe89f11117a"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid Lundqvist": 50,
+        "Stortorget 13": 50,
+        "Åke Svensson": 50,
+        "Malmö": 50,
+        "Östermalmsgatan 12": 50,
+        "Stockholm": 50
+      },
+      "vocabulary_sha256": "7f803f85b5ba63f0e3e173970c9a24069c7e35f01823dc90ffd1bbe89f11117a"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "metro_herald_740.txt",
+    "Painting Panel Canvas Boards",
+    "metro_herald 740",
+    "Astrid"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:20:17.995220+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

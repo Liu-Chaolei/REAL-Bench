@@ -1,0 +1,106 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0010_h8rf4902ivlsba175pmgq4j8id1gch7b",
+  "model": "deepseek-flash",
+  "input_sha256": "d3542b0eef0856f62f6ba9c7d7ce96e18e798d24fb6ed2e54c728273b4d9f48c",
+  "review_input_sha256": "4b6d54b671b471a4cb96ea765be500967c9faa00e96a759f929958de9e2ee156",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "fbbec5960d0653fc322d398917201350bf5e0e781425d03cf0a50a4cbccf56c8",
+  "reference_results_sha256": "ef1651d7e1107d5f8ccc4a607f47c5ed1ef8756961454f2f0ebaefa9ac18862c",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Aurélie",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Colette",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Karel",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "带变音符号的专有名字，难以识别，优先保留",
+          "weight": 50
+        },
+        {
+          "text": "Colette",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "专有名字，拼写不常见，保留",
+          "weight": 50
+        },
+        {
+          "text": "Karel",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "专有名字，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélie",
+        "Colette",
+        "Karel"
+      ],
+      "active_vocabulary": {
+        "Aurélie": 50,
+        "Colette": 50,
+        "Karel": 50
+      },
+      "vocabulary_sha256": "62a2b12dc40f87376ba96718e7df0f69d087ad69c1bcad98d47d0a078f605af3"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélie": 50,
+        "Colette": 50,
+        "Karel": 50
+      },
+      "vocabulary_sha256": "62a2b12dc40f87376ba96718e7df0f69d087ad69c1bcad98d47d0a078f605af3"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:13:38.058299+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -158,6 +158,7 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
         self.ticks: list[Tick] = []
         self._tool_executor = None
         self._scenario_user_input = None
+        self._observer_stage_pending = None
         self._scenario_user_text = ""
         self._scenario_user_utterance = None
         self._scenario_last_user_time = None
@@ -488,6 +489,7 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             len(diagnostic_recorder.media_ticks) if diagnostic_recorder else 0
         )
         diagnostic_agent_start = time.monotonic() if diagnostic_recorder else None
+        self._activate_observer_stage(incoming_for_agent)
         (
             agent_chunk,
             self.agent_state,
@@ -719,6 +721,21 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             self.num_errors += sum(result.error for result in ready)
             tool_results.extend(ready)
         return new_chunk, new_state, tool_calls, tool_results
+
+    def _activate_observer_stage(self, user_chunk):
+        """Switch vocabulary when a new stage's request starts real transport."""
+        activate = getattr(self.agent, "set_observer_stage", None)
+        if activate is None or user_chunk is None:
+            return
+        event_id = (user_chunk.raw_data or {}).get("scenario_input_id")
+        stages = getattr(self.user, "scenario_dynamic_stage_ids", {})
+        if event_id in stages:
+            # Some voice renderers put metadata on an initial silent chunk.
+            self._observer_stage_pending = stages[event_id]
+        pending = getattr(self, "_observer_stage_pending", None)
+        if pending is not None and user_chunk.contains_speech:
+            activate(pending)
+            self._observer_stage_pending = None
 
     def _observe_scenario_delivery(
         self, runtime, user_chunk, agent_chunk, *, input_time=None

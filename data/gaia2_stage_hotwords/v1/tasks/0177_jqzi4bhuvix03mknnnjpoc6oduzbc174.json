@@ -1,0 +1,141 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0177_jqzi4bhuvix03mknnnjpoc6oduzbc174",
+  "model": "deepseek-flash",
+  "input_sha256": "6656d85fe62c0ff17dc1e1cedb89bad5dd28e5bebfca9c76e492f09be3fbd500",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Leonie Krüger",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-52d0c8bc-0488-450d-86fb-713ef83f166c.arguments.attendees[0]",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Bronwyn Fothergill",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-52d0c8bc-0488-450d-86fb-713ef83f166c.arguments.attendees[1]",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Bronwyn Fothergil",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-d0173c73-b856-4cef-aa4b-04565f021cfe.arguments.content",
+          "reason": "回复中出现的联系人姓名变体"
+        },
+        {
+          "text": "complex_dag.png",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ca399dec-c012-4d9a-80b2-d04326f007c2.arguments.path",
+          "reason": "待删除文件名"
+        },
+        {
+          "text": "fractal.png",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ec5a7f93-5d3f-45bf-8ea6-212b065ea0eb.arguments.path",
+          "reason": "待删除文件名"
+        }
+      ],
+      "new_terms": [
+        "Leonie Krüger",
+        "Bronwyn Fothergill",
+        "Bronwyn Fothergil",
+        "complex_dag.png",
+        "fractal.png"
+      ],
+      "active_vocabulary": {
+        "Leonie Krüger": 50,
+        "Bronwyn Fothergill": 50,
+        "Bronwyn Fothergil": 50,
+        "complex_dag.png": 50,
+        "fractal.png": 50
+      },
+      "vocabulary_sha256": "62fb313c90cc6ba989a3d1037a4978ae5255344955f69483b4c3abde0b120e5d"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Bronwyn Fothergill",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Leonie Krüger",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Rohini",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_bronwyn.arguments.content",
+          "reason": "消息署名"
+        }
+      ],
+      "new_terms": [
+        "Rohini"
+      ],
+      "active_vocabulary": {
+        "Leonie Krüger": 50,
+        "Bronwyn Fothergill": 50,
+        "Bronwyn Fothergil": 50,
+        "complex_dag.png": 50,
+        "fractal.png": 50,
+        "Rohini": 50
+      },
+      "vocabulary_sha256": "e976d618042fdacccd74a231ab046a2a4880a0aec6aa16975d7a89ed99b27f84"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        }
+      ],
+      "new_terms": [
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "Leonie Krüger": 50,
+        "Bronwyn Fothergill": 50,
+        "Bronwyn Fothergil": 50,
+        "complex_dag.png": 50,
+        "fractal.png": 50,
+        "Rohini": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "c43a3476f3d18b6ab0e74a2ea56845aa31630ac830bd30169bef714cae12a197"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "6db6d2ac3900d29f8b8820a8dd976c9e6e9db31f0bcd76639c24ecf01c01581a",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2985,
+        "completion_tokens": 472,
+        "total_tokens": 3457,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2729
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.676
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0177_jqzi4bhuvix03mknnnjpoc6oduzbc174",
+  "extracted_at": "2026-11-22T06:40:31.586057+00:00"
+}

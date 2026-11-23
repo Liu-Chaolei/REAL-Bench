@@ -1,0 +1,117 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0647_aakouu8f2upgc0zggnclrosoqdhc8gup__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "72382f62f5543aad980397b700f8ff65f9b19856da6c71a7c8843273e315144b",
+  "review_input_sha256": "a7622c29b105a68aae8ba76ab0e8762079bcb5e3dc69e83ba4d4fecb55264ca1",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "b344612f79becc0e7853976d20336ac5b3ef95cb2c2707c577a3ec847dd636de",
+  "reference_results_sha256": "bcc4cbe9de7c1df37526154961a21a0839a7ec79e6dc245952b21b8a49c6dfb1",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Joana Silva",
+      "original_source": "stage0.source_task"
+    },
+    "stage2.tool_response.series_s2_verify_evening": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"541223c32f0b40edb923a728928ace2c\", \"title\": \"Networking Event\", \"start_datetime\": \"1729015200\", \"end_datetime\": \"1729022400\", \"tag\": \"Social\", \"description\": \"Attend networking event to connect with industry professionals.\", \"location\": \"Event Space\", \"attendees\": [\"Astrid Mikkelsen\", \"Beshoy Gadallah\"], \"start_strftime\": \"Tuesday, 2024-10-15 18:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 20:00:00\"}, {\"event_id\": \"9daa4008ccb14c48a7fd156b953b5c3a\", \"title\": \"Self-Care Routine\", \"start_datetime\": \"1729022400\", \"end_datetime\": \"1729026000\", \"tag\": \"Health\", \"description\": \"Relaxation and self-care routine to unwind.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-15 20:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 21:00:00\"}, {\"event_id\": \"d2f892cf34ab4e16be08eb6dbfd01727\", \"title\": \"Photoshoot\", \"start_datetime\": \"1728982800\", \"end_datetime\": \"1728993600\", \"tag\": \"Work\", \"description\": \"Photoshoot for upcoming brand campaign.\", \"location\": \"Studio\", \"attendees\": [\"Kasper Rønnow\"], \"start_strftime\": \"Tuesday, 2024-10-15 09:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 12:00:00\"}, {\"event_id\": \"633353a8e6d114a9be65378058a68b17\", \"title\": \"Talk with Joana\", \"start_datetime\": \"1729026000.0\", \"end_datetime\": \"1729026900.0\", \"tag\": null, \"description\": null, \"location\": null, \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-15 21:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 21:15:00\"}], \"range\": [\"0\", \"4\"], \"total\": \"4\"}",
+      "event_id": "series_s2_verify_evening",
+      "response_sha256": "081f304f931d46b387f2b0398e0807e0b15e99dd93ab77ec45e2168fc57f93ea"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Joana Silva",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Joana Silva"
+      ],
+      "active_vocabulary": {
+        "Joana Silva": 50
+      },
+      "vocabulary_sha256": "aaec43f229143b650928a032008c484864d138a71e5bab84d177d37d52bafc12"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Joana Silva": 50
+      },
+      "vocabulary_sha256": "aaec43f229143b650928a032008c484864d138a71e5bab84d177d37d52bafc12"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Astrid Mikkelsen",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_verify_evening",
+          "reason": "完整人名，含特殊拼写",
+          "weight": 50
+        },
+        {
+          "text": "Beshoy Gadallah",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_verify_evening",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Kasper Rønnow",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_verify_evening",
+          "reason": "含丹麦语特殊字符的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Mikkelsen",
+        "Beshoy Gadallah",
+        "Kasper Rønnow"
+      ],
+      "active_vocabulary": {
+        "Joana Silva": 50,
+        "Astrid Mikkelsen": 50,
+        "Beshoy Gadallah": 50,
+        "Kasper Rønnow": 50
+      },
+      "vocabulary_sha256": "3ee505edb52239d4c4727073a411c7b7b860f854de03d1a540cb637b20f9fa55"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Joana",
+    "Networking Event",
+    "Self-Care Routine"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:20.764530+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

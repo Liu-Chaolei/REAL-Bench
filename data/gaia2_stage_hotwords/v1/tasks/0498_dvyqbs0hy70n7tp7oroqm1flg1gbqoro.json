@@ -1,0 +1,149 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0498_dvyqbs0hy70n7tp7oroqm1flg1gbqoro",
+  "model": "deepseek-flash",
+  "input_sha256": "8d1efbf8a6b220855acc844ef6ba7f51d87dbeaa0dfb6211fb57a936bfb44df2",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7a89efa8-3d36-4f98-a0bb-1825aa74c85a.arguments.content",
+          "reason": "群聊消息中提到的收件人名字"
+        },
+        {
+          "text": "Kenji",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7a89efa8-3d36-4f98-a0bb-1825aa74c85a.arguments.content",
+          "reason": "群聊消息中提到的收件人名字"
+        }
+      ],
+      "new_terms": [
+        "Aurélie",
+        "Kenji"
+      ],
+      "active_vocabulary": {
+        "Aurélie": 50,
+        "Kenji": 50
+      },
+      "vocabulary_sha256": "fdc650bead4bb03b17879bc4356805301036e9bc8d2e3e39c9f143bde0a13644"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create.arguments.description",
+          "reason": "日历描述中提到的同行人"
+        },
+        {
+          "text": "Kenji",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create.arguments.description",
+          "reason": "日历描述中提到的同行人"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélie": 50,
+        "Kenji": 50
+      },
+      "vocabulary_sha256": "fdc650bead4bb03b17879bc4356805301036e9bc8d2e3e39c9f143bde0a13644"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Léon",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_leon.arguments.content",
+          "reason": "邮件称呼中的收件人名字"
+        },
+        {
+          "text": "Rik",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_rik.arguments.content",
+          "reason": "邮件称呼中的收件人名字"
+        },
+        {
+          "text": "Yumi",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_yumi.arguments.content",
+          "reason": "邮件称呼中的收件人名字"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_leon.arguments.content",
+          "reason": "邮件署名中的发件人全名"
+        },
+        {
+          "text": "Léon Vandenberghe",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "回复中提到的完整人名"
+        },
+        {
+          "text": "Rik Vandenberghe",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "回复中提到的完整人名"
+        },
+        {
+          "text": "Yumi Nakahara",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "回复中提到的完整人名"
+        }
+      ],
+      "new_terms": [
+        "Léon",
+        "Rik",
+        "Yumi",
+        "Ursula Wiederkehr",
+        "Léon Vandenberghe",
+        "Rik Vandenberghe",
+        "Yumi Nakahara"
+      ],
+      "active_vocabulary": {
+        "Aurélie": 50,
+        "Kenji": 50,
+        "Léon": 50,
+        "Rik": 50,
+        "Yumi": 50,
+        "Ursula Wiederkehr": 50,
+        "Léon Vandenberghe": 50,
+        "Rik Vandenberghe": 50,
+        "Yumi Nakahara": 50
+      },
+      "vocabulary_sha256": "cb123d60a641f24d4b4994ac0cab6445968c4e862b1c633a8fd6d9ab4b4ab47e"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "469504f333059ad16e3a0cbd307510b3fa966e76dcd3b1714a15454c4389ad19",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3657,
+        "completion_tokens": 511,
+        "total_tokens": 4168,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3401
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.794
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0498_dvyqbs0hy70n7tp7oroqm1flg1gbqoro",
+  "extracted_at": "2026-11-22T06:42:22.010060+00:00"
+}

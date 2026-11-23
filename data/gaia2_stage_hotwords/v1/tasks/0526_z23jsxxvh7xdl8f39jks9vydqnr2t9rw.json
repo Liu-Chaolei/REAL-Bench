@@ -1,0 +1,180 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0526_z23jsxxvh7xdl8f39jks9vydqnr2t9rw",
+  "model": "deepseek-flash",
+  "input_sha256": "fcdff2ee23d410e8eac9b024846517b71736987dbe7add681cb1c5ef204a328f",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c279cb4f-f76a-4ecf-a47e-4b30c2f23d33.arguments.content",
+          "reason": "发件人签名中的完整人名"
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "8ddb0a94599ebe2d52fc8977fe11e48d059fa068aee431ab6bf5112d1f2de8bd"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "River North Residences",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Skyline Oasis",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "公寓楼名称"
+        },
+        {
+          "text": "Chicago",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "城市名"
+        },
+        {
+          "text": "Kaitlyn Nakamura",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "舞台工作人员完整姓名"
+        },
+        {
+          "text": "333 W Hubbard St",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓具体地址"
+        },
+        {
+          "text": "3333 Main St",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓具体地址"
+        }
+      ],
+      "new_terms": [
+        "River North Residences",
+        "Skyline Oasis",
+        "Chicago",
+        "Kaitlyn Nakamura",
+        "333 W Hubbard St",
+        "3333 Main St"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "River North Residences": 50,
+        "Skyline Oasis": 50,
+        "Chicago": 50,
+        "Kaitlyn Nakamura": 50,
+        "333 W Hubbard St": 50,
+        "3333 Main St": 50
+      },
+      "vocabulary_sha256": "678befbfc50c934d8426c6d5545328b926aad2a0569c8f35448763e854696b21"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "消息接收人完整姓名"
+        },
+        {
+          "text": "Xóchitl",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "需转告的独特人名"
+        },
+        {
+          "text": "River North Residences",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "临时审查地点公寓名"
+        },
+        {
+          "text": "333 W Hubbard St",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "公寓具体地址"
+        },
+        {
+          "text": "Chicago",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Nalani Jensen",
+        "Xóchitl"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "River North Residences": 50,
+        "Skyline Oasis": 50,
+        "Chicago": 50,
+        "Kaitlyn Nakamura": 50,
+        "333 W Hubbard St": 50,
+        "3333 Main St": 50,
+        "Nalani Jensen": 50,
+        "Xóchitl": 50
+      },
+      "vocabulary_sha256": "828f845e97fc1e9829ee3953a0e05120e33adec4b7040b5cbde617037b562f21"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "4c986fbe8e48879bcd4a03586da929e28181c560f1138c6ab288d541202a774a",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3154,
+        "completion_tokens": 476,
+        "total_tokens": 3630,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2898
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.898,
+      "error": "Not an exact quotation of a source in stage 0: 'Nalani Jensen' from 'stage0.tool_gt.OracleEvent-AGENT-c279cb4f-f76a-4ecf-a47e-4b30c2f23d33.arguments.recipients[0]'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "bc3f641982eeef0da8ec424ad50d7b76bc918ef49578956954726b10c83d4452",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4079,
+        "completion_tokens": 406,
+        "total_tokens": 4485,
+        "prompt_tokens_details": {
+          "cached_tokens": 3584
+        },
+        "prompt_cache_hit_tokens": 3584,
+        "prompt_cache_miss_tokens": 495
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.88
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0526_z23jsxxvh7xdl8f39jks9vydqnr2t9rw",
+  "extracted_at": "2026-11-22T06:42:36.898862+00:00"
+}

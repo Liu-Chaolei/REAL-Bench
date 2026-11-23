@@ -1,0 +1,164 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0473_9avip2x8ppep164alnyncq7rhv7rry2q",
+  "model": "deepseek-flash",
+  "input_sha256": "74aa529b2124dac303968323559fe00e7a974a7360a8359f510e74ed8b948522",
+  "review_input_sha256": "6e478e0bb73b685f04b25ef7dbb5ec12af6c2dafd5f4189967b9b5ca202f3199",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "f0c6367da18a88c057a4933c474c5af717aaf6eb5e8c81a8c0f6bf75145b32c8",
+  "reference_results_sha256": "78341f0e89597a25b2069eb1a700229bf1f7c1b2fde632fdbbba0dcde4e6fb7a",
+  "sources": {
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Liesbeth Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-3b262495-71e6-4247-b533-5c8b9bc9f198.arguments.content"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Leuven Station",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-88a7e37d-1d49-4877-bbed-baf8ab6691ea.arguments.end_location"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "Sint-Michielsstraat 23",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-88a7e37d-1d49-4877-bbed-baf8ab6691ea.arguments.start_location"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Aurélien Dumont",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.attendees[0]"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Émile Vandenberghe",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.attendees[1]"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Elara Vandenberghe",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.attendees[2]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Sint-Michielsstraat 23",
+          "kind": "place",
+          "source": "stage0.existing_catalog.6",
+          "reason": "独特街道地址，含连字符复合名",
+          "weight": 50
+        },
+        {
+          "text": "Leuven Station",
+          "kind": "place",
+          "source": "stage0.existing_catalog.5",
+          "reason": "具体车站地名",
+          "weight": 50
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整人名，含独特姓氏组合",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Sint-Michielsstraat 23",
+        "Leuven Station",
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Sint-Michielsstraat 23": 50,
+        "Leuven Station": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "16dee852254ca955c42955a2eefae8bd4bd907b95055c9276411871614c728fd"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Elara Vandenberghe",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "完整人名，独特姓氏组合",
+          "weight": 50
+        },
+        {
+          "text": "Émile Vandenberghe",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien Dumont",
+        "Elara Vandenberghe",
+        "Émile Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Sint-Michielsstraat 23": 50,
+        "Leuven Station": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Aurélien Dumont": 50,
+        "Elara Vandenberghe": 50,
+        "Émile Vandenberghe": 50
+      },
+      "vocabulary_sha256": "3afc2467737757e46b422e376d19139e79ff837c1b7b5e487743081ec712400a"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Sint-Michielsstraat 23": 50,
+        "Leuven Station": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Aurélien Dumont": 50,
+        "Elara Vandenberghe": 50,
+        "Émile Vandenberghe": 50
+      },
+      "vocabulary_sha256": "3afc2467737757e46b422e376d19139e79ff837c1b7b5e487743081ec712400a"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Elara",
+    "Aurélien",
+    "Émile",
+    "Liesbeth",
+    "Leuven",
+    "Design Review Meeting"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:03.168859+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

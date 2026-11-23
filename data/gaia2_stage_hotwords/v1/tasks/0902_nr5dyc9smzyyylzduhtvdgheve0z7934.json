@@ -1,0 +1,152 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0902_nr5dyc9smzyyylzduhtvdgheve0z7934",
+  "model": "deepseek-flash",
+  "input_sha256": "fd1624e3741a43597dbc0a952642c128544392c5be764d0a2eeac19fdc750ac5",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f43bbc2f-eb0e-4eb7-ab3a-4a85e9535c4c.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Kaitlyn Nguyen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f43bbc2f-eb0e-4eb7-ab3a-4a85e9535c4c.arguments.attendees[1]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Kaida Jensen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f43bbc2f-eb0e-4eb7-ab3a-4a85e9535c4c.arguments.attendees[2]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "The Leela Hotel",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f43bbc2f-eb0e-4eb7-ab3a-4a85e9535c4c.arguments.location",
+          "reason": "午餐地点名称"
+        }
+      ],
+      "new_terms": [
+        "Rohan Kumar",
+        "Kaitlyn Nguyen",
+        "Kaida Jensen",
+        "The Leela Hotel"
+      ],
+      "active_vocabulary": {
+        "Rohan Kumar": 50,
+        "Kaitlyn Nguyen": 50,
+        "Kaida Jensen": 50,
+        "The Leela Hotel": 50
+      },
+      "vocabulary_sha256": "ad60c5e8d1cdda4d89367addd33e74ad57bd7db6dbd5bc10bf5dd667404fe354"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Sahyadri Apartments",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_quote.arguments.start_location",
+          "reason": "上车地点建筑名"
+        },
+        {
+          "text": "Bandra West",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_quote.arguments.start_location",
+          "reason": "孟买地区名"
+        },
+        {
+          "text": "Mumbai",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_quote.arguments.start_location",
+          "reason": "城市名"
+        },
+        {
+          "text": "The Leela Hotel",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_quote.arguments.end_location",
+          "reason": "目的地酒店名"
+        }
+      ],
+      "new_terms": [
+        "Sahyadri Apartments",
+        "Bandra West",
+        "Mumbai"
+      ],
+      "active_vocabulary": {
+        "Rohan Kumar": 50,
+        "Kaitlyn Nguyen": 50,
+        "Kaida Jensen": 50,
+        "The Leela Hotel": 50,
+        "Sahyadri Apartments": 50,
+        "Bandra West": 50,
+        "Mumbai": 50
+      },
+      "vocabulary_sha256": "bb9ab739f81c6f7574992c2f56cd2011f4af0cb1529f841060a9124890f9b2bd"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaitlyn Nguyen",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "提醒邮件收件人姓名"
+        },
+        {
+          "text": "Kaida Jensen",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "提醒邮件收件人姓名"
+        },
+        {
+          "text": "The Leela Hotel",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_reminder.arguments.location",
+          "reason": "午餐地点名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Rohan Kumar": 50,
+        "Kaitlyn Nguyen": 50,
+        "Kaida Jensen": 50,
+        "The Leela Hotel": 50,
+        "Sahyadri Apartments": 50,
+        "Bandra West": 50,
+        "Mumbai": 50
+      },
+      "vocabulary_sha256": "bb9ab739f81c6f7574992c2f56cd2011f4af0cb1529f841060a9124890f9b2bd"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "61f4035b1843b8532fee8abaed4c7795586766cc63bee751cde60f6f590ff4d4",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4839,
+        "completion_tokens": 532,
+        "total_tokens": 5371,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4583
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.127
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0902_nr5dyc9smzyyylzduhtvdgheve0z7934",
+  "extracted_at": "2026-11-22T06:44:25.590966+00:00"
+}

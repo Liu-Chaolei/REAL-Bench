@@ -1,0 +1,144 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0944_pivnn6sy5oe8huz2lxzhyex22eyvb22l",
+  "model": "deepseek-flash",
+  "input_sha256": "e6a8810d570dde53a634675548e49a4e0300d96eaffb711fced1a8b5d39ba134",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Helmut Eisenstadt",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Gerrit van der Meer",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "University of Cambridge",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "地点所属大学"
+        },
+        {
+          "text": "Department of Physics",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "具体院系名称"
+        }
+      ],
+      "new_terms": [
+        "Helmut Eisenstadt",
+        "Gerrit van der Meer",
+        "University of Cambridge",
+        "Department of Physics"
+      ],
+      "active_vocabulary": {
+        "Helmut Eisenstadt": 50,
+        "Gerrit van der Meer": 50,
+        "University of Cambridge": 50,
+        "Department of Physics": 50
+      },
+      "vocabulary_sha256": "18f57709655017b49a1e856c710fa2a62b737295489fac5649e43b1d4bb4c35b"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Helmut Eisenstadt",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群组成员姓名"
+        },
+        {
+          "text": "Gerrit van der Meer",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群组成员姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Helmut Eisenstadt": 50,
+        "Gerrit van der Meer": 50,
+        "University of Cambridge": 50,
+        "Department of Physics": 50
+      },
+      "vocabulary_sha256": "18f57709655017b49a1e856c710fa2a62b737295489fac5649e43b1d4bb4c35b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Helmut Eisenstadt",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "邮件中提及的参会人"
+        },
+        {
+          "text": "Gerrit van der Meer",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "邮件中提及的参会人"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Helmut Eisenstadt": 50,
+        "Gerrit van der Meer": 50,
+        "University of Cambridge": 50,
+        "Department of Physics": 50
+      },
+      "vocabulary_sha256": "18f57709655017b49a1e856c710fa2a62b737295489fac5649e43b1d4bb4c35b"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "87d91fe86d7c1f93fc68fe72411a3a060afaba15bd094f2bb9fbb56bc3125607",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4287,
+        "completion_tokens": 306,
+        "total_tokens": 4593,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4031
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.551,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "83232ed3f9dd2dbaf2e16b832134137f3999b0838e1c00b873cac220f5025d16",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4986,
+        "completion_tokens": 258,
+        "total_tokens": 5244,
+        "prompt_tokens_details": {
+          "cached_tokens": 4480
+        },
+        "prompt_cache_hit_tokens": 4480,
+        "prompt_cache_miss_tokens": 506
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.118
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0944_pivnn6sy5oe8huz2lxzhyex22eyvb22l",
+  "extracted_at": "2026-11-22T06:44:39.308408+00:00"
+}

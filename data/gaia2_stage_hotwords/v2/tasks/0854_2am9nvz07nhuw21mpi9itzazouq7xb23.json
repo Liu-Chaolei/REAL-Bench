@@ -1,0 +1,176 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0854_2am9nvz07nhuw21mpi9itzazouq7xb23",
+  "model": "deepseek-flash",
+  "input_sha256": "77a9417a9a40d94c1625788e90785cb08eb9cdb7c889c0a60da7a9b646774d21",
+  "review_input_sha256": "2369635c65e3aaa93edca9fa06e0ee45c6adfe4685bc174a6ca8591601b84e71",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "7f6e930697d35323af96815e5d76fe97a0e5e378d272320e8371804fefe3c9af",
+  "reference_results_sha256": "37b421f9779f69307f19945801c0b1cd7f06fa2febaf03132fcba0fbc708bf8e",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Astrid Lundqvist",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-87768a65-dc4d-447b-b29a-55463bbd67aa.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Linnea Svensson",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-6abbd25d-75c2-4d2c-9be2-58fb6260964a.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Åsa Lindqvist",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-6abbd25d-75c2-4d2c-9be2-58fb6260964a.arguments.attendees[1]"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Astrid Svensson",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Sunita Bishwakarma",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Astrid Lindqvist",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Pioneer Balloon Company 17231 Welcome Baby Bottle Foil Balloon",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，含少见姓氏组合，适合热词",
+          "weight": 50
+        },
+        {
+          "text": "Linnea Svensson",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Åsa Lindqvist",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Lundqvist",
+        "Linnea Svensson",
+        "Åsa Lindqvist"
+      ],
+      "active_vocabulary": {
+        "Astrid Lundqvist": 50,
+        "Linnea Svensson": 50,
+        "Åsa Lindqvist": 50
+      },
+      "vocabulary_sha256": "88ab23b42560e7a9267e210d2e8c3df0ee2d4f45338a23297ff71652745c8eb2"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Pioneer Balloon Company 17231 Welcome Baby Bottle Foil Balloon",
+          "kind": "product",
+          "source": "stage1.existing_catalog.3",
+          "reason": "长且独特的产品全名",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Lindqvist",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Svensson",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Sunita Bishwakarma",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "少见完整人名，识别难度高",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Pioneer Balloon Company 17231 Welcome Baby Bottle Foil Balloon",
+        "Astrid Lindqvist",
+        "Astrid Svensson",
+        "Sunita Bishwakarma"
+      ],
+      "active_vocabulary": {
+        "Astrid Lundqvist": 50,
+        "Linnea Svensson": 50,
+        "Åsa Lindqvist": 50,
+        "Pioneer Balloon Company 17231 Welcome Baby Bottle Foil Balloon": 50,
+        "Astrid Lindqvist": 50,
+        "Astrid Svensson": 50,
+        "Sunita Bishwakarma": 50
+      },
+      "vocabulary_sha256": "4bce2706d9c2bde15ef787043ae62e79fa800f0324a9622ecb7cfecba0245414"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid Lundqvist": 50,
+        "Linnea Svensson": 50,
+        "Åsa Lindqvist": 50,
+        "Pioneer Balloon Company 17231 Welcome Baby Bottle Foil Balloon": 50,
+        "Astrid Lindqvist": 50,
+        "Astrid Svensson": 50,
+        "Sunita Bishwakarma": 50
+      },
+      "vocabulary_sha256": "4bce2706d9c2bde15ef787043ae62e79fa800f0324a9622ecb7cfecba0245414"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Åsa",
+    "Linnea",
+    "MI ZONE Allison Teen Girls Duvet Cover Set"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:37.205697+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

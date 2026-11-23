@@ -1,0 +1,114 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0086_5p7bbvp9h8s5dqwunyet8diokpugh3gt",
+  "model": "deepseek-flash",
+  "input_sha256": "84b77c64f139d7a0acb237b2ed9bff3c44415dc8f3258d236ff0d95d3f5c48f9",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Alien RPG",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定桌游产品名"
+        },
+        {
+          "text": "Alien RPG: stress dice set",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定骰子套装产品名"
+        }
+      ],
+      "new_terms": [
+        "Alien RPG",
+        "Alien RPG: stress dice set"
+      ],
+      "active_vocabulary": {
+        "Alien RPG": 50,
+        "Alien RPG: stress dice set": 50
+      },
+      "vocabulary_sha256": "4a6c4a290d8234c4763029b6d8e3db683439be85160ccf470cfd2b5bab29a431"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Alien RPG Session Prep",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_create_prep.arguments.title",
+          "reason": "自定义日程标题"
+        },
+        {
+          "text": "Reminder: Alien RPG Session Prep",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_create_reminder.arguments.title",
+          "reason": "自定义提醒标题"
+        }
+      ],
+      "new_terms": [
+        "Alien RPG Session Prep",
+        "Reminder: Alien RPG Session Prep"
+      ],
+      "active_vocabulary": {
+        "Alien RPG": 50,
+        "Alien RPG: stress dice set": 50,
+        "Alien RPG Session Prep": 50,
+        "Reminder: Alien RPG Session Prep": 50
+      },
+      "vocabulary_sha256": "9513384a8c5b6e38ac83e8f98dedcb0e048f8654ba156bddb77056e6f01ef691"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Åse",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "用户名字"
+        },
+        {
+          "text": "Alien RPG: Stress Dice Set",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "特定骰子套装产品名"
+        }
+      ],
+      "new_terms": [
+        "Åse"
+      ],
+      "active_vocabulary": {
+        "Alien RPG": 50,
+        "Alien RPG: stress dice set": 50,
+        "Alien RPG Session Prep": 50,
+        "Reminder: Alien RPG Session Prep": 50,
+        "Åse": 50
+      },
+      "vocabulary_sha256": "46527fcd076270615bb49ebea10453fdd20a73d28ea72ddaafede750908e9e19"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "dd3734b913ac0835d9acb449ca6e192b05a8a4846526ad672883303a2908230d",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2507,
+        "completion_tokens": 243,
+        "total_tokens": 2750,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2251
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.087
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0086_5p7bbvp9h8s5dqwunyet8diokpugh3gt",
+  "extracted_at": "2026-11-22T06:39:58.399406+00:00"
+}

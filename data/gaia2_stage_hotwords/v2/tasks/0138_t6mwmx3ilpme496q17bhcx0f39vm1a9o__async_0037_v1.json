@@ -1,0 +1,174 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0138_t6mwmx3ilpme496q17bhcx0f39vm1a9o__async_0037_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "c60b872dd9b858d5eb78643233db4333c2d04f8307ddb027aa9e7ebf2469af44",
+  "review_input_sha256": "3a3016c703c12bf37e8ade3f457998ab2c8b02c2ca18399cd159c601fa6f4d11",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "268c1757b28e19fd0291983830a9de080dc2b4246e31327ebd5379f09a07de11",
+  "reference_results_sha256": "fffe5bdada4d063ce32dc4c5a906c40ff22a147c0e8fd4169c8e647cf8c303c0",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Aurelia",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Phoenix",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Aurelia Păunescu",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Desert Bloom Apartments",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Sunset Villas",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "N 7th St",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurelia",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Phoenix",
+          "kind": "place",
+          "source": "stage0.existing_catalog.1",
+          "reason": "地名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurelia",
+        "Phoenix"
+      ],
+      "active_vocabulary": {
+        "Aurelia": 50,
+        "Phoenix": 50
+      },
+      "vocabulary_sha256": "3f5a22db9c9b8641023e5dd4da9d8cf4f50280d604fc5cb8987b6ba8099f66ad"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Desert Bloom Apartments",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整公寓名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Aurelia Păunescu",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.existing_catalog.4",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Sunset Villas",
+          "kind": "place",
+          "source": "stage1.existing_catalog.3",
+          "reason": "完整公寓名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Desert Bloom Apartments",
+        "Aurelia Păunescu",
+        "Aurélien LaFleur",
+        "Sunset Villas"
+      ],
+      "active_vocabulary": {
+        "Aurelia": 50,
+        "Phoenix": 50,
+        "Desert Bloom Apartments": 50,
+        "Aurelia Păunescu": 50,
+        "Aurélien LaFleur": 50,
+        "Sunset Villas": 50
+      },
+      "vocabulary_sha256": "db148a517dd881ea3ff953d78c473a7e4400546c0899f07b4280386081201c57"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "N 7th St",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "具体街道名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "N 7th St"
+      ],
+      "active_vocabulary": {
+        "Aurelia": 50,
+        "Phoenix": 50,
+        "Desert Bloom Apartments": 50,
+        "Aurelia Păunescu": 50,
+        "Aurélien LaFleur": 50,
+        "Sunset Villas": 50,
+        "N 7th St": 50
+      },
+      "vocabulary_sha256": "9a5bdf9fc593e01ae11284c3a03a044d4209536bc3256be64a2c1b0793296f7d"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Desert Bloom"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:50.755629+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

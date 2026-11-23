@@ -1,0 +1,152 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0817_ccwrcvjz2zbzivq7lf26xlxggjadxux8",
+  "model": "deepseek-flash",
+  "input_sha256": "0ec251f84a85c1dd718f197bf4211447404972eac8a338e264622181e9d863ff",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Jensen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "姓氏，用于筛选联系人及活动名称"
+        },
+        {
+          "text": "Jensen Party",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-d4ba017d-b0c0-4525-8349-d3f8a1690eb6.arguments.title",
+          "reason": "自定义日历事件名称"
+        }
+      ],
+      "new_terms": [
+        "Jensen",
+        "Jensen Party"
+      ],
+      "active_vocabulary": {
+        "Jensen": 50,
+        "Jensen Party": 50
+      },
+      "vocabulary_sha256": "d53ff959f575b06b4858eb9baf4c5b36d9c9bb9f772267a434046e014c973292"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Jensen Party Logistics",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_create.arguments.title",
+          "reason": "自定义群聊名称"
+        },
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Nadira Jensen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "签名中的独特人名"
+        }
+      ],
+      "new_terms": [
+        "Jensen Party Logistics",
+        "Nalani Jensen",
+        "Nadira Jensen",
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Jensen": 50,
+        "Jensen Party": 50,
+        "Jensen Party Logistics": 50,
+        "Nalani Jensen": 50,
+        "Nadira Jensen": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "b1bfbe63594cf243c863f5cd44194c97e9fdbb0fbc5d5484395662d26f5bc074"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Jensen Party Prep",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_create.arguments.title",
+          "reason": "自定义日历事件名称"
+        },
+        {
+          "text": "Jensen Party",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "引用的活动名称"
+        }
+      ],
+      "new_terms": [
+        "Jensen Party Prep"
+      ],
+      "active_vocabulary": {
+        "Jensen": 50,
+        "Jensen Party": 50,
+        "Jensen Party Logistics": 50,
+        "Nalani Jensen": 50,
+        "Nadira Jensen": 50,
+        "Aurélien": 50,
+        "Jensen Party Prep": 50
+      },
+      "vocabulary_sha256": "6ad94e00629535dbd41727a80daad8836bcb33cb374da186eac4e4826db6c216"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "166c63bfaa67e59d0a91ff344ac7657121b58fd547e6f273c8b44bb58ab85e78",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2767,
+        "completion_tokens": 452,
+        "total_tokens": 3219,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2511
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.962,
+      "error": "Invalid proper-name phrase: 'njensen66@gaia2mail.com'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "e6f5c3688f9ece89b1aed8880400d4e91294c123ca6f1e57425d3cece5aa9c76",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3618,
+        "completion_tokens": 314,
+        "total_tokens": 3932,
+        "prompt_tokens_details": {
+          "cached_tokens": 3200
+        },
+        "prompt_cache_hit_tokens": 3200,
+        "prompt_cache_miss_tokens": 418
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.208
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0817_ccwrcvjz2zbzivq7lf26xlxggjadxux8",
+  "extracted_at": "2026-11-22T06:44:01.964009+00:00"
+}

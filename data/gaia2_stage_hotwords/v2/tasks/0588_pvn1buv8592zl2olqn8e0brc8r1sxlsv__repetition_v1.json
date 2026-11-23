@@ -1,0 +1,147 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0588_pvn1buv8592zl2olqn8e0brc8r1sxlsv__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "bd61937a19e527a47971b059b4c69669bf5b89bfc96ecac8f4fa0fd99756efe5",
+  "review_input_sha256": "e720ada53e3c1db6f45259e6169b12f6b06bafc1e3a99f30501033e51eda4e14",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "c9968741fab0a2fa3d92ecd3d00e511bad67defa8cc2b4d032b1c840b835f82b",
+  "reference_results_sha256": "d274d748ae3a8c006956d1bdc6f43be619b1453aa6200695a48a27fde6642317",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Sutopo Widyatama",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Philadelphia-opoly",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Widyastuti",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Sri Widyastuti",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.tool_response.series_s1_day_events": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"6c361456a2ef46a59f1afbdc0dd4f2d3\", \"title\": \"Lecture: Contemporary Russian History\", \"start_datetime\": \"1729245600\", \"end_datetime\": \"1729252800\", \"tag\": \"Work\", \"description\": \"Deliver a lecture on Contemporary Russian History to undergraduate students at Moscow State University.\", \"location\": \"Moscow State University, History Department\", \"attendees\": [], \"start_strftime\": \"Friday, 2024-10-18 10:00:00\", \"end_strftime\": \"Friday, 2024-10-18 12:00:00\"}, {\"event_id\": \"ee372f6e86c6452e9ec1498c3030b7f8\", \"title\": \"Office Hours\", \"start_datetime\": \"1729260000\", \"end_datetime\": \"1729267200\", \"tag\": \"Work\", \"description\": \"Hold office hours to meet with students and discuss their progress.\", \"location\": \"Moscow State University, History Department\", \"attendees\": [], \"start_strftime\": \"Friday, 2024-10-18 14:00:00\", \"end_strftime\": \"Friday, 2024-10-18 16:00:00\"}, {\"event_id\": \"d4c2d9f7cdacdf99ad578e25036c7e5f\", \"title\": \"Sushi Dinner\", \"start_datetime\": \"1729274400.0\", \"end_datetime\": \"1729281600.0\", \"tag\": \"Social\", \"description\": null, \"location\": null, \"attendees\": [\"Sutopo Widyatama\", \"Sri Widyastuti\"], \"start_strftime\": \"Friday, 2024-10-18 18:00:00\", \"end_strftime\": \"Friday, 2024-10-18 20:00:00\"}], \"range\": [\"0\", \"3\"], \"total\": \"3\"}",
+      "event_id": "series_s1_day_events",
+      "response_sha256": "07c8edcf4f9a93a9f758c7690d3076810beeeb81b12142faba3b676b80a429c5"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Philadelphia-opoly",
+          "kind": "product",
+          "source": "stage0.existing_catalog.1",
+          "reason": "专有产品名，含连字符",
+          "weight": 50
+        },
+        {
+          "text": "Sutopo Widyatama",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "印尼语完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Widyastuti",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "印尼语姓氏，拼写困难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Philadelphia-opoly",
+        "Sutopo Widyatama",
+        "Widyastuti"
+      ],
+      "active_vocabulary": {
+        "Philadelphia-opoly": 50,
+        "Sutopo Widyatama": 50,
+        "Widyastuti": 50
+      },
+      "vocabulary_sha256": "e37d7e40e832c58025fceb449f6fc36afb4d829663d8b8f3ba96ae2326912866"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Moscow State University",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_day_events",
+          "reason": "专有机构名",
+          "weight": 50
+        },
+        {
+          "text": "Sri Widyastuti",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，姓氏拼写困难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Moscow State University",
+        "Sri Widyastuti"
+      ],
+      "active_vocabulary": {
+        "Philadelphia-opoly": 50,
+        "Sutopo Widyatama": 50,
+        "Widyastuti": 50,
+        "Moscow State University": 50,
+        "Sri Widyastuti": 50
+      },
+      "vocabulary_sha256": "c7a4862846304c51193ec898afb3c38e23f5a88182b6df6e270e29fb47d75d63"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Philadelphia-opoly": 50,
+        "Sutopo Widyatama": 50,
+        "Widyastuti": 50,
+        "Moscow State University": 50,
+        "Sri Widyastuti": 50
+      },
+      "vocabulary_sha256": "c7a4862846304c51193ec898afb3c38e23f5a88182b6df6e270e29fb47d75d63"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Sutopo",
+    "Sri",
+    "Anastasiya"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:06.345667+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

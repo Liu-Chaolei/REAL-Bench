@@ -1,0 +1,144 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0414_3yql6usimuhmbc4q5hlkwpiz859qwj0e",
+  "model": "deepseek-flash",
+  "input_sha256": "b58ed0a86c47b90aafe509b95b7e640a7509faee53c5104325e7e6bae85429f2",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kiettisak",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "收件人名字，出现在问候语中"
+        },
+        {
+          "text": "Liesbeth",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "发件人署名"
+        },
+        {
+          "text": "Kiettisak Somsakul",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.title",
+          "reason": "完整人名，用于日历标题"
+        }
+      ],
+      "new_terms": [
+        "Kiettisak",
+        "Liesbeth",
+        "Kiettisak Somsakul"
+      ],
+      "active_vocabulary": {
+        "Kiettisak": 50,
+        "Liesbeth": 50,
+        "Kiettisak Somsakul": 50
+      },
+      "vocabulary_sha256": "5217ad3c33ba23b7c67b8ef54706c38b9cae88da60730037a1058414c2b213c3"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kiettisak Somsakul",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_tracker.arguments.content",
+          "reason": "教师联系人完整姓名"
+        },
+        {
+          "text": "Nonglak Sriwong",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_tracker.arguments.content",
+          "reason": "教师联系人完整姓名"
+        },
+        {
+          "text": "Jamila Al-Farsi",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_tracker.arguments.content",
+          "reason": "教师联系人完整姓名"
+        },
+        {
+          "text": "Thierry Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_tracker.arguments.content",
+          "reason": "教师联系人完整姓名"
+        },
+        {
+          "text": "Elodie Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_tracker.arguments.content",
+          "reason": "教师联系人完整姓名"
+        }
+      ],
+      "new_terms": [
+        "Nonglak Sriwong",
+        "Jamila Al-Farsi",
+        "Thierry Vandenberghe",
+        "Elodie Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Kiettisak": 50,
+        "Liesbeth": 50,
+        "Kiettisak Somsakul": 50,
+        "Nonglak Sriwong": 50,
+        "Jamila Al-Farsi": 50,
+        "Thierry Vandenberghe": 50,
+        "Elodie Vandenberghe": 50
+      },
+      "vocabulary_sha256": "7a005f957aeab68a189efe4ab19d9de5d2eff67ef136d8510573a2a931e3f97e"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "6e0b6d2115935565dc8ac9e887f98bf1a89e73d82a61793ed53e255bd8387472",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1866,
+        "completion_tokens": 412,
+        "total_tokens": 2278,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1610
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.652,
+      "error": "4 validation errors for Extraction\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage0.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='该阶段仅含电话号...无合适专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage1.tool_gt.series_s1...d_event.arguments.title', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage2.tool_gt.series_s2...acker.arguments.content', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "8c2c34b54c91f4cfea5d37c4f998bc475a0267cec59434a2cf38d0c6e5376500",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2914,
+        "completion_tokens": 353,
+        "total_tokens": 3267,
+        "prompt_tokens_details": {
+          "cached_tokens": 2176
+        },
+        "prompt_cache_hit_tokens": 2176,
+        "prompt_cache_miss_tokens": 738
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.806
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0414_3yql6usimuhmbc4q5hlkwpiz859qwj0e",
+  "extracted_at": "2026-11-22T06:41:47.566095+00:00"
+}

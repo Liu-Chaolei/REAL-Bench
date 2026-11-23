@@ -1,0 +1,540 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0152_zbeyuqqohsgl7tch4iwukvxyq44wkwdp__async_0050_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "8b1567bbb081ee8643511384758732c15804993a065c035ee8e5abbcac881038",
+  "review_input_sha256": "39538b8db1c6631edb1a872815c8b2acbd252f0de9c68db2dbef7e2ed731d881",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "f80eed53654526eaab53cbd606b907bfdb4af988f15c3222948eabfbb42433dc",
+  "reference_results_sha256": "cc17c2378a529ca21492fa40316b8266d29fb371e6b7a4d065e1670ef4e48cda",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Anastasia Kuznetsova",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Sahyadri Apartments",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Powai",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Rohan Kumar",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-55b55380-f197-4cb2-b171-5b880e3cee97.arguments.attendees[0]"
+    },
+    "stage1.tool_response.series_s1_read_saved": {
+      "stage": 1,
+      "text": "{\"3e77e07b099c4f8997bf98e70b695422\": {\"name\": \"Tata Housing Serein\", \"location\": \"Thane, Mumbai\", \"zip_code\": \"400610\", \"price\": \"25000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1100\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"3e77e07b099c4f8997bf98e70b695422\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"53704d8638a047adaf2e7e0c5852e341\": {\"name\": \"Hyderabad Habitat\", \"location\": \"Plot 90, Road No. 12, Banjara Hills, Hyderabad\", \"zip_code\": \"500034\", \"price\": \"20000\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"53704d8638a047adaf2e7e0c5852e341\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"cbbdc024d0a54d7c81caf26c1235000e\": {\"name\": \"Jaipur Jewel\", \"location\": \"C Scheme, Jaipur\", \"zip_code\": \"302001\", \"price\": \"20000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"cbbdc024d0a54d7c81caf26c1235000e\", \"amenities\": [\"Pool\", \"Gym\"], \"saved\": \"True\"}, \"9512910a40f147948c14689937dce1ab\": {\"name\": \"Ahmedabad Abode\", \"location\": \"Paldi, Ahmedabad\", \"zip_code\": \"380007\", \"price\": \"18000\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Second floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"9512910a40f147948c14689937dce1ab\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"fa3e919b61b3430ab5ca9880625e4c1b\": {\"name\": \"Tata Avenida\", \"location\": \"Sector 168, Noida, Uttar Pradesh\", \"zip_code\": \"201305\", \"price\": \"30000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"fa3e919b61b3430ab5ca9880625e4c1b\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"05ea3857ae00406a9a25f4fed5ed9805\": {\"name\": \"Surat Serenity Apartments\", \"location\": \"Plot 123, Sector 9, Ghod Dod Road, Surat\", \"zip_code\": \"395007\", \"price\": \"22000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"05ea3857ae00406a9a25f4fed5ed9805\", \"amenities\": [\"Pool\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"b11eb1bc494c458887d68b050eec888b\": {\"name\": \"Golden Nest\", \"location\": \"14, Maruti Nagar, KPHB Colony, Hyderabad\", \"zip_code\": \"500072\", \"price\": \"18000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"b11eb1bc494c458887d68b050eec888b\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"a86e715327104845a6c36488fede9400\": {\"name\": \"Sai Residency\", \"location\": \"Survey No. 123, Kharadi, Pune\", \"zip_code\": \"411014\", \"price\": \"18000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"a86e715327104845a6c36488fede9400\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"0a8f14cee9fc4ad4a1f0bf28fad10a83\": {\"name\": \"Vijayawada Homes\", \"location\": \"Mangalagiri, Vijayawada, Andhra Pradesh\", \"zip_code\": \"522503\", \"price\": \"15000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"0a8f14cee9fc4ad4a1f0bf28fad10a83\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"348a44c0c4534cca9b0fadd6085ee461\": {\"name\": \"Kumar's Pride\", \"location\": \"No. 15, 1st Cross, JP Nagar, Bengaluru\", \"zip_code\": \"560078\", \"price\": \"25000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"348a44c0c4534cca9b0fadd6085ee461\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"e389303a25bb4036b5e64d935a6127d3\": {\"name\": \"Sai Krupa Homes\", \"location\": \"Survey No 456, Kondapur, Hyderabad\", \"zip_code\": \"500084\", \"price\": \"35000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"e389303a25bb4036b5e64d935a6127d3\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"672a5d0b211546a681942d02b42e750e\": {\"name\": \"Serenity Homes\", \"location\": \"Survey 456, Hosur Road, Bengaluru\", \"zip_code\": \"560030\", \"price\": \"22000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1100\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"672a5d0b211546a681942d02b42e750e\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"cc5fa74512904bd0ac7888e767e34321\": {\"name\": \"Paradise Homes\", \"location\": \"Plot 456, Sector 11, Ghaziabad\", \"zip_code\": \"201001\", \"price\": \"18000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"cc5fa74512904bd0ac7888e767e34321\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"ea6b594f10a14eaab7a0dc8e26dfef26\": {\"name\": \"Sai Sagar Apartments\", \"location\": \"Survey No 123, Kondapur, Hyderabad\", \"zip_code\": \"500084\", \"price\": \"25000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"ea6b594f10a14eaab7a0dc8e26dfef26\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"5a9a5952aabd40abb4c14dffc7b24cbe\": {\"name\": \"Surat Sanctuary\", \"location\": \"Pal Hazira, Surat\", \"zip_code\": \"394510\", \"price\": \"20000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"5a9a5952aabd40abb4c14dffc7b24cbe\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"7b1d34e2e74a4ee29cf0c87556906f80\": {\"name\": \"Sunny Vista Apartments\", \"location\": \"Andheri West, Mumbai\", \"zip_code\": \"400053\", \"price\": \"25000\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"7b1d34e2e74a4ee29cf0c87556906f80\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"ca633656158e45beabfb13123398ac21\": {\"name\": \"Aaradhya Homes\", \"location\": \"Near Akshardham Temple, Gandhinagar\", \"zip_code\": \"382421\", \"price\": \"40000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"ca633656158e45beabfb13123398ac21\", \"amenities\": [\"Laundry\", \"Gym\"], \"saved\": \"True\"}, \"1170d9cda92c4312a69734cc632e2c82\": {\"name\": \"Riviera Apartments\", \"location\": \"Survey No 234, Kalyan Nagar, Bengaluru\", \"zip_code\": \"560043\", \"price\": \"40000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"1170d9cda92c4312a69734cc632e2c82\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"54722b4e5345463a964a4ebb3e7e43a5\": {\"name\": \"Shreeji Apartments\", \"location\": \"Plot No. 789, Sector 10, Gandhinagar\", \"zip_code\": \"382010\", \"price\": \"20000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"54722b4e5345463a964a4ebb3e7e43a5\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"a94e0bd9a28844488ca4cae3c2462952\": {\"name\": \"The Nest\", \"location\": \"No. 12, 1st Cross, 2nd Block, Koramangala, Bengaluru\", \"zip_code\": \"560034\", \"price\": \"35000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"a94e0bd9a28844488ca4cae3c2462952\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"5310797bdf08494b8f562148d5d02b1d\": {\"name\": \"Jain Residency\", \"location\": \"1/2, Old Palasia, Indore\", \"zip_code\": \"452001\", \"price\": \"15000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"5310797bdf08494b8f562148d5d02b1d\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"2757bb98b5c245ee88e8d4c3fe650eba\": {\"name\": \"Godrej Garden City\", \"location\": \"Survey 123, SG Highway, Ahmedabad\", \"zip_code\": \"380060\", \"price\": \"25000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"2757bb98b5c245ee88e8d4c3fe650eba\", \"amenities\": [\"Gym\", \"Swimming Pool\", \"Lift\"], \"saved\": \"True\"}, \"edd35d98707546abb9b6901583f3dce9\": {\"name\": \"Royal Residences\", \"location\": \"Plot 123, Sector 15, CBD Belapur, Navi Mumbai\", \"zip_code\": \"400614\", \"price\": \"40000\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"2500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"Long term lease\", \"apartment_id\": \"edd35d98707546abb9b6901583f3dce9\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\", \"Parking\", \"Security\"], \"saved\": \"True\"}, \"8620900a25ed4c62a0148663d1d3b7b8\": {\"name\": \"Kolkata Krupa\", \"location\": \"No. 78, B.B. Ganguly Street, Kolkata\", \"zip_code\": \"700012\", \"price\": \"12000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"8620900a25ed4c62a0148663d1d3b7b8\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"d5caf9e33b4b40e6b298c6d06914956b\": {\"name\": \"Lifestyle Apartments\", \"location\": \"Survey 789, Outer Ring Road, Hyderabad\", \"zip_code\": \"500084\", \"price\": \"25000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"d5caf9e33b4b40e6b298c6d06914956b\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"47ddaa08d66a4a5f96fe2095748a1d3b\": {\"name\": \"Surya Residency\", \"location\": \"Opposite to Railway Station, Ahmedabad\", \"zip_code\": \"380002\", \"price\": \"25000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"47ddaa08d66a4a5f96fe2095748a1d3b\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"23474cf0ae9c4d4d862e964bdafcbd93\": {\"name\": \"Vishal Residency\", \"location\": \"Survey No. 234, Mysore Road, Bengaluru\", \"zip_code\": \"560026\", \"price\": \"20000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"23474cf0ae9c4d4d862e964bdafcbd93\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"b648ed07a4cc4fbbb8f0703df78d1d25\": {\"name\": \"Lodha The Park\", \"location\": \"Worli, Mumbai\", \"zip_code\": \"400018\", \"price\": \"70000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"b648ed07a4cc4fbbb8f0703df78d1d25\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"a2760982c4234fccb22f59b342715ca5\": {\"name\": \"Prestige Shantiniketan\", \"location\": \"Whitefield, Bengaluru\", \"zip_code\": \"560048\", \"price\": \"60000\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Apartment\", \"square_footage\": \"2500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"a2760982c4234fccb22f59b342715ca5\", \"amenities\": [\"Pool\", \"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"d5031bec99fc4679b7688c50c5fcc2ac\": {\"name\": \"Bengaluru Bliss\", \"location\": \"Indiranagar, Bengaluru\", \"zip_code\": \"560038\", \"price\": \"22000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1400\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"d5031bec99fc4679b7688c50c5fcc2ac\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}}",
+      "event_id": "series_s1_read_saved",
+      "response_sha256": "984ecab0fe0f7ec2a90864db6f67750d1c9e2470a4b2c1b92ab153d5e9d306f4"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Anastasia Kuznetsova",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整俄式人名，含难发音姓氏，适合热词",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "完整人名，保留完整形式",
+          "weight": 50
+        },
+        {
+          "text": "Sahyadri Apartments",
+          "kind": "place",
+          "source": "stage0.existing_catalog.1",
+          "reason": "独特公寓名，Sahyadri 为难点专名",
+          "weight": 50
+        },
+        {
+          "text": "Powai",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "孟买地名，发音不直观",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Anastasia Kuznetsova",
+        "Rohan Kumar",
+        "Sahyadri Apartments",
+        "Powai"
+      ],
+      "active_vocabulary": {
+        "Anastasia Kuznetsova": 50,
+        "Rohan Kumar": 50,
+        "Sahyadri Apartments": 50,
+        "Powai": 50
+      },
+      "vocabulary_sha256": "a02b886f83ec92b495b97eed97ebabbe3261438ce0004ed838609fae1657ba51"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "B.B. Ganguly Street",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特街道名，Ganguly 为难点词",
+          "weight": 50
+        },
+        {
+          "text": "Ghod Dod Road",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特街道名，发音困难",
+          "weight": 50
+        },
+        {
+          "text": "Godrej Garden City",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "品牌房产名",
+          "weight": 50
+        },
+        {
+          "text": "Kumar's Pride",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Sai Krupa Homes",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特房产名，Krupa 为难点词",
+          "weight": 50
+        },
+        {
+          "text": "Sai Sagar Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特完整房产名",
+          "weight": 50
+        },
+        {
+          "text": "Sunny Vista Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特完整房产名",
+          "weight": 50
+        },
+        {
+          "text": "Surat Serenity Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特完整房产名",
+          "weight": 50
+        },
+        {
+          "text": "Tata Housing Serein",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特房产项目名，Serein 为难点词",
+          "weight": 50
+        },
+        {
+          "text": "Aaradhya Homes",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特房产名，Aaradhya 为难点词",
+          "weight": 50
+        },
+        {
+          "text": "Ahmedabad Abode",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Akshardham Temple",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特寺庙名",
+          "weight": 50
+        },
+        {
+          "text": "Bengaluru Bliss",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "CBD Belapur",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特地名组合",
+          "weight": 50
+        },
+        {
+          "text": "Hosur Road",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特道路名",
+          "weight": 50
+        },
+        {
+          "text": "Hyderabad Habitat",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特房产名，含地名组合",
+          "weight": 50
+        },
+        {
+          "text": "Jaipur Jewel",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "JP Nagar",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特街区名",
+          "weight": 50
+        },
+        {
+          "text": "Kalyan Nagar",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特街区名",
+          "weight": 50
+        },
+        {
+          "text": "Kolkata Krupa",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "KPHB Colony",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "缩写式独特地名",
+          "weight": 50
+        },
+        {
+          "text": "Maruti Nagar",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特街区名",
+          "weight": 50
+        },
+        {
+          "text": "Mysore Road",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特道路名",
+          "weight": 50
+        },
+        {
+          "text": "Navi Mumbai",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特城市名",
+          "weight": 50
+        },
+        {
+          "text": "Old Palasia",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特地名",
+          "weight": 50
+        },
+        {
+          "text": "Pal Hazira",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特地名",
+          "weight": 50
+        },
+        {
+          "text": "Prestige Shantiniketan",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "品牌房产名，Shantiniketan 为难点词",
+          "weight": 50
+        },
+        {
+          "text": "Shreeji Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特房产名，Shreeji 为难点词",
+          "weight": 50
+        },
+        {
+          "text": "Surya Residency",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Tata Avenida",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "品牌房产名，Avenida 为难点词",
+          "weight": 50
+        },
+        {
+          "text": "Vishal Residency",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Gandhinagar",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特城市名",
+          "weight": 50
+        },
+        {
+          "text": "Ghaziabad",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特城市名",
+          "weight": 50
+        },
+        {
+          "text": "Indiranagar",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特街区名",
+          "weight": 50
+        },
+        {
+          "text": "Kharadi",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "浦那地名，发音不直观",
+          "weight": 50
+        },
+        {
+          "text": "Kondapur",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特地名",
+          "weight": 50
+        },
+        {
+          "text": "Koramangala",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特街区名，发音困难",
+          "weight": 50
+        },
+        {
+          "text": "Mangalagiri",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特地名，发音困难",
+          "weight": 50
+        },
+        {
+          "text": "Vijayawada",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特城市名",
+          "weight": 50
+        },
+        {
+          "text": "Whitefield",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特街区名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "B.B. Ganguly Street",
+        "Ghod Dod Road",
+        "Godrej Garden City",
+        "Kumar's Pride",
+        "Sai Krupa Homes",
+        "Sai Sagar Apartments",
+        "Sunny Vista Apartments",
+        "Surat Serenity Apartments",
+        "Tata Housing Serein",
+        "Aaradhya Homes",
+        "Ahmedabad Abode",
+        "Akshardham Temple",
+        "Bengaluru Bliss",
+        "CBD Belapur",
+        "Hosur Road",
+        "Hyderabad Habitat",
+        "Jaipur Jewel",
+        "JP Nagar",
+        "Kalyan Nagar",
+        "Kolkata Krupa",
+        "KPHB Colony",
+        "Maruti Nagar",
+        "Mysore Road",
+        "Navi Mumbai",
+        "Old Palasia",
+        "Pal Hazira",
+        "Prestige Shantiniketan",
+        "Shreeji Apartments",
+        "Surya Residency",
+        "Tata Avenida",
+        "Vishal Residency",
+        "Gandhinagar",
+        "Ghaziabad",
+        "Indiranagar",
+        "Kharadi",
+        "Kondapur",
+        "Koramangala",
+        "Mangalagiri",
+        "Vijayawada",
+        "Whitefield"
+      ],
+      "active_vocabulary": {
+        "Anastasia Kuznetsova": 50,
+        "Rohan Kumar": 50,
+        "Sahyadri Apartments": 50,
+        "Powai": 50,
+        "B.B. Ganguly Street": 50,
+        "Ghod Dod Road": 50,
+        "Godrej Garden City": 50,
+        "Kumar's Pride": 50,
+        "Sai Krupa Homes": 50,
+        "Sai Sagar Apartments": 50,
+        "Sunny Vista Apartments": 50,
+        "Surat Serenity Apartments": 50,
+        "Tata Housing Serein": 50,
+        "Aaradhya Homes": 50,
+        "Ahmedabad Abode": 50,
+        "Akshardham Temple": 50,
+        "Bengaluru Bliss": 50,
+        "CBD Belapur": 50,
+        "Hosur Road": 50,
+        "Hyderabad Habitat": 50,
+        "Jaipur Jewel": 50,
+        "JP Nagar": 50,
+        "Kalyan Nagar": 50,
+        "Kolkata Krupa": 50,
+        "KPHB Colony": 50,
+        "Maruti Nagar": 50,
+        "Mysore Road": 50,
+        "Navi Mumbai": 50,
+        "Old Palasia": 50,
+        "Pal Hazira": 50,
+        "Prestige Shantiniketan": 50,
+        "Shreeji Apartments": 50,
+        "Surya Residency": 50,
+        "Tata Avenida": 50,
+        "Vishal Residency": 50,
+        "Gandhinagar": 50,
+        "Ghaziabad": 50,
+        "Indiranagar": 50,
+        "Kharadi": 50,
+        "Kondapur": 50,
+        "Koramangala": 50,
+        "Mangalagiri": 50,
+        "Vijayawada": 50,
+        "Whitefield": 50
+      },
+      "vocabulary_sha256": "7e31d685714d9707884aaec809ddc36ff208c651662ec4874083565b896ac1f9"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Anastasia Kuznetsova": 50,
+        "Rohan Kumar": 50,
+        "Sahyadri Apartments": 50,
+        "Powai": 50,
+        "B.B. Ganguly Street": 50,
+        "Ghod Dod Road": 50,
+        "Godrej Garden City": 50,
+        "Kumar's Pride": 50,
+        "Sai Krupa Homes": 50,
+        "Sai Sagar Apartments": 50,
+        "Sunny Vista Apartments": 50,
+        "Surat Serenity Apartments": 50,
+        "Tata Housing Serein": 50,
+        "Aaradhya Homes": 50,
+        "Ahmedabad Abode": 50,
+        "Akshardham Temple": 50,
+        "Bengaluru Bliss": 50,
+        "CBD Belapur": 50,
+        "Hosur Road": 50,
+        "Hyderabad Habitat": 50,
+        "Jaipur Jewel": 50,
+        "JP Nagar": 50,
+        "Kalyan Nagar": 50,
+        "Kolkata Krupa": 50,
+        "KPHB Colony": 50,
+        "Maruti Nagar": 50,
+        "Mysore Road": 50,
+        "Navi Mumbai": 50,
+        "Old Palasia": 50,
+        "Pal Hazira": 50,
+        "Prestige Shantiniketan": 50,
+        "Shreeji Apartments": 50,
+        "Surya Residency": 50,
+        "Tata Avenida": 50,
+        "Vishal Residency": 50,
+        "Gandhinagar": 50,
+        "Ghaziabad": 50,
+        "Indiranagar": 50,
+        "Kharadi": 50,
+        "Kondapur": 50,
+        "Koramangala": 50,
+        "Mangalagiri": 50,
+        "Vijayawada": 50,
+        "Whitefield": 50
+      },
+      "vocabulary_sha256": "7e31d685714d9707884aaec809ddc36ff208c651662ec4874083565b896ac1f9"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Mumbai",
+    "Maharashtra",
+    "Lodha The Park",
+    "Worli",
+    "Anastasia"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:20:00.375842+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

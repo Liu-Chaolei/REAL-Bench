@@ -1,0 +1,118 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0200_ndh9u8xbnpvnqmyy787miw5glb62ecu0",
+  "model": "deepseek-flash",
+  "input_sha256": "3b74cf6e44df4119dd1a73adf44bc6a896cbbb76cb52914d584d5ca64ec1fddc",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-2c9361e9-1cac-453d-b8b7-5d21f0628afb.arguments.content",
+          "reason": "收件人女儿的名字"
+        }
+      ],
+      "new_terms": [
+        "Astrid"
+      ],
+      "active_vocabulary": {
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "d10c3d5b6ed49e46866cce69105c4b25402126b3a4c0c3dc71b2d1cf6079b9ef"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "d10c3d5b6ed49e46866cce69105c4b25402126b3a4c0c3dc71b2d1cf6079b9ef"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Astrid Kjær",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "女儿完整姓名"
+        }
+      ],
+      "new_terms": [
+        "Astrid Kjær"
+      ],
+      "active_vocabulary": {
+        "Astrid": 50,
+        "Astrid Kjær": 50
+      },
+      "vocabulary_sha256": "b38e0d9e6c960402fcef1b830cf6f0e0c35d31a5e482b0f7f837597c368ae23c"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "0dd0a36d6254a7f59d89d11e9b15eed7b11d9b9597152aceaace57b805fa0835",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2663,
+        "completion_tokens": 220,
+        "total_tokens": 2883,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2407
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.46,
+      "error": "Not an exact quotation of a source in stage 0: 'Kjaer' from 'stage0.tool_gt.OracleEvent-AGENT-2c9361e9-1cac-453d-b8b7-5d21f0628afb.arguments.recipients[0]'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "60babd31b84b6a7648a26f67f3da30b010c4d936c353d62e1a72839741b81751",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3333,
+        "completion_tokens": 150,
+        "total_tokens": 3483,
+        "prompt_tokens_details": {
+          "cached_tokens": 2816
+        },
+        "prompt_cache_hit_tokens": 2816,
+        "prompt_cache_miss_tokens": 517
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 0.84,
+      "error": "Invalid proper-name phrase: 'astrid.kjaer@gaia2mail.com'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "aeb347ba6b18783e44bf1f67252abb3c8a08bddcee272e2c7a41e503201e5a58",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3214,
+        "completion_tokens": 118,
+        "total_tokens": 3332,
+        "prompt_tokens_details": {
+          "cached_tokens": 2560
+        },
+        "prompt_cache_hit_tokens": 2560,
+        "prompt_cache_miss_tokens": 654
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.723
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0200_ndh9u8xbnpvnqmyy787miw5glb62ecu0",
+  "extracted_at": "2026-11-22T06:40:43.429711+00:00"
+}

@@ -1,0 +1,147 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0260_7jx31pgop583mn3z3vox68anau1q2fsv__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "deb191faaaf555388392cc5b56924a752f9df261487dbbba75028285c2e38d68",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nalinee Srisombat",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "被取消备注的联系人姓名"
+        },
+        {
+          "text": "Nonglak Srisawat",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "群组成员姓名"
+        },
+        {
+          "text": "Nonglak Suthisakul",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "群组成员姓名"
+        },
+        {
+          "text": "Nonglak Wongchai",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "群组成员姓名"
+        },
+        {
+          "text": "Nonglak Wongchinda",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "群组成员姓名"
+        }
+      ],
+      "new_terms": [
+        "Nalinee Srisombat",
+        "Nonglak Srisawat",
+        "Nonglak Suthisakul",
+        "Nonglak Wongchai",
+        "Nonglak Wongchinda"
+      ],
+      "active_vocabulary": {
+        "Nalinee Srisombat": 50,
+        "Nonglak Srisawat": 50,
+        "Nonglak Suthisakul": 50,
+        "Nonglak Wongchai": 50,
+        "Nonglak Wongchinda": 50
+      },
+      "vocabulary_sha256": "6d55bb25175ab241ad08fbdde6f6c22c2259e1cb670fa741bd103ff4c930848a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Nonglak Srisawat",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "日历描述中的联系人姓名"
+        },
+        {
+          "text": "Nonglak Suthisakul",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "日历描述中的联系人姓名"
+        },
+        {
+          "text": "Nonglak Wongchai",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "日历描述中的联系人姓名"
+        },
+        {
+          "text": "Nonglak Wongchinda",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "日历描述中的联系人姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Nalinee Srisombat": 50,
+        "Nonglak Srisawat": 50,
+        "Nonglak Suthisakul": 50,
+        "Nonglak Wongchai": 50,
+        "Nonglak Wongchinda": 50
+      },
+      "vocabulary_sha256": "6d55bb25175ab241ad08fbdde6f6c22c2259e1cb670fa741bd103ff4c930848a"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "e0ea9e96629bb14801cc2958eeae91cde15f4013a74e0690d455728cd850be60",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1731,
+        "completion_tokens": 398,
+        "total_tokens": 2129,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1475
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.506,
+      "error": "4 validation errors for Extraction\nstages.0.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage0.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage1.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='stage2.source_task', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "a4dde84dcf284f342e6c744defd6662d6627dd1adb2e6a67ea92add9330a5b22",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2734,
+        "completion_tokens": 369,
+        "total_tokens": 3103,
+        "prompt_tokens_details": {
+          "cached_tokens": 2048
+        },
+        "prompt_cache_hit_tokens": 2048,
+        "prompt_cache_miss_tokens": 686
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.4
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0260_7jx31pgop583mn3z3vox68anau1q2fsv__mind_change_v1",
+  "extracted_at": "2026-11-22T06:45:04.168508+00:00"
+}

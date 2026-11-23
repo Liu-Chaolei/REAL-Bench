@@ -1,0 +1,170 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0103_2eew091qx234vunawg1dvmneqq5l3jut",
+  "model": "deepseek-flash",
+  "input_sha256": "75e96e74aaf9a1466ada31de9a8bf6f7b5a89be8a5cf99de633f37fcdc8093d2",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kvido Nováček",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名，会议取消对象"
+        },
+        {
+          "text": "Global Governance Seminar",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "研讨会名称"
+        },
+        {
+          "text": "Charles University",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "大学名称"
+        },
+        {
+          "text": "Opletalova 38, 110 00 Staré Město, Prague",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "地址"
+        },
+        {
+          "text": "Conan - Book of Skelos",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "书名"
+        },
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f99fd8bd-95e4-4470-a196-18ba46b079f6.arguments.content",
+          "reason": "邮件署名"
+        }
+      ],
+      "new_terms": [
+        "Kvido Nováček",
+        "Global Governance Seminar",
+        "Charles University",
+        "Opletalova 38, 110 00 Staré Město, Prague",
+        "Conan - Book of Skelos",
+        "Matěj Nováček"
+      ],
+      "active_vocabulary": {
+        "Kvido Nováček": 50,
+        "Global Governance Seminar": 50,
+        "Charles University": 50,
+        "Opletalova 38, 110 00 Staré Město, Prague": 50,
+        "Conan - Book of Skelos": 50,
+        "Matěj Nováček": 50
+      },
+      "vocabulary_sha256": "35fd1ea269e99c30f17ad26a60f9c39947282861a2b3f3f295c6f5220d012fad"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Global Governance Seminar",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "研讨会名称"
+        },
+        {
+          "text": "Opletalova 38, 110 00 Staré Město, Prague",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "地址"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kvido Nováček": 50,
+        "Global Governance Seminar": 50,
+        "Charles University": 50,
+        "Opletalova 38, 110 00 Staré Město, Prague": 50,
+        "Conan - Book of Skelos": 50,
+        "Matěj Nováček": 50
+      },
+      "vocabulary_sha256": "35fd1ea269e99c30f17ad26a60f9c39947282861a2b3f3f295c6f5220d012fad"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Global Governance Seminar",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "研讨会名称"
+        },
+        {
+          "text": "Opletalova 38, 110 00 Staré Město, Prague",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "地址"
+        },
+        {
+          "text": "Conan - Book of Skelos",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "书名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kvido Nováček": 50,
+        "Global Governance Seminar": 50,
+        "Charles University": 50,
+        "Opletalova 38, 110 00 Staré Město, Prague": 50,
+        "Conan - Book of Skelos": 50,
+        "Matěj Nováček": 50
+      },
+      "vocabulary_sha256": "35fd1ea269e99c30f17ad26a60f9c39947282861a2b3f3f295c6f5220d012fad"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "5c1369b4919541f111b497d7cc41660f19998154a4422c5f96e2ea91db9b7056",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2734,
+        "completion_tokens": 375,
+        "total_tokens": 3109,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2478
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.44,
+      "error": "Not an exact quotation of a source in stage 2: 'Conan - Book of Skelos' from 'stage2.source_task'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "4505e1212c9a57ffc394009eae5ec87c0fb202f620d396e1e1418ca770895900",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3520,
+        "completion_tokens": 385,
+        "total_tokens": 3905,
+        "prompt_tokens_details": {
+          "cached_tokens": 3072
+        },
+        "prompt_cache_hit_tokens": 3072,
+        "prompt_cache_miss_tokens": 448
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.506
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0103_2eew091qx234vunawg1dvmneqq5l3jut",
+  "extracted_at": "2026-11-22T06:40:05.848934+00:00"
+}

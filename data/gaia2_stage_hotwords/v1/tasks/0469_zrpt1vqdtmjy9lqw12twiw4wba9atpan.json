@@ -1,0 +1,188 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0469_zrpt1vqdtmjy9lqw12twiw4wba9atpan",
+  "model": "deepseek-flash",
+  "input_sha256": "8f2ba8754aa670fd53c5b527650dbbe765ed8b285b3cd2bec4323f9a6da064d0",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Sutrisno Wibowo",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-9424340a-8dea-4ebd-b379-d5bc6113add8.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Rodrigo García López",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-9424340a-8dea-4ebd-b379-d5bc6113add8.arguments.attendees[1]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Xóchitl Hernández-Gómez",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-9424340a-8dea-4ebd-b379-d5bc6113add8.arguments.attendees[2]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Sergei Kuznetsov",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-9424340a-8dea-4ebd-b379-d5bc6113add8.arguments.attendees[3]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-9424340a-8dea-4ebd-b379-d5bc6113add8.arguments.attendees[4]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Katharina Müller-Schneider",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-9424340a-8dea-4ebd-b379-d5bc6113add8.arguments.attendees[5]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Natalya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-9424340a-8dea-4ebd-b379-d5bc6113add8.arguments.attendees[6]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Saskia Römer",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-9424340a-8dea-4ebd-b379-d5bc6113add8.arguments.attendees[7]",
+          "reason": "参会人姓名"
+        }
+      ],
+      "new_terms": [
+        "Sutrisno Wibowo",
+        "Rodrigo García López",
+        "Xóchitl Hernández-Gómez",
+        "Sergei Kuznetsov",
+        "Viktor Kuznetsov",
+        "Katharina Müller-Schneider",
+        "Natalya Kuznetsova",
+        "Saskia Römer"
+      ],
+      "active_vocabulary": {
+        "Sutrisno Wibowo": 50,
+        "Rodrigo García López": 50,
+        "Xóchitl Hernández-Gómez": 50,
+        "Sergei Kuznetsov": 50,
+        "Viktor Kuznetsov": 50,
+        "Katharina Müller-Schneider": 50,
+        "Natalya Kuznetsova": 50,
+        "Saskia Römer": 50
+      },
+      "vocabulary_sha256": "b3af2e8c118fdf90649a7de344445f70d0e2096dbd7d7455d0fb16fc4bb7dacd"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Saskia Römer",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "群聊成员姓名"
+        },
+        {
+          "text": "Xóchitl Hernández-Gómez",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "群聊成员姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Sutrisno Wibowo": 50,
+        "Rodrigo García López": 50,
+        "Xóchitl Hernández-Gómez": 50,
+        "Sergei Kuznetsov": 50,
+        "Viktor Kuznetsov": 50,
+        "Katharina Müller-Schneider": 50,
+        "Natalya Kuznetsova": 50,
+        "Saskia Römer": 50
+      },
+      "vocabulary_sha256": "b3af2e8c118fdf90649a7de344445f70d0e2096dbd7d7455d0fb16fc4bb7dacd"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Sutrisno Wibowo",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "Messages群成员姓名"
+        },
+        {
+          "text": "Rodrigo García López",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "Messages群成员姓名"
+        },
+        {
+          "text": "Sergei Kuznetsov",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "Messages群成员姓名"
+        },
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "Messages群成员姓名"
+        },
+        {
+          "text": "Katharina Müller-Schneider",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "Messages群成员姓名"
+        },
+        {
+          "text": "Natalya Kuznetsova",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "Messages群成员姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Sutrisno Wibowo": 50,
+        "Rodrigo García López": 50,
+        "Xóchitl Hernández-Gómez": 50,
+        "Sergei Kuznetsov": 50,
+        "Viktor Kuznetsov": 50,
+        "Katharina Müller-Schneider": 50,
+        "Natalya Kuznetsova": 50,
+        "Saskia Römer": 50
+      },
+      "vocabulary_sha256": "b3af2e8c118fdf90649a7de344445f70d0e2096dbd7d7455d0fb16fc4bb7dacd"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "9d67c50115335baf49627931e817df53fa37136ea7881eb618eaed605418b5b0",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3918,
+        "completion_tokens": 848,
+        "total_tokens": 4766,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3662
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.912
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0469_zrpt1vqdtmjy9lqw12twiw4wba9atpan",
+  "extracted_at": "2026-11-22T06:42:11.076186+00:00"
+}

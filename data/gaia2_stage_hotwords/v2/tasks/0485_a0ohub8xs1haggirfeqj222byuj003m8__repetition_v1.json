@@ -1,0 +1,138 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0485_a0ohub8xs1haggirfeqj222byuj003m8__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "a9b61c6a5a8662771614316ba8646f3f642dc0afd9b3c457a52d79f05d0cb559",
+  "review_input_sha256": "c0cb5b253078621ca40ac04c776d57f8055bdf431c1e61ae44dc7b4691492e0c",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "6cb3d40a37bc5d8fc8cf4c96b22e93db7925dbd425f07ba00581a15df3e5d607",
+  "reference_results_sha256": "467630793f8d42e07270c0abc51a98973a67dd9d7a44512efe262d697c6c07eb",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Wine Awakening",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Young Wine Enthusiasts",
+      "original_source": "stage0.source_task"
+    },
+    "stage2.tool_response.series_s2_read_nov11": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"c824c1d53a37433a9ab5520b0c5bd3e9\", \"title\": \"Wine Supplier Meeting\", \"start_datetime\": \"1731319200\", \"end_datetime\": \"1731326400\", \"tag\": \"Work\", \"description\": \"Meeting with a wine supplier to discuss new wine offerings.\", \"location\": \"Restaurant Office\", \"attendees\": [\"Aurélien LaFleur\", \"Xóchitl Ramírez García\"], \"start_strftime\": \"Monday, 2024-11-11 10:00:00\", \"end_strftime\": \"Monday, 2024-11-11 12:00:00\"}, {\"event_id\": \"10fc6355dddc2d68cfa63635e5025c60\", \"title\": \"Wine Awakening Prep\", \"start_datetime\": \"1731319200.0\", \"end_datetime\": \"1731322800.0\", \"tag\": null, \"description\": \"Review the wine flight and the guest list before the 'Wine Awakening' event on Tuesday, November 12.\", \"location\": \"Restaurant Office\", \"attendees\": [], \"start_strftime\": \"Monday, 2024-11-11 10:00:00\", \"end_strftime\": \"Monday, 2024-11-11 11:00:00\"}], \"range\": [\"0\", \"2\"], \"total\": \"2\"}",
+      "event_id": "series_s2_read_nov11",
+      "response_sha256": "aa578545c864cbfbe405992fc12351bdd09aa9d31d2c9f39e15fbf09edc262b2"
+    },
+    "stage2.tool_response.series_s2_read_nov19": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"259a324ad8984f06b862967f2c1e3a66\", \"title\": \"Wine List Update Meeting\", \"start_datetime\": \"1732010400\", \"end_datetime\": \"1732017600\", \"tag\": \"Work\", \"description\": \"Meeting with suppliers to discuss new wine offerings.\", \"location\": \"Restaurant\", \"attendees\": [\"Aurélien LaFleur\", \"Xóchitl Hernández García\"], \"start_strftime\": \"Tuesday, 2024-11-19 10:00:00\", \"end_strftime\": \"Tuesday, 2024-11-19 12:00:00\"}, {\"event_id\": \"65473c6db120fccac12cec39cc94112b\", \"title\": \"Wine Awakening Prep\", \"start_datetime\": \"1732010400.0\", \"end_datetime\": \"1732014000.0\", \"tag\": null, \"description\": \"Review the wine flight and the guest list before the 'Wine Awakening' event on Wednesday, November 20.\", \"location\": \"Restaurant Office\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-11-19 10:00:00\", \"end_strftime\": \"Tuesday, 2024-11-19 11:00:00\"}], \"range\": [\"0\", \"2\"], \"total\": \"2\"}",
+      "event_id": "series_s2_read_nov19",
+      "response_sha256": "f1d6a8d894d4db5a8b00e4d8d4d1fa77bbb53b7ca3d040fad0b22ca150b6b5ba"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Young Wine Enthusiasts",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.1",
+          "reason": "特定群体名称",
+          "weight": 50
+        },
+        {
+          "text": "Wine Awakening",
+          "kind": "custom_name",
+          "source": "stage0.existing_catalog.0",
+          "reason": "特色活动名称，非普通词汇",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Young Wine Enthusiasts",
+        "Wine Awakening"
+      ],
+      "active_vocabulary": {
+        "Young Wine Enthusiasts": 50,
+        "Wine Awakening": 50
+      },
+      "vocabulary_sha256": "9683906ca4f936445ed8fe4ed912266c5bca49e74e4ad9986cfaffb9a0a50d53"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Young Wine Enthusiasts": 50,
+        "Wine Awakening": 50
+      },
+      "vocabulary_sha256": "9683906ca4f936445ed8fe4ed912266c5bca49e74e4ad9986cfaffb9a0a50d53"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Xóchitl Hernández García",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_nov19",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Xóchitl Ramírez García",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_nov11",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_nov11",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Xóchitl Hernández García",
+        "Xóchitl Ramírez García",
+        "Aurélien LaFleur"
+      ],
+      "active_vocabulary": {
+        "Young Wine Enthusiasts": 50,
+        "Wine Awakening": 50,
+        "Xóchitl Hernández García": 50,
+        "Xóchitl Ramírez García": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "bbc6f439e6aac9e009a3de0aabe2ddaa001a586c17530ed45f718f28cbb8a0c9"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Wine Awakening Prep",
+    "Restaurant Office"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:45.011350+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

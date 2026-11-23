@@ -1,0 +1,176 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0483_5flsv3yaza8sq8y40z663f3xf7zj211p__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "bb9725b1b6ff7d016e6d266207eadf1306539190fbbcd723e1dba81b9be8c4e6",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kirsten Rasmussen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Odense",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "丹麦城市名"
+        },
+        {
+          "text": "Odense City Centre",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Odense Nord",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Nørregade 10",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "街道地址"
+        },
+        {
+          "text": "Odense Oceanview",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Havneøen",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "地点名"
+        }
+      ],
+      "new_terms": [
+        "Kirsten Rasmussen",
+        "Odense",
+        "Odense City Centre",
+        "Odense Nord",
+        "Nørregade 10",
+        "Odense Oceanview",
+        "Havneøen"
+      ],
+      "active_vocabulary": {
+        "Kirsten Rasmussen": 50,
+        "Odense": 50,
+        "Odense City Centre": 50,
+        "Odense Nord": 50,
+        "Nørregade 10": 50,
+        "Odense Oceanview": 50,
+        "Havneøen": 50
+      },
+      "vocabulary_sha256": "0e77c308fcc9a8c18f25e75d5276897ef99204a0989682bd70a8398126837e15"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kirsten",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Odense City Centre",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Odense Oceanview",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "房源名称"
+        },
+        {
+          "text": "Odense C",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create_0.arguments.location",
+          "reason": "地点名"
+        },
+        {
+          "text": "Havneøen",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create_1.arguments.location",
+          "reason": "地点名"
+        }
+      ],
+      "new_terms": [
+        "Kirsten",
+        "Odense C"
+      ],
+      "active_vocabulary": {
+        "Kirsten Rasmussen": 50,
+        "Odense": 50,
+        "Odense City Centre": 50,
+        "Odense Nord": 50,
+        "Nørregade 10": 50,
+        "Odense Oceanview": 50,
+        "Havneøen": 50,
+        "Kirsten": 50,
+        "Odense C": 50
+      },
+      "vocabulary_sha256": "715a82864ef36b03b8b1ef31925a08c7d1e906c9e6e7486054c5bf27154e2d63"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "7167731d27f7d15c3838b03007720d8296970f453b67dd51971b83974693f845",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3281,
+        "completion_tokens": 432,
+        "total_tokens": 3713,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3025
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 1.856,
+      "error": "3 validation errors for Extraction\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无合适专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='含人名、城市、房源名与地址', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='含人名、房源名与地点', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "9a408e2c06dedf839c1733b0b86d6812d231d11731d4f7e49ef429699b92ba6c",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4275,
+        "completion_tokens": 401,
+        "total_tokens": 4676,
+        "prompt_tokens_details": {
+          "cached_tokens": 3712
+        },
+        "prompt_cache_hit_tokens": 3712,
+        "prompt_cache_miss_tokens": 563
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.417
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0483_5flsv3yaza8sq8y40z663f3xf7zj211p__repetition_v1",
+  "extracted_at": "2026-11-22T06:45:27.172576+00:00"
+}

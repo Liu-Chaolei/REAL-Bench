@@ -1,0 +1,240 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0645_gbj8otuliajhbbuncqqie6i64yv36egn__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "9e7725baaf67d9677e1fb5f0a75e4eb3abc2428af27d2aa94a02475c7f6ed76f",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kåre Fjellstad",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "用户指定的好友姓名，含特殊字符å"
+        },
+        {
+          "text": "Åse",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-0edda863-5455-46f0-9227-13a83785bcf8.arguments.content",
+          "reason": "邮件签名中的发件人名字，含特殊字符Å"
+        }
+      ],
+      "new_terms": [
+        "Kåre Fjellstad",
+        "Åse"
+      ],
+      "active_vocabulary": {
+        "Kåre Fjellstad": 50,
+        "Åse": 50
+      },
+      "vocabulary_sha256": "c032000a428a7f79abeb2b5792fdaa53d4ce444398a233fc8d2018e5bb618a8b"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kåre Fjellstad",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "用户提到的收件人姓名"
+        },
+        {
+          "text": "Fredrikstad Leilighet",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_announce.arguments.content",
+          "reason": "被移除的公寓名称，含挪威地名"
+        },
+        {
+          "text": "Trondheim Student Living",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_announce.arguments.content",
+          "reason": "被移除的公寓名称，含挪威地名"
+        },
+        {
+          "text": "Bodø Bay Apartments",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_announce.arguments.content",
+          "reason": "被移除的公寓名称，含特殊字符ø"
+        },
+        {
+          "text": "Bergen Student Apartments",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_announce.arguments.content",
+          "reason": "被移除的公寓名称，含挪威地名"
+        }
+      ],
+      "new_terms": [
+        "Fredrikstad Leilighet",
+        "Trondheim Student Living",
+        "Bodø Bay Apartments",
+        "Bergen Student Apartments"
+      ],
+      "active_vocabulary": {
+        "Kåre Fjellstad": 50,
+        "Åse": 50,
+        "Fredrikstad Leilighet": 50,
+        "Trondheim Student Living": 50,
+        "Bodø Bay Apartments": 50,
+        "Bergen Student Apartments": 50
+      },
+      "vocabulary_sha256": "48d4b7f7eb5cc051f700e69b22f748d7926a33857efedca9a3598c4348a936a2"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kåre",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "用户提到的好友名字"
+        },
+        {
+          "text": "Bergen Student Apartment",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_announce.arguments.content",
+          "reason": "被移除的公寓名称，含挪威地名"
+        },
+        {
+          "text": "Bergen Student Housing",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_announce.arguments.content",
+          "reason": "被移除的公寓名称，含挪威地名"
+        },
+        {
+          "text": "Trondheim",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_announce.arguments.content",
+          "reason": "统计中提到的挪威城市名"
+        },
+        {
+          "text": "Bergen",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_announce.arguments.content",
+          "reason": "统计中提到的挪威城市名"
+        },
+        {
+          "text": "Stavanger",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_announce.arguments.content",
+          "reason": "统计中提到的挪威城市名"
+        },
+        {
+          "text": "Oslo",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_announce.arguments.content",
+          "reason": "统计中提到的挪威城市名"
+        },
+        {
+          "text": "Tromsø",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_announce.arguments.content",
+          "reason": "统计中提到的挪威城市名，含特殊字符ø"
+        },
+        {
+          "text": "Fredrikstad",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_announce.arguments.content",
+          "reason": "统计中提到的挪威城市名"
+        },
+        {
+          "text": "Bodø",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_announce.arguments.content",
+          "reason": "统计中提到的挪威城市名，含特殊字符ø"
+        },
+        {
+          "text": "Kristiansand",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_announce.arguments.content",
+          "reason": "统计中提到的挪威城市名"
+        },
+        {
+          "text": "Ålesund",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_announce.arguments.content",
+          "reason": "统计中提到的挪威城市名，含特殊字符Å"
+        }
+      ],
+      "new_terms": [
+        "Kåre",
+        "Bergen Student Apartment",
+        "Bergen Student Housing",
+        "Trondheim",
+        "Bergen",
+        "Stavanger",
+        "Oslo",
+        "Tromsø",
+        "Fredrikstad",
+        "Bodø",
+        "Kristiansand",
+        "Ålesund"
+      ],
+      "active_vocabulary": {
+        "Kåre Fjellstad": 50,
+        "Åse": 50,
+        "Fredrikstad Leilighet": 50,
+        "Trondheim Student Living": 50,
+        "Bodø Bay Apartments": 50,
+        "Bergen Student Apartments": 50,
+        "Kåre": 50,
+        "Bergen Student Apartment": 50,
+        "Bergen Student Housing": 50,
+        "Trondheim": 50,
+        "Bergen": 50,
+        "Stavanger": 50,
+        "Oslo": 50,
+        "Tromsø": 50,
+        "Fredrikstad": 50,
+        "Bodø": 50,
+        "Kristiansand": 50,
+        "Ålesund": 50
+      },
+      "vocabulary_sha256": "4b1b3ea13a9162b0b104b1a8534dafe38603e6e86b4b856f52b916ff4885bb3e"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "536e4a0af953ee4846ea2ab80b1858c72a7db0e4c17f73ecbb5b91373b620004",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3668,
+        "completion_tokens": 813,
+        "total_tokens": 4481,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3412
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.82,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "c1c82c08297399265d6fbf595b747e8d9481fb824a8d7858b0f0276cc4feb769",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4875,
+        "completion_tokens": 816,
+        "total_tokens": 5691,
+        "prompt_tokens_details": {
+          "cached_tokens": 3840
+        },
+        "prompt_cache_hit_tokens": 3840,
+        "prompt_cache_miss_tokens": 1035
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.576
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0645_gbj8otuliajhbbuncqqie6i64yv36egn__mind_change_v1",
+  "extracted_at": "2026-11-22T06:45:57.679985+00:00"
+}

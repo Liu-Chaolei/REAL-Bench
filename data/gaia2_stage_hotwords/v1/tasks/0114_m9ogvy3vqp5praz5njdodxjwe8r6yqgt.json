@@ -1,0 +1,156 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0114_m9ogvy3vqp5praz5njdodxjwe8r6yqgt",
+  "model": "deepseek-flash",
+  "input_sha256": "4a67d7cf6a181907f8f2ff9d27b9b9fbc9354d0fa83cb1f0e781316937a1bfb4",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "151 Rum Tasting",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c6f81626-db9d-43fe-b6ce-7df49923af09.arguments.title",
+          "reason": "特定活动名称"
+        },
+        {
+          "text": "Agnes",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-be819943-b63f-4cf2-b2cb-41dbe5da2169.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Orange Peel Plastic Cups",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定商品名称"
+        },
+        {
+          "text": "Iridescent Lets Party Headbands",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "特定商品名称"
+        }
+      ],
+      "new_terms": [
+        "151 Rum Tasting",
+        "Agnes",
+        "Orange Peel Plastic Cups",
+        "Iridescent Lets Party Headbands"
+      ],
+      "active_vocabulary": {
+        "151 Rum Tasting": 50,
+        "Agnes": 50,
+        "Orange Peel Plastic Cups": 50,
+        "Iridescent Lets Party Headbands": 50
+      },
+      "vocabulary_sha256": "c4efb9070520a17972e4cc659af21acd80f928d6e391fc59d93c96d8155ed2a5"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_lookup.arguments.user_name",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "发件人签名"
+        }
+      ],
+      "new_terms": [
+        "Nalani Jensen",
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "151 Rum Tasting": 50,
+        "Agnes": 50,
+        "Orange Peel Plastic Cups": 50,
+        "Iridescent Lets Party Headbands": 50,
+        "Nalani Jensen": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "f2d4118b6bb7fe476ee7f7839b0763e77683e4bac4dedfa5fbbc034b9003c7b4"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Elise Brush Strokes 'Lets Party'",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "特定商品名称"
+        },
+        {
+          "text": "Elise",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_search.arguments.product_name",
+          "reason": "商品品牌名"
+        }
+      ],
+      "new_terms": [
+        "Elise Brush Strokes 'Lets Party'",
+        "Elise"
+      ],
+      "active_vocabulary": {
+        "151 Rum Tasting": 50,
+        "Agnes": 50,
+        "Orange Peel Plastic Cups": 50,
+        "Iridescent Lets Party Headbands": 50,
+        "Nalani Jensen": 50,
+        "Aurélien": 50,
+        "Elise Brush Strokes 'Lets Party'": 50,
+        "Elise": 50
+      },
+      "vocabulary_sha256": "f1a0e31bf54135303f407b0b698017cbedffb2513332e64d192c4f5f6ba7f61d"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "309cc4435e040dc0b986ecbd57568de4bac11202cb6a0b8787d9cee0ce11210f",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2573,
+        "completion_tokens": 482,
+        "total_tokens": 3055,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2317
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.567,
+      "error": "Invalid proper-name phrase: 'luis.marques.tours@gaia2mail.com'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "c569bf9394eacb2f7b9531ed5931611be9df5009a02427ce1d507cb061508a72",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3458,
+        "completion_tokens": 336,
+        "total_tokens": 3794,
+        "prompt_tokens_details": {
+          "cached_tokens": 2944
+        },
+        "prompt_cache_hit_tokens": 2944,
+        "prompt_cache_miss_tokens": 514
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.425
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0114_m9ogvy3vqp5praz5njdodxjwe8r6yqgt",
+  "extracted_at": "2026-11-22T06:40:09.340263+00:00"
+}

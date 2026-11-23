@@ -1,0 +1,192 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0843_o72its4w4q5sbz0pr42xvpmx2lqpl8xe__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "0dc55925890959f2f60a1d28fe3a04c63f20dac0dddf88e52c8bd36b1221bf5c",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Evangelia",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "客人名"
+        },
+        {
+          "text": "Kaidën",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "客人名"
+        },
+        {
+          "text": "Jamun Gulab Cafe",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "餐厅名"
+        },
+        {
+          "text": "The Pint Shop",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "餐厅名"
+        },
+        {
+          "text": "Cambridge",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "地名"
+        },
+        {
+          "text": "Evangelia Papadopoulos",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-254cf94c-1197-4211-aeff-feddec5edc07.arguments.attendees[0]",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Kaidën Nakamura",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-254cf94c-1197-4211-aeff-feddec5edc07.arguments.attendees[1]",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-cf2a49e7-f83e-4c1a-b563-1eb144c1b915.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [
+        "Evangelia",
+        "Kaidën",
+        "Jamun Gulab Cafe",
+        "The Pint Shop",
+        "Cambridge",
+        "Evangelia Papadopoulos",
+        "Kaidën Nakamura",
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "Evangelia": 50,
+        "Kaidën": 50,
+        "Jamun Gulab Cafe": 50,
+        "The Pint Shop": 50,
+        "Cambridge": 50,
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "3fafd1e7f72228dc6391f186661ee65f11e2e070ce699dbac53f54f8f9180635"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaidëns",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "指代同名联系人"
+        },
+        {
+          "text": "Jamun Gulab Cafe",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "餐厅名"
+        },
+        {
+          "text": "Evangelia Papadopoulos",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_brunch.arguments.attendees[0]",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Kaidën Nakamura",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_brunch.arguments.attendees[1]",
+          "reason": "完整人名"
+        }
+      ],
+      "new_terms": [
+        "Kaidëns"
+      ],
+      "active_vocabulary": {
+        "Evangelia": 50,
+        "Kaidën": 50,
+        "Jamun Gulab Cafe": 50,
+        "The Pint Shop": 50,
+        "Cambridge": 50,
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Rohini Deshpande": 50,
+        "Kaidëns": 50
+      },
+      "vocabulary_sha256": "2af3e0ae3d5b321c98869bb1d15bd19e5e79d54a8bcee5a6950adc8c3540a47c"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Evangelia",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "客人名"
+        },
+        {
+          "text": "Kaidën",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "客人名"
+        },
+        {
+          "text": "Jamun Gulab Cafe",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "餐厅名"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_evangelia.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Evangelia": 50,
+        "Kaidën": 50,
+        "Jamun Gulab Cafe": 50,
+        "The Pint Shop": 50,
+        "Cambridge": 50,
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Rohini Deshpande": 50,
+        "Kaidëns": 50
+      },
+      "vocabulary_sha256": "2af3e0ae3d5b321c98869bb1d15bd19e5e79d54a8bcee5a6950adc8c3540a47c"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "e2aa82f26e6b820d1b3399c7a4cf2995669530ade785f5979e1ac3d9ba3f5c08",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3617,
+        "completion_tokens": 580,
+        "total_tokens": 4197,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3361
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.14
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0843_o72its4w4q5sbz0pr42xvpmx2lqpl8xe__mind_change_v1",
+  "extracted_at": "2026-11-22T06:46:09.904965+00:00"
+}

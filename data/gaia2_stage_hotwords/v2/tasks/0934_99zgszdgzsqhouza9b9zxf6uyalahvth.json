@@ -1,0 +1,147 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0934_99zgszdgzsqhouza9b9zxf6uyalahvth",
+  "model": "deepseek-flash",
+  "input_sha256": "8d88374977c993fd6d7ce550bc2baba0eb4c175c83f08cbfeb7f44572e5cc19e",
+  "review_input_sha256": "716d80a50d00ac556f2a06d3fed32bc71451bff00f9cc3e81943b8902374c2ca",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "32fd3f5bd127ad7d3711cf8d21fbd5f2bfb9ed12b05cff675902479f148a60e7",
+  "reference_results_sha256": "8df9b19e0db2ac71158d12fe0b60a5cd6ee6f1b971e2be7d7c513caf7cb8b84c",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Koenraad Vandenberghe",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Elara Vandenberghe",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Thierry Vandenberghe",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Aurélien Vandenberghe",
+      "original_source": "stage0.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Vandenberghe Family Breakfasts",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Elara Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Koenraad Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含荷兰语拼写的完整人名，ASR易错",
+          "weight": 50
+        },
+        {
+          "text": "Thierry Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，含难拼写姓氏",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien Vandenberghe",
+        "Elara Vandenberghe",
+        "Koenraad Vandenberghe",
+        "Thierry Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Aurélien Vandenberghe": 50,
+        "Elara Vandenberghe": 50,
+        "Koenraad Vandenberghe": 50,
+        "Thierry Vandenberghe": 50
+      },
+      "vocabulary_sha256": "2f58ba03c3501898a78ee5d01cb2e07b48d7366218fea646b1b4bceee42a749b"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien Vandenberghe": 50,
+        "Elara Vandenberghe": 50,
+        "Koenraad Vandenberghe": 50,
+        "Thierry Vandenberghe": 50
+      },
+      "vocabulary_sha256": "2f58ba03c3501898a78ee5d01cb2e07b48d7366218fea646b1b4bceee42a749b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Vandenberghe Family Breakfasts",
+          "kind": "custom_name",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含难拼写姓氏的自定义群组名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Vandenberghe Family Breakfasts"
+      ],
+      "active_vocabulary": {
+        "Aurélien Vandenberghe": 50,
+        "Elara Vandenberghe": 50,
+        "Koenraad Vandenberghe": 50,
+        "Thierry Vandenberghe": 50,
+        "Vandenberghe Family Breakfasts": 50
+      },
+      "vocabulary_sha256": "5392b0914f148f46f5dd3932d83762e0f8fe0a532039e297e3ecaf6e9b365b20"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Koenraad",
+    "Elara",
+    "Thierry",
+    "Aurélien"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:54.312955+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

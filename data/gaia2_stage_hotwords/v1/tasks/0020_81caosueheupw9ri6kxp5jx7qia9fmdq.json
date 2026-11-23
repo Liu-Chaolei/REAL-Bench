@@ -1,0 +1,132 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0020_81caosueheupw9ri6kxp5jx7qia9fmdq",
+  "model": "deepseek-flash",
+  "input_sha256": "e0af6606eb94cc8a7ddfa9e8ed333d6f0c0a49418198dafc0c8105108dee902a",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-b7a848a6-a53d-464a-b0b6-fb169297366b.arguments.content",
+          "reason": "唯一返回的人名，含特殊字符"
+        }
+      ],
+      "new_terms": [
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "202ddec9e4313928156bc6592746ccdd38af7f224b07d02fce35cdd91a88cf1c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Ursula Kaufmann",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "最年长联系人的完整姓名"
+        },
+        {
+          "text": "Zurich",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "居住城市名"
+        }
+      ],
+      "new_terms": [
+        "Ursula Kaufmann",
+        "Zurich"
+      ],
+      "active_vocabulary": {
+        "Aurélien": 50,
+        "Ursula Kaufmann": 50,
+        "Zurich": 50
+      },
+      "vocabulary_sha256": "f29c53f62f8f4e57649a8cdc27b1af0b3ffb7fa7d331cc980ae3d7a92cac1609"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Ursula Kaufmann",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "联系人完整姓名"
+        },
+        {
+          "text": "A Historical Perspective on the Swiss Economy",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "邮件主题专有名称"
+        },
+        {
+          "text": "Basel",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "A Historical Perspective on the Swiss Economy",
+        "Basel"
+      ],
+      "active_vocabulary": {
+        "Aurélien": 50,
+        "Ursula Kaufmann": 50,
+        "Zurich": 50,
+        "A Historical Perspective on the Swiss Economy": 50,
+        "Basel": 50
+      },
+      "vocabulary_sha256": "c1a397dcc34251482e3ff0ec8044061878bbc14f46242f4a7993791c6a2aa3d7"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "e35a2ef08939ecca850303a2e635e9f3a77a34c716901e11ffaec9e1ad51cb88",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1066,
+        "completion_tokens": 324,
+        "total_tokens": 1390,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 810
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.682,
+      "error": "Invalid proper-name phrase: 'ukaufmann@gaia2mail.com'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "8c8ac1848194f81224637e6c86030447e1a2cd3950b74068499e945bce55314b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1789,
+        "completion_tokens": 279,
+        "total_tokens": 2068,
+        "prompt_tokens_details": {
+          "cached_tokens": 1280
+        },
+        "prompt_cache_hit_tokens": 1280,
+        "prompt_cache_miss_tokens": 509
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.384
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0020_81caosueheupw9ri6kxp5jx7qia9fmdq",
+  "extracted_at": "2026-11-22T06:39:41.764187+00:00"
+}

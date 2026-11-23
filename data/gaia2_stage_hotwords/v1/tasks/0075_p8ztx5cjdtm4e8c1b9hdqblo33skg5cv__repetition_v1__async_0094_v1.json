@@ -1,0 +1,212 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0075_p8ztx5cjdtm4e8c1b9hdqblo33skg5cv__repetition_v1__async_0094_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "007d137cb016c7cdb5943efea1d8420908c52a777a8aa5b1c68ec5205a750b86",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Khalifa Al-Mansoori",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "要删除的完整人名"
+        },
+        {
+          "text": "Asheville",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "联系人所在城市"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "联系人所在城市"
+        },
+        {
+          "text": "Nonglak Srisombat",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-d1d09eef-92ac-41b6-9352-76bb8f334603.arguments.content",
+          "reason": "被发消息的联系人全名"
+        },
+        {
+          "text": "Émile Vandenberghe",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-d1d09eef-92ac-41b6-9352-76bb8f334603.arguments.content",
+          "reason": "被发消息的联系人全名"
+        }
+      ],
+      "new_terms": [
+        "Khalifa Al-Mansoori",
+        "Asheville",
+        "Leuven",
+        "Nonglak Srisombat",
+        "Émile Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Khalifa Al-Mansoori": 50,
+        "Asheville": 50,
+        "Leuven": 50,
+        "Nonglak Srisombat": 50,
+        "Émile Vandenberghe": 50
+      },
+      "vocabulary_sha256": "2b561c5e2f935cf44c11b51a1dd834a16ba1e4c8411bee88f9e004f6b95a9ff9"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Khalifa Cleanup Deletion Record",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "自定义邮件主题名"
+        },
+        {
+          "text": "Khalifa Al-Mansoori",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "被删除的联系人全名"
+        },
+        {
+          "text": "Phone Call with Khalifa Al-Mansoori",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "被删除的日历事件标题"
+        },
+        {
+          "text": "Lunch Meeting with Khalifa Al-Mansoori",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "被删除的日历事件标题"
+        },
+        {
+          "text": "Renewable Energy Options for Sustainable Architecture",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "被删除邮件的主题"
+        }
+      ],
+      "new_terms": [
+        "Khalifa Cleanup Deletion Record",
+        "Phone Call with Khalifa Al-Mansoori",
+        "Lunch Meeting with Khalifa Al-Mansoori",
+        "Renewable Energy Options for Sustainable Architecture"
+      ],
+      "active_vocabulary": {
+        "Khalifa Al-Mansoori": 50,
+        "Asheville": 50,
+        "Leuven": 50,
+        "Nonglak Srisombat": 50,
+        "Émile Vandenberghe": 50,
+        "Khalifa Cleanup Deletion Record": 50,
+        "Phone Call with Khalifa Al-Mansoori": 50,
+        "Lunch Meeting with Khalifa Al-Mansoori": 50,
+        "Renewable Energy Options for Sustainable Architecture": 50
+      },
+      "vocabulary_sha256": "feabc26c255ec3693ec8fb06356819bf19c4d2ef8b537da02aba56de90e3c870"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Nonglak Srisombat",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "消息接收人全名"
+        },
+        {
+          "text": "Asheville",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "联系人所在城市"
+        },
+        {
+          "text": "Émile Vandenberghe",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "消息接收人全名"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "联系人所在城市"
+        },
+        {
+          "text": "Khalifa Al-Mansoori",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "澄清消息涉及的人名"
+        },
+        {
+          "text": "Follow up with Nonglak and Émile",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "新建日历事件标题"
+        }
+      ],
+      "new_terms": [
+        "Follow up with Nonglak and Émile"
+      ],
+      "active_vocabulary": {
+        "Khalifa Al-Mansoori": 50,
+        "Asheville": 50,
+        "Leuven": 50,
+        "Nonglak Srisombat": 50,
+        "Émile Vandenberghe": 50,
+        "Khalifa Cleanup Deletion Record": 50,
+        "Phone Call with Khalifa Al-Mansoori": 50,
+        "Lunch Meeting with Khalifa Al-Mansoori": 50,
+        "Renewable Energy Options for Sustainable Architecture": 50,
+        "Follow up with Nonglak and Émile": 50
+      },
+      "vocabulary_sha256": "23728f588f70d57cc976b6fc62cca1625e87751b13b9f3ac982b2f43ccac0ab6"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "def30d1e93ac7947eb11ade051f1bc5c556c003acd64386e45d4333e45d37f25",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2804,
+        "completion_tokens": 721,
+        "total_tokens": 3525,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2548
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.627,
+      "error": "Invalid proper-name phrase: 'khalifa.almansoori@gaia2mail.com'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "ca02033180bb8b07128842c8b3505672b866235b05aab4cc994901dbe46f0d0b",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3929,
+        "completion_tokens": 620,
+        "total_tokens": 4549,
+        "prompt_tokens_details": {
+          "cached_tokens": 3456
+        },
+        "prompt_cache_hit_tokens": 3456,
+        "prompt_cache_miss_tokens": 473
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.125
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0075_p8ztx5cjdtm4e8c1b9hdqblo33skg5cv__repetition_v1__async_0094_v1",
+  "extracted_at": "2026-11-22T06:47:00.783958+00:00"
+}

@@ -1,0 +1,201 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0346_kmo9dwg4c18xgxhz97nwk36wyjjpgzhe",
+  "model": "deepseek-flash",
+  "input_sha256": "73946e9efc9d80e9469ec9953f193fa3cfa5a0ccf389ba3aec733b5bb931e03e",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Perth",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "地名，用于筛选联系人"
+        },
+        {
+          "text": "Messages",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "应用名称，用于区分消息渠道"
+        },
+        {
+          "text": "Chats",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "应用名称，用于区分消息渠道"
+        }
+      ],
+      "new_terms": [
+        "Perth",
+        "Messages",
+        "Chats"
+      ],
+      "active_vocabulary": {
+        "Perth": 50,
+        "Messages": 50,
+        "Chats": 50
+      },
+      "vocabulary_sha256": "f4d638192487abfcaf88aac3bbd79b532eb5f85779da3914208056d3ae84b99e"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Perth",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "地名，指代同一批朋友"
+        },
+        {
+          "text": "Chats",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "应用名称"
+        },
+        {
+          "text": "Messages",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "应用名称"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Perth": 50,
+        "Messages": 50,
+        "Chats": 50
+      },
+      "vocabulary_sha256": "f4d638192487abfcaf88aac3bbd79b532eb5f85779da3914208056d3ae84b99e"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Bronwyn McKenzie",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Kaito Nakamura",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Kym Jansz",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "完整人名"
+        },
+        {
+          "text": "Åke Jansson",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "完整人名，含特殊字符"
+        },
+        {
+          "text": "Perth gift catch-up",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "群聊自定义标题"
+        },
+        {
+          "text": "Chats",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "应用名称"
+        },
+        {
+          "text": "Messages",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "应用名称"
+        }
+      ],
+      "new_terms": [
+        "Bronwyn McKenzie",
+        "Kaito Nakamura",
+        "Kym Jansz",
+        "Åke Jansson",
+        "Perth gift catch-up"
+      ],
+      "active_vocabulary": {
+        "Perth": 50,
+        "Messages": 50,
+        "Chats": 50,
+        "Bronwyn McKenzie": 50,
+        "Kaito Nakamura": 50,
+        "Kym Jansz": 50,
+        "Åke Jansson": 50,
+        "Perth gift catch-up": 50
+      },
+      "vocabulary_sha256": "9727646c0272302d26ee780870a571242ef33e844da29bfa019924634be09a20"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "4aa3bcf2baa0e5e2717f354f7b92043d26446781e6acfbf192a75aea83c87049",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2447,
+        "completion_tokens": 508,
+        "total_tokens": 2955,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2191
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 2.284,
+      "error": "3 validation errors for Extraction\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "e0f66e327d9af12ed7430fbb3da63662c823717663c461e8844620177b7aba0e",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3496,
+        "completion_tokens": 499,
+        "total_tokens": 3995,
+        "prompt_tokens_details": {
+          "cached_tokens": 2944
+        },
+        "prompt_cache_hit_tokens": 2944,
+        "prompt_cache_miss_tokens": 552
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.616,
+      "error": "Not an exact quotation of a source in stage 1: 'bronwyn' from 'stage1.tool_gt.series_s1_chats_bronwyn.arguments.user_id'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "73e9253fbc14945da6078697b0b05afc5e67f5751428131c6fa1d2429371fea1",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3367,
+        "completion_tokens": 347,
+        "total_tokens": 3714,
+        "prompt_tokens_details": {
+          "cached_tokens": 2432
+        },
+        "prompt_cache_hit_tokens": 2432,
+        "prompt_cache_miss_tokens": 935
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.281
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0346_kmo9dwg4c18xgxhz97nwk36wyjjpgzhe",
+  "extracted_at": "2026-11-22T06:41:30.133069+00:00"
+}

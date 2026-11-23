@@ -1,0 +1,124 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0418_r7epnubmyk4iyew0owaeqydhpec4ap0c__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "91e35186ba5ea02ae1c2f8c85b1b3cce0795e66532f523196034908f9488559b",
+  "review_input_sha256": "70898146d7aa65403a6830c5311e80b9143ef75ed344db5e70658f8b4d9ce43a",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "b28f3b2031669f4ac267ed68da61f0ca7fa2437995e5a52f91e0b0fc438cafa0",
+  "reference_results_sha256": "8ca143799e7946dac27941242b5d24455a30254458b792d0806c1c0073114b10",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Augustín Moreno-Sánchez",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-11c51de6-cc8d-4fdc-920a-40f82f1cf219.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage1.tool_gt.series_s1_1.arguments.content"
+    },
+    "stage1.tool_response.series_s1_3": {
+      "stage": 1,
+      "text": "{\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Call with Augustín Moreno-Sánchez\", \"start_datetime\": \"1729184400.0\", \"end_datetime\": \"1729186200.0\", \"tag\": \"Work\", \"description\": \"Call to discuss the wine and history pairing session for Augustín's conference on the history of wine production in medieval Spain and Portugal.\", \"location\": \"Phone\", \"attendees\": [\"Aurélien LaFleur\", \"augustin.moreno-sanchez@unm.edu\"], \"start_strftime\": \"Thursday, 2024-10-17 17:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 17:30:00\"}",
+      "event_id": "series_s1_3",
+      "response_sha256": "b4ef9dd8972ebdccf05f624bb306376b0cb8f348f90180d529dad32468b19fb0"
+    },
+    "stage2.tool_response.series_s2_2": {
+      "stage": 2,
+      "text": "{\"messages\": [{\"sender_id\": \"4a9702a2-0c98-459e-93e0-ff4b01fac807\", \"message_id\": \"c934bb2c5f71e13f0cc5da288112035c\", \"timestamp\": \"1728975605.0\", \"content\": \"Augustín — to confirm in quick writing: I've just replied to your email saying I'd be glad to lead the Iberian wine pairing session, and I've put our call in my diary for Thursday 17 October at 17:00 UTC. Looking forward to it.\"}, {\"sender_id\": \"b9b3a04d-d7f3-4245-95b0-c26bf434342d\", \"message_id\": \"bdcd9c67ecf5483283c0191754764df6\", \"timestamp\": \"1723635300\", \"content\": \"Actually, I just opened a bottle of Rioja Reserva last night. It was excellent. I think you'd appreciate it. Maybe next time you're in Albuquerque, we can open a bottle together.\"}, {\"sender_id\": \"4a9702a2-0c98-459e-93e0-ff4b01fac807\", \"message_id\": \"91e8fd049c2546daa98fae7591cd7452\", \"timestamp\": \"1723634700\", \"content\": \"I'll add it to my reading list, thanks for the recommendation! I've been meaning to read more Spanish literature. By the way, have you tried any good wines lately?\"}], \"metadata\": {\"message_range\": [\"0\", \"3\"], \"conversation_length\": \"11\", \"conversation_id\": \"a57fbb423b5c44c9b3f76e4a12d44dfd\", \"conversation_title\": \"Augustín Moreno-Sánchez\"}}",
+      "event_id": "series_s2_2",
+      "response_sha256": "1a3bfb1b0f154f29c1b7be1b4c7931287754d2c25754f0259a75739143c61fa4"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Augustín Moreno-Sánchez",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Augustín Moreno-Sánchez"
+      ],
+      "active_vocabulary": {
+        "Augustín Moreno-Sánchez": 50
+      },
+      "vocabulary_sha256": "b4d93254d181e606bf9f92a81596039f18c55a717688c271f871f5afd61a1aba"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Augustín Moreno-Sánchez",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_3",
+          "reason": "工具响应中出现的含变音符号完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur"
+      ],
+      "active_vocabulary": {
+        "Augustín Moreno-Sánchez": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "ae344ad1db31e64d1898323e5efb7d5778bf87c19736ebb9ffa83343dd9436da"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Augustín Moreno-Sánchez",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_2",
+          "reason": "会话标题中的含变音符号完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Augustín Moreno-Sánchez": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "ae344ad1db31e64d1898323e5efb7d5778bf87c19736ebb9ffa83343dd9436da"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Iberian Peninsula"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:34.859399+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,157 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0889_9q80g77sgsgo9mtf8vh3i2pzjm7gwjdk",
+  "model": "deepseek-flash",
+  "input_sha256": "d7fd119b5815473facb94bd864c3d672a4308eb78bb317ae392a98f63c732db3",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaida Nishikawa",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名，需准确识别"
+        },
+        {
+          "text": "Somsak Srisawat",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "人名，需准确识别"
+        },
+        {
+          "text": "Torggata 10, 8006 Bodø",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "挪威地址，含特殊字符ø"
+        },
+        {
+          "text": "Sjøgata 12, 8006 Bodø",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "挪威地址，含特殊字符ø"
+        }
+      ],
+      "new_terms": [
+        "Kaida Nishikawa",
+        "Somsak Srisawat",
+        "Torggata 10, 8006 Bodø",
+        "Sjøgata 12, 8006 Bodø"
+      ],
+      "active_vocabulary": {
+        "Kaida Nishikawa": 50,
+        "Somsak Srisawat": 50,
+        "Torggata 10, 8006 Bodø": 50,
+        "Sjøgata 12, 8006 Bodø": 50
+      },
+      "vocabulary_sha256": "ceaf228c0a4d3dd71c9b9a9e7bfd1bfeeab16236d76bc9c11b96efc8fbcb6a40"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaida Nishikawa",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "人名，需准确识别"
+        },
+        {
+          "text": "Somsak Srisawat",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "人名，需准确识别"
+        },
+        {
+          "text": "Torggata 10, 8006 Bodø",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "挪威地址，含特殊字符ø"
+        },
+        {
+          "text": "Sjøgata 12, 8006 Bodø",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "挪威地址，含特殊字符ø"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kaida Nishikawa": 50,
+        "Somsak Srisawat": 50,
+        "Torggata 10, 8006 Bodø": 50,
+        "Sjøgata 12, 8006 Bodø": 50
+      },
+      "vocabulary_sha256": "ceaf228c0a4d3dd71c9b9a9e7bfd1bfeeab16236d76bc9c11b96efc8fbcb6a40"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaida Nishikawa",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "人名，需准确识别"
+        },
+        {
+          "text": "Somsak Srisawat",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "人名，需准确识别"
+        },
+        {
+          "text": "Torggata 10, 8006 Bodø",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "挪威地址，含特殊字符ø"
+        },
+        {
+          "text": "Sjøgata 12, 8006 Bodø",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "挪威地址，含特殊字符ø"
+        },
+        {
+          "text": "Åse",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "邮件署名，含特殊字符Å"
+        }
+      ],
+      "new_terms": [
+        "Åse"
+      ],
+      "active_vocabulary": {
+        "Kaida Nishikawa": 50,
+        "Somsak Srisawat": 50,
+        "Torggata 10, 8006 Bodø": 50,
+        "Sjøgata 12, 8006 Bodø": 50,
+        "Åse": 50
+      },
+      "vocabulary_sha256": "8adb18be381914e2b17ab3166a03869608ce8c2db2bb2ad1e92456ad08838586"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "7209c709fff42f418efe53a23d5b912b26151f61711c59beec8a10b1c864d7f4",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3398,
+        "completion_tokens": 456,
+        "total_tokens": 3854,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3142
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.686
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0889_9q80g77sgsgo9mtf8vh3i2pzjm7gwjdk",
+  "extracted_at": "2026-11-22T06:44:21.487390+00:00"
+}

@@ -1,0 +1,411 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0477_hjy54c1dxzy4uxjtcklavu7wz86q6xwl",
+  "model": "deepseek-flash",
+  "input_sha256": "ec6abfbde4b9631342d4bdaae180b250f64d959de709178d6707ca9846a9efb7",
+  "review_input_sha256": "4715390cbde4e9380a31cdf0bbc880bbe73d978da3d4fe9d9fc90417b5eb992c",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "6be3bc32e7ba38801f7d3c17eb3d4937b0b14511eaf55aadcba741aee2195b69",
+  "reference_results_sha256": "2e892d7b3741a50e53277455dcba5f06afb9bc4873e1d8e602b95a0e3b67d53f",
+  "sources": {
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-3d9e88db-9dab-41b5-8fcf-02511ff8ef9a.arguments.content"
+    },
+    "stage1.existing_catalog.12": {
+      "stage": 1,
+      "text": "Rue de la Vigie",
+      "original_source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content"
+    },
+    "stage1.existing_catalog.14": {
+      "stage": 1,
+      "text": "Baarerstrasse",
+      "original_source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content"
+    },
+    "stage1.existing_catalog.21": {
+      "stage": 1,
+      "text": "Bern Bärenplatz",
+      "original_source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content"
+    },
+    "stage1.existing_catalog.26": {
+      "stage": 1,
+      "text": "Haldenstrasse",
+      "original_source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content"
+    },
+    "stage1.existing_catalog.38": {
+      "stage": 1,
+      "text": "Avenue de Rhodanie",
+      "original_source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Kornhausgasse 3",
+      "original_source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content"
+    },
+    "stage1.existing_catalog.40": {
+      "stage": 1,
+      "text": "Quai de la Gare 2",
+      "original_source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content"
+    },
+    "stage1.existing_catalog.42": {
+      "stage": 1,
+      "text": "Rue du Lac 20",
+      "original_source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content"
+    },
+    "stage1.existing_catalog.44": {
+      "stage": 1,
+      "text": "Seestrasse",
+      "original_source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content"
+    },
+    "stage1.existing_catalog.8": {
+      "stage": 1,
+      "text": "Gerechtigkeitsgasse 12",
+      "original_source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content"
+    },
+    "stage1.existing_catalog.9": {
+      "stage": 1,
+      "text": "Bernese Mountain Retreat",
+      "original_source": "stage1.tool_gt.series_s1_email_shortlist.arguments.content"
+    },
+    "stage1.tool_response.series_s1_list_saved": {
+      "stage": 1,
+      "text": "{\"529836869ae74c4f9a290df0a4d82d09\": {\"name\": \"Zurich Uptown\", \"location\": \"Talstrasse, Zurich\", \"zip_code\": \"8001\", \"price\": \"3800\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"2000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"529836869ae74c4f9a290df0a4d82d09\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"7b284299112d4acd9081fa338d5404ce\": {\"name\": \"Zug City Center\", \"location\": \"Zug, Altstadt\", \"zip_code\": \"6300\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"7b284299112d4acd9081fa338d5404ce\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"99a91b059bd244cdb1207d8c76e23875\": {\"name\": \"Geneva Haven\", \"location\": \"Rue de Genève, 1201 Geneva\", \"zip_code\": \"1201\", \"price\": \"2000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Basement\", \"pet_policy\": \"No pets\", \"lease_term\": \"Month-to-month\", \"apartment_id\": \"99a91b059bd244cdb1207d8c76e23875\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"9d43e37dabe647f1be3975f70ca6945d\": {\"name\": \"Zurichberg Oasis\", \"location\": \"Zurichbergstrasse, Zurich\", \"zip_code\": \"8044\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"9d43e37dabe647f1be3975f70ca6945d\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"4436d025bd074a8a9cf18e299c09d089\": {\"name\": \"Lugano Lake View\", \"location\": \"Via Nassa, 6900 Lugano\", \"zip_code\": \"6900\", \"price\": \"3200\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"4436d025bd074a8a9cf18e299c09d089\", \"amenities\": [\"Pool\", \"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"8c4ae6c041f543ddbe2e698d01c50f9c\": {\"name\": \"Bern Bliss\", \"location\": \"Marktgasse 30, Bern\", \"zip_code\": \"3011\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"8c4ae6c041f543ddbe2e698d01c50f9c\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"992ce357f1c54de5916cbc374e1b44e8\": {\"name\": \"Locarno City Center\", \"location\": \"6600 Locarno, Switzerland\", \"zip_code\": \"6600\", \"price\": \"2200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"992ce357f1c54de5916cbc374e1b44e8\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"7d1c66f47ade476eb81b0d06865e19f3\": {\"name\": \"Geneva Lakeside\", \"location\": \"1200 Geneva, Quai du Général-Guisan\", \"zip_code\": \"1200\", \"price\": \"3500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"7d1c66f47ade476eb81b0d06865e19f3\", \"amenities\": [\"Pool\", \"Parking\"], \"saved\": \"True\"}, \"c332937007d14072a432ac902e58af07\": {\"name\": \"Geneva Luxury\", \"location\": \"Rue de Lausanne 45, Geneva\", \"zip_code\": \"1201\", \"price\": \"4000\", \"bedrooms\": \"5\", \"bathrooms\": \"4\", \"property_type\": \"Condo\", \"square_footage\": \"2000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"No pets\", \"lease_term\": \"Long term lease\", \"apartment_id\": \"c332937007d14072a432ac902e58af07\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"84d63e1fd26b474e9448f147261641f8\": {\"name\": \"Bern Old Town\", \"location\": \"3011 Bern, Kornhausgasse\", \"zip_code\": \"3011\", \"price\": \"2500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"84d63e1fd26b474e9448f147261641f8\", \"amenities\": [\"Laundry\", \"Bike storage\"], \"saved\": \"True\"}, \"65e7072fb05d4777b2bd51382ac54278\": {\"name\": \"Geneva Lakefront\", \"location\": \"Geneva, Eaux-Vives\", \"zip_code\": \"1207\", \"price\": \"3500\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"Long term lease\", \"apartment_id\": \"65e7072fb05d4777b2bd51382ac54278\", \"amenities\": [\"Parking\", \"Laundry\", \"Sauna\"], \"saved\": \"True\"}, \"7116e85ac6b34ff9a00d4ec5244a9b32\": {\"name\": \"Geneva Gem\", \"location\": \"Rue de Lausanne 23, Geneva\", \"zip_code\": \"1201\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"7116e85ac6b34ff9a00d4ec5244a9b32\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"7cb90e8930c644f08dedafdcfde1f3e6\": {\"name\": \"Lausanne Charm\", \"location\": \"Rue de Genève 23, Lausanne\", \"zip_code\": \"1004\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"7cb90e8930c644f08dedafdcfde1f3e6\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"173edb3cc3574905a317b206195c0d7b\": {\"name\": \"Basel City\", \"location\": \"Marktplatz, 4051 Basel\", \"zip_code\": \"4051\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"173edb3cc3574905a317b206195c0d7b\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"8137fa0ad8634db7a4f1796cc9d6fefd\": {\"name\": \"Bern Bärenplatz\", \"location\": \"Bärenplatz, Bern\", \"zip_code\": \"3011\", \"price\": \"2500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Second floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"8137fa0ad8634db7a4f1796cc9d6fefd\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"3655dbac534e45b780e4c303ac681831\": {\"name\": \"Zug City Living\", \"location\": \"Baarerstrasse, Zug\", \"zip_code\": \"6300\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"3655dbac534e45b780e4c303ac681831\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"97cc588061fb466486b374a4c29a6f8f\": {\"name\": \"Lugano Living\", \"location\": \"Via Nassa 24, Lugano\", \"zip_code\": \"6900\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"97cc588061fb466486b374a4c29a6f8f\", \"amenities\": [\"Pool\", \"Gym\"], \"saved\": \"True\"}, \"52040401c03a484a9df4247a45a49d7e\": {\"name\": \"Zug Lake Views\", \"location\": \"6300 Zug, Switzerland\", \"zip_code\": \"6300\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"52040401c03a484a9df4247a45a49d7e\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"b7369f55d0534af997c7544bd5c01b23\": {\"name\": \"Zug Zest\", \"location\": \"Baarerstrasse 12, Zug\", \"zip_code\": \"6300\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"b7369f55d0534af997c7544bd5c01b23\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"473e5c7f56104443b0998d8a565dbb56\": {\"name\": \"Lausanne Lakeview\", \"location\": \"Rue du Lac 20, 1000 Lausanne\", \"zip_code\": \"1000\", \"price\": \"3000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"473e5c7f56104443b0998d8a565dbb56\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"fc087ca2b37a477f97a3d9c79f88843c\": {\"name\": \"Lugano Lakefront\", \"location\": \"Via Nassa, Lugano\", \"zip_code\": \"6900\", \"price\": \"3000\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"fc087ca2b37a477f97a3d9c79f88843c\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"05a7d223cbad49cdac60afa8b80a1d7f\": {\"name\": \"Zug Mountain Views\", \"location\": \"Haldenstrasse, Zug\", \"zip_code\": \"6300\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"05a7d223cbad49cdac60afa8b80a1d7f\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"0f92aa441816488eb59c8b2b9c918a14\": {\"name\": \"Lakeview Oasis\", \"location\": \"Quai du Mont-Blanc, Geneva\", \"zip_code\": \"1201\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"0f92aa441816488eb59c8b2b9c918a14\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"70627b484c8a489d80e457c80eadb2aa\": {\"name\": \"Locarno Loft\", \"location\": \"Via della Pace 12, 6600 Locarno\", \"zip_code\": \"6600\", \"price\": \"2000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"70627b484c8a489d80e457c80eadb2aa\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"a3c80c2d4a14471fab146a44297dc638\": {\"name\": \"Lausanne Luxury\", \"location\": \"Avenue de Cour 10, Lausanne\", \"zip_code\": \"1007\", \"price\": \"3500\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"a3c80c2d4a14471fab146a44297dc638\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"b76612a950bb414b9dde114a5fb20308\": {\"name\": \"Geneva Oasis\", \"location\": \"1201 Geneva, Rue de Lausanne\", \"zip_code\": \"1201\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"b76612a950bb414b9dde114a5fb20308\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"4f2aa4bb298c474da6fb2041a8d1f7a5\": {\"name\": \"Locarno Living\", \"location\": \"Via Verbano 12, 6600 Locarno\", \"zip_code\": \"6600\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"4f2aa4bb298c474da6fb2041a8d1f7a5\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"1d92d06cd6544dee8c2923900b6852b3\": {\"name\": \"Geneva City Center\", \"location\": \"1200 Geneva, Switzerland\", \"zip_code\": \"1200\", \"price\": \"2800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"1d92d06cd6544dee8c2923900b6852b3\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"9e212fbabafb4d679a1020b4ec957d59\": {\"name\": \"Zurich Zen\", \"location\": \"Limmatstrasse 123, Zurich\", \"zip_code\": \"8001\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"9e212fbabafb4d679a1020b4ec957d59\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"e8c74931b5d0476b998ff5a8bbaa45f9\": {\"name\": \"Lake Geneva Oasis\", \"location\": \"Rue de Lausanne, 1003 Lausanne\", \"zip_code\": \"1003\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"e8c74931b5d0476b998ff5a8bbaa45f9\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"4b13f061c4934d299eb9df84f63df2a7\": {\"name\": \"Zug Waterfront\", \"location\": \"Bahnhofstrasse, Zug\", \"zip_code\": \"6300\", \"price\": \"2400\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"4b13f061c4934d299eb9df84f63df2a7\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"d5d677c0a18943328cf41ee73f5823ef\": {\"name\": \"Zug Lake Apartments\", \"location\": \"Bahnhofstrasse 12, Zug\", \"zip_code\": \"6300\", \"price\": \"2800\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1400\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"d5d677c0a18943328cf41ee73f5823ef\", \"amenities\": [\"Parking\", \"Laundry\", \"Gym\"], \"saved\": \"True\"}, \"a234125f0f5b4c94be72070ca5928120\": {\"name\": \"Zug Zen\", \"location\": \"Baarerstrasse 15, Zug\", \"zip_code\": \"6300\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"a234125f0f5b4c94be72070ca5928120\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"991c50efc3d44b058514e086c4d6d362\": {\"name\": \"Zug Old Town\", \"location\": \"6300 Zug, Bahnhofstrasse\", \"zip_code\": \"6300\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"991c50efc3d44b058514e086c4d6d362\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"771269c9e3fa4f0fa0ba6cd17f857f07\": {\"name\": \"Zug Lakeside\", \"location\": \"Bahnhofstrasse, 6300 Zug\", \"zip_code\": \"6300\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"Long term lease\", \"apartment_id\": \"771269c9e3fa4f0fa0ba6cd17f857f07\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"f26a62caf16d4539bdd047d382a13801\": {\"name\": \"Zug Lakefront\", \"location\": \"Seestrasse, Zug\", \"zip_code\": \"6300\", \"price\": \"3500\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"f26a62caf16d4539bdd047d382a13801\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"e1253559df12421d84e17ca1c2d2dc9c\": {\"name\": \"Lausanne Lakefront\", \"location\": \"Quai de la Gare 2, Lausanne\", \"zip_code\": \"1000\", \"price\": \"3000\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"e1253559df12421d84e17ca1c2d2dc9c\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"d40095b6f0ea4d2a9e8367b906e6f593\": {\"name\": \"Lausanne Hills\", \"location\": \"Rue de la Vigie, 1000 Lausanne\", \"zip_code\": \"1000\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"d40095b6f0ea4d2a9e8367b906e6f593\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"cd21ea2ca06447a9ae39b503aa5ddb25\": {\"name\": \"Lausanne Lake Views\", \"location\": \"1000 Lausanne, Avenue de Rhodanie\", \"zip_code\": \"1000\", \"price\": \"3000\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"cd21ea2ca06447a9ae39b503aa5ddb25\", \"amenities\": [\"Gym\", \"Pool\", \"Parking\"], \"saved\": \"True\"}, \"57cc63d4afc0427887ff80be2425ca16\": {\"name\": \"Bern City Center\", \"location\": \"Marktgasse, Bern\", \"zip_code\": \"3011\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"57cc63d4afc0427887ff80be2425ca16\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"4bca342ae0d84603826d9bc193adfc12\": {\"name\": \"Bern Beauty\", \"location\": \"Kornhausgasse 3, Bern\", \"zip_code\": \"3011\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"4bca342ae0d84603826d9bc193adfc12\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"7225ce9ef6864366b06d438257c2f90a\": {\"name\": \"Bernese Mountain Retreat\", \"location\": \"Gerechtigkeitsgasse, Bern\", \"zip_code\": \"3011\", \"price\": \"1800\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"Month-to-month\", \"apartment_id\": \"7225ce9ef6864366b06d438257c2f90a\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"040662edd6ca46bdaa07e79e1d17e2e7\": {\"name\": \"Bern City Apartments\", \"location\": \"3011 Bern, Bundesplatz\", \"zip_code\": \"3011\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"040662edd6ca46bdaa07e79e1d17e2e7\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"bf7f1ee9f15240b2bc03f039c9da13db\": {\"name\": \"Bern Haven\", \"location\": \"Gerechtigkeitsgasse 12, 3011 Bern\", \"zip_code\": \"3011\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"bf7f1ee9f15240b2bc03f039c9da13db\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}}",
+      "event_id": "series_s1_list_saved",
+      "response_sha256": "6e3a6540df8ecab3d422216cc3a2835156a37e6b89d0ca04f73aca84e6ca9ae6"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整人名，含独特姓氏，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "d95c9da3be30654558667f62ae333c7b63393c188d4c6e532a2fa195afe3db23"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Quai de la Gare 2",
+          "kind": "place",
+          "source": "stage1.existing_catalog.40",
+          "reason": "独特法语地址名",
+          "weight": 50
+        },
+        {
+          "text": "Avenue de Cour 10",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特法语地址名",
+          "weight": 50
+        },
+        {
+          "text": "Quai du Général-Guisan",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "含变音符号的独特法语地名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Quai du Mont-Blanc",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特法语地名",
+          "weight": 50
+        },
+        {
+          "text": "Rue de la Vigie",
+          "kind": "place",
+          "source": "stage1.existing_catalog.12",
+          "reason": "独特法语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Rue du Lac 20",
+          "kind": "place",
+          "source": "stage1.existing_catalog.42",
+          "reason": "独特法语地址名",
+          "weight": 50
+        },
+        {
+          "text": "Via della Pace 12",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特意大利语地址名",
+          "weight": 50
+        },
+        {
+          "text": "Avenue de Rhodanie",
+          "kind": "place",
+          "source": "stage1.existing_catalog.38",
+          "reason": "独特法语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Bernese Mountain Retreat",
+          "kind": "custom_name",
+          "source": "stage1.existing_catalog.9",
+          "reason": "独特房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Rue de Genève",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特法语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Via Verbano 12",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特意大利语地址名",
+          "weight": 50
+        },
+        {
+          "text": "Eaux-Vives",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特法语地名",
+          "weight": 50
+        },
+        {
+          "text": "Limmatstrasse 123",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特瑞士街道名",
+          "weight": 50
+        },
+        {
+          "text": "Via Nassa",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特意大利语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Zurichberg Oasis",
+          "kind": "custom_name",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特房产名称，含复杂地名",
+          "weight": 50
+        },
+        {
+          "text": "Baarerstrasse",
+          "kind": "place",
+          "source": "stage1.existing_catalog.14",
+          "reason": "独特瑞士街道名",
+          "weight": 50
+        },
+        {
+          "text": "Bärenplatz",
+          "kind": "place",
+          "source": "stage1.existing_catalog.21",
+          "reason": "含变音符号的独特地名",
+          "weight": 50
+        },
+        {
+          "text": "Gerechtigkeitsgasse",
+          "kind": "place",
+          "source": "stage1.existing_catalog.8",
+          "reason": "长且复杂的德语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Haldenstrasse",
+          "kind": "place",
+          "source": "stage1.existing_catalog.26",
+          "reason": "独特瑞士街道名",
+          "weight": 50
+        },
+        {
+          "text": "Kornhausgasse",
+          "kind": "place",
+          "source": "stage1.existing_catalog.4",
+          "reason": "独特德语街道名，发音困难",
+          "weight": 50
+        },
+        {
+          "text": "Seestrasse",
+          "kind": "place",
+          "source": "stage1.existing_catalog.44",
+          "reason": "独特瑞士街道名",
+          "weight": 50
+        },
+        {
+          "text": "Talstrasse",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved",
+          "reason": "独特瑞士街道名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Quai de la Gare 2",
+        "Avenue de Cour 10",
+        "Quai du Général-Guisan",
+        "Quai du Mont-Blanc",
+        "Rue de la Vigie",
+        "Rue du Lac 20",
+        "Via della Pace 12",
+        "Avenue de Rhodanie",
+        "Bernese Mountain Retreat",
+        "Rue de Genève",
+        "Via Verbano 12",
+        "Eaux-Vives",
+        "Limmatstrasse 123",
+        "Via Nassa",
+        "Zurichberg Oasis",
+        "Baarerstrasse",
+        "Bärenplatz",
+        "Gerechtigkeitsgasse",
+        "Haldenstrasse",
+        "Kornhausgasse",
+        "Seestrasse",
+        "Talstrasse"
+      ],
+      "active_vocabulary": {
+        "Ursula Wiederkehr": 50,
+        "Quai de la Gare 2": 50,
+        "Avenue de Cour 10": 50,
+        "Quai du Général-Guisan": 50,
+        "Quai du Mont-Blanc": 50,
+        "Rue de la Vigie": 50,
+        "Rue du Lac 20": 50,
+        "Via della Pace 12": 50,
+        "Avenue de Rhodanie": 50,
+        "Bernese Mountain Retreat": 50,
+        "Rue de Genève": 50,
+        "Via Verbano 12": 50,
+        "Eaux-Vives": 50,
+        "Limmatstrasse 123": 50,
+        "Via Nassa": 50,
+        "Zurichberg Oasis": 50,
+        "Baarerstrasse": 50,
+        "Bärenplatz": 50,
+        "Gerechtigkeitsgasse": 50,
+        "Haldenstrasse": 50,
+        "Kornhausgasse": 50,
+        "Seestrasse": 50,
+        "Talstrasse": 50
+      },
+      "vocabulary_sha256": "1b5901e35367d63f5c80edc5a125010ad361c4db147da88f93243d612bb1516d"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Ursula Wiederkehr": 50,
+        "Quai de la Gare 2": 50,
+        "Avenue de Cour 10": 50,
+        "Quai du Général-Guisan": 50,
+        "Quai du Mont-Blanc": 50,
+        "Rue de la Vigie": 50,
+        "Rue du Lac 20": 50,
+        "Via della Pace 12": 50,
+        "Avenue de Rhodanie": 50,
+        "Bernese Mountain Retreat": 50,
+        "Rue de Genève": 50,
+        "Via Verbano 12": 50,
+        "Eaux-Vives": 50,
+        "Limmatstrasse 123": 50,
+        "Via Nassa": 50,
+        "Zurichberg Oasis": 50,
+        "Baarerstrasse": 50,
+        "Bärenplatz": 50,
+        "Gerechtigkeitsgasse": 50,
+        "Haldenstrasse": 50,
+        "Kornhausgasse": 50,
+        "Seestrasse": 50,
+        "Talstrasse": 50
+      },
+      "vocabulary_sha256": "1b5901e35367d63f5c80edc5a125010ad361c4db147da88f93243d612bb1516d"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [
+    {
+      "text": "Gerechtigkeitsgasse",
+      "from": "stage1.existing_catalog.10",
+      "to": "stage1.existing_catalog.8"
+    },
+    {
+      "text": "Bärenplatz",
+      "from": "stage1.existing_catalog.22",
+      "to": "stage1.existing_catalog.21"
+    }
+  ],
+  "old_terms_removed": [
+    "Kwame",
+    "Nadia",
+    "Nadja",
+    "Zug",
+    "Lausanne",
+    "Bern",
+    "Bern Beauty",
+    "Kornhausgasse 3",
+    "Bern City Apartments",
+    "Bundesplatz",
+    "Bern Haven",
+    "Gerechtigkeitsgasse 12",
+    "Lausanne Hills",
+    "Zug City Living",
+    "Bern Bliss",
+    "Marktgasse 30",
+    "Bern City Center",
+    "Marktgasse",
+    "Zug Waterfront",
+    "Bahnhofstrasse",
+    "Bern Bärenplatz",
+    "Bern Old Town",
+    "Zug Lake Views",
+    "Zug Mountain Views",
+    "Zug Zest",
+    "Baarerstrasse 12",
+    "Zug City Center",
+    "Altstadt",
+    "Zug Lake Apartments",
+    "Bahnhofstrasse 12",
+    "Zug Lakeside",
+    "Zug Old Town",
+    "Zug Zen",
+    "Baarerstrasse 15",
+    "Lausanne Lake Views",
+    "Lausanne Lakefront",
+    "Lausanne Lakeview",
+    "Zug Lakefront"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:05.540211+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

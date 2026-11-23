@@ -1,0 +1,145 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0127_ce0xbgfn1xfcqjk0bqrbzvywl89jvlam",
+  "model": "deepseek-flash",
+  "input_sha256": "a847bb8d5e4ac203c44343acdafbc6ee81008035b7ea477959fd68c644abb12a",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fd2679aa-3680-4cc4-863d-cf763d7be20a.arguments.content",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fd2679aa-3680-4cc4-863d-cf763d7be20a.arguments.content",
+          "reason": "发件人签名姓名"
+        },
+        {
+          "text": "complex_dag.png",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-8ac7b3d9-81cd-41e3-9d19-acaf07c24de8.arguments.path1",
+          "reason": "特定文件名"
+        }
+      ],
+      "new_terms": [
+        "Astrid",
+        "Søren Kjær",
+        "complex_dag.png"
+      ],
+      "active_vocabulary": {
+        "Astrid": 50,
+        "Søren Kjær": 50,
+        "complex_dag.png": 50
+      },
+      "vocabulary_sha256": "9c9485eb3f924319c1f7e26a211a0abcd19d035f9488c0142046e6240622f68f"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "社交媒体经理姓名"
+        },
+        {
+          "text": "Søren Kjærsgaard",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "大学联系人全名"
+        },
+        {
+          "text": "Aarhus University",
+          "kind": "organization",
+          "source": "stage1.source_task",
+          "reason": "大学机构名称"
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply.arguments.content",
+          "reason": "邮件签名姓名"
+        }
+      ],
+      "new_terms": [
+        "Søren Kjærsgaard",
+        "Aarhus University"
+      ],
+      "active_vocabulary": {
+        "Astrid": 50,
+        "Søren Kjær": 50,
+        "complex_dag.png": 50,
+        "Søren Kjærsgaard": 50,
+        "Aarhus University": 50
+      },
+      "vocabulary_sha256": "73c64533831f14b7601b24abaa0b16f01c6ee35c62f539983db0b1bc44571a7f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "收件人姓名"
+        },
+        {
+          "text": "Søren Kjærsgaard",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "大学联系人全名"
+        },
+        {
+          "text": "Aarhus University",
+          "kind": "organization",
+          "source": "stage2.source_task",
+          "reason": "大学机构名称"
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply_astrid.arguments.content",
+          "reason": "邮件签名姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid": 50,
+        "Søren Kjær": 50,
+        "complex_dag.png": 50,
+        "Søren Kjærsgaard": 50,
+        "Aarhus University": 50
+      },
+      "vocabulary_sha256": "73c64533831f14b7601b24abaa0b16f01c6ee35c62f539983db0b1bc44571a7f"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "1012a41746ded330b9305a028f97e68333bf6997b6a88433fc92512cb9226488",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2421,
+        "completion_tokens": 445,
+        "total_tokens": 2866,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2165
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.789
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0127_ce0xbgfn1xfcqjk0bqrbzvywl89jvlam",
+  "extracted_at": "2026-11-22T06:40:09.121472+00:00"
+}

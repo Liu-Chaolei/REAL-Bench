@@ -1,0 +1,126 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0844_ptf9fhdhy96bb008hlv4zn52sg8v5fva",
+  "model": "deepseek-flash",
+  "input_sha256": "2be1af58e4263b0999c2e2b94ee317428a6ebe747a848578cf3a7418a34f5bb8",
+  "review_input_sha256": "1e8bdd83dd6b980cb35551b30297a29237a5dbc1d218f5585615c90e700f538d",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "909a8edbc4f7e7f0aad9fb9acc163372756f7d4b80e83228508b4fd2d65b9336",
+  "reference_results_sha256": "a4b0beeccfe7d87a9d0d9e82b64ff3aa10f8853b5b226806671a06d35c5f8127",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kjetil Østensen",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Kaida Nishimura",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-487c4b10-b8b6-4b7e-9f11-c93e0e74a35b.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Åse Kjellstad",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-3308058a-f59e-4edf-bbc0-baa8ea1facf1.arguments.content"
+    },
+    "stage2.tool_response.series_s2_read_conversation": {
+      "stage": 2,
+      "text": "{\"messages\": [{\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"902f339c7fb2a2a616554691c93acdab\", \"timestamp\": \"1728975751.0\", \"content\": \"Please talk to me! I love you\"}, {\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"3299fe51d2f1f93984b2cb9522307d84\", \"timestamp\": \"1728975721.0\", \"content\": \"Please talk to me! I love you\"}, {\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"24f5f49f6bef01f49ebfd4b8e025926c\", \"timestamp\": \"1728975691.0\", \"content\": \"Please talk to me! I love you\"}, {\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"fc027cf57b1420be1d49328508696a64\", \"timestamp\": \"1728975661.0\", \"content\": \"Please talk to me! I love you\"}, {\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"b62cecc66e271e57211f19e7272ac7c1\", \"timestamp\": \"1728975631.0\", \"content\": \"Please talk to me! I love you\"}, {\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"c934bb2c5f71e13f0cc5da288112035c\", \"timestamp\": \"1728975601.0\", \"content\": \"Please talk to me! I love you\"}], \"metadata\": {\"message_range\": [\"0\", \"6\"], \"conversation_length\": \"6\", \"conversation_id\": \"e70243c91e05d66834b1f6dac414aa5e\", \"conversation_title\": \"Kjetil Østensen\"}}",
+      "event_id": "series_s2_read_conversation",
+      "response_sha256": "ecdabab4b1b2bdc2ca8c4d1fac30f254bd898bb78f67cc33834c3d75b7860d72"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaida Nishimura",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Kjetil Østensen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含特殊字符Ø的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含特殊字符Å的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kaida Nishimura",
+        "Kjetil Østensen",
+        "Åse Kjellstad"
+      ],
+      "active_vocabulary": {
+        "Kaida Nishimura": 50,
+        "Kjetil Østensen": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "f89a37b17815673412e5ca8834bb52b9d12cae77c241b2cc99a2ebeb924284c8"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kaida Nishimura": 50,
+        "Kjetil Østensen": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "f89a37b17815673412e5ca8834bb52b9d12cae77c241b2cc99a2ebeb924284c8"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kjetil Østensen",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_conversation",
+          "reason": "会话标题中的完整人名，含Ø，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kaida Nishimura": 50,
+        "Kjetil Østensen": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "f89a37b17815673412e5ca8834bb52b9d12cae77c241b2cc99a2ebeb924284c8"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kjetil"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:35.009097+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

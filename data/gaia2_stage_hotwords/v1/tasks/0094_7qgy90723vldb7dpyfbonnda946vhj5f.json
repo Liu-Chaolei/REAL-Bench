@@ -1,0 +1,170 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0094_7qgy90723vldb7dpyfbonnda946vhj5f",
+  "model": "deepseek-flash",
+  "input_sha256": "504c2e333b2ead641bde7d41aacec51c267fcce06bd6051d5cfabd5ef256c6db",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-54ec310d-ee14-4e8d-addf-07059417b26b.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Karel",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1827bfae-771e-4202-8345-39799b6d350e.arguments.content",
+          "reason": "收件人名字"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-54ec310d-ee14-4e8d-addf-07059417b26b.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [
+        "Aurélien",
+        "Karel",
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Aurélien": 50,
+        "Karel": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "17533645057dae797745e6ae1d328bc9ac6e6989f4c6d912703ea28e8809413f"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Karel",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "邮件副本名称"
+        },
+        {
+          "text": "Deleted Contacts",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "邮件主题名"
+        },
+        {
+          "text": "FWD: Renewable Energy Options for Sustainable Architecture",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "转发邮件主题"
+        }
+      ],
+      "new_terms": [
+        "Deleted Contacts",
+        "FWD: Renewable Energy Options for Sustainable Architecture"
+      ],
+      "active_vocabulary": {
+        "Aurélien": 50,
+        "Karel": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Deleted Contacts": 50,
+        "FWD: Renewable Energy Options for Sustainable Architecture": 50
+      },
+      "vocabulary_sha256": "163ea38fc3d3214af285982c462c32391305ea2589791df3d267f544fdd03427"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Khalifa Al-Mansoori",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "回复对象姓名"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply.arguments.content",
+          "reason": "署名"
+        },
+        {
+          "text": "Re: Renewable Energy Options for Sustainable Architecture",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "回复邮件主题"
+        },
+        {
+          "text": "Karel",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "草稿副本名称"
+        },
+        {
+          "text": "Deleted Contacts",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "草稿邮件主题"
+        }
+      ],
+      "new_terms": [
+        "Khalifa Al-Mansoori",
+        "Re: Renewable Energy Options for Sustainable Architecture"
+      ],
+      "active_vocabulary": {
+        "Aurélien": 50,
+        "Karel": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Deleted Contacts": 50,
+        "FWD: Renewable Energy Options for Sustainable Architecture": 50,
+        "Khalifa Al-Mansoori": 50,
+        "Re: Renewable Energy Options for Sustainable Architecture": 50
+      },
+      "vocabulary_sha256": "219cd9cebc86523a7c5cffd5c3866411449f0207eded6763bb417b5d7eadff79"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "4b18b9ba87291a37fc87974ac53dfb1373642a40e2ca8fff7ddbe105fa21cd2e",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3210,
+        "completion_tokens": 639,
+        "total_tokens": 3849,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2954
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 2.328,
+      "error": "Invalid proper-name phrase: 'somsak.wongcharee@gaia2mail.com'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "6b2255c224f35e289b4cf9afc594d3c65b8ab1fc4e9cf8fb23a48dfe69adc194",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4253,
+        "completion_tokens": 471,
+        "total_tokens": 4724,
+        "prompt_tokens_details": {
+          "cached_tokens": 3840
+        },
+        "prompt_cache_hit_tokens": 3840,
+        "prompt_cache_miss_tokens": 413
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.088
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0094_7qgy90723vldb7dpyfbonnda946vhj5f",
+  "extracted_at": "2026-11-22T06:40:04.325911+00:00"
+}

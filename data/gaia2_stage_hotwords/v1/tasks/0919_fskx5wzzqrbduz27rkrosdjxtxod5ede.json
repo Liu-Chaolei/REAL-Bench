@@ -1,0 +1,161 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0919_fskx5wzzqrbduz27rkrosdjxtxod5ede",
+  "model": "deepseek-flash",
+  "input_sha256": "9764fc38097aeaf6cb46b68853c10c820231d907eee277891f536bf5d6134229",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "London Luxe",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "房产项目/品牌专名"
+        },
+        {
+          "text": "10 Downing St, London",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "具体地址地名"
+        },
+        {
+          "text": "Aisha Patel",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "Property Tour",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f5ccc58b-2947-4a86-87bf-b37ee6a97c1a.arguments.title",
+          "reason": "日历事件自定义标题"
+        }
+      ],
+      "new_terms": [
+        "London Luxe",
+        "10 Downing St, London",
+        "Aisha Patel",
+        "Property Tour"
+      ],
+      "active_vocabulary": {
+        "London Luxe": 50,
+        "10 Downing St, London": 50,
+        "Aisha Patel": 50,
+        "Property Tour": 50
+      },
+      "vocabulary_sha256": "8de49f1fb75173a94f692c0474a6a9aa1693230a6596e4e7eeb166c4a183afd2"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "London Luxe",
+          "kind": "organization",
+          "source": "stage1.source_task",
+          "reason": "房产项目/品牌专名"
+        },
+        {
+          "text": "London Luxe Tour Debrief",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "自定义日历事件名"
+        },
+        {
+          "text": "10 Downing St, London",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "具体地址地名"
+        },
+        {
+          "text": "Aisha Patel",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "联系人全名"
+        }
+      ],
+      "new_terms": [
+        "London Luxe Tour Debrief"
+      ],
+      "active_vocabulary": {
+        "London Luxe": 50,
+        "10 Downing St, London": 50,
+        "Aisha Patel": 50,
+        "Property Tour": 50,
+        "London Luxe Tour Debrief": 50
+      },
+      "vocabulary_sha256": "f14f9ef8e2178b5f17e340c7498a799d2ca4f0e864bb12ecbde524bf38f66f59"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "10 Downing St, London",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "具体地址地名"
+        },
+        {
+          "text": "34, Storey's Way, Cambridge CB3 0DT",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "具体家庭住址"
+        },
+        {
+          "text": "Aisha Patel",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "联系人全名"
+        },
+        {
+          "text": "London Luxe",
+          "kind": "organization",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "房产项目/品牌专名"
+        },
+        {
+          "text": "Property Tour",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_search_tour.arguments.query",
+          "reason": "日历事件自定义标题"
+        }
+      ],
+      "new_terms": [
+        "34, Storey's Way, Cambridge CB3 0DT"
+      ],
+      "active_vocabulary": {
+        "London Luxe": 50,
+        "10 Downing St, London": 50,
+        "Aisha Patel": 50,
+        "Property Tour": 50,
+        "London Luxe Tour Debrief": 50,
+        "34, Storey's Way, Cambridge CB3 0DT": 50
+      },
+      "vocabulary_sha256": "fb6dc388b75f6227686ab73a8c4ccc6882ea3589b47f2d8f6303d5c4aafac210"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "b823997ab513f9055e1b0aeb2931bfe29acb8eb58a81aebf2fc6d708950f18f2",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3156,
+        "completion_tokens": 436,
+        "total_tokens": 3592,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2900
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.997
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0919_fskx5wzzqrbduz27rkrosdjxtxod5ede",
+  "extracted_at": "2026-11-22T06:44:30.043345+00:00"
+}

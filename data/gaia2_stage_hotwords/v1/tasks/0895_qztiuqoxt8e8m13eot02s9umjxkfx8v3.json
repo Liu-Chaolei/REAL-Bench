@@ -1,0 +1,153 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0895_qztiuqoxt8e8m13eot02s9umjxkfx8v3",
+  "model": "deepseek-flash",
+  "input_sha256": "bfe160f6ea617477046201d41a6faa73d26ccac0d984978d6d284c763a20b038",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Alessia Ramseyer",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-7247c8f0-bb53-430c-be27-df9c04a45a18.arguments.content",
+          "reason": "被通知取消活动的参会人姓名"
+        },
+        {
+          "text": "Research Collaboration Meeting",
+          "kind": "custom_name",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-7247c8f0-bb53-430c-be27-df9c04a45a18.arguments.content",
+          "reason": "被取消的活动名称"
+        }
+      ],
+      "new_terms": [
+        "Alessia Ramseyer",
+        "Katarzyna Zielińska",
+        "Research Collaboration Meeting"
+      ],
+      "active_vocabulary": {
+        "Alessia Ramseyer": 50,
+        "Katarzyna Zielińska": 50,
+        "Research Collaboration Meeting": 50
+      },
+      "vocabulary_sha256": "4453918dd6f40c3dc1f07554d443c4cab66bffdfa8906bac2fd2b669fc60e79c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Alessia Ramseyer",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Rhine River promenade",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "集合地点名称"
+        },
+        {
+          "text": "Mittlere Brücke",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "桥名"
+        }
+      ],
+      "new_terms": [
+        "Rhine River promenade",
+        "Mittlere Brücke"
+      ],
+      "active_vocabulary": {
+        "Alessia Ramseyer": 50,
+        "Katarzyna Zielińska": 50,
+        "Research Collaboration Meeting": 50,
+        "Rhine River promenade": 50,
+        "Mittlere Brücke": 50
+      },
+      "vocabulary_sha256": "2513cbb0e75c80b0f6cc68dcc2bf282e3d59c86d5c51c89af4f9a3f50c13608b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Alessia Ramseyer",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Rhine River promenade",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "集合地点名称"
+        },
+        {
+          "text": "Mittlere Brücke",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "桥名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Alessia Ramseyer": 50,
+        "Katarzyna Zielińska": 50,
+        "Research Collaboration Meeting": 50,
+        "Rhine River promenade": 50,
+        "Mittlere Brücke": 50
+      },
+      "vocabulary_sha256": "2513cbb0e75c80b0f6cc68dcc2bf282e3d59c86d5c51c89af4f9a3f50c13608b"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "0f9b4cebd7d2af23b122fa8058b196cec083a2a72129bd13b816b9d0d8c53923",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3012,
+        "completion_tokens": 355,
+        "total_tokens": 3367,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2756
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.813,
+      "error": "Not an exact quotation of a source in stage 1: 'Rhine River promenade near Mittlere Brücke' from 'stage1.source_task'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "3279c9094c089468d49775abce70bb7e0ae2290288548df1490b953cb1914353",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3782,
+        "completion_tokens": 343,
+        "total_tokens": 4125,
+        "prompt_tokens_details": {
+          "cached_tokens": 3328
+        },
+        "prompt_cache_hit_tokens": 3328,
+        "prompt_cache_miss_tokens": 454
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.338
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0895_qztiuqoxt8e8m13eot02s9umjxkfx8v3",
+  "extracted_at": "2026-11-22T06:44:25.520748+00:00"
+}

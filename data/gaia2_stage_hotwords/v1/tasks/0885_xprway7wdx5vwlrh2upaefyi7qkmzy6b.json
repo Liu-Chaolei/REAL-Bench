@@ -1,0 +1,137 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0885_xprway7wdx5vwlrh2upaefyi7qkmzy6b",
+  "model": "deepseek-flash",
+  "input_sha256": "05157525bc98cede38ba7ea8950c5bbffbca684930a4dcf3065ca203f56df3d8",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-77afd560-de31-47f0-95cd-fca382aa0d69.arguments.attendees[0]",
+          "reason": "参会人姓名，含特殊字符"
+        },
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-77afd560-de31-47f0-95cd-fca382aa0d69.arguments.attendees[1]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Kaia Nakamura",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-77afd560-de31-47f0-95cd-fca382aa0d69.arguments.attendees[2]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Ryder Nakamura",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-77afd560-de31-47f0-95cd-fca382aa0d69.arguments.attendees[3]",
+          "reason": "参会人姓名"
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur",
+        "Nalani Jensen",
+        "Kaia Nakamura",
+        "Ryder Nakamura"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Nalani Jensen": 50,
+        "Kaia Nakamura": 50,
+        "Ryder Nakamura": 50
+      },
+      "vocabulary_sha256": "68a067a62cbc2c4802e0c3b646f07c124c5c2580191595a1789a924e2f5f1e59"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群组成员姓名"
+        },
+        {
+          "text": "Kaia Nakamura",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群组成员姓名"
+        },
+        {
+          "text": "Ryder Nakamura",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "群组成员姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Nalani Jensen": 50,
+        "Kaia Nakamura": 50,
+        "Ryder Nakamura": 50
+      },
+      "vocabulary_sha256": "68a067a62cbc2c4802e0c3b646f07c124c5c2580191595a1789a924e2f5f1e59"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Nalani Jensen": 50,
+        "Kaia Nakamura": 50,
+        "Ryder Nakamura": 50
+      },
+      "vocabulary_sha256": "68a067a62cbc2c4802e0c3b646f07c124c5c2580191595a1789a924e2f5f1e59"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "21b8c8e25ffdc25d6bfa5c6021d0aa60516b6738b8d8c15333f24a95bcef4b4d",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4333,
+        "completion_tokens": 404,
+        "total_tokens": 4737,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4077
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.95,
+      "error": "Not an exact quotation of a source in stage 2: 'Aurélien LaFleur' from 'stage2.tool_gt.series_s2_email.arguments.recipients[0]'"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "eee382f2d8507e73a5aadcae27f77926bf6f0ad1e41002d14f973ecf38f31825",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 5163,
+        "completion_tokens": 356,
+        "total_tokens": 5519,
+        "prompt_tokens_details": {
+          "cached_tokens": 4736
+        },
+        "prompt_cache_hit_tokens": 4736,
+        "prompt_cache_miss_tokens": 427
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.511
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0885_xprway7wdx5vwlrh2upaefyi7qkmzy6b",
+  "extracted_at": "2026-11-22T06:44:24.069939+00:00"
+}

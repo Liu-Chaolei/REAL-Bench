@@ -1,0 +1,130 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0491_mzdxfy8gi40omgy2xee3itkqnb2lodvk",
+  "model": "deepseek-flash",
+  "input_sha256": "1aa7f10b4273cec6d54cf63d34b840bace2a2726d474f37e4cebadb2c59f4eee",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Prague 7 Loft",
+          "kind": "product",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-304b8e7f-9c4e-4b68-8990-170bd75ef377.arguments.content",
+          "reason": "公寓房源专有名称"
+        }
+      ],
+      "new_terms": [
+        "Prague 7 Loft"
+      ],
+      "active_vocabulary": {
+        "Prague 7 Loft": 50
+      },
+      "vocabulary_sha256": "959e55230f8b77d97b7df930bbf42d1e9668ab7ecaaa39452704ea64fb42489c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Prague 7 Loft",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_add.arguments.title",
+          "reason": "公寓房源专有名称"
+        },
+        {
+          "text": "Milady Horákové 20",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add.arguments.location",
+          "reason": "具体街道地址"
+        },
+        {
+          "text": "Praha 7",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add.arguments.location",
+          "reason": "布拉格城区名"
+        }
+      ],
+      "new_terms": [
+        "Milady Horákové 20",
+        "Praha 7"
+      ],
+      "active_vocabulary": {
+        "Prague 7 Loft": 50,
+        "Milady Horákové 20": 50,
+        "Praha 7": 50
+      },
+      "vocabulary_sha256": "ab1a9c54c54216a1479b8df8d8e04bad9fa4227cd268ed53e2f0096213791d04"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kvido Nováček",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "受邀人完整姓名"
+        },
+        {
+          "text": "Prague 7 Loft",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_add.arguments.title",
+          "reason": "公寓房源专有名称"
+        },
+        {
+          "text": "Milady Horákové 20",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add.arguments.location",
+          "reason": "具体街道地址"
+        },
+        {
+          "text": "Praha 7",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add.arguments.location",
+          "reason": "布拉格城区名"
+        },
+        {
+          "text": "Matěj",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "邮件署名人物名"
+        }
+      ],
+      "new_terms": [
+        "Kvido Nováček",
+        "Matěj"
+      ],
+      "active_vocabulary": {
+        "Prague 7 Loft": 50,
+        "Milady Horákové 20": 50,
+        "Praha 7": 50,
+        "Kvido Nováček": 50,
+        "Matěj": 50
+      },
+      "vocabulary_sha256": "817ce75a95affc53e37ecd0cab52eef54358ebe9f871ea6b9e8839331486ea62"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "ed79878e1fb7c352aac61f91931623975732ff8c6028de9343adb0f29eefc2f0",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2961,
+        "completion_tokens": 395,
+        "total_tokens": 3356,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2705
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.482
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0491_mzdxfy8gi40omgy2xee3itkqnb2lodvk",
+  "extracted_at": "2026-11-22T06:42:19.734831+00:00"
+}

@@ -1,0 +1,167 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0138_t6mwmx3ilpme496q17bhcx0f39vm1a9o__async_0037_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "c60b872dd9b858d5eb78643233db4333c2d04f8307ddb027aa9e7ebf2469af44",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurelia",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "联系人姓名"
+        },
+        {
+          "text": "Phoenix",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "城市名"
+        }
+      ],
+      "new_terms": [
+        "Aurelia",
+        "Phoenix"
+      ],
+      "active_vocabulary": {
+        "Aurelia": 50,
+        "Phoenix": 50
+      },
+      "vocabulary_sha256": "3f5a22db9c9b8641023e5dd4da9d8cf4f50280d604fc5cb8987b6ba8099f66ad"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurelia Păunescu",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "收件人全名"
+        },
+        {
+          "text": "Desert Bloom Apartments",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Desert Bloom",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Sunset Villas",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "公寓名称"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "发件人署名"
+        }
+      ],
+      "new_terms": [
+        "Aurelia Păunescu",
+        "Desert Bloom Apartments",
+        "Desert Bloom",
+        "Sunset Villas",
+        "Aurélien LaFleur"
+      ],
+      "active_vocabulary": {
+        "Aurelia": 50,
+        "Phoenix": 50,
+        "Aurelia Păunescu": 50,
+        "Desert Bloom Apartments": 50,
+        "Desert Bloom": 50,
+        "Sunset Villas": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "e63b2d6cb871b15f66f984d1a1e6cde9d910b5ca472f55d4eacec4a7d21fb073"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurelia Păunescu",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "参会人全名"
+        },
+        {
+          "text": "Desert Bloom Apartments",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "地点名称"
+        },
+        {
+          "text": "N 7th St",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "街道名"
+        }
+      ],
+      "new_terms": [
+        "N 7th St"
+      ],
+      "active_vocabulary": {
+        "Aurelia": 50,
+        "Phoenix": 50,
+        "Aurelia Păunescu": 50,
+        "Desert Bloom Apartments": 50,
+        "Desert Bloom": 50,
+        "Sunset Villas": 50,
+        "Aurélien LaFleur": 50,
+        "N 7th St": 50
+      },
+      "vocabulary_sha256": "6091739daff2b0a8b285d4dc9c281b7f1436dff4f2ee98e224900151d9779c00"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "250c51a40e9116eb7271386811b349562c213fbbc66890aa5f6705efbb596eb9",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2075,
+        "completion_tokens": 327,
+        "total_tokens": 2402,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1819
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 1.386,
+      "error": "Duplicate JSON field 'stage'; use distinct stage objects"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "963ca3f7981574aadf73a588ce4a78182401d478935389c65d09e25ce5faf874",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2795,
+        "completion_tokens": 329,
+        "total_tokens": 3124,
+        "prompt_tokens_details": {
+          "cached_tokens": 2304
+        },
+        "prompt_cache_hit_tokens": 2304,
+        "prompt_cache_miss_tokens": 491
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.236
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0138_t6mwmx3ilpme496q17bhcx0f39vm1a9o__async_0037_v1",
+  "extracted_at": "2026-11-22T06:46:33.385709+00:00"
+}

@@ -1,0 +1,93 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0158_8j85v3j9m5mqbp42u7jhgjt9y8oa9omz",
+  "model": "deepseek-flash",
+  "input_sha256": "cda8b15b0791178c0e1276698397fdcf0fc3e2bb7e7fb15eed86d5f1f5cd3a91",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "169a12f366fdc8deeb6ff3630d373b5ae3e2c29cbb448802cdcd1fdda2e7eeb3",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1872,
+        "completion_tokens": 158,
+        "total_tokens": 2030,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1616
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValidationError",
+      "seconds": 0.897,
+      "error": "3 validation errors for Extraction\nstages.0.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='无合适专有名词', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.1.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='包含个人姓名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstages.2.reason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='包含个人姓名', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden"
+    },
+    {
+      "attempt": 2,
+      "request_sha256": "3ded4e380013e5c087d493b7dadcc921492d5039e9c9a5bd22162df6da62eddf",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2582,
+        "completion_tokens": 137,
+        "total_tokens": 2719,
+        "prompt_tokens_details": {
+          "cached_tokens": 1920
+        },
+        "prompt_cache_hit_tokens": 1920,
+        "prompt_cache_miss_tokens": 662
+      },
+      "finish_reason": "stop",
+      "status": "rejected",
+      "error_type": "ValueError",
+      "seconds": 0.827,
+      "error": "Invalid proper-name phrase: 'liesbeth.vandenberghe@gaia2mail.com'"
+    },
+    {
+      "attempt": 3,
+      "request_sha256": "a3e6b8c72ddee3f7c1318120e4e792f484e2cc81635e01d904adcecea628317d",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2411,
+        "completion_tokens": 30,
+        "total_tokens": 2441,
+        "prompt_tokens_details": {
+          "cached_tokens": 1792
+        },
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 619
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 0.486
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0158_8j85v3j9m5mqbp42u7jhgjt9y8oa9omz",
+  "extracted_at": "2026-11-22T06:40:25.068823+00:00"
+}

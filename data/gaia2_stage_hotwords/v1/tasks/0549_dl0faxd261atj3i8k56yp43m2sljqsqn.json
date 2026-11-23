@@ -1,0 +1,170 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0549_dl0faxd261atj3i8k56yp43m2sljqsqn",
+  "model": "deepseek-flash",
+  "input_sha256": "503e2d978fd46fd73a923e6d0272cdfe721b88d9c1db5c16bc919e73c825ecc3",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kritsadaporn",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "收件人姓名，需保留"
+        },
+        {
+          "text": "Oleksandr",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f5a79817-2f33-4d3e-bbcb-5f30c2b30474.arguments.content",
+          "reason": "邮件收件人名字"
+        },
+        {
+          "text": "Narong",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f5a79817-2f33-4d3e-bbcb-5f30c2b30474.arguments.content",
+          "reason": "邮件收件人名字"
+        },
+        {
+          "text": "Nonglak",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f5a79817-2f33-4d3e-bbcb-5f30c2b30474.arguments.content",
+          "reason": "邮件收件人名字"
+        },
+        {
+          "text": "Krittin",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f5a79817-2f33-4d3e-bbcb-5f30c2b30474.arguments.content",
+          "reason": "邮件收件人名字"
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f5a79817-2f33-4d3e-bbcb-5f30c2b30474.arguments.content",
+          "reason": "发件人签名姓名"
+        }
+      ],
+      "new_terms": [
+        "Kritsadaporn",
+        "Oleksandr",
+        "Narong",
+        "Nonglak",
+        "Krittin",
+        "Åse Kjellstad"
+      ],
+      "active_vocabulary": {
+        "Kritsadaporn": 50,
+        "Oleksandr": 50,
+        "Narong": 50,
+        "Nonglak": 50,
+        "Krittin": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "bfd08d2423bdf0e7666e06bd841358d3b4939b2faa1b42fd3d179f2fbbdb19cc"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Narong Srisawat",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "参会人完整姓名"
+        },
+        {
+          "text": "Film Distributor's Office",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.location",
+          "reason": "会议地点名称"
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "邮件签名姓名"
+        }
+      ],
+      "new_terms": [
+        "Narong Srisawat",
+        "Film Distributor's Office"
+      ],
+      "active_vocabulary": {
+        "Kritsadaporn": 50,
+        "Oleksandr": 50,
+        "Narong": 50,
+        "Nonglak": 50,
+        "Krittin": 50,
+        "Åse Kjellstad": 50,
+        "Narong Srisawat": 50,
+        "Film Distributor's Office": 50
+      },
+      "vocabulary_sha256": "92680c8bded03af2405325c048da6b780ff363d7d0997d29d84a501dad797fd1"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kritsadaporn Wongsawat",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "联系人完整姓名"
+        },
+        {
+          "text": "Kritsadaporn Wongchai",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "需区分的另一联系人姓名"
+        },
+        {
+          "text": "Åse",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_message.arguments.content",
+          "reason": "消息签名名字"
+        }
+      ],
+      "new_terms": [
+        "Kritsadaporn Wongsawat",
+        "Kritsadaporn Wongchai",
+        "Åse"
+      ],
+      "active_vocabulary": {
+        "Kritsadaporn": 50,
+        "Oleksandr": 50,
+        "Narong": 50,
+        "Nonglak": 50,
+        "Krittin": 50,
+        "Åse Kjellstad": 50,
+        "Narong Srisawat": 50,
+        "Film Distributor's Office": 50,
+        "Kritsadaporn Wongsawat": 50,
+        "Kritsadaporn Wongchai": 50,
+        "Åse": 50
+      },
+      "vocabulary_sha256": "6e2b16c732403ea9e1d548a12af05f8c17b7e39e7e44d7bb2589ddd9dd9b01cc"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "2dd5d96c311883c547e63363451b9a90855d2f6db4b8181f8816d68ee019a6f2",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2792,
+        "completion_tokens": 572,
+        "total_tokens": 3364,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2536
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 2.66
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0549_dl0faxd261atj3i8k56yp43m2sljqsqn",
+  "extracted_at": "2026-11-22T06:42:40.766730+00:00"
+}

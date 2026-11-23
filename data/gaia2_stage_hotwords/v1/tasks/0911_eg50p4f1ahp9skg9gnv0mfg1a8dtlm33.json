@@ -1,0 +1,158 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0911_eg50p4f1ahp9skg9gnv0mfg1a8dtlm33",
+  "model": "deepseek-flash",
+  "input_sha256": "8cc1343ac9d7917dff47f18f95aec9f8014838d37278751c051c2d881fc764ec",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Karel",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "受邀者名字"
+        },
+        {
+          "text": "Séamus",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "受邀者名字，含重音"
+        },
+        {
+          "text": "Thierry",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "受邀者名字"
+        },
+        {
+          "text": "Aurélie Vandenberghe",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "受邀者完整姓名，含重音"
+        },
+        {
+          "text": "Vandenberghe",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "共同姓氏"
+        },
+        {
+          "text": "Liesbeth",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b42c0e1f-97fd-4e89-ba00-f1d08c446189.arguments.content",
+          "reason": "邮件署名主人名"
+        }
+      ],
+      "new_terms": [
+        "Karel",
+        "Séamus",
+        "Thierry",
+        "Aurélie Vandenberghe",
+        "Vandenberghe",
+        "Liesbeth"
+      ],
+      "active_vocabulary": {
+        "Karel": 50,
+        "Séamus": 50,
+        "Thierry": 50,
+        "Aurélie Vandenberghe": 50,
+        "Vandenberghe": 50,
+        "Liesbeth": 50
+      },
+      "vocabulary_sha256": "7848db862921fee8919d7da8eb9adc7edef184fcbf6f926ff7eeb5c03b46e6f5"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Karel": 50,
+        "Séamus": 50,
+        "Thierry": 50,
+        "Aurélie Vandenberghe": 50,
+        "Vandenberghe": 50,
+        "Liesbeth": 50
+      },
+      "vocabulary_sha256": "7848db862921fee8919d7da8eb9adc7edef184fcbf6f926ff7eeb5c03b46e6f5"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Karel",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群组成员名"
+        },
+        {
+          "text": "Séamus",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群组成员名，含重音"
+        },
+        {
+          "text": "Thierry",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群组成员名"
+        },
+        {
+          "text": "Aurélie Vandenberghe",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "群组成员完整姓名"
+        },
+        {
+          "text": "Birthday Party – 27 October",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "群组自定义标题"
+        },
+        {
+          "text": "Liesbeth",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "消息署名主人名"
+        }
+      ],
+      "new_terms": [
+        "Birthday Party – 27 October"
+      ],
+      "active_vocabulary": {
+        "Karel": 50,
+        "Séamus": 50,
+        "Thierry": 50,
+        "Aurélie Vandenberghe": 50,
+        "Vandenberghe": 50,
+        "Liesbeth": 50,
+        "Birthday Party – 27 October": 50
+      },
+      "vocabulary_sha256": "b6e72a42d079b8a55007c2e08217d8e906deec9c82346b89dbfc8d5b7a457def"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "214fb61b0c0eb3c46ec5afcfbc11a8360ca545e4a511e9da35ad11ce7cf21bbd",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4241,
+        "completion_tokens": 394,
+        "total_tokens": 4635,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3985
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.917
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0911_eg50p4f1ahp9skg9gnv0mfg1a8dtlm33",
+  "extracted_at": "2026-11-22T06:44:27.522039+00:00"
+}

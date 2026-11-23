@@ -1,0 +1,180 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0227_brbdzkwlyirxhpmod1axs4c10h06r7al__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "82e023d5d30224f9873591a2576e8d8b607af84e21f828163f97c0ac37d1723f",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Plzeň",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "捷克城市专有地名"
+        },
+        {
+          "text": "Brno",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "捷克城市专有地名"
+        },
+        {
+          "text": "Liberec",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "捷克城市专有地名"
+        },
+        {
+          "text": "Ostrava",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "捷克城市专有地名"
+        },
+        {
+          "text": "Kvido Nováček",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-6b602817-2b10-48f7-9a53-c938ea997733.arguments.content",
+          "reason": "联系人完整姓名"
+        }
+      ],
+      "new_terms": [
+        "Plzeň",
+        "Brno",
+        "Liberec",
+        "Ostrava",
+        "Kvido Nováček"
+      ],
+      "active_vocabulary": {
+        "Plzeň": 50,
+        "Brno": 50,
+        "Liberec": 50,
+        "Ostrava": 50,
+        "Kvido Nováček": 50
+      },
+      "vocabulary_sha256": "bb19a8663c3f3bb43252250ebc9b8ed3da8b47c79116e0876a252ee821b50b1c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Brno Nový Lískovec",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "布尔诺具体房源/区域名"
+        },
+        {
+          "text": "Lískovec 10",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "房源具体地址"
+        },
+        {
+          "text": "Kvido Nováček",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "布尔诺联系人完整姓名"
+        }
+      ],
+      "new_terms": [
+        "Brno Nový Lískovec",
+        "Lískovec 10"
+      ],
+      "active_vocabulary": {
+        "Plzeň": 50,
+        "Brno": 50,
+        "Liberec": 50,
+        "Ostrava": 50,
+        "Kvido Nováček": 50,
+        "Brno Nový Lískovec": 50,
+        "Lískovec 10": 50
+      },
+      "vocabulary_sha256": "77ce87d4a5e56355a4a51e7d271a3647bd0de80f81c7ddd3f3540f1ffb8986f1"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kvido Nováček",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "联系人完整姓名"
+        },
+        {
+          "text": "Brno Nový Lískovec",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "保留的布尔诺房源名"
+        },
+        {
+          "text": "Brno Moderna",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "被移除的布尔诺房源名"
+        },
+        {
+          "text": "Brněnský Dvůr",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "被移除的布尔诺房源名"
+        },
+        {
+          "text": "Brno South",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "被移除的布尔诺房源名"
+        },
+        {
+          "text": "Brno Bohunice",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "被移除的布尔诺房源名"
+        }
+      ],
+      "new_terms": [
+        "Brno Moderna",
+        "Brněnský Dvůr",
+        "Brno South",
+        "Brno Bohunice"
+      ],
+      "active_vocabulary": {
+        "Plzeň": 50,
+        "Brno": 50,
+        "Liberec": 50,
+        "Ostrava": 50,
+        "Kvido Nováček": 50,
+        "Brno Nový Lískovec": 50,
+        "Lískovec 10": 50,
+        "Brno Moderna": 50,
+        "Brněnský Dvůr": 50,
+        "Brno South": 50,
+        "Brno Bohunice": 50
+      },
+      "vocabulary_sha256": "e3ad26a3bbceadaa767e82faa1888f6195c7e71f6621797e6532d506143b704c"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "6b3bc18253feec5f3cd883eb36aa39ccb59a9b4dcea31b31c5948d2dacf8caf0",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1568,
+        "completion_tokens": 520,
+        "total_tokens": 2088,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1312
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.895
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0227_brbdzkwlyirxhpmod1axs4c10h06r7al__mind_change_v1",
+  "extracted_at": "2026-11-22T06:45:01.935361+00:00"
+}

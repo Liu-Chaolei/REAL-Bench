@@ -1,0 +1,133 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0022_bfecjsp9maplnofl92t81qkj2q2lfjrx",
+  "model": "deepseek-flash",
+  "input_sha256": "d0d7bad449f059e02c3e5d579943b6db68b3e7b6471523622a7192f3f1564909",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Katarzyna Szymańska",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "最年轻联系人姓名"
+        },
+        {
+          "text": "Chicago",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "联系人所在城市"
+        },
+        {
+          "text": "Léa Dumont",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "同龄联系人姓名"
+        },
+        {
+          "text": "Marseille",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "联系人所在城市"
+        },
+        {
+          "text": "Katarzyna",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_search_youngest.arguments.query",
+          "reason": "搜索查询中的名字"
+        },
+        {
+          "text": "Dumont",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_search_tie.arguments.query",
+          "reason": "搜索查询中的姓氏"
+        }
+      ],
+      "new_terms": [
+        "Katarzyna Szymańska",
+        "Chicago",
+        "Léa Dumont",
+        "Marseille",
+        "Katarzyna",
+        "Dumont"
+      ],
+      "active_vocabulary": {
+        "Katarzyna Szymańska": 50,
+        "Chicago": 50,
+        "Léa Dumont": 50,
+        "Marseille": 50,
+        "Katarzyna": 50,
+        "Dumont": 50
+      },
+      "vocabulary_sha256": "4feba86ceead8bbdffc74b55efc22fd7294e5270aa7ef26ed4274238024dadad"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Léa Dumont",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_lea_call.arguments.attendees[1]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_lea_call.arguments.attendees[0]",
+          "reason": "参会人姓名"
+        },
+        {
+          "text": "Katarzyna Szymańska",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "澄清中提及的联系人姓名"
+        }
+      ],
+      "new_terms": [
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Katarzyna Szymańska": 50,
+        "Chicago": 50,
+        "Léa Dumont": 50,
+        "Marseille": 50,
+        "Katarzyna": 50,
+        "Dumont": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "6623c9cf89e4e90000530f56efb9eb7e9e626e5375004b2145c245ebd6c2ad72"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "c40e38f01c25b233130f622030098ac43742cbae1600f390b91888e41f0dcce6",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 2404,
+        "completion_tokens": 382,
+        "total_tokens": 2786,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2148
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.6
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0022_bfecjsp9maplnofl92t81qkj2q2lfjrx",
+  "extracted_at": "2026-11-22T06:39:39.295197+00:00"
+}

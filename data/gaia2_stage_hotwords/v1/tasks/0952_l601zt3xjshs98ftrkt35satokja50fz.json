@@ -1,0 +1,98 @@
+{
+  "version": "gaia2-stage-hotwords-v1",
+  "task_id": "0952_l601zt3xjshs98ftrkt35satokja50fz",
+  "model": "deepseek-flash",
+  "input_sha256": "6aab5926f7c3e30a0b98e6ce5786ad6896cdb3da9ab8f8ce6f36d9d926de8ddd",
+  "prompt_sha256": "6b18acb205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaïs Ramadan",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "作者姓名，含特殊字符ï"
+        },
+        {
+          "text": "Geopolitical Dynamics",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "书名/系列名"
+        }
+      ],
+      "new_terms": [
+        "Kaïs Ramadan",
+        "Geopolitical Dynamics"
+      ],
+      "active_vocabulary": {
+        "Kaïs Ramadan": 50,
+        "Geopolitical Dynamics": 50
+      },
+      "vocabulary_sha256": "da9bca09c21421508c04397e55ee21220a4aecb1445442f2744fb734b76e02b1"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaïs Ramadan",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "作者姓名"
+        },
+        {
+          "text": "Geopolitical Dynamics",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "系列名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kaïs Ramadan": 50,
+        "Geopolitical Dynamics": 50
+      },
+      "vocabulary_sha256": "da9bca09c21421508c04397e55ee21220a4aecb1445442f2744fb734b76e02b1"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaïs Ramadan",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "作者姓名"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kaïs Ramadan": 50,
+        "Geopolitical Dynamics": 50
+      },
+      "vocabulary_sha256": "da9bca09c21421508c04397e55ee21220a4aecb1445442f2744fb734b76e02b1"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "request_sha256": "597ba7f94d03bab5b75a3af965d3534fc1d04f8b8c24045819692c51be335288",
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 1992,
+        "completion_tokens": 165,
+        "total_tokens": 2157,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1736
+      },
+      "finish_reason": "stop",
+      "status": "accepted",
+      "seconds": 1.156
+    }
+  ],
+  "artifacts": "data/simulations/gaia2-stage-hotwords-1100-20261122/tasks/0952_l601zt3xjshs98ftrkt35satokja50fz",
+  "extracted_at": "2026-11-22T06:44:39.508146+00:00"
+}

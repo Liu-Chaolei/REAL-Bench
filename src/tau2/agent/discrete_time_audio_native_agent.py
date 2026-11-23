@@ -63,6 +63,7 @@ from tau2.config import (
     DEFAULT_AUDIO_NATIVE_MAX_INACTIVE_SECONDS,
     DEFAULT_AUDIO_NATIVE_PROVIDER,
     DEFAULT_OPENAI_VAD_THRESHOLD,
+    DEFAULT_QWEN_ASR_STREAMING_MODEL,
     DEFAULT_SEND_AUDIO_INSTANT,
 )
 from tau2.data_model.audio import TELEPHONY_AUDIO_FORMAT, AudioEncoding, AudioFormat
@@ -311,6 +312,7 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
         self.avartha_config = avartha_config
         self.qwen_agent_config = qwen_agent_config
         self.observer_hotwords = None
+        self._observer_stage = 0
         self._live_trace_path = (
             audio_taps_dir / "live.jsonl" if audio_taps_dir else None
         )
@@ -390,10 +392,42 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
             self._agent_output_tap = AudioTap(
                 name="agent_output",
                 output_dir=audio_taps_dir,
-                sample_rate=self.audio_format.sample_rate,
-                encoding=self.audio_format.encoding,
+                sample_rate=self.playback_audio_format.sample_rate,
+                encoding=self.playback_audio_format.encoding,
             )
             logger.info(f"Agent audio taps enabled, output dir: {audio_taps_dir}")
+
+    @property
+    def playback_audio_format(self) -> AudioFormat:
+        """Determine the output format without booting a lazily created adapter."""
+        actual = getattr(self._adapter, "playback_audio_format", None)
+        if isinstance(actual, AudioFormat):
+            return actual
+        if (
+            self.provider == "qwen_agent"
+            and getattr(self.qwen_agent_config, "asr_model", None)
+            == DEFAULT_QWEN_ASR_STREAMING_MODEL
+        ):
+            return AudioFormat(
+                encoding=AudioEncoding.PCM_S16LE,
+                sample_rate=self.qwen_agent_config.playback_sample_rate,
+            )
+        return self.audio_format
+
+    def _get_playback_silence(self) -> bytes:
+        """Create one silent output tick at the output's own sample rate."""
+        fmt = self.playback_audio_format
+        size = (
+            round(fmt.sample_rate * self.tick_duration_ms / 1000)
+            * fmt.sample_width
+            * fmt.channels
+        )
+        value = (
+            b"\x7f"
+            if fmt.encoding == AudioEncoding.ULAW
+            else (b"\xd5" if fmt.encoding == AudioEncoding.ALAW else b"\x00")
+        )
+        return value * size
 
     def _build_system_prompt(self) -> str:
         """Build the same prompt used by offline review."""
@@ -454,6 +488,8 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
                 vad_config=self.vad_config,
                 modality=self.modality,
             )
+        if self._observer_stage and hasattr(self.observer_hotwords, "for_stage"):
+            self.adapter.set_observer_stage(self._observer_stage)
 
         return DiscreteTimeAgentState(
             system_messages=[SystemMessage(role="system", content=self.system_prompt)],
@@ -702,8 +738,9 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
         agent_audio = tick_result.get_played_agent_audio()
         transcript = tick_result.proportional_transcript or ""
 
-        # Use the configured audio format
-        audio_format = self.audio_format
+        # Playback can preserve the provider's native PCM while caller input
+        # continues to use the framework's separately configured format.
+        audio_format = tick_result.playback_audio_format or self.audio_format
 
         # Check if there was actual speech (not just silence padding)
         has_speech = (
@@ -748,22 +785,13 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
 
     def _create_empty_response(self) -> AssistantMessage:
         """Create empty response for error cases."""
-        # Text-mode message with silence audio (for time alignment)
-        # Use appropriate silence value based on encoding
-        if self.audio_format.encoding == AudioEncoding.ULAW:
-            silence_byte = b"\x7f"  # μ-law silence
-        elif self.audio_format.encoding == AudioEncoding.ALAW:
-            silence_byte = b"\xd5"  # A-law silence
-        else:
-            # PCM16: 2 bytes of zeros per sample
-            silence_byte = b"\x00\x00"
-        silence = silence_byte * (self.bytes_per_tick // len(silence_byte))
+        silence = self._get_playback_silence()
         message = AssistantMessage(
             role="assistant",
             content=None,
             is_audio=False,
             audio_content=base64.b64encode(silence).decode("utf-8"),
-            audio_format=self.audio_format,
+            audio_format=self.playback_audio_format,
             timestamp=get_now(),
             chunk_id=0,
             is_final_chunk=True,
@@ -799,7 +827,7 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
             AssistantMessage with text content and silence audio.
         """
         # Generate silence audio for one tick
-        silence = self._get_silence()
+        silence = self._get_playback_silence()
         if self.provider == "qwen_agent":
             # An external system has not spoken merely because the harness
             # created its first tick. Let the real voice conversation open.
@@ -809,7 +837,7 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
             content=content,
             is_audio=False,
             audio_content=base64.b64encode(silence).decode("utf-8"),
-            audio_format=self.audio_format,
+            audio_format=self.playback_audio_format,
             timestamp=get_now(),
             chunk_id=0,
             is_final_chunk=True,
@@ -881,6 +909,17 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
     def has_pending_output(self) -> bool:
         """Whether known media/tool results still need transport before continuation."""
         return bool(self._adapter and self._adapter.has_pending_output)
+
+    def set_observer_stage(self, stage: int) -> None:
+        """Activate stage-local listener words without sending them to the Agent."""
+        if not hasattr(self.observer_hotwords, "for_stage"):
+            return
+        if stage < self._observer_stage:
+            raise ValueError("Observer hotword stages cannot move backwards")
+        self.observer_hotwords.for_stage(stage)
+        if self._adapter is not None and self._adapter.is_connected:
+            self._adapter.set_observer_stage(stage)
+        self._observer_stage = stage
 
     def get_diagnostic_evidence(self):
         """Expose observed backend inputs when the provider has that boundary."""
