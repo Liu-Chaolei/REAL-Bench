@@ -1,9 +1,12 @@
+> 当前 Gaia2 链路使用三文件 API 配置：`config.env` 保存供应商连接，`qw.env` 选择 Agent，`realbench.env` 选择评测与生成角色。入口示例为 `config.gaia2.unified.json`，评分示例为 `examples/real-metrics.unified.yaml`。详见 [API 配置使用说明](../../docs/api-configuration.md)。本页旧供应商专用示例通过原单文件入口兼容使用。
+
 # Evaluate the complete Qwen Audio Agent with τ-Voice
 
 `qwen_agent` connects the real Gateway, native task runtime and Qwen Code ACP
 backend to τ-Voice. It is separate from `qwen`, which calls a DashScope model
 directly. The Qwen checkout is archived at its clean git revision and is never
-edited by the integration.
+edited by the integration at runtime. The scenario-clock image includes Qwen's
+optional frontend time-provider interface (source commit `02426d5`).
 
 Supported runs are **English retail and Gaia2**, with the
 normal Qwen routing and native permissions. A dedicated container, workspace,
@@ -93,6 +96,26 @@ headers/libraries for PyAudio. On this machine, compatible Ubuntu libraries were
 extracted without root into the ignored `.venv/lib/tau-native`; the launcher
 includes that directory when present. No system packages or shared Python user
 site were modified. Recreating the venv requires normal PortAudio provisioning.
+
+## Scenario time
+
+For environments exposing `System__get_current_time`, the bridge injects a
+`getCurrentTimeSnapshot` callback into Gateway. The existing frontend
+`get_current_time` tool then reads the evaluator's `ScenarioRuntime` through the
+same broker and tool execution path as the backend. Each explicit query reads
+the clock afresh; no additional clock, polling or per-tick comparisons are used.
+The ready metadata records `frontend_time_source` and `frontend_time_tool`.
+Other environments retain normal host-time queries.
+
+Scenario runs require the Gateway's `supportsCurrentTimeSnapshotProvider`
+interface; an incompatible source revision reports this once at startup. A
+failed time query returns an ordinary tool failure and never falls back to the
+host date. Build and use the scenario-clock image for the dynamic Gaia2 config.
+
+This covers the designated time-query tools. Native `schedule_reminder`, its
+scheduler and arbitrary shell/code date calls still use host time. It also does
+not add pause/resume to `ScenarioRuntime`: stopping ticks is distinct from
+stopping that clock. See [the implementation plan](../../docs/scenario-clock-injection-plan.md).
 
 ## Configure
 
@@ -294,14 +317,17 @@ for explicit tasks. Each call uses a fresh isolated Agent. The helper retains
 recordings, played-audio transcripts, bridge traces, tool trajectories and scores
 under `data/simulations/qwen-mimo-smoke-<timestamp>/`. It exits nonzero for
 infrastructure errors, preserves every attempt and refuses to overwrite results.
-The helper defaults to `--max-seconds 0`: no conversation-duration cap and no
-whole-simulation wallclock timeout. Agent/user stop signals and infrastructure
-failures still end a trial. Ordinary `tau2 run` defaults are unchanged; its
-`--max-steps-seconds 0` explicitly disables the voice tick limit. Results record
-`audio_native_config.max_steps_seconds=0` and `info.max_steps=null` for this mode.
-Use a positive `--max-seconds N` for a bounded smoke check; that also sets a
-wallclock timeout of `N + 150` seconds. The historical 240 s run above used such
-a short connectivity budget.
+The helper defaults to `--max-seconds 1200`, which is 6000 simulation ticks at
+the 0.2-second tick size. This gives Gaia2 dynamic follow-ups enough simulated
+time for backend retries and later stage delivery. Pass `--max-seconds 0`
+explicitly for an unlimited smoke run. Agent/user stop signals and
+infrastructure failures still end a trial. Ordinary `tau2 run` defaults are
+unchanged; its `--max-steps-seconds 0` explicitly disables the voice tick limit.
+Caller LLM and TTS generation is synchronous by default, so preparation time
+does not advance the simulation tick clock. Pass `--realtime-generation` to
+restore background caller generation and wall-clock tick advancement.
+For a shorter bounded smoke check, pass a smaller positive `--max-seconds N`;
+that also sets a wallclock timeout of `N + 150` seconds.
 
 To continue an interrupted batch, repeat its configuration, task selection, seed
 and `--save-to` name with `--resume`. Completed task/trial pairs are read from

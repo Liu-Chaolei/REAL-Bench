@@ -197,6 +197,9 @@ def add_series_args(parser):
                 help="Write explicitly incomplete draft-export only",
             )
 
+    for command in commands.choices.values():
+        command.add_argument("--api-config-dir", type=Path)
+
 
 def run_command(args):
     """Dispatch one command and fail visibly on unsuccessful attempted work."""
@@ -204,6 +207,18 @@ def run_command(args):
     from tau2.task_authoring.gaia2_series.materials import inventory
     from tau2.task_authoring.gaia2_series.schema import AuthoringConfig, RequestPolicy
     from tau2.task_authoring.gaia2_series.storage import read_record, source_tasks
+
+    if getattr(args, "api_config_dir", None) is not None:
+        from tau2.task_authoring.gaia2_series.schema import AuthoringConfig
+
+        def load_config():
+            value = json.loads(args.config.read_text())
+            value["api_config_dir"] = str(args.api_config_dir)
+            return AuthoringConfig.model_validate(value)
+    else:
+
+        def load_config():
+            return AuthoringConfig.model_validate_json(args.config.read_text())
 
     name = args.series_command
     if name == "repair-light":
@@ -213,7 +228,7 @@ def run_command(args):
             run_queue,
         )
 
-        config = AuthoringConfig.model_validate_json(args.config.read_text())
+        config = load_config()
         models = [
             resolve_profile(config, p)[0].casefold()
             for p in [config.author, config.reviewer]
@@ -238,7 +253,7 @@ def run_command(args):
             run_workflow,
         )
 
-        config = AuthoringConfig.model_validate_json(args.config.read_text())
+        config = load_config()
         if name == "revalidate-series":
             prepare_version(args.dataset, args.output, config)
             with pipeline.dataset_lock(args.output):
@@ -257,7 +272,7 @@ def run_command(args):
             args.dataset,
             args.output,
             args.task_id,
-            AuthoringConfig.model_validate_json(args.config.read_text()),
+            load_config(),
             content_attempts=args.content_attempts,
         )
     elif name == "inventory":
@@ -270,7 +285,7 @@ def run_command(args):
     elif name == "full":
         from tau2.task_authoring.gaia2_series.full import preflight, run_full
 
-        config = AuthoringConfig.model_validate_json(args.config.read_text())
+        config = load_config()
         with pipeline.dataset_lock(args.dataset):
             if args.dry_run:
                 report = preflight(args.dataset, config)
@@ -294,7 +309,7 @@ def run_command(args):
             run_recovery,
         )
 
-        config = AuthoringConfig.model_validate_json(args.config.read_text())
+        config = load_config()
         with pipeline.dataset_lock(args.dataset):
             scope = recovery_scope(args.dataset)
             if args.dry_run:

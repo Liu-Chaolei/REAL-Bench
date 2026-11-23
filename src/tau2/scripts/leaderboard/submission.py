@@ -7,7 +7,7 @@ is auto-generated from these models.
 
 from datetime import date
 from pathlib import Path
-from typing import Literal, Optional
+from typing import Any, Literal, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
@@ -263,15 +263,19 @@ class InteractionMetricsCounts(BaseModelNoExtra):
 
 
 class InteractionMetricsPanel(BaseModelNoExtra):
-    """The τ-voice interaction-metric panel for one domain (or the overall average).
+    """Unified voice panel; the old interruption field remains for legacy data.
 
-    Latencies are in seconds (lower is better). Rates and selectivity are
-    fractions in [0, 1] (higher is better), except agent_interruption_rate,
-    which counts agent-interrupts-user events per response-eligible user turn
-    (lower is better, and it can exceed 1 when the agent interrupts the same
-    turn more than once). Selectivity values are correct-rates
-    (1 - error rate).
+    Latencies and overlap use seconds. The event interruption rate can exceed
+    one. Event records and applicability counts belong to evaluation_log.
     """
+
+    version: Optional[str] = None
+    response_latency_p90: Optional[float] = None
+    agent_interruption_event_rate: Optional[float] = None
+    agent_interrupted_turn_rate: Optional[float] = None
+    speech_overlap_duration: Optional[float] = None
+    on_time_rate: Optional[float] = None
+    evaluation_log: Optional[dict] = None
 
     response_latency_mean: Optional[float] = Field(
         None, description="L_R: mean seconds from user turn end to agent response"
@@ -318,9 +322,9 @@ class InteractionMetrics(BaseModelNoExtra):
     version: Optional[str] = Field(
         None, description="Version stamp of the metric computation code"
     )
-    config: Optional[dict[str, float]] = Field(
+    config: Optional[dict[str, Any]] = Field(
         None,
-        description="Detection windows and tick duration used for extraction (seconds)",
+        description="Recorded metric definitions and aggregation profile; legacy tick settings remain readable",
     )
     domains: Optional[dict[str, InteractionMetricsPanel]] = Field(
         None, description="Per-domain interaction metric panels"

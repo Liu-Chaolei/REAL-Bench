@@ -405,7 +405,7 @@ def test_real_voice_wrapper_uses_played_waveforms(tmp_path):
     assert result["metrics"]["response_rate"]["value"] == 1
     assert 0 < result["metrics"]["response_latency_mean"]["value"] < 2.1
     assert 1.9 < result["waveform_evidence"]["agent_intervals"][0][0] < 2.1
-    assert result["metrics"]["audible_pretoolspeech_rate"]["value"] is None
+    assert "audible_pretoolspeech_rate" not in result["metrics"]
 
 
 def test_generic_streaming_agent_collects_consumed_requests_in_one_call(
@@ -551,8 +551,8 @@ def test_summary_pools_counts_and_keeps_evidence_profiles_separate():
         },
     ]
     report = summarize(rows)
-    assert report["total_trials"] == 2
-    assert report["stage_coverage"]["rate"] == 5 / 6
+    assert report["evaluation_log"]["total_trials"] == 2
+    assert report["evaluation_log"]["stage_coverage"]["delivered_stages"] == 5
     rows[1]["profile"] = "b"
     report = summarize(rows)
     assert set(report["groups"]) == {"a", "b"}

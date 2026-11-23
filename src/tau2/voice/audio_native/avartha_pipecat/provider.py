@@ -10,7 +10,8 @@ live extra.
 from __future__ import annotations
 
 import asyncio
-from dataclasses import dataclass
+import time
+from dataclasses import dataclass, field
 from typing import Any, ClassVar, Optional
 
 from loguru import logger
@@ -34,6 +35,7 @@ class AgentAudioEvent:
 
     audio: bytes
     sample_rate: int
+    received_monotonic: float = field(default_factory=time.monotonic)
 
 
 @dataclass

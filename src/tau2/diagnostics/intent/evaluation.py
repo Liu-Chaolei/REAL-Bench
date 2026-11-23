@@ -50,6 +50,15 @@ Return one judgment for EVERY supplied item_id exactly once, with status and rea
 Optional evidence contains verbatim passages from target_input, not source values
 copied as supposed evidence. Return only JSON conforming to the supplied schema."""
 
+EVALUATION_POLICY += """For whole_call inputs, 'current business request' includes
+the complete chronological authorization history in the declared context policy.
+An old parameter correctly submitted while authorized is not an extra or changed
+fact merely because a later request amended it. Missing/wrong updates and wrong
+cancellation targets remain errors. Transmission content and native acceptance
+are distinct facts; an accepted update is not evidence of business completion.
+Use the expressed target relationships and times, with no invented time limit.
+"""
+
 
 def judgment_schema(direction: str) -> dict[str, Any]:
     if direction not in DIRECTIONS:

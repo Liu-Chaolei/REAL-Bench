@@ -12,6 +12,11 @@ from tau2.config import (
     DEFAULT_MIMO_API_KEY_ENV,
     DEFAULT_MIMO_TTS_MODEL,
     DEFAULT_MIMO_TTS_VOICE,
+    DEFAULT_PCM_SAMPLE_RATE,
+    DEFAULT_QWEN_TTS_API_BASE,
+    DEFAULT_QWEN_TTS_API_KEY_ENV,
+    DEFAULT_QWEN_TTS_MODEL,
+    DEFAULT_QWEN_TTS_VOICE,
     DEFAULT_SEED,
     DEFAULT_SPEECH_EFFECTS_MODE,
 )
@@ -191,7 +196,26 @@ class MiMoTTSConfig(BaseModel):
     request_timeout_seconds: float = Field(default=60, gt=0)
 
 
-ProviderConfig = ElevenLabsTTSConfig | MiMoTTSConfig
+class QwenTTSConfig(BaseModel):
+    """Qwen Audio HTTP synthesis settings with provider-specific voices."""
+
+    model_config = ConfigDict(extra="forbid", hide_input_in_errors=True)
+    model_id: str = DEFAULT_QWEN_TTS_MODEL
+    base_url: str = DEFAULT_QWEN_TTS_API_BASE
+    api_key_env: str = Field(
+        default=DEFAULT_QWEN_TTS_API_KEY_ENV, pattern=r"^[A-Z_][A-Z0-9_]*$"
+    )
+    config_env_file: str | None = None
+    voice_id: str = DEFAULT_QWEN_TTS_VOICE
+    voices: dict[str, str] = Field(default_factory=dict)
+    language_code: str | None = "en"
+    sample_rate: Literal[8000, 12000, 16000, 22050, 24000, 44100, 48000] = (
+        DEFAULT_PCM_SAMPLE_RATE
+    )
+    request_timeout_seconds: float = Field(default=60, gt=0)
+
+
+ProviderConfig = ElevenLabsTTSConfig | MiMoTTSConfig | QwenTTSConfig
 
 
 # ============================================================================
@@ -279,6 +303,12 @@ class SynthesisConfig(BaseModel):
             settings = value.get("provider_config") or {}
             if not isinstance(settings, MiMoTTSConfig):
                 settings = MiMoTTSConfig.model_validate(settings)
+            value["provider_config"] = settings
+        elif isinstance(value, dict) and value.get("provider") == "qwen":
+            value = dict(value)
+            settings = value.get("provider_config") or {}
+            if not isinstance(settings, QwenTTSConfig):
+                settings = QwenTTSConfig.model_validate(settings)
             value["provider_config"] = settings
         return value
 

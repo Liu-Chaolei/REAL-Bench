@@ -24,7 +24,7 @@ from tau2.config import (
 )
 from tau2.data_model.asr import HotwordSettings
 from tau2.data_model.dynamic_followup import DynamicFollowupConfig
-from tau2.data_model.voice import MiMoTTSConfig
+from tau2.data_model.voice import MiMoTTSConfig, QwenTTSConfig
 from tau2.utils.env_config import read_config_environment, resolve_env_reference
 
 
@@ -92,7 +92,91 @@ class QwenAgentConfig(BaseModel):
 
     image: str = DEFAULT_QWEN_AGENT_IMAGE
     domain: str | None = Field(default=None, exclude=True)
+    api_configuration_resolved: bool = False
+    api_profiles: dict = Field(default_factory=dict)
+    api_config_dir: str | None = None
     config_env_file: str | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def resolve_shared_api_settings(cls, value):
+        if (
+            not isinstance(value, dict)
+            or not value.get("api_config_dir")
+            or value.get("api_configuration_resolved")
+        ):
+            return value
+        from pathlib import Path
+
+        from tau2.utils.api_config import get_api_configuration
+
+        value = dict(value)
+        directory = str(Path(value["api_config_dir"]).expanduser().resolve())
+        api = get_api_configuration(directory)
+        value["api_config_dir"] = directory
+        value["api_configuration_resolved"] = True
+        roles = ["USER", "USER_DECISION"]
+        followup = value.get("dynamic_followup") or {}
+        if followup.get("enabled") if isinstance(followup, dict) else followup.enabled:
+            roles.append("FOLLOWUP")
+        value["api_profiles"] = {role: api.text(role).public() for role in roles}
+        if value.get("environment"):
+            raise ValueError(
+                "api_config_dir conflicts with explicit Agent environment mappings"
+            )
+        if any(
+            value.get(k)
+            for k in (
+                "user_llm_api_key_env",
+                "user_llm_base_url_env",
+                "user_llm_model_env",
+                "user_decision_llm",
+            )
+        ):
+            raise ValueError(
+                "api_config_dir conflicts with explicit caller connection settings"
+            )
+        value["config_env_file"] = str(Path(directory) / "realbench.env")
+        for name in ("REALBENCH_ASR_API_KEY", "REALBENCH_TTS_API_KEY"):
+            if not api.value(name):
+                raise ValueError(f"Missing environment variable {name}")
+        for suffix, target in (
+            ("PROVIDER", "asr_provider"),
+            ("MODEL", "asr_model"),
+            ("BASE_URL", "asr_base_url"),
+        ):
+            setting = api.value("REALBENCH_ASR_" + suffix)
+            if not setting:
+                raise ValueError("Missing REALBENCH_ASR_" + suffix)
+            value[target] = setting
+        value.update(
+            asr_api_key_env="REALBENCH_ASR_API_KEY",
+            asr_base_url_env=None,
+            asr_provider_env=None,
+        )
+        provider = api.value("REALBENCH_TTS_PROVIDER")
+        if provider not in {"qwen", "mimo"}:
+            raise ValueError("REALBENCH_TTS_PROVIDER must be qwen or mimo")
+        settings = dict(value.get("tts") or {})
+        for suffix, target in (
+            ("MODEL", "model_id"),
+            ("BASE_URL", "base_url"),
+            ("VOICE", "voice_id"),
+        ):
+            setting = api.value("REALBENCH_TTS_" + suffix)
+            if not setting:
+                raise ValueError("Missing REALBENCH_TTS_" + suffix)
+            settings[target] = setting
+        settings.update(
+            api_key_env="REALBENCH_TTS_API_KEY",
+            config_env_file=value["config_env_file"],
+            voices=api.json_value("REALBENCH_TTS_VOICES_JSON", {}),
+        )
+        value["tts"] = (
+            QwenTTSConfig if provider == "qwen" else MiMoTTSConfig
+        ).model_validate(settings)
+        return value
+
     environment: dict[str, str] = Field(
         default_factory=dict,
         description="Container variable -> host variable name, never credential values.",
@@ -107,7 +191,7 @@ class QwenAgentConfig(BaseModel):
         default=DEFAULT_QWEN_AGENT_MAX_BUFFER_SECONDS, gt=0
     )
     speech_to_speech: SpeechToSpeechConfig | None = None
-    tts: MiMoTTSConfig | None = None
+    tts: MiMoTTSConfig | QwenTTSConfig | None = None
     user_decision_llm: str | None = None
     user_decision_llm_args: dict = Field(default_factory=dict)
     user_llm_api_key_env: str | None = None
@@ -143,6 +227,11 @@ class QwenAgentConfig(BaseModel):
 
     def user_llm_settings(self) -> tuple[str, dict] | None:
         """Resolve an explicitly configured caller LLM without serializing secrets."""
+        if self.api_config_dir:
+            from tau2.utils.api_config import get_api_configuration
+
+            profile = get_api_configuration(self.api_config_dir).text("USER")
+            return profile.litellm_model, profile.arguments()
         references = (
             self.user_llm_api_key_env,
             self.user_llm_base_url_env,
@@ -241,7 +330,17 @@ class QwenAgentConfig(BaseModel):
         Ambient settings override the file, including referenced variables.
         Neither values nor file contents belong in serialized configuration.
         """
-        values = read_config_environment(self.config_env_file, ambient)
+        if self.api_config_dir and not self.speech_to_speech:
+            from tau2.utils.api_config import get_api_configuration
+
+            return get_api_configuration(self.api_config_dir, "qw").agent_environment()
+        if self.api_config_dir:
+            from tau2.utils.api_config import get_api_configuration
+
+            values = get_api_configuration(self.api_config_dir, "qw").values
+            ambient = {}
+        else:
+            values = read_config_environment(self.config_env_file, ambient)
 
         def resolve(name):
             return resolve_env_reference(values, name)

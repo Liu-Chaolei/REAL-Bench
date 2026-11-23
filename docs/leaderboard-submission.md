@@ -204,14 +204,13 @@ is shown only when its domain is selected.
 |---|---|---|
 | `benchmark-submission.json` | text-v1, voice-v2 | The frozen frame, every task/trial observation, the per-cell, per-language and per-domain reward summary, and a SHA-256 of each cell's `results.json`. |
 | `benchmark-diagnostics.json` | voice-v2 only | The judge catalog and transport revisions, each judge contract used, and per cell: the same per-measure summary `tau2 judges summarize` prints, plus a fingerprint for every judged call × measure (`verdict_sha256` is the SHA-256 of the stored verdict). |
-| `benchmark-quality.json` | voice-v2 only | Call-level [Interaction](glossary.md#interaction) and [Generation quality](glossary.md#generation-quality) (`experience` in the file) for every scored call: the five Interaction flags, both outcomes, and per-cell pass/fail/unscored counts. `prepare` computes it from the saved calls and verdicts with no model calls; `validate` recomputes it and rejects any difference. Schema: [`schema_benchmark_quality.json`](../web/leaderboard/public/submissions/schema_benchmark_quality.json). |
+| `benchmark-quality.json` | voice-v2 only | `benchmark-quality-v4`: per-call identity and operational provenance under `evaluation_log`. No call-level selectivity flag or performance block. Three selectivity component rates belong to the voice interaction panel. The existing package validation can reproduce the provenance from saved calls without model calls. Schema: [`schema_benchmark_quality.json`](../web/leaderboard/public/submissions/schema_benchmark_quality.json). |
 | `benchmark-metadata.json` | text-v1, voice-v2 | Your `submitter.json` fields, plus the agent provider and model recorded in the run conditions. Maintainers add `trajectories` (the S3 prefix) after upload. Schema: [`schema_benchmark_metadata.json`](../web/leaderboard/public/submissions/schema_benchmark_metadata.json). |
 
 The leaderboard reads these files directly. A package must be complete:
-every cell scored, and, for voice-v2, diagnostics and call quality for every
-cell. Call quality never blocks a package: a call whose verdicts or ticks
-cannot decide a measure is counted as unscored, not failed, and left out of
-that measure's rate.
+every cell scored, and, for voice-v2, diagnostics and call provenance for every
+cell. The quality sidecar has no independent performance score. Existing
+historical metric values retain their original version and interpretation.
 
 The package does not copy trajectories or audio. Maintainers validate it against
 your saved matrix root, which you upload separately (next step). `validate`
@@ -256,15 +255,13 @@ custom setup in `notes` and link it in `references`. Unknown fields are rejected
    `s3://sierra-tau-bench-public/submissions/<name>/trajectories/<language>/<domain>/`.
 
 voice-v2 packages are the rows of the τ³-Voice **τ-i18n (Multilingual)**
-leaderboard (`/leaderboard?benchmark=voice`). Each row shows Task completion
-(pass@1, overall or for the selected domain) and, from the package's
-`benchmark-quality.json`, Interaction and Generation quality: the share of
-scored calls that pass, pooled over the scope shown. A package without that
-file shows "—" for both and stays out of the 3D explorer. A package's breakdown
-shows each score per language × domain, the five Interaction failures, and each
-judge measure per language with its coverage. Judge measures are diagnostics
-and never change the rank. 1.x and voice-v1 submissions keep their own tabs and
-are still accepted.
+leaderboard (`/leaderboard?benchmark=voice`). Task completion remains in the
+benchmark submission. Current `benchmark-quality-v4` sidecars contain provenance
+only and must not be interpreted as Interaction or Generation quality pass rates.
+The three selectivity component rates are part of the separate voice interaction
+panel. Historical UI displays and released scores keep their recorded definitions;
+judge measures remain diagnostics and do not change task rank. 1.x and voice-v1
+submissions keep their own tabs and are still accepted.
 
 The frozen 2026-10-02 voice-v2 release calls predate the matrix layout. A
 maintainer-only adapter, `tau2 submit prepare --historical-voice-v2`, reads

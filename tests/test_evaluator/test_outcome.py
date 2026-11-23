@@ -63,7 +63,7 @@ def test_budget_and_stop_endings_grade_actual_answer(monkeypatch, ending, mode):
         assert bool(calls) == eligible
 
 
-def test_missing_stage_keeps_checks_and_zeroes_only_total(monkeypatch):
+def test_missing_stage_is_logged_without_zeroing_total(monkeypatch):
     from tau2.data_model.scenario import ScenarioAction, ScenarioSpec, ScenarioStage
     from tau2.evaluator.evaluator_communicate import CommunicateEvaluator
     from tau2.evaluator.scenario_series import validate_delivery
@@ -128,10 +128,11 @@ def test_missing_stage_keeps_checks_and_zeroes_only_total(monkeypatch):
         "mock",
         communicate_scoring=CommunicateScoring(scorer="substring"),
     )
-    assert seen and result.reward == 0
+    assert seen and result.reward == 1
     assert result.reward_breakdown[RewardType.COMMUNICATE] == 1
     assert (
-        result.info["missing_requests"] == [2] and result.info["evidence"] == "retained"
+        simulation.info["evaluation_log"]["missing_requests"] == [2]
+        and result.info["evidence"] == "retained"
     )
     invalid = deepcopy(summary)
     invalid["stages"][1]["event_id"] = "wrong"

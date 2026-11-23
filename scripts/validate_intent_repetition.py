@@ -137,7 +137,7 @@ def scenarios():
 async def run(args):
     """Persist reproducible inputs, raw judgments and independent acceptance results."""
     config = MetricsConfig.load(args.config)
-    values = read_config_environment(args.env_file)
+    values = read_config_environment(args.env_file) if not config.api_config_dir else {}
     for role in ("gt", "prediction", "evaluation"):
         name = config.profile(role).api_key_env
         if name:

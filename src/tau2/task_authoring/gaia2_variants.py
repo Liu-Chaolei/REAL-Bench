@@ -740,13 +740,17 @@ def main():
         default=Path("data/archives/gaia2-before-variants-v1-20261107"),
     )
     parser.add_argument(
-        "--dataset", type=Path, default=Path("data/tau2/task_variants/gaia2/v1")
+        "--dataset",
+        type=Path,
+        default=Path("data/archives/gaia2/authoring/gaia2-variants-v1"),
     )
     parser.add_argument(
         "--work", type=Path, default=Path("data/simulations/gaia2-variants-v1/work")
     )
     parser.add_argument(
-        "--pilot", type=Path, default=Path("data/tau2/task_variants/gaia2/pilot-v1")
+        "--pilot",
+        type=Path,
+        default=Path("data/archives/gaia2/trials/gaia2-variants-pilot-v1"),
     )
     parser.add_argument(
         "--config", type=Path, default=Path("docs/gaia2-series.deepseek.config.json")

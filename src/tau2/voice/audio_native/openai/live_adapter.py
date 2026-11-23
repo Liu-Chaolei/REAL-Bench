@@ -1,6 +1,5 @@
 """Connect Live media to Sierra's voice simulator tick interface."""
 
-import audioop
 import base64
 import hashlib
 from collections import deque
@@ -158,21 +157,14 @@ class DiscreteTimeOpenAILiveAdapter(DiscreteTimeOpenAIAdapter):
                     )
                 )
         result.proportional_transcript = "".join(text)
-        # WebRTC also transports silence. Classify the delivered audio, without
-        # deleting quiet frames or changing the shared tick buffering lifecycle.
-        pcm = audioop.ulaw2lin(result.agent_audio_data, 2)
-        result.contains_speech = bool(pcm) and audioop.max(pcm, 2) > 32
         if result.live_transcript is not None:
-            frame_bytes = self.audio_format.sample_rate * 2 // 50
-            for offset in range(0, len(pcm), frame_bytes):
-                frame = pcm[offset : offset + frame_bytes]
-                if audioop.max(frame, 2) > 32:
-                    result.live_transcript.speech_intervals_ms.append(
-                        (
-                            offset * 500 / self.audio_format.sample_rate,
-                            (offset + len(frame)) * 500 / self.audio_format.sample_rate,
-                        )
-                    )
+            result.live_transcript.speech_intervals_ms = [
+                (
+                    (a - result.playback_start_monotonic) * 1000,
+                    (b - result.playback_start_monotonic) * 1000,
+                )
+                for a, b in result.speech_intervals
+            ]
         return result
 
     async def _async_disconnect(self) -> None:

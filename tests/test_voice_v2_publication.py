@@ -260,13 +260,8 @@ def test_historical_export_is_a_canonical_package(package, release_export):
         (c.language, c.domain) for c in loaded.submission.frame.cells
     ]
     en_airline_quality = quality.cells[0]
-    assert len(en_airline_quality.calls) == 50
-    # The fixture calls have no ticks and no fidelity verdicts: only the tool-use
-    # component is known, so neither measure can decide a call.
-    assert en_airline_quality.interaction_components.tool_misuse.known == 50
-    assert en_airline_quality.interaction_components.nonresponse.known == 0
-    assert en_airline_quality.interaction.unscored == 50
-    assert en_airline_quality.experience.unscored == 50
+    assert len(en_airline_quality.evaluation_log["calls"]) == 50
+    assert "metrics" not in en_airline_quality.model_dump()
     _validate(package, release_export)
 
 
@@ -300,15 +295,11 @@ def test_validate_recomputes_call_quality(package, release_export):
     path = package / QUALITY_FILE_NAME
     original = path.read_text()
     quality = json.loads(original)
-    # A self-consistent edit still differs from the recomputed calls.
-    quality["cells"][0]["calls"][0]["experience_utterances"] += 1
+    # Call provenance is still reproducible; no retired flag is calculated.
+    quality["cells"][0]["evaluation_log"]["calls"][0]["simulation_id"] = "edited"
     path.write_text(json.dumps(quality))
     with pytest.raises(ValueError, match="Call quality differs"):
         _validate(package, release_export)
-    quality["cells"][0]["interaction"]["passed"] += 1
-    path.write_text(json.dumps(quality))
-    with pytest.raises(ValueError, match="totals do not match the calls"):
-        load_package(package)
     path.unlink()
     with pytest.raises(ValueError, match=f"lacks {QUALITY_FILE_NAME}"):
         load_package(package)

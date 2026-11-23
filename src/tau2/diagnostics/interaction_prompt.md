@@ -71,6 +71,14 @@ Apply these boundaries:
 - Different time_bases are not directly comparable. Do not infer precedence or
   waiting duration across independent clocks, or treat message indices as seconds.
   Tool completion does not prove the frontend received its result at that moment.
+- When scenario_clock is present, its UTC scenario time is authoritative for
+  business dates, ahead of host dates or your own present date. start_timestamp
+  is the scenario origin, not a constant current time throughout the call.
+  observations are recorded time-tool results, not proof that the frontend
+  received them or that the user heard them. Judge using evidence available to
+  the participant at the time; do not assume historical agents used a new clock.
+  Without explicit scenario-date evidence, do not use the real-world year to
+  declare the user's requested dates expired.
 - Backend submit/update and prompt/steer may describe the same logical task.
   An unconfirmed submission does not prove acceptance, progress or completion.
 - Truncated event previews omit evidence; absent preview fields are not absent facts.

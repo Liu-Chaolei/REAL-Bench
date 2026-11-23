@@ -207,6 +207,7 @@ def build_user(
     llm_args: Optional[dict] = None,
     persona_config: Optional[PersonaConfig] = None,
     solo_mode: bool = False,
+    hidden_intent_graph=None,
 ) -> HalfDuplexUser:
     """Build a half-duplex user from a registered name.
 
@@ -245,7 +246,14 @@ def build_user(
     }
     if issubclass(UserConstructor, UserSimulator):
         user_kwargs["persona_config"] = persona_config
-        if environment.get_domain_name() in ELICITATION_DOMAINS:
+        user_kwargs["hidden_intent_graph"] = hidden_intent_graph
+        if environment.get_domain_name() == "gaia2":
+            from tau2.user.gaia2_guidelines import get_gaia2_user_guidelines
+
+            user_kwargs["global_guidelines_override"] = get_gaia2_user_guidelines(
+                persona_config, mode="text", use_tools=user_tools is not None
+            )
+        elif environment.get_domain_name() in ELICITATION_DOMAINS:
             from tau2.domains.intake.prompts import get_user_guidelines
 
             user_kwargs["global_guidelines_override"] = get_user_guidelines(
@@ -369,7 +377,9 @@ def build_voice_user(
         synthesis.provider_config.language_code = language_context.language.split("-")[
             0
         ]
-        if synthesis.provider == "mimo":
+        if synthesis.provider in {"mimo", "qwen"}:
+            # Pack voice IDs belong to ElevenLabs. Other providers must keep
+            # their own configured voice or explicit per-persona mapping.
             synthesis.provider_config.voice_id = synthesis.provider_config.voices.get(
                 persona.persona_id, synthesis.provider_config.voice_id
             )
@@ -421,7 +431,17 @@ def build_voice_user(
     from tau2.user.user_simulator_streaming import VoiceStreamingUserSimulator
 
     domain_kwargs = {}
-    if domain in ELICITATION_DOMAINS:
+    if environment.get_domain_name() == "gaia2":
+        from tau2.user.gaia2_guidelines import (
+            GAIA2_ROLE_REMINDER,
+            get_gaia2_user_guidelines,
+        )
+
+        domain_kwargs["global_guidelines_override"] = get_gaia2_user_guidelines(
+            persona_config, mode="voice", use_tools=user_tools is not None
+        )
+        domain_kwargs["role_reminder_override"] = GAIA2_ROLE_REMINDER
+    elif domain in ELICITATION_DOMAINS:
         from tau2.domains.intake.prompts import (
             OUTBOUND_ROLE_REMINDER,
             get_user_guidelines,
@@ -480,6 +500,13 @@ def build_voice_user(
     if audio_native_config.provider == "qwen_agent":
         system = audio_native_config.qwen_agent_config
         caller_llm = system.user_llm_settings()
+        if system.api_config_dir:
+            from tau2.utils.api_config import get_api_configuration
+
+            decision = get_api_configuration(system.api_config_dir).text(
+                "USER_DECISION"
+            )
+            domain_kwargs["api_config_dir"] = system.api_config_dir
         if caller_llm:
             llm, llm_args = caller_llm
         domain_kwargs["silence_checkin_threshold"] = ceil(
@@ -487,8 +514,12 @@ def build_voice_user(
             / audio_native_config.tick_duration_seconds
         )
         if caller_llm:
-            domain_kwargs["decision_model"] = llm
-            domain_kwargs["decision_model_args"] = dict(llm_args)
+            domain_kwargs["decision_model"] = (
+                decision.litellm_model if system.api_config_dir else llm
+            )
+            domain_kwargs["decision_model_args"] = (
+                decision.arguments() if system.api_config_dir else dict(llm_args)
+            )
         elif system.user_decision_llm:
             domain_kwargs["decision_model"] = system.user_decision_llm
             domain_kwargs["decision_model_args"] = dict(system.user_decision_llm_args)
@@ -679,6 +710,13 @@ def build_text_orchestrator(
 
     environment = build_environment(domain, solo_mode=solo_mode, env_kwargs=env_kwargs)
 
+    hidden_intent_graph = None
+    if config.task_set_name == "gaia2_hidden":
+        from tau2.data_model.hidden_intent import HiddenGoalGraph
+        from tau2.domains.gaia2_hidden.loader import get_goal_graph
+
+        hidden_intent_graph = HiddenGoalGraph.model_validate(get_goal_graph(task.id))
+
     agent = build_agent(
         config.effective_agent,
         environment,
@@ -701,6 +739,7 @@ def build_text_orchestrator(
         llm_args=config.llm_args_user,
         persona_config=user_persona_config,
         solo_mode=solo_mode,
+        hidden_intent_graph=hidden_intent_graph,
     )
 
     orchestrator = Orchestrator(
@@ -892,14 +931,25 @@ def _build_voice_orchestrator(
             from tau2.user.asr_hotwords import build_hotword_profile
 
             prompt_task = user_prompt_task(config, task)
+            hotword_model, hotword_args = config.llm_user, config.llm_args_user
+            if observer_settings.api_config_dir:
+                from tau2.utils.api_config import get_api_configuration
+
+                hotword_profile = get_api_configuration(
+                    observer_settings.api_config_dir
+                ).text("ASR_HOTWORDS")
+                hotword_model, hotword_args = (
+                    hotword_profile.litellm_model,
+                    hotword_profile.arguments(),
+                )
             try:
                 observer_hotwords = build_hotword_profile(
                     prompt_task,
                     environment.get_user_asr_materials(prompt_task),
                     observer_settings.asr_hotwords,
                     language=language_context.language,
-                    model=config.llm_user,
-                    model_args=config.llm_args_user,
+                    model=hotword_model,
+                    model_args=hotword_args,
                 )
             except Exception as error:
                 raise RuntimeError(
@@ -968,6 +1018,12 @@ def _build_voice_orchestrator(
             raise ValueError(
                 "Dynamic followup v1 requires English Gaia2 Qwen voice runs"
             )
+    from tau2.domains.gaia2.interaction_variants import variant_for
+
+    if variant_for(task) is not None:
+        # Authored changes determine the business content; the generic dynamic
+        # followup generator must not replace the temporary or initial request.
+        dynamic_followup_config = None
     if config.task_set_name == "gaia2_hidden":
         from tau2.data_model.hidden_intent import HiddenGoalGraph
         from tau2.domains.gaia2_hidden.loader import get_goal_graph

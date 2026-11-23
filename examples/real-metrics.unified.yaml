@@ -1,0 +1,17 @@
+# Models and connections are selected in realbench.env.
+measures:
+- intent
+- execution
+- voice
+- interaction
+- state_interaction
+- conciseness
+auto_score: true
+concurrency: 2
+max_requests: 96
+timeout_seconds: 300
+max_characters: 200000
+conciseness:
+  calibration: calibration/concise-feedback.en-v1.json
+  evidence_max_characters: 12000
+api_config_dir: ~/.config/qwaudio

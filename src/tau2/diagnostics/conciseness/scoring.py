@@ -33,17 +33,16 @@ def _point(matched, optional, required, length, budget):
         "required_coverage": recall,
         "length_budget": allowance,
         "length_efficiency": efficiency,
-        "raw_feedback_score": harmonic_score(recall, efficiency),
+        "feedback_score": harmonic_score(recall, efficiency),
     }
 
 
-def score_window(inventory, alignment, replies, budget=None):
-    """Count unique obligations; unknown matches retain their denominator."""
+def aligned_groups(inventory, alignment):
+    """Use the same deduplicated, unanimous matches for scoring and history."""
     decisions = {m["nugget_id"]: m["status"] for m in alignment["matches"]}
     groups = defaultdict(list)
     for nugget in inventory["nuggets"]:
         groups[nugget["equivalence_group"]].append(nugget)
-    counts = {kind: Counter() for kind in ("required", "optional")}
     for group in groups.values():
         kind = (
             "required"
@@ -51,7 +50,13 @@ def score_window(inventory, alignment, replies, budget=None):
             else "optional"
         )
         statuses = {decisions[n["id"]] for n in group}
-        status = next(iter(statuses)) if len(statuses) == 1 else "uncertain"
+        yield group, kind, next(iter(statuses)) if len(statuses) == 1 else "uncertain"
+
+
+def score_window(inventory, alignment, replies, budget=None):
+    """Count unique obligations; unknown matches retain their denominator."""
+    counts = {kind: Counter() for kind in ("required", "optional")}
+    for _, kind, status in aligned_groups(inventory, alignment):
         counts[kind][status] += 1
     required = sum(counts["required"].values())
     if not required:
@@ -61,12 +66,9 @@ def score_window(inventory, alignment, replies, budget=None):
     optional = counts["optional"]["matched"]
     optional_unknown = counts["optional"]["uncertain"]
     length = response_length(replies)
-    fidelity = alignment["fidelity_status"]
     lower_r, upper_r = matched / required, (matched + unknown) / required
     result = {
-        "status": "evidence_incomplete"
-        if unknown or fidelity == "uncertain"
-        else "measured",
+        "status": "evidence_incomplete" if unknown or optional_unknown else "measured",
         "required_total": required,
         "required_matched": matched,
         "required_uncertain": unknown,
@@ -78,9 +80,7 @@ def score_window(inventory, alignment, replies, budget=None):
         "required_coverage_upper": upper_r,
         "length_budget": None,
         "length_efficiency": None,
-        "raw_feedback_score": None,
         "feedback_score": None,
-        "fidelity_status": fidelity,
         "calibrated": budget is not None,
         "reason": None if budget else "uncalibrated_language",
         "findings": alignment["findings"],
@@ -95,18 +95,6 @@ def score_window(inventory, alignment, replies, budget=None):
         result[name] = lower[name] if abs(lower[name] - upper[name]) < 1e-9 else None
         result[name + "_lower"] = lower[name]
         result[name + "_upper"] = upper[name]
-    low, high = lower["raw_feedback_score"], upper["raw_feedback_score"]
-    if fidelity == "material_error":
-        low = high = 0.0
-    elif fidelity == "uncertain":
-        low = 0.0
-    result.update(
-        feedback_score_lower=low,
-        feedback_score_upper=high,
-        feedback_score=low
-        if abs(high - low) < 1e-9 and fidelity != "uncertain"
-        else None,
-    )
     return result
 
 
@@ -120,9 +108,6 @@ def trial_summary(windows):
         "scored_windows": len(scored),
         "window_coverage": len(scored) / len(applicable) if applicable else None,
         "response_length": sum(w.get("response_length", 0) for w in windows),
-        "material_error_windows": sum(
-            w.get("fidelity_status") == "material_error" for w in windows
-        ),
         "required_total": sum(w["required_total"] for w in scored),
         "required_matched": sum(w["required_matched"] for w in scored),
         "required_uncertain": sum(w["required_uncertain"] for w in scored),
@@ -130,7 +115,6 @@ def trial_summary(windows):
     for metric in (
         "required_coverage",
         "length_efficiency",
-        "raw_feedback_score",
         "feedback_score",
     ):
         values = [w.get(metric) for w in applicable]
@@ -147,7 +131,26 @@ def aggregate_reports(rows):
         measure = row.get("summary", {}).get("measures", {}).get("conciseness")
         if measure and not measure.get("diagnostic_only"):
             records.append((row, measure))
+    versions = {m.get("version", "tau-feedback-conciseness/1") for _, m in records}
+    if len(versions) > 1:
+        buckets = defaultdict(list)
+        for row in rows:
+            measure = row.get("summary", {}).get("measures", {}).get("conciseness")
+            version = (
+                measure.get("version", "tau-feedback-conciseness/1")
+                if measure
+                else "unscored"
+            )
+            buckets[version].append(row)
+        return {
+            "total_trials": len(rows),
+            "groups": {
+                version: aggregate_reports(bucket)
+                for version, bucket in sorted(buckets.items())
+            },
+        }
     result = {
+        "version": next(iter(versions), None),
         "total_trials": len(rows),
         "evaluated_trials": len(records),
         "statuses": dict(
@@ -166,7 +169,6 @@ def aggregate_reports(rows):
     for metric in (
         "required_coverage",
         "length_efficiency",
-        "raw_feedback_score",
         "feedback_score",
     ):
         tasks = defaultdict(list)
@@ -190,16 +192,6 @@ def aggregate_reports(rows):
     result["required_total"] = total
     result["required_matched"] = matched
     result["required_uncertain"] = unknown
-    judged = [
-        w
-        for w in windows
-        if w.get("fidelity_status") in {"supported", "material_error"}
-    ]
-    result["material_error_rate"] = (
-        sum(w["fidelity_status"] == "material_error" for w in judged) / len(judged)
-        if judged
-        else None
-    )
     result["outcomes"] = {
         state: {
             "windows": len(bucket),

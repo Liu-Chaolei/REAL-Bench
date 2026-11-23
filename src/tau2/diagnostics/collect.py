@@ -19,6 +19,7 @@ class EvidenceRecorder:
         self.environment, self.task, self.directory = environment, task, Path(directory)
         self.operations, self.frames, self.errors = [], {}, []
         self.frame_labels = {}
+        self.state_events = []
         self.media_ticks = []
         self.media_times = []
         self.writer = ThreadPoolExecutor(
@@ -29,6 +30,32 @@ class EvidenceRecorder:
         self.closed = False
         self.origin = time.monotonic()
         self.initial_frame = self.capture("initial")
+
+    def state_event(self, kind, role, content, visible_to, event_id=None):
+        """Capture native order at existing hooks; no extra evaluation occurs."""
+        with self.lock:
+            self.state_events.append(
+                dict(
+                    event_id=event_id or f"event:{len(self.state_events)}",
+                    kind=kind,
+                    role=role,
+                    content=copy.deepcopy(content),
+                    visible_to=visible_to,
+                    timestamp=time.monotonic(),
+                    sequence=len(self.state_events),
+                    source="tau-state-events/2",
+                    metadata={},
+                )
+            )
+
+    def tool_delivered(self, call_id, viewer="agent"):
+        self.state_event(
+            "tool_delivered",
+            viewer,
+            dict(call_id=call_id),
+            [viewer],
+            event_id="delivered:" + call_id,
+        )
 
     def now(self):
         runtime = getattr(self.environment, "scenario_runtime", None)
@@ -98,6 +125,14 @@ class EvidenceRecorder:
         before = (
             self.capture("before:" + message.id, selected) if kind == "WRITE" else None
         )
+        if message.requestor == "assistant":
+            self.state_event(
+                "tool_requested",
+                "backend",
+                dict(call_id=message.id, name=message.name, arguments=arguments),
+                ["backend"],
+                event_id="request:" + message.id,
+            )
         return {
             "started": self.now(),
             "kind": kind,
@@ -116,6 +151,19 @@ class EvidenceRecorder:
             content = json.loads(result.content)
         except (TypeError, ValueError):
             content = result.content
+        if message.requestor == "assistant":
+            self.state_event(
+                "tool_completed",
+                "environment",
+                dict(
+                    call_id=message.id,
+                    name=message.name,
+                    result=content,
+                    error=result.error,
+                ),
+                [],
+                event_id="completed:" + message.id,
+            )
         self.operations.append(
             OperationEvidence(
                 call_id=message.id,
@@ -192,7 +240,9 @@ def delivered_inputs(simulation, task, index_offset=0):
         merge_audio_script_gold,
     )
     from tau2.utils.transcript.views import utterance_groups, utterance_interrupted
+    from tau2.voice.audio_activity import speech_evidence
 
+    shared = speech_evidence(simulation.ticks or [])
     result = []
     stages = (simulation.info or {}).get("scenario_series", {}).get("stages", [])
     duration = (
@@ -230,6 +280,39 @@ def delivered_inputs(simulation, task, index_offset=0):
                     group.start_index * duration,
                     (group.end_index + 1) * duration,
                 )
+                if shared is not None:
+                    if speaker == "caller":
+                        pieces = [
+                            piece
+                            for turn in shared["user_turns"]
+                            if turn["start_tick"] <= group.end_index
+                            and turn["end_tick"] > group.start_index
+                            for piece in turn["intervals"]
+                        ]
+                    elif live.get("speech_start_us") is not None:
+                        pieces = [
+                            [live["speech_start_us"] / 1e6, live["speech_end_us"] / 1e6]
+                        ]
+                    else:
+                        pieces = [
+                            piece
+                            for i in range(group.start_index, group.end_index + 1)
+                            for piece in (
+                                getattr(
+                                    simulation.ticks[i].agent_chunk, "raw_data", None
+                                )
+                                or {}
+                            ).get("speech_intervals", [])
+                        ]
+                        pieces = [
+                            [a - shared["origin"], b - shared["origin"]]
+                            for a, b in pieces
+                        ]
+                    if pieces:
+                        start, end = (
+                            min(a for a, b in pieces),
+                            max(b for a, b in pieces),
+                        )
                 stage = None
                 for row in stages:
                     # Tick sequence is authoritative for media-stage membership.
@@ -245,6 +328,14 @@ def delivered_inputs(simulation, task, index_offset=0):
                 result.append(
                     UserInput(
                         id=f"{speaker}:{group.start_tick}",
+                        event_id=next(
+                            (
+                                (c.raw_data or {}).get("scenario_input_id")
+                                for c in group.chunks
+                                if (c.raw_data or {}).get("scenario_input_id")
+                            ),
+                            None,
+                        ),
                         text=text,
                         started=start,
                         ended=end,
@@ -275,6 +366,7 @@ def delivered_inputs(simulation, task, index_offset=0):
             result.append(
                 UserInput(
                     id=str(index),
+                    event_id=(message.raw_data or {}).get("scenario_input_id"),
                     text=message.content,
                     started=float(index),
                     ended=float(index),
@@ -288,6 +380,50 @@ def collect_audio(simulation, directory, orchestrator=None):
     """Persist the actual tick playback, with a monotonic-to-media mapping."""
     if not simulation.ticks:
         return {"status": "not_applicable", "reason": "text_run"}
+
+    from tau2.voice.audio_activity import CONFIG as activity_config
+    from tau2.voice.audio_activity import VERSION as activity_version
+    from tau2.voice.audio_activity import speech_evidence
+
+    shared = speech_evidence(simulation.ticks)
+    if shared is not None:
+        rows, channels = [], {"user": bytearray(), "agent": bytearray()}
+        for tick in simulation.ticks:
+            raw = getattr(tick.agent_chunk, "raw_data", None) or {}
+            for packet in raw.get("media_timeline", []):
+                role = packet["role"]
+                data = base64.b64decode(packet["audio"])
+                start, end = packet["start"], packet["end"]
+                row = dict(
+                    start=start - shared["origin"],
+                    end=end - shared["origin"],
+                    monotonic_start=start,
+                    monotonic_end=end,
+                    user=None,
+                    agent=None,
+                )
+                row[role] = dict(
+                    offset=len(channels[role]),
+                    bytes=len(data),
+                    format=packet["format"],
+                    utterance_ids=packet.get("utterance_ids", []),
+                )
+                if "received_monotonic" in packet:
+                    row["received_monotonic"] = packet["received_monotonic"]
+                channels[role].extend(data)
+                rows.append(row)
+        rows.sort(key=lambda r: (r["start"], r["end"]))
+        for role, data in channels.items():
+            (directory / (role + ".audio")).write_bytes(data)
+        write_jsonl(directory / "audio-timeline.jsonl", rows)
+        return dict(
+            status="collected",
+            duration=shared["duration"],
+            timeline=rows,
+            files={r: r + ".audio" for r in channels},
+            activity=dict(shared, config=activity_config, version=activity_version),
+            time_basis="direct_media_events",
+        )
 
     rows, channels = [], {"user": bytearray(), "agent": bytearray()}
     position = 0.0
@@ -348,6 +484,10 @@ def finalize_evidence(orchestrator, simulation, recorder, directory):
             enumerate(recorder.media_times)
         )
 
+    language_context = getattr(simulation, "language_context", None)
+    language_context = (
+        language_context.model_dump(mode="json") if language_context is not None else {}
+    )
     evidence = DiagnosticEvidence(
         simulation_id=simulation.id,
         task_id=simulation.task_id,
@@ -365,8 +505,16 @@ def finalize_evidence(orchestrator, simulation, recorder, directory):
         stages=(simulation.info or {}).get("scenario_series", {}),
         source={
             "task_sha256": digest(orchestrator.task.model_dump(mode="json")),
+            "language": language_context.get("language"),
+            "task_set_name": language_context.get("task_selection", {}).get(
+                "task_set_name"
+            ),
             "metrics_config": getattr(recorder, "metrics_config", None),
+            "state_backend_observations": source.get("state_observations", []),
             "active_metrics": (simulation.info or {}).get("active_metrics"),
+            "interaction_variant": orchestrator.task.scenario.async_interaction
+            if orchestrator.task.scenario
+            else None,
             "final_frame": getattr(recorder, "final_frame", None),
             "initial_frame": recorder.initial_frame,
             "frame_labels": recorder.frame_labels,
@@ -388,6 +536,17 @@ def finalize_evidence(orchestrator, simulation, recorder, directory):
         evidence.audio = collect_audio(media_simulation, directory, orchestrator)
     except Exception as exc:
         evidence.audio = {"status": "unavailable", "reason": type(exc).__name__}
+    from tau2.diagnostics.state.events import recorded_events
+
+    evidence.state_events = recorded_events(
+        media_simulation, evidence, recorder.state_events
+    )
+    evidence.source["state_event_version"] = "tau-state-events/2"
+    evidence.source["state_capabilities"] = {
+        name: tool.openai_schema["function"]
+        for name, tool in orchestrator.environment.tools.tools.items()
+        if hasattr(tool, "openai_schema")
+    }
     write_jsonl(
         directory / "user-inputs.jsonl",
         [x.model_dump(mode="json") for x in evidence.user_inputs],

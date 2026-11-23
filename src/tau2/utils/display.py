@@ -1,5 +1,4 @@
 import json
-import math
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, List, Optional
 
@@ -29,6 +28,7 @@ from tau2.data_model.simulation import (
 from tau2.data_model.tasks import Action, Task
 from tau2.data_model.transcript import DisplayTick
 from tau2.metrics.agent_metrics import AgentMetrics, is_successful
+from tau2.metrics.outcome import result_metric
 from tau2.utils.transcript.display import display_tick_ranges
 
 if TYPE_CHECKING:
@@ -480,31 +480,23 @@ class ConsoleDisplay:
         sim_info.append(f"{simulation.termination_reason}\n")
         if simulation.evaluation_status == "failed":
             sim_info.append("Evaluation: failed (unscored)\n", style=c.section_header)
-        if simulation.agent_cost is not None:
+        if show_details and simulation.agent_cost is not None:
             sim_info.append("Agent Cost: ", style=c.section_header)
             sim_info.append(f"${simulation.agent_cost:.4f}\n")
-        if simulation.user_cost is not None:
+        if show_details and simulation.user_cost is not None:
             sim_info.append("User Cost: ", style=c.section_header)
             sim_info.append(f"${simulation.user_cost:.4f}\n")
         if simulation.diagnostics_ref:
             diagnostics = simulation.diagnostics_ref
             sim_info.append("Diagnostics: ", style=c.section_header)
-            sim_info.append(str(diagnostics.get("status", "evaluated")) + "\n")
+            sim_info.append("\n")
             for name, result in (
                 diagnostics.get("summary", {}).get("measures", {}).items()
             ):
                 if name == "interaction":
                     rate = result.get("effective_interaction_rate")
-                    coverage = result.get("judgment_coverage")
-                    counts = result.get("counts", {})
                     rate_text = f"{rate:.1%}" if rate is not None else "N/A"
-                    coverage_text = f"{coverage:.1%}" if coverage is not None else "N/A"
-                    sim_info.append(
-                        f"  interaction: {rate_text} ({result.get('status')}) "
-                        f"useful/unhelpful/uncertain="
-                        f"{counts.get('useful', 0)}/{counts.get('unhelpful', 0)}/"
-                        f"{counts.get('uncertain', 0)}; coverage={coverage_text}\n"
-                    )
+                    sim_info.append(f"  interaction: {rate_text}\n")
                     continue
                 value = (
                     result.get("f1")
@@ -513,17 +505,16 @@ class ConsoleDisplay:
                     if name == "execution"
                     else result.get("status")
                 )
-                sim_info.append(f"  {name}: {value} ({result.get('status')})\n")
+                sim_info.append(f"  {name}: {value}\n")
                 if name == "conciseness":
                     trial = result.get("trial", {})
                     sim_info.append(
+                        f"    feedback version: {result.get('version', 'tau-feedback-conciseness/1')}\n"
                         f"    coverage={trial.get('required_coverage')} "
                         f"efficiency={trial.get('length_efficiency')} "
-                        f"score={trial.get('feedback_score')} "
-                        f"windows={trial.get('scored_windows')}/{trial.get('delivered_windows')} "
-                        f"material errors={trial.get('material_error_windows')}\n"
+                        f"score={trial.get('feedback_score')}\n"
                     )
-                if name == "intent" and "repetition" in result:
+                if show_details and name == "intent" and "repetition" in result:
                     repetition = result["repetition"]
                     sim_info.append(
                         f"    Content precision: {result['content_scores'].get('precision')}; "
@@ -556,21 +547,13 @@ class ConsoleDisplay:
                     "  Evidence and score details: " + diagnostics["directory"] + "\n"
                 )
         if simulation.reward_info:
-            marker = "✅" if is_successful(simulation.reward_info.reward) else "❌"
-            sim_info.append("Reward: ", style=c.section_header)
-            if simulation.reward_info.reward_breakdown:
-                breakdown = sorted(
-                    [
-                        f"{k.value}: {v:.1f}"
-                        for k, v in simulation.reward_info.reward_breakdown.items()
-                    ]
-                )
+            label, value = result_metric(simulation)
+            sim_info.append(label + ": ", style=c.section_header)
+            if value is None:
+                sim_info.append("unavailable\n")
             else:
-                breakdown = []
-
-            sim_info.append(
-                f"{marker} {simulation.reward_info.reward:.4f} ({', '.join(breakdown)})\n"
-            )
+                marker = "✅" if is_successful(value) else "❌"
+                sim_info.append(f"{marker} {value:.4f}\n")
 
             # Add DB check info if present
             if simulation.reward_info.db_check:
@@ -994,328 +977,17 @@ class ConsoleDisplay:
 
     @classmethod
     def display_agent_metrics(cls, metrics: AgentMetrics):
+        """Display capability scores; operational counts are saved in logs."""
         from rich.table import Table
 
-        c = cls.colors
-
-        # Create main metrics table
-        table = Table(
-            show_header=False,
-            box=None,
-            padding=(0, 2),
-            collapse_padding=True,
-        )
-        table.add_column("Label", style="bold")
-        table.add_column("Value")
-
-        # Overview section
-        table.add_row("[cyan]═══ Overview ═══[/]", "")
-        excluded = (
-            metrics.infra_error_count
-            + metrics.user_simulator_error_count
-            + metrics.grading_error_count
-        )
-        if excluded > 0:
-            table.add_row(
-                "Total Simulations", str(metrics.total_simulations + excluded)
-            )
-            if metrics.infra_error_count:
-                table.add_row(
-                    "⚠️  Infra Errors",
-                    f"[red]{metrics.infra_error_count}[/] (excluded from metrics below)",
-                )
-            if metrics.user_simulator_error_count:
-                table.add_row(
-                    "⚠️  User Simulator Errors",
-                    f"[red]{metrics.user_simulator_error_count}[/] (excluded from metrics below)",
-                )
-            if metrics.grading_error_count:
-                table.add_row(
-                    "Grading errors",
-                    f"[red]{metrics.grading_error_count}[/] (excluded from metrics below)",
-                )
-            table.add_row("Evaluated", str(metrics.total_simulations))
-        else:
-            table.add_row("Total Simulations", str(metrics.total_simulations))
-        table.add_row("Total Tasks", str(metrics.total_tasks))
-        table.add_row("", "")
-
-        # Reward metrics
-        table.add_row("[cyan]═══ Reward Metrics ═══[/]", "")
-        reward_color = (
-            "green"
-            if metrics.avg_reward > 0.8
-            else ("yellow" if metrics.avg_reward > 0.5 else "red")
-        )
+        table = Table("Metric", "Value")
         table.add_row(
-            "🏆 Average Reward", f"[{reward_color}]{metrics.avg_reward:.4f}[/]"
+            "Average reward",
+            f"{metrics.avg_reward:.4f}" if metrics.avg_reward is not None else "N/A",
         )
-        for k, pass_k in sorted(metrics.pass_hat_ks.items()):
-            pk_color = (
-                "green" if pass_k > 0.8 else ("yellow" if pass_k > 0.5 else "red")
-            )
-            table.add_row(f"   Pass^{k}", f"[{pk_color}]{pass_k:.3f}[/]")
-        avg_cost = metrics.avg_agent_cost
-        cost_str = (
-            f"${avg_cost:.4f}"
-            if avg_cost is not None and not math.isnan(avg_cost)
-            else "n/a"
-        )
-        table.add_row("💰 Avg Cost/Conversation", cost_str)
-        table.add_row("", "")
-
-        # Action metrics
-        table.add_row("[cyan]═══ Action Metrics ═══[/]", "")
-        if metrics.total_read_actions > 0:
-            read_pct = metrics.correct_read_actions / metrics.total_read_actions * 100
-            read_color = (
-                "green" if read_pct == 100 else ("yellow" if read_pct >= 80 else "red")
-            )
-            table.add_row(
-                "📖 Read Actions",
-                f"[{read_color}]{metrics.correct_read_actions}/{metrics.total_read_actions}[/] ({read_pct:.1f}%)",
-            )
-        else:
-            table.add_row("📖 Read Actions", "[dim]-[/]")
-
-        if metrics.total_write_actions > 0:
-            write_pct = (
-                metrics.correct_write_actions / metrics.total_write_actions * 100
-            )
-            write_color = (
-                "green"
-                if write_pct == 100
-                else ("yellow" if write_pct >= 80 else "red")
-            )
-            table.add_row(
-                "✏️  Write Actions",
-                f"[{write_color}]{metrics.correct_write_actions}/{metrics.total_write_actions}[/] ({write_pct:.1f}%)",
-            )
-        else:
-            table.add_row("✏️  Write Actions", "[dim]-[/]")
-        table.add_row("", "")
-
-        # DB Match
-        table.add_row("[cyan]═══ DB Match ═══[/]", "")
-        db_total = metrics.db_match_count + metrics.db_mismatch_count
-        if db_total > 0:
-            db_pct = metrics.db_match_count / db_total * 100
-            db_color = (
-                "green" if db_pct == 100 else ("yellow" if db_pct >= 80 else "red")
-            )
-            table.add_row(
-                "🗄️  DB Match",
-                f"[green]✓ {metrics.db_match_count}[/] / [red]✗ {metrics.db_mismatch_count}[/] ([{db_color}]{db_pct:.1f}%[/])",
-            )
-        else:
-            table.add_row(
-                "🗄️  DB Match", f"[dim]Not checked: {metrics.db_not_checked}[/]"
-            )
-        table.add_row("", "")
-
-        # Authentication
-        table.add_row("[cyan]═══ Authentication ═══[/]", "")
-        auth_total = metrics.auth_succeeded + metrics.auth_failed
-        if auth_total > 0:
-            auth_pct = metrics.auth_succeeded / auth_total * 100
-            auth_color = (
-                "green" if auth_pct == 100 else ("yellow" if auth_pct >= 80 else "red")
-            )
-            table.add_row(
-                "🔐 Auth Result",
-                f"[green]✓ {metrics.auth_succeeded}[/] / [red]✗ {metrics.auth_failed}[/] ([{auth_color}]{auth_pct:.1f}%[/])",
-            )
-        if metrics.auth_not_needed > 0:
-            table.add_row("   Not Needed", f"[dim]{metrics.auth_not_needed}[/]")
-        if metrics.auth_not_checked > 0:
-            table.add_row("   Not Checked", f"[dim]{metrics.auth_not_checked}[/]")
-        table.add_row("", "")
-
-        # Termination
-        table.add_row("[cyan]═══ Termination ═══[/]", "")
-        term_normal = metrics.termination_user_stop + metrics.termination_agent_stop
-        table.add_row(
-            "🛑 Normal Stop",
-            f"[green]{term_normal}[/] (👤 {metrics.termination_user_stop} / 🤖 {metrics.termination_agent_stop})",
-        )
-        if metrics.termination_max_steps > 0:
-            table.add_row("⏱️  Max Steps", f"[yellow]{metrics.termination_max_steps}[/]")
-        if metrics.termination_error > 0:
-            table.add_row("💥 Error", f"[red]{metrics.termination_error}[/]")
-        if metrics.termination_infrastructure_error > 0:
-            table.add_row(
-                "🔌 Infra Error",
-                f"[red]{metrics.termination_infrastructure_error}[/]",
-            )
-        table.add_row("", "")
-
-        # Responsiveness (only show if we have streaming/full-duplex data)
-        if metrics.sims_with_responsiveness_info > 0:
-            table.add_row("[cyan]═══ Responsiveness ═══[/]", "")
-            resp_pct = (
-                metrics.sims_with_unresponsive_period
-                / metrics.sims_with_responsiveness_info
-                * 100
-            )
-            resp_color = (
-                "green" if resp_pct == 0 else ("yellow" if resp_pct < 20 else "red")
-            )
-            table.add_row(
-                "🔇 Unresponsive Period",
-                f"[{resp_color}]{metrics.sims_with_unresponsive_period}/{metrics.sims_with_responsiveness_info}[/] ({resp_pct:.1f}%)",
-            )
-            table.add_row("", "")
-
-        # LLM Judge Review Errors
-        table.add_row("[cyan]═══ LLM Judge Review ═══[/]", "")
-
-        # Check if review was run
-        has_review = (
-            metrics.sims_with_agent_errors > 0
-            or metrics.sims_with_user_errors > 0
-            or metrics.total_agent_errors > 0
-            or metrics.total_user_errors > 0
-            or any(metrics.agent_error_tags_by_severity)
-            or any(metrics.user_error_tags_by_severity)
-        )
-
-        if has_review or metrics.total_simulations > 0:
-            # Agent errors - total by severity
-            agent_err_color = "green" if metrics.sims_with_agent_errors == 0 else "red"
-            agent_sev_parts = []
-            for sev in ["critical", "minor"]:
-                count = metrics.agent_errors_by_severity.get(sev, 0)
-                if count > 0:
-                    color = "red" if sev == "critical" else "yellow"
-                    agent_sev_parts.append(f"[{color}]{sev}={count}[/]")
-            agent_sev_str = (
-                f" ({', '.join(agent_sev_parts)})" if agent_sev_parts else ""
-            )
-            table.add_row(
-                "🤖 Agent Errors",
-                f"[{agent_err_color}]{metrics.total_agent_errors}[/] errors{agent_sev_str}",
-            )
-
-            # Agent errors - sims by max severity
-            agent_sim_parts = []
-            for sev in ["critical", "minor", "none"]:
-                count = metrics.sims_by_max_agent_severity.get(sev, 0)
-                if count > 0:
-                    if sev == "critical":
-                        agent_sim_parts.append(f"[red]{count} critical[/]")
-                    elif sev == "minor":
-                        agent_sim_parts.append(f"[yellow]{count} minor[/]")
-                    else:
-                        agent_sim_parts.append(f"[green]{count} clean[/]")
-            table.add_row(
-                "   Sims by severity",
-                ", ".join(agent_sim_parts) if agent_sim_parts else "[dim]-[/]",
-            )
-
-            # User errors - total by severity
-            user_err_color = (
-                "green"
-                if metrics.sims_with_user_errors == 0
-                else ("red" if metrics.sims_with_critical_user_errors > 0 else "yellow")
-            )
-            user_sev_parts = []
-            for sev in ["critical_helped", "critical_hindered", "minor"]:
-                count = metrics.user_errors_by_severity.get(sev, 0)
-                if count > 0:
-                    color = "red" if sev.startswith("critical") else "yellow"
-                    label = sev.replace("_", " ")
-                    user_sev_parts.append(f"[{color}]{label}={count}[/]")
-            user_sev_str = f" ({', '.join(user_sev_parts)})" if user_sev_parts else ""
-            table.add_row(
-                "👤 User Errors",
-                f"[{user_err_color}]{metrics.total_user_errors}[/] errors{user_sev_str}",
-            )
-
-            # User errors - sims by max severity
-            user_sim_parts = []
-            for sev in ["critical_helped", "critical_hindered", "minor", "none"]:
-                count = metrics.sims_by_max_user_severity.get(sev, 0)
-                if count > 0:
-                    if sev.startswith("critical"):
-                        label = sev.replace("_", " ")
-                        user_sim_parts.append(f"[red]{count} {label}[/]")
-                    elif sev == "minor":
-                        user_sim_parts.append(f"[yellow]{count} minor[/]")
-                    else:
-                        user_sim_parts.append(f"[green]{count} clean[/]")
-            table.add_row(
-                "   Sims by severity",
-                ", ".join(user_sim_parts) if user_sim_parts else "[dim]-[/]",
-            )
-
-            # First critical source
-            first_crit_parts = []
-            for src in ["agent", "user", "none"]:
-                count = metrics.sims_by_first_critical_source.get(src, 0)
-                if count > 0:
-                    if src == "agent":
-                        first_crit_parts.append(f"[red]{count} agent[/]")
-                    elif src == "user":
-                        first_crit_parts.append(f"[blue]{count} user[/]")
-                    else:
-                        first_crit_parts.append(f"[green]{count} none[/]")
-            if first_crit_parts:
-                table.add_row(
-                    "⚡ First Critical By",
-                    ", ".join(first_crit_parts),
-                )
-            table.add_row("", "")
-
-            # Error tags breakdown
-            if metrics.agent_error_tags_by_severity:
-                table.add_row("[cyan]─── 🤖 Agent Error Tags ───[/]", "")
-                # Sort by total count descending
-                sorted_tags = sorted(
-                    metrics.agent_error_tags_by_severity.items(),
-                    key=lambda x: sum(x[1].values()),
-                    reverse=True,
-                )
-                for tag, severities in sorted_tags:
-                    # Format: tag: minor=X, critical=Y
-                    parts = []
-                    for sev in ["minor", "critical"]:
-                        if sev in severities and severities[sev] > 0:
-                            color = "yellow" if sev == "minor" else "red"
-                            parts.append(f"[{color}]{sev}={severities[sev]}[/]")
-                    if parts:
-                        table.add_row(f"   {tag}", ", ".join(parts))
-                table.add_row("", "")
-
-            if metrics.user_error_tags_by_severity:
-                table.add_row("[cyan]─── 👤 User Error Tags ───[/]", "")
-                # Sort by total count descending
-                sorted_tags = sorted(
-                    metrics.user_error_tags_by_severity.items(),
-                    key=lambda x: sum(x[1].values()),
-                    reverse=True,
-                )
-                for tag, severities in sorted_tags:
-                    # Format: tag: minor=X, critical_helped=Y, critical_hindered=Z
-                    parts = []
-                    for sev in ["minor", "critical_helped", "critical_hindered"]:
-                        if sev in severities and severities[sev] > 0:
-                            color = "yellow" if sev == "minor" else "red"
-                            label = sev.replace("_", " ")
-                            parts.append(f"[{color}]{label}={severities[sev]}[/]")
-                    if parts:
-                        table.add_row(f"   {tag}", ", ".join(parts))
-        else:
-            table.add_row("", "[dim]No review data available[/]")
-
-        # Create and display panel
-        metrics_panel = Panel(
-            table,
-            title=f"[{c.panel_title}]Agent Performance Metrics",
-            border_style=c.panel_border,
-            expand=True,
-        )
-
-        cls.console.print(metrics_panel)
+        for k, value in sorted(metrics.pass_hat_ks.items()):
+            table.add_row(f"Pass^{k}", f"{value:.4f}")
+        cls.console.print(table)
 
     @classmethod
     def display_info(cls, info: "Info"):
@@ -2415,16 +2087,12 @@ class MarkdownDisplay:
 
         # Add reward info if present
         if sim.reward_info:
-            breakdown = sorted(
-                [
-                    f"{k.value}: {v:.1f}"
-                    for k, v in sim.reward_info.reward_breakdown.items()
-                ]
-            )
+            label, value = result_metric(sim)
             output.append(
-                f"**Reward**: {sim.reward_info.reward:.4f} ({', '.join(breakdown)})\n"
+                f"**{label}**: {value:.4f}"
+                if value is not None
+                else f"**{label}**: unavailable"
             )
-            output.append(f"**Reward**: {sim.reward_info.reward:.4f}")
 
             # Add DB check info if present
             if sim.reward_info.db_check:
@@ -2603,9 +2271,7 @@ class MarkdownDisplay:
                 ]
             )
 
-        if reward is not None:
-            output.extend(["\n### Reward", f"**{reward:.3f}**"])
-
+        # The simulation emits its single result; the optional total is legacy input.
         output.extend(["\n### Simulation", cls.display_simulation(sim)])
 
         return "\n".join(output)

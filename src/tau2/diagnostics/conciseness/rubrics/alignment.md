@@ -9,18 +9,17 @@ missing means absent or substantively incomplete. contradicted means a wrong or
 opposite assertion; cite it. uncertain means evidence, delivery or timing cannot
 support a reliable decision. Assistant claims never establish business truth.
 
-Judge the final resolved stance. Explicit correction can satisfy coverage but
-does not erase a prior material error. Conflicting unresolved claims cannot be
-scored by choosing the favorable sentence. Do not use a later tool success to
-excuse an earlier unsupported success announcement. Execution times do not prove
-frontend knowledge; unclear timing or missing evidence must remain uncertain.
+Judge the final resolved stance: an explicit correction can satisfy coverage.
+Conflicting unresolved claims cannot be scored by choosing the favorable sentence.
+Do not use a later tool success to credit an earlier response that could not
+yet convey that result. Execution times do not prove frontend knowledge; unclear
+timing or missing evidence for a nugget must remain uncertain.
 
-Record repetition, irrelevant material and material business errors with exact
-quotes. Material errors include false outcome, amount, identity, authorization,
-unsafe/invented recovery instructions, and falsely certain claims of success or
-failure. Generic courtesy is not hallucination. For material_error findings cite
-the relevant source IDs; unavailable evidence alone is not a contradiction.
-fidelity_status=material_error requires a supported material_error finding;
-uncertain applies if material assertions cannot be checked; supported means no
-identified material error or unresolved material uncertainty. Report only labels,
-citations and short reasons; Python calculates all scores and lengths.
+Record repetition and irrelevant expression with exact quotes for explanation
+only. Use uncertain findings when that expression cannot be reliably identified.
+Do not scan the response for overall factual errors or return an overall truth
+verdict. Grounding evaluates claims and their evidence separately. Here, an
+incorrect nugget is not covered; it does not invalidate other covered nuggets.
+Extra assertions do not create new obligations or change other nugget matches.
+Report only matches, expression findings, citations and short reasons; Python
+calculates coverage, length efficiency and the single combined feedback score.

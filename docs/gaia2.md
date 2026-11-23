@@ -1,9 +1,18 @@
 # Gaia2 tasks in τ-bench
 
-The `gaia2` domain runs all 800 core Gaia2 scenarios plus 200 request variants
-through the ordinary τ task loader, environment, user simulator, audio adapter,
+> 当前 Gaia2 整题评分仅使用环境组件；旧 ACTION/NL/COMMUNICATE 不再计算。必要信息覆盖由 conciseness 的 required_coverage 单独评价，后台 reply_reward 保留。阶段交付只记日志，不因 missing_requests 直接清零。下文历史验证记录保留原口径；当前指标见 [metrics-inventory.md](metrics-inventory.md)。
+
+The `gaia2` domain runs 800 core Gaia2 scenarios and 200 request variants through
+the ordinary τ task loader, environment, user simulator, audio adapter,
 orchestrator and evaluator. The complete local population contains 1,000 tasks;
+fixed async variants have been removed. Async interaction is generated at runtime
+through `active_metrics.persistent_task`, independently of dataset task count;
 the original Parquet import contains 800.
+An additional delta dataset exposes 100 AddTask, 50 Modify and 50 Cancel variants
+through independent splits, bringing the loaded `all` split to 1,200 when present.
+The canonical `tasks.json` retains 1,000 records. See the
+[interaction variant plan and implementation](modify-cancel-addtask-plan.md) and
+[data layout and commands](../data/tau2/domains/gaia2/README.md).
 It supports the existing Qwen Audio Agent integration in English, including
 parallel calls with independent containers, tool state and scene clocks.
 ARE agents, environment loops and judges are not used. No Gaia2
@@ -12,21 +21,42 @@ Docker service is required; Qwen itself retains its normal isolated container.
 These are Gaia2-derived tasks with the versioned `gaia2-tau-v1` reward definition.
 They are not original Gaia2 leaderboard scores.
 
+## User role
+
+Gaia2 text and voice users use `gaia2-neutral-user-v1`, a neutral human who
+delegates the current task to an AI agent, following ARE's default user-proxy
+role. The builders select domain-owned guidelines and a neutral voice reminder;
+the service-customer persona and its escalation language are not injected.
+Language, grammatical gender, verbosity, spelling guidance and the existing
+task-information boundaries are retained. Voice identity and timing parameters
+continue to come from the selected voice configuration.
+
+This role adds no application-access knowledge or blanket permissions, and does
+not instruct the user to guide the agent's tool use. Existing stage transitions,
+dynamic follow-ups and scoring retain their own behavior. The prompt is selected
+at construction without new runtime checks or model calls. The role version is
+included in the saved user guidelines; historical runs retain their old prompts.
+See the [implementation record](gaia2-neutral-user-results.md).
+
+## Task structure
+
 The local canonical data now combines each original question and its two authored
 continuations in `data/tau2/domains/gaia2/tasks.json`, retaining the 800 original
 task IDs. The additional `mind_change` and `repetition` categories each contain
-100 tasks that rewrite one request while preserving the original final objective,
-reference execution and scoring. See [request variant authoring](gaia2-variants.md).
+100 tasks. They rewrite one request while preserving the original final objective,
+reference execution and scoring. `base` selects 800 core tasks and `all` selects
+all 1,000 tasks. There is no fixed `async` split or ten-task persistent sidecar. See [request variant authoring](gaia2-variants.md).
 Each private `scenario.stages` entry holds the request, event index,
 evidence, outcome checks and criteria; operations remain in `scenario.events`.
 Generation attempts, review logs and acceptance fingerprints are archived outside
 the domain. Runtime-required resource and task integrity pins remain.
 
-**Continuous runtime:** multi-stage tasks now use the ordinary τ caller STOP
-signal. The first two caller STOPs release the next request through the existing
-TTS/audio path; the final STOP ends the call. One Qwen session, application state
-and scene clock persist across the three requests. Transfer, out-of-scope,
-Agent STOP and infrastructure failures retain their existing handling.
+**Continuous runtime:** multi-stage tasks use the ordinary τ caller STOP signal
+and the caller out-of-scope signal as the same stage-advance control. The first
+two such signals release the next request through the existing TTS/audio path;
+the signal on the final stage ends the call. One Qwen session, application state
+and scene clock persist across the three requests. Transfer, Agent STOP and
+infrastructure failures retain their terminal handling.
 
 The whole conversation is scored after it ends. ENV checks the cumulative final
 business state; COMMUNICATE uses each request's actual playback window; NL checks

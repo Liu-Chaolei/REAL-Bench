@@ -50,7 +50,10 @@ class FallbackRule(BaseModel):
     def validate_rule(self):
         if self.preferred_state == self.blocked_state:
             raise ValueError("fallback rule cannot block its own preferred state")
-        if self.fallback_operation == "result" and self.fallback_state != CanonicalState.COMPLETED:
+        if (
+            self.fallback_operation == "result"
+            and self.fallback_state != CanonicalState.COMPLETED
+        ):
             raise ValueError("result fallbacks require completed state")
         if self.fallback_state in {
             CanonicalState.NOT_STARTED,
@@ -86,6 +89,16 @@ class RequestGeneratorConfig(BaseModel):
     max_characters: int = Field(default=300, ge=1)
     fallback_policy: Literal["call_language_required"] = "call_language_required"
 
+    @model_validator(mode="after")
+    def consistent_api_source(self):
+        if self.model.api_role and any(
+            (self.model_env, self.api_base_env, self.api_key_env)
+        ):
+            raise ValueError(
+                "Shared active generator role conflicts with legacy connection overrides"
+            )
+        return self
+
 
 class PersistentTaskMetricConfig(BaseModel):
     """Complete policy for one active persistent-task metric."""
@@ -111,7 +124,10 @@ class PersistentTaskMetricConfig(BaseModel):
                 ):
                     if blocked == option.state:
                         continue
-                    if operation == "result" and option.state == CanonicalState.COMPLETED:
+                    if (
+                        operation == "result"
+                        and option.state == CanonicalState.COMPLETED
+                    ):
                         continue
                     generated.append(
                         FallbackRule(
@@ -148,13 +164,30 @@ class ActiveMetricsConfig(BaseModel):
     persistent_task: PersistentTaskMetricConfig | None = None
 
     @classmethod
-    def load(cls, path: str | Path) -> "ActiveMetricsConfig":
+    def load(cls, path: str | Path, api_config_dir=None) -> "ActiveMetricsConfig":
         value = yaml.safe_load(Path(path).read_text()) or {}
-        return cls.model_validate(value.get("active_metrics", value))
+        value = value.get("active_metrics", value)
+        if api_config_dir is not None and value.get("persistent_task"):
+            generator = value["persistent_task"].setdefault("generator", {})
+            if any(
+                generator.get(k) for k in ("model_env", "api_base_env", "api_key_env")
+            ):
+                raise ValueError(
+                    "api_config_dir conflicts with legacy active generator connection"
+                )
+            supplied = generator.get("model")
+            if supplied and not supplied.get("api_role"):
+                raise ValueError(
+                    "api_config_dir conflicts with literal active generator model"
+                )
+            generator["model"] = {
+                "api_role": "ACTIVE_REQUEST",
+                "api_config_dir": str(api_config_dir),
+            }
+        return cls.model_validate(value)
 
     def fingerprint(self) -> str:
         return digest(self.model_dump(mode="json"))
 
     def enabled(self) -> bool:
         return bool(self.persistent_task and self.persistent_task.enabled)
-

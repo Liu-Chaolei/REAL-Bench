@@ -68,6 +68,7 @@ class DiagnosticEvidence(EvidenceModel):
     stages: dict = Field(default_factory=dict)
     audio: dict = Field(default_factory=dict)
     source: dict = Field(default_factory=dict)
+    state_events: list[dict] = Field(default_factory=list)
     errors: list[dict] = Field(default_factory=list)
     complete: bool = True
 

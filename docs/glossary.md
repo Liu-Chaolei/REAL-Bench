@@ -55,17 +55,11 @@ it as passed / (passed + failed). Keys such as `experience` and the paper's
 
 ## Interaction
 
-The call-level turn-taking measure of voice-v2 packages
-(`voice-v2-interaction-call-v1`, in `benchmark-quality.json`). Each scored
-call gets five flags: **nonresponse** (a missed caller turn, a mean reply
-latency over 3 s, or an unyielded interruption), **interruption** (more than 3
-agent onsets over caller speech), **selectivity** (more than 3 errors summed
-over backchannels, vocal tics and non-directed speech), **monologue** (an agent
-floor hold over 45 s) and **tool_misuse** (the saved `tool_use` judge verdict).
-The first four come from the call's ticks; a flag is unknown when the call has
-no opportunity for it. A call fails with at least two known flags set, passes
-when even all unknown flags set could not reach two, and is otherwise
-unscored. The rate is passed / (passed + failed).
+Current `benchmark-quality-v3` packages retain the independent **selectivity**
+flag: more than 3 errors summed over backchannels, vocal tics and non-directed
+speech. It is computed from saved ticks and is unknown without an opportunity.
+There is no combined call-level verdict or tool-misuse flag. The three detailed
+selectivity metrics and the TICK/media voice panels keep their existing rules.
 
 ## Judge
 
@@ -76,8 +70,9 @@ must be run before `tau2 submit prepare`.
 
 ## Measure
 
-One named quantity a judge reports, such as `naturalness`, `speech_fidelity`
-or `tool_use`. A measure applies to some languages and not
+One named quantity a judge reports, such as `register_formality`. Historical
+contracts for `naturalness`, `speech_fidelity` and `tool_use` remain readable,
+but the current suite does not schedule them. A measure applies to some languages and not
 others; `tau2 judges summarize` lists, for each cell and measure, how many calls
 it applies to, how many were judged, and the pass and fail counts. Calls a
 measure cannot judge because recorded Live speech has no transcript are

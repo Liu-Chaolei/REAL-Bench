@@ -217,6 +217,7 @@ class ModelProfile(StrictModel):
 
     model: str | None = None
     model_env: str | None = None
+    api_role: str | None = None
     api_key_env: str | None = None
     api_base_env: str | None = None
     provider_prefix: str = "openai/"
@@ -227,8 +228,8 @@ class ModelProfile(StrictModel):
 
     @model_validator(mode="after")
     def explicit_model(self):
-        if bool(self.model) == bool(self.model_env):
-            raise ValueError("Choose exactly one of model or model_env")
+        if sum(bool(x) for x in (self.model, self.model_env, self.api_role)) != 1:
+            raise ValueError("Choose exactly one of model, model_env or api_role")
         if {"api_key", "api_base", "base_url"} & self.model_args.keys():
             raise ValueError("Use credential environment references, not model_args")
         return self
@@ -239,6 +240,22 @@ class AuthoringConfig(StrictModel):
 
     author: ModelProfile
     reviewer: ModelProfile
+    api_config_dir: str | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def shared_api_roles(cls, value):
+        if isinstance(value, dict) and value.get("api_config_dir"):
+            value = dict(value)
+            for role in ("author", "reviewer"):
+                profile = value.get(role)
+                if profile and not profile.get("api_role"):
+                    raise ValueError(
+                        "api_config_dir conflicts with explicit authoring connection"
+                    )
+                value[role] = {"api_role": role.upper(), **(profile or {})}
+        return value
+
     config_env_file: str | None = None
     concurrency: int = Field(default=DEFAULT_GAIA2_SERIES_CONCURRENCY, ge=1)
     max_attempts: int = Field(default=DEFAULT_GAIA2_SERIES_ATTEMPTS, ge=1)

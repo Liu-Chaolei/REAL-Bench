@@ -8,6 +8,13 @@ unknown outcome or a genuine need for clarification. A timeout does not establis
 failure. Absence of a tool record does not prove no operation occurred. Execution
 success does not prove the frontend knew the result at the same time. Missing or
 truncated evidence must not become a guessed answer, reason or recovery action.
+Historical requests identify the object and unchanged conditions; they do not
+create an obligation to repeat all old details in every later change window.
+An amendment replaces only its specified requirement from its actual delivery.
+Cancellation stops the specified remaining work, leaving other work active; do not
+demand the revoked deliverable or assume completed effects were undone. Accepted
+management instructions are not business completion. Judge each window against
+the requirements and result evidence available then, without future hindsight.
 When the necessary answer cannot be verified from evidence, return unavailable,
 not a complete inventory containing only an easier subset of the obligations.
 

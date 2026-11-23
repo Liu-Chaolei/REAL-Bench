@@ -532,9 +532,9 @@ async def test_summary_and_terminal_show_counts_evidence_and_versions(monkeypatc
     result = score_record(apply_repetition(content, record))
     row = {"profile": "same", "summary": {"measures": {"intent": result}}}
     report = summarize([row])
-    assert report["intent"]["micro"]["precision"] == pytest.approx(1 / 3)
-    assert report["intent"]["repetition"]["extra_goal_count"] == 2
-    assert report["intent"]["repetition"]["coverage"] == 1
+    assert report["metrics"]["intent"]["precision"] == pytest.approx(1 / 3)
+    assert report["evaluation_log"]["records"][0]["summary"]["measures"]["intent"]["repetition"]["extra_goal_count"] == 2
+    assert report["evaluation_log"]["statuses"]["intent"] == {"complete": 1}
     old = deepcopy(row)
     old["summary"]["measures"]["intent"]["version"] = "tau-real-intent/1"
     assert "intent" not in summarize([row, old])
@@ -551,7 +551,7 @@ async def test_summary_and_terminal_show_counts_evidence_and_versions(monkeypatc
         termination_reason=TerminationReason.USER_STOP,
         diagnostics_ref=row,
     )
-    ConsoleDisplay.display_simulation(simulation)
+    ConsoleDisplay.display_simulation(simulation, show_details=True)
     text = output.getvalue()
     assert "extra goals: 2" in text and "Content precision: 1" in text
     assert "user u:" in text and "matched -> extra" in text

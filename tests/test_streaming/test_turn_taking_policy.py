@@ -5,6 +5,8 @@ Focuses on the delivering_tool_result_speech threshold override
 and overlap/interruption logic.
 """
 
+import pytest
+
 from tau2.agent.base.streaming import (
     StreamingState,
     basic_turn_taking_policy,
@@ -172,3 +174,121 @@ class TestBasicTurnTakingActions:
             yield_threshold_when_interrupted=2,
         )
         assert action == "keep_talking"
+
+
+class TestCurrentSpeechTurnTaking:
+    """Current speech drives decisions; historical speech stays in evidence."""
+
+    @pytest.mark.parametrize("speech_ticks", [5, 7, 9])
+    def test_0760_speech_ending_does_not_stop_active_user(self, speech_ticks):
+        state = _make_state(
+            output_queue_size=3,
+            input_buffer_speech_ticks=speech_ticks,
+            consecutive_self_speaking=speech_ticks,
+            consecutive_other_speaking=0,
+        )
+        state.input_turn_taking_buffer[-1].raw_data = {"speaking_now": False}
+        before = state.model_dump()
+
+        assert state.input_ongoing_speech_duration() == 0
+        assert not state.input_interrupt()
+        assert state.input_total_speech_duration() == speech_ticks
+        assert (
+            basic_turn_taking_policy(
+                state,
+                yield_threshold_when_interrupted=5,
+                yield_threshold_when_interrupting=25,
+            )[0]
+            == "keep_talking"
+        )
+        assert state.model_dump() == before
+
+    @pytest.mark.parametrize("delivering_result", [False, True])
+    def test_no_overlap_is_not_treated_as_other_initiated(self, delivering_result):
+        state = _make_state(
+            output_queue_size=3,
+            input_buffer_speech_ticks=30,
+            consecutive_self_speaking=0,
+            consecutive_other_speaking=30,
+            delivering_tool_result_speech=delivering_result,
+        )
+        assert state.input_interrupt() and state.overlap_initiator is None
+        assert basic_turn_taking_policy(
+            state,
+            yield_threshold_when_interrupted=5,
+            yield_threshold_when_interrupting=25,
+        ) == ("keep_talking", "No current overlap")
+
+    @pytest.mark.parametrize(
+        "speech_ticks,expected", [(5, "keep_talking"), (25, "stop_talking")]
+    )
+    def test_active_self_overlap_retains_high_threshold(self, speech_ticks, expected):
+        state = _make_state(
+            output_queue_size=3,
+            input_buffer_speech_ticks=speech_ticks,
+            consecutive_self_speaking=speech_ticks,
+            consecutive_other_speaking=speech_ticks + 10,
+        )
+        for chunk in state.input_turn_taking_buffer:
+            chunk.raw_data = {"speaking_now": True}
+        assert state.overlap_initiator == "self"
+        assert (
+            basic_turn_taking_policy(
+                state,
+                yield_threshold_when_interrupted=5,
+                yield_threshold_when_interrupting=25,
+            )[0]
+            == expected
+        )
+
+    def test_pause_then_new_other_overlap_restarts_duration(self):
+        state = _make_state(
+            output_queue_size=3,
+            input_buffer_speech_ticks=9,
+            consecutive_self_speaking=9,
+            consecutive_other_speaking=0,
+        )
+        state.input_turn_taking_buffer[-1].raw_data = {"speaking_now": False}
+        thresholds = dict(
+            yield_threshold_when_interrupted=5, yield_threshold_when_interrupting=25
+        )
+        assert basic_turn_taking_policy(state, **thresholds)[0] == "keep_talking"
+        for count in range(1, 6):
+            state.update_input_turn_taking_buffer(
+                UserMessage(
+                    role="user", contains_speech=True, raw_data={"speaking_now": True}
+                )
+            )
+            state.consecutive_self_speaking_ticks += 1
+            state.consecutive_other_speaking_ticks = count
+            assert state.input_ongoing_speech_duration() == count
+            assert state.overlap_initiator == "other"
+            assert basic_turn_taking_policy(state, **thresholds)[0] == (
+                "stop_talking" if count == 5 else "keep_talking"
+            )
+
+    @pytest.mark.parametrize("contains_speech", [False, True])
+    def test_legacy_messages_without_current_state_keep_their_semantics(
+        self, contains_speech
+    ):
+        state = _make_state(output_queue_size=3)
+        state.update_input_turn_taking_buffer(
+            UserMessage(
+                role="user", content="Legacy reply", contains_speech=contains_speech
+            )
+        )
+        assert state.input_ongoing_speech_duration() == int(contains_speech)
+        assert state.input_total_speech_duration() == int(contains_speech)
+
+    def test_backchannel_still_takes_priority_over_overlap(self):
+        state = _make_state(
+            output_queue_size=2,
+            input_buffer_speech_ticks=10,
+            consecutive_self_speaking=10,
+            consecutive_other_speaking=5,
+        )
+        state.is_backchanneling = True
+        assert basic_turn_taking_policy(state, yield_threshold_when_interrupted=5) == (
+            "keep_talking",
+            "Backchannel in progress",
+        )

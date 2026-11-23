@@ -3,6 +3,7 @@
 from pathlib import Path
 
 from tau2.data_model.tasks import RewardType
+from tau2.persistent_tasks.scores import consolidate_score
 
 
 def verify_overlay(config, source, root):
@@ -86,14 +87,12 @@ def evaluate_overlay(
     revised = evaluate_simulation(
         independent, derived, env_kwargs=derived_kwargs, **kwargs
     )
-    persistent = grade(summary, communicate_scoring)
-    persistent["business_overlay_reward"] = revised.reward
+    persistent = consolidate_score(grade(summary, communicate_scoring))
     persistent["retained_before_cancel"] = sorted(
         retained & set(config.overlay.superseded_event_ids)
     )
     # Business execution is a separately reported outcome. Only the explicit
     # combined task reward composes it with native management performance.
-    persistent["reward"] = persistent["native_reward"]
     summary["grading"] = persistent
     reward = revised if config.combine_reward else original
     reward.info = {

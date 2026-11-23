@@ -39,6 +39,7 @@ from typing import TYPE_CHECKING, List, Optional, Tuple
 from loguru import logger
 
 from tau2.data_model.message import Tick
+from tau2.metrics.voice_interaction import METRIC_FIELDS
 from tau2.utils.transcript.segments import contiguous_ranges
 
 if TYPE_CHECKING:
@@ -46,7 +47,7 @@ if TYPE_CHECKING:
 
     from tau2.data_model.simulation import Results
 
-INTERACTION_METRICS_VERSION = "1.0"
+INTERACTION_METRICS_VERSION = "2.0"
 
 
 @dataclass
@@ -837,6 +838,11 @@ def filter_end_of_conversation_ticks(ticks: List[Tick]) -> List[Tick]:
     Returns:
         Filtered list of ticks with end-of-conversation artifact removed
     """
+    if any(
+        (getattr(t.agent_chunk, "raw_data", None) or {}).get("media_origin") is not None
+        for t in ticks
+    ):
+        return ticks
     if len(ticks) < 2:
         return ticks
 
@@ -880,6 +886,87 @@ def extract_all_segments(
     Returns:
         Tuple of (user_segments, agent_segments)
     """
+    from tau2.voice.audio_activity import speech_evidence
+
+    shared = speech_evidence(ticks)
+    if shared is not None:
+        user_segments, agent_segments = [], []
+
+        def timing(segment, a, b):
+            segment.start_time_sec, segment.end_time_sec = a, b
+            segment.duration_sec = b - a
+            segment.start_time_ms, segment.end_time_ms = a * 1000, b * 1000
+            segment.duration_ms = (b - a) * 1000
+
+        for turn in shared["user_turns"]:
+            first, last = turn["start_tick"], turn["end_tick"]
+            segment, effects = _create_user_segment_start(
+                ticks[first], first, ticks, tick_duration_sec
+            )
+            for index in range(first + 1, last):
+                effects = _extend_user_segment(
+                    segment, ticks[index], index, tick_duration_sec, effects
+                )
+            segment.end_tick = last
+            timing(segment, turn["intervals"][0][0], turn["intervals"][-1][1])
+            user_segments.append(segment)
+        for a, b in shared["agent_intervals"]:
+            indices = [
+                i
+                for i, tick in enumerate(ticks)
+                if any(
+                    x - shared["origin"] <= a < y - shared["origin"] + 1e-8
+                    for x, y in (getattr(tick.agent_chunk, "raw_data", None) or {}).get(
+                        "speech_intervals", []
+                    )
+                )
+            ]
+            first = indices[0] if indices else 0
+            segment, _ = _create_agent_segment_start(
+                ticks[first], first, ticks, tick_duration_sec
+            )
+            timing(segment, a, b)
+            segment.end_tick = max(
+                first + 1,
+                next(
+                    (
+                        i
+                        for i, tick in enumerate(ticks)
+                        if any(
+                            y - shared["origin"] >= b - 1e-8
+                            for x, y in (
+                                getattr(tick.agent_chunk, "raw_data", None) or {}
+                            ).get("speech_intervals", [])
+                        )
+                    ),
+                    first,
+                )
+                + 1,
+            )
+            agent_segments.append(segment)
+        for segment, others in ((u, agent_segments) for u in user_segments):
+            segment.other_speaking_at_start = any(
+                o.start_time_sec < segment.start_time_sec < o.end_time_sec
+                for o in others
+            )
+            segment.other_speaking_at_end = any(
+                o.start_time_sec <= segment.end_time_sec < o.end_time_sec
+                for o in others
+            )
+            segment.is_interruption = (
+                segment.other_speaking_at_start and not segment.is_backchannel
+            )
+        for segment in agent_segments:
+            segment.other_speaking_at_start = any(
+                u.start_time_sec < segment.start_time_sec < u.end_time_sec
+                for u in user_segments
+            )
+            segment.other_speaking_at_end = any(
+                u.start_time_sec <= segment.end_time_sec < u.end_time_sec
+                for u in user_segments
+            )
+        return user_segments, agent_segments
+
     # Filter out end-of-conversation artifact
     ticks = filter_end_of_conversation_ticks(ticks)
 
@@ -1010,7 +1097,7 @@ def extract_turn_transitions(
         valid_user_segments.append((user_idx, user_seg))
 
     # Sort agent segments by start_tick
-    sorted_agent_segments = sorted(agent_segments, key=lambda s: s.start_tick)
+    sorted_agent_segments = sorted(agent_segments, key=lambda s: s.start_time_sec)
 
     # For each valid user segment, determine if it got a response or not
     for i, (user_idx, user_seg) in enumerate(valid_user_segments):
@@ -1019,7 +1106,7 @@ def extract_turn_transitions(
         next_agent_idx = None
         next_agent_seg = None
         for agent_idx, agent_seg in enumerate(sorted_agent_segments):
-            if agent_seg.start_tick >= user_seg.end_tick:
+            if agent_seg.start_time_sec >= user_seg.end_time_sec:
                 next_agent_start = agent_seg.start_tick
                 next_agent_idx = agent_idx
                 next_agent_seg = agent_seg
@@ -1031,7 +1118,7 @@ def extract_turn_transitions(
         next_user_seg = None
         for j in range(i + 1, len(valid_user_segments)):
             next_idx, next_seg = valid_user_segments[j]
-            if next_seg.start_tick >= user_seg.end_tick:
+            if next_seg.start_time_sec >= user_seg.end_time_sec:
                 next_user_start = next_seg.start_tick
                 next_user_idx = next_idx
                 next_user_seg = next_seg
@@ -1054,7 +1141,10 @@ def extract_turn_transitions(
 
         # Determine outcome: response vs no-response
         if next_agent_start is not None:
-            if next_user_start is None or next_agent_start <= next_user_start:
+            if (
+                next_user_start is None
+                or next_agent_seg.start_time_sec <= next_user_seg.start_time_sec
+            ):
                 # Agent responded before user spoke again
                 gap_ticks = next_agent_seg.start_tick - user_seg.end_tick
                 gap_sec = next_agent_seg.start_time_sec - user_seg.end_time_sec
@@ -1219,6 +1309,10 @@ def extract_interruption_events(
     """
     events = []
 
+    precise = any(
+        (getattr(t.agent_chunk, "raw_data", None) or {}).get("media_origin") is not None
+        for t in ticks
+    )
     # Calculate yield windows in ticks for each event type
     no_yield_window_ticks = int(no_yield_window_sec / tick_duration_sec)
     backchannel_yield_window_ticks = int(
@@ -1277,19 +1371,41 @@ def extract_interruption_events(
         yield_tick = None
         agent_yielded = False
 
-        # Look ahead up to yield_window_ticks to find when agent stopped
-        for i in range(start_tick, min(start_tick + yield_window_ticks, len(ticks))):
-            agent_speaking = (
-                ticks[i].agent_chunk.contains_speech if ticks[i].agent_chunk else False
+        if precise:
+            ongoing = next(
+                (
+                    a
+                    for a in agent_segments
+                    if a.start_time_sec < user_seg.start_time_sec < a.end_time_sec
+                ),
+                None,
             )
-            if not agent_speaking:
-                agent_yielded = True
-                yield_tick = i
-                break
+            yield_time_sec = (
+                ongoing.end_time_sec - user_seg.start_time_sec if ongoing else 0.0
+            )
+            agent_yielded = (
+                ongoing is not None
+                and yield_time_sec < yield_window_ticks * tick_duration_sec
+            )
+            yield_tick = ongoing.end_tick if agent_yielded else None
+        else:
+            # Look ahead up to yield_window_ticks to find when agent stopped
+            for i in range(
+                start_tick, min(start_tick + yield_window_ticks, len(ticks))
+            ):
+                agent_speaking = (
+                    ticks[i].agent_chunk.contains_speech
+                    if ticks[i].agent_chunk
+                    else False
+                )
+                if not agent_speaking:
+                    agent_yielded = True
+                    yield_tick = i
+                    break
 
-        yield_time_sec = (
-            (yield_tick - start_tick) * tick_duration_sec if yield_tick else 0.0
-        )
+            yield_time_sec = (
+                (yield_tick - start_tick) * tick_duration_sec if yield_tick else 0.0
+            )
 
         events.append(
             InterruptionEvent(
@@ -1321,19 +1437,38 @@ def extract_interruption_events(
         yield_tick = None
         user_yielded = False
 
-        # Agent interruption uses no_yield_window for consistency
-        for i in range(start_tick, min(start_tick + no_yield_window_ticks, len(ticks))):
-            user_speaking = (
-                ticks[i].user_chunk.contains_speech if ticks[i].user_chunk else False
+        if precise:
+            ongoing = next(
+                (
+                    u
+                    for u in user_segments
+                    if u.start_time_sec < agent_seg.start_time_sec < u.end_time_sec
+                ),
+                None,
             )
-            if not user_speaking:
-                user_yielded = True
-                yield_tick = i
-                break
+            yield_time_sec = (
+                ongoing.end_time_sec - agent_seg.start_time_sec if ongoing else 0.0
+            )
+            user_yielded = ongoing is not None and yield_time_sec < no_yield_window_sec
+            yield_tick = ongoing.end_tick if user_yielded else None
+        else:
+            # Agent interruption uses no_yield_window for consistency
+            for i in range(
+                start_tick, min(start_tick + no_yield_window_ticks, len(ticks))
+            ):
+                user_speaking = (
+                    ticks[i].user_chunk.contains_speech
+                    if ticks[i].user_chunk
+                    else False
+                )
+                if not user_speaking:
+                    user_yielded = True
+                    yield_tick = i
+                    break
 
-        yield_time_sec = (
-            (yield_tick - start_tick) * tick_duration_sec if yield_tick else 0.0
-        )
+            yield_time_sec = (
+                (yield_tick - start_tick) * tick_duration_sec if yield_tick else 0.0
+            )
 
         events.append(
             InterruptionEvent(
@@ -1376,9 +1511,12 @@ def extract_interruption_events(
         agent_responded = False
         for agent_idx, agent_seg in enumerate(agent_segments):
             # Agent must start after user segment started and within window of user segment end
-            if agent_seg.start_tick < user_seg.start_tick:
+            if agent_seg.start_time_sec < user_seg.start_time_sec:
                 continue
-            if agent_seg.start_tick > user_seg.end_tick + response_window_ticks:
+            if (
+                agent_seg.start_time_sec
+                > user_seg.end_time_sec + response_window_ticks * tick_duration_sec
+            ):
                 continue
 
             # Determine event type based on the effect
@@ -2191,6 +2329,11 @@ def compute_interaction_metrics_for_experiment(
         NoVoiceTicksError: If no simulation contains ticks (e.g. a text-mode
             experiment directory was passed in).
     """
+    from tau2.metrics.voice_interaction import experiment_panel
+
+    panel = experiment_panel(results)
+    if panel is not None:
+        return panel
     config = config or InteractionMetricsConfig()
 
     tick_sims = [sim for sim in results.simulations if sim.ticks]
@@ -2258,7 +2401,7 @@ def compute_interaction_metrics_for_experiment(
 
 
 # Panel metric field names, in display order (L_R, L_Y, R_R, R_Y, I_A, S_BC, S_VT, S_ND).
-PANEL_METRIC_FIELDS = [
+LEGACY_PANEL_METRIC_FIELDS = [
     "response_latency_mean",
     "yield_latency_mean",
     "response_rate",
@@ -2268,6 +2411,9 @@ PANEL_METRIC_FIELDS = [
     "selectivity_vocal_tic",
     "selectivity_non_directed",
 ]
+
+
+PANEL_METRIC_FIELDS = list(METRIC_FIELDS)
 
 
 def aggregate_domain_metrics(domain_metrics: dict) -> Optional[dict]:
@@ -2288,8 +2434,28 @@ def aggregate_domain_metrics(domain_metrics: dict) -> Optional[dict]:
     if not domain_metrics:
         return None
 
+    from tau2.metrics.voice_interaction import VERSION as unified_version
+    from tau2.metrics.voice_interaction import aggregate
+
+    if any(m.get("version") == unified_version for m in domain_metrics.values()):
+        reports = [
+            r
+            for m in domain_metrics.values()
+            for r in m.get("evaluation_log", {}).get("trial_reports", [])
+        ]
+        report = aggregate(reports)
+        report["evaluation_log"]["historical_domains"] = [
+            domain
+            for domain, panel in domain_metrics.items()
+            if panel.get("version") != unified_version
+        ]
+        return dict(
+            version=unified_version,
+            **{k: v["value"] for k, v in report["metrics"].items()},
+            evaluation_log=report["evaluation_log"],
+        )
     overall: dict = {}
-    for metric_name in PANEL_METRIC_FIELDS:
+    for metric_name in LEGACY_PANEL_METRIC_FIELDS:
         values = [
             m[metric_name]
             for m in domain_metrics.values()

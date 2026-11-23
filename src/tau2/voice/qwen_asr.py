@@ -2,6 +2,7 @@
 
 import audioop
 import base64
+from typing import Literal
 from urllib.parse import urlsplit, urlunsplit
 
 import httpx
@@ -12,10 +13,12 @@ from tau2.voice.mimo import pcm_wav
 
 
 class QwenASRResult(BaseModel):
-    """Only the transcript and numeric provider usage cross the API boundary."""
+    """Transcript, usage and explicit metadata for an empty recognition result."""
 
     text: str
     usage: dict[str, int | float] = Field(default_factory=dict)
+    empty_reason: Literal["ASR_RESPONSE_HAVE_NO_WORDS"] | None = None
+    request_id: str | None = None
 
 
 def qwen_asr_url(base_url: str) -> str:
@@ -98,7 +101,43 @@ async def transcribe_qwen(
     except httpx.HTTPError:
         raise RuntimeError("Qwen ASR connection failed") from None
     if not response.is_success:
-        raise RuntimeError(f"Qwen ASR failed (HTTP {response.status_code})")
+        # Keep the public service error code for diagnosis, never its raw body.
+        try:
+            body = response.json()
+        except ValueError:
+            body = None
+        if not isinstance(body, dict):
+            body = {}
+        code = body.get("code")
+        if (
+            response.status_code == 400
+            and code == "CLIENT_ERROR"
+            and body.get("message") == "ASR_RESPONSE_HAVE_NO_WORDS"
+        ):
+            # Qwen represents this empty result as an HTTP error. Normalize it
+            # here so the existing observer can continue without inventing text.
+            request_id = body.get("request_id")
+            safe_id = (
+                isinstance(request_id, str)
+                and 0 < len(request_id) <= 128
+                and request_id.isascii()
+                and all(char.isalnum() or char in "_-" for char in request_id)
+                and key not in request_id
+            )
+            return QwenASRResult(
+                text="",
+                empty_reason="ASR_RESPONSE_HAVE_NO_WORDS",
+                request_id=request_id if safe_id else None,
+            )
+        safe_code = (
+            isinstance(code, str)
+            and 0 < len(code) <= 80
+            and code.isascii()
+            and all(char.isalnum() or char in "_.-" for char in code)
+            and key not in code
+        )
+        detail = f", code={code}" if safe_code else ""
+        raise RuntimeError(f"Qwen ASR failed (HTTP {response.status_code}{detail})")
     try:
         body = response.json()
         text = body["output"]["text"]

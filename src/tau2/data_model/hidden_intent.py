@@ -27,7 +27,9 @@ class HiddenGoalNode(BaseModel):
     id: str = Field(min_length=1)
     kind: GoalKind
     visibility: GoalVisibility
+    field_type: str | None = None
     description: str = Field(min_length=1)
+    aliases: list[str] = Field(default_factory=list)
     tool: str | None = None
     argument_path: str | None = None
     gold_value: Any = None
@@ -45,6 +47,9 @@ class HiddenGoalGraph(BaseModel):
     version: str = "gaia2-hidden-goal-graph-v1"
     source_task_id: str
     source_category: str
+    target_stage: int = Field(default=0, ge=0, le=2)
+    public_request: str | None = None
+    private_request: str | None = None
     nodes: list[HiddenGoalNode]
     edges: list[list[str]] = Field(default_factory=list)
     protected_values: list[str] = Field(default_factory=list)
@@ -126,7 +131,7 @@ class HiddenGoalState(BaseModel):
         if state == "released":
             self.transitions.append({"type": "repeat_question", "node_id": node.id})
             return
-        if state not in {"withheld", "asked", "invalid_question"}:
+        if state not in {"withheld", "asked", "invalid_question", "premature_action"}:
             raise ValueError(f"Node {node.id} cannot be released from state {state}")
         self.node_states[node.id] = "released"
         self.released_values[node.id] = node.gold_value
@@ -141,6 +146,23 @@ class HiddenGoalState(BaseModel):
                 "revision": self.revision,
             }
         )
+
+    def satisfy(self, node_id: str, *, tool: str, arguments: dict[str, Any]) -> bool:
+        """Mark a released node satisfied when its bound tool argument is used."""
+        node_state = self.node_states.get(node_id)
+        if node_state != "released":
+            return False
+        self.node_states[node_id] = "satisfied"
+        self.transitions.append(
+            {
+                "type": "satisfied",
+                "node_id": node_id,
+                "tool": tool,
+                "arguments": arguments,
+                "revision": self.revision,
+            }
+        )
+        return True
 
     def mark_invalid_question(self, node_id: str | None, question: str) -> None:
         """Record a question that did not identify a releasable hidden node."""

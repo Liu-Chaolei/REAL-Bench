@@ -21,6 +21,12 @@ from tau2.data_model.transcript import (
 LIVE_SEGMENT_VERSION = "live-tick-padding-v5"
 LIVE_SILENCE_MS = 1500
 LIVE_PADDING_MS = LIVE_SILENCE_MS // 2
+MISSING_TRANSCRIPT_ERROR = "Recorded Live speech has no transcript"
+
+
+def is_missing_transcript_segment(segment: dict) -> bool:
+    """Return whether a recorded audio segment has no observer transcript."""
+    return segment.get("audio_alignment_error") == MISSING_TRANSCRIPT_ERROR
 
 
 def live_metadata(tick: Tick) -> LiveTranscriptTick | None:
@@ -60,16 +66,55 @@ def _session_groups(
     fragments = []
     activity = []
     durations = {ticks[i].tick_duration_seconds for i, _ in records}
-    if len(durations) != 1 or None in durations or next(iter(durations)) <= 0:
+    direct = all(
+        (ticks[i].agent_chunk.raw_data or {}).get("media_origin") is not None
+        for i, _ in records
+    )
+    if not direct and (
+        len(durations) != 1 or None in durations or next(iter(durations)) <= 0
+    ):
         raise ValueError("Live grouping requires one recorded positive tick duration")
-    duration = next(iter(durations))
+    duration = ticks[records[0][0]].tick_duration_seconds or 0.2
     session_start_ms = ticks[records[0][0]].tick_id * duration * 1000
     played_alignment = any(m.alignment == "played_audio" for _, m in records)
     version = "played-audio-asr-v3" if played_alignment else LIVE_SEGMENT_VERSION
+
+    def media_ms(value):
+        if value is None or not direct:
+            return value
+        for index, _ in records:
+            raw = ticks[index].agent_chunk.raw_data
+            offset, length = (
+                raw["played_stream_start_ms"],
+                raw["played_stream_duration_ms"],
+            )
+            if offset <= value <= offset + length:
+                return (
+                    (raw["playback_start_monotonic"] - raw["media_origin"]) * 1000
+                    + value
+                    - offset
+                )
+        return None
+
     for index, metadata in records:
         tick = ticks[index]
-        start = round(tick.tick_id * duration * 1000, 6)
-        for a, b in metadata.speech_intervals_ms:
+        raw = tick.agent_chunk.raw_data or {}
+        start = (
+            (raw["playback_start_monotonic"] - raw["media_origin"]) * 1000
+            if direct
+            else round(tick.tick_id * duration * 1000, 6)
+        )
+        if direct:
+            activity.extend(
+                _AudioSpan(
+                    (a - raw["media_origin"]) * 1000,
+                    (b - raw["media_origin"]) * 1000,
+                    index,
+                    index,
+                )
+                for a, b in raw["speech_intervals"]
+            )
+        for a, b in [] if direct else metadata.speech_intervals_ms:
             if not 0 <= a < b <= duration * 1000 + 1e-6:
                 # Older played-audio flush records stored session-relative
                 # intervals on the final tick. Per-tick playback intervals
@@ -89,10 +134,18 @@ def _session_groups(
                         fragment,
                         index,
                         start,
-                        session_start_ms + fragment.start_ms
+                        (
+                            media_ms(fragment.start_ms)
+                            if direct
+                            else session_start_ms + fragment.start_ms
+                        )
                         if aligned and fragment.start_ms is not None
                         else None,
-                        session_start_ms + fragment.end_ms
+                        (
+                            media_ms(fragment.end_ms)
+                            if direct
+                            else session_start_ms + fragment.end_ms
+                        )
                         if aligned and fragment.end_ms is not None
                         else None,
                     )
@@ -119,8 +172,14 @@ def _session_groups(
                 "unmatched_text",
             )
         ]
-    session_start = ticks[records[0][0]].tick_id * duration * 1000
-    session_end = (ticks[records[-1][0]].tick_id + 1) * duration * 1000
+    session_start = 0 if direct else ticks[records[0][0]].tick_id * duration * 1000
+    last_raw = ticks[records[-1][0]].agent_chunk.raw_data or {}
+    session_end = (
+        (last_raw["playback_start_monotonic"] - last_raw["media_origin"]) * 1000
+        + last_raw["played_stream_duration_ms"]
+        if direct
+        else (ticks[records[-1][0]].tick_id + 1) * duration * 1000
+    )
     bounds = [
         (
             max(session_start, s.start_ms - LIVE_PADDING_MS),
@@ -167,7 +226,7 @@ def _session_groups(
         if orphan:
             problems[ordinal].add("Live transcript has no recorded speech")
         if not part:
-            problems[ordinal].add("Recorded Live speech has no transcript")
+            problems[ordinal].add(MISSING_TRANSCRIPT_ERROR)
         identity = [
             session,
             version,
@@ -315,13 +374,11 @@ def require_live_alignment(
     unresolved = [
         g.chunks[0].raw_data["live_segment"] for g in live_utterance_groups(ticks)
     ]
-    unresolved = [m for m in unresolved if m["audio_alignment_error"]]
-    if allow_missing_transcript:
-        unresolved = [
-            m
-            for m in unresolved
-            if m["audio_alignment_error"] != "Recorded Live speech has no transcript"
-        ]
+    unresolved = [
+        m
+        for m in unresolved
+        if m["audio_alignment_error"] and not is_missing_transcript_segment(m)
+    ]
     if unresolved:
         raise ValueError(
             "Unresolved Live audio/text association: "

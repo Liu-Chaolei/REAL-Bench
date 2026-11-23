@@ -13,9 +13,12 @@ from tau2.task_authoring.gaia2_variants import build_variant, validate_variant
 @pytest.fixture
 def source_task():
     """Use a real native task so all reference and schema fields are covered."""
-    path = Path("data/tau2/task_variants/gaia2/pilot-v1/tasks.json")
-    task = json.loads(path.read_text())[0]
     source_path = Path("data/tau2/domains/gaia2/tasks.json")
+    task = next(
+        item
+        for item in json.loads(source_path.read_text())
+        if item["scenario"]["category"] == "repetition"
+    )
     return next(
         source
         for source in json.loads(source_path.read_text())

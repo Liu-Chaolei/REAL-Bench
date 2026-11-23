@@ -1,0 +1,11 @@
+# Sequential state semantics: one cached model request per delivered utterance/action.
+# Select explicitly; auto_score=false collects evidence without model calls.
+measures: [state_interaction]
+auto_score: true
+concurrency: 1
+max_requests: 96
+timeout_seconds: 120
+max_characters: 200000
+model:
+  model: gpt-5.5
+  args: {reasoning_effort: low, num_retries: 0}

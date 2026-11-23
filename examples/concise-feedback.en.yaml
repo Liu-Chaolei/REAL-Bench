@@ -1,0 +1,10 @@
+# Opt-in offline feedback evaluation with the initial English length budget.
+measures: [conciseness]
+auto_score: false
+concurrency: 1
+max_requests: 64
+timeout_seconds: 120
+max_characters: 200000
+conciseness:
+  calibration: calibration/concise-feedback.en-v1.json
+  evidence_max_characters: 12000

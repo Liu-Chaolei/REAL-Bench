@@ -34,7 +34,6 @@ Usage:
 Reference: https://www.alibabacloud.com/help/en/model-studio/realtime
 """
 
-import asyncio
 import base64
 import json
 from typing import Any, List, Optional
@@ -294,20 +293,13 @@ class DiscreteTimeQwenAdapter(DiscreteTimeAdapter):
         # Convert telephony audio to Qwen format
         qwen_audio = self._audio_converter.convert_input(user_audio)
 
-        async def receive_events():
-            elapsed_so_far = asyncio.get_running_loop().time() - tick_start
-            remaining = max(0.01, (self.tick_duration_ms / 1000) - elapsed_so_far)
-            return await self.provider.receive_events_for_duration(remaining)
+        async def receive():
+            return await self.provider.receive_events_for_duration(0.02)
 
-        _, events = await asyncio.gather(
-            self._send_audio_chunked(
-                qwen_audio, self.provider.send_audio, self._chunk_size
-            ),
-            receive_events(),
+        self._start_media_receiver(receive, self._process_event)
+        await self._send_audio_chunked(
+            qwen_audio, self.provider.send_audio, self._chunk_size
         )
-
-        for event in events:
-            self._process_event(result, event)
 
     def _process_event(self, result: TickResult, event: Any) -> None:
         """Process a Qwen event."""

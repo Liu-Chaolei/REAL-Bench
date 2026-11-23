@@ -1,4 +1,11 @@
 import os
+from pathlib import Path
+
+DEFAULT_API_CONFIG_DIR = str(Path.home() / ".config" / "qwaudio")
+
+# Shared evaluator-owned speech detection (PCM16 amplitude; no provider overrides).
+AUDIO_ACTIVITY_FRAME_MS = 20
+AUDIO_ACTIVITY_RMS_THRESHOLD = int(os.getenv("TAU2_AUDIO_ACTIVITY_RMS_THRESHOLD", "0"))
 
 # Optional independent SAASR caller-renderer workers.
 DEFAULT_SAASR_REQUEST_TIMEOUT_SECONDS = 900.0
@@ -161,6 +168,10 @@ DEFAULT_ASR_HOTWORD_WEIGHT = 4
 DEFAULT_ASR_HOTWORD_MAX_TERMS = 2000
 DEFAULT_QWEN_ASR_MODEL = "qwen-audio-3.1-asr-flash"
 DEFAULT_QWEN_ASR_SAMPLE_RATE = 16000
+DEFAULT_QWEN_TTS_MODEL = "qwen-audio-3.1-tts-flash"
+DEFAULT_QWEN_TTS_API_BASE = "https://dashscope.aliyuncs.com"
+DEFAULT_QWEN_TTS_API_KEY_ENV = "DASHSCOPE_API_KEY"
+DEFAULT_QWEN_TTS_VOICE = "loongbella_v3.1"
 VOICE_USER_SIMULATOR_DECISION_MODEL = "gpt-5.4-mini-2026-03-17"  # overridable
 VOICE_USER_SIMULATOR_DECISION_MODEL_ARGS = {"reasoning_effort": "low"}
 DEFAULT_SPEECH_COMPLEXITY = "regular"  # overridable: "control", "regular"
@@ -412,3 +423,17 @@ DEFAULT_DIAGNOSTIC_MAX_CHARACTERS = 200000
 DEFAULT_FEEDBACK_EVIDENCE_CHARACTERS = 12000
 DEFAULT_FEEDBACK_OPTIONAL_CAP = 0.25
 DEFAULT_INTERACTION_EVENT_CHARACTERS = 1200
+
+# Unified voice-interaction definitions, in seconds unless explicitly named.
+VOICE_INTERACTION_CONFIG = {
+    "merge_gap_sec": 0.2,
+    "stop_silence_sec": 1.0,
+    "on_time_sec": 2.75,
+    "backchannel_stop_window_sec": 1.0,
+    "vocal_tic_stop_window_sec": 1.0,
+    "non_directed_stop_window_sec": 1.0,
+    "vocal_tic_response_window_sec": 2.0,
+    "non_directed_response_window_sec": 2.0,
+    "aggregation": "equal_task_then_trial",
+    "percentile": "weighted_empirical_inverse_cdf",
+}

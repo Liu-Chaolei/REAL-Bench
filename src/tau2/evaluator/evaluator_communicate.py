@@ -199,7 +199,7 @@ class CommunicateEvaluator(EvaluatorBase[Message]):
                         ),
                     ],
                     call_name="communicate_info_eval",
-                    **judge.model_args,
+                    **judge.arguments(),
                 )
                 reply = SemanticCommunicateReply.model_validate_json(
                     extract_json_from_llm_response(response.content or "")

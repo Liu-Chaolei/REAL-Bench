@@ -52,9 +52,12 @@ class Gaia2Environment(Environment):
             from tau2.domains.gaia2.utils import runtime_digest, verify_task_artifact
             from tau2.domains.gaia2.verify import verify_pinned_resources
 
-            if not allow_stale_runtime and (not manifest.get("verified") or (
-                runtime_mode != "replay" and spec.runtime_sha256 != runtime_digest()
-            )):
+            if not allow_stale_runtime and (
+                not manifest.get("verified")
+                or (
+                    runtime_mode != "replay" and spec.runtime_sha256 != runtime_digest()
+                )
+            ):
                 raise ValueError(
                     "Gaia2 data/runtime is not verified; run 'tau2 gaia2 verify --reference --seal'"
                 )
@@ -80,10 +83,15 @@ class Gaia2Environment(Environment):
         self.runtime_mode = runtime_mode
         self.stage_control = stage_control and not task.id.startswith("hidden_")
         managed = set()
+        from tau2.domains.gaia2.interaction_variants import variant_for
+
+        variant = variant_for(task)
+        if variant is not None:
+            managed.add(variant.request_id())
         if stage_control and len(spec.stages) > 1:
             from tau2.orchestrator.scenario_stages import stage_requests
 
-            managed = {event.id for event in stage_requests(spec)[1:]}
+            managed |= {event.id for event in stage_requests(spec)[1:]}
         self.scenario_runtime = ScenarioRuntime(
             spec, self._environment_operation, managed_user_events=managed
         )
@@ -204,7 +212,9 @@ def get_environment(
     )
 
 
-def get_tasks(task_split_name=None, *, root=GAIA2_DATA_DIR) -> list[Task]:
+def get_tasks(
+    task_split_name=None, *, root=GAIA2_DATA_DIR, include_interaction_variants=True
+) -> list[Task]:
     """Load converted native tasks; no Parquet dependency is needed at runtime."""
     path = Path(root) / "tasks.json"
     if not path.exists():
@@ -215,15 +225,47 @@ def get_tasks(task_split_name=None, *, root=GAIA2_DATA_DIR) -> list[Task]:
 
         verify_task_artifact(Path(root))
     tasks = [Task.model_validate(value) for value in json.loads(path.read_text())]
+    variants_path = Path(root) / "interaction_variants.json"
+    if include_interaction_variants and variants_path.exists():
+        variants = json.loads(variants_path.read_text())
+        if not isinstance(variants, list):
+            raise ValueError("Gaia2 interaction_variants.json must contain a list")
+        base = {task.id: task for task in tasks}
+        for raw in variants:
+            source_id = raw.get("source_task_id")
+            source = base.get(source_id)
+            if source is None:
+                raise ValueError(
+                    f"Unknown interaction variant source task: {source_id}"
+                )
+            from tau2.domains.gaia2.interaction_variants import (
+                InteractionVariant,
+                apply_variant,
+            )
+
+            tasks.append(apply_variant(source, InteractionVariant.model_validate(raw)))
+        if len({task.id for task in tasks}) != len(tasks):
+            raise ValueError("Duplicate Gaia2 interaction variant task ID")
     if task_split_name is None:
         return tasks
-    splits = get_tasks_split(root=root)
+    splits = get_tasks_split(
+        root=root, include_interaction_variants=include_interaction_variants
+    )
     if task_split_name not in splits:
         raise ValueError(f"Unknown Gaia2 split {task_split_name}")
     selected = set(splits[task_split_name])
     return [task for task in tasks if task.id in selected]
 
 
-def get_tasks_split(*, root=GAIA2_DATA_DIR):
+def get_tasks_split(*, root=GAIA2_DATA_DIR, include_interaction_variants=True):
     """Expose base and five capability subsets through standard task selection."""
-    return json.loads((Path(root) / "split_tasks.json").read_text())
+    result = json.loads((Path(root) / "split_tasks.json").read_text())
+    variants_path = Path(root) / "interaction_variants.json"
+    if include_interaction_variants and variants_path.exists():
+        variants = json.loads(variants_path.read_text())
+        for kind in ("addtask", "modify", "cancel"):
+            result[kind] = [
+                row["id"] for row in variants if row.get("variant_type") == kind
+            ]
+        result["all"] = result.get("all", []) + [row["id"] for row in variants]
+    return result

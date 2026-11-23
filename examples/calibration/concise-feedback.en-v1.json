@@ -1,0 +1,27 @@
+{
+  "calibration": {
+    "id": "en-feedback-initial-v1",
+    "version": "tau-feedback-calibration/1",
+    "length_rule": "nfc_nonwhitespace/1",
+    "reviewed": true,
+    "provenance": "Initial English budget selected from reviewed illustrative examples; corpus calibration, independent annotation and held-out validation remain pending.",
+    "review_sha256": "c1e82446761b6d39c5eef8d8b2046948d764dece3a3d1bcdc2c8e715707a59e8",
+    "languages": {
+      "en": {
+        "base": 15,
+        "per_nugget": 30,
+        "optional_cap": 0.25
+      }
+    }
+  },
+  "selection": {
+    "kind": "user_selected_initial_budget",
+    "language": "en",
+    "user_feedback": "同意这个配置",
+    "basis": "User reviewed English illustrative examples and selected the 15 + 30N preset.",
+    "base": 15,
+    "per_nugget": 30,
+    "optional_cap": 0.25,
+    "validation_status": "Preliminary parameter choice; no 40–60-window annotation, corpus fit or held-out listening validation completed."
+  }
+}

@@ -864,6 +864,7 @@ def repair_one(
     api_key_pool = [] if "deepseek" in model_name else None
     token = generation.request_policy_override.set(
         default_policy(
+            config=config,
             per_key_concurrency=per_key_concurrency,
             key_limits=key_limits,
             api_key_pool=api_key_pool,

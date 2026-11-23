@@ -1,0 +1,55 @@
+actions:
+  send:
+    candidates: [send_message, send_email]
+    roles:
+      ARG0: sender
+      ARG1: content
+      ARG2: recipient
+  cancel:
+    candidates: [cancel]
+    roles:
+      ARG0: actor
+      ARG1: target
+  save:
+    candidates: [save]
+    roles:
+      ARG0: actor
+      ARG1: target
+  delete:
+    candidates: [delete]
+    roles:
+      ARG0: actor
+      ARG1: target
+  create:
+    candidates: [create]
+    roles:
+      ARG0: actor
+      ARG1: created_object
+  update:
+    candidates: [update]
+    roles:
+      ARG0: actor
+      ARG1: target
+      ARG2: new_value
+  book:
+    candidates: [book]
+    roles:
+      ARG0: actor
+      ARG1: target
+  find:
+    candidates: [search, find]
+    roles:
+      ARG0: actor
+      ARG1: target
+  move:
+    candidates: [modify]
+    roles:
+      ARG0: actor
+      ARG1: target
+      ARG2: destination
+  add:
+    candidates: [add]
+    roles:
+      ARG0: actor
+      ARG1: target
+

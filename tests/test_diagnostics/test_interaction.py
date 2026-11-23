@@ -27,6 +27,7 @@ from tau2.diagnostics.cli import add_metrics_args
 from tau2.diagnostics.config import MetricsConfig
 from tau2.diagnostics.interaction import (
     build_input,
+    conversation_evidence,
     evaluate_interaction,
     summarize_interaction,
 )
@@ -187,6 +188,52 @@ def test_input_previews_large_events_without_hidden_state(call_evidence):
     assert "hidden_answer" not in json.dumps(payload)
 
 
+def test_scenario_clock_is_public_context_with_only_recorded_time_reads(
+    call_evidence, monkeypatch
+):
+    assert "scenario_clock" not in build_input(call_evidence)
+    call_evidence.domain = "gaia2"
+    call_evidence.source["scenario_start_time"] = 1728975600
+    call_evidence.operations = [
+        OperationEvidence(
+            call_id=name,
+            name=name,
+            app="System",
+            kind="SYSTEM",
+            arguments={},
+            raw_arguments={},
+            result={"current_timestamp": 1728975660},
+            started=1728975660,
+            ended=1728975660,
+        )
+        for name in ("System__get_current_time", "System__get_notifications")
+    ]
+    payload = build_input(call_evidence)
+    clock = payload["scenario_clock"]
+    assert clock["start_timestamp"] == 1728975600
+    assert clock["time_zone"] == "UTC"
+    assert clock["authoritative_tool"] == "System__get_current_time"
+    assert [row["id"] for row in clock["observations"]] == ["System__get_current_time"]
+    assert clock["observations"][0]["result"]["current_timestamp"] == 1728975660
+    assert payload["operations"] == []
+    call_evidence.operations = []
+    assert build_input(call_evidence)["scenario_clock"]["observations"] == []
+    monkeypatch.setattr("tau2.diagnostics.collect.delivered_inputs", lambda *_: [])
+    historical = conversation_evidence(
+        SimpleNamespace(
+            id="historical",
+            task_id="task",
+            info={},
+            ticks=[],
+            termination_reason=TerminationReason.MAX_STEPS,
+        ),
+        SimpleNamespace(scenario=SimpleNamespace(start_time=1728975600)),
+        "gaia2",
+    )
+    assert build_input(historical)["scenario_clock"]["start_timestamp"] == 1728975600
+    assert build_input(historical)["scenario_clock"]["observations"] == []
+
+
 @pytest.mark.parametrize("failure", ["missing", "unknown", "label", "json", "timeout"])
 def test_failures_do_not_retry_or_cache_invalid_judgments(
     call_evidence, judge, tmp_path, failure
@@ -260,8 +307,10 @@ def test_cache_is_reused_and_invalid_trials_are_excluded(
     assert pooled["scored"] == 1 and pooled["total_trials"] == 4
     assert pooled["counts"] == measure["counts"]
     report = summarize([first, {"profile": first["profile"]}])
-    assert report["interaction"]["total_trials"] == 2
-    assert report["interaction"]["effective_interaction_rate"] == pytest.approx(2 / 3)
+    assert report["evaluation_log"]["total_trials"] == 2
+    assert report["metrics"]["interaction"][
+        "effective_interaction_rate"
+    ] == pytest.approx(2 / 3)
     alternate = dict(measure, counts={"useful": 0, "unhelpful": 6, "uncertain": 0})
     assert summarize_interaction([measure, alternate])[
         "effective_interaction_rate"
@@ -322,7 +371,7 @@ def test_historical_dialogue_cli_dry_run_cache_and_export(judge, tmp_path, capsy
         ]
     )
     args.func(args)
-    assert '"target_utterances": 1' in capsys.readouterr().out
+    assert '"effective_interaction_rate": null' in capsys.readouterr().out
     assert not calls and not (tmp_path / "artifacts").exists()
     responses[:] = [
         {
@@ -336,20 +385,32 @@ def test_historical_dialogue_cli_dry_run_cache_and_export(judge, tmp_path, capsy
         }
     ]
     first = run_saved(path, config())
-    assert first["interaction"]["effective_interaction_rate"] == 1
-    measure = first["records"][0]["summary"]["measures"]["interaction"]
+    assert first["metrics"]["interaction"]["effective_interaction_rate"] == 1
+    measure = first["evaluation_log"]["records"][0]["summary"]["measures"][
+        "interaction"
+    ]
     assert measure["evidence_mode"] == "conversation_only"
     prompt = calls[0]["messages"][0].content
     assert "hidden user script" not in prompt
     assert '"dialogue":"message_index"' in prompt
     assert len(calls) == 1
-    assert read_saved_reports(path)["interaction"]["counts"] == measure["counts"]
+    assert (
+        read_saved_reports(path)["evaluation_log"]["records"][0]["summary"]["measures"][
+            "interaction"
+        ]["counts"]
+        == measure["counts"]
+    )
     run_saved(path, config())
     assert len(calls) == 1
     export_path = tmp_path / "export.json"
     export_args = parser.parse_args(["export", str(path), "--output", str(export_path)])
     export_args.func(export_args)
-    assert json.loads(export_path.read_text())["interaction"]["scored"] == 1
+    assert (
+        json.loads(export_path.read_text())["metrics"]["interaction"][
+            "effective_interaction_rate"
+        ]
+        == 1
+    )
     assert len(calls) == 1 and path.read_bytes() == original
 
 
@@ -370,14 +431,14 @@ def test_historical_fallback_is_interaction_only_and_run_specific(
     for name in ("mock", "retail"):
         saved_run(tmp_path / name / "results.json", domain=name, format="dir")
     report = run_saved(tmp_path, config(), dry_run=True)
-    assert len(report["records"]) == 2
-    assert all(row["status"] == "planned" for row in report["records"]), report[
-        "records"
-    ]
+    assert len(report["evaluation_log"]["records"]) == 2
+    assert all(
+        row["status"] == "planned" for row in report["evaluation_log"]["records"]
+    ), report["evaluation_log"]["records"]
     assert sorted(domains) == ["mock", "retail"]
     blocked = run_saved(tmp_path, config(), only=["interaction", "voice"])
     assert all(
         row["reason"] == "historical_run_missing_diagnostic_evidence"
-        for row in blocked["records"]
+        for row in blocked["evaluation_log"]["records"]
     )
     assert not calls

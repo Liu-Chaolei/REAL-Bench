@@ -1,4 +1,4 @@
-"""STOP-driven continuation of a single stateful conversation."""
+"""Control-signal-driven continuation of a single stateful conversation."""
 
 from tau2.user.user_simulator_base import OUT_OF_SCOPE, STOP, TRANSFER
 
@@ -15,7 +15,7 @@ def stage_requests(spec):
 
 
 class ScenarioStages:
-    """Consume intermediate STOPs; correctness is evaluated after the call."""
+    """Consume intermediate control signals; correctness is evaluated after the call."""
 
     def __init__(self, spec):
         self.requests = stage_requests(spec)
@@ -44,12 +44,16 @@ class ScenarioStages:
         }
 
     def stop(self, message, runtime, index):
-        """Return True when STOP is internal, including duplicate old signals."""
+        """Consume an intermediate STOP or out-of-scope signal.
+
+        Both signals end the current scripted request and release the next one
+        when a series has another stage.  Transfer remains a terminal signal.
+        """
         text = message.content or ""
         if (
             message.is_tool_call()
-            or STOP not in text
-            or any(token in text for token in (TRANSFER, OUT_OF_SCOPE))
+            or not any(token in text for token in (STOP, OUT_OF_SCOPE))
+            or TRANSFER in text
         ):
             return False
         if self.transition_pending or self.awaiting_delivery:
@@ -62,6 +66,9 @@ class ScenarioStages:
 
     def release(self, user, runtime, index):
         """Queue exactly one continuation once known output has drained."""
+        hidden_runtime = getattr(user, "hidden_intent_runtime", None)
+        if hidden_runtime is not None and self.current == 0:
+            hidden_runtime.deactivate()
         observer = getattr(user, "diagnostic_recorder", None)
         if observer is not None:
             observer.stage(f"stage:{self.current}:end")

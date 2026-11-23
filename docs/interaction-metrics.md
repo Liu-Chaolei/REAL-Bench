@@ -1,4 +1,52 @@
-# Voice Interaction Metrics
+# Unified voice interaction metrics
+
+New source-classified media records use `tau-voice-interaction/4` from
+`src/tau2/metrics/voice_interaction.py`. Both the diagnostics CLI and the
+interaction-metrics export read the same event calculations. Historical
+recordings retain the definitions documented in the legacy section below.
+
+| Field | Definition |
+| --- | --- |
+| `response_rate` | Answered formal utterances / delivered formal utterances. |
+| `response_latency_mean` | Mean delay from a formal utterance ending to the start of a new Agent speech group; an Agent group that began earlier does not count as a response. |
+| `response_latency_p90` | Inverse empirical CDF at 0.9, with equal task weights and equal trial weights within a task. |
+| `yield_rate` | Confirmed yields / decidable formal interruptions. A yield requires at least one second of silence; no timeliness deadline. |
+| `yield_latency_mean` | Mean seconds to the actual stop in confirmed yields; excludes the silence-confirmation wait. |
+| `agent_interruption_event_rate` | New agent speech groups starting during formal user utterances / formal utterances. Can exceed one. |
+| `agent_interrupted_turn_rate` | Formal user utterances with at least one such start / formal utterances. |
+| `speech_overlap_duration` | Mean overlap seconds per formal utterance, including zero overlap. |
+| `on_time_rate` | Timely responses / answered utterances: delay < 2.75 s for every request, independent of tools or tool logs. No early penalty. |
+| `selectivity_backchannel` | Correct continuation through independently generated backchannels. |
+| `selectivity_vocal_tic` | Correct handling of independent vocal tics, using the shared one-second stop confirmation. |
+| `selectivity_non_directed` | Correct handling of independent speech not directed at the agent. |
+
+Normal generated user utterances are formal. Independently generated continuers,
+inserts, background, silence and internal control signals are excluded at their
+source. An embedded filler or background noise does not change a formal
+utterance's category. Audio packet boundaries do not create new utterances.
+
+Gaps shorter than 200 ms join agent speech groups for onset counting. Original
+voiced intervals remain separate for zero-delay response decisions, overlap and
+one-second silence confirmation. A confirmed stop is timestamped at the start of
+silence. Insufficient trailing silence is logged and excluded from yield rates.
+
+Means and ratios average trials within each task and then tasks equally. For P90,
+each applicable task receives equal mass, divided among its applicable trials,
+then their latency samples. The returned delay is the first whose cumulative
+weight reaches 0.9. Unanswered requests affect response rate, not a fabricated
+latency value. Counts and event records live in `evaluation_log`.
+
+The call-level selectivity flag (more than three errors) is retired. The three component rates remain; quality sidecars contain provenance logs only.
+
+Detailed implementation plan and decisions:
+[voice-interaction-metrics-unification-plan.md](voice-interaction-metrics-unification-plan.md).
+
+---
+
+# Legacy voice interaction metrics
+
+The following section describes historical panels and their original formulas.
+It does not define the new source-classified panel.
 
 The τ-voice leaderboard reports **interaction quality** alongside task success
 (pass^1). Interaction metrics measure the conversational dynamics of a voice

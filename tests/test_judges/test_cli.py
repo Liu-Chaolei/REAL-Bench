@@ -1,7 +1,6 @@
 """Offline end-to-end diagnostics over ordinary saved Results."""
 
 import argparse
-import json
 
 import pytest
 
@@ -129,10 +128,7 @@ def test_live_transcript_allows_text_judging_without_audio(tmp_path):
     plan = plan_suite(
         saved.inputs, load_catalog(), [], only=["naturalness", "speech_fidelity"]
     )
-    assert {entry.measure: entry.action for entry in plan.items} == {
-        "naturalness": PlanAction.MISSING,
-        "speech_fidelity": PlanAction.MISSING_INPUT,
-    }
+    assert plan.items == []
 
     legacy = simulation.model_copy(deep=True)
     legacy.ticks[0].agent_chunk.raw_data = {"tick_number": 0}
@@ -199,24 +195,24 @@ def test_cli_dry_run_and_readers_never_call_backend_or_modify_results(
     )
     before = all_source_bytes(saved_run)
     for command in ("suite", "summarize", "export"):
-        options = [command, str(saved_run), "--only", "naturalness,tool_use"]
+        options = [command, str(saved_run), "--only", "register_formality"]
         if command == "suite":
             options.append("--dry-run")
         report = build_export(args(*options))
-        assert len(report.plan.items) == 4
+        assert len(report.plan.items) == 2
         assert all(summary.not_judged_calls == 2 for summary in report.summary)
         assert all(summary.observed_pass_fraction is None for summary in report.summary)
     assert not progress_path(saved_run.resolve()).exists()
     assert all_source_bytes(saved_run) == before
 
 
-def test_cli_production_no_speech_is_explicit_no_opportunity(saved_run, monkeypatch):
+def test_cli_production_no_tools_is_explicit_no_opportunity(saved_run, monkeypatch):
     monkeypatch.setattr(
         "tau2.judges.criteria.generate",
         lambda **kw: pytest.fail("no speech must not call a model"),
     )
     before = all_source_bytes(saved_run)
-    report = build_export(args("suite", str(saved_run), "--only", "naturalness"))
+    report = build_export(args("suite", str(saved_run), "--only", "register_formality"))
     assert report.summary[0].judged_calls == 2
     assert report.summary[0].no_opportunity_units == 2
     assert all_source_bytes(saved_run) == before
@@ -245,16 +241,22 @@ def test_cli_fixture_backend_resume_force_filter_stale_and_reward_invariance(
         ),
     )
     before = all_source_bytes(saved_run)
-    report = build_export(args("suite", str(saved_run), "--only", "naturalness"))
+    report = build_export(args("suite", str(saved_run), "--only", "register_formality"))
     assert calls == [0, 1]
     assert (
         report.summary[0].complete and report.summary[0].observed_pass_fraction == 0.5
     )
-    build_export(args("suite", str(saved_run), "--only", "naturalness"))
+    build_export(args("suite", str(saved_run), "--only", "register_formality"))
     assert calls == [0, 1]
     build_export(
         args(
-            "suite", str(saved_run), "--only", "naturalness", "--force", "--trials", "1"
+            "suite",
+            str(saved_run),
+            "--only",
+            "register_formality",
+            "--force",
+            "--trials",
+            "1",
         )
     )
     assert calls == [0, 1, 1]
@@ -268,7 +270,7 @@ def test_cli_fixture_backend_resume_force_filter_stale_and_reward_invariance(
     result.tasks[0].user_scenario.instructions = "Changed caller context."
     result.save(saved_run, format="dir" if saved_run.is_dir() else "json")
     stale = build_export(
-        args("suite", str(saved_run), "--only", "naturalness", "--dry-run")
+        args("suite", str(saved_run), "--only", "register_formality", "--dry-run")
     )
     assert all(item.action == PlanAction.STALE for item in stale.plan.items)
 
@@ -281,7 +283,7 @@ def test_cli_malformed_fixture_reply_remains_an_explicit_error(saved_run, monkey
         "create_judge",
         lambda *_: __import__("types").SimpleNamespace(evaluate=lambda *_: "not typed"),
     )
-    report = build_export(args("suite", str(saved_run), "--only", "naturalness"))
+    report = build_export(args("suite", str(saved_run), "--only", "register_formality"))
     assert report.summary[0].error_calls == 2
     assert report.summary[0].observed_pass_fraction is None
     assert all(row.error for row in report.verdicts)
@@ -296,17 +298,15 @@ def test_cli_has_no_rejudge_and_rejects_unvalidated_measure(saved_run):
         )
 
 
-def test_cli_production_tool_use_adapter_runs_without_api_when_no_tools(
-    saved_run, monkeypatch
-):
-    import tau2.judges.tool_use as module
+def test_cli_production_no_speech_skips_model(saved_run, monkeypatch):
+    import tau2.judges.criteria as module
 
     monkeypatch.setattr(
         module,
         "generate",
-        lambda **_: pytest.fail("No-tool call must be preclassified"),
+        lambda **_: pytest.fail("No-speech call must be preclassified"),
     )
-    report = build_export(args("suite", str(saved_run), "--only", "tool_use"))
+    report = build_export(args("suite", str(saved_run), "--only", "register_formality"))
     assert report.summary[0].judged_calls == 2
     assert report.summary[0].no_opportunity_units == 2
     assert report.summary[0].observed_pass_fraction is None
@@ -316,7 +316,7 @@ def test_cli_verified_missing_audio_is_explicit(saved_run):
     report = build_export(
         args("suite", str(saved_run), "--only", "speech_fidelity", "--dry-run")
     )
-    assert report.summary[0].missing_input_calls == 2
+    assert report.summary == []
 
 
 def test_saved_run_skips_infrastructure_errors(saved_run):
@@ -338,59 +338,6 @@ def test_backend_rejects_changed_source_before_model_call(saved_run):
     result.save(saved_run, format="dir" if saved_run.is_dir() else "json")
     with pytest.raises(ValueError, match="metadata changed"):
         reader.load(item)
-
-
-def test_saved_production_naturalness_errors_resume_and_cached_success(
-    saved_run, monkeypatch
-):
-    from types import SimpleNamespace
-
-    from tau2.data_model.message import AssistantMessage, UserMessage
-
-    results = Results.load(saved_run)
-    for simulation in results.simulations:
-        simulation.messages = [
-            UserMessage(role="user", content="Pode ajudar?"),
-            AssistantMessage(role="assistant", content="Claro, posso ajudar."),
-        ]
-    results.save(saved_run, format="dir" if saved_run.is_dir() else "json")
-    before = all_source_bytes(saved_run)
-    calls = []
-
-    def generate(**kwargs):
-        calls.append(kwargs)
-        if len(calls) == 1:
-            return SimpleNamespace(content='{"results": []}')
-        return SimpleNamespace(
-            content=json.dumps(
-                {
-                    "results": [
-                        {
-                            "factor_id": "naturalness",
-                            "opportunity": True,
-                            "violated": False,
-                            "severity": 0,
-                            "reasoning": "Natural phrasing.",
-                            "quote": "",
-                        }
-                    ]
-                }
-            )
-        )
-
-    monkeypatch.setattr("tau2.judges.criteria.generate", generate)
-    report = build_export(args("suite", str(saved_run), "--only", "naturalness"))
-    assert report.summary[0].error_calls == 1
-    assert report.summary[0].judged_calls == 1
-    report = build_export(args("suite", str(saved_run), "--only", "naturalness"))
-    assert len(calls) == 3
-    assert report.summary[0].complete
-    assert report.summary[0].observed_pass_fraction == 1
-    build_export(args("suite", str(saved_run), "--only", "naturalness"))
-    assert len(calls) == 3
-    assert all_source_bytes(saved_run) == before
-    assert all(call["model"] == "gpt-5.5" for call in calls)
-    assert all(call["reasoning_effort"] == "xhigh" for call in calls)
 
 
 def test_evidence_reader_is_lazy_and_reuses_metadata(saved_run, monkeypatch):
@@ -426,7 +373,9 @@ def test_suite_consumes_typed_verdict_without_json_round_trip(saved_run, monkeyp
         "model_validate_json",
         lambda *_: pytest.fail("Typed judge verdict must not be reparsed as JSON"),
     )
-    report = judge_saved_run(saved_run, load_catalog(), only=["tool_use"], execute=True)
+    report = judge_saved_run(
+        saved_run, load_catalog(), only=["register_formality"], execute=True
+    )
     assert all(row.verdict is not None for row in report.verdicts)
     assert all(row.error is None for row in report.verdicts)
 
@@ -457,7 +406,7 @@ def test_suite_and_summarize_print_compact_tables_by_default(
         "tau2.judges.suite.create_judge",
         lambda *_: pytest.fail("read-only command reached backend"),
     )
-    selection = ["--only", "naturalness,tool_use"]
+    selection = ["--only", "register_formality"]
 
     run_judges(args("summarize", str(saved_run), *selection))
     table = capsys.readouterr().out
@@ -473,11 +422,13 @@ def test_suite_and_summarize_print_compact_tables_by_default(
         "complete",
     ]
     assert table.splitlines()[2].split() == [
-        "naturalness", "2", "0", "0", "2", "0", "0", "-", "no"
+        "register_formality", "2", "0", "0", "2", "0", "0", "-", "no"
     ]  # fmt: skip
     assert "{" not in table
 
-    run_judges(args("suite", str(saved_run), "--only", "tool_use", "--dry-run"))
+    run_judges(
+        args("suite", str(saved_run), "--only", "register_formality", "--dry-run")
+    )
     plan = capsys.readouterr().out
     assert plan.splitlines()[0].split() == [
         "measure",
@@ -486,10 +437,10 @@ def test_suite_and_summarize_print_compact_tables_by_default(
         "not_applicable",
         "missing_input",
     ]
-    assert plan.splitlines()[2].split() == ["tool_use", "2", "0", "0", "0"]
+    assert plan.splitlines()[2].split() == ["register_formality", "2", "0", "0", "0"]
     assert "Verdicts to judge: 2; reused: 0." in plan
-    # Tool use asks at most one question per calibrated criterion per call.
-    assert "Estimated model calls (upper bound): 6." in plan
+    # No delivered speech means no utterance-level model calls.
+    assert "Estimated model calls (upper bound): 0." in plan
 
     # --json restores the full typed export, identical to the library result.
     run_judges(args("summarize", str(saved_run), *selection, "--json"))
@@ -516,7 +467,7 @@ def test_export_command_stays_json(saved_run, capsys):
     from tau2.judges.cli import run_judges
     from tau2.judges.summary import DiagnosticExport
 
-    run_judges(args("export", str(saved_run), "--only", "tool_use"))
+    run_judges(args("export", str(saved_run), "--only", "register_formality"))
     DiagnosticExport.model_validate_json(capsys.readouterr().out)
     with pytest.raises(SystemExit):
         args("export", str(saved_run), "--json")

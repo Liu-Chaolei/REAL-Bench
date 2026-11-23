@@ -1,6 +1,7 @@
 # Copyright Sierra
 """Audio effect processor mixins for batch and streaming modes."""
 
+import uuid
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
@@ -9,7 +10,7 @@ import numpy as np
 from loguru import logger
 from pydantic import BaseModel
 
-from tau2.data_model.audio import AudioData, AudioEncoding
+from tau2.data_model.audio import PCM_SAMPLE_RATE, AudioData, AudioEncoding
 from tau2.data_model.audio_effects import (
     ChannelEffectsConfig,
     ChannelEffectsResult,
@@ -129,6 +130,7 @@ class StreamingChunkResult:
     burst_noise_file: Optional[str]
     pending_effect_completed: bool
     pending_effect_discarded: bool
+    speech_event: dict | None = None
 
     def to_mixed_audio_data(self) -> AudioData:
         """Sum all tracks (including out-of-turn speech) into one AudioData."""
@@ -217,7 +219,11 @@ class StreamingAudioEffectsMixin:
                                 pending_effect = PendingEffectState(
                                     audio_bytes=audio.data,
                                     offset=0,
-                                    info={"type": item.type, "value": item.text},
+                                    info={
+                                        "type": item.type,
+                                        "value": item.text,
+                                        "event_id": str(uuid.uuid4()),
+                                    },
                                 )
                                 triggered_speech_insert = item
                                 logger.debug(
@@ -228,11 +234,23 @@ class StreamingAudioEffectsMixin:
         oot_track = np.zeros(num_samples, dtype=np.float64)
         pending_effect_completed = False
 
+        speech_event = None
         if (
             pending_effect is not None
             and not pending_effect.is_complete
             and not is_speech
         ):
+            speech_event = {
+                "id": pending_effect.info.setdefault("event_id", str(uuid.uuid4())),
+                "kind": "vocal_tic"
+                if pending_effect.info["type"] == "vocal_tic"
+                else "non_directed",
+                "range": [
+                    0.0,
+                    min(num_samples * 2, pending_effect.remaining_bytes)
+                    / (2 * PCM_SAMPLE_RATE),
+                ],
+            }
             oot_track, pending_effect, pending_effect_completed = (
                 self._get_pending_effect_track(pending_effect, num_samples)
             )
@@ -253,6 +271,7 @@ class StreamingAudioEffectsMixin:
             burst_noise_file=burst_noise_file,
             pending_effect_completed=pending_effect_completed,
             pending_effect_discarded=pending_effect_discarded,
+            speech_event=speech_event,
         )
 
     def _get_pending_effect_track(

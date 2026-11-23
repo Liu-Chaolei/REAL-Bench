@@ -10,7 +10,7 @@ The three stages share application state and scenario time. It produces native
 `Task`, `ScenarioSpec`, `ScenarioAction` and `EvaluationCriteria` records, plus a
 private stage index with material evidence, checkpoint outcomes and review records.
 The canonical integrated tasks use the continuous runtime described in
-[the Gaia2 guide](gaia2.md): intermediate caller STOPs release the next request,
+[the Gaia2 guide](gaia2.md): intermediate caller STOP or out-of-scope signals release the next request,
 with one final score after the call. Standalone authoring exports still require
 the native integration and complete reference/replay verification before running.
 

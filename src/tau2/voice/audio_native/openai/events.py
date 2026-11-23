@@ -1,5 +1,6 @@
 """Pydantic models for OpenAI Realtime API events."""
 
+import time
 from typing import Annotated, Literal, Optional, Union
 
 from pydantic import BaseModel, Field
@@ -8,6 +9,7 @@ from pydantic import BaseModel, Field
 class BaseRealtimeEvent(BaseModel):
     """Base class for all Realtime API events."""
 
+    received_monotonic: float = Field(default_factory=time.monotonic)
     type: str
     event_id: Optional[str] = None
 

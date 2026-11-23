@@ -16,9 +16,10 @@ def add_metrics_args(parser):
         child.add_argument("--output", type=Path)
         if name == "run":
             child.add_argument("--config", type=Path, required=True)
+            child.add_argument("--api-config-dir", type=Path)
             child.add_argument(
                 "--only",
-                help="Comma-separated intent,execution,voice,interaction,conciseness",
+                help="Comma-separated intent,execution,voice,interaction,state_interaction,conciseness",
             )
             child.add_argument("--dry-run", action="store_true")
         child.set_defaults(func=run_metrics)
@@ -90,14 +91,25 @@ def run_metrics(args):
 
         only = args.only.split(",") if args.only else None
         if only and any(
-            x not in ("intent", "execution", "voice", "interaction", "conciseness")
+            x
+            not in (
+                "intent",
+                "execution",
+                "voice",
+                "interaction",
+                "state_interaction",
+                "conciseness",
+            )
             for x in only
         ):
             raise ValueError(
-                "--only accepts intent,execution,voice,interaction,conciseness"
+                "--only accepts intent,execution,voice,interaction,state_interaction,conciseness"
             )
         report = run_saved(
-            args.results, MetricsConfig.load(args.config), only, args.dry_run
+            args.results,
+            MetricsConfig.load(args.config, args.api_config_dir),
+            only,
+            args.dry_run,
         )
     else:
         from tau2.diagnostics.suite import read_saved_reports
@@ -105,4 +117,18 @@ def run_metrics(args):
         report = read_saved_reports(args.results)
     if args.output:
         write_json(args.output, report)
-    print(json.dumps(report, ensure_ascii=False, indent=2))
+
+    def capability_view(value):
+        if "groups" in value:
+            return {
+                "groups": {
+                    key: capability_view(group)
+                    for key, group in value["groups"].items()
+                }
+            }
+        return value.get("metrics", value)
+
+    visible = capability_view(report)
+    if args.metrics_command == "export":
+        visible = report
+    print(json.dumps(visible, ensure_ascii=False, indent=2))

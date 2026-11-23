@@ -106,7 +106,7 @@ def main():
                 report.update(
                     status=availability["status"],
                     reasons=[availability["reason"]],
-                    native_reward=None,
+                    reward=None,
                     task_id=case,
                     scenario_id=case,
                 )

@@ -78,7 +78,7 @@ def generate_quality_schema() -> str:
         BenchmarkQuality,
         "Tau2-Bench 2.0 Package Call Quality",
         "benchmark-quality.json in a voice-v2 leaderboard package: call-level "
-        "Interaction and Experience (Generation quality). Auto-generated from "
+        "provenance logs without independent performance flags. Auto-generated from "
         "src/tau2/scripts/leaderboard/benchmark_quality.py — do not edit by hand.",
     )
 

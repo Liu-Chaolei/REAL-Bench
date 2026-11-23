@@ -15,8 +15,9 @@ from tau2.evaluator.persistent_tasks.reply import reply_text
 from tau2.evaluator.persistent_tasks.state_result import result_state
 from tau2.persistent_tasks.core.models import CanonicalState
 from tau2.persistent_tasks.runtime.replay import replay
+from tau2.persistent_tasks.scores import consolidate_score
 
-GRADING_VERSION = "persistent-task-grading-v5"
+GRADING_VERSION = "persistent-task-grading-v8"
 
 
 def grade(summary, scoring, *, reply_judge=None):
@@ -39,7 +40,7 @@ def grade(summary, scoring, *, reply_judge=None):
     ).hexdigest()
     cached = summary.get("grading")
     if reply_judge is None and cached and cached.get("cache_key") == cache_key:
-        return {**cached, "reward": cached.get("native_reward", cached.get("reward"))}
+        return cached
     checks = []
     reply_checks = []
     coverage = {key: 0 for key in COVERAGE_FIELDS}
@@ -158,7 +159,10 @@ def grade(summary, scoring, *, reply_judge=None):
             prior = next(
                 (
                     check
-                    for check in (cached or {}).get("reply_checks", [])
+                    for check in (cached or {})
+                    .get("evaluation_log", {})
+                    .get("reply", {})
+                    .get("checks", (cached or {}).get("reply_checks", []))
                     if check.get("request_id") == key
                 ),
                 None,
@@ -190,7 +194,14 @@ def grade(summary, scoring, *, reply_judge=None):
                 "release_status": release["status"],
             }
         )
-        reply_checks.append({"request_id": key, **verdict, "window": window})
+        reply_checks.append(
+            {
+                "request_id": key,
+                **verdict,
+                "window": window,
+                "evaluated": bool(text and operation and state_result),
+            }
+        )
     complete = not summary["issues"]
     not_reached = any(
         summary["releases"][request["request_id"]]["delivery_started_at"] is None
@@ -205,34 +216,43 @@ def grade(summary, scoring, *, reply_judge=None):
     operation_reward = float(all(c["operation"] for c in checks))
     state_reward = float(all(c["state_result"] for c in checks))
     reply_reward = float(all(c["met"] for c in reply_checks))
-    return {
-        "version": GRADING_VERSION,
-        "status": (
-            "not_reached"
-            if not_reached
-            else (
-                "evidence_unavailable"
-                if not complete
-                else ("reply_unavailable" if reply_unavailable else "completed")
-            )
-        ),
-        "reward": operation_reward * state_reward * reply_reward
-        if complete and not not_reached and not reply_unavailable
-        else None,
-        "native_reward": operation_reward * state_reward * reply_reward
-        if complete and not not_reached and not reply_unavailable
-        else None,
-        "operation_reward": operation_reward,
-        "state_result_reward": state_reward,
-        "reply_reward": reply_reward,
-        "checks": checks,
-        "reply_checks": reply_checks,
-        "coverage": coverage,
-        "judge": settings,
-        "cache_key": hashlib.sha256(
-            json.dumps(
-                [summary["evidence_sha256"], settings, GRADING_VERSION],
-                sort_keys=True,
-            ).encode()
-        ).hexdigest(),
-    }
+    return consolidate_score(
+        {
+            "version": GRADING_VERSION,
+            "status": (
+                "not_reached"
+                if not_reached
+                else (
+                    "evidence_unavailable"
+                    if not complete
+                    else ("reply_unavailable" if reply_unavailable else "completed")
+                )
+            ),
+            "reward": state_reward * reply_reward
+            if complete and not not_reached and not reply_unavailable
+            else None,
+            "evaluation_log": {
+                "operation_reward": operation_reward,
+                "coverage": coverage,
+                "reply": {
+                    "passed": bool(reply_reward)
+                    if all(c["evaluated"] for c in reply_checks)
+                    else None,
+                    "status": "judged"
+                    if all(c["evaluated"] for c in reply_checks)
+                    else "not_fully_evaluated",
+                },
+            },
+            "native_result_reward": state_reward,
+            "reply_reward": reply_reward,
+            "checks": checks,
+            "reply_checks": reply_checks,
+            "judge": settings,
+            "cache_key": hashlib.sha256(
+                json.dumps(
+                    [summary["evidence_sha256"], settings, GRADING_VERSION],
+                    sort_keys=True,
+                ).encode()
+            ).hexdigest(),
+        }
+    )

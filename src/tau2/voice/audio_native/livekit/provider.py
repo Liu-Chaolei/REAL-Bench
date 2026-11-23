@@ -81,6 +81,7 @@ class CascadedEvent:
     type: CascadedEventType
     data: Dict[str, Any] = field(default_factory=dict)
     timestamp: float = field(default_factory=time.time)
+    received_monotonic: float = field(default_factory=time.monotonic)
 
     # Convenience accessors
     @property

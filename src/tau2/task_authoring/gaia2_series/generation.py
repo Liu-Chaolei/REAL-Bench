@@ -282,7 +282,12 @@ def select_pooled_key(config, policy):
 
     if not policy.api_key_pool:
         return None, None, None
-    values = read_config_environment(config.config_env_file)
+    if config.api_config_dir:
+        from tau2.utils.api_config import get_api_configuration
+
+        values = get_api_configuration(config.api_config_dir).values
+    else:
+        values = read_config_environment(config.config_env_file)
     credentials = [resolve_env_reference(values, name) for name in policy.api_key_pool]
     if len(set(credentials)) != len(credentials):
         raise ValueError("API key pool credentials must be distinct")
@@ -347,6 +352,17 @@ def fallback_profile(config, profile):
     """Resolve the optional second MiniMax endpoint from the private config file."""
     from tau2.utils.env_config import read_config_environment, resolve_env_reference
 
+    if config.api_config_dir:
+        from tau2.utils.api_config import get_api_configuration
+
+        fallback = get_api_configuration(config.api_config_dir).fallback(
+            profile.api_role
+        )
+        return (
+            (fallback.litellm_model, dict(profile.model_args, **fallback.arguments()))
+            if fallback
+            else None
+        )
     values = read_config_environment(config.config_env_file)
     selected_model = profile.model or resolve_env_reference(values, profile.model_env)
     if "minimax" not in selected_model.casefold():
@@ -371,6 +387,20 @@ def resolve_profile(config, profile):
     """Resolve credentials privately; provenance retains names, not secret values."""
     from tau2.utils.env_config import read_config_environment, resolve_env_reference
 
+    if config.api_config_dir:
+        from tau2.utils.api_config import get_api_configuration
+
+        selected = get_api_configuration(config.api_config_dir).text(profile.api_role)
+        kwargs = dict(profile.model_args, **selected.arguments())
+        kwargs.setdefault("num_retries", 0)
+        kwargs.setdefault("timeout", 60)
+        secrets = [selected.api_key.get_secret_value()]
+        fallback = get_api_configuration(config.api_config_dir).fallback(
+            profile.api_role
+        )
+        if fallback:
+            secrets.append(fallback.api_key.get_secret_value())
+        return selected.litellm_model, kwargs, secrets
     values = read_config_environment(config.config_env_file)
     model = profile.model or resolve_env_reference(values, profile.model_env)
     if (
@@ -717,7 +747,11 @@ def call_model(
                 "timeout_seconds": kwargs.get("timeout"),
                 "provider_attempt": provider_attempt,
                 "route": "secondary" if fallback_used else "primary",
-                "failover": "MINIMAX_API_KEY2/MINIMAX_BASE_URL2"
+                "failover": (
+                    "REALBENCH_" + profile.api_role + "_FALLBACK"
+                    if config.api_config_dir
+                    else "MINIMAX_API_KEY2/MINIMAX_BASE_URL2"
+                )
                 if fallback_used
                 else None,
                 "purpose": response_model.__name__,
@@ -845,7 +879,11 @@ def call_model(
                     if policy.timeout_seconds is not None:
                         kwargs["timeout"] = policy.timeout_seconds
                     fallback_used = True
-                    request_details["failover"] = "MINIMAX_API_KEY2/MINIMAX_BASE_URL2"
+                    request_details["failover"] = (
+                        "REALBENCH_" + profile.api_role + "_FALLBACK"
+                        if config.api_config_dir
+                        else "MINIMAX_API_KEY2/MINIMAX_BASE_URL2"
+                    )
                     continue
                 if quota:
                     raise ProviderQuotaExhausted(text) from None

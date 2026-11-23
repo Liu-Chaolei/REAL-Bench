@@ -1,23 +1,19 @@
 {
-  "config_env_file": "/hpc_stor03/sjtu_home/chaolei.liu/.config/qwaudio/config.env",
   "author": {
-    "model_env": "GAIA2_BACKEND_MODEL",
-    "api_key_env": "GAIA2_BACKEND_API_KEY",
-    "api_base_env": "GAIA2_BACKEND_API_BASE",
-    "provider_prefix": "openai/",
-    "reasoning_effort": "low",
-    "model_args": {"timeout": 180}
+    "api_role": "AUTHOR",
+    "model_args": {
+      "timeout": 180
+    }
   },
   "reviewer": {
-    "model_env": "GAIA2_JUDGE_MODEL",
-    "api_key_env": "GAIA2_JUDGE_API_KEY",
-    "api_base_env": "GAIA2_JUDGE_ENDPOINT",
-    "provider_prefix": "openai/responses/",
-    "reasoning_effort": "low",
-    "model_args": {"timeout": 180}
+    "api_role": "REVIEWER",
+    "model_args": {
+      "timeout": 180
+    }
   },
   "concurrency": 4,
   "max_attempts": 3,
   "seed": 300,
-  "context_characters": 45000
+  "context_characters": 45000,
+  "api_config_dir": "~/.config/qwaudio"
 }

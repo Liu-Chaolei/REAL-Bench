@@ -103,10 +103,17 @@ def run_acceptance(
     write_json(record_path(output, task_id), record)
     start_calls = len(record.get("calls", []))
     started = time.time()
+    key_pool = ["MIMO_API_KEY1", "MIMO_API_KEY3"]
+    if config.api_config_dir:
+        from tau2.utils.api_config import get_api_configuration
+
+        key_pool = get_api_configuration(config.api_config_dir).json_value(
+            "REALBENCH_AUTHOR_KEY_POOL_JSON", []
+        )
     policy = request_policy or RequestPolicy(
         timeout_seconds=180,
         attempts=2,
-        api_key_pool=["MIMO_API_KEY1", "MIMO_API_KEY3"],
+        api_key_pool=key_pool,
         per_key_concurrency=1,
         adaptive_concurrency=False,
     )

@@ -7,6 +7,11 @@ import subprocess
 from datetime import datetime
 from pathlib import Path
 
+# Qwen Gaia2 smoke calls use a 200 ms simulation tick.  The 6000-tick
+# default leaves enough simulated time for backend retries and stage delivery;
+# pass --max-seconds 0 explicitly when an unlimited run is wanted.
+DEFAULT_SMOKE_MAX_SECONDS = 1200
+
 
 def main():
     """Load evaluation credentials privately; keep model/key roles separate."""
@@ -17,13 +22,24 @@ def main():
     here = Path(__file__).resolve().parent
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--config", type=Path, default=here / "config.speech-to-speech.example.json"
+        "--config", type=Path, default=here / "config.gaia2.unified.json"
     )
+    parser.add_argument("--api-config-dir", type=Path)
     parser.add_argument("--num-tasks", type=int, default=3)
-    parser.add_argument("--domain", choices=["retail", "gaia2"], default="retail")
+    parser.add_argument("--domain", choices=["retail", "gaia2"], default="gaia2")
     parser.add_argument("--task-ids", nargs="+")
+    parser.add_argument("--task-split-name", default="base")
     parser.add_argument("--seed", type=int, default=DEFAULT_SEED)
     parser.add_argument("--max-concurrency", type=int, default=1)
+    parser.add_argument(
+        "--realtime-generation",
+        action=argparse.BooleanOptionalAction,
+        default=False,
+        help=(
+            "Run caller LLM/TTS generation without blocking simulation ticks. "
+            "The default pauses the simulation clock while caller speech is prepared."
+        ),
+    )
     parser.add_argument(
         "--user-audio-renderer", choices=["standard", "saasr"], default="standard"
     )
@@ -31,8 +47,11 @@ def main():
     parser.add_argument(
         "--max-seconds",
         type=int,
-        default=0,
-        help="Maximum conversation seconds; 0 (default) disables time limits.",
+        default=DEFAULT_SMOKE_MAX_SECONDS,
+        help=(
+            "Maximum conversation seconds; default is 1200 seconds "
+            "(6000 ticks at 0.2s/tick), and 0 disables time limits."
+        ),
     )
     parser.add_argument(
         "--save-to",
@@ -79,13 +98,22 @@ def main():
         parser.error("--max-seconds must be nonnegative; use 0 for no time limit")
     if args.max_concurrency < 1:
         parser.error("--max-concurrency must be positive")
-    config = QwenAgentConfig.model_validate_json(args.config.read_text())
+    config_value = json.loads(args.config.read_text())
+    if args.api_config_dir is not None:
+        config_value["api_config_dir"] = str(args.api_config_dir)
+    if config_value.get("api_config_dir"):
+        config_value["api_configuration_resolved"] = False
+    config = QwenAgentConfig.model_validate(config_value)
+    if config.api_config_dir:
+        return run_shared(args, config)
     values = read_config_environment(config.config_env_file)
     env = dict(os.environ)
     caller = config.user_llm_settings()
     if args.judge_from_user_llm:
         if caller is None:
-            raise ValueError("--judge-from-user-llm requires a complete user LLM configuration")
+            raise ValueError(
+                "--judge-from-user-llm requires a complete user LLM configuration"
+            )
         judge_model, user_llm_args = caller
         judge_api_key = user_llm_args["api_key"]
         judge_api_base = user_llm_args["api_base"]
@@ -157,16 +185,6 @@ def main():
                 "user_decision_llm_args": user_args,
             }
         )
-    if args.judge_from_user_llm:
-        runtime_environment = dict(config.environment)
-        runtime_environment.update(
-            {
-                "OPENAI_API_KEY": "DEEPSEEK_API_KEY",
-                "OPENAI_BASE_URL": "DEEPSEEK_BASE_URL",
-                "OPENAI_MODEL": "DEEPSEEK_MODEL",
-            }
-        )
-        config = config.model_copy(update={"environment": runtime_environment})
     derived_config = output / "qwen_agent_config.json"
     derived_config.write_text(config.model_dump_json(indent=2))
     derived_config.chmod(0o600)
@@ -179,7 +197,8 @@ def main():
             "api_key_env": "TAU2_RUNTIME_JUDGE_API_KEY",
             "args": judge_model_args,
         }
-        metrics_value = yaml.safe_load(metrics_source.read_text()) or {}
+        # Keep file-backed calibration resolved when relocating this profile.
+        metrics_value = metrics.model_dump(mode="json")
         metrics_value["model"] = judge_profile
         for role in metrics_value.get("models") or {}:
             metrics_value["models"][role] = dict(judge_profile)
@@ -200,6 +219,8 @@ def main():
         "none",
         "--domain",
         args.domain,
+        "--task-split-name",
+        args.task_split_name,
         "--language",
         "en",
         "--num-trials",
@@ -212,6 +233,9 @@ def main():
         "control",
         "--max-steps-seconds",
         str(args.max_seconds),
+        "--realtime-generation"
+        if args.realtime_generation
+        else "--no-realtime-generation",
         "--user-llm",
         user_model,
         "--user-llm-args",
@@ -250,7 +274,10 @@ def main():
     if args.gaia2_allow_stale_runtime:
         command.append("--gaia2-allow-stale-runtime")
     if args.persistent_task_config:
-        command += ["--persistent-task-config", str(args.persistent_task_config.resolve())]
+        command += [
+            "--persistent-task-config",
+            str(args.persistent_task_config.resolve()),
+        ]
 
     if args.max_seconds:
         command.extend(["--timeout", str(args.max_seconds + 150)])
@@ -303,6 +330,136 @@ def main():
             print(
                 "Smoke run contains infrastructure or user-simulator failures; see the saved results."
             )
+            code = 1
+    raise SystemExit(code)
+
+
+def run_shared(args, config):
+    """Launch shared API roles without putting any credentials on argv."""
+    from tau2.utils.api_config import get_api_configuration
+    from tau2.utils.utils import DATA_DIR
+
+    here = Path(__file__).resolve().parent
+    directory = config.api_config_dir
+    api = get_api_configuration(directory)
+    agent_api = get_api_configuration(directory, "qw")
+    # Resolve required launch connections once, without model/network probes.
+    config.user_llm_settings()
+    agent_api.agent_environment()
+    api.text("USER" if args.judge_from_user_llm else "REPLY_JUDGE")
+    output = DATA_DIR / "simulations" / args.save_to
+    if (output / "results.json").exists() and not args.dry_run and not args.resume:
+        raise ValueError("Choose a new save-to name to preserve previous attempts")
+    output.mkdir(parents=True, exist_ok=True)
+    derived = output / "qwen_agent_config.json"
+    with derived.open("w") as stream:
+        os.chmod(derived, 0o600)
+        stream.write(config.model_dump_json(indent=2))
+    command = [
+        str(here / "run_hpc.sh"),
+        "run",
+        "--audio-native",
+        "--audio-native-provider",
+        "qwen_agent",
+        "--qwen-agent-config",
+        str(derived),
+        "--api-config-dir",
+        directory,
+        "--benchmark",
+        "none",
+        "--domain",
+        args.domain,
+        "--task-split-name",
+        args.task_split_name,
+        "--language",
+        "en",
+        "--num-trials",
+        "1",
+        "--seed",
+        str(args.seed),
+        "--max-concurrency",
+        str(args.max_concurrency),
+        "--speech-complexity",
+        "control",
+        "--max-steps-seconds",
+        str(args.max_seconds),
+        "--realtime-generation"
+        if args.realtime_generation
+        else "--no-realtime-generation",
+        "--save-to",
+        args.save_to,
+        "--verbose-logs",
+        "--audio-taps",
+    ]
+    if args.judge_from_user_llm:
+        command += ["--judge-from-user-llm"]
+    elif (
+        args.judge_api is not None
+        or args.judge_api_key_env != "GAIA2_JUDGE_API_KEY"
+        or args.judge_endpoint_env != "GAIA2_JUDGE_ENDPOINT"
+        or args.judge_model_env != "GAIA2_JUDGE_MODEL"
+    ):
+        raise ValueError(
+            "Shared API mode uses realbench.env judge roles, not legacy judge flags"
+        )
+    for name, flag in (
+        ("metrics_config", "--metrics-config"),
+        ("active_metrics_config", "--active-metrics-config"),
+        ("persistent_task_config", "--persistent-task-config"),
+    ):
+        path = getattr(args, name)
+        if path:
+            command += [flag, str(path.resolve())]
+    if args.max_seconds:
+        command += ["--timeout", str(args.max_seconds + 150)]
+    if args.user_audio_renderer == "saasr":
+        if args.saasr_config is None:
+            raise ValueError("SAASR requires --saasr-config")
+        command += [
+            "--user-audio-renderer",
+            "saasr",
+            "--saasr-config",
+            str(args.saasr_config.resolve()),
+        ]
+    elif args.saasr_config is not None:
+        raise ValueError("--saasr-config requires --user-audio-renderer saasr")
+    if args.gaia2_allow_stale_runtime:
+        command.append("--gaia2-allow-stale-runtime")
+    if args.resume:
+        command.append("--auto-resume")
+    command += (
+        ["--task-ids", *args.task_ids]
+        if args.task_ids
+        else ["--num-tasks", str(args.num_tasks)]
+    )
+    if args.dry_run:
+        command.append("--dry-run")
+    # Filter child diagnostics as well as keeping secret values off argv.
+    secrets = [
+        resolve
+        for snapshot in (api, agent_api)
+        for key in snapshot.values
+        if any(x in key for x in ("KEY", "TOKEN", "SECRET"))
+        if (resolve := snapshot.value(key))
+    ]
+    with subprocess.Popen(
+        command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True
+    ) as process:
+        for line in process.stdout:
+            for secret in secrets:
+                line = line.replace(secret, "[REDACTED]")
+            print(line, end="", flush=True)
+        code = process.wait()
+    if code == 0 and not args.dry_run:
+        result_file = output / "results.json"
+        if not result_file.exists():
+            raise RuntimeError("Smoke run did not produce results")
+        index = json.loads(result_file.read_text()).get("simulation_index", [])
+        if not index or any(
+            item.get("termination_reason") in {"infrastructure_error", "user_error"}
+            or item.get("evaluation_status") == "failed"
+            for item in index
+        ):
             code = 1
     raise SystemExit(code)
 

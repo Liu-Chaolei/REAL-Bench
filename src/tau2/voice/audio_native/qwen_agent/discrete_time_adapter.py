@@ -69,6 +69,7 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
         self._played = Counter()
         self._done = set()
         self._terminal = set()
+        self._playback_started = set()
         self._cancelled = set()
         self._seen_calls = set()
         self._allowed_tools = set()
@@ -119,6 +120,7 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
         self._played.clear()
         self._done.clear()
         self._terminal.clear()
+        self._playback_started.clear()
         self._cancelled.clear()
         self._seen_calls.clear()
         self._allowed_tools = {t.name for t in tools}
@@ -195,23 +197,18 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
                 }
             )
 
+        async def receive():
+            event = await self.provider.next_event()
+            return [event]
+
+        self._start_media_receiver(receive, self._process_event)
         await self._send_audio_chunked(
             pcm,
             send_audio,
             int(self.provider.input_sample_rate * 2 * self._voip_interval_ms / 1000),
         )
-        for event in self.provider.drain():
-            self._process_event(result, event)
-        buffered = sum(len(data) for data, _ in result.agent_audio_chunks)
-        if (
-            buffered
-            > self.config.max_buffer_seconds * self.audio_format.bytes_per_second
-        ):
-            raise RuntimeError(
-                "Qwen playback backlog exceeded the configured limit "
-                f"({buffered / self.audio_format.bytes_per_second:.1f}s queued, "
-                f"{self.config.max_buffer_seconds:.1f}s allowed)"
-            )
+        if getattr(self.provider, "failure", None):
+            raise self.provider.failure
 
     @property
     def has_pending_output(self) -> bool:
@@ -380,11 +377,12 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
             }
         )
 
-    async def _after_playback(self, result):
-        for data, response_id in result.agent_audio_chunks:
-            if data and not self._played[response_id]:
+    async def _playback_progress(self):
+        for response_id, count in list(self.playback.played.items()):
+            self._played[response_id] = count
+            if count and response_id not in self._playback_started:
+                self._playback_started.add(response_id)
                 await self._receipt("playback.started", response_id)
-            self._played[response_id] += len(data)
         for response_id in self._cancelled - self._terminal:
             await self._receipt("playback.cancelled", response_id)
             self._terminal.add(response_id)
@@ -392,10 +390,10 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
             if self._played[response_id] >= self._received[response_id]:
                 await self._receipt("playback.ended", response_id)
                 self._terminal.add(response_id)
+
+    async def _after_playback(self, result):
+        await self._playback_progress()
         played = result.get_played_agent_audio()
-        result.contains_speech = bool(
-            played and audioop.rms(audioop.ulaw2lin(played, 2), 2)
-        )
         await self.transcriber.send(audioop.ulaw2lin(played, 2))
         if result.was_truncated and result.contains_speech:
             queue_partial = getattr(self.transcriber, "queue_pending", None)
@@ -408,16 +406,13 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
             origin="recorded_audio",
             alignment="played_audio",
             fragments=fragments,
-            speech_intervals_ms=(
-                [
-                    (
-                        0,
-                        len(played) / self.audio_format.bytes_per_second * 1000,
-                    )
-                ]
-                if result.contains_speech
-                else []
-            ),
+            speech_intervals_ms=[
+                (
+                    (a - result.playback_start_monotonic) * 1000,
+                    (b - result.playback_start_monotonic) * 1000,
+                )
+                for a, b in result.speech_intervals
+            ],
         )
 
     async def _receipt(self, kind, response_id):

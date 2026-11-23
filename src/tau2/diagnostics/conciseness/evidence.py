@@ -4,6 +4,7 @@ import math
 from bisect import bisect_right
 
 from tau2.diagnostics.intent.io import canonical, digest
+from tau2.diagnostics.request_changes import management_events
 
 
 def project_value(value, maximum):
@@ -204,6 +205,24 @@ def build_windows(evidence, options):
             if identity in sources:
                 raise ValueError("Duplicate operation ID")
             sources[identity] = op_data
+        for event in management_events(evidence):
+            when = media_time(event["time"]) if event["time"] is not None else None
+            if when is not None and when < upper:
+                finished = event["completed"]
+                visible = dict(event)
+                if finished is None or finished >= scene_upper:
+                    for field in ("result", "success", "completed"):
+                        visible.pop(field, None)
+                    visible["completion"] = "not_observed_before_window_end"
+                sources["management:" + event["id"]] = dict(
+                    visible,
+                    kind="operation",
+                    current=when >= lower,
+                    started_media=when,
+                    completed_media=media_time(finished)
+                    if finished is not None and finished < scene_upper
+                    else None,
+                )
         row["sources"] = sources
         row["limitations"] = {
             "operation_log_complete": "not_proven",

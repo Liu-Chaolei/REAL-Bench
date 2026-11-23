@@ -1,4 +1,4 @@
-// Runs alongside the unmodified Gateway, using its native ACP backend and GCP SDK.
+// Embeds the Gateway using its native ACP backend, clock injection and GCP SDK.
 import { createServer } from 'node:http'
 import { once } from 'node:events'
 import { readFileSync, mkdirSync, writeFileSync } from 'node:fs'
@@ -11,6 +11,7 @@ import { WebSocketServer, WebSocket } from 'ws'
 import { ToolBroker, composePolicy, gatewayMedia, gatewayFailure, serveMcp, observeBackend } from './core.mjs'
 import { startSpeechToSpeech } from './speech-runtime.mjs'
 import { observePersistentTasks } from './persistent-observer.mjs'
+import { createScenarioTimeProvider, SCENARIO_TIME_TOOL, SCENARIO_TIME_POLICY } from './scenario-time.mjs'
 
 const port = Number(process.env.TAU_BRIDGE_PORT || 8787)
 const root = process.env.TAU_QWEN_ROOT || '/opt/qwen-audio-agent'
@@ -47,7 +48,9 @@ async function initialize(message) {
   if (initialized || message.protocol !== 1) throw new Error('Invalid bridge initialization')
   initialized = true
   if (!message.policy || !Array.isArray(message.tools)) throw new Error('Policy and tools are required')
-  broker = new ToolBroker({ tools: message.tools, policy: message.policy, send,
+  const scenarioTimeEnabled = message.tools.some(tool => tool.name === SCENARIO_TIME_TOOL)
+  const policy = message.policy + (scenarioTimeEnabled ? `\n\n${SCENARIO_TIME_POLICY}\n` : '')
+  broker = new ToolBroker({ tools: message.tools, policy, send,
     timeoutMs: message.tool_timeout_ms, onFailure: fail })
   mkdirSync(`${trial}/prompts`, { recursive: true })
   mkdirSync(`${trial}/config`, { recursive: true })
@@ -68,10 +71,10 @@ async function initialize(message) {
   }))
   mkdirSync(`${workspace}/.qwen`, { recursive: true })
   const original = readFileSync(`${root}/config/frontend-agent/PROMPT.md`, 'utf8')
-  const combined = composePolicy(original, message.policy)
+  const combined = composePolicy(original, policy)
   writeFileSync(`${trial}/prompts/PROMPT.md`, combined)
   writeFileSync(`${trial}/prompts/ASSISTANT.md`, readFileSync(`${root}/config/frontend-agent/ASSISTANT.md`))
-  writeFileSync(`${workspace}/QWEN.md`, message.policy)
+  writeFileSync(`${workspace}/QWEN.md`, policy)
   const settings = {
     security: { auth: { selectedType: 'openai' } },
     model: { name: process.env.OPENAI_MODEL,
@@ -101,7 +104,15 @@ async function initialize(message) {
   speech = await startSpeechToSpeech({ onFailure: fail,
     timeoutMs: Number(process.env.TAU_S2S_BOOT_TIMEOUT_MS || 120000) })
   // Set all deployment configuration BEFORE importing Qwen's config singleton.
-  const { createGatewayApplication } = await import(pathToFileURL(`${root}/server/src/app/gateway-application.mjs`))
+  const { createGatewayApplication, supportsCurrentTimeSnapshotProvider } = await import(pathToFileURL(`${root}/server/src/app/gateway-application.mjs`))
+  let getCurrentTimeSnapshot
+  if (scenarioTimeEnabled) {
+    if (supportsCurrentTimeSnapshotProvider !== true) {
+      throw new Error('This Qwen image does not support scenario time injection; rebuild with the clock provider interface')
+    }
+    const { currentTimeSnapshot } = await import(pathToFileURL(`${root}/server/src/conversation/frontend-agent-context.mjs`))
+    getCurrentTimeSnapshot = createScenarioTimeProvider(broker, currentTimeSnapshot)
+  }
   const { GatewayClient } = await import(pathToFileURL(`${root}/shared/gateway/client-sdk.mjs`))
   const { config } = await import(pathToFileURL(`${root}/server/src/core/config.mjs`))
   const { AcpBackendAdapter } = await import(pathToFileURL(`${root}/server/src/backend/adapters/acp/backend-adapter.mjs`))
@@ -119,7 +130,9 @@ async function initialize(message) {
     }],
   })
   if (message.diagnostics_enabled) observeBackend(backend, send)
-  application = createGatewayApplication({ autoStart: false, agent: createBackendAgentHost(backend) })
+  application = createGatewayApplication({ autoStart: false, agent: createBackendAgentHost(backend),
+    ...(scenarioTimeEnabled ? { getCurrentTimeSnapshot } : {}),
+  })
   if (message.persistent_tasks_enabled) {
     const { AgentTaskRuntime } = await import(pathToFileURL(`${root}/server/src/frontend/tools/agent-task-runtime.mjs`))
     stopPersistentObserver = observePersistentTasks({ taskManager: application.services.taskManager, AgentTaskRuntime, emit: send })
@@ -132,12 +145,14 @@ async function initialize(message) {
     qwen_code_version: execFileSync(qwen, ['--version'], { encoding: 'utf8' }).trim(),
     frontend_model: speech ? process.env.TAU_S2S_LLM_MODEL : process.env.QWEN_AUDIO_REALTIME_MODEL || 'qwen-audio-3.1-realtime-plus',
     frontend_provider: process.env.QWEN_AUDIO_REALTIME_PROVIDER || 'dashscope',
+    frontend_time_source: scenarioTimeEnabled ? 'scenario' : 'host',
+    ...(scenarioTimeEnabled ? { frontend_time_tool: SCENARIO_TIME_TOOL } : {}),
     ...(speech ? { speech_to_speech: speech.metadata } : {}),
     backend_protocol: 'qwen', backend_permission_mode: 'native',
     backend_model: process.env.OPENAI_MODEL || null,
     backend_reasoning_effort: process.env.QWEN_CODE_REASONING_EFFORT || null,
     sandbox: JSON.parse(readFileSync(`${trial}/sandbox-proof.json`, 'utf8')),
-    policy_sha256: createHash('sha256').update(message.policy).digest('hex'),
+    policy_sha256: createHash('sha256').update(policy).digest('hex'),
     original_prompt_sha256: createHash('sha256').update(original).digest('hex'),
     effective_prompt_sha256: createHash('sha256').update(combined).digest('hex'),
     tool_names: message.tools.map(tool => tool.name),

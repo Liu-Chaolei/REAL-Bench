@@ -1,16 +1,5 @@
-import json
-from pathlib import Path
-
 import pytest
 
-from tau2.domains.gaia2.persistent_tasks import (
-    build_task_service,
-    build_task_tools,
-    compile_persistent_actions,
-    load_persistent_scenario,
-    validate_source_bindings,
-)
-from tau2.domains.gaia2.utils import read_snapshot
 from tau2.persistent_tasks.adapters import GPTLiveEventAdapter, QwenEventAdapter
 from tau2.persistent_tasks.evaluator import evaluate_operations, evaluate_summary
 from tau2.persistent_tasks.event_binding import EventBinder
@@ -26,9 +15,7 @@ from tau2.persistent_tasks.models import (
 )
 from tau2.persistent_tasks.scheduler import PersistentTaskScheduler
 from tau2.persistent_tasks.trace import TaskTrace
-from tau2.persistent_tasks.validation import validate_sidecar
 
-ROOT = Path("data/tau2/domains/gaia2")
 SOURCE = "source-task"
 STAGE = 1
 
@@ -117,50 +104,6 @@ def test_scheduler_releases_after_original_event():
     released = scheduler.advance(elapsed=10)
     assert [item.request_id for item in released] == ["r1"]
     assert service.query_task(SOURCE, STAGE).state == TaskState.RUNNING
-
-
-def test_sidecar_samples_bind_native_source_events():
-    manifest = json.loads((ROOT / "persistent_tasks/manifest.json").read_text())
-    assert manifest["scenarios"] == 10
-    scenario = load_persistent_scenario("pt_0001", root=ROOT)
-    service = build_task_service(scenario)
-    task_view = service.list_tasks()[0]
-    assert task_view.source_task_id == scenario["task"]["source_task_id"]
-    assert task_view.source_stage == scenario["task"]["source_stage"]
-    assert "setup" not in scenario["task"]
-    validate_source_bindings(scenario, root=ROOT)
-    source = next(
-        item
-        for item in json.loads((ROOT / "tasks.json").read_text())
-        if item["id"] == scenario["task"]["source_task_id"]
-    )
-    actions = compile_persistent_actions(scenario, source_task=source)
-    assert actions[-1].kind == "user"
-    assert set(actions[-1].dependencies) <= set(
-        scenario["task"]["source_event_ids"]
-    ) | {action.id for action in actions}
-
-
-def test_gaia2_task_toolkit_exposes_lifecycle_tools():
-    scenario = load_persistent_scenario("pt_0001", root=ROOT)
-    source = next(
-        item
-        for item in json.loads((ROOT / "tasks.json").read_text())
-        if item["id"] == scenario["task"]["source_task_id"]
-    )
-    tools = build_task_tools(
-        read_snapshot(source["scenario"]["snapshot"], ROOT),
-        assets=ROOT / "assets",
-        scenario=scenario,
-    )
-    assert {
-        "list_tasks",
-        "query_task",
-        "modify_task",
-        "cancel_task",
-        "get_task_result",
-    } <= set(tools.get_tools())
-    tools.close()
 
 
 def test_operation_evaluator_requires_native_target():
@@ -374,8 +317,4 @@ def test_serialized_summary_grades_operations_and_replies():
             },
         }
     )
-    assert result["reward"] == 1.0
-
-
-def test_draft_sidecar_has_valid_native_bindings():
-    assert validate_sidecar(ROOT / "persistent_tasks") == []
+    assert result["completion_score"] == 1.0

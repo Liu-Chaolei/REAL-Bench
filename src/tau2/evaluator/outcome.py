@@ -1,8 +1,9 @@
 """Shared outcome grading policy for live runs and trajectory re-evaluation."""
 
 from tau2.data_model.simulation import TerminationReason
+from tau2.persistent_tasks.scores import completion_score, consolidate_score
 
-GRADING_VERSION = "tau-outcome-grading-v2"
+GRADING_VERSION = "tau-outcome-grading-v4"
 GRADABLE_ENDINGS = frozenset(
     {
         TerminationReason.AGENT_STOP,
@@ -24,21 +25,17 @@ def stamp_grading(simulation):
 
 
 def finalize_reward(simulation, reward, series=None, missing=()):
-    """Attach diagnostics and enforce delivery after component checks finish."""
+    """Attach grading metadata; delivery is recorded only in the evaluation log."""
     persistent_summary = (simulation.info or {}).get("persistent_tasks")
     if persistent_summary is not None:
         from tau2.data_model.tasks import RewardType
 
         persistent = persistent_summary.get("grading")
         if persistent is None:
-            persistent = {"status": "ungraded", "reward": None}
+            persistent = {"status": "ungraded", "completion_score": None}
         combine = persistent_summary.get("config", {}).get("combine_reward", False)
         if combine and RewardType.PERSISTENT_TASK in (reward.reward_basis or []):
-            factor = (
-                persistent.get("native_reward")
-                if persistent_summary.get("config", {}).get("overlay")
-                else persistent["reward"]
-            )
+            factor = completion_score(persistent)
             if factor is None:
                 raise ValueError("Persistent reward requires complete graded evidence")
             reward.reward *= factor
@@ -46,16 +43,22 @@ def finalize_reward(simulation, reward, series=None, missing=()):
                 **(reward.reward_breakdown or {}),
                 RewardType.PERSISTENT_TASK: factor,
             }
-        reward.info = {**(reward.info or {}), "persistent_tasks": persistent}
+        reward.info = {
+            **(reward.info or {}),
+            "persistent_tasks": consolidate_score(persistent),
+        }
     reward.info = {
         **(reward.info or {}),
         "grading_version": GRADING_VERSION,
         "termination_reason": simulation.termination_reason.value,
     }
     if series is not None:
-        reward.info.update(series_version=series["version"], scenario_series=series)
-        reward.info["missing_requests"] = list(missing)
-    if missing:
-        reward.reward = 0.0
-        reward.info["note"] = "Not all continuous requests were delivered"
+        simulation.info = {
+            **(simulation.info or {}),
+            "evaluation_log": {
+                **(simulation.info or {}).get("evaluation_log", {}),
+                "scenario_series": series,
+                "missing_requests": list(missing),
+            },
+        }
     return reward

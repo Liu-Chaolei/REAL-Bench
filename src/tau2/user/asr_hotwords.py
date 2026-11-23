@@ -97,7 +97,7 @@ def build_hotword_profile(
     materials_sha = _digest(
         {"texts": texts, "candidates": materials.model_dump()["candidates"]}
     )
-    args_sha = _digest(model_args)
+    args_sha = _digest({k: v for k, v in model_args.items() if k != "api_key"})
     key = _digest(
         {
             "version": ASR_HOTWORD_BUILDER_VERSION,

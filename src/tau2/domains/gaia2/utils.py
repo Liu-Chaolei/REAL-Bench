@@ -36,6 +36,26 @@ def verify_task_artifact(root: Path, task=None) -> None:
     index = _task_artifact_index(
         str(path), stat.st_size, stat.st_mtime_ns, manifest["tasks_sha256"]
     )
+    if task is not None:
+        from tau2.domains.gaia2.interaction_variants import apply_variant, variant_for
+
+        variant = variant_for(task)
+        if variant is not None:
+            from tau2.data_model.tasks import Task
+
+            published = json.loads((root / "interaction_variants.json").read_text())
+            if not any(row == variant.model_dump(mode="json") for row in published):
+                raise ValueError("Interaction variant is absent from its delta dataset")
+
+            source = next(
+                row
+                for row in json.loads(path.read_text())
+                if row["id"] == variant.source_task_id
+            )
+            expected = apply_variant(Task.model_validate(source), variant)
+            if expected != task:
+                raise ValueError("Interaction variant differs from its source view")
+            return
     if (
         task is not None
         and index.get(task.id)

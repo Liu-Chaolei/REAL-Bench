@@ -145,6 +145,7 @@ class IntentConfig(StrictConfig):
     definition_set: str | None = None
     validation_profile_path: Path | None = None
     env_file: Path | None = None
+    api_config_dir: str | None = None
     instructions_path: Path | None = None
     profile_path: Path | None = None
     gt_model: ModelOptions = Field(default_factory=ModelOptions)
@@ -219,6 +220,21 @@ class IntentConfig(StrictConfig):
 
     def environment(self, overrides: dict[str, str] | None = None) -> dict[str, str]:
         """Read into a private snapshot; never alter process/provider environments."""
+        if self.api_config_dir:
+            from tau2.utils.api_config import get_api_configuration
+
+            api = get_api_configuration(self.api_config_dir)
+            result = {}
+            for stage, prefix in STAGE_ENV_PREFIXES.items():
+                profile = api.text("INTENT_" + stage.upper())
+                result.update(
+                    {
+                        prefix + "_MODEL": profile.litellm_model,
+                        prefix + "_API_BASE": profile.base_url,
+                        prefix + "_API_KEY": profile.api_key.get_secret_value(),
+                    }
+                )
+            return result | (overrides or {})
         values = (
             dotenv_values(self.env_file)
             if self.env_file is not None and self.env_file.is_file()
@@ -253,6 +269,17 @@ class IntentConfig(StrictConfig):
             raise ValueError("Model stage must be gt, prediction or evaluation")
         prefix = STAGE_ENV_PREFIXES[stage]
         options = getattr(self, f"{stage}_model")
+        if self.api_config_dir:
+            from tau2.utils.api_config import get_api_configuration
+
+            selected = get_api_configuration(self.api_config_dir).text(
+                "INTENT_" + stage.upper()
+            )
+            options = options.model_copy(
+                update={
+                    k: v for k, v in selected.args.items() if k in options.model_fields
+                }
+            )
         model = environment.get(f"{prefix}_MODEL") or None
         api_base = environment.get(f"{prefix}_API_BASE") or None
         return ModelConfig(

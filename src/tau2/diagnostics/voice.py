@@ -7,8 +7,9 @@ from tau2.diagnostics.media_clock import (
     map_scenario_time_to_media,
 )
 from tau2.metrics import real_voice
+from tau2.metrics.voice_interaction import EVENT_VERSION
 
-VERSION = "tau-real-voice/2"
+VERSION = "tau-real-voice/4"
 CONFIG = {
     **real_voice.CONFIG,
     "time_basis": "tau_actual_media_delivery_and_playback",
@@ -93,6 +94,32 @@ def evaluate_voice(evidence, directory: Path):
             "reason": evidence.audio.get("reason"),
             "version": VERSION,
         }
+    shared = evidence.audio.get("activity")
+    if shared and shared.get("user_event_version") == EVENT_VERSION:
+        from tau2.metrics.voice_interaction import evaluate
+
+        origin = evidence.source.get("scenario_monotonic_origin")
+        epoch = evidence.source.get("scenario_start_time")
+        calls = None
+        if origin is not None and epoch is not None:
+            calls = [
+                dict(
+                    call_id=op.call_id,
+                    started_mono=op.started - epoch + origin - shared["origin"],
+                )
+                for op in evidence.operations
+                if op.kind != "SYSTEM" and op.requestor == "assistant"
+            ]
+        return evaluate(
+            shared,
+            calls,
+            task_key=(
+                evidence.domain,
+                evidence.source.get("language"),
+                evidence.source.get("task_set_name"),
+                evidence.task_id,
+            ),
+        )
     from tau2.data_model.audio import AudioData, AudioFormat
     from tau2.voice.utils.audio_preprocessing import convert_to_pcm16
 
@@ -101,69 +128,90 @@ def evaluate_voice(evidence, directory: Path):
         role: (directory / evidence.audio["files"][role]).read_bytes()
         for role in ("user", "agent")
     }
-    intervals = {"user": [], "agent": []}
-    for role in intervals:
-        # Detect on the complete channel, not separately on 200 ms frames.
-        chunks, formats, maps, count = [], set(), [], 0
-        for row in timeline:
-            item = row.get(role)
-            if not item:
-                continue
-            fmt = AudioFormat.model_validate(item["format"])
-            formats.add(fmt.sample_rate)
-            pcm = convert_to_pcm16(
-                AudioData(
-                    data=raw[role][item["offset"] : item["offset"] + item["bytes"]],
-                    format=fmt,
+    shared = evidence.audio.get("activity")
+    if shared is not None:
+        turns = [t["intervals"] for t in shared["user_turns"]]
+        intervals = {
+            "user": [r for t in turns for r in t],
+            "agent": shared["agent_intervals"],
+        }
+    else:
+        intervals = {"user": [], "agent": []}
+        for role in intervals:
+            # Detect on the complete channel, not separately on 200 ms frames.
+            chunks, formats, maps, count = [], set(), [], 0
+            for row in timeline:
+                item = row.get(role)
+                if not item:
+                    continue
+                fmt = AudioFormat.model_validate(item["format"])
+                formats.add(fmt.sample_rate)
+                pcm = convert_to_pcm16(
+                    AudioData(
+                        data=raw[role][item["offset"] : item["offset"] + item["bytes"]],
+                        format=fmt,
+                    )
+                ).data
+                n = len(pcm) // 2
+                maps.append(
+                    {
+                        "sample_start": count,
+                        "sample_end": count + n,
+                        "mono_start": row["start"],
+                        "mono_end": row["end"],
+                    }
                 )
-            ).data
-            n = len(pcm) // 2
-            maps.append(
-                {
-                    "sample_start": count,
-                    "sample_end": count + n,
-                    "mono_start": row["start"],
-                    "mono_end": row["end"],
+                chunks.append(pcm)
+                count += n
+            if len(formats) != 1:
+                return {
+                    "status": "unavailable",
+                    "reason": "missing_or_changing_audio_format",
+                    "version": VERSION,
                 }
+            rate = next(iter(formats))
+            voiced = (
+                real_voice.detect_speech(b"".join(chunks), rate)
+                if role == "agent"
+                else [
+                    [row.started, row.ended]
+                    for row in evidence.user_inputs
+                    if row.role == "user"
+                ]
             )
-            chunks.append(pcm)
-            count += n
-        if len(formats) != 1:
-            return {
-                "status": "unavailable",
-                "reason": "missing_or_changing_audio_format",
-                "version": VERSION,
-            }
-        rate = next(iter(formats))
-        voiced = real_voice.detect_speech(b"".join(chunks), rate)
-        # Map each sample interval into delivered time, preserving channel gaps.
-        for a, b in voiced:
-            for row in maps:
-                left, right = (
-                    max(a * rate, row["sample_start"]),
-                    min(b * rate, row["sample_end"]),
-                )
-                if right > left:
-                    scale = (row["mono_end"] - row["mono_start"]) / (
-                        row["sample_end"] - row["sample_start"]
+            if role == "user":
+                intervals[role] = voiced
+                continue
+            # Map each sample interval into delivered time, preserving channel gaps.
+            for a, b in voiced:
+                for row in maps:
+                    left, right = (
+                        max(a * rate, row["sample_start"]),
+                        min(b * rate, row["sample_end"]),
                     )
-                    intervals[role].append(
-                        [
-                            row["mono_start"] + (left - row["sample_start"]) * scale,
-                            row["mono_start"] + (right - row["sample_start"]) * scale,
-                        ]
-                    )
-    turns = []
-    for row in evidence.user_inputs:
-        if row.role != "user":
-            continue
-        pieces = [
-            [max(a, row.started), min(b, row.ended)]
-            for a, b in intervals["user"]
-            if min(b, row.ended) > max(a, row.started)
-        ]
-        if pieces:
-            turns.append(real_voice._intervals(pieces))
+                    if right > left:
+                        scale = (row["mono_end"] - row["mono_start"]) / (
+                            row["sample_end"] - row["sample_start"]
+                        )
+                        intervals[role].append(
+                            [
+                                row["mono_start"]
+                                + (left - row["sample_start"]) * scale,
+                                row["mono_start"]
+                                + (right - row["sample_start"]) * scale,
+                            ]
+                        )
+        turns = []
+        for row in evidence.user_inputs:
+            if row.role != "user":
+                continue
+            pieces = [
+                [max(a, row.started), min(b, row.ended)]
+                for a, b in intervals["user"]
+                if min(b, row.ended) > max(a, row.started)
+            ]
+            if pieces:
+                turns.append(real_voice._intervals(pieces))
     waveform = {
         "version": real_voice.EVIDENCE_VERSION,
         "config": real_voice.CONFIG,
@@ -182,16 +230,30 @@ def evaluate_voice(evidence, directory: Path):
     # the recorded monotonic/media timeline so one gap cannot erase all context.
     origin = evidence.source.get("scenario_monotonic_origin")
     epoch = evidence.source.get("scenario_start_time")
-    calls, tool_context = map_tool_operations(
-        evidence.operations, timeline, epoch, origin
-    )
+    if shared is not None:
+        calls = [] if origin is not None and epoch is not None else None
+        if calls is not None:
+            calls = [
+                dict(
+                    call_id=op.call_id,
+                    completed=True,
+                    started_mono=op.started - epoch + origin - shared["origin"],
+                    completed_mono=op.ended - epoch + origin - shared["origin"],
+                )
+                for op in evidence.operations
+                if op.kind != "SYSTEM" and op.requestor == "assistant"
+            ]
+        tool_context = {
+            "total_operations": len(evidence.operations),
+            "time_basis": "direct_media_events",
+        }
+    else:
+        calls, tool_context = map_tool_operations(
+            evidence.operations, timeline, epoch, origin
+        )
     result = real_voice.score_interactions(waveform, calls)
     if calls is None and tool_context["total_operations"]:
-        for name in (
-            "on_time_rate",
-            "late_rate",
-            "audible_pretoolspeech_rate",
-        ):
+        for name in ("on_time_rate",):
             result["metrics"][name]["reason"] = "tool_media_time_mapping_unavailable"
     result.setdefault("details", {})["tool_context"] = tool_context
     result.update(
@@ -200,13 +262,27 @@ def evaluate_voice(evidence, directory: Path):
         namespace="real_voice",
         waveform_evidence=waveform,
         source_metric_version=real_voice.VERSION,
-        config=CONFIG,
+        config={**CONFIG, **(shared["config"] if shared else {})},
     )
     return result
 
 
 def aggregate_voice(reports):
     """Use REAL pooling formulas while enforcing tau's own media-time contract."""
+    from tau2.metrics.voice_interaction import VERSION as unified_version
+    from tau2.metrics.voice_interaction import aggregate
+
+    if not any(reports) or any(
+        r and r.get("version") == unified_version for r in reports
+    ):
+        return aggregate(reports)
+    if all(not r or r.get("version") == "tau-voice-interaction/3" for r in reports):
+        # Preserve saved values and sample weights, with their original definition.
+        old = next(r for r in reports if r)
+        result = aggregate(
+            [dict(r, version=unified_version) if r else None for r in reports]
+        )
+        return dict(result, version=old["version"], config=old["config"])
     for report in reports:
         if report and (
             report.get("version") != VERSION or report.get("config") != CONFIG

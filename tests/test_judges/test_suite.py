@@ -68,7 +68,7 @@ def test_dry_run_calls_nothing_and_writes_nothing(tmp_path):
         inputs(),
         load_catalog(),
         path,
-        only=[Measure.NATURALNESS],
+        only=[Measure.REGISTER_FORMALITY],
         dry_run=True,
         backend=forbidden,
     )
@@ -83,7 +83,7 @@ def test_resume_reuses_matching_contract_and_all_trials(tmp_path):
         inputs(),
         load_catalog(),
         path,
-        only=[Measure.NATURALNESS],
+        only=[Measure.REGISTER_FORMALITY],
         backend=passing_backend,
     )
     assert len(first.items) == 2
@@ -91,12 +91,12 @@ def test_resume_reuses_matching_contract_and_all_trials(tmp_path):
         inputs(),
         load_catalog(),
         path,
-        only=[Measure.NATURALNESS],
+        only=[Measure.REGISTER_FORMALITY],
         backend=lambda *_: pytest.fail("cache miss"),
     )
     assert all(item.action == PlanAction.REUSE for item in resumed.items)
     selected = plan_suite(
-        inputs(), load_catalog(), [], only=[Measure.NATURALNESS], trials=[1]
+        inputs(), load_catalog(), [], only=[Measure.REGISTER_FORMALITY], trials=[1]
     )
     assert [item.input.trial for item in selected.items] == [1]
 
@@ -108,14 +108,18 @@ def test_preserve_errors_fills_gaps_without_retrying_recorded_failure(tmp_path):
         raise RuntimeError("recorded failure")
 
     execute_suite(
-        inputs()[:1], load_catalog(), path, only=[Measure.NATURALNESS], backend=fail
+        inputs()[:1],
+        load_catalog(),
+        path,
+        only=[Measure.REGISTER_FORMALITY],
+        backend=fail,
     )
     before = path.read_bytes()
     execute_suite(
         inputs()[:1],
         load_catalog(),
         path,
-        only=[Measure.NATURALNESS],
+        only=[Measure.REGISTER_FORMALITY],
         retry_errors=False,
         backend=lambda *_args: pytest.fail("recorded error was retried"),
     )
@@ -128,7 +132,7 @@ def test_judge_worker_bounds_in_flight_calls(monkeypatch, tmp_path):
         for index in range(6)
     ]
     catalog = load_catalog()
-    plan = plan_suite(selected, catalog, [], only=[Measure.NATURALNESS])
+    plan = plan_suite(selected, catalog, [], only=[Measure.REGISTER_FORMALITY])
     lock = threading.Lock()
     active = peak = 0
 
@@ -171,64 +175,20 @@ def test_judge_worker_bounds_in_flight_calls(monkeypatch, tmp_path):
     assert JudgeExecutionConfig(processes=8, concurrency=10).processes == 8
 
 
-def test_saved_naturalness_v16_loads_but_requires_rejudging(tmp_path):
-    path = tmp_path / "verdicts.json"
-    catalog = load_catalog()
-    execute_suite(
-        inputs(), catalog, path, only=[Measure.NATURALNESS], backend=passing_backend
-    )
-    recorded = json.loads(path.read_text())
-    for row in recorded:
-        assert (
-            row["identity"]["contract_id"]
-            == "naturalness-v17-rubric-v21-language-specific-draft2"
-        )
-        assert row["identity"]["prompt_version"] == "v17"
-        row["identity"].update(
-            contract_id="naturalness-v16-rubric-v20",
-            implementation="naturalness-v16",
-            prompt_version="v16",
-            catalog_revision="validated-measures-v2",
-        )
-        row["verdict"]["units"][0]["evidence"] = json.dumps(
-            {
-                "factor_id": "natural_word_choice",
-                "opportunity": True,
-                "violated": False,
-                "severity": 0,
-                "reasoning": "Natural",
-                "quote": "",
-            }
-        )
-    path.write_text(json.dumps(recorded))
-    before = path.read_bytes()
-    loaded = read_verdicts(path)
-    assert len(loaded) == 2
-    assert all(row.identity.implementation == "naturalness-v16" for row in loaded)
-    plan = execute_suite(
-        inputs(),
-        catalog,
-        path,
-        only=[Measure.NATURALNESS],
-        dry_run=True,
-        backend=lambda *_: pytest.fail("Planning must not call the judge"),
-    )
-    assert all(item.action == PlanAction.STALE for item in plan.items)
-    assert path.read_bytes() == before
-
-
 @pytest.mark.parametrize("changed", ["input", "model", "args", "prompt", "rubric"])
 def test_cache_invalidates_changed_contract_or_input(tmp_path, changed):
     path = tmp_path / "verdicts.json"
     catalog = load_catalog()
     execute_suite(
-        inputs(), catalog, path, only=[Measure.NATURALNESS], backend=passing_backend
+        inputs(),
+        catalog,
+        path,
+        only=[Measure.REGISTER_FORMALITY],
+        backend=passing_backend,
     )
     changed_inputs = inputs()
     contract = next(
-        c
-        for c in catalog.contracts
-        if c.contract_id == "naturalness-v17-rubric-v21-language-specific-draft2"
+        c for c in catalog.contracts if c.contract_id == "nativeness-v15-rubric-v19"
     )
     if changed == "input":
         changed_inputs[0].input_fingerprint = "b" * 64
@@ -241,7 +201,7 @@ def test_cache_invalidates_changed_contract_or_input(tmp_path, changed):
     else:
         contract.prompt.rubric_version = "changed"
     plan = execute_suite(
-        changed_inputs, catalog, path, only=[Measure.NATURALNESS], dry_run=True
+        changed_inputs, catalog, path, only=[Measure.REGISTER_FORMALITY], dry_run=True
     )
     assert plan.items[0].action == PlanAction.STALE
 
@@ -252,24 +212,24 @@ def test_force_and_unsupported_pairs_and_gender_scope(tmp_path):
         inputs(),
         load_catalog(),
         path,
-        only=[Measure.NATURALNESS],
+        only=[Measure.REGISTER_FORMALITY],
         backend=passing_backend,
     )
     force = execute_suite(
         inputs(),
         load_catalog(),
         path,
-        only=[Measure.NATURALNESS],
+        only=[Measure.REGISTER_FORMALITY],
         force=True,
         dry_run=True,
     )
     assert all(item.action == PlanAction.FORCE for item in force.items)
     item = inputs()[0].model_copy(update={"language": "en"})
     assert (
-        plan_suite([item], load_catalog(), [], only=[Measure.NATURALNESS])
+        plan_suite([item], load_catalog(), [], only=[Measure.REGISTER_FORMALITY])
         .items[0]
         .action
-        == PlanAction.MISSING
+        == PlanAction.NOT_APPLICABLE
     )
     item = inputs()[0].model_copy(update={"agent_gender": "male"})
     assert (
@@ -279,12 +239,9 @@ def test_force_and_unsupported_pairs_and_gender_scope(tmp_path):
         == PlanAction.NOT_APPLICABLE
     )
     item = inputs()[0].model_copy(update={"has_audio": False})
-    assert (
-        plan_suite([item], load_catalog(), [], only=[Measure.SPEECH_FIDELITY])
-        .items[0]
-        .action
-        == PlanAction.MISSING_INPUT
-    )
+    assert not plan_suite(
+        [item], load_catalog(), [], only=[Measure.SPEECH_FIDELITY]
+    ).items
 
 
 def test_malformed_verdict_is_persisted_error_and_retried(tmp_path):
@@ -293,20 +250,20 @@ def test_malformed_verdict_is_persisted_error_and_retried(tmp_path):
         inputs(),
         load_catalog(),
         path,
-        only=[Measure.NATURALNESS],
+        only=[Measure.REGISTER_FORMALITY],
         backend=lambda *_: '{"units": []}',
     )
     rows = json.loads(path.read_text())
     assert len(rows) == 2 and all(row["error"] for row in rows)
     plan = execute_suite(
-        inputs(), load_catalog(), path, only=[Measure.NATURALNESS], dry_run=True
+        inputs(), load_catalog(), path, only=[Measure.REGISTER_FORMALITY], dry_run=True
     )
     assert all(item.action == PlanAction.RETRY_ERROR for item in plan.items)
     execute_suite(
         inputs(),
         load_catalog(),
         path,
-        only=[Measure.NATURALNESS],
+        only=[Measure.REGISTER_FORMALITY],
         backend=passing_backend,
     )
     assert all(row["error"] is None for row in json.loads(path.read_text()))
@@ -316,7 +273,8 @@ def test_catalog_only_contains_passing_measures_and_exact_models():
     catalog = load_catalog()
     assert len(catalog.pairs) == 27
     assert any(
-        p.language == "en" and p.measure == Measure.NATURALNESS for p in catalog.pairs
+        p.language == "pt" and p.measure == Measure.REGISTER_FORMALITY
+        for p in catalog.pairs
     )
     assert not any(
         p.language in {"ko", "zh"} and p.measure == Measure.NAME_ADDRESS
@@ -356,13 +314,14 @@ def test_read_only_summary_distinguishes_missing_error_and_not_applicable(tmp_pa
         source[:1],
         load_catalog(),
         path,
-        only=[Measure.NATURALNESS],
+        only=[Measure.REGISTER_FORMALITY],
         backend=lambda *_: "malformed",
     )
     stored = read_verdicts(path)
     before = path.read_bytes()
     report = summarize_suite(
-        plan_suite(source, load_catalog(), stored, only=[Measure.NATURALNESS]), stored
+        plan_suite(source, load_catalog(), stored, only=[Measure.REGISTER_FORMALITY]),
+        stored,
     )[0]
     assert report.error_calls == 1
     assert report.not_judged_calls == 1
@@ -387,7 +346,10 @@ def test_audio_only_changes_leave_text_verdict_cache_valid():
         audio_fingerprint="b" * 64,
     )
     plan = plan_suite(
-        [source], catalog, [], only=[Measure.NATURALNESS, Measure.SPEECH_FIDELITY]
+        [source],
+        catalog,
+        [],
+        only=[Measure.REGISTER_FORMALITY, Measure.SPEECH_FIDELITY],
     )
     saved = [
         StoredVerdict(
@@ -404,11 +366,13 @@ def test_audio_only_changes_leave_text_verdict_cache_valid():
     ]
     changed = source.model_copy(update={"audio_fingerprint": "c" * 64})
     updated = plan_suite(
-        [changed], catalog, saved, only=[Measure.NATURALNESS, Measure.SPEECH_FIDELITY]
+        [changed],
+        catalog,
+        saved,
+        only=[Measure.REGISTER_FORMALITY, Measure.SPEECH_FIDELITY],
     )
     assert [item.action for item in updated.items] == [
         PlanAction.REUSE,
-        PlanAction.STALE,
     ]
 
 
@@ -418,7 +382,7 @@ def test_legacy_transport_verdicts_are_stale(tmp_path):
         inputs(),
         load_catalog(),
         path,
-        only=[Measure.NATURALNESS],
+        only=[Measure.REGISTER_FORMALITY],
         backend=passing_backend,
     )
     recorded = json.loads(path.read_text())
@@ -426,7 +390,7 @@ def test_legacy_transport_verdicts_are_stale(tmp_path):
         del row["identity"]["transport_revision"]
     path.write_text(json.dumps(recorded))
     plan = plan_suite(
-        inputs(), load_catalog(), read_verdicts(path), only=[Measure.NATURALNESS]
+        inputs(), load_catalog(), read_verdicts(path), only=[Measure.REGISTER_FORMALITY]
     )
     assert all(item.action == PlanAction.STALE for item in plan.items)
 
@@ -452,9 +416,11 @@ def test_partial_results_report_coverage_and_resume_without_losing_successes(tmp
         ]
         return result
 
-    execute_suite(inputs(), catalog, path, only=[Measure.NATURALNESS], backend=partial)
+    execute_suite(
+        inputs(), catalog, path, only=[Measure.REGISTER_FORMALITY], backend=partial
+    )
     stored = read_verdicts(path)
-    plan = plan_suite(inputs(), catalog, stored, only=[Measure.NATURALNESS])
+    plan = plan_suite(inputs(), catalog, stored, only=[Measure.REGISTER_FORMALITY])
     assert all(i.action == PlanAction.RETRY_ERROR for i in plan.items)
     report = summarize_suite(plan, stored)[0]
     assert report.error_calls == report.partial_calls == report.error_units == 2
@@ -463,7 +429,11 @@ def test_partial_results_report_coverage_and_resume_without_losing_successes(tmp
     before = path.read_bytes()
     with pytest.raises(ValueError, match="resume backend"):
         execute_suite(
-            inputs(), catalog, path, only=[Measure.NATURALNESS], backend=passing_backend
+            inputs(),
+            catalog,
+            path,
+            only=[Measure.REGISTER_FORMALITY],
+            backend=passing_backend,
         )
     assert path.read_bytes() == before
 
@@ -474,7 +444,7 @@ def test_partial_results_report_coverage_and_resume_without_losing_successes(tmp
         inputs(),
         catalog,
         path,
-        only=[Measure.NATURALNESS],
+        only=[Measure.REGISTER_FORMALITY],
         backend=passing_backend,
         resume_backend=broken,
     )
@@ -486,7 +456,7 @@ def test_partial_results_report_coverage_and_resume_without_losing_successes(tmp
         inputs(),
         catalog,
         path,
-        only=[Measure.NATURALNESS],
+        only=[Measure.REGISTER_FORMALITY],
         backend=passing_backend,
         resume_backend=lambda item, contract, measure, previous: MeasureVerdict(
             units=previous.units
@@ -509,13 +479,13 @@ def test_partial_results_report_coverage_and_resume_without_losing_successes(tmp
         inputs(),
         catalog,
         path,
-        only=[Measure.NATURALNESS],
+        only=[Measure.REGISTER_FORMALITY],
         backend=lambda *_: pytest.fail("full retry"),
         resume_backend=resume,
     )
     stored = read_verdicts(path)
     report = summarize_suite(
-        plan_suite(inputs(), catalog, stored, only=[Measure.NATURALNESS]), stored
+        plan_suite(inputs(), catalog, stored, only=[Measure.REGISTER_FORMALITY]), stored
     )[0]
     assert report.complete and report.pass_units == 4 and report.error_units == 0
 
@@ -542,11 +512,13 @@ def _live_input_rows(tmp_path, backends):
         inputs(),
         load_catalog(),
         path,
-        only=[Measure.NATURALNESS],
+        only=[Measure.REGISTER_FORMALITY],
         backend=lambda item, *rest: backends[item.trial](item, *rest),
     )
     stored = read_verdicts(path)
-    plan = plan_suite(inputs(), load_catalog(), stored, only=[Measure.NATURALNESS])
+    plan = plan_suite(
+        inputs(), load_catalog(), stored, only=[Measure.REGISTER_FORMALITY]
+    )
     return plan, stored
 
 

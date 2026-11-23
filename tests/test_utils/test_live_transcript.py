@@ -118,8 +118,7 @@ def test_late_batched_captions_preserve_text_and_missing_audio_flags():
     )
     messages = agent_messages(ticks)
     assert "".join(m.content for m in messages) == "FirstSecond"
-    with pytest.raises(ValueError, match="Unresolved Live"):
-        require_live_alignment(ticks)
+    require_live_alignment(ticks)
 
 
 def test_tick_straddling_padded_windows_belongs_to_earlier_clip():
@@ -194,13 +193,21 @@ def test_caller_speech_does_not_override_approved_silence_threshold():
     assert messages[0].content == "FirstSecond"
 
 
-def test_unmatched_audio_is_retained_and_blocks_judging():
+def test_unmatched_audio_is_retained_but_skipped_from_judging():
     ticks = timeline({}, [5, 6])
     messages = agent_messages(ticks)
-    assert len(messages) == 1 and messages[0].content == ""
-    assert metadata(messages[0])["association_status"] == "unmatched_audio"
-    with pytest.raises(ValueError, match="no transcript"):
-        require_live_alignment(ticks)
+    assert messages == []
+    groups = live_utterance_groups(ticks)
+    assert len(groups) == 1
+    assert metadata(groups[0].chunks[0])["association_status"] == "unmatched_audio"
+    require_live_alignment(ticks)
+
+
+def test_unmatched_audio_does_not_drop_other_transcripted_segments():
+    ticks = timeline({5: [fragment("Keep this", 0, 200)]}, [5, 6, 20, 21])
+    messages = agent_messages(ticks)
+    assert [message.content for message in messages] == ["Keep this"]
+    require_live_alignment(ticks)
 
 
 def test_unmatched_text_is_preserved_and_blocks_judging():
@@ -219,9 +226,9 @@ def test_exact_approved_silence_threshold(gap_ms, count):
             ticks[i].agent_chunk.raw_data["live_transcript"][
                 "speech_intervals_ms"
             ].append((max(a - i * 200, 0), min(b - i * 200, 200)))
-    messages = agent_messages(ticks)
-    assert len(messages) == count
-    assert all(metadata(m)["silence_threshold_ms"] == 1500 for m in messages)
+    groups = utterance_groups(ticks, "agent")
+    assert len(groups) == count
+    assert all(metadata(g.chunks[0])["silence_threshold_ms"] == 1500 for g in groups)
 
 
 def test_ids_are_deterministic_and_independent_of_wall_clock():
@@ -388,7 +395,7 @@ def test_explicit_noop_clear_overrides_legacy_boolean():
 
 
 @pytest.mark.parametrize("kind", ["communication", "nl_assertions"])
-def test_outcome_text_judges_reject_untranscribed_playback(kind):
+def test_outcome_text_judges_skip_untranscribed_playback(kind):
     from tau2.evaluator.evaluator_communicate import FullDuplexCommunicateEvaluator
     from tau2.evaluator.evaluator_nl_assertions import FullDuplexNLAssertionsEvaluator
 
@@ -398,8 +405,7 @@ def test_outcome_text_judges_reject_untranscribed_playback(kind):
         if kind == "communication"
         else FullDuplexNLAssertionsEvaluator
     )
-    with pytest.raises(ValueError, match="Unresolved Live"):
-        evaluator.ticks_to_message_history(ticks)
+    assert evaluator.ticks_to_message_history(ticks) == []
 
 
 def test_invalid_activity_interval_rejected():

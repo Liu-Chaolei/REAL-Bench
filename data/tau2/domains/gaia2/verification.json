@@ -1,8 +1,8 @@
 {
   "valid": true,
-  "tasks": 1100,
+  "tasks": 1000,
   "runtime_sha256": "a2f92108c783f9814763ab3234951d60a69a91c20cfbf4fbb48139584730a9f2",
-  "tasks_sha256": "d230a035041b83b25aafc8ea1dbe00963baa45eb68a87a313e883a51a8b70f20",
+  "tasks_sha256": "2e9aff105f53511ee0d7830bbdf64e5b3fa82023cb294697b2900ab0e2a1ef46",
   "errors": [],
   "missing_resources": [],
   "resource_hashes": {
@@ -305,9 +305,9 @@
     "demo_filesystem/Pictures/Personal/Travels/Vietnam_2021.jpg": "8507438dc85e11dfa539a5a44b2a75e271a852cf7d7028d08931e8824b06b6e1",
     "demo_filesystem/Pictures/llama.jpg": "77382f7c0b684320fc021bf5551b55479f7ee86a3c2fb7f3b0fd27257ca304e9"
   },
-  "reference_checked": 1100,
+  "reference_checked": 1000,
   "reference_failures": [],
-  "authoring_checks": 17409,
+  "authoring_checks": 15973,
   "authoring_check_failures": [
     {
       "id": "0031_45dydqdiaufomudhpahsl0isohbn6s7z",
@@ -321,5 +321,13 @@
     }
   ],
   "assets_sha256": "c91672f4bda3799f17f110e584be509c0f9fbb415ce497ab535153c10b5c9cba",
-  "sealed": true
+  "sealed": true,
+  "selection_update": {
+    "operation": "remove_fixed_async_tasks",
+    "removed_tasks": 100,
+    "previous_tasks": 1100,
+    "previous_tasks_sha256": "d230a035041b83b25aafc8ea1dbe00963baa45eb68a87a313e883a51a8b70f20",
+    "reference_results": "inherited_for_unchanged_retained_tasks",
+    "reference_rerun": false
+  }
 }

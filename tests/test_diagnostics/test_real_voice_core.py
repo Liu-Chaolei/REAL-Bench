@@ -64,14 +64,12 @@ def test_response_latency_and_no_response_are_paired():
     assert value(report, "response_latency_mean") == 1.0
     assert value(report, "response_rate") == 1.0
     assert value(report, "on_time_rate") == 1.0
-    assert value(report, "late_rate") == 0.0
     assert value(report, "agent_interruption_rate") == 0.0
     assert value(report, "speech_overlap_duration") == 0.0
     silent = im.score_interactions(evidence(), [])
     assert value(silent, "response_rate") == 0.0
     assert value(silent, "response_latency_mean") is None
     assert silent["metrics"]["response_latency_mean"]["reason"] == "no_response"
-    assert value(silent, "audible_pretoolspeech_rate") is None
 
 
 @pytest.mark.parametrize(
@@ -92,7 +90,6 @@ def test_eva_latency_threshold_boundaries(latency, tools, on_time, late):
         evidence(agent=[[4 + latency, 5 + latency]]), [call(2, 3)] if tools else []
     )
     assert value(report, "on_time_rate") == on_time
-    assert value(report, "late_rate") == late
 
 
 def test_multiple_barge_ins_count_one_turn_and_overlap_excludes_user_pauses():
@@ -111,26 +108,6 @@ def test_endpoint_touch_is_not_overlap_or_interruption():
     assert value(report, "speech_overlap_duration") == 0
     assert value(report, "agent_interruption_rate") == 0
     assert value(report, "response_latency_mean") == 0
-
-
-def test_tool_groups_use_audible_intervals_and_reset_after_previous_group():
-    report = im.score_interactions(
-        evidence(agent=[[4.5, 5.0], [8, 8.5], [12, 13]]),
-        [call(6, 7), call(7.1, 7.5), call(9, 10)],
-    )
-    assert value(report, "audible_pretoolspeech_rate") == 1
-    assert [group["tool_count"] for group in report["details"]["tool_groups"]] == [2, 1]
-    silent_lead = im.score_interactions(
-        evidence(agent=[[8, 8.5]]), [call(6, 7), call(9, 10)]
-    )
-    assert value(silent_lead, "audible_pretoolspeech_rate") == 0.5
-    invalid = im.score_interactions(evidence(agent=[[5, 6]]), [call(6, 101)])
-    assert value(invalid, "audible_pretoolspeech_rate") is None
-    assert (
-        invalid["metrics"]["audible_pretoolspeech_rate"]["reason"]
-        == "invalid_tool_timeline"
-    )
-    assert value(invalid, "response_latency_mean") == 1
 
 
 def test_missing_tool_context_does_not_guess_non_tool_threshold():
@@ -152,8 +129,6 @@ def test_aggregation_pools_samples_instead_of_trial_percentiles_and_ratios():
     assert value(summary, "response_latency_p90") == pytest.approx(8.2)
     assert value(summary, "response_rate") == pytest.approx(2 / 3)
     assert value(summary, "speech_overlap_duration") == 0
-    assert value(summary, "audible_pretoolspeech_rate") == pytest.approx(2 / 3)
-    assert summary["metrics"]["audible_pretoolspeech_rate"]["unavailable_trials"] == 1
 
 
 def test_incompatible_configs_cannot_be_aggregated():
@@ -290,3 +265,9 @@ def test_audio_evidence_excludes_startup_and_uses_wav_not_transcripts(tmp_path):
         im.analyze_audio(tmp_path / "input.wav", tmp_path, observation)["reason"]
         == "output_audio_hash_mismatch"
     )
+
+
+def test_retired_voice_measures_are_not_computed():
+    report = im.score_interactions(evidence(agent=[[5, 6]]), [])
+    assert "late_rate" not in report["metrics"]
+    assert "audible_pretoolspeech_rate" not in report["metrics"]

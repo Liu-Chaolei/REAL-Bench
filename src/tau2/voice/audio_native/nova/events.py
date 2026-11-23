@@ -11,6 +11,7 @@ Reference: AWS Bedrock Nova Sonic documentation
 """
 
 import json
+import time
 from typing import Any, Dict, Literal, Optional, Union
 
 from loguru import logger
@@ -57,6 +58,7 @@ class NovaContentStartEvent(BaseNovaEvent):
     event_type: Literal["contentStart"] = "contentStart"
     role: Optional[str] = None  # "USER" or "ASSISTANT"
     content_id: Optional[str] = Field(default=None, alias="contentId")
+    received_monotonic: float = Field(default_factory=time.monotonic)
     type: Optional[str] = (
         None  # "AUDIO", "TEXT", "TOOL_USE", "TOOL_RESULT" (maps from API 'type' field)
     )

@@ -12,6 +12,7 @@ Key event types:
 Reference: https://docs.x.ai/docs/guides/voice/agent
 """
 
+import time
 from typing import Any, Dict, Literal, Optional, Union
 
 from loguru import logger
@@ -21,6 +22,7 @@ from pydantic import BaseModel, Field
 class BaseXAIEvent(BaseModel):
     """Base class for all xAI Realtime API events."""
 
+    received_monotonic: float = Field(default_factory=time.monotonic)
     type: str
     event_id: Optional[str] = None
 

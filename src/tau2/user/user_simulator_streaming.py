@@ -58,7 +58,7 @@ from tau2.user.dynamic_followup import (
     infer_status_affect,
 )
 from tau2.user.guidelines import simulation_guidelines
-from tau2.user.hidden_intent import HiddenIntentRuntime
+from tau2.user.hidden_intent import HIDDEN_CONTEXT_PREFIX, HiddenIntentRuntime
 from tau2.user.user_simulator import UserSimulator, build_user_system_prompt
 from tau2.user.user_simulator_base import (
     OUT_OF_SCOPE,
@@ -384,6 +384,7 @@ class VoiceStreamingUserSimulator(
         saasr_session=None,
         dynamic_followup_config: DynamicFollowupConfig | None = None,
         hidden_intent_graph: HiddenGoalGraph | None = None,
+        api_config_dir: str | None = None,
     ):
         """
         Initialize the streaming user simulator.
@@ -429,6 +430,7 @@ class VoiceStreamingUserSimulator(
         )
         self.persona_config = persona_config or PersonaConfig()
         self.backchannel = backchannel or default_backchannel_settings()
+        self.api_config_dir = api_config_dir
         self.decision_model = decision_model
         self.decision_model_args = decision_model_args
         self.global_guidelines_override = global_guidelines_override
@@ -457,6 +459,7 @@ class VoiceStreamingUserSimulator(
             else None
         )
         self._hidden_intent_events: list[dict] = []
+        self._hidden_intent_seen_questions: set[str] = set()
         self.scenario_dynamic_stage_ids: dict[str, int] = {}
         self.scenario_dynamic_stage_tool_gts: dict[str, list[dict]] = {}
         self._dynamic_followup_events: list[dict] = []
@@ -624,6 +627,77 @@ class VoiceStreamingUserSimulator(
             guidelines=self.global_simulation_guidelines,
         )
 
+    def _initial_system_messages(self) -> list[SystemMessage]:
+        """Build private user-side system messages for a fresh call."""
+        messages = [SystemMessage(role="system", content=self.system_prompt)]
+        if self.hidden_intent_runtime is not None:
+            messages.append(
+                SystemMessage(
+                    role="system", content=self.hidden_intent_runtime.user_context()
+                )
+            )
+        return messages
+
+    def _sync_hidden_intent_context(self, state: UserAudioStreamingState) -> None:
+        """Refresh the private user-side state message after a transition."""
+        if self.hidden_intent_runtime is None:
+            return
+        context = SystemMessage(
+            role="system", content=self.hidden_intent_runtime.user_context()
+        )
+        for index, system_message in enumerate(state.system_messages):
+            if system_message.content and system_message.content.startswith(
+                HIDDEN_CONTEXT_PREFIX
+            ):
+                state.system_messages[index] = context
+                return
+        state.system_messages.append(context)
+
+    def _api_settings(self, role, default_model=None, default_args=None):
+        """Select an optional caller sub-role from the shared startup snapshot."""
+        if self.api_config_dir:
+            from tau2.utils.api_config import get_api_configuration
+
+            profile = get_api_configuration(self.api_config_dir).text(role)
+            return profile.litellm_model, profile.arguments()
+        return (
+            default_model or self.llm,
+            self.llm_args if default_args is None else default_args,
+        )
+
+    def _observe_hidden_question(
+        self, question: str, state: UserAudioStreamingState
+    ) -> None:
+        """Advance hidden state once for a newly observed Agent turn."""
+        if self.hidden_intent_runtime is None or not question:
+            return
+        key = " ".join(question.split())
+        if key in self._hidden_intent_seen_questions:
+            return
+        self._hidden_intent_seen_questions.add(key)
+        model, args = self._api_settings("HIDDEN_INTENT")
+        result = self.hidden_intent_runtime.detect_and_apply(
+            question, model=model, model_args=args
+        )
+        self._hidden_intent_events.append(
+            {
+                "question": question,
+                **result,
+                "revision": self.hidden_intent_runtime.state.revision,
+            }
+        )
+        if result.get("released"):
+            self._sync_hidden_intent_context(state)
+            self._sync_released_hidden_facts()
+
+    def _sync_released_hidden_facts(self) -> None:
+        """Expose released values to the existing candidate grounding context."""
+        if self.hidden_intent_runtime is None:
+            return
+        for fact in self.hidden_intent_runtime.released_facts():
+            if fact not in self._released_scenario_facts:
+                self._released_scenario_facts.append(fact)
+
     @classmethod
     def is_stop(cls, message: Message) -> bool:
         """Check if the message is a stop message."""
@@ -650,7 +724,27 @@ class VoiceStreamingUserSimulator(
             self._observe_agent_input(state, participant_chunk)
         if self._audio_taps:
             self._audio_taps["agent_input"].record_message(participant_chunk)
-        return super().get_next_chunk(state, participant_chunk, tool_results)
+        message, state = super().get_next_chunk(state, participant_chunk, tool_results)
+        self._discard_last_control_message_from_history(state, message)
+        return message, state
+
+    def _discard_last_control_message_from_history(
+        self, state: "UserAudioStreamingState", message: UserMessage
+    ) -> None:
+        """Keep control signals out of the private user transcript history.
+
+        Intermediate ``###STOP###`` messages are consumed by the scenario-stage
+        controller. They are returned to the orchestrator unchanged, but they
+        must not become a user transcript chunk immediately before the next
+        stage's synthesized audio. The latter would make the linearizer try to
+        merge text and audio messages into one chunk.
+        """
+        if not self.is_stop(message) or not state.ticks:
+            return
+        last_tick = state.ticks[-1]
+        if last_tick.self_chunk is None or not self.is_stop(last_tick.self_chunk):
+            return
+        state.ticks[-1] = last_tick.model_copy(update={"self_chunk": None})
 
     def cancel_pending_generation(self) -> None:
         """Close generation admission before the Agent and ASR are stopped."""
@@ -720,9 +814,7 @@ class VoiceStreamingUserSimulator(
             )
 
             return UserAudioStreamingState(
-                system_messages=[
-                    SystemMessage(role="system", content=self.system_prompt)
-                ],
+                system_messages=self._initial_system_messages(),
                 messages=message_history,
                 noise_generator=BackgroundNoiseGenerator(
                     silent_mode=True, sample_rate=PCM_SAMPLE_RATE
@@ -776,7 +868,7 @@ class VoiceStreamingUserSimulator(
         # Create streaming state
         backchannel_rng = random.Random(speech_env.voice_seed + 100)
         return UserAudioStreamingState(
-            system_messages=[SystemMessage(role="system", content=self.system_prompt)],
+            system_messages=self._initial_system_messages(),
             messages=message_history,
             noise_generator=noise_generator,
             effect_scheduler=effect_scheduler,
@@ -797,7 +889,9 @@ class VoiceStreamingUserSimulator(
         if not isinstance(chunk, AssistantMessage):
             return False
         # Check contains_speech flag - defaults to True for backward compatibility if not set
-        return chunk.contains_speech if chunk.contains_speech is not None else True
+        from tau2.voice.audio_activity import is_speaking
+
+        return is_speaking(chunk)
 
     @property
     def _generation(self) -> Future | None:
@@ -1142,6 +1236,7 @@ class VoiceStreamingUserSimulator(
         self._record_generated_result(task, message, generated, state, discarded=False)
         self._voice_event("committed", task, state)
         self._generation_task = None
+        self._sync_hidden_intent_context(state)
         if task.origin == "scripted":
             key = (message.raw_data or {}).get("scenario_input_id")
             if not self._scenario_inputs or self._scenario_inputs[0][0] != key:
@@ -1450,6 +1545,13 @@ class VoiceStreamingUserSimulator(
             chunk.audio_format = mixed_audio.format
             chunk.source_effects = result.source_effects
 
+        chunk.raw_data = {**(chunk.raw_data or {})}
+        chunk.raw_data.setdefault(
+            "user_event_kind", "formal" if is_speech else "background"
+        )
+        if result.speech_event is not None:
+            chunk.raw_data["independent_user_events"] = [result.speech_event]
+
         if self._audio_taps:
             self._audio_taps["post_noise"].record_message(chunk)
 
@@ -1547,6 +1649,10 @@ class VoiceStreamingUserSimulator(
                 full_message.turn_taking_action = action
                 return full_message, new_state
             elif self.is_stop(full_message):
+                full_message.raw_data = {
+                    **(full_message.raw_data or {}),
+                    "user_event_kind": "control",
+                }
                 logger.debug("Generating message: Stop message detected")
                 full_message.turn_taking_action = action
                 return full_message, new_state
@@ -1696,6 +1802,23 @@ class VoiceStreamingUserSimulator(
                     "scripted_input_available",
                 )
 
+    def observe_agent_tool_calls(self, tool_calls) -> None:
+        """Bind Agent tool calls to hidden-intent state for diagnostics."""
+        if self.hidden_intent_runtime is None:
+            return
+        for call in tool_calls:
+            self.hidden_intent_runtime.observe_tool_call(call.name, call.arguments)
+
+    def get_hidden_intent_metrics(self) -> dict | None:
+        """Return the single public hidden-intent metric for this run."""
+        if self.hidden_intent_runtime is None:
+            return None
+        from tau2.metrics.hidden_intent import score_hidden_intent
+
+        return score_hidden_intent(
+            self.hidden_intent_runtime.graph, self.hidden_intent_runtime.state
+        )
+
     def _generate_full_duplex_voice_message(
         self,
         message: ValidUserInputMessage,
@@ -1751,15 +1874,9 @@ class VoiceStreamingUserSimulator(
             for message in reversed(linearized_messages):
                 if not isinstance(message, AssistantMessage) or not message.content:
                     continue
-                result = self.hidden_intent_runtime.ask_auto(message.content)
-                self._hidden_intent_events.append(
-                    {
-                        "question": message.content,
-                        **result,
-                        "revision": self.hidden_intent_runtime.state.revision,
-                    }
-                )
+                self._observe_hidden_question(message.content, state)
                 break
+            self._sync_hidden_intent_context(state)
 
         # Flip roles for user simulator (it sees itself as assistant)
         flipped_messages = self._flip_roles_for_llm(linearized_messages)
@@ -1792,7 +1909,12 @@ class VoiceStreamingUserSimulator(
                 and dynamic_stage in self.dynamic_followup_config.stages
             )
             if dynamic_enabled:
+                followup_model, followup_args = self._api_settings("FOLLOWUP")
                 cache_material = {
+                    "model": followup_model,
+                    "model_args": {
+                        k: v for k, v in followup_args.items() if k != "api_key"
+                    },
                     "event_id": key,
                     "stage": dynamic_stage,
                     "source_request": text,
@@ -1815,8 +1937,8 @@ class VoiceStreamingUserSimulator(
                     context_error = None
                     try:
                         context_classification, context_reply = classify_status_affect(
-                            model=self.llm,
-                            model_args=self.llm_args,
+                            model=followup_model,
+                            model_args=followup_args,
                             conversation=linearized_messages,
                             max_context_characters=(
                                 self.dynamic_followup_config.max_context_characters
@@ -1864,8 +1986,8 @@ class VoiceStreamingUserSimulator(
                             verification,
                             verification_reply,
                         ) = generate_dynamic_followup(
-                            model=self.llm,
-                            model_args=self.llm_args,
+                            model=followup_model,
+                            model_args=followup_args,
                             stage=dynamic_stage,
                             source_request=text,
                             conversation=linearized_messages,
@@ -1891,7 +2013,7 @@ class VoiceStreamingUserSimulator(
                             "verification": verification.model_dump(mode="json"),
                             "accepted": True,
                             "fallback": False,
-                            "model": self.llm,
+                            "model": followup_model,
                             "prompt_hash": dynamic_context_hash,
                             "context_revision": state.agent_input_revision,
                             "generation_time_seconds": candidate_reply.generation_time_seconds,
@@ -2019,6 +2141,11 @@ class VoiceStreamingUserSimulator(
                                 fragments[fragment["event_id"]] = fragment
                     return self.audio_recheck(evidence, list(fragments.values()))
 
+                grounding_model, grounding_args = self._api_settings(
+                    "USER_GROUNDING",
+                    self.decision_model or self.llm,
+                    self.decision_model_args if self.decision_model else self.llm_args,
+                )
                 assistant_message = generate_grounded_reply(
                     generate_reply=generate_reply,
                     allowed=self.scenario_constraints
@@ -2029,10 +2156,8 @@ class VoiceStreamingUserSimulator(
                         for m in linearized_messages
                         if m.content
                     ),
-                    model=self.decision_model or self.llm,
-                    model_args=self.decision_model_args
-                    if self.decision_model
-                    else self.llm_args,
+                    model=grounding_model,
+                    model_args=grounding_args,
                     is_stop=self.is_stop,
                     events=self._candidate_recovery_events,
                     max_retries=self.candidate_max_retries,
@@ -2140,6 +2265,10 @@ class VoiceStreamingUserSimulator(
 
     def _create_chunk_messages(self, full_message):
         """Align caller captions to foreground, excluding prelude and RIR tail."""
+        full_message.raw_data = {
+            "user_event_kind": "formal",
+            **(full_message.raw_data or {}),
+        }
         if self.saasr_session is None:
             return super()._create_chunk_messages(full_message)
         lead = self.saasr_session.commit(full_message)
@@ -2170,6 +2299,17 @@ class VoiceStreamingUserSimulator(
                     "transport_gain": metadata["transport_gain"],
                     "utterance": metadata["utterance"],
                 },
+                "speech_range_seconds": [
+                    max(0, lead - index * self.chunk_size) / PCM_SAMPLE_RATE,
+                    min(
+                        self.chunk_size,
+                        lead + metadata["speech_samples"] - index * self.chunk_size,
+                    )
+                    / PCM_SAMPLE_RATE,
+                ]
+                if first <= index <= last
+                else [0.0, 0.0],
+                "user_event_kind": full_message.raw_data["user_event_kind"],
                 "saasr_main_final": index == last,
                 "saasr_speech_offset_seconds": max(0, lead - index * self.chunk_size)
                 / PCM_SAMPLE_RATE,
@@ -2220,6 +2360,9 @@ class VoiceStreamingUserSimulator(
         chunk.audio_format = SAASR_AUDIO_FORMAT.model_copy()
         chunk.audio_path = None
         chunk.raw_data = {**(chunk.raw_data or {}), "saasr_output_id": output_id}
+        chunk.raw_data.setdefault(
+            "user_event_kind", "background" if not chunk.contains_speech else "formal"
+        )
         if state.telephony_converter is not None:
             chunk = self._add_telephony_compression(chunk, state.telephony_converter)
         if self._audio_taps:
@@ -2317,7 +2460,7 @@ class VoiceStreamingUserSimulator(
             content=content,
             cost=0.0,
             usage=None,
-            raw_data=None,
+            raw_data={"user_event_kind": "backchannel"},
             chunk_id=0,
             is_final_chunk=True,
         )

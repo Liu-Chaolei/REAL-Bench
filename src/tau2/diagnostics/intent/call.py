@@ -18,6 +18,11 @@ from tau2.diagnostics.intent.repetition import apply_repetition, check_repetitio
 from tau2.diagnostics.intent.scoring import score_record
 from tau2.diagnostics.intent.types import TextRecord
 from tau2.diagnostics.model import TauJsonModel
+from tau2.diagnostics.request_changes import (
+    CHANGE_POLICY,
+    management_events,
+    request_relations,
+)
 
 CALL_POLICY = """This input is a chronological complete conversation of delivered requests,
 not just the latest request. Extract one combined intent. Retain all distinct
@@ -30,6 +35,8 @@ provenance only, not extra business requirements. Relative dates refer to the
 request in which they were expressed; do not merge two different request anchors.
 Do not invent facts from application state, reference solutions or the other side.
 """
+
+CALL_POLICY += CHANGE_POLICY
 
 USER_CALL_POLICY = (
     CALL_POLICY
@@ -53,6 +60,7 @@ Evidence paths are relative to the business intent: /goals/0, NOT /intent/goals/
 def combined_sources(evidence):
     """Deterministically serialize each side without access to the other side."""
     user = []
+    relations = request_relations(evidence)
     for row in evidence.user_inputs:
         if row.role == "user" and row.unavailable_reason:
             return None, None, row.unavailable_reason
@@ -79,6 +87,8 @@ def combined_sources(evidence):
         user.append(
             {
                 "source_id": row.id,
+                "request_id": row.event_id,
+                "request_relation": relations.get(row.event_id),
                 "role": row.role,
                 "stage": row.stage,
                 "started": row.started,
@@ -109,10 +119,29 @@ def combined_sources(evidence):
                 "content": row.content,
             }
         )
+    backend.extend(
+        dict(
+            source_id="management:" + row["id"],
+            logical_id=row["id"],
+            role=row["kind"],
+            task_id=row["task_id"],
+            time=row["time"],
+            content=dict(
+                arguments=row["arguments"], result=row["result"], success=row["success"]
+            ),
+        )
+        for row in management_events(evidence)
+    )
     identity = evidence.simulation_id
     a = TextRecord(
         identity,
         canonical(user),
+        metadata={
+            "task_id": evidence.task_id,
+            "domain": evidence.domain,
+            "language": evidence.source.get("language"),
+            "task_set_name": evidence.source.get("task_set_name"),
+        },
         context={
             "scope": "whole_call",
             "policy": USER_CALL_POLICY,

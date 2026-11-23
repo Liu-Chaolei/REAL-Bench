@@ -20,6 +20,7 @@ from tau2.evaluator.evaluator_nl_assertions import (
 )
 from tau2.evaluator.outcome import can_grade, finalize_reward, stamp_grading
 from tau2.orchestrator.modes import CommunicationMode
+from tau2.persistent_tasks.scores import completion_score
 from tau2.registry import registry
 
 
@@ -121,6 +122,14 @@ def evaluate_simulation(
     Returns:
         RewardInfo with the evaluation results.
     """
+    if domain == "gaia2":
+        simulation.info = {
+            **(simulation.info or {}),
+            "evaluation_log": {
+                **(simulation.info or {}).get("evaluation_log", {}),
+                "domain": domain,
+            },
+        }
     persistent = (simulation.info or {}).get("persistent_tasks")
     allow_persistent_generated_reply = bool(
         persistent
@@ -147,6 +156,21 @@ def evaluate_simulation(
             customer_language=customer_language,
         )
     stamp_grading(simulation)
+    from tau2.domains.gaia2.interaction_variants import metric_enabled
+
+    if not metric_enabled(task, "environment"):
+        return finalize_reward(
+            simulation,
+            RewardInfo(
+                reward=None,
+                reward_basis=[],
+                reward_breakdown={},
+                info={
+                    "status": "not_applicable",
+                    "reason": "interaction_variant_scoring_scope",
+                },
+            ),
+        )
     persistent = (simulation.info or {}).get("persistent_tasks")
     if (
         persistent
@@ -225,6 +249,61 @@ def evaluate_simulation(
         FullDuplexCommunicateEvaluator if is_full_duplex else CommunicateEvaluator
     )
     ActEvaluator = FullDuplexActionEvaluator if is_full_duplex else ActionEvaluator
+
+    # Keep the frozen task intact for replay. Information coverage is measured
+    # by conciseness; historical ACTION/NL/COMMUNICATE declarations are inactive.
+    if domain == "gaia2":
+        basis = [
+            b
+            for b in task.evaluation_criteria.reward_basis
+            if b
+            not in {
+                RewardType.ACTION,
+                RewardType.NL_ASSERTION,
+                RewardType.COMMUNICATE,
+            }
+        ]
+        components = []
+        if evaluation_type not in {
+            EvaluationType.ACTION,
+            EvaluationType.NL_ASSERTIONS,
+            EvaluationType.COMMUNICATE,
+        }:
+            env_reward_info = EnvEvaluator.calculate_reward(
+                environment_constructor=registry.get_env_constructor(domain),
+                task=task,
+                full_trajectory=trajectory,
+                solo_mode=solo_mode,
+                env_kwargs=env_kwargs,
+                strict_replay=strict_replay,
+                compare_tool_results=compare_tool_results,
+                environment_trace=simulation.environment_trace,
+            )
+            components.append(env_reward_info)
+        reward = 1.0
+        breakdown = {}
+        details = {}
+        for component in components:
+            reward *= component.reward
+            breakdown.update(component.reward_breakdown or {})
+            details.update(component.info or {})
+        result = RewardInfo(
+            reward=reward,
+            reward_basis=basis,
+            reward_breakdown=breakdown,
+            env_assertions=env_reward_info.env_assertions if env_reward_info else None,
+            info=details,
+        )
+        simulation.info = {
+            **(simulation.info or {}),
+            "evaluation_log": {
+                **(simulation.info or {}).get("evaluation_log", {}),
+                "domain": domain,
+                "effective_reward_basis": [b.value for b in basis],
+                "evaluation_type": evaluation_type.value,
+            },
+        }
+        return finalize_reward(simulation, result, series, missing)
 
     # Get tool types from the environment for action evaluation
     tool_types: Optional[dict[str, ToolType]] = None
@@ -359,7 +438,7 @@ def evaluate_simulation(
         if (
             persistent
             and persistent.get("config", {}).get("combine_reward")
-            and persistent.get("grading", {}).get("reward") is not None
+            and completion_score(persistent.get("grading")) is not None
         ):
             evaluated_bases.add(RewardType.PERSISTENT_TASK)
         if communicate_reward_info is not None:

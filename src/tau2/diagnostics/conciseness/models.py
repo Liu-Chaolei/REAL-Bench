@@ -30,6 +30,11 @@ class Calibration(StrictModel):
     reviewed: Literal[True]
     provenance: str = Field(min_length=1)
     review_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+    source_sha256: str | None = Field(
+        default=None,
+        pattern=r"^[a-f0-9]{64}$",
+        description="Hash of the calibration file used to load this profile.",
+    )
     languages: dict[str, LengthBudget] = Field(min_length=1)
 
 
@@ -110,9 +115,9 @@ class Match(StrictModel):
 
 
 class Finding(StrictModel):
-    """Auditable duplication, irrelevant content or misleading assertion."""
+    """Explanatory repetition or irrelevant expression, without a truth verdict."""
 
-    kind: Literal["repetition", "irrelevant", "material_error", "uncertain"]
+    kind: Literal["repetition", "irrelevant", "uncertain"]
     reason: str = Field(min_length=1)
     quotes: list[Quote] = Field(min_length=1)
     evidence_refs: list[str]
@@ -123,5 +128,3 @@ class Alignment(StrictModel):
 
     matches: list[Match]
     findings: list[Finding]
-    fidelity_status: Literal["supported", "material_error", "uncertain"]
-    fidelity_reason: str = Field(min_length=1)

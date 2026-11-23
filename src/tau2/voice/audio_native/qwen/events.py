@@ -6,6 +6,7 @@ This file provides Qwen-specific aliases and any Qwen-specific event types.
 Reference: https://www.alibabacloud.com/help/en/model-studio/realtime
 """
 
+import time
 from typing import Annotated, Literal, Optional, Union
 
 from pydantic import BaseModel, Field
@@ -14,6 +15,7 @@ from pydantic import BaseModel, Field
 class BaseQwenEvent(BaseModel):
     """Base class for all Qwen Realtime API events."""
 
+    received_monotonic: float = Field(default_factory=time.monotonic)
     type: str
     event_id: Optional[str] = None
 

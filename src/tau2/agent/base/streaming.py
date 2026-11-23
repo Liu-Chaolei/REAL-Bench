@@ -25,6 +25,7 @@ from tau2.utils.transcript.linearization import (
     linearize_ticks,
 )
 from tau2.utils.utils import get_now
+from tau2.voice.audio_activity import is_speaking
 from tau2.voice.utils.audio_preprocessing import pad_audio_with_zeros
 from tau2.voice.utils.probability import poisson_should_trigger
 
@@ -149,14 +150,17 @@ class StreamingState(BaseModel, Generic[InputMessageType, OutputMessageType]):
 
     def input_ongoing_speech_duration(self) -> int:
         """
-        Check duration of ongoing speech since last silence.
+        Count consecutive input chunks still speaking at each chunk's end.
+
+        A chunk may contain earlier speech while no longer speaking now. That
+        ends the current run without removing its historical speech evidence.
 
         Returns:
             The last speech duration in chunks.
         """
         ongoing_speech_duration = 0
         for chunk in reversed(self.input_turn_taking_buffer):
-            if not isinstance(chunk, EnvironmentMessage) and chunk.contains_speech:
+            if not isinstance(chunk, EnvironmentMessage) and is_speaking(chunk):
                 ongoing_speech_duration += 1
             else:
                 break
@@ -825,7 +829,26 @@ class AudioChunkingMixin(
                 chunk_id=i,
                 is_final_chunk=i == len(chunks) - 1,
                 audio_script_gold=chunk_audio_script_gold,
-                raw_data=full_message.raw_data if i == 0 else None,
+                raw_data={
+                    **(full_message.raw_data or {} if i == 0 else {}),
+                    "user_event_kind": (full_message.raw_data or {}).get(
+                        "user_event_kind", "formal"
+                    ),
+                    "speech_range_seconds": [
+                        0.0,
+                        max(
+                            0.0,
+                            min(
+                                chunk.duration,
+                                len(full_message.get_audio_bytes())
+                                / full_message.audio_format.bytes_per_second
+                                - i * chunk.duration,
+                            ),
+                        ),
+                    ]
+                    if full_message.contains_speech
+                    else [0.0, 0.0],
+                },
                 cost=full_message.cost if i == 0 else 0.0,
                 usage=full_message.usage if i == 0 else None,
                 speech_effects=full_message.speech_effects,
@@ -1186,6 +1209,8 @@ def basic_turn_taking_policy(
 
             # Choose threshold based on context
             overlap_initiator = state.overlap_initiator
+            if overlap_initiator is None:
+                return "keep_talking", "No current overlap"
             if state.delivering_tool_result_speech:
                 # Tool result speech is assertive — always use the high
                 # "interrupting" threshold so the participant holds its ground

@@ -21,6 +21,7 @@ from rich.table import Table
 from tau2.data_model.simulation import Results
 from tau2.metrics.voice_interaction_metrics import (
     INTERACTION_METRICS_VERSION,
+    LEGACY_PANEL_METRIC_FIELDS,
     PANEL_METRIC_FIELDS,
     InteractionMetricsConfig,
     NoVoiceTicksError,
@@ -120,10 +121,25 @@ def build_interaction_metrics_block(
 ) -> dict:
     """Assemble the ``interaction_metrics`` block from per-domain panels."""
     config = config or InteractionMetricsConfig()
+    from tau2.metrics.voice_interaction import CONFIG, VERSION
+
+    unified = any(m.get("version") == VERSION for m in domain_metrics.values())
     return {
-        "version": INTERACTION_METRICS_VERSION,
-        "config": config.as_dict(),
-        "domains": dict(sorted(domain_metrics.items())),
+        "version": VERSION if unified else INTERACTION_METRICS_VERSION,
+        "config": CONFIG if unified else config.as_dict(),
+        "domains": dict(
+            sorted(
+                (
+                    domain,
+                    dict(
+                        panel, version=panel.get("version", INTERACTION_METRICS_VERSION)
+                    )
+                    if unified
+                    else panel,
+                )
+                for domain, panel in domain_metrics.items()
+            )
+        ),
         "overall": aggregate_domain_metrics(domain_metrics),
     }
 
@@ -173,8 +189,10 @@ def compute_interaction_metrics_block(
 def _format_cell(metric_name: str, value: Optional[float]) -> str:
     if value is None:
         return "—"
-    if metric_name.endswith("latency_mean"):
+    if "latency" in metric_name or metric_name == "speech_overlap_duration":
         return f"{value:.2f}s"
+    if metric_name == "agent_interruption_event_rate":
+        return f"{value:.2f}/turn"
     return f"{value * 100:.1f}%"
 
 
@@ -182,14 +200,15 @@ def print_interaction_metrics(block: dict) -> None:
     """Pretty-print an interaction_metrics block as a rich table."""
     table = Table(title="Interaction Metrics (τ-voice panel)")
     table.add_column("Domain")
-    table.add_column("L_R ↓")
-    table.add_column("L_Y ↓")
-    table.add_column("R_R ↑")
-    table.add_column("R_Y ↑")
-    table.add_column("I_A ↓")
-    table.add_column("S_BC ↑")
-    table.add_column("S_VT ↑")
-    table.add_column("S_ND ↑")
+    from tau2.metrics.voice_interaction import VERSION
+
+    fields = (
+        PANEL_METRIC_FIELDS
+        if block.get("version") == VERSION
+        else LEGACY_PANEL_METRIC_FIELDS
+    )
+    for field in fields:
+        table.add_column(field)
 
     rows = list(block["domains"].items())
     if block.get("overall"):
@@ -198,7 +217,7 @@ def print_interaction_metrics(block: dict) -> None:
     for domain, metrics in rows:
         table.add_row(
             domain,
-            *[_format_cell(name, metrics.get(name)) for name in PANEL_METRIC_FIELDS],
+            *[_format_cell(name, metrics.get(name)) for name in fields],
         )
 
     console.print(table)

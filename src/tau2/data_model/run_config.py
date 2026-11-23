@@ -182,14 +182,18 @@ class AudioNativeConfig(BaseModel):
 
     @model_validator(mode="after")
     def validate_qwen_agent_config(self):
-        """Keep complete-system settings and real-time semantics explicit."""
+        """Keep complete-system settings explicit.
+
+        Qwen Agent supports both asynchronous caller generation and the
+        synchronous path.  The latter intentionally blocks the current
+        simulation tick while the caller LLM/TTS response is prepared, which
+        is useful when the simulation clock must exclude preparation latency.
+        """
         if self.provider == "qwen_agent":
             if self.qwen_agent_config is None:
                 raise ValueError("qwen_agent requires qwen_agent_config")
             if self.reasoning_effort is not None:
                 raise ValueError("Qwen Agent reasoning is configured on the system")
-            if self.realtime_generation is False:
-                raise ValueError("qwen_agent requires non-blocking user generation")
             if self.model == DEFAULT_AUDIO_NATIVE_MODELS[DEFAULT_AUDIO_NATIVE_PROVIDER]:
                 self.model = DEFAULT_AUDIO_NATIVE_MODELS["qwen_agent"]
         elif self.qwen_agent_config is not None:

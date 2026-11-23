@@ -140,8 +140,10 @@ def test_two_native_formats_use_the_same_runtime_and_grader():
         for event, at in (("opened", 1), ("inspect.begin", 5), ("inspect.end", 6))
     ]
     for verdict in (run_case(native), run_case(alternate)):
-        assert verdict["native_reward"] == 1
-        assert verdict["version"] == "persistent-task-grading-v5"
+        assert verdict["completion_score"] == 1
+        assert verdict["evaluation_log"]["native_result"]["passed"] == 1
+        assert "state_result_reward" not in verdict
+        assert verdict["version"] == "persistent-task-grading-v8"
 
 
 def test_adapter_does_not_confuse_acknowledgement_and_completion():
@@ -247,7 +249,7 @@ def test_unsupported_agent_produces_unscored_skip_without_starting_models():
     assert result.evaluation_status == "skipped"
     assert result.termination_reason.value == "unsupported"
     assert result.reward_info is None
-    assert result.info["async_availability"]["native_reward"] is None
+    assert result.info["async_availability"]["reward"] is None
 
 
 def test_embedded_async_configuration_keeps_source_identity_and_rejects_overrides():

@@ -4,10 +4,11 @@ import json
 import unicodedata
 from pathlib import Path
 
-from tau2.diagnostics.conciseness import VERSION
+from tau2.diagnostics.conciseness import INVENTORY_VERSION, VERSION
 from tau2.diagnostics.conciseness.evidence import build_windows, generation_input
 from tau2.diagnostics.conciseness.models import Alignment, NuggetInventory
 from tau2.diagnostics.conciseness.scoring import (
+    aligned_groups,
     response_length,
     score_window,
     trial_summary,
@@ -91,43 +92,26 @@ def validate_alignment(raw, inventory, window):
                 )
     for finding in value["findings"]:
         sources_valid = set(finding["evidence_refs"]) <= window["sources"].keys()
-        material_supported = finding["kind"] != "material_error" or bool(
-            finding["evidence_refs"]
-        )
-        if (
-            not valid_quotes(finding["quotes"])
-            or not sources_valid
-            or not material_supported
-        ):
+        if not valid_quotes(finding["quotes"]) or not sources_valid:
             validation.append(
                 {"original_kind": finding["kind"], "reason": "invalid_finding_citation"}
             )
             finding.update(kind="uncertain", reason="invalid_finding_citation")
-    # A validated contradiction of a frozen business obligation is itself a
-    # substantive error, even if the judge forgot to duplicate it as a finding.
-    for match in value["matches"]:
-        if match["status"] == "contradicted":
-            value["findings"].append(
-                {
-                    "kind": "material_error",
-                    "reason": match["reason"],
-                    "quotes": match["quotes"],
-                    "evidence_refs": nuggets[match["nugget_id"]]["evidence_refs"],
-                }
-            )
-    if any(f["kind"] == "material_error" for f in value["findings"]):
-        value["fidelity_status"] = "material_error"
-    elif value["fidelity_status"] == "material_error":
-        # A bare label cannot trigger the zero-score gate.
-        value["fidelity_status"] = "uncertain"
-        validation.append({"reason": "material_error_without_supported_finding"})
-    if value["fidelity_status"] != "material_error" and (
-        validation
-        or any(f["kind"] == "uncertain" for f in value["findings"])
-        or any(m["status"] in {"uncertain", "contradicted"} for m in value["matches"])
-    ):
-        value["fidelity_status"] = "uncertain"
     return value, validation
+
+
+def delivered_history(inventory, alignment, window_id):
+    """Carry only unanimously covered obligations, never extra assistant claims."""
+    return [
+        {
+            "window_id": window_id,
+            "proposition": group[0]["proposition"],
+            "equivalence_group": group[0]["equivalence_group"],
+            "evidence_refs": sorted({ref for n in group for ref in n["evidence_refs"]}),
+        }
+        for group, _, status in aligned_groups(inventory, alignment)
+        if status == "matched"
+    ]
 
 
 def _rubric(name):
@@ -199,6 +183,9 @@ def evaluate_feedback(evidence, config, directory, output, budget, language=None
     length_budget = (
         calibration.languages.get(language) if calibration and language else None
     )
+    from tau2.diagnostics.request_changes import feedback_evidence
+
+    evidence = feedback_evidence(evidence)
     windows = build_windows(evidence, options)
     output, directory = Path(output), Path(directory)
     output.mkdir(parents=True, exist_ok=True)
@@ -228,7 +215,7 @@ def evaluate_feedback(evidence, config, directory, output, budget, language=None
                 "prompt": prompt,
                 "schema": inventory_schema,
                 "model": config.profile("feedback_nuggets").model_dump(),
-                "version": VERSION,
+                "version": INVENTORY_VERSION,
             }
         )
         frozen_path = cache / "nuggets" / (key + ".json")
@@ -281,8 +268,6 @@ def evaluate_feedback(evidence, config, directory, output, budget, language=None
                         for n in inventory["nuggets"]
                     ],
                     "findings": [],
-                    "fidelity_status": "supported",
-                    "fidelity_reason": "No delivered claims",
                 }
                 validations = []
             else:
@@ -308,15 +293,7 @@ def evaluate_feedback(evidence, config, directory, output, budget, language=None
             result.update(
                 score_window(inventory, alignment, window["replies"], length_budget)
             )
-            matched = {
-                m["nugget_id"] for m in alignment["matches"] if m["status"] == "matched"
-            }
-            if alignment["fidelity_status"] == "supported":
-                history.extend(
-                    {"window_id": window["id"], "proposition": n["proposition"]}
-                    for n in inventory["nuggets"]
-                    if n["id"] in matched
-                )
+            history.extend(delivered_history(inventory, alignment, window["id"]))
         except Exception as exc:
             result.update(status="grader_error", reason=type(exc).__name__)
             write_json(
@@ -355,6 +332,7 @@ def evaluate_feedback(evidence, config, directory, output, budget, language=None
         "future_context_visible_within_window": True,
         "calibration_id": calibration.id if calibration else None,
         "calibration_sha256": digest(calibration.model_dump()) if calibration else None,
+        "calibration_source_sha256": calibration.source_sha256 if calibration else None,
         "diagnostic_only": not evidence.complete,
         "windows": results,
         "trial": trial,

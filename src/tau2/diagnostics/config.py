@@ -1,5 +1,6 @@
 """Explicit model profiles and bounded independent diagnostic execution."""
 
+import hashlib
 import os
 from pathlib import Path
 from typing import Any, Literal
@@ -30,7 +31,44 @@ class ModelProfile(BaseModel):
         default_factory=lambda: dict(DEFAULT_SEMANTIC_COMMUNICATE_MODEL_ARGS)
     )
 
+    api_identity: dict | None = None
+    api_role: str | None = None
+    api_config_dir: str | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def resolve_api_role(cls, value):
+        if (
+            isinstance(value, dict)
+            and value.get("api_role")
+            and not value.get("api_identity")
+        ):
+            from tau2.config import DEFAULT_API_CONFIG_DIR
+            from tau2.utils.api_config import get_api_configuration
+
+            value = dict(value)
+            profile = get_api_configuration(
+                value.get("api_config_dir") or DEFAULT_API_CONFIG_DIR
+            ).text(value["api_role"])
+            value.update(
+                api_identity=profile.public(),
+                model=profile.litellm_model,
+                api_base=profile.public()["api_base"],
+                api_key_env=None,
+                args=dict(profile.args),
+            )
+        return value
+
     def arguments(self):
+        if self.api_role:
+            from tau2.config import DEFAULT_API_CONFIG_DIR
+            from tau2.utils.api_config import get_api_configuration
+
+            return (
+                get_api_configuration(self.api_config_dir or DEFAULT_API_CONFIG_DIR)
+                .text(self.api_role)
+                .arguments()
+            )
         result = dict(self.args)
         if self.api_base:
             result["api_base"] = self.api_base
@@ -58,6 +96,7 @@ class MetricsConfig(BaseModel):
             "execution",
             "voice",
             "interaction",
+            "state_interaction",
             "conciseness",
             "persistent_task",
         ]
@@ -75,6 +114,7 @@ class MetricsConfig(BaseModel):
             "evaluation",
             "execution",
             "interaction",
+            "state_interaction",
             "feedback_nuggets",
             "feedback_alignment",
         ],
@@ -82,17 +122,63 @@ class MetricsConfig(BaseModel):
     ] = Field(default_factory=dict)
     conciseness: FeedbackConfig = Field(default_factory=FeedbackConfig)
 
+    api_config_dir: str | None = None
+    api_judge_role: Literal["JUDGE", "USER"] = "JUDGE"
+
+    @model_validator(mode="before")
     @classmethod
-    def load(cls, path):
+    def resolve_api_profiles(cls, value):
+        if isinstance(value, dict) and value.get("api_config_dir"):
+            from tau2.utils.api_config import DIAGNOSTIC_ROLES
+
+            value = dict(value)
+            directory = value["api_config_dir"]
+            if isinstance(value.get("model"), dict) and value["model"].get(
+                "api_identity"
+            ):
+                return value
+            supplied = [value.get("model", {}), *value.get("models", {}).values()]
+            if any(
+                isinstance(p, dict) and p and not p.get("api_role") for p in supplied
+            ):
+                raise ValueError(
+                    "api_config_dir conflicts with literal diagnostic profiles"
+                )
+            default_role = value.get("api_judge_role", "JUDGE")
+            value["model"] = {"api_role": default_role, "api_config_dir": directory}
+            value["models"] = {
+                role: {
+                    "api_role": target if default_role == "JUDGE" else "USER",
+                    "api_config_dir": directory,
+                }
+                for role, target in DIAGNOSTIC_ROLES.items()
+            }
+        return value
+
+    @classmethod
+    def load(cls, path, api_config_dir=None, judge_from_user=False):
         path = Path(path)
         value = yaml.safe_load(path.read_text())
+        if api_config_dir is not None:
+            value["api_config_dir"] = str(api_config_dir)
+        if judge_from_user:
+            value["api_judge_role"] = "USER"
+        if value.get("api_config_dir"):
+            for profile in [value.get("model", {}), *value.get("models", {}).values()]:
+                if profile.get("api_role"):
+                    profile.pop("api_identity", None)
         feedback = value.get("conciseness", {})
         if isinstance(feedback.get("calibration"), str):
             import json
 
             calibration_path = path.parent / feedback["calibration"]
             data = json.loads(calibration_path.read_text())
-            feedback["calibration"] = data.get("calibration", data)
+            calibration = dict(data.get("calibration", data))
+            calibration.setdefault(
+                "source_sha256",
+                hashlib.sha256(calibration_path.read_bytes()).hexdigest(),
+            )
+            feedback["calibration"] = calibration
         return cls.model_validate(value)
 
     def profile(self, role):

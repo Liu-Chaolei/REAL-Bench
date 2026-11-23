@@ -427,6 +427,82 @@ def qwen_config(**kwargs):
     )
 
 
+def test_qwen_no_words_keeps_observer_running_and_records_empty_result(monkeypatch):
+    monkeypatch.setenv("DASHSCOPE_API_KEY3", "test-observer-key")
+
+    async def scenario():
+        calls = []
+
+        def remote(request):
+            calls.append(request)
+            if len(calls) == 1:
+                return httpx.Response(
+                    400,
+                    json={
+                        "code": "CLIENT_ERROR",
+                        "message": "ASR_RESPONSE_HAVE_NO_WORDS",
+                        "request_id": "1515e8f8-12fd-96a2-bf28-83c56bcfb438",
+                    },
+                )
+            return httpx.Response(200, json={"output": {"text": "Next sentence."}})
+
+        async with httpx.AsyncClient(transport=httpx.MockTransport(remote)) as client:
+            observer = QwenPlayedAudioTranscriber(qwen_config(), client=client)
+            await observer.connect()
+            try:
+                await observer.send(b"\x10\x10" * 8000)
+                await asyncio.wait_for(observer._segments.join(), 1)
+                assert observer.failure is None and observer.drain() == []
+                assert observer.summary()["usage"][0] == {
+                    "purpose": "primary",
+                    "status": "empty",
+                    "reason": "ASR_RESPONSE_HAVE_NO_WORDS",
+                    "request_id": "1515e8f8-12fd-96a2-bf28-83c56bcfb438",
+                    "audio_duration_seconds": 1.0,
+                }
+                await observer.send(b"\x20\x20" * 8000)
+                await asyncio.wait_for(observer._segments.join(), 1)
+                (fragment,) = observer.drain()
+                assert fragment.text.strip() == "Next sentence."
+                assert (fragment.start_ms, fragment.end_ms) == (1000, 2000)
+                assert observer.failure is None and not observer.worker.done()
+                assert len(calls) == observer.summary()["finalized_segments"] == 2
+            finally:
+                await observer.close()
+
+    asyncio.run(scenario())
+
+
+@pytest.mark.parametrize(
+    "status,code,message",
+    [
+        (400, "CLIENT_ERROR", "invalid audio format"),
+        (400, "InvalidParameter", "ASR_RESPONSE_HAVE_NO_WORDS"),
+        (401, "CLIENT_ERROR", "ASR_RESPONSE_HAVE_NO_WORDS"),
+    ],
+)
+def test_qwen_no_words_normalization_preserves_other_errors(status, code, message):
+    from tau2.voice.qwen_asr import transcribe_qwen
+
+    async def scenario():
+        def remote(request):
+            return httpx.Response(status, json={"code": code, "message": message})
+
+        async with httpx.AsyncClient(transport=httpx.MockTransport(remote)) as client:
+            with pytest.raises(RuntimeError, match=f"Qwen ASR failed \\(HTTP {status}"):
+                await transcribe_qwen(
+                    client,
+                    "https://dashscope.invalid",
+                    "qwen-audio-3.1-asr-flash",
+                    "test-observer-key",
+                    b"\x10\x10" * 8000,
+                    8000,
+                    "en",
+                )
+
+    asyncio.run(scenario())
+
+
 def test_qwen_observer_async_audio_bounds_fixed_words_recheck_and_usage(monkeypatch):
     monkeypatch.setenv("DASHSCOPE_API_KEY3", "test-observer-key")
 

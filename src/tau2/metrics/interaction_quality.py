@@ -124,6 +124,29 @@ def measure_interaction(simulation: SimulationRun) -> InteractionMeasurements | 
     ticks = simulation.ticks
     if not ticks:
         return None
+    from tau2.metrics.voice_interaction import from_ticks
+
+    shared = from_ticks(ticks)
+    if shared["status"] == "measured":
+        counts = shared["evaluation_log"]["counts"]
+        return InteractionMeasurements(
+            response_total=counts["formal_turns"],
+            responses=counts["responses"],
+            response_latency_mean=shared["metrics"]["response_latency_mean"]["value"],
+            yield_total=counts["yield_total"],
+            yields=counts["yields"],
+            backchannel_total=counts["backchannel_total"],
+            backchannel_errors=counts["backchannel_errors"],
+            vocal_tic_total=counts["vocal_tic_total"],
+            vocal_tic_errors=counts["vocal_tic_errors"],
+            non_directed_total=counts["non_directed_total"],
+            non_directed_errors=counts["non_directed_errors"],
+            agent_interruptions=counts["agent_interruptions"],
+            max_agent_floor_hold_seconds=max(
+                (b - a for a, b in shared["evaluation_log"]["agent_groups"]),
+                default=None,
+            ),
+        )
     duration = tick_duration_seconds(ticks)
     config = InteractionMetricsConfig(tick_duration_sec=duration)
     events = extract_voice_quality_events_from_simulation(

@@ -8,6 +8,7 @@ from pathlib import Path
 from tau2.data_model.semantic_communication import CommunicateScoring
 from tau2.persistent_tasks.backend_runtime import replay
 from tau2.persistent_tasks.grading import grade
+from tau2.persistent_tasks.scores import completion_score
 
 
 def validate(evidence_path, simulation_path, *, regrade=False):
@@ -24,7 +25,7 @@ def validate(evidence_path, simulation_path, *, regrade=False):
         grading = grade(
             regrade_summary, CommunicateScoring.model_validate(original["judge"])
         )
-        for field in ("business_overlay_reward", "retained_before_cancel"):
+        for field in ("retained_before_cancel",):
             if field in original:
                 grading[field] = original[field]
     simulation = json.loads(simulation_path.read_text())
@@ -35,18 +36,20 @@ def validate(evidence_path, simulation_path, *, regrade=False):
         not replayed["issues"]
         and grading.get("status") == "completed"
         and simulation.get("evaluation_status") == "completed"
-        and grading.get("coverage", {}).get("delivered")
+        and grading.get("evaluation_log", {})
+        .get("coverage", grading.get("coverage", {}))
+        .get("delivered")
         == len(summary["config"]["requests"])
     )
-    passed = measured and grading.get("reward") == 1.0
+    passed = measured and completion_score(grading) == 1.0
     reasons = []
     evidence_diagnostic_reasons = [item["reason"] for item in replayed["issues"]]
     if not measured:
         if grading.get("status") != "completed":
             reasons.append(grading.get("status", "ungraded"))
-        if grading.get("coverage", {}).get("delivered") != len(
-            summary["config"]["requests"]
-        ):
+        if grading.get("evaluation_log", {}).get(
+            "coverage", grading.get("coverage", {})
+        ).get("delivered") != len(summary["config"]["requests"]):
             reasons.append("required_request_not_delivered")
         if simulation.get("evaluation_status") != "completed":
             reasons.append("evaluation_failed")

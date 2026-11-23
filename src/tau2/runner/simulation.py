@@ -131,10 +131,16 @@ def run_simulation(
             )
         env_kwargs = {**(env_kwargs or {}), key: value}
 
+    from tau2.domains.gaia2.interaction_variants import variant_for
     from tau2.persistent_tasks.availability import resolve_config
 
+    if variant_for(orchestrator.task) is not None:
+        active_metrics_config = active_metrics_config or {}
+
     if active_metrics_config is None:
-        persistent_task_config = resolve_config(orchestrator.task, persistent_task_config)
+        persistent_task_config = resolve_config(
+            orchestrator.task, persistent_task_config
+        )
     if persistent_task_config is not None:
         from tau2.persistent_tasks.integration import install
 
@@ -143,7 +149,13 @@ def run_simulation(
     active_manager = None
 
     recorder = None
-    if metrics_config is not None or active_metrics_config is not None:
+    # Collect evidence once. Semantic diagnostics run only when explicitly
+    # selected in this run's metrics configuration and share its budget.
+    if (
+        metrics_config is not None
+        or active_metrics_config is not None
+        or diagnostics_dir is not None
+    ):
         from pathlib import Path
 
         from tau2.diagnostics.collect import EvidenceRecorder
@@ -233,6 +245,8 @@ def run_simulation(
                 getattr(orchestrator.environment.scenario_runtime, "time", lambda: 0)(),
             )
         raise
+    if call_context is not None:
+        simulation.language_context = call_context.language
     evidence = None
     if recorder is not None:
         from tau2.diagnostics.collect import finalize_evidence
@@ -283,7 +297,6 @@ def run_simulation(
     if call_context is not None:
         from tau2.voice.voice_gender import VOICE_GENDER_CATALOG_REVISION
 
-        simulation.language_context = call_context.language
         simulation.agent_voice = call_context.agent_voice
         simulation.agent_voice_gender = call_context.agent_voice_gender
         if call_context.agent_voice or call_context.agent_voice_gender:

@@ -72,7 +72,8 @@ Repository-wide `make check-all` remains blocked by 14 existing lint errors in
 and `src/tau2/task_authoring/gaia2_series/manual.py`. Those unrelated files were
 not rewritten to conceal the existing failures.
 
-Artifacts: `data/tau2/task_variants/gaia2/v1/` contains the authored native tasks,
+The historical authoring bundle at
+`data/archives/gaia2/authoring/gaia2-variants-v1/` contains the authored native tasks,
 minimal provenance, complete reading sheet and validation. The canonical domain
 contains the combined population and published variant validation hashes. Local
 request records and check logs are under `data/simulations/gaia2-variants-v1*`.

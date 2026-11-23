@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import asyncio
 import html
 from bisect import bisect_right
 from collections import deque
@@ -522,17 +521,6 @@ class DiscreteTimeAvarthaPipecatAdapter(DiscreteTimeAdapter):
             )
         self._pending_tool_results.clear()
 
-    async def _async_run_tick(self, user_audio: bytes, tick_number: int) -> TickResult:
-        """Retain post-interruption audio and utterance tails after tick buffering."""
-
-        result = await super()._async_run_tick(user_audio, tick_number)
-        if self._audio_after_cut:
-            self._buffered_agent_audio[:0] = self._audio_after_cut
-            self._audio_after_cut = []
-        self._buffered_agent_audio.extend(self._held_end)
-        self._held_end = []
-        return result
-
     async def _execute_tick(
         self,
         user_audio: bytes,
@@ -550,57 +538,11 @@ class DiscreteTimeAvarthaPipecatAdapter(DiscreteTimeAdapter):
                 sample_rate=DEFAULT_AVARTHA_INPUT_SAMPLE_RATE,
             )
 
-        async def receive_events() -> list[Any]:
-            elapsed = asyncio.get_running_loop().time() - tick_start
-            remaining = max(0.01, self.tick_duration_ms / 1000 - elapsed)
-            return await self.provider.receive_events_for_duration(remaining)
+        async def receive():
+            return await self.provider.receive_events_for_duration(0.02)
 
-        tasks = [
-            asyncio.create_task(
-                self._send_audio_chunked(
-                    provider_audio,
-                    send_audio,
-                    self._chunk_size,
-                )
-            ),
-            asyncio.create_task(receive_events()),
-        ]
-        try:
-            _, events = await asyncio.gather(*tasks)
-        finally:
-            # gather does not cancel its sibling when audio sending fails.
-            # Drain both before disconnect can stop their background loop.
-            for task in tasks:
-                if not task.done():
-                    task.cancel()
-            await asyncio.gather(*tasks, return_exceptions=True)
-        for event in events:
-            self._process_event(result, event)
-        self._hold_utterance_end(result)
-
-    def _hold_utterance_end(self, result: TickResult) -> None:
-        """Keep the last millisecond of an unfinished utterance for later.
-
-        The end of a line's text is released by its played caption. If that
-        arrives after the line's audio has all been played, its text would
-        land on a tick with no audio, and the user simulator drops text from
-        silent ticks. Holding back 1 ms until the caption arrives makes the
-        last text always ride on audio.
-        """
-
-        if not self._awaiting_playback or result.was_truncated:
-            return
-        available = sum(len(chunk) for chunk, _ in result.agent_audio_chunks)
-        if available == 0 or available > self.bytes_per_tick:
-            return  # nothing to play, or the tail is buffered anyway
-        hold = min(available, self._end_hold_bytes)
-        data, item_id = result.agent_audio_chunks.pop()
-        while len(data) < hold:
-            previous, item_id = result.agent_audio_chunks.pop()
-            data = previous + data
-        if len(data) > hold:
-            result.agent_audio_chunks.append((data[:-hold], item_id))
-        self._held_end = [(data[-hold:], item_id)]
+        self._start_media_receiver(receive, self._process_event)
+        await self._send_audio_chunked(provider_audio, send_audio, self._chunk_size)
 
     def _transcript(self) -> _SpokenTranscript:
         if _ITEM_ID not in self._utterance_transcripts:
@@ -631,13 +573,15 @@ class DiscreteTimeAvarthaPipecatAdapter(DiscreteTimeAdapter):
                 if self._stale_audio:
                     result.truncated_audio_bytes += len(telephony_audio)
                     return
-                chunk = (telephony_audio, _ITEM_ID)
                 self._awaiting_playback = True
-                if result.was_truncated:
-                    self._audio_after_cut.append(chunk)
-                else:
-                    result.agent_audio_chunks.append(chunk)
                 self._transcript().add_audio(len(telephony_audio))
+                # Retain the protocol's existing 1 ms caption tail. Its actual
+                # release time is observed by the common playback queue.
+                pending = b"".join(data for data, _ in self._held_end) + telephony_audio
+                hold = min(len(pending), self._end_hold_bytes)
+                self._held_end = [(pending[-hold:], _ITEM_ID)]
+                if len(pending) > hold:
+                    result.agent_audio_chunks.append((pending[:-hold], _ITEM_ID))
         elif isinstance(event, ToolCallEvent):
             result.tool_calls.append(
                 ToolCall(
@@ -671,6 +615,8 @@ class DiscreteTimeAvarthaPipecatAdapter(DiscreteTimeAdapter):
             if not self._stale_audio:
                 self._awaiting_playback = False
                 self._transcript().add_playback(event.text)
+                result.agent_audio_chunks.extend(self._held_end)
+                self._held_end = []
         elif isinstance(event, AgentLLMStartedEvent):
             self._stale_text = False
             self._llm_carryover = self._llm_unsent

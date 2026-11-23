@@ -1338,3 +1338,24 @@ class TestEffectTimeline:
         assert restored.events[0].end_ms == 1500
         assert restored.events[0].duration_ms == 500
         assert restored.events[0].params == {"file": "horn.wav"}
+
+
+def test_independent_insert_keeps_one_id_and_exact_tail_across_chunks():
+    mixin = StreamingAudioEffectsMixin()
+    noise = BackgroundNoiseGenerator(sample_rate=16000, silent_mode=True)
+    pending = PendingEffectState(
+        audio_bytes=b"\x01\x00" * 700,
+        offset=0,
+        info={"type": "vocal_tic", "value": "cough"},
+    )
+    rows = []
+    while pending is not None:
+        result = mixin.process_streaming_chunk(
+            None, noise, num_samples=320, pending_effect=pending
+        )
+        rows.append(result.speech_event)
+        pending = result.pending_effect
+    assert len(rows) == 3
+    assert len({r["id"] for r in rows}) == 1
+    assert all(r["kind"] == "vocal_tic" for r in rows)
+    assert sum(r["range"][1] for r in rows) == pytest.approx(700 / 16000)

@@ -9,8 +9,10 @@ import pytest
 from pydantic import ValidationError
 
 from tau2.data_model.diagnostics import DiagnosticEvidence, OperationEvidence, UserInput
+from tau2.diagnostics.conciseness import INVENTORY_VERSION, VERSION
 from tau2.diagnostics.conciseness.calibration import fit_calibration
 from tau2.diagnostics.conciseness.evaluator import (
+    delivered_history,
     evaluate_feedback,
     validate_alignment,
     validate_inventory,
@@ -20,7 +22,7 @@ from tau2.diagnostics.conciseness.evidence import (
     generation_input,
     preflight,
 )
-from tau2.diagnostics.conciseness.models import FeedbackConfig, LengthBudget
+from tau2.diagnostics.conciseness.models import Alignment, FeedbackConfig, LengthBudget
 from tau2.diagnostics.conciseness.scoring import (
     aggregate_reports,
     response_length,
@@ -28,7 +30,7 @@ from tau2.diagnostics.conciseness.scoring import (
     trial_summary,
 )
 from tau2.diagnostics.config import MetricsConfig
-from tau2.diagnostics.intent.io import canonical
+from tau2.diagnostics.intent.io import canonical, digest
 from tau2.diagnostics.model import RequestBudget
 
 
@@ -104,8 +106,6 @@ def alignment(inv, status="matched"):
             for n in inv["nuggets"]
         ],
         "findings": [],
-        "fidelity_status": "supported",
-        "fidelity_reason": "Grounded",
     }
 
 
@@ -131,6 +131,8 @@ def test_trec_formula(matched, length, recall, efficiency, score):
     assert result["required_coverage"] == recall
     assert result["length_efficiency"] == efficiency
     assert result["feedback_score"] == pytest.approx(score)
+    assert not any(k.startswith("raw_feedback_score") for k in result)
+    assert "fidelity_status" not in result
 
 
 def test_uncalibrated_never_publishes_length_score():
@@ -170,16 +172,18 @@ def test_splitting_replies_does_not_add_budget():
     assert response_length([{"text": "e\u0301 中\n A"}]) == 3
 
 
-def test_material_error_gates_score_but_failure_outcome_does_not():
+def test_wrong_nugget_reduces_coverage_without_zeroing_other_credit():
     inv = inventory()
     aligned = alignment(inv)
     assert (
         score_window(inv, aligned, [{"text": "x"}], budget())["feedback_score"] == 100
     )
-    aligned["fidelity_status"] = "material_error"
+    aligned["matches"][0]["status"] = "contradicted"
     score = score_window(inv, aligned, [{"text": "x"}], budget())
-    assert score["raw_feedback_score"] == 100
-    assert score["feedback_score"] == 0
+    assert score["required_coverage"] == 0.5
+    assert score["feedback_score"] == pytest.approx(100 * 5 / 9.5)
+    assert score["feedback_score_lower"] == score["feedback_score_upper"]
+    assert inv["outcome"] == "partial_success"
 
 
 def test_blind_projection_excludes_target_and_future_request(evidence):
@@ -263,7 +267,7 @@ def test_invalid_quotes_are_unknown_not_guessed_credit(evidence):
     )
     assert value["matches"][0]["status"] == "uncertain"
     assert value["matches"][1]["status"] == "matched"
-    assert value["fidelity_status"] == "uncertain"
+    assert "fidelity_status" not in value
     assert errors
 
 
@@ -277,15 +281,25 @@ def test_alignment_cannot_drop_or_duplicate_nuggets(evidence):
         )
 
 
-def test_unsubstantiated_material_error_does_not_zero_score(evidence):
+def test_alignment_schema_only_requests_coverage_and_expression():
     inv = inventory()
     aligned = alignment(inv)
+    assert Alignment.model_validate(aligned).model_dump() == aligned
+    assert set(Alignment.model_json_schema()["properties"]) == {"matches", "findings"}
     aligned["fidelity_status"] = "material_error"
-    value, errors = validate_alignment(
-        canonical(aligned), inv, build_windows(evidence, FeedbackConfig())[0]
-    )
-    assert value["fidelity_status"] == "uncertain"
-    assert errors
+    with pytest.raises(ValidationError):
+        Alignment.model_validate(aligned)
+    aligned.pop("fidelity_status")
+    aligned["findings"] = [
+        {
+            "kind": "material_error",
+            "reason": "Old verdict",
+            "quotes": [{"utterance_id": "a0", "text": "cancelled"}],
+            "evidence_refs": ["operation:op0"],
+        }
+    ]
+    with pytest.raises(ValidationError):
+        Alignment.model_validate(aligned)
 
 
 def test_two_stages_freeze_inventory_across_target_rewrites(
@@ -505,7 +519,12 @@ def test_cli_opt_in_and_default_compatibility():
 def test_suite_integration_keeps_original_reward(evidence, tmp_path, monkeypatch):
     from tau2.diagnostics.suite import evaluate_evidence, summarize
 
-    expected = {"status": "measured", "windows": [], "trial": {"feedback_score": None}}
+    expected = {
+        "version": VERSION,
+        "status": "measured",
+        "windows": [],
+        "trial": {"feedback_score": None},
+    }
     monkeypatch.setattr(
         "tau2.diagnostics.conciseness.evaluator.evaluate_feedback",
         lambda *args: copy.deepcopy(expected),
@@ -518,8 +537,8 @@ def test_suite_integration_keeps_original_reward(evidence, tmp_path, monkeypatch
         result["summary"]["measures"]["conciseness"]["trial"]["feedback_score"] is None
     )
     report = summarize([{**result, "task_id": "task", "reward": 0}])
-    assert report["conciseness"]["task_success_rate"] == 0
-    assert report["conciseness"]["scored_trials"] == 0
+    assert report["metrics"]["conciseness"]["feedback_score"] is None
+    assert report["evaluation_log"]["records"][0]["reward"] == 0
 
 
 def test_malformed_model_response_is_audited_without_retry(tmp_path, monkeypatch):
@@ -544,15 +563,16 @@ def test_malformed_model_response_is_audited_without_retry(tmp_path, monkeypatch
     assert not list(tmp_path.glob("*.json"))
 
 
-def test_validated_contradiction_cannot_be_labeled_supported(evidence):
+def test_contradiction_is_only_an_uncovered_nugget(evidence):
     inv = inventory()
     aligned = alignment(inv)
     aligned["matches"][0]["status"] = "contradicted"
     value, _ = validate_alignment(
         canonical(aligned), inv, build_windows(evidence, FeedbackConfig())[0]
     )
-    assert value["fidelity_status"] == "material_error"
-    assert value["findings"][-1]["kind"] == "material_error"
+    assert value["matches"][0]["status"] == "contradicted"
+    assert value["findings"] == []
+    assert "fidelity_status" not in value
 
 
 def test_later_result_does_not_credit_earlier_reply(evidence):
@@ -609,8 +629,7 @@ def test_provider_timeout_retries_and_audits_attempts(tmp_path, monkeypatch):
     attempts = list((tmp_path / "attempts").glob("*.json"))
     assert len(attempts) == 2
     assert all(
-        json.loads(path.read_text())["status"] == "provider_error"
-        for path in attempts
+        json.loads(path.read_text())["status"] == "provider_error" for path in attempts
     )
 
 
@@ -687,7 +706,10 @@ def test_calibrated_measure_roundtrip_reuses_successful_suite_result(
     assert measure["trial"]["required_coverage"] == 1
     assert measure["trial"]["feedback_score"] is not None
     report = summarize([{**second, "task_id": "task", "reward": 0}])
-    assert report["conciseness"]["feedback_score"] == measure["trial"]["feedback_score"]
+    assert (
+        report["metrics"]["conciseness"]["feedback_score"]
+        == measure["trial"]["feedback_score"]
+    )
 
 
 def test_partial_review_has_no_implicit_human_approval(tmp_path):
@@ -812,3 +834,237 @@ def test_diagnostic_cache_identity_covers_shared_transcript_code(monkeypatch):
 
     monkeypatch.setattr(Path, "read_bytes", altered)
     assert implementation_digest() != before
+
+
+def test_history_uses_the_same_unanimous_groups_as_coverage():
+    inv = inventory(5)
+    # A second spelling of g0 is a duplicate, while g1 has conflicting matches.
+    inv["nuggets"].extend(
+        [
+            {**inv["nuggets"][0], "id": "alias0"},
+            {**inv["nuggets"][1], "id": "alias1"},
+        ]
+    )
+    aligned = alignment(inv)
+    statuses = {
+        "n2": "contradicted",
+        "n3": "uncertain",
+        "n4": "missing",
+        "alias1": "uncertain",
+    }
+    for match in aligned["matches"]:
+        match["status"] = statuses.get(match["nugget_id"], "matched")
+    history = delivered_history(inv, aligned, "stage:0")
+    assert history == [
+        dict(
+            window_id="stage:0",
+            proposition="Required fact 0",
+            equivalence_group="g0",
+            evidence_refs=["operation:op0", "user:u0"],
+        )
+    ]
+    score = score_window(inv, aligned, [{"text": "short"}], budget())
+    assert score["required_total"] == 5
+    assert score["required_matched"] == 1
+    assert score["required_uncertain"] == 2
+
+
+def test_expression_uncertainty_does_not_invalidate_matched_information(evidence):
+    inv = inventory()
+    aligned = alignment(inv)
+    aligned["findings"] = [
+        dict(
+            kind="irrelevant",
+            reason="Possibly padding",
+            quotes=[dict(utterance_id="a0", text="unrecorded")],
+            evidence_refs=[],
+        )
+    ]
+    value, notes = validate_alignment(
+        canonical(aligned), inv, build_windows(evidence, FeedbackConfig())[0]
+    )
+    assert notes and value["findings"][0]["kind"] == "uncertain"
+    score = score_window(inv, value, [{"text": "short"}], budget())
+    assert score["status"] == "measured"
+    assert score["feedback_score"] == 100
+    assert len(delivered_history(inv, value, "stage:0")) == 2
+
+
+def test_legacy_frozen_inventory_is_reused_with_new_alignment(
+    evidence, tmp_path, monkeypatch
+):
+    from tau2.diagnostics.conciseness.evaluator import _rubric
+
+    config = MetricsConfig(measures=["conciseness"])
+    window = build_windows(evidence, config.conciseness)[0]
+    blind = generation_input(window, [])
+    from tau2.diagnostics.conciseness.models import NuggetInventory
+
+    key = digest(
+        dict(
+            prompt=_rubric("nuggets") + "\nINPUT:\n" + canonical(blind),
+            schema=NuggetInventory.model_json_schema(),
+            model=config.profile("feedback_nuggets").model_dump(),
+            version=INVENTORY_VERSION,
+        )
+    )
+    assert (
+        INVENTORY_VERSION == "tau-feedback-conciseness/1"
+        and VERSION != INVENTORY_VERSION
+    )
+    frozen = tmp_path / "conciseness-cache/nuggets" / f"{key}.json"
+    frozen.parent.mkdir(parents=True)
+    frozen.write_text(
+        canonical(
+            dict(input_key=key, inventory=inventory(), sha256=digest(inventory()))
+        )
+    )
+    original = frozen.read_bytes()
+    calls = []
+
+    class Model:
+        def __init__(self, config, role, directory, budget):
+            self.role = role
+
+        def complete_sync(self, prompt, schema, *, validate):
+            calls.append(self.role)
+            assert self.role == "feedback_alignment"
+            assert "fidelity_status" not in canonical(schema)
+            raw = canonical(alignment(inventory()))
+            validate(raw)
+            return raw
+
+    monkeypatch.setattr("tau2.diagnostics.conciseness.evaluator.TauJsonModel", Model)
+    result = evaluate_feedback(
+        evidence, config, tmp_path / "evidence", tmp_path / "out", RequestBudget(2)
+    )
+    assert calls == ["feedback_alignment"]
+    assert result["version"] == VERSION
+    assert result["trial"]["required_coverage"] == 1
+    assert frozen.read_bytes() == original
+
+
+def test_feedback_versions_are_not_averaged_together():
+    from tau2.diagnostics.suite import summarize
+
+    def row(version, score):
+        measure = dict(
+            version=version,
+            status="measured",
+            trial=dict(required_coverage=1, length_efficiency=1, feedback_score=score),
+            windows=[],
+        )
+        return dict(task_id="t", summary=dict(measures={"conciseness": measure}))
+
+    rows = [row("tau-feedback-conciseness/1", 0), row(VERSION, 100), {}]
+    before = copy.deepcopy(rows)
+    for report in (summarize(rows), aggregate_reports(rows)):
+        assert set(report["groups"]) == {
+            "tau-feedback-conciseness/1",
+            VERSION,
+            "unscored",
+        }
+        for version, score in [("tau-feedback-conciseness/1", 0), (VERSION, 100)]:
+            group = report["groups"][version]
+            value = group["metrics"]["conciseness"] if "metrics" in group else group
+            assert value["feedback_score"] == score
+            assert "raw_feedback_score" not in value
+            assert "material_error_rate" not in value
+    assert rows == before
+    current = summarize([rows[1]])
+    assert set(current["metrics"]["conciseness"]) == {
+        "required_coverage",
+        "length_efficiency",
+        "feedback_score",
+    }
+    assert current["evaluation_log"]["feedback_versions"] == [VERSION]
+
+
+def test_history_flows_to_next_window_without_truth_gate(
+    evidence, tmp_path, monkeypatch
+):
+    evidence.user_inputs.extend(
+        [
+            UserInput(
+                id="u1", text="Please repeat the result", started=10, ended=11, stage=1
+            ),
+            UserInput(
+                id="a1",
+                role="assistant_context",
+                text="Repeated result",
+                started=13,
+                ended=14,
+                stage=1,
+            ),
+        ]
+    )
+    evidence.stages["stages"].append(
+        dict(stage=1, started={"time": 1010}, completed={"time": 1014})
+    )
+    evidence.operations.append(
+        evidence.operations[0].model_copy(
+            update=dict(call_id="op1", started=1011, ended=1012)
+        )
+    )
+    seen_history = []
+
+    class Model:
+        def __init__(self, config, role, directory, budget):
+            self.role = role
+
+        def complete_sync(self, prompt, schema, *, validate):
+            if self.role == "feedback_nuggets":
+                data = json.loads(prompt.split("\nINPUT:\n", 1)[1])
+                seen_history.append(data["validated_history"])
+                inv = inventory()
+                if data["window_id"] == "stage:1":
+                    for item in inv["nuggets"]:
+                        item["evidence_refs"] = ["user:u1", "operation:op1"]
+                raw = canonical(inv)
+            else:
+                data = json.loads(prompt.split("\nINPUT:\n", 1)[1])
+                inv = data["inventory"]
+                reply = data["replies"][0]
+                result = alignment(inv)
+                for item in result["matches"]:
+                    item["quotes"] = [
+                        dict(utterance_id=reply["id"], text=reply["text"])
+                    ]
+                if data["context"]["window_id"] == "stage:0":
+                    result["matches"][1]["status"] = "contradicted"
+                raw = canonical(result)
+            validate(raw)
+            return raw
+
+    monkeypatch.setattr("tau2.diagnostics.conciseness.evaluator.TauJsonModel", Model)
+    report = evaluate_feedback(
+        evidence,
+        MetricsConfig(),
+        tmp_path / "evidence",
+        tmp_path / "out",
+        RequestBudget(4),
+    )
+    assert report["status"] == "measured"
+    assert report["trial"]["required_coverage"] == 0.75
+    assert seen_history[0] == []
+    assert [r["proposition"] for r in seen_history[1]] == ["Required fact 0"]
+    assert seen_history[1][0]["window_id"] == "stage:0"
+    assert seen_history[1][0]["evidence_refs"] == ["operation:op0", "user:u0"]
+    assert "fidelity_status" not in canonical(report)
+
+
+def test_no_reply_with_budget_and_optional_unknown_ranges():
+    inv = inventory(2, 1)
+    silent = score_window(inv, alignment(inv, "missing"), [], budget())
+    assert (
+        silent["required_coverage"]
+        == silent["length_efficiency"]
+        == silent["feedback_score"]
+        == 0
+    )
+    aligned = alignment(inv)
+    aligned["matches"][-1]["status"] = "uncertain"
+    score = score_window(inv, aligned, [{"text": "x" * 100}], budget())
+    assert score["required_coverage"] == 1
+    assert score["length_efficiency"] is score["feedback_score"] is None
+    assert 0 < score["feedback_score_lower"] < score["feedback_score_upper"] <= 100

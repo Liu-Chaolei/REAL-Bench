@@ -16,6 +16,10 @@ def resolve_config(task, explicit=None):
     from tau2.persistent_tasks.config import PersistentTaskConfig
 
     embedded = task.scenario.async_interaction if task.scenario else None
+    if embedded and embedded.get("version") == "gaia2-interaction-variant-v1":
+        if explicit is not None:
+            raise ValueError("Interaction variants use the active metric runtime")
+        return None
     if embedded is not None and explicit is not None:
         left = PersistentTaskConfig.model_validate(embedded)
         right = PersistentTaskConfig.model_validate(explicit)
@@ -116,7 +120,7 @@ def skip_unavailable_async(function):
                     "async_availability": {
                         "status": error.status,
                         "reason": str(error),
-                        "native_reward": None,
+                        "reward": None,
                     }
                 },
             )

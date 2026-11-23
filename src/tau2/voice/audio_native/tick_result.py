@@ -114,6 +114,18 @@ class TickResult(BaseModel):
         exclude=True,  # Exclude from serialization (may contain bytes)
     )
     live_transcript: LiveTranscriptTick | None = None
+    played_audio: bytes | None = Field(default=None, exclude=True)
+    media_timeline: list[dict] = Field(default_factory=list)
+    media_tool_calls: list[dict] = Field(default_factory=list)
+    media_origin: float | None = None
+    media_cutoff: float | None = None
+    playback_start_monotonic: float | None = None
+    played_stream_start_ms: float = 0.0
+    played_stream_duration_ms: float = 0.0
+    speaking_now: bool = False
+    speech_config: dict = Field(default_factory=dict)
+    speech_intervals: list[list[float]] = Field(default_factory=list)
+
     generated_text: List[dict] = Field(
         default_factory=list,
         description="Provider-generated response text, independent of played-audio ASR.",
@@ -283,6 +295,9 @@ class TickResult(BaseModel):
         Raises:
             ValueError: If bytes_per_tick is not set (== 0).
         """
+        if self.played_audio is not None:
+            return self.played_audio
+
         if self.bytes_per_tick <= 0:
             raise ValueError(
                 f"bytes_per_tick must be > 0, got {self.bytes_per_tick}. "

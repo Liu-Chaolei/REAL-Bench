@@ -79,7 +79,13 @@ class TauJsonModel:
                     validate(row["output"])
                 return row["output"]
         args = profile.arguments()
-        if self.role in {"interaction", "feedback_nuggets", "feedback_alignment"}:
+        args.setdefault("timeout", self.config.timeout_seconds)
+        if self.role in {
+            "interaction",
+            "state_interaction",
+            "feedback_nuggets",
+            "feedback_alignment",
+        }:
             args.update(num_retries=0, response_validation_retries=0)
         content = (
             prompt + "\nOutput JSON schema:\n" + canonical(schema) if schema else prompt
@@ -110,7 +116,6 @@ class TauJsonModel:
                 messages=[UserMessage(role="user", content=content)],
                 call_name="diagnostic_" + self.role,
                 response_format={"type": "json_object"},
-                timeout=self.config.timeout_seconds,
                 **args,
             )
         except Exception as exc:
@@ -155,11 +160,12 @@ class TauJsonModel:
 
     def complete_sync(self, prompt, schema, *, validate=None):
         """Run one diagnostic request, retrying a provider timeout once."""
-        for attempt in range(self.TIMEOUT_RETRIES + 1):
+        attempts = 1 if self.role == "state_interaction" else self.TIMEOUT_RETRIES + 1
+        for attempt in range(attempts):
             try:
                 return self._complete_once(prompt, schema, validate=validate)
             except Exception as exc:
-                if attempt >= self.TIMEOUT_RETRIES or not _is_timeout_error(exc):
+                if attempt >= attempts - 1 or not _is_timeout_error(exc):
                     raise
                 logger.warning(
                     "Diagnostic %s request timed out; retrying once (%d/%d)",
@@ -170,7 +176,12 @@ class TauJsonModel:
 
     async def complete(self, prompt, schema):
         """Run with an outer deadline and retry one provider timeout."""
-        timeout = self.config.timeout_seconds + self.OUTER_TIMEOUT_GRACE_SECONDS
+        timeout = (
+            self.config.profile(self.role).args.get(
+                "timeout", self.config.timeout_seconds
+            )
+            + self.OUTER_TIMEOUT_GRACE_SECONDS
+        )
         for attempt in range(self.TIMEOUT_RETRIES + 1):
             try:
                 return await asyncio.wait_for(
@@ -234,12 +245,13 @@ class TauJsonModel:
             "user": UserMessage,
             "assistant": AssistantMessage,
         }
+        args = profile.arguments()
+        args.setdefault("timeout", self.config.timeout_seconds)
         response = generate(
             model=profile.model,
             messages=[types[m["role"]](**m) for m in messages],
             call_name="diagnostic_native_execution",
-            timeout=self.config.timeout_seconds,
-            **profile.arguments(),
+            **args,
         )
         output = response.content
         if not isinstance(output, str) or not output.strip():

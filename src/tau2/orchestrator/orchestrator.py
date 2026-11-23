@@ -354,6 +354,11 @@ class BaseOrchestrator(ABC, Generic[BaseAgentT, BaseUserT, TrajectoryItemT]):
                                     "scenario_input_id"
                                 ),
                             )
+                            if active_metrics is not None:
+                                active_metrics.delivery_completed(
+                                    (message.raw_data or {}).get("scenario_input_id"),
+                                    scenario_runtime.time(),
+                                )
                         elif (
                             isinstance(message, AssistantMessage)
                             and not message.is_tool_call()
@@ -482,6 +487,12 @@ class BaseOrchestrator(ABC, Generic[BaseAgentT, BaseUserT, TrajectoryItemT]):
             if tool_result.error:
                 self.num_errors += 1
             tool_results.append(tool_result)
+        if hasattr(self.user, "observe_agent_tool_calls"):
+            agent_tool_calls = [
+                call for call in tool_calls if call.requestor == "assistant"
+            ]
+            if agent_tool_calls:
+                self.user.observe_agent_tool_calls(agent_tool_calls)
         return tool_results
 
     def _wrap_tool_results(self, tool_results: list[ToolMessage]) -> Message:
@@ -909,7 +920,9 @@ class Orchestrator(BaseOrchestrator[AgentT, UserT, Message]):
             if active_metrics is not None and active_metrics.should_extend_reply(
                 self.environment.scenario_runtime.time()
             ):
-                active_metrics.consume_reply_step(self.environment.scenario_runtime.time())
+                active_metrics.consume_reply_step(
+                    self.environment.scenario_runtime.time()
+                )
                 return
             self.done = True
             self.termination_reason = TerminationReason.MAX_STEPS
@@ -968,6 +981,12 @@ class Orchestrator(BaseOrchestrator[AgentT, UserT, Message]):
         ):
             speech_environment = self.user.voice_settings.speech_environment
 
+        info = None
+        if hasattr(self.user, "get_hidden_intent_metrics"):
+            hidden_intent = self.user.get_hidden_intent_metrics()
+            if hidden_intent is not None:
+                info = {"hidden_intent": hidden_intent}
+
         simulation_run = SimulationRun(
             id=self.simulation_id,
             task_id=self.task.id,
@@ -982,6 +1001,7 @@ class Orchestrator(BaseOrchestrator[AgentT, UserT, Message]):
             seed=self.seed,
             mode=self.mode.value,
             speech_environment=speech_environment,
+            info=info,
         )
         return simulation_run
 

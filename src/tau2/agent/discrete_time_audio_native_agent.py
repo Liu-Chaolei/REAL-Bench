@@ -511,6 +511,32 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
             if getattr(self, "diagnostic_recorder", None)
             else None
         )
+        duration = len(user_audio) / self.audio_format.bytes_per_second
+        source = participant_chunk
+        metadata = getattr(source, "raw_data", None) or {}
+        known = metadata.get("speech_range_seconds")
+        if known is None:
+            known = (
+                [0.0, duration]
+                if getattr(source, "contains_speech", False)
+                else [0.0, 0.0]
+            )
+        kind = metadata.get(
+            "user_event_kind", "formal" if known[1] > known[0] else "background"
+        )
+        if kind in {"background", "control"}:
+            known = [0.0, 0.0]
+        self.adapter.diagnostic_recorder = getattr(self, "diagnostic_recorder", None)
+        self.adapter._input_context = {
+            "audio": user_audio,
+            "duration": duration,
+            "speech": known,
+            "utterance_ids": getattr(source, "utterance_ids", None) or [],
+            "event_kind": kind,
+            "independent_events": metadata.get("independent_user_events", []),
+        }
+        if source is not None and hasattr(source, "contains_speech"):
+            source.contains_speech = known[1] > known[0]
         try:
             tick_result = self.adapter.run_tick(
                 user_audio=user_audio,
@@ -574,7 +600,7 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
             )
 
         # Update speech timing
-        if response.contains_speech or response.is_tool_call():
+        if tick_result.speaking_now or response.is_tool_call():
             state.time_since_last_talk = 0
         else:
             state.time_since_last_talk += 1
@@ -706,11 +732,21 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
         audio_format = self.audio_format
 
         # Check if there was actual speech (not just silence padding)
-        has_speech = (
-            tick_result.contains_speech
-            if tick_result.contains_speech is not None
-            else len(tick_result.agent_audio_data) > 0
-        )
+        if tick_result.media_origin is not None:
+            has_speech = bool(tick_result.speech_intervals)
+        else:
+            from tau2.data_model.audio import AudioData
+            from tau2.voice.audio_activity import detect_speech
+            from tau2.voice.utils.audio_preprocessing import convert_to_pcm16
+
+            has_speech = bool(
+                detect_speech(
+                    convert_to_pcm16(
+                        AudioData(data=agent_audio, format=self.audio_format)
+                    ).data,
+                    self.audio_format.sample_rate,
+                )
+            )
 
         audio_content = base64.b64encode(agent_audio).decode("utf-8")
         content = transcript if transcript else None
@@ -744,6 +780,7 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
         )
         # Check if this is a stop message (done or transfer tool call)
         message = self._check_if_stop_toolcall(message)
+        self._last_media_message = message
         return message
 
     def _create_empty_response(self) -> AssistantMessage:
@@ -875,6 +912,33 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
         This method is kept for backwards compatibility and explicit cleanup.
         """
         if self._owns_adapter and self._adapter is not None:
+            tail = self._adapter.finish_media()
+            message = getattr(self, "_last_media_message", None)
+            if tail and message is not None:
+                destinations = [message]
+                recorder = getattr(self, "diagnostic_recorder", None)
+                if recorder is not None and recorder.media_ticks:
+                    destinations.append(recorder.media_ticks[-1].agent_chunk)
+                for destination in destinations:
+                    if destination is not None and destination.raw_data is not None:
+                        for key, rows in tail.items():
+                            if key == "media_cutoff":
+                                destination.raw_data[key] = rows
+                            else:
+                                destination.raw_data.setdefault(key, []).extend(rows)
+                        raw = destination.raw_data
+                        played = [
+                            r for r in tail["media_timeline"] if r["role"] == "agent"
+                        ]
+                        if played and raw.get("playback_start_monotonic") is not None:
+                            raw["played_stream_duration_ms"] = max(
+                                raw["played_stream_duration_ms"],
+                                (
+                                    max(r["end"] for r in played)
+                                    - raw["playback_start_monotonic"]
+                                )
+                                * 1000,
+                            )
             self._adapter.disconnect()
 
     @property
@@ -893,6 +957,7 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
             if provider.backend_observer_ready
             else "bridge_backend_observer_not_available",
             "backend_inputs": list(provider.backend_inputs.values()),
+            "state_observations": list(getattr(provider, "state_observations", [])),
         }
 
     def get_async_evidence_source(self):

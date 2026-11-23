@@ -22,7 +22,28 @@ class ActiveMetricManager:
     def install(self) -> None:
         if self._installed:
             return
-        if self.config.persistent_task and self.config.persistent_task.enabled:
+        from tau2.domains.gaia2.interaction_variants import variant_for
+
+        variant = variant_for(self.orchestrator.task)
+        if variant is not None:
+            from tau2.metrics.active.config import PersistentTaskMetricConfig
+            from tau2.metrics.active.persistent_task.variant import (
+                InteractionVariantRuntime,
+            )
+
+            profile = self.config.persistent_task or PersistentTaskMetricConfig(
+                preferred_options=[dict(state="running", operation="query", weight=1)]
+            )
+            self.metrics.append(
+                InteractionVariantRuntime(
+                    profile,
+                    variant=variant,
+                    orchestrator=self.orchestrator,
+                    seed=self.seed,
+                    trial=self.trial,
+                )
+            )
+        elif self.config.persistent_task and self.config.persistent_task.enabled:
             self.metrics.append(
                 PersistentTaskMetricRuntime(
                     self.config.persistent_task,
@@ -46,6 +67,20 @@ class ActiveMetricManager:
     def should_extend_reply(self, timestamp: float) -> bool:
         return any(metric.should_extend_reply(timestamp) for metric in self.metrics)
 
+    def delivery_started(self, request_id, timestamp):
+        """Forward actual transport start when a metric needs precise delivery."""
+        for metric in self.metrics:
+            handler = getattr(metric, "delivery_started", None)
+            if handler is not None:
+                handler(request_id, timestamp)
+
+    def delivery_completed(self, request_id, timestamp):
+        """Forward actual complete delivery separately from its first packet."""
+        for metric in self.metrics:
+            handler = getattr(metric, "delivery_completed", None)
+            if handler is not None:
+                handler(request_id, timestamp)
+
     def consume_reply_step(self, timestamp: float) -> None:
         for metric in self.metrics:
             metric.consume_reply_step(timestamp)
@@ -63,12 +98,8 @@ class ActiveMetricManager:
         return summary
 
     def score(self, scoring=None) -> dict[str, Any]:
-        return {
-            metric.name: metric.score(scoring)
-            for metric in self.metrics
-        }
+        return {metric.name: metric.score(scoring) for metric in self.metrics}
 
     def close(self) -> None:
         for metric in self.metrics:
             metric.close()
-

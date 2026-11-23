@@ -169,9 +169,14 @@ def test_real_native_sequence_replays_and_grades_without_nonempty_reply_shortcut
         scoring,
         reply_judge=lambda text, fact: {"met": "still running" in text},
     )
-    assert result["reward"] == 1
-    assert result["coverage"]["delivered"] == 1
-    assert grade(summary, scoring, reply_judge=lambda *_: {"met": False})["reward"] == 0
+    assert result["completion_score"] == 1
+    assert result["evaluation_log"]["coverage"]["delivered"] == 1
+    assert (
+        grade(summary, scoring, reply_judge=lambda *_: {"met": False})[
+            "completion_score"
+        ]
+        == 0
+    )
     summary["operations"][0]["success"] = False
     with pytest.raises(ValueError, match="hash"):
         replay(summary)
@@ -180,10 +185,10 @@ def test_real_native_sequence_replays_and_grades_without_nonempty_reply_shortcut
 def test_unasked_request_is_a_failure_with_explicit_coverage():
     runtime = BackendTaskRuntime(config())
     result = grade(runtime.summary(8), CommunicateScoring.model_validate({}))
-    assert result["reward"] is None
+    assert result["completion_score"] is None
     assert result["status"] == "not_reached"
-    assert result["coverage"]["expected"] == 1
-    assert result["coverage"]["delivered"] == 0
+    assert result["evaluation_log"]["coverage"]["expected"] == 1
+    assert result["evaluation_log"]["coverage"]["delivered"] == 0
 
 
 def test_result_keeps_the_request_of_its_call_start():
@@ -328,7 +333,7 @@ def test_later_permission_update_is_not_a_duplicate_progress_query_or_terminal_c
         CommunicateScoring.model_validate({}),
         reply_judge=lambda *_: {"met": True},
     )
-    assert verdict["reward"] == 1
+    assert verdict["completion_score"] == 1
 
 
 def test_completed_task_does_not_become_a_failed_model_answer_when_trigger_was_unasked():
@@ -340,8 +345,8 @@ def test_completed_task_does_not_become_a_failed_model_answer_when_trigger_was_u
     )
     result = grade(runtime.summary(5), CommunicateScoring.model_validate({}))
     assert result["status"] == "not_reached"
-    assert result["reward"] is None
-    assert result["coverage"]["delivery_started"] == 0
+    assert result["completion_score"] is None
+    assert result["evaluation_log"]["coverage"]["delivery_started"] == 0
 
 
 def test_native_role_keywords_match_case_without_guessing_an_ambiguous_role():
@@ -406,7 +411,7 @@ def test_frozen_reply_verdict_can_be_reused_when_only_counting_policy_changes(
             "Identical reply input must reuse its frozen verdict"
         ),
     )
-    assert grade(summary, scoring)["reward"] == 1
+    assert grade(summary, scoring)["completion_score"] == 1
 
 
 def test_fresh_prefetch_is_attributed_to_request_without_rewriting_operation_time():
@@ -540,8 +545,8 @@ def test_generated_text_can_score_when_played_audio_transcript_is_missing():
         CommunicateScoring.model_validate({}),
         reply_judge=lambda text, fact: {"met": text == "The task is still running."},
     )
-    assert result["reply_reward"] == 1.0
-    assert result["reward"] == 1.0
+    assert result["evaluation_log"]["reply"]["passed"] == 1.0
+    assert result["completion_score"] == 1.0
 
 
 def test_previous_reply_overlap_is_audio_diagnostic_only():
@@ -585,7 +590,7 @@ def test_v2_without_generated_reply_is_reply_unavailable():
     )
     result = grade(runtime.summary(8), CommunicateScoring.model_validate({}))
     assert result["status"] == "reply_unavailable"
-    assert result["native_reward"] is None
+    assert result["completion_score"] is None
 
 
 def test_declared_identity_lookup_does_not_count_as_a_duplicate_target_query():
@@ -639,5 +644,10 @@ def test_declared_identity_lookup_does_not_count_as_a_duplicate_target_query():
         CommunicateScoring.model_validate({}),
         reply_judge=lambda *_: {"met": True},
     )
-    assert verdict["reward"] == 1
-    assert verdict["checks"][0]["auxiliary_lookup_count"] == 1
+    assert verdict["completion_score"] == 1
+    assert (
+        verdict["evaluation_log"]["native_result"]["checks"][0][
+            "auxiliary_lookup_count"
+        ]
+        == 1
+    )

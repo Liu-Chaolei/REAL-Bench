@@ -5,6 +5,8 @@ import json
 from collections import Counter, defaultdict
 from pathlib import Path
 
+from tau2.persistent_tasks.scores import completion_score
+
 
 def aggregate(data: Path, simulations: Path):
     manifest = json.loads((data / "manifest.json").read_text())
@@ -50,13 +52,15 @@ def aggregate(data: Path, simulations: Path):
             "reasons": report.get("reasons", metadata["reasons"]),
             "measurement_verified": report.get("measurement_verified", False),
             "expected_behavior_passed": report.get("expected_behavior_passed", False),
-            "native_reward": grading.get("native_reward"),
+            "completion_score": completion_score(grading),
             "ordinary_gaia2_reward": report.get("original_gaia2_reward"),
             "report": str(path) if path else None,
             "attempts": [
                 str(row[1]) for row in sorted(candidates, key=lambda row: row[0])
             ],
-            "coverage": grading.get("coverage", {}),
+            "coverage": grading.get("evaluation_log", {}).get(
+                "coverage", grading.get("coverage", {})
+            ),
             "evidence_sha256": report.get("evidence_sha256"),
             "config_sha256": report.get("config_sha256"),
         }

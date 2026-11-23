@@ -88,7 +88,7 @@ class RequestGenerator:
         )
         model = self.config.model.model
         if self.config.model_env:
-            model = os.environ.get(self.config.model_env, model)
+            model = os.environ[self.config.model_env]
         if "/" not in model:
             model = "openai/" + model
         args = self.config.model.arguments()
@@ -101,7 +101,11 @@ class RequestGenerator:
             model=model,
             **args,
         )
-        content = response if isinstance(response, str) else getattr(response, "content", response)
+        content = (
+            response
+            if isinstance(response, str)
+            else getattr(response, "content", response)
+        )
         if isinstance(content, list):
             content = "".join(str(item) for item in content)
         if not isinstance(content, str):
@@ -114,7 +118,9 @@ class RequestGenerator:
                 raise ValueError("generator_response_is_not_json")
             return json.loads(match.group(0))
 
-    def _validate(self, value: dict[str, Any], context: RequestGenerationContext) -> None:
+    def _validate(
+        self, value: dict[str, Any], context: RequestGenerationContext
+    ) -> None:
         text = value.get("text")
         if not isinstance(text, str) or not text.strip():
             raise ValueError("empty_generated_request")
@@ -152,8 +158,9 @@ class RequestGenerator:
         if not values:
             return None
         index = context.seed % len(values)
-        text = str(values[index]).replace("{task_label}", context.task_label or "that task")
+        text = str(values[index]).replace(
+            "{task_label}", context.task_label or "that task"
+        )
         if len(text) > self.config.max_characters:
             return None
         return text
-

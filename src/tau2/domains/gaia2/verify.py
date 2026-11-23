@@ -31,12 +31,23 @@ def population_errors(tasks, splits, manifest):
         errors.append(f"Expected exactly {sum(expected.values())} unique tasks")
     if Counter(task.scenario.category for task in tasks) != expected:
         errors.append("Task categories differ from the versioned population")
-    if set(splits) != {"base", *expected}:
+    if set(splits) != {"base", *expected} and set(splits) != {"base", "all", *expected}:
         errors.append("Task splits differ from the versioned categories")
-    if len(splits.get("base", [])) != len(tasks) or set(splits.get("base", [])) != set(
-        identifiers
+    # Current layout: base is the original 800, all includes request variants.
+    # Historical imports used base for the complete population.
+    core = {
+        task.id
+        for task in tasks
+        if task.scenario.category
+        in {"search", "execution", "ambiguity", "adaptability", "time"}
+    }
+    base = core if "all" in splits else set(identifiers)
+    if len(splits.get("base", [])) != len(base) or set(splits.get("base", [])) != base:
+        errors.append("Base split differs from the core population")
+    if "all" in splits and (
+        len(splits["all"]) != len(tasks) or set(splits["all"]) != set(identifiers)
     ):
-        errors.append("Base split differs from the imported population")
+        errors.append("All split differs from the imported population")
     for category, count in expected.items():
         selected = splits.get(category, [])
         actual = {task.id for task in tasks if task.scenario.category == category}
@@ -250,8 +261,10 @@ def verify_dataset(root: Path, *, reference=False, workers=4, seal=False) -> dic
 
     root = Path(root)
     manifest = json.loads((root / "manifest.json").read_text())
-    tasks = get_tasks(root=root)
-    splits = get_tasks_split(root=root)
+    # Seal the canonical source artifact only. Interaction variants remain
+    # deltas; never materialize them back into the immutable source population.
+    tasks = get_tasks(root=root, include_interaction_variants=False)
+    splits = get_tasks_split(root=root, include_interaction_variants=False)
     errors = population_errors(tasks, splits, manifest)
     if (
         hashlib.sha256((root / "tasks.json").read_bytes()).hexdigest()

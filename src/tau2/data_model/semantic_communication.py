@@ -30,6 +30,45 @@ class SemanticCommunicateSettings(BaseModel):
             description="Resolved judge arguments; explicit overrides are preserved.",
         ),
     ]
+    api_identity: dict | None = None
+    api_role: str | None = None
+    api_config_dir: str | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def shared_judge(cls, value):
+        if (
+            isinstance(value, dict)
+            and value.get("api_role")
+            and not value.get("api_identity")
+        ):
+            from tau2.config import DEFAULT_API_CONFIG_DIR
+            from tau2.utils.api_config import get_api_configuration
+
+            value = dict(value)
+            selected = get_api_configuration(
+                value.get("api_config_dir") or DEFAULT_API_CONFIG_DIR
+            ).text(value["api_role"])
+            value.update(
+                api_identity=selected.public(),
+                model=selected.litellm_model,
+                model_args=dict(selected.args, api_base=selected.public()["api_base"]),
+            )
+        return value
+
+    def arguments(self):
+        """Resolve credentials in memory only, outside serialized judge settings."""
+        if self.api_role:
+            from tau2.config import DEFAULT_API_CONFIG_DIR
+            from tau2.utils.api_config import get_api_configuration
+
+            return (
+                get_api_configuration(self.api_config_dir or DEFAULT_API_CONFIG_DIR)
+                .text(self.api_role)
+                .arguments()
+            )
+        return dict(self.model_args)
+
     prompt_version: Annotated[
         Literal["communicate-semantic-v1"],
         Field(

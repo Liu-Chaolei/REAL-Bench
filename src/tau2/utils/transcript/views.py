@@ -29,7 +29,11 @@ from tau2.utils.transcript.audio_text import (
     merge_audio_script_gold,
 )
 from tau2.utils.transcript.linearization import linearize_ticks
-from tau2.utils.transcript.live import live_metadata, live_utterance_groups
+from tau2.utils.transcript.live import (
+    is_missing_transcript_segment,
+    live_metadata,
+    live_utterance_groups,
+)
 
 if TYPE_CHECKING:
     from tau2.data_model.simulation import SimulationRun
@@ -38,7 +42,11 @@ _BARGE_IN_GRACE_SECONDS = 2.0
 
 
 def utterance_groups(
-    ticks: list[Tick], speaker: Literal["agent", "caller"], *, raw_speech: bool = False
+    ticks: list[Tick],
+    speaker: Literal["agent", "caller"],
+    *,
+    raw_speech: bool = False,
+    skip_untranscribed_live: bool = False,
 ) -> list[UtteranceGroup]:
     """Group one speaker with delivery/audio or raw-call boundary semantics.
 
@@ -87,7 +95,16 @@ def utterance_groups(
             )
             current_ids = ids
     if speaker == "agent":
-        groups.extend(live_utterance_groups(ticks))
+        live_groups = live_utterance_groups(ticks)
+        if skip_untranscribed_live:
+            live_groups = [
+                group
+                for group in live_groups
+                if not is_missing_transcript_segment(
+                    group.chunks[0].raw_data.get("live_segment", {})
+                )
+            ]
+        groups.extend(live_groups)
         groups.sort(key=lambda group: group.start_index)
     return groups
 
@@ -98,7 +115,7 @@ def agent_messages(ticks: list[Tick]) -> list[AssistantMessage]:
         group.chunks[0]
         if len(group.chunks) == 1
         else AssistantMessage.merge_chunks(group.chunks)
-        for group in utterance_groups(ticks, "agent")
+        for group in utterance_groups(ticks, "agent", skip_untranscribed_live=True)
     ]
 
 
@@ -106,7 +123,9 @@ def agent_utterance_tick_spans(sim: SimulationRun) -> list[tuple[int, int]]:
     """Original tick-ID spans aligned one-for-one with ``agent_messages``."""
     return [
         (group.start_tick, group.end_tick)
-        for group in utterance_groups(sim.ticks or [], "agent")
+        for group in utterance_groups(
+            sim.ticks or [], "agent", skip_untranscribed_live=True
+        )
     ]
 
 
@@ -283,7 +302,9 @@ def build_agent_turns(simulation: SimulationRun) -> list[AgentTurn]:
         )
         if text := delivered_text(merged):
             user_events.append((group.start_tick, group.end_tick, text))
-    for group in utterance_groups(simulation.ticks, "agent"):
+    for group in utterance_groups(
+        simulation.ticks, "agent", skip_untranscribed_live=True
+    ):
         merged = (
             group.chunks[0]
             if len(group.chunks) == 1
@@ -327,13 +348,25 @@ def build_agent_turns(simulation: SimulationRun) -> list[AgentTurn]:
 
 def speech_messages(ticks: list[Tick]) -> list[Message]:
     """Containment-aware evaluation view, excluding tool calls from both speakers."""
+    skipped_ticks = {
+        tick_id
+        for group in live_utterance_groups(ticks)
+        if is_missing_transcript_segment(
+            group.chunks[0].raw_data.get("live_segment", {})
+        )
+        for tick_id in range(group.start_tick, group.end_tick + 1)
+    }
     return linearize_ticks(
         [
             ParticipantTick(
                 tick_id=t.tick_id,
                 timestamp=t.timestamp,
                 self_chunk=t.agent_chunk
-                if t.agent_chunk is not None and not t.agent_chunk.is_tool_call()
+                if (
+                    t.tick_id not in skipped_ticks
+                    and t.agent_chunk is not None
+                    and not t.agent_chunk.is_tool_call()
+                )
                 else None,
                 other_chunk=t.user_chunk
                 if t.user_chunk is not None and not t.user_chunk.is_tool_call()

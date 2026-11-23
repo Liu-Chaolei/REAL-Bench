@@ -15,14 +15,12 @@ from collections import Counter
 from pathlib import Path
 from typing import Any, TypeGuard
 
-VERSION = "gaia2-voice-interaction/1"
-EVIDENCE_VERSION = "gaia2-voice-interaction-evidence/1"
+from tau2.voice.audio_activity import CONFIG as ACTIVITY_CONFIG
+
+VERSION = "gaia2-voice-interaction/3"
+EVIDENCE_VERSION = "gaia2-voice-interaction-evidence/2"
 CONFIG: dict[str, Any] = {
-    "vad": "webrtcvad-wheels==2.0.14.post1",
-    "resampler": "soxr==0.5.0.post1",
-    "vad_mode": 2,
-    "sample_rate": 16000,
-    "frame_ms": 20,
+    **ACTIVITY_CONFIG,
     "merge_gap_sec": 0.2,
     "early_threshold_sec": 0.2,
     "late_threshold_sec": 2.75,
@@ -41,8 +39,6 @@ METRIC_UNITS = {
     "agent_interruption_rate": "fraction",
     "speech_overlap_duration": "seconds",
     "on_time_rate": "fraction",
-    "late_rate": "fraction",
-    "audible_pretoolspeech_rate": "fraction",
 }
 
 
@@ -78,33 +74,9 @@ def percentile(samples: list[float], p: float) -> float | None:
 
 def detect_speech(pcm: bytes, rate: int) -> list[list[float]]:
     """Return raw voiced intervals in source seconds, excluding final frame pad."""
-    import numpy as np
-    import soxr
-    import webrtcvad
+    from tau2.voice.audio_activity import detect_speech as shared_detect
 
-    if rate <= 0 or len(pcm) % 2:
-        raise ValueError("invalid_pcm16")
-    if not pcm:
-        return []
-    target_rate = CONFIG["sample_rate"]
-    if rate != target_rate:
-        samples = np.frombuffer(pcm, dtype="<i2").astype(np.float32)
-        resampled = soxr.resample(samples, rate, target_rate, quality="HQ")
-        frames = np.clip(np.rint(resampled), -32768, 32767).astype("<i2").tobytes()
-    else:
-        frames = pcm
-    size = target_rate * CONFIG["frame_ms"] // 1000 * 2
-    detector = webrtcvad.Vad(CONFIG["vad_mode"])
-    duration = len(pcm) / (rate * 2)
-    voiced = []
-    for offset in range(0, len(frames), size):
-        frame = frames[offset : offset + size]
-        if detector.is_speech(frame.ljust(size, b"\0"), target_rate):
-            start = offset / (target_rate * 2)
-            end = min(duration, (offset + size) / (target_rate * 2))
-            if end > start:
-                voiced.append([start, end])
-    return _intervals(voiced)
+    return shared_detect(pcm, rate)
 
 
 def _read_pcm(path: Path) -> tuple[bytes, int]:
@@ -328,39 +300,6 @@ def _overlap(left: list[list[float]], right: list[list[float]]) -> float:
     return sum(max(0.0, min(b, d) - max(a, c)) for a, b in left for c, d in right)
 
 
-def _tool_groups(
-    calls: list[dict[str, Any]], speech: list[list[float]], start: float, cutoff: float
-) -> list[dict[str, Any]]:
-    ordered = sorted(calls, key=lambda row: row.get("started_mono", -math.inf))
-    groups: list[dict[str, Any]] = []
-    previous_end = start
-    for row in ordered:
-        began, ended = row.get("started_mono"), row.get("completed_mono")
-        if (
-            not _number(began)
-            or not _number(ended)
-            or not start <= began <= ended <= cutoff
-        ):
-            raise ValueError("invalid_tool_timeline")
-        if not row.get("completed"):
-            raise ValueError("unfinished_tool_call")
-        spoken = _overlap(speech, [[previous_end, began]]) > 0
-        if not groups or spoken:
-            groups.append(
-                {
-                    "start_mono": began,
-                    "end_mono": ended,
-                    "has_audible_lead_in": spoken,
-                    "tool_count": 1,
-                }
-            )
-        else:
-            groups[-1]["end_mono"] = max(groups[-1]["end_mono"], ended)
-            groups[-1]["tool_count"] += 1
-        previous_end = max(previous_end, ended)
-    return groups
-
-
 def score_interactions(
     evidence: dict[str, Any] | None, calls: list[dict[str, Any]] | None = None
 ) -> dict[str, Any]:
@@ -458,40 +397,18 @@ def score_interactions(
     late_threshold = (
         CONFIG["late_threshold_tool_sec"] if has_tools else CONFIG["late_threshold_sec"]
     )
-    for name in ("on_time_rate", "late_rate"):
-        count = sum(
-            CONFIG["early_threshold_sec"] <= value < threshold
-            if name == "on_time_rate"
-            else value >= threshold
-            for value, threshold in zip(latencies, thresholds)
-        )
-        n = len(latencies) if calls is not None else 0
-        metrics[name] = _metric(
-            name,
-            count / n if n else None,
-            numerator=count if n else 0,
-            denominator=n,
-            reason=None if n else tool_reason,
-        )
-    groups = []
-    try:
-        if calls is None:
-            raise ValueError("missing_tool_context")
-        groups = _tool_groups(calls, agent, start, cutoff)
-        count = sum(group["has_audible_lead_in"] for group in groups)
-        n = len(groups)
-        metrics["audible_pretoolspeech_rate"] = _metric(
-            "audible_pretoolspeech_rate",
-            count / n if n else None,
-            numerator=count,
-            denominator=n,
-            reason=None if n else "no_tool_calls",
-        )
-    except (ValueError, TypeError) as exc:
-        metrics["audible_pretoolspeech_rate"] = _metric(
-            "audible_pretoolspeech_rate",
-            reason=str(exc) if isinstance(exc, ValueError) else "invalid_tool_timeline",
-        )
+    count = sum(
+        CONFIG["early_threshold_sec"] <= value < threshold
+        for value, threshold in zip(latencies, thresholds)
+    )
+    n = len(latencies) if calls is not None else 0
+    metrics["on_time_rate"] = _metric(
+        "on_time_rate",
+        count / n if n else None,
+        numerator=count if n else 0,
+        denominator=n,
+        reason=None if n else tool_reason,
+    )
     report["details"] = {
         "user_turns": len(turns),
         "response_eligible_turns": eligible,
@@ -502,7 +419,6 @@ def score_interactions(
         "early_responses": sum(
             value < CONFIG["early_threshold_sec"] for value in latencies
         ),
-        "tool_groups": groups,
     }
     return report
 

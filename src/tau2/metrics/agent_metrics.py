@@ -9,16 +9,16 @@ from pydantic import BaseModel
 from tau2.data_model.simulation import Results, TerminationReason
 
 
-def is_successful(reward: float) -> bool:
+def is_successful(reward: float | None) -> bool:
     """
     Check if the reward is successful.
     """
-    return (1 - 1e-6) <= reward <= (1 + 1e-6)
+    return reward is not None and (1 - 1e-6) <= reward <= (1 + 1e-6)
 
 
 class AgentMetrics(BaseModel):
     # Core metrics
-    avg_reward: float
+    avg_reward: float | None
     pass_hat_ks: dict[int, float]
     avg_agent_cost: float
 
@@ -100,17 +100,21 @@ class AgentMetrics(BaseModel):
         ) + self.sims_by_max_user_severity.get("critical_hindered", 0)
 
     def as_dict(self) -> dict:
-        data = {
+        """Export capability values separately from run diagnostics."""
+        log = self.model_dump(exclude={"avg_reward", "pass_hat_ks"})
+        # Old read/write action scores are superseded by execution diagnostics.
+        for name in (
+            "total_read_actions",
+            "correct_read_actions",
+            "total_write_actions",
+            "correct_write_actions",
+        ):
+            log.pop(name, None)
+        return {
             "avg_reward": self.avg_reward,
-            "avg_agent_cost": self.avg_agent_cost,
-            "total_simulations": self.total_simulations,
-            "total_tasks": self.total_tasks,
-            "infra_error_count": self.infra_error_count,
-            "user_simulator_error_count": self.user_simulator_error_count,
+            **{f"pass_hat_{k}": v for k, v in self.pass_hat_ks.items()},
+            "evaluation_log": log,
         }
-        for k, v in self.pass_hat_ks.items():
-            data[f"pass_hat_{k}"] = v
-        return data
 
 
 def pass_hat_k(num_trials: int, success_count: int, k: int) -> float:
@@ -254,7 +258,7 @@ def compute_metrics(results: Results) -> AgentMetrics:
         )
 
     df, df_pass_hat_k = prepare_dfs(results)
-    avg_reward = df.reward.mean()
+    avg_reward = None if df.empty else df.groupby("task_id").reward.mean().mean()
     pass_hat_ks = {}
     for column in df_pass_hat_k.columns:
         if match := re.match(r"pass\^(\d+)", column):
@@ -507,7 +511,6 @@ def display_metrics(metrics: AgentMetrics) -> None:
     print("📈 Pass^k")
     for k, pass_hat_k in metrics.pass_hat_ks.items():
         print(f"  k={k}: {pass_hat_k}")
-    print(f"💰 Average agent cost: {metrics.avg_agent_cost}")
 
 
 if __name__ == "__main__":

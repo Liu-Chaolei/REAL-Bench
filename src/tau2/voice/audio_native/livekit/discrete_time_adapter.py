@@ -397,89 +397,7 @@ class LiveKitCascadedAdapter(DiscreteTimeAdapter):
         tasks that push events to a queue. The tick drains the queue within its
         time budget, so slow LLM calls don't block the tick.
         """
-        tick_start = asyncio.get_running_loop().time()
-        deadline = tick_start + (self.tick_duration_ms / 1000)
-        self._current_tick_number = tick_number
-
-        events: List[CascadedEvent] = []
-        tool_calls: List[ToolCall] = []
-        agent_audio_chunks: List[Tuple[bytes, Optional[str]]] = []
-        vad_events: List[str] = []
-
-        # Track cumulative audio for timing
-        user_audio_duration_ms = (
-            len(user_audio) / self.audio_format.bytes_per_second * 1000
-        )
-        cumulative_at_tick_start = self._cumulative_user_audio_ms
-        self._cumulative_user_audio_ms += int(user_audio_duration_ms)
-
-        # Start with any buffered audio from previous tick
-        if self._buffered_audio_chunks:
-            agent_audio_chunks.extend(self._buffered_audio_chunks)
-            self._buffered_audio_chunks = []
-
-        # Spawn pending tool results as background tasks
-        for call_id, result, request_response in self._pending_tool_results:
-            asyncio.create_task(
-                self._drain_to_queue(
-                    self.provider.send_tool_result(
-                        call_id, result, request_response=request_response
-                    )
-                )
-            )
-        self._pending_tool_results.clear()
-
-        # Convert user audio from telephony (8kHz μ-law) to STT format (16kHz PCM16)
-        stt_audio = self._audio_converter.convert_input(user_audio)
-
-        # Spawn process_audio as a background task — events go to queue
-        asyncio.create_task(
-            self._drain_to_queue(self.provider.process_audio(stt_audio))
-        )
-
-        # Drain events from queue until tick deadline
-        await self._drain_event_queue(
-            deadline, events, agent_audio_chunks, vad_events, tool_calls
-        )
-
-        # Cap audio at bytes_per_tick and buffer excess for next tick
-        capped_chunks, buffered_chunks = self._cap_audio_chunks(
-            agent_audio_chunks, self.bytes_per_tick
-        )
-
-        # Store buffered audio for next tick
-        self._buffered_audio_chunks = buffered_chunks
-
-        # Drain usage records reported during this tick
-        tick_usage_records = list(self._tick_usage_buffer)
-        self._tick_usage_buffer.clear()
-
-        # Build TickResult with capped audio
-        result = TickResult(
-            tick_number=tick_number,
-            audio_sent_bytes=len(user_audio),
-            audio_sent_duration_ms=user_audio_duration_ms,
-            user_audio_data=user_audio,
-            events=events,
-            vad_events=vad_events,
-            tool_calls=tool_calls,
-            usage_records=tick_usage_records,
-            agent_audio_chunks=capped_chunks,
-            proportional_transcript=self._get_proportional_transcript(capped_chunks),
-            bytes_per_tick=self.bytes_per_tick,
-            bytes_per_second=self.audio_format.bytes_per_second,
-            tick_sim_duration_ms=self.tick_duration_ms,
-            cumulative_user_audio_at_tick_start_ms=cumulative_at_tick_start,
-        )
-
-        # Ensure tick takes at least tick_duration_ms wall-clock time
-        elapsed = asyncio.get_running_loop().time() - tick_start
-        remaining_time = (self.tick_duration_ms / 1000) - elapsed
-        if remaining_time > 0:
-            await asyncio.sleep(remaining_time)
-
-        logger.debug(f"Tick {tick_number}: {result.summary()}")
-        return result
+        return await super()._async_run_tick(user_audio, tick_number)
 
     def _cap_audio_chunks(
         self,
@@ -683,7 +601,40 @@ class LiveKitCascadedAdapter(DiscreteTimeAdapter):
         logger.debug(f"Queued tool result for call_id={call_id}")
 
     async def _execute_tick(self, user_audio, tick_number, result, tick_start):
-        raise NotImplementedError("LiveKit uses its own run_tick")
+        async def receive():
+            return [await self._event_queue.get()]
+
+        def handle(result, event):
+            result.events.append(event)
+            self._handle_event(
+                event, result.agent_audio_chunks, result.vad_events, result.tool_calls
+            )
+
+        self._start_media_receiver(receive, handle)
+        converted = self._audio_converter.convert_input(user_audio)
+
+        async def send(data):
+            asyncio.create_task(self._drain_to_queue(self.provider.process_audio(data)))
+
+        await self._send_audio_chunked(
+            converted,
+            send,
+            max(
+                2,
+                len(converted)
+                // max(1, self.tick_duration_ms // self._voip_interval_ms),
+            ),
+        )
 
     async def _flush_pending_tool_results(self):
-        raise NotImplementedError("LiveKit uses its own run_tick")
+        for call_id, result, request_response in self._pending_tool_results:
+            asyncio.create_task(
+                self._drain_to_queue(
+                    self.provider.send_tool_result(
+                        call_id,
+                        result,
+                        request_response=request_response,
+                    )
+                )
+            )
+        self._pending_tool_results.clear()

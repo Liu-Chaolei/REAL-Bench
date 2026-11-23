@@ -13,6 +13,7 @@ from tau2.data_model.message import (
 )
 from tau2.data_model.scenario import ScenarioAction, ScenarioSpec
 from tau2.data_model.tasks import Task, UserScenario
+from tau2.data_model.transcript import LinearizationStrategy, ParticipantTick
 from tau2.data_model.voice import SynthesisConfig, VoiceSettings
 from tau2.environment.db import DB
 from tau2.environment.environment import Environment
@@ -21,6 +22,7 @@ from tau2.environment.toolkit import ToolKitBase, ToolType, is_tool
 from tau2.orchestrator.full_duplex_orchestrator import FullDuplexOrchestrator
 from tau2.user.user_simulator_base import UserError
 from tau2.user.user_simulator_streaming import VoiceStreamingUserSimulator
+from tau2.utils.transcript.linearization import linearize_ticks
 
 
 @pytest.fixture(autouse=True)
@@ -74,6 +76,56 @@ def test_control_signals_bypass_grounding(monkeypatch, content):
     assert user.is_stop(message)
     assert not message.has_audio_content()
     assert state._llm_generation_seconds == 0.1
+
+
+def test_text_and_audio_user_chunks_are_not_merged():
+    """A stage control message must not be merged with the next voice chunk."""
+    stop = UserMessage(role="user", content="Thanks, bye. ###STOP###", is_audio=False)
+    audio = UserMessage(
+        role="user",
+        content="The next stage request",
+        is_audio=True,
+        audio_content="AA==",
+    )
+    ticks = [
+        ParticipantTick(tick_id=0, timestamp="0", self_chunk=stop),
+        ParticipantTick(tick_id=1, timestamp="1", self_chunk=audio),
+    ]
+
+    messages = linearize_ticks(
+        ticks, LinearizationStrategy.CONTAINMENT_AWARE, integration_ticks=1
+    )
+
+    assert [message.content for message in messages] == [
+        "Thanks, bye. ###STOP###",
+        "The next stage request",
+    ]
+
+
+def test_control_stop_is_removed_from_private_user_history():
+    """Internal STOP remains a returned signal but leaves user LLM history."""
+    user = VoiceStreamingUserSimulator(
+        tools=None,
+        instructions="Complete the staged request.",
+        llm="unused",
+        voice_settings=VoiceSettings(
+            transcription_config=None, synthesis_config=SynthesisConfig()
+        ),
+        realtime_generation=False,
+        use_llm_backchannel=False,
+    )
+    state = user.get_init_state()
+    stop = UserMessage(role="user", content="Done. ###STOP###", is_audio=False)
+    state.record_tick(
+        tick_id=0,
+        timestamp="0",
+        self_chunk=stop,
+        other_chunk=None,
+    )
+
+    user._discard_last_control_message_from_history(state, stop)
+
+    assert state.ticks[-1].self_chunk is None
 
 
 def test_ordinary_voice_reply_still_requires_grounding(monkeypatch):

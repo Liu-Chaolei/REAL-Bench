@@ -38,6 +38,11 @@ class Bridge:
     async def send(self, message):
         self.sent.append(message)
 
+    async def next_event(self):
+        while not self.events:
+            await asyncio.sleep(0.001)
+        return self.events.popleft()
+
     def drain(self):
         events, self.events = list(self.events), deque()
         return events
@@ -152,9 +157,12 @@ def test_media_keeps_flowing_while_business_result_is_pending(system):
     )
     result = adapter.run_tick(b"\xff" * 160)
     assert result.tool_calls[0].id == "c"
-    assert len(result.agent_audio_data) == 160
-    assert len(result.get_played_agent_audio()) == 160
-    assert observer.played and len(observer.played[0]) == 320
+    assert result.agent_audio_data
+    assert result.media_timeline and result.speech_intervals
+    assert (
+        observer.played
+        and len(observer.played[0]) == len(result.get_played_agent_audio()) * 2
+    )
     adapter.send_tool_result("c", "official tool result")
     adapter.run_tick(b"\xff" * 160)
     returns = [e for e in bridge.sent if e["type"] == "tool_result"]
@@ -209,7 +217,8 @@ def test_interruption_discards_unplayed_audio_and_never_reads_gateway_text(syste
     observer.fragments = [LiveTranscriptFragment(speaker="agent", text="Heard prefix")]
     bridge.events.append({"type": "clear", "response_id": "r"})
     cut = adapter.run_tick(b"\xff" * 160)
-    assert cut.agent_audio_data == b""
+    # Audio played before the clear arrived is retained; future audio is gone.
+    assert not adapter.playback.pending_chunks()
     assert cut.proportional_transcript == "Heard prefix"
     assert cut.was_truncated and cut.truncated_audio_bytes > 0
     assert any(e.get("event") == "playback.cancelled" for e in bridge.sent)
@@ -247,8 +256,8 @@ def test_cancelling_old_response_keeps_new_response_backlog(system, new_audio_fi
     cut = adapter.run_tick(b"\xff" * 160)
     assert cut.was_truncated
     assert cut.truncated_audio_bytes > 0
-    assert adapter._buffered_agent_audio
-    assert all(response == "new" for _, response in adapter._buffered_agent_audio)
+    assert adapter.playback.pending_chunks()
+    assert all(response == "new" for _, response in adapter.playback.pending_chunks())
     assert (
         adapter._played["old"] + cut.truncated_audio_bytes == adapter._received["old"]
     )
@@ -275,7 +284,7 @@ def test_late_clear_for_completed_response_does_not_cut_new_reply(system):
     )
     result = adapter.run_tick(b"\xff" * 160)
     assert not result.was_truncated
-    assert adapter._buffered_agent_audio
+    assert adapter.playback.pending_chunks()
 
 
 def test_playback_to_collector_preserves_completed_reply_after_idle_clear(system):
@@ -356,12 +365,14 @@ def test_config_requires_live_semantics_and_contains_no_credentials():
     )
     assert config.model == "qwen-audio-agent"
     assert config.realtime_generation_enabled
-    with pytest.raises(ValueError, match="non-blocking"):
-        AudioNativeConfig(
-            provider="qwen_agent",
-            qwen_agent_config=QwenAgentConfig(),
-            realtime_generation=False,
-        )
+    blocking_config = AudioNativeConfig(
+        provider="qwen_agent",
+        qwen_agent_config=QwenAgentConfig(),
+        realtime_generation=False,
+        max_steps_seconds=1200,
+    )
+    assert not blocking_config.realtime_generation_enabled
+    assert blocking_config.max_steps_ticks == 6000
     with pytest.raises(ValueError, match="environment variable names"):
         QwenAgentConfig(environment={"OPENAI_API_KEY": "literal-secret"})
     with pytest.raises(ValueError, match="controlled"):
@@ -577,7 +588,15 @@ def test_delayed_observer_words_align_to_played_audio_not_later_reply():
         )
     messages = agent_messages(ticks)
     assert messages[0].content == "First answer"
-    assert messages[1].content == ""
+    from tau2.utils.transcript.live import live_utterance_groups
+
+    groups = live_utterance_groups(ticks)
+    assert groups[1].chunks[0].content == ""
+    assert (
+        groups[1].chunks[0].raw_data["live_segment"]["association_status"]
+        == "unmatched_audio"
+    )
+    assert len(messages) == 1  # missing ASR remains evidence, outside the text view
 
 
 def test_start_timeout_cleans_up_a_container_created_before_the_cli_returned(
@@ -883,3 +902,24 @@ def test_backend_channel_reports_overflow_and_never_enters_media_queue():
     drained = provider.drain_backend_events()
     assert len(drained) == 1 and drained[0]["received_monotonic"] > 0
     assert provider.drain_backend_events() == []
+
+
+def test_backend_metric_input_excludes_transport_receipt_fields():
+    from types import SimpleNamespace
+
+    from tau2.data_model.diagnostics import BackendInput
+
+    provider = QwenAgentProvider(QwenAgentConfig(), runtime=SimpleNamespace())
+    provider.diagnostics_enabled = True
+    provider.record(
+        {
+            "type": "diagnostic_backend",
+            "id": "observed-1",
+            "time": 1.0,
+            "role": "submit",
+            "content": "Cancel yoga classes.",
+        }
+    )
+    row = BackendInput.model_validate(provider.backend_inputs["observed-1"])
+    assert row.content == "Cancel yoga classes."
+    assert "received_monotonic" not in provider.backend_inputs["observed-1"]

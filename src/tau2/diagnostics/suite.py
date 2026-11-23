@@ -9,6 +9,7 @@ from tau2.data_model.diagnostics import DiagnosticEvidence
 from tau2.diagnostics.config import MetricsConfig
 from tau2.diagnostics.intent.io import digest, write_json
 from tau2.diagnostics.model import RequestBudget, TauJsonModel
+from tau2.metrics.outcome import env_assertion_value
 
 
 def implementation_digest():
@@ -16,7 +17,12 @@ def implementation_digest():
     root = Path(__file__).parent
     files = (
         list(root.rglob("*"))
-        + [root.parent / "metrics/real_voice.py"]
+        + [
+            root.parent / "metrics/real_voice.py",
+            root.parent / "metrics/voice_interaction.py",
+            root.parent / "voice/audio_activity.py",
+            root.parent / "config.py",
+        ]
         + list((root.parent / "metrics/active").rglob("*.py"))
         + list(
             (root.parents[2] / "data/tau2/metrics/persistent_task/templates").glob(
@@ -65,6 +71,14 @@ def evaluate_evidence(task, evidence, directory, config, only=None):
     budget = RequestBudget(config.max_requests)
     results = {}
     for measure in only if only is not None else config.measures:
+        from tau2.domains.gaia2.interaction_variants import metric_enabled
+
+        if not metric_enabled(task, measure):
+            results[measure] = {
+                "status": "not_applicable",
+                "reason": "interaction_variant_scoring_scope",
+            }
+            continue
         path = output / (measure + ".json")
         key = digest(
             {
@@ -80,6 +94,10 @@ def evaluate_evidence(task, evidence, directory, config, only=None):
             "measured",
             "not_applicable",
         }:
+            if measure == "persistent_task":
+                from tau2.persistent_tasks.scores import consolidate_score
+
+                previous = consolidate_score(previous)
             results[measure] = previous
             continue
         try:
@@ -121,6 +139,17 @@ def evaluate_evidence(task, evidence, directory, config, only=None):
                 from tau2.diagnostics.interaction import evaluate_interaction
 
                 result = evaluate_interaction(evidence, config, output, budget)
+            elif measure == "state_interaction":
+                from tau2.diagnostics.state.metrics import evaluate_state_interaction
+
+                result = evaluate_state_interaction(
+                    task,
+                    evidence,
+                    output,
+                    model=TauJsonModel(
+                        config, "state_interaction", output / "requests", budget
+                    ),
+                )
             elif measure == "persistent_task":
                 result = (
                     evidence.source.get("active_metrics", {})
@@ -139,6 +168,10 @@ def evaluate_evidence(task, evidence, directory, config, only=None):
                 "status": "grader_error",
                 "reason": type(exc).__name__,
             }
+        if measure == "persistent_task":
+            from tau2.persistent_tasks.scores import consolidate_score
+
+            result = consolidate_score(result)
         result["diagnostic_only"] = not evidence.complete
         result["input_key"] = key
         write_json(path, result)
@@ -226,6 +259,7 @@ def run_saved(results_path, config, only=None, dry_run=False):
                     directory,
                     meta.info.environment_info.domain_name,
                     meta.info.language,
+                    getattr(meta.info, "task_set_name", None),
                 )
             )
         for task in meta.tasks:
@@ -242,18 +276,30 @@ def run_saved(results_path, config, only=None, dry_run=False):
                     )
 
     def process(job):
-        run, sim, task, directory, domain, language = job
+        run, sim, task, directory, domain, language, task_set_name = job
         row = {
             "simulation_id": sim.id,
             "task_id": sim.task_id,
             "trial": sim.trial,
             "run": str(run),
+            "domain": domain,
+            "language": language,
+            "task_set_name": task_set_name,
+            "hidden_intent": (sim.info or {}).get("hidden_intent"),
+            "persistent_tasks": (sim.info or {}).get("persistent_tasks"),
             "evidence": str(directory),
             "termination_reason": sim.termination_reason.value,
-            "reward": sim.reward_info.reward if sim.reward_info else None,
+            **(
+                {"env_assertion": env_assertion_value(sim)}
+                if domain == "gaia2"
+                else {"reward": sim.reward_info.reward if sim.reward_info else None}
+            ),
         }
         selected = only if only is not None else config.measures
-        if not directory.exists() and selected != ["interaction"]:
+        if not directory.exists() and selected not in (
+            ["interaction"],
+            ["state_interaction"],
+        ):
             return row | {
                 "status": "unavailable",
                 "reason": "historical_run_missing_diagnostic_evidence",
@@ -283,6 +329,20 @@ def run_saved(results_path, config, only=None, dry_run=False):
                             json.dumps(payload, ensure_ascii=False)
                         ),
                     )
+                if "state_interaction" in selected:
+                    planned["state_interaction"] = {
+                        "status": "planned",
+                        "evidence_mode": evidence.source.get(
+                            "interaction_evidence_mode", "recorded_events"
+                        ),
+                        "model": config.profile("state_interaction").model,
+                        "semantic_requests": sum(
+                            e.get("kind")
+                            in {"user_turn", "agent_turn", "tool_requested"}
+                            for e in evidence.state_events
+                        ),
+                        "shared_max_requests": config.max_requests,
+                    }
                 return planned
             effective = config
             if "conciseness" in selected and config.conciseness.language is None:
@@ -346,7 +406,16 @@ def read_saved_reports(results_path):
                 "task_id": sim.task_id,
                 "trial": sim.trial,
                 "run": str(run),
-                "reward": sim.reward_info.reward if sim.reward_info else None,
+                "domain": meta.info.environment_info.domain_name,
+                "language": meta.info.language,
+                "task_set_name": getattr(meta.info, "task_set_name", None),
+                "hidden_intent": (sim.info or {}).get("hidden_intent"),
+                "persistent_tasks": (sim.info or {}).get("persistent_tasks"),
+                **(
+                    {"env_assertion": env_assertion_value(sim)}
+                    if meta.info.environment_info.domain_name == "gaia2"
+                    else {"reward": sim.reward_info.reward if sim.reward_info else None}
+                ),
                 "termination_reason": sim.termination_reason.value,
             }
             if latest.exists():
@@ -375,18 +444,31 @@ def summarize(rows):
 
     from tau2.diagnostics.voice import aggregate_voice
 
+    def variant_kind(row):
+        source = row.get("summary", {}).get("source", {})
+        variant = source.get("interaction_variant") or {}
+        return variant.get("variant_type", "source")
+
+    kinds = {variant_kind(row) for row in rows}
+    if len(kinds) > 1:
+        return {
+            "version": "tau-real-diagnostics/2",
+            "evaluation_log": {"total_trials": len(rows), "records": rows},
+            "groups": {
+                kind: summarize([r for r in rows if variant_kind(r) == kind])
+                for kind in sorted(kinds)
+            },
+        }
+
     profiles = {r.get("profile") for r in rows if r.get("profile")}
     if len(profiles) > 1:
         return {
             "version": "tau-real-diagnostics/1",
-            "total_trials": len(rows),
-            "records": rows,
+            "evaluation_log": {"total_trials": len(rows), "records": rows},
             "groups": {
                 profile: summarize([r for r in rows if r.get("profile") == profile])
                 for profile in sorted(profiles)
             },
-            "unscored_trials": sum(not r.get("profile") for r in rows),
-            "reason": "different_profiles_reported_separately",
         }
 
     def intent_version(row):
@@ -397,159 +479,257 @@ def summarize(rows):
     if len(versions) > 1:
         return {
             "version": "tau-real-diagnostics/1",
-            "total_trials": len(rows),
-            "records": rows,
+            "evaluation_log": {"total_trials": len(rows), "records": rows},
             "groups": {
                 version: summarize(
                     [row for row in rows if intent_version(row) == version]
                 )
                 for version in sorted(versions)
             },
-            "unscored_trials": sum(intent_version(row) == "unscored" for row in rows),
-            "reason": "different_intent_versions_reported_separately",
         }
-    intent, voice, execution, statuses = [], [], [], {}
-    for row in rows:
-        summary = row.get("summary", {})
-        for name in ("intent", "execution", "voice", "interaction", "conciseness"):
-            result = summary.get("measures", {}).get(name)
-            statuses.setdefault(name, Counter())[
-                result.get("status", "unavailable") if result else "unavailable"
-            ] += 1
-        result = summary.get("measures", {}).get("intent", {})
-        if result.get("method") == "bidirectional_text" and not result.get(
-            "diagnostic_only"
-        ):
-            intent.append(result)
-        result = summary.get("measures", {}).get("voice")
-        if result and "metrics" in result and not result.get("diagnostic_only"):
-            voice.append(result)
-        result = summary.get("measures", {}).get("execution", {})
-        if result:
-            execution.append(result)
-    # Intent score_record is already deterministic; pool its directional counts.
-    valid = [r for r in intent if r.get("f1") is not None]
-    repetitions = [result["repetition"] for result in intent if "repetition" in result]
-
-    def fraction(direction):
-        matched = sum(r[direction]["counts"]["matched"] for r in valid)
-        total = sum(r[direction]["counts"]["total"] for r in valid)
-        return matched / total if total else 1.0
-
-    p, r = fraction("backward"), fraction("forward")
-    from tau2.diagnostics.intent.scoring import harmonic
-
-    execution_groups = {}
-    from tau2.diagnostics.execution.scoring import aggregate, dimension
-
-    for result in execution:
-        if result.get("diagnostic_only") or not result.get("dimensions"):
-            continue
-        signature = digest(
-            {
-                k: {"status": v["status"], "coverage": v["coverage"]}
-                for k, v in result["dimensions"].items()
-            }
+    state_versions = {
+        (r.get("summary", {}).get("measures", {}).get("state_interaction") or {}).get(
+            "version"
         )
-        execution_groups.setdefault(signature, []).append(result)
-    grouped = {}
-    for signature, members in execution_groups.items():
-        pooled = {}
-        for name in ("tools", "parameters", "order", "effects"):
-            parts = [m["dimensions"][name] for m in members]
-            if name == "tools" and parts[0]["status"] != "not_applicable":
-                expected = sum(p["reference_count"] for p in parts)
-                observed = sum(p["actual_count"] for p in parts)
-                matched = sum(p["matched"] for p in parts)
-                value = (
-                    2 * matched / (expected + observed) if expected + observed else None
+        for r in rows
+    } - {None}
+    if len(state_versions) > 1:
+        return {
+            "version": "tau-real-diagnostics/2",
+            "evaluation_log": {
+                "total_trials": len(rows),
+                "state_versions": sorted(state_versions),
+            },
+            "groups": {
+                version: summarize(
+                    [
+                        r
+                        for r in rows
+                        if (
+                            r.get("summary", {})
+                            .get("measures", {})
+                            .get("state_interaction")
+                            or {}
+                        ).get("version")
+                        == version
+                    ]
                 )
-                pooled[name] = {
-                    "score": value,
-                    "lower": value,
-                    "upper": value,
-                    "coverage": 1.0,
-                    "status": "measured",
-                    "reference_count": expected,
-                    "actual_count": observed,
-                    "matched": matched,
-                }
-            else:
-                pooled[name] = dimension([u for p in parts for u in p.get("units", [])])
-        grouped[signature] = {
-            "tasks": len(members),
-            "dimensions": pooled,
-            "total": aggregate(pooled),
-            "profile": {
-                k: {"status": v["status"], "coverage": v["coverage"]}
-                for k, v in members[0]["dimensions"].items()
+                for version in sorted(state_versions)
             },
         }
-    total_stages = sum(
-        row.get("summary", {}).get("coverage", {}).get("total_stages", 0)
+
+    def feedback_version(row):
+        result = row.get("summary", {}).get("measures", {}).get("conciseness") or {}
+        return result.get("version") or (
+            "tau-feedback-conciseness/1" if "trial" in result else "unscored"
+        )
+
+    feedback_versions = {feedback_version(row) for row in rows} - {"unscored"}
+    if len(feedback_versions) > 1:
+        buckets = {}
+        for row in rows:
+            buckets.setdefault(feedback_version(row), []).append(row)
+        return {
+            "version": "tau-real-diagnostics/2",
+            "evaluation_log": {
+                "total_trials": len(rows),
+                "feedback_versions": sorted(feedback_versions),
+            },
+            "groups": {
+                version: summarize(bucket)
+                for version, bucket in sorted(buckets.items())
+            },
+        }
+    # Reuse report grouping so different voice definitions are never pooled.
+    voice_profiles = {
+        digest({"version": result.get("version"), "config": result.get("config")})
         for row in rows
-    )
-    delivered_stages = sum(
-        row.get("summary", {}).get("coverage", {}).get("delivered_stages", 0)
-        for row in rows
-    )
-    report = {
-        "version": "tau-real-diagnostics/1",
-        "total_trials": len(rows),
-        "records": rows,
-        "statuses": {k: dict(v) for k, v in statuses.items()},
-        "stage_coverage": {
-            "total": total_stages,
-            "delivered": delivered_stages,
-            "rate": delivered_stages / total_stages if total_stages else None,
-        },
-        "termination_reasons": dict(
-            Counter(row.get("termination_reason", "unknown") for row in rows)
-        ),
+        if (result := row.get("summary", {}).get("measures", {}).get("voice"))
+        and "metrics" in result
+    }
+    if len(voice_profiles) > 1:
+        buckets = {}
+        for row in rows:
+            result = row.get("summary", {}).get("measures", {}).get("voice") or {}
+            key = (
+                digest(
+                    {"version": result.get("version"), "config": result.get("config")}
+                )
+                if "metrics" in result
+                else "unscored"
+            )
+            buckets.setdefault(key, []).append(row)
+        return {
+            "version": "tau-real-diagnostics/2",
+            "evaluation_log": {"total_trials": len(rows)},
+            "groups": {key: summarize(bucket) for key, bucket in buckets.items()},
+        }
+    from tau2.metrics.aggregation import task_key, task_mean
+
+    def measures(name):
+        return [
+            (row, row.get("summary", {}).get("measures", {}).get(name) or {})
+            for row in rows
+        ]
+
+    def average(name, *path):
+        values = []
+        for row, result in measures(name):
+            if result.get("diagnostic_only"):
+                continue
+            if name == "intent" and result.get("f1") is None:
+                continue
+            value = result
+            for key in path:
+                value = value.get(key) if isinstance(value, dict) else None
+            values.append((task_key(row), value))
+        return task_mean(values)
+
+    # Raw evidence, counts and statuses belong to the evaluation log. Only
+    # capability values enter the metric panel; no additional judging occurs.
+    statuses = {
+        name: dict(
+            Counter(result.get("status", "unavailable") for _, result in measures(name))
+        )
+        for name in (
+            "intent",
+            "execution",
+            "voice",
+            "interaction",
+            "state_interaction",
+            "conciseness",
+            "persistent_task",
+        )
+    }
+    metrics = {
         "intent": {
-            "version": next(iter(versions)) if versions else None,
-            "scored": len(valid),
-            "micro": {"precision": p, "recall": r, "f1": harmonic(p, r)}
-            if valid
-            else None,
-            "macro_f1": sum(x["f1"] for x in valid) / len(valid) if valid else None,
-            "complete_match_rate": sum(x["complete_match"] for x in valid) / len(valid)
-            if valid
-            else None,
-            "repetition": {
-                "trials": len(repetitions),
-                "completed": sum(r["status"] == "complete" for r in repetitions),
-                "statuses": dict(Counter(r["status"] for r in repetitions)),
-                "total_goal_count": sum(r["total_goal_count"] for r in repetitions),
-                "checked_goal_count": sum(r["checked_goal_count"] for r in repetitions),
-                "extra_goal_count": sum(r["extra_goal_count"] for r in repetitions),
-                "uncertain_goal_count": sum(
-                    r["uncertain_goal_count"] for r in repetitions
-                ),
-                "coverage": sum(r["status"] == "complete" for r in repetitions)
-                / len(repetitions)
-                if repetitions
-                else None,
+            "precision": average("intent", "precision"),
+            "recall": average("intent", "recall"),
+            "macro_f1": average("intent", "f1"),
+        },
+        "execution": {
+            name: {
+                field: average("execution", "dimensions", name, field)
+                for field in ("score", "lower", "upper")
+            }
+            for name in ("tools", "parameters", "order", "effects")
+        },
+        "interaction": {
+            "effective_interaction_rate": average(
+                "interaction", "effective_interaction_rate"
+            )
+        },
+        "state_interaction": {
+            "progressivity": {
+                "forward_rate": average(
+                    "state_interaction", "progressivity", "forward_rate"
+                )
+            },
+            "grounding": {
+                "consistent_rate": average(
+                    "state_interaction", "grounding", "consistent_rate"
+                )
             },
         },
-        "real_voice": aggregate_voice(voice + [None] * (len(rows) - len(voice))),
-        "execution": {
-            "scored": sum(
-                x.get("total", {}).get("score") is not None
-                and not x.get("diagnostic_only")
-                for x in execution
-            ),
-            "totals": [x.get("total") for x in execution],
-            "groups": grouped,
-            "note": "Compare totals only within matching applicability and coverage profiles.",
+        "conciseness": {
+            name: average("conciseness", "trial", name)
+            for name in (
+                "required_coverage",
+                "length_efficiency",
+                "feedback_score",
+            )
         },
     }
-    from tau2.diagnostics.interaction import summarize_interaction
+    environment_rows = [
+        (task_key(row), row.get("env_assertion"))
+        for row in rows
+        if "env_assertion" in row
+    ]
+    if environment_rows:
+        metrics["environment"] = {"env_assertion": task_mean(environment_rows)}
+    # Preserve applicability groups for execution totals. A total with different
+    # effective weights must not silently acquire the same meaning.
+    groups = {}
+    for row, result in measures("execution"):
+        if result.get("diagnostic_only") or not result.get("dimensions"):
+            continue
+        profile = {
+            k: {"status": v["status"], "coverage": v["coverage"]}
+            for k, v in result["dimensions"].items()
+        }
+        key = digest(profile)
+        groups.setdefault(key, {"profile": profile, "rows": []})["rows"].append(
+            (row, result)
+        )
+    metrics["execution"]["totals_by_profile"] = {
+        key: {
+            field: task_mean(
+                (task_key(row), result.get("total", {}).get(field))
+                for row, result in group["rows"]
+            )
+            for field in ("score", "lower", "upper")
+        }
+        for key, group in groups.items()
+    }
+    voice = [
+        dict(result, task_key=task_key(row))
+        if result and "metrics" in result and not result.get("diagnostic_only")
+        else None
+        for row, result in measures("voice")
+    ]
+    voice_report = aggregate_voice(voice)
+    namespace = voice_report.get("namespace", "real_voice")
+    metrics[namespace] = {
+        name: item["value"] for name, item in voice_report["metrics"].items()
+    }
+    from tau2.persistent_tasks.scores import completion_score
 
-    report["interaction"] = summarize_interaction(
-        [row.get("summary", {}).get("measures", {}).get("interaction") for row in rows]
-    )
-    from tau2.diagnostics.conciseness.scoring import aggregate_reports
-
-    report["conciseness"] = aggregate_reports(rows)
-    return report
+    persistent = []
+    hidden = []
+    for row in rows:
+        result = row.get("summary", {}).get("measures", {}).get("persistent_task")
+        if result is None:
+            result = (row.get("persistent_tasks") or {}).get("grading", {})
+        if result and not result.get("diagnostic_only"):
+            persistent.append((row, result))
+        if row.get("hidden_intent"):
+            hidden.append((row, row["hidden_intent"]))
+    metrics["persistent_task"] = {
+        "completion_score": task_mean(
+            (task_key(row), completion_score(result)) for row, result in persistent
+        )
+    }
+    metrics["hidden_intent"] = {
+        "hidden_ask_rate": task_mean(
+            (task_key(row), result.get("hidden_ask_rate")) for row, result in hidden
+        )
+    }
+    return {
+        "version": "tau-real-diagnostics/2",
+        "metrics": metrics,
+        "evaluation_log": {
+            "total_trials": len(rows),
+            "records": rows,
+            "statuses": statuses,
+            "intent_versions": sorted(versions),
+            "feedback_versions": sorted(feedback_versions),
+            "execution_profiles": {
+                key: group["profile"] for key, group in groups.items()
+            },
+            "voice": voice_report,
+            "termination_reasons": dict(
+                Counter(row.get("termination_reason", "unknown") for row in rows)
+            ),
+            "stage_coverage": {
+                name: sum(
+                    row.get("summary", {}).get("coverage", {}).get(name, 0)
+                    for row in rows
+                )
+                for name in (
+                    "total_stages",
+                    "delivered_stages",
+                    "fully_delivered_stages",
+                )
+            },
+        },
+    }

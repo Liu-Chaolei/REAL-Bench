@@ -19,7 +19,9 @@ def test_hidden_metrics_are_replayable_and_keep_task_reward_separate():
                     "id": "g_subject",
                     "kind": "tool_argument",
                     "visibility": "withheld",
+                    "field_type": "email_subject",
                     "description": "Email subject",
+                    "aliases": ["subject", "email subject"],
                     "argument_path": "subject",
                     "gold_value": "Subject A",
                     "release_policy": "after_valid_question",
@@ -31,5 +33,4 @@ def test_hidden_metrics_are_replayable_and_keep_task_reward_separate():
     runtime.ask("What email subject should I use?", node_id="g_subject")
     metrics = score_hidden_intent(graph, runtime.state, task_passed=True)
     assert metrics["hidden_ask_rate"] == 1.0
-    assert metrics["hidden_reveal_rate"] == 1.0
-    assert metrics["task_pass_at_1"] is True
+    assert set(metrics) == {"version", "hidden_count", "hidden_ask_rate"}

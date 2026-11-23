@@ -1240,6 +1240,7 @@ def can_merge_messages(msg1: Message, msg2: Message) -> bool:
     - Both are non-None ParticipantMessageBase
     - Neither is a tool call
     - Both are of the same type
+    - Both have the same audio mode
 
     Args:
         msg1: First message (typically the last message in history).
@@ -1265,6 +1266,12 @@ def can_merge_messages(msg1: Message, msg2: Message) -> bool:
 
     # Must be the same type
     if type(msg1) is not type(msg2):
+        return False
+
+    # Text/control messages and audio chunks are separate transcript units.
+    # Keeping them separate also prevents merge_message_chunks() from receiving
+    # the mixed [False, True] combination that it correctly rejects.
+    if msg1.is_audio != msg2.is_audio:
         return False
 
     return True

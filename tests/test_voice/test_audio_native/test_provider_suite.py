@@ -264,7 +264,12 @@ def _make_order_tool() -> Tool:
 def assert_audio_capping(result: TickResult, adapter: DiscreteTimeAdapter) -> None:
     """Assert that agent audio is capped to bytes_per_tick."""
     total = sum(len(data) for data, _ in result.agent_audio_chunks)
-    assert total <= adapter.bytes_per_tick, (
+    limit = (
+        len(result.get_played_agent_audio())
+        if result.media_origin is not None
+        else adapter.bytes_per_tick
+    )
+    assert total <= limit, (
         f"Audio capping violated: {total} bytes > {adapter.bytes_per_tick} bytes_per_tick"
     )
 
@@ -278,7 +283,16 @@ def assert_played_audio_length(
         "adapter.run_tick() returned a TickResult without setting bytes_per_tick"
     )
     played = result.get_played_agent_audio()
-    assert len(played) == adapter.bytes_per_tick, (
+    expected = (
+        round(
+            result.played_stream_duration_ms
+            * adapter.audio_format.bytes_per_second
+            / 1000
+        )
+        if result.media_origin is not None
+        else adapter.bytes_per_tick
+    )
+    assert len(played) == expected, (
         f"get_played_agent_audio returned {len(played)} bytes, "
         f"expected {adapter.bytes_per_tick}"
     )

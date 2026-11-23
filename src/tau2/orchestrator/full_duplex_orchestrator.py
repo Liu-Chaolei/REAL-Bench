@@ -32,6 +32,7 @@ from tau2.user.user_simulator import UserSimulator
 from tau2.user.user_simulator_base import FullDuplexUser, UserError
 from tau2.utils.llm_utils import get_cost
 from tau2.utils.utils import get_now
+from tau2.voice.audio_activity import is_speaking
 from tau2.voice.pricing import build_session_usage
 from tau2.voice.saasr_worker import SaasrWorkerError
 from tau2.voice.utils.transcript_utils import compute_proportional_user_transcripts
@@ -352,7 +353,7 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
         persistent = getattr(self, "persistent_task_runtime", None)
         communication_busy = bool(
             getattr(self.agent, "has_pending_output", False)
-            or (self.current_agent_chunk and self.current_agent_chunk.contains_speech)
+            or is_speaking(self.current_agent_chunk)
             or (self.current_user_chunk and self.current_user_chunk.contains_speech)
             or self._scenario_user_input
             or (self._tool_executor and self._tool_executor.pending)
@@ -384,9 +385,7 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
                 self.pending_agent_tool_results or self.pending_user_tool_results
             )
             busy = busy or getattr(self.agent, "has_pending_output", False)
-            busy = busy or bool(
-                self.current_agent_chunk and self.current_agent_chunk.contains_speech
-            )
+            busy = busy or bool(is_speaking(self.current_agent_chunk))
             busy = busy or bool(
                 persistent and persistent.blocks_stage(self.scenario_stages.current)
             )
@@ -694,6 +693,9 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
                 results = self._execute_tool_calls(tool_calls)
             tool_results = list(results)
 
+            if is_agent and hasattr(self.user, "observe_agent_tool_calls"):
+                self.user.observe_agent_tool_calls(tool_calls)
+
             for tc, result in zip(tool_calls, results):
                 result_preview = (
                     result.content[:100] + "..."
@@ -817,6 +819,11 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
                     )
                     recorded = True
                 if user_chunk.is_final_chunk or data.get("saasr_main_final"):
+                    active = getattr(self, "active_metric_manager", None)
+                    if active is not None and self._scenario_user_input:
+                        active.delivery_completed(
+                            self._scenario_user_input, runtime.time()
+                        )
                     if persistent and self._scenario_user_input:
                         persistent.delivery_completed(
                             self._scenario_user_input, runtime.time()
@@ -826,11 +833,23 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
                     self._scenario_user_input = None
                     self._scenario_user_text = ""
                     self._scenario_user_utterance = None
-        now = runtime.monotonic()
+        raw = (agent_chunk.raw_data or {}) if agent_chunk is not None else {}
+        stream_start = raw.get("played_stream_start_ms")
+        stream_duration = raw.get("played_stream_duration_ms")
+        now = raw.get("media_cutoff") or runtime.monotonic()
         if len(self._scenario_audio_ms) == 1:
-            self._scenario_audio_times[0] = now - self.tick_duration_seconds
+            self._scenario_audio_times[0] = (
+                raw.get("playback_start_monotonic")
+                if raw.get("playback_start_monotonic") is not None
+                else now - self.tick_duration_seconds
+            )
+        # Observer offsets refer to the cumulative audio actually presented by
+        # the adapter. A continuous-media snapshot may contain more than one
+        # nominal tick, especially after a synchronous caller-generation wait.
         self._scenario_audio_ms.append(
-            self._scenario_audio_ms[-1] + self.tick_duration_seconds * 1000
+            stream_start + stream_duration
+            if stream_start is not None and stream_duration is not None
+            else self._scenario_audio_ms[-1] + self.tick_duration_seconds * 1000
         )
         self._scenario_audio_times.append(now)
         if agent_chunk is None or not runtime.started:
@@ -1029,6 +1048,12 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
                     if user_cost is not None and additional is not None
                     else None
                 )
+
+        hidden_intent = None
+        if hasattr(self.user, "get_hidden_intent_metrics"):
+            hidden_intent = self.user.get_hidden_intent_metrics()
+            if hidden_intent is not None:
+                info["hidden_intent"] = hidden_intent
 
         # Extract provider session ID if available (e.g., OpenAI session ID)
         provider_session_id = None

@@ -58,7 +58,15 @@ class QwenPlayedAudioTranscriber(SegmentedPlayedAudioTranscriber):
             self.language,
             self.hotwords.vocabulary() if self.hotwords is not None else None,
         )
-        self.usage_records.append({"purpose": purpose, **result.usage})
+        record = {"purpose": purpose, **result.usage}
+        if result.empty_reason:
+            record.update(
+                status="empty",
+                reason=result.empty_reason,
+                request_id=result.request_id,
+                audio_duration_seconds=len(pcm) / (DEFAULT_TELEPHONY_RATE * 2),
+            )
+        self.usage_records.append(record)
         return result.text
 
     def summary(self):

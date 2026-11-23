@@ -107,6 +107,8 @@ def plan_suite(
         if trials is not None and source.trial not in trials:
             continue
         for measure in measures:
+            if measure in {"naturalness", "speech_fidelity", "tool_use"}:
+                continue
             key = _key(source, measure)
             if key in seen:
                 raise ValueError("Duplicate simulation/measure inputs")

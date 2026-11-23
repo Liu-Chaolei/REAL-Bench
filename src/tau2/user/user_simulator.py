@@ -3,6 +3,7 @@ from typing import Generic, Literal, Optional, Tuple, TypeVar
 from loguru import logger
 
 from tau2.agent.base.llm_config import LLMConfigMixin
+from tau2.data_model.hidden_intent import HiddenGoalGraph
 from tau2.data_model.message import (
     AssistantMessage,
     Message,
@@ -15,6 +16,7 @@ from tau2.data_model.message import (
 from tau2.data_model.persona import PersonaConfig
 from tau2.environment.tool import Tool
 from tau2.user.guidelines import finalize_system_prompt, simulation_guidelines
+from tau2.user.hidden_intent import HIDDEN_CONTEXT_PREFIX, HiddenIntentRuntime
 from tau2.user.user_simulator_base import (
     OUT_OF_SCOPE,
     STOP,
@@ -81,6 +83,7 @@ class UserSimulator(
             PersonaConfig
         ] = None,  # TODO: Should this be pushed to the base class?
         global_guidelines_override: Optional[str] = None,
+        hidden_intent_graph: HiddenGoalGraph | None = None,
     ):
         super().__init__(
             instructions=instructions,
@@ -90,6 +93,13 @@ class UserSimulator(
         )
         self.persona_config = persona_config or PersonaConfig()
         self.global_guidelines_override = global_guidelines_override
+        self.hidden_intent_runtime = (
+            HiddenIntentRuntime(hidden_intent_graph)
+            if hidden_intent_graph is not None
+            else None
+        )
+        self._hidden_intent_events: list[dict] = []
+        self._hidden_intent_seen_questions: set[str] = set()
         self._scenario_inputs = []
         self.scenario_constraints = None
         self._released_scenario_facts = []
@@ -101,6 +111,23 @@ class UserSimulator(
     def queue_scenario_input(self, event_id: str, text: str) -> None:
         """Use the same task script contract in text and streaming voice runs."""
         self._scenario_inputs.append((event_id, text))
+
+    def observe_agent_tool_calls(self, tool_calls) -> None:
+        """Bind Agent tool calls to hidden-intent state for diagnostics."""
+        if self.hidden_intent_runtime is None:
+            return
+        for call in tool_calls:
+            self.hidden_intent_runtime.observe_tool_call(call.name, call.arguments)
+
+    def get_hidden_intent_metrics(self) -> dict | None:
+        """Return the single public hidden-intent metric for this run."""
+        if self.hidden_intent_runtime is None:
+            return None
+        from tau2.metrics.hidden_intent import score_hidden_intent
+
+        return score_hidden_intent(
+            self.hidden_intent_runtime.graph, self.hidden_intent_runtime.state
+        )
 
     def scenario_stage_context(self, event_id, text):
         """Mark the newly released request as the current conversational goal."""
@@ -160,11 +187,60 @@ class UserSimulator(
             "Invalid user message history. User messages must be of type UserMessage, AssistantMessage, or ToolMessage to User."
         )
 
+        system_messages = [SystemMessage(role="system", content=self.system_prompt)]
+        if self.hidden_intent_runtime is not None:
+            system_messages.append(
+                SystemMessage(
+                    role="system", content=self.hidden_intent_runtime.user_context()
+                )
+            )
         user_state = UserState(
-            system_messages=[SystemMessage(role="system", content=self.system_prompt)],
+            system_messages=system_messages,
             messages=message_history,
         )
         return user_state
+
+    def _sync_hidden_intent_context(self, state: UserStateType) -> None:
+        """Refresh the private user-side state message after a transition."""
+        if self.hidden_intent_runtime is None:
+            return
+        context = SystemMessage(
+            role="system", content=self.hidden_intent_runtime.user_context()
+        )
+        for index, system_message in enumerate(state.system_messages):
+            if system_message.content and system_message.content.startswith(
+                HIDDEN_CONTEXT_PREFIX
+            ):
+                state.system_messages[index] = context
+                return
+        state.system_messages.append(context)
+
+    def _observe_hidden_question(
+        self, question: str, state: UserStateType
+    ) -> dict | None:
+        """Advance hidden state once for a newly observed Agent turn."""
+        if self.hidden_intent_runtime is None or not question:
+            return None
+        key = " ".join(question.split())
+        if key in self._hidden_intent_seen_questions:
+            return None
+        self._hidden_intent_seen_questions.add(key)
+        result = self.hidden_intent_runtime.detect_and_apply(
+            question, model=self.llm, model_args=self.llm_args
+        )
+        self._hidden_intent_events.append({"question": question, **result})
+        if result.get("released"):
+            self._sync_hidden_intent_context(state)
+            self._sync_released_hidden_facts()
+        return result
+
+    def _sync_released_hidden_facts(self) -> None:
+        """Expose released values to the existing candidate grounding context."""
+        if self.hidden_intent_runtime is None:
+            return
+        for fact in self.hidden_intent_runtime.released_facts():
+            if fact not in self._released_scenario_facts:
+                self._released_scenario_facts.append(fact)
 
     @classmethod
     def is_stop(cls, message: UserMessage) -> bool:
@@ -185,6 +261,9 @@ class UserSimulator(
     def generate_next_message(
         self, message: ValidUserInputMessage, state: UserStateType
     ) -> Tuple[UserMessage, UserStateType]:
+        if isinstance(message, AssistantMessage) and message.content:
+            self._observe_hidden_question(message.content, state)
+        self._sync_hidden_intent_context(state)
         if self._scenario_inputs:
             key, text = self._scenario_inputs.pop(0)
             self._released_scenario_facts.append(text)

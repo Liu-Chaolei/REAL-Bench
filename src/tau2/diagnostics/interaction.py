@@ -10,8 +10,9 @@ from tau2.config import DEFAULT_INTERACTION_EVENT_CHARACTERS
 from tau2.data_model.diagnostics import DiagnosticEvidence
 from tau2.diagnostics.intent.io import canonical
 from tau2.diagnostics.model import TauJsonModel
+from tau2.diagnostics.request_changes import management_events
 
-VERSION = "tau-interaction-effectiveness/2"
+VERSION = "tau-interaction-effectiveness/3"
 
 
 class InteractionAct(BaseModel):
@@ -44,7 +45,7 @@ def conversation_evidence(simulation, task, domain: str) -> DiagnosticEvidence:
     """Read historical delivered dialogue without reconstructing execution."""
     from tau2.diagnostics.collect import delivered_inputs
 
-    return DiagnosticEvidence(
+    result = DiagnosticEvidence(
         simulation_id=simulation.id,
         task_id=simulation.task_id,
         domain=domain,
@@ -54,14 +55,22 @@ def conversation_evidence(simulation, task, domain: str) -> DiagnosticEvidence:
         stages=(simulation.info or {}).get("scenario_series", {}),
         source={
             "interaction_evidence_mode": "conversation_only",
+            "active_metrics": (simulation.info or {}).get("active_metrics"),
+            "interaction_variant": getattr(task.scenario, "async_interaction", None),
             "dialogue_time_basis": "media_seconds"
             if simulation.ticks
             else "message_index",
             "termination_reason": simulation.termination_reason.value,
+            "scenario_start_time": task.scenario.start_time if task.scenario else None,
         },
         complete=simulation.termination_reason.value
         not in {"infrastructure_error", "user_error", "unexpected_error"},
     )
+
+    from tau2.diagnostics.state.events import recorded_events
+
+    result.state_events = recorded_events(simulation, result, [])
+    return result
 
 
 def build_input(evidence: DiagnosticEvidence) -> dict:
@@ -81,7 +90,7 @@ def build_input(evidence: DiagnosticEvidence) -> dict:
         for row in sorted(evidence.user_inputs, key=lambda row: row.started)
         if (row.text and row.text.strip()) or row.unavailable_reason
     ]
-    return {
+    payload = {
         "dialogue": dialogue,
         "target_utterance_ids": [
             row["id"] for row in dialogue if row["role"] == "assistant_context"
@@ -99,6 +108,7 @@ def build_input(evidence: DiagnosticEvidence) -> dict:
             "backend": "independent_provider_clock",
         },
         "backend_status": evidence.backend_status,
+        "management_events": management_events(evidence),
         "backend_inputs": [
             {
                 "id": row.id,
@@ -127,6 +137,26 @@ def build_input(evidence: DiagnosticEvidence) -> dict:
             if row.kind != "SYSTEM"
         ],
     }
+    start_time = evidence.source.get("scenario_start_time")
+    if evidence.domain == "gaia2" and start_time is not None:
+        payload["scenario_clock"] = {
+            "start_timestamp": start_time,
+            "time_zone": "UTC",
+            "authoritative_tool": "System__get_current_time",
+            "observations": [
+                {
+                    "id": row.call_id,
+                    "requestor": row.requestor,
+                    "started": row.started,
+                    "ended": row.ended,
+                    "result": preview(row.result),
+                    "error": row.error,
+                }
+                for row in evidence.operations
+                if row.name == "System__get_current_time"
+            ],
+        }
+    return payload
 
 
 def _rates(counts: dict) -> dict:

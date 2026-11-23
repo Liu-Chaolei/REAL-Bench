@@ -1,5 +1,9 @@
 # Dynamic persistent-task metric
 
+> 当前异步交互仅保留本运行时动态机制。固定 async100题及10题 Persistent Tasks 材料
+> 已从活动数据删除；主文件现为1000题（base800＋两类变体各100），不再有 async split。
+
+
 ## Goal
 
 The persistent-task evaluation is an active metric. It observes a real backend
@@ -133,11 +137,16 @@ resolved intents, generated request, fallback reason, delivery timing, backend
 operations, reply text, termination reason, and policy digests in
 `simulation.info.active_metrics` and the diagnostic evidence source.
 
-The independent score remains:
+The independent performance value is `completion_score`. It preserves the
+existing native-result and reply success conditions. `operation_reward` remains
+a log field; native-result and reply judgments are boolean details under
+`evaluation_log.native_result` and `evaluation_log.reply`. No component scores
+are displayed separately. A skipped reply judgment is marked not evaluated,
+rather than reported as a model-judged incorrect reply.
 
-```text
-operation_reward * native_result_reward * reply_reward
-```
+Historical `reward` / `native_reward` totals remain readable; explicit zero and
+unavailable values are preserved. Existing fixed-request grading uses the same
+output shape while retaining its original judging conditions.
 
 `query` accepts the actual state returned after delivery. `result` requires a
 completed task with an available result. `modify` requires an accepted update,

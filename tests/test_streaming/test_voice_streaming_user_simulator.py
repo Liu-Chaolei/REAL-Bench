@@ -94,6 +94,48 @@ def first_agent_message() -> AssistantMessage:
     )
 
 
+@pytest.mark.parametrize("agent_speaking_now", [False, True])
+def test_current_overlap_controls_user_queue_without_losing_pending_speech(
+    streaming_user, monkeypatch, agent_speaking_now
+):
+    """A speech tail keeps the queue; a real new interruption still stops it."""
+    state = streaming_user.get_init_state()
+    chunks = [
+        UserMessage(role="user", content=f"part {i}", contains_speech=True)
+        for i in range(3)
+    ]
+    state.output_streaming_queue = list(chunks)
+    state.input_turn_taking_buffer = [
+        AssistantMessage(
+            role="assistant",
+            contains_speech=True,
+            raw_data={"speaking_now": agent_speaking_now},
+        )
+        for _ in range(5)
+    ]
+    state.consecutive_self_speaking_ticks = 10
+    state.consecutive_other_speaking_ticks = 5 if agent_speaking_now else 0
+    streaming_user.yield_threshold_when_interrupted = 5
+    streaming_user.yield_threshold_when_interrupting = 25
+    # Exercise the existing queue actions without mixing effects or generating audio.
+    monkeypatch.setattr(
+        streaming_user,
+        "_apply_chunk_effects",
+        lambda chunk, *_args, **_kwargs: chunk
+        or UserMessage(role="user", contains_speech=False),
+    )
+    action = streaming_user._compute_turn_taking_action(state)
+    message, state = streaming_user._perform_turn_taking_action(state, action)
+    if agent_speaking_now:
+        assert action.action == "stop_talking"
+        assert state.output_streaming_queue == []
+        assert not message.contains_speech
+    else:
+        assert action.action == "keep_talking"
+        assert message.content == "part 0"
+        assert state.output_streaming_queue == chunks[1:]
+
+
 @pytest.fixture
 def audio_format():
     """Create a standard audio format for testing."""
@@ -615,3 +657,17 @@ def test_voice_streaming_user_integration_ticks(user_instructions, voice_setting
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v", "-s"])
+
+
+def test_source_marks_continuer_and_formal_utterance_separately(streaming_user):
+    state = streaming_user.get_init_state()
+    continuer = streaming_user._generate_backchannel_message(state)
+    chunks = streaming_user._create_chunk_messages(continuer)
+    assert all(c.raw_data["user_event_kind"] == "backchannel" for c in chunks)
+    normal = streaming_user.synthesize_voice(
+        message=UserMessage(role="user", content="Um, please change my booking."),
+        state=state,
+    )
+    chunks = streaming_user._create_chunk_messages(normal)
+    assert all(c.raw_data["user_event_kind"] == "formal" for c in chunks)
+    assert len({tuple(c.utterance_ids) for c in chunks}) == 1

@@ -142,3 +142,45 @@ def test_missing_language_template_reports_generation_unavailable(monkeypatch):
         metric.advance(scenario.current, True)
 
     assert metric.status == "generation_unavailable"
+
+
+def test_reply_score_still_uses_native_result_evidence(monkeypatch):
+    from tau2.data_model.semantic_communication import CommunicateScoring
+    from tau2.data_model.simulation import CommunicateCheck
+    from tau2.evaluator.evaluator_communicate import CommunicateEvaluator
+
+    metric, _, _ = runtime()
+    metric.status = "delivered"
+    metric.backend_task_id = "backend-1"
+    metric.generated_request = {"resolved_intent": {"operation": "query"}}
+    metric.delivery = {"delivered_at": 1.0}
+    metric.operations = [
+        {
+            "backend_task_id": "backend-1",
+            "operation": "query",
+            "timestamp": 2.0,
+            "success": True,
+            "result": {"state": "running"},
+        }
+    ]
+    metric.reply_text = "It is still running."
+    calls = []
+
+    def judge(messages, facts, **kwargs):
+        calls.append((messages, facts))
+        return [
+            CommunicateCheck(
+                info=facts[0], met=True, justification="Matches native state"
+            )
+        ]
+
+    monkeypatch.setattr(CommunicateEvaluator, "evaluate_communicate_info", judge)
+    result = metric.score(CommunicateScoring())
+    assert len(calls) == 1 and '"actual_state": "running"' in calls[0][1][0]
+    assert (
+        result["evaluation_log"]["native_result"]["passed"]
+        == result["evaluation_log"]["reply"]["passed"]
+        == result["completion_score"]
+        == 1
+    )
+    assert "state_result_reward" not in result

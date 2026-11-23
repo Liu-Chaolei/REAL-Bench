@@ -3,7 +3,12 @@
 from dotenv import load_dotenv
 
 from tau2.data_model.audio import AudioData
-from tau2.data_model.voice import ElevenLabsTTSConfig, MiMoTTSConfig, ProviderConfig
+from tau2.data_model.voice import (
+    ElevenLabsTTSConfig,
+    MiMoTTSConfig,
+    ProviderConfig,
+    QwenTTSConfig,
+)
 from tau2.utils.retry import tts_retry
 from tau2.voice.utils.elevenlabs_utils import tts_elevenlabs
 
@@ -23,6 +28,10 @@ def synthesize_voice(
         from tau2.voice.mimo import synthesize_mimo
 
         audio_data = synthesize_mimo(text, provider_config)
+    elif provider == "qwen" and isinstance(provider_config, QwenTTSConfig):
+        from tau2.voice.qwen_tts import synthesize_qwen
+
+        audio_data = synthesize_qwen(text, provider_config)
     else:
         raise ValueError(f"Unsupported synthesis provider: {provider}")
 

@@ -27,7 +27,6 @@ Usage:
     adapter.disconnect()
 """
 
-import asyncio
 import uuid
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -384,27 +383,21 @@ class DiscreteTimeGeminiAdapter(DiscreteTimeAdapter):
         # Convert user audio from telephony to Gemini format
         gemini_audio = self._audio_converter.convert_input(user_audio)
 
-        gemini_audio_received: List[Tuple[bytes, Optional[str]]] = []
+        def handle(result, event):
+            chunks = []
+            self._process_event(result, event, chunks)
+            for data, rid in chunks:
+                result.agent_audio_chunks.append(
+                    (self._audio_converter.convert_output(data), rid)
+                )
 
-        async def receive_events():
-            elapsed_so_far = asyncio.get_running_loop().time() - tick_start
-            remaining = max(0.01, (self.tick_duration_ms / 1000) - elapsed_so_far)
-            return await self.provider.receive_events_for_duration(remaining)
+        async def receive():
+            return await self.provider.receive_events_for_duration(0.02)
 
-        _, events = await asyncio.gather(
-            self._send_audio_chunked(
-                gemini_audio, self.provider.send_audio, self._chunk_size
-            ),
-            receive_events(),
+        self._start_media_receiver(receive, handle)
+        await self._send_audio_chunked(
+            gemini_audio, self.provider.send_audio, self._chunk_size
         )
-
-        for event in events:
-            self._process_event(result, event, gemini_audio_received)
-
-        # Convert Gemini audio to telephony format and add to result
-        for gemini_bytes, item_id in gemini_audio_received:
-            telephony_bytes = self._audio_converter.convert_output(gemini_bytes)
-            result.agent_audio_chunks.append((telephony_bytes, item_id))
 
     def _process_event(
         self,

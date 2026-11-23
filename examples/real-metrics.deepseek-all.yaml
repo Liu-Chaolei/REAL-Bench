@@ -1,41 +1,17 @@
+# Models and connections are selected in realbench.env.
 measures:
-  - intent
-  - execution
-  - voice
-  - interaction
+- intent
+- execution
+- voice
+- interaction
+- state_interaction
+- conciseness
 auto_score: true
 concurrency: 2
 max_requests: 96
 timeout_seconds: 300
 max_characters: 200000
-model:
-  model: openai/responses/deepseek-flash
-  api_base: https://apifusion.aispeech.com.cn/v1
-  api_key_env: DEEPSEEK_API_KEY
-  args: {reasoning_effort: low, num_retries: 0}
-models:
-  gt:
-    model: openai/responses/deepseek-flash
-    api_base: https://apifusion.aispeech.com.cn/v1
-    api_key_env: DEEPSEEK_API_KEY
-    args: {reasoning_effort: low, num_retries: 0}
-  prediction:
-    model: openai/responses/deepseek-flash
-    api_base: https://apifusion.aispeech.com.cn/v1
-    api_key_env: DEEPSEEK_API_KEY
-    args: {reasoning_effort: low, num_retries: 0}
-  evaluation:
-    model: openai/responses/deepseek-flash
-    api_base: https://apifusion.aispeech.com.cn/v1
-    api_key_env: DEEPSEEK_API_KEY
-    args: {reasoning_effort: low, num_retries: 0}
-  execution:
-    model: openai/responses/deepseek-flash
-    api_base: https://apifusion.aispeech.com.cn/v1
-    api_key_env: DEEPSEEK_API_KEY
-    args: {reasoning_effort: low, num_retries: 0}
-  interaction:
-    model: openai/responses/deepseek-flash
-    api_base: https://apifusion.aispeech.com.cn/v1
-    api_key_env: DEEPSEEK_API_KEY
-    args: {reasoning_effort: low, num_retries: 0}
+conciseness:
+  calibration: calibration/concise-feedback.en-v1.json
+  evidence_max_characters: 12000
+api_config_dir: ~/.config/qwaudio

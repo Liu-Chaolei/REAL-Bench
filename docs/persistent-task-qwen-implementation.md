@@ -1,5 +1,9 @@
 > Historical implementation plan. Active async definitions now live in ordinary Gaia2 tasks; see [current architecture](persistent-tasks.md).
 
+> 历史固定异步任务记录。对应固定数据集已移除，当前仅使用运行时动态异步交互，
+> 见 [当前运行方式](gaia2-async.md)。下文旧题号和命令保留用于追溯，不作为新评测入口。
+
+
 # Qwen Persistent Task 实施方案
 
 日期：2026-11-13。依据当前工作区代码及 `persistent-task-qwen-plan.md`。

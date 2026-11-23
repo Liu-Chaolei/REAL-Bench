@@ -1,5 +1,9 @@
 # Native Qwen persistent-task integration
 
+> 历史固定异步任务记录。对应固定数据集已移除，当前仅使用运行时动态异步交互，
+> 见 [当前运行方式](gaia2-async.md)。下文旧题号和命令保留用于追溯，不作为新评测入口。
+
+
 This implementation observes the fixed Qwen TaskManager and the original
 `AgentTaskRuntime` methods. It never mounts the historical in-memory task tools
 in a live environment. Live code implements the shared Adapter contract for native status/result queries and mutation requests with an

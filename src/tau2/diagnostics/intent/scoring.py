@@ -6,6 +6,7 @@ from typing import Any
 from tau2.diagnostics.intent import PIPELINE_VERSION
 from tau2.diagnostics.intent.evaluation import DIRECTIONS, METHOD, materialize
 from tau2.diagnostics.intent.io import digest, index_records
+from tau2.metrics.aggregation import task_key, task_mean
 
 
 def harmonic(precision: float, recall: float) -> float:
@@ -104,6 +105,7 @@ def score_record(evaluation: dict[str, Any]) -> dict[str, Any]:
     precision, recall = directions["backward"]["score"], directions["forward"]["score"]
     valid = precision is not None and recall is not None
     result = {
+        "score_version": "task-equal-intent-v1",
         "method": METHOD,
         "id": evaluation["id"],
         "evaluation_sha256": digest(evaluation),
@@ -112,7 +114,6 @@ def score_record(evaluation: dict[str, Any]) -> dict[str, Any]:
         "precision": precision,
         "recall": recall,
         "f1": harmonic(precision, recall) if valid else None,
-        "complete_match": precision == recall == 1 if valid else None,
         **directions,
     } | ({"reason": evaluation["reason"]} if evaluation.get("reason") else {})
     if content_scores is not None:
@@ -151,22 +152,6 @@ def score_batch(
         raise ValueError("Score different intent rule versions in separate batches")
     records = [score_record(row) for row in evaluations]
     valid = [row for row in records if row["f1"] is not None]
-    micro = None
-    if valid:
-        totals = {
-            name: {
-                key: sum(row[name]["counts"][key] for row in valid)
-                for key in valid[0][name]["counts"]
-            }
-            for name in DIRECTIONS
-        }
-        precision, recall = ratio(totals["backward"]), ratio(totals["forward"])
-        micro = {
-            "precision": precision,
-            "recall": recall,
-            "f1": harmonic(precision, recall),
-            **totals,
-        }
     grouped = {}
     for field in group_by or []:
         buckets: dict[str, list[dict[str, Any]]] = {}
@@ -187,16 +172,26 @@ def score_batch(
         "profile_sha256s": sorted(profiles),
         "records": records,
         "groups": grouped,
-        "micro": micro,
-        "macro_f1": sum(row["f1"] for row in valid) / len(valid) if valid else None,
-        "complete_match_rate": sum(row["complete_match"] for row in valid) / len(valid)
-        if valid
-        else None,
-        "coverage": {
-            "total": len(records),
-            "scored": len(valid),
-            "unavailable": len(records) - len(valid),
-            "rate": len(valid) / len(records) if records else None,
-            "statuses": dict(Counter(row["status"] for row in records)),
+        "precision": task_mean(
+            (task_key(e), r["precision"])
+            for e, r in zip(evaluations, records)
+            if r["f1"] is not None
+        ),
+        "recall": task_mean(
+            (task_key(e), r["recall"])
+            for e, r in zip(evaluations, records)
+            if r["f1"] is not None
+        ),
+        "macro_f1": task_mean(
+            (task_key(e), r["f1"]) for e, r in zip(evaluations, records)
+        ),
+        "evaluation_log": {
+            "coverage": {
+                "total": len(records),
+                "scored": len(valid),
+                "unavailable": len(records) - len(valid),
+                "rate": len(valid) / len(records) if records else None,
+                "statuses": dict(Counter(row["status"] for row in records)),
+            }
         },
     }

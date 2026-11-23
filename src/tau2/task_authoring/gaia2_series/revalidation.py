@@ -44,8 +44,21 @@ def utc_now():
     return datetime.now(timezone.utc).isoformat()
 
 
-def default_policy(*, per_key_concurrency=1, key_limits=None, api_key_pool=None):
+def default_policy(
+    *, per_key_concurrency=1, key_limits=None, api_key_pool=None, config=None
+):
     """Conservative capacity; credentials remain private environment references."""
+    if config is not None and config.api_config_dir:
+        from tau2.utils.api_config import get_api_configuration
+
+        api_key_pool = (
+            get_api_configuration(config.api_config_dir).json_value(
+                "REALBENCH_AUTHOR_KEY_POOL_JSON", []
+            )
+            if api_key_pool is None
+            else api_key_pool
+        )
+        key_limits = {k: v for k, v in (key_limits or {}).items() if k in api_key_pool}
     return RequestPolicy(
         timeout_seconds=180,
         attempts=2,
@@ -184,6 +197,7 @@ def _audit_one(dataset, config, task_id, tasks, source, *, legacy=True):
     }
     token = request_policy_override.set(
         default_policy(
+            config=config,
             per_key_concurrency=(
                 DEFAULT_GAIA2_QUESTION_AUDIT_PER_KEY_CONCURRENCY if legacy else 1
             ),
@@ -352,7 +366,7 @@ def rebuild_one(dataset, config, task_id):
     )
     record["config_identity"] = config_identity(config)
     record["calls"] = pipeline.PersistentCalls(record.get("calls", []), dataset, record)
-    policy = default_policy().model_copy(
+    policy = default_policy(config=config).model_copy(
         update={"deadline_at": time.time() + DEFAULT_GAIA2_ACCEPTANCE_TIMEOUT}
     )
     token = request_policy_override.set(policy)
@@ -654,7 +668,7 @@ def calibrate_questions(dataset, config):
         if saved.get("key") == key:
             return saved
     results = []
-    token = request_policy_override.set(default_policy())
+    token = request_policy_override.set(default_policy(config=config))
     try:
         for name, texts, expected in cases:
             calls = AuditCalls(dataset / "calibration-calls" / f"{name}.json")

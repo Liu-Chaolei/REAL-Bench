@@ -1,45 +1,13 @@
 {
-  "image": "docker.v2.aispeech.com/sjtu/sjtu_yukai-tau-qwen-agent:0.5.3-real-metrics",
-  "config_env_file": "/hpc_stor03/sjtu_home/chaolei.liu/.config/qwaudio/config.env",
-  "environment": {
-    "OPENAI_API_KEY": "GAIA2_BACKEND_API_KEY",
-    "OPENAI_BASE_URL": "GAIA2_BACKEND_API_BASE",
-    "OPENAI_MODEL": "GAIA2_BACKEND_MODEL"
-  },
-  "speech_to_speech": {
-    "llm_api_key_env": "DEEPSEEK_API_KEY",
-    "llm_base_url_env": "DEEPSEEK_BASE_URL",
-    "llm_model_env": "DEEPSEEK_MODEL",
-    "mimo_api_key_env": "MIMO_API_KEY",
-    "asr_model": "mimo-v2.5-asr",
-    "tts_model": "mimo-v2.5-tts",
-    "voice": "Dean",
-    "language": "en",
-    "llm_api": "responses-api",
-    "reasoning_effort": "low"
-  },
+  "image": "docker.v2.aispeech.com/sjtu/sjtu_yukai-tau-qwen-agent:0.5.4-scenario-clock",
   "boot_timeout_seconds": 180,
   "tool_timeout_seconds": 120,
   "max_buffer_seconds": 1200,
-  "asr_provider": "mimo",
-  "asr_model": "mimo-v2.5-asr",
-  "asr_api_key_env": "MIMO_API_KEY",
-  "tts": {
-    "model_id": "mimo-v2.5-tts",
-    "api_key_env": "MIMO_API_KEY",
-    "voices": {
-      "mamadou_diallo": "Dean",
-      "priya_patil": "Chloe"
-    }
-  },
   "asr_hotwords": {
     "enabled": false,
     "weight": 4,
     "max_terms": 2000
   },
-  "user_llm_api_key_env": "DEEPSEEK_API_KEY",
-  "user_llm_base_url_env": "DEEPSEEK_BASE_URL",
-  "user_llm_model_env": "DEEPSEEK_MODEL",
   "dynamic_followup": {
     "enabled": true,
     "stages": [
@@ -48,5 +16,6 @@
     ],
     "max_context_characters": 24000,
     "max_retries": 1
-  }
+  },
+  "api_config_dir": "~/.config/qwaudio"
 }

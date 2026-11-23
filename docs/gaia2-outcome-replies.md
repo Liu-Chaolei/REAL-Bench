@@ -1,5 +1,7 @@
 # Outcome grading and actual-mail replies
 
+> 当前 Gaia2 整题评分仅使用环境组件；旧 ACTION/NL/COMMUNICATE 不再计算。必要信息覆盖由 conciseness 的 required_coverage 单独评价，后台 reply_reward 保留。阶段交付只记日志，不因 missing_requests 直接清零。下文历史验证记录保留原口径；当前指标见 [metrics-inventory.md](metrics-inventory.md)。
+
 `tau-outcome-grading-v2` applies to every τ domain in text and voice. A returned
 `max_steps` or `timeout` trajectory receives the same ENV, COMMUNICATE, ACTION and
 NL checks selected by the task's existing evaluation type and reward basis.

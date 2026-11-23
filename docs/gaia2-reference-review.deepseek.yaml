@@ -1,0 +1,10 @@
+model: openai/responses/deepseek-flash
+api_base: https://apifusion.aispeech.com.cn/v1
+api_key_env: DEEPSEEK_API_KEY
+concurrency: 32
+max_requests: 3000
+timeout_seconds: 300
+max_characters: 240000
+args:
+  reasoning_effort: low
+  num_retries: 0

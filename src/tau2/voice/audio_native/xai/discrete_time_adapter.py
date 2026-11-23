@@ -29,7 +29,6 @@ Usage:
 Reference: https://docs.x.ai/docs/guides/voice/agent
 """
 
-import asyncio
 import base64
 import json
 from typing import Any, List, Optional
@@ -314,20 +313,13 @@ class DiscreteTimeXAIAdapter(DiscreteTimeAdapter):
     ) -> None:
         """xAI-specific: send audio, receive events, process events."""
 
-        async def receive_events():
-            elapsed_so_far = asyncio.get_running_loop().time() - tick_start
-            remaining = max(0.01, (self.tick_duration_ms / 1000) - elapsed_so_far)
-            return await self.provider.receive_events_for_duration(remaining)
+        async def receive():
+            return await self.provider.receive_events_for_duration(0.02)
 
-        _, events = await asyncio.gather(
-            self._send_audio_chunked(
-                user_audio, self.provider.send_audio, self._chunk_size
-            ),
-            receive_events(),
+        self._start_media_receiver(receive, self._process_event)
+        await self._send_audio_chunked(
+            user_audio, self.provider.send_audio, self._chunk_size
         )
-
-        for event in events:
-            self._process_event(result, event)
 
     def _process_event(self, result: TickResult, event: Any) -> None:
         """Process an xAI event."""

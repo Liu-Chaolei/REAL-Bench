@@ -391,32 +391,15 @@ class DiscreteTimeNovaAdapter(DiscreteTimeAdapter):
                 return
             await self.provider.send_audio(chunk, self._audio_content_id)
 
-        async def receive_events():
-            elapsed_so_far = asyncio.get_running_loop().time() - tick_start
-            remaining = max(0.01, (self.tick_duration_ms / 1000) - elapsed_so_far)
-            end_time = asyncio.get_running_loop().time() + remaining
-            collected = []
-            while asyncio.get_running_loop().time() < end_time:
-                try:
-                    event = await asyncio.wait_for(
-                        self._event_queue.get(),
-                        timeout=0.05,
-                    )
-                    collected.append(event)
-                except asyncio.TimeoutError:
-                    continue
-            return collected
+        async def receive():
+            return [await self._event_queue.get()]
 
-        _, events = await asyncio.gather(
-            self._send_audio_chunked(nova_audio, send_nova_audio, self._chunk_size),
-            receive_events(),
-        )
-
-        for event in events:
+        def handle(result, event):
             self._process_event(result, event)
+            self._skip_content_id = result.skip_item_id
 
-        # Sync back skip state from Nova's content_id space
-        self._skip_content_id = result.skip_item_id
+        self._start_media_receiver(receive, handle)
+        await self._send_audio_chunked(nova_audio, send_nova_audio, self._chunk_size)
 
     def _process_event(self, result: TickResult, event: Any) -> None:
         """Process a Nova Sonic event."""

@@ -1,5 +1,5 @@
-# Gaia2 async task migration
+# 固定异步100题：已移除
 
-The 100 async definitions are now part of the ordinary 1100-task Gaia2 dataset.
-See [evaluation usage](gaia2-async.md) and [Adapter architecture](persistent-tasks.md).
-The old candidate/sampling/sidecar workflow is no longer active.
+原固定异步100题及主文件中的对应变体已经移除，不再作为活动任务集。
+异步交互仅保留运行时动态机制，见 [运行说明](gaia2-async.md)。
+主数据现在为1000题：800道基础题＋100道改口变体＋100道重复表达变体。

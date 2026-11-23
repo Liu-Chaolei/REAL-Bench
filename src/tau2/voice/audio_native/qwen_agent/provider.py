@@ -33,6 +33,7 @@ class QwenAgentProvider:
         self.input_sample_rate = None
         self.diagnostics_enabled = False
         self.backend_inputs = {}
+        self.state_observations = []
         self.backend_events = Queue(maxsize=DEFAULT_QWEN_AGENT_BACKEND_EVENT_QUEUE_SIZE)
         self.persistent_tasks_enabled = False
         self.backend_capabilities = None
@@ -65,6 +66,12 @@ class QwenAgentProvider:
             "response.started",
         }
         event.setdefault("received_monotonic", time.monotonic())
+        if self.diagnostics_enabled and event.get("type") in {
+            "backend_task_state",
+            "backend_native_operation",
+        }:
+            self.state_observations.append(dict(event))
+
         if is_reply or event.get("type") in {
             "diagnostic_backend",
             "backend_task_state",
@@ -72,7 +79,9 @@ class QwenAgentProvider:
         }:
             if self.diagnostics_enabled and event.get("type") == "diagnostic_backend":
                 self.backend_inputs[event.get("id", str(len(self.backend_inputs)))] = {
-                    k: v for k, v in event.items() if k not in {"type"}
+                    k: v
+                    for k, v in event.items()
+                    if k not in {"type", "received_monotonic"}
                 }
             if self.persistent_tasks_enabled:
                 payload = dict(
@@ -100,6 +109,7 @@ class QwenAgentProvider:
         self.backend_capabilities = None
         self.backend_evidence_gap = False
         self.backend_inputs = {}
+        self.state_observations = []
         self.backend_observer_ready = False
         self.session_id = str(uuid.uuid4())
         if self.trace_path:
@@ -190,6 +200,16 @@ class QwenAgentProvider:
         except BaseException:
             await self.disconnect()
             raise
+
+    async def next_event(self):
+        """Yield transport events continuously, propagating connection failure."""
+        while True:
+            if self.failure is not None:
+                raise self.failure
+            try:
+                return await asyncio.wait_for(self.events.get(), 0.1)
+            except asyncio.TimeoutError:
+                continue
 
     async def _read(self):
         try:

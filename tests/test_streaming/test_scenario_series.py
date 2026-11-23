@@ -2,6 +2,8 @@
 
 from types import SimpleNamespace
 
+import pytest
+
 from tau2.data_model.message import AssistantMessage, UserMessage
 from tau2.data_model.scenario import ScenarioAction, ScenarioSpec, ScenarioStage
 from tau2.data_model.semantic_communication import CommunicateScoring
@@ -64,10 +66,27 @@ def test_stop_is_not_success_and_duplicate_stop_cannot_skip_a_request():
     assert controller.stop(stop, runtime, 4)
     assert not controller.transition_pending
     controller.delivered("user1", runtime, 5, complete=True)
-    for token in ["###TRANSFER###", "###OUT-OF-SCOPE###", "###STOP### ###TRANSFER###"]:
-        assert not controller.stop(UserMessage(role="user", content=token), runtime, 6)
+    assert not controller.stop(
+        UserMessage(role="user", content="###TRANSFER###"), runtime, 6
+    )
+    assert controller.stop(
+        UserMessage(role="user", content="###OUT-OF-SCOPE###"), runtime, 7
+    )
+    assert controller.transition_pending
     assert controller.current == 1
     assert runtime.results == {}  # No reference effect is invented to advance.
+
+
+def test_out_of_scope_is_terminal_only_after_the_last_stage():
+    scene = spec()
+    runtime = ScenarioRuntime(scene, lambda *a: None)
+    controller = ScenarioStages(scene)
+    controller.current = len(controller.requests) - 1
+    controller.delivered("user2", runtime, 0, complete=True)
+
+    assert not controller.stop(
+        UserMessage(role="user", content="###OUT-OF-SCOPE###"), runtime, 1
+    )
 
 
 def test_voice_three_stops_preserve_session_and_deliver_each_request_once():
@@ -266,7 +285,7 @@ def test_interrupted_request_cannot_consume_stop_for_the_following_stage():
     assert controller.transition_pending
 
 
-def test_joint_score_cannot_pass_when_last_request_is_missing(monkeypatch):
+def test_missing_last_request_is_logged_without_overriding_business_score(monkeypatch):
     from tau2.data_model.simulation import SimulationRun
     from tau2.data_model.tasks import EvaluationCriteria, RewardType
     from tau2.evaluator.evaluator import EvaluationType, evaluate_simulation
@@ -302,8 +321,8 @@ def test_joint_score_cannot_pass_when_last_request_is_missing(monkeypatch):
         "mock",
         communicate_scoring=CommunicateScoring(scorer="substring"),
     )
-    assert reward.reward == 0
-    assert "Not all" in reward.info["note"]
+    assert reward.reward == 1
+    assert result.info["evaluation_log"]["missing_requests"]
 
 
 def test_process_judge_receives_boundaries_and_actual_prohibited_operation(monkeypatch):
@@ -373,3 +392,45 @@ def test_cancelled_script_is_requeued_in_the_same_stage():
     assert queued == [("user0", "Request 0")]
     assert controller.current == 0
     assert controller.rows[0]["interruptions"]
+
+
+def test_scenario_transcript_uses_actual_playback_clock():
+    """One snapshot may contain more audio than its nominal 200 ms tick."""
+    orchestrator = object.__new__(FullDuplexOrchestrator)
+    orchestrator.tick_duration_seconds = 0.2
+    orchestrator._scenario_audio_ms = [0]
+    orchestrator._scenario_audio_times = [0]
+    orchestrator._scenario_seen_fragments = set()
+    delivered = []
+    runtime = SimpleNamespace(
+        started=True,
+        monotonic=lambda: 43.0,
+        timestamp_at=lambda wall: 1000 + wall,
+        delivered=lambda *args, **kwargs: delivered.append((args, kwargs)),
+    )
+    raw = {
+        "played_stream_start_ms": 0,
+        "played_stream_duration_ms": 1000,
+        "playback_start_monotonic": 41.0,
+        "media_cutoff": 42.0,
+        "live_transcript": {
+            "origin": "recorded_audio",
+            "alignment": "played_audio",
+            "fragments": [{"event_id": "heard", "text": "Done.", "end_ms": 1000}],
+        },
+    }
+    orchestrator._observe_scenario_delivery(
+        runtime, None, AssistantMessage(role="assistant", raw_data=raw)
+    )
+    assert orchestrator._scenario_audio_ms == [0, 1000]
+    assert delivered == [(("agent", "Done."), {"delivered_at": 1042.0})]
+    raw.update(
+        played_stream_start_ms=1000, played_stream_duration_ms=200, media_cutoff=42.2
+    )
+    raw["live_transcript"]["fragments"] = [
+        {"event_id": "future", "text": "Future.", "end_ms": 1500}
+    ]
+    with pytest.raises(ValueError, match="audio not yet played"):
+        orchestrator._observe_scenario_delivery(
+            runtime, None, AssistantMessage(role="assistant", raw_data=raw)
+        )

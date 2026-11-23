@@ -533,7 +533,7 @@ def _historical_quality(
     scored_by_cell: dict[tuple[str, str], list[str]],
     verdicts: dict[str, dict[str, list[StoredVerdict]]],
 ) -> BenchmarkQuality:
-    """Call-level quality from each scored call's saved ticks and verdicts."""
+    """Selectivity from each scored call's saved ticks."""
     cells = []
     for (language, domain), scored in scored_by_cell.items():
         directory = _cell_dir(source_root, language, domain) / "simulations"
@@ -542,10 +542,7 @@ def _historical_quality(
             simulation = SimulationRun.model_validate_json(
                 (directory / f"{simulation_id}.json").read_text()
             )
-            rows = {
-                row.identity.measure: row for row in verdicts[language][simulation_id]
-            }
-            calls.append(score_call(simulation, rows))
+            calls.append(score_call(simulation))
         cells.append(cell_quality(language, domain, calls))
     return build_quality(official, cells)
 

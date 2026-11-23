@@ -16,6 +16,7 @@ from tau2.metrics.active.persistent_task.generator import (
 from tau2.metrics.active.persistent_task.policy import PersistentTaskPolicy
 from tau2.persistent_tasks.availability import evidence_source
 from tau2.persistent_tasks.core.models import BackendTaskObservation
+from tau2.persistent_tasks.scores import consolidate_score
 
 
 class PersistentTaskMetricRuntime:
@@ -23,7 +24,9 @@ class PersistentTaskMetricRuntime:
 
     name = "persistent_task"
 
-    def __init__(self, config: PersistentTaskMetricConfig, *, orchestrator, seed, trial):
+    def __init__(
+        self, config: PersistentTaskMetricConfig, *, orchestrator, seed, trial
+    ):
         self.config = config
         self.orchestrator = orchestrator
         self.seed = self._seed(seed, orchestrator.task.id, trial)
@@ -124,7 +127,12 @@ class PersistentTaskMetricRuntime:
             self._observe(event)
 
     def advance(self, timestamp: float, turn_boundary: bool) -> None:
-        if self.status in {"unsupported", "generation_unavailable", "completed", "reply_unavailable"}:
+        if self.status in {
+            "unsupported",
+            "generation_unavailable",
+            "completed",
+            "reply_unavailable",
+        }:
             return
         self._drain()
         if self.status == "delivered" and self.reply_text and turn_boundary:
@@ -155,7 +163,9 @@ class PersistentTaskMetricRuntime:
             self.status = "generation_unavailable"
             self.issues.append({"reason": str(error)})
             return
-        self.request_id = f"persistent_task_metric_{self.orchestrator.simulation_id}_request_1"
+        self.request_id = (
+            f"persistent_task_metric_{self.orchestrator.simulation_id}_request_1"
+        )
         self.request_text = generated.text
         self.generated_request = {
             "text": generated.text,
@@ -243,6 +253,7 @@ class PersistentTaskMetricRuntime:
             if self.generated_request
             else None,
             "generated_request": self.generated_request,
+            "request_id": self.request_id,
             "delivery": self.delivery,
             "reply_text": self.reply_text,
             "operations": self.operations,
@@ -263,22 +274,43 @@ class PersistentTaskMetricRuntime:
             "not_reached",
             "reply_unavailable",
         }:
-            return {
-                "status": self.status,
-                "reward": None,
-                "operation_reward": None,
-                "native_result_reward": None,
-                "reply_reward": None,
-            }
+            return consolidate_score(
+                {
+                    "status": self.status,
+                    "completion_score": None,
+                    "evaluation_log": {
+                        "operation_reward": None,
+                        "native_result": {"passed": None, "reason": self.status},
+                        "reply": {
+                            "passed": None,
+                            "status": "not_evaluated",
+                            "reason": self.status,
+                        },
+                    },
+                }
+            )
         resolved = (self.generated_request or {}).get("resolved_intent") or {}
         operation_name = resolved.get("operation")
         candidates = [
             event
             for event in self.operations
             if event.get("backend_task_id") == self.backend_task_id
+            and event.get("kind") != "native_operation_started"
             and self.delivery["delivered_at"] is not None
             and event.get("timestamp", 0) >= self.delivery["delivered_at"]
             and event.get("success") is not False
+            and event.get("result") is not None
+            and next(
+                (
+                    start.get("timestamp", 0)
+                    for start in self.operations
+                    if event.get("call_id")
+                    and start.get("call_id") == event["call_id"]
+                    and start.get("kind") == "native_operation_started"
+                ),
+                event.get("timestamp", 0),
+            )
+            >= self.delivery["delivered_at"]
         ]
         operation = next(
             (
@@ -292,17 +324,14 @@ class PersistentTaskMetricRuntime:
         operation_reward = float(operation is not None)
         result = operation.get("result") if operation else None
         actual_state = (
-            result.get("state") if isinstance(result, dict) else None
-        ) or (operation.get("state") if operation else None) or (
-            operation.get("status") if operation else None
+            (result.get("state") if isinstance(result, dict) else None)
+            or (operation.get("state") if operation else None)
+            or (operation.get("status") if operation else None)
         )
         native_reward = float(
             operation_reward
             and (
-                (
-                    operation_name == "query"
-                    and actual_state is not None
-                )
+                (operation_name == "query" and actual_state is not None)
                 or (
                     operation_name == "result"
                     and actual_state == "completed"
@@ -322,18 +351,36 @@ class PersistentTaskMetricRuntime:
             )
         )
         reply_reward = 0.0
+        reply_detail = {
+            "passed": None,
+            "status": "not_evaluated",
+            "reason": "native_result_not_passed",
+        }
+        if native_reward and not self.reply_text:
+            reply_detail = {
+                "passed": False,
+                "status": "no_reply",
+                "reason": "no_delivered_reply",
+            }
         if self.reply_text and native_reward:
             fact = json.dumps(
                 {
                     "operation": operation_name,
                     "actual_state": actual_state,
                     "native_operation_result": result,
+                    "backend_task_id": self.backend_task_id,
+                    "task_objective": self.task_label,
                     "requirement": "Accurately report the actual native task result without inventing completion or errors.",
                 },
                 ensure_ascii=False,
             )
             if scoring is None:
                 reply_reward = 1.0
+                reply_detail = {
+                    "passed": True,
+                    "status": "presence_only",
+                    "reason": "scoring_not_configured",
+                }
             else:
                 from tau2.data_model.message import AssistantMessage
                 from tau2.evaluator.evaluator_communicate import CommunicateEvaluator
@@ -344,14 +391,24 @@ class PersistentTaskMetricRuntime:
                     scoring=scoring,
                 )[0]
                 reply_reward = float(verdict.met)
-        reward = operation_reward * native_reward * reply_reward
+                reply_detail = {
+                    "passed": verdict.met,
+                    "status": "judged",
+                    "reason": verdict.justification,
+                }
+        reward = native_reward * reply_reward
         return {
             "status": "measured",
-            "reward": reward,
-            "operation_reward": operation_reward,
-            "native_result_reward": native_reward,
-            "reply_reward": reply_reward,
+            "completion_score": reward,
+            "evaluation_log": {
+                "operation_reward": operation_reward,
+                "native_result": {
+                    "passed": bool(native_reward),
+                    "operation": operation,
+                    "actual_state": actual_state,
+                },
+                "reply": {**reply_detail, "text": self.reply_text},
+            },
             "operation": operation,
             "actual_state": actual_state,
         }
-

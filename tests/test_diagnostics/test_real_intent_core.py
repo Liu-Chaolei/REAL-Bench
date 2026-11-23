@@ -326,11 +326,11 @@ async def test_micro_uses_same_complete_cohort_and_directional_denominators():
     good["metadata"] = {"config": "search"}
     uncertain["metadata"] = {"config": "execution"}
     score = score_batch([good, uncertain], ["config"])
-    assert score["micro"]["f1"] == 1 and score["coverage"]["rate"] == 0.5
-    assert (
-        score["micro"]["forward"]["total"] == score["micro"]["backward"]["total"] == 1
-    )
-    assert score["groups"]["config"]["execution"]["micro"] is None
+    assert score["macro_f1"] == 1
+    assert score["evaluation_log"]["coverage"]["rate"] == 0.5
+    assert score["precision"] == score["recall"] == 1
+    assert score["groups"]["config"]["execution"]["macro_f1"] is None
+    assert "micro" not in score and "complete_match_rate" not in score
     with pytest.raises(ValueError, match="method=bidirectional_text"):
         score_record({"id": "unsupported", "status": "complete"})
 

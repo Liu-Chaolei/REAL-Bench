@@ -6,6 +6,7 @@ from typing import Any
 
 from tau2.persistent_tasks.backend import BackendTaskObservation
 from tau2.persistent_tasks.models import PersistentTask, TaskTraceRecord
+from tau2.persistent_tasks.scores import consolidate_score
 
 
 def evaluate_operations(
@@ -97,13 +98,15 @@ def evaluate_summary(summary: dict[str, Any]) -> dict[str, Any]:
         met = bool(reply) if check.get("check_reply") else True
         reply_checks.append({"request_id": request_id, "met": met, "reply": reply})
     reply_reward = float(all(row["met"] for row in reply_checks))
-    return {
-        "reward": operation_result["reward"] * reply_reward,
-        "operation_reward": operation_result["reward"],
-        "reply_reward": reply_reward,
-        "checks": operation_result["checks"],
-        "reply_checks": reply_checks,
-    }
+    return consolidate_score(
+        {
+            "reward": operation_result["reward"] * reply_reward,
+            "evaluation_log": {"operation_reward": operation_result["reward"]},
+            "reply_reward": reply_reward,
+            "checks": operation_result["checks"],
+            "reply_checks": reply_checks,
+        }
+    )
 
 
 def evaluate_backend_operations(

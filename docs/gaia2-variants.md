@@ -15,8 +15,9 @@ direct repetitions, 35 paraphrased repetitions, and 30 later-turn restatements o
 an earlier intention. Restatements use the existing caller and stage logic.
 
 Each new category draws 20 tasks from each original category. The two groups use
-200 distinct originals. The four reviewed examples in
-`data/tau2/task_variants/gaia2/pilot-v1/` count toward these quotas. Selection uses
+200 distinct originals. The four reviewed examples in the historical
+`data/archives/gaia2/trials/gaia2-variants-pilot-v1/` bundle counted toward these
+quotas during authoring. Selection uses
 seed 300 and excludes source tasks with known failing authoring checks.
 
 The author and independent reviewer use the existing DeepSeek configuration at
@@ -63,9 +64,10 @@ task must also pass the existing reference execution, authoring checks and stric
 replay. These checks validate construction; they are not model ability scores.
 
 The combined manifest declares `population_version=gaia2-variants-v1`. Validation
-accepts either the historical five-category 800-task population or this complete
-seven-category 1,000-task population. `base` selects all tasks. The original five
-category splits retain their original membership, and the two new splits select
+accepts either the historical five-category 800-task population or the complete
+seven-category 1,000-task population. Fixed async tasks have been removed;
+`base` selects the 800 original tasks and `all` selects all 1,000 tasks. The original
+five category splits retain their original membership, and the two new splits select
 their 100 variants. No separate `original` split is added.
 
 ```bash

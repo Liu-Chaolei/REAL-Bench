@@ -22,6 +22,7 @@ import asyncio
 import audioop
 import base64
 import time
+from collections import deque
 from typing import Any, List, Optional
 
 from loguru import logger
@@ -42,15 +43,15 @@ from tau2.voice.audio_native.phonic import events as ev
 from tau2.voice.audio_native.phonic.provider import PhonicProvider
 from tau2.voice.audio_native.tick_result import TickResult, UtteranceTranscript
 
-# Peak PCM16 amplitude above which delivered agent audio counts as speech
-# (same test as the OpenAI Live adapter).
-_SPEECH_PEAK_THRESHOLD = 32
-
 
 def mark_played_speech(result: TickResult) -> None:
     """Classify the tick as speech from the agent audio actually played."""
     pcm = audioop.ulaw2lin(result.agent_audio_data, 2)
-    result.contains_speech = bool(pcm) and audioop.max(pcm, 2) > _SPEECH_PEAK_THRESHOLD
+    from tau2.voice.audio_activity import detect_speech
+
+    result.contains_speech = bool(
+        detect_speech(pcm, getattr(result, "bytes_per_second", 8000))
+    )
 
 
 # tau2 reasoning effort -> Phonic intelligence level.
@@ -115,6 +116,7 @@ class DiscreteTimePhonicAdapter(DiscreteTimeAdapter):
 
         self._pumping = False
         self._pump_gen = 0
+        self._send_contexts = deque()
         self._send_buf = bytearray()
         self._event_buf: List[Any] = []
         self._pump_tasks: List[asyncio.Task] = []
@@ -158,6 +160,7 @@ class DiscreteTimePhonicAdapter(DiscreteTimeAdapter):
                 self._connected = True
                 self._pumping = True
                 self._send_buf = bytearray()
+                self._send_contexts.clear()
                 self._event_buf = []
                 self._pump_error = None
                 self._bg_loop.run_coroutine(self._start_pump())
@@ -274,7 +277,6 @@ class DiscreteTimePhonicAdapter(DiscreteTimeAdapter):
         except Exception as e:
             logger.error(f"Error in run_tick (tick={tick_number}): {e}")
             raise
-        mark_played_speech(result)
         return result
 
     async def _flush_pending_tool_results(self) -> None:
@@ -298,11 +300,13 @@ class DiscreteTimePhonicAdapter(DiscreteTimeAdapter):
             # An established call dropped. Raising marks the simulation as an
             # infrastructure error, as the other providers' adapters do.
             raise RuntimeError(f"Phonic connection lost: {self._pump_error}")
-        self._send_buf.extend(user_audio)
-        await asyncio.sleep(self.tick_duration_ms / 1000)
         events, self._event_buf = self._event_buf, []
         for event in events:
-            self._process_event(result, event)
+            await self._media_event(self._process_event, event)
+        if self._input_context is not None:
+            self._send_contexts.append([self._input_context, len(user_audio)])
+        self._send_buf.extend(user_audio)
+        await asyncio.sleep(self.tick_duration_ms / 1000)
 
     # -----------------------------------------------------------------------
     # Realtime pump
@@ -349,6 +353,18 @@ class DiscreteTimePhonicAdapter(DiscreteTimeAdapter):
         next_t = loop.time()
         while self._pumping and gen == self._pump_gen:
             buf = self._send_buf
+            actual = min(n, len(buf))
+            remaining = actual
+            while remaining and self._send_contexts:
+                context, available = self._send_contexts[0]
+                count = min(remaining, available)
+                previous_context, self._input_context = self._input_context, context
+                self._record_input(b"", count / len(context["audio"]))
+                self._input_context = previous_context
+                self._send_contexts[0][1] -= count
+                if not self._send_contexts[0][1]:
+                    self._send_contexts.popleft()
+                remaining -= count
             if len(buf) >= n:
                 chunk = bytes(buf[:n])
                 del buf[:n]
@@ -381,7 +397,10 @@ class DiscreteTimePhonicAdapter(DiscreteTimeAdapter):
                 continue
             if getattr(msg, "type", None) == ev.CONVERSATION_CREATED:
                 self._pump_ready.set()
-            self._event_buf.append(msg)
+            if self._stream_result is not None:
+                await self._media_event(self._process_event, msg)
+            else:
+                self._event_buf.append(msg)
 
     # -----------------------------------------------------------------------
     # Events

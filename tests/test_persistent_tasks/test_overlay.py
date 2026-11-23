@@ -232,7 +232,7 @@ def test_combined_overlay_reward_does_not_multiply_business_reward_twice(monkeyp
     )
     monkeypatch.setattr(
         "tau2.evaluator.persistent_tasks.grader.grade",
-        lambda *a, **kw: {"native_reward": 0.5, "reward": 0.5},
+        lambda *a, **kw: {"reward": 0.5},
     )
     reward = evaluate_overlay(
         simulation,
@@ -247,9 +247,9 @@ def test_combined_overlay_reward_does_not_multiply_business_reward_twice(monkeyp
         customer_language=None,
     )
     assert reward.reward == 0.3
-    assert simulation.info["persistent_tasks"]["grading"]["reward"] == 0.5
+    assert simulation.info["persistent_tasks"]["grading"]["completion_score"] == 0.5
     assert (
-        simulation.info["persistent_tasks"]["grading"]["business_overlay_reward"] == 0.6
+        "business_overlay_reward" not in simulation.info["persistent_tasks"]["grading"]
     )
     assert reward.info["original_gaia2_reward"]["reward"] == 0.2
     assert reward.info["derived_gaia2_reward"]["reward"] == 0.6

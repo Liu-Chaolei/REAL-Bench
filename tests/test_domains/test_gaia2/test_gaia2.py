@@ -123,9 +123,7 @@ def test_voice_literal_allowlist_covers_the_audited_sources():
     from tau2.domains.gaia2.scoring import _VOICE_RELAXED_LITERAL_SOURCES
 
     assert len(_VOICE_RELAXED_LITERAL_SOURCES) == 177
-    assert "0052_snsq4rd73gytoo0wr75bgd2nyzra07z1" in (
-        _VOICE_RELAXED_LITERAL_SOURCES
-    )
+    assert "0052_snsq4rd73gytoo0wr75bgd2nyzra07z1" in (_VOICE_RELAXED_LITERAL_SOURCES)
 
 
 def test_location_source_rules_keep_environment_fragments_exact():
@@ -147,11 +145,7 @@ def test_location_source_rules_keep_environment_fragments_exact():
     assert _equivalent(
         {"end_location": "meir 90 leuven belgium"},
         {"end_location": "Meir 90, Leuven, Belgium"},
-        location_rules={
-            "end_location": {
-                "Meir 90, Leuven, Belgium": {"mode": "user"}
-            }
-        },
+        location_rules={"end_location": {"Meir 90, Leuven, Belgium": {"mode": "user"}}},
     )
 
 
@@ -165,9 +159,14 @@ def test_domain_uses_standard_registry_and_all_source_ids():
     tasks = get_tasks()
     splits = get_tasks_split()
     expected = 1100 if "async" in splits else (1000 if "mind_change" in splits else 800)
+    expected += sum(
+        len(splits.get(kind, [])) for kind in ("addtask", "modify", "cancel")
+    )
     assert len(tasks) == expected
     assert len(set(t.id for t in tasks)) == expected
-    assert set(splits["base"]) == {t.id for t in tasks}
+    assert set(splits.get("all", splits["base"])) == {t.id for t in tasks}
+    if "all" in splits:
+        assert len(splits["base"]) == 800
     assert all(
         len(splits[name]) == 160
         for name in ["search", "execution", "ambiguity", "adaptability", "time"]

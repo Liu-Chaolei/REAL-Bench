@@ -150,8 +150,8 @@ def test_prepare_and_validate_recompute_rewards_and_judges(
         if (cell.language, cell.domain) == ("hi", "retail")
     )
     measures = {summary.measure: summary for summary in hindi.summary}
-    assert measures["naturalness"].judged_calls == 50
-    assert measures["speech_fidelity"].judged_calls == 50
+    assert "naturalness" not in measures
+    assert "speech_fidelity" not in measures
     # The catalog validates Hindi gender only for male agents; fixture is unknown.
     assert measures["gender_agreement"].applicable_calls == 0
     assert all(summary.complete for summary in hindi.summary)
@@ -162,15 +162,15 @@ def test_prepare_and_validate_recompute_rewards_and_judges(
     assert submission["summary"]["complete"] is True
     quality = load_package(package).quality
     assert len(quality.cells) == 18
-    # Every scored call gets a record; tool misuse comes from its tool_use verdict.
-    assert all(len(cell.calls) == 50 for cell in quality.cells)
-    assert all(cell.interaction_components.tool_misuse.known for cell in quality.cells)
+    # Every scored call retains identity and operational provenance only.
+    assert all(len(cell.evaluation_log["calls"]) == 50 for cell in quality.cells)
+    assert all("metrics" not in cell.model_dump() for cell in quality.cells)
 
     _submit("validate", package, "--results", judged_matrix)
 
     # A self-consistent but changed call record differs from the saved calls.
     edited = json.loads((package / "benchmark-quality.json").read_text())
-    edited["cells"][0]["calls"][0]["experience_utterances"] += 1
+    edited["cells"][0]["evaluation_log"]["calls"][0]["simulation_id"] = "changed"
     edited_package = tmp_path / "edited"
     shutil.copytree(package, edited_package)
     (edited_package / "benchmark-quality.json").write_text(json.dumps(edited))
@@ -179,7 +179,9 @@ def test_prepare_and_validate_recompute_rewards_and_judges(
 
     # A forged summary in the package fails its own consistency check.
     forged = json.loads((package / "benchmark-diagnostics.json").read_text())
-    forged["cells"][0]["summary"][0]["fail_units"] += 1
+    next(cell for cell in forged["cells"] if cell["summary"])["summary"][0][
+        "fail_units"
+    ] += 1
     forged_package = tmp_path / "forged"
     shutil.copytree(package, forged_package)
     (forged_package / "benchmark-diagnostics.json").write_text(json.dumps(forged))
@@ -189,7 +191,9 @@ def test_prepare_and_validate_recompute_rewards_and_judges(
     # A changed saved verdict no longer matches the package fingerprints.
     verdicts_path = judged_matrix / "es-airline" / "diagnostics" / "verdicts.json"
     rows = json.loads(verdicts_path.read_text())
-    unit = rows[0]["verdict"]["units"][0]
+    unit = next(row for row in rows if row["identity"]["measure"] == "counting_units")[
+        "verdict"
+    ]["units"][0]
     unit["violation"] = not unit["violation"]
     verdicts_path.write_text(json.dumps(rows))
     with pytest.raises(ValueError, match="Judge diagnostics differ"):
@@ -257,7 +261,7 @@ def test_prepare_refuses_missing_judges_per_cell_and_measure(
         row
         for row in rows
         if not (
-            row["identity"]["measure"] == "naturalness"
+            row["identity"]["measure"] == "counting_units"
             and row["identity"]["input"]["simulation_id"] in {"sim-0", "sim-1"}
         )
     ]
@@ -274,7 +278,7 @@ def test_prepare_refuses_missing_judges_per_cell_and_measure(
     message = str(raised.value.code)
     assert "Rewards:" not in message
     assert "Judges: 1/18 cells" in message
-    assert "zh-airline: naturalness 48/50 judged (2 not judged)" in message
+    assert "zh-airline: counting_units 48/50 judged (2 not judged)" in message
     assert f"tau2 judges suite {judged_matrix}" in message
     assert "--auto-resume" not in message
     assert not (tmp_path / "package").exists()
@@ -286,7 +290,9 @@ def test_prepare_refuses_partial_judge_errors_cleanly(
     """A verdict with unit errors but some units is incomplete, never a crash."""
     verdicts_path = judged_matrix / "es-retail" / "diagnostics" / "verdicts.json"
     rows = json.loads(verdicts_path.read_text())
-    partial = next(row for row in rows if row["identity"]["measure"] == "naturalness")
+    partial = next(
+        row for row in rows if row["identity"]["measure"] == "counting_units"
+    )
     partial["verdict"]["unit_errors"] = [
         {"unit_id": "late-utterance", "kind": "response", "error": "fixture"}
     ]
@@ -301,6 +307,6 @@ def test_prepare_refuses_partial_judge_errors_cleanly(
             submitter_file,
         )
     message = str(raised.value.code)
-    assert "es-retail: naturalness 49/50 judged (1 judge errors)" in message
+    assert "es-retail: counting_units 49/50 judged (1 judge errors)" in message
     assert f"Run `tau2 judges suite {judged_matrix}`" in message
     assert not (tmp_path / "package").exists()

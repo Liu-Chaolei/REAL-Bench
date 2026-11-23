@@ -202,6 +202,14 @@ def add_run_args(parser):
         help=f"The log level to use for the simulation. Default is {DEFAULT_LOG_LEVEL}.",
     )
     parser.add_argument(
+        "--judge-from-user-llm",
+        action="store_true",
+        help="Shared API mode: use USER for judges only",
+    )
+    parser.add_argument(
+        "--api-config-dir", type=Path, help="Shared qwaudio API configuration directory"
+    )
+    parser.add_argument(
         "--metrics-config",
         type=Path,
         default=None,
@@ -842,11 +850,17 @@ def main():
                 if not args.qwen_agent_config:
                     run_parser.error("qwen_agent requires --qwen-agent-config")
                 try:
+                    import json
                     from pathlib import Path
 
-                    qwen_agent_config = QwenAgentConfig.model_validate_json(
-                        Path(args.qwen_agent_config).read_text()
-                    )
+                    qwen_value = json.loads(Path(args.qwen_agent_config).read_text())
+                    if args.api_config_dir is not None:
+                        qwen_value["api_config_dir"] = str(args.api_config_dir)
+                    if qwen_value.get("api_config_dir"):
+                        qwen_value["api_configuration_resolved"] = False
+                    qwen_agent_config = QwenAgentConfig.model_validate(qwen_value)
+                    if qwen_agent_config.api_config_dir:
+                        args.api_config_dir = Path(qwen_agent_config.api_config_dir)
                 except (OSError, ValueError) as exc:
                     run_parser.error(f"invalid Qwen Agent configuration: {exc}")
             elif args.qwen_agent_config:
@@ -928,15 +942,15 @@ def main():
         if getattr(args, "metrics_config", None):
             from tau2.diagnostics.config import MetricsConfig
 
-            metrics_config = MetricsConfig.load(args.metrics_config).model_dump(
-                mode="json"
-            )
+            metrics_config = MetricsConfig.load(
+                args.metrics_config, args.api_config_dir, args.judge_from_user_llm
+            ).model_dump(mode="json")
         active_metrics = None
         if getattr(args, "active_metrics_config", None):
             from tau2.metrics.active.config import ActiveMetricsConfig
 
             active_metrics = ActiveMetricsConfig.load(
-                args.active_metrics_config
+                args.active_metrics_config, args.api_config_dir
             ).model_dump(mode="json")
         persistent_task_config = None
         if args.persistent_task_config:
@@ -989,8 +1003,38 @@ def main():
         from tau2.multilingual.cli import communicate_scoring_from_args
 
         communicate_scoring = communicate_scoring_from_args(args)
+        if args.api_config_dir is not None:
+            if communicate_scoring is not None and not (
+                communicate_scoring.judge and communicate_scoring.judge.api_role
+            ):
+                raise ValueError(
+                    "api_config_dir conflicts with explicit communicate judge"
+                )
+            from tau2.data_model.semantic_communication import CommunicateScoring
+
+            if communicate_scoring is None:
+                communicate_scoring = CommunicateScoring.model_validate(
+                    {
+                        "judge": {
+                            "api_role": "USER"
+                            if args.judge_from_user_llm
+                            else "REPLY_JUDGE",
+                            "api_config_dir": str(args.api_config_dir),
+                        }
+                    }
+                )
         if communicate_scoring is not None:
             shared_kwargs["communicate_scoring"] = communicate_scoring
+        if args.api_config_dir is not None:
+            from tau2.utils.api_config import get_api_configuration
+
+            user_profile = get_api_configuration(str(args.api_config_dir)).text("USER")
+            shared_kwargs["llm_user"] = user_profile.litellm_model
+            shared_kwargs["llm_args_user"] = dict(user_profile.args)
+            if args.user_llm is not None or args.user_llm_args is not None:
+                raise ValueError(
+                    "Shared API mode selects caller connections through realbench.env"
+                )
         shared_kwargs["elicitation"] = elicitation_config_from_args(args)
         if args.user_llm is not None:
             shared_kwargs["llm_user"] = args.user_llm
@@ -1183,6 +1227,7 @@ def main():
         type=Path,
         help="Archived Gaia2 data and language binding for strict historical rescoring",
     )
+    evaluate_parser.add_argument("--api-config-dir", type=Path)
     evaluate_parser.set_defaults(func=lambda args: run_evaluate_trajectories(args))
 
     # Review command - LLM-based conversation review
@@ -1366,6 +1411,7 @@ def run_evaluate_trajectories(args):
         args.output_dir,
         fresh_tasks=getattr(args, "fresh_tasks", False),
         recorded_data_root=getattr(args, "recorded_data_root", None),
+        api_config_dir=getattr(args, "api_config_dir", None),
     )
 
 

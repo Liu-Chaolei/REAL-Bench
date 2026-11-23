@@ -11,6 +11,7 @@ Key differences:
 Reference: https://ai.google.dev/api/live
 """
 
+import time
 from typing import Any, Dict, Literal, Optional, Union
 
 from pydantic import BaseModel, Field
@@ -19,6 +20,7 @@ from pydantic import BaseModel, Field
 class BaseGeminiEvent(BaseModel):
     """Base class for all Gemini Live API events."""
 
+    received_monotonic: float = Field(default_factory=time.monotonic)
     type: str
     event_id: Optional[str] = None
 

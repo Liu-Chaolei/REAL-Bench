@@ -17,7 +17,8 @@ from dotenv import dotenv_values
 def main():
     """Probe 32 then double, or halve after failure; persist measured outcomes."""
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--config-env", type=Path, required=True)
+    parser.add_argument("--config-env", type=Path)
+    parser.add_argument("--api-config-dir", type=Path)
     parser.add_argument("--source", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--pause-pid", type=int)
@@ -28,11 +29,26 @@ def main():
     parser.add_argument("--model-env", default="GAIA2_BACKEND_MODEL")
     parser.add_argument("--confirm-waves", type=int, default=1)
     args = parser.parse_args()
-    values = dict(dotenv_values(args.config_env))
-    values.update(os.environ)
-    base = values[args.base_url_env].rstrip("/")
-    key = values[args.api_key_env]
-    model = values[args.model_env]
+    if args.config_env is None:
+        from tau2.config import DEFAULT_API_CONFIG_DIR
+        from tau2.utils.api_config import get_api_configuration
+
+        profile = get_api_configuration(
+            str(args.api_config_dir or DEFAULT_API_CONFIG_DIR)
+        ).text("AUTHOR")
+        if profile.api != "chat":
+            raise ValueError("Concurrency probe requires an AUTHOR chat connection")
+        base, key, model = (
+            profile.base_url.rstrip("/"),
+            profile.api_key.get_secret_value(),
+            profile.model,
+        )
+    else:
+        values = dict(dotenv_values(args.config_env))
+        values.update(os.environ)
+        base = values[args.base_url_env].rstrip("/")
+        key = values[args.api_key_env]
+        model = values[args.model_env]
     tasks = json.loads((args.source / "tasks.json").read_text())
     report = {
         "endpoint": base,

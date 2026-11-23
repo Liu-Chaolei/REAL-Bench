@@ -1,41 +1,21 @@
 {
   "image": "tau-qwen-persistent:0.2-realtime-flash",
-  "config_env_file": "/hpc_stor03/sjtu_home/chaolei.liu/.config/qwaudio/config.env",
-  "environment": {
-    "OPENAI_API_KEY": "QWEN_API_KEY",
-    "OPENAI_BASE_URL": "QWEN_BASE_URL",
-    "OPENAI_MODEL": "QWEN_MODEL",
-    "QWEN_AUDIO_REALTIME_API_KEY": "DASHSCOPE_API_KEY",
-    "QWEN_AUDIO_REALTIME_URL": "QWEN_AUDIO_REALTIME_BASE_URL",
-    "QWEN_AUDIO_REALTIME_PROVIDER": "QWEN_AUDIO_REALTIME_PROVIDER",
-    "QWEN_AUDIO_REALTIME_MODEL": "QWEN_AUDIO_REALTIME_MODEL"
-  },
   "boot_timeout_seconds": 180,
   "tool_timeout_seconds": 120,
   "max_buffer_seconds": 1200,
-  "asr_provider": "mimo",
-  "asr_model": "mimo-v2.5-asr",
-  "asr_api_key_env": "MIMO_API_KEY",
-  "tts": {
-    "model_id": "mimo-v2.5-tts",
-    "api_key_env": "MIMO_API_KEY",
-    "voices": {
-      "mamadou_diallo": "Dean",
-      "priya_patil": "Chloe"
-    }
-  },
   "asr_hotwords": {
     "enabled": false,
     "weight": 4,
     "max_terms": 2000
   },
-  "user_llm_api_key_env": "QWEN_API_KEY",
-  "user_llm_base_url_env": "QWEN_BASE_URL",
-  "user_llm_model_env": "QWEN_MODEL",
   "dynamic_followup": {
     "enabled": true,
-    "stages": [1, 2],
+    "stages": [
+      1,
+      2
+    ],
     "max_context_characters": 24000,
     "max_retries": 1
-  }
+  },
+  "api_config_dir": "~/.config/qwaudio"
 }

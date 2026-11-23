@@ -208,6 +208,7 @@ def compute_simulation_rewards(
     console: Optional[Console] = None,
     fresh_tasks: bool = False,
     recorded_data_root: str | Path | None = None,
+    api_config_dir: str | Path | None = None,
 ) -> Results:
     """
     Compute and update rewards for all simulations in the results.
@@ -238,6 +239,17 @@ def compute_simulation_rewards(
         if fresh_tasks or recorded_data_root is not None
         else _recorded_language(results)
     )
+    if api_config_dir is not None:
+        from tau2.data_model.semantic_communication import CommunicateScoring
+
+        results.info.communicate_scoring = CommunicateScoring.model_validate(
+            {
+                "judge": {
+                    "api_role": "REPLY_JUDGE",
+                    "api_config_dir": str(api_config_dir),
+                }
+            }
+        )
     scoring = results.info.effective_communicate_scoring
 
     progress_context = Progress(console=console) if console else None
@@ -304,6 +316,7 @@ def evaluate_trajectories(
     evaluation_type: EvaluationType = EvaluationType.ALL,
     fresh_tasks: bool = False,
     recorded_data_root: str | Path | None = None,
+    api_config_dir: str | Path | None = None,
 ) -> None:
     """
     Evaluate trajectories and optionally save updated results with recomputed rewards.
@@ -362,6 +375,7 @@ def evaluate_trajectories(
                 console=console,
                 fresh_tasks=fresh_tasks,
                 recorded_data_root=recorded_data_root,
+                api_config_dir=api_config_dir,
             )
             console.print(
                 f"  ✅ Computed rewards for {len(updated_results.simulations)} simulation(s)",

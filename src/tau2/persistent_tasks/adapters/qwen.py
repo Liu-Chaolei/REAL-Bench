@@ -51,7 +51,7 @@ class QwenEventAdapter:
             canonical = CanonicalState.UNKNOWN
         result = value.get("result")
         kind = value.get("kind") or value.get("type") or "backend_update"
-        if kind.startswith("native_operation_"):
+        if kind == "native_operation_completed":
             result = normalize_result(result, session)
         updates = [
             {"instruction": update.get("instruction"), "effect": "delivered"}
@@ -66,6 +66,7 @@ class QwenEventAdapter:
                 session, value.get("task_id") or value.get("backend_task_id")
             ),
             source_task_id=value.get("source_task_id"),
+            request_id=value.get("request_id") or task.get("request_id"),
             source_stage=value.get("source_stage"),
             status=canonical.value if canonical else None,
             operation=value.get("operation"),
@@ -179,8 +180,12 @@ def normalize_result(result, session=None):
         "result": result.get("result"),
         "result_available": state == CanonicalState.COMPLETED and "result" in result,
         "error": result.get("error"),
-        "accepted": status == "accepted",
-        "effect": "cancelled" if status == "cancelled" else None,
+        "accepted": status == "accepted" or result.get("accepted") is True,
+        "effect": (
+            "cancelled"
+            if status == "cancelled" or result.get("effect") == "cancelled"
+            else None
+        ),
         "progress": {
             key: result.get(key)
             for key in (

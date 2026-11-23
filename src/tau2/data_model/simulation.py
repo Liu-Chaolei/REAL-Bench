@@ -846,7 +846,12 @@ class RewardInfo(BaseModel):
     The reward received by the agent.
     """
 
-    reward: Annotated[float, Field(description="The reward received by the agent.")]
+    reward: Annotated[
+        Optional[float],
+        Field(
+            description="Task reward, or None when business scoring is not applicable."
+        ),
+    ]
     db_check: Annotated[
         Optional[DBCheck], Field(description="The database check.", default=None)
     ]
