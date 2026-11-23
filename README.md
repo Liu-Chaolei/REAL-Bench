@@ -1,371 +1,252 @@
-# $\tau$-Bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains
+# REAL-Bench
 
-[![python](https://img.shields.io/badge/Python-3.12%2B-blue.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
-[![arXiv](https://img.shields.io/badge/cs.AI-arXiv%3A2506.07982-B31B1B.svg?logo=arxiv&logoColor=red)](https://arxiv.org/abs/2506.07982)
-[![blog](https://img.shields.io/badge/blog-tau--bench-green)](https://sierra.ai/blog/benchmarking-agents-in-collaborative-real-world-scenarios)
-[![Twitter](https://img.shields.io/twitter/url/https/twitter.com/sierra.svg?style=social&label=Follow%20%40SierraPlatform)](https://x.com/SierraPlatform/status/1932464265207889974)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?logo=linkedin&logoColor=white)](https://www.linkedin.com/posts/sierra_last-year-we-introduced-%F0%9D%9C%8F-bench-a-benchmark-activity-7338229693898231809-F8L4?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAdc8goBmhEsiEo1_t_XSJbAnY4_zMfAWcE)
-[![Leaderboard](https://img.shields.io/badge/🏆_Live_Leaderboard-taubench.com-brightgreen?style=flat)](https://taubench.com)
+面向真实世界智能体的端到端评测基准。REAL-Bench 在 τ-bench 的任务、工具和
+环境框架之上，加入 Gaia2 场景、Qwen Audio Agent 集成，以及可复现的意图、
+执行和语音交互诊断。
 
-<div align="center">
-<img src="figs/traj.png" width="95%" alt="Trajectory">
-</div>
+[![Python](https://img.shields.io/badge/Python-3.12%2B-blue.svg)](https://www.python.org)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Repository](https://img.shields.io/badge/GitHub-REAL--Bench-181717?logo=github)](https://github.com/Liu-Chaolei/REAL-Bench)
 
-## τ-bench 2.0
+> 项目仍使用 <code>tau2</code> 作为 Python 包名和命令行入口，这是为了兼容已有任务、
+> 结果文件和工具链。对外项目名称为 **REAL-Bench**。
 
-τ-bench 2.0 adds **τ-i18n** (also called τ-multi): the same customer-service
-tasks in six languages, in text and in full-duplex voice, plus post-hoc judges
-for how the agent speaks.
+## 项目内容
 
-What's new:
+REAL-Bench 评测 Agent 在真实业务环境中的完整行为：理解用户请求、规划并执行
+工具调用、处理多轮修改和重复请求、进行语音交互，并在结束后保留足够证据供
+复核。评测既可以运行普通文本对话，也可以运行包含 ASR、LLM、TTS、播放、
+打断和工具等待的全双工语音通话。
 
-- **Six languages.** `--language` selects a language pack: English, Spanish,
-  Portuguese, Hindi, Chinese and Korean. Each pack localizes the tasks, the
-  database and the caller personas for airline, retail and telecom.
-- **Voice in every language.** Full-duplex voice runs with realtime agents
-  (OpenAI, Gemini, xAI and others) against a simulated caller who speaks the
-  language.
-- **New `intake` domain** (τ-Entity): capturing names, addresses and other
-  entities exactly on an outbound call, over 200 tasks. See
-  [τ-Entity](docs/elicitation.md).
-- **`banking_knowledge` in voice.** The retrieval domain from v1.0 now also runs
-  as a custom voice run (`--audio-native --benchmark none`).
-- **Judges.** `tau2 judges` scores naturalness, speech fidelity, tool use and
-  language-specific checks after a run. Judges do not change the task reward.
-- **Released benchmarks.** Frozen task sets with pinned data, so runs can be
-  checked and compared.
+当前仓库的重点包括：
 
-### The benchmarks
+- **Gaia2 任务集**：1,000 道三阶段任务（800 道基础任务、100 道改口变体、
+  100 道重复表达变体），另有 AddTask、Modify、Cancel 交互变体。
+- **Qwen Audio Agent**：通过独立容器、工作区、MCP 和应用状态运行完整 Agent，
+  支持 English retail 与 Gaia2 场景。
+- **REAL 诊断指标**：意图忠实度、执行质量、语音交互和交互状态指标，与原有
+  任务 reward 并列保存。
+- **可审计证据**：保存实际交付的用户输入、Agent 播放音频、ASR 片段、后端
+  提交、工具参数、应用状态和阶段时间线。
+- **可复现运行**：任务、资源、运行时和评分配置带有版本与哈希；Gaia2 运行前
+  可通过 reference verification 和 seal 检查数据完整性。
 
-| Benchmark | Mode | Cells | Calls at 1 trial | Run with |
-|---|---|---|---|---|
-| `text-v1` | text | 6 languages × 3 domains | 900 | `tau2 run --benchmark text` |
-| `voice-v2` (τ-i18n) | voice | 6 languages × 3 domains | 900 | `tau2 run --audio-native` |
-| `voice-v1` | voice | English × 3 domains | 278 | `tau2 run --audio-native --benchmark voice-v1` |
+## 评测链路
 
-The domains are airline, retail and telecom. `text-v1` and `voice-v2` use the
-same 50 frozen tasks per domain in every language. `voice-v1` is the English-only
-frame of the current English voice leaderboard (50 airline, 114 retail, 114
-telecom tasks). See the [glossary](docs/glossary.md) for *cell*, *frame* and
-the other terms used in these docs.
+~~~text
+用户任务
+   │
+   ├── 文本用户模拟器 ──┐
+   └── 语音用户模拟器 ──┼── τ orchestrator ── Agent / 工具 / 应用环境
+                       │
+                       └── trajectory + audio + evidence
+                                      │
+                                      ├── 原始任务 reward
+                                      └── REAL diagnostics
+~~~
 
-### Quickstart
+诊断指标按独立 profile 保存，缺失证据会明确标记为 unavailable，不会静默当作
+零分或满分。诊断是评测报告的一部分，不会改写原始任务 reward。
 
-```bash
-git clone https://github.com/sierra-research/tau2-bench
-cd tau2-bench
-uv sync --extra voice          # drop --extra voice for text only
-cp .env.example .env           # add OPENAI_API_KEY (and voice keys for voice)
-```
+## 快速开始
 
-Text benchmark:
+### 安装
 
-```bash
-tau2 run --benchmark text --agent-llm openai/gpt-5.5 \
-  --agent-llm-args '{"reasoning_effort":"low"}' --save-to text-run --dry-run
-```
+需要 Python 3.12、[uv](https://docs.astral.sh/uv/getting-started/installation/)
+和（运行语音 Agent 时）Docker。建议使用锁定依赖：
 
-Voice benchmark (create your own caller voices first; the shipped voice IDs are
-Sierra-internal):
+~~~bash
+git clone https://github.com/Liu-Chaolei/REAL-Bench.git
+cd REAL-Bench
 
-```bash
-python -m tau2.voice.scripts.setup_voices --language all   # prints TAU2_VOICE_ID_... lines for .env
-tau2 run --audio-native --audio-native-model gpt-realtime-2 \
-  --reasoning-effort minimal --save-to voice-run --dry-run
-```
+UV_FROZEN=1 uv sync --extra gaia2 --extra voice --extra diagnostics --extra dev
+UV_FROZEN=1 uv run tau2 check-data
+~~~
 
-`--dry-run` prints the plan without making calls. Remove it to run, then:
+只运行核心文本任务时可以省略 <code>gaia2</code>、<code>voice</code> 和
+<code>diagnostics</code>：
 
-```bash
-tau2 view --file data/simulations/voice-run      # scores and calls
-tau2 judges suite data/simulations/voice-run     # judges (needed for a voice-v2 submission)
-```
+~~~bash
+UV_FROZEN=1 uv sync --extra dev
+~~~
 
-Add `--domain retail --num-tasks 2` for a 12-call smoke test. Full details:
-[Running the benchmark](docs/running-the-benchmark.md) and the
-[submission guide](docs/leaderboard-submission.md).
+主要 extras：
 
-### Comparing with v1.0.1
+| extra | 用途 |
+| --- | --- |
+| <code>gaia2</code> | Gaia2 数据导入、资源和验证 |
+| <code>voice</code> | 全双工语音、ASR、TTS 和音频处理 |
+| <code>diagnostics</code> | REAL 指标依赖 |
+| <code>dev</code> | pytest、ruff 和 pre-commit |
+| <code>knowledge</code> | <code>banking_knowledge</code> 检索域 |
+| <code>gym</code> | Gymnasium 接口 |
+| <code>all</code> | 全部功能 |
 
-2.0 English runs are **not** input-identical to v1.0.1, so 2.0 scores are not
-comparable with the 1.x leaderboard. The differences:
+### API 配置
 
-- English retail and telecom each use 50 reviewed task replacements.
-- The prompts add a language clause and an entity-order rule (keep multi-part
-  values such as addresses in the task's order).
-- The text user simulator gets a persona block.
-- Communication checks use a semantic LLM judge instead of substring matching.
-- The NL-assertion judge is `gpt-5.4-mini-2026-03-17` (was `gpt-4.1`).
-- Name, ID and phone lookups fold case, accents and formatting.
-- Voice defaults: user simulator `gpt-5.5` (was `gpt-4.1`), a 2400-second call
-  limit (was 1200) and agent voice `marin` (was `alloy`).
+普通 τ 任务可以使用仓库根目录的 <code>.env</code>：
 
-For scores comparable to the 1.x leaderboard, use the
-[`v1.0.1` release](https://github.com/sierra-research/tau2-bench/releases/tag/v1.0.1).
-1.x and 2.0 results are shown on separate leaderboard tabs, and 1.x submissions
-are still accepted. The full list is in the
-[CHANGELOG](CHANGELOG.md#upgrading-from-1x).
-
-### Previous release: τ³-bench (v1.0)
-
-τ³-bench added voice full-duplex evaluation, the `banking_knowledge` domain and
-75+ task fixes:
-[τ-Voice paper](https://arxiv.org/abs/2603.13686) ·
-[τ-Knowledge paper](https://arxiv.org/abs/2603.04370) ·
-[task fixes paper](https://arxiv.org/abs/2512.07850) ·
-[v1.0.0 release notes](https://github.com/sierra-research/tau2-bench/releases/tag/v1.0.0).
-v1.0.1 fixed `banking_knowledge` grading; results from before 1.0.1 are not
-comparable on that domain (see the [CHANGELOG](CHANGELOG.md#101---2026-07-15)).
-
-> **Upgrading from τ²-bench?** Installation uses `uv` instead of
-> `pip install -e .`, and Python `>=3.12, <3.14` is required.
-
-## Overview
-
-$\tau$-bench is a simulation framework for evaluating customer service agents across multiple domains. It supports text-based half-duplex (turn-based) evaluation and voice full-duplex (simultaneous) evaluation using real-time audio APIs.
-
-Each domain specifies:
-- A **policy** that the agent must follow
-- A set of **tools** that the agent can use
-- A set of **tasks** to evaluate the agent's performance
-- Optionally: a set of **user tools** for the user simulator
-
-**Available domains**: `mock` · `airline` · `retail` · `telecom` · `banking_knowledge` · `intake` · `gaia2`
-
-[Gaia2](docs/gaia2.md) imports 800 personal-assistant tasks as a native domain and
-adds 200 [request variants](docs/gaia2-variants.md) for within-utterance changes of
-mind and repeated intentions, for 1,000 tasks including application state and timed
-events. It uses the same `tau2 run`, user,
-voice and reward pipeline. Install the `gaia2` extra and verify the dataset before
-running; these adapted τ scores are separate from the original Gaia2 leaderboard.
-
-[REAL-derived diagnostics](docs/real-metrics.md) optionally adds whole-call intent
-fidelity, four execution scores and eight waveform interaction metrics alongside
-the ordinary task reward (`--metrics-config examples/real-metrics.yaml`).
-
-[Gaia2 series authoring](docs/gaia2-series.md) adds two grounded, related requests
-per original task, with reference execution, stage checkpoints and independent
-review. These offline artifacts prepare longer task sequences for later runtime
-integration.
-
-[τ-Entity](docs/elicitation.md) uses `--domain intake` to evaluate exact entity capture in outbound calls over 200 tasks. Agent-directed elicitation is the default; `--elicitation-strategy scaffolded` selects the scaffolded ablation.
-
-| Mode | Description |
-|------|-------------|
-| **Text (half-duplex)** | Turn-based chat with tool use |
-| **Voice (full-duplex)** | End-to-end audio via realtime providers (OpenAI, Gemini, xAI) |
-
-> [!NOTE]
-> τ-i18n was previously called τ-Multilingual, and τ-Entity was previously
-> called τ-Elicitation. Only the names changed: the old names remain in
-> technical identifiers, provenance and paper titles, and the τ-Entity domain
-> is still `intake`.
-
-## Installation and a first custom run
-
-### 1. Install
-
-```bash
-git clone https://github.com/sierra-research/tau2-bench
-cd tau2-bench
-uv sync                        # core, including scaffolded intake text runs
-```
-
-Optional extras (install what you need):
-
-```bash
-uv sync --extra voice          # + voice/audio-native features
-uv sync --extra knowledge      # + banking_knowledge domain (retrieval pipeline)
-uv sync --extra gaia2          # + Gaia2 applications and data import
-uv sync --extra gym            # + gymnasium RL interface
-uv sync --extra dev            # + pytest, ruff, pre-commit (required for contributing)
-uv sync --all-extras           # everything
-```
-
-This requires [uv](https://docs.astral.sh/uv/getting-started/installation/). Voice features also need system dependencies (`brew install portaudio ffmpeg` on macOS). See the [full installation guide](docs/getting-started.md) for details.
-
-### 2. Set up API keys
-
-```bash
+~~~bash
 cp .env.example .env
-# Edit .env with your API keys (uses LiteLLM — any supported provider works)
-```
+~~~
 
-### 3. Run an evaluation
+REAL-Bench 的完整评测推荐使用共享配置目录（默认 <code>~/.config/qwaudio</code>）：
 
-```bash
-tau2 run --domain airline --agent-llm gpt-4.1 --user-llm gpt-4.1 \
-  --num-trials 1 --num-tasks 5
-```
+| 文件 | 用途 |
+| --- | --- |
+| <code>config.env</code> | 供应商的 API key、地址和原始模型名 |
+| <code>qw.env</code> | 被测 Agent 后端的连接选择 |
+| <code>realbench.env</code> | 用户模拟器、ASR/TTS、评分和题目生成角色 |
 
-Results are saved to `data/simulations/`. Use `tau2 view` to browse them.
+配置示例和角色继承规则见 [API 配置说明](docs/api-configuration.md)。私有
+配置文件不要提交到 Git；运行结果只记录非敏感连接信息和引用名。
 
-> **Tip**: Run `tau2 intro` for an overview of available domains, commands, and examples.
+### 运行一个最小语音 smoke
 
-## Documentation
+下面的命令运行一通 Gaia2 语音电话并保存结果。它会为该通话创建独立的 Agent
+容器和应用状态：
 
-### Getting Started
+~~~bash
+integrations/qwen_audio_agent/run_hpc.sh smoke \
+  --domain gaia2 \
+  --config integrations/qwen_audio_agent/config.gaia2.unified.json \
+  --metrics-config examples/real-metrics.unified.yaml \
+  --num-tasks 1 \
+  --max-concurrency 1 \
+  --save-to realbench-smoke
+~~~
 
-| Document | Description |
-|----------|-------------|
-| [Getting Started](docs/getting-started.md) | Installation, API keys, first run, output structure, configuration |
-| [Running the benchmark](docs/running-the-benchmark.md) | Text and voice benchmark commands, defaults, results layout, resume, scoring and judges |
-| [Submission guide](docs/leaderboard-submission.md) | Submitting text-v1, voice-v2, voice-v1 and 1.x results |
-| [Glossary](docs/glossary.md) | Pack, cell, frame, binding revision, pin, trial, judge, manifest |
-| [CLI Reference](docs/cli-reference.md) | Every `tau2` command's `--help`, generated from the CLI |
+使用 <code>--dry-run</code> 只查看运行计划；使用 <code>--task-ids 0</code> 固定任务；使用
+<code>--resume</code> 继续未完成的批次。结果写入
+<code>data/simulations/realbench-smoke/</code>。
 
-### Core Concepts
+运行普通文本任务的示例：
 
-| Document | Description |
-|----------|-------------|
-| [Agent Developer Guide](src/tau2/agent/README.md) | Build and evaluate your own agent |
-| [Domains](src/tau2/domains/README.md) | Domain structure, data format, and available domains |
-| [Orchestrator & Communication Modes](src/tau2/orchestrator/README.md) | Half-duplex and full-duplex orchestration |
-| [Task Schema & Evaluation](docs/evaluation.md) | What `evaluation_criteria.actions` means, how `reward_basis` gates the reward, and how to inspect action correctness |
-| [Gaia2](docs/gaia2.md) | Import 800 core tasks and run the 1,000-task population including request variants through the shared text and voice pipeline |
+~~~bash
+UV_FROZEN=1 uv run tau2 run \
+  --domain retail \
+  --agent-llm gpt-4.1 \
+  --user-llm gpt-4.1 \
+  --num-trials 1 \
+  --num-tasks 2 \
+  --save-to retail-text-smoke
+~~~
 
-### Languages and judges
+### 查看和重算结果
 
-| Document | Description |
-|----------|-------------|
-| [Language packs](docs/language-packs.md) | What a language pack contains and how runs resolve it |
-| [Adding a language](docs/language-authoring.md) | The `tau2 factory` authoring workflow |
-| [Judge validation](docs/judge-validation.md) | Production judges, and authoring and validating new ones |
-| [τ-Entity](docs/elicitation.md) | The `intake` domain and its strategies |
+~~~bash
+UV_FROZEN=1 uv run tau2 view --file data/simulations/realbench-smoke
 
-### Knowledge Retrieval
+# 对已有运行补算 REAL 指标
+UV_FROZEN=1 uv run tau2 metrics run data/simulations/realbench-smoke \
+  --config examples/real-metrics.unified.yaml
+UV_FROZEN=1 uv run tau2 metrics summarize data/simulations/realbench-smoke
+UV_FROZEN=1 uv run tau2 metrics export data/simulations/realbench-smoke \
+  --output realbench-metrics.json
+~~~
 
-| Document | Description |
-|----------|-------------|
-| [Knowledge Retrieval](src/tau2/knowledge/README.md) | Retrieval pipeline configs, embeddings, RAG, and sandbox setup for the `banking_knowledge` domain |
+<code>metrics run</code> 会复用已经完成的评分请求，只评估缺失或失败的项目。修改模型、
+提示词、指标版本或证据后会生成新的 content-addressed profile，历史结果不会
+被覆盖。
 
-### Voice & Audio
+## Gaia2 数据和验证
 
-| Document | Description |
-|----------|-------------|
-| [Voice (Full-Duplex)](src/tau2/voice/README.md) | Providers, speech complexity, CLI options, and output structure for voice evaluation |
-| [Audio Native Architecture](src/tau2/voice/audio_native/README.md) | Internal architecture for adding or modifying realtime provider adapters |
+Gaia2 的本地任务位于 <code>data/tau2/domains/gaia2/</code>。首次导入原始数据和资源后，
+执行：
 
-### RL & Training
+~~~bash
+UV_FROZEN=1 uv run tau2 gaia2 import \
+  --source /path/to/gaia2 \
+  --assets /path/to/gaia2_filesystem
 
-| Document | Description |
-|----------|-------------|
-| [Gym Interface](src/tau2/gym/README.md) | Gymnasium-compatible environment, play mode, train/test splits |
+UV_FROZEN=1 uv run tau2 gaia2 verify \
+  --reference \
+  --workers 8 \
+  --seal
+~~~
 
-### Leaderboard & Experiments
+运行时代码、任务或资源发生变化后，必须重新验证并 seal。验证使用本地原生工具
+和严格 replay，不调用模型；seal 只表示数据和运行时已验证，不代表 Agent 已经
+取得高分。更多任务布局见 [Gaia2 数据说明](data/tau2/domains/gaia2/README.md)
+和 [Gaia2 指南](docs/gaia2.md)。
 
-| Document | Description |
-|----------|-------------|
-| [Submission guide](docs/leaderboard-submission.md) | How to submit results to [taubench.com](https://taubench.com) |
-| [Experiments](src/experiments/README.md) | Experimental features and research code |
+## REAL 指标
 
-### Project
+默认示例配置为 [examples/real-metrics.unified.yaml](examples/real-metrics.unified.yaml)，
+当前可选 measure 包括：
 
-| Document | Description |
-|----------|-------------|
-| [Contributing](CONTRIBUTING.md) | How to contribute to τ-bench |
-| [Changelog](CHANGELOG.md) | Version history and release notes |
+| measure | 内容 |
+| --- | --- |
+| <code>intent</code> | 用户需求与 Agent 顶层任务的 Precision、Recall、F1、覆盖和来源证据 |
+| <code>execution</code> | 工具选择、参数、调用顺序和业务状态效果 |
+| <code>voice</code> | 响应延迟、响应率、打断、重叠、按时率和语音前置发言 |
+| <code>interaction</code> | 交互时序、让步、响应和有效发言行为 |
+| <code>state_interaction</code> | 多阶段任务中的状态变化与交互状态 |
+| <code>conciseness</code> | 必要信息覆盖、回复长度和反馈质量 |
 
-## Contributing
+REAL 指标的定义、证据目录、缓存规则和离线验证见
+[REAL-derived diagnostics](docs/real-metrics.md)。指标源文件、上游版本和哈希
+记录在 [src/tau2/diagnostics/SOURCE.json](src/tau2/diagnostics/SOURCE.json)。
 
-We welcome contributions! Whether you're fixing bugs, adding features, creating domains, or contributing research code, see our [Contributing Guide](CONTRIBUTING.md) for guidelines.
+## Qwen Audio Agent 集成
 
-## Citation
+集成代码位于 [integrations/qwen_audio_agent/](integrations/qwen_audio_agent/)。
+它为每个 trial 隔离容器、workspace、MCP、控制连接和应用状态；Agent 只能看到
+明确注入的策略与工具 schema，任务答案、原始数据库和评分证据留在评测端。
 
-If you use a specific component of $\tau^3$-bench, please cite the corresponding paper below.
+构建 Qwen Agent 镜像：
 
-### Knowledge Domain (`banking_knowledge`)
+~~~bash
+UV_FROZEN=1 uv run python integrations/qwen_audio_agent/build_image.py \
+  /path/to/qwen-audio-agent
+~~~
 
-```bibtex
-@article{shi2026tau,
-  title={$\tau$-Knowledge: Evaluating Conversational Agents over Unstructured Knowledge},
-  author={Shi, Quan and Zytek, Alexandra and Razavi, Pedram and Narasimhan, Karthik and Barres, Victor},
-  journal={arXiv preprint arXiv:2603.04370},
-  year={2026}
-}
-```
+集成运行、语音前端、场景时钟、隔离边界和验证命令见
+[Qwen Audio Agent README](integrations/qwen_audio_agent/README.md)。实时服务测试
+需要对应的模型、ASR、TTS 和 Docker 环境，并会产生服务调用费用。
 
-### Voice Full-Duplex Benchmark
+## 开发和测试
 
-```bibtex
+~~~bash
+UV_FROZEN=1 uv run pytest tests/ \
+  --ignore=tests/test_voice \
+  --ignore=tests/test_streaming \
+  --ignore=tests/test_gym \
+  --ignore=tests/test_domains/test_banking_knowledge
 
-@misc{ray2026tauvoicebenchmarkingfullduplexvoice,
-      title={$\tau$-Voice: Benchmarking Full-Duplex Voice Agents on Real-World Domains},
-      author={Soham Ray and Keshav Dhandhania and Victor Barres and Karthik Narasimhan},
-      year={2026},
-      eprint={2603.13686},
-      archivePrefix={arXiv},
-      primaryClass={cs.SD},
-      url={https://arxiv.org/abs/2603.13686},
-}
-```
+UV_FROZEN=1 uv run pytest tests/test_diagnostics
+UV_FROZEN=1 uv run ruff check .
+UV_FROZEN=1 uv run ruff format --check .
+~~~
 
-### Multilingual Voice Benchmark (τ-i18n)
+对应的 Make 目标见 [Makefile](Makefile)：<code>make test</code>、<code>make test-diagnostics</code>、
+<code>make test-voice</code>、<code>make test-gaia2</code>、<code>make test-all</code> 和
+<code>make check-all</code>。
 
-```bibtex
-@misc{ray2026taumultilingual,
-      title={$\tau$-Multilingual: Benchmarking Voice Agents Across Languages},
-      author={Soham Ray and Edgard dos Santos Paiva and Ruben Valenzuela and Karthik Narasimhan and Keshav Dhandhania and Victor Barres},
-      year={2026},
-      eprint={2609.35820},
-      archivePrefix={arXiv},
-      url={https://arxiv.org/abs/2609.35820},
-}
-```
+## 目录结构
 
-### Entity Capture Benchmark (τ-Entity, `intake`)
+~~~text
+src/tau2/                         评测运行时、Agent、环境、指标和 CLI
+data/tau2/domains/                任务、策略、数据库和语言数据
+integrations/qwen_audio_agent/    Qwen Audio Agent 容器与 smoke 入口
+examples/                         REAL 指标和运行配置示例
+docs/                             评测、配置、Gaia2 和指标说明
+tests/                            核心、语音、Gaia2 和诊断测试
+data/simulations/                 本地运行结果（默认不纳入版本控制）
+~~~
 
-```bibtex
-@misc{ray2026tauelicitation,
-      title={$\tau$-Elicitation: Benchmarking Multi-Turn Entity Extraction in Voice Agents},
-      author={Soham Ray and Victor Barres},
-      year={2026},
-      eprint={2609.13602},
-      archivePrefix={arXiv},
-      url={https://arxiv.org/abs/2609.13602},
-}
-```
+## 相关文档
 
-### Core $\tau$-Bench
+- [Getting Started](docs/getting-started.md)：安装、API key 和基础运行
+- [API 配置](docs/api-configuration.md)：<code>config.env</code>、<code>qw.env</code>、<code>realbench.env</code>
+- [REAL 指标](docs/real-metrics.md)：评分定义、证据和缓存
+- [Gaia2 指南](docs/gaia2.md)：数据导入、验证和运行
+- [Qwen Audio Agent](integrations/qwen_audio_agent/README.md)：完整语音 Agent 集成
+- [CLI Reference](docs/cli-reference.md)：所有 <code>tau2</code> 命令和参数
+- [指标清单](docs/metrics-inventory.md)：当前指标版本和来源
 
-```bibtex
+## 许可证与来源
 
-@misc{barres2025tau2,
-      title={$\tau^2$-Bench: Evaluating Conversational Agents in a Dual-Control Environment}, 
-      author={Victor Barres and Honghua Dong and Soham Ray and Xujie Si and Karthik Narasimhan},
-      year={2025},
-      eprint={2506.07982},
-      archivePrefix={arXiv},
-      primaryClass={cs.AI},
-      url={https://arxiv.org/abs/2506.07982}, 
-}
-
-@misc{yao2024tau,
-      title={$\tau$-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains}, 
-      author={Shunyu Yao and Noah Shinn and Pedram Razavi and Karthik Narasimhan},
-      year={2024},
-      eprint={2406.12045},
-      archivePrefix={arXiv},
-      primaryClass={cs.AI},
-      url={https://arxiv.org/abs/2406.12045}, 
-}
-```
-
-### Task Fixes
-
-```bibtex
-
-@inproceedings{cuadron2026saber,
-      title={{SABER}: Small Actions, Big Errors {\textemdash} Safeguarding Mutating Steps in {LLM} Agents},
-      author={Alejandro Cuadron and Pengfei Yu and Yang Liu and Arpit Gupta},
-      booktitle={ICLR 2026 Workshop on Memory for LLM-Based Agentic Systems},
-      year={2026},
-      url={https://openreview.net/forum?id=En2z9dckgP},
-}
-```
-## Optional continuous caller scenes
-
-Use `--user-audio-renderer saasr --saasr-config runtime.json` for SAASR caller
-voices with continuous multi-speaker background audio in any voice domain.
-See [setup, behavior and evidence](docs/saasr-user-audio.md).
+项目代码使用 [MIT License](LICENSE)。REAL 指标中引用的上游 REAL-Bench/ARE
+实现、版本和文件哈希见 [src/tau2/diagnostics/SOURCE.json](src/tau2/diagnostics/SOURCE.json)。
+Gaia2 数据、模型服务和第三方语音服务分别遵循其原始许可证与使用条款。
