@@ -1,0 +1,21 @@
+{
+  "image": "tau-qwen-persistent:0.2-realtime-flash",
+  "boot_timeout_seconds": 180,
+  "tool_timeout_seconds": 120,
+  "max_buffer_seconds": 1200,
+  "asr_hotwords": {
+    "enabled": false,
+    "weight": 4,
+    "max_terms": 2000
+  },
+  "dynamic_followup": {
+    "enabled": true,
+    "stages": [
+      1,
+      2
+    ],
+    "max_context_characters": 24000,
+    "max_retries": 1
+  },
+  "api_config_dir": "~/.config/qwaudio"
+}

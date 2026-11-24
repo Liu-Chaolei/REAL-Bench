@@ -1,0 +1,7 @@
+# Reuse an already verified fixed-source Qwen integration image.
+ARG BASE_IMAGE=docker.v2.aispeech.com/sjtu/sjtu_yukai-tau-qwen-agent:0.5.3-real-metrics
+FROM ${BASE_IMAGE}
+USER root
+COPY bridge.mjs persistent-observer.mjs /opt/tau-bridge/
+LABEL org.tau.qwen-agent.persistent-observer="1"
+USER node
