@@ -1,0 +1,175 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0050_hxg5cgnax6hl0ihu0tt73lsavc0sve3x",
+  "model": "deepseek-flash",
+  "input_sha256": "6a4d77de11cd3c8d39235f6f5e3b8b524ef0ec971e9a68216d27dd4965193258",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Gerrit van der Meer",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-70a4da5a-738a-44e4-94ab-be6d5166fe1f.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Gerrit van der Meer"
+      ],
+      "active_vocabulary": {
+        "Gerrit van der Meer": 50
+      },
+      "vocabulary_sha256": "c6527d52181b8c2be753c46d521afb2905f1abde7e7cf47c467c7aa64226d353"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Gerrit van der Meer",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[1]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "Gerrit van der Meer": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "1b8814a23be8127d8d6dd07f2b14230bc9bcc7899e85397a8c5d56d7fee1fde7"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Akua Owusu-Agyemang",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_tracker.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Astrid MacLeod",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_tracker.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Astrid Müller",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_tracker.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bridget MacTavish",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_tracker.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Evelyn Fothergill",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_tracker.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Gerrit van der Meer",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_tracker.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kaidën McKenzie",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_tracker.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Katharina Schulze",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_tracker.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kofi Adjei",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_tracker.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kofi Owusu",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_tracker.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kymberley Nakamura",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_tracker.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Saskia Müller-Franke",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_tracker.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Siu-Fung De Vries",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_tracker.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ximena García-Ramírez",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_tracker.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Akua Owusu-Agyemang",
+        "Astrid MacLeod",
+        "Astrid Müller",
+        "Bridget MacTavish",
+        "Evelyn Fothergill",
+        "Kaidën McKenzie",
+        "Katharina Schulze",
+        "Kofi Adjei",
+        "Kofi Owusu",
+        "Kymberley Nakamura",
+        "Saskia Müller-Franke",
+        "Siu-Fung De Vries",
+        "Ximena García-Ramírez"
+      ],
+      "active_vocabulary": {
+        "Gerrit van der Meer": 50,
+        "Rohini Deshpande": 50,
+        "Akua Owusu-Agyemang": 50,
+        "Astrid MacLeod": 50,
+        "Astrid Müller": 50,
+        "Bridget MacTavish": 50,
+        "Evelyn Fothergill": 50,
+        "Kaidën McKenzie": 50,
+        "Katharina Schulze": 50,
+        "Kofi Adjei": 50,
+        "Kofi Owusu": 50,
+        "Kymberley Nakamura": 50,
+        "Saskia Müller-Franke": 50,
+        "Siu-Fung De Vries": 50,
+        "Ximena García-Ramírez": 50
+      },
+      "vocabulary_sha256": "4c6e5f31f2ec15b305441dc4ae9134b8e5eaf911b428988893fc20b28b6d7f16"
+    }
+  ]
+}

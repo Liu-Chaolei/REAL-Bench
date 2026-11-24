@@ -195,7 +195,7 @@ def _submit(*argv):
 
 def _build(benchmark: str, source: Path):
     return build_historical_package(
-        source, None, SubmitterMetadata.model_validate(SUBMITTER), benchmark
+        source, SubmitterMetadata.model_validate(SUBMITTER), benchmark
     )
 
 
@@ -236,7 +236,6 @@ def test_domain_export_round_trips_as_a_package(release_export, tmp_path):
     assert package.name == name
     frame = load_frame(benchmark)
     assert package.submission.frame == frame
-    assert package.diagnostics is None
     # Call quality is defined for the core voice-v2 frame only.
     assert package.quality is None
     assert not (output / name / "benchmark-quality.json").exists()
@@ -444,22 +443,8 @@ def test_pass3_edit_fails_validation(release_export, tmp_path):
         load_package(path.parent)
 
 
-def test_domain_frames_take_no_judges(release_export, tmp_path):
+def test_historical_adapter_rejects_unsupported_benchmark(release_export, tmp_path):
     benchmark, source, metadata = release_export
-    with pytest.raises(ValueError, match="takes no --judges-root"):
-        _submit(
-            "prepare",
-            source,
-            "--historical-voice-v2",
-            "--benchmark",
-            benchmark,
-            "--judges-root",
-            tmp_path,
-            "--metadata-file",
-            metadata,
-            "--output",
-            tmp_path / "out",
-        )
     with pytest.raises(ValueError, match="--benchmark voice, banking, entity"):
         _submit(
             "prepare",
@@ -504,9 +489,7 @@ def test_review_requires_the_suffixed_package_name(release_export, tmp_path):
         "--output",
         output,
     )
-    args = argparse.Namespace(
-        verify_only=False, historical_voice_v2=True, judges_root=[], upload=False
-    )
+    args = argparse.Namespace(verify_only=False, historical_voice_v2=True, upload=False)
     console = Console(quiet=True)
     _review_package(output / f"{NAME}_{benchmark}", source, args, console)
     unsuffixed = output / NAME

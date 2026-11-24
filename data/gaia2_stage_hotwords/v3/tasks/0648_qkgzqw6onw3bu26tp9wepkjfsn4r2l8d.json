@@ -1,0 +1,347 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0648_qkgzqw6onw3bu26tp9wepkjfsn4r2l8d",
+  "model": "deepseek-flash",
+  "input_sha256": "dbd05364d0a05d6bd725e638c99a569759ed842f3e79a64779391938fd04a467",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Akira Tanaka",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Akira Tanaka",
+        "Liverpool"
+      ],
+      "active_vocabulary": {
+        "Akira Tanaka": 50,
+        "Liverpool": 50
+      },
+      "vocabulary_sha256": "acfa697c62384db3411e35092fc90f101455729310b1a96a2a1ab4a975b69446"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Akira",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool Waterfront Apartment",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool Lofts",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool Luxury",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Edinburgh New Town Flat",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "50 George St",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Edinburgh",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Edinburgh New Town Apartments",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "20 George Street",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bristol Bay",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "1-3 Harbourside",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bristol",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bristol Harbourside Apartment",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "10 Canons Rd",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Edinburgh City Centre Flats",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Birmingham Brook",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Cardiff",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Akira",
+        "Liverpool Waterfront Apartment",
+        "Liverpool Lofts",
+        "Liverpool Luxury",
+        "Edinburgh New Town Flat",
+        "50 George St",
+        "Edinburgh",
+        "Edinburgh New Town Apartments",
+        "20 George Street",
+        "Bristol Bay",
+        "1-3 Harbourside",
+        "Bristol",
+        "Bristol Harbourside Apartment",
+        "10 Canons Rd",
+        "Edinburgh City Centre Flats",
+        "Birmingham Brook",
+        "Cardiff"
+      ],
+      "active_vocabulary": {
+        "Akira Tanaka": 50,
+        "Liverpool": 50,
+        "Akira": 50,
+        "Liverpool Waterfront Apartment": 50,
+        "Liverpool Lofts": 50,
+        "Liverpool Luxury": 50,
+        "Edinburgh New Town Flat": 50,
+        "50 George St": 50,
+        "Edinburgh": 50,
+        "Edinburgh New Town Apartments": 50,
+        "20 George Street": 50,
+        "Bristol Bay": 50,
+        "1-3 Harbourside": 50,
+        "Bristol": 50,
+        "Bristol Harbourside Apartment": 50,
+        "10 Canons Rd": 50,
+        "Edinburgh City Centre Flats": 50,
+        "Birmingham Brook": 50,
+        "Cardiff": 50
+      },
+      "vocabulary_sha256": "2b24b2e19db6ddc6d415532e8a65da7c001666b99c8889beb59b868356a44fab"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Akira Tanaka",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_writeup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Cardiff",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_writeup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool Waterfront Apartment",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_writeup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "10 The Strand",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_writeup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool Lofts",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_writeup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "45 Albert Dock",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_writeup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool Luxury",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_writeup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "321 Liverpool ONE",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_writeup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Edinburgh New Town Flat",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_writeup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "50 George St",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_writeup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Edinburgh",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_writeup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Edinburgh New Town Apartments",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_writeup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "20 George Street",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_writeup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bristol Bay",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_writeup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "1-3 Harbourside",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_writeup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bristol",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_writeup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bristol Harbourside Apartment",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_writeup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "10 Canons Rd",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_writeup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Edinburgh City Centre Flats",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_writeup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Birmingham Brook",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_writeup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "The Bristolian",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_writeup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "10 The Strand",
+        "45 Albert Dock",
+        "321 Liverpool ONE",
+        "The Bristolian"
+      ],
+      "active_vocabulary": {
+        "Akira Tanaka": 50,
+        "Liverpool": 50,
+        "Akira": 50,
+        "Liverpool Waterfront Apartment": 50,
+        "Liverpool Lofts": 50,
+        "Liverpool Luxury": 50,
+        "Edinburgh New Town Flat": 50,
+        "50 George St": 50,
+        "Edinburgh": 50,
+        "Edinburgh New Town Apartments": 50,
+        "20 George Street": 50,
+        "Bristol Bay": 50,
+        "1-3 Harbourside": 50,
+        "Bristol": 50,
+        "Bristol Harbourside Apartment": 50,
+        "10 Canons Rd": 50,
+        "Edinburgh City Centre Flats": 50,
+        "Birmingham Brook": 50,
+        "Cardiff": 50,
+        "10 The Strand": 50,
+        "45 Albert Dock": 50,
+        "321 Liverpool ONE": 50,
+        "The Bristolian": 50
+      },
+      "vocabulary_sha256": "2d237a4bb5f6ac20af3695033aa50ea657e8a9e8338040d798a81d627f8ebacd"
+    }
+  ]
+}

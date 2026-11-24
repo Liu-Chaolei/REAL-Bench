@@ -226,7 +226,7 @@ def review_simulation_full(
     if not results.info or not results.info.user_info:
         raise ValueError("results.info.user_info is required for review")
 
-    from tau2.multilingual.runtime import recorded_review_user_info
+    from tau2.domains.gaia2.language_runtime import recorded_review_user_info
 
     user_info = recorded_review_user_info(
         results.info, task, context=simulation.language_context
@@ -463,7 +463,7 @@ def review_simulation_user(
     if not results.info or not results.info.user_info:
         raise ValueError("results.info.user_info is required for review")
 
-    from tau2.multilingual.runtime import recorded_review_user_info
+    from tau2.domains.gaia2.language_runtime import recorded_review_user_info
 
     user_info = recorded_review_user_info(
         results.info, task, context=simulation.language_context
@@ -1058,7 +1058,7 @@ Examples:
   python -m tau2.scripts.review_conversation run results.json
 
   # Review all results.json files in a directory
-  python -m tau2.scripts.review_conversation run data/simulations/
+  python -m tau2.scripts.review_conversation run data/results/
 
   # User simulator only review
   python -m tau2.scripts.review_conversation run results.json --mode user

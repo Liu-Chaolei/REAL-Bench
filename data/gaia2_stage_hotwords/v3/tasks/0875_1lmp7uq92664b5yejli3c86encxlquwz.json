@@ -1,0 +1,142 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0875_1lmp7uq92664b5yejli3c86encxlquwz",
+  "model": "deepseek-flash",
+  "input_sha256": "2ec44b1295753c2bd3014f627a1d1d7594e3c6aad245323d8e8e490c604a5e03",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "CBD Belapur",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-de775a59-1b72-45d3-975f-e8d66e00108f.arguments.location",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Navi Mumbai",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-de775a59-1b72-45d3-975f-e8d66e00108f.arguments.location",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Royal Residences",
+          "kind": "place",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-c4e2881b-cb0d-4ea5-adbb-9229df71c01f.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kaitlyn Nguyen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ff02009b-6458-4efc-a2b1-7509970459a3.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kaida Jensen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1176f957-3d38-43ee-bab7-6ddf2879b32b.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Žiga Kovačič",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5e807865-136b-4de6-bf74-cd7ddc680b37.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kaitlyn Nwosu",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7c9211a5-c31b-40b6-8e9f-49364617ba83.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ff02009b-6458-4efc-a2b1-7509970459a3.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "CBD Belapur",
+        "Navi Mumbai",
+        "Royal Residences",
+        "Kaitlyn Nguyen",
+        "Kaida Jensen",
+        "Žiga Kovačič",
+        "Kaitlyn Nwosu",
+        "Rohan Kumar"
+      ],
+      "active_vocabulary": {
+        "CBD Belapur": 50,
+        "Navi Mumbai": 50,
+        "Royal Residences": 50,
+        "Kaitlyn Nguyen": 50,
+        "Kaida Jensen": 50,
+        "Žiga Kovačič": 50,
+        "Kaitlyn Nwosu": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "1b0f464b3324cb1f0cfde55ca841f106ddd894cfffe426ea935a07f335b630eb"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "CBD Belapur",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_debrief.arguments.location",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Navi Mumbai",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_debrief.arguments.location",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "CBD Belapur": 50,
+        "Navi Mumbai": 50,
+        "Royal Residences": 50,
+        "Kaitlyn Nguyen": 50,
+        "Kaida Jensen": 50,
+        "Žiga Kovačič": 50,
+        "Kaitlyn Nwosu": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "1b0f464b3324cb1f0cfde55ca841f106ddd894cfffe426ea935a07f335b630eb"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "CBD Belapur",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_order_replacement_cab.arguments.end_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Navi Mumbai",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_order_replacement_cab.arguments.end_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "CBD Belapur": 50,
+        "Navi Mumbai": 50,
+        "Royal Residences": 50,
+        "Kaitlyn Nguyen": 50,
+        "Kaida Jensen": 50,
+        "Žiga Kovačič": 50,
+        "Kaitlyn Nwosu": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "1b0f464b3324cb1f0cfde55ca841f106ddd894cfffe426ea935a07f335b630eb"
+    }
+  ]
+}

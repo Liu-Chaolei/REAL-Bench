@@ -1,0 +1,69 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0234_fixyszxhzv4kiz893gvljv4chmeko5v2",
+  "model": "deepseek-flash",
+  "input_sha256": "e26c2d888dd9da5084de0b3a15fc6390b56dad216a1799133216e7aaa26def41",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Ximena García-Ramírez",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zoom",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Ximena García-Ramírez",
+        "Zoom"
+      ],
+      "active_vocabulary": {
+        "Ximena García-Ramírez": 50,
+        "Zoom": 50
+      },
+      "vocabulary_sha256": "b25daf0b2c28b3e3fb322cddeffcdd07b04bb12a38b278392094e8de2066f187"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Ximena García-Ramírez",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Anastasiya Kuznetsova"
+      ],
+      "active_vocabulary": {
+        "Ximena García-Ramírez": 50,
+        "Zoom": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "8cef91a8ae4203b6b01ece570838309156e2f01b4b5ae187a21d5ed05fd8a78c"
+    }
+  ]
+}

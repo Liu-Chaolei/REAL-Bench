@@ -1,0 +1,102 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0636_rmskjxrfmi05z4zftlr3li5tr96qxeas",
+  "model": "deepseek-flash",
+  "input_sha256": "a8fc3bdc7f8c0ba19a9f4c66303c3c9678192ff741d5768b4b5bedf1419dda8e",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-651f65de-c575-4ceb-bf88-4646a4bf4bd8.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Luís Marques",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-651f65de-c575-4ceb-bf88-4646a4bf4bd8.arguments.attendees[1]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-651f65de-c575-4ceb-bf88-4646a4bf4bd8.arguments.attendees[2]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "1945 SE Water Ave, Portland, OR 97214",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur",
+        "Luís Marques",
+        "Jamila Fernandes",
+        "1945 SE Water Ave, Portland, OR 97214"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Luís Marques": 50,
+        "Jamila Fernandes": 50,
+        "1945 SE Water Ave, Portland, OR 97214": 50
+      },
+      "vocabulary_sha256": "6929e1b227767bbaf70bd74634bf936a14bc8463e687e2ae63174089adfa29da"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "1945 SE Water Ave, Portland, OR 97214",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Luís Marques": 50,
+        "Jamila Fernandes": 50,
+        "1945 SE Water Ave, Portland, OR 97214": 50
+      },
+      "vocabulary_sha256": "6929e1b227767bbaf70bd74634bf936a14bc8463e687e2ae63174089adfa29da"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Luís Marques",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_luis.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Luís Marques": 50,
+        "Jamila Fernandes": 50,
+        "1945 SE Water Ave, Portland, OR 97214": 50
+      },
+      "vocabulary_sha256": "6929e1b227767bbaf70bd74634bf936a14bc8463e687e2ae63174089adfa29da"
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0187_wk3hw6dtnbrvzs94r1cjqmkwogkjziv6",
+  "model": "deepseek-flash",
+  "input_sha256": "b48394e916c7c2d537838d073ef646c07239e10fd9cd0de299d0248c38460811",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Rowan Fothergill",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ce62aff1-fe36-4b1a-ade9-1630c7a1f5fa.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohan Deshpande",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ce62aff1-fe36-4b1a-ade9-1630c7a1f5fa.arguments.attendees[1]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kavita Deshpande",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ce62aff1-fe36-4b1a-ade9-1630c7a1f5fa.arguments.attendees[2]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Nottingham Park",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Estes Alpha III Rocket Launch Set",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Rowan Fothergill",
+        "Rohan Deshpande",
+        "Kavita Deshpande",
+        "Nottingham Park",
+        "Estes Alpha III Rocket Launch Set"
+      ],
+      "active_vocabulary": {
+        "Rowan Fothergill": 50,
+        "Rohan Deshpande": 50,
+        "Kavita Deshpande": 50,
+        "Nottingham Park": 50,
+        "Estes Alpha III Rocket Launch Set": 50
+      },
+      "vocabulary_sha256": "f8bd75f0477f4ae48b40097becd18d8c93147b050531b27082d98e5489aad2ef"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Estes Alpha III Rocket Launch Set",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_group_followup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "UK Reunion 2024",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Nottingham Park",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_group_followup.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "UK Reunion 2024"
+      ],
+      "active_vocabulary": {
+        "Rowan Fothergill": 50,
+        "Rohan Deshpande": 50,
+        "Kavita Deshpande": 50,
+        "Nottingham Park": 50,
+        "Estes Alpha III Rocket Launch Set": 50,
+        "UK Reunion 2024": 50
+      },
+      "vocabulary_sha256": "45d90eca1a15f586f0482be5ecd81f654247eb33aa64cfec173190ba2fcc66e9"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kavita Deshpande",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "UK Reunion 2024",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Nottingham Park",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Estes Alpha III Rocket Launch Set",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_kavita_message.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Rowan Fothergill": 50,
+        "Rohan Deshpande": 50,
+        "Kavita Deshpande": 50,
+        "Nottingham Park": 50,
+        "Estes Alpha III Rocket Launch Set": 50,
+        "UK Reunion 2024": 50
+      },
+      "vocabulary_sha256": "45d90eca1a15f586f0482be5ecd81f654247eb33aa64cfec173190ba2fcc66e9"
+    }
+  ]
+}

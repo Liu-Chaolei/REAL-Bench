@@ -1,0 +1,106 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0251_ra2mla9wv2ggujnc6130gzqwp1f6agmm",
+  "model": "deepseek-flash",
+  "input_sha256": "5de9a04bcc2154b9da6d4e8f01cef548a851aff2cf81ab703fdeca0fcfb843da",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Naomi Matsumoto",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kenji Nakamura",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Emiko Tanaka",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Hiroshi Saito",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Yumi Nakahara",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Tokyo Medical Center",
+          "kind": "organization",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Japanese Health Ministry",
+          "kind": "organization",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Japanese Cancer Association",
+          "kind": "organization",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Tokyo",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Naomi Matsumoto",
+        "Kenji Nakamura",
+        "Emiko Tanaka",
+        "Hiroshi Saito",
+        "Yumi Nakahara",
+        "Tokyo Medical Center",
+        "Japanese Health Ministry",
+        "Japanese Cancer Association",
+        "Tokyo"
+      ],
+      "active_vocabulary": {
+        "Naomi Matsumoto": 50,
+        "Kenji Nakamura": 50,
+        "Emiko Tanaka": 50,
+        "Hiroshi Saito": 50,
+        "Yumi Nakahara": 50,
+        "Tokyo Medical Center": 50,
+        "Japanese Health Ministry": 50,
+        "Japanese Cancer Association": 50,
+        "Tokyo": 50
+      },
+      "vocabulary_sha256": "f3b62b336788337a065f22822691558caf5807276a606b74456acd6bfc2faf76"
+    }
+  ]
+}

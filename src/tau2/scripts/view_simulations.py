@@ -22,7 +22,7 @@ from tau2.data_model.simulation import (
 from tau2.data_model.tasks import Task, TaskIssue, TaskIssueStatus
 from tau2.metrics.agent_metrics import compute_metrics, is_successful
 from tau2.utils.display import ConsoleDisplay
-from tau2.utils.utils import DATA_DIR
+from tau2.utils.utils import DATA_DIR, RESULTS_DIR
 
 
 def get_tick_duration_ms(results: Results) -> Optional[int]:
@@ -38,7 +38,7 @@ def get_available_simulations(sim_dir: Optional[Path] = None):
     Prefers results_reviewed.json (with embedded reviews) over results.json.
     """
     if sim_dir is None:
-        sim_dir = Path(DATA_DIR) / "simulations"
+        sim_dir = Path(RESULTS_DIR)
 
     if not sim_dir.exists():
         return []
@@ -950,7 +950,7 @@ def main(
         sim_files = [Path(sim_file)]
 
     if not sim_files:
-        dir_path = sim_dir if sim_dir else f"{DATA_DIR}/simulations"
+        dir_path = sim_dir if sim_dir else str(RESULTS_DIR)
         ConsoleDisplay.console.print(f"[red]No simulation files found in {dir_path}[/]")
         return
 

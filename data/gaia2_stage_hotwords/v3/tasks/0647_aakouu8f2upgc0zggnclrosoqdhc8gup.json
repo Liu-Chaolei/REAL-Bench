@@ -1,0 +1,95 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0647_aakouu8f2upgc0zggnclrosoqdhc8gup",
+  "model": "deepseek-flash",
+  "input_sha256": "2b3f746502b77b851bdd808f7c0768ddab885160462b82d3ffe8be02c532c487",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Joana Silva",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Joana",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Joana Silva",
+        "Joana"
+      ],
+      "active_vocabulary": {
+        "Joana Silva": 50,
+        "Joana": 50
+      },
+      "vocabulary_sha256": "08ca1ef362c889cac46f97b222c20d1e588468dc5cd41c965d8a8dae975da940"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Joana",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Networking Event",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Networking Event"
+      ],
+      "active_vocabulary": {
+        "Joana Silva": 50,
+        "Joana": 50,
+        "Networking Event": 50
+      },
+      "vocabulary_sha256": "a35fc8642c74b0e1e1c31c2837b59489744f149f1c7a936914fd8d601054234b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Joana",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Networking Event",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Self-Care Routine",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Self-Care Routine"
+      ],
+      "active_vocabulary": {
+        "Joana Silva": 50,
+        "Joana": 50,
+        "Networking Event": 50,
+        "Self-Care Routine": 50
+      },
+      "vocabulary_sha256": "7d53e986a5062f3061b77040ef9fc645e2a65cbdfc5c1c94c65c4a1984c32570"
+    }
+  ]
+}

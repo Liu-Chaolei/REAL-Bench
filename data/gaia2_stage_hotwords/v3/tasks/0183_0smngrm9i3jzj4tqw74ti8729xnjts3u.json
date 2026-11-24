@@ -1,0 +1,89 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0183_0smngrm9i3jzj4tqw74ti8729xnjts3u",
+  "model": "deepseek-flash",
+  "input_sha256": "62d6e2d628d0d971045a967afb1db2a6fd4c72a3fa43857594b1ff9f99126115",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Artstraws Class Pack",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Art Class",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Artstraws Class Pack",
+        "Art Class"
+      ],
+      "active_vocabulary": {
+        "Artstraws Class Pack": 50,
+        "Art Class": 50
+      },
+      "vocabulary_sha256": "6b4af1e1f755ab8f4efa99770f9692de68a6a5960388fdfd95aba275be81ab34"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nalinee Srisombat",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Artstraws Class Pack",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Nalinee Srisombat",
+        "Åse Kjellstad"
+      ],
+      "active_vocabulary": {
+        "Artstraws Class Pack": 50,
+        "Art Class": 50,
+        "Nalinee Srisombat": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "7849234369b10fea6839774beacb14465ebb144dfb859cbcd4b6c3a5c5ada86b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Artstraws Class Pack",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_add.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Artstraws Class Pack": 50,
+        "Art Class": 50,
+        "Nalinee Srisombat": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "7849234369b10fea6839774beacb14465ebb144dfb859cbcd4b6c3a5c5ada86b"
+    }
+  ]
+}

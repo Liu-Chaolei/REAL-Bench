@@ -1,0 +1,121 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0680_wmve2jrtqqqxwe54zykox0z7ipt59rgg",
+  "model": "deepseek-flash",
+  "input_sha256": "4e8e8155ad0a54d6651f734164010267def0d02bfd97c1be99493a83c644f7b9",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Sergei Kuznetsov",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Pasta Caffee",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Tverskaya Street 12, Moscow, 125009",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Tequila Sunrise",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Sergei Kuznetsov",
+        "Pasta Caffee",
+        "Tverskaya Street 12, Moscow, 125009",
+        "Tequila Sunrise"
+      ],
+      "active_vocabulary": {
+        "Sergei Kuznetsov": 50,
+        "Pasta Caffee": 50,
+        "Tverskaya Street 12, Moscow, 125009": 50,
+        "Tequila Sunrise": 50
+      },
+      "vocabulary_sha256": "0ece4d0c45d0d6326cf88d09f8d0dd19cb7f6d8016a03fdb03c1c8bb37409d02"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Sergei Kuznetsov",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Pasta Caffee",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Tequila Sunrise",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Viktor Kuznetsov"
+      ],
+      "active_vocabulary": {
+        "Sergei Kuznetsov": 50,
+        "Pasta Caffee": 50,
+        "Tverskaya Street 12, Moscow, 125009": 50,
+        "Tequila Sunrise": 50,
+        "Viktor Kuznetsov": 50
+      },
+      "vocabulary_sha256": "835e3edaf883a709015b1590a8623db8d3d4029ed61afc2257cb63b9f236c16b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Sergei's Gift",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Tequila Sunrise",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Sergei's Gift"
+      ],
+      "active_vocabulary": {
+        "Sergei Kuznetsov": 50,
+        "Pasta Caffee": 50,
+        "Tverskaya Street 12, Moscow, 125009": 50,
+        "Tequila Sunrise": 50,
+        "Viktor Kuznetsov": 50,
+        "Sergei's Gift": 50
+      },
+      "vocabulary_sha256": "6d71d65103f78face093e6c9837183203701d4db759565a6cf0aee0d237433d2"
+    }
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0209_xgnlzj47rwd8wmtompnrhzj6z6js85rb",
+  "model": "deepseek-flash",
+  "input_sha256": "1a03e03cb7a24c69aea2b97934998c621448e6f6eee84008dbfa0cfdde26d0c1",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaitlyn",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Villas",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kaitlyn",
+        "Villas"
+      ],
+      "active_vocabulary": {
+        "Kaitlyn": 50,
+        "Villas": 50
+      },
+      "vocabulary_sha256": "3032eff800b20f4f8922d86186e64355b2e751606f90894102e727ae130515bb"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "San Jose Villas",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_review.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "9010 Stevens Creek Blvd",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_review.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "San Jose",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_review.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kaitlyn",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "San Jose Villas",
+        "9010 Stevens Creek Blvd",
+        "San Jose"
+      ],
+      "active_vocabulary": {
+        "Kaitlyn": 50,
+        "Villas": 50,
+        "San Jose Villas": 50,
+        "9010 Stevens Creek Blvd": 50,
+        "San Jose": 50
+      },
+      "vocabulary_sha256": "f1fe4c5e34ae3d52d71e7e0faa4b88039eabc68c4f442ed75675f873e07da233"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "San Jose Villas",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "The Villas at Houston",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Creekside Villas",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Creekwood Villas",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Sunset Villas",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "9010 Stevens Creek Blvd",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "7890 Westheimer Rd",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "4567 Creek Rd",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "5678 Wurzbach Rd",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "5678 Sunset Dr",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Houston",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Austin",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "San Antonio",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Phoenix",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kaitlyn",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "The Villas at Houston",
+        "Creekside Villas",
+        "Creekwood Villas",
+        "Sunset Villas",
+        "7890 Westheimer Rd",
+        "4567 Creek Rd",
+        "5678 Wurzbach Rd",
+        "5678 Sunset Dr",
+        "Houston",
+        "Austin",
+        "San Antonio",
+        "Phoenix"
+      ],
+      "active_vocabulary": {
+        "Kaitlyn": 50,
+        "Villas": 50,
+        "San Jose Villas": 50,
+        "9010 Stevens Creek Blvd": 50,
+        "San Jose": 50,
+        "The Villas at Houston": 50,
+        "Creekside Villas": 50,
+        "Creekwood Villas": 50,
+        "Sunset Villas": 50,
+        "7890 Westheimer Rd": 50,
+        "4567 Creek Rd": 50,
+        "5678 Wurzbach Rd": 50,
+        "5678 Sunset Dr": 50,
+        "Houston": 50,
+        "Austin": 50,
+        "San Antonio": 50,
+        "Phoenix": 50
+      },
+      "vocabulary_sha256": "52df184837f9e9d441f75648eeae3ac6cb664f375f3479c0ffce0ed2b934ba1a"
+    }
+  ]
+}

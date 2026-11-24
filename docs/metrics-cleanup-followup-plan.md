@@ -1,5 +1,7 @@
 # 指标精简增量计划：信息覆盖、后台结果命名与工具误用指标
 
+后续清理：独立 Judge 体系已按 [清理计划](judge-system-removal-plan.md) 移除。本文以下内容记录此前停用调度时的实施过程。
+
 本文记录上一轮指标精简后的新增决定，已按本轮范围实施。上一轮计划见 [metrics-cleanup-plan.md](metrics-cleanup-plan.md)，当前指标清单见 [metrics-inventory.md](metrics-inventory.md)。
 
 本轮核心是：取消当前 Gaia2 整题 COMMUNICATE 评分，统一后台结果字段为 native_result_reward，移除 tool_misuse 及其独立裁判调度。实现依靠调用入口和数据流，不给评测运行增加验收流程。

@@ -1,0 +1,180 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0025_slwr953cyo9j4zx9p769s1raiuxcrec6",
+  "model": "deepseek-flash",
+  "input_sha256": "46e1704fd0bfacaa458a3eb5b4294d5116f52f5b8c5dd495c456df867a9acf23",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "United Arab Emirates",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "United Arab Emirates"
+      ],
+      "active_vocabulary": {
+        "United Arab Emirates": 50
+      },
+      "vocabulary_sha256": "4b0db312407bce4aeca52ea75df4e2bd9e99f759ccde5bf9c95d4532f701109c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "UAE Sustainability Network",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Belgium",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rashid Al-Khateeb",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Khalifa Al-Mansoori",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zayed Al-Mansoori",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Khalid Al-Mansoori",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Amira Al-Khateeb",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Fatima Al-Khaja",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Amal Al-Mansoori",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rashid Al-Mansoori",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "UAE Sustainability Network",
+        "Liesbeth Vandenberghe",
+        "Leuven",
+        "Belgium",
+        "Rashid Al-Khateeb",
+        "Khalifa Al-Mansoori",
+        "Zayed Al-Mansoori",
+        "Khalid Al-Mansoori",
+        "Amira Al-Khateeb",
+        "Fatima Al-Khaja",
+        "Amal Al-Mansoori",
+        "Rashid Al-Mansoori"
+      ],
+      "active_vocabulary": {
+        "United Arab Emirates": 50,
+        "UAE Sustainability Network": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Leuven": 50,
+        "Belgium": 50,
+        "Rashid Al-Khateeb": 50,
+        "Khalifa Al-Mansoori": 50,
+        "Zayed Al-Mansoori": 50,
+        "Khalid Al-Mansoori": 50,
+        "Amira Al-Khateeb": 50,
+        "Fatima Al-Khaja": 50,
+        "Amal Al-Mansoori": 50,
+        "Rashid Al-Mansoori": 50
+      },
+      "vocabulary_sha256": "fc54b25726f17b89aa8acd3670818b17b84b28471e89aa3ea4e438e499c5115d"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "UAE Net-Zero Design Kickoff",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "UAE Sustainability Network",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liesbeth",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "UAE Net-Zero Design Kickoff",
+        "Liesbeth"
+      ],
+      "active_vocabulary": {
+        "United Arab Emirates": 50,
+        "UAE Sustainability Network": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Leuven": 50,
+        "Belgium": 50,
+        "Rashid Al-Khateeb": 50,
+        "Khalifa Al-Mansoori": 50,
+        "Zayed Al-Mansoori": 50,
+        "Khalid Al-Mansoori": 50,
+        "Amira Al-Khateeb": 50,
+        "Fatima Al-Khaja": 50,
+        "Amal Al-Mansoori": 50,
+        "Rashid Al-Mansoori": 50,
+        "UAE Net-Zero Design Kickoff": 50,
+        "Liesbeth": 50
+      },
+      "vocabulary_sha256": "5df774b11e36cb3377842b3ffa72f7521e9b3e859d7659dcbd53649931cf9ad7"
+    }
+  ]
+}

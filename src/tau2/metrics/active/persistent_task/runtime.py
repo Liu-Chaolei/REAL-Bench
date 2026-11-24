@@ -187,8 +187,17 @@ class PersistentTaskMetricRuntime:
             self.status = "unsupported"
             self.issues.append({"reason": "missing_scenario_runtime"})
             return
-        with runtime.lock:
-            runtime.user_inputs.append((self.request_id, self.request_text))
+        queue = getattr(runtime, "queue_user_input", None)
+        if queue is None:
+            with runtime.lock:
+                runtime.user_inputs.append((self.request_id, self.request_text))
+        else:
+            queue(
+                self.request_id,
+                self.request_text,
+                source="persistent_task",
+                purpose="followup",
+            )
         self.delivery["queued_at"] = timestamp
         self.status = "queued"
 

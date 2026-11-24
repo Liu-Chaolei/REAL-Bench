@@ -1,0 +1,106 @@
+schema_version: 3
+language: en
+revision: gaia2-language-v2
+display_name: English
+agent_greeting: Hi! How can I help you today?
+agent_language_clause: Respond in English using Latin script; keep all tool calls,
+  arguments, and structured outputs in English exactly as specified.
+personas:
+  gaia2_male:
+    gender: male
+    locale: Scenario-defined
+    variety: English
+    gender_guidance: You are the male user described by the Gaia2 scenario. Do not
+      invent identity details.
+    pragmatics_clauses:
+    - Speak plainly and cooperate with the agent on the current released request.
+    - Clarify supplied facts when asked. Do not add goals or assume completion from
+      a promise.
+    voice:
+      voice_id: ET3963lBcRmodt3ZaTBS
+      interrupt_tendency: waits
+      backchannel_phrases:
+      - mm-hm
+      non_directed_phrases: []
+      vocal_tics: []
+      voice_examples: &id001
+        disfluency_fillers: '"um", "let me think"'
+        restart_example: '"Please open the file—sorry, the folder I mentioned."'
+        filler_pause_example: '"Let me check... yes, that is the date I meant."'
+        pause_marker_examples: '"The name is... let me say it again."'
+        self_interruption_example: '"I want to—actually, let me finish the current
+          request first."'
+        clarification_request: '"Could you repeat that? I did not hear the last part."'
+        emotion_examples: '"Thanks, that helps."'
+        conversational_confirmations: '"Okay", "Yes", "I understand"'
+        silence_checkins: '"Are you still working on the request?"'
+        frustrated_endings: '"I cannot continue right now. Goodbye."'
+        dont_know_responses: '"I do not know that detail."'
+        make_agent_work_chain: '"Which part of the current request do you need me
+          to clarify?"'
+        one_at_a_time_example: '"Let me answer the first question, then the second."'
+        forget_details_example: '"I do not remember that detail."'
+        vague_openers: '"Please help me with the task I described."'
+        unknown_info_phrases: '"That information was not provided to me."'
+        tool_acknowledgment: '"I will check that now."'
+        tool_result_report: '"The tool returned this result."'
+        tool_failure_report: '"The tool returned an error."'
+        multiple_actions_pushback: '"Could you explain the steps one at a time?"'
+        gratitude_examples: '"Thank you for completing the request."'
+        unknown_info_tools_phrases: '"I cannot determine that from the available result."'
+      pragmatics_clauses: []
+  gaia2_female:
+    gender: female
+    locale: Scenario-defined
+    variety: English
+    gender_guidance: You are the female user described by the Gaia2 scenario. Do not
+      invent identity details.
+    pragmatics_clauses:
+    - Speak plainly and cooperate with the agent on the current released request.
+    - Clarify supplied facts when asked. Do not add goals or assume completion from
+      a promise.
+    voice:
+      voice_id: mnHhNJntmsPxJsZvYVM7
+      interrupt_tendency: waits
+      pragmatics_clauses: []
+      backchannel_phrases:
+      - mm-hm
+      non_directed_phrases: []
+      vocal_tics: []
+      voice_examples: *id001
+domains:
+  gaia2:
+    revision: gaia2-language-v2
+    source: registry
+    task_metadata_file: metadata.json
+    canonical_scenario: false
+    caller: pack
+    user_guidelines: Your first utterance is supplied verbatim by the scenario. Afterwards,
+      respond naturally to what you actually hear. Repeat or clarify the original
+      request, answer using only known facts, and approve actions only when they implement
+      that request. Do not invent preferences, change dates or add tasks. If asked
+      for unknown information, say you do not know. Wait when the agent is doing requested
+      work or monitoring future updates. Do not treat a progress announcement as proof
+      of completion. You cannot see future messages, application databases, reference
+      answers or evaluation criteria.
+    voice_guidelines: ''
+    text_guidelines: ''
+default_binding: null
+voice:
+  agent_greeting: Hello! How can I help with your task?
+  spellout_section: '## Speaking Special Characters and Numbers
+
+    Spell a name, ID, email, or code character by character only when the agent explicitly
+    asks you to spell it. A request to repeat a value or a failed lookup is not a
+    request to spell it. Add word anchors or character explanations only when the
+    agent specifically asks for anchors or explanations; a spelling request alone
+    does not request anchors.
+
+
+    Only after an explicit spelling request, a spelling-only example is "J, O, H,
+    N".
+
+    Only after a specific request for anchors or character explanations, examples
+    are ''D as in dog'', ''B as in boy'', ''M as in Mike'', ''K as in kite''.'
+  speech_insert_events_per_minute: 1.0
+  backchannel_level: medium

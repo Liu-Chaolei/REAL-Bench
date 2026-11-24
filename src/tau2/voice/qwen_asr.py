@@ -48,6 +48,16 @@ def qwen_asr_url(base_url: str) -> str:
     return urlunsplit((schemes[parsed.scheme], parsed.netloc, path, "", ""))
 
 
+def qwen_streaming_asr_url(base_url: str) -> str:
+    """Resolve the regional Qwen streaming ASR WebSocket endpoint."""
+    parsed = urlsplit(base_url)
+    if parsed.path.rstrip("/") == "/api-ws/v1/inference":
+        base_url = urlunsplit(parsed._replace(path=""))
+    parsed = urlsplit(qwen_asr_url(base_url))
+    scheme = "wss" if parsed.scheme == "https" else "ws"
+    return urlunsplit((scheme, parsed.netloc, "/api-ws/v1/inference", "", ""))
+
+
 async def transcribe_qwen(
     client: httpx.AsyncClient,
     base_url: str,

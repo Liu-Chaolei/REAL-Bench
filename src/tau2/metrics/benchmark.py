@@ -307,7 +307,7 @@ def read_task_trials(path: Path, frame: BenchmarkFrame) -> list[TaskTrial]:
         raise ValueError(
             "Saved task selection differs from authoritative benchmark artifacts"
         )
-    from tau2.multilingual.runtime import resolve_task
+    from tau2.domains.gaia2.language_runtime import resolve_task
 
     for task_id, context in contexts.items():
         source_task = source_tasks[task_id]

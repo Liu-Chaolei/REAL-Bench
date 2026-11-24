@@ -1,0 +1,94 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0417_jg3u6t2tqos0yuxkxicoxqw08wsfvrtw",
+  "model": "deepseek-flash",
+  "input_sha256": "80c97ea202332f6f7446e672fc70b4c0d035f355c57abc80816c5244d31dbf17",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kåre Østensen",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-2946fafc-ed59-4573-9234-3342d0e599f7.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kåre Østensen"
+      ],
+      "active_vocabulary": {
+        "Kåre Østensen": 50
+      },
+      "vocabulary_sha256": "1979f7673d25224b440d5f822dd66e3af63ea548a5e23e388edbc715e969823d"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kåre Østensen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Café Opéra",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Café Opéra",
+        "Åse Kjellstad"
+      ],
+      "active_vocabulary": {
+        "Kåre Østensen": 50,
+        "Café Opéra": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "168299db2e50a1b45f33325ac3af49ab742ade889ae665c1555bbf2eb51c38cd"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kåre Østensen",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Restaurant Schrøder",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Café Opéra",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_dinner.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Restaurant Schrøder"
+      ],
+      "active_vocabulary": {
+        "Kåre Østensen": 50,
+        "Café Opéra": 50,
+        "Åse Kjellstad": 50,
+        "Restaurant Schrøder": 50
+      },
+      "vocabulary_sha256": "bd0debdb69cbf9fcb691d7370400399ff0a188684e1127e0827c047fbad02806"
+    }
+  ]
+}

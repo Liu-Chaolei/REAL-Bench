@@ -1,0 +1,120 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0362_1v5mft3yjd8ikn998xxq5v20zyl885px",
+  "model": "deepseek-flash",
+  "input_sha256": "bd819a12ef2fdb758d50f777bd8c26cb791db03c41a4e54ed9fd3312ef3237fa",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Aurélien Dumont",
+        "Aurélien",
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Aurélien Dumont": 50,
+        "Aurélien": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "32e2c6efbecc6779464dc31968e354d86a26428fc96fff5e571bae1a9fbc71da"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Émile Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_lookup_emile.arguments.user_name",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Karel Vandenberghe",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Family Dinners",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Émile",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Karel",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liesbeth",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Émile Vandenberghe",
+        "Karel Vandenberghe",
+        "Family Dinners",
+        "Émile",
+        "Karel",
+        "Leuven",
+        "Liesbeth"
+      ],
+      "active_vocabulary": {
+        "Aurélien Dumont": 50,
+        "Aurélien": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Émile Vandenberghe": 50,
+        "Karel Vandenberghe": 50,
+        "Family Dinners": 50,
+        "Émile": 50,
+        "Karel": 50,
+        "Leuven": 50,
+        "Liesbeth": 50
+      },
+      "vocabulary_sha256": "6474a170517adf55ed4a506148c86b08b3e531ef4d50527e85678f00fd718857"
+    }
+  ]
+}

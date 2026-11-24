@@ -1,0 +1,117 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0890_p76cdsnqnnh13rpy12z7sj6f55ngiqdy",
+  "model": "deepseek-flash",
+  "input_sha256": "6235ee83c1d0d22d0ac2afc23d830aa74cda8adea71ad87b0d8607b1af58b106",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kendrick Lamar",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "KDOT",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "They Not Like Us",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Adriana Oliveira Silva",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kvido Nováček",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Klaus Grüner",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kendrick Lamar",
+        "KDOT",
+        "They Not Like Us",
+        "Adriana Oliveira Silva",
+        "Kvido Nováček",
+        "Klaus Grüner"
+      ],
+      "active_vocabulary": {
+        "Kendrick Lamar": 50,
+        "KDOT": 50,
+        "They Not Like Us": 50,
+        "Adriana Oliveira Silva": 50,
+        "Kvido Nováček": 50,
+        "Klaus Grüner": 50
+      },
+      "vocabulary_sha256": "dd19ed4ee546fd3b8018372487e4a87842dac4c360b720eedcdf442269081295"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kvido",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kvido"
+      ],
+      "active_vocabulary": {
+        "Kendrick Lamar": 50,
+        "KDOT": 50,
+        "They Not Like Us": 50,
+        "Adriana Oliveira Silva": 50,
+        "Kvido Nováček": 50,
+        "Klaus Grüner": 50,
+        "Kvido": 50
+      },
+      "vocabulary_sha256": "5a3c94ef4ad0243a7a7a564d150470c109a12adce4b285d50f233bec15086e74"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Adriana",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Adriana"
+      ],
+      "active_vocabulary": {
+        "Kendrick Lamar": 50,
+        "KDOT": 50,
+        "They Not Like Us": 50,
+        "Adriana Oliveira Silva": 50,
+        "Kvido Nováček": 50,
+        "Klaus Grüner": 50,
+        "Kvido": 50,
+        "Adriana": 50
+      },
+      "vocabulary_sha256": "912b0b77c242fce0ec6074646df0fd045b7a9820b9265596dc1ac739799e18d6"
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0692_0titoqjx5uvsesykkno5fxxjccpdd827",
+  "model": "deepseek-flash",
+  "input_sha256": "3b99014ad2b23d0f301e9c6f4da839b67469b1a043344c99eedc279949c037a4",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-06d1bae6-bf38-4dd9-91f6-f55fab67ed1e.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Luís Marques",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-06d1bae6-bf38-4dd9-91f6-f55fab67ed1e.arguments.attendees[1]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-06d1bae6-bf38-4dd9-91f6-f55fab67ed1e.arguments.attendees[2]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Çağla Öztürk",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-06d1bae6-bf38-4dd9-91f6-f55fab67ed1e.arguments.attendees[3]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Çağla",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-06d1bae6-bf38-4dd9-91f6-f55fab67ed1e.arguments.attendees[3]",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur",
+        "Luís Marques",
+        "Jamila Fernandes",
+        "Çağla Öztürk",
+        "Çağla"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Luís Marques": 50,
+        "Jamila Fernandes": 50,
+        "Çağla Öztürk": 50,
+        "Çağla": 50
+      },
+      "vocabulary_sha256": "05837abbe073fc7e2348f4b7c4534263e59609b1c788fe75ea8ca5eb2018f654"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Luís Marques": 50,
+        "Jamila Fernandes": 50,
+        "Çağla Öztürk": 50,
+        "Çağla": 50
+      },
+      "vocabulary_sha256": "05837abbe073fc7e2348f4b7c4534263e59609b1c788fe75ea8ca5eb2018f654"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Luís",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Jamila",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Çağla",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Aurélien",
+        "Luís",
+        "Jamila"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Luís Marques": 50,
+        "Jamila Fernandes": 50,
+        "Çağla Öztürk": 50,
+        "Çağla": 50,
+        "Aurélien": 50,
+        "Luís": 50,
+        "Jamila": 50
+      },
+      "vocabulary_sha256": "df34a2465adaf7f0eee22fafe8daf2ac89fbb9424cfb7c844157d57473535f88"
+    }
+  ]
+}

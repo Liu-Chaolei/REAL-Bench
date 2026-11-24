@@ -1,0 +1,117 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0557_mhvj0o3r72swizncucvfirqtkqogtcff",
+  "model": "deepseek-flash",
+  "input_sha256": "b075039a595937149f3d48e06d536555a2229a8bc43ba786250c0dfa179b57ca",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélie Janssens",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b30ebe0f-29f8-447e-8870-58d587b02bc7.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Museum in Basel",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b30ebe0f-29f8-447e-8870-58d587b02bc7.arguments.location",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ultra Dash",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Aurélie Janssens",
+        "Museum in Basel",
+        "Ultra Dash"
+      ],
+      "active_vocabulary": {
+        "Aurélie Janssens": 50,
+        "Museum in Basel": 50,
+        "Ultra Dash": 50
+      },
+      "vocabulary_sha256": "ae6259f193675d68a000a452a2a84dc4aa3ca57dd89273a4316ff4a60838a8d0"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélie Janssens",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Mittlere Strasse 12, 4058 Basel, Switzerland",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_quote.arguments.start_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Museum in Basel",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_quote.arguments.end_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Mittlere Strasse 12, 4058 Basel, Switzerland"
+      ],
+      "active_vocabulary": {
+        "Aurélie Janssens": 50,
+        "Museum in Basel": 50,
+        "Ultra Dash": 50,
+        "Mittlere Strasse 12, 4058 Basel, Switzerland": 50
+      },
+      "vocabulary_sha256": "6a4a9e6a03347c40ca9b2e1c0f0d1849672f9cbc1a9990ae1f6d5b9a6f6e1281"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélie Janssens",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Mittlere Strasse 12, 4058 Basel, Switzerland",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Museum in Basel",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Aurélie Janssens": 50,
+        "Museum in Basel": 50,
+        "Ultra Dash": 50,
+        "Mittlere Strasse 12, 4058 Basel, Switzerland": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "58a62d8fcb2b1e1a6b48f886494bd5496514630dc3604f01e75957639220489a"
+    }
+  ]
+}

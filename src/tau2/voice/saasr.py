@@ -159,7 +159,7 @@ class SaasrSession:
                 raise ValueError("Invalid prepared SAASR audio")
         self.fade = round(DEFAULT_SAASR_CROSSFADE_SECONDS * PCM_SAMPLE_RATE)
         self.target_peak = 10 ** (self.scene["peak_dbfs"] / 20)
-        for name in ("main", "background", "noise", "mixed"):
+        for name in ("main", "background", "noise", "interaction_insert", "mixed"):
             self.writers[name] = WaveTrack(
                 self.directory / f"played_{name}.wav", floating=name != "mixed"
             )
@@ -244,14 +244,21 @@ class SaasrSession:
         )
         return offset
 
-    def mix_tick(self, chunk, count):
-        """Mix every emitted tick, even during Agent speech or user inference."""
+    def mix_tick(self, chunk, count, interaction_insert=None):
+        """Mix every emitted tick, including an optional interaction insert."""
         main = np.zeros(count, dtype=np.float64)
         if chunk is not None:
             pcm = np.frombuffer(chunk.get_audio_bytes(), dtype="<i2")
             main[: len(pcm)] = pcm / 32767
             meta = (chunk.raw_data or {}).get("saasr_foreground", {})
             main /= meta.get("transport_gain", 1.0)
+        interaction = (
+            np.asarray(interaction_insert, dtype=np.float64)
+            if interaction_insert is not None
+            else np.zeros(count, dtype=np.float64)
+        )
+        if len(interaction) != count:
+            raise ValueError("SAASR interaction insert has an incompatible length")
         background = np.zeros(count)
         noise = np.zeros(count)
         if self.started:
@@ -260,7 +267,7 @@ class SaasrSession:
                 loop_audio(self.noise, self.position, count, self.fade)
                 * self.noise_gain
             )
-        mixed = main + background + noise
+        mixed = main + background + noise + interaction
         gain = min(1.0, self.target_peak / max(float(np.max(np.abs(mixed))), 1e-12))
         token = next(self.tick_counter)
         self.pending_ticks[token] = {
@@ -268,6 +275,7 @@ class SaasrSession:
                 "main": main * gain,
                 "background": background * gain,
                 "noise": noise * gain,
+                "interaction_insert": interaction * gain,
                 "mixed": mixed * gain,
             },
             "sample": self.position,
@@ -283,7 +291,7 @@ class SaasrSession:
     def record(self):
         """Serializable source and playback evidence for saved trajectories."""
         return {
-            "version": "saasr-continuous-v1",
+            "version": "saasr-continuous-v2",
             "scene_yaml": str(self.scene_yaml),
             "seed": self.seed,
             "scene": getattr(self, "scene", None),
@@ -298,9 +306,7 @@ class SaasrSession:
         }
 
     def record_sent(self, chunk):
-        """Preserve the actual post-codec outgoing samples as playable PCM."""
-        import audioop
-
+        """Preserve the actual SAASR PCM samples sent to the Agent."""
         if chunk is None:
             return
         token = (chunk.raw_data or {}).get("saasr_output_id")
@@ -315,9 +321,7 @@ class SaasrSession:
         self.sent_samples += frame["count"]
         self.sent_scene_samples += frame["count"] if frame["started"] else 0
         data = chunk.get_audio_bytes()
-        if chunk.audio_format.encoding == AudioEncoding.ULAW:
-            data = audioop.ulaw2lin(data, 2)
-        elif not chunk.audio_format.is_pcm16:
+        if not chunk.audio_format.is_pcm16:
             raise ValueError("Unsupported SAASR transport encoding")
         if "sent" not in self.writers:
             self.writers["sent"] = WaveTrack(

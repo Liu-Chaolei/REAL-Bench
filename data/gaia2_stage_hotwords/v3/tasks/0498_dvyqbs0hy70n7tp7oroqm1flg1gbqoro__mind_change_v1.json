@@ -1,0 +1,103 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0498_dvyqbs0hy70n7tp7oroqm1flg1gbqoro__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "90ac2e780eceb8f70fe43b4132cd3e93cc31c9bffb50b1804896e19c54dc9dfc",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7a89efa8-3d36-4f98-a0bb-1825aa74c85a.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kenji",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7a89efa8-3d36-4f98-a0bb-1825aa74c85a.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Aurélie",
+        "Kenji"
+      ],
+      "active_vocabulary": {
+        "Aurélie": 50,
+        "Kenji": 50
+      },
+      "vocabulary_sha256": "fdc650bead4bb03b17879bc4356805301036e9bc8d2e3e39c9f143bde0a13644"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kenji",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélie": 50,
+        "Kenji": 50
+      },
+      "vocabulary_sha256": "fdc650bead4bb03b17879bc4356805301036e9bc8d2e3e39c9f143bde0a13644"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Léon Vandenberghe",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rik Vandenberghe",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Yumi Nakahara",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_leon.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Léon Vandenberghe",
+        "Rik Vandenberghe",
+        "Yumi Nakahara",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Aurélie": 50,
+        "Kenji": 50,
+        "Léon Vandenberghe": 50,
+        "Rik Vandenberghe": 50,
+        "Yumi Nakahara": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "c5d641d6817ee2cb0b12b497b4527a17a40b3952c8ffbf7194e499391f94c774"
+    }
+  ]
+}

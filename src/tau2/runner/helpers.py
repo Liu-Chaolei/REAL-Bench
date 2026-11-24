@@ -20,8 +20,8 @@ from tau2.data_model.simulation import (
     VoiceRunConfig,
 )
 from tau2.data_model.tasks import Task
+from tau2.domains.gaia2.language_runtime import LoadedLanguage
 from tau2.environment.environment import EnvironmentInfo
-from tau2.multilingual.runtime import LoadedLanguage
 from tau2.registry import RegistryInfo, registry
 from tau2.utils.utils import get_commit_hash, get_now
 
@@ -169,45 +169,6 @@ def get_info(
     prompt_version = None
     catalog_version = None
     spell_detection_version = None
-    if config.elicitation is not None:
-        from tau2.domains.intake.complications import COMPLICATION_CATALOG_VERSION
-        from tau2.domains.intake.folds import SCORING_VERSION
-        from tau2.domains.intake.prompts import (
-            ELICITATION_PROMPT_VERSION,
-            get_user_guidelines,
-        )
-
-        global_user_sim_guidelines = get_user_guidelines(
-            is_voice=is_voice,
-            agent_directed=config.elicitation.strategy
-            == ElicitationStrategy.AGENT_DIRECTED,
-        )
-        scoring_version = SCORING_VERSION
-        prompt_version = ELICITATION_PROMPT_VERSION
-        catalog_version = COMPLICATION_CATALOG_VERSION
-        if (
-            is_voice
-            and config.elicitation.strategy == ElicitationStrategy.AGENT_DIRECTED
-        ):
-            from tau2.domains.intake.spell_events import SPELL_EVENT_DETECTION_VERSION
-
-            spell_detection_version = SPELL_EVENT_DETECTION_VERSION
-
-    if config.elicitation is not None and config.language not in {None, "en"}:
-        from tau2.domains.intake.localized import (
-            LOCALIZED_STIMULUS_VERSION,
-            NATIVE_SCORING_VERSION,
-        )
-        from tau2.domains.intake.prompts import LOCALIZED_ELICITATION_PROMPT_VERSION
-        from tau2.domains.intake.spell_events import (
-            NATIVE_SPELL_EVENT_DETECTION_VERSION,
-        )
-
-        scoring_version = NATIVE_SCORING_VERSION
-        prompt_version = LOCALIZED_ELICITATION_PROMPT_VERSION
-        catalog_version = LOCALIZED_STIMULUS_VERSION
-        if spell_detection_version is not None:
-            spell_detection_version = NATIVE_SPELL_EVENT_DETECTION_VERSION
 
     user_info = UserInfo(
         implementation=config.effective_user,
@@ -233,7 +194,7 @@ def get_info(
         llm=agent_llm,
         llm_args=agent_llm_args,
     )
-    from tau2.multilingual.runtime import (
+    from tau2.domains.gaia2.language_runtime import (
         language_environment_kwargs,
         pin_language_artifacts,
         resolve_task,
@@ -248,12 +209,7 @@ def get_info(
     # Resolve the run-level policy for its channel/retrieval settings. Individual
     # simulations also record their task-specific policy (e.g. callback orders).
     info_env_kwargs: dict = language_environment_kwargs(loaded)
-    if config.elicitation is not None:
-        info_env_kwargs["channel"] = "voice" if is_voice else "text"
-        info_env_kwargs["strategy"] = config.elicitation.strategy
-    if config.domain == "gaia2" and getattr(
-        config, "gaia2_allow_stale_runtime", False
-    ):
+    if config.domain == "gaia2" and getattr(config, "gaia2_allow_stale_runtime", False):
         info_env_kwargs["allow_stale_runtime"] = True
     if getattr(config, "retrieval_config", None) is not None:
         info_env_kwargs["retrieval_variant"] = config.retrieval_config
@@ -272,7 +228,6 @@ def get_info(
         or config.elicitation.strategy != ElicitationStrategy.AGENT_DIRECTED
     )
     return Info(
-        persistent_task_config=config.persistent_task_config,
         active_metrics=config.active_metrics,
         user_audio_renderer=(
             config.audio_native_config.saasr_identity if is_voice else None

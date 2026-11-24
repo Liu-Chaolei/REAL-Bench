@@ -1,0 +1,167 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0473_9avip2x8ppep164alnyncq7rhv7rry2q",
+  "model": "deepseek-flash",
+  "input_sha256": "74aa529b2124dac303968323559fe00e7a974a7360a8359f510e74ed8b948522",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Elara",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-8773510f-5c69-4c65-931d-1b124174fa1a.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6baf14d5-6f01-4a1c-83e1-3afd3020d8a1.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Émile",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-4c25d6f3-e190-44aa-be5c-89ce190d2fe9.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liesbeth",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-8773510f-5c69-4c65-931d-1b124174fa1a.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3b262495-71e6-4247-b533-5c8b9bc9f198.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Leuven Station",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Sint-Michielsstraat 23",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-88a7e37d-1d49-4877-bbed-baf8ab6691ea.arguments.start_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Design Review Meeting",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3b262495-71e6-4247-b533-5c8b9bc9f198.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Elara",
+        "Aurélien",
+        "Émile",
+        "Liesbeth",
+        "Liesbeth Vandenberghe",
+        "Leuven Station",
+        "Sint-Michielsstraat 23",
+        "Leuven",
+        "Design Review Meeting"
+      ],
+      "active_vocabulary": {
+        "Elara": 50,
+        "Aurélien": 50,
+        "Émile": 50,
+        "Liesbeth": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Leuven Station": 50,
+        "Sint-Michielsstraat 23": 50,
+        "Leuven": 50,
+        "Design Review Meeting": 50
+      },
+      "vocabulary_sha256": "a55d633422bf93c4a037c9688fc995ae5c036907f599cc78034260c08fe30007"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Émile Vandenberghe",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Elara Vandenberghe",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Sint-Michielsstraat 23",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Aurélien Dumont",
+        "Émile Vandenberghe",
+        "Elara Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Elara": 50,
+        "Aurélien": 50,
+        "Émile": 50,
+        "Liesbeth": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Leuven Station": 50,
+        "Sint-Michielsstraat 23": 50,
+        "Leuven": 50,
+        "Design Review Meeting": 50,
+        "Aurélien Dumont": 50,
+        "Émile Vandenberghe": 50,
+        "Elara Vandenberghe": 50
+      },
+      "vocabulary_sha256": "d76a63f8016478f8a632973eddfac919380dae6fdb3a6b483b485f3212120364"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Elara": 50,
+        "Aurélien": 50,
+        "Émile": 50,
+        "Liesbeth": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Leuven Station": 50,
+        "Sint-Michielsstraat 23": 50,
+        "Leuven": 50,
+        "Design Review Meeting": 50,
+        "Aurélien Dumont": 50,
+        "Émile Vandenberghe": 50,
+        "Elara Vandenberghe": 50
+      },
+      "vocabulary_sha256": "d76a63f8016478f8a632973eddfac919380dae6fdb3a6b483b485f3212120364"
+    }
+  ]
+}

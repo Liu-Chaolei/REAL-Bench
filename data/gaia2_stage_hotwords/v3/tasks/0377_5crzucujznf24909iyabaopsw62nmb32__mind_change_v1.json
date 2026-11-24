@@ -1,0 +1,230 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0377_5crzucujznf24909iyabaopsw62nmb32__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "9ac1a594352fa2f734a1134b9eeb5f64418ceefb8a5d058f5ad5fd61ad3f8138",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Petra",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a88dde72-dcf7-42e2-a482-e17f32d78b23.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a88dde72-dcf7-42e2-a482-e17f32d78b23.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Petra",
+        "Matěj Nováček"
+      ],
+      "active_vocabulary": {
+        "Petra": 50,
+        "Matěj Nováček": 50
+      },
+      "vocabulary_sha256": "6b7f6b5229bcec9b827f91bc48e8b8944edd273a07f1ed3bbc70c7250c633ec0"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kvido Nováček",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Plzeň Penthouse",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liberec Luxury",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Prague 6 Apartment",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Praha 1 Luxury",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Prague 1 Luxury",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Prague Luxury",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ostrava Luxury",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kvido Nováček",
+        "Plzeň Penthouse",
+        "Liberec Luxury",
+        "Prague 6 Apartment",
+        "Praha 1 Luxury",
+        "Prague 1 Luxury",
+        "Prague Luxury",
+        "Ostrava Luxury"
+      ],
+      "active_vocabulary": {
+        "Petra": 50,
+        "Matěj Nováček": 50,
+        "Kvido Nováček": 50,
+        "Plzeň Penthouse": 50,
+        "Liberec Luxury": 50,
+        "Prague 6 Apartment": 50,
+        "Praha 1 Luxury": 50,
+        "Prague 1 Luxury": 50,
+        "Prague Luxury": 50,
+        "Ostrava Luxury": 50
+      },
+      "vocabulary_sha256": "200e80f4a86b28e779fa58de1227e29cc6bdf7f951ab8046692cd21458d4f5b3"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Prague Luxury",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_comparison.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Plzeň Penthouse",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_comparison.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Pařížská 123",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_comparison.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liberec Luxury",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_comparison.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Perštýn",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_comparison.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ostrava Luxury",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_comparison.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Českobratrská 12",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_comparison.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Praha 1 Luxury",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_comparison.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Jindřišská",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_comparison.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Prague 6 Apartment",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_comparison.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Nad Šárkou 20",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_comparison.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Prague 1 Luxury",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_comparison.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "ul. Pařížská 12",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_comparison.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Křižíkova 14",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_comparison.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Pařížská 123",
+        "Perštýn",
+        "Českobratrská 12",
+        "Jindřišská",
+        "Nad Šárkou 20",
+        "ul. Pařížská 12",
+        "Křižíkova 14"
+      ],
+      "active_vocabulary": {
+        "Petra": 50,
+        "Matěj Nováček": 50,
+        "Kvido Nováček": 50,
+        "Plzeň Penthouse": 50,
+        "Liberec Luxury": 50,
+        "Prague 6 Apartment": 50,
+        "Praha 1 Luxury": 50,
+        "Prague 1 Luxury": 50,
+        "Prague Luxury": 50,
+        "Ostrava Luxury": 50,
+        "Pařížská 123": 50,
+        "Perštýn": 50,
+        "Českobratrská 12": 50,
+        "Jindřišská": 50,
+        "Nad Šárkou 20": 50,
+        "ul. Pařížská 12": 50,
+        "Křižíkova 14": 50
+      },
+      "vocabulary_sha256": "5bc55e8259efb5538131c7f59a73a0ca791ad06a69b54911158ea3f43a91ad15"
+    }
+  ]
+}

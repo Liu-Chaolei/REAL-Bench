@@ -1,7 +1,6 @@
 from collections import defaultdict
 from pathlib import Path
 
-from tau2.config import DEFAULT_LOCALIZE_DB
 from tau2.data_model.simulation import Results
 from tau2.data_model.tasks import Task
 from tau2.registry import registry
@@ -31,27 +30,15 @@ def _expected_tasks(results: Results) -> list[Task]:
     if info.language is None:
         return registry.get_tasks_loader(domain)("base")
 
-    from tau2.multilingual.runtime import TaskSelection, load_language
+    from tau2.domains.gaia2.language_runtime import TaskSelection, load_language
 
-    canonical_voice_v1 = (
-        info.benchmark is not None and info.benchmark.benchmark_version == "voice-v1"
-    )
     loaded = load_language(
         info.language,
         domain,
         mode="voice" if info.audio_native_config is not None else "text",
-        localize_db=DEFAULT_LOCALIZE_DB
-        if info.localize_db is None
-        else info.localize_db,
         selection=TaskSelection(
             task_split_name="base",
-            # Intake strategies select their own task variant (as at run time).
-            task_kwargs={"strategy": info.elicitation.strategy.value}
-            if info.elicitation is not None
-            else {},
         ),
-        pack_extension=info.pack_extension,
-        **({"canonical_tasks": True} if canonical_voice_v1 else {}),
     )
     return loaded.tasks
 

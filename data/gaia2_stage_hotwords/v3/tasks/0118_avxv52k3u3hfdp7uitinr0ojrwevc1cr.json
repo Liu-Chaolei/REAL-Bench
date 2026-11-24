@@ -1,0 +1,223 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0118_avxv52k3u3hfdp7uitinr0ojrwevc1cr",
+  "model": "deepseek-flash",
+  "input_sha256": "4b9ef0d6a242b8f2447fe13f6964d3af83416f58ab7746ca54b8033af7c5f515",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Akira Kübler",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Akira",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurelian",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1d07aba8-ebbf-4881-b4e4-62ab432eda03.arguments.subject",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a9f7086f-8db0-4d39-bb24-f4f49dba6907.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Collaborative Historical Project",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Iceland_2020.jpg",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a9f7086f-8db0-4d39-bb24-f4f49dba6907.arguments.attachment_paths[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "India_2022.jpg",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a9f7086f-8db0-4d39-bb24-f4f49dba6907.arguments.attachment_paths[1]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Indonesia_2021.jpg",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a9f7086f-8db0-4d39-bb24-f4f49dba6907.arguments.attachment_paths[2]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "complex_dag.png",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-78559d87-f1ab-4482-9ce5-e4f3b15d1a58.arguments.path1",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Akira Kübler",
+        "Akira",
+        "Aurelian",
+        "Ursula Wiederkehr",
+        "Collaborative Historical Project",
+        "Iceland_2020.jpg",
+        "India_2022.jpg",
+        "Indonesia_2021.jpg",
+        "complex_dag.png"
+      ],
+      "active_vocabulary": {
+        "Akira Kübler": 50,
+        "Akira": 50,
+        "Aurelian": 50,
+        "Ursula Wiederkehr": 50,
+        "Collaborative Historical Project": 50,
+        "Iceland_2020.jpg": 50,
+        "India_2022.jpg": 50,
+        "Indonesia_2021.jpg": 50,
+        "complex_dag.png": 50
+      },
+      "vocabulary_sha256": "b7cbc7d58c9fabdbbf7c8569716bf9e96e0915341c696a3a390e9dbb8a8528b2"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien De Smet",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien Janssens",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Dinant",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Basel",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Aurélien De Smet",
+        "Aurélien Janssens",
+        "Dinant",
+        "Basel",
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Akira Kübler": 50,
+        "Akira": 50,
+        "Aurelian": 50,
+        "Ursula Wiederkehr": 50,
+        "Collaborative Historical Project": 50,
+        "Iceland_2020.jpg": 50,
+        "India_2022.jpg": 50,
+        "Indonesia_2021.jpg": 50,
+        "complex_dag.png": 50,
+        "Aurélien De Smet": 50,
+        "Aurélien Janssens": 50,
+        "Dinant": 50,
+        "Basel": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "01a1f52e3d0deb15ecfa38a544bb47d06f2985ce72080fe9d67d11e8e300630c"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien De Smet",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Dinant",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Café zum Kirschgarten",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Basel",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Historical Society",
+          "kind": "organization",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Café zum Kirschgarten",
+        "Katarzyna Zielińska",
+        "Historical Society"
+      ],
+      "active_vocabulary": {
+        "Akira Kübler": 50,
+        "Akira": 50,
+        "Aurelian": 50,
+        "Ursula Wiederkehr": 50,
+        "Collaborative Historical Project": 50,
+        "Iceland_2020.jpg": 50,
+        "India_2022.jpg": 50,
+        "Indonesia_2021.jpg": 50,
+        "complex_dag.png": 50,
+        "Aurélien De Smet": 50,
+        "Aurélien Janssens": 50,
+        "Dinant": 50,
+        "Basel": 50,
+        "Aurélien": 50,
+        "Café zum Kirschgarten": 50,
+        "Katarzyna Zielińska": 50,
+        "Historical Society": 50
+      },
+      "vocabulary_sha256": "bb9f68c8920a1f6c04618f66aa2a7311dddd8ed0f6de30222409954b033d9d98"
+    }
+  ]
+}

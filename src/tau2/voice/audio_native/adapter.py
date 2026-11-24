@@ -94,8 +94,12 @@ class DiscreteTimeAdapter(ABC):
 
         self.tick_duration_ms = tick_duration_ms
         self.audio_format = audio_format or TELEPHONY_AUDIO_FORMAT
+        self.playback_audio_format = self.audio_format
         self.bytes_per_tick = int(
             self.audio_format.bytes_per_second * tick_duration_ms / 1000
+        )
+        self.playback_bytes_per_tick = int(
+            self.playback_audio_format.bytes_per_second * tick_duration_ms / 1000
         )
         self.send_audio_instant = send_audio_instant
         self.realtime_pacing = False
@@ -279,9 +283,14 @@ class DiscreteTimeAdapter(ABC):
                 audio_sent_duration_ms=len(user_audio)
                 / self.audio_format.bytes_per_second
                 * 1000,
-                bytes_per_tick=self.bytes_per_tick,
-                bytes_per_second=self.audio_format.bytes_per_second,
-                silence_byte=TELEPHONY_ULAW_SILENCE,
+                bytes_per_tick=self.playback_bytes_per_tick,
+                bytes_per_second=self.playback_audio_format.bytes_per_second,
+                silence_byte=(
+                    TELEPHONY_ULAW_SILENCE
+                    if self.playback_audio_format.encoding == AudioEncoding.ULAW
+                    else b"\0" * self.playback_audio_format.sample_width
+                ),
+                playback_audio_format=self.playback_audio_format,
             )
         live = self._stream_result
         live.tick_number = tick_number
@@ -306,6 +315,7 @@ class DiscreteTimeAdapter(ABC):
         result = live.model_copy(deep=True)
         result.media_timeline = rows
         result.media_origin = self._media_origin
+        result.playback_audio_format = self.playback_audio_format
         result.media_cutoff = ended
         result.speech_config = dict(ACTIVITY_CONFIG)
         result.speech_intervals = [list(r) for r in self._speech_intervals]
@@ -314,21 +324,22 @@ class DiscreteTimeAdapter(ABC):
         # Compatibility audio is a presentation view, including leading silence.
         output_rows = [r for r in rows if r["role"] == "agent"]
         start = min([tick_start] + [r["start"] for r in output_rows])
-        count = round((ended - start) * self.audio_format.bytes_per_second)
-        width = self.audio_format.bytes_per_sample
+        media_format = self.playback_audio_format
+        count = round((ended - start) * media_format.bytes_per_second)
+        width = media_format.bytes_per_sample
         count -= count % width
         silence = {
             AudioEncoding.ULAW: TELEPHONY_ULAW_SILENCE,
             AudioEncoding.ALAW: b"\xd5",
             AudioEncoding.PCM_U8: b"\x80",
         }.get(
-            self.audio_format.encoding, b"\0" * self.audio_format.sample_width
-        ) * self.audio_format.channels
+            media_format.encoding, b"\0" * media_format.sample_width
+        ) * media_format.channels
         output = bytearray(silence * (count // width))
         result.agent_audio_chunks = []
         for row in output_rows:
             data = base64.b64decode(row["audio"])
-            offset = round((row["start"] - start) * self.audio_format.bytes_per_second)
+            offset = round((row["start"] - start) * media_format.bytes_per_second)
             offset -= offset % width
             output[offset : offset + len(data)] = data
             result.agent_audio_chunks.append((data, row.get("response_id")))
@@ -336,7 +347,7 @@ class DiscreteTimeAdapter(ABC):
         result.playback_start_monotonic = start
         result.played_stream_start_ms = self._played_stream_ms
         result.played_stream_duration_ms = (
-            len(output) / self.audio_format.bytes_per_second * 1000
+            len(output) / media_format.bytes_per_second * 1000
         )
         self._played_stream_ms += result.played_stream_duration_ms
         result.speaking_now = bool(
@@ -418,16 +429,18 @@ class DiscreteTimeAdapter(ABC):
 
         for row in self.playback.drain(until):
             pcm = convert_to_pcm16(
-                AudioData(data=base64.b64decode(row["audio"]), format=self.audio_format)
+                AudioData(
+                    data=base64.b64decode(row["audio"]), format=self.playback_audio_format
+                )
             ).data
-            if self.audio_format.channels == 2:
+            if self.playback_audio_format.channels == 2:
                 import audioop
 
                 pcm = audioop.tomono(pcm, 2, 0.5, 0.5)
             if (
                 self._speech_end is None
                 or abs(row["start"] - self._speech_end)
-                > 1 / self.audio_format.sample_rate
+                > 1 / self.playback_audio_format.sample_rate
             ):
                 if self._speech_origin is not None:
                     self._speech_intervals.extend(
@@ -436,7 +449,9 @@ class DiscreteTimeAdapter(ABC):
                             for a, b in self._speech_detector.feed(b"", final=True)
                         ]
                     )
-                self._speech_detector = SpeechDetector(self.audio_format.sample_rate)
+                self._speech_detector = SpeechDetector(
+                    self.playback_audio_format.sample_rate
+                )
                 self._speech_origin = row["start"]
             intervals = self._speech_detector.feed(pcm)
             self._speech_intervals.extend(

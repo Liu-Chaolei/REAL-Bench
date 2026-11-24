@@ -95,15 +95,11 @@ def try_resume(
     # Auto-detect format from on-disk state
     fmt = Results._detect_format(save_path)
     prev_simulation_results = Results.load(save_path)
-    if (
-        prev_simulation_results.info.persistent_task_config
-        != simulation_results.info.persistent_task_config
-    ):
-        raise ValueError("Persistent task conditions changed; use a new output path")
+    from tau2.persistent_tasks.availability import reject_retired_results
 
-    if (
-        getattr(prev_simulation_results.info, "active_metrics", None)
-        != getattr(simulation_results.info, "active_metrics", None)
+    reject_retired_results(prev_simulation_results)
+    if getattr(prev_simulation_results.info, "active_metrics", None) != getattr(
+        simulation_results.info, "active_metrics", None
     ):
         raise ValueError("Active metric conditions changed; use a new output path")
 
@@ -123,7 +119,7 @@ def try_resume(
             "Voice instruction prompt revision changed; use a new output path"
         )
 
-    from tau2.multilingual.runtime import validate_language_resume
+    from tau2.domains.gaia2.language_runtime import validate_language_resume
 
     validate_language_resume(prev_simulation_results.info, simulation_results.info)
 

@@ -1,0 +1,163 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0993_3ahejw0mjny98xxbohxa397r69k99f5t",
+  "model": "deepseek-flash",
+  "input_sha256": "482f7714e42237fccfa8a9ee4969741c038575ab58840cd1ace12ac0f11bab9e",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Severance",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Brno",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Božetěchova 3, 110 00 Prague 1",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-af22fd49-5e49-4e48-ad92-2d1c7b0ec382.arguments.end_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "602 00 Brno-střed, Czechia",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Eliška",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b8c4cc99-59a4-4d23-a038-e1b09f5afac6.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Lukáš",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ea360651-fbc8-4cbc-a2f8-038cd41e168d.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kvido",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-88bb16be-ac75-4709-ba2f-d581331751bf.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Severance",
+        "Brno",
+        "Božetěchova 3, 110 00 Prague 1",
+        "602 00 Brno-střed, Czechia",
+        "Eliška",
+        "Lukáš",
+        "Kvido"
+      ],
+      "active_vocabulary": {
+        "Severance": 50,
+        "Brno": 50,
+        "Božetěchova 3, 110 00 Prague 1": 50,
+        "602 00 Brno-střed, Czechia": 50,
+        "Eliška": 50,
+        "Lukáš": 50,
+        "Kvido": 50
+      },
+      "vocabulary_sha256": "d913df392f4befaee946caa98cd73542c0f5d337ad3014944cfc31bdb7a3bf62"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Severance Watch Party",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kvido",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Brno",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Severance Watch Party"
+      ],
+      "active_vocabulary": {
+        "Severance": 50,
+        "Brno": 50,
+        "Božetěchova 3, 110 00 Prague 1": 50,
+        "602 00 Brno-střed, Czechia": 50,
+        "Eliška": 50,
+        "Lukáš": 50,
+        "Kvido": 50,
+        "Severance Watch Party": 50
+      },
+      "vocabulary_sha256": "72cab4d9b51860c55762933982153dd65ef4c6d6945a3ba050c67f6263e2ab98"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Cab pickup reminder",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kvido",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Brno",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Božetěchova 3, 110 00 Prague 1",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_cal.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "602 00 Brno-střed, Czechia",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_cal.arguments.location",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Cab pickup reminder"
+      ],
+      "active_vocabulary": {
+        "Severance": 50,
+        "Brno": 50,
+        "Božetěchova 3, 110 00 Prague 1": 50,
+        "602 00 Brno-střed, Czechia": 50,
+        "Eliška": 50,
+        "Lukáš": 50,
+        "Kvido": 50,
+        "Severance Watch Party": 50,
+        "Cab pickup reminder": 50
+      },
+      "vocabulary_sha256": "c873d62e8be4e236505591a960a26f673d6b3644f0d2bb012f053e0569bfb62a"
+    }
+  ]
+}

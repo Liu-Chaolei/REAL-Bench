@@ -1,0 +1,103 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0733_3jysuon7htwbvn53ht2j0uts62ktj2nu",
+  "model": "deepseek-flash",
+  "input_sha256": "0e6db8797bf3615ad69ccce774b2596840c2ef4f132859fd2a77003fb98a0715",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-06f1b6f5-3078-40a3-887a-96edc26c2b0f.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "57ad47d6526d51ff839408a62045b67ce6e4481a234d063feb674bd86e888c43"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Karel Vandenberghe",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_2.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zoom",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Aurélien Dumont",
+        "Karel Vandenberghe",
+        "Zoom"
+      ],
+      "active_vocabulary": {
+        "Liesbeth Vandenberghe": 50,
+        "Aurélien Dumont": 50,
+        "Karel Vandenberghe": 50,
+        "Zoom": 50
+      },
+      "vocabulary_sha256": "3d0ac6661efbd131e446730ecd61603dfb7b73e6b14a127dd2c9a78c7d81ec7f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_5.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Karel Vandenberghe",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_5.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zoom Meeting",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_5.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Zoom Meeting"
+      ],
+      "active_vocabulary": {
+        "Liesbeth Vandenberghe": 50,
+        "Aurélien Dumont": 50,
+        "Karel Vandenberghe": 50,
+        "Zoom": 50,
+        "Zoom Meeting": 50
+      },
+      "vocabulary_sha256": "0dbf9db21bfe175111b860154e7dea0e9b46b0aaced159f9a2b5fe9ab4e915f2"
+    }
+  ]
+}

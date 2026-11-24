@@ -3,37 +3,39 @@
 from pathlib import Path
 from typing import Literal
 
-from pydantic import Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from tau2.data_model.benchmark import BenchmarkFrame
-from tau2.data_model.judges import (
-    ContractModel,
-    JudgeCatalog,
-)
 from tau2.data_model.simulation import Results, SimulationRun, TerminationReason
 
 QUALITY_FILE_NAME = "benchmark-quality.json"
 QUALITY_BENCHMARKS = frozenset({"voice-v2"})
 
 
-class CallQuality(ContractModel):
+class CallQuality(BaseModel):
     """Operational provenance for a single call."""
+
+    model_config = ConfigDict(extra="forbid")
 
     simulation_id: str
     task_id: str
     evaluation_log: dict = Field(default_factory=dict)
 
 
-class CellQuality(ContractModel):
+class CellQuality(BaseModel):
     """Call evidence in the log, without independent performance metrics."""
+
+    model_config = ConfigDict(extra="forbid")
 
     language: str
     domain: str
     evaluation_log: dict = Field(default_factory=dict)
 
 
-class BenchmarkQuality(ContractModel):
+class BenchmarkQuality(BaseModel):
     """Current quality output; historical v1 sidecars are not rewritten."""
+
+    model_config = ConfigDict(extra="forbid")
 
     schema_version: Literal["benchmark-quality-v4"] = "benchmark-quality-v4"
     benchmark_version: str
@@ -119,10 +121,8 @@ def _scored(simulation: SimulationRun) -> bool:
     }
 
 
-def collect_quality(
-    root: Path, frame: BenchmarkFrame, catalog: JudgeCatalog
-) -> BenchmarkQuality:
-    """Collect call provenance only; catalog is retained for callers."""
+def collect_quality(root: Path, frame: BenchmarkFrame) -> BenchmarkQuality:
+    """Collect call provenance without invoking an independent judge."""
 
     cells = []
     for cell in frame.cells:

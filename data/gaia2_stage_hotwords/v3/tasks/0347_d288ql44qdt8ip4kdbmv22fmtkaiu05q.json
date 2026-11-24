@@ -1,0 +1,116 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0347_d288ql44qdt8ip4kdbmv22fmtkaiu05q",
+  "model": "deepseek-flash",
+  "input_sha256": "5f5c23a15d7e9b16778252fc6ee52828764ddc2c760058aeb17429708281df03",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kritsana Wongprasert",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-80b7a93b-ed9a-4487-8978-3804aa2c9ff0.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Narong",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-d345a9bb-6598-483b-89ac-a1ad2885d0de.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Nonglak",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b4d999d7-9632-4d63-a23a-56d212cbe3c2.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Krittin",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5ccae0bf-2805-43f0-a280-4c4fdb6c4167.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-d345a9bb-6598-483b-89ac-a1ad2885d0de.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kritsana Wongprasert",
+        "Narong",
+        "Nonglak",
+        "Krittin",
+        "Åse Kjellstad"
+      ],
+      "active_vocabulary": {
+        "Kritsana Wongprasert": 50,
+        "Narong": 50,
+        "Nonglak": 50,
+        "Krittin": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "070f0247494888fb264335caf7cd5c19a3147d638aeab35472e064a5fa43cd30"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kritsana Wongprasert",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_rebook_zoom.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kritsana",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kritsana"
+      ],
+      "active_vocabulary": {
+        "Kritsana Wongprasert": 50,
+        "Narong": 50,
+        "Nonglak": 50,
+        "Krittin": 50,
+        "Åse Kjellstad": 50,
+        "Kritsana": 50
+      },
+      "vocabulary_sha256": "98e7024fd44de70971db9e6d2d9d5e95e4426fe4a4698f48c430f422793b2a0e"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kritsana Wongprasert",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kritsana",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kritsana Wongprasert": 50,
+        "Narong": 50,
+        "Nonglak": 50,
+        "Krittin": 50,
+        "Åse Kjellstad": 50,
+        "Kritsana": 50
+      },
+      "vocabulary_sha256": "98e7024fd44de70971db9e6d2d9d5e95e4426fe4a4698f48c430f422793b2a0e"
+    }
+  ]
+}

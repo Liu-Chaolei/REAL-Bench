@@ -1,5 +1,7 @@
 # GAIA2 Persistent Task：Qwen 实施计划
 
+> 历史文档：旧 Persistent Task 配置、运行、恢复和重新评分入口已退役。本文保留设计与实验来源，不作为当前操作指南；当前运行见 [动态异步交互](gaia2-async.md)。
+
 > 实施状态：代码链路及真实 Qwen 验证已完成，十个候选均执行过真实验证。
 > 当前八题形成完整测量，四题原生管理行为通过；两道 failed 查询缺少真实状态证据，保留未验证。
 > 详见 [实现与验证结果](qwen-persistent-results.md) 和 [运行说明](qwen-persistent-validation.md)。

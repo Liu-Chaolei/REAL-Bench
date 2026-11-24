@@ -1,0 +1,56 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0200_ndh9u8xbnpvnqmyy787miw5glb62ecu0",
+  "model": "deepseek-flash",
+  "input_sha256": "3b74cf6e44df4119dd1a73adf44bc6a896cbbb76cb52914d584d5ca64ec1fddc",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-2c9361e9-1cac-453d-b8b7-5d21f0628afb.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Astrid"
+      ],
+      "active_vocabulary": {
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "d10c3d5b6ed49e46866cce69105c4b25402126b3a4c0c3dc71b2d1cf6079b9ef"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "d10c3d5b6ed49e46866cce69105c4b25402126b3a4c0c3dc71b2d1cf6079b9ef"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Astrid Kjær",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Astrid Kjær"
+      ],
+      "active_vocabulary": {
+        "Astrid": 50,
+        "Astrid Kjær": 50
+      },
+      "vocabulary_sha256": "b38e0d9e6c960402fcef1b830cf6f0e0c35d31a5e482b0f7f837597c368ae23c"
+    }
+  ]
+}

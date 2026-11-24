@@ -501,6 +501,14 @@ class RunSettings(BaseModel):
         ),
     ]
 
+    @model_validator(mode="before")
+    @classmethod
+    def reject_retired_persistent_config(cls, value):
+        """Reject retired runtime settings instead of silently ignoring them."""
+        if isinstance(value, dict) and value.get("persistent_task_config") is not None:
+            raise ValueError("persistent_task_config is retired; use active_metrics")
+        return value
+
     metrics_config: Optional[dict] = Field(
         default=None, description="Resolved independent diagnostic profile."
     )
@@ -511,9 +519,6 @@ class RunSettings(BaseModel):
         default=False,
         description="Development-only Gaia2 mode that skips runtime seal comparison.",
     )
-    persistent_task_config: Optional[dict] = Field(
-        default=None, description="Private native backend task scenario."
-    )
 
     @model_serializer(mode="wrap")
     def serialize_optional_metrics(self, handler):
@@ -523,8 +528,6 @@ class RunSettings(BaseModel):
             data.pop("metrics_config", None)
         if self.active_metrics is None:
             data.pop("active_metrics", None)
-        if self.persistent_task_config is None:
-            data.pop("persistent_task_config", None)
         return data
 
     verbose_logs: Annotated[

@@ -12,7 +12,7 @@ Writes, under web/leaderboard/public/submissions/:
   ``benchmark-pass3.json`` (``BenchmarkPass3``).
 - ``schema_benchmark_quality.json``: the voice-v2 package's
   ``benchmark-quality.json`` (``BenchmarkQuality``). The package's other files
-  are ``BenchmarkSubmission`` and ``BenchmarkDiagnostics`` exports.
+  include the ``BenchmarkSubmission`` export.
 
 With --check, verifies the files are up-to-date and exits non-zero if not.
 """

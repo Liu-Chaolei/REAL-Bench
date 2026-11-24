@@ -1,0 +1,60 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0082_ydvnfzlpi1maeeoui4pljydk6xvkq9xm",
+  "model": "deepseek-flash",
+  "input_sha256": "4f46724daccba671f1849d37e7a1072962d773e4f83a479c8adb7d2dcc3bf3c5",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Private Project",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Private Project"
+      ],
+      "active_vocabulary": {
+        "Private Project": 50
+      },
+      "vocabulary_sha256": "3b111522499d2a6005dded72ab13e7062a447770eadc177dfc26021c3849d71e"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Private Project",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Private Project": 50
+      },
+      "vocabulary_sha256": "3b111522499d2a6005dded72ab13e7062a447770eadc177dfc26021c3849d71e"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Private Project",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Private Project": 50
+      },
+      "vocabulary_sha256": "3b111522499d2a6005dded72ab13e7062a447770eadc177dfc26021c3849d71e"
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0827_nt5fp2r2f3a4i2xsujzqdtny0b15xpng",
+  "model": "deepseek-flash",
+  "input_sha256": "1a18cdcec5dcd2737a198f8406431d46bd549c170ade81d5a6c8a2f78056b2c7",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Liverpool Mini Studio",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-2dbb73ab-fb61-488b-9da4-ade37311b721.arguments.title",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool City Centre",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7e852f5f-d30b-4170-9be0-8265a5ea7e70.arguments.title",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool Luxe",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-9e4c9755-caef-4ca8-93b1-c9804c82c17c.arguments.title",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool Waterfront",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f8fd0de4-fb8b-4345-9fcc-ef71fe8c7c80.arguments.title",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool City Centre Apartment",
+          "kind": "custom_name",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-1dd1fe83-45c0-4c31-9dec-336511f4df1f.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool Waterfront Apartment",
+          "kind": "custom_name",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-1dd1fe83-45c0-4c31-9dec-336511f4df1f.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Liverpool Mini Studio",
+        "Liverpool City Centre",
+        "Liverpool Luxe",
+        "Liverpool Waterfront",
+        "Liverpool City Centre Apartment",
+        "Liverpool Waterfront Apartment"
+      ],
+      "active_vocabulary": {
+        "Liverpool Mini Studio": 50,
+        "Liverpool City Centre": 50,
+        "Liverpool Luxe": 50,
+        "Liverpool Waterfront": 50,
+        "Liverpool City Centre Apartment": 50,
+        "Liverpool Waterfront Apartment": 50
+      },
+      "vocabulary_sha256": "8a97e9813ed9988c0ad3766d2b116ef55ab42cb73422a2fe5e73914f0fec866c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Liverpool Luxe",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool Mini Studio",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool City Centre Apartment",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool Waterfront",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_waterfront_new.arguments.title",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Liverpool Mini Studio": 50,
+        "Liverpool City Centre": 50,
+        "Liverpool Luxe": 50,
+        "Liverpool Waterfront": 50,
+        "Liverpool City Centre Apartment": 50,
+        "Liverpool Waterfront Apartment": 50
+      },
+      "vocabulary_sha256": "8a97e9813ed9988c0ad3766d2b116ef55ab42cb73422a2fe5e73914f0fec866c"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Liverpool Waterfront Apartment",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool Mini Studio",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool City Centre Apartment",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Liverpool Mini Studio": 50,
+        "Liverpool City Centre": 50,
+        "Liverpool Luxe": 50,
+        "Liverpool Waterfront": 50,
+        "Liverpool City Centre Apartment": 50,
+        "Liverpool Waterfront Apartment": 50
+      },
+      "vocabulary_sha256": "8a97e9813ed9988c0ad3766d2b116ef55ab42cb73422a2fe5e73914f0fec866c"
+    }
+  ]
+}

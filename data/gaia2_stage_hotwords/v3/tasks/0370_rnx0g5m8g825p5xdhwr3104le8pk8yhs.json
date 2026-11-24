@@ -1,0 +1,134 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0370_rnx0g5m8g825p5xdhwr3104le8pk8yhs",
+  "model": "deepseek-flash",
+  "input_sha256": "4daf8fa3f8f0e38d0bd5fa013d9b828da3505f0fe4c2c74efc0727c40f301b6c",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Luís Silva",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f544ea5f-ddfa-49ff-a06e-4c47c6ee0706.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Luís",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-75a97f6f-3150-4cd2-ac93-eac61b26998f.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Steak Palace",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kaia",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5c31dff0-3452-4bc4-86ea-fbcce6aaf65a.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Nalani",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-8b10c8a2-4304-475b-8610-774ffc176551.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Jamila",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-32a5e555-fdba-49ac-b9f2-a93033892a5b.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Luís Silva",
+        "Luís",
+        "Steak Palace",
+        "Kaia",
+        "Nalani",
+        "Jamila"
+      ],
+      "active_vocabulary": {
+        "Luís Silva": 50,
+        "Luís": 50,
+        "Steak Palace": 50,
+        "Kaia": 50,
+        "Nalani": 50,
+        "Jamila": 50
+      },
+      "vocabulary_sha256": "b87251d9eb15f7abd17671e53fb082061008024e560c7829c990bb58d9ad7ac4"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Luís Silva",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Luís",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Steak Palace",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Luís Silva": 50,
+        "Luís": 50,
+        "Steak Palace": 50,
+        "Kaia": 50,
+        "Nalani": 50,
+        "Jamila": 50
+      },
+      "vocabulary_sha256": "b87251d9eb15f7abd17671e53fb082061008024e560c7829c990bb58d9ad7ac4"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Luís",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Luís Silva",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Steak Palace",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Luís Silva": 50,
+        "Luís": 50,
+        "Steak Palace": 50,
+        "Kaia": 50,
+        "Nalani": 50,
+        "Jamila": 50
+      },
+      "vocabulary_sha256": "b87251d9eb15f7abd17671e53fb082061008024e560c7829c990bb58d9ad7ac4"
+    }
+  ]
+}

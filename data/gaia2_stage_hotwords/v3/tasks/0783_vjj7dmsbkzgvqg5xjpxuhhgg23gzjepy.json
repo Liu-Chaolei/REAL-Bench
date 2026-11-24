@@ -1,0 +1,56 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0783_vjj7dmsbkzgvqg5xjpxuhhgg23gzjepy",
+  "model": "deepseek-flash",
+  "input_sha256": "b2e641273777d86aa3818d47ceafcd75ed0dfcb278a0a2946f112d43d9916460",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Astrid Kjær",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Spend Day with Granddaughters",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Astrid Kjær",
+        "Spend Day with Granddaughters"
+      ],
+      "active_vocabulary": {
+        "Astrid Kjær": 50,
+        "Spend Day with Granddaughters": 50
+      },
+      "vocabulary_sha256": "acaf14262cf0d3894b7dbb1c2e46d0513564d635da43a3b7b385c637c1f41184"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid Kjær": 50,
+        "Spend Day with Granddaughters": 50
+      },
+      "vocabulary_sha256": "acaf14262cf0d3894b7dbb1c2e46d0513564d635da43a3b7b385c637c1f41184"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid Kjær": 50,
+        "Spend Day with Granddaughters": 50
+      },
+      "vocabulary_sha256": "acaf14262cf0d3894b7dbb1c2e46d0513564d635da43a3b7b385c637c1f41184"
+    }
+  ]
+}

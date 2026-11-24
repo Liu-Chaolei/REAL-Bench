@@ -1,0 +1,73 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0047_jzjvioclcihsg7ypz5uzi9o5e3o10nx8",
+  "model": "deepseek-flash",
+  "input_sha256": "d470dd6af67407f906de35fe5e8b09c4c5723c650c987a5587f4ff57e693de37",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Saskia",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-111d6b2e-6e5c-42b2-82d9-21961f7f4710.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Saskia"
+      ],
+      "active_vocabulary": {
+        "Saskia": 50
+      },
+      "vocabulary_sha256": "78debc45551c8a45c55edd5a0b4addf5e1d258d358e66648b9bb9114ce3f70d3"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Saskia",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Saskia": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "5ed6f46c609b6c8fb8f26283b256299a22b8b8d32422bd81720cd646b78d6b0f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Saskia Vandermeersch",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Saskia Vandermeersch"
+      ],
+      "active_vocabulary": {
+        "Saskia": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Saskia Vandermeersch": 50
+      },
+      "vocabulary_sha256": "a73c5e97b3849875118a37ed96d2db975fb221dec94d2903a522e052999f0bba"
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # GAIA2 persistent task 后续实施计划
 
+> 历史文档：旧 Persistent Task 配置、运行、恢复和重新评分入口已退役。本文保留设计与实验来源，不作为当前操作指南；当前运行见 [动态异步交互](gaia2-async.md)。
+
 ## 目标
 
 把当前 10 道 draft 样本和 prototype 代码推进成一套可以接入不同 Audio Agent 后端的 persistent task 评测机制。

@@ -84,6 +84,7 @@ class ScenarioRuntime:
         self._event_ordinals = {event.id: i for i, event in enumerate(spec.events)}
         self.notifications: list[dict] = []
         self.user_inputs: list[tuple[str, str]] = []
+        self.user_input_metadata: dict[str, dict[str, str | None]] = {}
         self.failure: BaseException | None = None
         self._origin: float | None = None
         self._manual: float | None = 0.0
@@ -300,6 +301,22 @@ class ScenarioRuntime:
         with self.lock:
             self._delivery_listeners.append(listener)
 
+    def queue_user_input(
+        self,
+        event_id: str,
+        text: str,
+        *,
+        source: str = "scenario",
+        purpose: str = "request",
+    ) -> None:
+        """Queue a user request while retaining its mechanism provenance."""
+        with self.lock:
+            self.user_inputs.append((event_id, text))
+            self.user_input_metadata[event_id] = {
+                "source": source,
+                "purpose": purpose,
+            }
+
     def _match_text_fields(self, pairs):
         return all(
             self.semantic_matcher(actual, expected) for actual, expected in pairs
@@ -404,7 +421,18 @@ class ScenarioRuntime:
     ) -> None:
         """Observe actual speech delivery; future captions never count."""
         with self.lock:
-            self.record(kind, result=text, event_id=event_id, event_time=delivered_at)
+            metadata = self.user_input_metadata.get(
+                event_id or "",
+                {"source": "scenario", "purpose": "scripted_request"},
+            )
+            self.record(
+                kind,
+                result=text,
+                event_id=event_id,
+                event_time=delivered_at,
+                source=metadata.get("source") if kind == "user" else None,
+                purpose=metadata.get("purpose") if kind == "user" else None,
+            )
             when = self.time() if delivered_at is None else delivered_at
             for listener in list(self._delivery_listeners):
                 listener(kind, text, event_id, when)
@@ -486,7 +514,12 @@ class ScenarioRuntime:
                     )
                     if event.kind == "user":
                         if event.id not in self._released_inputs:
-                            self.user_inputs.append((event.id, arguments["content"]))
+                            self.queue_user_input(
+                                event.id,
+                                arguments["content"],
+                                source="scenario",
+                                purpose="scripted_request",
+                            )
                             self._released_inputs.add(event.id)
                         continue  # Delivery, rather than release, completes input.
                     with self.operation() as started:

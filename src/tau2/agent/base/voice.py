@@ -1,7 +1,7 @@
 import random
 import uuid
 from copy import deepcopy
-from typing import Generic, TypeVar
+from typing import Generic, Optional, TypeVar
 
 from loguru import logger
 from pydantic import BaseModel
@@ -32,7 +32,7 @@ class VoiceState(BaseModel):
 
     model_config = {"arbitrary_types_allowed": True}
 
-    noise_generator: BackgroundNoiseGenerator
+    noise_generator: Optional[BackgroundNoiseGenerator] = None
 
 
 VoiceStateType = TypeVar("VoiceStateType", bound=VoiceState)

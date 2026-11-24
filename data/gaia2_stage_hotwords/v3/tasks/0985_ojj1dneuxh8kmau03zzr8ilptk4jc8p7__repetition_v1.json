@@ -1,0 +1,84 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0985_ojj1dneuxh8kmau03zzr8ilptk4jc8p7__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "bd6ac64636df4602dd739cf89275c9fde707e466410811711d2e31dd3f165d0a",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaitlyn Nguyen-Tran",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kaya Nakoda",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rémi LaFleur",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kaitlyn Nguyen-Tran",
+        "Kaya Nakoda",
+        "Rémi LaFleur"
+      ],
+      "active_vocabulary": {
+        "Kaitlyn Nguyen-Tran": 50,
+        "Kaya Nakoda": 50,
+        "Rémi LaFleur": 50
+      },
+      "vocabulary_sha256": "e83844c9960e628c7559ce7819f7b93334f284c3b0cbdc28c5e71588521db363"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaori Nakahara",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kaori Nakahara"
+      ],
+      "active_vocabulary": {
+        "Kaitlyn Nguyen-Tran": 50,
+        "Kaya Nakoda": 50,
+        "Rémi LaFleur": 50,
+        "Kaori Nakahara": 50
+      },
+      "vocabulary_sha256": "b8da0df2ec6e6e767a8b4a05aa14ac75bdbbe82e78e8733a2262a758a8424c82"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaori Nakahara",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kaitlyn Nguyen-Tran": 50,
+        "Kaya Nakoda": 50,
+        "Rémi LaFleur": 50,
+        "Kaori Nakahara": 50
+      },
+      "vocabulary_sha256": "b8da0df2ec6e6e767a8b4a05aa14ac75bdbbe82e78e8733a2262a758a8424c82"
+    }
+  ]
+}

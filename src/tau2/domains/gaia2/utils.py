@@ -91,24 +91,7 @@ def runtime_digest() -> str:
             "runner/simulation.py",
             "persistent_tasks/core/models.py",
             "persistent_tasks/core/observation.py",
-            "persistent_tasks/core/identity.py",
-            "persistent_tasks/core/projection.py",
-            "persistent_tasks/triggers/conditions.py",
-            "persistent_tasks/triggers/scheduler.py",
-            "persistent_tasks/triggers/release.py",
-            "persistent_tasks/triggers/windows.py",
-            "persistent_tasks/runtime/coordinator.py",
-            "persistent_tasks/runtime/replay.py",
-            "persistent_tasks/runtime/evidence.py",
-            "persistent_tasks/config.py",
-            "persistent_tasks/integration.py",
             "persistent_tasks/adapters/qwen.py",
-            "evaluator/persistent_tasks/grader.py",
-            "evaluator/persistent_tasks/operation.py",
-            "evaluator/persistent_tasks/state_result.py",
-            "evaluator/persistent_tasks/reply.py",
-            "evaluator/persistent_tasks/coverage.py",
-            "evaluator/persistent_tasks/overlay.py",
             "environment/environment.py",
             "environment/scenario.py",
             "environment/replay.py",
@@ -140,8 +123,6 @@ def runtime_digest() -> str:
     for relative in (
         "persistent_tasks/core",
         "persistent_tasks/adapters",
-        "persistent_tasks/runtime",
-        "persistent_tasks/legacy",
     ):
         paths.extend((package / relative).glob("*.py"))
     paths.extend(
@@ -154,8 +135,6 @@ def runtime_digest() -> str:
     )
     digest = hashlib.sha256(GAIA2_VERSION.encode())
     from tau2.config import (
-        DEFAULT_PERSISTENT_TASK_MAX_WAIT_SECONDS,
-        DEFAULT_PERSISTENT_TASK_RELEASE_DELAY_SECONDS,
         DEFAULT_QWEN_AGENT_BACKEND_EVENT_QUEUE_SIZE,
         DEFAULT_SCENARIO_DRAIN_SECONDS,
         DEFAULT_SCENARIO_EVIDENCE_CHARS,
@@ -174,8 +153,6 @@ def runtime_digest() -> str:
                 DEFAULT_SCENARIO_EVIDENCE_CHARS,
                 DEFAULT_SCENARIO_STATE_MATCH_LIMIT,
                 DEFAULT_USER_CANDIDATE_RETRIES,
-                DEFAULT_PERSISTENT_TASK_MAX_WAIT_SECONDS,
-                DEFAULT_PERSISTENT_TASK_RELEASE_DELAY_SECONDS,
                 DEFAULT_QWEN_AGENT_BACKEND_EVENT_QUEUE_SIZE,
             ]
         )

@@ -3,7 +3,7 @@
 Maintainer-only. The release calls predate the current matrix layout and some
 recorded condition fields, so ``tau2 submit prepare <matrix-root>`` cannot read
 them. This adapter reads the saved exports (``trajectories/<lang>/<domain>/``)
-and their saved judge verdicts as raw JSON, checks them against the published
+as raw JSON, checks them against the published
 frame, and writes the same package a matrix submission produces. It never runs
 a simulation or a judge, and it must never qualify an incomplete new run.
 
@@ -27,14 +27,7 @@ from tau2.data_model.benchmark import (
     TaskTrial,
     TrialStatus,
 )
-from tau2.data_model.judges import (
-    PlanAction,
-    PlannedVerdict,
-    StoredVerdict,
-    SuitePlan,
-)
 from tau2.data_model.simulation import SimulationRun
-from tau2.judges.submission import JUDGED_BENCHMARKS, export_diagnostics
 from tau2.metrics.benchmark import summarize
 from tau2.runner.pass3 import CROSSED_CONDITIONS, STABLE_INFO_FIELDS
 from tau2.runner.presets import binding_revision, load_cell_language, load_frame
@@ -62,7 +55,7 @@ from tau2.scripts.leaderboard.benchmark_quality import (
 )
 
 if TYPE_CHECKING:
-    from tau2.multilingual.runtime import LoadedLanguage
+    from tau2.domains.gaia2.language_runtime import LoadedLanguage
 
 EVIDENCE = "historical-voice-v2-2026-10-02"
 CORRECTION_FORMAT = "voice-v2-gemini-retry-correction-v1"
@@ -417,123 +410,12 @@ def _validate_source_correction(root: Path) -> None:
             raise ValueError("corrected simulation differs from source correction")
 
 
-def _load_verdicts(
-    judges_roots: list[Path], language: str, simulation_id: str
-) -> list[StoredVerdict]:
-    """Exactly one judge root holds each scored call's saved verdict file."""
-    paths = [
-        path
-        for root in judges_roots
-        if (path := root / language / f"{simulation_id}.json").is_file()
-    ]
-    if len(paths) != 1:
-        raise ValueError(
-            f"{language}/{simulation_id}: expected one saved verdict file, "
-            f"found {len(paths)}"
-        )
-    rows = [
-        StoredVerdict.model_validate(row) for row in json.loads(paths[0].read_text())
-    ]
-    measures = [row.identity.measure for row in rows]
-    if len(measures) != len(set(measures)):
-        raise ValueError(f"{paths[0]}: duplicate judge measure")
-    if any(row.identity.input.simulation_id != simulation_id for row in rows):
-        raise ValueError(f"{paths[0]}: verdict simulation ID mismatch")
-    return rows
-
-
-def _judge_plan(
-    scored: list[str], verdicts: dict[str, list[StoredVerdict]], measures: list[str]
-) -> SuitePlan:
-    """Every saved measure of the language, for every scored call of the cell.
-
-    A call without a saved verdict for one of its language's measures stays
-    explicit as not judged; it is never dropped or counted as a failure.
-    """
-    items = []
-    for simulation_id in scored:
-        rows = {row.identity.measure: row for row in verdicts[simulation_id]}
-        call_input = next(iter(rows.values())).identity.input
-        for measure in measures:
-            row = rows.get(measure)
-            items.append(
-                PlannedVerdict(
-                    input=call_input,
-                    measure=measure,
-                    action=PlanAction.REUSE if row else PlanAction.MISSING,
-                    identity=row.identity if row else None,
-                    reason="Frozen 2026-10-02 release verdict"
-                    if row
-                    else "No saved release verdict",
-                )
-            )
-    return SuitePlan(items=items)
-
-
-def _saved_verdicts(
-    judges_roots: list[Path], scored_by_cell: dict[tuple[str, str], list[str]]
-) -> dict[str, dict[str, list[StoredVerdict]]]:
-    """The saved verdict rows of every scored call, by language and call."""
-    verdicts: dict[str, dict[str, list[StoredVerdict]]] = defaultdict(dict)
-    for (language, _), scored in scored_by_cell.items():
-        for simulation_id in scored:
-            verdicts[language][simulation_id] = _load_verdicts(
-                judges_roots, language, simulation_id
-            )
-    return verdicts
-
-
-def _judge_diagnostics(
-    official: BenchmarkFrame,
-    judges_roots: list[Path],
-    scored_by_cell: dict[tuple[str, str], list[str]],
-    verdicts: dict[str, dict[str, list[StoredVerdict]]],
-):
-    """Diagnostics from the saved verdicts of every scored call."""
-    for language, by_call in verdicts.items():
-        saved = {
-            path.stem
-            for root in judges_roots
-            for path in (root / language).glob("*.json")
-        }
-        if saved != set(by_call):
-            raise ValueError(f"{language}: judge IDs differ from scored calls")
-    catalogs = {
-        row.identity.catalog_revision
-        for by_call in verdicts.values()
-        for rows in by_call.values()
-        for row in rows
-    }
-    if len(catalogs) != 1:
-        raise ValueError(f"Saved verdicts mix judge catalogs: {sorted(catalogs)}")
-    cells = []
-    for (language, domain), scored in scored_by_cell.items():
-        measures = list(
-            dict.fromkeys(
-                row.identity.measure
-                for rows in verdicts[language].values()
-                for row in rows
-            )
-        )
-        stored = [row for call in scored for row in verdicts[language][call]]
-        cells.append(
-            (
-                language,
-                domain,
-                _judge_plan(scored, verdicts[language], measures),
-                stored,
-            )
-        )
-    return export_diagnostics(official, catalogs.pop(), cells)
-
-
 def _historical_quality(
     source_root: Path,
     official: BenchmarkFrame,
     scored_by_cell: dict[tuple[str, str], list[str]],
-    verdicts: dict[str, dict[str, list[StoredVerdict]]],
 ) -> BenchmarkQuality:
-    """Selectivity from each scored call's saved ticks."""
+    """Run provenance from each scored call."""
     cells = []
     for (language, domain), scored in scored_by_cell.items():
         directory = _cell_dir(source_root, language, domain) / "simulations"
@@ -549,28 +431,20 @@ def _historical_quality(
 
 def build_historical_package(
     source_root: Path,
-    judges_roots: list[Path] | None,
     submitter: SubmitterMetadata,
     benchmark: str = "voice",
 ) -> BenchmarkPackage:
     """Derive the 2.0 package for one provider's frozen export of one frame.
 
     ``benchmark`` is the published preset: ``voice`` (the 18 core cells, which
-    record their frame and are judged), or ``banking`` / ``entity``, whose
-    pre-manifest cells are derived and carry no judge diagnostics.
+    record their frame), or ``banking`` / ``entity``, whose pre-manifest
+    cells are derived from the release bindings.
     """
     if benchmark not in HISTORICAL_BENCHMARKS:
         raise ValueError(
             f"Historical Voice V2 packages one of {', '.join(HISTORICAL_BENCHMARKS)}"
         )
     official = load_frame(benchmark, num_trials=1)
-    judged = official.benchmark_version in JUDGED_BENCHMARKS
-    if judged != bool(judges_roots):
-        raise ValueError(
-            f"{official.benchmark_version} "
-            + ("requires" if judged else "takes no")
-            + " --judges-root"
-        )
     _validate_source_correction(source_root)
     trials: list[TaskTrial] = []
     sources: dict[str, str] = {}
@@ -585,7 +459,7 @@ def build_historical_package(
         data = json.loads(results_path.read_text())
         simulations = data["simulation_index"]
         info = data["info"]
-        if judged:
+        if benchmark == "voice":
             benchmark_info = info["benchmark"]
             audio_config = benchmark_info["conditions"]["audio_native_config"]
             task_mapping = _validate_cell_frame(
@@ -625,7 +499,6 @@ def build_historical_package(
     if len(conditions) != 1:
         raise ValueError("Voice V2 export mixes recorded run conditions")
     provider, model = agents.pop()
-    verdicts = _saved_verdicts(judges_roots, scored_by_cell) if judged else {}
     return BenchmarkPackage(
         metadata=PackageMetadata(
             **submitter.model_dump(),
@@ -639,11 +512,8 @@ def build_historical_package(
             summary=summarize(official, trials),
             sources=sources,
         ),
-        diagnostics=_judge_diagnostics(official, judges_roots, scored_by_cell, verdicts)
-        if judged
-        else None,
-        quality=_historical_quality(source_root, official, scored_by_cell, verdicts)
-        if judged and official.benchmark_version in QUALITY_BENCHMARKS
+        quality=_historical_quality(source_root, official, scored_by_cell)
+        if official.benchmark_version in QUALITY_BENCHMARKS
         else None,
         pass3=_historical_pass3(source_root, official, regular_cells)
         if official.benchmark_version in PASS3_BENCHMARKS
@@ -653,14 +523,13 @@ def build_historical_package(
 
 def prepare_historical_package(
     source_root: Path,
-    judges_roots: list[Path] | None,
     metadata_file: Path,
     output: Path,
     benchmark: str = "voice",
 ) -> BenchmarkPackage:
     """Write ``<output>/<name>/`` from the saved export; nothing is copied."""
     submitter = SubmitterMetadata.model_validate_json(metadata_file.read_text())
-    package = build_historical_package(source_root, judges_roots, submitter, benchmark)
+    package = build_historical_package(source_root, submitter, benchmark)
     destination = output / package.name
     if destination.exists():
         raise FileExistsError(f"destination already exists: {destination}")
@@ -672,10 +541,9 @@ def prepare_historical_package(
 def validate_historical_package(
     directory: Path,
     source_root: Path,
-    judges_roots: list[Path] | None,
     benchmark: str | None = None,
 ) -> BenchmarkPackage:
-    """Recompute the package from the saved export and verdicts.
+    """Recompute the package from the saved export.
 
     The preset is read from the package's frame; ``benchmark``, if given, must
     name the same one.
@@ -699,12 +567,10 @@ def validate_historical_package(
     submitter = SubmitterMetadata.model_validate(
         package.metadata.model_dump(include=set(SubmitterMetadata.model_fields))
     )
-    expected = build_historical_package(source_root, judges_roots, submitter, recorded)
+    expected = build_historical_package(source_root, submitter, recorded)
     expected.metadata.trajectories = package.metadata.trajectories
     if expected.submission != package.submission:
         raise ValueError("Submission differs from the saved release export")
-    if expected.diagnostics != package.diagnostics:
-        raise ValueError("Judge diagnostics differ from the saved release verdicts")
     if expected.quality != package.quality:
         raise ValueError("Call quality differs from the saved release calls")
     if expected.pass3 != package.pass3:

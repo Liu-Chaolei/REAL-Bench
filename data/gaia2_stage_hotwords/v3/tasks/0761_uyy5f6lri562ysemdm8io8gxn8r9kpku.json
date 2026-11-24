@@ -1,0 +1,76 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0761_uyy5f6lri562ysemdm8io8gxn8r9kpku",
+  "model": "deepseek-flash",
+  "input_sha256": "ba09bdecd5f253b6c0fe40324d2b3688b6995028b285bac920fa959875bf473a",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kazimierz Wojciechowski",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c48905d7-e50c-4c48-beaf-e1fe8ad99913.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kazimierz Wojciechowski",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Kazimierz Wojciechowski": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "86d6b0b5bdde3d447d929799b471b85d26af1f2253ad9e3be7f4de538ec3e7a8"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kazimierz Wojciechowski",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_hold.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kazimierz Wojciechowski": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "86d6b0b5bdde3d447d929799b471b85d26af1f2253ad9e3be7f4de538ec3e7a8"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kazimierz Wojciechowski",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kazimierz Wojciechowski": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "86d6b0b5bdde3d447d929799b471b85d26af1f2253ad9e3be7f4de538ec3e7a8"
+    }
+  ]
+}

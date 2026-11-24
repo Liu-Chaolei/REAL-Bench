@@ -38,4 +38,5 @@ integrations/qwen_audio_agent/run_hpc.sh smoke --domain gaia2 \
 它们按请求类型复用，不是固定题库。
 
 运行参数、证据和当前机制见 [动态异步机制](active-persistent-task-metric-plan.md)。
-旧固定 qpt 运行与报表属于历史记录，不再使用旧 ID 或固定数据脚本发起新评测。
+旧固定 qpt 和 `persistent_task_config` 运行入口已退役；已有结果仍可查看，
+不能恢复旧运行或自动重评分。

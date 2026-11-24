@@ -1,0 +1,177 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0448_zqydvk40g69ra4bro910dwpwfzmy2y9n__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "226750c959c8795d238b662cca7fdfb0e58e69b23602dcfd4a4c2754b8f64dcc",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Trondheim",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-72f777b1-563d-442c-91ab-2420ad73593e.arguments.subject",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Trondheim"
+      ],
+      "active_vocabulary": {
+        "Trondheim": 50
+      },
+      "vocabulary_sha256": "016bbb4743e3419305b742146d001a853c2a9e0704d27217e45af0f246060bfe"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Rohan",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Trondheim East",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_pet_friendly_shortlist.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Trondheim Terraces",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_pet_friendly_shortlist.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Trondheim Student Living",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_pet_friendly_shortlist.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Trondheim Leilighet",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_pet_friendly_shortlist.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Trondheim Modern Home",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_pet_friendly_shortlist.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email_pet_friendly_shortlist.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Rohan",
+        "Trondheim East",
+        "Trondheim Terraces",
+        "Trondheim Student Living",
+        "Trondheim Leilighet",
+        "Trondheim Modern Home",
+        "Åse Kjellstad"
+      ],
+      "active_vocabulary": {
+        "Trondheim": 50,
+        "Rohan": 50,
+        "Trondheim East": 50,
+        "Trondheim Terraces": 50,
+        "Trondheim Student Living": 50,
+        "Trondheim Leilighet": 50,
+        "Trondheim Modern Home": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "894cd4bf5d6815b953a303e889e19e3cf15dc785d19af375494cf1d4e1eb882e"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Rohan",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Trondheim Leilighet",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_viewing_request.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Trondheim University Apartments",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_viewing_request.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Trondheim Central",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_viewing_request.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Trondheim Student Housing",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_viewing_request.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Trondheim Tower",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_viewing_request.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Trondheim Town Centre",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_viewing_request.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Trondheim Modern Home",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_viewing_request.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_viewing_request.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Trondheim University Apartments",
+        "Trondheim Central",
+        "Trondheim Student Housing",
+        "Trondheim Tower",
+        "Trondheim Town Centre"
+      ],
+      "active_vocabulary": {
+        "Trondheim": 50,
+        "Rohan": 50,
+        "Trondheim East": 50,
+        "Trondheim Terraces": 50,
+        "Trondheim Student Living": 50,
+        "Trondheim Leilighet": 50,
+        "Trondheim Modern Home": 50,
+        "Åse Kjellstad": 50,
+        "Trondheim University Apartments": 50,
+        "Trondheim Central": 50,
+        "Trondheim Student Housing": 50,
+        "Trondheim Tower": 50,
+        "Trondheim Town Centre": 50
+      },
+      "vocabulary_sha256": "2ec74350fec52ee4167f7b609aa3818e3e198e72b806459d5a70db34a9373756"
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0036_eux8mnspf93qbuun9xvirb0prdiu62ed",
+  "model": "deepseek-flash",
+  "input_sha256": "95346c68b73be4cba04066d10d715515c0929bf0b572b5e6c26fcc27aa575d15",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Luísa",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Sebastião Salgado",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Lisbon Photoshoot",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Luísa",
+        "Sebastião Salgado",
+        "Lisbon Photoshoot"
+      ],
+      "active_vocabulary": {
+        "Luísa": 50,
+        "Sebastião Salgado": 50,
+        "Lisbon Photoshoot": 50
+      },
+      "vocabulary_sha256": "1b494dfd9dfc1922d45f3203a31b52ac5b21225d9a600f6577607b2795c76487"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Luísa Silva",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Sebastião Salgado",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Lisbon",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Stockholm",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Luísa Silva",
+        "Lisbon",
+        "Stockholm"
+      ],
+      "active_vocabulary": {
+        "Luísa": 50,
+        "Sebastião Salgado": 50,
+        "Lisbon Photoshoot": 50,
+        "Luísa Silva": 50,
+        "Lisbon": 50,
+        "Stockholm": 50
+      },
+      "vocabulary_sha256": "fde817bc410605783ce840c170a75fa778ca124d7f850f8f2bae8380de7bd19f"
+    }
+  ]
+}

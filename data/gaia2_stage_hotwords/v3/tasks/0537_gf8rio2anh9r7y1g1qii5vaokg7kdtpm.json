@@ -1,0 +1,115 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0537_gf8rio2anh9r7y1g1qii5vaokg7kdtpm",
+  "model": "deepseek-flash",
+  "input_sha256": "28bdf252e84fc772cc5c34816474cf3257f4319a3c37867a16f2fda519d0c8d4",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Trondheim Leilighet",
+          "kind": "place",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-219014fd-ee08-4776-8121-0956e1a9dc26.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Trondheim University Apartments",
+          "kind": "place",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-219014fd-ee08-4776-8121-0956e1a9dc26.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Trondheim Leilighet",
+        "Trondheim University Apartments"
+      ],
+      "active_vocabulary": {
+        "Trondheim Leilighet": 50,
+        "Trondheim University Apartments": 50
+      },
+      "vocabulary_sha256": "b16168014decfb27895135548e7999c26894aa62909829847ce18890588a0c9e"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Trondheim Leilighet",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Øvre Bakklandet 23",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Astrid Kleveland",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Øvre Bakklandet",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Øvre Bakklandet 23",
+        "Astrid Kleveland",
+        "Øvre Bakklandet"
+      ],
+      "active_vocabulary": {
+        "Trondheim Leilighet": 50,
+        "Trondheim University Apartments": 50,
+        "Øvre Bakklandet 23": 50,
+        "Astrid Kleveland": 50,
+        "Øvre Bakklandet": 50
+      },
+      "vocabulary_sha256": "a2e2d367688891724fbd6a67763b72bb7c1e758852a14ac2ad52dcd002a4e1f9"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Øvre Bakklandet 23",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Øvre Bakklandet 23, Trondheim",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Astrid",
+        "Øvre Bakklandet 23, Trondheim"
+      ],
+      "active_vocabulary": {
+        "Trondheim Leilighet": 50,
+        "Trondheim University Apartments": 50,
+        "Øvre Bakklandet 23": 50,
+        "Astrid Kleveland": 50,
+        "Øvre Bakklandet": 50,
+        "Astrid": 50,
+        "Øvre Bakklandet 23, Trondheim": 50
+      },
+      "vocabulary_sha256": "8fe5014efb9531b9fc51f9f96a9fb2a45808a076c4303007c56a55a8570595fb"
+    }
+  ]
+}

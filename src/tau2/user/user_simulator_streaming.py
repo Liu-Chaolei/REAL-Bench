@@ -71,6 +71,10 @@ from tau2.user.user_simulator_base import (
 from tau2.utils.llm_utils import generate
 from tau2.utils.transcript.linearization import merge_homogeneous_chunks
 from tau2.utils.utils import get_now
+from tau2.voice.interaction_inserts import (
+    InteractionInsertEngine,
+    PendingInteractionInsert,
+)
 from tau2.voice.synthesis.audio_effects.effects import StreamingTelephonyConverter
 from tau2.voice.synthesis.audio_effects.processor import (
     PendingEffectState,
@@ -141,6 +145,8 @@ class UserAudioStreamingState(
     out_of_turn_speech_generator: Optional[OutOfTurnSpeechGenerator] = None
 
     pending_effect: Optional[PendingEffectState] = None
+
+    interaction_insert: Optional[PendingInteractionInsert] = None
 
     telephony_converter: Optional[StreamingTelephonyConverter] = None
 
@@ -382,6 +388,7 @@ class VoiceStreamingUserSimulator(
         decision_model_args: Optional[dict] = None,
         silence_checkin_threshold: Optional[int] = None,
         saasr_session=None,
+        interaction_insert_config=None,
         dynamic_followup_config: DynamicFollowupConfig | None = None,
         hidden_intent_graph: HiddenGoalGraph | None = None,
         api_config_dir: str | None = None,
@@ -452,6 +459,18 @@ class VoiceStreamingUserSimulator(
         self.interruption_check_interval = interruption_check_interval
         self.realtime_generation = realtime_generation
         self.saasr_session = saasr_session
+        self.interaction_insert_engine = None
+        if saasr_session is not None and interaction_insert_config is not None:
+            speech_environment = self.voice_settings.speech_environment
+            insert_provider_config = interaction_insert_config.provider_config
+            self.interaction_insert_engine = InteractionInsertEngine(
+                synthesis_config=interaction_insert_config,
+                speech_config=interaction_insert_config.speech_effects_config,
+                persona_name=getattr(speech_environment, "persona_name", "default"),
+                voice_id=getattr(insert_provider_config, "voice_id", None),
+                sample_rate=PCM_SAMPLE_RATE,
+                seed=getattr(speech_environment, "voice_seed", 42),
+            )
         self.dynamic_followup_config = dynamic_followup_config
         self.hidden_intent_runtime = (
             HiddenIntentRuntime(hidden_intent_graph)
@@ -519,6 +538,15 @@ class VoiceStreamingUserSimulator(
         if audio_taps_dir is not None:
             from tau2.data_model.audio import TELEPHONY_SAMPLE_RATE
 
+            user_output_sample_rate = (
+                PCM_SAMPLE_RATE if saasr_session is not None else TELEPHONY_SAMPLE_RATE
+            )
+            user_output_encoding = (
+                AudioEncoding.PCM_S16LE
+                if saasr_session is not None
+                else AudioEncoding.ULAW
+            )
+
             self._audio_taps = {
                 # Pipeline-stage taps (existing)
                 "agent_input": AudioTap(
@@ -548,8 +576,8 @@ class VoiceStreamingUserSimulator(
                 "user_output": AudioTap(
                     "user_output",
                     audio_taps_dir,
-                    TELEPHONY_SAMPLE_RATE,
-                    AudioEncoding.ULAW,
+                    user_output_sample_rate,
+                    user_output_encoding,
                 ),
                 # Per-effect multitrack taps (time-aligned, same length)
                 "speech_only": AudioTap(
@@ -807,23 +835,15 @@ class VoiceStreamingUserSimulator(
         speech_env = self.voice_settings.speech_environment
 
         if self.saasr_session is not None:
-            # The scene renderer owns acoustic effects. Do not pre-generate old
-            # random speech inserts or initialize a second background source.
-            from tau2.voice.synthesis.audio_effects.noise_generator import (
-                BackgroundNoiseGenerator,
-            )
-
             return UserAudioStreamingState(
                 system_messages=self._initial_system_messages(),
                 messages=message_history,
-                noise_generator=BackgroundNoiseGenerator(
-                    silent_mode=True, sample_rate=PCM_SAMPLE_RATE
-                ),
-                telephony_converter=StreamingTelephonyConverter(
-                    input_sample_rate=PCM_SAMPLE_RATE
-                )
-                if speech_env.telephony_enabled
-                else None,
+                noise_generator=None,
+                effect_scheduler=None,
+                out_of_turn_speech_generator=None,
+                pending_effect=None,
+                interaction_insert=None,
+                telephony_converter=None,
                 backchannel_rng=random.Random(speech_env.voice_seed + 100),
             )
 
@@ -1425,6 +1445,9 @@ class VoiceStreamingUserSimulator(
         """
         if self.saasr_session is not None:
             return self._mix_saasr_chunk(chunk, state)
+
+        if state.noise_generator is None:
+            raise RuntimeError("Standard voice rendering requires a noise generator")
 
         current_time_ms = int(state.elapsed_samples * 1000 / PCM_SAMPLE_RATE)
 
@@ -2344,10 +2367,23 @@ class VoiceStreamingUserSimulator(
         return result
 
     def _mix_saasr_chunk(self, chunk, state):
-        """Add continuous scene audio even when no caller foreground is playing."""
+        """Add SAASR scene audio and an optional interaction insert."""
         from tau2.voice.saasr import SAASR_AUDIO_FORMAT
 
-        audio, output_id = self.saasr_session.mix_tick(chunk, self.chunk_size)
+        insert_result = None
+        if self.interaction_insert_engine is not None:
+            insert_result = self.interaction_insert_engine.process(
+                is_speech=bool(chunk and chunk.contains_speech),
+                num_samples=self.chunk_size,
+                pending=state.interaction_insert,
+            )
+            state.interaction_insert = insert_result.pending
+
+        audio, output_id = self.saasr_session.mix_tick(
+            chunk,
+            self.chunk_size,
+            interaction_insert=(insert_result.audio if insert_result else None),
+        )
         if chunk is None:
             chunk = UserMessage(
                 role="user",
@@ -2360,11 +2396,28 @@ class VoiceStreamingUserSimulator(
         chunk.audio_format = SAASR_AUDIO_FORMAT.model_copy()
         chunk.audio_path = None
         chunk.raw_data = {**(chunk.raw_data or {}), "saasr_output_id": output_id}
+        if insert_result is not None:
+            if insert_result.triggered is not None:
+                chunk.raw_data["interaction_insert"] = {
+                    "type": insert_result.triggered.type,
+                    "text": insert_result.triggered.text,
+                }
+            if insert_result.event is not None:
+                chunk.raw_data["interaction_insert_event"] = insert_result.event
+                self.saasr_session.events.append(
+                    {
+                        "event": "interaction_insert",
+                        **insert_result.event,
+                        "completed": insert_result.completed,
+                    }
+                )
+            if insert_result.discarded:
+                self.saasr_session.events.append(
+                    {"event": "interaction_insert_discarded"}
+                )
         chunk.raw_data.setdefault(
             "user_event_kind", "background" if not chunk.contains_speech else "formal"
         )
-        if state.telephony_converter is not None:
-            chunk = self._add_telephony_compression(chunk, state.telephony_converter)
         if self._audio_taps:
             self._audio_taps["user_output"].record_message(chunk)
         state.elapsed_samples += self.chunk_size

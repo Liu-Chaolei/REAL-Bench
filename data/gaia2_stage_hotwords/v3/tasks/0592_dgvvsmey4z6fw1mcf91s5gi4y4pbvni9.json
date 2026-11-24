@@ -1,0 +1,141 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0592_dgvvsmey4z6fw1mcf91s5gi4y4pbvni9",
+  "model": "deepseek-flash",
+  "input_sha256": "82c8ad04c5df8622067c00d1edd172ad2886c53eca34b0d87e2bdc654a18dafd",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Melbourne",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "University of Melbourne",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kaitlyn",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-d55ff20d-8895-4aa5-a291-06007c4997b4.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Melbourne",
+        "University of Melbourne",
+        "Astrid",
+        "Kaitlyn"
+      ],
+      "active_vocabulary": {
+        "Melbourne": 50,
+        "University of Melbourne": 50,
+        "Astrid": 50,
+        "Kaitlyn": 50
+      },
+      "vocabulary_sha256": "2aacd3d74d8572c2037794a83ae47262d73b04ed4e04ca84769c0332932b9908"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Melbourne Relocation Review",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Akira Tanaka",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kaitlyn Nguyen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Melbourne",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Melbourne Relocation Review",
+        "Akira Tanaka",
+        "Kaitlyn Nguyen"
+      ],
+      "active_vocabulary": {
+        "Melbourne": 50,
+        "University of Melbourne": 50,
+        "Astrid": 50,
+        "Kaitlyn": 50,
+        "Melbourne Relocation Review": 50,
+        "Akira Tanaka": 50,
+        "Kaitlyn Nguyen": 50
+      },
+      "vocabulary_sha256": "9d5db0656331b013d18e897dd5a3f66bbe8beb92c6e8a149f9b3d6d9cf6e1bb2"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Melbourne Relocation Follow-up",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kaitlyn Nguyen",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Akira",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Melbourne",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Melbourne Relocation Follow-up",
+        "Akira"
+      ],
+      "active_vocabulary": {
+        "Melbourne": 50,
+        "University of Melbourne": 50,
+        "Astrid": 50,
+        "Kaitlyn": 50,
+        "Melbourne Relocation Review": 50,
+        "Akira Tanaka": 50,
+        "Kaitlyn Nguyen": 50,
+        "Melbourne Relocation Follow-up": 50,
+        "Akira": 50
+      },
+      "vocabulary_sha256": "d16ca98451a9779f06f9bddf5c26139ad971b43a0b89ed2ad4774fa32ccdb8e8"
+    }
+  ]
+}

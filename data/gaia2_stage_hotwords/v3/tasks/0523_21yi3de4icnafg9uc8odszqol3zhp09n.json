@@ -1,0 +1,95 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0523_21yi3de4icnafg9uc8odszqol3zhp09n",
+  "model": "deepseek-flash",
+  "input_sha256": "6f089a040c41fe8d14550c7c2e4c393c6a54dab4b8cb4b32eccb89d0dc6ccf58",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Astrid Nakamura",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-02ab6727-1db9-4377-b87d-7a4d5067dbdd.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Wine Club",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dd3882af-b830-444e-9063-a860bfa5a476.arguments.title",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Astrid Nakamura",
+        "Aurélien LaFleur",
+        "Wine Club"
+      ],
+      "active_vocabulary": {
+        "Astrid Nakamura": 50,
+        "Aurélien LaFleur": 50,
+        "Wine Club": 50
+      },
+      "vocabulary_sha256": "3a299b9004cc005d4d020bb6d8faa6b9d3dfa4876933ab789c1a8784d7d0411d"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Wine and Conversation",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Wine and Conversation"
+      ],
+      "active_vocabulary": {
+        "Astrid Nakamura": 50,
+        "Aurélien LaFleur": 50,
+        "Wine Club": 50,
+        "Wine and Conversation": 50
+      },
+      "vocabulary_sha256": "20a2b109030ce84803fb2cdf447392b38f40f7c823f6715fb6bda95e80a4e7b4"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Wine club setup",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Wine club setup",
+        "Astrid"
+      ],
+      "active_vocabulary": {
+        "Astrid Nakamura": 50,
+        "Aurélien LaFleur": 50,
+        "Wine Club": 50,
+        "Wine and Conversation": 50,
+        "Wine club setup": 50,
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "e4d3d5cce015aa8775a69c7f8771d8700d1a22cbb326a745a240d147ec09f7fa"
+    }
+  ]
+}

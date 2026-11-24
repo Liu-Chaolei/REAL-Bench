@@ -3,14 +3,12 @@
 import json
 from pathlib import Path
 
-from tau2.domains.gaia2.utils import GAIA2_DATA_DIR, GAIA2_VERSION
+from tau2.domains.gaia2.utils import GAIA2_DATA_DIR
 
 
 def publish_binding(root: Path):
-    """Inherit English personas through the existing language factory."""
+    """Refresh Gaia2's self-contained English task metadata binding."""
     from tau2.domains.gaia2.environment import get_tasks
-    from tau2.domains.gaia2.importer import USER_CONSTRAINTS
-    from tau2.multilingual.factory.pack_extension import publish_registry_extension
 
     if Path(root).resolve() != GAIA2_DATA_DIR.resolve():
         return None
@@ -23,14 +21,12 @@ def publish_binding(root: Path):
             "canonical_task_id": task.id,
             "caller_gender": gender if gender in {"male", "female"} else None,
         }
-    return publish_registry_extension(
-        name="gaia2",
-        language="en",
-        domain="gaia2",
-        revision=GAIA2_VERSION,
-        metadata=metadata,
-        user_guidelines=USER_CONSTRAINTS,
+    language_root = Path(root) / "language" / "en"
+    language_root.mkdir(parents=True, exist_ok=True)
+    (language_root / "metadata.json").write_text(
+        json.dumps(metadata, ensure_ascii=False, indent=2) + "\n"
     )
+    return language_root
 
 
 def add_gaia2_args(parser):

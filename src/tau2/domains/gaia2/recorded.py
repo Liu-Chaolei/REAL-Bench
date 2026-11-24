@@ -8,8 +8,12 @@ from pathlib import Path
 from pydantic import TypeAdapter
 
 from tau2.data_model.language import TaskMetadata
+from tau2.domains.gaia2.language_runtime import (
+    _canonical_json,
+    task_digest,
+    task_payload,
+)
 from tau2.domains.gaia2.utils import verify_task_artifact
-from tau2.multilingual.runtime import _canonical_json, task_digest, task_payload
 
 
 def archive_data(source, destination):
@@ -18,14 +22,9 @@ def archive_data(source, destination):
     if destination.exists():
         raise FileExistsError(destination)
     shutil.copytree(source, destination)
-    repository_data = source.parents[1]
-    shutil.copytree(
-        repository_data / "multilingual_extensions/gaia2",
-        destination / "language_extension",
-    )
-    shutil.copyfile(
-        repository_data / "multilingual/en/pack.yaml", destination / "pack.yaml"
-    )
+    # Preserve the historical archive root alias while live data uses the
+    # language/en/pack.yaml layout.
+    shutil.copyfile(source / "language/en/pack.yaml", destination / "pack.yaml")
     hashes = {
         str(p.relative_to(destination)): hashlib.sha256(p.read_bytes()).hexdigest()
         for p in destination.rglob("*")
@@ -59,19 +58,24 @@ def validate_recorded_data(results, root):
         verify_task_artifact(root, task)
         if task_digest(task) != task_digest(index[task.id]):
             raise ValueError("Embedded task differs from recorded data")
-    metadata = TypeAdapter(dict[str, TaskMetadata]).validate_json(
-        (root / "language_extension/en/metadata.json").read_bytes()
-    )
+    language = root / "language/en"
+    if language.is_dir():
+        metadata_bytes = (language / "metadata.json").read_bytes()
+        pack_bytes = (language / "pack.yaml").read_bytes()
+    else:
+        # Explicit historical archives remain readable without reinstalling τ packs.
+        metadata_bytes = (root / "language_extension/en/metadata.json").read_bytes()
+        pack_bytes = (root / "pack.yaml").read_bytes() + (
+            root / "language_extension/en/extension.json"
+        ).read_bytes()
+    metadata = TypeAdapter(dict[str, TaskMetadata]).validate_json(metadata_bytes)
     tasks_hash = hashlib.sha256(
         _canonical_json([task_payload(t) for t in tasks])
     ).hexdigest()
     metadata_hash = hashlib.sha256(
         TypeAdapter(dict[str, TaskMetadata]).dump_json(metadata)
     ).hexdigest()
-    pack_hash = hashlib.sha256(
-        (root / "pack.yaml").read_bytes()
-        + (root / "language_extension/en/extension.json").read_bytes()
-    ).hexdigest()
+    pack_hash = hashlib.sha256(pack_bytes).hexdigest()
     pins = results.info.language_artifacts
     if pins is not None and (
         pins.tasks_sha256 != tasks_hash

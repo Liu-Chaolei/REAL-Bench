@@ -3,7 +3,7 @@
 Every run resolves exactly one language pack (canonical English by default). The
 pack is mode-neutral: text-only packs omit the ``voice`` sections, and voice runs
 require them. Everything here is data; prompt scaffolds live in
-``tau2.user.guidelines`` and pack loading in ``tau2.multilingual.runtime``.
+``tau2.user.guidelines`` and pack loading in ``tau2.domains.gaia2.language_runtime``.
 """
 
 from enum import Enum
@@ -475,17 +475,6 @@ class LanguagePack(PackModel):
                 f"language {self.language} does not support domain {domain}"
             )
         return binding
-
-
-class PackExtension(PackModel):
-    """Opt-in custom-run bindings pinned to an unchanged released pack."""
-
-    schema_version: Literal[1] = 1
-    name: str = Field(pattern=r"^[a-z][a-z0-9_-]*$")
-    language: str = Field(pattern=r"^[a-z]{2,3}(?:-[A-Za-z0-9]+)*$")
-    base_pack_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
-    revision: str = Field(min_length=1)
-    domains: dict[str, DomainBinding] = Field(min_length=1)
 
 
 class RuntimePersona(PersonaConfig):

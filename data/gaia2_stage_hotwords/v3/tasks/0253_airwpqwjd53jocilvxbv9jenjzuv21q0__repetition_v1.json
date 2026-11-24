@@ -1,0 +1,104 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0253_airwpqwjd53jocilvxbv9jenjzuv21q0__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "8735ab88b8769fda70eafcd12405cafe17c690f099dd062ce08071e605173104",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Birgitta Sørensen",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-e449fd3c-a30d-4099-a8fc-fa3f420d7f29.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Birgitta Sørensen"
+      ],
+      "active_vocabulary": {
+        "Birgitta Sørensen": 50
+      },
+      "vocabulary_sha256": "f808420fd3cd4eb7f6282a1c2b88a18f94f68aa0c9e75b681546279b7dc65c54"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Birgitta Sørensen",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aarhus",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Søren",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Aarhus",
+        "Søren"
+      ],
+      "active_vocabulary": {
+        "Birgitta Sørensen": 50,
+        "Aarhus": 50,
+        "Søren": 50
+      },
+      "vocabulary_sha256": "703f24aaf0aaab937de32cdcf0a297aed88ccdfeb754e9be99227d416755dbc6"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aarhus Fintech Meetup",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Astrid Sørensen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Birgitta Sørensen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Søren Rasmussen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Aarhus Fintech Meetup",
+        "Astrid Sørensen",
+        "Søren Rasmussen"
+      ],
+      "active_vocabulary": {
+        "Birgitta Sørensen": 50,
+        "Aarhus": 50,
+        "Søren": 50,
+        "Aarhus Fintech Meetup": 50,
+        "Astrid Sørensen": 50,
+        "Søren Rasmussen": 50
+      },
+      "vocabulary_sha256": "8e2bddb1021310839cfc0ac641db28afb99c9870b474524dcf53ef732b82fc89"
+    }
+  ]
+}

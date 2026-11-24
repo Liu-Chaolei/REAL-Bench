@@ -53,18 +53,9 @@ The shared retail compiler supplies explicit given/family-name facts from the
 structured caller identity; review that output instead of adding language-specific
 manual prompt patches. Existing agent-clause assembly stays in the runtime.
 
-## Judge coverage
-
-An existing language judge is not automatically validated for newly claimed
-conditions. Record whether the domain extension falls within its evidence scope.
-If extending or adding a judge, follow [judge validation](../../../docs/judge-validation.md)
-and keep candidate results separate until validated. User-only coverage can ship
-without a new judge. Do not copy caller behavior into agent judging rules.
-
 ## PR
 
-Include the reviewed pack/task change, updated README, reproducible checks and
-optional judge evidence. Reuse voices when possible; do not recreate them just
-because domain tasks changed. Do not change the benchmark's frozen language/task
+Include the reviewed pack/task change, updated README and reproducible checks.
+Reuse voices when possible; do not recreate them just because domain tasks changed. Do not change the benchmark's frozen language/task
 selection or run a full benchmark as part of routine domain localization. Report
 missing review or live evidence accurately; never manufacture approvals.

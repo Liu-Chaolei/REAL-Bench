@@ -179,7 +179,7 @@ def default_backchannel_settings(
 ) -> BackchannelSettings:
     """A pack's canonical-persona continuers, for callers built without a persona."""
     from tau2.config import DEFAULT_LANGUAGE
-    from tau2.multilingual.runtime import load_pack
+    from tau2.domains.gaia2.language_runtime import load_pack
 
     pack = load_pack(language or DEFAULT_LANGUAGE)
     if pack.voice is None:

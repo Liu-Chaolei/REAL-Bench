@@ -47,7 +47,7 @@ from tau2.runner.work import (
 from tau2.utils.display import ConsoleDisplay, Text
 from tau2.utils.errors import NonRetryableError
 from tau2.utils.llm_utils import llm_log_mode
-from tau2.utils.utils import DATA_DIR, get_now
+from tau2.utils.utils import RESULTS_DIR, get_now
 
 AUTH_TOKEN_ENV = "TAU2_CONTROLLER_TOKEN"
 
@@ -437,7 +437,7 @@ def drive_batches(
         worker_log_dir = (
             first_save_dir / "workers"
             if first_save_dir
-            else DATA_DIR / "simulations" / "workers"
+            else RESULTS_DIR / "workers"
         )
 
     procs = [

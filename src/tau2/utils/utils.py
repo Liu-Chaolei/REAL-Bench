@@ -24,6 +24,10 @@ else:
     SOURCE_DIR = Path(__file__).parents[3]
     DATA_DIR = SOURCE_DIR / "data"
 
+# Root for new simulation, metrics, judge and diagnostic outputs. Historical
+# ``data/simulations`` runs remain readable when an explicit path is supplied.
+RESULTS_DIR = DATA_DIR / "results"
+
 # Check if data directory exists and is accessible
 if not DATA_DIR.exists():
     logger.warning(f"Data directory does not exist: {DATA_DIR}")

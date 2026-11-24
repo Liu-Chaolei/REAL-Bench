@@ -1,0 +1,172 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0462_jm9qsdyww7couhqwnl5ipim8if3juelt__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "3ac4c4d6ed07b705a8e218a183f416f6da0adb96fd121f94b3d17d7610c625a6",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a6732eb4-389f-4e31-ab62-41c4bc9ef4c9.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Nalani Jensen",
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Nalani Jensen": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "cad77cdb9d3a69d7562ad7b12f795a49e280c9941a487e20688ba8efc6db5aa4"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Willow Creek Residences",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.kwargs.data",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "The Vue at Lake Eola",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.kwargs.data",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liberty Square Apartments",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.kwargs.data",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Cityview Apartments",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.kwargs.data",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Riverwalk Apartments",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.kwargs.data",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Riverwalk Residences",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.kwargs.data",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Riverwalk Lofts",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.kwargs.data",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "The Enclave",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_create.arguments.kwargs.data",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Willow Creek Residences",
+        "The Vue at Lake Eola",
+        "Liberty Square Apartments",
+        "Cityview Apartments",
+        "Riverwalk Apartments",
+        "Riverwalk Residences",
+        "Riverwalk Lofts",
+        "The Enclave"
+      ],
+      "active_vocabulary": {
+        "Nalani Jensen": 50,
+        "Aurélien": 50,
+        "Willow Creek Residences": 50,
+        "The Vue at Lake Eola": 50,
+        "Liberty Square Apartments": 50,
+        "Cityview Apartments": 50,
+        "Riverwalk Apartments": 50,
+        "Riverwalk Residences": 50,
+        "Riverwalk Lofts": 50,
+        "The Enclave": 50
+      },
+      "vocabulary_sha256": "9b5f91d33e72dadda8e5831a076d35e68b9d62a922ae5277ed9f1bf88f654490"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Wine Inventory Management",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur",
+        "Wine Inventory Management"
+      ],
+      "active_vocabulary": {
+        "Nalani Jensen": 50,
+        "Aurélien": 50,
+        "Willow Creek Residences": 50,
+        "The Vue at Lake Eola": 50,
+        "Liberty Square Apartments": 50,
+        "Cityview Apartments": 50,
+        "Riverwalk Apartments": 50,
+        "Riverwalk Residences": 50,
+        "Riverwalk Lofts": 50,
+        "The Enclave": 50,
+        "Aurélien LaFleur": 50,
+        "Wine Inventory Management": 50
+      },
+      "vocabulary_sha256": "cc91a4b4c6f91e226e429bd589c2634d70ac2e19447bab059ac092efcb4d4cb2"
+    }
+  ]
+}

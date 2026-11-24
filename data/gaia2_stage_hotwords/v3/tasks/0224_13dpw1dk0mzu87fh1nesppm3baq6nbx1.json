@@ -1,0 +1,142 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0224_13dpw1dk0mzu87fh1nesppm3baq6nbx1",
+  "model": "deepseek-flash",
+  "input_sha256": "d2007a81dada3f108f3ae5a6b29354f327db04ddc453b634140aaadd01345a5e",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Mumbai",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Mumbai"
+      ],
+      "active_vocabulary": {
+        "Mumbai": 50
+      },
+      "vocabulary_sha256": "65a483e2dd2c0dac80debb3a71850dcc256a66fae60979027d750a52445f1f18"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Rohan Nair",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Anastasia Kuznetsova",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohini Nair",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Raghavan Iyer",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohan Khurana",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bandra",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_reply_rohini.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Rohan Nair",
+        "Anastasia Kuznetsova",
+        "Rohini Nair",
+        "Raghavan Iyer",
+        "Rohan Khurana",
+        "Bandra"
+      ],
+      "active_vocabulary": {
+        "Mumbai": 50,
+        "Rohan Nair": 50,
+        "Anastasia Kuznetsova": 50,
+        "Rohini Nair": 50,
+        "Raghavan Iyer": 50,
+        "Rohan Khurana": 50,
+        "Bandra": 50
+      },
+      "vocabulary_sha256": "4739d6e911aecc71b05d13cf35fd47070c3d84828e7957228b817c7ed3262b94"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Mumbai Restorative Justice Circle",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohan Nair",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_message.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Raghavan Iyer",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_message.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Anastasia Kuznetsova",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_message.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohini Nair",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_message.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohan Khurana",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_message.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Mumbai Restorative Justice Circle"
+      ],
+      "active_vocabulary": {
+        "Mumbai": 50,
+        "Rohan Nair": 50,
+        "Anastasia Kuznetsova": 50,
+        "Rohini Nair": 50,
+        "Raghavan Iyer": 50,
+        "Rohan Khurana": 50,
+        "Bandra": 50,
+        "Mumbai Restorative Justice Circle": 50
+      },
+      "vocabulary_sha256": "b3a36f30ddb274d51972e222a839677855814797041cde399bc7449b5dbc6abe"
+    }
+  ]
+}

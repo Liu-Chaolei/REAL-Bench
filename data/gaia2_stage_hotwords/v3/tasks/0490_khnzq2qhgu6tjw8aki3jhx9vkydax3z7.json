@@ -1,0 +1,149 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0490_khnzq2qhgu6tjw8aki3jhx9vkydax3z7",
+  "model": "deepseek-flash",
+  "input_sha256": "f4cd5e51c41b9490db7adea3832ce0783a32a82a5870bfa92ed8d04fa23e1476",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-d7cff449-3793-40f4-91c3-3d543d39337e.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Vladimíra",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-4bd05251-cf6d-4137-9e4e-943b667df10e.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Prague Police Department",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Matěj Nováček",
+        "Vladimíra",
+        "Prague Police Department"
+      ],
+      "active_vocabulary": {
+        "Matěj Nováček": 50,
+        "Vladimíra": 50,
+        "Prague Police Department": 50
+      },
+      "vocabulary_sha256": "073ea2635da145db5e5c28589883a3586ad8c4986ccc00a015b2563bb7470728"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Štěpán Nováček",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Pavla Nováková",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Květa Nováková",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Věra Nováková",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zdeněk Nováček",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bohumil Nováček",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Lukáš Nováček",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Štěpán Nováček",
+        "Pavla Nováková",
+        "Květa Nováková",
+        "Věra Nováková",
+        "Zdeněk Nováček",
+        "Bohumil Nováček",
+        "Lukáš Nováček"
+      ],
+      "active_vocabulary": {
+        "Matěj Nováček": 50,
+        "Vladimíra": 50,
+        "Prague Police Department": 50,
+        "Štěpán Nováček": 50,
+        "Pavla Nováková": 50,
+        "Květa Nováková": 50,
+        "Věra Nováková": 50,
+        "Zdeněk Nováček": 50,
+        "Bohumil Nováček": 50,
+        "Lukáš Nováček": 50
+      },
+      "vocabulary_sha256": "7c9cc64ef8b27bb30accec5fed615ba128554bf0fff0e05b6435431cfc59bdf1"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Šárka Nováková",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Translation Project for Android App",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_status.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Šárka Nováková",
+        "Translation Project for Android App"
+      ],
+      "active_vocabulary": {
+        "Matěj Nováček": 50,
+        "Vladimíra": 50,
+        "Prague Police Department": 50,
+        "Štěpán Nováček": 50,
+        "Pavla Nováková": 50,
+        "Květa Nováková": 50,
+        "Věra Nováková": 50,
+        "Zdeněk Nováček": 50,
+        "Bohumil Nováček": 50,
+        "Lukáš Nováček": 50,
+        "Šárka Nováková": 50,
+        "Translation Project for Android App": 50
+      },
+      "vocabulary_sha256": "8907e467b6552893af0968b52d9a156e46e5acf94c61c9c080958adea59a25f8"
+    }
+  ]
+}

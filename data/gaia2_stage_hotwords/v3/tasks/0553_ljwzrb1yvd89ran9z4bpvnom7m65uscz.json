@@ -1,0 +1,150 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0553_ljwzrb1yvd89ran9z4bpvnom7m65uscz",
+  "model": "deepseek-flash",
+  "input_sha256": "5631c6fa69d6d1a060f78e2441f00d48f61901a6e5c7c6162cf6a4dcc8d26d51",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "sims3",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Story of Resilience",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "complex_dag.png",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b2a69647-0cbf-43eb-bd43-8f17a6b0af1c.arguments.path1",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "sims3",
+        "Story of Resilience",
+        "complex_dag.png"
+      ],
+      "active_vocabulary": {
+        "sims3": 50,
+        "Story of Resilience": 50,
+        "complex_dag.png": 50
+      },
+      "vocabulary_sha256": "b87c8bd1c565b4d2ab67eb8bc277ab993ca4c1748091673bdfa3466776da1ede"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Zara Kaur",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email_note.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kymberley Janssen",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email_note.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Maureen Kowalski",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email_note.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "145/7 Macleay St, Potts Point NSW 2011, Australia",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_note.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "145/23 St Kilda Road, Melbourne VIC 3004",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_note.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "145 Sturt Street, Ballarat VIC 3350",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_email_note.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Story of Resilience",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Zara Kaur",
+        "Kymberley Janssen",
+        "Maureen Kowalski",
+        "145/7 Macleay St, Potts Point NSW 2011, Australia",
+        "145/23 St Kilda Road, Melbourne VIC 3004",
+        "145 Sturt Street, Ballarat VIC 3350"
+      ],
+      "active_vocabulary": {
+        "sims3": 50,
+        "Story of Resilience": 50,
+        "complex_dag.png": 50,
+        "Zara Kaur": 50,
+        "Kymberley Janssen": 50,
+        "Maureen Kowalski": 50,
+        "145/7 Macleay St, Potts Point NSW 2011, Australia": 50,
+        "145/23 St Kilda Road, Melbourne VIC 3004": 50,
+        "145 Sturt Street, Ballarat VIC 3350": 50
+      },
+      "vocabulary_sha256": "20ff4abc96f0680d503b1a1e8c075f34c65780e90254d938a28a49dcbec261aa"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kymberley Janssen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_cal.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "complex_dag.png",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_reply.arguments.attachment_paths[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Rohan Kumar"
+      ],
+      "active_vocabulary": {
+        "sims3": 50,
+        "Story of Resilience": 50,
+        "complex_dag.png": 50,
+        "Zara Kaur": 50,
+        "Kymberley Janssen": 50,
+        "Maureen Kowalski": 50,
+        "145/7 Macleay St, Potts Point NSW 2011, Australia": 50,
+        "145/23 St Kilda Road, Melbourne VIC 3004": 50,
+        "145 Sturt Street, Ballarat VIC 3350": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "24186af4b1d22601c75e949c5335846f13dbb70bac68e8d14c5096aff03c3983"
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0154_y8alwcdthk0vw7rjmrkwv2mkj9b01a9x",
+  "model": "deepseek-flash",
+  "input_sha256": "e5ff94de0c3811c3c6d3dd81a1a70690177e78d96c07a3ae9c10b5154369fc60",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Søren",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Søren"
+      ],
+      "active_vocabulary": {
+        "Søren": 50
+      },
+      "vocabulary_sha256": "6ba9740268792c4c1cad3500c674183b13637db530060768cf4af26252173693"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Uppsala Urban",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Göteborgs Gård",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Västerås View",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Göteborgs Garden",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Norrköping Nest",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Göteborgs Gem",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Lund Lyckås",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Uppsala Utopia",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Uppsala University Heights",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Uppsala Oaks",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Søren",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Uppsala Urban",
+        "Göteborgs Gård",
+        "Västerås View",
+        "Göteborgs Garden",
+        "Norrköping Nest",
+        "Göteborgs Gem",
+        "Lund Lyckås",
+        "Uppsala Utopia",
+        "Uppsala University Heights",
+        "Uppsala Oaks"
+      ],
+      "active_vocabulary": {
+        "Søren": 50,
+        "Uppsala Urban": 50,
+        "Göteborgs Gård": 50,
+        "Västerås View": 50,
+        "Göteborgs Garden": 50,
+        "Norrköping Nest": 50,
+        "Göteborgs Gem": 50,
+        "Lund Lyckås": 50,
+        "Uppsala Utopia": 50,
+        "Uppsala University Heights": 50,
+        "Uppsala Oaks": 50
+      },
+      "vocabulary_sha256": "fe1f84c0ccf00811396bb0e30ca0b54efc6bf6bddfe30f66909f8b6a3422e6d5"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Malmö City Center",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Malmö Harbour",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Malmö Majestic",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Malmö Marina View",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Malmö City Center",
+        "Malmö Harbour",
+        "Malmö Majestic",
+        "Malmö Marina View"
+      ],
+      "active_vocabulary": {
+        "Søren": 50,
+        "Uppsala Urban": 50,
+        "Göteborgs Gård": 50,
+        "Västerås View": 50,
+        "Göteborgs Garden": 50,
+        "Norrköping Nest": 50,
+        "Göteborgs Gem": 50,
+        "Lund Lyckås": 50,
+        "Uppsala Utopia": 50,
+        "Uppsala University Heights": 50,
+        "Uppsala Oaks": 50,
+        "Malmö City Center": 50,
+        "Malmö Harbour": 50,
+        "Malmö Majestic": 50,
+        "Malmö Marina View": 50
+      },
+      "vocabulary_sha256": "b69179693f7df1bbed38b302861c4600d35ec82ee850d63b32b40eb0f3f19e7c"
+    }
+  ]
+}

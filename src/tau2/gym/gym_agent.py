@@ -27,8 +27,8 @@ from tau2.data_model.message import (
 from tau2.data_model.semantic_communication import CommunicateScoring
 from tau2.data_model.simulation import SimulationRun, TextRunConfig
 from tau2.data_model.tasks import Task
+from tau2.domains.gaia2.language_runtime import load_run_language
 from tau2.environment.tool import Tool, as_tool
-from tau2.multilingual.runtime import load_run_language
 from tau2.orchestrator.orchestrator import Orchestrator
 from tau2.registry import registry
 from tau2.runner.build import build_text_orchestrator

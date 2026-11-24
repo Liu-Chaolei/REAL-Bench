@@ -458,13 +458,6 @@ class BenchmarkRunInfo(BenchmarkModel):
         return self
 
 
-class TaskSubsetReference(BenchmarkModel):
-    """An immutable task subset already owned by the task-subset package."""
-
-    name: str = Field(pattern=r"^[a-z][a-z0-9_]*$", description="Frozen subset name.")
-    sha256: Fingerprint = Field(description="Digest of the published subset artifact.")
-
-
 class CellBinding(BenchmarkModel):
     """A released language/domain binding without duplicated task membership."""
 
@@ -472,22 +465,6 @@ class CellBinding(BenchmarkModel):
     domain: Domain = Field(description="Shared domain identifier.")
     binding_revision: str = Field(
         min_length=1, description="Frozen runtime binding digest."
-    )
-
-
-class BenchmarkManifest(BenchmarkModel):
-    """Release data expanded into a frame by the ordinary-run preset loader."""
-
-    benchmark_version: str = Field(
-        min_length=1, description="Public benchmark generation."
-    )
-    revision: str = Field(min_length=1, description="Immutable manifest revision.")
-    mode: CallMode = Field(description="Call mode every released cell runs in.")
-    task_subsets: dict[str, TaskSubsetReference] = Field(
-        min_length=1, description="Pinned subset reference per domain."
-    )
-    cells: list[CellBinding] = Field(
-        min_length=1, description="Ordered released language/domain bindings."
     )
 
 

@@ -1,0 +1,64 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0715_cx0sdsbtfkzxb3yleg9hzzk60c2n2oxr",
+  "model": "deepseek-flash",
+  "input_sha256": "5ffeb21bab4e14de103f9bb142f00ba9fbb41368323cc8576e5c0839877b8325",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Nalani",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1a20fb93-2eca-4d36-8987-70c81dc475f4.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Nalani"
+      ],
+      "active_vocabulary": {
+        "Nalani": 50
+      },
+      "vocabulary_sha256": "0bb398ba7ad8e3670ae450be5f494f6dd6805badf5720b6e3703287600e9e00a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Nalani": 50
+      },
+      "vocabulary_sha256": "0bb398ba7ad8e3670ae450be5f494f6dd6805badf5720b6e3703287600e9e00a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurelien",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_e1.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "MiMo",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_e1.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Aurelien",
+        "MiMo"
+      ],
+      "active_vocabulary": {
+        "Nalani": 50,
+        "Aurelien": 50,
+        "MiMo": 50
+      },
+      "vocabulary_sha256": "635d5c5d4a8d3f5d728c0c4e012fa738fc530230a75d8210a058f153ffca5980"
+    }
+  ]
+}

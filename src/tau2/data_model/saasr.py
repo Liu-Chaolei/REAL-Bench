@@ -170,7 +170,7 @@ class SaasrConfig(BaseModel):
             )
         }
         return {
-            "version": "saasr-continuous-v1",
+            "version": "saasr-continuous-v2",
             "config": self.model_dump(mode="json"),
             "scenes": scenes,
             "assets": assets,

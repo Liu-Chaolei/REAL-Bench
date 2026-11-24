@@ -1,0 +1,176 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0978_3iswnd7l3vmtlyrq5uxo0uv043da3qiq",
+  "model": "deepseek-flash",
+  "input_sha256": "8d0e83d6777657f94c3d2546e2223215fd682f1376a885236288b219d566fd85",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kirsten",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3d48d23f-4008-4dca-9ad4-dc0dd111508d.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aisling",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3d48d23f-4008-4dca-9ad4-dc0dd111508d.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Somchai",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3d48d23f-4008-4dca-9ad4-dc0dd111508d.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3d48d23f-4008-4dca-9ad4-dc0dd111508d.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "kirsten.ravnkilde",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3d48d23f-4008-4dca-9ad4-dc0dd111508d.arguments.recipients[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "aisling.oconnor",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3d48d23f-4008-4dca-9ad4-dc0dd111508d.arguments.recipients[1]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "somchai.wongtrakul",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3d48d23f-4008-4dca-9ad4-dc0dd111508d.arguments.recipients[2]",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kirsten",
+        "Aisling",
+        "Somchai",
+        "Søren Kjær",
+        "kirsten.ravnkilde",
+        "aisling.oconnor",
+        "somchai.wongtrakul"
+      ],
+      "active_vocabulary": {
+        "Kirsten": 50,
+        "Aisling": 50,
+        "Somchai": 50,
+        "Søren Kjær": 50,
+        "kirsten.ravnkilde": 50,
+        "aisling.oconnor": 50,
+        "somchai.wongtrakul": 50
+      },
+      "vocabulary_sha256": "00007aca291bd913726b74bfff5b7842206afe24f396cbc0ac5f8c31c32d432f"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Astrid Kjær",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ikea",
+          "kind": "organization",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Astrid Kjær",
+        "Ikea"
+      ],
+      "active_vocabulary": {
+        "Kirsten": 50,
+        "Aisling": 50,
+        "Somchai": 50,
+        "Søren Kjær": 50,
+        "kirsten.ravnkilde": 50,
+        "aisling.oconnor": 50,
+        "somchai.wongtrakul": 50,
+        "Astrid Kjær": 50,
+        "Ikea": 50
+      },
+      "vocabulary_sha256": "2298c7aa08462459919a01e747fc124f6f581a6dd795fcd710a87a55cae2e2ad"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kirsten",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_send_message.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Stainless Steel Humbrol AG9150 The Modeller's Tool Set",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_send_message.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aisling",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_send_message.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Beige HANSA 4825 Plush",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_send_message.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Somchai",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_send_message.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Blue Champion Sports Rhino Mini Promax Ball",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_send_message.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Stainless Steel Humbrol AG9150 The Modeller's Tool Set",
+        "Beige HANSA 4825 Plush",
+        "Blue Champion Sports Rhino Mini Promax Ball"
+      ],
+      "active_vocabulary": {
+        "Kirsten": 50,
+        "Aisling": 50,
+        "Somchai": 50,
+        "Søren Kjær": 50,
+        "kirsten.ravnkilde": 50,
+        "aisling.oconnor": 50,
+        "somchai.wongtrakul": 50,
+        "Astrid Kjær": 50,
+        "Ikea": 50,
+        "Stainless Steel Humbrol AG9150 The Modeller's Tool Set": 50,
+        "Beige HANSA 4825 Plush": 50,
+        "Blue Champion Sports Rhino Mini Promax Ball": 50
+      },
+      "vocabulary_sha256": "a1ae4fb2450661212563de4d621c06d78b9efab86667ef85bb3cdcda3c0b2be1"
+    }
+  ]
+}

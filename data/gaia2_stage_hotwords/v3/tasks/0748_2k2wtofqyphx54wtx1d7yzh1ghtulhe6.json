@@ -1,0 +1,203 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0748_2k2wtofqyphx54wtx1d7yzh1ghtulhe6",
+  "model": "deepseek-flash",
+  "input_sha256": "e83901da72e530f243d2b518075862ed2d8a4519466685bcec78c4a38c6ce10b",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Matěj",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f670b412-13d3-475c-beb9-33fa2c5043f7.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Eliška Nováková",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-77b02460-fd4b-453a-871b-524aeaa89d1d.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Tereza Nováková",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-77b02460-fd4b-453a-871b-524aeaa89d1d.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kryštof Nováček",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-77b02460-fd4b-453a-871b-524aeaa89d1d.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zuzana Nováková",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-77b02460-fd4b-453a-871b-524aeaa89d1d.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "František Šťastný",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-77b02460-fd4b-453a-871b-524aeaa89d1d.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Dominion Nocturne Board Game",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Dominion",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Matěj",
+        "Eliška Nováková",
+        "Tereza Nováková",
+        "Kryštof Nováček",
+        "Zuzana Nováková",
+        "František Šťastný",
+        "Dominion Nocturne Board Game",
+        "Dominion"
+      ],
+      "active_vocabulary": {
+        "Matěj": 50,
+        "Eliška Nováková": 50,
+        "Tereza Nováková": 50,
+        "Kryštof Nováček": 50,
+        "Zuzana Nováková": 50,
+        "František Šťastný": 50,
+        "Dominion Nocturne Board Game": 50,
+        "Dominion": 50
+      },
+      "vocabulary_sha256": "0880e65ec205f78ba10736b689a2833b39f0b984d9e22cd3086d40e1225b56fa"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kryštof",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zuzana",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kryštof Nováček",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_calendar.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zuzana Nováková",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_calendar.arguments.attendees[1]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Božetěchova 3",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Dominion: Nocturne",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Matěj",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email_krystof.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kryštof",
+        "Zuzana",
+        "Božetěchova 3",
+        "Dominion: Nocturne"
+      ],
+      "active_vocabulary": {
+        "Matěj": 50,
+        "Eliška Nováková": 50,
+        "Tereza Nováková": 50,
+        "Kryštof Nováček": 50,
+        "Zuzana Nováková": 50,
+        "František Šťastný": 50,
+        "Dominion Nocturne Board Game": 50,
+        "Dominion": 50,
+        "Kryštof": 50,
+        "Zuzana": 50,
+        "Božetěchova 3": 50,
+        "Dominion: Nocturne": 50
+      },
+      "vocabulary_sha256": "f5dff68463ec43fc54d50ebfd083f8fd7b65a53d121650ec370fe47ee1fd9d98"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kryštof Nováček",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zuzana",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Božetěchova 3",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email_krystof.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Dominion: Nocturne",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email_krystof.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Matěj",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_krystof.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Matěj": 50,
+        "Eliška Nováková": 50,
+        "Tereza Nováková": 50,
+        "Kryštof Nováček": 50,
+        "Zuzana Nováková": 50,
+        "František Šťastný": 50,
+        "Dominion Nocturne Board Game": 50,
+        "Dominion": 50,
+        "Kryštof": 50,
+        "Zuzana": 50,
+        "Božetěchova 3": 50,
+        "Dominion: Nocturne": 50
+      },
+      "vocabulary_sha256": "f5dff68463ec43fc54d50ebfd083f8fd7b65a53d121650ec370fe47ee1fd9d98"
+    }
+  ]
+}

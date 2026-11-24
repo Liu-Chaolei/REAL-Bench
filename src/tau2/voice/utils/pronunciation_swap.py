@@ -5,7 +5,7 @@
 text into their pinned respellings right before TTS. It is a pure function
 over ``(text, mapping)`` — deterministic, no I/O, no domain knowledge; the
 mapping is built for each call from its recorded stimulus (see
-``tau2.domains.intake.pronunciation_map``) and handed to the voice user
+a domain-owned pronunciation map) and handed to the voice user
 simulator via ``VoiceSettings.pronunciation_map``. The stored transcript is
 never touched: callers apply this to the synthesis text only.
 

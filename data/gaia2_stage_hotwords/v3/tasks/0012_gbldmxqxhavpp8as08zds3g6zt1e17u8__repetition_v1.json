@@ -1,0 +1,100 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0012_gbldmxqxhavpp8as08zds3g6zt1e17u8__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "00d08079d458fcaa924890a551bc06ee253cb9bc82058538a8dff9b9b6913a09",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Thailand",
+          "kind": "place",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-a09d979c-3306-4014-8c03-2ef3d848ce61.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Thailand"
+      ],
+      "active_vocabulary": {
+        "Thailand": 50
+      },
+      "vocabulary_sha256": "18566bb3f67bf4fbf59cd0b6e42ccc20b4540b9c68ca5d7932068b9411a6859d"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nonglak Suthisakul",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Chiang Mai",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Oslo",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Åse",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Nonglak Suthisakul",
+        "Chiang Mai",
+        "Oslo",
+        "Åse"
+      ],
+      "active_vocabulary": {
+        "Thailand": 50,
+        "Nonglak Suthisakul": 50,
+        "Chiang Mai": 50,
+        "Oslo": 50,
+        "Åse": 50
+      },
+      "vocabulary_sha256": "16b08935b57c9501d2199e01b47f6e210caa6036e8193f9975188dabce54d9d3"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Nonglak Suthisakul",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kari Østensen",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kari Østensen"
+      ],
+      "active_vocabulary": {
+        "Thailand": 50,
+        "Nonglak Suthisakul": 50,
+        "Chiang Mai": 50,
+        "Oslo": 50,
+        "Åse": 50,
+        "Kari Østensen": 50
+      },
+      "vocabulary_sha256": "a76917645bb3452c161880cdf0fa60d46047e6b1cab3ed0b84bb0688b52ff6eb"
+    }
+  ]
+}

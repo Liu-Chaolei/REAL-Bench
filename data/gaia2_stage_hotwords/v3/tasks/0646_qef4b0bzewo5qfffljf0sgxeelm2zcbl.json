@@ -1,0 +1,169 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0646_qef4b0bzewo5qfffljf0sgxeelm2zcbl",
+  "model": "deepseek-flash",
+  "input_sha256": "09dcffc68bd34c9db190dcaf97181f0d9ad3d779cadbf30a742f608eb35a308b",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Eliška Nováková",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Tereza Nováková",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bohumil",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7634c05c-a071-40ef-aa8d-12a07d4baf93.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Lukas",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7634c05c-a071-40ef-aa8d-12a07d4baf93.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-7634c05c-a071-40ef-aa8d-12a07d4baf93.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kvido",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b1e1e8ed-999a-4d1b-bf25-cf520004edea.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Eliška Nováková",
+        "Tereza Nováková",
+        "Bohumil",
+        "Lukas",
+        "Matěj Nováček",
+        "Kvido"
+      ],
+      "active_vocabulary": {
+        "Eliška Nováková": 50,
+        "Tereza Nováková": 50,
+        "Bohumil": 50,
+        "Lukas": 50,
+        "Matěj Nováček": 50,
+        "Kvido": 50
+      },
+      "vocabulary_sha256": "f67055b626a1c34a5bc5250a82670ded05bf20d79b645c37eacb98ac100c3924"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Tereza",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Eliška",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply_tereza.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Translation Project Meeting",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Tereza",
+        "Eliška",
+        "Translation Project Meeting"
+      ],
+      "active_vocabulary": {
+        "Eliška Nováková": 50,
+        "Tereza Nováková": 50,
+        "Bohumil": 50,
+        "Lukas": 50,
+        "Matěj Nováček": 50,
+        "Kvido": 50,
+        "Tereza": 50,
+        "Eliška": 50,
+        "Translation Project Meeting": 50
+      },
+      "vocabulary_sha256": "f2c6d05bb0ecc89003d8ae9ca307ab2bec4ebf0b47b23282bdbd036944551639"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Bohumil",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply_bohumil.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Lukáš Nováček",
+          "kind": "person",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Dinner with Family",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Yoga Class",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Lukáš Nováček",
+        "Dinner with Family",
+        "Yoga Class"
+      ],
+      "active_vocabulary": {
+        "Eliška Nováková": 50,
+        "Tereza Nováková": 50,
+        "Bohumil": 50,
+        "Lukas": 50,
+        "Matěj Nováček": 50,
+        "Kvido": 50,
+        "Tereza": 50,
+        "Eliška": 50,
+        "Translation Project Meeting": 50,
+        "Lukáš Nováček": 50,
+        "Dinner with Family": 50,
+        "Yoga Class": 50
+      },
+      "vocabulary_sha256": "4411256efc40a0068690624aa881ab32f3d92c278a4f743bef140c8b97efdda7"
+    }
+  ]
+}

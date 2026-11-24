@@ -1,0 +1,196 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0205_4601iajlmbvrb8vd8zgmvgiomm317tsw",
+  "model": "deepseek-flash",
+  "input_sha256": "2c4dbd236384d4d232b27a736c266020feade2d64a4263b0d38cea3889615389",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "George Street",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Edinburgh",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Helmut Eisenstadt",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-742e500e-c042-442a-b3b9-684ef36e64f8.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Gerrit van der Meer",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-742e500e-c042-442a-b3b9-684ef36e64f8.arguments.attendees[1]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "University of Cambridge",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-742e500e-c042-442a-b3b9-684ef36e64f8.arguments.location",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Department of Physics",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-742e500e-c042-442a-b3b9-684ef36e64f8.arguments.location",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e61eeb9d-ded9-4968-8da5-a16bdeb6ee62.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "George Street",
+        "Edinburgh",
+        "Helmut Eisenstadt",
+        "Gerrit van der Meer",
+        "University of Cambridge",
+        "Department of Physics",
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "George Street": 50,
+        "Edinburgh": 50,
+        "Helmut Eisenstadt": 50,
+        "Gerrit van der Meer": 50,
+        "University of Cambridge": 50,
+        "Department of Physics": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "0ad1547ae3418fa2a39b8aad8d90b311e1035db6a57bc03c19b45970e5eda499"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Edinburgh New Town Apartments",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Edinburgh Estates",
+          "kind": "organization",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Edinburgh Mews",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Edinburgh",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "20 George Street",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send_comparison.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "500 Princes Street",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send_comparison.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Old Town",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send_comparison.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Edinburgh New Town Apartments",
+        "Edinburgh Estates",
+        "Edinburgh Mews",
+        "20 George Street",
+        "500 Princes Street",
+        "Old Town"
+      ],
+      "active_vocabulary": {
+        "George Street": 50,
+        "Edinburgh": 50,
+        "Helmut Eisenstadt": 50,
+        "Gerrit van der Meer": 50,
+        "University of Cambridge": 50,
+        "Department of Physics": 50,
+        "Rohini Deshpande": 50,
+        "Edinburgh New Town Apartments": 50,
+        "Edinburgh Estates": 50,
+        "Edinburgh Mews": 50,
+        "20 George Street": 50,
+        "500 Princes Street": 50,
+        "Old Town": 50
+      },
+      "vocabulary_sha256": "09559fc1bace8585de7769b9b0ffb7b3dc5f56e479ed431690cc13262f4b2ffd"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Edinburgh New Town Apartments",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "20 George Street",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Edinburgh",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "EH2 2LR",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_signing.arguments.location",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "EH2 2LR"
+      ],
+      "active_vocabulary": {
+        "George Street": 50,
+        "Edinburgh": 50,
+        "Helmut Eisenstadt": 50,
+        "Gerrit van der Meer": 50,
+        "University of Cambridge": 50,
+        "Department of Physics": 50,
+        "Rohini Deshpande": 50,
+        "Edinburgh New Town Apartments": 50,
+        "Edinburgh Estates": 50,
+        "Edinburgh Mews": 50,
+        "20 George Street": 50,
+        "500 Princes Street": 50,
+        "Old Town": 50,
+        "EH2 2LR": 50
+      },
+      "vocabulary_sha256": "1f905e453ee2e9b041358aaba5251494b213e15a64c86968ba599c3c36355262"
+    }
+  ]
+}

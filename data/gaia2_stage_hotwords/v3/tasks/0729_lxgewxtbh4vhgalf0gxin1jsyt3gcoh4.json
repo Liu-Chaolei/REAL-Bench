@@ -1,0 +1,120 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0729_lxgewxtbh4vhgalf0gxin1jsyt3gcoh4",
+  "model": "deepseek-flash",
+  "input_sha256": "ad7e638af3d394914bcda85e90168222ea922ca669f4fb4321c0e156d27ea482",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Deniz Öztürk",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Exclusive Wine Bar",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Client Confirmation",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Staff Training: Wine and Food Pairing",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Deniz Öztürk",
+        "Exclusive Wine Bar",
+        "Client Confirmation",
+        "Staff Training: Wine and Food Pairing"
+      ],
+      "active_vocabulary": {
+        "Deniz Öztürk": 50,
+        "Exclusive Wine Bar": 50,
+        "Client Confirmation": 50,
+        "Staff Training: Wine and Food Pairing": 50
+      },
+      "vocabulary_sha256": "4ffab973411a547ab20ebf94fb004d0a6e2a17b6277d27d34a5d475f5b73c1de"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kaia Nakamura",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Deniz Öztürk",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "VIP Evening Prep Briefing",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Nalani Jensen",
+        "Kaia Nakamura",
+        "VIP Evening Prep Briefing",
+        "Aurélien LaFleur"
+      ],
+      "active_vocabulary": {
+        "Deniz Öztürk": 50,
+        "Exclusive Wine Bar": 50,
+        "Client Confirmation": 50,
+        "Staff Training: Wine and Food Pairing": 50,
+        "Nalani Jensen": 50,
+        "Kaia Nakamura": 50,
+        "VIP Evening Prep Briefing": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "0c04ae629cef75851d787890b95e2da7b15a4e1a46072559c43ec14a9d630f9c"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Deniz Öztürk": 50,
+        "Exclusive Wine Bar": 50,
+        "Client Confirmation": 50,
+        "Staff Training: Wine and Food Pairing": 50,
+        "Nalani Jensen": 50,
+        "Kaia Nakamura": 50,
+        "VIP Evening Prep Briefing": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "0c04ae629cef75851d787890b95e2da7b15a4e1a46072559c43ec14a9d630f9c"
+    }
+  ]
+}

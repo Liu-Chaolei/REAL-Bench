@@ -1,0 +1,62 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0489_3d0b4g9b6n7w1b87br37xdl0hve5e0yb",
+  "model": "deepseek-flash",
+  "input_sha256": "259cbfc92ba894af78ea53dbb67a3037de1ee7e589b65ef7c25908770804d18a",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Marvel",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Marvel"
+      ],
+      "active_vocabulary": {
+        "Marvel": 50
+      },
+      "vocabulary_sha256": "510458ad100f86e24237c71d00025221a517d6023d9171232c69cb96bbb5b226"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Marvel": 50
+      },
+      "vocabulary_sha256": "510458ad100f86e24237c71d00025221a517d6023d9171232c69cb96bbb5b226"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Marvel",
+          "kind": "organization",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Funko Marvel Captain America Pop Vinyl Figure",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Funko Marvel Captain America Pop Vinyl Figure"
+      ],
+      "active_vocabulary": {
+        "Marvel": 50,
+        "Funko Marvel Captain America Pop Vinyl Figure": 50
+      },
+      "vocabulary_sha256": "3e23e72ad64d4a3102be4d9b9e5677c4abf420e6e595382a4ea087be2b69af19"
+    }
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0511_798bbbiqb42ufq67w607yig61if55vh8",
+  "model": "deepseek-flash",
+  "input_sha256": "9731bf02ac56bb951ad700ef23d00095fde1c88f56309385dea8c608090662f3",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Volunteer Social Work",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Dinner with Friends",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-51122772-85ba-4665-a97f-0038797ba423.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Dinner with Family",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-cdfe6a62-3e50-41f1-b87c-383d712245be.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Volunteer Social Work",
+        "Dinner with Friends",
+        "Dinner with Family"
+      ],
+      "active_vocabulary": {
+        "Volunteer Social Work": 50,
+        "Dinner with Friends": 50,
+        "Dinner with Family": 50
+      },
+      "vocabulary_sha256": "782c2bdfa18c287de8ba152806ae7a94cb39f98ac61cf20a0e84e9f07c209b61"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Volunteer Social Work",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Lunch Break",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_replace_0.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Dinner with Friends",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_replace_1.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Personal Development",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_replace_6.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Dinner with Family",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_notice_2.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohan",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_notice_1.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Lunch Break",
+        "Personal Development",
+        "Rohan"
+      ],
+      "active_vocabulary": {
+        "Volunteer Social Work": 50,
+        "Dinner with Friends": 50,
+        "Dinner with Family": 50,
+        "Lunch Break": 50,
+        "Personal Development": 50,
+        "Rohan": 50
+      },
+      "vocabulary_sha256": "f58f5beee84aea09a38371fa1c97ca2dda343d1480df147346dc50372d957b90"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Astrid McKenzie",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Volunteer Social Work",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Lunch Break",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Dinner with Friends",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Dinner with Family",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Personal Development",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aaradhya Rao",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kymberley Ngata",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kymberley Wundke",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Astrid McKenzie",
+        "Aaradhya Rao",
+        "Kymberley Ngata",
+        "Rohini Deshpande",
+        "Kymberley Wundke"
+      ],
+      "active_vocabulary": {
+        "Volunteer Social Work": 50,
+        "Dinner with Friends": 50,
+        "Dinner with Family": 50,
+        "Lunch Break": 50,
+        "Personal Development": 50,
+        "Rohan": 50,
+        "Astrid McKenzie": 50,
+        "Aaradhya Rao": 50,
+        "Kymberley Ngata": 50,
+        "Rohini Deshpande": 50,
+        "Kymberley Wundke": 50
+      },
+      "vocabulary_sha256": "f520c2c54805f2b12ac3a83b558790157b85946c63d1fe5efc526b493865b934"
+    }
+  ]
+}

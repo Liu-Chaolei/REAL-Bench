@@ -1,0 +1,76 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0442_8iwfasr3p6c7xwyuqj9wrfdfk80rwfig",
+  "model": "deepseek-flash",
+  "input_sha256": "af5033eff1dc7b463059bacad0dee4632ce5b6617fe5712c667fa04398c22287",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-c3e8a20f-f3a7-40a7-8fee-17b128e84511.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Katarzyna Zielińska"
+      ],
+      "active_vocabulary": {
+        "Katarzyna Zielińska": 50
+      },
+      "vocabulary_sha256": "c5268737b262513745ef8dfb30149c229a915f483b90d3296f713d2f50c9032b"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ursula",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Ursula"
+      ],
+      "active_vocabulary": {
+        "Katarzyna Zielińska": 50,
+        "Ursula": 50
+      },
+      "vocabulary_sha256": "1dbe77c5229e30c0a2e8f6b7537f43edb311339caa8ec77f3d72e4477a38efea"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ursula",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_chat.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Katarzyna Zielińska": 50,
+        "Ursula": 50
+      },
+      "vocabulary_sha256": "1dbe77c5229e30c0a2e8f6b7537f43edb311339caa8ec77f3d72e4477a38efea"
+    }
+  ]
+}

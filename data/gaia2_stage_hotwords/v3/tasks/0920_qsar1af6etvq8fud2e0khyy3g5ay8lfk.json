@@ -1,0 +1,137 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0920_qsar1af6etvq8fud2e0khyy3g5ay8lfk",
+  "model": "deepseek-flash",
+  "input_sha256": "7d9691b97ead245e47188bb0fcd59d25e57c5e4f37a6f4048d0c9e4b8e53f2c4",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Åsa",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kasteelpark Arenberg",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Åsa Lindgren",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-ab650dfe-af6e-4bfa-bb97-6abec080677e.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liesbeth",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-acd4caaf-3ef8-490e-aca5-25403a023f7e.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Åsa",
+        "Kasteelpark Arenberg",
+        "Leuven",
+        "Åsa Lindgren",
+        "Liesbeth"
+      ],
+      "active_vocabulary": {
+        "Åsa": 50,
+        "Kasteelpark Arenberg": 50,
+        "Leuven": 50,
+        "Åsa Lindgren": 50,
+        "Liesbeth": 50
+      },
+      "vocabulary_sha256": "b537c43ed991ea92ebcccfa5586d58a67559969e62967b9d64037b1ced4acb9c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Arenberg",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kasteelpark Arenberg",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Åsa",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Arenberg"
+      ],
+      "active_vocabulary": {
+        "Åsa": 50,
+        "Kasteelpark Arenberg": 50,
+        "Leuven": 50,
+        "Åsa Lindgren": 50,
+        "Liesbeth": 50,
+        "Arenberg": 50
+      },
+      "vocabulary_sha256": "49851c277360e1e6fa4fc24e18b22ea9be9887ee3920e17f0936ae21cb6c1e0f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Åsa Lindgren",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Arenberg",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Åsa": 50,
+        "Kasteelpark Arenberg": 50,
+        "Leuven": 50,
+        "Åsa Lindgren": 50,
+        "Liesbeth": 50,
+        "Arenberg": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "73e486b940bdff356baf1349600a74234ba48fe0d41c424fe44effba1fb69d85"
+    }
+  ]
+}

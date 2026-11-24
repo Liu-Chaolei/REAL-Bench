@@ -521,7 +521,7 @@ class LeaderboardManifest(BaseModelNoExtra):
     voice_v2_submissions: list[str] = Field(
         default_factory=list,
         description="2.0 voice-v2 package folder names (benchmark-submission.json, "
-        "benchmark-diagnostics.json, benchmark-metadata.json)",
+        "benchmark-quality.json, benchmark-metadata.json)",
     )
     voice_v2_domain_submissions: list[str] = Field(
         default_factory=list,

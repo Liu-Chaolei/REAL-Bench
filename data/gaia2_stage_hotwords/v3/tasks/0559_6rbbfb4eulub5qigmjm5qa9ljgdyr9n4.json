@@ -1,0 +1,133 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0559_6rbbfb4eulub5qigmjm5qa9ljgdyr9n4",
+  "model": "deepseek-flash",
+  "input_sha256": "4ef336bccfffc77cc773179380a67518b7750025db084c6b814d71664de55015",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Zurich Airport",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zurich",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "University",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Zurich Airport",
+        "Zurich",
+        "University"
+      ],
+      "active_vocabulary": {
+        "Zurich Airport": 50,
+        "Zurich": 50,
+        "University": 50
+      },
+      "vocabulary_sha256": "825ae3fbf0ed83def59b5a262d2e576974bb92f01ddfaf346b6d46e93f6e115c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Zurich Airport",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Mittlere Strasse 12",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Basel",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Switzerland",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zurich",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Mittlere Strasse 12",
+        "Basel",
+        "Switzerland"
+      ],
+      "active_vocabulary": {
+        "Zurich Airport": 50,
+        "Zurich": 50,
+        "University": 50,
+        "Mittlere Strasse 12": 50,
+        "Basel": 50,
+        "Switzerland": 50
+      },
+      "vocabulary_sha256": "c3968cbf02c411456f1782ccf4f9b766b52f4821b126a1866cc4424091d81c71"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Alessia Ramseyer",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zoom Meeting",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Alessia Ramseyer",
+        "Ursula Wiederkehr",
+        "Zoom Meeting"
+      ],
+      "active_vocabulary": {
+        "Zurich Airport": 50,
+        "Zurich": 50,
+        "University": 50,
+        "Mittlere Strasse 12": 50,
+        "Basel": 50,
+        "Switzerland": 50,
+        "Alessia Ramseyer": 50,
+        "Ursula Wiederkehr": 50,
+        "Zoom Meeting": 50
+      },
+      "vocabulary_sha256": "c55691c8d1ad468e3ae35ad728e72a50a7448fc9fbc60b6eb5206582e36347ef"
+    }
+  ]
+}

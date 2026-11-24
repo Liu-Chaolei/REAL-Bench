@@ -18,14 +18,12 @@ For how the commands fit together, see
 
 | Command | Description |
 |---|---|
-| [`tau2 judges`](#tau2-judges) | Saved-run diagnostic judging and reports |
-| [`tau2 tasks`](#tau2-tasks) | Frozen canonical task subsets |
-| [`tau2 factory`](#tau2-factory) | Staged language authoring and publication |
+| [`tau2 metrics`](#tau2-metrics) | REAL-derived saved-run diagnostics |
+| [`tau2 gaia2`](#tau2-gaia2) | Import and verify native Gaia2 task data |
+| [`tau2 gaia2-series`](#tau2-gaia2-series) | Author and validate related Gaia2 task continuations |
 | [`tau2 benchmarks`](#tau2-benchmarks) | Released benchmark manifests and their pins |
 | [`tau2 run`](#tau2-run) | Run a benchmark |
 | [`tau2 run-pass3`](#tau2-run-pass3) | Run Pass^3 on three ordinary or crossed trials |
-| [`tau2 languages`](#tau2-languages) | Inspect and validate published language packs |
-| [`tau2 intake-tasks`](#tau2-intake-tasks) | Generate and verify τ-Entity tasks |
 | [`tau2 play`](#tau2-play) | Play manual mode - interact with a domain as the agent |
 | [`tau2 view`](#tau2-view) | View simulation results |
 | [`tau2 domain`](#tau2-domain) | Show domain documentation |
@@ -39,633 +37,504 @@ For how the commands fit together, see
 | [`tau2 submit`](#tau2-submit) | Leaderboard submissions |
 | [`tau2 convert-results`](#tau2-convert-results) | Convert simulation results between storage formats |
 
-## `tau2 judges`
+## `tau2 metrics`
 
 ```text
-usage: tau2 judges [-h] {suite,summarize,export,candidate,validate,promote} ...
+usage: tau2 metrics [-h]
+                    {run,summarize,export,coverage,verify-gaia2,feedback-review,feedback-calibrate}
+                    ...
 
 positional arguments:
-  {suite,summarize,export,candidate,validate,promote}
-    suite               Plan or resume selected judges on a saved run
-    summarize           Read saved diagnostic scores and coverage without model calls
-    export              Export typed saved diagnostics and provenance without model
-                        calls
-    candidate           Run an unvalidated candidate in a separate output directory
-    validate            Validate held-out evidence
-    promote             Export a reviewed validated registry bundle
+  {run,summarize,export,coverage,verify-gaia2,feedback-review,feedback-calibrate}
 
 options:
   -h, --help            show this help message and exit
 ```
 
-### `tau2 judges suite`
+### `tau2 metrics run`
 
 ```text
-usage: tau2 judges suite [-h] [--only ONLY] [--trials TRIALS [TRIALS ...]]
-                         [--processes PROCESSES] [--concurrency CONCURRENCY]
-                         [--preserve-errors] [--force] [--dry-run]
-                         [--registry REGISTRY] [--json] [--output OUTPUT]
-                         results
-
-positional arguments:
-  results               Ordinary Results JSON, run directory, or benchmark matrix root
-
-options:
-  -h, --help            show this help message and exit
-  --only ONLY           Comma-separated measure names; default all selected measures
-  --trials TRIALS [TRIALS ...]
-                        Explicit stored trial indices; default all trials
-  --processes PROCESSES
-                        Independent judge workers; default 1
-  --concurrency CONCURRENCY
-                        Judge calls in flight per worker; default 1
-  --preserve-errors     Keep recorded judge errors/partials while filling missing
-                        verdicts
-  --force               Recompute matching verdicts
-  --dry-run             Plan without model calls or progress writes
-  --registry REGISTRY   Explicit verified promotion bundle; never an unvalidated
-                        candidate
-  --json                Print the full typed export (plan, summary, verdicts) as JSON
-                        instead of the compact table
-  --output OUTPUT       Also write the full typed export as JSON to this file
-```
-
-### `tau2 judges summarize`
-
-```text
-usage: tau2 judges summarize [-h] [--only ONLY] [--trials TRIALS [TRIALS ...]]
-                             [--registry REGISTRY] [--json] [--output OUTPUT]
-                             results
-
-positional arguments:
-  results               Ordinary Results JSON, run directory, or benchmark matrix root
-
-options:
-  -h, --help            show this help message and exit
-  --only ONLY           Comma-separated measure names; default all selected measures
-  --trials TRIALS [TRIALS ...]
-                        Explicit stored trial indices; default all trials
-  --registry REGISTRY   Explicit verified promotion bundle; never an unvalidated
-                        candidate
-  --json                Print the full typed export (plan, summary, verdicts) as JSON
-                        instead of the compact table
-  --output OUTPUT       Also write the full typed export as JSON to this file
-```
-
-### `tau2 judges export`
-
-```text
-usage: tau2 judges export [-h] [--only ONLY] [--trials TRIALS [TRIALS ...]]
-                          [--registry REGISTRY]
-                          results
-
-positional arguments:
-  results               Ordinary Results JSON, run directory, or benchmark matrix root
-
-options:
-  -h, --help            show this help message and exit
-  --only ONLY           Comma-separated measure names; default all selected measures
-  --trials TRIALS [TRIALS ...]
-                        Explicit stored trial indices; default all trials
-  --registry REGISTRY   Explicit verified promotion bundle; never an unvalidated
-                        candidate
-```
-
-### `tau2 judges candidate`
-
-```text
-usage: tau2 judges candidate [-h] --candidate CANDIDATE --output OUTPUT [--dry-run]
-                             results
+usage: tau2 metrics run [-h] [--output OUTPUT] --config CONFIG
+                        [--api-config-dir API_CONFIG_DIR] [--only ONLY] [--dry-run]
+                        results
 
 positional arguments:
   results
 
 options:
   -h, --help            show this help message and exit
-  --candidate CANDIDATE
   --output OUTPUT
+  --config CONFIG
+  --api-config-dir API_CONFIG_DIR
+  --only ONLY           Comma-separated intent,execution,voice,interaction,state_inter
+                        action,conciseness
   --dry-run
 ```
 
-### `tau2 judges validate`
+### `tau2 metrics summarize`
 
 ```text
-usage: tau2 judges validate [-h] --request REQUEST --output OUTPUT
-
-options:
-  -h, --help         show this help message and exit
-  --request REQUEST
-  --output OUTPUT
-```
-
-### `tau2 judges promote`
-
-```text
-usage: tau2 judges promote [-h] --request REQUEST --output OUTPUT
-
-options:
-  -h, --help         show this help message and exit
-  --request REQUEST
-  --output OUTPUT
-```
-
-## `tau2 tasks`
-
-```text
-usage: tau2 tasks [-h] {list,show,verify,subset} ...
+usage: tau2 metrics summarize [-h] [--output OUTPUT] results
 
 positional arguments:
-  {list,show,verify,subset}
-    list                List frozen canonical subsets
-    show                Show one subset's design and membership
-    verify              Verify frames, draws and installed bindings
-    subset              Publish a seeded draw under a new name
-
-options:
-  -h, --help            show this help message and exit
-```
-
-### `tau2 tasks list`
-
-```text
-usage: tau2 tasks list [-h]
-
-options:
-  -h, --help  show this help message and exit
-```
-
-### `tau2 tasks show`
-
-```text
-usage: tau2 tasks show [-h] [--ids] name
-
-positional arguments:
-  name
-
-options:
-  -h, --help  show this help message and exit
-  --ids       Include all canonical IDs
-```
-
-### `tau2 tasks verify`
-
-```text
-usage: tau2 tasks verify [-h] [--name NAME]
-
-options:
-  -h, --help   show this help message and exit
-  --name NAME  One artifact; omitted verifies every artifact
-```
-
-### `tau2 tasks subset`
-
-```text
-usage: tau2 tasks subset [-h] --domain
-                         {airline,retail,telecom,banking_knowledge,intake} --name NAME
-                         [--size SIZE] [--seed SEED] [--dry-run]
-
-options:
-  -h, --help            show this help message and exit
-  --domain {airline,retail,telecom,banking_knowledge,intake}
-  --name NAME           New artifact name; never overwritten
-  --size SIZE
-  --seed SEED
-  --dry-run             Print the draw without writing
-```
-
-## `tau2 factory`
-
-```text
-usage: tau2 factory [-h]
-                    {autoform,inventory-database,refresh-regional-bundle,init-request,draft,validate,review-content,approve,stage-pack,add-domain,prepare-voices,reuse-voices,audition,validate-voices,record-created-voice,finalize,draft-judge,compile-judge,register-judge,list-judges,draft-database-localization,revise-database-localization,compile-approved-regional,publish-pack-extension,export-localization-spreadsheet,ingest-localization-spreadsheet,export-localization-entities-csv}
-                    ...
-
-positional arguments:
-  {autoform,inventory-database,refresh-regional-bundle,init-request,draft,validate,review-content,approve,stage-pack,add-domain,prepare-voices,reuse-voices,audition,validate-voices,record-created-voice,finalize,draft-judge,compile-judge,register-judge,list-judges,draft-database-localization,revise-database-localization,compile-approved-regional,publish-pack-extension,export-localization-spreadsheet,ingest-localization-spreadsheet,export-localization-entities-csv}
-    autoform            Draft a validated author form for local review
-    inventory-database  Inventory canonical databases and frozen tasks as a
-                        localization source
-    refresh-regional-bundle
-                        Rebind an installed regional map to this checkout's source
-                        content and republish a byte-identical runtime bundle
-    init-request        Write a valid draft-request.json skeleton (frozen-50 tasks,
-                        caller genders, inventories) for a new language; offline
-    draft               Build localized entities and draft language content for one
-                        content review
-    validate            Validate staged content and print its review digest
-    review-content      Render staged language, entity and task content for human
-                        review
-    approve             Record a reviewer's approval of the exact digest they
-                        inspected
-    stage-pack          Stage an existing runtime pack for a new domain revision
-    add-domain          Bind another reviewed supported domain to a staged language
-    prepare-voices      Provision voices and store resumable audition evidence
-    reuse-voices        Reuse reviewed voices after a domain-only revision
-    audition            Export exact native-text voice previews for listening review
-    validate-voices     Validate audio and provenance; optionally check voice access
-    record-created-voice
-                        Record an account voice after an uncertain creation
-    finalize            Publish an immutable reviewed runtime language bundle
-    draft-judge         Author independent agent criteria
-    compile-judge       Compile reviewed criteria into an UNVALIDATED candidate
-    register-judge      Publish a reviewed reusable authoring entry; never enable
-                        production
-    list-judges         List authoring ideas, validated sources and reusable reviewed
-                        entries
-    draft-database-localization
-                        Draft native/romanized regional maps through fixed prompts
-    revise-database-localization
-                        Redraft selected fields while retaining verified regional
-                        mappings
-    compile-approved-regional
-                        Compile a digest-approved regional map for a separate-run
-                        extension
-    publish-pack-extension
-                        Bind approved regional bundles for separate runs only
-    export-localization-spreadsheet
-                        Export map-backed entity review with one tab per language
-    ingest-localization-spreadsheet
-                        Validate workbook decisions and export map review evidence
-    export-localization-entities-csv
-                        Export classified entity pairs without scripts or protocol
-                        JSON
-
-options:
-  -h, --help            show this help message and exit
-```
-
-<details>
-<summary>27 <code>tau2 factory</code> subcommands</summary>
-
-### `tau2 factory autoform`
-
-```text
-usage: tau2 factory autoform [-h] --request REQUEST --output OUTPUT
-
-options:
-  -h, --help         show this help message and exit
-  --request REQUEST  Typed stage request JSON
-  --output OUTPUT    New immutable artifact path or stage directory
-```
-
-### `tau2 factory inventory-database`
-
-```text
-usage: tau2 factory inventory-database [-h] --domain
-                                       {airline,retail,telecom,banking_knowledge,intake}
-                                       [--data-root DATA_ROOT] --output OUTPUT
-
-options:
-  -h, --help            show this help message and exit
-  --domain {airline,retail,telecom,banking_knowledge,intake}
-  --data-root DATA_ROOT
-                        Data directory (default: configured DATA_DIR)
-  --output OUTPUT
-```
-
-### `tau2 factory refresh-regional-bundle`
-
-```text
-usage: tau2 factory refresh-regional-bundle [-h] --language LANGUAGE --domain
-                                            {airline,retail,telecom} --revision
-                                            REVISION [--data-root DATA_ROOT] --output
-                                            OUTPUT
-
-options:
-  -h, --help            show this help message and exit
-  --language LANGUAGE
-  --domain {airline,retail,telecom}
-  --revision REVISION   New regional map revision label
-  --data-root DATA_ROOT
-                        Data directory (default: configured DATA_DIR)
-  --output OUTPUT       New directory; receives localization/ and regional/ files
-```
-
-### `tau2 factory init-request`
-
-```text
-usage: tau2 factory init-request [-h] --language LANGUAGE --domains
-                                 {airline,retail,telecom}
-                                 [{airline,retail,telecom} ...] --form FORM
-                                 --reviewed-by REVIEWED_BY --model MODEL
-                                 --reasoning-effort {minimal,low,medium,high,xhigh}
-                                 --country COUNTRY --currency CURRENCY
-                                 --currency-scale CURRENCY_SCALE --time-zone TIME_ZONE
-                                 [--data-root DATA_ROOT] --output OUTPUT
-
-options:
-  -h, --help            show this help message and exit
-  --language LANGUAGE
-  --domains {airline,retail,telecom} [{airline,retail,telecom} ...]
-  --form FORM           Reviewed autoform author-form.json
-  --reviewed-by REVIEWED_BY
-                        Content reviewer attribution
-  --model MODEL         Pinned generation model
-  --reasoning-effort {minimal,low,medium,high,xhigh}
-                        Pinned reasoning effort
-  --country COUNTRY     ISO 3166 alpha-2 code
-  --currency CURRENCY   ISO 4217 code
-  --currency-scale CURRENCY_SCALE
-                        Fixed decimal scale from USD
-  --time-zone TIME_ZONE
-                        IANA time zone
-  --data-root DATA_ROOT
-                        Data directory (default: configured DATA_DIR)
-  --output OUTPUT       New directory for draft-request.json and referenced
-                        inventories
-```
-
-### `tau2 factory draft`
-
-```text
-usage: tau2 factory draft [-h] --request REQUEST --output OUTPUT
-
-options:
-  -h, --help         show this help message and exit
-  --request REQUEST  Typed stage request JSON
-  --output OUTPUT    New immutable artifact path or stage directory
-```
-
-### `tau2 factory validate`
-
-```text
-usage: tau2 factory validate [-h] --request REQUEST
-
-options:
-  -h, --help         show this help message and exit
-  --request REQUEST  Typed stage request JSON
-```
-
-### `tau2 factory review-content`
-
-```text
-usage: tau2 factory review-content [-h] --request REQUEST --output OUTPUT
-
-options:
-  -h, --help         show this help message and exit
-  --request REQUEST  Typed stage request JSON
-  --output OUTPUT    New immutable artifact path or stage directory
-```
-
-### `tau2 factory approve`
-
-```text
-usage: tau2 factory approve [-h] --gate {content,listening} --artifact ARTIFACT
-                            --digest DIGEST --reviewed-by REVIEWED_BY --output OUTPUT
-
-options:
-  -h, --help            show this help message and exit
-  --gate {content,listening}
-                        content: a draft.json; listening: a voice assets.json
-  --artifact ARTIFACT
-  --digest DIGEST       Digest shown to the reviewer (review page or audition index)
-  --reviewed-by REVIEWED_BY
-  --output OUTPUT
-```
-
-### `tau2 factory stage-pack`
-
-```text
-usage: tau2 factory stage-pack [-h] --request REQUEST --output OUTPUT
-
-options:
-  -h, --help         show this help message and exit
-  --request REQUEST  Typed stage request JSON
-  --output OUTPUT    New immutable artifact path or stage directory
-```
-
-### `tau2 factory add-domain`
-
-```text
-usage: tau2 factory add-domain [-h] --request REQUEST --output OUTPUT
-
-options:
-  -h, --help         show this help message and exit
-  --request REQUEST  Typed stage request JSON
-  --output OUTPUT    New immutable artifact path or stage directory
-```
-
-### `tau2 factory prepare-voices`
-
-```text
-usage: tau2 factory prepare-voices [-h] --request REQUEST --output OUTPUT
-
-options:
-  -h, --help         show this help message and exit
-  --request REQUEST  Typed stage request JSON
-  --output OUTPUT    New immutable artifact path or stage directory
-```
-
-### `tau2 factory reuse-voices`
-
-```text
-usage: tau2 factory reuse-voices [-h] --request REQUEST --output OUTPUT
-
-options:
-  -h, --help         show this help message and exit
-  --request REQUEST  Typed stage request JSON
-  --output OUTPUT    New immutable artifact path or stage directory
-```
-
-### `tau2 factory audition`
-
-```text
-usage: tau2 factory audition [-h] --request REQUEST --output OUTPUT
-
-options:
-  -h, --help         show this help message and exit
-  --request REQUEST  Typed stage request JSON
-  --output OUTPUT    New immutable artifact path or stage directory
-```
-
-### `tau2 factory validate-voices`
-
-```text
-usage: tau2 factory validate-voices [-h] --request REQUEST [--check-provider]
-
-options:
-  -h, --help         show this help message and exit
-  --request REQUEST  Typed stage request JSON
-  --check-provider   Check voice access using ElevenLabs (network)
-```
-
-### `tau2 factory record-created-voice`
-
-```text
-usage: tau2 factory record-created-voice [-h] --directory DIRECTORY --persona-id
-                                         PERSONA_ID --voice-id VOICE_ID
-
-options:
-  -h, --help            show this help message and exit
-  --directory DIRECTORY
-  --persona-id PERSONA_ID
-  --voice-id VOICE_ID
-```
-
-### `tau2 factory finalize`
-
-```text
-usage: tau2 factory finalize [-h] --request REQUEST --output OUTPUT
-
-options:
-  -h, --help         show this help message and exit
-  --request REQUEST  Typed stage request JSON
-  --output OUTPUT    New immutable artifact path or stage directory
-```
-
-### `tau2 factory draft-judge`
-
-```text
-usage: tau2 factory draft-judge [-h] --request REQUEST --output OUTPUT
-                                [--catalog-entry CATALOG_ENTRY]
-
-options:
-  -h, --help            show this help message and exit
-  --request REQUEST
-  --output OUTPUT
-  --catalog-entry CATALOG_ENTRY
-                        Additional reviewed candidate sources; contributed entries are
-                        discovered automatically
-```
-
-### `tau2 factory compile-judge`
-
-```text
-usage: tau2 factory compile-judge [-h] --request REQUEST --output OUTPUT
-
-options:
-  -h, --help         show this help message and exit
-  --request REQUEST
-  --output OUTPUT
-```
-
-### `tau2 factory register-judge`
-
-```text
-usage: tau2 factory register-judge [-h] --candidate CANDIDATE --output OUTPUT
-
-options:
-  -h, --help            show this help message and exit
-  --candidate CANDIDATE
-  --output OUTPUT
-```
-
-### `tau2 factory list-judges`
-
-```text
-usage: tau2 factory list-judges [-h] [--catalog-entry CATALOG_ENTRY]
-
-options:
-  -h, --help            show this help message and exit
-  --catalog-entry CATALOG_ENTRY
-                        Additional reviewed candidate source files
-```
-
-### `tau2 factory draft-database-localization`
-
-```text
-usage: tau2 factory draft-database-localization [-h] --request REQUEST --output OUTPUT
-                                                --checkpoints CHECKPOINTS
-                                                [--pilot-per-category PILOT_PER_CATEGORY]
-
-options:
-  -h, --help            show this help message and exit
-  --request REQUEST
-  --output OUTPUT
-  --checkpoints CHECKPOINTS
-  --pilot-per-category PILOT_PER_CATEGORY
-                        Banking only: draft this many uncovered entities per family;
-                        output is an incomplete pilot, never publishable.
-```
-
-### `tau2 factory revise-database-localization`
-
-```text
-usage: tau2 factory revise-database-localization [-h] --request REQUEST --output
-                                                 OUTPUT --checkpoints CHECKPOINTS
-
-options:
-  -h, --help            show this help message and exit
-  --request REQUEST
-  --output OUTPUT
-  --checkpoints CHECKPOINTS
-```
-
-### `tau2 factory compile-approved-regional`
-
-```text
-usage: tau2 factory compile-approved-regional [-h] --map MAP --source SOURCE
-                                              --approval APPROVAL --metadata METADATA
-                                              --output OUTPUT [--data-root DATA_ROOT]
-
-options:
-  -h, --help            show this help message and exit
-  --map MAP
-  --source SOURCE
-  --approval APPROVAL
-  --metadata METADATA
-  --output OUTPUT
-  --data-root DATA_ROOT
-```
-
-### `tau2 factory publish-pack-extension`
-
-```text
-usage: tau2 factory publish-pack-extension [-h] --name NAME --language LANGUAGE
-                                           --revision REVISION --bundle BUNDLE
-                                           --output OUTPUT
-
-options:
-  -h, --help           show this help message and exit
-  --name NAME
-  --language LANGUAGE
-  --revision REVISION
-  --bundle BUNDLE
-  --output OUTPUT
-```
-
-### `tau2 factory export-localization-spreadsheet`
-
-```text
-usage: tau2 factory export-localization-spreadsheet [-h] --map MAP --output OUTPUT
-                                                    [--previous PREVIOUS]
-
-options:
-  -h, --help           show this help message and exit
-  --map MAP
-  --output OUTPUT
-  --previous PREVIOUS
-```
-
-### `tau2 factory ingest-localization-spreadsheet`
-
-```text
-usage: tau2 factory ingest-localization-spreadsheet [-h] --map MAP --workbook WORKBOOK
-                                                    --reviewed-by REVIEWED_BY --output
-                                                    OUTPUT
-                                                    [--approval-dir APPROVAL_DIR]
-
-options:
-  -h, --help            show this help message and exit
-  --map MAP
-  --workbook WORKBOOK
-  --reviewed-by REVIEWED_BY
-  --output OUTPUT
-  --approval-dir APPROVAL_DIR
-```
-
-### `tau2 factory export-localization-entities-csv`
-
-```text
-usage: tau2 factory export-localization-entities-csv [-h] --map MAP --output OUTPUT
+  results
 
 options:
   -h, --help       show this help message and exit
-  --map MAP
   --output OUTPUT
 ```
 
-</details>
+### `tau2 metrics export`
+
+```text
+usage: tau2 metrics export [-h] [--output OUTPUT] results
+
+positional arguments:
+  results
+
+options:
+  -h, --help       show this help message and exit
+  --output OUTPUT
+```
+
+### `tau2 metrics coverage`
+
+```text
+usage: tau2 metrics coverage [-h] --output OUTPUT
+
+options:
+  -h, --help       show this help message and exit
+  --output OUTPUT
+```
+
+### `tau2 metrics verify-gaia2`
+
+```text
+usage: tau2 metrics verify-gaia2 [-h] --output OUTPUT [--workers WORKERS]
+
+options:
+  -h, --help         show this help message and exit
+  --output OUTPUT
+  --workers WORKERS
+```
+
+### `tau2 metrics feedback-review`
+
+```text
+usage: tau2 metrics feedback-review [-h] --output OUTPUT results
+
+positional arguments:
+  results
+
+options:
+  -h, --help       show this help message and exit
+  --output OUTPUT
+```
+
+### `tau2 metrics feedback-calibrate`
+
+```text
+usage: tau2 metrics feedback-calibrate [-h] --id ID --provenance PROVENANCE --output
+                                       OUTPUT
+                                       reviews
+
+positional arguments:
+  reviews
+
+options:
+  -h, --help            show this help message and exit
+  --id ID
+  --provenance PROVENANCE
+  --output OUTPUT
+```
+
+## `tau2 gaia2`
+
+```text
+usage: tau2 gaia2 [-h] {import,verify} ...
+
+positional arguments:
+  {import,verify}
+    import         Convert five local Parquet configurations
+    verify         Validate task, resource and operation contracts
+
+options:
+  -h, --help       show this help message and exit
+```
+
+### `tau2 gaia2 import`
+
+```text
+usage: tau2 gaia2 import [-h] --source SOURCE [--assets ASSETS] [--output OUTPUT]
+                         [--replace-incomplete]
+
+options:
+  -h, --help            show this help message and exit
+  --source SOURCE
+  --assets ASSETS
+  --output OUTPUT
+  --replace-incomplete
+```
+
+### `tau2 gaia2 verify`
+
+```text
+usage: tau2 gaia2 verify [-h] [--data DATA] [--reference] [--workers WORKERS] [--seal]
+
+options:
+  -h, --help         show this help message and exit
+  --data DATA
+  --reference        Execute all reference operations without model calls
+  --workers WORKERS
+  --seal             Pin a verified import for evaluation
+```
+
+## `tau2 gaia2-series`
+
+```text
+usage: tau2 gaia2-series [-h]
+                         {repair-light,revalidate-series,audit-questions,repair-acceptance,inventory,full,recover,generate,repair,verify,review,review-sheet,import-review,export,status}
+                         ...
+
+positional arguments:
+  {repair-light,revalidate-series,audit-questions,repair-acceptance,inventory,full,recover,generate,repair,verify,review,review-sheet,import-review,export,status}
+    repair-light        Repair the frozen 399-task queue; keep the 401 passed tasks
+                        unchanged
+    revalidate-series   Source-isolated planning, full legacy audit and bounded
+                        rebuild
+    audit-questions     Audit every frozen legacy-reviewed request pair
+    repair-acceptance   Run one isolated MiMo repair acceptance
+    inventory           Index and pin all 800 sealed tasks
+    full                Run resumable 800-task generation, repair and review
+    recover             Repair failed records and rerun verification/review
+    generate            Write and reference-check two continuations per task
+                        (resumable)
+    repair              Repair explicit failed tasks with a persistent extra budget
+    verify              Check material, execute references and strictly replay without
+                        models
+    review              Independently review full candidates and write human review
+                        sheets
+    review-sheet        Write readable tasks and unsigned human decision templates
+    import-review       Import content-bound human decisions
+    export              Require 800 accepted series, or explicitly export draft
+                        coverage
+    status              Report all 800 tasks, review coverage and model usage
+
+options:
+  -h, --help            show this help message and exit
+```
+
+### `tau2 gaia2-series repair-light`
+
+```text
+usage: tau2 gaia2-series repair-light [-h] --dataset DATASET --output OUTPUT --config
+                                      CONFIG [--concurrency CONCURRENCY]
+                                      [--per-key-concurrency PER_KEY_CONCURRENCY]
+                                      [--task-limit TASK_LIMIT]
+                                      [--retry-from RETRY_FROM]
+                                      [--api-config-dir API_CONFIG_DIR]
+
+options:
+  -h, --help            show this help message and exit
+  --dataset DATASET     Existing completed audit version with repair-queue.json
+  --output OUTPUT
+  --config CONFIG
+  --concurrency CONCURRENCY
+                        Concurrent tasks; reuse saved setting on resume
+  --per-key-concurrency PER_KEY_CONCURRENCY
+                        Maximum simultaneous requests per MiMo key; reuse saved
+                        setting on resume
+  --task-limit TASK_LIMIT
+                        Process only the first N frozen queue tasks in this run
+  --retry-from RETRY_FROM
+                        Explicitly create a new protocol round from a stopped
+                        lightweight run
+  --api-config-dir API_CONFIG_DIR
+```
+
+### `tau2 gaia2-series revalidate-series`
+
+```text
+usage: tau2 gaia2-series revalidate-series [-h] --dataset DATASET --output OUTPUT
+                                           --config CONFIG
+                                           [--audit-concurrency AUDIT_CONCURRENCY]
+                                           [--api-config-dir API_CONFIG_DIR]
+
+options:
+  -h, --help            show this help message and exit
+  --dataset DATASET
+  --output OUTPUT
+  --config CONFIG
+  --audit-concurrency AUDIT_CONCURRENCY
+  --api-config-dir API_CONFIG_DIR
+```
+
+### `tau2 gaia2-series audit-questions`
+
+```text
+usage: tau2 gaia2-series audit-questions [-h] --dataset DATASET --config CONFIG
+                                         [--concurrency CONCURRENCY]
+                                         [--api-config-dir API_CONFIG_DIR]
+
+options:
+  -h, --help            show this help message and exit
+  --dataset DATASET
+  --config CONFIG
+  --concurrency CONCURRENCY
+  --api-config-dir API_CONFIG_DIR
+```
+
+### `tau2 gaia2-series repair-acceptance`
+
+```text
+usage: tau2 gaia2-series repair-acceptance [-h] --dataset DATASET --output OUTPUT
+                                           --task-id TASK_ID --config CONFIG
+                                           [--content-attempts CONTENT_ATTEMPTS]
+                                           [--api-config-dir API_CONFIG_DIR]
+
+options:
+  -h, --help            show this help message and exit
+  --dataset DATASET
+  --output OUTPUT
+  --task-id TASK_ID
+  --config CONFIG
+  --content-attempts CONTENT_ATTEMPTS
+  --api-config-dir API_CONFIG_DIR
+```
+
+### `tau2 gaia2-series inventory`
+
+```text
+usage: tau2 gaia2-series inventory [-h] [--source SOURCE] --output OUTPUT
+                                   [--seed SEED] [--api-config-dir API_CONFIG_DIR]
+
+options:
+  -h, --help            show this help message and exit
+  --source SOURCE
+  --output OUTPUT
+  --seed SEED
+  --api-config-dir API_CONFIG_DIR
+```
+
+### `tau2 gaia2-series full`
+
+```text
+usage: tau2 gaia2-series full [-h] --dataset DATASET --config CONFIG
+                              [--start-concurrency START_CONCURRENCY]
+                              [--max-concurrency MAX_CONCURRENCY]
+                              [--request-timeout REQUEST_TIMEOUT]
+                              [--provider-attempts PROVIDER_ATTEMPTS] [--dry-run]
+                              [--api-key-pool API_KEY_POOL [API_KEY_POOL ...]]
+                              [--per-key-concurrency PER_KEY_CONCURRENCY]
+                              [--fixed-concurrency] [--api-config-dir API_CONFIG_DIR]
+
+options:
+  -h, --help            show this help message and exit
+  --dataset DATASET
+  --config CONFIG
+  --start-concurrency START_CONCURRENCY
+  --max-concurrency MAX_CONCURRENCY
+  --request-timeout REQUEST_TIMEOUT
+  --provider-attempts PROVIDER_ATTEMPTS
+  --dry-run
+  --api-key-pool API_KEY_POOL [API_KEY_POOL ...]
+  --per-key-concurrency PER_KEY_CONCURRENCY
+  --fixed-concurrency
+  --api-config-dir API_CONFIG_DIR
+```
+
+### `tau2 gaia2-series recover`
+
+```text
+usage: tau2 gaia2-series recover [-h] --dataset DATASET --config CONFIG
+                                 [--repair-rounds REPAIR_ROUNDS]
+                                 [--concurrency CONCURRENCY]
+                                 [--request-timeout REQUEST_TIMEOUT]
+                                 [--provider-attempts PROVIDER_ATTEMPTS]
+                                 [--api-key-pool API_KEY_POOL [API_KEY_POOL ...]]
+                                 [--per-key-concurrency PER_KEY_CONCURRENCY]
+                                 [--fixed-concurrency] [--dry-run]
+                                 [--api-config-dir API_CONFIG_DIR]
+
+options:
+  -h, --help            show this help message and exit
+  --dataset DATASET
+  --config CONFIG
+  --repair-rounds REPAIR_ROUNDS
+  --concurrency CONCURRENCY
+  --request-timeout REQUEST_TIMEOUT
+  --provider-attempts PROVIDER_ATTEMPTS
+  --api-key-pool API_KEY_POOL [API_KEY_POOL ...]
+  --per-key-concurrency PER_KEY_CONCURRENCY
+  --fixed-concurrency
+  --dry-run
+  --api-config-dir API_CONFIG_DIR
+```
+
+### `tau2 gaia2-series generate`
+
+```text
+usage: tau2 gaia2-series generate [-h] --dataset DATASET
+                                  [--task-ids TASK_IDS [TASK_IDS ...] | --pilot |
+                                  --pilot-per-category PILOT_PER_CATEGORY] --config
+                                  CONFIG [--concurrency CONCURRENCY]
+                                  [--request-timeout REQUEST_TIMEOUT]
+                                  [--provider-attempts PROVIDER_ATTEMPTS]
+                                  [--stop-on-provider-error] [--dry-run]
+                                  [--api-config-dir API_CONFIG_DIR]
+
+options:
+  -h, --help            show this help message and exit
+  --dataset DATASET
+  --task-ids TASK_IDS [TASK_IDS ...]
+  --pilot               Fixed 50-task human pilot
+  --pilot-per-category PILOT_PER_CATEGORY
+  --config CONFIG
+  --concurrency CONCURRENCY
+                        Operational worker override; preserves authored content
+  --request-timeout REQUEST_TIMEOUT
+                        Seconds allowed per model request
+  --provider-attempts PROVIDER_ATTEMPTS
+                        Bounded attempts per transient API failure (1 to 3)
+  --stop-on-provider-error
+                        Stop the whole batch instead of isolating a failed task
+  --dry-run             Report scope without model calls
+  --api-config-dir API_CONFIG_DIR
+```
+
+### `tau2 gaia2-series repair`
+
+```text
+usage: tau2 gaia2-series repair [-h] --dataset DATASET
+                                [--task-ids TASK_IDS [TASK_IDS ...] | --pilot |
+                                --pilot-per-category PILOT_PER_CATEGORY] --config
+                                CONFIG [--concurrency CONCURRENCY]
+                                [--request-timeout REQUEST_TIMEOUT]
+                                [--provider-attempts PROVIDER_ATTEMPTS]
+                                [--stop-on-provider-error] [--dry-run]
+                                [--api-config-dir API_CONFIG_DIR]
+
+options:
+  -h, --help            show this help message and exit
+  --dataset DATASET
+  --task-ids TASK_IDS [TASK_IDS ...]
+  --pilot               Fixed 50-task human pilot
+  --pilot-per-category PILOT_PER_CATEGORY
+  --config CONFIG
+  --concurrency CONCURRENCY
+                        Operational worker override; preserves authored content
+  --request-timeout REQUEST_TIMEOUT
+                        Seconds allowed per model request
+  --provider-attempts PROVIDER_ATTEMPTS
+                        Bounded attempts per transient API failure (1 to 3)
+  --stop-on-provider-error
+                        Stop the whole batch instead of isolating a failed task
+  --dry-run             Report scope without model calls
+  --api-config-dir API_CONFIG_DIR
+```
+
+### `tau2 gaia2-series verify`
+
+```text
+usage: tau2 gaia2-series verify [-h] --dataset DATASET
+                                [--task-ids TASK_IDS [TASK_IDS ...] | --pilot |
+                                --pilot-per-category PILOT_PER_CATEGORY]
+                                [--workers WORKERS] [--api-config-dir API_CONFIG_DIR]
+
+options:
+  -h, --help            show this help message and exit
+  --dataset DATASET
+  --task-ids TASK_IDS [TASK_IDS ...]
+  --pilot               Fixed 50-task human pilot
+  --pilot-per-category PILOT_PER_CATEGORY
+  --workers WORKERS
+  --api-config-dir API_CONFIG_DIR
+```
+
+### `tau2 gaia2-series review`
+
+```text
+usage: tau2 gaia2-series review [-h] --dataset DATASET
+                                [--task-ids TASK_IDS [TASK_IDS ...] | --pilot |
+                                --pilot-per-category PILOT_PER_CATEGORY] --config
+                                CONFIG [--concurrency CONCURRENCY]
+                                [--request-timeout REQUEST_TIMEOUT]
+                                [--provider-attempts PROVIDER_ATTEMPTS]
+                                [--stop-on-provider-error]
+                                [--api-config-dir API_CONFIG_DIR]
+
+options:
+  -h, --help            show this help message and exit
+  --dataset DATASET
+  --task-ids TASK_IDS [TASK_IDS ...]
+  --pilot               Fixed 50-task human pilot
+  --pilot-per-category PILOT_PER_CATEGORY
+  --config CONFIG
+  --concurrency CONCURRENCY
+                        Operational worker override; preserves authored content
+  --request-timeout REQUEST_TIMEOUT
+                        Seconds allowed per model request
+  --provider-attempts PROVIDER_ATTEMPTS
+                        Bounded attempts per transient API failure (1 to 3)
+  --stop-on-provider-error
+                        Stop the whole batch instead of isolating a failed task
+  --api-config-dir API_CONFIG_DIR
+```
+
+### `tau2 gaia2-series review-sheet`
+
+```text
+usage: tau2 gaia2-series review-sheet [-h] --dataset DATASET
+                                      [--task-ids TASK_IDS [TASK_IDS ...] | --pilot |
+                                      --pilot-per-category PILOT_PER_CATEGORY]
+                                      [--api-config-dir API_CONFIG_DIR]
+
+options:
+  -h, --help            show this help message and exit
+  --dataset DATASET
+  --task-ids TASK_IDS [TASK_IDS ...]
+  --pilot               Fixed 50-task human pilot
+  --pilot-per-category PILOT_PER_CATEGORY
+  --api-config-dir API_CONFIG_DIR
+```
+
+### `tau2 gaia2-series import-review`
+
+```text
+usage: tau2 gaia2-series import-review [-h] --dataset DATASET --decisions DECISIONS
+                                       [--api-config-dir API_CONFIG_DIR]
+
+options:
+  -h, --help            show this help message and exit
+  --dataset DATASET
+  --decisions DECISIONS
+  --api-config-dir API_CONFIG_DIR
+```
+
+### `tau2 gaia2-series export`
+
+```text
+usage: tau2 gaia2-series export [-h] --dataset DATASET [--allow-partial]
+                                [--api-config-dir API_CONFIG_DIR]
+
+options:
+  -h, --help            show this help message and exit
+  --dataset DATASET
+  --allow-partial       Write explicitly incomplete draft-export only
+  --api-config-dir API_CONFIG_DIR
+```
+
+### `tau2 gaia2-series status`
+
+```text
+usage: tau2 gaia2-series status [-h] --dataset DATASET
+                                [--api-config-dir API_CONFIG_DIR]
+
+options:
+  -h, --help            show this help message and exit
+  --dataset DATASET
+  --api-config-dir API_CONFIG_DIR
+```
 
 ## `tau2 benchmarks`
 
@@ -718,26 +587,32 @@ usage: tau2 run [-h] [--communicate-scorer {semantic,substring}]
                 [--communicate-judge JSON] [--no-localize-db] [--language LANGUAGE]
                 [--benchmark BENCHMARK] [--dry-run] [--json]
                 [--global-limit GLOBAL_LIMIT] [--voice VOICE]
-                [--domain {mock,airline,retail,telecom,telecom-workflow,banking_knowledge,intake}]
+                [--domain {mock,airline,retail,gaia2,telecom,telecom-workflow,banking_knowledge,intake}]
                 [--num-trials NUM_TRIALS]
                 [--agent {llm_agent,llm_agent_gt,llm_agent_solo,discrete_time_audio_native_agent}]
                 [--agent-llm AGENT_LLM] [--agent-llm-args AGENT_LLM_ARGS]
-                [--user {user_simulator,dummy_user,voice_streaming_user_simulator}]
-                [--user-llm USER_LLM] [--user-llm-args USER_LLM_ARGS]
-                [--task-set-name {mock,airline,retail,telecom_full,telecom_small,telecom,telecom-workflow,banking_knowledge,intake}]
+                [--user {user_simulator,dummy_user}] [--user-llm USER_LLM]
+                [--user-llm-args USER_LLM_ARGS]
+                [--task-set-name {mock,airline,retail,gaia2,gaia2_hidden,telecom_full,telecom_small,telecom,telecom-workflow,banking_knowledge,intake}]
                 [--task-split-name TASK_SPLIT_NAME]
                 [--task-ids TASK_IDS [TASK_IDS ...]] [--num-tasks NUM_TASKS]
                 [--max-steps MAX_STEPS] [--max-errors MAX_ERRORS] [--timeout TIMEOUT]
                 [--save-to SAVE_TO] [--max-concurrency MAX_CONCURRENCY]
                 [--workers WORKERS] [--provider-limit PROVIDER_LIMIT] [--seed SEED]
-                [--log-level LOG_LEVEL] [--verbose-logs] [--audio-debug]
-                [--audio-taps] [--llm-log-mode {all,latest}]
+                [--log-level LOG_LEVEL] [--judge-from-user-llm]
+                [--api-config-dir API_CONFIG_DIR] [--metrics-config METRICS_CONFIG]
+                [--active-metrics-config ACTIVE_METRICS_CONFIG]
+                [--gaia2-allow-stale-runtime]
+                [--verbose-logs]
+                [--audio-debug] [--audio-taps] [--llm-log-mode {all,latest}]
                 [--max-retries MAX_RETRIES] [--retry-delay RETRY_DELAY]
                 [--enforce-communication-protocol] [--user-persona USER_PERSONA]
+                [--user-audio-renderer {standard,saasr}] [--saasr-config SAASR_CONFIG]
                 [--audio-native]
-                [--audio-native-provider {openai,openai_live,gemini,xai,nova,qwen,avartha_pipecat,phonic,livekit,launa}]
+                [--audio-native-provider {openai,openai_live,gemini,xai,nova,qwen,qwen_agent,avartha_pipecat,phonic,livekit,launa}]
                 [--cascaded-config CASCADED_CONFIG]
                 [--audio-native-model AUDIO_NATIVE_MODEL]
+                [--qwen-agent-config QWEN_AGENT_CONFIG]
                 [--avartha-base-url AVARTHA_BASE_URL] [--live-config LIVE_CONFIG]
                 [--realtime-generation | --no-realtime-generation]
                 [--reasoning-effort {minimal,low,medium,high,xhigh}]
@@ -791,7 +666,7 @@ options:
                         Total concurrent calls across the benchmark worker fleet.
   --voice VOICE         OpenAI Realtime agent voice override; the released default is
                         marin.
-  --domain {mock,airline,retail,telecom,telecom-workflow,banking_knowledge,intake}, -d {mock,airline,retail,telecom,telecom-workflow,banking_knowledge,intake}
+  --domain {mock,airline,retail,gaia2,telecom,telecom-workflow,banking_knowledge,intake}, -d {mock,airline,retail,gaia2,telecom,telecom-workflow,banking_knowledge,intake}
                         Domain filter; repeatable for released voice runs. Omit to run
                         all released voice domains.
   --num-trials NUM_TRIALS
@@ -803,7 +678,7 @@ options:
   --agent-llm-args AGENT_LLM_ARGS
                         The arguments to pass to the LLM for the agent. Default is
                         '{"temperature": 0.0}'.
-  --user {user_simulator,dummy_user,voice_streaming_user_simulator}
+  --user {user_simulator,dummy_user}
                         The user implementation to use. Default is user_simulator.
   --user-llm USER_LLM   The LLM to use for the user. Default is gpt-4.1-2025-04-14;
                         τ-Entity uses gpt-5.5.
@@ -811,7 +686,7 @@ options:
                         The arguments to pass to the LLM for the user. Default is
                         '{"temperature": 0.0}'; the default τ-Entity caller uses
                         {"temperature": 0.0, "reasoning_effort": "low"}.
-  --task-set-name {mock,airline,retail,telecom_full,telecom_small,telecom,telecom-workflow,banking_knowledge,intake}
+  --task-set-name {mock,airline,retail,gaia2,gaia2_hidden,telecom_full,telecom_small,telecom,telecom-workflow,banking_knowledge,intake}
                         The task set to run the simulation on. If not provided, will
                         load default task set for the domain.
   --task-split-name TASK_SPLIT_NAME
@@ -834,10 +709,10 @@ options:
   --timeout TIMEOUT     Maximum wallclock time in seconds for each simulation. No
                         timeout by default.
   --save-to SAVE_TO, --output SAVE_TO
-                        The path to save the simulation results. Will be saved to
-                        data/simulations/<save_to>/results.json. If not provided, will
-                        save to <timestamp>_<domain>_<agent>_<user>. If the file
-                        already exists, it will try to resume the run.
+                        The path to save the simulation results. Relative paths are
+                        saved under data/results/<save_to>/results.json. If not
+                        provided, a timestamped run name is used. If the file already
+                        exists, it will try to resume the run.
   --max-concurrency MAX_CONCURRENCY
                         The maximum number of concurrent simulations to run. Default
                         is 3. With --workers, this is the number of simulations each
@@ -855,6 +730,17 @@ options:
   --seed SEED           The seed to use for the simulation. Default is 300.
   --log-level LOG_LEVEL
                         The log level to use for the simulation. Default is ERROR.
+  --judge-from-user-llm
+                        Shared API mode: use USER for judges only
+  --api-config-dir API_CONFIG_DIR
+                        Shared qwaudio API configuration directory
+  --metrics-config METRICS_CONFIG
+                        Independent diagnostic YAML profile
+  --active-metrics-config ACTIVE_METRICS_CONFIG
+                        Active metric YAML profile
+  --gaia2-allow-stale-runtime
+                        Skip the Gaia2 runtime seal comparison for development smoke
+                        runs
   --verbose-logs        Enable verbose logging: saves LLM call logs, audio files, per-
                         task logs, and ticks (for audio-native). Files are saved to
                         the save directory (auto-generated if --save-to not
@@ -884,10 +770,15 @@ options:
                         weighted probabilities. Examples: '{"verbosity": "minimal"}',
                         '{"verbosity": {"minimal": 0.8, "standard": 0.2}}'. If not
                         provided, uses default behavior (standard verbosity).
+  --user-audio-renderer {standard,saasr}
+                        Caller audio renderer; saasr adds a continuous multi-speaker
+                        scene.
+  --saasr-config SAASR_CONFIG
+                        SAASR worker and scene JSON configuration
   --audio-native        Enable audio-native mode using DiscreteTimeAudioNativeAgent
                         with VoiceStreamingUserSimulator. This enables full-duplex
                         voice simulation using audio native APIs.
-  --audio-native-provider {openai,openai_live,gemini,xai,nova,qwen,avartha_pipecat,phonic,livekit,launa}
+  --audio-native-provider {openai,openai_live,gemini,xai,nova,qwen,qwen_agent,avartha_pipecat,phonic,livekit,launa}
                         Audio native API provider. Default is 'openai'.
   --cascaded-config CASCADED_CONFIG
                         Cascaded config preset name for livekit provider. Available
@@ -897,6 +788,9 @@ options:
                         Audio native model to use. If not specified, uses the default
                         model for the selected provider. For avartha_pipecat, it is
                         only a label, since --avartha-base-url selects the agent.
+  --qwen-agent-config QWEN_AGENT_CONFIG
+                        JSON configuration file for the complete qwen_agent system
+                        provider.
   --avartha-base-url AVARTHA_BASE_URL
                         URL of the hosted Avartha agent the avartha_pipecat provider
                         calls, https://<host>/inference/serverless/pipecat/v1/public/<
@@ -917,8 +811,8 @@ options:
                         Tick duration in seconds for audio-native mode. Default is
                         0.2.
   --max-steps-seconds MAX_STEPS_SECONDS
-                        Maximum conversation duration in seconds. Default is 1200;
-                        τ-Entity uses 240.
+                        Maximum conversation duration in seconds; 0 disables the
+                        limit. Default is 1200; τ-Entity uses 240.
   --speech-complexity {control,regular,control_audio,control_accents,control_behavior,control_audio_accents,control_audio_behavior,control_accents_behavior}
                         Speech complexity level for audio effects. Default is
                         'regular'.
@@ -997,27 +891,34 @@ usage: tau2 run-pass3 [-h] [--communicate-scorer {semantic,substring}]
                       [--communicate-judge JSON] [--no-localize-db]
                       [--language LANGUAGE] [--benchmark BENCHMARK] [--dry-run]
                       [--json] [--global-limit GLOBAL_LIMIT] [--voice VOICE]
-                      [--domain {mock,airline,retail,telecom,telecom-workflow,banking_knowledge,intake}]
+                      [--domain {mock,airline,retail,gaia2,telecom,telecom-workflow,banking_knowledge,intake}]
                       [--num-trials NUM_TRIALS]
                       [--agent {llm_agent,llm_agent_gt,llm_agent_solo,discrete_time_audio_native_agent}]
                       [--agent-llm AGENT_LLM] [--agent-llm-args AGENT_LLM_ARGS]
-                      [--user {user_simulator,dummy_user,voice_streaming_user_simulator}]
-                      [--user-llm USER_LLM] [--user-llm-args USER_LLM_ARGS]
-                      [--task-set-name {mock,airline,retail,telecom_full,telecom_small,telecom,telecom-workflow,banking_knowledge,intake}]
+                      [--user {user_simulator,dummy_user}] [--user-llm USER_LLM]
+                      [--user-llm-args USER_LLM_ARGS]
+                      [--task-set-name {mock,airline,retail,gaia2,gaia2_hidden,telecom_full,telecom_small,telecom,telecom-workflow,banking_knowledge,intake}]
                       [--task-split-name TASK_SPLIT_NAME]
                       [--task-ids TASK_IDS [TASK_IDS ...]] [--num-tasks NUM_TASKS]
                       [--max-steps MAX_STEPS] [--max-errors MAX_ERRORS]
                       [--timeout TIMEOUT] [--save-to SAVE_TO]
                       [--max-concurrency MAX_CONCURRENCY] [--workers WORKERS]
                       [--provider-limit PROVIDER_LIMIT] [--seed SEED]
-                      [--log-level LOG_LEVEL] [--verbose-logs] [--audio-debug]
-                      [--audio-taps] [--llm-log-mode {all,latest}]
-                      [--max-retries MAX_RETRIES] [--retry-delay RETRY_DELAY]
-                      [--enforce-communication-protocol] [--user-persona USER_PERSONA]
-                      [--audio-native]
-                      [--audio-native-provider {openai,openai_live,gemini,xai,nova,qwen,avartha_pipecat,phonic,livekit,launa}]
+                      [--log-level LOG_LEVEL] [--judge-from-user-llm]
+                      [--api-config-dir API_CONFIG_DIR]
+                      [--metrics-config METRICS_CONFIG]
+                      [--active-metrics-config ACTIVE_METRICS_CONFIG]
+                      [--gaia2-allow-stale-runtime]
+                      [--verbose-logs] [--audio-debug] [--audio-taps]
+                      [--llm-log-mode {all,latest}] [--max-retries MAX_RETRIES]
+                      [--retry-delay RETRY_DELAY] [--enforce-communication-protocol]
+                      [--user-persona USER_PERSONA]
+                      [--user-audio-renderer {standard,saasr}]
+                      [--saasr-config SAASR_CONFIG] [--audio-native]
+                      [--audio-native-provider {openai,openai_live,gemini,xai,nova,qwen,qwen_agent,avartha_pipecat,phonic,livekit,launa}]
                       [--cascaded-config CASCADED_CONFIG]
                       [--audio-native-model AUDIO_NATIVE_MODEL]
+                      [--qwen-agent-config QWEN_AGENT_CONFIG]
                       [--avartha-base-url AVARTHA_BASE_URL]
                       [--live-config LIVE_CONFIG]
                       [--realtime-generation | --no-realtime-generation]
@@ -1075,7 +976,7 @@ options:
                         Total concurrent calls across the benchmark worker fleet.
   --voice VOICE         OpenAI Realtime agent voice override; the released default is
                         marin.
-  --domain {mock,airline,retail,telecom,telecom-workflow,banking_knowledge,intake}, -d {mock,airline,retail,telecom,telecom-workflow,banking_knowledge,intake}
+  --domain {mock,airline,retail,gaia2,telecom,telecom-workflow,banking_knowledge,intake}, -d {mock,airline,retail,gaia2,telecom,telecom-workflow,banking_knowledge,intake}
                         Domain filter; repeatable for released voice runs. Omit to run
                         all released voice domains.
   --num-trials NUM_TRIALS
@@ -1087,7 +988,7 @@ options:
   --agent-llm-args AGENT_LLM_ARGS
                         The arguments to pass to the LLM for the agent. Default is
                         '{"temperature": 0.0}'.
-  --user {user_simulator,dummy_user,voice_streaming_user_simulator}
+  --user {user_simulator,dummy_user}
                         The user implementation to use. Default is user_simulator.
   --user-llm USER_LLM   The LLM to use for the user. Default is gpt-4.1-2025-04-14;
                         τ-Entity uses gpt-5.5.
@@ -1095,7 +996,7 @@ options:
                         The arguments to pass to the LLM for the user. Default is
                         '{"temperature": 0.0}'; the default τ-Entity caller uses
                         {"temperature": 0.0, "reasoning_effort": "low"}.
-  --task-set-name {mock,airline,retail,telecom_full,telecom_small,telecom,telecom-workflow,banking_knowledge,intake}
+  --task-set-name {mock,airline,retail,gaia2,gaia2_hidden,telecom_full,telecom_small,telecom,telecom-workflow,banking_knowledge,intake}
                         The task set to run the simulation on. If not provided, will
                         load default task set for the domain.
   --task-split-name TASK_SPLIT_NAME
@@ -1118,10 +1019,10 @@ options:
   --timeout TIMEOUT     Maximum wallclock time in seconds for each simulation. No
                         timeout by default.
   --save-to SAVE_TO, --output SAVE_TO
-                        The path to save the simulation results. Will be saved to
-                        data/simulations/<save_to>/results.json. If not provided, will
-                        save to <timestamp>_<domain>_<agent>_<user>. If the file
-                        already exists, it will try to resume the run.
+                        The path to save the simulation results. Relative paths are
+                        saved under data/results/<save_to>/results.json. If not
+                        provided, a timestamped run name is used. If the file already
+                        exists, it will try to resume the run.
   --max-concurrency MAX_CONCURRENCY
                         The maximum number of concurrent simulations to run. Default
                         is 3. With --workers, this is the number of simulations each
@@ -1139,6 +1040,17 @@ options:
   --seed SEED           The seed to use for the simulation. Default is 300.
   --log-level LOG_LEVEL
                         The log level to use for the simulation. Default is ERROR.
+  --judge-from-user-llm
+                        Shared API mode: use USER for judges only
+  --api-config-dir API_CONFIG_DIR
+                        Shared qwaudio API configuration directory
+  --metrics-config METRICS_CONFIG
+                        Independent diagnostic YAML profile
+  --active-metrics-config ACTIVE_METRICS_CONFIG
+                        Active metric YAML profile
+  --gaia2-allow-stale-runtime
+                        Skip the Gaia2 runtime seal comparison for development smoke
+                        runs
   --verbose-logs        Enable verbose logging: saves LLM call logs, audio files, per-
                         task logs, and ticks (for audio-native). Files are saved to
                         the save directory (auto-generated if --save-to not
@@ -1168,10 +1080,15 @@ options:
                         weighted probabilities. Examples: '{"verbosity": "minimal"}',
                         '{"verbosity": {"minimal": 0.8, "standard": 0.2}}'. If not
                         provided, uses default behavior (standard verbosity).
+  --user-audio-renderer {standard,saasr}
+                        Caller audio renderer; saasr adds a continuous multi-speaker
+                        scene.
+  --saasr-config SAASR_CONFIG
+                        SAASR worker and scene JSON configuration
   --audio-native        Enable audio-native mode using DiscreteTimeAudioNativeAgent
                         with VoiceStreamingUserSimulator. This enables full-duplex
                         voice simulation using audio native APIs.
-  --audio-native-provider {openai,openai_live,gemini,xai,nova,qwen,avartha_pipecat,phonic,livekit,launa}
+  --audio-native-provider {openai,openai_live,gemini,xai,nova,qwen,qwen_agent,avartha_pipecat,phonic,livekit,launa}
                         Audio native API provider. Default is 'openai'.
   --cascaded-config CASCADED_CONFIG
                         Cascaded config preset name for livekit provider. Available
@@ -1181,6 +1098,9 @@ options:
                         Audio native model to use. If not specified, uses the default
                         model for the selected provider. For avartha_pipecat, it is
                         only a label, since --avartha-base-url selects the agent.
+  --qwen-agent-config QWEN_AGENT_CONFIG
+                        JSON configuration file for the complete qwen_agent system
+                        provider.
   --avartha-base-url AVARTHA_BASE_URL
                         URL of the hosted Avartha agent the avartha_pipecat provider
                         calls, https://<host>/inference/serverless/pipecat/v1/public/<
@@ -1201,8 +1121,8 @@ options:
                         Tick duration in seconds for audio-native mode. Default is
                         0.2.
   --max-steps-seconds MAX_STEPS_SECONDS
-                        Maximum conversation duration in seconds. Default is 1200;
-                        τ-Entity uses 240.
+                        Maximum conversation duration in seconds; 0 disables the
+                        limit. Default is 1200; τ-Entity uses 240.
   --speech-complexity {control,regular,control_audio,control_accents,control_behavior,control_audio_accents,control_audio_behavior,control_accents_behavior}
                         Speech complexity level for audio effects. Default is
                         'regular'.
@@ -1280,123 +1200,6 @@ options:
                         kinds retain their no-complication probability.
 ```
 
-## `tau2 languages`
-
-```text
-usage: tau2 languages [-h] {list,render-prompts,show,validate} ...
-
-positional arguments:
-  {list,render-prompts,show,validate}
-    list                List published language directories
-    render-prompts      Render actual voice prompts offline for review
-    show                Show a published pack and all its bindings
-    validate            Validate a published pack and all its bindings
-
-options:
-  -h, --help            show this help message and exit
-```
-
-### `tau2 languages list`
-
-```text
-usage: tau2 languages list [-h]
-
-options:
-  -h, --help  show this help message and exit
-```
-
-### `tau2 languages render-prompts`
-
-```text
-usage: tau2 languages render-prompts [-h] --output OUTPUT [--language LANGUAGE]
-                                     [--domain DOMAIN] [--seed SEED]
-                                     [--no-localize-db] [--benchmark BENCHMARK]
-                                     [--config CONFIG]
-
-options:
-  -h, --help            show this help message and exit
-  --output OUTPUT
-  --language LANGUAGE   Language filter; repeatable
-  --domain DOMAIN       Domain filter; repeatable
-  --seed SEED
-  --no-localize-db      Review canonical scenarios in the selected language; cannot
-                        use --benchmark.
-  --benchmark BENCHMARK
-                        Render the released benchmark using the same resolver/defaults
-                        as tau2 run --audio-native
-  --config CONFIG       Ordinary VoiceRunConfig JSON used for prompt construction
-```
-
-### `tau2 languages show`
-
-```text
-usage: tau2 languages show [-h] language
-
-positional arguments:
-  language
-
-options:
-  -h, --help  show this help message and exit
-```
-
-### `tau2 languages validate`
-
-```text
-usage: tau2 languages validate [-h] language
-
-positional arguments:
-  language
-
-options:
-  -h, --help  show this help message and exit
-```
-
-## `tau2 intake-tasks`
-
-```text
-usage: tau2 intake-tasks [-h] {enumerate,freeze,verify} ...
-
-positional arguments:
-  {enumerate,freeze,verify}
-    enumerate           Validate the banks and report the released task frame
-    freeze              Generate verified tasks, splits, and provenance
-    verify              Check frozen artifacts against their recorded draw without
-                        writing
-
-options:
-  -h, --help            show this help message and exit
-```
-
-### `tau2 intake-tasks enumerate`
-
-```text
-usage: tau2 intake-tasks enumerate [-h]
-
-options:
-  -h, --help  show this help message and exit
-```
-
-### `tau2 intake-tasks freeze`
-
-```text
-usage: tau2 intake-tasks freeze [-h] [--seed SEED] [--out OUT]
-
-options:
-  -h, --help   show this help message and exit
-  --seed SEED
-  --out OUT    Output directory (default: canonical domain data)
-```
-
-### `tau2 intake-tasks verify`
-
-```text
-usage: tau2 intake-tasks verify [-h] [--data-dir DATA_DIR]
-
-options:
-  -h, --help           show this help message and exit
-  --data-dir DATA_DIR  Artifact directory (default: canonical domain data)
-```
-
 ## `tau2 play`
 
 ```text
@@ -1416,7 +1219,7 @@ usage: tau2 view [-h] [--dir DIR] [--file FILE] [--only-show-failed]
 options:
   -h, --help            show this help message and exit
   --dir DIR             Directory containing simulation files, or a benchmark matrix
-                        root. Defaults to data/simulations.
+                        root. Defaults to data/results.
   --file FILE           Path to a simulation results file, ordinary run directory, or
                         benchmark matrix root
   --only-show-failed    Only show failed tasks.
@@ -1487,7 +1290,10 @@ options:
 ## `tau2 evaluate-trajs`
 
 ```text
-usage: tau2 evaluate-trajs [-h] [-o OUTPUT_DIR] [--fresh-tasks] paths [paths ...]
+usage: tau2 evaluate-trajs [-h] [-o OUTPUT_DIR] [--fresh-tasks]
+                           [--recorded-data-root RECORDED_DATA_ROOT]
+                           [--api-config-dir API_CONFIG_DIR]
+                           paths [paths ...]
 
 positional arguments:
   paths                 Paths to trajectory files, directories, or glob patterns
@@ -1499,6 +1305,10 @@ options:
                         rewards. If not provided, only displays metrics.
   --fresh-tasks         Re-grade against the current task definitions from the data
                         directory instead of the ones embedded in each results file.
+  --recorded-data-root RECORDED_DATA_ROOT
+                        Archived Gaia2 data and language binding for strict historical
+                        rescoring
+  --api-config-dir API_CONFIG_DIR
 ```
 
 ## `tau2 review`
@@ -1577,7 +1387,7 @@ options:
 ```text
 usage: tau2 submit prepare [-h] --output OUTPUT [--no-verify] [--voice]
                            [--benchmark BENCHMARK] [--metadata-file METADATA_FILE]
-                           [--historical-voice-v2] [--judges-root JUDGES_ROOT]
+                           [--historical-voice-v2]
                            input_paths [input_paths ...]
 
 positional arguments:
@@ -1601,17 +1411,13 @@ options:
                         Maintainers only: read the frozen 2026-10-02 Voice V2 release
                         export; --benchmark voice (default), banking or entity selects
                         the frame
-  --judges-root JUDGES_ROOT
-                        With --historical-voice-v2 (voice frame only): a provider's
-                        saved verdict directory (<language>/<simulation-id>.json);
-                        repeat for each judge suite
 ```
 
 ### `tau2 submit validate`
 
 ```text
 usage: tau2 submit validate [-h] [--benchmark BENCHMARK] [--results RESULTS]
-                            [--historical-voice-v2] [--judges-root JUDGES_ROOT]
+                            [--historical-voice-v2]
                             submission_dir
 
 positional arguments:
@@ -1629,10 +1435,6 @@ options:
                         Maintainers only: read the frozen 2026-10-02 Voice V2 release
                         export; --benchmark voice (default), banking or entity selects
                         the frame
-  --judges-root JUDGES_ROOT
-                        With --historical-voice-v2 (voice frame only): a provider's
-                        saved verdict directory (<language>/<simulation-id>.json);
-                        repeat for each judge suite
 ```
 
 ### `tau2 submit verify-trajs`

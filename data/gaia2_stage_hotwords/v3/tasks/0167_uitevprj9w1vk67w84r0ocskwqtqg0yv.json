@@ -1,0 +1,148 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0167_uitevprj9w1vk67w84r0ocskwqtqg0yv",
+  "model": "deepseek-flash",
+  "input_sha256": "163d6516b4f5573a03a07372219cb6ecdb77dc260aca52995776e6050c77c881",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Saskia",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Net-Zero Energy Building Project",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Amal",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "KU Leuven",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Amal Al-Mansour",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c0033c8c-8d7c-4a8c-b94d-81f98884af0f.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Sione",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5e311dd8-659b-47c1-849c-632b9bff4588.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c6bf1061-fdea-4f97-8930-4a9e00c4d98e.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Saskia",
+        "Net-Zero Energy Building Project",
+        "Amal",
+        "KU Leuven",
+        "Amal Al-Mansour",
+        "Sione",
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Saskia": 50,
+        "Net-Zero Energy Building Project": 50,
+        "Amal": 50,
+        "KU Leuven": 50,
+        "Amal Al-Mansour": 50,
+        "Sione": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "6ca44e1f8f4c428acb86c95d2375f5e6a9324dbb2b109d75654bbd72b589e0c8"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Amal Al-Mansour",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Nalinee Srisawat",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Net-Zero Energy Building - Call with Amal",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Nalinee Srisawat",
+        "Net-Zero Energy Building - Call with Amal"
+      ],
+      "active_vocabulary": {
+        "Saskia": 50,
+        "Net-Zero Energy Building Project": 50,
+        "Amal": 50,
+        "KU Leuven": 50,
+        "Amal Al-Mansour": 50,
+        "Sione": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Nalinee Srisawat": 50,
+        "Net-Zero Energy Building - Call with Amal": 50
+      },
+      "vocabulary_sha256": "7a43065c18da661bd905b9e48b4f090c708303c42b921ffa53c282b81ff783ff"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "KU Leuven",
+          "kind": "organization",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Sint-Michielsstraat 23",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Sint-Michielsstraat 23"
+      ],
+      "active_vocabulary": {
+        "Saskia": 50,
+        "Net-Zero Energy Building Project": 50,
+        "Amal": 50,
+        "KU Leuven": 50,
+        "Amal Al-Mansour": 50,
+        "Sione": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Nalinee Srisawat": 50,
+        "Net-Zero Energy Building - Call with Amal": 50,
+        "Sint-Michielsstraat 23": 50
+      },
+      "vocabulary_sha256": "93a9a3872c01cc42cc389428becc967a0e65887f21cb981614cafd89c2e0b717"
+    }
+  ]
+}

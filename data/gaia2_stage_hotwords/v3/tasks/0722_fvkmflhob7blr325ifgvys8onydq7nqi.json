@@ -1,0 +1,134 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0722_fvkmflhob7blr325ifgvys8onydq7nqi",
+  "model": "deepseek-flash",
+  "input_sha256": "fefb4fac557f65c1c27265211cc188cf97338429698b80fed425e1d88940bcca",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "VIP Wine Tasting Event",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-71f98308-ae4a-45c2-896e-896c120b49a2.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Staff Meeting",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-275c7938-f717-421d-ac8e-313dee96701d.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Yoga Class",
+          "kind": "custom_name",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6d1c5408-7232-4a63-9e51-44312cb788c8.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "VIP Wine Tasting Event",
+        "Staff Meeting",
+        "Yoga Class"
+      ],
+      "active_vocabulary": {
+        "VIP Wine Tasting Event": 50,
+        "Staff Meeting": 50,
+        "Yoga Class": 50
+      },
+      "vocabulary_sha256": "81d20cfacd2ca0693fba1717ae0da8edb6f1eef97534e66e56bdce32bc9ca2a8"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "VIP Wine Tasting Event",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Staff Meeting",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Yoga Class",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Wine List Review",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Nalani Jensen",
+        "Wine List Review"
+      ],
+      "active_vocabulary": {
+        "VIP Wine Tasting Event": 50,
+        "Staff Meeting": 50,
+        "Yoga Class": 50,
+        "Nalani Jensen": 50,
+        "Wine List Review": 50
+      },
+      "vocabulary_sha256": "4a54356db7389f741f7c03b25c9bebce5d57406d4e274e09c63743c9cc9dd6d1"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaia Nakamura",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Staff Meeting",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_proposal.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kaia Nakamura",
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "VIP Wine Tasting Event": 50,
+        "Staff Meeting": 50,
+        "Yoga Class": 50,
+        "Nalani Jensen": 50,
+        "Wine List Review": 50,
+        "Kaia Nakamura": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "9de8404c96147bf91d52d63f7a9ab62b75a2d39a1b9fb9c77f8e7ac7434977c4"
+    }
+  ]
+}

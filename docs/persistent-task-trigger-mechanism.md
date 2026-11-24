@@ -1,5 +1,7 @@
 # Persistent task 通用触发机制计划
 
+> 历史文档：旧 Persistent Task 配置、运行、恢复和重新评分入口已退役。本文保留设计与实验来源，不作为当前操作指南；当前运行见 [动态异步交互](gaia2-async.md)。
+
 ## 目标
 
 建立一套跨 Qwen Audio Agent、GPT Live 和其他后端都能使用的 persistent task 触发机制。

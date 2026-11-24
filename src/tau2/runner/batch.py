@@ -24,7 +24,6 @@ from typing import Callable, Optional
 
 from loguru import logger
 
-from tau2.data_model.elicitation import ElicitationStrategy
 from tau2.data_model.language import LanguageTaskInfo
 from tau2.data_model.persona import InterruptTendency, PersonaConfig, Verbosity
 from tau2.data_model.run_config import AudioNativeConfig
@@ -44,17 +43,12 @@ from tau2.evaluator.evaluator import EvaluationType
 from tau2.evaluator.hallucination_reviewer import failed_hallucination_check
 from tau2.evaluator.reviewer import check_hallucination, format_hallucination_feedback
 from tau2.metrics.agent_metrics import compute_metrics
-from tau2.persistent_tasks.availability import (
-    AsyncTaskUnavailable,
-    skip_unavailable_async,
-)
 from tau2.registry import registry
 from tau2.runner.build import _build_env_kwargs, build_orchestrator
 from tau2.runner.checkpoint import (
     create_checkpoint_fns,
     try_resume,
 )
-from tau2.runner.elicitation import sample_run_complication, user_prompt_task
 from tau2.runner.hallucination_checkpoint import (
     HallucinationReviewCheckpoint,
     load_review_checkpoint,
@@ -71,7 +65,7 @@ from tau2.user_simulation_voice_presets import COMPLEXITY_CONFIGS
 from tau2.utils.display import ConsoleDisplay, Text
 from tau2.utils.errors import NonRetryableError
 from tau2.utils.llm_utils import llm_log_mode, set_llm_log_dir, set_llm_log_mode
-from tau2.utils.utils import DATA_DIR
+from tau2.utils.utils import RESULTS_DIR
 
 # Context variable to track current simulation_id for log filtering
 # This ensures task-specific log handlers only receive their own messages
@@ -192,7 +186,7 @@ def run_auto_review(
         voice_settings=user_voice_settings,
     )
     if language_context is not None:
-        from tau2.multilingual.runtime import language_review_user_info
+        from tau2.domains.gaia2.language_runtime import language_review_user_info
 
         review_user_info = language_review_user_info(
             review_user_info,
@@ -345,8 +339,6 @@ class _TaskLogContext:
                 "error": str(exc_val),
                 "error_type": exc_type.__name__,
             }
-            if isinstance(exc_val, AsyncTaskUnavailable):
-                status.update(status="skipped", reason=exc_val.status)
             try:
                 status_path = self.task_log_dir / "sim_status.json"
                 with open(status_path, "w") as f:
@@ -367,7 +359,6 @@ class _TaskLogContext:
 # =============================================================================
 
 
-@skip_unavailable_async
 def run_single_task(
     config: RunConfig,
     task: Task,
@@ -484,7 +475,6 @@ def run_single_task(
             on_trajectory_ready=save_raw_trajectory,
             metrics_config=config.metrics_config,
             active_metrics_config=config.active_metrics,
-            persistent_task_config=config.persistent_task_config,
             trial=trial,
             diagnostics_dir=(
                 save_dir
@@ -497,7 +487,6 @@ def run_single_task(
             else None,
         )
 
-        simulation.complication = sample_run_complication(config, task)
         if save_dir is not None:
             status_path = (
                 save_dir
@@ -530,31 +519,9 @@ def run_single_task(
                 call_language if call_language.persona is not None else None
             )
             review_persona = user_persona_config
-            if config.elicitation is not None:
-                agent_directed = (
-                    config.elicitation.strategy == ElicitationStrategy.AGENT_DIRECTED
-                )
-                if review_context is not None and review_context.cross_lingual:
-                    # Localized intake: the pack persona voices the outbound caller.
-                    from tau2.multilingual.runtime import intake_review_user_info
-
-                    localized = intake_review_user_info(
-                        UserInfo(implementation=config.effective_user),
-                        review_context,
-                        agent_directed=agent_directed,
-                    )
-                    review_guidelines = localized.global_simulation_guidelines
-                    review_persona = localized.persona_config
-                    review_context = None
-                else:
-                    from tau2.domains.intake.prompts import get_user_guidelines
-
-                    review_guidelines = get_user_guidelines(
-                        is_voice=is_voice, agent_directed=agent_directed
-                    )
             run_auto_review(
                 simulation=simulation,
-                task=user_prompt_task(config, task),
+                task=task,
                 review_mode=review_mode,
                 review_model=review_model or config.review_model,
                 user=config.effective_user,
@@ -752,7 +719,7 @@ def run_unit(
         is_full_duplex = result.ticks is not None and len(result.ticks) > 0
         if hallucination_retries > 0 and is_full_duplex and review_checkpoint is None:
             hallucination_retry_count = 0
-            prompt_task = user_prompt_task(config, task)
+            prompt_task = task
             while True:
                 try:
                     h_check = check_hallucination(
@@ -992,28 +959,6 @@ def prepare_batch(
 
     # Warm knowledge base cache for banking_knowledge domain
     policy_override = None
-    if config.domain == "banking_knowledge":
-        from tau2.domains.banking_knowledge.environment import get_knowledge_base
-        from tau2.domains.banking_knowledge.retrieval import get_info_policy_override
-        from tau2.knowledge.embeddings_cache import (
-            get_unique_embedder_configs_for_retrieval_configs,
-            warm_kb_cache,
-        )
-
-        retrieval_config = getattr(config, "retrieval_config", None)
-        retrieval_config_kwargs = getattr(config, "retrieval_config_kwargs", None)
-        kwargs = retrieval_config_kwargs or {}
-        embedder_configs = None
-        if retrieval_config:
-            embedder_configs = get_unique_embedder_configs_for_retrieval_configs(
-                [retrieval_config],
-                kwargs,
-            )
-        warm_kb_cache(embedder_configs)
-        knowledge_base = get_knowledge_base()
-        policy_override = get_info_policy_override(
-            retrieval_config, knowledge_base, **kwargs
-        )
 
     # Build Info and initial Results
     info = get_info(
@@ -1325,17 +1270,9 @@ def _run_tasks(
 
 def _load_run_tasks(config: RunConfig) -> list[Task]:
     """Load a config's tasks and apply the agent's registered task filter."""
-    from tau2.multilingual.runtime import pin_language_artifacts
+    from tau2.domains.gaia2.language_runtime import pin_language_artifacts
 
-    task_set_name = config.task_set_name or config.domain
-    if config.elicitation is not None and task_set_name != config.domain:
-        raise ValueError(
-            f"Elicitation task set {task_set_name!r} must match selected domain "
-            f"{config.domain!r}; intake requires its own caller and tool contracts."
-        )
     tasks = select_run_tasks(config, pin_language_artifacts(config))
-    if config.elicitation is not None and not tasks:
-        raise ValueError("No elicitation tasks match the selected task IDs")
 
     effective_agent = config.effective_agent
     task_filter = registry.get_agent_task_filter(effective_agent)
@@ -1358,7 +1295,7 @@ def _run_save_paths(config: RunConfig) -> tuple[str, Path, Path, str]:
     simulations with tick data are very large; text runs use monolithic JSON.
     """
     run_name = config.save_to or make_run_name(config)
-    save_dir = DATA_DIR / "simulations" / run_name
+    save_dir = RESULTS_DIR / run_name
     save_path = save_dir / "results.json"
     results_format = "dir" if isinstance(config, VoiceRunConfig) else "json"
     return run_name, save_dir, save_path, results_format

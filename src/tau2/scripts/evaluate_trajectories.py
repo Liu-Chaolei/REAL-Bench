@@ -14,11 +14,11 @@ from tau2.data_model.elicitation import ElicitationStrategy
 from tau2.data_model.language import LanguageTaskInfo, cross_lingual
 from tau2.data_model.simulation import Results, SimulationRun
 from tau2.data_model.tasks import Task
+from tau2.domains.gaia2.language_runtime import LoadedLanguage
 from tau2.evaluator.evaluator import EvaluationType, evaluate_simulation
 from tau2.evaluator.evaluator_base import evaluation_error_info
 from tau2.evaluator.outcome import can_grade, stamp_grading
 from tau2.metrics.agent_metrics import compute_metrics
-from tau2.multilingual.runtime import LoadedLanguage
 from tau2.orchestrator.modes import CommunicationMode
 from tau2.utils.display import ConsoleDisplay
 from tau2.utils.io_utils import expand_paths
@@ -159,7 +159,7 @@ def _build_eval_env_kwargs(
             task=task, semantic_scoring=results.info.effective_communicate_scoring
         )
     if loaded_language is not None:
-        from tau2.multilingual.runtime import (
+        from tau2.domains.gaia2.language_runtime import (
             language_environment_kwargs,
             resolve_task,
             without_delivery_details,

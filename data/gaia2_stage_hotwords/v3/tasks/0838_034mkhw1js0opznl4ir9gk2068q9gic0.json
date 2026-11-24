@@ -1,0 +1,141 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0838_034mkhw1js0opznl4ir9gk2068q9gic0",
+  "model": "deepseek-flash",
+  "input_sha256": "c6d2ef28863f93cb5d8e274d313cb615df2649f46c8da901aeafb2372ddd49a4",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Lea Müller",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-971a8d41-70fa-4730-943f-6c1103fe89f6.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Petrovs Restaurant",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-971a8d41-70fa-4730-943f-6c1103fe89f6.arguments.location",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aidan Ó Cuinn",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-471b6e5b-98e3-409a-ae8e-9b9db47edfc3.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Klaus",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3bcb15a1-68aa-4b83-aeb8-aea360a88111.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Anastasiya",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3bcb15a1-68aa-4b83-aeb8-aea360a88111.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Dublin",
+          "kind": "place",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-471b6e5b-98e3-409a-ae8e-9b9db47edfc3.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Lea Müller",
+        "Petrovs Restaurant",
+        "Aidan Ó Cuinn",
+        "Klaus",
+        "Anastasiya",
+        "Dublin"
+      ],
+      "active_vocabulary": {
+        "Lea Müller": 50,
+        "Petrovs Restaurant": 50,
+        "Aidan Ó Cuinn": 50,
+        "Klaus": 50,
+        "Anastasiya": 50,
+        "Dublin": 50
+      },
+      "vocabulary_sha256": "e8b266d275eeaf2ac5d872ad85eae7366675a104e3a9289045cb7e120fe4a332"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Lea",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Petrovs",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Anastasiya",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_text_lea_confirmation.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Lea",
+        "Petrovs"
+      ],
+      "active_vocabulary": {
+        "Lea Müller": 50,
+        "Petrovs Restaurant": 50,
+        "Aidan Ó Cuinn": 50,
+        "Klaus": 50,
+        "Anastasiya": 50,
+        "Dublin": 50,
+        "Lea": 50,
+        "Petrovs": 50
+      },
+      "vocabulary_sha256": "a937a8e24d2a0c875dd020d06bf4f4fcb6e3b57021a24fe4459d9c58066fa0bd"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Lea",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Petrovs",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Anastasiya",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_text_lea.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Lea Müller": 50,
+        "Petrovs Restaurant": 50,
+        "Aidan Ó Cuinn": 50,
+        "Klaus": 50,
+        "Anastasiya": 50,
+        "Dublin": 50,
+        "Lea": 50,
+        "Petrovs": 50
+      },
+      "vocabulary_sha256": "a937a8e24d2a0c875dd020d06bf4f4fcb6e3b57021a24fe4459d9c58066fa0bd"
+    }
+  ]
+}

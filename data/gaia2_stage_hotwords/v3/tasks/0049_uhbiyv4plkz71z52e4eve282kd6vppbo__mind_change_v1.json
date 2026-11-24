@@ -1,0 +1,128 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0049_uhbiyv4plkz71z52e4eve282kd6vppbo__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "abfe7a4163bd3015f94eb6a7addec9bdbd1747281a6ac46bfd8bf003ce12c681",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Xóchitl Ramírez-García",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Garcia Enterprises",
+          "kind": "organization",
+          "source": "stage1.tool_gt.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Wine List Update",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Nalani Jensen",
+        "Xóchitl Ramírez-García",
+        "Garcia Enterprises",
+        "Aurélien LaFleur",
+        "Wine List Update"
+      ],
+      "active_vocabulary": {
+        "Nalani Jensen": 50,
+        "Xóchitl Ramírez-García": 50,
+        "Garcia Enterprises": 50,
+        "Aurélien LaFleur": 50,
+        "Wine List Update": 50
+      },
+      "vocabulary_sha256": "4e3cc4cb820f84e08d669c6829ea9ea52c06da4b66bf9f1addd0ca77c3ba86b4"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Xóchitl Ramírez-García",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Alexandru Mihăilescu",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kaitlyn Reyes",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Luís Pereira",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Wine Cellar & Sustainability",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Portland",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Alexandru Mihăilescu",
+        "Kaitlyn Reyes",
+        "Luís Pereira",
+        "Wine Cellar & Sustainability",
+        "Portland"
+      ],
+      "active_vocabulary": {
+        "Nalani Jensen": 50,
+        "Xóchitl Ramírez-García": 50,
+        "Garcia Enterprises": 50,
+        "Aurélien LaFleur": 50,
+        "Wine List Update": 50,
+        "Alexandru Mihăilescu": 50,
+        "Kaitlyn Reyes": 50,
+        "Luís Pereira": 50,
+        "Wine Cellar & Sustainability": 50,
+        "Portland": 50
+      },
+      "vocabulary_sha256": "88aac0951bed9b0b5e032773097e34ddaca3796d0c1a867084465ebd61f5ce97"
+    }
+  ]
+}

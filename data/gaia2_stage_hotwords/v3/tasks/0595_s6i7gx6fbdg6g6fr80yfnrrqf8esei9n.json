@@ -1,0 +1,158 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0595_s6i7gx6fbdg6g6fr80yfnrrqf8esei9n",
+  "model": "deepseek-flash",
+  "input_sha256": "c3fdcf481039b38850dccca68ca1f3ae03ec9da508b4f13bfee6f1bd767c371e",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "LS2 7DJ",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Apartment Moving Day",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Home Office",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-016f5eeb-3788-434f-9ec1-8e968060ba5c.arguments.location",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "LS2 7DJ",
+        "Apartment Moving Day",
+        "Home Office"
+      ],
+      "active_vocabulary": {
+        "LS2 7DJ": 50,
+        "Apartment Moving Day": 50,
+        "Home Office": 50
+      },
+      "vocabulary_sha256": "7185c047efad278029024d097df42b8cb6759f97e466a88625eeb00804acd3ae"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Leeds",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "LS2 7DJ",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "789 Kirkgate",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Cambridge",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "34, Storey's Way, Cambridge CB3 0DT",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_order_return.arguments.end_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "789 Kirkgate, Leeds, LS2 7DJ",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_order_return.arguments.start_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Check Leeds viewing travel",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Leeds",
+        "789 Kirkgate",
+        "Cambridge",
+        "34, Storey's Way, Cambridge CB3 0DT",
+        "789 Kirkgate, Leeds, LS2 7DJ",
+        "Check Leeds viewing travel"
+      ],
+      "active_vocabulary": {
+        "LS2 7DJ": 50,
+        "Apartment Moving Day": 50,
+        "Home Office": 50,
+        "Leeds": 50,
+        "789 Kirkgate": 50,
+        "Cambridge": 50,
+        "34, Storey's Way, Cambridge CB3 0DT": 50,
+        "789 Kirkgate, Leeds, LS2 7DJ": 50,
+        "Check Leeds viewing travel": 50
+      },
+      "vocabulary_sha256": "8a84e009fa5dd71ebfb82d101905a3a2a3d54b719ce63f4fafab6a0cd1b3b54a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Evangelia Papadopoulos",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Leeds",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "789 Kirkgate, Leeds, LS2 7DJ",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_plan.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Evangelia",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Evangelia Papadopoulos",
+        "Evangelia"
+      ],
+      "active_vocabulary": {
+        "LS2 7DJ": 50,
+        "Apartment Moving Day": 50,
+        "Home Office": 50,
+        "Leeds": 50,
+        "789 Kirkgate": 50,
+        "Cambridge": 50,
+        "34, Storey's Way, Cambridge CB3 0DT": 50,
+        "789 Kirkgate, Leeds, LS2 7DJ": 50,
+        "Check Leeds viewing travel": 50,
+        "Evangelia Papadopoulos": 50,
+        "Evangelia": 50
+      },
+      "vocabulary_sha256": "7f5a008843d79f6cfdb5924c3acadcefcdac0c36b130dc0a074b3136d1682121"
+    }
+  ]
+}

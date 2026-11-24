@@ -1,0 +1,85 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0250_4mpn1qg7xxcb12b11fi0pekvvjwowji0",
+  "model": "deepseek-flash",
+  "input_sha256": "1e942f885bf71817b1cbabfd2ff71e87912d97aef4259d4561ff4216ad8ca036",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Alessia Ramseyer",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Alessia Ramseyer",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Alessia Ramseyer": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "1a9ee85b6aab9b530070e1b7f2cbfca64ab5d7415c9ec0dfb8cd786448988141"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kazimierz Wojciechowski",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "October Zoom Research Partners",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Alessia Ramseyer",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Katarzyna Zielińska",
+        "Kazimierz Wojciechowski",
+        "October Zoom Research Partners"
+      ],
+      "active_vocabulary": {
+        "Alessia Ramseyer": 50,
+        "Ursula Wiederkehr": 50,
+        "Katarzyna Zielińska": 50,
+        "Kazimierz Wojciechowski": 50,
+        "October Zoom Research Partners": 50
+      },
+      "vocabulary_sha256": "fcffa267762dbd3822ae495aff5c5d1b0f093bf622822496ee44975504516be7"
+    }
+  ]
+}

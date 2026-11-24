@@ -1,0 +1,90 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0242_5kowvhlry1nti7j5oiekdfd3zv8dvsth__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "7434bd2240ed7cb561ab6bee51841e57bd6ab99e8de853bd3009123611862420",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Bristol Temple Meads Station",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bristol Bungalow",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Whiteladies Road",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bristol",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Bristol Temple Meads Station",
+        "Bristol Bungalow",
+        "Whiteladies Road",
+        "Bristol"
+      ],
+      "active_vocabulary": {
+        "Bristol Temple Meads Station": 50,
+        "Bristol Bungalow": 50,
+        "Whiteladies Road": 50,
+        "Bristol": 50
+      },
+      "vocabulary_sha256": "e491a15c916c0f2d30e1470da571c1458fab8cf74d9e6c5d0c1ad9fa4a2d427d"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Whiteladies Road",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bristol Bungalow",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bristol",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Bristol Temple Meads Station": 50,
+        "Bristol Bungalow": 50,
+        "Whiteladies Road": 50,
+        "Bristol": 50
+      },
+      "vocabulary_sha256": "e491a15c916c0f2d30e1470da571c1458fab8cf74d9e6c5d0c1ad9fa4a2d427d"
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0676_6xd4atv0d4vcqppx40utwoskts52vzvb",
+  "model": "deepseek-flash",
+  "input_sha256": "6ea21dadd24178f3fc16c35a660f078025dff1f344645090c541990b64a7945f",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Sydow",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Oliveira",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Funko Pop! Animation: Dragonball Z - Trunks",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-91fd79ef-da23-4050-b0d5-c3482606e2e7.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Sydow",
+        "Oliveira",
+        "Funko Pop! Animation: Dragonball Z - Trunks",
+        "Anastasiya Kuznetsova"
+      ],
+      "active_vocabulary": {
+        "Sydow": 50,
+        "Oliveira": 50,
+        "Funko Pop! Animation: Dragonball Z - Trunks": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "5de60698bbf5c9ec21ed3e8e2505cdb30de8bdd6cf4e72593c6513c8e83c694f"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Sydow",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Trunks",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Trunks"
+      ],
+      "active_vocabulary": {
+        "Sydow": 50,
+        "Oliveira": 50,
+        "Funko Pop! Animation: Dragonball Z - Trunks": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Trunks": 50
+      },
+      "vocabulary_sha256": "d0e08da4b9cc5e839117ba0fef9ba96bcd1a219c8333d25dac28d45f7cfb7632"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Sydow",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Anastasiya",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Funko Pop",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Trunks",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Daryl",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Amy",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Black Panther Chrome",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Anastasiya",
+        "Funko Pop",
+        "Daryl",
+        "Amy",
+        "Black Panther Chrome"
+      ],
+      "active_vocabulary": {
+        "Sydow": 50,
+        "Oliveira": 50,
+        "Funko Pop! Animation: Dragonball Z - Trunks": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Trunks": 50,
+        "Anastasiya": 50,
+        "Funko Pop": 50,
+        "Daryl": 50,
+        "Amy": 50,
+        "Black Panther Chrome": 50
+      },
+      "vocabulary_sha256": "b4e09ac30b7ee282788cd78f28b86daf2ca45f0fe7b1c3c3e994e77f82b4926c"
+    }
+  ]
+}

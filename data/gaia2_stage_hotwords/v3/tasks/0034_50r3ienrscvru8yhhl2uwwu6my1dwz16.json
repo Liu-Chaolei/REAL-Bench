@@ -1,0 +1,70 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0034_50r3ienrscvru8yhhl2uwwu6my1dwz16",
+  "model": "deepseek-flash",
+  "input_sha256": "d6bbcd2687226d769c8ed056b1e3b7a4d295c8ac65ceabad9461f24d3bcab1ad",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kunto Wijayanto",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-de2efc69-6e4e-46bb-a790-e2587f72c152.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kunto Wijayanto"
+      ],
+      "active_vocabulary": {
+        "Kunto Wijayanto": 50
+      },
+      "vocabulary_sha256": "85892c096268a267993cede4f3d93c4a9419b0f68ad93edadff54533e0d8da63"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kunto Wijayanto",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Propaganda Research Collaboration with Kunto",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Propaganda Research Collaboration with Kunto"
+      ],
+      "active_vocabulary": {
+        "Kunto Wijayanto": 50,
+        "Propaganda Research Collaboration with Kunto": 50
+      },
+      "vocabulary_sha256": "26d20e6e6a4d454a921619b409648d9a79582de86507f83cbc2e7cdb83aaba72"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kunto Wijayanto",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kunto Wijayanto": 50,
+        "Propaganda Research Collaboration with Kunto": 50
+      },
+      "vocabulary_sha256": "26d20e6e6a4d454a921619b409648d9a79582de86507f83cbc2e7cdb83aaba72"
+    }
+  ]
+}

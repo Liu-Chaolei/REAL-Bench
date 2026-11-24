@@ -1,0 +1,79 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0439_cqa3b6nl68w192g99wvys1v39ynhm596",
+  "model": "deepseek-flash",
+  "input_sha256": "0c007638ca22f9b7014a8b9d8df3026c162d8743ac73f75841c5dafea2874794",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-1a381694-f461-47c8-9bf9-9cbd8b1f196d.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Katarzyna Zielińska"
+      ],
+      "active_vocabulary": {
+        "Katarzyna Zielińska": 50
+      },
+      "vocabulary_sha256": "c5268737b262513745ef8dfb30149c229a915f483b90d3296f713d2f50c9032b"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kircholm",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Katarzyna",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kircholm",
+        "Katarzyna"
+      ],
+      "active_vocabulary": {
+        "Katarzyna Zielińska": 50,
+        "Kircholm": 50,
+        "Katarzyna": 50
+      },
+      "vocabulary_sha256": "d6a2a7b6d30e488350a47acaf9cfcbb61107da043684f59437481f56ec4f86d1"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Katarzyna",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kircholm",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Katarzyna Zielińska": 50,
+        "Kircholm": 50,
+        "Katarzyna": 50
+      },
+      "vocabulary_sha256": "d6a2a7b6d30e488350a47acaf9cfcbb61107da043684f59437481f56ec4f86d1"
+    }
+  ]
+}

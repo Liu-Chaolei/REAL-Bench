@@ -1,0 +1,117 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0005_nlme4nanrpyu7ny7c55biii97somt6x8",
+  "model": "deepseek-flash",
+  "input_sha256": "8bfd5aab13c3ae3bc1570b46f0acbffad57166047e5d6b6b6fb83667a1dbed67",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Prague 6 Luxury",
+          "kind": "product",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-280cc9d6-2264-4466-8a7f-59a1709ec93e.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Prague 6 Luxury"
+      ],
+      "active_vocabulary": {
+        "Prague 6 Luxury": 50
+      },
+      "vocabulary_sha256": "9d5ab6b01b159d3072572b213ee37a12fb2769c75937928058d9bc035dec48aa"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Prague Palace",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Prague 6 Luxury",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Prague 7",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Pražský Palác",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Prague Palace",
+        "Prague 7",
+        "Pražský Palác"
+      ],
+      "active_vocabulary": {
+        "Prague 6 Luxury": 50,
+        "Prague Palace": 50,
+        "Prague 7": 50,
+        "Pražský Palác": 50
+      },
+      "vocabulary_sha256": "e91ce7a4459f683741a9110071a35f69ddd626d856d87e14f3d91deed8e494b9"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Pražská Perla",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Karlov náměstí 12",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Prague 6 Luxury",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Prague 7",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Pražský Palác",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Pražská Perla",
+        "Karlov náměstí 12"
+      ],
+      "active_vocabulary": {
+        "Prague 6 Luxury": 50,
+        "Prague Palace": 50,
+        "Prague 7": 50,
+        "Pražský Palác": 50,
+        "Pražská Perla": 50,
+        "Karlov náměstí 12": 50
+      },
+      "vocabulary_sha256": "9fe905b3d2dc4194dc35382f80dc53c2ede79755f41a523a4ef46f1d6df1d230"
+    }
+  ]
+}

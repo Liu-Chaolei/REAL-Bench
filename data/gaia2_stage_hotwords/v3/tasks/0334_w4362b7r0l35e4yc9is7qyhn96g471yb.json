@@ -1,0 +1,148 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0334_w4362b7r0l35e4yc9is7qyhn96g471yb",
+  "model": "deepseek-flash",
+  "input_sha256": "884e7ce6ade8573eca1441857fbef2f29d733410c4b27b46eb36ad21dcd4c025",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kai",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a8a6247a-1501-4aa3-abc3-8a731c6c9ce7.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Sergei",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a8a6247a-1501-4aa3-abc3-8a731c6c9ce7.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a8a6247a-1501-4aa3-abc3-8a731c6c9ce7.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aidan",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a25dca20-1cf1-405d-a6d5-9c3938f5fba7.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Katharina",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c1a181cf-a85d-4cf2-b837-b52174855672.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Klaus",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c1a181cf-a85d-4cf2-b837-b52174855672.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "names+achievements.xlsx",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kai",
+        "Sergei",
+        "Anastasiya Kuznetsova",
+        "Aidan",
+        "Katharina",
+        "Klaus",
+        "names+achievements.xlsx"
+      ],
+      "active_vocabulary": {
+        "Kai": 50,
+        "Sergei": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Aidan": 50,
+        "Katharina": 50,
+        "Klaus": 50,
+        "names+achievements.xlsx": 50
+      },
+      "vocabulary_sha256": "b56d52b71589cd33ba946ce81278c43eeb5c0b5c9815065c6b23f865e99d35ef"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Katharina",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Klaus",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Cold War Research Group",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "names+achievements.xlsx",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_2.arguments.attachment_path",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Cold War Research Group"
+      ],
+      "active_vocabulary": {
+        "Kai": 50,
+        "Sergei": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Aidan": 50,
+        "Katharina": 50,
+        "Klaus": 50,
+        "names+achievements.xlsx": 50,
+        "Cold War Research Group": 50
+      },
+      "vocabulary_sha256": "f5070eddb8edc203af32c624b7fde57ea36ded529b65f69c44f92bdceb46ed4e"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Cold War Research Group",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "names+achievements.xlsx",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kai": 50,
+        "Sergei": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Aidan": 50,
+        "Katharina": 50,
+        "Klaus": 50,
+        "names+achievements.xlsx": 50,
+        "Cold War Research Group": 50
+      },
+      "vocabulary_sha256": "f5070eddb8edc203af32c624b7fde57ea36ded529b65f69c44f92bdceb46ed4e"
+    }
+  ]
+}

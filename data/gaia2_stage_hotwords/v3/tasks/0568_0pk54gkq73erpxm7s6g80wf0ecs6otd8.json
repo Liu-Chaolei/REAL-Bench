@@ -1,0 +1,151 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0568_0pk54gkq73erpxm7s6g80wf0ecs6otd8",
+  "model": "deepseek-flash",
+  "input_sha256": "4da6070c23b47b2877b3158b79b2353d51f0f129f407420d331382b96cf5b49e",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Rohan",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-074c4c0e-45ae-4a04-a0ef-c9946e20e194.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohini",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-0190457d-9b8a-46bb-a407-652f6dfd5255.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Raghavendra",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-d3e42a19-c558-4452-833f-b64564a55d01.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Anastasia",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-003f5066-b4c7-461d-b7f4-a2fe3556fe6c.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-074c4c0e-45ae-4a04-a0ef-c9946e20e194.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bachmann Trains New York Central 40' Stock Car-Ho Scale",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Chennai Central Railway Station",
+          "kind": "place",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-bc588db8-fbda-47a2-a6b4-a783243940d3.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ahmedabad Railway Station",
+          "kind": "place",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-bc588db8-fbda-47a2-a6b4-a783243940d3.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Rohan",
+        "Rohini",
+        "Raghavendra",
+        "Anastasia",
+        "Rohan Kumar",
+        "Bachmann Trains New York Central 40' Stock Car-Ho Scale",
+        "Chennai Central Railway Station",
+        "Ahmedabad Railway Station"
+      ],
+      "active_vocabulary": {
+        "Rohan": 50,
+        "Rohini": 50,
+        "Raghavendra": 50,
+        "Anastasia": 50,
+        "Rohan Kumar": 50,
+        "Bachmann Trains New York Central 40' Stock Car-Ho Scale": 50,
+        "Chennai Central Railway Station": 50,
+        "Ahmedabad Railway Station": 50
+      },
+      "vocabulary_sha256": "42e322edd000115377e0bfb732f12a370b91d1d96115047d04c3a9237be65eeb"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Chennai Central Railway Station",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ahmedabad Railway Station",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Rohan": 50,
+        "Rohini": 50,
+        "Raghavendra": 50,
+        "Anastasia": 50,
+        "Rohan Kumar": 50,
+        "Bachmann Trains New York Central 40' Stock Car-Ho Scale": 50,
+        "Chennai Central Railway Station": 50,
+        "Ahmedabad Railway Station": 50
+      },
+      "vocabulary_sha256": "42e322edd000115377e0bfb732f12a370b91d1d96115047d04c3a9237be65eeb"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Chennai Central Railway Station",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ahmedabad Railway Station",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_review.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bachmann New York Central",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Bachmann New York Central"
+      ],
+      "active_vocabulary": {
+        "Rohan": 50,
+        "Rohini": 50,
+        "Raghavendra": 50,
+        "Anastasia": 50,
+        "Rohan Kumar": 50,
+        "Bachmann Trains New York Central 40' Stock Car-Ho Scale": 50,
+        "Chennai Central Railway Station": 50,
+        "Ahmedabad Railway Station": 50,
+        "Bachmann New York Central": 50
+      },
+      "vocabulary_sha256": "a1090cd4e1f543deb6d6c168dbdd36e50757a74b2a0f15760056a96a2f9f1c70"
+    }
+  ]
+}

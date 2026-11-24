@@ -1,3 +1,5 @@
+> 当前项目只提供 Gaia2 运行入口。请使用 [Gaia2 English runtime](gaia2-language-runtime.md)。下文旧 τ 示例保留历史说明。
+
 # Getting Started
 
 This guide walks you through installing τ-bench, configuring API keys, and running your first evaluation.

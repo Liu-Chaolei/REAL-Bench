@@ -1,0 +1,172 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0938_c0z8k5bduwb35otlxlk83v2ax8h9ruep",
+  "model": "deepseek-flash",
+  "input_sha256": "1223bcb3a85d1d75b135f0a352ab39bed9970f8b2a8ba08df904b496f8922070",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Balloon Animal Pool Float",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Humbrol AG9150 The Modeller's Tool Set",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "HANSA 4825 Plush",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Activa Scenic Sand",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aoife",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dcf6aed2-b873-49c0-a143-a7f8b5849bbe.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dcf6aed2-b873-49c0-a143-a7f8b5849bbe.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohini Rao",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1b778e7c-02d5-4afc-893a-af4413dcb66d.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Balloon Animal Pool Float",
+        "Humbrol AG9150 The Modeller's Tool Set",
+        "HANSA 4825 Plush",
+        "Activa Scenic Sand",
+        "Aoife",
+        "Søren Kjær",
+        "Rohini Rao"
+      ],
+      "active_vocabulary": {
+        "Balloon Animal Pool Float": 50,
+        "Humbrol AG9150 The Modeller's Tool Set": 50,
+        "HANSA 4825 Plush": 50,
+        "Activa Scenic Sand": 50,
+        "Aoife": 50,
+        "Søren Kjær": 50,
+        "Rohini Rao": 50
+      },
+      "vocabulary_sha256": "ceff2f485e8b9a925c463af8d53b4236170e1fe896742d513a91d5572b5e16b1"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Balloon Animal Pool Float",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Humbrol AG9150 The Modeller's Tool Set",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Niamh",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_agent_5.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_agent_5.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Niamh"
+      ],
+      "active_vocabulary": {
+        "Balloon Animal Pool Float": 50,
+        "Humbrol AG9150 The Modeller's Tool Set": 50,
+        "HANSA 4825 Plush": 50,
+        "Activa Scenic Sand": 50,
+        "Aoife": 50,
+        "Søren Kjær": 50,
+        "Rohini Rao": 50,
+        "Niamh": 50
+      },
+      "vocabulary_sha256": "909f76a5362a76ace0735509fae173ba5803c01e06e9df694e3ff79def1d2289"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Rohini Rao",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Activa Scenic Sand",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Balloon Animal Pool Float",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_agent_4.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Humbrol AG9150 The Modeller's Tool Set",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_agent_4.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "HANSA 4825 Plush",
+          "kind": "product",
+          "source": "stage2.reference_reply.series_s2_agent_4.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_agent_3.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Balloon Animal Pool Float": 50,
+        "Humbrol AG9150 The Modeller's Tool Set": 50,
+        "HANSA 4825 Plush": 50,
+        "Activa Scenic Sand": 50,
+        "Aoife": 50,
+        "Søren Kjær": 50,
+        "Rohini Rao": 50,
+        "Niamh": 50
+      },
+      "vocabulary_sha256": "909f76a5362a76ace0735509fae173ba5803c01e06e9df694e3ff79def1d2289"
+    }
+  ]
+}

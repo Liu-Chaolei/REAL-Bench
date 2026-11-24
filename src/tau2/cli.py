@@ -7,12 +7,8 @@ from tau2.config import (
     DEFAULT_AUDIO_NATIVE_MODELS,
     DEFAULT_AUDIO_NATIVE_PROVIDER,
     DEFAULT_CHANNEL_EFFECTS_MODE,
-    DEFAULT_ELICITATION_LLM_ARGS_USER,
-    DEFAULT_ELICITATION_LLM_USER,
-    DEFAULT_ELICITATION_MAX_STEPS_SECONDS,
     DEFAULT_INTEGRATION_DURATION_SECONDS,
     DEFAULT_INTERRUPTION_CHECK_INTERVAL_SECONDS,
-    DEFAULT_LANGUAGE,
     DEFAULT_LLM_AGENT,
     DEFAULT_LLM_EVAL_USER_SIMULATOR,
     DEFAULT_LLM_LOG_MODE,
@@ -44,23 +40,18 @@ from tau2.data_model.cascaded import CascadedConfigRequest
 from tau2.data_model.persona import PersonaConfig
 from tau2.data_model.run_config import AudioNativeConfig
 from tau2.data_model.simulation import TextRunConfig, VoiceRunConfig
-from tau2.domains.banking_knowledge.retrieval import get_all_variant_names
 from tau2.run import get_options, run_domain
 from tau2.runner.work import parse_provider_limits
 from tau2.voice.audio_native.avartha_pipecat.config import AvarthaPipecatConfig
 from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
 
 
-def get_all_retrieval_config_names():
-    return get_all_variant_names()
-
-
 def add_run_args(parser):
     """Add run arguments to a parser."""
-    from tau2.multilingual.cli import add_language_run_args
+    from tau2.evaluator.semantic_communication_cli import add_communication_run_args
     from tau2.runner.cli import add_benchmark_run_args
 
-    add_language_run_args(parser)
+    add_communication_run_args(parser)
     add_benchmark_run_args(parser)
     domains = get_options().domains
     parser.add_argument(
@@ -107,13 +98,13 @@ def add_run_args(parser):
         "--user-llm",
         type=str,
         default=None,
-        help=f"The LLM to use for the user. Default is {DEFAULT_LLM_USER}; τ-Entity uses {DEFAULT_ELICITATION_LLM_USER}.",
+        help=f"The LLM to use for the user. Default is {DEFAULT_LLM_USER}.",
     )
     parser.add_argument(
         "--user-llm-args",
         type=json.loads,
         default=None,
-        help=f"The arguments to pass to the LLM for the user. Default is '{{\"temperature\": {DEFAULT_LLM_TEMPERATURE_USER}}}'; the default τ-Entity caller uses {json.dumps(DEFAULT_ELICITATION_LLM_ARGS_USER)}.",
+        help=f"The arguments to pass to the LLM for the user. Default is '{{\"temperature\": {DEFAULT_LLM_TEMPERATURE_USER}}}'.",
     )
     parser.add_argument(
         "--task-set-name",
@@ -163,7 +154,7 @@ def add_run_args(parser):
         "--output",
         type=str,
         required=False,
-        help="The path to save the simulation results. Will be saved to data/simulations/<save_to>/results.json. If not provided, will save to <timestamp>_<domain>_<agent>_<user>. If the file already exists, it will try to resume the run.",
+        help="The path to save the simulation results. Relative paths are saved under data/results/<save_to>/results.json. If not provided, a timestamped run name is used. If the file already exists, it will try to resume the run.",
     )
     parser.add_argument(
         "--max-concurrency",
@@ -225,12 +216,6 @@ def add_run_args(parser):
         "--gaia2-allow-stale-runtime",
         action="store_true",
         help="Skip the Gaia2 runtime seal comparison for development smoke runs",
-    )
-    parser.add_argument(
-        "--persistent-task-config",
-        type=Path,
-        default=None,
-        help="Private JSON scenario for native Qwen persistent-task evaluation",
     )
     parser.add_argument(
         "--verbose-logs",
@@ -391,7 +376,7 @@ def add_run_args(parser):
         "--max-steps-seconds",
         type=int,
         default=None,
-        help=f"Maximum conversation duration in seconds; 0 disables the limit. Default is {DEFAULT_MAX_STEPS_SECONDS}; τ-Entity uses {DEFAULT_ELICITATION_MAX_STEPS_SECONDS}.",
+        help=f"Maximum conversation duration in seconds; 0 disables the limit. Default is {DEFAULT_MAX_STEPS_SECONDS}.",
     )
     parser.add_argument(
         "--speech-complexity",
@@ -498,31 +483,7 @@ def add_run_args(parser):
         help="Use plain text system prompt without XML tags (overrides auto-detection).",
     )
 
-    from tau2.domains.intake.cli import add_intake_run_args
-
-    add_intake_run_args(parser)
-
-    # Knowledge domain arguments
-    parser.add_argument(
-        "--retrieval-config",
-        type=str,
-        default=None,
-        choices=sorted(get_all_retrieval_config_names()),
-        help=(
-            "Knowledge retrieval config name (banking_knowledge domain). "
-            "Offline: no_knowledge, full_kb, golden_retrieval, bm25, bm25_grep, grep_only. "
-            "Requires OPENAI_API_KEY: openai_embeddings*, alltools. "
-            "Requires OPENROUTER_API_KEY: qwen_embeddings*, alltools-qwen. "
-            "Requires sandbox-runtime: terminal_use*, alltools, alltools-qwen. "
-            "Default for banking_knowledge: alltools (BM25 + dense + shell)."
-        ),
-    )
-    parser.add_argument(
-        "--retrieval-config-kwargs",
-        type=json.loads,
-        default=None,
-        help="Arguments to pass to the retrieval config constructor as JSON (e.g., '{\"top_k\": 10}').",
-    )
+    parser.set_defaults(retrieval_config=None, retrieval_config_kwargs=None)
 
     # Resume mode
     parser.add_argument(
@@ -628,20 +589,7 @@ def run_intro():
     )
     domain_table.add_column("Domain", style="bold", no_wrap=True)
     domain_table.add_column("Description")
-    domain_table.add_row(
-        "airline", "Flight booking, cancellation, and customer support"
-    )
-    domain_table.add_row("retail", "Order management, returns, and product inquiries")
-    domain_table.add_row("telecom", "Telecom account management and troubleshooting")
-    domain_table.add_row(
-        "banking_knowledge",
-        "Knowledge-retrieval-based customer service with configurable RAG pipelines",
-    )
-    domain_table.add_row("mock", "Lightweight test domain for development")
-    domain_table.add_row(
-        "intake",
-        "τ-Entity: agent-directed voice elicitation; optional scaffolded ablation",
-    )
+    domain_table.add_row("gaia2", "Gaia2 multi-stage tasks and interaction variants")
     console.print(domain_table)
     console.print()
 
@@ -672,9 +620,6 @@ def run_intro():
     cmd_table.add_row("tau2 submit prepare", "Prepare a leaderboard submission")
     cmd_table.add_row("tau2 submit validate", "Validate a submission directory")
     cmd_table.add_row("tau2 check-data", "Verify data directory is set up correctly")
-    cmd_table.add_row(
-        "tau2 intake-tasks", "Enumerate, reproduce, and verify frozen τ-Entity tasks"
-    )
     cmd_table.add_row("tau2 start", "Start background servers")
     cmd_table.add_row("tau2 intro", "Show this page")
     console.print(cmd_table)
@@ -688,11 +633,11 @@ def run_intro():
         "tau2 check-data\n"
         "\n"
         "# 2. Run a text (half-duplex) evaluation\n"
-        "tau2 run --domain airline --agent-llm gpt-4.1 --user-llm gpt-4.1 "
+        "tau2 run --domain gaia2 --agent-llm gpt-4.1 --user-llm gpt-4.1 "
         "--num-trials 1 --num-tasks 5\n"
         "\n"
         "# 3. Run a voice (full-duplex) evaluation\n"
-        "tau2 run --domain retail --audio-native --num-tasks 1 --verbose-logs\n"
+        "tau2 run --domain gaia2 --audio-native --num-tasks 1 --verbose-logs\n"
         "\n"
         "# 4. Browse results\n"
         "tau2 view\n"
@@ -722,28 +667,9 @@ def main():
 
     # Saved-run diagnostics are registered by their owning package.
     from tau2.diagnostics.cli import add_metrics_args
-    from tau2.judges.cli import add_judges_args
 
     add_metrics_args(
         subparsers.add_parser("metrics", help="REAL-derived saved-run diagnostics")
-    )
-    add_judges_args(
-        subparsers.add_parser("judges", help="Saved-run diagnostic judging and reports")
-    )
-
-    from tau2.config import DEFAULT_TASK_SUBSET_SEED, DEFAULT_TASK_SUBSET_SIZE
-    from tau2.multilingual.factory.cli import add_factory_args
-    from tau2.task_subsets.cli import add_tasks_args
-
-    add_tasks_args(
-        subparsers.add_parser("tasks", help="Frozen canonical task subsets"),
-        default_size=DEFAULT_TASK_SUBSET_SIZE,
-        default_seed=DEFAULT_TASK_SUBSET_SEED,
-    )
-    add_factory_args(
-        subparsers.add_parser(
-            "factory", help="Staged language authoring and publication"
-        )
     )
 
     from tau2.domains.gaia2.cli import add_gaia2_args
@@ -778,16 +704,12 @@ def main():
         args.benchmark = selected_benchmark(args) or "none"
         benchmark_mode = args.benchmark != "none"
         if args.audio_native_provider == "qwen_agent":
-            if not args.audio_native or benchmark_mode:
-                run_parser.error("qwen_agent requires --audio-native --benchmark none")
+            if not args.audio_native:
+                run_parser.error("qwen_agent requires --audio-native")
             from tau2.registry import registry
 
-            languages = (
-                registry.get_domain_capabilities(args.domain[0]).get(
-                    "qwen_agent_languages", []
-                )
-                if args.domain and len(args.domain) == 1
-                else []
+            languages = registry.get_domain_capabilities("gaia2").get(
+                "qwen_agent_languages", []
             )
             if (args.language or ["en"])[0] not in languages:
                 run_parser.error(
@@ -928,16 +850,7 @@ def main():
         set_llm_log_mode(args.llm_log_mode)
 
         # Shared config kwargs
-        from tau2.multilingual.runtime import extension_for_domain
-
-        pack_extension = (
-            extension_for_domain(
-                args.language[0] if args.language else DEFAULT_LANGUAGE,
-                args.domain[0],
-            )
-            if not benchmark_mode and args.domain and args.localize_db is not False
-            else None
-        )
+        pack_extension = None
         metrics_config = None
         if getattr(args, "metrics_config", None):
             from tau2.diagnostics.config import MetricsConfig
@@ -952,15 +865,7 @@ def main():
             active_metrics = ActiveMetricsConfig.load(
                 args.active_metrics_config, args.api_config_dir
             ).model_dump(mode="json")
-        persistent_task_config = None
-        if args.persistent_task_config:
-            from tau2.persistent_tasks.config import PersistentTaskConfig
-
-            persistent_task_config = PersistentTaskConfig.load(
-                args.persistent_task_config
-            ).model_dump(mode="json")
         shared_kwargs = dict(
-            persistent_task_config=persistent_task_config,
             active_metrics=active_metrics,
             gaia2_allow_stale_runtime=args.gaia2_allow_stale_runtime,
             metrics_config=metrics_config,
@@ -996,11 +901,11 @@ def main():
             retrieval_config_kwargs=args.retrieval_config_kwargs,
         )
 
-        from tau2.domains.intake.cli import elicitation_config_from_args
-
         if not benchmark_mode and args.domain:
             shared_kwargs["domain"] = args.domain[0]
-        from tau2.multilingual.cli import communicate_scoring_from_args
+        from tau2.evaluator.semantic_communication_cli import (
+            communicate_scoring_from_args,
+        )
 
         communicate_scoring = communicate_scoring_from_args(args)
         if args.api_config_dir is not None:
@@ -1035,7 +940,6 @@ def main():
                 raise ValueError(
                     "Shared API mode selects caller connections through realbench.env"
                 )
-        shared_kwargs["elicitation"] = elicitation_config_from_args(args)
         if args.user_llm is not None:
             shared_kwargs["llm_user"] = args.user_llm
         if args.user_llm_args is not None:
@@ -1086,18 +990,6 @@ def main():
         run_command=run_command,
     )
 
-    from tau2.multilingual.cli import add_languages_args
-
-    languages_parser = subparsers.add_parser(
-        "languages", help="Inspect and validate published language packs"
-    )
-    add_languages_args(languages_parser)
-    from tau2.domains.intake.tasks.cli import add_intake_tasks_args
-
-    add_intake_tasks_args(
-        subparsers.add_parser("intake-tasks", help="Generate and verify τ-Entity tasks")
-    )
-
     # Play command
     play_parser = subparsers.add_parser(
         "play", help="Play manual mode - interact with a domain as the agent"
@@ -1109,7 +1001,7 @@ def main():
     view_parser.add_argument(
         "--dir",
         type=str,
-        help="Directory containing simulation files, or a benchmark matrix root. Defaults to data/simulations.",
+        help="Directory containing simulation files, or a benchmark matrix root. Defaults to data/results.",
     )
     view_parser.add_argument(
         "--file",

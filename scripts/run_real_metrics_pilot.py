@@ -31,7 +31,7 @@ def main():
     attempts = []
     for entry in selection["tasks"]:
         child = output / entry["id"]
-        save_to = child.relative_to(root / "data/simulations").as_posix()
+        save_to = child.relative_to(root / "data/results").as_posix()
         command = [
             str(root / "integrations/qwen_audio_agent/run_hpc.sh"),
             "smoke",

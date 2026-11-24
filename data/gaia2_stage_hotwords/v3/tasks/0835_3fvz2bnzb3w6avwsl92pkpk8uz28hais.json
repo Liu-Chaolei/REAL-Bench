@@ -1,0 +1,146 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0835_3fvz2bnzb3w6avwsl92pkpk8uz28hais",
+  "model": "deepseek-flash",
+  "input_sha256": "6da3f08b24ed616b9286c7ab92f16d1146e87c11bcbf60e39c612a646c835522",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-90f8a5d6-c7ab-494f-abe0-1976e8318e34.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bordeaux",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Burgundy",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Loire Valley",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Alsace",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Jamila Fernandes",
+        "Aurélien LaFleur",
+        "Bordeaux",
+        "Burgundy",
+        "Loire Valley",
+        "Alsace"
+      ],
+      "active_vocabulary": {
+        "Jamila Fernandes": 50,
+        "Aurélien LaFleur": 50,
+        "Bordeaux": 50,
+        "Burgundy": 50,
+        "Loire Valley": 50,
+        "Alsace": 50
+      },
+      "vocabulary_sha256": "46c93a5b960cff9fcf4ce779778210780d4cab6ab0e8081561e4a1b7c4a4f8f2"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Bordeaux",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_mkdir_bordeaux_notes.arguments.path",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Burgundy",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_mkdir_burgundy_notes.arguments.path",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Loire Valley",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_mkdir_loire_notes.arguments.path",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Alsace",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_mkdir_alsace_notes.arguments.path",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Jamila Fernandes": 50,
+        "Aurélien LaFleur": 50,
+        "Bordeaux": 50,
+        "Burgundy": 50,
+        "Loire Valley": 50,
+        "Alsace": 50
+      },
+      "vocabulary_sha256": "46c93a5b960cff9fcf4ce779778210780d4cab6ab0e8081561e4a1b7c4a4f8f2"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Bordeaux",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_event_with_description.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Burgundy",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_event_with_description.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Loire Valley",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_event_with_description.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Alsace",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_event_with_description.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Jamila Fernandes": 50,
+        "Aurélien LaFleur": 50,
+        "Bordeaux": 50,
+        "Burgundy": 50,
+        "Loire Valley": 50,
+        "Alsace": 50
+      },
+      "vocabulary_sha256": "46c93a5b960cff9fcf4ce779778210780d4cab6ab0e8081561e4a1b7c4a4f8f2"
+    }
+  ]
+}

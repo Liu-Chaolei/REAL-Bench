@@ -29,11 +29,10 @@ Example:
         web/leaderboard/public/submissions/my-voice-model_org_2026-10-20 \\
         /tmp/downloaded-matrix-root/ --upload
 
-    # The frozen 2026-10-02 release export, with its saved verdicts
+    # The frozen 2026-10-02 release export
     python -m tau2.scripts.leaderboard.review_submission \\
         web/leaderboard/public/submissions/<name> /path/to/release-export \\
-        --historical-voice-v2 --judges-root /path/to/verdicts/<provider> \\
-        [--judges-root ...]
+        --historical-voice-v2
 """
 
 import argparse
@@ -393,16 +392,13 @@ def _verify_upload(
 def _package_uploads(
     package: BenchmarkPackage,
     source: Path,
-    judges_roots: list[Path],
 ) -> list[tuple[Path, str]]:
     """Local evidence → S3 key under ``submissions/<name>/``, language layer first.
 
     Cells go to ``trajectories/<language>/<domain>/`` for both evidence layouts.
     A matrix root's own files (frame, plan, execution record) go to
     ``trajectories/``. For the historical export, its ``correction.json`` goes
-    to ``source_correction.json`` and saved verdicts to
-    ``judges/<agent_provider>/<language>/``, the layout of the 2026-10-09 Gemini
-    upload. An entity package's other two crossed Pass^3 conditions go to
+    to ``source_correction.json``. An entity package's other two crossed Pass^3 conditions go to
     ``pass3/<language>/intake/<condition>/``.
     """
     cells = [(cell.language, cell.domain) for cell in package.submission.frame.cells]
@@ -430,14 +426,6 @@ def _package_uploads(
             )
         if (source / "correction.json").is_file():
             uploads.append((source / "correction.json", "source_correction.json"))
-        languages = dict.fromkeys(language for language, _ in cells)
-        provider = package.metadata.agent_provider
-        uploads.extend(
-            (root / language, f"judges/{provider}/{language}/")
-            for root in judges_roots
-            for language in languages
-            if (root / language).is_dir()
-        )
     missing = [str(local) for local, _ in uploads if not local.exists()]
     if missing:
         raise ValueError("Missing evidence: " + ", ".join(missing))
@@ -453,7 +441,7 @@ def _review_package(
         package = load_package(package_dir)
     elif args.historical_voice_v2:
         console.print("\n[bold]Recomputing from the frozen release export...[/bold]")
-        package = validate_historical_package(package_dir, source, args.judges_root)
+        package = validate_historical_package(package_dir, source)
     else:
         console.print("\n[bold]Recomputing from the saved matrix...[/bold]")
         package = validate_benchmark_submission(package_dir, source)
@@ -465,7 +453,7 @@ def _review_package(
     )
     if package.name != package_dir.name:
         raise ValueError(f"Package directory must be named {package.name}")
-    uploads = _package_uploads(package, source, args.judges_root)
+    uploads = _package_uploads(package, source)
     if args.verify_only:
         _verify_package_upload(package, prefix, console)
         return
@@ -561,13 +549,6 @@ def main():
         action="store_true",
         help="2.0 package citing the frozen 2026-10-02 release export",
     )
-    parser.add_argument(
-        "--judges-root",
-        type=Path,
-        action="append",
-        default=[],
-        help="With --historical-voice-v2: saved verdicts (<language>/<id>.json)",
-    )
     args = parser.parse_args()
 
     console = Console()
@@ -583,7 +564,7 @@ def main():
     if is_package(submission_dir):
         _review_package(submission_dir, source, args, console)
         return
-    if args.historical_voice_v2 or args.judges_root:
+    if args.historical_voice_v2:
         raise ValueError("--historical-voice-v2 applies only to 2.0 packages")
 
     # Step 1: Load submission.json

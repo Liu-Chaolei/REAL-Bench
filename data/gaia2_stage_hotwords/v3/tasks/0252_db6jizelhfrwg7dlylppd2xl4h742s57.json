@@ -1,0 +1,75 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0252_db6jizelhfrwg7dlylppd2xl4h742s57",
+  "model": "deepseek-flash",
+  "input_sha256": "dcc29f4fbd6eee433ddebedace9e1afce61ca1bd25a5625854e8d3e0aef3f8eb",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Linnea Åström",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Stockholm",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Linnea Åström",
+        "Stockholm"
+      ],
+      "active_vocabulary": {
+        "Linnea Åström": 50,
+        "Stockholm": 50
+      },
+      "vocabulary_sha256": "be36b1e52f5c8a2273a25b95ed8a60756992bb20735cdd03886caeba0ea4868a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Linnea Åström",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Stockholm",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Astrid"
+      ],
+      "active_vocabulary": {
+        "Linnea Åström": 50,
+        "Stockholm": 50,
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "28e38d4f1aaa05784f81b1dc6dbbfa00560930446a68c9318a284cd7dbca80b1"
+    }
+  ]
+}

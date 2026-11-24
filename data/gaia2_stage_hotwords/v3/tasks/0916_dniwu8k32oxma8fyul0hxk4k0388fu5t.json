@@ -1,0 +1,97 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0916_dniwu8k32oxma8fyul0hxk4k0388fu5t",
+  "model": "deepseek-flash",
+  "input_sha256": "f295d3e12265a8643e351874b5a7b9f6cd0cd551a5d6da2bcb68418a3e1f1d09",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Axel Lindqvist",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Axel",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Axel Lindqvist",
+        "Axel"
+      ],
+      "active_vocabulary": {
+        "Axel Lindqvist": 50,
+        "Axel": 50
+      },
+      "vocabulary_sha256": "7404cd3063201ceac8de635061d144c463de3e82009a1dba4655aca24f0ccfda"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Axel",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Göteborgs Galleria",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Göteborgs Galleria"
+      ],
+      "active_vocabulary": {
+        "Axel Lindqvist": 50,
+        "Axel": 50,
+        "Göteborgs Galleria": 50
+      },
+      "vocabulary_sha256": "93dfc5db17d1bacd31a93835c20e7d06365b52c6cb5aed178b25fcfd0f19fbef"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Göteborgs Galleria",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Uppsala Student Living",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Lund Luxury Living",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Uppsala Student Living",
+        "Lund Luxury Living"
+      ],
+      "active_vocabulary": {
+        "Axel Lindqvist": 50,
+        "Axel": 50,
+        "Göteborgs Galleria": 50,
+        "Uppsala Student Living": 50,
+        "Lund Luxury Living": 50
+      },
+      "vocabulary_sha256": "275a8718b7e569595c0c6604354ca6da3b89a4b35f96df5169452823882f1a06"
+    }
+  ]
+}

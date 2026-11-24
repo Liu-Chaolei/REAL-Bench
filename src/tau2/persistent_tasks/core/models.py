@@ -7,7 +7,7 @@ from enum import StrEnum
 from math import isfinite
 from typing import Any
 
-from tau2.config import DEFAULT_PERSISTENT_TASK_MAX_WAIT_SECONDS
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
 class CanonicalState(StrEnum):
@@ -66,40 +66,25 @@ class BackendTaskObservation:
         return asdict(self)
 
 
-@dataclass(frozen=True)
-class TaskIdentity:
-    """Benchmark role bound to one real backend task."""
+class ObservedEvent(BaseModel):
+    """A provider-neutral event consumed by binding and scheduling."""
 
-    role: str
-    source_task_id: str
-    source_stage: int
-    backend_task_id: str
+    model_config = ConfigDict(extra="forbid")
 
-
-@dataclass(frozen=True)
-class StateTransition:
-    identity: TaskIdentity
-    previous: CanonicalState
-    current: CanonicalState
+    provider: str
+    kind: str
     timestamp: float
-    observation: BackendTaskObservation
+    event_id: str | None = None
+    call_id: str | None = None
+    channel: str | None = None
+    tool_name: str | None = None
+    arguments: dict[str, Any] = Field(default_factory=dict)
+    result: Any = None
+    accepted: bool | None = None
+    raw: Any = None
 
-
-@dataclass(frozen=True)
-class BackendRequest:
-    """A private request released from a declared state transition."""
-
-    request_id: str
-    text: str
-    source_task_id: str
-    source_stage: int
-    state: CanonicalState
-    delay_seconds: float = 0.0
-    after_turn_boundary: bool = True
-    role: str = "primary"
-    max_wait_seconds: float = DEFAULT_PERSISTENT_TASK_MAX_WAIT_SECONDS
-    expected_operation: str = "query"
-    reply_expectation: str = "Accurately report the native task status and result."
-    expected_arguments: dict[str, Any] | None = None
-    request_operation_policy: str = "post_delivery_only"
-    prefetch_max_age_seconds: float = 120.0
+    @model_validator(mode="after")
+    def valid_event(self):
+        if self.kind == "tool_call_completed" and not self.tool_name:
+            raise ValueError("completed tool events require tool_name")
+        return self

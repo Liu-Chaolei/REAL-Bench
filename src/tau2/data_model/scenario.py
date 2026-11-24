@@ -94,3 +94,5 @@ class ScenarioRecord(BaseModel):
     error: bool = False
     call_id: str | None = None
     event_id: str | None = None
+    source: str | None = None
+    purpose: str | None = None

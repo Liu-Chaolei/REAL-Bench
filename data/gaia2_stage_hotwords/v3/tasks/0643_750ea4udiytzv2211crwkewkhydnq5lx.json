@@ -1,0 +1,203 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0643_750ea4udiytzv2211crwkewkhydnq5lx",
+  "model": "deepseek-flash",
+  "input_sha256": "baa86c5196947b2fc8f493133f80e189ffd87996a74da9b7c318422d3b71e467",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Věra Nováková",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b50aafb6-9c5d-4e0a-ab4a-8836c5a1485e.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zdeněk Nováček",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b50aafb6-9c5d-4e0a-ab4a-8836c5a1485e.arguments.attendees[1]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Katharina Fuchs",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b50aafb6-9c5d-4e0a-ab4a-8836c5a1485e.arguments.attendees[2]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Saskia König",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b50aafb6-9c5d-4e0a-ab4a-8836c5a1485e.arguments.attendees[3]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Charles University",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ovocný trh 560/5",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Prague 1",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Tic Tac Two",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Věra Nováková",
+        "Zdeněk Nováček",
+        "Katharina Fuchs",
+        "Saskia König",
+        "Charles University",
+        "Ovocný trh 560/5",
+        "Prague 1",
+        "Tic Tac Two"
+      ],
+      "active_vocabulary": {
+        "Věra Nováková": 50,
+        "Zdeněk Nováček": 50,
+        "Katharina Fuchs": 50,
+        "Saskia König": 50,
+        "Charles University": 50,
+        "Ovocný trh 560/5": 50,
+        "Prague 1": 50,
+        "Tic Tac Two": 50
+      },
+      "vocabulary_sha256": "b44318c309b3dc9e9a247023d6ec97e90f3c3489483d6ee1ea4f55d66667d553"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Věra",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Katharina",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Saskia",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zdeněk",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Charles University",
+          "kind": "organization",
+          "source": "stage1.tool_gt.series_s1_send_vera.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ovocný trh 560/5",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send_vera.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Prague 1",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send_vera.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Věra",
+        "Katharina",
+        "Saskia",
+        "Zdeněk"
+      ],
+      "active_vocabulary": {
+        "Věra Nováková": 50,
+        "Zdeněk Nováček": 50,
+        "Katharina Fuchs": 50,
+        "Saskia König": 50,
+        "Charles University": 50,
+        "Ovocný trh 560/5": 50,
+        "Prague 1": 50,
+        "Tic Tac Two": 50,
+        "Věra": 50,
+        "Katharina": 50,
+        "Saskia": 50,
+        "Zdeněk": 50
+      },
+      "vocabulary_sha256": "13481c4f6bbec4e82a9fbd82dd159659bfbcaec91b4221c5bb77971594edacac"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Věra",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Katharina",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Saskia",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zdeněk",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Tic Tac Two",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Věra Nováková": 50,
+        "Zdeněk Nováček": 50,
+        "Katharina Fuchs": 50,
+        "Saskia König": 50,
+        "Charles University": 50,
+        "Ovocný trh 560/5": 50,
+        "Prague 1": 50,
+        "Tic Tac Two": 50,
+        "Věra": 50,
+        "Katharina": 50,
+        "Saskia": 50,
+        "Zdeněk": 50
+      },
+      "vocabulary_sha256": "13481c4f6bbec4e82a9fbd82dd159659bfbcaec91b4221c5bb77971594edacac"
+    }
+  ]
+}

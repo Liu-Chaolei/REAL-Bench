@@ -1,0 +1,76 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0914_y70s9nda9x1kae513hc6vs39oi568yak",
+  "model": "deepseek-flash",
+  "input_sha256": "bb62a105a367c91ddc25d76cfbfd3a3ce1eab98a9d556ed2e8caea77ccc835ac",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Luís Pimentel",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Linnea Åström",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-48417906-7507-4699-aa5d-ff04984bb11a.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-3355d2d9-a40d-4dd4-b1c6-659ca343b1bd.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Luís Pimentel",
+        "Linnea Åström",
+        "Astrid Lundqvist"
+      ],
+      "active_vocabulary": {
+        "Luís Pimentel": 50,
+        "Linnea Åström": 50,
+        "Astrid Lundqvist": 50
+      },
+      "vocabulary_sha256": "818a00ad780524763dc6c4fdb45355429c43b6f408a54a7c08c7bee91a9ca475"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Luís Pimentel": 50,
+        "Linnea Åström": 50,
+        "Astrid Lundqvist": 50
+      },
+      "vocabulary_sha256": "818a00ad780524763dc6c4fdb45355429c43b6f408a54a7c08c7bee91a9ca475"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Beatriz Sousa",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Beatriz Sousa"
+      ],
+      "active_vocabulary": {
+        "Luís Pimentel": 50,
+        "Linnea Åström": 50,
+        "Astrid Lundqvist": 50,
+        "Beatriz Sousa": 50
+      },
+      "vocabulary_sha256": "4e9f77f6d7e4d1af087cff91128f133d3b4ec0e46df2a77119a5e9b86847ac02"
+    }
+  ]
+}

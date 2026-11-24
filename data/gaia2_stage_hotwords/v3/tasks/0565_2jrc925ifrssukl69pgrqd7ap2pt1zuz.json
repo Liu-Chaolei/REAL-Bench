@@ -1,0 +1,127 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0565_2jrc925ifrssukl69pgrqd7ap2pt1zuz",
+  "model": "deepseek-flash",
+  "input_sha256": "eccec17caad303b766c504ece60d9c9a685fb0f84d73d31112feace35e564166",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aisling",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aerospace Engineering Consultant",
+          "kind": "technical_term",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Former Aerospace Engineer",
+          "kind": "technical_term",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Aisling",
+        "Aerospace Engineering Consultant",
+        "Former Aerospace Engineer"
+      ],
+      "active_vocabulary": {
+        "Aisling": 50,
+        "Aerospace Engineering Consultant": 50,
+        "Former Aerospace Engineer": 50
+      },
+      "vocabulary_sha256": "2c0f5e113666febac6eea296b1c0f0ee6c79dcc2b7f6d01749f5110193e63a0b"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kailash Rao",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Thanawat Suthiwong",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aisling Ó Cuinn",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aerospace Engineering Consultant",
+          "kind": "technical_term",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kailash Rao",
+        "Thanawat Suthiwong",
+        "Aisling Ó Cuinn"
+      ],
+      "active_vocabulary": {
+        "Aisling": 50,
+        "Aerospace Engineering Consultant": 50,
+        "Former Aerospace Engineer": 50,
+        "Kailash Rao": 50,
+        "Thanawat Suthiwong": 50,
+        "Aisling Ó Cuinn": 50
+      },
+      "vocabulary_sha256": "4c8deefa17c4095743ac90fd518b46dbbee58ba0b0361bb4effd2b4bbe04ebde"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kailash",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Thanawat",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Catch-up and Startup Updates – Kailash & Thanawat",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kailash",
+        "Thanawat",
+        "Catch-up and Startup Updates – Kailash & Thanawat"
+      ],
+      "active_vocabulary": {
+        "Aisling": 50,
+        "Aerospace Engineering Consultant": 50,
+        "Former Aerospace Engineer": 50,
+        "Kailash Rao": 50,
+        "Thanawat Suthiwong": 50,
+        "Aisling Ó Cuinn": 50,
+        "Kailash": 50,
+        "Thanawat": 50,
+        "Catch-up and Startup Updates – Kailash & Thanawat": 50
+      },
+      "vocabulary_sha256": "d418d9d779aef6ba2d166d716361af8b94282d31b43011158e4c1fe9b6fc3fb2"
+    }
+  ]
+}

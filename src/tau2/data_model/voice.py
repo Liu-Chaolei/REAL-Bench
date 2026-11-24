@@ -188,8 +188,8 @@ class MiMoTTSConfig(BaseModel):
     voice_id: str = DEFAULT_MIMO_TTS_VOICE
     voices: dict[str, str] = Field(
         default_factory=lambda: {
-            "mamadou_diallo": "Dean",
-            "priya_patil": "Chloe",
+            "gaia2_male": "Dean",
+            "gaia2_female": "Chloe",
         }
     )
     language_code: str | None = "en"

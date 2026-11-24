@@ -15,6 +15,10 @@ from tau2.data_model.voice import QwenTTSConfig
 from tau2.utils.env_config import read_config_environment, resolve_env_reference
 
 
+class QwenTTSConnectionError(ConnectionError):
+    """Retryable transport failure with provider details removed."""
+
+
 def _resolve_key(config: QwenTTSConfig) -> str:
     key = resolve_env_reference(
         read_config_environment(config.config_env_file), config.api_key_env
@@ -79,10 +83,8 @@ def synthesize_qwen(text: str, config: QwenTTSConfig) -> AudioData:
                 raw = download.content
             else:
                 raise ValueError("Qwen TTS response has no audio")
-    except httpx.HTTPError as error:
-        raise RuntimeError(
-            f"Qwen TTS HTTP request failed ({type(error).__name__})"
-        ) from None
+    except httpx.HTTPError:
+        raise QwenTTSConnectionError("Qwen TTS connection failed") from None
     except (ValueError, TypeError):
         raise RuntimeError("Qwen TTS returned invalid audio") from None
     try:

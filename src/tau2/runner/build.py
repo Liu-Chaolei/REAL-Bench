@@ -22,10 +22,9 @@ from tau2.backchannel import BackchannelSettings, default_backchannel_settings
 from tau2.config import (
     DEFAULT_CHANNEL_EFFECTS_MODE,
     DEFAULT_SPEECH_EFFECTS_MODE,
-    ELICITATION_DOMAINS,
 )
 from tau2.data_model.dynamic_followup import DynamicFollowupConfig
-from tau2.data_model.elicitation import ElicitationConfig, ElicitationStrategy
+from tau2.data_model.elicitation import ElicitationConfig
 from tau2.data_model.language import CallContext, LanguageTaskInfo
 from tau2.data_model.persona import PersonaConfig
 from tau2.data_model.run_config import AudioNativeConfig
@@ -39,11 +38,9 @@ from tau2.data_model.voice import (
 )
 from tau2.environment.environment import Environment
 from tau2.environment.tool import Tool
-from tau2.multilingual.agent_guidance import localized_transfer_policy
 from tau2.orchestrator.full_duplex_orchestrator import FullDuplexOrchestrator
 from tau2.orchestrator.orchestrator import Orchestrator
 from tau2.registry import registry
-from tau2.runner.elicitation import sample_run_complication, user_prompt_task
 from tau2.user.user_simulator import DummyUser, UserSimulator
 from tau2.user.user_simulator_base import FullDuplexUser, HalfDuplexUser
 from tau2.user_simulation_voice_presets import (
@@ -87,9 +84,7 @@ def agent_domain_policy(
     environment: Environment, language_guidance: str = "", *, language: str = "en"
 ) -> str:
     """Attach resolved language guidance to the ordinary domain policy."""
-    policy = localized_transfer_policy(
-        environment.get_policy(), environment.get_domain_name(), language
-    )
+    policy = environment.get_policy()
     return policy + ("\n\n" + language_guidance if language_guidance else "")
 
 
@@ -173,16 +168,6 @@ def build_agent(
         audio_native_config = audio_native_config.model_copy(
             update={"qwen_agent_config": system}
         )
-    if domain in ELICITATION_DOMAINS:
-        domain_kwargs["additional_stop_tool_names"] = frozenset({"end_call"})
-        if audio_native_config is not None:
-            from tau2.domains.intake.prompts import get_agent_instructions
-
-            domain_kwargs["agent_instruction_override"] = get_agent_instructions(
-                audio_native_config.provider,
-                agent_directed=(elicitation_config or ElicitationConfig()).strategy
-                == ElicitationStrategy.AGENT_DIRECTED,
-            )
 
     return agent_factory(
         tools=tools,
@@ -252,12 +237,6 @@ def build_user(
 
             user_kwargs["global_guidelines_override"] = get_gaia2_user_guidelines(
                 persona_config, mode="text", use_tools=user_tools is not None
-            )
-        elif environment.get_domain_name() in ELICITATION_DOMAINS:
-            from tau2.domains.intake.prompts import get_user_guidelines
-
-            user_kwargs["global_guidelines_override"] = get_user_guidelines(
-                is_voice=False, agent_directed=False, persona=persona_config
             )
 
     return UserConstructor(**user_kwargs)
@@ -409,7 +388,11 @@ def build_voice_user(
         speech_environment = sampled_voice_config.to_speech_environment(task_seed)
         persona_config = persona_config or sampled_voice_config.persona_config
     task_voice_settings.speech_environment = speech_environment
+    interaction_insert_config = None
     if saasr_session is not None:
+        # Preserve the independent TTS settings used only for short interaction
+        # inserts before the main caller renderer is switched to SAASR.
+        interaction_insert_config = deepcopy(task_voice_settings.synthesis_config)
         # Record the actual acoustic assignment rather than an unused legacy TTS voice.
         synthesis = task_voice_settings.synthesis_config
         synthesis.provider = "saasr"
@@ -418,7 +401,8 @@ def build_voice_user(
         speech_environment.voice_id = f"saasr:reference:{reference}"
         speech_environment.background_noise_file = None
         speech_environment.burst_noise_files = []
-        speech_environment.environment = "saasr-continuous-v1"
+        speech_environment.telephony_enabled = False
+        speech_environment.environment = "saasr-continuous-v2"
 
     # Crossed speech effects change caller behavior while retaining the
     # selected pack persona's identity and gender.
@@ -441,61 +425,6 @@ def build_voice_user(
             persona_config, mode="voice", use_tools=user_tools is not None
         )
         domain_kwargs["role_reminder_override"] = GAIA2_ROLE_REMINDER
-    elif domain in ELICITATION_DOMAINS:
-        from tau2.domains.intake.prompts import (
-            OUTBOUND_ROLE_REMINDER,
-            get_user_guidelines,
-        )
-        from tau2.domains.intake.pronunciation_map import build_pronunciation_map
-
-        settings = (
-            elicitation_config.elicitation
-            if elicitation_config is not None
-            and elicitation_config.elicitation is not None
-            else ElicitationConfig()
-        )
-        agent_directed = settings.strategy == ElicitationStrategy.AGENT_DIRECTED
-        domain_kwargs["global_guidelines_override"] = get_user_guidelines(
-            is_voice=True, agent_directed=agent_directed, persona=persona_config
-        )
-        domain_kwargs["role_reminder_override"] = OUTBOUND_ROLE_REMINDER
-        selected_stimulus = None
-        locale_data = None
-        if elicitation_config is not None and elicitation_config.language not in {
-            None,
-            "en",
-        }:
-            from tau2.runner.elicitation import localized_intake_context
-
-            intake_context = localized_intake_context(elicitation_config, task)
-            locale_data = intake_context.data
-            selected_stimulus = locale_data.for_task(intake_context.canonical_task_id)
-        if elicitation_config is not None:
-            task_voice_settings.pronunciation_map = build_pronunciation_map(
-                sample_run_complication(elicitation_config, task),
-                selected=selected_stimulus,
-            )
-        if selected_stimulus is not None:
-            task_voice_settings.pronunciation_grapheme_tokens = [
-                p.token
-                for p in selected_stimulus.pronunciations
-                if p.boundary == "grapheme"
-                and p.token in task_voice_settings.pronunciation_map
-            ]
-        if agent_directed:
-            from tau2.domains.intake.spell_events import build_spell_event_detector
-
-            if locale_data is not None:
-                from tau2.domains.intake.spell_events import (
-                    build_native_spell_event_detector,
-                )
-
-                detector = build_native_spell_event_detector(
-                    task, locale_data.digit_words
-                )
-            else:
-                detector = build_spell_event_detector(task)
-            domain_kwargs["spell_event_detector"] = detector.detect
 
     if audio_native_config.provider == "qwen_agent":
         system = audio_native_config.qwen_agent_config
@@ -556,6 +485,7 @@ def build_voice_user(
         audio_taps_dir=audio_taps_dir,
         realtime_generation=audio_native_config.realtime_generation_enabled,
         saasr_session=saasr_session,
+        interaction_insert_config=interaction_insert_config,
         dynamic_followup_config=dynamic_followup_config,
         hidden_intent_graph=hidden_intent_graph,
     )
@@ -629,7 +559,7 @@ def _build_env_kwargs(
     Passes channel and task context for elicitation's pre-call work order, and
     retrieval settings and task context for banking knowledge policies.
     """
-    from tau2.multilingual.runtime import (
+    from tau2.domains.gaia2.language_runtime import (
         language_environment_kwargs,
         pin_language_artifacts,
     )
@@ -645,12 +575,6 @@ def _build_env_kwargs(
             config, "gaia2_allow_stale_runtime", False
         ):
             env_kwargs["allow_stale_runtime"] = True
-    if config.domain in ELICITATION_DOMAINS:
-        env_kwargs["task"] = task
-        env_kwargs["strategy"] = config.elicitation.strategy
-        env_kwargs["channel"] = (
-            "voice" if isinstance(config, VoiceRunConfig) else "text"
-        )
     retrieval_config = getattr(config, "retrieval_config", None)
     if retrieval_config is not None:
         env_kwargs["retrieval_variant"] = retrieval_config
@@ -699,7 +623,10 @@ def build_text_orchestrator(
     solo_mode = registry.get_agent_metadata(
         config.effective_agent, "solo_mode", default=False
     )
-    from tau2.multilingual.runtime import agent_language_guidance, task_context
+    from tau2.domains.gaia2.language_runtime import (
+        agent_language_guidance,
+        task_context,
+    )
 
     language_context = task_context(config, task, context=language_context)
     context = call_context(config, language_context)
@@ -734,7 +661,7 @@ def build_text_orchestrator(
     user = build_user(
         config.effective_user,
         environment,
-        user_prompt_task(config, task),
+        task,
         llm=config.llm_user,
         llm_args=config.llm_args_user,
         persona_config=user_persona_config,
@@ -756,6 +683,16 @@ def build_text_orchestrator(
         validate_communication=config.enforce_communication_protocol,
         timeout=config.timeout,
         call_context=context,
+        watchdog_config=(
+            config.audio_native_config.qwen_agent_config.watchdog
+            if config.audio_native_config.qwen_agent_config is not None
+            else None
+        ),
+        watchdog_judge=(
+            config.communicate_scoring.judge
+            if config.communicate_scoring is not None
+            else None
+        ),
     )
 
     logger.debug(
@@ -779,19 +716,9 @@ def build_voice_orchestrator(
     language_context: Optional[LanguageTaskInfo] = None,
 ) -> FullDuplexOrchestrator:
     """Build a voice trial and clean up prepared resources if construction fails."""
-    from tau2.persistent_tasks.availability import check_task, resolve_config
+    from tau2.persistent_tasks.availability import reject_retired_task
 
-    async_config = resolve_config(task, config.persistent_task_config)
-    if async_config is not None:
-        from tau2.persistent_tasks.config import PersistentTaskConfig
-
-        profile = PersistentTaskConfig.model_validate(async_config)
-        check_task(task, profile)
-        if profile.overlay:
-            from tau2.domains.gaia2.utils import GAIA2_DATA_DIR
-            from tau2.evaluator.persistent_tasks.overlay import verify_overlay
-
-            verify_overlay(profile, task, GAIA2_DATA_DIR)
+    reject_retired_task(task)
     with ExitStack() as resources:
         result = _build_voice_orchestrator(
             config,
@@ -866,7 +793,10 @@ def _build_voice_orchestrator(
             f"but solo mode is not supported for voice/full-duplex runs."
         )
 
-    from tau2.multilingual.runtime import agent_language_guidance, task_context
+    from tau2.domains.gaia2.language_runtime import (
+        agent_language_guidance,
+        task_context,
+    )
 
     language_context = task_context(config, task, context=language_context)
     context = call_context(config, language_context)
@@ -896,7 +826,7 @@ def _build_voice_orchestrator(
         directory = (
             audio_taps_dir.parent / "saasr"
             if audio_taps_dir is not None
-            else Path("data/simulations/saasr-artifacts") / simulation_id
+            else Path("data/results/saasr-artifacts") / simulation_id
         )
         saasr_session = SaasrSession(
             settings,
@@ -930,7 +860,7 @@ def _build_voice_orchestrator(
         if observer_settings.asr_hotwords.enabled:
             from tau2.user.asr_hotwords import build_hotword_profile
 
-            prompt_task = user_prompt_task(config, task)
+            prompt_task = task
             hotword_model, hotword_args = config.llm_user, config.llm_args_user
             if observer_settings.api_config_dir:
                 from tau2.utils.api_config import get_api_configuration
@@ -943,14 +873,25 @@ def _build_voice_orchestrator(
                     hotword_profile.arguments(),
                 )
             try:
-                observer_hotwords = build_hotword_profile(
-                    prompt_task,
-                    environment.get_user_asr_materials(prompt_task),
-                    observer_settings.asr_hotwords,
-                    language=language_context.language,
-                    model=hotword_model,
-                    model_args=hotword_args,
-                )
+                if observer_settings.asr_hotwords.mode == "gaia2_stage_gt":
+                    if domain != "gaia2" or language_context.language != "en":
+                        raise ValueError(
+                            "Fixed stage hotwords require English Gaia2"
+                        )
+                    from tau2.user.stage_asr_hotwords import load_stage_hotword_profile
+
+                    observer_hotwords = load_stage_hotword_profile(
+                        task, observer_settings.asr_hotwords
+                    )
+                else:
+                    observer_hotwords = build_hotword_profile(
+                        prompt_task,
+                        environment.get_user_asr_materials(prompt_task),
+                        observer_settings.asr_hotwords,
+                        language=language_context.language,
+                        model=hotword_model,
+                        model_args=hotword_args,
+                    )
             except Exception as error:
                 raise RuntimeError(
                     f"ASR hotword preparation failed ({type(error).__name__})"
@@ -989,20 +930,6 @@ def _build_voice_orchestrator(
             elicitation_config=config.elicitation,
         )
 
-    from tau2.persistent_tasks.availability import (
-        check_capabilities,
-        evidence_source,
-        resolve_config,
-    )
-
-    embedded_async = resolve_config(task, config.persistent_task_config)
-    if embedded_async is not None:
-        from tau2.persistent_tasks.config import PersistentTaskConfig
-
-        check_capabilities(
-            PersistentTaskConfig.model_validate(embedded_async), evidence_source(agent)
-        )
-
     dynamic_followup_config = None
     hidden_intent_graph = None
     if (
@@ -1032,7 +959,7 @@ def _build_voice_orchestrator(
 
     user = build_voice_user(
         environment,
-        user_prompt_task(config, task),
+        task,
         config.audio_native_config,
         llm=config.llm_user,
         llm_args=config.llm_args_user,

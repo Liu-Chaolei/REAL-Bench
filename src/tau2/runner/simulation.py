@@ -29,7 +29,6 @@ def run_simulation(
     on_trajectory_ready: Optional[Callable[[SimulationRun], None]] = None,
     metrics_config: Optional[dict] = None,
     active_metrics_config: Optional[dict] = None,
-    persistent_task_config: Optional[dict] = None,
     trial: Optional[int] = None,
     diagnostics_dir=None,
 ) -> SimulationRun:
@@ -73,12 +72,15 @@ def run_simulation(
         result = run_simulation(orchestrator)
         print(result.reward_info.reward)
     """
+    from tau2.persistent_tasks.availability import reject_retired_task
+
+    reject_retired_task(orchestrator.task)
     # Direct callers of this layer need the same fresh scenario for replay that
     # batch execution passes explicitly. Resolve it before any provider work.
     call_context = orchestrator.call_context
     customer_language = None
     if call_context is not None:
-        from tau2.multilingual.runtime import (
+        from tau2.domains.gaia2.language_runtime import (
             language_environment_kwargs,
             task_digest,
         )
@@ -132,19 +134,30 @@ def run_simulation(
         env_kwargs = {**(env_kwargs or {}), key: value}
 
     from tau2.domains.gaia2.interaction_variants import variant_for
-    from tau2.persistent_tasks.availability import resolve_config
 
-    if variant_for(orchestrator.task) is not None:
-        active_metrics_config = active_metrics_config or {}
+    variant = variant_for(orchestrator.task)
+    scenario_mechanism_manager = None
+    if variant is not None:
+        from tau2.metrics.active.config import ActiveMetricsConfig
+        from tau2.metrics.scenario_mechanisms import ScenarioMechanismManager
 
-    if active_metrics_config is None:
-        persistent_task_config = resolve_config(
-            orchestrator.task, persistent_task_config
+        mechanism_config = None
+        if active_metrics_config is not None:
+            mechanism_config = ActiveMetricsConfig.model_validate(
+                active_metrics_config
+            ).persistent_task
+        scenario_mechanism_manager = ScenarioMechanismManager(
+            orchestrator=orchestrator,
+            variant=variant,
+            config=mechanism_config,
+            seed=getattr(orchestrator, "seed", 0) or 0,
+            trial=trial,
         )
-    if persistent_task_config is not None:
-        from tau2.persistent_tasks.integration import install
-
-        install(orchestrator, persistent_task_config)
+        scenario_mechanism_manager.install()
+        orchestrator.scenario_mechanism_manager = scenario_mechanism_manager
+        # A variant is a scenario mechanism; do not silently turn it into a
+        # regular active persistent-task metric or legacy runtime.
+        active_metrics_config = None
 
     active_manager = None
 
@@ -195,10 +208,6 @@ def run_simulation(
         from tau2.metrics.active.manager import ActiveMetricManager
 
         active_config = ActiveMetricsConfig.model_validate(active_metrics_config)
-        if persistent_task_config is not None and active_config.enabled():
-            raise ValueError(
-                "active_metrics cannot be combined with persistent_task_config"
-            )
         active_manager = ActiveMetricManager(
             active_config,
             orchestrator=orchestrator,
@@ -223,24 +232,27 @@ def run_simulation(
                     }
                 }
             simulation.info = {**(simulation.info or {}), "active_metrics": active_info}
-    except BaseException as error:
+        if scenario_mechanism_manager is not None:
+            mechanism_info = dict(
+                (simulation.info or {}).get("scenario_mechanisms", {})
+            )
+            mechanism_info["scores"] = scenario_mechanism_manager.score(
+                communicate_scoring
+            )
+            simulation.info = {
+                **(simulation.info or {}),
+                "scenario_mechanisms": mechanism_info,
+            }
+    except BaseException:
         if recorder is not None:
             recorder.close()
-        persistent_runtime = getattr(orchestrator, "persistent_task_runtime", None)
-        if persistent_runtime is not None and diagnostics_dir is not None:
-            from tau2.persistent_tasks.runtime.evidence import write_summary
-
-            persistent_runtime.issues.append(
-                {"reason": "simulation_failed", "error_type": type(error).__name__}
-            )
-            write_summary(
-                persistent_runtime.summary(
-                    orchestrator.environment.scenario_runtime.time()
-                ),
-                diagnostics_dir,
-            )
         if active_manager is not None:
             active_manager.finalize(
+                getattr(orchestrator.termination_reason, "value", "error"),
+                getattr(orchestrator.environment.scenario_runtime, "time", lambda: 0)(),
+            )
+        if scenario_mechanism_manager is not None:
+            scenario_mechanism_manager.finalize(
                 getattr(orchestrator.termination_reason, "value", "error"),
                 getattr(orchestrator.environment.scenario_runtime, "time", lambda: 0)(),
             )
@@ -330,12 +342,6 @@ def run_simulation(
     if on_trajectory_ready is not None:
         on_trajectory_ready(simulation)
     try:
-        persistent = (simulation.info or {}).get("persistent_tasks")
-        if persistent is not None:
-            from tau2.persistent_tasks.runtime.evidence import write_summary
-
-            if diagnostics_dir is not None:
-                write_summary(persistent, diagnostics_dir)
         reward_info = evaluate_simulation(
             simulation=simulation,
             task=task,
@@ -347,8 +353,6 @@ def run_simulation(
             communicate_scoring=communicate_scoring,
             customer_language=customer_language,
         )
-        if persistent is not None and diagnostics_dir is not None:
-            write_summary(persistent, diagnostics_dir)
     except Exception as error:
         # Preserve the actual completed conversation, never a new empty run.
         simulation.reward_info = None

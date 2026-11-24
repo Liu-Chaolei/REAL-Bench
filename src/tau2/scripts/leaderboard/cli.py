@@ -109,25 +109,11 @@ def _add_historical_args(parser: argparse.ArgumentParser) -> None:
         help="Maintainers only: read the frozen 2026-10-02 Voice V2 release export; "
         "--benchmark voice (default), banking or entity selects the frame",
     )
-    parser.add_argument(
-        "--judges-root",
-        type=Path,
-        action="append",
-        help="With --historical-voice-v2 (voice frame only): a provider's saved "
-        "verdict directory (<language>/<simulation-id>.json); repeat for each "
-        "judge suite",
-    )
 
 
 def _check_historical_args(args, *, needs: tuple[str, ...]) -> bool:
-    """True for a historical invocation; reject historical inputs elsewhere.
-
-    The voice frame is judged and needs ``--judges-root``; banking and entity
-    carry no judge diagnostics and take none.
-    """
+    """Select the historical release adapter when explicitly requested."""
     if not args.historical_voice_v2:
-        if args.judges_root:
-            raise ValueError("--judges-root requires --historical-voice-v2")
         return False
     from tau2.scripts.leaderboard.voice_v2_publication import HISTORICAL_BENCHMARKS
 
@@ -186,7 +172,6 @@ def run_prepare_submission(args):
 
         prepare_historical_package(
             Path(args.input_paths[0]),
-            args.judges_root,
             args.metadata_file,
             Path(args.output),
             args.benchmark or "voice",
@@ -248,9 +233,7 @@ def run_validate_submission(args):
 
         _quiet_package_logs()
 
-        package = validate_historical_package(
-            directory, args.results, args.judges_root, args.benchmark
-        )
+        package = validate_historical_package(directory, args.results, args.benchmark)
         print(package.submission.summary.model_dump_json(indent=2))
         return
     if args.benchmark or is_package(directory):

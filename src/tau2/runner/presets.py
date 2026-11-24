@@ -9,7 +9,6 @@ from pydantic import Discriminator, Field, Tag
 
 from tau2.config import (
     DEFAULT_AUDIO_NATIVE_MODELS,
-    DEFAULT_BANKING_RETRIEVAL_CONFIG,
     DEFAULT_BENCHMARK_USER_ARGS,
     DEFAULT_BENCHMARK_USER_MODEL,
     DEFAULT_LANGUAGE,
@@ -20,7 +19,6 @@ from tau2.config import (
 )
 from tau2.data_model.benchmark import (
     BenchmarkFrame,
-    BenchmarkManifest,
     BenchmarkModel,
     BenchmarkPlan,
     BenchmarkRunInfo,
@@ -33,8 +31,8 @@ from tau2.data_model.run_config import AudioNativeConfig
 from tau2.data_model.simulation import RunConfig, TextRunConfig, VoiceRunConfig
 
 if TYPE_CHECKING:
-    from tau2.data_model.language import LanguageTaskInfo, TaskSelection
-    from tau2.multilingual.runtime import LoadedLanguage
+    from tau2.data_model.language import LanguageTaskInfo
+    from tau2.domains.gaia2.language_runtime import LoadedLanguage
 
 
 class BenchmarkRequest(BenchmarkModel):
@@ -71,7 +69,11 @@ class BenchmarkRequest(BenchmarkModel):
 
 def resolve_benchmark(request: BenchmarkRequest) -> BenchmarkPlan:
     """Resolve the released benchmark for CLI and Python callers through one path."""
-    frame = load_frame(request.preset, num_trials=request.template.num_trials)
+    frame = load_frame(
+        request.preset,
+        num_trials=request.template.num_trials,
+        mode=template_mode(request.template),
+    )
     verify_frame(frame, request.preset)
     if template_mode(request.template) != frame.mode:
         raise ValueError(
@@ -121,74 +123,27 @@ def binding_revision(loaded: "LoadedLanguage") -> str:
     ).hexdigest()
 
 
-def cell_selection(domain: str) -> "TaskSelection | None":
-    """The frozen task-loader selection a released cell pins.
-
-    Elicitation cells pin the default strategy's task variant, so a released
-    entity frame cannot silently mix strategies.
-    """
-    if domain not in ELICITATION_DOMAINS:
-        return None
-    from tau2.data_model.elicitation import ElicitationConfig
-    from tau2.data_model.language import TaskSelection
-
-    return TaskSelection(task_kwargs={"strategy": ElicitationConfig().strategy.value})
-
-
 def load_cell_language(
     language: str, domain: str, mode: str, *, canonical_tasks: bool = False
 ) -> "LoadedLanguage":
-    """Load one released cell's binding exactly as the benchmark pins it.
+    """Load the one Gaia2 English binding for a recorded run mode."""
+    from tau2.domains.gaia2.language_runtime import load_language
 
-    Domains outside the base pack resolve through their published extension.
-    """
-    from tau2.multilingual.runtime import extension_for_domain, load_language
-
-    return load_language(
-        language,
-        domain,
-        mode=mode,
-        selection=cell_selection(domain),
-        pack_extension=extension_for_domain(language, domain),
-        canonical_tasks=canonical_tasks,
-    )
+    return load_language(language, domain, mode=mode)
 
 
 def uses_canonical_tasks(benchmark: object | None) -> bool:
-    """Whether a benchmark binds the canonical registry tasks (voice-v1).
-
-    voice-v1 skips the English pack's reviewed task replacements (retail and
-    telecom ``tasks_file``). Accepts a run config's benchmark request, a recorded
-    ``BenchmarkRunInfo`` or a frame, so every reload repeats the planner's rule.
-    """
-    return getattr(benchmark, "benchmark_version", None) == "voice-v1"
+    """Gaia2 always uses its domain task loader."""
+    return False
 
 
 def reload_recorded_call(
     context: "LanguageTaskInfo", domain: str, *, canonical_tasks: bool = False
 ) -> "LoadedLanguage":
-    """Reload exactly the binding a recorded call used, rejecting any drift.
+    """Reload the Gaia2 binding recorded by a trajectory."""
+    from tau2.domains.gaia2.language_runtime import reload_call_language
 
-    ``canonical_tasks`` must repeat the planner's choice (``uses_canonical_tasks``).
-    Kept outside ``multilingual.runtime``, whose source is part of the pinned
-    intake runtime rules digest.
-    """
-    from tau2.multilingual.runtime import load_language, reload_call_language
-
-    if not canonical_tasks:
-        return reload_call_language(context, domain)
-    loaded = load_language(
-        context.language,
-        domain,
-        mode=context.mode,
-        localize_db=context.scenario_mode != "canonical",
-        selection=context.task_selection,
-        pack_extension=context.pack_extension,
-        canonical_tasks=True,
-    )
-    if loaded.artifact_pins != context.artifact_pins:
-        raise ValueError("published language artifacts differ from the recorded call")
-    return loaded
+    return reload_call_language(context, domain)
 
 
 def resolve_configs(
@@ -205,16 +160,11 @@ def resolve_configs(
     installed languages cannot silently enter a released benchmark. Selection filters only choose
     which cells to run, while the returned frame retains the full denominator.
     """
-    from tau2.multilingual.runtime import run_task_selection
 
     if template.pack_extension is not None:
         raise ValueError(
             "Released benchmarks select their own pack extensions; "
             "use --benchmark none for a custom extension"
-        )
-    if not template.effective_localize_db:
-        raise ValueError(
-            "Released benchmarks require regional scenarios; use --benchmark none with --no-localize-db for canonical scenarios in the selected language"
         )
     if template.language != DEFAULT_LANGUAGE:
         raise ValueError(
@@ -244,13 +194,6 @@ def resolve_configs(
     ):
         raise ValueError(
             "Released benchmark tasks are frozen; use --benchmark none for custom task sets or splits"
-        )
-    if frame.benchmark_version == "voice-v1" and (
-        template.task_ids is not None or template.num_tasks is not None
-    ):
-        raise ValueError(
-            "Voice V1 submissions require the complete task frame; "
-            "use --benchmark none for task samples"
         )
     if template.task_ids is not None and template.num_tasks is not None:
         raise ValueError("Choose either task_ids or num_tasks, not both")
@@ -335,20 +278,6 @@ def resolve_configs(
             language_artifacts=loaded.artifact_pins,
         )
         config = type(template).model_validate(values)
-        selection = cell_selection(cell.domain)
-        if selection is not None and run_task_selection(config) != selection:
-            raise ValueError(
-                f"Released {cell.domain} cells use the default elicitation strategy; "
-                "use --benchmark none for other strategies"
-            )
-        if cell.domain == "banking_knowledge" and (
-            config.retrieval_config != DEFAULT_BANKING_RETRIEVAL_CONFIG
-            or config.retrieval_config_kwargs
-        ):
-            raise ValueError(
-                f"Released banking cells use the {DEFAULT_BANKING_RETRIEVAL_CONFIG} "
-                "retrieval config; use --benchmark none for other retrieval settings"
-            )
         common = encode_conditions(config)
         condition = hashlib.sha256(
             json.dumps(
@@ -419,53 +348,55 @@ def manifest_path(name: str) -> Path:
     return path
 
 
-def load_manifest(name: str) -> tuple[BenchmarkManifest, Path]:
-    """Read one installed benchmark manifest by name, confined to its directory."""
-    path = manifest_path(name)
-    return BenchmarkManifest.model_validate_json(path.read_text()), path
-
-
-def load_frame(name: str = "voice", *, num_trials: int = 1) -> BenchmarkFrame:
-    """Expand a published manifest from its digest-pinned task subsets."""
-    from tau2.task_subsets.store import load_subset, subset_path
-
+def load_frame(
+    name: str = "gaia2", *, num_trials: int = 1, mode: str | None = None
+) -> BenchmarkFrame:
+    """Expand the Gaia2 base group into an ordinary run frame."""
     if num_trials < 1:
         raise ValueError("num_trials must be positive")
-    manifest, _ = load_manifest(name)
-    if set(manifest.task_subsets) != {cell.domain for cell in manifest.cells}:
-        raise ValueError("Manifest subsets must match the released domains")
-    subsets = {}
-    for domain, reference in manifest.task_subsets.items():
-        payload = subset_path(reference.name).read_bytes()
-        if hashlib.sha256(payload).hexdigest() != reference.sha256:
-            raise ValueError(f"Frozen subset digest changed for {reference.name}")
-        subset = load_subset(reference.name)
-        if subset.domain != domain:
-            raise ValueError("Manifest domain and task subset domain disagree")
-        subsets[domain] = subset
-    return BenchmarkFrame(
-        benchmark_version=manifest.benchmark_version,
-        revision=manifest.revision,
-        mode=manifest.mode,
-        trials=list(range(num_trials)),
-        cells=[
-            CellFrame(
-                **cell.model_dump(), canonical_task_ids=subsets[cell.domain].task_ids
-            )
-            for cell in manifest.cells
-        ],
+    if name == "gaia2":
+        from tau2.domains.gaia2.language_runtime import load_language
+        from tau2.domains.gaia2.manifest import load_manifest as load_gaia2_manifest
+
+        manifest = load_gaia2_manifest()
+        selected_mode = mode or "text"
+        if selected_mode not in manifest.modes:
+            raise ValueError(f"Gaia2 benchmark does not support {selected_mode!r} runs")
+        group = manifest.task_groups.get("base")
+        if group is None:
+            raise ValueError("Gaia2 manifest has no base task group")
+        loaded = load_language("en", "gaia2", mode=selected_mode)
+        return BenchmarkFrame(
+            benchmark_version=manifest.benchmark_version,
+            revision=manifest.revision,
+            mode=selected_mode,
+            trials=list(range(num_trials)),
+            cells=[
+                CellFrame(
+                    language="en",
+                    domain="gaia2",
+                    canonical_task_ids=group.task_ids,
+                    binding_revision=binding_revision(loaded),
+                )
+            ],
+        )
+    raise ValueError(
+        f"Unknown released benchmark {name!r}; the active release is 'gaia2'"
     )
 
 
-def verify_frame(frame: BenchmarkFrame, name: str = "voice") -> None:
-    """Verify official membership and the source data of each referenced subset."""
-    from tau2.task_subsets.store import load_subset, verify_subset
+def verify_frame(frame: BenchmarkFrame, name: str = "gaia2") -> None:
+    """Check the Gaia2 release source digests and task membership."""
+    if name == "gaia2":
+        from tau2.domains.gaia2.manifest import load_manifest as load_gaia2_manifest
+        from tau2.domains.gaia2.manifest import verify_manifest_sources
 
-    if frame != load_frame(name, num_trials=len(frame.trials)):
-        raise ValueError("Benchmark frame differs from the published manifest")
-    manifest, _ = load_manifest(name)
-    for reference in manifest.task_subsets.values():
-        verify_subset(load_subset(reference.name))
+        manifest = load_gaia2_manifest()
+        verify_manifest_sources(manifest)
+        if frame != load_frame(name, num_trials=len(frame.trials), mode=frame.mode):
+            raise ValueError("Gaia2 benchmark frame differs from its release manifest")
+        return
+    raise ValueError(f"Only the Gaia2 release can be verified: {name}")
 
 
 def extend_plan(previous: BenchmarkPlan, requested: BenchmarkPlan) -> BenchmarkPlan:
@@ -524,7 +455,7 @@ def extend_plan(previous: BenchmarkPlan, requested: BenchmarkPlan) -> BenchmarkP
 
 def prepare_plan(plan: BenchmarkPlan, output: Path) -> BenchmarkPlan:
     """Resolve cumulative resume scope and validate all input paths before preview/work."""
-    from tau2.multilingual.runtime import load_run_language
+    from tau2.domains.gaia2.language_runtime import load_run_language
 
     plan = BenchmarkPlan.model_validate(plan.model_dump())
     frame_path = output / "benchmark-frame.json"
@@ -620,78 +551,3 @@ def infer_preset(frame: BenchmarkFrame, name: str | None = None) -> str:
             "Recorded frame must match exactly one installed published benchmark"
         )
     return matches[0]
-
-
-def pin_manifest(
-    name: str,
-    *,
-    revision: str | None = None,
-    source: str | None = None,
-    mode: str | None = None,
-    benchmark_version: str | None = None,
-) -> BenchmarkManifest:
-    """Recompute a manifest's subset digests and binding revisions from this checkout.
-
-    Pins are derived, never authored: each subset digest is the SHA-256 of the
-    published subset file and each binding revision fingerprints the installed
-    pack binding in the manifest's call mode. With ``source``, a new manifest is
-    derived from an existing one (same cells and subsets) for another mode.
-    """
-    from tau2.task_subsets.store import subset_path
-
-    if source is not None:
-        target = manifest_path(name)
-        if target.exists():
-            raise FileExistsError(f"benchmark '{name}' already exists; pin it instead")
-        if revision is None or benchmark_version is None or mode is None:
-            raise ValueError(
-                "deriving a new benchmark requires --revision, --benchmark-version "
-                "and --mode"
-            )
-        base, _ = load_manifest(source)
-    else:
-        if benchmark_version is not None or mode is not None:
-            raise ValueError("--benchmark-version and --mode apply only with --from")
-        base, target = load_manifest(name)
-    call_mode = mode or base.mode
-    subsets = {
-        domain: reference.model_copy(
-            update={
-                "sha256": hashlib.sha256(
-                    subset_path(reference.name).read_bytes()
-                ).hexdigest()
-            }
-        )
-        for domain, reference in base.task_subsets.items()
-    }
-    cells = [
-        cell.model_copy(
-            update={
-                "binding_revision": binding_revision(
-                    load_cell_language(
-                        cell.language,
-                        cell.domain,
-                        call_mode,
-                        canonical_tasks=(benchmark_version or base.benchmark_version)
-                        == "voice-v1",
-                    )
-                )
-            }
-        )
-        for cell in base.cells
-    ]
-    pins_changed = subsets != base.task_subsets or cells != base.cells
-    if source is None and pins_changed and (revision or base.revision) == base.revision:
-        raise ValueError(
-            f"benchmark '{name}' pins changed but its revision {base.revision!r} "
-            "did not; pass --revision with a new release revision"
-        )
-    manifest = BenchmarkManifest(
-        benchmark_version=benchmark_version or base.benchmark_version,
-        revision=revision or base.revision,
-        mode=call_mode,
-        task_subsets=subsets,
-        cells=cells,
-    )
-    target.write_text(manifest.model_dump_json(indent=2) + "\n")
-    return manifest

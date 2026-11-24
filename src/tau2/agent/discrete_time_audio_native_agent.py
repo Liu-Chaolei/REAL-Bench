@@ -729,7 +729,7 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
         transcript = tick_result.proportional_transcript or ""
 
         # Use the configured audio format
-        audio_format = self.audio_format
+        audio_format = tick_result.playback_audio_format or self.audio_format
 
         # Check if there was actual speech (not just silence padding)
         if tick_result.media_origin is not None:
@@ -959,6 +959,11 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
             "backend_inputs": list(provider.backend_inputs.values()),
             "state_observations": list(getattr(provider, "state_observations", [])),
         }
+
+    def set_observer_stage(self, stage: int) -> None:
+        """Advance evaluator-side staged ASR vocabulary after real speech starts."""
+        if self._adapter is not None:
+            self._adapter.set_observer_stage(stage)
 
     def get_async_evidence_source(self):
         """Return an optional passive evidence port implemented by the transport Adapter."""

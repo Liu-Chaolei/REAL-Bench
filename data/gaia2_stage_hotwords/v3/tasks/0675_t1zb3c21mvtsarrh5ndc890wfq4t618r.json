@@ -1,0 +1,108 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0675_t1zb3c21mvtsarrh5ndc890wfq4t618r",
+  "model": "deepseek-flash",
+  "input_sha256": "263e5f6ce91e06571631769ff3718ffa08cdfff8b346848d05e0c35f96118dac",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Koenraad Vandenberghe",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien Vandenberghe",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Board & Dice Inuit: The Snow Folk",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Avenue Louise 240, 1050 Brussels, Belgium",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Koenraad Vandenberghe",
+        "Aurélien Vandenberghe",
+        "Board & Dice Inuit: The Snow Folk",
+        "Avenue Louise 240, 1050 Brussels, Belgium"
+      ],
+      "active_vocabulary": {
+        "Koenraad Vandenberghe": 50,
+        "Aurélien Vandenberghe": 50,
+        "Board & Dice Inuit: The Snow Folk": 50,
+        "Avenue Louise 240, 1050 Brussels, Belgium": 50
+      },
+      "vocabulary_sha256": "c78601dd64881b395bf0b2147697ac3780348bd601161d216fd7d3852a471569"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Koenraad Vandenberghe": 50,
+        "Aurélien Vandenberghe": 50,
+        "Board & Dice Inuit: The Snow Folk": 50,
+        "Avenue Louise 240, 1050 Brussels, Belgium": 50
+      },
+      "vocabulary_sha256": "c78601dd64881b395bf0b2147697ac3780348bd601161d216fd7d3852a471569"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Koenraad",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Avenue Louise 240, 1050 Brussels, Belgium",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Koenraad and Aurélien Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_event.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Koenraad",
+        "Aurélien",
+        "Koenraad and Aurélien Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Koenraad Vandenberghe": 50,
+        "Aurélien Vandenberghe": 50,
+        "Board & Dice Inuit: The Snow Folk": 50,
+        "Avenue Louise 240, 1050 Brussels, Belgium": 50,
+        "Koenraad": 50,
+        "Aurélien": 50,
+        "Koenraad and Aurélien Vandenberghe": 50
+      },
+      "vocabulary_sha256": "bdc241f040d95cc1feb7b955e91cfcc875b5a78a26c993a4fcc52d621b91a5ad"
+    }
+  ]
+}

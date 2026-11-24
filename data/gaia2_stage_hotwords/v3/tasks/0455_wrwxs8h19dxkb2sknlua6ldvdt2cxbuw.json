@@ -1,0 +1,95 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0455_wrwxs8h19dxkb2sknlua6ldvdt2cxbuw",
+  "model": "deepseek-flash",
+  "input_sha256": "46586c20a30a4f054e87aa337d991da8b58980336e78efabf349ea0f361b0449",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Chocolatiers",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Day of The Dead Plastic Table Cover",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bloody Gauze Halloween Table Cover",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Chocolatiers",
+        "Day of The Dead Plastic Table Cover",
+        "Bloody Gauze Halloween Table Cover"
+      ],
+      "active_vocabulary": {
+        "Chocolatiers": 50,
+        "Day of The Dead Plastic Table Cover": 50,
+        "Bloody Gauze Halloween Table Cover": 50
+      },
+      "vocabulary_sha256": "b8e211e95b577adf850dd3732cdac26a6777c44b9b211e482cf4e60f825944f3"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien von Allmen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Aurélien von Allmen"
+      ],
+      "active_vocabulary": {
+        "Chocolatiers": 50,
+        "Day of The Dead Plastic Table Cover": 50,
+        "Bloody Gauze Halloween Table Cover": 50,
+        "Aurélien von Allmen": 50
+      },
+      "vocabulary_sha256": "f4dab772a37e92783eee8e502df6d475c650922642e05f8cc56551254b47c677"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Anastasiya Zolotova",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien Ramseyer",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Anastasiya Zolotova",
+        "Aurélien Ramseyer"
+      ],
+      "active_vocabulary": {
+        "Chocolatiers": 50,
+        "Day of The Dead Plastic Table Cover": 50,
+        "Bloody Gauze Halloween Table Cover": 50,
+        "Aurélien von Allmen": 50,
+        "Anastasiya Zolotova": 50,
+        "Aurélien Ramseyer": 50
+      },
+      "vocabulary_sha256": "420596f0aa15cbe914878de77a6b834c67ad5f989e7a8e4f316c713305a69dca"
+    }
+  ]
+}

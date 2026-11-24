@@ -1,0 +1,131 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0403_xd1sww2pf0jt9if4o5sgeh20gbtfacsl",
+  "model": "deepseek-flash",
+  "input_sha256": "22394d2416dcb1b0178f9574c06a5cb2c8da41ff4269e6847f6c97d335953331",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-72d5b493-d9b4-4b8e-aaec-45d70566aac7.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Aurélie"
+      ],
+      "active_vocabulary": {
+        "Aurélie": 50
+      },
+      "vocabulary_sha256": "1fe1c5c21c251e6fcd8b9376aa8d0a93ecda01063f535a3adb4d3e4156442241"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélie Dumont",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_prompt.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kiyoshi Nakahara",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Nadja Ramadanović",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Swiss-Japanese Relations and Cultural Exchange",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Seeking Insights on Career Transitions for Historians",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_send_prompt.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Aurélie Dumont",
+        "Kiyoshi Nakahara",
+        "Nadja Ramadanović",
+        "Swiss-Japanese Relations and Cultural Exchange",
+        "Seeking Insights on Career Transitions for Historians"
+      ],
+      "active_vocabulary": {
+        "Aurélie": 50,
+        "Aurélie Dumont": 50,
+        "Kiyoshi Nakahara": 50,
+        "Nadja Ramadanović": 50,
+        "Swiss-Japanese Relations and Cultural Exchange": 50,
+        "Seeking Insights on Career Transitions for Historians": 50
+      },
+      "vocabulary_sha256": "d063f573bb6c4d197a5a3a861610522f417fb40ef545808a60eb731826738ad5"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_title.arguments.title",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kiyoshi",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_title.arguments.title",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Nadja",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_title.arguments.title",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ursula",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_title.arguments.title",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Swiss-Japanese Relations and Cultural Exchange",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kiyoshi",
+        "Nadja",
+        "Ursula"
+      ],
+      "active_vocabulary": {
+        "Aurélie": 50,
+        "Aurélie Dumont": 50,
+        "Kiyoshi Nakahara": 50,
+        "Nadja Ramadanović": 50,
+        "Swiss-Japanese Relations and Cultural Exchange": 50,
+        "Seeking Insights on Career Transitions for Historians": 50,
+        "Kiyoshi": 50,
+        "Nadja": 50,
+        "Ursula": 50
+      },
+      "vocabulary_sha256": "8cfe8463dd66fb7a2a9783338b3cdb6eec868725cd49d37023b62fde9062c677"
+    }
+  ]
+}

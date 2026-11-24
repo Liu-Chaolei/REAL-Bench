@@ -1,0 +1,42 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0220_ttjxcmc6fpmyp9gqp10lfwf7v5ww6sf0",
+  "model": "deepseek-flash",
+  "input_sha256": "0aedfc6d8a47f5b50801f8936e6faa00c255795da56ae37fcc1ce22554aee11c",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Astrid Møller",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Astrid Møller"
+      ],
+      "active_vocabulary": {
+        "Astrid Møller": 50
+      },
+      "vocabulary_sha256": "1dbb0cd9b375c2f01def2290be2194d98ec1dba18c6b5519c7edcf03622e0d3d"
+    }
+  ]
+}

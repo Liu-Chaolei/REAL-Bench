@@ -66,7 +66,6 @@ def main():
     )
     parser.add_argument("--active-metrics-config", type=Path)
     parser.add_argument("--gaia2-allow-stale-runtime", action="store_true")
-    parser.add_argument("--persistent-task-config", type=Path)
     parser.add_argument(
         "--judge-api-key-env",
         default="GAIA2_JUDGE_API_KEY",
@@ -273,11 +272,6 @@ def main():
         ]
     if args.gaia2_allow_stale_runtime:
         command.append("--gaia2-allow-stale-runtime")
-    if args.persistent_task_config:
-        command += [
-            "--persistent-task-config",
-            str(args.persistent_task_config.resolve()),
-        ]
 
     if args.max_seconds:
         command.extend(["--timeout", str(args.max_seconds + 150)])
@@ -405,7 +399,6 @@ def run_shared(args, config):
     for name, flag in (
         ("metrics_config", "--metrics-config"),
         ("active_metrics_config", "--active-metrics-config"),
-        ("persistent_task_config", "--persistent-task-config"),
     ):
         path = getattr(args, name)
         if path:

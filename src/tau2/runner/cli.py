@@ -18,8 +18,6 @@ from tau2.runner.presets import (
     ExecutionSettings,
     execute_plan,
     load_frame,
-    load_manifest,
-    pin_manifest,
     preset_names,
     resolve_benchmark,
 )
@@ -126,24 +124,21 @@ def add_pass3_args(
             result = run_command(selected)
             if not args.dry_run:
                 results[condition.label] = result
-            from tau2.utils import DATA_DIR
+            from tau2.utils import RESULTS_DIR
 
             source_paths[condition.label] = str(
-                DATA_DIR
-                / "simulations"
-                / f"{args.save_to}_{condition.label}"
-                / "results.json"
+                RESULTS_DIR / f"{args.save_to}_{condition.label}" / "results.json"
             )
         if args.dry_run:
             return None
 
-        from tau2.utils import DATA_DIR
+        from tau2.utils import RESULTS_DIR
 
         report = summarize_crossed_pass3(
             results,
             source_paths,
         )
-        report_file = DATA_DIR / "simulations" / f"{args.save_to}_pass3.json"
+        report_file = RESULTS_DIR / f"{args.save_to}_pass3.json"
         report_file.parent.mkdir(parents=True, exist_ok=True)
         report_file.write_text(report.model_dump_json(indent=2) + "\n")
         print(
@@ -161,10 +156,8 @@ def add_benchmark_run_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "--benchmark",
         default=None,
-        help="Released benchmark manifest: voice runs default to 'voice' (τ-i18n, V2); "
-        "use 'voice-v1' for the English current-leaderboard frame. Text runs "
-        "are custom single-domain runs unless you select 'text'. Use 'none' for a "
-        "custom single-domain run.",
+        choices=("gaia2", "none"),
+        help="Gaia2 release manifest; use 'none' for an explicit Gaia2 task-set run.",
     )
     parser.add_argument(
         "--dry-run",
@@ -193,22 +186,6 @@ def add_benchmarks_args(parser: argparse.ArgumentParser) -> None:
     sub = parser.add_subparsers(dest="benchmarks_command", required=True)
     listing = sub.add_parser("list", help="List installed benchmark manifests")
     listing.set_defaults(func=run_benchmarks_list)
-    pin = sub.add_parser(
-        "pin",
-        help="Recompute a manifest's subset digests and binding revisions from the "
-        "current checkout (or derive a new manifest with --from)",
-    )
-    pin.add_argument("name", help="Benchmark manifest name, e.g. voice or text")
-    pin.add_argument(
-        "--revision",
-        help="New manifest revision label; required when any pin changes",
-    )
-    pin.add_argument(
-        "--from", dest="source", help="Derive a new manifest from this one's cells"
-    )
-    pin.add_argument("--mode", choices=("text", "voice"), help="Call mode with --from")
-    pin.add_argument("--benchmark-version", help="Benchmark generation with --from")
-    pin.set_defaults(func=run_benchmarks_pin)
 
 
 def run_benchmarks_list(args: argparse.Namespace) -> None:
@@ -217,29 +194,22 @@ def run_benchmarks_list(args: argparse.Namespace) -> None:
 
     rows = []
     for name in preset_names():
-        manifest, _ = load_manifest(name)
-        rows.append(
-            {
-                "name": name,
-                "benchmark_version": manifest.benchmark_version,
-                "revision": manifest.revision,
-                "mode": manifest.mode,
-                "cells": len(manifest.cells),
-            }
-        )
+        if name == "gaia2":
+            from tau2.domains.gaia2.manifest import load_manifest as load_gaia2_manifest
+
+            manifest = load_gaia2_manifest()
+            rows.append(
+                {
+                    "name": name,
+                    "benchmark_version": manifest.benchmark_version,
+                    "revision": manifest.revision,
+                    "mode": ",".join(manifest.modes),
+                    "task_groups": len(manifest.task_groups),
+                }
+            )
+            continue
+        raise ValueError(f"Unsupported benchmark manifest: {name}")
     print(json.dumps(rows, indent=2))
-
-
-def run_benchmarks_pin(args: argparse.Namespace) -> None:
-    """Rewrite one manifest's derived pins and print the result."""
-    manifest = pin_manifest(
-        args.name,
-        revision=args.revision,
-        source=args.source,
-        mode=args.mode,
-        benchmark_version=args.benchmark_version,
-    )
-    print(manifest.model_dump_json(indent=2))
 
 
 def selected_benchmark(args: argparse.Namespace) -> str | None:
@@ -251,8 +221,8 @@ def selected_benchmark(args: argparse.Namespace) -> str | None:
 
 def check_benchmark_selection(args: argparse.Namespace) -> None:
     """Reject selections outside the released frame before building any config."""
-    frame = load_frame(args.benchmark)
     mode = "voice" if args.audio_native else "text"
+    frame = load_frame(args.benchmark, mode=mode)
     if frame.mode != mode:
         raise ValueError(
             f"The '{args.benchmark}' benchmark runs {frame.mode} calls; "
@@ -262,12 +232,6 @@ def check_benchmark_selection(args: argparse.Namespace) -> None:
                 else "add --audio-native or choose a text benchmark"
             )
         )
-    if frame.benchmark_version == "voice-v1":
-        if args.task_ids is not None or args.num_tasks is not None:
-            raise ValueError(
-                "Voice V1 submissions require the complete task frame; "
-                "use --benchmark none for task samples"
-            )
     for flag, selected, allowed in (
         ("--domain", args.domain, {cell.domain for cell in frame.cells}),
         ("--language", args.language, {cell.language for cell in frame.cells}),
@@ -300,12 +264,10 @@ def run_benchmark(args: argparse.Namespace, template: RunConfig) -> None:
     """Resolve one typed request and execute all cells through the shared controller."""
     from tau2.metrics.benchmark import export_submission
     from tau2.runner.report import render_plan, render_summary
-    from tau2.utils import DATA_DIR
+    from tau2.utils import RESULTS_DIR
 
-    output = (
-        DATA_DIR
-        / "simulations"
-        / (args.save_to or f"{datetime.now():%Y-%m-%d_%H-%M-%S}_{args.benchmark}")
+    output = RESULTS_DIR / (
+        args.save_to or f"{datetime.now():%Y-%m-%d_%H-%M-%S}_{args.benchmark}"
     )
     plan = resolve_benchmark(
         BenchmarkRequest(

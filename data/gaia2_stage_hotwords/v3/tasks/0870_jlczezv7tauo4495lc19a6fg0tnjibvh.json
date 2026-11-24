@@ -1,0 +1,112 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0870_jlczezv7tauo4495lc19a6fg0tnjibvh",
+  "model": "deepseek-flash",
+  "input_sha256": "71e469bc05f4d7009ee474ea08b2e73e7fd55daa29b1e7949fe16e567d6bcc64",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-0d1a41b6-1075-4486-9842-881a280063f8.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Xóchitl Ramírez",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e037197f-f04e-42db-8f68-e6428cf29ba7.arguments.attendees[1]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Xóchitl",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5094ac07-9c1f-4045-807d-f66d13721c65.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "1423 NW 23rd Ave, Portland, OR 97210",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-bed73f93-c44d-4bf4-8846-4580a33f0e69.arguments.end_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Nalani Jensen",
+        "Aurélien LaFleur",
+        "Xóchitl Ramírez",
+        "Xóchitl",
+        "1423 NW 23rd Ave, Portland, OR 97210"
+      ],
+      "active_vocabulary": {
+        "Nalani Jensen": 50,
+        "Aurélien LaFleur": 50,
+        "Xóchitl Ramírez": 50,
+        "Xóchitl": 50,
+        "1423 NW 23rd Ave, Portland, OR 97210": 50
+      },
+      "vocabulary_sha256": "bf5c691abba6b985b20cb7a620372785cd6ee29bea37ac8767cb52bbe8a235a3"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Jamila",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_notify.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Jamila",
+        "Jamila Fernandes"
+      ],
+      "active_vocabulary": {
+        "Nalani Jensen": 50,
+        "Aurélien LaFleur": 50,
+        "Xóchitl Ramírez": 50,
+        "Xóchitl": 50,
+        "1423 NW 23rd Ave, Portland, OR 97210": 50,
+        "Jamila": 50,
+        "Jamila Fernandes": 50
+      },
+      "vocabulary_sha256": "aa5d51274573c7469944a0defd80e0f21f106afa37ec36be828271e45eaac140"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Nalani Jensen": 50,
+        "Aurélien LaFleur": 50,
+        "Xóchitl Ramírez": 50,
+        "Xóchitl": 50,
+        "1423 NW 23rd Ave, Portland, OR 97210": 50,
+        "Jamila": 50,
+        "Jamila Fernandes": 50
+      },
+      "vocabulary_sha256": "aa5d51274573c7469944a0defd80e0f21f106afa37ec36be828271e45eaac140"
+    }
+  ]
+}

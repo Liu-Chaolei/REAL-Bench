@@ -1,0 +1,284 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0514_u8wwuid7dd340fdbxqkha1x3fovnn0ee",
+  "model": "deepseek-flash",
+  "input_sha256": "339ae1a9d501df6080b9ab60c7e6004f45d2e3a4ab517140e76869ffa90d5311",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "O'Connor",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kremlin",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "O'Connor",
+        "Kremlin"
+      ],
+      "active_vocabulary": {
+        "O'Connor": 50,
+        "Kremlin": 50
+      },
+      "vocabulary_sha256": "7c2433c373d377d6a2df6ce967291c06a19afda4849c924e3fa311f35041c12d"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aidan O'Connor",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aisling O'Connor",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ronan O'Connor",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Saoirse O'Connor",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Seamus O'Connor",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Saskia Mueller-Krueger",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rogelio Garcia-Mendoza",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kazan Kremlin",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kremlin Views",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kremlin View Apartments",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Caoimhe Ni Chonaill",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aine Ni Chonaill",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aoife Ni Chonaill",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aine Ni Chonchobhair",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aoife Ni Chonchobhair",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Saoirse Ni Chonchobhair",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aoife Ni Chonchuir",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rogelio García-Mendoza",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_check_event.arguments.query",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Saskia Müller-Krüger",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_say.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ní Chonaill",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_say.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ní Chonchobhair",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_say.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Aidan O'Connor",
+        "Aisling O'Connor",
+        "Ronan O'Connor",
+        "Saoirse O'Connor",
+        "Seamus O'Connor",
+        "Viktor Kuznetsov",
+        "Saskia Mueller-Krueger",
+        "Rogelio Garcia-Mendoza",
+        "Kazan Kremlin",
+        "Kremlin Views",
+        "Kremlin View Apartments",
+        "Caoimhe Ni Chonaill",
+        "Aine Ni Chonaill",
+        "Aoife Ni Chonaill",
+        "Aine Ni Chonchobhair",
+        "Aoife Ni Chonchobhair",
+        "Saoirse Ni Chonchobhair",
+        "Aoife Ni Chonchuir",
+        "Anastasiya Kuznetsova",
+        "Rogelio García-Mendoza",
+        "Saskia Müller-Krüger",
+        "Ní Chonaill",
+        "Ní Chonchobhair"
+      ],
+      "active_vocabulary": {
+        "O'Connor": 50,
+        "Kremlin": 50,
+        "Aidan O'Connor": 50,
+        "Aisling O'Connor": 50,
+        "Ronan O'Connor": 50,
+        "Saoirse O'Connor": 50,
+        "Seamus O'Connor": 50,
+        "Viktor Kuznetsov": 50,
+        "Saskia Mueller-Krueger": 50,
+        "Rogelio Garcia-Mendoza": 50,
+        "Kazan Kremlin": 50,
+        "Kremlin Views": 50,
+        "Kremlin View Apartments": 50,
+        "Caoimhe Ni Chonaill": 50,
+        "Aine Ni Chonaill": 50,
+        "Aoife Ni Chonaill": 50,
+        "Aine Ni Chonchobhair": 50,
+        "Aoife Ni Chonchobhair": 50,
+        "Saoirse Ni Chonchobhair": 50,
+        "Aoife Ni Chonchuir": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Rogelio García-Mendoza": 50,
+        "Saskia Müller-Krüger": 50,
+        "Ní Chonaill": 50,
+        "Ní Chonchobhair": 50
+      },
+      "vocabulary_sha256": "14048c45137c7eef97132428efd2ef816f572cf951871384448af36b780ef6ad"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kazan Kremlin",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kremlin Views",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kremlin View Apartments",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "O'Connor": 50,
+        "Kremlin": 50,
+        "Aidan O'Connor": 50,
+        "Aisling O'Connor": 50,
+        "Ronan O'Connor": 50,
+        "Saoirse O'Connor": 50,
+        "Seamus O'Connor": 50,
+        "Viktor Kuznetsov": 50,
+        "Saskia Mueller-Krueger": 50,
+        "Rogelio Garcia-Mendoza": 50,
+        "Kazan Kremlin": 50,
+        "Kremlin Views": 50,
+        "Kremlin View Apartments": 50,
+        "Caoimhe Ni Chonaill": 50,
+        "Aine Ni Chonaill": 50,
+        "Aoife Ni Chonaill": 50,
+        "Aine Ni Chonchobhair": 50,
+        "Aoife Ni Chonchobhair": 50,
+        "Saoirse Ni Chonchobhair": 50,
+        "Aoife Ni Chonchuir": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Rogelio García-Mendoza": 50,
+        "Saskia Müller-Krüger": 50,
+        "Ní Chonaill": 50,
+        "Ní Chonchobhair": 50
+      },
+      "vocabulary_sha256": "14048c45137c7eef97132428efd2ef816f572cf951871384448af36b780ef6ad"
+    }
+  ]
+}

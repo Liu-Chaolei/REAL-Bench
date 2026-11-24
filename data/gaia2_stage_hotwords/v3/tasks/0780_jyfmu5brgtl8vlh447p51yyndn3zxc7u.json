@@ -1,0 +1,141 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0780_jyfmu5brgtl8vlh447p51yyndn3zxc7u",
+  "model": "deepseek-flash",
+  "input_sha256": "7314705e5e36502e2e91f0b2c585a806ca51765ce66934296c83fe4e0448602f",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Bergen",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kalfarveien 23, Bergen",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bergenhus Fortress, Bergen",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-79924900-3408-40cb-822b-d1db556cddbd.arguments.start_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Bergen",
+        "Kalfarveien 23, Bergen",
+        "Bergenhus Fortress, Bergen"
+      ],
+      "active_vocabulary": {
+        "Bergen": 50,
+        "Kalfarveien 23, Bergen": 50,
+        "Bergenhus Fortress, Bergen": 50
+      },
+      "vocabulary_sha256": "dc5c055f645b504b50c3c9685b398a4e5838114c667298ad68bcada536b35adc"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Bergen",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Review Bergen Shortlist",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Catch-up and Film Talk",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bergen City Centre Apartments",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Review Bergen Shortlist",
+        "Catch-up and Film Talk",
+        "Bergen City Centre Apartments"
+      ],
+      "active_vocabulary": {
+        "Bergen": 50,
+        "Kalfarveien 23, Bergen": 50,
+        "Bergenhus Fortress, Bergen": 50,
+        "Review Bergen Shortlist": 50,
+        "Catch-up and Film Talk": 50,
+        "Bergen City Centre Apartments": 50
+      },
+      "vocabulary_sha256": "c8b56d604f7a2d9e291692bdde2aeb029048e158dec31874886ee527c6236384"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Lunch After Bergen Review",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Café Opéra",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bergen Hillside Homes",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bergen Heights",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bergen City Centre Apartments",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Lunch After Bergen Review",
+        "Café Opéra",
+        "Bergen Hillside Homes",
+        "Bergen Heights"
+      ],
+      "active_vocabulary": {
+        "Bergen": 50,
+        "Kalfarveien 23, Bergen": 50,
+        "Bergenhus Fortress, Bergen": 50,
+        "Review Bergen Shortlist": 50,
+        "Catch-up and Film Talk": 50,
+        "Bergen City Centre Apartments": 50,
+        "Lunch After Bergen Review": 50,
+        "Café Opéra": 50,
+        "Bergen Hillside Homes": 50,
+        "Bergen Heights": 50
+      },
+      "vocabulary_sha256": "08c20c4a5d759648cab1b16d0fbf78415c5c8115db1d8ef7447a97700bb81a52"
+    }
+  ]
+}

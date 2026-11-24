@@ -1,0 +1,110 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0817_ccwrcvjz2zbzivq7lf26xlxggjadxux8",
+  "model": "deepseek-flash",
+  "input_sha256": "0ec251f84a85c1dd718f197bf4211447404972eac8a338e264622181e9d863ff",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Jensen",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Jensen Party",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Jensen",
+        "Jensen Party"
+      ],
+      "active_vocabulary": {
+        "Jensen": 50,
+        "Jensen Party": 50
+      },
+      "vocabulary_sha256": "d53ff959f575b06b4858eb9baf4c5b36d9c9bb9f772267a434046e014c973292"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Jensen Party Logistics",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Nadira Jensen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Jensen Party Logistics",
+        "Nalani Jensen",
+        "Nadira Jensen",
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Jensen": 50,
+        "Jensen Party": 50,
+        "Jensen Party Logistics": 50,
+        "Nalani Jensen": 50,
+        "Nadira Jensen": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "b1bfbe63594cf243c863f5cd44194c97e9fdbb0fbc5d5484395662d26f5bc074"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Jensen Party Prep",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Jensen Party",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Jensen Party Prep"
+      ],
+      "active_vocabulary": {
+        "Jensen": 50,
+        "Jensen Party": 50,
+        "Jensen Party Logistics": 50,
+        "Nalani Jensen": 50,
+        "Nadira Jensen": 50,
+        "Aurélien": 50,
+        "Jensen Party Prep": 50
+      },
+      "vocabulary_sha256": "6ad94e00629535dbd41727a80daad8836bcb33cb374da186eac4e4826db6c216"
+    }
+  ]
+}

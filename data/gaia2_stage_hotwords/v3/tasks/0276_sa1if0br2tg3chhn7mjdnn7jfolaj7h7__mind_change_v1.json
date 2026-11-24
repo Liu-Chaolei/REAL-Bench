@@ -1,0 +1,148 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0276_sa1if0br2tg3chhn7mjdnn7jfolaj7h7__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "601739ad4649cc54b85db2e76976f13078bcc9214ae51e6e13b1e067c5bae1ab",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Lisbon",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Portugal",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Lisbon",
+        "Portugal"
+      ],
+      "active_vocabulary": {
+        "Lisbon": 50,
+        "Portugal": 50
+      },
+      "vocabulary_sha256": "4f73a756355c8d0b38d42a9b8cfd19d7a8d9ee0c892f6c945011849f2b713805"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Luísa Silva e Sousa",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Luís Marques",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Lisbon",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Porto",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Restaurant Private Dining Room",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Luísa Silva e Sousa",
+        "Luís Marques",
+        "Jamila Fernandes",
+        "Porto",
+        "Restaurant Private Dining Room",
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Lisbon": 50,
+        "Portugal": 50,
+        "Luísa Silva e Sousa": 50,
+        "Luís Marques": 50,
+        "Jamila Fernandes": 50,
+        "Porto": 50,
+        "Restaurant Private Dining Room": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "f10e0e611f4119bc9037ff5a5fd5b9ee5508d67beb6c7bf10d00d3a2d8297270"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Luís Marques",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Lisbon",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Tagus Valley",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Tagus Valley",
+        "Aurélien LaFleur"
+      ],
+      "active_vocabulary": {
+        "Lisbon": 50,
+        "Portugal": 50,
+        "Luísa Silva e Sousa": 50,
+        "Luís Marques": 50,
+        "Jamila Fernandes": 50,
+        "Porto": 50,
+        "Restaurant Private Dining Room": 50,
+        "Aurélien": 50,
+        "Tagus Valley": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "6e017649d798b02157a115b7a6e5117fa678fa6c5e585fc54c5c6606290c1f5e"
+    }
+  ]
+}

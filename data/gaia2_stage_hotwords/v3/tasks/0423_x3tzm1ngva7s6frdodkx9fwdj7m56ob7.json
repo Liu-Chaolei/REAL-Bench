@@ -1,0 +1,231 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0423_x3tzm1ngva7s6frdodkx9fwdj7m56ob7",
+  "model": "deepseek-flash",
+  "input_sha256": "a2cfa3bad4b274a05e99ea0004d523947bd269d470590866cd1b6e87ba3f45f5",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nalinee Srisombat",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Jawaher Al-Mansour",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Elara Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Thanakorn Sombat",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Nalinee Wongtrakul",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Nalinee Wongthanawat",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Lars Svensson",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien Van den Broeck",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Åsa Lundström",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Fatima Al-Khateeb",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Amal Al-Khateeb",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Séamus Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Nalinee Srisombat",
+        "Jawaher Al-Mansour",
+        "Elara Vandenberghe",
+        "Thanakorn Sombat",
+        "Nalinee Wongtrakul",
+        "Nalinee Wongthanawat",
+        "Lars Svensson",
+        "Aurélien Van den Broeck",
+        "Aurélien Dumont",
+        "Åsa Lundström",
+        "Fatima Al-Khateeb",
+        "Amal Al-Khateeb",
+        "Séamus Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Nalinee Srisombat": 50,
+        "Jawaher Al-Mansour": 50,
+        "Elara Vandenberghe": 50,
+        "Thanakorn Sombat": 50,
+        "Nalinee Wongtrakul": 50,
+        "Nalinee Wongthanawat": 50,
+        "Lars Svensson": 50,
+        "Aurélien Van den Broeck": 50,
+        "Aurélien Dumont": 50,
+        "Åsa Lundström": 50,
+        "Fatima Al-Khateeb": 50,
+        "Amal Al-Khateeb": 50,
+        "Séamus Vandenberghe": 50
+      },
+      "vocabulary_sha256": "ebafc11a6233715060e19fc0d840f6dab2e892cd45b3f4e28e4eed48c7cdd62b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Nalinee Srisombat",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_lookup_0.arguments.user_name",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Jawaher Al-Mansour",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_lookup_1.arguments.user_name",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Elara Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_lookup_2.arguments.user_name",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Thanakorn Sombat",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_lookup_3.arguments.user_name",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Nalinee Wongtrakul",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_lookup_4.arguments.user_name",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Nalinee Wongthanawat",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_lookup_5.arguments.user_name",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Lars Svensson",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_lookup_6.arguments.user_name",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien Van den Broeck",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_lookup_7.arguments.user_name",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_lookup_8.arguments.user_name",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Åsa Lundström",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_lookup_9.arguments.user_name",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Fatima Al-Khateeb",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_lookup_10.arguments.user_name",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Amal Al-Khateeb",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_lookup_11.arguments.user_name",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Séamus Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_lookup_12.arguments.user_name",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Nalinee Srisombat": 50,
+        "Jawaher Al-Mansour": 50,
+        "Elara Vandenberghe": 50,
+        "Thanakorn Sombat": 50,
+        "Nalinee Wongtrakul": 50,
+        "Nalinee Wongthanawat": 50,
+        "Lars Svensson": 50,
+        "Aurélien Van den Broeck": 50,
+        "Aurélien Dumont": 50,
+        "Åsa Lundström": 50,
+        "Fatima Al-Khateeb": 50,
+        "Amal Al-Khateeb": 50,
+        "Séamus Vandenberghe": 50
+      },
+      "vocabulary_sha256": "ebafc11a6233715060e19fc0d840f6dab2e892cd45b3f4e28e4eed48c7cdd62b"
+    }
+  ]
+}

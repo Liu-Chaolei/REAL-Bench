@@ -1,5 +1,7 @@
 > Historical implementation plan. Active async definitions now live in ordinary Gaia2 tasks; see [current architecture](persistent-tasks.md).
 
+> 历史文档：旧 Persistent Task 配置、运行、恢复和重新评分入口已退役。本文保留设计与实验来源，不作为当前操作指南；当前运行见 [动态异步交互](gaia2-async.md)。
+
 > 历史固定异步任务记录。对应固定数据集已移除，当前仅使用运行时动态异步交互，
 > 见 [当前运行方式](gaia2-async.md)。下文旧题号和命令保留用于追溯，不作为新评测入口。
 

@@ -16,7 +16,7 @@ def main():
         "--selection",
         type=Path,
         default=root
-        / "data/simulations/gaia2-series-smoke-preflight-20261106-105704/selection.json",
+        / "data/results/gaia2-series-smoke-preflight-20261106-105704/selection.json",
     )
     parser.add_argument(
         "--config",
@@ -32,7 +32,7 @@ def main():
     selection = json.loads(args.selection.read_text())
     entries = selection["tasks"]
     entries.sort(key=lambda row: not row["id"].startswith("0353_"))
-    output = root / "data/simulations" / args.save_to
+    output = root / "data/results" / args.save_to
     output.mkdir(parents=True, exist_ok=False)
     (output / "selection.json").write_text(
         json.dumps(selection, ensure_ascii=False, indent=2) + "\n"
@@ -64,7 +64,7 @@ def main():
             result = subprocess.run(
                 command, stdout=log, stderr=subprocess.STDOUT, cwd=root
             )
-        result_path = root / "data/simulations" / child / "results.json"
+        result_path = root / "data/results" / child / "results.json"
         index = (
             json.loads(result_path.read_text()).get("simulation_index", [])
             if result_path.exists()

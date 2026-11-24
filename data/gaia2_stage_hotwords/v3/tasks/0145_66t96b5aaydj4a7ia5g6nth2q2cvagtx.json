@@ -1,0 +1,134 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0145_66t96b5aaydj4a7ia5g6nth2q2cvagtx",
+  "model": "deepseek-flash",
+  "input_sha256": "eaafa4f1964839b691203552b661c6760fdba9cca61a850b973862f52e508bff",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Saved Apartments",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Leuven",
+        "Saved Apartments"
+      ],
+      "active_vocabulary": {
+        "Leuven": 50,
+        "Saved Apartments": 50
+      },
+      "vocabulary_sha256": "5548ad2306192d1f4256358f485ba16357c339eca90dc1ec8c302db619b066b6"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Leuven Student Living",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_add.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Tiensestraat",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Leuven Student Haven",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_add.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Naamsestraat",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Leuven Student Housing",
+          "kind": "custom_name",
+          "source": "stage1.tool_gt.series_s1_add.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Leuven Student Living",
+        "Tiensestraat",
+        "Leuven Student Haven",
+        "Naamsestraat",
+        "Leuven Student Housing"
+      ],
+      "active_vocabulary": {
+        "Leuven": 50,
+        "Saved Apartments": 50,
+        "Leuven Student Living": 50,
+        "Tiensestraat": 50,
+        "Leuven Student Haven": 50,
+        "Naamsestraat": 50,
+        "Leuven Student Housing": 50
+      },
+      "vocabulary_sha256": "04b5f3e3b7e89e30fdb37dab2842c1f0fed230baaf5155e065f8f3d5ad26e215"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Leuven Student Living",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Tiensestraat",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Leuven Student Haven",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Naamsestraat",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Leuven Student Housing",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Leuven": 50,
+        "Saved Apartments": 50,
+        "Leuven Student Living": 50,
+        "Tiensestraat": 50,
+        "Leuven Student Haven": 50,
+        "Naamsestraat": 50,
+        "Leuven Student Housing": 50
+      },
+      "vocabulary_sha256": "04b5f3e3b7e89e30fdb37dab2842c1f0fed230baaf5155e065f8f3d5ad26e215"
+    }
+  ]
+}

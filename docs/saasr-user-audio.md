@@ -74,8 +74,8 @@ Python 调用时，在 `AudioNativeConfig` 设置相同的 `user_audio_renderer`
 噪声使用首条有效主声和背景构成的参考窗口校准，之后固定噪声增益；这不是对整次通话
 每一时刻都强制保持12 dB。最终混音的共同峰值增益作用于所有分轨。
 
-SAASR 负责声学条件，τ 不再叠加自己的随机背景、突发声、非定向语音、muffling 或丢帧。
-传输所需的电话格式转换保留。用户行为、LLM、grounding、工具和奖励定义沿用原有逻辑。
+SAASR 负责主声和连续场景声学条件，τ 不再叠加自己的随机背景、突发声、muffling 或丢帧。
+交互间隙的非定向语音和 vocal tic 作为独立插入轨道保留；SAASR PCM 输出直接发送给 Agent，不再经过 Tau 电话格式转换。用户行为、LLM、grounding、工具和奖励定义沿用原有逻辑。
 
 背景台词真实进入 Agent 的输入音频，但不进入正式用户文本，也不标记为主用户正在说话。
 正式用户文本只对应主声区间；初始背景前奏不会启动 Gaia2 场景时钟。
@@ -89,13 +89,13 @@ SAASR 负责声学条件，τ 不再叠加自己的随机背景、突发声、�
 - `scene/`：背景分轨、合并背景、噪声素材和对话排程。
 - `utterance_*/`：当次主声、文本、响度与生成信息，包括未播放候选。
 - `played_main.wav`、`played_background.wav`、`played_noise.wav`：按实际输出 tick 对齐的分轨。
-- `played_mixed.wav`：电话编码前的实际混音；`sent_to_agent.wav` 是电话编码后的输出，解码为可播放 PCM。
+- `played_mixed.wav`：SAASR 统一增益后的实际混音；`sent_to_agent.wav` 是直接发送给 Agent 的 SAASR PCM 输出。
 - `playback.jsonl`：播放位置、块长度、主声标记和共同峰值增益。
 - `render.json`：渲染版本、资源、模型和 worker 身份，以及生成与播放信息。
 
 直接构建 orchestrator 且不指定音频输出目录时，证据位于
 `data/simulations/saasr-artifacts/<simulation_id>/`。
-这些新结果是 `saasr-continuous-v1` 音频条件，不保证与原离线数据逐采样相同。
+这些新结果是 `saasr-continuous-v2` 音频条件，不保证与原离线数据逐采样相同。
 同一结果目录不允许续跑时改变 renderer、模型、场景、参考声音或 worker 软件。
 源随机种子会传到模型推理；相同种子仍不保证跨 CUDA/软件版本逐字节一致。
 

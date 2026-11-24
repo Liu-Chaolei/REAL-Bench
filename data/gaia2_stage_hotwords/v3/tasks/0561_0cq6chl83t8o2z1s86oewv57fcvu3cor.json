@@ -1,0 +1,166 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0561_0cq6chl83t8o2z1s86oewv57fcvu3cor",
+  "model": "deepseek-flash",
+  "input_sha256": "eaa2d9ce99f41f15d1b8aa182d708083bbc11a0f0952bd8bbacdc996aaeb21e7",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Arya",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Arya"
+      ],
+      "active_vocabulary": {
+        "Arya": 50
+      },
+      "vocabulary_sha256": "a406ff6d06b8ee1966cdfd40229ad79eb39a806d0775488b1139891a4366872d"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nizhny Novgorod City Center",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Omsk Riverfront",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Samara Studio",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Omsk City Center",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Nizhny Novgorod City Center",
+        "Omsk Riverfront",
+        "Samara Studio",
+        "Omsk City Center"
+      ],
+      "active_vocabulary": {
+        "Arya": 50,
+        "Nizhny Novgorod City Center": 50,
+        "Omsk Riverfront": 50,
+        "Samara Studio": 50,
+        "Omsk City Center": 50
+      },
+      "vocabulary_sha256": "f9f621c32bc6fddbe3be42d48f66ef65dd07612dbc5f29e8a0ff2d51b32160bd"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Nizhny Novgorod City Center",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Minin Square",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Nizhny Novgorod",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Omsk Riverfront",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ulitsa Lenina",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Omsk",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Samara Studio",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kuibyshev Street",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Samara",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Omsk City Center",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Lenina Street 20",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_write.arguments.kwargs.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Minin Square",
+        "Nizhny Novgorod",
+        "Ulitsa Lenina",
+        "Omsk",
+        "Kuibyshev Street",
+        "Samara",
+        "Lenina Street 20"
+      ],
+      "active_vocabulary": {
+        "Arya": 50,
+        "Nizhny Novgorod City Center": 50,
+        "Omsk Riverfront": 50,
+        "Samara Studio": 50,
+        "Omsk City Center": 50,
+        "Minin Square": 50,
+        "Nizhny Novgorod": 50,
+        "Ulitsa Lenina": 50,
+        "Omsk": 50,
+        "Kuibyshev Street": 50,
+        "Samara": 50,
+        "Lenina Street 20": 50
+      },
+      "vocabulary_sha256": "d2b10ec836e83ab73f3ed25c21987b5d63e5cea22f6df0fafa64cf41c9f8c011"
+    }
+  ]
+}

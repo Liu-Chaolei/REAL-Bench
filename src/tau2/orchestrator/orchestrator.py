@@ -300,6 +300,15 @@ class BaseOrchestrator(ABC, Generic[BaseAgentT, BaseUserT, TrajectoryItemT]):
         except Exception as e:
             logger.warning(f"Error during user cleanup: {e}")
 
+    def _runtime_managers(self):
+        """Return installed live managers without duplicating shared objects."""
+        managers = []
+        for name in ("active_metric_manager", "scenario_mechanism_manager"):
+            manager = getattr(self, name, None)
+            if manager is not None and manager not in managers:
+                managers.append(manager)
+        return managers
+
     def run(self) -> SimulationRun:
         """
         Run the simulation.
@@ -325,9 +334,10 @@ class BaseOrchestrator(ABC, Generic[BaseAgentT, BaseUserT, TrajectoryItemT]):
         try:
             while not self.done:
                 previous_messages = None
-                active_metrics = getattr(self, "active_metric_manager", None)
-                if active_metrics is not None and scenario_runtime is not None:
-                    active_metrics.advance(scenario_runtime.time(), True)
+                runtime_managers = self._runtime_managers()
+                if scenario_runtime is not None:
+                    for manager in runtime_managers:
+                        manager.advance(scenario_runtime.time(), True)
                 if (
                     scenario_runtime is not None
                     and self.mode == CommunicationMode.HALF_DUPLEX
@@ -354,8 +364,8 @@ class BaseOrchestrator(ABC, Generic[BaseAgentT, BaseUserT, TrajectoryItemT]):
                                     "scenario_input_id"
                                 ),
                             )
-                            if active_metrics is not None:
-                                active_metrics.delivery_completed(
+                            for manager in runtime_managers:
+                                manager.delivery_completed(
                                     (message.raw_data or {}).get("scenario_input_id"),
                                     scenario_runtime.time(),
                                 )
@@ -364,8 +374,9 @@ class BaseOrchestrator(ABC, Generic[BaseAgentT, BaseUserT, TrajectoryItemT]):
                             and not message.is_tool_call()
                         ):
                             scenario_runtime.delivered("agent", message.content or "")
-                if active_metrics is not None and scenario_runtime is not None:
-                    active_metrics.advance(scenario_runtime.time(), False)
+                if scenario_runtime is not None:
+                    for manager in runtime_managers:
+                        manager.advance(scenario_runtime.time(), False)
                 self._check_termination()
             if scenario_runtime is not None and scenario_runtime.failure is not None:
                 raise RuntimeError(
@@ -386,19 +397,20 @@ class BaseOrchestrator(ABC, Generic[BaseAgentT, BaseUserT, TrajectoryItemT]):
                         self.termination_reason.value
                     ),
                 }
-            persistent_summary = getattr(
-                self.environment, "persistent_task_summary", lambda: None
-            )()
-            if persistent_summary is not None:
-                result.info = {
-                    **(result.info or {}),
-                    "persistent_tasks": persistent_summary,
-                }
             active_metrics = getattr(self, "active_metric_manager", None)
             if active_metrics is not None:
                 result.info = {
                     **(result.info or {}),
                     "active_metrics": active_metrics.finalize(
+                        self.termination_reason.value,
+                        scenario_runtime.time() if scenario_runtime is not None else 0,
+                    ),
+                }
+            scenario_mechanisms = getattr(self, "scenario_mechanism_manager", None)
+            if scenario_mechanisms is not None:
+                result.info = {
+                    **(result.info or {}),
+                    "scenario_mechanisms": scenario_mechanisms.finalize(
                         self.termination_reason.value,
                         scenario_runtime.time() if scenario_runtime is not None else 0,
                     ),
@@ -916,14 +928,12 @@ class Orchestrator(BaseOrchestrator[AgentT, UserT, Message]):
             return
 
         if self.max_steps is not None and self.step_count >= self.max_steps:
-            active_metrics = getattr(self, "active_metric_manager", None)
-            if active_metrics is not None and active_metrics.should_extend_reply(
-                self.environment.scenario_runtime.time()
-            ):
-                active_metrics.consume_reply_step(
-                    self.environment.scenario_runtime.time()
-                )
-                return
+            runtime = getattr(self.environment, "scenario_runtime", None)
+            if runtime is not None:
+                for manager in self._runtime_managers():
+                    if manager.should_extend_reply(runtime.time()):
+                        manager.consume_reply_step(runtime.time())
+                        return
             self.done = True
             self.termination_reason = TerminationReason.MAX_STEPS
         if self.num_errors >= self.max_errors:

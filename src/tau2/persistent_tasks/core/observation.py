@@ -5,7 +5,7 @@ from __future__ import annotations
 from collections.abc import Iterable, Mapping
 from typing import Any
 
-from tau2.persistent_tasks.models import ObservedEvent
+from tau2.persistent_tasks.core.models import ObservedEvent
 
 TOOL_COMPLETED = "tool_call_completed"
 TOOL_STARTED = "tool_call_started"

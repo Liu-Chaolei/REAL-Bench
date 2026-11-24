@@ -1,3 +1,5 @@
+> 当前工作区已迁移到 Gaia2-only 评测。任务、英文 caller 配置与运行入口见 [Gaia2 English runtime](docs/gaia2-language-runtime.md)；新结果写入 `data/results/`。下文涉及旧 τ 领域的内容保留历史项目背景。
+
 # REAL-Bench
 
 面向真实世界智能体的端到端评测基准。REAL-Bench 在 τ-bench 的任务、工具和

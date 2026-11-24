@@ -22,6 +22,14 @@ class LiveTranscriptFragment(BaseModel):
     ingress_audio_bytes: int | None = Field(default=None, ge=0)
 
 
+class LiveTranscriptSnapshot(BaseModel):
+    """Cumulative confirmed transcript exposed by a live observer."""
+
+    version: int = Field(ge=0)
+    text: str = ""
+    pending: bool = False
+
+
 class LiveTranscriptTick(BaseModel):
     """Serializable evidence; playback activity uses tick-relative audio time."""
 

@@ -1,0 +1,99 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0802_k8uzg7pa8rk1256zjuo1mwf0aer6cdbj",
+  "model": "deepseek-flash",
+  "input_sha256": "e3a42e02390d49dadc0cf1fff0234e7ac19eb90bb598333270a0f02b61d6eed6",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaitlyn",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f0b8db84-480d-43f6-945b-dae08245104f.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f0b8db84-480d-43f6-945b-dae08245104f.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kaida",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e928b933-2bfe-4260-b0fd-78683b77b304.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kaitlyn",
+        "Rohan Kumar",
+        "Kaida"
+      ],
+      "active_vocabulary": {
+        "Kaitlyn": 50,
+        "Rohan Kumar": 50,
+        "Kaida": 50
+      },
+      "vocabulary_sha256": "ae8508ccd1eb37566fc0ebd765fd0daf32162a2c39bc157097ba0aa6bb65657a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaitlyn Nguyen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kaida Jensen",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kaitlyn Nguyen",
+        "Kaida Jensen"
+      ],
+      "active_vocabulary": {
+        "Kaitlyn": 50,
+        "Rohan Kumar": 50,
+        "Kaida": 50,
+        "Kaitlyn Nguyen": 50,
+        "Kaida Jensen": 50
+      },
+      "vocabulary_sha256": "0dfd4503bc5db5ca5037faad84e3d1daeca5c18a38e6e1fa57de21cc98dddbdd"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaitlyn Nguyen",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kaida Jensen",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kaitlyn": 50,
+        "Rohan Kumar": 50,
+        "Kaida": 50,
+        "Kaitlyn Nguyen": 50,
+        "Kaida Jensen": 50
+      },
+      "vocabulary_sha256": "0dfd4503bc5db5ca5037faad84e3d1daeca5c18a38e6e1fa57de21cc98dddbdd"
+    }
+  ]
+}

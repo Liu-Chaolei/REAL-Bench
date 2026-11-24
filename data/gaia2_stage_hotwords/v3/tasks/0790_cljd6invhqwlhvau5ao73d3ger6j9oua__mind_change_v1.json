@@ -1,0 +1,199 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0790_cljd6invhqwlhvau5ao73d3ger6j9oua__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "9b3e999295a64bbe41d30b12e2d83b64b701c84ed70c6e88f96afa4199e0f2b2",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Porto",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Sporting Lisbon",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Vasco Pinto",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-64adabeb-e107-4557-9059-df0c438bb6ca.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Leonor Sousa",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-64adabeb-e107-4557-9059-df0c438bb6ca.arguments.attendees[1]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Vasco",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-26cff89d-7fdd-4909-9743-70a9b363ce9e.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Leonor",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-64adabeb-e107-4557-9059-df0c438bb6ca.arguments.attendees[1]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Östermalmsgatan 12",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Sweden Arlanda Airport",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Porto",
+        "Sporting Lisbon",
+        "Vasco Pinto",
+        "Leonor Sousa",
+        "Vasco",
+        "Leonor",
+        "Östermalmsgatan 12",
+        "Sweden Arlanda Airport"
+      ],
+      "active_vocabulary": {
+        "Porto": 50,
+        "Sporting Lisbon": 50,
+        "Vasco Pinto": 50,
+        "Leonor Sousa": 50,
+        "Vasco": 50,
+        "Leonor": 50,
+        "Östermalmsgatan 12": 50,
+        "Sweden Arlanda Airport": 50
+      },
+      "vocabulary_sha256": "518ce389665f0d8cc10ef7f83cdd16c419ccecf091181b800046dafa0db29988"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Porto Match Day",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Porto",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Sporting Lisbon",
+          "kind": "organization",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Vasco",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Leonor",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Porto Match Day"
+      ],
+      "active_vocabulary": {
+        "Porto": 50,
+        "Sporting Lisbon": 50,
+        "Vasco Pinto": 50,
+        "Leonor Sousa": 50,
+        "Vasco": 50,
+        "Leonor": 50,
+        "Östermalmsgatan 12": 50,
+        "Sweden Arlanda Airport": 50,
+        "Porto Match Day": 50
+      },
+      "vocabulary_sha256": "9674aa63313b45ade0e63c4c5a1d73b58b0f786db11adbaec3a08d07a7d8dc2a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Porto Trip Checklist",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Porto",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Vasco Pinto",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Leonor Sousa",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Östermalmsgatan 12",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Sweden Arlanda Airport",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Pack for Porto",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Porto Trip Checklist",
+        "Pack for Porto"
+      ],
+      "active_vocabulary": {
+        "Porto": 50,
+        "Sporting Lisbon": 50,
+        "Vasco Pinto": 50,
+        "Leonor Sousa": 50,
+        "Vasco": 50,
+        "Leonor": 50,
+        "Östermalmsgatan 12": 50,
+        "Sweden Arlanda Airport": 50,
+        "Porto Match Day": 50,
+        "Porto Trip Checklist": 50,
+        "Pack for Porto": 50
+      },
+      "vocabulary_sha256": "b42466e697dc2c93cb0b42f975d931ed3a00ed492e5a4502659d0a444580efd7"
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0427_rmzdrbnr28qmz5qxe2fh6vhiyo8zhv62",
+  "model": "deepseek-flash",
+  "input_sha256": "63ee7536401720fafdddf915e5e90de152b8cff6bc5d3e6ed9ddf82aad24c229",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Astrid Rasmussen",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien Vandenberghe",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohan Deshpande",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Astrid Rasmussen",
+        "Aurélien Vandenberghe",
+        "Rohan Deshpande"
+      ],
+      "active_vocabulary": {
+        "Astrid Rasmussen": 50,
+        "Aurélien Vandenberghe": 50,
+        "Rohan Deshpande": 50
+      },
+      "vocabulary_sha256": "683d899f9b3a8159cdefce67dea464d747f2d24feaa09567efcebc92030ee113"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien Vandenberghe",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Copenhagen",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Project X",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Søren",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Copenhagen",
+        "Project X",
+        "Søren"
+      ],
+      "active_vocabulary": {
+        "Astrid Rasmussen": 50,
+        "Aurélien Vandenberghe": 50,
+        "Rohan Deshpande": 50,
+        "Copenhagen": 50,
+        "Project X": 50,
+        "Søren": 50
+      },
+      "vocabulary_sha256": "399f87d9b24c9f9be70e80bb634a9a5ed52f70073c7a4e928f040d479a38a62b"
+    }
+  ]
+}

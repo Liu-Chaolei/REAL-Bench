@@ -1,0 +1,168 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0371_d6k55fqraq6dhkzmypc47ximls3gpl43",
+  "model": "deepseek-flash",
+  "input_sha256": "e1d94395a783db68702e97561dfcd44b66d9e4fade96e3ff808aa00dc73bcef3",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Elena Sokolova",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Tverskaya Street 12, Moscow, 125009",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Moscow",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Russia",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Sokolova",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Elena Sokolova",
+        "Tverskaya Street 12, Moscow, 125009",
+        "Moscow",
+        "Russia",
+        "Sokolova"
+      ],
+      "active_vocabulary": {
+        "Elena Sokolova": 50,
+        "Tverskaya Street 12, Moscow, 125009": 50,
+        "Moscow": 50,
+        "Russia": 50,
+        "Sokolova": 50
+      },
+      "vocabulary_sha256": "6171a9a894b1270ac722adb7c897e7e895467db95e622e7564dfba7c843a4875"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Tverskaya Street 12, Moscow, 125009",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ulitsa Bolshaya Dmitrovka, 15/1, Moscow, 127006",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Elena",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Ulitsa Bolshaya Dmitrovka, 15/1, Moscow, 127006",
+        "Elena"
+      ],
+      "active_vocabulary": {
+        "Elena Sokolova": 50,
+        "Tverskaya Street 12, Moscow, 125009": 50,
+        "Moscow": 50,
+        "Russia": 50,
+        "Sokolova": 50,
+        "Ulitsa Bolshaya Dmitrovka, 15/1, Moscow, 127006": 50,
+        "Elena": 50
+      },
+      "vocabulary_sha256": "d00c1ea392d952b16147e26fa8976ef238bbbb6f651dcfc4de35a777983f1182"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Moscow Dreams",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Moscow City Lights",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kremlin Views",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Elena",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Tverskaya St, 12, Moscow",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_dreams.arguments.location",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "20 Tverskaya Street, Moscow",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_city_lights.arguments.location",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Tverskaya St, Moscow",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_kremlin.arguments.location",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Moscow Dreams",
+        "Moscow City Lights",
+        "Kremlin Views",
+        "Tverskaya St, 12, Moscow",
+        "20 Tverskaya Street, Moscow",
+        "Tverskaya St, Moscow"
+      ],
+      "active_vocabulary": {
+        "Elena Sokolova": 50,
+        "Tverskaya Street 12, Moscow, 125009": 50,
+        "Moscow": 50,
+        "Russia": 50,
+        "Sokolova": 50,
+        "Ulitsa Bolshaya Dmitrovka, 15/1, Moscow, 127006": 50,
+        "Elena": 50,
+        "Moscow Dreams": 50,
+        "Moscow City Lights": 50,
+        "Kremlin Views": 50,
+        "Tverskaya St, 12, Moscow": 50,
+        "20 Tverskaya Street, Moscow": 50,
+        "Tverskaya St, Moscow": 50
+      },
+      "vocabulary_sha256": "e399e27028fc9472f62bade86120ee82f7ea17efa4be7dde2388f7f3092a3023"
+    }
+  ]
+}

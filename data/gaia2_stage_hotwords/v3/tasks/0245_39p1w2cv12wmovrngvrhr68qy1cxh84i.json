@@ -1,0 +1,90 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0245_39p1w2cv12wmovrngvrhr68qy1cxh84i",
+  "model": "deepseek-flash",
+  "input_sha256": "0a3ea33902f866cb6ab09d038648e796ea8f5d4d7ceab47529b853d4c8dd4369",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Citlali Ramírez García",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Jasper Ragnarsson",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[1]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kaidën Rylan",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[2]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Luís Pereira da Silva",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[3]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Luísa Pereira de Sousa",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[4]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Somsak Chanthavong",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[5]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zeynep Çelik",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[6]",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Citlali Ramírez García",
+        "Jasper Ragnarsson",
+        "Kaidën Rylan",
+        "Luís Pereira da Silva",
+        "Luísa Pereira de Sousa",
+        "Somsak Chanthavong",
+        "Zeynep Çelik"
+      ],
+      "active_vocabulary": {
+        "Citlali Ramírez García": 50,
+        "Jasper Ragnarsson": 50,
+        "Kaidën Rylan": 50,
+        "Luís Pereira da Silva": 50,
+        "Luísa Pereira de Sousa": 50,
+        "Somsak Chanthavong": 50,
+        "Zeynep Çelik": 50
+      },
+      "vocabulary_sha256": "fb0ea3e7d0a572a5d81b9041381f585d7fad19acfb0175dcc778650259a28b6b"
+    }
+  ]
+}

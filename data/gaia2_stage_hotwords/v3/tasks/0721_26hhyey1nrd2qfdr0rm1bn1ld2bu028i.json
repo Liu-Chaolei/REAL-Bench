@@ -1,0 +1,131 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0721_26hhyey1nrd2qfdr0rm1bn1ld2bu028i",
+  "model": "deepseek-flash",
+  "input_sha256": "02c04f8bf799ffd3607df8378c4eb680bfee9907e682d10e685cc7e3f34179c1",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "The Eagle Pub",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e54e1598-990c-4074-975e-70c72890bdfb.arguments.end_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Cambridge",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e54e1598-990c-4074-975e-70c72890bdfb.arguments.end_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "University of Cambridge",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e54e1598-990c-4074-975e-70c72890bdfb.arguments.start_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Department of Physics",
+          "kind": "organization",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e54e1598-990c-4074-975e-70c72890bdfb.arguments.start_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "The Eagle Pub",
+        "Cambridge",
+        "University of Cambridge",
+        "Department of Physics"
+      ],
+      "active_vocabulary": {
+        "The Eagle Pub": 50,
+        "Cambridge": 50,
+        "University of Cambridge": 50,
+        "Department of Physics": 50
+      },
+      "vocabulary_sha256": "981507412a7da369aa6297eb8847abd86bb57bc42bc73b71030de6bd030fa18c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "The Eagle Pub",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Department of Physics",
+          "kind": "organization",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "University of Cambridge",
+          "kind": "organization",
+          "source": "stage1.tool_gt.series_s1_calendar.arguments.location",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "The Eagle Pub": 50,
+        "Cambridge": 50,
+        "University of Cambridge": 50,
+        "Department of Physics": 50
+      },
+      "vocabulary_sha256": "981507412a7da369aa6297eb8847abd86bb57bc42bc73b71030de6bd030fa18c"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kymberley Janssen",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Klaasje Van der Meer",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "The Eagle Pub",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Department of Physics",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_add.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "University of Cambridge",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_add.arguments.location",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kymberley Janssen",
+        "Klaasje Van der Meer"
+      ],
+      "active_vocabulary": {
+        "The Eagle Pub": 50,
+        "Cambridge": 50,
+        "University of Cambridge": 50,
+        "Department of Physics": 50,
+        "Kymberley Janssen": 50,
+        "Klaasje Van der Meer": 50
+      },
+      "vocabulary_sha256": "a473e5e00af0fc1841f1ab478674d825fca489c869547747e7697f6fa4839f1c"
+    }
+  ]
+}

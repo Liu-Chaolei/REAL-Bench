@@ -1,0 +1,145 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0325_pixli5p6bhxqhjdu02nggaum92ub8hla",
+  "model": "deepseek-flash",
+  "input_sha256": "6f04be9529a919ec43abbab977a3f9b33eaed3e7e4d5956393e03928b363d160",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "The Vue",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kaidën",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b5c005a8-2f6f-4287-884e-427536541ade.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b5c005a8-2f6f-4287-884e-427536541ade.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kaitlyn",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-cad40612-4be7-48c0-be9d-d1c22dcbde3f.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Nalani",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-00d87004-069c-4b07-8807-aaed8419330b.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Augusta",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c42d6217-e23c-4460-ae86-62700f214146.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kaia",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-63fa9708-35f3-4c6b-802f-48cf572c0a65.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "The Vue",
+        "Kaidën",
+        "Aurélien LaFleur",
+        "Kaitlyn",
+        "Nalani",
+        "Augusta",
+        "Kaia"
+      ],
+      "active_vocabulary": {
+        "The Vue": 50,
+        "Kaidën": 50,
+        "Aurélien LaFleur": 50,
+        "Kaitlyn": 50,
+        "Nalani": 50,
+        "Augusta": 50,
+        "Kaia": 50
+      },
+      "vocabulary_sha256": "cef2044303d127aa511c0f56537d809dc0ff58f1322ed020c46db21b980bc715"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Soho Oasis",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "155 Wooster St",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Soho Oasis",
+        "155 Wooster St"
+      ],
+      "active_vocabulary": {
+        "The Vue": 50,
+        "Kaidën": 50,
+        "Aurélien LaFleur": 50,
+        "Kaitlyn": 50,
+        "Nalani": 50,
+        "Augusta": 50,
+        "Kaia": 50,
+        "Soho Oasis": 50,
+        "155 Wooster St": 50
+      },
+      "vocabulary_sha256": "8cb4942e4e7b54067dd3cc3d8437e4b272239b15ee4176e2217f4a3145944d21"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Soho Oasis",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "155 Wooster St",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_add_viewing.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_viewing.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "The Vue": 50,
+        "Kaidën": 50,
+        "Aurélien LaFleur": 50,
+        "Kaitlyn": 50,
+        "Nalani": 50,
+        "Augusta": 50,
+        "Kaia": 50,
+        "Soho Oasis": 50,
+        "155 Wooster St": 50
+      },
+      "vocabulary_sha256": "8cb4942e4e7b54067dd3cc3d8437e4b272239b15ee4176e2217f4a3145944d21"
+    }
+  ]
+}

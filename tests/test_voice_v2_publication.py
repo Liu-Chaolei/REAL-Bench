@@ -1,6 +1,6 @@
 """The frozen 2026-10-02 release export becomes the same 2.0 package as a matrix.
 
-A synthetic 18-cell export on the real published frame; no model is called.
+A small synthetic frozen export; no shipped task pack or model is needed.
 """
 
 import argparse
@@ -12,8 +12,8 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
+from tau2.data_model.benchmark import BenchmarkFrame, CellFrame
 from tau2.data_model.simulation import RewardInfo, SimulationRun
-from tau2.runner.presets import load_frame
 from tau2.scripts.leaderboard.benchmark_package import (
     METADATA_FILE_NAME,
     SUBMISSION_FILE_NAME,
@@ -31,13 +31,11 @@ from tau2.scripts.leaderboard.generate_schema import (
     generate_quality_schema,
     generate_schema,
 )
-from tau2.scripts.leaderboard.submission import LeaderboardManifest
 from tau2.scripts.leaderboard.voice_v2_publication import (
     _validate_cell_frame,
     _validate_simulation_files,
 )
 
-MEASURES = {"en": ("naturalness", "tool_use"), "ko": ("honorific_agreement",)}
 SUBMITTER = {
     "model_name": "Offline Fixture 1.0",
     "model_organization": "Test Org",
@@ -53,43 +51,6 @@ def _write_json(path: Path, payload) -> None:
     path.write_text(json.dumps(payload))
 
 
-def _verdict(language, domain, simulation_id, measure, violation=False):
-    units = [
-        {"unit_id": "0", "opportunity": True, "violation": violation},
-        {"unit_id": "1", "opportunity": False, "violation": False},
-    ]
-    if measure == "tool_use":
-        # The tool-use judge scores the whole call as one unit.
-        units = [{"unit_id": "call", "opportunity": True, "violation": violation}]
-    return {
-        "identity": {
-            "input": {
-                "domain": domain,
-                "run_id": "r" * 64,
-                "simulation_id": simulation_id,
-                "trial": 0,
-                "language": language,
-                "agent_gender": "female",
-                "caller_gender": "male",
-                "input_fingerprint": "f" * 64,
-                "has_audio": True,
-                "audio_fingerprint": "a" * 64,
-            },
-            "measure": measure,
-            "contract_id": f"{measure}-fixture",
-            "implementation": "naturalness-v17",
-            "input_exclusions": "injected-opener-transfer-line-and-control-turns-v1",
-            "model": "fixture-judge",
-            "model_args": {},
-            "prompt_version": "v1",
-            "rubric_version": "r1",
-            "transport_revision": "multimodal-responses-v1",
-            "catalog_revision": "fixture-catalog",
-        },
-        "verdict": {"units": [dict(unit, evidence="fixture") for unit in units]},
-    }
-
-
 @pytest.fixture
 def forbid_paid_calls(monkeypatch):
     def forbidden(*args, **kwargs):
@@ -100,13 +61,36 @@ def forbid_paid_calls(monkeypatch):
     monkeypatch.setattr(socket.socket, "connect", forbidden)
 
 
-@pytest.fixture(scope="module")
-def release_export(tmp_path_factory):
-    """Historical layout: trajectories/<lang>/<domain>/ plus per-language verdicts."""
-    root = tmp_path_factory.mktemp("release")
+@pytest.fixture
+def publication_frame(monkeypatch):
+    frame = BenchmarkFrame(
+        benchmark_version="voice-v2",
+        revision="offline-publication-v1",
+        mode="voice",
+        trials=[0],
+        cells=[
+            CellFrame(
+                language=language,
+                domain=domain,
+                canonical_task_ids=[str(i) for i in range(4)],
+                binding_revision="fixture-binding",
+            )
+            for language, domain in [("en", "airline"), ("en", "telecom")]
+        ],
+    )
+    monkeypatch.setattr(
+        "tau2.scripts.leaderboard.voice_v2_publication.load_frame",
+        lambda *args, **kwargs: frame,
+    )
+    return frame
+
+
+@pytest.fixture
+def release_export(tmp_path, publication_frame):
+    """Historical layout: trajectories/<lang>/<domain>/."""
+    root = tmp_path / "release"
     source = root / "export"
-    judges = root / "verdicts"
-    official = load_frame("voice", num_trials=1)
+    official = publication_frame
     for cell in official.cells:
         language, domain = cell.language, cell.domain
         directory = source / "trajectories" / language / domain
@@ -137,14 +121,6 @@ def release_export(tmp_path_factory):
                     "reward": reward,
                     "termination_reason": "agent_stop",
                 }
-            )
-            measures = MEASURES.get(language, ("naturalness",))
-            _write_json(
-                judges / language / f"{simulation_id}.json",
-                [
-                    _verdict(language, domain, simulation_id, m, position % 4 == 0)
-                    for m in measures
-                ],
             )
         _write_json(
             directory / "results.json",
@@ -185,7 +161,7 @@ def release_export(tmp_path_factory):
         )
     metadata = root / "metadata.json"
     _write_json(metadata, SUBMITTER)
-    return source, judges, metadata
+    return source, metadata
 
 
 def _submit(*argv):
@@ -199,14 +175,12 @@ def _submit(*argv):
 
 @pytest.fixture
 def package(release_export, tmp_path, forbid_paid_calls):
-    source, judges, metadata = release_export
+    source, metadata = release_export
     output = tmp_path / "out"
     _submit(
         "prepare",
         source,
         "--historical-voice-v2",
-        "--judges-root",
-        judges,
         "--metadata-file",
         metadata,
         "--output",
@@ -215,14 +189,12 @@ def package(release_export, tmp_path, forbid_paid_calls):
     return output / NAME
 
 
-def _validate(package, release_export, judges=None):
-    source, default_judges, _ = release_export
+def _validate(package, release_export):
+    source, _ = release_export
     _submit(
         "validate",
         package,
         "--historical-voice-v2",
-        "--judges-root",
-        judges or default_judges,
         "--results",
         source,
     )
@@ -236,21 +208,10 @@ def test_historical_export_is_a_canonical_package(package, release_export):
         "offline-fixture",
     )
     summary = loaded.submission.summary
-    assert summary.complete and len(loaded.submission.trials) == 900
+    assert summary.complete and len(loaded.submission.trials) == 8
     assert summary.score == pytest.approx(0.5)
-    assert set(summary.by_language) == {"en", "es", "hi", "ko", "pt", "zh"}
-    diagnostics = loaded.diagnostics
-    assert diagnostics.catalog_revision == "fixture-catalog"
-    assert len(diagnostics.cells) == 18
-    en_airline = next(
-        cell
-        for cell in diagnostics.cells
-        if (cell.language, cell.domain) == ("en", "airline")
-    )
-    tool_use = next(row for row in en_airline.summary if row.measure == "tool_use")
-    assert (tool_use.applicable_calls, tool_use.judged_calls) == (50, 50)
-    assert tool_use.complete and tool_use.pass_units + tool_use.fail_units == 50
-    assert {row.measure for row in en_airline.summary} == {"naturalness", "tool_use"}
+    assert set(summary.by_language) == {"en"}
+    assert not (package / "benchmark-diagnostics.json").exists()
     quality = loaded.quality
     assert (quality.benchmark_version, quality.frame_revision) == (
         "voice-v2",
@@ -260,7 +221,7 @@ def test_historical_export_is_a_canonical_package(package, release_export):
         (c.language, c.domain) for c in loaded.submission.frame.cells
     ]
     en_airline_quality = quality.cells[0]
-    assert len(en_airline_quality.evaluation_log["calls"]) == 50
+    assert len(en_airline_quality.evaluation_log["calls"]) == 4
     assert "metrics" not in en_airline_quality.model_dump()
     _validate(package, release_export)
 
@@ -269,18 +230,15 @@ def test_upload_layout_matches_the_uploaded_release_entry(package, release_expor
     """Review uploads use the S3 layout of the 2026-10-09 Gemini entry."""
     from tau2.scripts.leaderboard.review_submission import _package_uploads
 
-    source, judges, _ = release_export
+    source, _ = release_export
     (source / "correction.json").write_text("{}")
     try:
-        keys = {
-            key for _, key in _package_uploads(load_package(package), source, [judges])
-        }
+        keys = {key for _, key in _package_uploads(load_package(package), source)}
     finally:
         (source / "correction.json").unlink()
-    assert "trajectories/hi/airline/" in keys
+    assert "trajectories/en/telecom/" in keys
     assert "source_correction.json" in keys
-    assert "judges/openai_live/ko/" in keys
-    assert not any(key.startswith(("judges/ko", "correction")) for key in keys)
+    assert not any(key.startswith(("judges/", "correction")) for key in keys)
 
 
 def test_validate_rejects_changed_package_and_evidence(package, release_export):
@@ -305,86 +263,6 @@ def test_validate_recomputes_call_quality(package, release_export):
         load_package(package)
     path.write_text(original)
     _validate(package, release_export)
-
-
-def test_validate_rejects_changed_verdict(package, release_export, tmp_path):
-    _, judges, _ = release_export
-    changed = tmp_path / "verdicts"
-    shutil.copytree(judges, changed)
-    path = next((changed / "es").glob("*.json"))
-    rows = json.loads(path.read_text())
-    rows[0]["verdict"]["units"][0]["violation"] = not rows[0]["verdict"]["units"][0][
-        "violation"
-    ]
-    path.write_text(json.dumps(rows))
-    with pytest.raises(ValueError, match="Judge diagnostics differ"):
-        _validate(package, release_export, changed)
-
-
-def test_partial_and_missing_verdicts_are_coverage_gaps(
-    release_export, tmp_path, forbid_paid_calls
-):
-    from tau2.scripts.leaderboard.voice_v2_publication import (
-        build_historical_package,
-    )
-
-    source, judges, metadata = release_export
-    gaps = tmp_path / "verdicts"
-    shutil.copytree(judges, gaps)
-    partial, missing = sorted((gaps / "en").glob("retail-*.json"))[:2]
-    rows = json.loads(partial.read_text())
-    rows[0]["verdict"]["unit_errors"] = [
-        {"unit_id": "2", "kind": "response", "error": "fixture"}
-    ]
-    partial.write_text(json.dumps(rows))
-    rows = json.loads(missing.read_text())
-    missing.write_text(json.dumps(rows[1:]))
-    built = build_historical_package(
-        source,
-        [gaps],
-        SubmitterMetadata.model_validate_json(metadata.read_text()),
-    )
-    cell = next(
-        cell
-        for cell in built.diagnostics.cells
-        if (cell.language, cell.domain) == ("en", "retail")
-    )
-    naturalness = next(row for row in cell.summary if row.measure == "naturalness")
-    assert not naturalness.complete
-    assert (naturalness.judged_calls, naturalness.not_judged_calls) == (48, 1)
-    assert (naturalness.error_calls, naturalness.partial_calls) == (1, 1)
-    # Never a failure: rewards and the official score are unchanged.
-    assert built.submission.summary.score == pytest.approx(0.5)
-
-
-def test_prepare_requires_one_verdict_file_per_scored_call(
-    release_export, tmp_path, forbid_paid_calls
-):
-    source, judges, metadata = release_export
-    duplicate = tmp_path / "duplicate"
-    shutil.copytree(judges / "hi", duplicate / "hi")
-    with pytest.raises(ValueError, match="expected one saved verdict file, found 2"):
-        _submit(
-            "prepare",
-            source,
-            "--historical-voice-v2",
-            "--judges-root",
-            judges,
-            "--judges-root",
-            duplicate,
-            "--metadata-file",
-            metadata,
-            "--output",
-            tmp_path / "out",
-        )
-    assert not (tmp_path / "out").exists()
-
-
-def test_historical_flags_are_rejected_without_the_adapter(tmp_path):
-    with pytest.raises(ValueError, match="requires --historical-voice-v2"):
-        _submit(
-            "prepare", tmp_path, "--judges-root", tmp_path, "--output", tmp_path / "o"
-        )
 
 
 def test_metadata_contract():
@@ -416,8 +294,6 @@ def test_metadata_contract():
 
 def test_package_rejects_incomplete_or_misfiled_parts(package):
     loaded = load_package(package)
-    with pytest.raises(ValueError, match="lacks benchmark-diagnostics.json"):
-        loaded.model_copy(update={"diagnostics": None}).check()
     text = loaded.model_copy(
         update={"metadata": loaded.metadata.model_copy(update={"agent_provider": None})}
     )
@@ -428,8 +304,8 @@ def test_package_rejects_incomplete_or_misfiled_parts(package):
         load_package(package)
 
 
-def test_frame_rejects_duplicate_task_trial_even_with_50_entries() -> None:
-    official = load_frame("voice", num_trials=1)
+def test_frame_rejects_duplicate_task_trial(publication_frame) -> None:
+    official = publication_frame
     cell = next(
         item
         for item in official.cells
@@ -472,7 +348,7 @@ def test_frame_rejects_duplicate_task_trial_even_with_50_entries() -> None:
 
 
 def test_index_must_agree_with_saved_simulation(release_export) -> None:
-    source, _, _ = release_export
+    source, _ = release_export
     results = json.loads((source / "trajectories/en/airline/results.json").read_text())
     index = [dict(entry) for entry in results["simulation_index"]]
     index[0]["reward"] = 1.0 - index[0]["reward"]
@@ -480,26 +356,20 @@ def test_index_must_agree_with_saved_simulation(release_export) -> None:
         _validate_simulation_files(source, index, "en", "airline")
 
 
-def test_schemas_are_current_and_manifest_has_a_2_0_key():
+def test_schemas_are_current():
     assert SCHEMA_PATH.read_text() == generate_schema()
     assert METADATA_SCHEMA_PATH.read_text() == generate_metadata_schema()
     assert QUALITY_SCHEMA_PATH.read_text() == generate_quality_schema()
-    manifest = LeaderboardManifest.model_validate_json(
-        (SCHEMA_PATH.parent / "manifest.json").read_text()
-    )
-    for name in manifest.voice_v2_submissions + manifest.voice_v2_domain_submissions:
-        load_package(SCHEMA_PATH.parent / name)
 
 
 def test_historical_infrastructure_errors_are_excluded_and_validate(
     release_export, tmp_path, forbid_paid_calls
 ):
     """Unscored infrastructure calls leave the denominator, not the package."""
-    source, judges, metadata = release_export
-    copied, verdicts = tmp_path / "export", tmp_path / "verdicts"
+    source, metadata = release_export
+    copied = tmp_path / "export"
     shutil.copytree(source, copied)
-    shutil.copytree(judges, verdicts)
-    directory = copied / "trajectories" / "zh" / "telecom"
+    directory = copied / "trajectories" / "en" / "telecom"
     results = json.loads((directory / "results.json").read_text())
     # Positions 1 and 3 would have passed; their tasks drop out of the mean.
     for entry in (results["simulation_index"][1], results["simulation_index"][3]):
@@ -508,15 +378,12 @@ def test_historical_infrastructure_errors_are_excluded_and_validate(
         simulation = json.loads(path.read_text())
         simulation.update(reward_info=None, termination_reason="infrastructure_error")
         path.write_text(json.dumps(simulation))
-        (verdicts / "zh" / f"{entry['id']}.json").unlink()
     (directory / "results.json").write_text(json.dumps(results))
     output = tmp_path / "out"
     _submit(
         "prepare",
         copied,
         "--historical-voice-v2",
-        "--judges-root",
-        verdicts,
         "--metadata-file",
         metadata,
         "--output",
@@ -524,8 +391,8 @@ def test_historical_infrastructure_errors_are_excluded_and_validate(
     )
     summary = load_package(output / NAME).submission.summary
     assert summary.complete and summary.error_trials == 2
-    cell = next(c for c in summary.cells if (c.language, c.domain) == ("zh", "telecom"))
-    assert (cell.scored_trials, cell.error_trials) == (48, 2)
-    assert cell.score == pytest.approx(23 / 48)
-    assert summary.score == pytest.approx((17 * 0.5 + 23 / 48) / 18)
-    _validate(output / NAME, (copied, verdicts, metadata))
+    cell = next(c for c in summary.cells if (c.language, c.domain) == ("en", "telecom"))
+    assert (cell.scored_trials, cell.error_trials) == (2, 2)
+    assert cell.score == 0
+    assert summary.score == 0.25
+    _validate(output / NAME, (copied, metadata))

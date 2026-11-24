@@ -1,0 +1,120 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0039_6u86tml7x72m298phk38pb7m7gihkro5",
+  "model": "deepseek-flash",
+  "input_sha256": "006b49c1d5b9c6c6135b7f2c3f0c18bbe9a2a85cdef81436876f285c2b984c92",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Vasco Sousa",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Gudrun Schrøder",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Astrid Møller",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Meixiang Liang",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Meiying Wong",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Samtal med Gudrun och Vasco",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Catch-up and Cultural Exchange",
+          "kind": "custom_name",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Vasco Sousa",
+        "Gudrun Schrøder",
+        "Astrid Møller",
+        "Meixiang Liang",
+        "Meiying Wong",
+        "Astrid Lundqvist",
+        "Samtal med Gudrun och Vasco",
+        "Catch-up and Cultural Exchange"
+      ],
+      "active_vocabulary": {
+        "Vasco Sousa": 50,
+        "Gudrun Schrøder": 50,
+        "Astrid Møller": 50,
+        "Meixiang Liang": 50,
+        "Meiying Wong": 50,
+        "Astrid Lundqvist": 50,
+        "Samtal med Gudrun och Vasco": 50,
+        "Catch-up and Cultural Exchange": 50
+      },
+      "vocabulary_sha256": "5ebebf635b0f56b1c5e669f67abd9ec85830363c33acaece2d5fdb6371264dc2"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Astrid Møller",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_search_astrid.arguments.query",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Meixiang Liang",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_search_meixiang.arguments.query",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Vasco Sousa": 50,
+        "Gudrun Schrøder": 50,
+        "Astrid Møller": 50,
+        "Meixiang Liang": 50,
+        "Meiying Wong": 50,
+        "Astrid Lundqvist": 50,
+        "Samtal med Gudrun och Vasco": 50,
+        "Catch-up and Cultural Exchange": 50
+      },
+      "vocabulary_sha256": "5ebebf635b0f56b1c5e669f67abd9ec85830363c33acaece2d5fdb6371264dc2"
+    }
+  ]
+}

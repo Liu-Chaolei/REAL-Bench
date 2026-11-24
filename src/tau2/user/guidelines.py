@@ -300,7 +300,7 @@ def render_simulation_guidelines(persona: RuntimePersona, *, use_tools: bool) ->
 def default_persona(mode: CallMode) -> RuntimePersona:
     """Canonical English persona for simulators constructed without a context."""
     from tau2.config import DEFAULT_LANGUAGE
-    from tau2.multilingual.runtime import load_pack, resolve_persona
+    from tau2.domains.gaia2.language_runtime import load_pack, resolve_persona
 
     pack = load_pack(DEFAULT_LANGUAGE)
     return resolve_persona(pack, sorted(pack.personas)[0], mode=mode)

@@ -1,0 +1,171 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0210_1vb8olqqqherwk5917zfpyjlw6ept46r",
+  "model": "deepseek-flash",
+  "input_sha256": "84807e153a8b5a9aad8aaa7f178975f0ad51406957eabf93c5e63e208d876df8",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "CASDON Sat Nav Steering Wheel",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Sugarbooger Silicone Teether Set-of-Two",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Wizard of Oz Tin Man Axe",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Funko POP! PEZ: Ad Icons—Sprout",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "CASDON Sat Nav Steering Wheel",
+        "Sugarbooger Silicone Teether Set-of-Two",
+        "Wizard of Oz Tin Man Axe",
+        "Funko POP! PEZ: Ad Icons—Sprout"
+      ],
+      "active_vocabulary": {
+        "CASDON Sat Nav Steering Wheel": 50,
+        "Sugarbooger Silicone Teether Set-of-Two": 50,
+        "Wizard of Oz Tin Man Axe": 50,
+        "Funko POP! PEZ: Ad Icons—Sprout": 50
+      },
+      "vocabulary_sha256": "ffb14e50acfc78528c6baeaebfba06ea5033e644549653c06d399c652c447fe9"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "CASDON Sat Nav Steering Wheel",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Funko POP! PEZ: Ad Icons - Sprout",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Sugarbooger Silicone Teether Set-of-Two",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Wizard of Oz Tin Man Axe",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Funko POP! PEZ: Ad Icons - Sprout"
+      ],
+      "active_vocabulary": {
+        "CASDON Sat Nav Steering Wheel": 50,
+        "Sugarbooger Silicone Teether Set-of-Two": 50,
+        "Wizard of Oz Tin Man Axe": 50,
+        "Funko POP! PEZ: Ad Icons—Sprout": 50,
+        "Funko POP! PEZ: Ad Icons - Sprout": 50
+      },
+      "vocabulary_sha256": "54565df458f8c6df685d0b9de710d83ab9fc10c54d3297135d07afe5714afd4b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aarav Rao",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Astrid Kleveland",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[1]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Krittin Sricharoen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[2]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kåre Jensen",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[3]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Narong Srisawat",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[4]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Oleksandr Hrynchenko",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[5]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Warunee Suthiwong",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[6]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Frognerveien 34",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Aarav Rao",
+        "Astrid Kleveland",
+        "Krittin Sricharoen",
+        "Kåre Jensen",
+        "Narong Srisawat",
+        "Oleksandr Hrynchenko",
+        "Warunee Suthiwong",
+        "Frognerveien 34"
+      ],
+      "active_vocabulary": {
+        "CASDON Sat Nav Steering Wheel": 50,
+        "Sugarbooger Silicone Teether Set-of-Two": 50,
+        "Wizard of Oz Tin Man Axe": 50,
+        "Funko POP! PEZ: Ad Icons—Sprout": 50,
+        "Funko POP! PEZ: Ad Icons - Sprout": 50,
+        "Aarav Rao": 50,
+        "Astrid Kleveland": 50,
+        "Krittin Sricharoen": 50,
+        "Kåre Jensen": 50,
+        "Narong Srisawat": 50,
+        "Oleksandr Hrynchenko": 50,
+        "Warunee Suthiwong": 50,
+        "Frognerveien 34": 50
+      },
+      "vocabulary_sha256": "7b8b75b1b5f68638e6eafbd10c87e0618cceb009905061ad25cb564560fbb2a0"
+    }
+  ]
+}

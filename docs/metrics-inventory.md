@@ -39,7 +39,7 @@ On Time Rate 统计用户结束后新发言分组产生的已回应样本，取�
 - Generation quality 与 naturalness/speech_fidelity 的运行裁判调度及质量汇总。
 - complete_match、complete_match_rate、micro.f1。
 
-旧 ACTION/NL/COMMUNICATE 的其他领域共用评分器仍然存在。naturalness/fidelity/tool_use 的底层实现、来源注册记录与历史结果可保留，但正常 judge suite 不再调度这三项，包括显式选择与 force。通话质量计算只读语音 ticks，不依赖裁判结果。
+旧 ACTION/NL/COMMUNICATE 的其他领域共用评分器仍然存在。独立 judge suite、naturalness/fidelity/tool_use、语言专项 judge、候选目录和 authoring 已删除；历史结果文件保留。通话质量计算只读语音 ticks，不依赖裁判结果。
 
 通话级 `selectivity`（三类错误合计超过 3 次）已删除，相关质量 sidecar 只保留调用身份和运行日志，没有空的性能块。语音新口径版本为 `tau-voice-interaction/4`；旧版本单独汇总，不重评分。
 

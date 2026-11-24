@@ -42,16 +42,9 @@ are harness faults, so they are excluded from the denominator and reported as
 
 ## Generation quality
 
-The public name for the τ-i18n measure that papers, data and code call
-**Experience** (`experience`). An agent utterance has an issue when the
-naturalness or the speech-fidelity judge flagged it. The paper reports the
-share of aligned utterances without an issue. Voice-v2 packages score it per
-call (`voice-v2-experience-call-v1`, in `benchmark-quality.json`): a call
-passes when at most 25% of its eligible agent utterances have an issue. It is
-*unscored*, never failed, unless both judges returned complete verdicts that
-pair every utterance. The leaderboard shows it as Generation quality and rates
-it as passed / (passed + failed). Keys such as `experience` and the paper's
-`experience.json` keep the old name.
+A retired measure (serialized as `experience` in historical releases). It combined
+Naturalness and Speech Fidelity judgments. Current evaluation no longer computes
+it; historical paper and release results retain their original definitions.
 
 ## Interaction
 
@@ -61,23 +54,11 @@ speech. It is computed from saved ticks and is unknown without an opportunity.
 There is no combined call-level verdict or tool-misuse flag. The three detailed
 selectivity metrics and the TICK/media voice panels keep their existing rules.
 
-## Judge
-
-A model-based diagnostic run after the simulation, with `tau2 judges suite`. Judges never change the task reward. Each judge is defined
-by a contract (model, prompt version, rubric version, scope) in
-`src/tau2/judges/production_judges.json`. For voice-v2 submissions the judges
-must be run before `tau2 submit prepare`.
-
 ## Measure
 
-One named quantity a judge reports, such as `register_formality`. Historical
-contracts for `naturalness`, `speech_fidelity` and `tool_use` remain readable,
-but the current suite does not schedule them. A measure applies to some languages and not
-others; `tau2 judges summarize` lists, for each cell and measure, how many calls
-it applies to, how many were judged, and the pass and fail counts. Calls a
-measure cannot judge because recorded Live speech has no transcript are
-excluded from it and counted as `input_excluded_calls`; they do not block a
-submission.
+One named evaluation quantity. Current measures and aggregation rules are listed
+in [the metrics inventory](metrics-inventory.md). The independent Judge suite has
+been removed; task evaluators and current diagnostics remain separate.
 
 ## Pack
 

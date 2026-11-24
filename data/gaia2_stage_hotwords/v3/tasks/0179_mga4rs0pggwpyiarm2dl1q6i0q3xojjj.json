@@ -1,0 +1,133 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0179_mga4rs0pggwpyiarm2dl1q6i0q3xojjj",
+  "model": "deepseek-flash",
+  "input_sha256": "01c00b0ebd0fe969242f75bf409e3616be23b0c75e8614890174a8c594849851",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Brunette Barbie Dreamtopia Fairy Doll",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Beistle Flamingo & Hibiscus Beads",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Saskia",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zurich",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Brunette Barbie Dreamtopia Fairy Doll",
+        "Beistle Flamingo & Hibiscus Beads",
+        "Saskia",
+        "Zurich"
+      ],
+      "active_vocabulary": {
+        "Brunette Barbie Dreamtopia Fairy Doll": 50,
+        "Beistle Flamingo & Hibiscus Beads": 50,
+        "Saskia": 50,
+        "Zurich": 50
+      },
+      "vocabulary_sha256": "6d305daf171e0d33571147f9c7582034fdb4b0719a0b28e279e1de231e7f8355"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Beistle Flamingo & Hibiscus Beads",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Colette Vandenberghe",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Langestraat",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Brugge",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Belgium",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Colette Vandenberghe",
+        "Langestraat",
+        "Brugge",
+        "Belgium"
+      ],
+      "active_vocabulary": {
+        "Brunette Barbie Dreamtopia Fairy Doll": 50,
+        "Beistle Flamingo & Hibiscus Beads": 50,
+        "Saskia": 50,
+        "Zurich": 50,
+        "Colette Vandenberghe": 50,
+        "Langestraat": 50,
+        "Brugge": 50,
+        "Belgium": 50
+      },
+      "vocabulary_sha256": "1c6d88458846cb53ef98eb485add8bb95330e709bdfc27cba67e1a365cff7887"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Saskia",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Colette Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_reminder.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Brunette Barbie Dreamtopia Fairy Doll": 50,
+        "Beistle Flamingo & Hibiscus Beads": 50,
+        "Saskia": 50,
+        "Zurich": 50,
+        "Colette Vandenberghe": 50,
+        "Langestraat": 50,
+        "Brugge": 50,
+        "Belgium": 50
+      },
+      "vocabulary_sha256": "1c6d88458846cb53ef98eb485add8bb95330e709bdfc27cba67e1a365cff7887"
+    }
+  ]
+}

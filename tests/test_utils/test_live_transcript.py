@@ -9,7 +9,6 @@ import pytest
 from tau2.data_model.message import AssistantMessage, Tick, UserMessage
 from tau2.data_model.simulation import SimulationRun, TerminationReason
 from tau2.data_model.transcript import LiveTranscriptFragment, LiveTranscriptTick
-from tau2.judges.run_evidence import load_audio_clips
 from tau2.utils.transcript.live import live_utterance_groups, require_live_alignment
 from tau2.utils.transcript.views import (
     agent_messages,
@@ -283,30 +282,6 @@ def test_metadata_survives_serialization():
     assert saved["live_transcript"]["fragments"][0]["text"] == "안녕"
 
 
-def test_fidelity_uses_exact_subtick_audio_bounds_and_shared_id(tmp_path):
-    import base64
-    import io
-
-    ticks = timeline({5: [fragment("Recorded text", 80000, 81000)]}, [])
-    ticks[5].agent_chunk.raw_data["live_transcript"]["speech_intervals_ms"] = [
-        (20, 180)
-    ]
-    sim = simulation(ticks)
-    clip = load_audio_clips(audio_file(tmp_path), sim)[0]
-    assert clip.segment_id == build_agent_turns(sim)[0].segment_id
-    assert clip.duration_seconds == 1.66
-    with wave.open(io.BytesIO(base64.b64decode(clip.wav_base64)), "rb") as wav:
-        assert wav.readframes(wav.getnframes()) == b"\x02\x00" * 13280
-
-
-def test_silent_harness_greeting_is_not_fidelity_opportunity(tmp_path):
-    ticks = timeline({}, [])
-    ticks[0].agent_chunk = AssistantMessage(
-        role="assistant", content="Hello", contains_speech=False
-    )
-    assert load_audio_clips(audio_file(tmp_path), simulation(ticks)) == []
-
-
 @pytest.mark.parametrize("cut_tick", [9, 10])
 def test_explicit_truncation_follows_playback_not_caption_clock(cut_tick):
     ticks = timeline(
@@ -421,9 +396,9 @@ def test_legacy_played_audio_session_interval_is_ignored():
     raw["alignment"] = "played_audio"
     raw["speech_intervals_ms"] = [(0, 200), (400, 600)]
     groups = live_utterance_groups(ticks)
-    assert groups and groups[0].chunks[0].raw_data["live_segment"][
-        "audio_alignment_error"
-    ]
+    assert (
+        groups and groups[0].chunks[0].raw_data["live_segment"]["audio_alignment_error"]
+    )
 
 
 def test_final_session_interval_is_not_inserted_as_tick_interval():
@@ -440,13 +415,12 @@ def test_final_session_interval_is_not_inserted_as_tick_interval():
         speech_intervals_ms=[(400, 600)],
     )
     _merge_final_live_transcript(ticks, final)
-    intervals = ticks[-1].agent_chunk.raw_data["live_transcript"][
-        "speech_intervals_ms"
-    ]
+    intervals = ticks[-1].agent_chunk.raw_data["live_transcript"]["speech_intervals_ms"]
     assert all(0 <= start < end <= 200 for start, end in intervals)
-    assert ticks[-1].agent_chunk.raw_data["live_transcript"]["fragments"][0][
-        "text"
-    ] == "Tail"
+    assert (
+        ticks[-1].agent_chunk.raw_data["live_transcript"]["fragments"][0]["text"]
+        == "Tail"
+    )
 
 
 def test_provider_timestamp_changes_do_not_change_group_ids_or_bounds():
@@ -467,21 +441,6 @@ def test_padding_stops_at_session_edges():
     messages = agent_messages(ticks)
     assert metadata(messages[0])["playback_start_us"] == 0
     assert metadata(messages[1])["playback_end_us"] == 6000000
-
-
-@pytest.mark.parametrize("contains_speech", [True, False])
-def test_non_live_audio_and_missing_ids_do_not_enable_padding(
-    tmp_path, contains_speech
-):
-    ticks = timeline({}, [])
-    for t in ticks:
-        t.agent_chunk = None
-    ticks[5].agent_chunk = AssistantMessage(
-        role="assistant", content="Other provider", contains_speech=contains_speech
-    )
-    clip = load_audio_clips(audio_file(tmp_path), simulation(ticks))[0]
-    assert clip.duration_seconds == 0.2
-    assert clip.segment_id is None
 
 
 def test_legacy_live_recovery_uses_right_channel_and_preserves_source(tmp_path):
@@ -512,7 +471,6 @@ def test_legacy_live_recovery_uses_right_channel_and_preserves_source(tmp_path):
     assert metadata(messages[0])["speech_end_us"] == 400000
     assert metadata(messages[0])["fragments"][0]["start_ms"] is None
     require_live_alignment(recovered.ticks)
-    assert load_audio_clips(path, recovered)[0].duration_seconds == 0.6
 
 
 def test_legacy_recovery_requires_explicit_live_provider(tmp_path):
@@ -531,96 +489,3 @@ def test_recorded_live_evidence_is_not_replaced_by_recovery(tmp_path):
     assert (
         recover_live_audio(sim, tmp_path / "missing.wav", provider="openai_live") is sim
     )
-
-
-@pytest.mark.parametrize("measure", ["naturalness", "speech_fidelity"])
-def test_judges_skip_only_uncaptioned_live_group(tmp_path, monkeypatch, measure):
-    from types import SimpleNamespace
-
-    from tau2.data_model.tasks import Task
-    from tau2.judges.catalog import load_catalog
-    from tau2.judges.criteria import CriteriaJudge
-    from tau2.judges.fidelity import FidelityJudge
-    from tau2.judges.run_evidence import AudioEvidence, RunEvidence
-
-    ticks = timeline({3: [fragment("First", 0, 200)]}, [*range(2, 7), *range(21, 28)])
-    sim = simulation(ticks)
-    path = audio_file(tmp_path)
-    response = (
-        '{"findings": []}'
-        if measure == "speech_fidelity"
-        else json.dumps(
-            {
-                "results": [
-                    {
-                        "factor_id": "naturalness",
-                        "opportunity": True,
-                        "violated": False,
-                        "severity": 0,
-                        "reasoning": "Natural",
-                        "quote": "",
-                    }
-                ]
-            }
-        )
-    )
-    calls = []
-
-    def generate(**kwargs):
-        calls.append(kwargs)
-        return SimpleNamespace(content=response)
-
-    adapter = "fidelity" if measure == "speech_fidelity" else "criteria"
-    monkeypatch.setattr(f"tau2.judges.{adapter}.generate", generate)
-    contract_id = (
-        "speech-fidelity-v6"
-        if measure == "speech_fidelity"
-        else "naturalness-v17-rubric-v21-language-specific-draft2"
-    )
-    contract = next(c for c in load_catalog().contracts if c.contract_id == contract_id)
-    judge = (
-        FidelityJudge(contract)
-        if measure == "speech_fidelity"
-        else CriteriaJudge(contract)
-    )
-    evidence = RunEvidence(
-        simulation=sim,
-        task=Task(id="0", user_scenario={"instructions": "Fixture"}),
-        language="es",
-        audio=AudioEvidence(path=path, sha256="a" * 64, error=None),
-    )
-    result = judge.evaluate(evidence, measure)
-    assert len(calls) == len(result.units) == len(result.unit_errors) == 1
-    assert result.unit_errors[0].kind == "input"
-    assert "no transcript" in result.unit_errors[0].error
-    assert result.units[0].unit_id != result.unit_errors[0].unit_id
-    monkeypatch.setattr(
-        f"tau2.judges.{adapter}.generate",
-        lambda **kw: pytest.fail("Successful unit was repeated"),
-    )
-    assert judge.resume(evidence, measure, result) == result
-
-
-def test_all_uncaptioned_audio_remains_unjudged(tmp_path, monkeypatch):
-    from tau2.data_model.tasks import Task
-    from tau2.judges.catalog import load_catalog
-    from tau2.judges.fidelity import FidelityJudge
-    from tau2.judges.run_evidence import AudioEvidence, RunEvidence
-
-    sim = simulation(timeline({}, range(2, 7)))
-    monkeypatch.setattr(
-        "tau2.judges.fidelity.generate", lambda **kw: pytest.fail("No reference")
-    )
-    contract = next(
-        c for c in load_catalog().contracts if c.contract_id == "speech-fidelity-v6"
-    )
-    result = FidelityJudge(contract).evaluate(
-        RunEvidence(
-            simulation=sim,
-            task=Task(id="0", user_scenario={"instructions": "Fixture"}),
-            language="es",
-            audio=AudioEvidence(path=audio_file(tmp_path), sha256="a" * 64, error=None),
-        ),
-        "speech_fidelity",
-    )
-    assert not result.units and len(result.unit_errors) == 1

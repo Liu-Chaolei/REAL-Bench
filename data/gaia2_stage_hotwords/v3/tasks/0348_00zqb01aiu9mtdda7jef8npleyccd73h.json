@@ -1,0 +1,153 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0348_00zqb01aiu9mtdda7jef8npleyccd73h",
+  "model": "deepseek-flash",
+  "input_sha256": "c01fadc703b909e08dcbd7953b1c1946e0c03091083730d59b1d66b55dd55415",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Sofía Kuznetsova García",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Moscow Metro Apartments",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6450adc6-9c33-4bd3-826d-6de05c553b42.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Moscow Elite",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-6450adc6-9c33-4bd3-826d-6de05c553b42.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Sofía Kuznetsova García",
+        "Moscow Metro Apartments",
+        "Moscow Elite"
+      ],
+      "active_vocabulary": {
+        "Sofía Kuznetsova García": 50,
+        "Moscow Metro Apartments": 50,
+        "Moscow Elite": 50
+      },
+      "vocabulary_sha256": "7902775ebc177f913b64bb8f36f5557b0da0b77e125575a862b5ae8d7a278999"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Moscow River Apartments",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Moscow Skyline",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kremlin embankment",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Krasnopresnenskaya Naberezhnaya",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Moscow City Lights",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Moscow Oasis",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kremlin Views",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kremlin View Apartments",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Moscow River Apartments",
+        "Moscow Skyline",
+        "Kremlin embankment",
+        "Krasnopresnenskaya Naberezhnaya",
+        "Moscow City Lights",
+        "Moscow Oasis",
+        "Kremlin Views",
+        "Kremlin View Apartments"
+      ],
+      "active_vocabulary": {
+        "Sofía Kuznetsova García": 50,
+        "Moscow Metro Apartments": 50,
+        "Moscow Elite": 50,
+        "Moscow River Apartments": 50,
+        "Moscow Skyline": 50,
+        "Kremlin embankment": 50,
+        "Krasnopresnenskaya Naberezhnaya": 50,
+        "Moscow City Lights": 50,
+        "Moscow Oasis": 50,
+        "Kremlin Views": 50,
+        "Kremlin View Apartments": 50
+      },
+      "vocabulary_sha256": "6ac00d8e299ec497a7f8e77e0e0390c4b8f7c923c0f940a0494ef198daaa0fa4"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Moscow Skyline",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Moscow Oasis",
+          "kind": "place",
+          "source": "stage2.reference_reply.series_s2_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Sofía Kuznetsova García": 50,
+        "Moscow Metro Apartments": 50,
+        "Moscow Elite": 50,
+        "Moscow River Apartments": 50,
+        "Moscow Skyline": 50,
+        "Kremlin embankment": 50,
+        "Krasnopresnenskaya Naberezhnaya": 50,
+        "Moscow City Lights": 50,
+        "Moscow Oasis": 50,
+        "Kremlin Views": 50,
+        "Kremlin View Apartments": 50
+      },
+      "vocabulary_sha256": "6ac00d8e299ec497a7f8e77e0e0390c4b8f7c923c0f940a0494ef198daaa0fa4"
+    }
+  ]
+}

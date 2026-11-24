@@ -1,0 +1,143 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0621_uuah385lesh5u44896fr450ntypjb8ge",
+  "model": "deepseek-flash",
+  "input_sha256": "7df9f837b7727e4bee50f9814a0a301d0150dacb33e0f494a7b3f8313aae049f",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kuzma Petrovich",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Moscow Skyline",
+          "kind": "product",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dcd5fff9-bd51-4249-adba-3c6880e9667f.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Moscow Modern",
+          "kind": "product",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dcd5fff9-bd51-4249-adba-3c6880e9667f.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Moscow Metro",
+          "kind": "product",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dcd5fff9-bd51-4249-adba-3c6880e9667f.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-dcd5fff9-bd51-4249-adba-3c6880e9667f.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kuzma Petrovich",
+        "Moscow Skyline",
+        "Moscow Modern",
+        "Moscow Metro",
+        "Anastasiya Kuznetsova"
+      ],
+      "active_vocabulary": {
+        "Kuzma Petrovich": 50,
+        "Moscow Skyline": 50,
+        "Moscow Modern": 50,
+        "Moscow Metro": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "dd6290c1f555aee3306b137acf94e2f4bef340e0d90162096da8359196136add"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Moscow Skyline",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Moscow Modern",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Moscow Metro",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Moscow Oasis",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_message.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Moscow Oasis"
+      ],
+      "active_vocabulary": {
+        "Kuzma Petrovich": 50,
+        "Moscow Skyline": 50,
+        "Moscow Modern": 50,
+        "Moscow Metro": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Moscow Oasis": 50
+      },
+      "vocabulary_sha256": "b8aab82e466bef58253687867eb89fe541799c784e2efd03c9e8257a6df92b73"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Moscow Metro",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Tsvetnoy Boulevard",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Tsvetnoy Boulevard"
+      ],
+      "active_vocabulary": {
+        "Kuzma Petrovich": 50,
+        "Moscow Skyline": 50,
+        "Moscow Modern": 50,
+        "Moscow Metro": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Moscow Oasis": 50,
+        "Tsvetnoy Boulevard": 50
+      },
+      "vocabulary_sha256": "c53246c2b824c985a5046da44a8e86470b4eb5ec388f54ff395e64adf5aa2d43"
+    }
+  ]
+}

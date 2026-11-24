@@ -1,0 +1,137 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0704_lui2dl8fcrr4qp8syekzbkaaj1s0o1ce__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "88d243816d1bd1148ec2dc4166f86f8d1612962b59a991805244c9753ccb0eb8",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kasper",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5ee176a0-95fc-4370-aa66-78199c471b79.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-5ee176a0-95fc-4370-aa66-78199c471b79.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Astrid Mikkelsen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-cdacf16e-aead-4d50-bc11-e41c13f00793.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Beshoy Gadallah",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-ad70af5f-bb3c-4b84-bf7e-4369c83f7b19.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Party Pictures Game",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kasper",
+        "Astrid Lundqvist",
+        "Astrid Mikkelsen",
+        "Beshoy Gadallah",
+        "Party Pictures Game"
+      ],
+      "active_vocabulary": {
+        "Kasper": 50,
+        "Astrid Lundqvist": 50,
+        "Astrid Mikkelsen": 50,
+        "Beshoy Gadallah": 50,
+        "Party Pictures Game": 50
+      },
+      "vocabulary_sha256": "8bd636258408d324a0ef12365ad54aaf35b09e501ea5cb7151417d515b094515"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kasper",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply_kasper.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Networking Event Prep",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Networking Event Prep"
+      ],
+      "active_vocabulary": {
+        "Kasper": 50,
+        "Astrid Lundqvist": 50,
+        "Astrid Mikkelsen": 50,
+        "Beshoy Gadallah": 50,
+        "Party Pictures Game": 50,
+        "Networking Event Prep": 50
+      },
+      "vocabulary_sha256": "9e460b7bed77e0d0f75330072816aac3f8883a5882e9ef4274dda348752f9d4e"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Attendee Check",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Astrid Mikkelsen",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Beshoy Gadallah",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Networking Event Prep",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Attendee Check"
+      ],
+      "active_vocabulary": {
+        "Kasper": 50,
+        "Astrid Lundqvist": 50,
+        "Astrid Mikkelsen": 50,
+        "Beshoy Gadallah": 50,
+        "Party Pictures Game": 50,
+        "Networking Event Prep": 50,
+        "Attendee Check": 50
+      },
+      "vocabulary_sha256": "ba3ebd9a93cb320429dd76a8e51afb1c19df8325b2aa71d869b4263aa887a93a"
+    }
+  ]
+}

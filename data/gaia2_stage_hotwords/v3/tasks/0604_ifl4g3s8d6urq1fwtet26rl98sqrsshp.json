@@ -1,0 +1,180 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0604_ifl4g3s8d6urq1fwtet26rl98sqrsshp",
+  "model": "deepseek-flash",
+  "input_sha256": "a30de6e5380bfb30caaf544b897412234664394b57abfeec01c81545f3b66314",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Åsa Lindström",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liege Luxe",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Brugge Beauty",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Belgium",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Åsa Lindström",
+        "Liege Luxe",
+        "Brugge Beauty",
+        "Belgium"
+      ],
+      "active_vocabulary": {
+        "Åsa Lindström": 50,
+        "Liege Luxe": 50,
+        "Brugge Beauty": 50,
+        "Belgium": 50
+      },
+      "vocabulary_sha256": "c99a860810c2462bf4f8b90454a79d5eabc8297d0b728a621531711d51f244e1"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Liege Luxe",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Brugge Beauty",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rue Saint-Gilles 15",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Langestraat 10",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liege",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Brugge",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Rue Saint-Gilles 15",
+        "Langestraat 10",
+        "Liege",
+        "Brugge"
+      ],
+      "active_vocabulary": {
+        "Åsa Lindström": 50,
+        "Liege Luxe": 50,
+        "Brugge Beauty": 50,
+        "Belgium": 50,
+        "Rue Saint-Gilles 15": 50,
+        "Langestraat 10": 50,
+        "Liege": 50,
+        "Brugge": 50
+      },
+      "vocabulary_sha256": "479480809c1ffb3188a9fc24cbdc12c597d285514ac064a0ee518fc6c687c267"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Sint-Michielsstraat 23",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Leuven",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liege Luxe",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rue Saint-Gilles 15",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Brugge Beauty",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Langestraat 10",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Brugge",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Åsa Lindström",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Sint-Michielsstraat 23",
+        "Leuven"
+      ],
+      "active_vocabulary": {
+        "Åsa Lindström": 50,
+        "Liege Luxe": 50,
+        "Brugge Beauty": 50,
+        "Belgium": 50,
+        "Rue Saint-Gilles 15": 50,
+        "Langestraat 10": 50,
+        "Liege": 50,
+        "Brugge": 50,
+        "Sint-Michielsstraat 23": 50,
+        "Leuven": 50
+      },
+      "vocabulary_sha256": "7475189e5f99766e9125168be3a314708029625becc6b05ad48e90cf0043ffce"
+    }
+  ]
+}

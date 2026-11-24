@@ -1,0 +1,138 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0493_su3bfdjdmzi5t7g6p6qlanptvrbdj2d5",
+  "model": "deepseek-flash",
+  "input_sha256": "c49180633678ec6d8d32f1db05239819aa99a954773edd63ab1bcdcfe09dbf1f",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Leont'yevskiy Pereulok",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Moscow",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Leont'yevskiy Pereulok",
+        "Moscow"
+      ],
+      "active_vocabulary": {
+        "Leont'yevskiy Pereulok": 50,
+        "Moscow": 50
+      },
+      "vocabulary_sha256": "6d58f6221e2201ea5293d989e981fdb0fb8879ce0759a3a589f95168690a17a3"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Idea Max",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Peek-A-Pet",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bobble Heads",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Corgi",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Pooparoos",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Squishy Pooping Pets",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Idea Max",
+        "Peek-A-Pet",
+        "Bobble Heads",
+        "Corgi",
+        "Pooparoos",
+        "Squishy Pooping Pets"
+      ],
+      "active_vocabulary": {
+        "Leont'yevskiy Pereulok": 50,
+        "Moscow": 50,
+        "Idea Max": 50,
+        "Peek-A-Pet": 50,
+        "Bobble Heads": 50,
+        "Corgi": 50,
+        "Pooparoos": 50,
+        "Squishy Pooping Pets": 50
+      },
+      "vocabulary_sha256": "709e15102a9be7e3f4498b6a63200069fc64cbcb7f9e5b10c6f610ab82841372"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Gulandom Davlatov",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Leont’yevskiy Pereulok",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ulitsa Tverskaya",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_quote_ride.arguments.end_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Gulandom Davlatov",
+        "Leont’yevskiy Pereulok",
+        "Ulitsa Tverskaya"
+      ],
+      "active_vocabulary": {
+        "Leont'yevskiy Pereulok": 50,
+        "Moscow": 50,
+        "Idea Max": 50,
+        "Peek-A-Pet": 50,
+        "Bobble Heads": 50,
+        "Corgi": 50,
+        "Pooparoos": 50,
+        "Squishy Pooping Pets": 50,
+        "Gulandom Davlatov": 50,
+        "Leont’yevskiy Pereulok": 50,
+        "Ulitsa Tverskaya": 50
+      },
+      "vocabulary_sha256": "5e6a6cddb675fdf4ecf1a6a2b251b753f2a9dc41f48770a2343a4b6f1156f1bf"
+    }
+  ]
+}

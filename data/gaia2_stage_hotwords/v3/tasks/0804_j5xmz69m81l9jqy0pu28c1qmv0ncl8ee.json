@@ -1,0 +1,89 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0804_j5xmz69m81l9jqy0pu28c1qmv0ncl8ee",
+  "model": "deepseek-flash",
+  "input_sha256": "18c814bb383eb3f3cf2b9b4ea452ccead89d2eee92f3e3dfebd03de32464f9c4",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Akira Lundström",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "HALLOWEEN DUCKY MIX",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Akira Lundström",
+        "HALLOWEEN DUCKY MIX"
+      ],
+      "active_vocabulary": {
+        "Akira Lundström": 50,
+        "HALLOWEEN DUCKY MIX": 50
+      },
+      "vocabulary_sha256": "971e31c25d5730722932118ad3e67fd2a94f04495f312e65180281b3d81cef2c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Stockholm",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Halloween Instagram Post – Ducky Vinyl",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Stockholm",
+        "Halloween Instagram Post – Ducky Vinyl"
+      ],
+      "active_vocabulary": {
+        "Akira Lundström": 50,
+        "HALLOWEEN DUCKY MIX": 50,
+        "Stockholm": 50,
+        "Halloween Instagram Post – Ducky Vinyl": 50
+      },
+      "vocabulary_sha256": "4a9d04b75479857b27e0b1a44e788caa908b1d033d3d36b35b4a784d4161c9f1"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Akira Lundström",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "HALLOWEEN DUCKY MIX",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_msg.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Akira Lundström": 50,
+        "HALLOWEEN DUCKY MIX": 50,
+        "Stockholm": 50,
+        "Halloween Instagram Post – Ducky Vinyl": 50
+      },
+      "vocabulary_sha256": "4a9d04b75479857b27e0b1a44e788caa908b1d033d3d36b35b4a784d4161c9f1"
+    }
+  ]
+}

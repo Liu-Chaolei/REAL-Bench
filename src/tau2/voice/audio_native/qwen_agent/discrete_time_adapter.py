@@ -4,8 +4,12 @@ import audioop
 import base64
 from collections import Counter
 
-from tau2.config import DEFAULT_AUDIO_NATIVE_DISCONNECT_TIMEOUT
-from tau2.data_model.audio import TELEPHONY_AUDIO_FORMAT
+from tau2.config import (
+    DEFAULT_AUDIO_NATIVE_DISCONNECT_TIMEOUT,
+    DEFAULT_QWEN_ASR_STREAMING_MODEL,
+    DEFAULT_TELEPHONY_RATE,
+)
+from tau2.data_model.audio import TELEPHONY_AUDIO_FORMAT, AudioEncoding, AudioFormat
 from tau2.data_model.message import ToolCall
 from tau2.data_model.transcript import LiveTranscriptTick
 from tau2.voice.audio_native.adapter import DiscreteTimeAdapter
@@ -39,19 +43,38 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
         if language not in (None, "en", "en-US"):
             raise ValueError("The first Qwen Agent integration supports English only")
         super().__init__(tick_duration_ms, audio_format, send_audio_instant=False)
+        self.playback_audio_format = AudioFormat(
+            encoding=AudioEncoding.PCM_S16LE,
+            sample_rate=config.playback_sample_rate,
+        )
+        self.playback_bytes_per_tick = int(
+            self.playback_audio_format.bytes_per_second * tick_duration_ms / 1000
+        )
+        self._native_playback = config.asr_model == DEFAULT_QWEN_ASR_STREAMING_MODEL
+        if self._native_playback:
+            self.playback = self.playback.__class__(self.playback_audio_format)
         self.realtime_pacing = True
         self.config, self.model = config, model
         self.provider = provider or QwenAgentProvider(config, trace_path)
         if transcriber is not None:
             self.transcriber = transcriber
         elif config.asr_provider == "qwen":
-            from tau2.voice.audio_native.qwen_agent.qwen_transcription import (
-                QwenPlayedAudioTranscriber,
-            )
+            if config.asr_model == DEFAULT_QWEN_ASR_STREAMING_MODEL:
+                from tau2.voice.audio_native.qwen_agent.qwen_streaming_transcription import (
+                    QwenStreamingPlayedAudioTranscriber,
+                )
 
-            self.transcriber = QwenPlayedAudioTranscriber(
-                config, hotwords=observer_hotwords
-            )
+                self.transcriber = QwenStreamingPlayedAudioTranscriber(
+                    config, hotwords=observer_hotwords
+                )
+            else:
+                from tau2.voice.audio_native.qwen_agent.qwen_transcription import (
+                    QwenPlayedAudioTranscriber,
+                )
+
+                self.transcriber = QwenPlayedAudioTranscriber(
+                    config, hotwords=observer_hotwords
+                )
         elif config.asr_provider == "mimo":
             from tau2.voice.audio_native.qwen_agent.mimo_transcription import (
                 MiMoPlayedAudioTranscriber,
@@ -160,6 +183,13 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
         self._bg_loop.run_coroutine(self._after_playback(result), timeout=10)
         return result
 
+    def set_observer_stage(self, stage: int) -> None:
+        """Activate the next staged vocabulary on the observer event loop."""
+        activate = getattr(self.transcriber, "activate_stage", None)
+        if activate is None:
+            return
+        self._bg_loop.run_coroutine(activate(stage), timeout=10)
+
     async def _flush_pending_tool_results(self):
         for call_id, result, _request_response, is_error in self._pending_tool_results:
             await self.provider.send(
@@ -236,12 +266,16 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
             if response_id in self._cancelled:
                 return
             rate = int(event["sample_rate"])
-            converter = self._converters.setdefault(
-                rate, StreamingTelephonyConverter(output_sample_rate=rate)
-            )
-            data = converter.convert_output(
-                base64.b64decode(event["audio"], validate=True)
-            )
+            pcm = base64.b64decode(event["audio"], validate=True)
+            if self._native_playback:
+                if rate != self.playback_audio_format.sample_rate or len(pcm) % 2:
+                    raise ValueError("Qwen native PCM rate or sample alignment mismatch")
+                data = pcm
+            else:
+                converter = self._converters.setdefault(
+                    rate, StreamingTelephonyConverter(output_sample_rate=rate)
+                )
+                data = converter.convert_output(pcm)
             self._received[response_id] += len(data)
             result.agent_audio_chunks.append((data, response_id))
         elif kind == "audio_done":
@@ -394,7 +428,17 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
     async def _after_playback(self, result):
         await self._playback_progress()
         played = result.get_played_agent_audio()
-        await self.transcriber.send(audioop.ulaw2lin(played, 2))
+        if hasattr(self.transcriber, "send_native"):
+            if self._native_playback:
+                await self.transcriber.send_native(
+                    played, self.playback_audio_format.sample_rate
+                )
+            else:
+                await self.transcriber.send_native(
+                    audioop.ulaw2lin(played, 2), DEFAULT_TELEPHONY_RATE
+                )
+        else:
+            await self.transcriber.send(audioop.ulaw2lin(played, 2))
         if result.was_truncated and result.contains_speech:
             queue_partial = getattr(self.transcriber, "queue_pending", None)
             if queue_partial is not None:

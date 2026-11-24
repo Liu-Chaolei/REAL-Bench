@@ -6,8 +6,15 @@ from tau2.metrics.active.persistent_task.runtime import PersistentTaskMetricRunt
 from tau2.persistent_tasks.availability import evidence_source
 
 
-class InteractionVariantRuntime(PersistentTaskMetricRuntime):
-    """Reuse native management scoring with explicit primary/temporary bindings."""
+class InteractionVariantController(PersistentTaskMetricRuntime):
+    """Drive an authored interaction variant during a live scenario.
+
+    The controller reuses persistent-task evidence plumbing, but its primary
+    responsibility is scenario control: it observes backend events and queues
+    authored user requests. Its score is a separate post-run evaluation.
+    """
+
+    name = "interaction_variant"
 
     def __init__(self, config, *, variant, **kwargs):
         super().__init__(config, **kwargs)
@@ -40,9 +47,6 @@ class InteractionVariantRuntime(PersistentTaskMetricRuntime):
             self.issues.append({"reason": "missing_native_management_operation"})
             return
         self.source.enable()
-        self.orchestrator.environment.scenario_runtime.add_delivery_listener(
-            self.on_delivery
-        )
 
     def _observe(self, event):
         event = replace(event, timestamp=self._timestamp(event))
@@ -186,8 +190,17 @@ class InteractionVariantRuntime(PersistentTaskMetricRuntime):
         self.request_id, self.request_text = request_id, text
         self.delivery = delivery
         runtime = self.orchestrator.environment.scenario_runtime
-        with runtime.lock:
-            runtime.user_inputs.append((request_id, text))
+        queue = getattr(runtime, "queue_user_input", None)
+        if queue is None:
+            with runtime.lock:
+                runtime.user_inputs.append((request_id, text))
+        else:
+            queue(
+                request_id,
+                text,
+                source="interaction_variant",
+                purpose=phase,
+            )
         self.status = "queued"
 
     def advance(self, timestamp, turn_boundary):
@@ -293,6 +306,8 @@ class InteractionVariantRuntime(PersistentTaskMetricRuntime):
     def finalize(self, termination_reason, timestamp):
         self._drain()
         summary = super().finalize(termination_reason, timestamp)
+        summary["version"] = "interaction-variant-evidence-v1"
+        summary["mechanism"] = "interaction_variant"
         if (
             self.backend_task_id is None
             and self.initial_delivery is not None
@@ -312,7 +327,7 @@ class InteractionVariantRuntime(PersistentTaskMetricRuntime):
         )
         return summary
 
-    def score(self, scoring=None):
+    def _score(self, scoring=None):
         if self.variant.variant_type == "addtask" or self.status in {
             "target_unbound",
             "target_finished_before_request",
@@ -361,3 +376,15 @@ class InteractionVariantRuntime(PersistentTaskMetricRuntime):
                 },
             }
         return super().score(scoring)
+
+    def score(self, scoring=None):
+        """Evaluate the completed mechanism evidence through its evaluator."""
+        from tau2.metrics.active.persistent_task.variant_evaluator import (
+            InteractionVariantEvaluator,
+        )
+
+        return InteractionVariantEvaluator.score(self, scoring)
+
+
+# Compatibility for callers that imported the old runtime name.
+InteractionVariantRuntime = InteractionVariantController

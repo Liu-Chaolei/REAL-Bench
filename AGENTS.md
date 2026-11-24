@@ -100,7 +100,6 @@ src/tau2/
 ├── environment/     # Environment, DB, server, toolkit base classes
 ├── evaluator/       # Task evaluation logic
 ├── gym/             # Gymnasium-compatible RL interface
-├── judges/          # Post-hoc judge suite (`tau2 judges`), never part of the reward
 ├── knowledge/       # Knowledge retrieval pipeline (embedders, retrievers, postprocessors, sandbox)
 ├── metrics/         # Metrics computation
 ├── multilingual/    # Runtime language packs, localization, regional bundles
@@ -120,7 +119,7 @@ Other top-level directories:
 - `data/` — Domain data (JSON, TOML, policies), simulation outputs. Under `data/tau2/`:
   `domains/` (English source data), `multilingual/<lang>/` (pack.yaml, localization
   maps, regional bundles), `benchmarks/` (`voice.json`, `text.json` manifests),
-  `task_subsets/`, `judge_catalog/`
+  `task_subsets/`
 - `tests/` — All tests (pytest)
 - `scripts/` — Standalone utility scripts
 - `src/experiments/` — Research/experimental code (self-contained)
@@ -178,7 +177,7 @@ English code path. Released benchmark manifests pin each language × domain cell
 to a data revision; after changing pack or bundle data, regenerate pins with
 `tau2 benchmarks pin <voice|text>` rather than editing the JSON. New languages
 go through `tau2 factory` (see `docs/language-authoring.md`), never hand-edited
-bundles. Judges in `tau2 judges` are diagnostics only and must not feed rewards.
+bundles. Independent Judge suite and authoring commands have been removed.
 
 ### Orchestrators
 
@@ -226,8 +225,8 @@ Test layout mirrors source:
 - `tests/test_streaming/` — streaming/full-duplex tests (requires `voice` extra)
 - `tests/test_voice/` — audio-native provider tests (requires `voice` extra; individual providers gated by `{PROVIDER}_TEST_ENABLED=1`)
 - `tests/test_gym/` — gymnasium RL interface tests (requires `gym` extra)
-- `tests/test_multilingual/`, `tests/test_benchmark/`, `tests/test_judges/`,
-  `tests/test_task_subsets/` — packs, manifests, judges and subsets
+- `tests/test_multilingual/`, `tests/test_benchmark/`,
+  `tests/test_task_subsets/` — packs, manifests and subsets
 
 ## Code Style
 

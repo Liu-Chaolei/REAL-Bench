@@ -13,6 +13,7 @@ from typing import Any, List, Literal, Optional, Tuple
 from pydantic import BaseModel, ConfigDict, Field
 
 from tau2.config import DEFAULT_TELEPHONY_RATE, TELEPHONY_ULAW_SILENCE
+from tau2.data_model.audio import AudioFormat
 from tau2.data_model.message import ToolCall
 from tau2.data_model.transcript import LiveTranscriptTick
 from tau2.data_model.usage import UsageRecord
@@ -118,6 +119,7 @@ class TickResult(BaseModel):
     media_timeline: list[dict] = Field(default_factory=list)
     media_tool_calls: list[dict] = Field(default_factory=list)
     media_origin: float | None = None
+    playback_audio_format: AudioFormat | None = None
     media_cutoff: float | None = None
     playback_start_monotonic: float | None = None
     played_stream_start_ms: float = 0.0

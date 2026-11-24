@@ -20,7 +20,6 @@ from tau2.evaluator.evaluator_nl_assertions import (
 )
 from tau2.evaluator.outcome import can_grade, finalize_reward, stamp_grading
 from tau2.orchestrator.modes import CommunicationMode
-from tau2.persistent_tasks.scores import completion_score
 from tau2.registry import registry
 
 
@@ -130,31 +129,9 @@ def evaluate_simulation(
                 "domain": domain,
             },
         }
-    persistent = (simulation.info or {}).get("persistent_tasks")
-    allow_persistent_generated_reply = bool(
-        persistent
-        and persistent.get("config", {}).get("reply_evidence_mode", "generated_text")
-        == "generated_text"
-    )
-    if (
-        persistent
-        and persistent.get("config", {}).get("overlay")
-        and can_grade(simulation.termination_reason)
-    ):
-        from tau2.evaluator.persistent_tasks.overlay import evaluate_overlay
+    from tau2.persistent_tasks.availability import reject_retired_simulation
 
-        return evaluate_overlay(
-            simulation,
-            task,
-            evaluation_type=evaluation_type,
-            solo_mode=solo_mode,
-            domain=domain,
-            mode=mode,
-            env_kwargs=env_kwargs,
-            strict_replay=strict_replay,
-            communicate_scoring=communicate_scoring,
-            customer_language=customer_language,
-        )
+    reject_retired_simulation(simulation, task)
     stamp_grading(simulation)
     from tau2.domains.gaia2.interaction_variants import metric_enabled
 
@@ -171,15 +148,6 @@ def evaluate_simulation(
                 },
             ),
         )
-    persistent = (simulation.info or {}).get("persistent_tasks")
-    if (
-        persistent
-        and persistent.get("version") in {"persistent-task-v1", "qwen-persistent-v1"}
-        and can_grade(simulation.termination_reason)
-    ):
-        from tau2.evaluator.persistent_tasks.grader import grade
-
-        persistent["grading"] = grade(persistent, communicate_scoring)
     compare_tool_results = not (domain == "gaia2" and task.scenario is not None)
     if not can_grade(simulation.termination_reason):
         return finalize_reward(
@@ -342,11 +310,6 @@ def evaluate_simulation(
                 if task.scenario is not None
                 else {}
             ),
-            **(
-                {"allow_unresolved_live_audio": True}
-                if is_full_duplex and allow_persistent_generated_reply
-                else {}
-            ),
         )
     elif evaluation_type == EvaluationType.COMMUNICATE:
         reward_info = CommEvaluator.calculate_reward(
@@ -358,11 +321,6 @@ def evaluate_simulation(
             **(
                 {"runtime_bindings": communication_bindings()}
                 if task.scenario is not None
-                else {}
-            ),
-            **(
-                {"allow_unresolved_live_audio": True}
-                if is_full_duplex and allow_persistent_generated_reply
                 else {}
             ),
         )
@@ -401,11 +359,6 @@ def evaluate_simulation(
                     if task.scenario is not None
                     else {}
                 ),
-                **(
-                    {"allow_unresolved_live_audio": True}
-                    if is_full_duplex and allow_persistent_generated_reply
-                    else {}
-                ),
             )
         nl_reward_info = None
         task_needs_nl = RewardType.NL_ASSERTION in task.evaluation_criteria.reward_basis
@@ -419,11 +372,6 @@ def evaluate_simulation(
                     if task.scenario is not None
                     else {}
                 ),
-                **(
-                    {"allow_unresolved_live_audio": True}
-                    if is_full_duplex and allow_persistent_generated_reply
-                    else {}
-                ),
             )
 
         ## Combine all the rewards.
@@ -435,12 +383,6 @@ def evaluate_simulation(
         task_reward_basis = set(task.evaluation_criteria.reward_basis)
 
         evaluated_bases = env_bases | action_bases
-        if (
-            persistent
-            and persistent.get("config", {}).get("combine_reward")
-            and completion_score(persistent.get("grading")) is not None
-        ):
-            evaluated_bases.add(RewardType.PERSISTENT_TASK)
         if communicate_reward_info is not None:
             evaluated_bases |= comm_bases
         if nl_reward_info is not None:
@@ -524,11 +466,6 @@ def evaluate_simulation(
                 if task.scenario is not None
                 else {}
             ),
-            **(
-                {"allow_unresolved_live_audio": True}
-                if is_full_duplex and allow_persistent_generated_reply
-                else {}
-            ),
         )
         nl_reward_info = None
         if evaluation_type == EvaluationType.ALL_WITH_NL_ASSERTIONS_IGNORE_BASIS:
@@ -539,11 +476,6 @@ def evaluate_simulation(
                 **(
                     {"environment_trace": simulation.environment_trace}
                     if task.scenario is not None
-                    else {}
-                ),
-                **(
-                    {"allow_unresolved_live_audio": True}
-                    if is_full_duplex and allow_persistent_generated_reply
                     else {}
                 ),
             )

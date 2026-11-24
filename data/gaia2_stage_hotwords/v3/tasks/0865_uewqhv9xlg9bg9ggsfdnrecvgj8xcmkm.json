@@ -1,0 +1,164 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0865_uewqhv9xlg9bg9ggsfdnrecvgj8xcmkm",
+  "model": "deepseek-flash",
+  "input_sha256": "2a5ea3d74282b3295dbb92b73dfdb64f5257d0d9303509438770e3c65b7cc2f6",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Bohumil Nováček",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-cccc8ed1-d5c0-46ac-8a0b-96bee5111c45.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Lukáš Nováček",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-cccc8ed1-d5c0-46ac-8a0b-96bee5111c45.arguments.attendees[1]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Božetěchova 5, 602 00 Brno, Czech Republic",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Údolní 34, 602 00 Brno, Czech Republic",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-488d320d-575f-4966-99a4-62806563cf26.arguments.location",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Lidická 123",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-cccc8ed1-d5c0-46ac-8a0b-96bee5111c45.arguments.location",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Bohumil Nováček",
+        "Lukáš Nováček",
+        "Božetěchova 5, 602 00 Brno, Czech Republic",
+        "Údolní 34, 602 00 Brno, Czech Republic",
+        "Lidická 123"
+      ],
+      "active_vocabulary": {
+        "Bohumil Nováček": 50,
+        "Lukáš Nováček": 50,
+        "Božetěchova 5, 602 00 Brno, Czech Republic": 50,
+        "Údolní 34, 602 00 Brno, Czech Republic": 50,
+        "Lidická 123": 50
+      },
+      "vocabulary_sha256": "2b680a57455e4c36a4240809ea1cf917b7c00ea9af3247dcaccd7f7aa24337c7"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_add_details.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bohumil Nováček",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Lukáš Nováček",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Údolní 34, 602 00 Brno, Czech Republic",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_details.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Božetěchova 5, 602 00 Brno, Czech Republic",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add_details.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Dinner with Family — Final Details",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Matěj Nováček",
+        "Dinner with Family — Final Details"
+      ],
+      "active_vocabulary": {
+        "Bohumil Nováček": 50,
+        "Lukáš Nováček": 50,
+        "Božetěchova 5, 602 00 Brno, Czech Republic": 50,
+        "Údolní 34, 602 00 Brno, Czech Republic": 50,
+        "Lidická 123": 50,
+        "Matěj Nováček": 50,
+        "Dinner with Family — Final Details": 50
+      },
+      "vocabulary_sha256": "e23f026f737bfc1d7d1c43ae4539a5880495cb4265255e98b5f992aff3395e4a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Lukáš Nováček",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bohumil Nováček",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_followup.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Údolní 34, 602 00 Brno, Czech Republic",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Božetěchova 5, 602 00 Brno, Czech Republic",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Family Dinner Follow-up",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Family Dinner Follow-up"
+      ],
+      "active_vocabulary": {
+        "Bohumil Nováček": 50,
+        "Lukáš Nováček": 50,
+        "Božetěchova 5, 602 00 Brno, Czech Republic": 50,
+        "Údolní 34, 602 00 Brno, Czech Republic": 50,
+        "Lidická 123": 50,
+        "Matěj Nováček": 50,
+        "Dinner with Family — Final Details": 50,
+        "Family Dinner Follow-up": 50
+      },
+      "vocabulary_sha256": "dbd3d38c88f14d1d247192521c897dec580661e1924f0bb625e6a146ff3160f0"
+    }
+  ]
+}

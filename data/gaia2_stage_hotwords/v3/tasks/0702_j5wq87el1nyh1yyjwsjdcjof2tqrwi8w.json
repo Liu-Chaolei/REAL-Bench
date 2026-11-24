@@ -1,0 +1,76 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0702_j5wq87el1nyh1yyjwsjdcjof2tqrwi8w",
+  "model": "deepseek-flash",
+  "input_sha256": "b2a0e3b8a6ae09814308915c425b490e04bfe4ac4801263e978f86492e07667f",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaitlyn Nakamura",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-4768cb3a-707f-44e3-92ce-e60eb2350cc2.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kaitlyn Nakamura",
+        "Aurélien LaFleur"
+      ],
+      "active_vocabulary": {
+        "Kaitlyn Nakamura": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "83e387a4a4b1b85e19c82f7cf61c8cf7437b772c1f5482d5cccd5b194c44a183"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaitlyn Nakamura",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kaitlyn Nakamura": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "83e387a4a4b1b85e19c82f7cf61c8cf7437b772c1f5482d5cccd5b194c44a183"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaitlyn Nakamura",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_hold.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_reply_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kaitlyn Nakamura": 50,
+        "Aurélien LaFleur": 50
+      },
+      "vocabulary_sha256": "83e387a4a4b1b85e19c82f7cf61c8cf7437b772c1f5482d5cccd5b194c44a183"
+    }
+  ]
+}

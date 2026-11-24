@@ -1,0 +1,142 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0917_wyfwulm018zdh4m9xw59mzmw3zgl0k5l",
+  "model": "deepseek-flash",
+  "input_sha256": "84141e89ff737b7d9594fff4104371a2fa77cb43247ab1708ec49b85d9d4643d",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Akira Nakahara",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "MasterPieces NFL Push & Pull Toy",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "PROLINE 344100 Ram 2500 Clear Body",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Wreck It Ralph 2 Fashion Yesss Action Figure",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zorbitz Inc. Blockerz Sparkle",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "ParkZone 18A Brushless ESC Vehicle Part for Trucks",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Renovating my Space",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "345, Kiyamachi Street, Nakagyo-ku, Kyoto, 604-0921, Japan",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-21ee0628-43f4-4b7e-a91d-9ed1d7aedf15.arguments.start_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Akira Nakahara",
+        "MasterPieces NFL Push & Pull Toy",
+        "PROLINE 344100 Ram 2500 Clear Body",
+        "Wreck It Ralph 2 Fashion Yesss Action Figure",
+        "Zorbitz Inc. Blockerz Sparkle",
+        "ParkZone 18A Brushless ESC Vehicle Part for Trucks",
+        "Renovating my Space",
+        "345, Kiyamachi Street, Nakagyo-ku, Kyoto, 604-0921, Japan"
+      ],
+      "active_vocabulary": {
+        "Akira Nakahara": 50,
+        "MasterPieces NFL Push & Pull Toy": 50,
+        "PROLINE 344100 Ram 2500 Clear Body": 50,
+        "Wreck It Ralph 2 Fashion Yesss Action Figure": 50,
+        "Zorbitz Inc. Blockerz Sparkle": 50,
+        "ParkZone 18A Brushless ESC Vehicle Part for Trucks": 50,
+        "Renovating my Space": 50,
+        "345, Kiyamachi Street, Nakagyo-ku, Kyoto, 604-0921, Japan": 50
+      },
+      "vocabulary_sha256": "cb17b63a5c97623910f47a065c17fc2971af18b4fe8c4b854e0eb47093b3d59b"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Akira Nakahara",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "345, Kiyamachi Street, Nakagyo-ku, Kyoto, 604-0921, Japan",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_ride.arguments.start_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Akira Nakahara": 50,
+        "MasterPieces NFL Push & Pull Toy": 50,
+        "PROLINE 344100 Ram 2500 Clear Body": 50,
+        "Wreck It Ralph 2 Fashion Yesss Action Figure": 50,
+        "Zorbitz Inc. Blockerz Sparkle": 50,
+        "ParkZone 18A Brushless ESC Vehicle Part for Trucks": 50,
+        "Renovating my Space": 50,
+        "345, Kiyamachi Street, Nakagyo-ku, Kyoto, 604-0921, Japan": 50
+      },
+      "vocabulary_sha256": "cb17b63a5c97623910f47a065c17fc2971af18b4fe8c4b854e0eb47093b3d59b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Akira Nakahara",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "345, Kiyamachi Street, Nakagyo-ku, Kyoto, 604-0921, Japan",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Akira Nakahara": 50,
+        "MasterPieces NFL Push & Pull Toy": 50,
+        "PROLINE 344100 Ram 2500 Clear Body": 50,
+        "Wreck It Ralph 2 Fashion Yesss Action Figure": 50,
+        "Zorbitz Inc. Blockerz Sparkle": 50,
+        "ParkZone 18A Brushless ESC Vehicle Part for Trucks": 50,
+        "Renovating my Space": 50,
+        "345, Kiyamachi Street, Nakagyo-ku, Kyoto, 604-0921, Japan": 50
+      },
+      "vocabulary_sha256": "cb17b63a5c97623910f47a065c17fc2971af18b4fe8c4b854e0eb47093b3d59b"
+    }
+  ]
+}

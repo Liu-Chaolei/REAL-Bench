@@ -4,7 +4,7 @@
 固定 async100题和 `data/tau2/domains/gaia2/persistent_tasks/` 的10题材料已移除。
 普通主任务总数为1000，不再通过独立 `async` split 选择异步测试。
 
-Modify／Cancel／AddTask 使用同一动态机制的题目指定分支，交互差异保存在独立
+Modify／Cancel／AddTask 使用独立场景机制，复用公共后台证据接口；交互差异保存在独立
 `interaction_variants.json`，不恢复旧固定 async 或 qpt 材料。三类 split 自动安装
 题目运行模式；每题仅执行其已保存的业务变化。见
 [实施计划](modify-cancel-addtask-plan.md) 与
@@ -34,7 +34,9 @@ Qwen 的原生观察器仍在 `integrations/qwen_audio_agent/`；其他 Agent �
 动态指标只报告 `completion_score` 后台请求完成分；后台结果与回复判断保存在 `evaluation_log.native_result` 和 `evaluation_log.reply`，不作为独立性能分；
 `operation_reward` 留在日志，不额外乘一次，也不默认乘入普通任务结果。
 
-历史配置、轨迹和结果的兼容代码保留供读取历史材料；当前活动数据不依赖固定 sidecar。
+旧 `persistent_task_config`、固定 sidecar 运行、断点续跑和重新评分入口已移除。
+历史结果只读取轨迹、摘要和已保存评分；未保存分数显示未评分，不执行旧 replay 或 grader。
+公共事件模型、Provider adapters 和分数读取函数继续供新机制及历史展示使用。
 
 使用示例见 [运行说明](gaia2-async.md)，详细规则见
 [动态异步机制](active-persistent-task-metric-plan.md)。

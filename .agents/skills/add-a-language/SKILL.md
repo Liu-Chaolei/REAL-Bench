@@ -1,6 +1,6 @@
 ---
 name: add-a-language
-description: Add a language to the tau2 voice benchmark through the language factory, including reviewed user content, localized tasks, voices and a contribution PR. Optionally author separate agent judges. For extending an existing pack to another supported domain, use add-a-domain.
+description: Add a language to the tau2 voice benchmark through the language factory, including reviewed user content, localized tasks, voices and a contribution PR. For extending an existing pack to another supported domain, use add-a-domain.
 ---
 
 # Add a language
@@ -12,8 +12,8 @@ checks; keep the skill focused on executing them.
 
 ## Establish the submission
 
-Determine the language code, locale/variety, supported domains and whether the
-submission is user-only or user-and-judge. Use existing session choices. Supported
+Determine the language code, locale/variety and supported domains. The submission
+covers caller content, tasks and voices. Use existing session choices. Supported
 factory domains are airline, retail and telecom; adding a new domain implementation
 is separate work. Adding a pack does not change the frozen official benchmark. The ordinary
 `tau2 run --audio-native` command selects only the released manifest; use
@@ -81,23 +81,6 @@ The shared retail compiler supplies explicit given/family-name facts from the
 structured caller identity; review that output instead of adding language-specific
 manual prompt patches. Existing agent-clause assembly stays in the runtime.
 
-## Optional agent judges
-
-Read [judge validation](../../../docs/judge-validation.md). Agent criteria are
-independent of caller persona behavior. With the judge-authoring commands installed,
-use `draft-judge` for a naturalness extension, an adapted catalog diagnostic or a
-new diagnostic, then review and `compile-judge`. Use `judges candidate` for explicit
-experimental execution. Every judge starts unvalidated.
-To contribute a reusable authoring source, run `factory register-judge` into
-`data/tau2/judge_catalog/`. `factory list-judges` and future adaptations discover
-reviewed entries there; registration does not enable production scoring.
-
-Validation requires frozen held-out human evidence and a computed report. Only
-`judges promote` with exact review/evidence can produce a production registry
-change. A user-only submission or an unvalidated judge submission is valid; do
-not invent evidence to complete the workflow. Keep status and scope per judge in
-the README. Do not import annotation tooling.
-
 ## Verify and submit
 
 Run the documented offline checks and a bounded live smoke using explicitly
@@ -106,7 +89,5 @@ behavior, voice mapping and results. Report unavailable live checks honestly;
 offline tests do not prove native quality. Do not launch a full benchmark unless
 requested. Preserve frozen paper runs.
 
-Submit the pack/task data, completed README, relevant judge definitions/evidence
-and tests through a PR. Exclude credentials, transient staging files and internal
-design notes. Report user validation separately from judge validation and keep
-production judge activation explicit in the PR.
+Submit the pack/task data, completed README and tests through a PR. Exclude
+credentials, transient staging files and internal design notes. Report user validation and remaining evidence gaps accurately.

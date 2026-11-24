@@ -1,0 +1,98 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0262_ckxyv7rgqr3dzijm0s8g30h39etriavg",
+  "model": "deepseek-flash",
+  "input_sha256": "0ba1027ecbe45dd5640bd471ca0b827d299014f3586e77c8b00fec715f0cf7a3",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Lodha The Park",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Worli",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Mumbai",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_add.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Lodha The Park",
+        "Worli",
+        "Mumbai"
+      ],
+      "active_vocabulary": {
+        "Lodha The Park": 50,
+        "Worli": 50,
+        "Mumbai": 50
+      },
+      "vocabulary_sha256": "95100b309bdcbb3891e7a2ad04fa4354884140ed9f28fa9ce00d4d1874270375"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Anastasia Kuznetsova",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Mumbai",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Lodha The Park",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Worli",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Los Angeles",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Anastasia Kuznetsova",
+        "Los Angeles"
+      ],
+      "active_vocabulary": {
+        "Lodha The Park": 50,
+        "Worli": 50,
+        "Mumbai": 50,
+        "Anastasia Kuznetsova": 50,
+        "Los Angeles": 50
+      },
+      "vocabulary_sha256": "41599a37b8156b3069484467a20ccc4e346937d638bfe699470025bd5147fd2a"
+    }
+  ]
+}

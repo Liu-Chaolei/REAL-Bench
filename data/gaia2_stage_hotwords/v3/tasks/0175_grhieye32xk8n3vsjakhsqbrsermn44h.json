@@ -1,0 +1,234 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0175_grhieye32xk8n3vsjakhsqbrsermn44h",
+  "model": "deepseek-flash",
+  "input_sha256": "d0c444de79e1d27d6ce36d584f860a0c9d41674695710d4648b20c6000e29a62",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kofi Adjei",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-daf01625-2bbb-41fa-8496-7e769579b019.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-daf01625-2bbb-41fa-8496-7e769579b019.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kofi Adjei",
+        "Liverpool",
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "Kofi Adjei": 50,
+        "Liverpool": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "ae4abea0b2bd924f3675dd024bfbd03c6da1eda71e14c10267d8a79751b9fed1"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kofi Adjei",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool Lofts",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Albert Dock",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool Luxe Living",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Paradise Street",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool Docks Apartments",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Merseyside",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool Luxury",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool ONE",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool Loft",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool Waterfront Apartments",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Princes Dock",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool Luxury Living",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Liverpool Lofts",
+        "Albert Dock",
+        "Liverpool Luxe Living",
+        "Paradise Street",
+        "Liverpool Docks Apartments",
+        "Merseyside",
+        "Liverpool Luxury",
+        "Liverpool ONE",
+        "Liverpool Loft",
+        "Liverpool Waterfront Apartments",
+        "Princes Dock",
+        "Liverpool Luxury Living"
+      ],
+      "active_vocabulary": {
+        "Kofi Adjei": 50,
+        "Liverpool": 50,
+        "Rohini Deshpande": 50,
+        "Liverpool Lofts": 50,
+        "Albert Dock": 50,
+        "Liverpool Luxe Living": 50,
+        "Paradise Street": 50,
+        "Liverpool Docks Apartments": 50,
+        "Merseyside": 50,
+        "Liverpool Luxury": 50,
+        "Liverpool ONE": 50,
+        "Liverpool Loft": 50,
+        "Liverpool Waterfront Apartments": 50,
+        "Princes Dock": 50,
+        "Liverpool Luxury Living": 50
+      },
+      "vocabulary_sha256": "34984a645ca5f702312a7c3aea3762d6c0367fc0ff870563e01addd96f51929f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kofi Adjei",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ghanaian",
+          "kind": "custom_name",
+          "source": "stage2.tool_gt.series_s2_update_contact.arguments.updates.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Berlin",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_update_contact.arguments.updates.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liverpool apartment search check-in",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Lecture on Quantum Computing",
+          "kind": "custom_name",
+          "source": "stage2.reference_reply.series_s2_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Ghanaian",
+        "Berlin",
+        "Liverpool apartment search check-in",
+        "Lecture on Quantum Computing"
+      ],
+      "active_vocabulary": {
+        "Kofi Adjei": 50,
+        "Liverpool": 50,
+        "Rohini Deshpande": 50,
+        "Liverpool Lofts": 50,
+        "Albert Dock": 50,
+        "Liverpool Luxe Living": 50,
+        "Paradise Street": 50,
+        "Liverpool Docks Apartments": 50,
+        "Merseyside": 50,
+        "Liverpool Luxury": 50,
+        "Liverpool ONE": 50,
+        "Liverpool Loft": 50,
+        "Liverpool Waterfront Apartments": 50,
+        "Princes Dock": 50,
+        "Liverpool Luxury Living": 50,
+        "Ghanaian": 50,
+        "Berlin": 50,
+        "Liverpool apartment search check-in": 50,
+        "Lecture on Quantum Computing": 50
+      },
+      "vocabulary_sha256": "1963f111c57236cd66f7f7e278a77e73c8fccec9d77e0d62baa94e9ca56d99e1"
+    }
+  ]
+}

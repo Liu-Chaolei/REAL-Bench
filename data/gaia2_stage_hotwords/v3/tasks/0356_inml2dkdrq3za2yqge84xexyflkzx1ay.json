@@ -1,0 +1,135 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0356_inml2dkdrq3za2yqge84xexyflkzx1ay",
+  "model": "deepseek-flash",
+  "input_sha256": "3bbee02e5434154961ae4c8a85b51a16b72b34dc110e1b1db3ef1085becb3ee1",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-779b576c-a806-4c51-9173-57810851b3ec.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kymberley",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a8498118-295c-444f-afd4-3bc9a4a4c045.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Maureen",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-32d31938-67ad-4df4-98f8-b549bbae3b43.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bridget",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-c73059ef-f8d8-4212-9c69-df09c3d29045.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Geertruida",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b434f9e9-f669-4072-952a-3c11b294f3bd.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-779b576c-a806-4c51-9173-57810851b3ec.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "The Dead of Night",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Astrid",
+        "Kymberley",
+        "Maureen",
+        "Bridget",
+        "Geertruida",
+        "Rohini Deshpande",
+        "The Dead of Night"
+      ],
+      "active_vocabulary": {
+        "Astrid": 50,
+        "Kymberley": 50,
+        "Maureen": 50,
+        "Bridget": 50,
+        "Geertruida": 50,
+        "Rohini Deshpande": 50,
+        "The Dead of Night": 50
+      },
+      "vocabulary_sha256": "840f7bcbdd35770766afb0a807a399f76023d7c98401f6b9ac5bc815c05160cb"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "The Dead of Night",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid": 50,
+        "Kymberley": 50,
+        "Maureen": 50,
+        "Bridget": 50,
+        "Geertruida": 50,
+        "Rohini Deshpande": 50,
+        "The Dead of Night": 50
+      },
+      "vocabulary_sha256": "840f7bcbdd35770766afb0a807a399f76023d7c98401f6b9ac5bc815c05160cb"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Astrid Jensen",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "The Dead of Night",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send_astrid.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Astrid Jensen"
+      ],
+      "active_vocabulary": {
+        "Astrid": 50,
+        "Kymberley": 50,
+        "Maureen": 50,
+        "Bridget": 50,
+        "Geertruida": 50,
+        "Rohini Deshpande": 50,
+        "The Dead of Night": 50,
+        "Astrid Jensen": 50
+      },
+      "vocabulary_sha256": "f9d9a75af6c321a717ba4ad9406cd978762825b13b06770957d2b90ce045d0b6"
+    }
+  ]
+}

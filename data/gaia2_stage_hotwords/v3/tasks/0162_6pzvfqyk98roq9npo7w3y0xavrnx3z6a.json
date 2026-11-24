@@ -1,0 +1,183 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0162_6pzvfqyk98roq9npo7w3y0xavrnx3z6a",
+  "model": "deepseek-flash",
+  "input_sha256": "cda0e909efe2f1a576fa5dcd3a69d5b7eb6f7c45050ad4460e00aaa36ca53aea",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Mumbai",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Navi Mumbai",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Akira",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zuri Mthembu",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Plot No. 789, Andheri West, Mumbai",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-fe3671e7-372c-483f-bd8d-340b9acbc908.arguments.end_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-b971930f-15e6-4eaa-8d54-4af524e6e079.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Akira Kaur",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-94f18acd-f5f2-40c9-b75f-facb2c12fe8a.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Akira Jensen",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-94f18acd-f5f2-40c9-b75f-facb2c12fe8a.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Akira Nakamura",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-94f18acd-f5f2-40c9-b75f-facb2c12fe8a.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Mumbai",
+        "Navi Mumbai",
+        "Akira",
+        "Zuri Mthembu",
+        "Plot No. 789, Andheri West, Mumbai",
+        "Rohan Kumar",
+        "Akira Kaur",
+        "Akira Jensen",
+        "Akira Nakamura"
+      ],
+      "active_vocabulary": {
+        "Mumbai": 50,
+        "Navi Mumbai": 50,
+        "Akira": 50,
+        "Zuri Mthembu": 50,
+        "Plot No. 789, Andheri West, Mumbai": 50,
+        "Rohan Kumar": 50,
+        "Akira Kaur": 50,
+        "Akira Jensen": 50,
+        "Akira Nakamura": 50
+      },
+      "vocabulary_sha256": "1be1b6a7079c2f9b71b7278ba9a39413d4f8a5a28aa2df53f310855ad06b4ecf"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Zuri Mthembu",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Plot No. 789, Andheri West, Mumbai",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_quote.arguments.start_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bandra West, Mumbai",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_announce.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Bandra West, Mumbai"
+      ],
+      "active_vocabulary": {
+        "Mumbai": 50,
+        "Navi Mumbai": 50,
+        "Akira": 50,
+        "Zuri Mthembu": 50,
+        "Plot No. 789, Andheri West, Mumbai": 50,
+        "Rohan Kumar": 50,
+        "Akira Kaur": 50,
+        "Akira Jensen": 50,
+        "Akira Nakamura": 50,
+        "Bandra West, Mumbai": 50
+      },
+      "vocabulary_sha256": "424e9d3056810266904953b6cda267e699a628ff7579c97300e5bb8d5bcb9222"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Zuri Mthembu",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Mumbai",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Mumbai Maison",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Plot No. 789, Andheri West, Mumbai",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Mumbai Maison"
+      ],
+      "active_vocabulary": {
+        "Mumbai": 50,
+        "Navi Mumbai": 50,
+        "Akira": 50,
+        "Zuri Mthembu": 50,
+        "Plot No. 789, Andheri West, Mumbai": 50,
+        "Rohan Kumar": 50,
+        "Akira Kaur": 50,
+        "Akira Jensen": 50,
+        "Akira Nakamura": 50,
+        "Bandra West, Mumbai": 50,
+        "Mumbai Maison": 50
+      },
+      "vocabulary_sha256": "2f55476069eea220fad9c2f5a05b0a8f47df697e084a55f045c57c0d46d958ad"
+    }
+  ]
+}

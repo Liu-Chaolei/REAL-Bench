@@ -1,0 +1,70 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0651_wj9ojjy0vyhg1x5ocia1s0828z2emu8n",
+  "model": "deepseek-flash",
+  "input_sha256": "fcb856b2ca68055a7a3ca53c72536ba0ff19b9fb3950422402f0e31754c26d19",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "133 Yoga Way, Kolkata",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "456 Party Lane, Kolkata",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-9b38320e-1b87-4cbc-9138-23de20a51183.arguments.end_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "133 Yoga Way, Kolkata",
+        "456 Party Lane, Kolkata"
+      ],
+      "active_vocabulary": {
+        "133 Yoga Way, Kolkata": 50,
+        "456 Party Lane, Kolkata": 50
+      },
+      "vocabulary_sha256": "e96d97e240568870829de25d510f3f48b4fea98ed47cc55b583074cc77aaa103"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "456 Party Lane, Kolkata",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "133 Yoga Way, Kolkata": 50,
+        "456 Party Lane, Kolkata": 50
+      },
+      "vocabulary_sha256": "e96d97e240568870829de25d510f3f48b4fea98ed47cc55b583074cc77aaa103"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "456 Party Lane, Kolkata",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "133 Yoga Way, Kolkata": 50,
+        "456 Party Lane, Kolkata": 50
+      },
+      "vocabulary_sha256": "e96d97e240568870829de25d510f3f48b4fea98ed47cc55b583074cc77aaa103"
+    }
+  ]
+}

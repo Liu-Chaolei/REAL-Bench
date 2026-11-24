@@ -22,28 +22,7 @@ class ActiveMetricManager:
     def install(self) -> None:
         if self._installed:
             return
-        from tau2.domains.gaia2.interaction_variants import variant_for
-
-        variant = variant_for(self.orchestrator.task)
-        if variant is not None:
-            from tau2.metrics.active.config import PersistentTaskMetricConfig
-            from tau2.metrics.active.persistent_task.variant import (
-                InteractionVariantRuntime,
-            )
-
-            profile = self.config.persistent_task or PersistentTaskMetricConfig(
-                preferred_options=[dict(state="running", operation="query", weight=1)]
-            )
-            self.metrics.append(
-                InteractionVariantRuntime(
-                    profile,
-                    variant=variant,
-                    orchestrator=self.orchestrator,
-                    seed=self.seed,
-                    trial=self.trial,
-                )
-            )
-        elif self.config.persistent_task and self.config.persistent_task.enabled:
+        if self.config.persistent_task and self.config.persistent_task.enabled:
             self.metrics.append(
                 PersistentTaskMetricRuntime(
                     self.config.persistent_task,

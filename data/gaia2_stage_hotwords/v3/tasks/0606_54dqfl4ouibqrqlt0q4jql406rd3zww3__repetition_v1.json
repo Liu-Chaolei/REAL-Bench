@@ -1,0 +1,117 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0606_54dqfl4ouibqrqlt0q4jql406rd3zww3__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "622a0369f15909bbdaddce6e118dd2be8cfca3c77e1be4392f3c073349d6430d",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaida Schönberger",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Plzeň",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Pilsner Urquell Apartments",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-af0a1bcc-0649-48ab-82c0-8c9e0fb8ff68.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kaida Schönberger",
+        "Plzeň",
+        "Pilsner Urquell Apartments"
+      ],
+      "active_vocabulary": {
+        "Kaida Schönberger": 50,
+        "Plzeň": 50,
+        "Pilsner Urquell Apartments": 50
+      },
+      "vocabulary_sha256": "78fffd85f1bc43cfaa9218e4f7ea2adcdf75ea39ad4820c4123da0a58e07bddb"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Plzeň Loft Living",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kaida",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "ul. Pražská 15",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Plzeň Loft Living",
+        "Kaida",
+        "ul. Pražská 15"
+      ],
+      "active_vocabulary": {
+        "Kaida Schönberger": 50,
+        "Plzeň": 50,
+        "Pilsner Urquell Apartments": 50,
+        "Plzeň Loft Living": 50,
+        "Kaida": 50,
+        "ul. Pražská 15": 50
+      },
+      "vocabulary_sha256": "82f439a6a2b745642c4eccc3a62f47e078ef88b0934b08e65161e007b4af37ba"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Plzeň Loft Living",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Pilsner Urquell Apartments",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Plzeň Student Housing",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Plzeň Student Housing"
+      ],
+      "active_vocabulary": {
+        "Kaida Schönberger": 50,
+        "Plzeň": 50,
+        "Pilsner Urquell Apartments": 50,
+        "Plzeň Loft Living": 50,
+        "Kaida": 50,
+        "ul. Pražská 15": 50,
+        "Plzeň Student Housing": 50
+      },
+      "vocabulary_sha256": "cf5179b25cf64d87c7d7e00fa10b5d54de48b7292e0a4fb0528bb0d9c880183e"
+    }
+  ]
+}

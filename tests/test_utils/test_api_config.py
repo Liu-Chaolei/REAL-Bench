@@ -280,7 +280,6 @@ def test_smoke_launch_keeps_credentials_off_argv(api_dir, tmp_path, monkeypatch)
         realtime_generation=False,
         metrics_config=None,
         active_metrics_config=None,
-        persistent_task_config=None,
         user_audio_renderer="standard",
         saasr_config=None,
         gaia2_allow_stale_runtime=False,

@@ -141,18 +141,16 @@ ScenarioRuntime：参考事件和环境事件什么时候完成、释放
 - 它使用自己的状态策略、请求生成和交付窗口；
 - 它的结果独立记录，不默认乘入普通 Gaia2 结果。
 
-当前 active metric 与旧 `persistent_task_config` 互斥；变体任务是一个特殊入口，会优先安装 `InteractionVariantRuntime`。
+交互变体已通过独立的 `ScenarioMechanismManager` 安装，不属于普通 active 指标。
 
-#### 旧 persistent_task 机制
+#### 旧 persistent_task 机制（已退役）
 
-旧机制由 `src/tau2/persistent_tasks/integration.py` 和旧 runtime/coordinator 驱动。它同样会观察后台事件、释放请求、记录操作和回复，但数据模型、绑定和评分路径与新 active 机制不同。
+旧 `persistent_task_config` 配置入口、integration/coordinator 调度、固定 sidecar、
+回放和重新评分链路已移除。运行时不再使用旧机制生成请求、阻塞阶段或组合主任务奖励。
 
-因此当前存在两套后台动态请求实现：
-
-- 新的 `active_metrics.persistent_task`；
-- 旧的 `persistent_task_config`。
-
-运行时已有互斥条件，但历史读取和评分代码仍保留两套兼容分支。后续需要确认当前发布运行只保留哪条主路径，旧路径只作为历史读取还是继续支持新运行。
+当前后台交互使用 active persistent-task 或独立交互变体场景机制。公共后台事件模型、
+Provider 适配器和分数读取函数继续保留；历史结果只读取已有轨迹、摘要和保存分数，
+不自动恢复旧运行或重新评分。
 
 ## 4. “参考事件触发”与“动态追加请求”的边界
 
@@ -164,7 +162,7 @@ ScenarioRuntime：参考事件和环境事件什么时候完成、释放
 | ScenarioStages | `scenario.stages`、STOP 和已交付状态 | 是 | 连续多阶段用户请求 |
 | InteractionVariant | 变体数据契约 | 是 | 修改、取消、添加任务的测试场景 |
 | Active persistent task | 实时后台观察和状态策略 | 是，且这是设计目标 | 动态查询、结果、修改、取消请求 |
-| 旧 persistent task | 旧后台运行时配置 | 是 | 历史后台任务测试路径 |
+| 旧 persistent task（已退役） | 历史结果 | 否 | 读取已保存轨迹和分数 |
 
 因此，后台动态请求不能简单归类为“参考答案污染”。它本来就是你设计的测试流程。但它仍需要和 Gaia2 参考事件触发分开记录，避免最后无法判断某条用户请求究竟来自哪种机制。
 
@@ -269,7 +267,7 @@ ENV 主要通过重放和参考状态比较，execution 主要通过诊断调用
 - Gaia2 的 ARE 应用实现仍是实际工具行为来源，不能因为它来自旧项目就直接删除。
 - 参考执行用于生成目标状态和参考事件，不能当作第二次 Agent 运行删除。
 - 三阶段控制、交互变体和后台动态指标各有明确测试目的，不能简单合并成一个“follow-up”开关。
-- 旧 persistent task 路径可以先保留历史读取，但当前新运行需要明确主路径。
+- 旧 persistent task 只保留历史结果读取，运行和重新评分入口已退役。
 - 幻觉重试当前对 Qwen Agent 被配置为 0；是否作为框架通用机制保留，属于其他问题。
 
 ## 7. 后续逐项讨论顺序

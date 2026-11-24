@@ -12,21 +12,15 @@ from typing_extensions import Annotated
 from tau2.config import (
     DEFAULT_AUDIO_NATIVE_AGENT_IMPLEMENTATION,
     DEFAULT_AUDIO_NATIVE_USER_IMPLEMENTATION,
-    DEFAULT_BANKING_RETRIEVAL_CONFIG,
-    DEFAULT_ELICITATION_LLM_ARGS_USER,
-    DEFAULT_ELICITATION_LLM_USER,
-    DEFAULT_ELICITATION_MAX_STEPS_SECONDS,
     DEFAULT_LANGUAGE,
     DEFAULT_LOCALIZE_DB,
     DEFAULT_SAVE_TO,
     DEFAULT_TEXT_STREAMING_CONFIG,
-    ELICITATION_DOMAINS,
 )
 from tau2.data_model.audio_effects import EffectTimeline
 from tau2.data_model.benchmark import BenchmarkRunInfo
 from tau2.data_model.elicitation import (
     ElicitationConfig,
-    ElicitationStrategy,
     SampledComplication,
 )
 from tau2.data_model.language import (
@@ -64,39 +58,34 @@ class BaseRunConfig(RunSettings):
     """
 
     @model_validator(mode="after")
-    def validate_persistent_task_mode(self):
+    def _gaia2_runtime_scope(self):
+        """Select the installed Gaia2 execution contract before provider setup."""
+        if self.domain != "gaia2" or self.language != "en":
+            raise ValueError("New runs support only domain gaia2 and language en")
+        if self.pack_extension is not None or self.localize_db is False:
+            raise ValueError(
+                "Gaia2 does not use language extensions or regional databases"
+            )
+        if self.elicitation is not None or self.retrieval_config is not None:
+            raise ValueError("Gaia2 does not use intake or banking retrieval settings")
+        return self
+
+    @model_validator(mode="after")
+    def validate_active_metrics(self):
         if self.active_metrics is not None:
             from tau2.metrics.active.config import ActiveMetricsConfig
 
             ActiveMetricsConfig.model_validate(self.active_metrics)
-            if self.persistent_task_config is not None:
-                raise ValueError(
-                    "active_metrics cannot be combined with persistent_task_config"
-                )
-        if self.persistent_task_config is not None:
-            from tau2.persistent_tasks.config import PersistentTaskConfig
-
-            PersistentTaskConfig.model_validate(self.persistent_task_config)
-            audio = getattr(self, "audio_native_config", None)
-            if (
-                self.domain != "gaia2"
-                or audio is None
-                or audio.provider != "qwen_agent"
-                or self.language != "en"
-            ):
-                raise ValueError(
-                    "Persistent tasks v1 requires English Gaia2 with qwen_agent"
-                )
         return self
 
     language: str = Field(
         default=DEFAULT_LANGUAGE,
-        description="Published language pack; canonical English unless a language is requested.",
+        description="Gaia2 call language; new runs use English.",
     )
     pack_extension: Optional[str] = Field(
         default=None,
         pattern=r"^[a-z][a-z0-9_-]*$",
-        description="Explicit separate-run domain extension.",
+        description="Historical compatibility field; new Gaia2 runs do not use extensions.",
     )
 
     localize_db: Optional[bool] = Field(
@@ -111,39 +100,6 @@ class BaseRunConfig(RunSettings):
         description="Resolved content pins carried to workers; mutations fail before provider use.",
     )
 
-    @model_validator(mode="after")
-    def _resolve_elicitation(self) -> "BaseRunConfig":
-        """Resolve domain defaults before either CLI or programmatic execution."""
-        if self.domain not in ELICITATION_DOMAINS:
-            if self.elicitation is not None:
-                raise ValueError("elicitation settings require an elicitation domain")
-            return self
-        if self.elicitation is None:
-            self.elicitation = ElicitationConfig()
-        if (
-            self.elicitation.strategy == ElicitationStrategy.AGENT_DIRECTED
-            and not self.is_voice
-        ):
-            raise ValueError(
-                "Agent-directed intake requires a voice run; "
-                "select the scaffolded strategy for the text ablation"
-            )
-        if "llm_user" not in self.model_fields_set:
-            self.llm_user = DEFAULT_ELICITATION_LLM_USER
-        if (
-            "llm_args_user" not in self.model_fields_set
-            and self.llm_user == DEFAULT_ELICITATION_LLM_USER
-        ):
-            self.llm_args_user = deepcopy(DEFAULT_ELICITATION_LLM_ARGS_USER)
-        if (
-            self.is_voice
-            and "max_steps_seconds" not in self.audio_native_config.model_fields_set
-        ):
-            self.audio_native_config = self.audio_native_config.model_copy(
-                update={"max_steps_seconds": DEFAULT_ELICITATION_MAX_STEPS_SECONDS}
-            )
-        return self
-
     benchmark: Optional[BenchmarkRunInfo] = Field(
         default=None, description="Explicit versioned benchmark selection, if any."
     )
@@ -153,7 +109,7 @@ class BaseRunConfig(RunSettings):
         str,
         Field(
             description="The domain to run the simulation on",
-            default="airline",
+            default="gaia2",
         ),
     ]
     task_set_name: Annotated[
@@ -195,15 +151,6 @@ class BaseRunConfig(RunSettings):
     ]
 
     # ---- Abstract-ish properties (subclasses must override) ----
-
-    @model_validator(mode="after")
-    def _default_banking_retrieval_config(self) -> "BaseRunConfig":
-        """Default retrieval_config to alltools for banking_knowledge."""
-        if self.domain == "banking_knowledge" and self.retrieval_config is None:
-            object.__setattr__(
-                self, "retrieval_config", DEFAULT_BANKING_RETRIEVAL_CONFIG
-            )
-        return self
 
     @model_validator(mode="after")
     def _resolve_language_settings(self) -> "BaseRunConfig":
@@ -995,7 +942,9 @@ class UserInfo(BaseModel):
 class Info(BaseModel):
     """Information about the simulator."""
 
-    persistent_task_config: Optional[dict] = Field(default=None)
+    persistent_task_config: Optional[dict] = Field(
+        default=None, description="Read-only legacy configuration from saved results."
+    )
     active_metrics: Optional[dict] = Field(default=None)
 
     @model_serializer(mode="wrap")
@@ -1159,6 +1108,7 @@ class TerminationReason(str, Enum):
     INFRASTRUCTURE_ERROR = "infrastructure_error"  # Task failed due to infrastructure (e.g., API disconnect)
     CONTEXT_WINDOW_EXCEEDED = "context_window_exceeded"
     UNEXPECTED_ERROR = "unexpected_error"
+    WATCHDOG_STALL = "watchdog_stall"
 
 
 class SimulationRun(BaseModel):

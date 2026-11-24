@@ -40,6 +40,9 @@ class Gaia2Environment(Environment):
         stage_control=True,
         runtime_mode="online",
     ):
+        from tau2.persistent_tasks.availability import reject_retired_task
+
+        reject_retired_task(task)
         from tau2.domains.gaia2.tools import Gaia2Tools
 
         self.task = task
@@ -225,6 +228,10 @@ def get_tasks(
 
         verify_task_artifact(Path(root))
     tasks = [Task.model_validate(value) for value in json.loads(path.read_text())]
+    from tau2.persistent_tasks.availability import reject_retired_task
+
+    for task in tasks:
+        reject_retired_task(task)
     variants_path = Path(root) / "interaction_variants.json"
     if include_interaction_variants and variants_path.exists():
         variants = json.loads(variants_path.read_text())

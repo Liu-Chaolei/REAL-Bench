@@ -1,0 +1,114 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0635_mmp4hksqjnf1g52oexxaxmntjix11g2l__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "a9d9b4b0202501dac555a73c29939cc076ee5a86ad38b21dc2898c0e949befc8",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Eliška Nováková",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Luiza Oliveira Silva",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Saskia König",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Eliška Nováková",
+        "Luiza Oliveira Silva",
+        "Saskia König"
+      ],
+      "active_vocabulary": {
+        "Eliška Nováková": 50,
+        "Luiza Oliveira Silva": 50,
+        "Saskia König": 50
+      },
+      "vocabulary_sha256": "cd27ebc99c6d649471990dfa33c3bd8caf3e1aea7b5c9c8a0ef8e92b8a4dfed5"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Eliška Nováková",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Luiza Oliveira Silva",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Saskia König",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Matěj",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send_eliska.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Matěj"
+      ],
+      "active_vocabulary": {
+        "Eliška Nováková": 50,
+        "Luiza Oliveira Silva": 50,
+        "Saskia König": 50,
+        "Matěj": 50
+      },
+      "vocabulary_sha256": "bbd45c2e7e4ff83894bae886b9a1c9652ec623a1e6eafefec8bfeeefab4d0cb7"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Eliška Nováková",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Luiza Oliveira Silva",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Saskia König",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Eliška Nováková": 50,
+        "Luiza Oliveira Silva": 50,
+        "Saskia König": 50,
+        "Matěj": 50
+      },
+      "vocabulary_sha256": "bbd45c2e7e4ff83894bae886b9a1c9652ec623a1e6eafefec8bfeeefab4d0cb7"
+    }
+  ]
+}

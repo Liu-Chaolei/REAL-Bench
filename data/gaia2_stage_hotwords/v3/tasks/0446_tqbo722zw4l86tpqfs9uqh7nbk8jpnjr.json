@@ -1,0 +1,342 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0446_tqbo722zw4l86tpqfs9uqh7nbk8jpnjr",
+  "model": "deepseek-flash",
+  "input_sha256": "037d8a152221d6c62b7fd4810e0cde9435bd1a831e4a41c216bfbf524d6568d6",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Nonglak Srisombat",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liege City Loft",
+          "kind": "product",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-343b2933-e392-417b-a753-9f12bbd440ac.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Nonglak Srisombat",
+        "Liege City Loft"
+      ],
+      "active_vocabulary": {
+        "Nonglak Srisombat": 50,
+        "Liege City Loft": 50
+      },
+      "vocabulary_sha256": "1df4b79529242a847abf0d7ecfaf15b940aadf7bcfc966aa45c4c1c0155bc571"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nonglak Srisombat",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ghent Canal Living",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liege City Loft",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Brugge Historic District",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Ghent Canal Living",
+        "Brugge Historic District"
+      ],
+      "active_vocabulary": {
+        "Nonglak Srisombat": 50,
+        "Liege City Loft": 50,
+        "Ghent Canal Living": 50,
+        "Brugge Historic District": 50
+      },
+      "vocabulary_sha256": "f8955797c3151170ead83f5bb2e739e5247ec6766a4bf088a38573755252c670"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Antwerp Abode",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Antwerp Dream",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Antwerp Haven",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Antwerp Luxury Loft",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Brussels Boutique",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Brussels Bright",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Brussels Green",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Charleroi Comfort",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ghent Eco-Friendly",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ghent Student Apartments",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Le Château d'Eau",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Le Clos des Abbesses",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Leuven Luxury",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liege City Center",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liege City Living",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liege City View",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liege Living",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liege Loft",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liege Luxe",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liege Luxury",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Mechelen Modern",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Namur City Center",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Namur City Living",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Namur River Views",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Namur Riverfront",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Namur Riverside",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Brussels Luxe Living",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ghent Canal Living",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ghent Gem",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ghent Waterfront",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liege City Loft",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ostend Beachside Condo",
+          "kind": "product",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Antwerp Abode",
+        "Antwerp Dream",
+        "Antwerp Haven",
+        "Antwerp Luxury Loft",
+        "Brussels Boutique",
+        "Brussels Bright",
+        "Brussels Green",
+        "Charleroi Comfort",
+        "Ghent Eco-Friendly",
+        "Ghent Student Apartments",
+        "Le Château d'Eau",
+        "Le Clos des Abbesses",
+        "Leuven Luxury",
+        "Liege City Center",
+        "Liege City Living",
+        "Liege City View",
+        "Liege Living",
+        "Liege Loft",
+        "Liege Luxe",
+        "Liege Luxury",
+        "Mechelen Modern",
+        "Namur City Center",
+        "Namur City Living",
+        "Namur River Views",
+        "Namur Riverfront",
+        "Namur Riverside",
+        "Brussels Luxe Living",
+        "Ghent Gem",
+        "Ghent Waterfront",
+        "Ostend Beachside Condo"
+      ],
+      "active_vocabulary": {
+        "Nonglak Srisombat": 50,
+        "Liege City Loft": 50,
+        "Ghent Canal Living": 50,
+        "Brugge Historic District": 50,
+        "Antwerp Abode": 50,
+        "Antwerp Dream": 50,
+        "Antwerp Haven": 50,
+        "Antwerp Luxury Loft": 50,
+        "Brussels Boutique": 50,
+        "Brussels Bright": 50,
+        "Brussels Green": 50,
+        "Charleroi Comfort": 50,
+        "Ghent Eco-Friendly": 50,
+        "Ghent Student Apartments": 50,
+        "Le Château d'Eau": 50,
+        "Le Clos des Abbesses": 50,
+        "Leuven Luxury": 50,
+        "Liege City Center": 50,
+        "Liege City Living": 50,
+        "Liege City View": 50,
+        "Liege Living": 50,
+        "Liege Loft": 50,
+        "Liege Luxe": 50,
+        "Liege Luxury": 50,
+        "Mechelen Modern": 50,
+        "Namur City Center": 50,
+        "Namur City Living": 50,
+        "Namur River Views": 50,
+        "Namur Riverfront": 50,
+        "Namur Riverside": 50,
+        "Brussels Luxe Living": 50,
+        "Ghent Gem": 50,
+        "Ghent Waterfront": 50,
+        "Ostend Beachside Condo": 50
+      },
+      "vocabulary_sha256": "68efa000c2eb06cce64a187a23d4ff2fcfa60f63ad8ed523d1ab120a59146132"
+    }
+  ]
+}

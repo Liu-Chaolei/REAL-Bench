@@ -1,0 +1,154 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0907_o8lhhq00pjqngpvp00cu0ireperv6ssu",
+  "model": "deepseek-flash",
+  "input_sha256": "872b791ea41e6b1e566791cdda91671a51dc0b27e2ada2b9488220b9bdaa5cd0",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Sunita",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Jiaqi",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-142c9988-7636-4f86-a408-0cb7413bc1ef.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Beatriz",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-142c9988-7636-4f86-a408-0cb7413bc1ef.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-142c9988-7636-4f86-a408-0cb7413bc1ef.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Yuxin Liang",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-06b44d90-c044-4241-aff4-19ddea4a532f.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zhaolong Liang",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-06b44d90-c044-4241-aff4-19ddea4a532f.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Jiaqi Zhang",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-0979d2ab-b50b-4dc9-8053-c8084a551c75.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Beatriz Silva Marques",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-0979d2ab-b50b-4dc9-8053-c8084a551c75.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Sunita",
+        "Jiaqi",
+        "Beatriz",
+        "Astrid Lundqvist",
+        "Yuxin Liang",
+        "Zhaolong Liang",
+        "Jiaqi Zhang",
+        "Beatriz Silva Marques"
+      ],
+      "active_vocabulary": {
+        "Sunita": 50,
+        "Jiaqi": 50,
+        "Beatriz": 50,
+        "Astrid Lundqvist": 50,
+        "Yuxin Liang": 50,
+        "Zhaolong Liang": 50,
+        "Jiaqi Zhang": 50,
+        "Beatriz Silva Marques": 50
+      },
+      "vocabulary_sha256": "eb7ee71cddaffa18d37234a0507f6a0d7d36e2f31c17a6300b8ad23807d7fb63"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Yuxin Liang",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zhaolong Liang",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Sunita": 50,
+        "Jiaqi": 50,
+        "Beatriz": 50,
+        "Astrid Lundqvist": 50,
+        "Yuxin Liang": 50,
+        "Zhaolong Liang": 50,
+        "Jiaqi Zhang": 50,
+        "Beatriz Silva Marques": 50
+      },
+      "vocabulary_sha256": "eb7ee71cddaffa18d37234a0507f6a0d7d36e2f31c17a6300b8ad23807d7fb63"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Yuxin Liang",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zhaolong Liang",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Sunita": 50,
+        "Jiaqi": 50,
+        "Beatriz": 50,
+        "Astrid Lundqvist": 50,
+        "Yuxin Liang": 50,
+        "Zhaolong Liang": 50,
+        "Jiaqi Zhang": 50,
+        "Beatriz Silva Marques": 50
+      },
+      "vocabulary_sha256": "eb7ee71cddaffa18d37234a0507f6a0d7d36e2f31c17a6300b8ad23807d7fb63"
+    }
+  ]
+}

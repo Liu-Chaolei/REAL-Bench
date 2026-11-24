@@ -1,0 +1,140 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0820_9lbodzqs3fsb26oz8uolg4isfjwwaufg__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "b1137825eb7252ba3d841c4e3067101565e336deec9c13114a3f185a1677e9fe",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaito",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e443b476-0c5f-4eb5-bfee-3df8378a1fe9.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-e443b476-0c5f-4eb5-bfee-3df8378a1fe9.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Tokyo",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kaito",
+        "Ursula Wiederkehr",
+        "Tokyo"
+      ],
+      "active_vocabulary": {
+        "Kaito": 50,
+        "Ursula Wiederkehr": 50,
+        "Tokyo": 50
+      },
+      "vocabulary_sha256": "27c75d3ccaf0ca8c6aa31d5afa5ee18bb37c19d78958b030796505fba41f6c13"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Léonie Ramseyer",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Alessia",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Alessia Ramseyer",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_cal.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zoom",
+          "kind": "product",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Léonie Ramseyer",
+        "Alessia",
+        "Alessia Ramseyer",
+        "Zoom"
+      ],
+      "active_vocabulary": {
+        "Kaito": 50,
+        "Ursula Wiederkehr": 50,
+        "Tokyo": 50,
+        "Léonie Ramseyer": 50,
+        "Alessia": 50,
+        "Alessia Ramseyer": 50,
+        "Zoom": 50
+      },
+      "vocabulary_sha256": "ba096d902beebd344df1d240155dd0730cffb9f48720d0cc79d3efd7363b5424"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Alessia",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Saskia",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Alessia Ramseyer",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zoom",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Aurélie",
+        "Saskia"
+      ],
+      "active_vocabulary": {
+        "Kaito": 50,
+        "Ursula Wiederkehr": 50,
+        "Tokyo": 50,
+        "Léonie Ramseyer": 50,
+        "Alessia": 50,
+        "Alessia Ramseyer": 50,
+        "Zoom": 50,
+        "Aurélie": 50,
+        "Saskia": 50
+      },
+      "vocabulary_sha256": "a4b039e64b092a05d25cf6f6d3e4ace06ebf088e187932805b19baabf9d23df5"
+    }
+  ]
+}

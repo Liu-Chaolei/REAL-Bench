@@ -1,0 +1,80 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0634_vl1sn9gyr68c5hgigh6r2aoutdgo5pjd",
+  "model": "deepseek-flash",
+  "input_sha256": "8572bff9b49d83a0efaac118f0432229dc0d3636262cd04f8b113154719d896e",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Adelaide Silva",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Acoustic Guitar Pinata",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Adelaide Silva",
+        "Acoustic Guitar Pinata"
+      ],
+      "active_vocabulary": {
+        "Adelaide Silva": 50,
+        "Acoustic Guitar Pinata": 50
+      },
+      "vocabulary_sha256": "0977a8c3f08b21cae1193de68a51ca5b59638d960eb4c7e98b08c7c8ae966422"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Adelaide",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Acoustic Guitar Pinata",
+          "kind": "product",
+          "source": "stage1.tool_gt.series_s1_message_adelaide.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Adelaide"
+      ],
+      "active_vocabulary": {
+        "Adelaide Silva": 50,
+        "Acoustic Guitar Pinata": 50,
+        "Adelaide": 50
+      },
+      "vocabulary_sha256": "e238f818315eaacc98a64b17383b427e9defbe4a7137ec841fbace78d3961a7c"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Acoustic Guitar Pinata",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Adelaide Silva": 50,
+        "Acoustic Guitar Pinata": 50,
+        "Adelaide": 50
+      },
+      "vocabulary_sha256": "e238f818315eaacc98a64b17383b427e9defbe4a7137ec841fbace78d3961a7c"
+    }
+  ]
+}

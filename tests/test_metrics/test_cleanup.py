@@ -2,7 +2,6 @@
 
 import pytest
 
-from tau2.data_model.judges import JudgeInput
 from tau2.data_model.semantic_communication import CommunicateScoring
 from tau2.data_model.simulation import RewardInfo, SimulationRun
 from tau2.data_model.tasks import EvaluationCriteria, RewardType, Task, UserScenario
@@ -125,36 +124,6 @@ def test_task_means_ignore_trial_count_and_keep_datasets_separate():
     assert "micro" not in report["metrics"]["intent"]
     rows.append(row("a", 0, "hidden"))
     assert summarize(rows)["metrics"]["intent"]["macro_f1"] == pytest.approx(1 / 3)
-
-
-def test_retired_judges_never_reach_backend_even_when_explicit(tmp_path):
-    from tau2.judges.catalog import load_catalog
-    from tau2.judges.suite import execute_suite
-
-    item = JudgeInput(
-        run_id="r",
-        simulation_id="s",
-        trial=0,
-        domain="gaia2",
-        language="en",
-        agent_gender="female",
-        input_fingerprint="a" * 64,
-        has_audio=True,
-    )
-
-    def forbidden(*args):
-        pytest.fail("retired judge reached backend")
-
-    plan = execute_suite(
-        [item],
-        load_catalog(),
-        tmp_path / "verdicts.json",
-        only=["naturalness", "speech_fidelity", "tool_use"],
-        force=True,
-        backend=forbidden,
-    )
-    assert plan.items == []
-    assert not (tmp_path / "verdicts.json").exists()
 
 
 def test_backend_result_summary_reads_old_fields_without_overriding_new_zero():

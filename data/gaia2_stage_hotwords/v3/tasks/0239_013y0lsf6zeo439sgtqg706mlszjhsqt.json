@@ -1,0 +1,81 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0239_013y0lsf6zeo439sgtqg706mlszjhsqt",
+  "model": "deepseek-flash",
+  "input_sha256": "0fd98834d5b67b0ae55c554797f445cbf9d5e44ef98a16ff2de9f65aeb7e33e2",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kirsten Ravnkilde",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Yoga Studio",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kirsten Ravnkilde",
+        "Søren Kjær",
+        "Yoga Studio"
+      ],
+      "active_vocabulary": {
+        "Kirsten Ravnkilde": 50,
+        "Søren Kjær": 50,
+        "Yoga Studio": 50
+      },
+      "vocabulary_sha256": "93ef831825ee5c96b84c5fdbad4f6535744b42c8452293f62230e97a8afb36a0"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kirsten Ravnkilde",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Yoga Studio",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kirsten Ravnkilde": 50,
+        "Søren Kjær": 50,
+        "Yoga Studio": 50
+      },
+      "vocabulary_sha256": "93ef831825ee5c96b84c5fdbad4f6535744b42c8452293f62230e97a8afb36a0"
+    }
+  ]
+}

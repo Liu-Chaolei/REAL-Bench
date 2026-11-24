@@ -266,7 +266,9 @@ class RewardType(str, Enum):
     NL_ASSERTION = "NL_ASSERTION"
     ACTION = "ACTION"
     COMMUNICATE = "COMMUNICATE"
-    PERSISTENT_TASK = "PERSISTENT_TASK"
+    PERSISTENT_TASK = (
+        "PERSISTENT_TASK"  # Historical results only; retired for new runs.
+    )
 
 
 class TaskIssueStatus(str, Enum):

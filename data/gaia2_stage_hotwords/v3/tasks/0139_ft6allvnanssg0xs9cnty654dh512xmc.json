@@ -1,0 +1,104 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0139_ft6allvnanssg0xs9cnty654dh512xmc",
+  "model": "deepseek-flash",
+  "input_sha256": "0ae2534ffa6fb8deddb36a1ed36b378fa253ee5b3a20fe767c024855b312d51a",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Akira",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Akira"
+      ],
+      "active_vocabulary": {
+        "Akira": 50
+      },
+      "vocabulary_sha256": "a23efdc48a7da37eaef0b77d342a63240be46b63c08df1d9e383fa4b6021c629"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Akira",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Basel",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Basel",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Akira": 50,
+        "Basel": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "133bac68105768ea477bd7275638dcae1fbde1e6ba79cc0a051d057327e690e5"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Mittlere Strasse 12",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Basel",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Switzerland",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Yoga Studio in Basel",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Mittlere Strasse 12",
+        "Switzerland",
+        "Yoga Studio in Basel"
+      ],
+      "active_vocabulary": {
+        "Akira": 50,
+        "Basel": 50,
+        "Ursula Wiederkehr": 50,
+        "Mittlere Strasse 12": 50,
+        "Switzerland": 50,
+        "Yoga Studio in Basel": 50
+      },
+      "vocabulary_sha256": "54d122e73d174b26915ea67bad4507db6b564967885c34cd9c0d48ca7084af8c"
+    }
+  ]
+}

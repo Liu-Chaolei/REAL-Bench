@@ -1,0 +1,167 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0452_wy5m8xi2s8h377krn5o5r616w1iv36km",
+  "model": "deepseek-flash",
+  "input_sha256": "3d628b37216d64c7a8bca138936e90e10af78d01ff3baa9f2f048450778e6420",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Zorbitz Inc.",
+          "kind": "organization",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Blockerz Sparkle",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Historical Research Meeting",
+          "kind": "custom_name",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Zorbitz Inc.",
+        "Blockerz Sparkle",
+        "Historical Research Meeting"
+      ],
+      "active_vocabulary": {
+        "Zorbitz Inc.": 50,
+        "Blockerz Sparkle": 50,
+        "Historical Research Meeting": 50
+      },
+      "vocabulary_sha256": "7392c828d34d29955e4cfc298b21dfde574282454a4e8ac761e6d793173f11ac"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create.arguments.attendees[1]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélie Wyss",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_create.arguments.attendees[2]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "University of Basel",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Historical Research Meeting",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Aurélien Vandenberghe",
+        "Liesbeth Vandenberghe",
+        "Aurélie Wyss",
+        "University of Basel",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Zorbitz Inc.": 50,
+        "Blockerz Sparkle": 50,
+        "Historical Research Meeting": 50,
+        "Aurélien Vandenberghe": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Aurélie Wyss": 50,
+        "University of Basel": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "8a18f36f2d85e3bfab830b95f5798c539becb3421ab3be1b4381c0f4afed291d"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Akira Nakamura",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_allocation.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélie Wyss",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_allocation.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aurélien Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_allocation.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_allocation.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Saskia Wyss",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email_allocation.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Zorbitz Inc.",
+          "kind": "organization",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Blockerz Sparkle",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Akira Nakamura",
+        "Saskia Wyss"
+      ],
+      "active_vocabulary": {
+        "Zorbitz Inc.": 50,
+        "Blockerz Sparkle": 50,
+        "Historical Research Meeting": 50,
+        "Aurélien Vandenberghe": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Aurélie Wyss": 50,
+        "University of Basel": 50,
+        "Ursula Wiederkehr": 50,
+        "Akira Nakamura": 50,
+        "Saskia Wyss": 50
+      },
+      "vocabulary_sha256": "27e6c054d41f903debda0a3dc0b73b84fa98fdd2e74f8d029ff6035566f2a92f"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0440_jf13lgl41rqdhskxrffkm01n14ca9z50",
+  "model": "deepseek-flash",
+  "input_sha256": "b068724e0f1a0937176cf863e2b27bcc331aaeeac9445f55204f9fe49f96da29",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Praha 1",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Praha 2",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Prague",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Praha 1",
+        "Praha 2",
+        "Prague"
+      ],
+      "active_vocabulary": {
+        "Praha 1": 50,
+        "Praha 2": 50,
+        "Prague": 50
+      },
+      "vocabulary_sha256": "7f5aeb295bcc33ae7bfdd4767581618c458f05326f8cd9309cd7ed001fd6e8bc"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Helga Steinbacher",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_add_followup.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Helga",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Helga Steinbacher",
+        "Helga"
+      ],
+      "active_vocabulary": {
+        "Praha 1": 50,
+        "Praha 2": 50,
+        "Prague": 50,
+        "Helga Steinbacher": 50,
+        "Helga": 50
+      },
+      "vocabulary_sha256": "e18bfe1400337bc406f59b4512ad4e4d75a12d09fe51f4539f1dcc9fe8857acf"
+    }
+  ]
+}

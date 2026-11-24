@@ -1,0 +1,133 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0909_q04sd2kko687gwcdg4liz0dr07kqkqbw",
+  "model": "deepseek-flash",
+  "input_sha256": "b6f3c676732f7a0683856a86686fd47b7c0e24f6b283741fdabd375dcad04ce1",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kofi Ogunlesi",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Fosswinckels gate 10, Bergen",
+          "kind": "place",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Frognerveien 34, 0266 Oslo, Norway",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-a932d076-c54f-4271-a2a7-46d28d33b9e6.arguments.start_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Filipstad Brygge 2, Oslo",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-1315e0aa-facf-422d-98e8-12650339c56d.arguments.end_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kofi Ogunlesi",
+        "Fosswinckels gate 10, Bergen",
+        "Frognerveien 34, 0266 Oslo, Norway",
+        "Filipstad Brygge 2, Oslo"
+      ],
+      "active_vocabulary": {
+        "Kofi Ogunlesi": 50,
+        "Fosswinckels gate 10, Bergen": 50,
+        "Frognerveien 34, 0266 Oslo, Norway": 50,
+        "Filipstad Brygge 2, Oslo": 50
+      },
+      "vocabulary_sha256": "15c81f509fa505bda931cabee9e73b8d2f3f2131fbf1a7a30b1f06075c4fd165"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Bergen Student Housing",
+          "kind": "organization",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Fosswinckels gate 10, Bergen",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kofi Ogunlesi",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Bergen Student Housing"
+      ],
+      "active_vocabulary": {
+        "Kofi Ogunlesi": 50,
+        "Fosswinckels gate 10, Bergen": 50,
+        "Frognerveien 34, 0266 Oslo, Norway": 50,
+        "Filipstad Brygge 2, Oslo": 50,
+        "Bergen Student Housing": 50
+      },
+      "vocabulary_sha256": "34c981376a9726b1932a7fa5e76616a8989d9e0833f62e797740a6e3ffd57f68"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Bergen apartment details review",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Fosswinckels gate 10, Bergen",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kofi Ogunlesi",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Bergen Student Housing",
+          "kind": "organization",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Filipstad Brygge 2, Oslo",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_create.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Bergen apartment details review"
+      ],
+      "active_vocabulary": {
+        "Kofi Ogunlesi": 50,
+        "Fosswinckels gate 10, Bergen": 50,
+        "Frognerveien 34, 0266 Oslo, Norway": 50,
+        "Filipstad Brygge 2, Oslo": 50,
+        "Bergen Student Housing": 50,
+        "Bergen apartment details review": 50
+      },
+      "vocabulary_sha256": "ea5435c00faeab74a4b9a35690071aca1923f0175d99effbba28b8bf4796aefc"
+    }
+  ]
+}

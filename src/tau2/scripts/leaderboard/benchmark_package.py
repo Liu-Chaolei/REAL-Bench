@@ -1,13 +1,10 @@
-"""The 2.0 leaderboard package: rewards, judge diagnostics and display metadata.
+"""The 2.0 leaderboard package: rewards, run provenance and display metadata.
 
 A package is three or four files in one directory:
 
 - ``benchmark-submission.json``: the frozen frame, every task/trial reward and
   the recomputable summary (``tau2.data_model.benchmark.BenchmarkSubmission``).
-- ``benchmark-diagnostics.json``: voice-v2 only; per-cell judge summaries and
-  verdict fingerprints (``tau2.judges.submission.BenchmarkDiagnostics``).
-- ``benchmark-quality.json``: voice-v2 only; call-level Interaction and
-  Experience (Generation quality) per scored call
+- ``benchmark-quality.json``: voice-v2 only; run provenance per scored call
   (``tau2.scripts.leaderboard.benchmark_quality.BenchmarkQuality``).
 - ``benchmark-pass3.json``: voice-v2-entity only; each task's outcome in the
   three crossed conditions and the Pass^3 score the leaderboard shows
@@ -27,8 +24,6 @@ from typing import Annotated, Literal
 from pydantic import BaseModel, ConfigDict, Field
 
 from tau2.data_model.benchmark import BenchmarkSubmission
-from tau2.judges import submission as judge_submission
-from tau2.judges.submission import DIAGNOSTICS_FILE_NAME, BenchmarkDiagnostics
 from tau2.metrics.benchmark import validate_submission
 from tau2.scripts.leaderboard.benchmark_pass3 import (
     PASS3_BENCHMARKS,
@@ -48,7 +43,6 @@ SUBMISSION_FILE_NAME = "benchmark-submission.json"
 METADATA_FILE_NAME = "benchmark-metadata.json"
 PACKAGE_FILE_NAMES = (
     SUBMISSION_FILE_NAME,
-    DIAGNOSTICS_FILE_NAME,
     QUALITY_FILE_NAME,
     PASS3_FILE_NAME,
     METADATA_FILE_NAME,
@@ -57,7 +51,7 @@ PACKAGE_FILE_NAMES = (
 # How the package's evidence root is laid out, and which reader recomputes it.
 # "matrix": a `tau2 run --benchmark ... --save-to` root (`<lang>-<domain>/` cells).
 # "historical-voice-v2-2026-10-02": the frozen release export
-# (`trajectories/<lang>/<domain>/`) plus its saved judge verdicts.
+# (`trajectories/<lang>/<domain>/`) plus its saved trajectories.
 Evidence = Literal["matrix", "historical-voice-v2-2026-10-02"]
 # Package-name suffixes of the domain frames that fill an agent's voice-v2 row.
 DOMAIN_PACKAGE_SUFFIXES = {"voice-v2-banking": "banking", "voice-v2-entity": "entity"}
@@ -134,7 +128,6 @@ class BenchmarkPackage(BaseModel):
     model_config = ConfigDict(extra="forbid")
     metadata: PackageMetadata
     submission: BenchmarkSubmission
-    diagnostics: BenchmarkDiagnostics | None
     quality: BenchmarkQuality | None = None
     pass3: BenchmarkPass3 | None = None
 
@@ -144,25 +137,7 @@ class BenchmarkPackage(BaseModel):
         if not self.submission.summary.complete:
             raise ValueError("A leaderboard package requires a complete matrix")
         frame = self.submission.frame
-        judged = frame.benchmark_version in judge_submission.JUDGED_BENCHMARKS
-        if judged and self.diagnostics is None:
-            raise ValueError(f"Package lacks {DIAGNOSTICS_FILE_NAME}")
-        if not judged and self.diagnostics is not None:
-            raise ValueError(f"{frame.benchmark_version} carries no judge diagnostics")
-        if self.diagnostics is not None:
-            if (
-                self.diagnostics.benchmark_version != frame.benchmark_version
-                or self.diagnostics.frame_revision != frame.revision
-            ):
-                raise ValueError("Diagnostics and rewards cite different frames")
-            cells = {(cell.language, cell.domain) for cell in frame.cells}
-            judged_cells = [
-                (cell.language, cell.domain) for cell in self.diagnostics.cells
-            ]
-            if len(judged_cells) != len(cells) or set(judged_cells) != cells:
-                raise ValueError("Diagnostics must cover every frame cell once")
-        # Call quality reads judge verdicts, so only judged frames carry it.
-        rated = judged and frame.benchmark_version in QUALITY_BENCHMARKS
+        rated = frame.benchmark_version in QUALITY_BENCHMARKS
         if rated and self.quality is None:
             raise ValueError(f"Package lacks {QUALITY_FILE_NAME}")
         if not rated and self.quality is not None:
@@ -187,10 +162,6 @@ class BenchmarkPackage(BaseModel):
         (directory / SUBMISSION_FILE_NAME).write_text(
             self.submission.model_dump_json(indent=2) + "\n"
         )
-        if self.diagnostics is not None:
-            (directory / DIAGNOSTICS_FILE_NAME).write_text(
-                self.diagnostics.model_dump_json(indent=2) + "\n"
-            )
         if self.quality is not None:
             (directory / QUALITY_FILE_NAME).write_text(
                 self.quality.model_dump_json(indent=2) + "\n"
@@ -232,7 +203,6 @@ def load_package(directory: Path) -> BenchmarkPackage:
     for name in (SUBMISSION_FILE_NAME, METADATA_FILE_NAME):
         if not (directory / name).is_file():
             raise ValueError(f"Package {directory} lacks {name}")
-    diagnostics_path = directory / DIAGNOSTICS_FILE_NAME
     quality_path = directory / QUALITY_FILE_NAME
     pass3_path = directory / PASS3_FILE_NAME
     return BenchmarkPackage(
@@ -242,11 +212,6 @@ def load_package(directory: Path) -> BenchmarkPackage:
         submission=BenchmarkSubmission.model_validate_json(
             (directory / SUBMISSION_FILE_NAME).read_text()
         ),
-        diagnostics=BenchmarkDiagnostics.model_validate_json(
-            diagnostics_path.read_text()
-        )
-        if diagnostics_path.is_file()
-        else None,
         quality=BenchmarkQuality.model_validate_json(quality_path.read_text())
         if quality_path.is_file()
         else None,

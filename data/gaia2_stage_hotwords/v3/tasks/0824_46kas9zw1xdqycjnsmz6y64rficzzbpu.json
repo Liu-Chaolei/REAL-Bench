@@ -1,0 +1,120 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0824_46kas9zw1xdqycjnsmz6y64rficzzbpu",
+  "model": "deepseek-flash",
+  "input_sha256": "3692b7e70843bcdb8960cb12698226ccc47172b4abfb75455a64e26a51f2f666",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Avengers: Endgame",
+          "kind": "product",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-71174ad0-2e49-4ec8-a64e-56333c521e4b.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Spider-Man: Far from Home",
+          "kind": "product",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-71174ad0-2e49-4ec8-a64e-56333c521e4b.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Captain Marvel",
+          "kind": "product",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-71174ad0-2e49-4ec8-a64e-56333c521e4b.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Marvel Movies",
+          "kind": "product",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Avengers: Endgame",
+        "Spider-Man: Far from Home",
+        "Captain Marvel",
+        "Marvel Movies"
+      ],
+      "active_vocabulary": {
+        "Avengers: Endgame": 50,
+        "Spider-Man: Far from Home": 50,
+        "Captain Marvel": 50,
+        "Marvel Movies": 50
+      },
+      "vocabulary_sha256": "100d81f43db16a991f9243b8a140699ef7cab3ee8401b7d1d43dabeaf8fb891f"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Avengers: Endgame",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Spider-Man: Far From Home",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Captain Marvel",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Marvel Movies",
+          "kind": "product",
+          "source": "stage1.reference_reply.series_s1_reply.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Avengers: Endgame": 50,
+        "Spider-Man: Far from Home": 50,
+        "Captain Marvel": 50,
+        "Marvel Movies": 50
+      },
+      "vocabulary_sha256": "100d81f43db16a991f9243b8a140699ef7cab3ee8401b7d1d43dabeaf8fb891f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Avengers: Endgame",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Spider-Man: Far From Home",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Captain Marvel",
+          "kind": "product",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Avengers: Endgame": 50,
+        "Spider-Man: Far from Home": 50,
+        "Captain Marvel": 50,
+        "Marvel Movies": 50
+      },
+      "vocabulary_sha256": "100d81f43db16a991f9243b8a140699ef7cab3ee8401b7d1d43dabeaf8fb891f"
+    }
+  ]
+}

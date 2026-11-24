@@ -1,0 +1,27 @@
+{
+  "image": "docker.v2.aispeech.com/sjtu/sjtu_yukai-tau-qwen-agent:0.5.4-scenario-clock",
+  "boot_timeout_seconds": 180,
+  "tool_timeout_seconds": 120,
+  "max_buffer_seconds": 1200,
+  "asr_provider": "qwen",
+  "asr_model": "qwen-audio-3.1-asr-flash-streaming",
+  "asr_append_seconds": 2.0,
+  "playback_sample_rate": 24000,
+  "asr_hotwords": {
+    "enabled": true,
+    "mode": "gaia2_stage_gt",
+    "weight": 50,
+    "max_terms": 2000,
+    "catalog_dir": "data/gaia2_stage_hotwords/v3"
+  },
+  "watchdog": {
+    "enabled": false,
+    "initial_check_ticks": 6000,
+    "check_interval_ticks": 3000,
+    "max_total_ticks": 12000,
+    "judge_timeout_seconds": 30,
+    "heartbeat_timeout_seconds": 180,
+    "context_ticks": 120
+  },
+  "api_config_dir": "~/.config/qwaudio"
+}

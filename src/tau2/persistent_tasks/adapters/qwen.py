@@ -5,9 +5,12 @@ from __future__ import annotations
 from collections.abc import Iterable, Mapping
 from typing import Any
 
-from tau2.persistent_tasks.core.models import BackendTaskObservation, CanonicalState
+from tau2.persistent_tasks.core.models import (
+    BackendTaskObservation,
+    CanonicalState,
+    ObservedEvent,
+)
 from tau2.persistent_tasks.core.observation import event_from_mapping
-from tau2.persistent_tasks.models import ObservedEvent
 
 
 class QwenEventAdapter:

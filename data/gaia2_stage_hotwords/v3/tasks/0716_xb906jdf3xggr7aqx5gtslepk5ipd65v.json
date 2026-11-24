@@ -1,0 +1,138 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0716_xb906jdf3xggr7aqx5gtslepk5ipd65v",
+  "model": "deepseek-flash",
+  "input_sha256": "37bf91911c80e8ec289fb339944ff352043289b209f842445f348e531a613058",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Yujie Liang",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Yujie",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Haga, Göteborg",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-bd443c6e-1b9e-4633-8b70-c76f836ca526.arguments.location",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Yujie Liang",
+        "Yujie",
+        "Haga, Göteborg"
+      ],
+      "active_vocabulary": {
+        "Yujie Liang": 50,
+        "Yujie": 50,
+        "Haga, Göteborg": 50
+      },
+      "vocabulary_sha256": "55ba6787460d92a75a6f9c850f09cf7561949ba942dec6d172ac06411309a80a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Göteborg",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Göteborgs Gård",
+          "kind": "place",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Göteborg City Center",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_chat.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Avenyn 10",
+          "kind": "place",
+          "source": "stage1.tool_gt.series_s1_chat.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Yujie",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Göteborg",
+        "Göteborgs Gård",
+        "Göteborg City Center",
+        "Avenyn 10"
+      ],
+      "active_vocabulary": {
+        "Yujie Liang": 50,
+        "Yujie": 50,
+        "Haga, Göteborg": 50,
+        "Göteborg": 50,
+        "Göteborgs Gård": 50,
+        "Göteborg City Center": 50,
+        "Avenyn 10": 50
+      },
+      "vocabulary_sha256": "a53cb9e4d74e0e04a360529eeb99dbf3bdf373a5f57846f3dfef5ce2a3944e8b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Göteborg City Center",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Avenyn 10, Göteborg",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Yujie Liang",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Yujie",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Avenyn 10, Göteborg"
+      ],
+      "active_vocabulary": {
+        "Yujie Liang": 50,
+        "Yujie": 50,
+        "Haga, Göteborg": 50,
+        "Göteborg": 50,
+        "Göteborgs Gård": 50,
+        "Göteborg City Center": 50,
+        "Avenyn 10": 50,
+        "Avenyn 10, Göteborg": 50
+      },
+      "vocabulary_sha256": "5e62ccb8420f8ab8bc087d7805390b2cbe498adfc2a384ee892e6a9465d1d4d0"
+    }
+  ]
+}

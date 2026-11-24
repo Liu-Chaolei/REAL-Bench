@@ -1,0 +1,130 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0214_eht1on2zsfnwid1zfnadsqwx1zmpsvzq",
+  "model": "deepseek-flash",
+  "input_sha256": "306b30cb9f2d8f80e7fa28bf4cfd5ff14a0b5864cc8687a329cce8ed6c7dc66f",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aoife Ní Chonaill",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aidan Ó Cuinn",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ximena García Hernández",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage0.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Tverskaya Street, Moscow",
+          "kind": "place",
+          "source": "stage0.tool_gt.OracleEvent-AGENT-f1e5415e-308b-4876-8e9b-ada885930312.arguments.end_location",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Aoife Ní Chonaill",
+        "Aidan Ó Cuinn",
+        "Ximena García Hernández",
+        "Viktor Kuznetsov",
+        "Tverskaya Street, Moscow"
+      ],
+      "active_vocabulary": {
+        "Aoife Ní Chonaill": 50,
+        "Aidan Ó Cuinn": 50,
+        "Ximena García Hernández": 50,
+        "Viktor Kuznetsov": 50,
+        "Tverskaya Street, Moscow": 50
+      },
+      "vocabulary_sha256": "eb385f2b19ed40e43c3d351a4bab84dd05cb3764a33177e74352f2a0e12e3b91"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aoife Ní Chonaill",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aidan Ó Cuinn",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Ximena García Hernández",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aoife Ní Chonaill": 50,
+        "Aidan Ó Cuinn": 50,
+        "Ximena García Hernández": 50,
+        "Viktor Kuznetsov": 50,
+        "Tverskaya Street, Moscow": 50
+      },
+      "vocabulary_sha256": "eb385f2b19ed40e43c3d351a4bab84dd05cb3764a33177e74352f2a0e12e3b91"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Ximena García Hernández",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aoife Ní Chonaill",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_calendar.arguments.attendees[0]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Aidan Ó Cuinn",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_calendar.arguments.attendees[1]",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Tverskaya Street, Moscow",
+          "kind": "place",
+          "source": "stage2.tool_gt.series_s2_calendar.arguments.description",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aoife Ní Chonaill": 50,
+        "Aidan Ó Cuinn": 50,
+        "Ximena García Hernández": 50,
+        "Viktor Kuznetsov": 50,
+        "Tverskaya Street, Moscow": 50
+      },
+      "vocabulary_sha256": "eb385f2b19ed40e43c3d351a4bab84dd05cb3764a33177e74352f2a0e12e3b91"
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0415_ksd1rp3drlzqm9xq1amkmkqb0rff1q8l",
+  "model": "deepseek-flash",
+  "input_sha256": "20393ab54aa5c307e4cd6744850052e6748ecd5fee098d7be3663efe60872afb",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kalyan Rao",
+          "kind": "person",
+          "source": "stage0.reference_reply.OracleEvent-AGENT-c1e59876-ef7a-4a16-851c-b249114bb692.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kalyan Rao"
+      ],
+      "active_vocabulary": {
+        "Kalyan Rao": 50
+      },
+      "vocabulary_sha256": "f55e94382a0720567486af25d86dd6701ec92930ea3b5dbb4c635d5f1da59cc7"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kalyan Rao",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Kalyan ji",
+          "kind": "person",
+          "source": "stage1.tool_gt.series_s1_send.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Foucault",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Dadar East",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Shanti Niketan",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Mumbai",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Maharashtra",
+          "kind": "place",
+          "source": "stage1.reference_reply.series_s1_answer.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohan",
+          "kind": "person",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Kalyan ji",
+        "Foucault",
+        "Dadar East",
+        "Shanti Niketan",
+        "Mumbai",
+        "Maharashtra",
+        "Rohan"
+      ],
+      "active_vocabulary": {
+        "Kalyan Rao": 50,
+        "Kalyan ji": 50,
+        "Foucault": 50,
+        "Dadar East": 50,
+        "Shanti Niketan": 50,
+        "Mumbai": 50,
+        "Maharashtra": 50,
+        "Rohan": 50
+      },
+      "vocabulary_sha256": "ec7a30dd26fee2d0cf8ffab16d06dddc4bb82799a62124dbe91e7603d72ea603"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kalyan ji",
+          "kind": "person",
+          "source": "stage2.tool_gt.series_s2_email.arguments.content",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Foucault",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Conference Room",
+          "kind": "place",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Rohan Kumar",
+        "Conference Room"
+      ],
+      "active_vocabulary": {
+        "Kalyan Rao": 50,
+        "Kalyan ji": 50,
+        "Foucault": 50,
+        "Dadar East": 50,
+        "Shanti Niketan": 50,
+        "Mumbai": 50,
+        "Maharashtra": 50,
+        "Rohan": 50,
+        "Rohan Kumar": 50,
+        "Conference Room": 50
+      },
+      "vocabulary_sha256": "6d00ca78fadb1d20d5140c0f0d15ab3a0cb57f1e63e4d5ac66a1161e5e480c0b"
+    }
+  ]
+}

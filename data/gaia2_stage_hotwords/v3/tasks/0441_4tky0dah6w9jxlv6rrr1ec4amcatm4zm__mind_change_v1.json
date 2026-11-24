@@ -1,0 +1,60 @@
+{
+  "version": "gaia2-stage-hotwords-v3",
+  "task_id": "0441_4tky0dah6w9jxlv6rrr1ec4amcatm4zm__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "bdba6d9138f2844a2d50b741217432be50955fe9ebea1674e2bc8594adfdd73f",
+  "prompt_sha256": "6b16a6b205ac26bd203d0dcf9c8bf40fc87be6bfc0e93124bbdce5a6da5e457c",
+  "weight": 50,
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Prague Luxury",
+          "kind": "custom_name",
+          "source": "stage1.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Prague Luxury"
+      ],
+      "active_vocabulary": {
+        "Prague Luxury": 50
+      },
+      "vocabulary_sha256": "b5ee52d5d4dfce3fbe21ac9e19402ad71b26539baf3693d7919cf052101493a8"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Prague Luxury",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        },
+        {
+          "text": "Riverfront Residence",
+          "kind": "custom_name",
+          "source": "stage2.source_task",
+          "reason": "retained reviewed phrase grounded in current task"
+        }
+      ],
+      "new_terms": [
+        "Riverfront Residence"
+      ],
+      "active_vocabulary": {
+        "Prague Luxury": 50,
+        "Riverfront Residence": 50
+      },
+      "vocabulary_sha256": "39dc3367937f5e3dea2842a6801f36e21c6ae9aa93f58cce10a7c05509e89d22"
+    }
+  ]
+}
