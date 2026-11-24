@@ -134,7 +134,9 @@ def run_simulation(
     from tau2.persistent_tasks.availability import resolve_config
 
     if active_metrics_config is None:
-        persistent_task_config = resolve_config(orchestrator.task, persistent_task_config)
+        persistent_task_config = resolve_config(
+            orchestrator.task, persistent_task_config
+        )
     if persistent_task_config is not None:
         from tau2.persistent_tasks.integration import install
 

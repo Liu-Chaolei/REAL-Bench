@@ -609,8 +609,7 @@ def test_provider_timeout_retries_and_audits_attempts(tmp_path, monkeypatch):
     attempts = list((tmp_path / "attempts").glob("*.json"))
     assert len(attempts) == 2
     assert all(
-        json.loads(path.read_text())["status"] == "provider_error"
-        for path in attempts
+        json.loads(path.read_text())["status"] == "provider_error" for path in attempts
     )
 
 

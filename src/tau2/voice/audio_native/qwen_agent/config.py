@@ -28,6 +28,7 @@ from tau2.config import (
 from tau2.data_model.asr import HotwordSettings
 from tau2.data_model.dynamic_followup import DynamicFollowupConfig
 from tau2.data_model.voice import MiMoTTSConfig, QwenTTSConfig
+from tau2.data_model.watchdog import WatchdogConfig
 from tau2.utils.env_config import read_config_environment, resolve_env_reference
 
 
@@ -121,6 +122,10 @@ class QwenAgentConfig(BaseModel):
         description=(
             "Opt-in contextual rendering for the second and third fixed scenario requests"
         ),
+    )
+    watchdog: WatchdogConfig = Field(
+        default_factory=WatchdogConfig,
+        description="Optional full-duplex semantic watchdog settings.",
     )
 
     @model_validator(mode="after")

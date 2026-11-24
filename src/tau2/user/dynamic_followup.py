@@ -243,9 +243,7 @@ def generate_dynamic_followup(
     """Render one fixed stage goal using the preceding live conversation."""
     context = _compact_context(conversation, config.max_context_characters)
     facts = "\n".join(released_facts[-8:])
-    inferred_status, inferred_affect = infer_status_affect(
-        conversation, released_facts
-    )
+    inferred_status, inferred_affect = infer_status_affect(conversation, released_facts)
     stage_status = stage_status or inferred_status
     affect = affect or inferred_affect
     tool_gt = json.dumps(

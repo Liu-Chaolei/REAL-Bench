@@ -44,8 +44,15 @@ def history_messages(history: str) -> list[SimpleNamespace]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--config", type=Path, default=ROOT / "integrations/qwen_audio_agent/config.gaia2.dynamic.metrics.deepseek-user.json")
-    parser.add_argument("--simulations-root", type=Path, default=ROOT / "data/simulations")
+    parser.add_argument(
+        "--config",
+        type=Path,
+        default=ROOT
+        / "integrations/qwen_audio_agent/config.gaia2.dynamic.metrics.deepseek-user.json",
+    )
+    parser.add_argument(
+        "--simulations-root", type=Path, default=ROOT / "data/simulations"
+    )
     parser.add_argument("--output", type=Path, default=OUTPUT)
     args = parser.parse_args()
     config = QwenAgentConfig.model_validate_json(args.config.read_text())

@@ -52,9 +52,12 @@ class Gaia2Environment(Environment):
             from tau2.domains.gaia2.utils import runtime_digest, verify_task_artifact
             from tau2.domains.gaia2.verify import verify_pinned_resources
 
-            if not allow_stale_runtime and (not manifest.get("verified") or (
-                runtime_mode != "replay" and spec.runtime_sha256 != runtime_digest()
-            )):
+            if not allow_stale_runtime and (
+                not manifest.get("verified")
+                or (
+                    runtime_mode != "replay" and spec.runtime_sha256 != runtime_digest()
+                )
+            ):
                 raise ValueError(
                     "Gaia2 data/runtime is not verified; run 'tau2 gaia2 verify --reference --seal'"
                 )

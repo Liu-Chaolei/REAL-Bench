@@ -36,7 +36,9 @@ def score_hidden_intent(
         "ask_specificity": 1.0 - (len(invalid) / max(len(state.transitions), 1)),
         "premature_action_rate": len(premature) / max(denominator, 1),
         "goal_graph_completion_rate": sum(
-            state.node_states.get(node.id) == "satisfied" for node in graph.nodes if node.required
+            state.node_states.get(node.id) == "satisfied"
+            for node in graph.nodes
+            if node.required
         )
         / max(sum(node.required for node in graph.nodes), 1),
         "task_pass_at_1": task_passed,

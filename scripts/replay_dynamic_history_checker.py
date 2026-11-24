@@ -50,14 +50,23 @@ def _candidate(raw_path: Path) -> dict:
 def _safe_error(error: Exception) -> str:
     # Do not put API credentials or complete prompts into the report.
     text = str(error)
-    text = re.sub(r"(?i)(api[_ -]?key|authorization|bearer)\s*[:=]\s*\S+", r"\1=[REDACTED]", text)
+    text = re.sub(
+        r"(?i)(api[_ -]?key|authorization|bearer)\s*[:=]\s*\S+", r"\1=[REDACTED]", text
+    )
     return text[:2000]
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--config", type=Path, default=ROOT / "integrations/qwen_audio_agent/config.gaia2.dynamic.metrics.deepseek-user.json")
-    parser.add_argument("--simulations-root", type=Path, default=ROOT / "data/simulations")
+    parser.add_argument(
+        "--config",
+        type=Path,
+        default=ROOT
+        / "integrations/qwen_audio_agent/config.gaia2.dynamic.metrics.deepseek-user.json",
+    )
+    parser.add_argument(
+        "--simulations-root", type=Path, default=ROOT / "data/simulations"
+    )
     parser.add_argument("--output", type=Path, default=OUTPUT)
     args = parser.parse_args()
     config = QwenAgentConfig.model_validate_json(args.config.read_text())
@@ -109,7 +118,9 @@ def main() -> int:
                 conversation=_messages(data["history"]),
                 released_facts=[data["released"]],
                 config=replay_config,
-                tool_call_gt=tool_gt_for_stage(load_task(data["task_id"]), data["stage"]),
+                tool_call_gt=tool_gt_for_stage(
+                    load_task(data["task_id"]), data["stage"]
+                ),
             )
             result["accepted"] = True
             result["verification"] = verification.model_dump(mode="json")

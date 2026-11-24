@@ -224,7 +224,9 @@ def load_task(task_id: str) -> dict[str, Any]:
 
 
 def tool_gt_for_stage(task: dict[str, Any], stage: int) -> list[dict[str, Any]]:
-    stage_data = next(item for item in task["scenario"]["stages"] if item["stage"] == stage)
+    stage_data = next(
+        item for item in task["scenario"]["stages"] if item["stage"] == stage
+    )
     wanted = set(stage_data.get("event_ids", []))
     events = []
     for event in task["scenario"]["events"]:
@@ -337,7 +339,9 @@ def normalize_graph(raw: RawGoalGraph, stage: int, source: str) -> GoalGraph:
         ]
         visibility = item.get("visibility")
         if visibility is None:
-            visibility = "caller_visible" if item.get("caller_visible", True) else "backend_only"
+            visibility = (
+                "caller_visible" if item.get("caller_visible", True) else "backend_only"
+            )
         if visibility not in {"caller_visible", "backend_only"}:
             visibility = "caller_visible"
         protected = _value_list(
@@ -398,7 +402,9 @@ def normalize_graph(raw: RawGoalGraph, stage: int, source: str) -> GoalGraph:
         if (
             node.tool
             and any(word in node.tool.casefold() for word in ("get_", "list_", "read_"))
-            and not any(word in source_lower for word in ("check", "verify", "sent folder"))
+            and not any(
+                word in source_lower for word in ("check", "verify", "sent folder")
+            )
         ):
             node.visibility = "backend_only"
         if node.kind == "report":
@@ -407,7 +413,9 @@ def normalize_graph(raw: RawGoalGraph, stage: int, source: str) -> GoalGraph:
                     node.description = report_text
                 if not node.arguments:
                     node.arguments = {"required_output": report_text}
-            elif not node.arguments and (not node.description or node.description == node.id):
+            elif not node.arguments and (
+                not node.description or node.description == node.id
+            ):
                 # A report node invented solely from a backend readback is not
                 # a caller goal when the source contains no report request.
                 continue
@@ -420,7 +428,9 @@ def normalize_graph(raw: RawGoalGraph, stage: int, source: str) -> GoalGraph:
                 kind="report",
                 description=report_text,
                 arguments={"required_output": report_text},
-                depends_on=[node.id for node in nodes if node.visibility == "caller_visible"],
+                depends_on=[
+                    node.id for node in nodes if node.visibility == "caller_visible"
+                ],
             )
         )
     valid_ids = {node.id for node in nodes}
@@ -447,9 +457,16 @@ def normalize_graph(raw: RawGoalGraph, stage: int, source: str) -> GoalGraph:
 def main() -> int:
     global TASKS_PATH
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--config", type=Path, default=ROOT / "integrations/qwen_audio_agent/config.gaia2.dynamic.metrics.deepseek-user.json")
+    parser.add_argument(
+        "--config",
+        type=Path,
+        default=ROOT
+        / "integrations/qwen_audio_agent/config.gaia2.dynamic.metrics.deepseek-user.json",
+    )
     parser.add_argument("--tasks", type=Path, default=TASKS_PATH)
-    parser.add_argument("--simulations-root", type=Path, default=ROOT / "data/simulations")
+    parser.add_argument(
+        "--simulations-root", type=Path, default=ROOT / "data/simulations"
+    )
     parser.add_argument("--output", type=Path, default=OUTPUT_PATH)
     args = parser.parse_args()
     TASKS_PATH = args.tasks.resolve()
@@ -476,9 +493,9 @@ def main() -> int:
         task = load_task(data["task_id"])
         gt = tool_gt_for_stage(task, data["stage"])
         graph_user = f"""
-STAGE: {data['stage']}
+STAGE: {data["stage"]}
 CURRENT SOURCE REQUEST:
-{data['source']}
+{data["source"]}
 
 EXPECTED TOOL GT (execution evidence; internal values must remain backend-only):
 {json.dumps(gt, ensure_ascii=False, indent=2)}
@@ -510,15 +527,15 @@ EXPECTED TOOL GT (execution evidence; internal values must remain backend-only):
             raise RuntimeError("goal graph extraction returned an empty graph")
 
         render_user = f"""
-STAGE: {data['stage']}
+STAGE: {data["stage"]}
 GOAL GRAPH:
 {graph.model_dump_json(indent=2)}
 
 RELEASED FACTS FROM EARLIER STAGES:
-{data['released'] or '(none)'}
+{data["released"] or "(none)"}
 
 PRECEDING HISTORY (the current request is intentionally omitted):
-{data['history'] or '(none)'}
+{data["history"] or "(none)"}
 """.strip()
         render_args = {**base_args, "temperature": 0.8, "seed": 626729 + data["stage"]}
         render_reply = generate(
@@ -535,7 +552,7 @@ PRECEDING HISTORY (the current request is intentionally omitted):
 
         check_user = f"""
 SOURCE REQUEST:
-{data['source']}
+{data["source"]}
 
 GOAL GRAPH:
 {graph.model_dump_json(indent=2)}

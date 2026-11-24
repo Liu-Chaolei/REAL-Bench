@@ -50,7 +50,10 @@ class FallbackRule(BaseModel):
     def validate_rule(self):
         if self.preferred_state == self.blocked_state:
             raise ValueError("fallback rule cannot block its own preferred state")
-        if self.fallback_operation == "result" and self.fallback_state != CanonicalState.COMPLETED:
+        if (
+            self.fallback_operation == "result"
+            and self.fallback_state != CanonicalState.COMPLETED
+        ):
             raise ValueError("result fallbacks require completed state")
         if self.fallback_state in {
             CanonicalState.NOT_STARTED,
@@ -111,7 +114,10 @@ class PersistentTaskMetricConfig(BaseModel):
                 ):
                     if blocked == option.state:
                         continue
-                    if operation == "result" and option.state == CanonicalState.COMPLETED:
+                    if (
+                        operation == "result"
+                        and option.state == CanonicalState.COMPLETED
+                    ):
                         continue
                     generated.append(
                         FallbackRule(
@@ -157,4 +163,3 @@ class ActiveMetricsConfig(BaseModel):
 
     def enabled(self) -> bool:
         return bool(self.persistent_task and self.persistent_task.enabled)
-

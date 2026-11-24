@@ -56,6 +56,7 @@ def test_budget_and_stop_endings_grade_actual_answer(monkeypatch, ending, mode):
         TerminationReason.USER_STOP,
         TerminationReason.MAX_STEPS,
         TerminationReason.TIMEOUT,
+        TerminationReason.WATCHDOG_STALL,
     }
     assert result.reward == float(eligible)
     assert result.info["grading_version"] == GRADING_VERSION

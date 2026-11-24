@@ -9,6 +9,7 @@ GRADABLE_ENDINGS = frozenset(
         TerminationReason.USER_STOP,
         TerminationReason.MAX_STEPS,
         TerminationReason.TIMEOUT,
+        TerminationReason.WATCHDOG_STALL,
     }
 )
 

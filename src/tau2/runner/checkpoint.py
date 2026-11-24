@@ -101,9 +101,8 @@ def try_resume(
     ):
         raise ValueError("Persistent task conditions changed; use a new output path")
 
-    if (
-        getattr(prev_simulation_results.info, "active_metrics", None)
-        != getattr(simulation_results.info, "active_metrics", None)
+    if getattr(prev_simulation_results.info, "active_metrics", None) != getattr(
+        simulation_results.info, "active_metrics", None
     ):
         raise ValueError("Active metric conditions changed; use a new output path")
 

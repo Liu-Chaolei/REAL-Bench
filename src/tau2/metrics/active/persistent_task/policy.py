@@ -44,7 +44,9 @@ class PersistentTaskPolicy:
         self.fallback_reason: str | None = None
 
     def choose_preferred(self, supported_states=None, supported_operations=None):
-        states = supported_states or {option.state for option in self.config.preferred_options}
+        states = supported_states or {
+            option.state for option in self.config.preferred_options
+        }
         operations = supported_operations or {
             option.operation for option in self.config.preferred_options
         }
@@ -97,22 +99,28 @@ class PersistentTaskPolicy:
             return self.resolved
         if self.current_state is None:
             return None
-        if self.created_at is not None and now - self.created_at > self.config.gates.max_wait_seconds:
+        if (
+            self.created_at is not None
+            and now - self.created_at > self.config.gates.max_wait_seconds
+        ):
             self.decision_status = "expired"
             return None
         if self.current_state == self.preferred.state:
             if self.config.gates.initial_state_guard and len(self.observations) <= 1:
                 return None
-            if len(self.observations) - 1 < self.config.gates.min_observations_after_creation:
+            if (
+                len(self.observations) - 1
+                < self.config.gates.min_observations_after_creation
+            ):
                 return None
-            if self.entered_at is None or now - self.entered_at < self.config.gates.min_dwell_seconds:
+            if (
+                self.entered_at is None
+                or now - self.entered_at < self.config.gates.min_dwell_seconds
+            ):
                 return None
             if self.turn_boundaries < self.config.gates.min_turn_boundaries:
                 return None
-            if (
-                self.preferred.operation == "result"
-                and not self.result_available
-            ):
+            if self.preferred.operation == "result" and not self.result_available:
                 return None
             self.decision_status = "preferred_ready"
             self.resolved = ResolvedIntent(
@@ -132,7 +140,10 @@ class PersistentTaskPolicy:
             return None
         if rule.fallback_operation == "result" and not self.result_available:
             return None
-        if self.entered_at is None or now - self.entered_at < self.config.gates.min_dwell_seconds:
+        if (
+            self.entered_at is None
+            or now - self.entered_at < self.config.gates.min_dwell_seconds
+        ):
             return None
         if self.turn_boundaries < self.config.gates.min_turn_boundaries:
             return None
@@ -146,4 +157,3 @@ class PersistentTaskPolicy:
             fallback_reason=rule.reason,
         )
         return self.resolved
-

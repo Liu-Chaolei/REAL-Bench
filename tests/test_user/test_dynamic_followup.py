@@ -222,8 +222,7 @@ def test_dynamic_followup_rejects_unsupported_historical_claim(monkeypatch):
             model_args={},
             stage=1,
             source_request=(
-                "Email Alice at alice@example.com. The subject is "
-                '"Follow-up".'
+                'Email Alice at alice@example.com. The subject is "Follow-up".'
             ),
             conversation=[
                 UserMessage(

@@ -123,9 +123,7 @@ def test_voice_literal_allowlist_covers_the_audited_sources():
     from tau2.domains.gaia2.scoring import _VOICE_RELAXED_LITERAL_SOURCES
 
     assert len(_VOICE_RELAXED_LITERAL_SOURCES) == 177
-    assert "0052_snsq4rd73gytoo0wr75bgd2nyzra07z1" in (
-        _VOICE_RELAXED_LITERAL_SOURCES
-    )
+    assert "0052_snsq4rd73gytoo0wr75bgd2nyzra07z1" in (_VOICE_RELAXED_LITERAL_SOURCES)
 
 
 def test_location_source_rules_keep_environment_fragments_exact():
@@ -147,11 +145,7 @@ def test_location_source_rules_keep_environment_fragments_exact():
     assert _equivalent(
         {"end_location": "meir 90 leuven belgium"},
         {"end_location": "Meir 90, Leuven, Belgium"},
-        location_rules={
-            "end_location": {
-                "Meir 90, Leuven, Belgium": {"mode": "user"}
-            }
-        },
+        location_rules={"end_location": {"Meir 90, Leuven, Belgium": {"mode": "user"}}},
     )
 
 

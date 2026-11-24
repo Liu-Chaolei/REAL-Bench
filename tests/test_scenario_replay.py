@@ -180,7 +180,10 @@ def test_wait_replay_accepts_exact_string_timestamp_but_not_missing_arrival():
 def test_tool_result_mismatch_can_be_recorded_without_blocking_replay():
     environment = _environment([])
     _call(environment, "parent", "original")
-    records = [record.model_dump(mode="json") for record in environment.scenario_runtime.records]
+    records = [
+        record.model_dump(mode="json")
+        for record in environment.scenario_runtime.records
+    ]
     records[-1]["result"] = "stale-result"
     replayed = _environment([])
     warnings = []
@@ -201,7 +204,10 @@ def test_tool_result_mismatch_can_be_recorded_without_blocking_replay():
 def test_tool_error_still_blocks_when_result_comparison_is_disabled():
     environment = _environment([])
     _call(environment, "parent", "original")
-    records = [record.model_dump(mode="json") for record in environment.scenario_runtime.records]
+    records = [
+        record.model_dump(mode="json")
+        for record in environment.scenario_runtime.records
+    ]
     records[-1]["error"] = True
     replayed = _environment([])
     try:

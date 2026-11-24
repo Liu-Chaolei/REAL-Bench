@@ -2,6 +2,16 @@
 
 记录 `tau2-bench-backup` 中较大的功能与评测流程改动，后续按记录日期倒序追加。每项说明目的、实际行为、配置、代码入口和验证情况。上游项目的发布记录见 [CHANGELOG.md](CHANGELOG.md)。
 
+## 2026-11-24：增加可选的全双工长任务 watchdog
+
+- 新增 `WatchdogConfig`，默认关闭；旧配置和原有 `max_steps` 行为保持不变。Qwen Agent 配置可以通过 `watchdog.enabled=true` 启用，默认在 6000 tick 检查，之后每 3000 tick 检查，默认总上限为 12000 tick。
+- 在检查点把有限的近期 user/agent 对话、工具调用/结果、pending 状态、场景时间和 heartbeat 阶段交给当前 communicate judge 使用的同一套 LLM 配置。结构化结果支持 `continue`、`wait_one_more_checkpoint`、`stop_and_evaluate` 和 `uncertain`；judge 超时或格式错误按 `uncertain` 继续。
+- watchdog 输入已改为事件摘要：给 LLM 的内容包含当前环境时间、阶段状态、带起止时间的对话轮次、当前未完成语音、最近 20 条工具操作和显式 heartbeat 存活状态，不再直接拼接重复的每 tick 累计文本。用户语音尚未结束时由程序侧强制继续，避免把用户正在追问误判为 Agent 重复卡死。
+- FullDuplexOrchestrator 增加基于 `time.monotonic()` 的 heartbeat，记录 tick、参与者调用和工具等待阶段。失去 heartbeat 时请求以 `watchdog_stall` 终止，并复用现有 finalization/evaluation 流程；结果把 checkpoint 判断保存在 `simulation.info.watchdog`。
+- `watchdog_stall` 被视为可评测终止原因，ENV、execution、voice 等指标仍可对已有轨迹评分。配置与实现入口分别为 [watchdog.py](src/tau2/data_model/watchdog.py)、[orchestrator/watchdog.py](src/tau2/orchestrator/watchdog.py) 和 [full_duplex_orchestrator.py](src/tau2/orchestrator/full_duplex_orchestrator.py)。
+- 当前版本使用进程内 heartbeat 和正常收尾路径；它不包含外部 supervisor 的强制杀进程或中途 trajectory checkpoint。API 阻塞仍依赖已有请求 timeout 返回控制权后再进入 watchdog 收尾。
+- 验证：watchdog 专项 2 项通过；相关 outcome、benchmark runtime、orchestrator 和 voice prompt 回归共 54 项通过。全量 pytest 本次未完成，未产生失败报告。
+
 ## 2026-11-23：为流式 ASR 累计快照增加非重复文本视图
 
 - 流式 observer 的每个 tick 仍原样保存 `live_transcript.snapshot.text`，用于审计和复现；评测、显示和指标路径不再把这个累计全文当作增量拼接。

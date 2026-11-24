@@ -23,7 +23,9 @@ class PersistentTaskMetricRuntime:
 
     name = "persistent_task"
 
-    def __init__(self, config: PersistentTaskMetricConfig, *, orchestrator, seed, trial):
+    def __init__(
+        self, config: PersistentTaskMetricConfig, *, orchestrator, seed, trial
+    ):
         self.config = config
         self.orchestrator = orchestrator
         self.seed = self._seed(seed, orchestrator.task.id, trial)
@@ -124,7 +126,12 @@ class PersistentTaskMetricRuntime:
             self._observe(event)
 
     def advance(self, timestamp: float, turn_boundary: bool) -> None:
-        if self.status in {"unsupported", "generation_unavailable", "completed", "reply_unavailable"}:
+        if self.status in {
+            "unsupported",
+            "generation_unavailable",
+            "completed",
+            "reply_unavailable",
+        }:
             return
         self._drain()
         if self.status == "delivered" and self.reply_text and turn_boundary:
@@ -155,7 +162,9 @@ class PersistentTaskMetricRuntime:
             self.status = "generation_unavailable"
             self.issues.append({"reason": str(error)})
             return
-        self.request_id = f"persistent_task_metric_{self.orchestrator.simulation_id}_request_1"
+        self.request_id = (
+            f"persistent_task_metric_{self.orchestrator.simulation_id}_request_1"
+        )
         self.request_text = generated.text
         self.generated_request = {
             "text": generated.text,
@@ -292,17 +301,14 @@ class PersistentTaskMetricRuntime:
         operation_reward = float(operation is not None)
         result = operation.get("result") if operation else None
         actual_state = (
-            result.get("state") if isinstance(result, dict) else None
-        ) or (operation.get("state") if operation else None) or (
-            operation.get("status") if operation else None
+            (result.get("state") if isinstance(result, dict) else None)
+            or (operation.get("state") if operation else None)
+            or (operation.get("status") if operation else None)
         )
         native_reward = float(
             operation_reward
             and (
-                (
-                    operation_name == "query"
-                    and actual_state is not None
-                )
+                (operation_name == "query" and actual_state is not None)
                 or (
                     operation_name == "result"
                     and actual_state == "completed"
@@ -354,4 +360,3 @@ class PersistentTaskMetricRuntime:
             "operation": operation,
             "actual_state": actual_state,
         }
-

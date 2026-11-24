@@ -1148,6 +1148,7 @@ class TerminationReason(str, Enum):
     AGENT_STOP = "agent_stop"
     MAX_STEPS = "max_steps"
     TIMEOUT = "timeout"
+    WATCHDOG_STALL = "watchdog_stall"
     TOO_MANY_ERRORS = "too_many_errors"
     AGENT_ERROR = "agent_error"
     USER_ERROR = "user_error"

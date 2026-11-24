@@ -49,6 +49,7 @@ from tau2.data_model.live_config import LiveConfig
 from tau2.data_model.saasr import SaasrConfig
 from tau2.data_model.semantic_communication import CommunicateScoring
 from tau2.data_model.voice import SpeechComplexity, VoiceSettings
+from tau2.data_model.watchdog import WatchdogConfig
 from tau2.voice.audio_native.avartha_pipecat.config import AvarthaPipecatConfig
 from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
 
@@ -65,6 +66,7 @@ class AudioNativeConfig(BaseModel):
     user_audio_renderer: Literal["standard", "saasr"] = "standard"
     saasr_config: SaasrConfig | None = None
     saasr_identity: dict | None = None
+    watchdog: WatchdogConfig = Field(default_factory=WatchdogConfig)
 
     @model_validator(mode="after")
     def validate_user_renderer(self):

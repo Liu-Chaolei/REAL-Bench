@@ -877,6 +877,11 @@ def main():
                 model=audio_native_model,
                 avartha_config=avartha_config,
                 qwen_agent_config=qwen_agent_config,
+                **(
+                    {"watchdog": qwen_agent_config.watchdog}
+                    if qwen_agent_config is not None
+                    else {}
+                ),
                 cascaded_request=(
                     CascadedConfigRequest(preset=args.cascaded_config)
                     if args.cascaded_config is not None

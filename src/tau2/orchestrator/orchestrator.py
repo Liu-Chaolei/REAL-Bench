@@ -909,7 +909,9 @@ class Orchestrator(BaseOrchestrator[AgentT, UserT, Message]):
             if active_metrics is not None and active_metrics.should_extend_reply(
                 self.environment.scenario_runtime.time()
             ):
-                active_metrics.consume_reply_step(self.environment.scenario_runtime.time())
+                active_metrics.consume_reply_step(
+                    self.environment.scenario_runtime.time()
+                )
                 return
             self.done = True
             self.termination_reason = TerminationReason.MAX_STEPS

@@ -1026,6 +1026,12 @@ def _build_voice_orchestrator(
         tick_duration_seconds=config.audio_native_config.tick_duration_seconds,
         timeout=config.timeout,
         call_context=context,
+        watchdog_config=config.audio_native_config.watchdog,
+        watchdog_judge=(
+            config.communicate_scoring.judge
+            if config.communicate_scoring is not None
+            else None
+        ),
     )
     if config.audio_native_config.provider == "qwen_agent":
 

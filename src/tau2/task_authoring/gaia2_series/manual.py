@@ -40,13 +40,17 @@ def preflight_submission(dataset: Path, submission: dict) -> dict:
     base_value = record.get("manual_pending_candidate", record.get("draft"))
     if submission.get("base_candidate_sha256") != digest(base_value):
         raise ValueError("Stale base candidate hash")
-    plan = QuestionPlan.model_validate(submission.get("question_plan", record["question_plan"]))
+    plan = QuestionPlan.model_validate(
+        submission.get("question_plan", record["question_plan"])
+    )
     draft = SeriesDraft.model_validate(submission["candidate"])
     if draft.base_task_id != tid or draft.base_task_sha256 != digest(tasks[tid]):
         raise ValueError("Candidate base task identity differs from sealed source")
     requests = [q.request for q in plan.requests]
     if len(draft.stages) != 2 or [s.request for s in draft.stages] != requests:
-        raise ValueError("Two candidate requests must match the submitted question plan")
+        raise ValueError(
+            "Two candidate requests must match the submitted question plan"
+        )
     event_ids = {e.id for stage in draft.stages for e in stage.events}
     if len(event_ids) != sum(len(stage.events) for stage in draft.stages):
         raise ValueError("Duplicate event IDs")

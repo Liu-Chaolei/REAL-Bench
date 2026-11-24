@@ -85,7 +85,9 @@ def main():
     caller = config.user_llm_settings()
     if args.judge_from_user_llm:
         if caller is None:
-            raise ValueError("--judge-from-user-llm requires a complete user LLM configuration")
+            raise ValueError(
+                "--judge-from-user-llm requires a complete user LLM configuration"
+            )
         judge_model, user_llm_args = caller
         judge_api_key = user_llm_args["api_key"]
         judge_api_base = user_llm_args["api_base"]
@@ -216,6 +218,8 @@ def main():
         user_model,
         "--user-llm-args",
         json.dumps(user_args),
+        "--communicate-scorer",
+        "semantic",
         "--communicate-judge",
         json.dumps({"model": judge_model, "model_args": judge_model_args}),
         "--save-to",
@@ -250,7 +254,10 @@ def main():
     if args.gaia2_allow_stale_runtime:
         command.append("--gaia2-allow-stale-runtime")
     if args.persistent_task_config:
-        command += ["--persistent-task-config", str(args.persistent_task_config.resolve())]
+        command += [
+            "--persistent-task-config",
+            str(args.persistent_task_config.resolve()),
+        ]
 
     if args.max_seconds:
         command.extend(["--timeout", str(args.max_seconds + 150)])

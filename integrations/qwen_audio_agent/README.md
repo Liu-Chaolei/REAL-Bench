@@ -215,6 +215,33 @@ the runtime uses the deterministic heuristic fallback. The accepted rendering,
 context labels and check result are recorded with the stage and reused when
 replaying the run. The default is disabled.
 
+### Optional long-run watchdog
+
+The full-duplex loop can optionally ask the configured communication judge
+whether a long-running call is still making reasonable progress. The existing
+`max_steps` remains the first checkpoint; a healthy result advances the next
+checkpoint by 3000 ticks. The feature is disabled unless this block is added to
+the Qwen Agent config:
+
+```json
+"watchdog": {
+  "enabled": true,
+  "initial_check_ticks": 6000,
+  "check_interval_ticks": 3000,
+  "max_total_ticks": 12000,
+  "judge_timeout_seconds": 30,
+  "heartbeat_timeout_seconds": 180,
+  "context_ticks": 120
+}
+```
+
+The judge receives a bounded recent dialogue/tool timeline and current pending
+state. A judge timeout or malformed response is recorded as uncertain and lets
+the call continue. The in-process heartbeat monitors tick and participant-call
+progress; watchdog decisions and heartbeat status are saved under
+`simulation.info.watchdog`. A watchdog stop uses the normal finalization and
+evaluation path with termination reason `watchdog_stall`.
+
 ### Realtime frontend
 
 The supplied `config.example.json` reads the existing, read-only configuration:

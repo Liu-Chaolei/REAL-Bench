@@ -63,12 +63,8 @@ class ActiveMetricManager:
         return summary
 
     def score(self, scoring=None) -> dict[str, Any]:
-        return {
-            metric.name: metric.score(scoring)
-            for metric in self.metrics
-        }
+        return {metric.name: metric.score(scoring) for metric in self.metrics}
 
     def close(self) -> None:
         for metric in self.metrics:
             metric.close()
-
