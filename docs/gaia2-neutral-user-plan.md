@@ -100,7 +100,7 @@ Respond as the user, using the current request and the conversation so far.
 
 ### 4.5 结束与控制信号
 
-新指南保留现有运行协议需要的 `###STOP###`、`###OUT-OF-SCOPE###` 和实际发生转交时的 `###TRANSFER###` 说明。
+新指南只保留当前 Gaia2 运行协议需要的 `###STOP###` 和 `###OUT-OF-SCOPE###` 说明，不再注入客服场景遗留的转人工信号。
 
 保留“同意做不代表已经做完、当前请求尚有未完成事项时不能仅因一句承诺就结束”的语义。已有轮换、等待、停止判定、阶段推进继续工作；本次不引入新的停滞计数器或退出阈值。
 

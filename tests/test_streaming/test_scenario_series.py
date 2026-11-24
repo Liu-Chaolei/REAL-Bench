@@ -66,9 +66,6 @@ def test_stop_is_not_success_and_duplicate_stop_cannot_skip_a_request():
     assert controller.stop(stop, runtime, 4)
     assert not controller.transition_pending
     controller.delivered("user1", runtime, 5, complete=True)
-    assert not controller.stop(
-        UserMessage(role="user", content="###TRANSFER###"), runtime, 6
-    )
     assert controller.stop(
         UserMessage(role="user", content="###OUT-OF-SCOPE###"), runtime, 7
     )

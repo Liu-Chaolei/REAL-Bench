@@ -55,8 +55,8 @@ the domain. Runtime-required resource and task integrity pins remain.
 and the caller out-of-scope signal as the same stage-advance control. The first
 two such signals release the next request through the existing TTS/audio path;
 the signal on the final stage ends the call. One Qwen session, application state
-and scene clock persist across the three requests. Transfer, Agent STOP and
-infrastructure failures retain their terminal handling.
+and scene clock persist across the three requests. Agent STOP and infrastructure
+failures retain their terminal handling.
 
 The whole conversation is scored after it ends. ENV checks the cumulative final
 business state; COMMUNICATE uses each request's actual playback window; NL checks

@@ -4,7 +4,7 @@ from tau2.data_model.language import CallMode, RuntimePersona
 from tau2.data_model.persona import PersonaConfig
 from tau2.user.guidelines import default_persona, language_directive
 
-GAIA2_USER_GUIDELINES_VERSION = "gaia2-neutral-user-v1"
+GAIA2_USER_GUIDELINES_VERSION = "gaia2-neutral-user-v2-no-transfer"
 
 GAIA2_ROLE_REMINDER = (
     "REMINDER: You are the human user who gave the AI agent the current task. "
@@ -24,9 +24,8 @@ Respond as the user, using the current request and the conversation so far.
 ## Ending the interaction
 - Continue until all parts of the current request have been addressed. Wait for the agent to confirm requested actions are done, rather than ending on a promise to do them.
 - When the current request is satisfied, generate '###STOP###' to end the interaction.
-- If you have actually been transferred to another agent, generate '###TRANSFER###'.
 - If the scenario does not provide enough information to continue, generate '###OUT-OF-SCOPE###'.
-- These tokens are control signals, not words to speak or include in ordinary replies.
+- These signals are control signals, not words to speak or include in ordinary replies.
 """
 
 _VOICE_GUIDELINES = """## Voice interaction

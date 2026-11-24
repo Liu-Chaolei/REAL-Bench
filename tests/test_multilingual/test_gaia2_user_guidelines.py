@@ -116,7 +116,7 @@ def test_gaia2_complete_prompt_and_role_reminder(
     )
     assert all(
         token in prompt
-        for token in ["###STOP###", "###TRANSFER###", "###OUT-OF-SCOPE###"]
+        for token in ["###STOP###", "###OUT-OF-SCOPE###"]
     )
     if cross_lingual:
         assert (

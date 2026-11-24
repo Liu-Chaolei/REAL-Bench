@@ -14,6 +14,7 @@ import gzip
 import hashlib
 import json
 import re
+from collections import Counter
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any
@@ -600,9 +601,84 @@ def run_review(
     return result_rows
 
 
+CONFIRMED_STATUSES = {
+    "confirmed", "confirmed_issue", "issue_confirmed", "issue", "fail",
+    "problem", "incorrect", "defect", "inconsistent", "contradicted",
+    "wrong", "error", "invalid", "overconstrained", "over_constrained",
+    "overconstraint", "over_strict", "over_constraining", "under_constrained",
+    "underconstrained", "missing_check", "check_gap", "needs_fix",
+}
+UNCERTAIN_STATUSES = {
+    "needs_evidence", "incomplete", "risk", "concern", "open", "ambiguous",
+    "observation", "potential_issue", "suspected_issue", "partially_supported",
+    "weak", "warning", "under_specified", "over_specified",
+}
+
+
+def normalize_finding_status(status):
+    value = str(status or "").strip().lower().replace(" ", "_").replace("-", "_")
+    if value in CONFIRMED_STATUSES:
+        return "confirmed_issue"
+    if value in UNCERTAIN_STATUSES or value not in {"no_issue", "verified", "ok", "pass", "complete", "valid", "supported", "none"}:
+        return "needs_evidence"
+    return "no_issue"
+
+
+def summarize_reviews(out: Path):
+    inventory_rows = {r["id"]: r for r in read_json(out / "inventory.json")["rows"]}
+    records = []
+    for path in sorted((out / "responses" / "reference").glob("*.json")):
+        record = read_json(path)
+        if record.get("status") == "complete":
+            records.append(
+                (
+                    record,
+                    inventory_rows.get(record["id"], {}).get("kind", "unknown"),
+                    path,
+                )
+            )
+    findings = []
+    by_kind = {}
+    for record, kind, path in records:
+        bucket = by_kind.setdefault(kind, {"tasks": 0, "confirmed": set(), "uncertain": set(), "finding_count": 0})
+        bucket["tasks"] += 1
+        for finding in (record.get("output") or {}).get("findings", []):
+            normalized = {
+                **finding,
+                "normalized_status": normalize_finding_status(finding.get("status")),
+                "task_id": record["id"],
+                "kind": kind,
+                "review_record": str(path.relative_to(out)),
+                "review_round": record.get("round", "reference"),
+                "input_key": record.get("input_key"),
+            }
+            findings.append(normalized)
+            bucket["finding_count"] += 1
+            if normalized["normalized_status"] == "confirmed_issue":
+                bucket["confirmed"].add(record["id"])
+            elif normalized["normalized_status"] == "needs_evidence":
+                bucket["uncertain"].add(record["id"])
+    summary = {
+        "version": VERSION,
+        "reference_complete": len(records),
+        "finding_count": len(findings),
+        "finding_statuses": dict(Counter(f["normalized_status"] for f in findings)),
+        "finding_severity": dict(Counter(str(f.get("severity", "unknown")).lower() for f in findings)),
+        "by_kind": {kind: {"tasks": data["tasks"], "confirmed_issue_tasks": len(data["confirmed"]), "needs_evidence_tasks": len(data["uncertain"]), "finding_count": data["finding_count"]} for kind, data in by_kind.items()},
+        "findings": findings,
+    }
+    write_json(out / "reference-summary.json", summary)
+    lines = ["# Gaia2 reference review summary", "", f"Reference records complete: **{len(records)}**.", f"Model findings: **{len(findings)}**; task-level counts below are deduplicated.", "", "| Kind | Tasks | Confirmed issue tasks | Needs-evidence tasks | Findings |", "| --- | ---: | ---: | ---: | ---: |"]
+    for kind, data in summary["by_kind"].items():
+        lines.append(f"| {kind} | {data['tasks']} | {data['confirmed_issue_tasks']} | {data['needs_evidence_tasks']} | {data['finding_count']} |")
+    lines += ["", "## Severity", "", "```json", json.dumps(summary["finding_severity"], ensure_ascii=False, indent=2), "```", "", "## Normalized status", "", "```json", json.dumps(summary["finding_statuses"], ensure_ascii=False, indent=2), "```", "", "Confirmed issue is a triage signal. Every item still needs evidence review before changing tasks or scoring."]
+    (out / "reference-summary.md").write_text("\n".join(lines) + "\n")
+    return summary
+
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", choices=("prepare", "review"))
+    parser.add_argument("command", choices=("prepare", "review", "summarize"))
     parser.add_argument(
         "--out", type=Path, default=ROOT / "data/archives/gaia2/reference-review-v2"
     )
@@ -624,6 +700,9 @@ def main():
                 ensure_ascii=False,
             )
         )
+    elif args.command == "summarize":
+        summary = summarize_reviews(args.out)
+        print(json.dumps({"reference_complete": summary["reference_complete"], "finding_count": summary["finding_count"]}, ensure_ascii=False))
     else:
         print(
             json.dumps(

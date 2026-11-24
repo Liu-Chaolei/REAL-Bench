@@ -1,6 +1,6 @@
 """Control-signal-driven continuation of a single stateful conversation."""
 
-from tau2.user.user_simulator_base import OUT_OF_SCOPE, STOP, TRANSFER
+from tau2.user.user_simulator_base import OUT_OF_SCOPE, STOP
 
 SERIES_VERSION = "gaia2-series-runtime-v1"
 
@@ -47,13 +47,12 @@ class ScenarioStages:
         """Consume an intermediate STOP or out-of-scope signal.
 
         Both signals end the current scripted request and release the next one
-        when a series has another stage.  Transfer remains a terminal signal.
+        when a series has another stage.
         """
         text = message.content or ""
         if (
             message.is_tool_call()
             or not any(token in text for token in (STOP, OUT_OF_SCOPE))
-            or TRANSFER in text
         ):
             return False
         if self.transition_pending or self.awaiting_delivery:
