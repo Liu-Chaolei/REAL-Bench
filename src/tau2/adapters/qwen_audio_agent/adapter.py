@@ -43,15 +43,15 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
         if language not in (None, "en", "en-US"):
             raise ValueError("The first Qwen Agent integration supports English only")
         super().__init__(tick_duration_ms, audio_format, send_audio_instant=False)
-        self.playback_audio_format = AudioFormat(
-            encoding=AudioEncoding.PCM_S16LE,
-            sample_rate=config.playback_sample_rate,
-        )
-        self.playback_bytes_per_tick = int(
-            self.playback_audio_format.bytes_per_second * tick_duration_ms / 1000
-        )
         self._native_playback = config.asr_model == DEFAULT_QWEN_ASR_STREAMING_MODEL
         if self._native_playback:
+            self.playback_audio_format = AudioFormat(
+                encoding=AudioEncoding.PCM_S16LE,
+                sample_rate=config.playback_sample_rate,
+            )
+            self.playback_bytes_per_tick = int(
+                self.playback_audio_format.bytes_per_second * tick_duration_ms / 1000
+            )
             self.playback = self.playback.__class__(self.playback_audio_format)
         self.realtime_pacing = True
         self.config, self.model = config, model
