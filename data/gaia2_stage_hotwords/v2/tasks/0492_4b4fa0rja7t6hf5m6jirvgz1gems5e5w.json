@@ -1,0 +1,171 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0492_4b4fa0rja7t6hf5m6jirvgz1gems5e5w",
+  "model": "deepseek-flash",
+  "input_sha256": "61ff72356df621d9498813add3394fd0a3e0493e9c014a490c481e8a87d56dac",
+  "review_input_sha256": "1ba9cd89b82ba8831a95df145e22b33887e38e2f206fa0234e7dd33a74c0bfec",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "3052cf5d3cee863acf670be1159ced4a68d2ece30faae7ad0a7243d9a4c338ae",
+  "reference_results_sha256": "2d5237377801fc521ed3236d25fc4f62a8d5ce9fcdb8b787d707125ea9a2d48e",
+  "sources": {
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Kongens gate 30, Trondheim",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f1987455-0024-4963-a8f0-72c2bc84f00b.arguments.end_location"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Trondheim Luxury Apartments",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.title"
+    },
+    "stage1.tool_response.series_s1_today": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"1198daea687b4b3e88df58c2fac37d26\", \"title\": \"Yoga Class\", \"start_datetime\": \"1728997200\", \"end_datetime\": \"1729000800\", \"tag\": \"Health\", \"description\": \"Attend a yoga class to relax and unwind.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-15 13:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 14:00:00\"}, {\"event_id\": \"3790ec1152374736ab6ff9723cdc694a\", \"title\": \"Film Festival Panel Discussion\", \"start_datetime\": \"1729022400\", \"end_datetime\": \"1729029600\", \"tag\": \"Work\", \"description\": \"Participate in a panel discussion on film criticism at the festival.\", \"location\": \"Film Festival Venue\", \"attendees\": [\"Kåre Jensen\", \"Astrid Kleveland\"], \"start_strftime\": \"Tuesday, 2024-10-15 20:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 22:00:00\"}, {\"event_id\": \"604e9633b4eb4d079ff9bebd1d0e03bb\", \"title\": \"Dinner with Nonglak Wongchai\", \"start_datetime\": \"1729015200\", \"end_datetime\": \"1729022400\", \"tag\": \"Social\", \"description\": \"Enjoy dinner with Nonglak at a Thai restaurant.\", \"location\": \"Thai Kitchen\", \"attendees\": [\"Nonglak Wongchai\"], \"start_strftime\": \"Tuesday, 2024-10-15 18:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 20:00:00\"}, {\"event_id\": \"6d8000de6c1c44c7b917c62ba594b78d\", \"title\": \"Film Criticism Workshop\", \"start_datetime\": \"1729000800\", \"end_datetime\": \"1729008000\", \"tag\": \"Work\", \"description\": \"Lead a workshop on film criticism for aspiring critics.\", \"location\": \"Film School\", \"attendees\": [\"Warunee Suthiwong\", \"Krittin Sricharoen\"], \"start_strftime\": \"Tuesday, 2024-10-15 14:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 16:00:00\"}, {\"event_id\": \"d27e1c81056547a4b5211378c3a10441\", \"title\": \"Interview with Film Director\", \"start_datetime\": \"1728986400\", \"end_datetime\": \"1728993600\", \"tag\": \"Work\", \"description\": \"Conduct an interview with a prominent film director.\", \"location\": \"Hotel Continental\", \"attendees\": [\"Aarav Rao\"], \"start_strftime\": \"Tuesday, 2024-10-15 10:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 12:00:00\"}, {\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Trondheim Luxury Apartments\", \"start_datetime\": \"1728990000.0\", \"end_datetime\": \"1728993600.0\", \"tag\": \"Personal\", \"description\": \"Apartment viewing. Ride pickup at 11:00 from Home, destination Kongens gate 30, Trondheim (Trondheim Luxury Apartments).\", \"location\": \"Kongens gate 30, Trondheim\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-15 11:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 12:00:00\"}], \"range\": [\"0\", \"6\"], \"total\": \"6\"}",
+      "event_id": "series_s1_today",
+      "response_sha256": "59141a720c20a05e66d47804c0429e927547ee14a56ee501b55808b011c0d1b9"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kongens gate 30, Trondheim",
+          "kind": "place",
+          "source": "stage0.existing_catalog.4",
+          "reason": "含挪威语地名与街道的完整地址，ASR识别难度高",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kongens gate 30, Trondheim"
+      ],
+      "active_vocabulary": {
+        "Kongens gate 30, Trondheim": 50
+      },
+      "vocabulary_sha256": "42a8c52123e45490c78b18b6cd5e417c8b66c5ae2d5966d24ff8b162c58342da"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Trondheim Luxury Apartments",
+          "kind": "organization",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整专有公寓名称，含地名，识别难度高",
+          "weight": 50
+        },
+        {
+          "text": "Aarav Rao",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_today",
+          "reason": "印度语完整人名，识别难度较高",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Kleveland",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_today",
+          "reason": "完整挪威人名，姓氏独特",
+          "weight": 50
+        },
+        {
+          "text": "Krittin Sricharoen",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_today",
+          "reason": "泰语完整人名，发音识别困难",
+          "weight": 50
+        },
+        {
+          "text": "Kåre Jensen",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_today",
+          "reason": "含挪威语变音符号å的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Nonglak Wongchai",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_today",
+          "reason": "泰语完整人名，发音识别困难",
+          "weight": 50
+        },
+        {
+          "text": "Warunee Suthiwong",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_today",
+          "reason": "泰语完整人名，发音识别困难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Trondheim Luxury Apartments",
+        "Aarav Rao",
+        "Astrid Kleveland",
+        "Krittin Sricharoen",
+        "Kåre Jensen",
+        "Nonglak Wongchai",
+        "Warunee Suthiwong"
+      ],
+      "active_vocabulary": {
+        "Kongens gate 30, Trondheim": 50,
+        "Trondheim Luxury Apartments": 50,
+        "Aarav Rao": 50,
+        "Astrid Kleveland": 50,
+        "Krittin Sricharoen": 50,
+        "Kåre Jensen": 50,
+        "Nonglak Wongchai": 50,
+        "Warunee Suthiwong": 50
+      },
+      "vocabulary_sha256": "5985d985e07ec70151e65010d6838f6b7b8549769094a40a3d6161ee6ecb0709"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kongens gate 30, Trondheim": 50,
+        "Trondheim Luxury Apartments": 50,
+        "Aarav Rao": 50,
+        "Astrid Kleveland": 50,
+        "Krittin Sricharoen": 50,
+        "Kåre Jensen": 50,
+        "Nonglak Wongchai": 50,
+        "Warunee Suthiwong": 50
+      },
+      "vocabulary_sha256": "5985d985e07ec70151e65010d6838f6b7b8549769094a40a3d6161ee6ecb0709"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": [
+        {
+          "text": "Trondheim",
+          "covered_by": "Kongens gate 30, Trondheim"
+        }
+      ]
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kjetil",
+    "Trondheim",
+    "Astrid",
+    "Åse"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:07.836630+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

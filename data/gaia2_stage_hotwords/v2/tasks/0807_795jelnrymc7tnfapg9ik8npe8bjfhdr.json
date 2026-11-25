@@ -1,0 +1,96 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0807_795jelnrymc7tnfapg9ik8npe8bjfhdr",
+  "model": "deepseek-flash",
+  "input_sha256": "bf6507a055925ce75523ee7227bffbe3207929e32d87509b8fcd6bac1f41a5e1",
+  "review_input_sha256": "40c747e265ced306aea9fdf94b0489d94cee67567fbba32122b4a70aed1a87ce",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "c5e41f312d98cdac778e5dbf0a1dc36bd34208ceaf7adb665f5abc3fae975994",
+  "reference_results_sha256": "f9b102cbfa36e8e42d40695674de739563dbbfdb93ec9f360b5b2f501615530e",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Rohini Desai",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Mickey Mouse Disney Patriotic Bean Plush and Minnie Mouse",
+      "original_source": "stage0.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Mickey Mouse Disney Patriotic Bean Plush and Minnie Mouse",
+          "kind": "product",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整商品名，含专有名词",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Desai",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，具有辨识度",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Mickey Mouse Disney Patriotic Bean Plush and Minnie Mouse",
+        "Rohini Desai"
+      ],
+      "active_vocabulary": {
+        "Mickey Mouse Disney Patriotic Bean Plush and Minnie Mouse": 50,
+        "Rohini Desai": 50
+      },
+      "vocabulary_sha256": "1568ce1419e941e1e101eb79bd52ffd3ecdded5ac08b219110d2219d1b7e91ef"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Mickey Mouse Disney Patriotic Bean Plush and Minnie Mouse": 50,
+        "Rohini Desai": 50
+      },
+      "vocabulary_sha256": "1568ce1419e941e1e101eb79bd52ffd3ecdded5ac08b219110d2219d1b7e91ef"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Mickey Mouse Disney Patriotic Bean Plush and Minnie Mouse": 50,
+        "Rohini Desai": 50
+      },
+      "vocabulary_sha256": "1568ce1419e941e1e101eb79bd52ffd3ecdded5ac08b219110d2219d1b7e91ef"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "MOUSE20"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:24.533680+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

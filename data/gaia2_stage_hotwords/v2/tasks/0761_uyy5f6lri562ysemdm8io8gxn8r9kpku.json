@@ -1,0 +1,94 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0761_uyy5f6lri562ysemdm8io8gxn8r9kpku",
+  "model": "deepseek-flash",
+  "input_sha256": "ba09bdecd5f253b6c0fe40324d2b3688b6995028b285bac920fa959875bf473a",
+  "review_input_sha256": "7c109157b4016ad24ce7a32f58ac2ece19e9a0849adee7b57af4907939ed6e6a",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "8f77264e0d4056fae82952f24ca6470bfe45568237eca2a916776feb6db8df0f",
+  "reference_results_sha256": "f29de139ee37bcedecb84cb1a2c4514a1a5b77af6e3e8ea91b84638e482048cd",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kazimierz Wojciechowski",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-c48905d7-e50c-4c48-beaf-e1fe8ad99913.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kazimierz Wojciechowski",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "波兰语难拼写完整人名，含特殊字母组合",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "德语难拼写完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kazimierz Wojciechowski",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Kazimierz Wojciechowski": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "86d6b0b5bdde3d447d929799b471b85d26af1f2253ad9e3be7f4de538ec3e7a8"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kazimierz Wojciechowski": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "86d6b0b5bdde3d447d929799b471b85d26af1f2253ad9e3be7f4de538ec3e7a8"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kazimierz Wojciechowski": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "86d6b0b5bdde3d447d929799b471b85d26af1f2253ad9e3be7f4de538ec3e7a8"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:16.284898+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

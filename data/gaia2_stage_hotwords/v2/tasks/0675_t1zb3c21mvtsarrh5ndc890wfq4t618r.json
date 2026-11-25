@@ -1,0 +1,160 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0675_t1zb3c21mvtsarrh5ndc890wfq4t618r",
+  "model": "deepseek-flash",
+  "input_sha256": "263e5f6ce91e06571631769ff3718ffa08cdfff8b346848d05e0c35f96118dac",
+  "review_input_sha256": "789e5023445a20780f622edc0654e3ca4f0b7976d5f740622c261dafe6a80e9a",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "23302d1b4d6ce2af5f948b55e3641bd98a6c0044523dc4c1320aea8572c21b55",
+  "reference_results_sha256": "ed4e18554f103be0ca71e64eeef66f7866a8debd578c87cc0c8acafaddb9ad68",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Koenraad Vandenberghe",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Aurélien Vandenberghe",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Board & Dice Inuit: The Snow Folk",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Avenue Louise 240, 1050 Brussels, Belgium",
+      "original_source": "stage0.source_task"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Koenraad and Aurélien Vandenberghe",
+      "original_source": "stage2.tool_gt.series_s2_add_event.arguments.description"
+    },
+    "stage2.tool_response.series_s2_read_chat": {
+      "stage": 2,
+      "text": "{\"messages\": [{\"sender_id\": \"2ab72e6d-3e52-44c9-ad8d-07a6c779bcc2\", \"message_id\": \"3299fe51d2f1f93984b2cb9522307d84\", \"timestamp\": \"1728975608.0\", \"content\": \"Just to confirm: my cab is booked for 10:00 and I will arrive at your place around 10:30 on the 26th.\"}, {\"sender_id\": \"514f2e1d-4728-43a9-a193-fea11c42afff\", \"message_id\": \"fc027cf57b1420be1d49328508696a64\", \"timestamp\": \"1728975604.0\", \"content\": \"Hey Liesbeth, thank you for the message!\"}], \"metadata\": {\"message_range\": [\"0\", \"2\"], \"conversation_length\": \"5\", \"conversation_id\": \"c934bb2c5f71e13f0cc5da288112035c\", \"conversation_title\": \"Aurélien Vandenberghe, Koenraad Vandenberghe\"}}",
+      "event_id": "series_s2_read_chat",
+      "response_sha256": "ec1112473bf4c2615906d547d34b1b2aca8ad7bed02e0f346d2aa66a2218ece2"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Avenue Louise 240, 1050 Brussels, Belgium",
+          "kind": "place",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整街道地址，含法语地名",
+          "weight": 50
+        },
+        {
+          "text": "Board & Dice Inuit: The Snow Folk",
+          "kind": "product",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含特殊符号的完整产品名",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Koenraad Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含罕见姓氏的完整人名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Avenue Louise 240, 1050 Brussels, Belgium",
+        "Board & Dice Inuit: The Snow Folk",
+        "Aurélien Vandenberghe",
+        "Koenraad Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Avenue Louise 240, 1050 Brussels, Belgium": 50,
+        "Board & Dice Inuit: The Snow Folk": 50,
+        "Aurélien Vandenberghe": 50,
+        "Koenraad Vandenberghe": 50
+      },
+      "vocabulary_sha256": "c78601dd64881b395bf0b2147697ac3780348bd601161d216fd7d3852a471569"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Avenue Louise 240, 1050 Brussels, Belgium": 50,
+        "Board & Dice Inuit: The Snow Folk": 50,
+        "Aurélien Vandenberghe": 50,
+        "Koenraad Vandenberghe": 50
+      },
+      "vocabulary_sha256": "c78601dd64881b395bf0b2147697ac3780348bd601161d216fd7d3852a471569"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Koenraad and Aurélien Vandenberghe",
+          "kind": "person",
+          "source": "stage2.existing_catalog.2",
+          "reason": "完整组合人名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Liesbeth",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_chat",
+          "reason": "聊天中出现的独特人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Koenraad and Aurélien Vandenberghe",
+        "Liesbeth"
+      ],
+      "active_vocabulary": {
+        "Avenue Louise 240, 1050 Brussels, Belgium": 50,
+        "Board & Dice Inuit: The Snow Folk": 50,
+        "Aurélien Vandenberghe": 50,
+        "Koenraad Vandenberghe": 50,
+        "Koenraad and Aurélien Vandenberghe": 50,
+        "Liesbeth": 50
+      },
+      "vocabulary_sha256": "f69c9dc39eb68b2d2fd6adadf6acf750948d8a088b0a9ce3b72d0b0e729494fb"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Koenraad",
+    "Aurélien"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:58.965009+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

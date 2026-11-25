@@ -1,0 +1,97 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0863_77j2gnywa1mxhzecvsrep6ejbvj2tzra__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "3626c2c9e1dbb0f7046c4f794c3c04dfc36d9827e6466a08588f7004f5217221",
+  "review_input_sha256": "8a0a6f256114d8ee4b6f45a3c7f4a263366a3226ae15625fc61f093ed5ad1943",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "d3545cd431d054496ecc0c10f6332e5939d255953a5b1234290cac9ab72613fa",
+  "reference_results_sha256": "c35e90ad3df62c726634472ffb76283a8a061041a93f10cd1e4f9d9714de32c2",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Birgitta Larsson",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Astrid",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-92362fd4-c091-4815-9394-3c1ebebeb434.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Birgitta Larsson",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，含不常见名字，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Astrid",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "不常见的人名，可作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Birgitta Larsson",
+        "Astrid"
+      ],
+      "active_vocabulary": {
+        "Birgitta Larsson": 50,
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "dac8a307e359801683c72a7261771e28b72b1bad8e0547f68a19a038f70bdc3d"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Birgitta Larsson": 50,
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "dac8a307e359801683c72a7261771e28b72b1bad8e0547f68a19a038f70bdc3d"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Birgitta Larsson": 50,
+        "Astrid": 50
+      },
+      "vocabulary_sha256": "dac8a307e359801683c72a7261771e28b72b1bad8e0547f68a19a038f70bdc3d"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Paw Patrol Boys' Group Short Sleeve T-Shirt",
+    "Cute Kids Fidget Spinner T-Shirt"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:31.695983+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

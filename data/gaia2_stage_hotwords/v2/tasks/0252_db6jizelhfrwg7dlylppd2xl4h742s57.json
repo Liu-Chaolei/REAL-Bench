@@ -1,0 +1,109 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0252_db6jizelhfrwg7dlylppd2xl4h742s57",
+  "model": "deepseek-flash",
+  "input_sha256": "dcc29f4fbd6eee433ddebedace9e1afce61ca1bd25a5625854e8d3e0aef3f8eb",
+  "review_input_sha256": "850b33ea361548fcccbd508507ab430230647c0273bfe64620c07c655697d922",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "001c39b580a1c6aeb677753f37ae139857d1aa42585f05999bf0382e7b9bec6e",
+  "reference_results_sha256": "80602aa8129354d66f0d6bf1c099ee5856bc8f329cc8f0f36fcab32d03123d06",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Linnea Åström",
+      "original_source": "stage1.tool_gt.series_s1_add.arguments.attendees[0]"
+    },
+    "stage1.tool_response.series_s1_contact": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Linnea\", \"last_name\": \"Åström\", \"contact_id\": \"e9c338608557420a880c34cfaff20511\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"43\", \"nationality\": \"Swedish\", \"city_living\": \"Stockholm\", \"country\": \"Sweden\", \"status\": \"Status.EMPLOYED\", \"job\": \"Tizen Platform Software Engineer\", \"description\": \"A seasoned software engineer with a passion for open-source projects.\", \"phone\": \"+46734567880\", \"email\": \"linnea.astrom@gaia2mail.com\", \"address\": \"Luntmakargatan 12, 113 51 Stockholm, Sweden\"}",
+      "event_id": "series_s1_contact",
+      "response_sha256": "ee5a02dbe35153ad40334ba160c7b8c26944e3fe73febe5349852fba26e9bcd0"
+    },
+    "stage2.tool_response.series_s2_event": {
+      "stage": 2,
+      "text": "{\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1730487600.0\", \"end_datetime\": \"1730494800.0\", \"tag\": \"Social\", \"description\": \"Follow-up dinner with Linnea Åström.\", \"location\": \"Restaurant in Stockholm\", \"attendees\": [\"Linnea Åström\"], \"start_strftime\": \"Friday, 2024-11-01 19:00:00\", \"end_strftime\": \"Friday, 2024-11-01 21:00:00\"}",
+      "event_id": "series_s2_event",
+      "response_sha256": "ccb13a2311c28d7a9bd089829b24d3270c7d29469520b63f39f206cc2052a4dc"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Linnea Åström",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Luntmakargatan",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_contact",
+          "reason": "难拼写的瑞典街道名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Linnea Åström",
+        "Luntmakargatan"
+      ],
+      "active_vocabulary": {
+        "Linnea Åström": 50,
+        "Luntmakargatan": 50
+      },
+      "vocabulary_sha256": "4a9fd7ffaaa7fdc13725f75052f47376e9f9d4220fbc700b8094d704a192b23b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Linnea Åström",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_event",
+          "reason": "含变音符号的完整人名，事件描述中出现",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Linnea Åström": 50,
+        "Luntmakargatan": 50
+      },
+      "vocabulary_sha256": "4a9fd7ffaaa7fdc13725f75052f47376e9f9d4220fbc700b8094d704a192b23b"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Stockholm",
+    "Astrid"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:43.877006+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

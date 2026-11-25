@@ -1,0 +1,248 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0875_1lmp7uq92664b5yejli3c86encxlquwz",
+  "model": "deepseek-flash",
+  "input_sha256": "2ec44b1295753c2bd3014f627a1d1d7594e3c6aad245323d8e8e490c604a5e03",
+  "review_input_sha256": "9503b62ca2993e6256ae9bbbb5f1a1f352edde8ec927efdcb944580cdcad6df6",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "874eed7b76e5fb9e316c94ff4b3c37650506198f81b0243a42384c04835a06ad",
+  "reference_results_sha256": "e0d2745e2782b2d2a75377f3ec448ac21500afff5b4dd65097036866dd20b6a0",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "CBD Belapur",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-de775a59-1b72-45d3-975f-e8d66e00108f.arguments.location"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Navi Mumbai",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-de775a59-1b72-45d3-975f-e8d66e00108f.arguments.location"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Royal Residences",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-c4e2881b-cb0d-4ea5-adbb-9229df71c01f.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Kaitlyn Nguyen",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-ff02009b-6458-4efc-a2b1-7509970459a3.arguments.content"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Kaida Jensen",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-1176f957-3d38-43ee-bab7-6ddf2879b32b.arguments.content"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Žiga Kovačič",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-5e807865-136b-4de6-bf74-cd7ddc680b37.arguments.content"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "Kaitlyn Nwosu",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-7c9211a5-c31b-40b6-8e9f-49364617ba83.arguments.content"
+    },
+    "stage0.existing_catalog.7": {
+      "stage": 0,
+      "text": "Rohan Kumar",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-ff02009b-6458-4efc-a2b1-7509970459a3.arguments.content"
+    },
+    "stage1.tool_response.series_s1_read_today": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"3e38ecde856a47709abbb57d8317e46f\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729015200\", \"end_datetime\": \"1729018800\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Rohan Kumar\", \"Rohini Rao\"], \"start_strftime\": \"Tuesday, 2024-10-15 18:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 19:00:00\"}, {\"event_id\": \"5516adfff35a489e966df0262987bad9\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1729022400\", \"end_datetime\": \"1729029600\", \"tag\": \"Social\", \"description\": \"Catch up with friends over dinner.\", \"location\": \"Restaurant\", \"attendees\": [\"Rohan Kumar\", \"Kymberley Wundke\", \"Kaida Kaur\"], \"start_strftime\": \"Tuesday, 2024-10-15 20:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 22:00:00\"}, {\"event_id\": \"cec50e236da64e1aa1caf436999dbcd6\", \"title\": \"Project Update Call\", \"start_datetime\": \"1729004400\", \"end_datetime\": \"1729008000\", \"tag\": \"Work\", \"description\": \"Update team members on project progress.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Rohan Kumar\", \"Rohini Nambiar\", \"Aurélien Thibault\"], \"start_strftime\": \"Tuesday, 2024-10-15 15:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 16:00:00\"}, {\"event_id\": \"d4c2d9f7cdacdf99ad578e25036c7e5f\", \"title\": \"Property Viewing\", \"start_datetime\": \"1728981900.0\", \"end_datetime\": \"1728985500.0\", \"tag\": null, \"description\": null, \"location\": \"Plot 123, Sector 15, CBD Belapur, Navi Mumbai\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-15 08:45:00\", \"end_strftime\": \"Tuesday, 2024-10-15 09:45:00\"}, {\"event_id\": \"1eb633f381cb1a19fbaa26def26885d9\", \"title\": \"Property Viewing Debrief\", \"start_datetime\": \"1728985500.0\", \"end_datetime\": \"1728987300.0\", \"tag\": null, \"description\": null, \"location\": \"Plot 123, Sector 15, CBD Belapur, Navi Mumbai\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-15 09:45:00\", \"end_strftime\": \"Tuesday, 2024-10-15 10:15:00\"}], \"range\": [\"0\", \"5\"], \"total\": \"5\"}",
+      "event_id": "series_s1_read_today",
+      "response_sha256": "030d88755a431aaaa01f8e5b05bc2c6b76e983a3cfb51f02a4092ea7d5cd9d21"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "CBD Belapur",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "独特地名，含缩写，ASR易错",
+          "weight": 50
+        },
+        {
+          "text": "Kaida Jensen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整人名，含不常见名",
+          "weight": 50
+        },
+        {
+          "text": "Kaitlyn Nguyen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Kaitlyn Nwosu",
+          "kind": "person",
+          "source": "stage0.existing_catalog.6",
+          "reason": "完整人名，姓氏拼写难",
+          "weight": 50
+        },
+        {
+          "text": "Navi Mumbai",
+          "kind": "place",
+          "source": "stage0.existing_catalog.1",
+          "reason": "印度城市名，需准确识别",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.existing_catalog.7",
+          "reason": "完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Royal Residences",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "专有住宅区名称",
+          "weight": 50
+        },
+        {
+          "text": "Žiga Kovačič",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "CBD Belapur",
+        "Kaida Jensen",
+        "Kaitlyn Nguyen",
+        "Kaitlyn Nwosu",
+        "Navi Mumbai",
+        "Rohan Kumar",
+        "Royal Residences",
+        "Žiga Kovačič"
+      ],
+      "active_vocabulary": {
+        "CBD Belapur": 50,
+        "Kaida Jensen": 50,
+        "Kaitlyn Nguyen": 50,
+        "Kaitlyn Nwosu": 50,
+        "Navi Mumbai": 50,
+        "Rohan Kumar": 50,
+        "Royal Residences": 50,
+        "Žiga Kovačič": 50
+      },
+      "vocabulary_sha256": "1b0f464b3324cb1f0cfde55ca841f106ddd894cfffe426ea935a07f335b630eb"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien Thibault",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_today",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Kaida Kaur",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_today",
+          "reason": "完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Kymberley Wundke",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_today",
+          "reason": "完整人名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Nambiar",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_today",
+          "reason": "完整人名，姓氏拼写难",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Rao",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_today",
+          "reason": "完整人名，含不常见名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien Thibault",
+        "Kaida Kaur",
+        "Kymberley Wundke",
+        "Rohini Nambiar",
+        "Rohini Rao"
+      ],
+      "active_vocabulary": {
+        "CBD Belapur": 50,
+        "Kaida Jensen": 50,
+        "Kaitlyn Nguyen": 50,
+        "Kaitlyn Nwosu": 50,
+        "Navi Mumbai": 50,
+        "Rohan Kumar": 50,
+        "Royal Residences": 50,
+        "Žiga Kovačič": 50,
+        "Aurélien Thibault": 50,
+        "Kaida Kaur": 50,
+        "Kymberley Wundke": 50,
+        "Rohini Nambiar": 50,
+        "Rohini Rao": 50
+      },
+      "vocabulary_sha256": "b2141baf577460bba234eba125b0d3b79850fff76c64e9d56c8b174d25ffdf3f"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "CBD Belapur": 50,
+        "Kaida Jensen": 50,
+        "Kaitlyn Nguyen": 50,
+        "Kaitlyn Nwosu": 50,
+        "Navi Mumbai": 50,
+        "Rohan Kumar": 50,
+        "Royal Residences": 50,
+        "Žiga Kovačič": 50,
+        "Aurélien Thibault": 50,
+        "Kaida Kaur": 50,
+        "Kymberley Wundke": 50,
+        "Rohini Nambiar": 50,
+        "Rohini Rao": 50
+      },
+      "vocabulary_sha256": "b2141baf577460bba234eba125b0d3b79850fff76c64e9d56c8b174d25ffdf3f"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:41.487810+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

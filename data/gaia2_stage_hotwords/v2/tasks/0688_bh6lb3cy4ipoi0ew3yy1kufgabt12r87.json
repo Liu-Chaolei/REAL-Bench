@@ -1,0 +1,162 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0688_bh6lb3cy4ipoi0ew3yy1kufgabt12r87",
+  "model": "deepseek-flash",
+  "input_sha256": "42d26aa4b6102dc2b15f5ff45e28c5102c5b416dd3197791a82f10d690866779",
+  "review_input_sha256": "51bc2cec61d309a919cba0637f4c0e0c1b118bea1c71730287594b7e36413e4b",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "93fcfee36bfee71efcde7869ad1c00d65719ac374d2ef07a9bd812c556043e0e",
+  "reference_results_sha256": "c0479e86b1e45f07d91a74b817f57560f2e3df785334feb0072fe69f8f22d45a",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Nonglak Saelee",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-6c1eeafd-a7dd-4fff-979f-2059defa8e7f.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Krittin Sricharoen",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-6c1eeafd-a7dd-4fff-979f-2059defa8e7f.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Kåre Sørensen",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-6c1eeafd-a7dd-4fff-979f-2059defa8e7f.arguments.attendees[2]"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Solveig Fjellstad",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-6c1eeafd-a7dd-4fff-979f-2059defa8e7f.arguments.attendees[3]"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Kåre Fjellstad",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-6c1eeafd-a7dd-4fff-979f-2059defa8e7f.arguments.attendees[4]"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Åse Kjellstad",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-10fde195-8ce4-4837-81af-336c0e8a05a8.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Krittin Sricharoen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整泰式人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Kåre Fjellstad",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Kåre Sørensen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Nonglak Saelee",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整泰式人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Solveig Fjellstad",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整挪威式人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Krittin Sricharoen",
+        "Kåre Fjellstad",
+        "Kåre Sørensen",
+        "Nonglak Saelee",
+        "Solveig Fjellstad",
+        "Åse Kjellstad"
+      ],
+      "active_vocabulary": {
+        "Krittin Sricharoen": 50,
+        "Kåre Fjellstad": 50,
+        "Kåre Sørensen": 50,
+        "Nonglak Saelee": 50,
+        "Solveig Fjellstad": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "8259b21d798188faf8c8f170ef0e4699527a511728056f8ea1a5342131873303"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Krittin Sricharoen": 50,
+        "Kåre Fjellstad": 50,
+        "Kåre Sørensen": 50,
+        "Nonglak Saelee": 50,
+        "Solveig Fjellstad": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "8259b21d798188faf8c8f170ef0e4699527a511728056f8ea1a5342131873303"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Krittin Sricharoen": 50,
+        "Kåre Fjellstad": 50,
+        "Kåre Sørensen": 50,
+        "Nonglak Saelee": 50,
+        "Solveig Fjellstad": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "8259b21d798188faf8c8f170ef0e4699527a511728056f8ea1a5342131873303"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Nonglak",
+    "Krittin",
+    "Oslo"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:01.311550+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

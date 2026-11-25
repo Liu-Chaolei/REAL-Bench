@@ -1,0 +1,130 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0361_6h1wlgpju37lez11ni1bgfcsksthnf4l",
+  "model": "deepseek-flash",
+  "input_sha256": "1a81357d5620324edc12f6c55dd1bda85aceac0079d44dbeca28639b795fb385",
+  "review_input_sha256": "a116455071ddee7cabe363179eed97ba60615410b70428250fbd269a61c761d1",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "f8628f7a2ddd76f76fb2f65228eab0419f1e2f6a38fde6e00f187e7c08f87919",
+  "reference_results_sha256": "aa06361c5516985541f8ff7096d3479b712a62c8444f4f732ac56a085269239b",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Sergei Kuznetsov",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-15e5d3dc-0452-4053-88a8-e0859bfdde60.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Viktor Kuznetsov",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-15e5d3dc-0452-4053-88a8-e0859bfdde60.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Moscow State University",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-4c3c27f1-4a72-4c59-82bf-93da9f7c0072.arguments.location"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Anastasiya Kuznetsova",
+      "original_source": "stage2.tool_gt.series_s2_email_sergei.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Moscow State University",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.2",
+          "reason": "专有机构名",
+          "weight": 50
+        },
+        {
+          "text": "Sergei Kuznetsov",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "俄语人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "俄语人名，较难识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Moscow State University",
+        "Sergei Kuznetsov",
+        "Viktor Kuznetsov"
+      ],
+      "active_vocabulary": {
+        "Moscow State University": 50,
+        "Sergei Kuznetsov": 50,
+        "Viktor Kuznetsov": 50
+      },
+      "vocabulary_sha256": "7fc42bea706f79a5a4d8c64a2db6ac20762011fefdade7b3a4c9c83fd18bdf24"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Moscow State University": 50,
+        "Sergei Kuznetsov": 50,
+        "Viktor Kuznetsov": 50
+      },
+      "vocabulary_sha256": "7fc42bea706f79a5a4d8c64a2db6ac20762011fefdade7b3a4c9c83fd18bdf24"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "俄语人名，较难识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Anastasiya Kuznetsova"
+      ],
+      "active_vocabulary": {
+        "Moscow State University": 50,
+        "Sergei Kuznetsov": 50,
+        "Viktor Kuznetsov": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "5a9cc1bd7949e8ff55146175edb4875aab23cb23984ebd2e93756878182b3fc9"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Modern Russian History",
+    "Reunion Planning Session",
+    "Reunion Preparation"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:22.387621+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

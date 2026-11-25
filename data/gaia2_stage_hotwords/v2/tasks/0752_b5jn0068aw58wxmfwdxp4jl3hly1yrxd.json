@@ -1,0 +1,134 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0752_b5jn0068aw58wxmfwdxp4jl3hly1yrxd",
+  "model": "deepseek-flash",
+  "input_sha256": "2bc12649080e39015f82124d4430ff6fa9ea513bf1db0cfe5e49b7b779d6baa3",
+  "review_input_sha256": "481c07632a3810e249beaa908be458378ee89e9fc7430cad17ca4dc6256c7d56",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "e24ed24a896d59e8b3d503d1da4e9633bd06188e4c6319ce5576f7cfeb3ee0fa",
+  "reference_results_sha256": "fd19353ca98f3aae5862ff308f1aac0d5d4a5be4833f58fb241918caf1f0d12b",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "kaitlyn.nguyen",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-ade90ddd-815a-4bf4-b4b3-61e76025cf1d.arguments.recipients[0]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "kaida.jensen",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-2c574744-2627-4cfb-be6d-ce9a159153d8.arguments.recipients[0]"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Rohan Kumar",
+      "original_source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[0]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "kaida.jensen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "较难拼写的完整人名（字面形式）",
+          "weight": 50
+        },
+        {
+          "text": "kaitlyn.nguyen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "较难拼写的完整人名（字面形式）",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "kaida.jensen",
+        "kaitlyn.nguyen"
+      ],
+      "active_vocabulary": {
+        "kaida.jensen": 50,
+        "kaitlyn.nguyen": 50
+      },
+      "vocabulary_sha256": "c1969039fc95f33f535c7260f46ec453549bb4c939271a439a7c0ba3243d6c17"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，较难拼写",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Rohan Kumar"
+      ],
+      "active_vocabulary": {
+        "kaida.jensen": 50,
+        "kaitlyn.nguyen": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "fe9984324f2e5a6dd2504def5ceca57774e41bf4c7c05f838692d23371213aed"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "kaida.jensen": 50,
+        "kaitlyn.nguyen": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "fe9984324f2e5a6dd2504def5ceca57774e41bf4c7c05f838692d23371213aed"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": [
+        {
+          "text": "Kaida Jensen",
+          "covered_by": "kaida.jensen"
+        },
+        {
+          "text": "Kaitlyn Nguyen",
+          "covered_by": "kaitlyn.nguyen"
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "terms": [
+        {
+          "text": "Kaida",
+          "covered_by": "kaida.jensen"
+        },
+        {
+          "text": "Kaitlyn",
+          "covered_by": "kaitlyn.nguyen"
+        }
+      ]
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kaitlyn Nguyen",
+    "Kaida Jensen",
+    "Kaitlyn",
+    "Kaida"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:21.797411+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

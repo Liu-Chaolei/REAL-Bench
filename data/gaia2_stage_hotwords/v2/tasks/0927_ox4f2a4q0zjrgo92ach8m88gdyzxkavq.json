@@ -1,0 +1,158 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0927_ox4f2a4q0zjrgo92ach8m88gdyzxkavq",
+  "model": "deepseek-flash",
+  "input_sha256": "5d248cfdc6d06ced19f322f6cfd70d065bf20822fadccc9bd7e27df441691713",
+  "review_input_sha256": "a383c534a202f96941c76a7b398a1e475324d8691f7310bdbbdc9f51157e38bc",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "b5fc2f48f4fffa97f138f1304dee22a9adfb235714715def6d1820fb9043d190",
+  "reference_results_sha256": "7a6c9590abc3ed406d5572b9b3500b428b85f71a162cf11492be33e62f8a8ff8",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kaitlyn Nakamura",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Jamila Patel",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Aurora Heights",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-fc83de32-16a1-44d1-93bc-2814ba349d8c.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Soho Oasis",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-fc83de32-16a1-44d1-93bc-2814ba349d8c.arguments.content"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Skyline Views",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-fc83de32-16a1-44d1-93bc-2814ba349d8c.arguments.content"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Aurélien",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-fc83de32-16a1-44d1-93bc-2814ba349d8c.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurora Heights",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "公寓楼盘专名，需精确识别",
+          "weight": 50
+        },
+        {
+          "text": "Jamila Patel",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，拼写较难，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Kaitlyn Nakamura",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，含少见姓氏，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Skyline Views",
+          "kind": "place",
+          "source": "stage0.existing_catalog.4",
+          "reason": "公寓楼盘专名，需精确识别",
+          "weight": 50
+        },
+        {
+          "text": "Soho Oasis",
+          "kind": "place",
+          "source": "stage0.existing_catalog.3",
+          "reason": "公寓楼盘专名，需精确识别",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "含变音符号的专名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurora Heights",
+        "Jamila Patel",
+        "Kaitlyn Nakamura",
+        "Skyline Views",
+        "Soho Oasis",
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Aurora Heights": 50,
+        "Jamila Patel": 50,
+        "Kaitlyn Nakamura": 50,
+        "Skyline Views": 50,
+        "Soho Oasis": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "f57abecf6b69b4b4d2ea0824b9d55992c3f086ed6f067bd2c8fb0f733da83df1"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurora Heights": 50,
+        "Jamila Patel": 50,
+        "Kaitlyn Nakamura": 50,
+        "Skyline Views": 50,
+        "Soho Oasis": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "f57abecf6b69b4b4d2ea0824b9d55992c3f086ed6f067bd2c8fb0f733da83df1"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurora Heights": 50,
+        "Jamila Patel": 50,
+        "Kaitlyn Nakamura": 50,
+        "Skyline Views": 50,
+        "Soho Oasis": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "f57abecf6b69b4b4d2ea0824b9d55992c3f086ed6f067bd2c8fb0f733da83df1"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:51.380852+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

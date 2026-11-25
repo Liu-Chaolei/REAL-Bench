@@ -1,0 +1,165 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0153_40f2nobclwlsgauwiq8yatbnayrcxcze",
+  "model": "deepseek-flash",
+  "input_sha256": "0542a479d46bae12ba68503b006104e2bb744d79af604ba87e3ea6be8a8fcae7",
+  "review_input_sha256": "fb507faa97f73044537437074af80c841d7922abc40dd127ccaf4a9a8f504480",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "5777abd842ec8ec6e4d483e71cf7fd690b040abb92c9d563fa7d8273835b2a86",
+  "reference_results_sha256": "efb0b820b2bc5ebc916af411eed5be59db65c9b0c8b9c3a10748939f3dc98d4e",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-449a4a57-99b3-49d3-9652-ad7281579c30.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Ursula von Allmen",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-531e819e-312c-4730-96af-871260fa7244.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Ursula Kaufmann",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-531e819e-312c-4730-96af-871260fa7244.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Zofia Kowalczyk",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Kraków",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Zofia Kowalska",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Ursula von Allmen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含贵族介词 von 的完整人名，辨识度高",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Kaufmann",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整人名，姓氏较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，含少见姓氏，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Ursula von Allmen",
+        "Ursula Kaufmann",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Ursula von Allmen": 50,
+        "Ursula Kaufmann": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "ee81de3bc5c2bac863552cdf5662ba1ce5cf227e93b6764cfa3bde434f594835"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Zofia Kowalczyk",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "波兰语完整人名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Zofia Kowalska",
+          "kind": "person",
+          "source": "stage1.existing_catalog.4",
+          "reason": "波兰语完整人名，与 Kowalczyk 易混淆",
+          "weight": 50
+        },
+        {
+          "text": "Kraków",
+          "kind": "place",
+          "source": "stage1.existing_catalog.3",
+          "reason": "含变音符号的地名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Zofia Kowalczyk",
+        "Zofia Kowalska",
+        "Kraków"
+      ],
+      "active_vocabulary": {
+        "Ursula von Allmen": 50,
+        "Ursula Kaufmann": 50,
+        "Ursula Wiederkehr": 50,
+        "Zofia Kowalczyk": 50,
+        "Zofia Kowalska": 50,
+        "Kraków": 50
+      },
+      "vocabulary_sha256": "3187f9166d85c531b923d2d804d8b2ecd13ddc8baa674f951891fe9f33a3db6e"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Ursula von Allmen": 50,
+        "Ursula Kaufmann": 50,
+        "Ursula Wiederkehr": 50,
+        "Zofia Kowalczyk": 50,
+        "Zofia Kowalska": 50,
+        "Kraków": 50
+      },
+      "vocabulary_sha256": "3187f9166d85c531b923d2d804d8b2ecd13ddc8baa674f951891fe9f33a3db6e"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Akira",
+    "Zurich",
+    "Basel",
+    "Historical Tour in Basel",
+    "Ursula",
+    "Former Motion Capture Technician",
+    "Former Financial Advisor"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:12.834629+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

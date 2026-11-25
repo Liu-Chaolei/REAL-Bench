@@ -1,0 +1,157 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0642_lcg7nwyas88r8922cbukfa94im976c2x",
+  "model": "deepseek-flash",
+  "input_sha256": "5a5510c03dd5bf44b1a26c5b912eb5316f3f7a1ebfaeccccbbb220b479f6e65c",
+  "review_input_sha256": "5cf2c95e1de03fad3283484e2bc271fd3d4e82eb765eecff5b56a7a8cc3a1c31",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "76a5837314f307086fa6c176b280f17fbfb4d88a0f0874b6f00a011a0135f529",
+  "reference_results_sha256": "f8abb96e6a0274dcfd4c60a36a2db8cf7b941723f564076117f1e6b3b9bca21a",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Porygon-Z",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Aurélien Tremblay",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Åse Kjellstad",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-4e82da36-21ba-4ffe-9998-4a43dd075320.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Forest Animal-opoly",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "ODA9BTN6T5",
+      "original_source": "stage2.tool_gt.series_s2_code_oda.arguments.discount_code"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "VU1UTEKORB",
+      "original_source": "stage2.tool_gt.series_s2_code_vu1.arguments.discount_code"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien Tremblay",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Porygon-Z",
+          "kind": "product",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含连字符与数字的独特产品名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien Tremblay",
+        "Porygon-Z",
+        "Åse Kjellstad"
+      ],
+      "active_vocabulary": {
+        "Aurélien Tremblay": 50,
+        "Porygon-Z": 50,
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "606bf23403de30c787fea5b5509717d3652e1a47c7abe238077540e929f12745"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Forest Animal-opoly",
+          "kind": "product",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含连字符的独特产品名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Forest Animal-opoly"
+      ],
+      "active_vocabulary": {
+        "Aurélien Tremblay": 50,
+        "Porygon-Z": 50,
+        "Åse Kjellstad": 50,
+        "Forest Animal-opoly": 50
+      },
+      "vocabulary_sha256": "91fe5331b6e20205f0446cec6a9216b04a2a42e530537c624884b6ac77dd094b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "ODA9BTN6T5",
+          "kind": "technical_term",
+          "source": "stage2.existing_catalog.0",
+          "reason": "随机字母数字代码，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "VU1UTEKORB",
+          "kind": "technical_term",
+          "source": "stage2.existing_catalog.1",
+          "reason": "随机字母数字代码，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "ODA9BTN6T5",
+        "VU1UTEKORB"
+      ],
+      "active_vocabulary": {
+        "Aurélien Tremblay": 50,
+        "Porygon-Z": 50,
+        "Åse Kjellstad": 50,
+        "Forest Animal-opoly": 50,
+        "ODA9BTN6T5": 50,
+        "VU1UTEKORB": 50
+      },
+      "vocabulary_sha256": "2664f42169ad0229447ea8c97f099e45d6792ee9e6e66913292b02d2449edfa5"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:49.920442+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,130 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0618_tzjsm881uzdzc8bkicb27xhbwpcqcq3a__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "d807a9dac586b7d9e8be1612920a3affbfa70bc511e71f2caf9dd447c9ff5b7e",
+  "review_input_sha256": "0b14b3e767807b3f7c6bd8c4a52937e82740614270b7c9429d20ef8c17a20fc8",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "c8635aca00db935946d40d9b23b0aa6379e48edbfce20136e66f9887ee18c24f",
+  "reference_results_sha256": "e0bfaa96724072efdc2723409c449eba876db5c4cc786d5332e9505bff74faf3",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Yinyin Liang",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Astrid Lundqvist",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-2f36b201-f679-403e-a80a-1e524f641506.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Jingyi Liang",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Jiaxin Liang",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，拼写较难，保留",
+          "weight": 50
+        },
+        {
+          "text": "Yinyin Liang",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Lundqvist",
+        "Yinyin Liang"
+      ],
+      "active_vocabulary": {
+        "Astrid Lundqvist": 50,
+        "Yinyin Liang": 50
+      },
+      "vocabulary_sha256": "edf3866cc18dcf52035e63309a2686fcc5d5624155e0f0e686dbe9c2d89c2a58"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Jingyi Liang",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Jingyi Liang"
+      ],
+      "active_vocabulary": {
+        "Astrid Lundqvist": 50,
+        "Yinyin Liang": 50,
+        "Jingyi Liang": 50
+      },
+      "vocabulary_sha256": "aa4e0aa3a8ad9d368bb43e946701d45f990308101857091019957fb31144638b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Jiaxin Liang",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Jiaxin Liang"
+      ],
+      "active_vocabulary": {
+        "Astrid Lundqvist": 50,
+        "Yinyin Liang": 50,
+        "Jingyi Liang": 50,
+        "Jiaxin Liang": 50
+      },
+      "vocabulary_sha256": "936ce33b365eec3f29e847bf2d705cfc1514396c9a404ee3ec4cb6be4be8f467"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Dreamworks Trolls BFF Blanket",
+    "Trolls BFF Blanket"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:11.802686+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

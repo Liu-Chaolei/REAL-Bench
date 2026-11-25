@@ -1,0 +1,220 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0798_hzwjgzezx424kje5gmqy1o4fy94ylm09",
+  "model": "deepseek-flash",
+  "input_sha256": "dd5421aa9624a14d8853ea6806916809adef9e5743c0c5e8a3914869b34d024e",
+  "review_input_sha256": "b4552ed3eaa6d10ec2c3f7fe41f03d6c62dd4ee5e3e7435853897a2740a089ec",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "ffa0507ad4c07228094d68aceeb2cb2915e4e279c8c1cc66dbc206a9bd8bfadf",
+  "reference_results_sha256": "adead607c21642dec4bd775cecf467279b5ee8e8965f7cfa1ee418381352e258",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kåre Fjellstad",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-506b16fb-c0fb-42eb-a865-9e2a29330fe2.arguments.content"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Kåre Østensen",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-506b16fb-c0fb-42eb-a865-9e2a29330fe2.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Kåre Sørensen",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-506b16fb-c0fb-42eb-a865-9e2a29330fe2.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Oleksandr Hrynchenko",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-506b16fb-c0fb-42eb-a865-9e2a29330fe2.arguments.content"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Åse Kjellstad",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-6051cb7d-7e5d-4d82-8c5a-8b89c7aab1d5.arguments.content"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "23 Kirkegata, 9008 Tromsø, Norway",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-048e5699-1ed3-45e5-b874-fcd2f86c8633.arguments.end_location"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "Frognerveien 12, 0266 Oslo, Norway",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-048e5699-1ed3-45e5-b874-fcd2f86c8633.arguments.start_location"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Åshild Nystad",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Filmkveld hos Åshild",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.title"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kåre Fjellstad",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含挪威语特殊字符å的完整人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Kåre Sørensen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含å和ø的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Kåre Østensen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含å和Ø的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Oleksandr Hrynchenko",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "难拼写的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "含Å的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Frognerveien",
+          "kind": "place",
+          "source": "stage0.existing_catalog.6",
+          "reason": "挪威语街道名，难识别",
+          "weight": 50
+        },
+        {
+          "text": "Kirkegata",
+          "kind": "place",
+          "source": "stage0.existing_catalog.5",
+          "reason": "挪威语街道名，难识别",
+          "weight": 50
+        },
+        {
+          "text": "Tromsø",
+          "kind": "place",
+          "source": "stage0.existing_catalog.5",
+          "reason": "含ø的挪威地名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kåre Fjellstad",
+        "Kåre Sørensen",
+        "Kåre Østensen",
+        "Oleksandr Hrynchenko",
+        "Åse Kjellstad",
+        "Frognerveien",
+        "Kirkegata",
+        "Tromsø"
+      ],
+      "active_vocabulary": {
+        "Kåre Fjellstad": 50,
+        "Kåre Sørensen": 50,
+        "Kåre Østensen": 50,
+        "Oleksandr Hrynchenko": 50,
+        "Åse Kjellstad": 50,
+        "Frognerveien": 50,
+        "Kirkegata": 50,
+        "Tromsø": 50
+      },
+      "vocabulary_sha256": "51b9835acc1b1ccb5972f9340da8c8b188d64f9327fea38de8ba7d3452427e4a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Filmkveld hos Åshild",
+          "kind": "custom_name",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含Å的自定义会话标题",
+          "weight": 50
+        },
+        {
+          "text": "Åshild Nystad",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含Å的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Filmkveld hos Åshild",
+        "Åshild Nystad"
+      ],
+      "active_vocabulary": {
+        "Kåre Fjellstad": 50,
+        "Kåre Sørensen": 50,
+        "Kåre Østensen": 50,
+        "Oleksandr Hrynchenko": 50,
+        "Åse Kjellstad": 50,
+        "Frognerveien": 50,
+        "Kirkegata": 50,
+        "Tromsø": 50,
+        "Filmkveld hos Åshild": 50,
+        "Åshild Nystad": 50
+      },
+      "vocabulary_sha256": "f6bbb79ba59b4d51cd65a616da1b21816c44ffb7c070717086549c8453d2759c"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kåre Fjellstad": 50,
+        "Kåre Sørensen": 50,
+        "Kåre Østensen": 50,
+        "Oleksandr Hrynchenko": 50,
+        "Åse Kjellstad": 50,
+        "Frognerveien": 50,
+        "Kirkegata": 50,
+        "Tromsø": 50,
+        "Filmkveld hos Åshild": 50,
+        "Åshild Nystad": 50
+      },
+      "vocabulary_sha256": "f6bbb79ba59b4d51cd65a616da1b21816c44ffb7c070717086549c8453d2759c"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "23 Kirkegata, 9008 Tromsø, Norway",
+    "Frognerveien 12, 0266 Oslo, Norway"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:23.414807+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

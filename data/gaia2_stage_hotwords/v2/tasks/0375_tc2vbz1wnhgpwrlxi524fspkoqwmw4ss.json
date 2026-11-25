@@ -1,0 +1,229 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0375_tc2vbz1wnhgpwrlxi524fspkoqwmw4ss",
+  "model": "deepseek-flash",
+  "input_sha256": "998fe6785d51ca692041aab4f85d747c59ed4aa959c7e6ef90d8ddfd5e1b00e9",
+  "review_input_sha256": "137113f3aa90dbc3a357e27b36045c4aaf1b8136cec6af7d8087ff7394442698",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "349cf2e57015cec323bb78b8228b9b369f8c2082a63eea6f370934219fc1ad63",
+  "reference_results_sha256": "4cfabd12786e78e788922386e90907685a2241b026bf2fc6bd53202294b259af",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Åse",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-a512abae-d37b-419d-bc99-57386cbf9092.arguments.content"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Kåre",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-60e7034a-7dcf-4ea8-9e8a-ee1215ae3965.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Oleksandr",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-8212a839-4a58-4da4-8a5a-e36be2f96c84.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Solveig",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-645421ed-6180-4e0a-b9e4-b07b7a7c5ff9.arguments.content"
+    },
+    "stage1.tool_response.series_s1_read_1": {
+      "stage": 1,
+      "text": "{\"messages\": [{\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"3299fe51d2f1f93984b2cb9522307d84\", \"timestamp\": \"1728975602.0\", \"content\": \"A quick RSVP reminder for Cinema Paradiso at my home on Sunday 20 October 2024, 19:00–21:40 UTC. Please reply by Friday 18 October at 18:00 UTC to say whether you can attend. Attendance has not been assumed.\"}, {\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"e70243c91e05d66834b1f6dac414aa5e\", \"timestamp\": \"1728975601.0\", \"content\": \"Hi Kåre, I'm hosting a watch-along of Cinema Paradiso at my house this Sunday from 7:00 PM to 9:40 PM. Would you like to join? Please confirm if you can attend. Best, Åse.\"}], \"metadata\": {\"message_range\": [\"0\", \"2\"], \"conversation_length\": \"2\", \"conversation_id\": \"b62cecc66e271e57211f19e7272ac7c1\", \"conversation_title\": \"Kåre Fjellstad\"}}",
+      "event_id": "series_s1_read_1",
+      "response_sha256": "6d9e77ff03ae25acfda887a4c93c6c7c139a785cc7c41450f9f0b73690dee392"
+    },
+    "stage1.tool_response.series_s1_read_2": {
+      "stage": 1,
+      "text": "{\"messages\": [{\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"902f339c7fb2a2a616554691c93acdab\", \"timestamp\": \"1728975602.0\", \"content\": \"A quick RSVP reminder for Cinema Paradiso at my home on Sunday 20 October 2024, 19:00–21:40 UTC. Please reply by Friday 18 October at 18:00 UTC to say whether you can attend. Attendance has not been assumed.\"}, {\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"fc027cf57b1420be1d49328508696a64\", \"timestamp\": \"1728975601.0\", \"content\": \"Hi Kåre, I'm hosting a watch-along of Cinema Paradiso at my house this Sunday from 7:00 PM to 9:40 PM. Would you like to join? Please confirm if you can attend. Best, Åse.\"}, {\"sender_id\": \"f44f8146-eae8-4fb1-801f-77ac3cb87e51\", \"message_id\": \"ba09a492870d4c0c82e1202e7d82dffb\", \"timestamp\": \"1728833700\", \"content\": \"I've heard great things about that film! I'll have to add it to my list. Well, Åse, it was great catching up with you. Let's talk soon!\"}, {\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"00f7ccb95ea2431db074e48b4225cd20\", \"timestamp\": \"1728833100\", \"content\": \"Actually, I just saw 'The Worst Person in the World' and loved it! The director, Joachim Trier, is really making waves in the film world.\"}, {\"sender_id\": \"f44f8146-eae8-4fb1-801f-77ac3cb87e51\", \"message_id\": \"3a4bd1b5eed7439d9e746ba828ac1df1\", \"timestamp\": \"1728832500\", \"content\": \"Sounds like a plan! I'll send you some dates and we can finalize plans. Oh, and by the way, have you seen any good Norwegian films lately?\"}, {\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"07f39098c0ef425f9a378c92f8d30ede\", \"timestamp\": \"1728831900\", \"content\": \"That sounds great! I'd love to hear more about it. And yes, let's plan on meeting up soon. Maybe we can even catch a film together at the festival?\"}, {\"sender_id\": \"f44f8146-eae8-4fb1-801f-77ac3cb87e51\", \"message_id\": \"40915c35a3874903a7542b47ae8dfafd\", \"timestamp\": \"1728831300\", \"content\": \"Ah, yes! I've actually been working on it in my spare time. It's been a challenge, but I think it'll be worth it in the end. Maybe we can discuss it more over a cup of coffee soon?\"}, {\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"d358dd9622b74c878656fa147ccf061d\", \"timestamp\": \"1728830700\", \"content\": \"Not yet, but I'll have to check it out! I've always been fascinated by Munch's work. By the way, have you given any more thought to writing that book about your experiences in the banking world?\"}, {\"sender_id\": \"f44f8146-eae8-4fb1-801f-77ac3cb87e51\", \"message_id\": \"ec994f22f2a4459bbbfa83162a4aa16b\", \"timestamp\": \"1728830100\", \"content\": \"Gudrun is doing well, thanks for asking! She's been keeping busy with her gardening and volunteering at the local museum. Speaking of which, have you heard about the new Munch exhibit at the National Gallery?\"}, {\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"773de68f4f7f44cabbac8d3f1de18b4c\", \"timestamp\": \"1728829500\", \"content\": \"Actually, I was planning to check it out this week! I've heard great things about it. By the way, how's your wife, Gudrun? I feel like it's been ages since we last caught up.\"}, {\"sender_id\": \"f44f8146-eae8-4fb1-801f-77ac3cb87e51\", \"message_id\": \"d73b9bf265d748daacbdc9e0645086eb\", \"timestamp\": \"1728828900\", \"content\": \"Åse, my weekend was quiet, just spent some time with the family. Truffaut, eh? I've always been a fan of his work, especially 'Jules and Jim'. Have you seen the new Bergman retrospective at the Cinemateket?\"}, {\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"e4269ab3d4e649b59835b3a7a6adee6e\", \"timestamp\": \"1728828300\", \"content\": \"Hei Kåre! How was your weekend? I spent mine watching some old Truffaut films, getting ready for the upcoming film festival in Oslo.\"}], \"metadata\": {\"message_range\": [\"0\", \"12\"], \"conversation_length\": \"12\", \"conversation_id\": \"6f71edc0aa93413190b42f46c6c913f3\", \"conversation_title\": \"Kåre Østensen\"}}",
+      "event_id": "series_s1_read_2",
+      "response_sha256": "d43562570a25954ea16bf5f7ce7fa22ef89860aa47e832f56c8a408e87883e37"
+    },
+    "stage1.tool_response.series_s1_read_3": {
+      "stage": 1,
+      "text": "{\"messages\": [{\"sender_id\": \"+4761433123\", \"message_id\": \"5b83bb32c438c315898cb7bd745bd6eb\", \"timestamp\": \"1728975602.0\", \"content\": \"A quick RSVP reminder for Cinema Paradiso at my home on Sunday 20 October 2024, 19:00–21:40 UTC. Please reply by Friday 18 October at 18:00 UTC to say whether you can attend. Attendance has not been assumed.\"}, {\"sender_id\": \"+4761433123\", \"message_id\": \"80b778e2010dfb8636b473bc810cef5d\", \"timestamp\": \"1728975601.0\", \"content\": \"Hi Kåre, I'm hosting a watch-along of Cinema Paradiso at my house this Sunday from 7:00 PM to 9:40 PM. Would you like to join? Please confirm if you can attend.\"}, {\"sender_id\": \"+4761433123\", \"message_id\": \"a38f813fa3d147d983f8064b7686f63b\", \"timestamp\": \"1727283600\", \"content\": \"You too, Kåre! Looking forward to hearing from you soon.\"}, {\"sender_id\": \"+4090123456\", \"message_id\": \"fd0b763e0cd0486380783ad363d39c9d\", \"timestamp\": \"1727282700\", \"content\": \"Sounds good to me! I'll send you a message with my schedule and we can plan something. Take care, Åse!\"}, {\"sender_id\": \"+4761433123\", \"message_id\": \"6309f92e78284df2b7d1b04cbac55af2\", \"timestamp\": \"1727281800\", \"content\": \"That sounds like a great idea! I'd love to meet up with you there. Let's make sure to coordinate our schedules and catch up in person soon.\"}, {\"sender_id\": \"+4090123456\", \"message_id\": \"2db25ddb31d540fd82bbe7bcb10589de\", \"timestamp\": \"1727280900\", \"content\": \"Actually, I have! I'm thinking of volunteering there, it sounds like a great opportunity to meet some new people and enjoy some good music. Maybe we can meet up there?\"}, {\"sender_id\": \"+4761433123\", \"message_id\": \"fc9fdd7674c449689d0ad85b2f71d7bc\", \"timestamp\": \"1727280000\", \"content\": \"Wow, that's amazing! I'm sure that was a thrilling experience. Speaking of music, have you heard about the new Oslo Jazz Festival? I heard it's going to be a great event.\"}, {\"sender_id\": \"+4090123456\", \"message_id\": \"59ce01fe13884cd18b7767366acd2dc8\", \"timestamp\": \"1727279100\", \"content\": \"Yeah, I love Marvin Gaye! We used to play a lot of soul and R&B covers. I even got to meet him once at a concert in Oslo, it was a real highlight of my life.\"}, {\"sender_id\": \"+4761433123\", \"message_id\": \"89c697892d8f4ede96e96859bc30ae6a\", \"timestamp\": \"1727278200\", \"content\": \"No way! I had no idea. What kind of music did you play? I'm a big fan of Marvin Gaye, I've heard you're a fan too?\"}, {\"sender_id\": \"+4090123456\", \"message_id\": \"93735d3273c748d9b3345dd314b4264e\", \"timestamp\": \"1727277300\", \"content\": \"Ah, that sounds fascinating! I've always been a fan of Norwegian cinema. Did you know that I used to play guitar for a local band that performed at some of the film festivals in Oslo?\"}, {\"sender_id\": \"+4761433123\", \"message_id\": \"c3cfa9d61a9543889b86416b553c5eb6\", \"timestamp\": \"1727276400\", \"content\": \"That sounds wonderful! I've been keeping busy with some film projects, trying to stay active in the community. I recently watched a documentary about the Norwegian film industry, it was really interesting.\"}, {\"sender_id\": \"+4090123456\", \"message_id\": \"483bf79db6364416b3e8ac9f77042717\", \"timestamp\": \"1727275500\", \"content\": \"Åse! Summer was great, thanks for asking. I did get to do some hiking in Jotunheimen, it was beautiful as always. How about you? What have you been up to?\"}, {\"sender_id\": \"+4761433123\", \"message_id\": \"e495aae033be478ab55421cecec8de0a\", \"timestamp\": \"1727274600\", \"content\": \"Hei Kåre! How was your summer? Did you get to do any hiking in the mountains?\"}], \"metadata\": {\"message_range\": [\"0\", \"13\"], \"conversation_length\": \"13\", \"conversation_id\": \"192acd91b0f940bea9d197006d5dc4f5\", \"conversation_title\": \"Kåre Sørensen\"}}",
+      "event_id": "series_s1_read_3",
+      "response_sha256": "9fb0d58214b8384d7acc501d457d270241fc9cb51a72d45f1e8d7bbf48c4a8ab"
+    },
+    "stage1.tool_response.series_s1_read_4": {
+      "stage": 1,
+      "text": "{\"messages\": [{\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"e0bf30c518375f83c96f13997165778f\", \"timestamp\": \"1728975602.0\", \"content\": \"A quick RSVP reminder for Cinema Paradiso at my home on Sunday 20 October 2024, 19:00–21:40 UTC. Please reply by Friday 18 October at 18:00 UTC to say whether you can attend. Attendance has not been assumed.\"}, {\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"84148b3bc5976c1777bfffd13ccfbf03\", \"timestamp\": \"1728975601.0\", \"content\": \"Hi Oleksandr, I'm hosting a watch-along of Cinema Paradiso at my house this Sunday from 7:00 PM to 9:40 PM. Would you like to join? Please confirm if you can attend. Best, Åse.\"}, {\"sender_id\": \"daf1c408-8e8b-4e03-b869-87152e0d40c7\", \"message_id\": \"f13384002ebc4aeb998be8335f16abcc\", \"timestamp\": \"1727535000\", \"content\": \"Sounds like a plan. I'll send you the details. Looking forward to it, Åse!\"}, {\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"04c98c7827b54d9897435ec72934743a\", \"timestamp\": \"1727534700\", \"content\": \"That sounds like a wonderful idea! I'd love to. Let's plan on it for next week?\"}, {\"sender_id\": \"daf1c408-8e8b-4e03-b869-87152e0d40c7\", \"message_id\": \"0aac84d0021a4b228dff013b24dcb717\", \"timestamp\": \"1727534400\", \"content\": \"Actually, I was thinking of checking it out. Would you like to join me for a screening of 'Jules and Jim'?\"}, {\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"abe516a4a04f426f961c8a6211f3f14f\", \"timestamp\": \"1727534100\", \"content\": \"No way! I had no idea. That's amazing. I can see how Truffaut's films would be inspiring. Speaking of which, have you heard about the new Truffaut retrospective at the Cinemateket?\"}, {\"sender_id\": \"daf1c408-8e8b-4e03-b869-87152e0d40c7\", \"message_id\": \"3331fe6c9ad54d8d821cb940ace36204\", \"timestamp\": \"1727533800\", \"content\": \"Ah, yes! The French New Wave was a huge influence on me when I was playing football. The philosophy of 'l'art pour l'art' really resonated with me. Did you know that I used to watch Truffaut films before big matches to get in the right mindset?\"}, {\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"956436cf9e9e44e2bb1ab57252e19f1c\", \"timestamp\": \"1727533500\", \"content\": \"I thought it was excellent. The way the director portrayed her struggles with identity and relationships was so nuanced. It reminded me of some of the French New Wave films we used to discuss.\"}, {\"sender_id\": \"daf1c408-8e8b-4e03-b869-87152e0d40c7\", \"message_id\": \"1dcdc28412f74c52a9196c89f3bb207a\", \"timestamp\": \"1727533200\", \"content\": \"Actually, I have! I loved it. The cinematography was stunning. I've been meaning to ask you, what did you think of the protagonist's character development?\"}, {\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"3a43c78ee58c4fbea5a5afcd90687804\", \"timestamp\": \"1727532900\", \"content\": \"That's wonderful to hear! I'm sure he'll make you proud. As for me, I've been keeping busy with some film criticism projects. I recently reviewed a new Norwegian film that I think you'd enjoy. Have you seen 'The Worst Person in the World'?\"}, {\"sender_id\": \"daf1c408-8e8b-4e03-b869-87152e0d40c7\", \"message_id\": \"c0fc7a520ad74e6d9a9b86ead594ceb3\", \"timestamp\": \"1727532600\", \"content\": \"Åse! Life is good, thanks for asking. The family is doing well too. My son is getting into football, just like his old man. How about you? What's new in the world of cinema?\"}, {\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"342fb967bd234c4fa20580e86e83de26\", \"timestamp\": \"1727532300\", \"content\": \"Hei Oleksandr! How's life treating you? I feel like I haven't seen you in ages. How's the family?\"}], \"metadata\": {\"message_range\": [\"0\", \"12\"], \"conversation_length\": \"12\", \"conversation_id\": \"40d5e21c2e8947dab8b9a095697cecfd\", \"conversation_title\": \"Oleksandr Hrynchenko\"}}",
+      "event_id": "series_s1_read_4",
+      "response_sha256": "4e65f3e6549ff59e913c2aaf2b97e546c446777955b6dcd02fe7a85a0c0b7299"
+    },
+    "stage1.tool_response.series_s1_read_5": {
+      "stage": 1,
+      "text": "{\"messages\": [{\"sender_id\": \"+4761433123\", \"message_id\": \"ea31db8dece9cfb6f64b20090c6d1d2c\", \"timestamp\": \"1728975602.0\", \"content\": \"A quick RSVP reminder for Cinema Paradiso at my home on Sunday 20 October 2024, 19:00–21:40 UTC. Please reply by Friday 18 October at 18:00 UTC to say whether you can attend. Attendance has not been assumed.\"}, {\"sender_id\": \"+4761433123\", \"message_id\": \"bfe531fea5b7b82a8783e573eeb2f0fe\", \"timestamp\": \"1728975601.0\", \"content\": \"Hi Solveig, I'm hosting a watch-along of Cinema Paradiso at my house this Sunday from 7:00 PM to 9:40 PM. Would you like to join? Please confirm if you can attend.\"}], \"metadata\": {\"message_range\": [\"0\", \"2\"], \"conversation_length\": \"2\", \"conversation_id\": \"6af4025d5f3916beff8fa1824c06fbf2\", \"conversation_title\": \"Solveig Fjellstad\"}}",
+      "event_id": "series_s1_read_5",
+      "response_sha256": "8e855f2bb79eb163753ea942ce76b0a9368a41d0e2f0ad71e4830440cc00be31"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Frognerveien 34",
+      "original_source": "stage2.tool_gt.series_s2_send.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kåre",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含挪威语变音符号的名字，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Oleksandr",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "较难拼写的名字",
+          "weight": 50
+        },
+        {
+          "text": "Solveig",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "较难拼写的名字",
+          "weight": 50
+        },
+        {
+          "text": "Åse",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含挪威语变音符号的名字，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kåre",
+        "Oleksandr",
+        "Solveig",
+        "Åse"
+      ],
+      "active_vocabulary": {
+        "Kåre": 50,
+        "Oleksandr": 50,
+        "Solveig": 50,
+        "Åse": 50
+      },
+      "vocabulary_sha256": "1d2d2b8672ed264dd886cedb653defa1c4c94d0348bb40e2d7b8086d897d554c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kåre Fjellstad",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_1",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Kåre Sørensen",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_3",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Kåre Østensen",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_2",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Oleksandr Hrynchenko",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_4",
+          "reason": "较难拼写的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Solveig Fjellstad",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_5",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kåre Fjellstad",
+        "Kåre Sørensen",
+        "Kåre Østensen",
+        "Oleksandr Hrynchenko",
+        "Solveig Fjellstad"
+      ],
+      "active_vocabulary": {
+        "Kåre": 50,
+        "Oleksandr": 50,
+        "Solveig": 50,
+        "Åse": 50,
+        "Kåre Fjellstad": 50,
+        "Kåre Sørensen": 50,
+        "Kåre Østensen": 50,
+        "Oleksandr Hrynchenko": 50,
+        "Solveig Fjellstad": 50
+      },
+      "vocabulary_sha256": "c33d654f697edafe61e35e54188fe7e5c662908b7385e08657291f0ab529313d"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Frognerveien 34",
+          "kind": "place",
+          "source": "stage2.existing_catalog.1",
+          "reason": "较难拼写的挪威街道地址",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Frognerveien 34"
+      ],
+      "active_vocabulary": {
+        "Kåre": 50,
+        "Oleksandr": 50,
+        "Solveig": 50,
+        "Åse": 50,
+        "Kåre Fjellstad": 50,
+        "Kåre Sørensen": 50,
+        "Kåre Østensen": 50,
+        "Oleksandr Hrynchenko": 50,
+        "Solveig Fjellstad": 50,
+        "Frognerveien 34": 50
+      },
+      "vocabulary_sha256": "422aef090c31bd27cd4b54b33977bde768b42b3b3f307d5aef472a09a259e99d"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Cinema Paradiso",
+    "Cinema Paradiso Watch-Along planning",
+    "Oslo",
+    "Norway"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:29.460222+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,173 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0536_xmhms2a1j0j6y6uku5udoa2jgaj2tj1a",
+  "model": "deepseek-flash",
+  "input_sha256": "0b07c6f5869e81aeb6832df55999001e29f1e78fa594251db229954d47100362",
+  "review_input_sha256": "0f5a050fe43b4ddb3a782d6969adc009c550493f5832e86ded980e40b01e0313",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "f0324cc31c2bae6e6d838d09014f97844430da6b5c5686c95c4f1b6295c72968",
+  "reference_results_sha256": "d8f793aec84929fef5d20753dc7acc337bb9b784af2916759f4f21c9e9f413e6",
+  "sources": {
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Astrid Lundqvist",
+      "original_source": "stage1.tool_gt.series_s1_email_ake.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Åsa Lindgren",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Åke Svensson",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.tool_response.series_s1_read_ake": {
+      "stage": 1,
+      "text": "{\"messages\": [{\"sender_id\": \"fa2e9836-487e-4db4-81bf-29bb21f0bc20\", \"message_id\": \"e798e9761ea44d00b6d8db8c30facadc\", \"timestamp\": \"1724669400\", \"content\": \"I'd love to, Astrid! Thank you for the invitation. Åke, I look forward to trying your wife's cooking and learning more about Swedish football.\"}, {\"sender_id\": \"e7ab09f6-1fdf-420f-a28b-c67d4c34f43e\", \"message_id\": \"e0a9800f3d08465ca2bee49f79eba83e\", \"timestamp\": \"1724669100\", \"content\": \"That sounds like a great idea, Åke! Luís, would you like to come visit us in Stockholm sometime? We can show you around the city and introduce you to some Swedish delicacies.\"}], \"metadata\": {\"message_range\": [\"0\", \"2\"], \"conversation_length\": \"10\", \"conversation_id\": \"08a689b00ad64e7e907da9cbb5fbd24f\", \"conversation_title\": \"Catching up with friends\"}}",
+      "event_id": "series_s1_read_ake",
+      "response_sha256": "2e14da66e9aaea63478aa831c81c8354ed540f634424d17596c4dcffea5de0b8"
+    },
+    "stage1.tool_response.series_s1_read_ake_contact": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Åke\", \"last_name\": \"Svensson\", \"contact_id\": \"f24fbd0903d140cd9f1e9052a81ddc1c\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"48\", \"nationality\": \"Swedish\", \"city_living\": \"Stockholm\", \"country\": \"Sweden\", \"status\": \"Status.EMPLOYED\", \"job\": \"Scout Manager for Djurgårdens IF, a Swedish football club\", \"description\": \"Åke Svensson is a seasoned scout manager with over 20 years of experience in the football industry. Born and raised in Stockholm, Sweden, Åke developed a passion for football from a young age and played for several local clubs before transitioning to a career in scouting. He is known for his meticulous attention to detail and ability to identify talented players who fit the specific needs of his team. Åke is a family man, married to his wife, Lena, and has two children, Emil and Linn. He is an avid hiker and enjoys exploring the beautiful Swedish countryside in his free time.\", \"phone\": \"+46700123456\", \"email\": \"ake.svensson@dif.se\", \"address\": \"Linnégatan 12, 114 47 Stockholm, Sweden\"}",
+      "event_id": "series_s1_read_ake_contact",
+      "response_sha256": "02d06655a7785a7e41a945e0c7b63cfda7f63f301e1a78791c4e20d142303dfd"
+    },
+    "stage1.tool_response.series_s1_read_asa_contact": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Åsa\", \"last_name\": \"Lindgren\", \"contact_id\": \"a7c46da6d9634bf19ad16dcb2c4563ff\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"41\", \"nationality\": \"Swedish\", \"city_living\": \"Stockholm\", \"country\": \"Sweden\", \"status\": \"Status.EMPLOYED\", \"job\": \"Musician/Songwriter\", \"description\": \"\", \"phone\": \"+46702123446\", \"email\": \"asa.lindgren@gaia2mail.com\", \"address\": \"Åsögatan 12, 118 29 Stockholm, Sweden\"}",
+      "event_id": "series_s1_read_asa_contact",
+      "response_sha256": "0338978a1bf3ca5772804d2344be8b317326614bdf80b6dc3c115ec9ead7b924"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "完整人名，含独特姓氏，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Djurgårdens IF",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_ake_contact",
+          "reason": "含变音符号的独特俱乐部名称",
+          "weight": 50
+        },
+        {
+          "text": "Åke Svensson",
+          "kind": "person",
+          "source": "stage1.existing_catalog.4",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Åsa Lindgren",
+          "kind": "person",
+          "source": "stage1.existing_catalog.3",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Linnégatan",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_ake_contact",
+          "reason": "含变音符号的街道名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Luís",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_ake",
+          "reason": "含变音符号的独特名字",
+          "weight": 50
+        },
+        {
+          "text": "Åsögatan",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_asa_contact",
+          "reason": "含变音符号的街道名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Lundqvist",
+        "Djurgårdens IF",
+        "Åke Svensson",
+        "Åsa Lindgren",
+        "Linnégatan",
+        "Luís",
+        "Åsögatan"
+      ],
+      "active_vocabulary": {
+        "Astrid Lundqvist": 50,
+        "Djurgårdens IF": 50,
+        "Åke Svensson": 50,
+        "Åsa Lindgren": 50,
+        "Linnégatan": 50,
+        "Luís": 50,
+        "Åsögatan": 50
+      },
+      "vocabulary_sha256": "5b666600b6a7dc13b626af40b263fe1d2b6ce59afc2015093cdc9dd0d250ef32"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid Lundqvist": 50,
+        "Djurgårdens IF": 50,
+        "Åke Svensson": 50,
+        "Åsa Lindgren": 50,
+        "Linnégatan": 50,
+        "Luís": 50,
+        "Åsögatan": 50
+      },
+      "vocabulary_sha256": "5b666600b6a7dc13b626af40b263fe1d2b6ce59afc2015093cdc9dd0d250ef32"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Brand Partnership Meeting",
+    "Content Creation Session",
+    "Yoga Class",
+    "Åsa",
+    "Åke",
+    "Catching up with friends",
+    "Yoga Studio",
+    "Zoom"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:22.034313+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,158 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0835_3fvz2bnzb3w6avwsl92pkpk8uz28hais",
+  "model": "deepseek-flash",
+  "input_sha256": "6da3f08b24ed616b9286c7ab92f16d1146e87c11bcbf60e39c612a646c835522",
+  "review_input_sha256": "2d22ec6a39067240ced3b3ff3b4ca6f89592e8809080e59e143a938613639993",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "c8f10b92b6bf0cd1e3cedad08f57b5b85d314cb7f939c764dc32cecfc2be43bd",
+  "reference_results_sha256": "e881e390bd831bed0c4f6f25c1ce96385f9ce115d6f7276dc4e4ca88d7ca4048",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Jamila Fernandes",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-90f8a5d6-c7ab-494f-abe0-1976e8318e34.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Bordeaux",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-889a37b0-532c-4af3-b260-d02a10037c5f.arguments.path"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Burgundy",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f6ed2b7a-11c2-4bcd-b47c-9768d9543865.arguments.path"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Loire Valley",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-fe6bf9d7-d19f-4b1a-96cb-474b94adb90c.arguments.path"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Alsace",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-c27853dc-6f26-4cf5-9c98-ced548a8fa58.arguments.path"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含拉丁变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，含独特姓氏，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Loire Valley",
+          "kind": "place",
+          "source": "stage0.existing_catalog.4",
+          "reason": "法国葡萄酒产区专有地名",
+          "weight": 50
+        },
+        {
+          "text": "Alsace",
+          "kind": "place",
+          "source": "stage0.existing_catalog.5",
+          "reason": "法国葡萄酒产区专有地名",
+          "weight": 50
+        },
+        {
+          "text": "Bordeaux",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "法国葡萄酒产区专有地名",
+          "weight": 50
+        },
+        {
+          "text": "Burgundy",
+          "kind": "place",
+          "source": "stage0.existing_catalog.3",
+          "reason": "法国葡萄酒产区专有地名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur",
+        "Jamila Fernandes",
+        "Loire Valley",
+        "Alsace",
+        "Bordeaux",
+        "Burgundy"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Jamila Fernandes": 50,
+        "Loire Valley": 50,
+        "Alsace": 50,
+        "Bordeaux": 50,
+        "Burgundy": 50
+      },
+      "vocabulary_sha256": "46c93a5b960cff9fcf4ce779778210780d4cab6ab0e8081561e4a1b7c4a4f8f2"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Jamila Fernandes": 50,
+        "Loire Valley": 50,
+        "Alsace": 50,
+        "Bordeaux": 50,
+        "Burgundy": 50
+      },
+      "vocabulary_sha256": "46c93a5b960cff9fcf4ce779778210780d4cab6ab0e8081561e4a1b7c4a4f8f2"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Jamila Fernandes": 50,
+        "Loire Valley": 50,
+        "Alsace": 50,
+        "Bordeaux": 50,
+        "Burgundy": 50
+      },
+      "vocabulary_sha256": "46c93a5b960cff9fcf4ce779778210780d4cab6ab0e8081561e4a1b7c4a4f8f2"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:31.996288+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

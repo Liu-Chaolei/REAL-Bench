@@ -1,0 +1,166 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0841_7oa5e611arhc1vl3nagzmxl27wgvo14c",
+  "model": "deepseek-flash",
+  "input_sha256": "497062d38a16924231cd6de34f8ef375e6f6e56cce6bc7b9b77c5d8727d7275d",
+  "review_input_sha256": "fccf1cf310904589388eca2a1357f54d34d7f744fcf51ad6aa48d0a38df4f010",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "9c8a478b5df2d74a43c4773079b1076b92c9aaffddfbe0c9cf26f990078d11cd",
+  "reference_results_sha256": "70e7bce6363c76307849a85ad5937f9efe1b122d9c2cb2445451778d30066543",
+  "sources": {
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Khalid Ma",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-629721ff-dca6-44e3-9e3f-bfc0094fc7e8.arguments.content"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Lianying Wang",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-629721ff-dca6-44e3-9e3f-bfc0094fc7e8.arguments.content"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Luísa Sousa",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-629721ff-dca6-44e3-9e3f-bfc0094fc7e8.arguments.content"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "Uppsala Castle",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-4fa145ba-14a7-45fb-89db-ff442f9c1858.arguments.location"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Dinner at Uppsala Castle",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.title"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Östermalmsgatan 12",
+      "original_source": "stage2.tool_gt.series_s2_quote.arguments.end_location"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Khalid Ma",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Lianying Wang",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整人名，拼写较难，保留",
+          "weight": 50
+        },
+        {
+          "text": "Luísa Sousa",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Uppsala Castle",
+          "kind": "place",
+          "source": "stage0.existing_catalog.6",
+          "reason": "完整地名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Khalid Ma",
+        "Lianying Wang",
+        "Luísa Sousa",
+        "Uppsala Castle"
+      ],
+      "active_vocabulary": {
+        "Khalid Ma": 50,
+        "Lianying Wang": 50,
+        "Luísa Sousa": 50,
+        "Uppsala Castle": 50
+      },
+      "vocabulary_sha256": "f27d801634377df11597ae11b2d6b36f9feee5b3f7bb3a6cfae205f055f466a8"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Dinner at Uppsala Castle",
+          "kind": "custom_name",
+          "source": "stage1.existing_catalog.0",
+          "reason": "会话自定义名称，含地名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Dinner at Uppsala Castle"
+      ],
+      "active_vocabulary": {
+        "Khalid Ma": 50,
+        "Lianying Wang": 50,
+        "Luísa Sousa": 50,
+        "Uppsala Castle": 50,
+        "Dinner at Uppsala Castle": 50
+      },
+      "vocabulary_sha256": "7e8d57159534f156c0ac835a4d4e0370218042235f94903781cf6386920352eb"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Östermalmsgatan 12",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号的街道地址，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Östermalmsgatan 12"
+      ],
+      "active_vocabulary": {
+        "Khalid Ma": 50,
+        "Lianying Wang": 50,
+        "Luísa Sousa": 50,
+        "Uppsala Castle": 50,
+        "Dinner at Uppsala Castle": 50,
+        "Östermalmsgatan 12": 50
+      },
+      "vocabulary_sha256": "b0cff3ba4e9b60098e7de2eb1e246564401e8c56833bbbca7e81b86e0bdd8a9a"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Khalid",
+    "Lianying",
+    "Luísa",
+    "A Conversation Across Cultures",
+    "Stockholm",
+    "Sweden"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:34.046193+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

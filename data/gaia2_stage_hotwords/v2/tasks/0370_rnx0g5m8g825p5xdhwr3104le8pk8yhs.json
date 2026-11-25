@@ -1,0 +1,99 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0370_rnx0g5m8g825p5xdhwr3104le8pk8yhs",
+  "model": "deepseek-flash",
+  "input_sha256": "4daf8fa3f8f0e38d0bd5fa013d9b828da3505f0fe4c2c74efc0727c40f301b6c",
+  "review_input_sha256": "4a77b24e16910eba4884ce947276aeb8611260ad9717ce3ffbe8d1c06cbad17e",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "2ee0238cdb130aaf225272268adbfb0495b733492f837f5f2821a74ad258d672",
+  "reference_results_sha256": "6bb05dfa0e61e71c7ad166b4574b8c662564d89aa2a207a13d2cd1e312e7e383",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Luís Silva",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f544ea5f-ddfa-49ff-a06e-4c47c6ee0706.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Steak Palace",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f544ea5f-ddfa-49ff-a06e-4c47c6ee0706.arguments.location"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Luís Silva",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Steak Palace",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.2",
+          "reason": "独特餐厅专名，非通用词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Luís Silva",
+        "Steak Palace"
+      ],
+      "active_vocabulary": {
+        "Luís Silva": 50,
+        "Steak Palace": 50
+      },
+      "vocabulary_sha256": "e3f81bff59e915a0812473caa4e0cac835833e5e34ed4489e0d56cc8606ae4d5"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Luís Silva": 50,
+        "Steak Palace": 50
+      },
+      "vocabulary_sha256": "e3f81bff59e915a0812473caa4e0cac835833e5e34ed4489e0d56cc8606ae4d5"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Luís Silva": 50,
+        "Steak Palace": 50
+      },
+      "vocabulary_sha256": "e3f81bff59e915a0812473caa4e0cac835833e5e34ed4489e0d56cc8606ae4d5"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Luís",
+    "Kaia",
+    "Nalani",
+    "Jamila"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:24.466660+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

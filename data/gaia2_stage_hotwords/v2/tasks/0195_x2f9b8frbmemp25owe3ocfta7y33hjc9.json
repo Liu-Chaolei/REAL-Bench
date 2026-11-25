@@ -1,0 +1,180 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0195_x2f9b8frbmemp25owe3ocfta7y33hjc9",
+  "model": "deepseek-flash",
+  "input_sha256": "3260c7d9add40ca35ee27b2d87cb4fe2418a3504da3882a34a5e5631257c88ae",
+  "review_input_sha256": "decf1c0356f415fd5a428eccef1086a0935443c291875bcd8bff428727521380",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "91de6e1746d9c97496fbd6dd532f78809b06cc366436e7c433b238828c2d52b4",
+  "reference_results_sha256": "98f9bd0d3ebbf853d82426174a06354dc5fe262c85099fd1eea9b944f9b2a9ba",
+  "sources": {
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Søren Kjær",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f5091409-16ce-42ce-ae87-1aaa0d3f635d.arguments.content"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "København V",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-9935df70-96de-4991-b50a-529216b41897.arguments.end_location"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "København Kompas",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Østerbrogade 123",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "København Ø",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Somsak Chaiyaphum",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Aurélien Van den Broeck",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "København V",
+          "kind": "place",
+          "source": "stage0.existing_catalog.5",
+          "reason": "含特殊字符的完整地名",
+          "weight": 50
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含特殊字符的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "København V",
+        "Søren Kjær"
+      ],
+      "active_vocabulary": {
+        "København V": 50,
+        "Søren Kjær": 50
+      },
+      "vocabulary_sha256": "3e5b998e43f0ce25f9eaa2a9b71c99c226957c9c7e5eac0c16533c63dbaeefdb"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "København Kompas",
+          "kind": "organization",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含特殊字符的独特名称",
+          "weight": 50
+        },
+        {
+          "text": "København Ø",
+          "kind": "place",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含特殊字符的完整地名",
+          "weight": 50
+        },
+        {
+          "text": "Østerbrogade 123",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含特殊字符的完整街道地址",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "København Kompas",
+        "København Ø",
+        "Østerbrogade 123"
+      ],
+      "active_vocabulary": {
+        "København V": 50,
+        "Søren Kjær": 50,
+        "København Kompas": 50,
+        "København Ø": 50,
+        "Østerbrogade 123": 50
+      },
+      "vocabulary_sha256": "ffb1dc34439d557b8571736d590f108cc2c9873a6a67d7becdfe50ec31848c19"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien Van den Broeck",
+          "kind": "person",
+          "source": "stage2.existing_catalog.2",
+          "reason": "含特殊字符的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Somsak Chaiyaphum",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "完整且较难的人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien Van den Broeck",
+        "Somsak Chaiyaphum"
+      ],
+      "active_vocabulary": {
+        "København V": 50,
+        "Søren Kjær": 50,
+        "København Kompas": 50,
+        "København Ø": 50,
+        "Østerbrogade 123": 50,
+        "Aurélien Van den Broeck": 50,
+        "Somsak Chaiyaphum": 50
+      },
+      "vocabulary_sha256": "da68c76a82ab596a00625e09a306332d987cf82cd3a28e9c2aef70a267998dee"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Astrid",
+    "Collen",
+    "Stijn",
+    "Thanakorn",
+    "Copenhagen",
+    "Denmark",
+    "Financial Inclusion and Interdisciplinary Approaches",
+    "Søren"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:26.704865+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

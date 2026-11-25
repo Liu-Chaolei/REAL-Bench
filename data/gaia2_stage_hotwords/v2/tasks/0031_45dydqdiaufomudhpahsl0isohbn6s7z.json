@@ -1,0 +1,184 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0031_45dydqdiaufomudhpahsl0isohbn6s7z",
+  "model": "deepseek-flash",
+  "input_sha256": "c9ea9b106a5dedb9ae2e515109d0e5123a5bc5e7ea98a4fee18af2b6f47e2762",
+  "review_input_sha256": "bb6b34849c60ca0e775fc429c394362a2d924032d62b8831f24fec534bad7f08",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "39d693c4273a042d0760c908f176958fab4fca5598916edc1a243f5f271cb2eb",
+  "reference_results_sha256": "59dc1eda75810f5c23730568fa90cd3c842225c222a922ad6c828a3ea6c09b87",
+  "sources": {
+    "stage1.tool_response.series_s1_read_recent": {
+      "stage": 1,
+      "text": "[{\"participant_ids\": [\"+351912344678\", \"+4586134211\", \"+46734567890\"], \"messages\": [{\"sender_id\": \"+46734567890\", \"message_id\": \"2a0b1d304e234243b4f84f26833d8b73\", \"timestamp\": \"1728821400\", \"content\": \"Det låter som en underbar idé, Gudrun! Jag ska definitivt komma och besöka dig i Aarhus snart. Tack för samtalet idag, det var så trevligt att prata med er båda.\"}], \"title\": \"Samtal med Gudrun och Vasco\", \"conversation_id\": \"6d5fe68e90a542b8b4aeee17a00e906e\", \"last_updated\": \"1728821400\"}, {\"participant_ids\": [\"+862112315678\", \"+861065512387\", \"+7561234567\", \"+46734567890\"], \"messages\": [{\"sender_id\": \"+861065512387\", \"message_id\": \"adc1905accaa4d41ad0150e09bc591b1\", \"timestamp\": \"1728819300\", \"content\": \"Astrid Møller, I actually love cooking Xiaolongbao! It's a traditional Chinese dish from my hometown. Meixiang, have you ever tried making Xiaolongbao?\"}], \"title\": \"Catch-up and Cultural Exchange\", \"conversation_id\": \"79562e5dbaf84919a0779d1070097f9b\", \"last_updated\": \"1728819300\"}, {\"participant_ids\": [\"+46701234537\", \"+46734567890\", \"+358936123456\", \"+46702345678\"], \"messages\": [{\"sender_id\": \"+46701234537\", \"message_id\": \"2c3796a6705b471f8bc4b951924abac9\", \"timestamp\": \"1728733800\", \"content\": \"I've been meaning to visit Porto again. Maybe we can plan a trip together soon?\"}], \"title\": \"Catch-up and Culture\", \"conversation_id\": \"26d2cea86a6d471b9346e82b6b5c0c1d\", \"last_updated\": \"1728733800\"}, {\"participant_ids\": [\"+4571345678\", \"+351954123456\", \"+46734567890\"], \"messages\": [{\"sender_id\": \"+351954123456\", \"message_id\": \"443a55afe9ea4b638f025cbbc2aac7f1\", \"timestamp\": \"1728732900\", \"content\": \"Sounds great, Astrid! Have a wonderful day and talk to you soon!\"}], \"title\": \"Catch-up and Sustainable Fashion\", \"conversation_id\": \"ff602c484dad46ab94f51b9f02e365a9\", \"last_updated\": \"1728732900\"}, {\"participant_ids\": [\"+46202123456\", \"+46734567890\"], \"messages\": [{\"sender_id\": \"+46202123456\", \"message_id\": \"c223a30632624cdca055ad11ba64d4a6\", \"timestamp\": \"1728730200\", \"content\": \"Ha! That's amazing. I'm sure he's still got the skills. Okay, I should get back to work. Talk to you soon, Astrid!\"}], \"title\": \"Axel Lindqvist\", \"conversation_id\": \"bd5fd1ae6f9947dda2e6631c4cde1773\", \"last_updated\": \"1728730200\"}]",
+      "event_id": "series_s1_read_recent",
+      "response_sha256": "842e286ffb0c7210665b6b9f047b82384c8a8d4fdd45e5c570d20e03b3ee23b5"
+    },
+    "stage2.tool_response.series_s2_read_conversation": {
+      "stage": 2,
+      "text": "{\"messages\": [{\"sender_id\": \"+46701234537\", \"message_id\": \"2c3796a6705b471f8bc4b951924abac9\", \"timestamp\": \"1728733800\", \"content\": \"I've been meaning to visit Porto again. Maybe we can plan a trip together soon?\"}, {\"sender_id\": \"+358936123456\", \"message_id\": \"0bcca9ddc1304ab7aea7cd55ca06a36b\", \"timestamp\": \"1728733200\", \"content\": \"It's been good! I've been keeping busy with work and exploring the city. I recently visited the Porto Cathedral and was struck by its beauty.\"}, {\"sender_id\": \"+46734567890\", \"message_id\": \"e3e5efb1a48844618fdc127e922fd9fd\", \"timestamp\": \"1728732600\", \"content\": \"I'll try to get some tickets through my influencer connections. Sunita, how's life in Porto been treating you?\"}, {\"sender_id\": \"+46702345678\", \"message_id\": \"ce1cbad655a54107bf4972c2ec5feaf1\", \"timestamp\": \"1728732000\", \"content\": \"That sounds amazing. I'd love to attend the premiere. Astrid, can you get us tickets?\"}, {\"sender_id\": \"+46701234537\", \"message_id\": \"f74a2d3ac5404ac59510e28731d15188\", \"timestamp\": \"1728731400\", \"content\": \"Of course! From what I've read, the piece is inspired by the natural landscapes of Sweden. Carter was fascinated by the country's unique light and soundscapes.\"}, {\"sender_id\": \"+358936123456\", \"message_id\": \"b37eb45eb446464d92cf4f1db939b191\", \"timestamp\": \"1728730800\", \"content\": \"Hej all! I've been a bit busy with work, but I did hear about the premiere. Astrid, can you tell us more about the piece and what inspired Carter to write it?\"}, {\"sender_id\": \"+46734567890\", \"message_id\": \"2eee84d9c6d4421caff623cb1afe23d4\", \"timestamp\": \"1728729900\", \"content\": \"No, I hadn't! I'd love to learn more about it. Sunita, have you heard about it? You're always up to date on the latest music news.\"}, {\"sender_id\": \"+46701234537\", \"message_id\": \"38af6c1f14184405828919eb15eb2864\", \"timestamp\": \"1728729300\", \"content\": \"Actually, I was just writing an article about it for Dagens Nyheter. It's going to be a huge event! Have you heard about the new Elliott Carter piece that's premiering at the Stockholm Concert Hall next month?\"}, {\"sender_id\": \"+46734567890\", \"message_id\": \"6d5c9201ed404566b1c492be02aaf544\", \"timestamp\": \"1728728700\", \"content\": \"Not yet, but it's on my list! I've been following his career since I was a teenager. Speaking of which, have you heard about the new tennis tournament coming to Stockholm next year?\"}, {\"sender_id\": \"+46702345678\", \"message_id\": \"2d7d70224c1242dbace36f0bfe1744ad\", \"timestamp\": \"1728728100\", \"content\": \"Hej Astrid! I can imagine. I've been meaning to take a walk there myself. By the way, have you read Björn Borg's latest book on mental toughness?\"}, {\"sender_id\": \"+46734567890\", \"message_id\": \"757dcf65768148e1be1c318f804b3e36\", \"timestamp\": \"1728727500\", \"content\": \"Hej! Just got back from a photoshoot in the Old Town. The autumn colors are stunning this time of year.\"}], \"metadata\": {\"message_range\": [\"0\", \"11\"], \"conversation_length\": \"11\", \"conversation_id\": \"26d2cea86a6d471b9346e82b6b5c0c1d\", \"conversation_title\": \"Catch-up and Culture\"}}",
+      "event_id": "series_s2_read_conversation",
+      "response_sha256": "d46cb3661bd528d4210c0c947ca63f59185f2874fd976fd1c71a81485163f133"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Astrid Møller",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_recent",
+          "reason": "含特殊字符ø的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Axel Lindqvist",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_recent",
+          "reason": "完整瑞典人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Gudrun",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_recent",
+          "reason": "北欧人名，ASR易误识别",
+          "weight": 50
+        },
+        {
+          "text": "Meixiang",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_recent",
+          "reason": "中文拼音人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Vasco",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_recent",
+          "reason": "葡萄牙人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Xiaolongbao",
+          "kind": "custom_name",
+          "source": "stage1.tool_response.series_s1_read_recent",
+          "reason": "中文菜名拼音，ASR易错",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Møller",
+        "Axel Lindqvist",
+        "Gudrun",
+        "Meixiang",
+        "Vasco",
+        "Xiaolongbao"
+      ],
+      "active_vocabulary": {
+        "Astrid Møller": 50,
+        "Axel Lindqvist": 50,
+        "Gudrun": 50,
+        "Meixiang": 50,
+        "Vasco": 50,
+        "Xiaolongbao": 50
+      },
+      "vocabulary_sha256": "904c146242a14264b9c0f4642268209456666fae3ce66b9ef486afc6585d15de"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Stockholm Concert Hall",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_read_conversation",
+          "reason": "完整场所名",
+          "weight": 50
+        },
+        {
+          "text": "Björn Borg",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_conversation",
+          "reason": "含特殊字符ö的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Dagens Nyheter",
+          "kind": "organization",
+          "source": "stage2.tool_response.series_s2_read_conversation",
+          "reason": "瑞典报纸名，含特殊拼写",
+          "weight": 50
+        },
+        {
+          "text": "Elliott Carter",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_conversation",
+          "reason": "完整作曲家姓名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Sunita",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_conversation",
+          "reason": "印度人名，较难识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Stockholm Concert Hall",
+        "Björn Borg",
+        "Dagens Nyheter",
+        "Elliott Carter",
+        "Sunita"
+      ],
+      "active_vocabulary": {
+        "Astrid Møller": 50,
+        "Axel Lindqvist": 50,
+        "Gudrun": 50,
+        "Meixiang": 50,
+        "Vasco": 50,
+        "Xiaolongbao": 50,
+        "Stockholm Concert Hall": 50,
+        "Björn Borg": 50,
+        "Dagens Nyheter": 50,
+        "Elliott Carter": 50,
+        "Sunita": 50
+      },
+      "vocabulary_sha256": "17cbccc4ae3ce8974cd570065b8a26f308150c50089c8293c3312f8c9f59e711"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Catch-up and Culture",
+    "Porto",
+    "Porto Cathedral"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:13:42.926648+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

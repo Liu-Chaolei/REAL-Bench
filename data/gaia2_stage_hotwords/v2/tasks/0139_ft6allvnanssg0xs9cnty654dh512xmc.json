@@ -1,0 +1,142 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0139_ft6allvnanssg0xs9cnty654dh512xmc",
+  "model": "deepseek-flash",
+  "input_sha256": "0ae2534ffa6fb8deddb36a1ed36b378fa253ee5b3a20fe767c024855b312d51a",
+  "review_input_sha256": "f62923ceb4829142a8993006aeb829ad4d64f6430469457df276afb64c538e43",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "0e5e7a2a4c27c04fb6d7167109eb4d16fa436b442e2962b6530f38d473fe680d",
+  "reference_results_sha256": "c7883fb78ed707c86ff27df8600953280b14c6b7c3440ad7e33a167c65a9b64a",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Akira",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Basel",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage1.tool_gt.series_s1_reply.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Mittlere Strasse 12",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Yoga Studio in Basel",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Akira",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Akira"
+      ],
+      "active_vocabulary": {
+        "Akira": 50
+      },
+      "vocabulary_sha256": "a23efdc48a7da37eaef0b77d342a63240be46b63c08df1d9e383fa4b6021c629"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Basel",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "地名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Ursula Wiederkehr",
+        "Basel"
+      ],
+      "active_vocabulary": {
+        "Akira": 50,
+        "Ursula Wiederkehr": 50,
+        "Basel": 50
+      },
+      "vocabulary_sha256": "133bac68105768ea477bd7275638dcae1fbde1e6ba79cc0a051d057327e690e5"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Yoga Studio in Basel",
+          "kind": "organization",
+          "source": "stage2.existing_catalog.2",
+          "reason": "具体场所名称，保留",
+          "weight": 50
+        },
+        {
+          "text": "Mittlere Strasse 12",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "具体街道地址，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Yoga Studio in Basel",
+        "Mittlere Strasse 12"
+      ],
+      "active_vocabulary": {
+        "Akira": 50,
+        "Ursula Wiederkehr": 50,
+        "Basel": 50,
+        "Yoga Studio in Basel": 50,
+        "Mittlere Strasse 12": 50
+      },
+      "vocabulary_sha256": "da9a743c37eccdc0c42f4889e9d5522558c27168ec48179c946e0fc7940a28dd"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Switzerland"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:07.837635+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

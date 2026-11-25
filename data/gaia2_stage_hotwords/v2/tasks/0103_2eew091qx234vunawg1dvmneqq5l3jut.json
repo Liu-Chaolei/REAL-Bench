@@ -1,0 +1,114 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0103_2eew091qx234vunawg1dvmneqq5l3jut",
+  "model": "deepseek-flash",
+  "input_sha256": "75e96e74aaf9a1466ada31de9a8bf6f7b5a89be8a5cf99de633f37fcdc8093d2",
+  "review_input_sha256": "bf89f4c930d28563bbc6ece4b8a3c2b1c33b467c3de7c46d895b2fada36e60fa",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "91b47119ee499e8a401ea25e9b576acc34e454be6cdc2fb660d08e2d37755a48",
+  "reference_results_sha256": "caf9ee557df2dbdbac2330afd6e5b1838ed215159aab4990729eeeb061cf7905",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kvido Nováček",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Opletalova 38, 110 00 Staré Město, Prague",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Matěj Nováček",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f99fd8bd-95e4-4470-a196-18ba46b079f6.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Opletalova 38, 110 00 Staré Město, Prague",
+          "kind": "place",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含捷克语地名变音符号的完整地址",
+          "weight": 50
+        },
+        {
+          "text": "Kvido Nováček",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Opletalova 38, 110 00 Staré Město, Prague",
+        "Kvido Nováček",
+        "Matěj Nováček"
+      ],
+      "active_vocabulary": {
+        "Opletalova 38, 110 00 Staré Město, Prague": 50,
+        "Kvido Nováček": 50,
+        "Matěj Nováček": 50
+      },
+      "vocabulary_sha256": "d009aea448991aeccabfb279cb26870842f651bf94feac29b364d0c5646be8f5"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Opletalova 38, 110 00 Staré Město, Prague": 50,
+        "Kvido Nováček": 50,
+        "Matěj Nováček": 50
+      },
+      "vocabulary_sha256": "d009aea448991aeccabfb279cb26870842f651bf94feac29b364d0c5646be8f5"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Opletalova 38, 110 00 Staré Město, Prague": 50,
+        "Kvido Nováček": 50,
+        "Matěj Nováček": 50
+      },
+      "vocabulary_sha256": "d009aea448991aeccabfb279cb26870842f651bf94feac29b364d0c5646be8f5"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Global Governance Seminar",
+    "Charles University",
+    "Conan - Book of Skelos"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:00.403429+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,165 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0980_s0b6q9czn1wkjlkl9p6qesjd792a9zbz",
+  "model": "deepseek-flash",
+  "input_sha256": "aec44a6604593d4add0b532b14d7da4558bc564f89bf1dfef152f70a4c0a2aaa",
+  "review_input_sha256": "65dcc1add49ed1ad28eaa0e5571c6babb2b8ac70f79618871566bafe07565146",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "7c8967a678e45bc4224a72a3eec176e2d38976668636308cc0b56efda5879f35",
+  "reference_results_sha256": "0d2fe456fdfc1f6c5237023d4582b0423fa674448e19f4c43616eaeb43108a45",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Sip & Savor Soirée",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f05be255-3344-4b5f-8c8c-46c44e65dbae.arguments.title"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Vintner's Selection Night",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-83f587ce-9258-4fab-b6f3-3efa6ef185fc.arguments.title"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Wines of the World Tasting",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-5ab772fc-9c19-4cf6-8031-050edfca76a1.arguments.title"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Nalani Jensen",
+      "original_source": "stage1.reference_reply.series_s1_confirm.arguments.content"
+    },
+    "stage2.tool_response.series_s2_read_last": {
+      "stage": 2,
+      "text": "{\"event_id\": \"d0c7103e1ab84f3d944de2e6a5db72ed\", \"title\": \"Wine Tasting\", \"start_datetime\": \"1729105200\", \"end_datetime\": \"1729112400\", \"tag\": \"Work\", \"description\": \"Host a wine tasting event for customers to showcase new wines and build relationships.\", \"location\": \"Restaurant Private Dining Room\", \"attendees\": [\"Aurélien LaFleur\", \"Luís Marques\", \"Jamila Fernandes\"], \"start_strftime\": \"Wednesday, 2024-10-16 19:00:00\", \"end_strftime\": \"Wednesday, 2024-10-16 21:00:00\"}",
+      "event_id": "series_s2_read_last",
+      "response_sha256": "7f8a4f3fdd8d9e89250a5f70cca05374b01587227e3eb0c17ab0696323271c71"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Wines of the World Tasting",
+          "kind": "custom_name",
+          "source": "stage0.existing_catalog.2",
+          "reason": "独特活动名称",
+          "weight": 50
+        },
+        {
+          "text": "Vintner's Selection Night",
+          "kind": "custom_name",
+          "source": "stage0.existing_catalog.1",
+          "reason": "独特活动名称，含专有名词",
+          "weight": 50
+        },
+        {
+          "text": "Sip & Savor Soirée",
+          "kind": "custom_name",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含特殊字符的独特活动名称，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Wines of the World Tasting",
+        "Vintner's Selection Night",
+        "Sip & Savor Soirée"
+      ],
+      "active_vocabulary": {
+        "Wines of the World Tasting": 50,
+        "Vintner's Selection Night": 50,
+        "Sip & Savor Soirée": 50
+      },
+      "vocabulary_sha256": "779235b4e7931164ef67fb2188dc26489a48f4332c07b783ee74afb572145164"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Nalani Jensen"
+      ],
+      "active_vocabulary": {
+        "Wines of the World Tasting": 50,
+        "Vintner's Selection Night": 50,
+        "Sip & Savor Soirée": 50,
+        "Nalani Jensen": 50
+      },
+      "vocabulary_sha256": "c63361618db18ff88ce8829e0710dd6d3346b30e65a144c7f83400d02b68d005"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_last",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_last",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Luís Marques",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_last",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur",
+        "Jamila Fernandes",
+        "Luís Marques"
+      ],
+      "active_vocabulary": {
+        "Wines of the World Tasting": 50,
+        "Vintner's Selection Night": 50,
+        "Sip & Savor Soirée": 50,
+        "Nalani Jensen": 50,
+        "Aurélien LaFleur": 50,
+        "Jamila Fernandes": 50,
+        "Luís Marques": 50
+      },
+      "vocabulary_sha256": "2c4d7ff315f84c56cf8bc1778f1aa80e2cd82d1d6e945dbf8f40220360f67f31"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "1234 NW Davis St",
+    "1234 NW 23rd Ave"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:07.735471+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

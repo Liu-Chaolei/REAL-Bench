@@ -2,7 +2,7 @@
 
 状态：机制实现已完成，真实 Qwen smoke 待执行。
 
-已完成的离线工作包括 watchdog 生命周期、Qwen native PCM playback format、streaming observer 接入、stage activation、当前 1000 任务 v3 catalog 和机制测试。
+已完成的离线工作包括 watchdog 生命周期、Qwen native PCM playback format、streaming observer 接入、stage activation、当前 1000 任务 V2 catalog 和机制测试。
 
 目标是把 `origin/tau-backup` 中当前工作区缺少的 watchdog、Qwen streaming ASR、stage hotwords 和相关配置迁移到 Gaia2-only 工作区。实现以运行时机制为主，不把新逻辑写入 evaluator、reward 或评分公式。
 
@@ -16,7 +16,7 @@
 - 不恢复独立的 async 任务；
 - 当前热词目录不生成 async profile；
 - 共同的 1000 个任务按当前任务内容重新计算 input hash；
-- backup v1/v2 profile 不直接覆盖当前数据；
+- 采用 backup V2 profile，保留当前 1000 个任务并去除 async profile；
 - 新功能默认关闭；
 - 不修改任务成功公式、语音指标公式、reward 或历史结果格式；
 - 不新增评测系统 acceptance、二次裁判、自动修复或自动重跑。
@@ -24,7 +24,7 @@
 当前目录目标：
 
 ```text
-data/gaia2_stage_hotwords/v3/
+data/gaia2_stage_hotwords/v2/
   manifest.json
   tasks/<current-task-id>.json  # 1000 个
 ```
@@ -33,7 +33,7 @@ manifest 应明确记录：
 
 ```json
 {
-  "version": "gaia2-stage-hotwords-v3",
+  "version": "gaia2-stage-hotwords-v2",
   "tasks": 1000,
   "async_tasks": 0,
   "dataset_sha256": "<current tasks.json sha256>",
@@ -198,20 +198,19 @@ stage input 只包含：
 
 ## 7. 当前 1000 任务热词目录
 
-backup v1/v2 不能直接复制，因为它们绑定 1100 个旧任务。迁移脚本应从当前任务读取 stage source，再处理 backup 已审核词条：
+backup V2 绑定 1100 个任务。迁移脚本从当前任务筛选 1000 个共同 ID，保留 V2 的二次审核结果和权重策略：
 
 1. 读取当前 `tasks.json`；
 2. 查找对应的 reviewed profile；
-3. 重新检查词条是否是当前 source 的 literal substring；
-4. 丢弃当前任务不存在的词条；
-5. 重新计算 `input_sha256`；
-6. 重新写入 v3 profile；
-7. 生成新的 manifest；
-8. 明确排除所有 `__async_*` ID。
+3. 校验 profile 的当前 task input hash；
+4. 保留 V2 的 `old_terms_removed`、overflow weight 和 source evidence；
+5. 丢弃 100 个 `__async_*` profile；
+6. 重新计算当前 manifest 的 profile hashes；
+7. 明确记录 `tasks=1000` 和 `async_tasks=0`。
 
 authoring 可以离线执行一次，运行时不重新 authoring。
 
-每个 profile 的累计 vocabulary 仍按 stage 增长。前 50 个累计词使用 weight 50，后续词使用 weight 5 时，需要在 schema 和 loader 中保持一致。
+每个 profile 的累计 vocabulary 仍按 stage 增长。前 50 个累计词使用 weight 50，后续词使用 V2 的 weight 5；loader 必须校验累计数量和每个 term 的 weight。
 
 ## 8. Stage activation
 
@@ -367,7 +366,7 @@ stage hotwords：
 离线机制测试通过后，只运行一个当前任务的真实 Qwen smoke：
 
 - 使用 streaming Qwen config；
-- 使用 v3 catalog；
+- 使用 V2 catalog；
 - watchdog 保持关闭；
 - 保存 transcript、media timeline 和 observer summary；
 - 检查 stage activation；
@@ -381,7 +380,7 @@ stage hotwords：
 
 1. 完成 native PCM playback format 和时间线接入；
 2. 完成 streaming observer session 状态机；
-3. 完成 stage hotword loader 和 v3 catalog；
+3. 完成 stage hotword loader 和 V2 catalog；
 4. 接入真实 speech boundary 的 stage activation；
 5. 完成 watchdog 生命周期和结果记录；
 6. 补当前代码结构的机制测试；

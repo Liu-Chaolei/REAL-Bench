@@ -1,0 +1,142 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0060_20gzbu5axwurnrooquit6zgdiu8h51v0__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "d48356598c4abf54fec704949c5ac336e40186b2a33e0905671acada253f9f0d",
+  "review_input_sha256": "0a99f98774983a24ce1a82968b39a1b5c03e222dda9062119cc1dc0a725a836d",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "daa3f9954570ccdf1847850dc989a6c48cd9304379a32125b58d8c71e3b43464",
+  "reference_results_sha256": "765303a5dda79c2bb14a4eaa6f826cef7fbfb4d33a6121404fb0639e441096dd",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Conan The Brigand",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Corinth",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Jamila Patel",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.attendees[1]"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.attendees[0]"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Portland",
+      "original_source": "stage2.tool_gt.series_s2_search.arguments.location"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Conan The Brigand",
+          "kind": "custom_name",
+          "source": "stage0.existing_catalog.0",
+          "reason": "虚构作品名，专有且不易识别",
+          "weight": 50
+        },
+        {
+          "text": "Corinth",
+          "kind": "place",
+          "source": "stage0.existing_catalog.1",
+          "reason": "地名，专有名词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Conan The Brigand",
+        "Corinth"
+      ],
+      "active_vocabulary": {
+        "Conan The Brigand": 50,
+        "Corinth": 50
+      },
+      "vocabulary_sha256": "a86cd44ccc3558a8719eb22ee47d106628feebbce0f6aad76abcec062fce63eb"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Jamila Patel",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，专有",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur",
+        "Jamila Patel"
+      ],
+      "active_vocabulary": {
+        "Conan The Brigand": 50,
+        "Corinth": 50,
+        "Aurélien LaFleur": 50,
+        "Jamila Patel": 50
+      },
+      "vocabulary_sha256": "509dcc2cba0744853db56f157a39f4958e4cd8034b096f035d5e601f35fbb36e"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Portland",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "城市地名，专有名词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Portland"
+      ],
+      "active_vocabulary": {
+        "Conan The Brigand": 50,
+        "Corinth": 50,
+        "Aurélien LaFleur": 50,
+        "Jamila Patel": 50,
+        "Portland": 50
+      },
+      "vocabulary_sha256": "c26198ac920ed26e9e777d5f3c504df60fb2e5bcfec0cfe2ff71580ae1a11cb5"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:48.587098+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

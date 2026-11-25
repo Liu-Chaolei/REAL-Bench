@@ -1,0 +1,169 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0600_g9nej7m3auopflugcogj9f1pt9jxxsw8__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "a32bceff48a5c1a5330381f0febd00931b710a0cad09c770bf4228d6f0293dd7",
+  "review_input_sha256": "cd3478d34875a6a2006e2fea14b4d5543d59fb10e7dcc8a6c0762f1955cd4da4",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "4d2cefc6a19cd945a81cdfdf861308b3bcb602ff0ebd165f2aeb363f70abdcd6",
+  "reference_results_sha256": "245a7979e5053af4470b054001437f8c48b550dd589c273e04f9d7710c1e044c",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Amira El Khattabi",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Søren",
+      "original_source": "stage1.tool_gt.series_s1_email_amira.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Bram Janssens",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.tool_response.series_s2_list_before": {
+      "stage": 2,
+      "text": "{\"contacts\": [{\"first_name\": \"Tanawat\", \"last_name\": \"Srisombat\", \"contact_id\": \"002a8fdd8cc54728b0253ebdc1646b6c\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"32\", \"nationality\": \"Thai\", \"city_living\": \"Chiang Mai\", \"country\": \"Thailand\", \"status\": \"Status.EMPLOYED\", \"job\": \"City Councilman\", \"description\": \"Tanawat Srisombat is a young and ambitious city councilman from Chiang Mai, Thailand. He was born and raised in this cultural and spiritual hub of northern Thailand and is deeply passionate about making his hometown a better place for its residents. Tanawat is well-educated, having earned a degree in Urban Planning from Chiang Mai University. He is known for his innovative ideas and collaborative approach to governance, often seeking input from local communities and stakeholders.\", \"phone\": \"+66819576543\", \"email\": \"tanawat.srisombat@gaia2mail.com\", \"address\": \"123/456 Moo 10, Chang Khlan Subdistrict, Chiang Mai 50100\"}, {\"first_name\": \"Astrid\", \"last_name\": \"Sørensen\", \"contact_id\": \"081d342339064406966e3f71f19ef090\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"47\", \"nationality\": \"Danish\", \"city_living\": \"Aarhus\", \"country\": \"Denmark\", \"status\": \"Status.EMPLOYED\", \"job\": \"Medical Doctor, Researcher\", \"description\": \"Astrid Sørensen is a dedicated and compassionate medical doctor who has always been fascinated by the potential of mathematics to improve medical diagnosis and treatment. Born and raised in Aarhus, Denmark, Astrid developed a strong foundation in mathematics and science from a young age. She pursued a career in medicine, earning her medical degree from the University of Aarhus and later specializing in internal medicine. As a researcher, Astrid is passionate about applying mathematical models to analyze complex medical data, with the goal of developing more accurate and personalized treatment plans.\", \"phone\": \"+4561234567\", \"email\": \"astrid.sorensen@auh.dk\", \"address\": \"Skovvej 12, 3.tv, 8200 Aarhus N\"}, {\"first_name\": \"Elodie\", \"last_name\": \"Vandenberghe\", \"contact_id\": \"08d2a9eca0b84661895130a53e6b2200\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"74\", \"nationality\": \"Belgian\", \"city_living\": \"Kochi\", \"country\": \"India\", \"status\": \"Status.RETIRED\", \"job\": \"Former High School Teacher\", \"description\": \"A 74-year-old retired high school teacher from Belgium, who has always been fascinated by different cultures and ways of life.\", \"phone\": \"+914841234567\", \"email\": \"elodie.vandenberghe@gaia2mail.com\", \"address\": \"c/o Hotel Forte Kochi, Princess Street, Fort Kochi, Kochi, Kerala, India\"}, {\"first_name\": \"Aurélie\", \"last_name\": \"Vandenberghe\", \"contact_id\": \"095f008e6ace45808da5a36bcfa95880\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"65\", \"nationality\": \"Belgian\", \"city_living\": \"Ghent\", \"country\": \"Belgium\", \"status\": \"Status.RETIRED\", \"job\": \"Former librarian, now a part-time blogger and minimalist lifestyle coach\", \"description\": \"Aurélie Vandenberghe is a 65-year-old retired librarian who has embarked on a journey of minimalism and simplicity.\", \"phone\": \"+32486123456\", \"email\": \"aurelie.vandenberghe@gaia2mail.com\", \"address\": \"Korte Meer 12, 9000 Ghent, Belgium\"}, {\"first_name\": \"Thanawat\", \"last_name\": \"Sricharoen\", \"contact_id\": \"0a14d9e82e0849cd9700649f8ecc5898\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"48\", \"nationality\": \"Thai\", \"city_living\": \"Chiang Mai\", \"country\": \"Thailand\", \"status\": \"Status.EMPLOYED\", \"job\": \"Professional Muay Thai Athlete and Part-time Sports Nutrition Consultant\", \"description\": \"Thanawat Sricharoen is a renowned Muay Thai athlete from Chiang Mai, Thailand. Born and raised in a family of modest means, Thanawat's passion for sports and nutrition drove him to become one of the most successful Muay Thai fighters in Thailand. With a career spanning over two decades, Thanawat has won numerous championships and accolades, including the coveted Rajadamnern Stadium Championship title. As he approaches the twilight of his athletic career, Thanawat has begun to pursue his interest in nutritional science, with the goal of becoming a sports nutritionist. He is currently working towards a certification in sports nutrition and has started consulting with younger athletes on their dietary needs.\", \"phone\": \"+66819876543\", \"email\": \"thanawat.sricharoen@gaia2mail.com\", \"address\": \"123/456 Moo 10, Chang Khlan Sub-District, Chiang Mai 50100, Thailand\"}, {\"first_name\": \"Rohan\", \"last_name\": \"Naidu\", \"contact_id\": \"0cd68caee28d46eaaad97011b3a8452d\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"48\", \"nationality\": \"Indian\", \"city_living\": \"Bengaluru\", \"country\": \"India\", \"status\": \"Status.EMPLOYED\", \"job\": \"Software Engineer\", \"description\": \"Rohan Naidu is a 48-year-old software engineer from Bengaluru, India. He is a hardcore swimming fan and has been swimming competitively since his college days. Despite his busy schedule, he still manages to squeeze in a few laps at the local pool every morning. Rohan has a little programming background, which he developed during his engineering days, and has been working in the IT industry for over two decades. He is married to a school teacher, and they have two children, a boy, and a girl, both in their teens.\", \"phone\": \"+918041234567\", \"email\": \"rohan.naidu@gaia2mail.com\", \"address\": \"14, 2nd Cross, 1st Stage, BTM Layout, Bengaluru, Karnataka 560029\"}, {\"first_name\": \"Birgitta\", \"last_name\": \"Kjær\", \"contact_id\": \"0d5e1f6445cf46bf8e5d95dffc8fbe92\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"59\", \"nationality\": \"Danish\", \"city_living\": \"Copenhagen\", \"country\": \"Denmark\", \"status\": \"Status.EMPLOYED\", \"job\": \"History Teacher\", \"description\": \"Birgitta Kjær is a warm and engaging individual who has dedicated her life to sharing her passion for history with her students.\", \"phone\": \"+4331123456\", \"email\": \"birgitta.kjaer@gaia2mail.com\", \"address\": \"Frederiksborggade 12, 1362 København K, Denmark\"}, {\"first_name\": \"Bram\", \"last_name\": \"Janssens\", \"contact_id\": \"107669d974844d55a2f71a02c22ef425\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"47\", \"nationality\": \"Belgian\", \"city_living\": \"Kanturk\", \"country\": \"Belgium\", \"status\": \"Status.EMPLOYED\", \"job\": \"Sports Journalist\", \"description\": \"Bram Janssens is a 47-year-old sports journalist from Kanturk, Belgium. He is a hardcore football fan and has been following the sport since he was a kid. Bram's passion for football is evident in his work, where he writes for a local sports magazine, covering football games and interviewing players. When he's not working, Bram loves to watch football games with his friends and family, often hosting viewing parties at his home. He's also an avid reader and enjoys hiking in the Belgian countryside. Bram is a bit of a foodie and loves to try out new recipes in his spare time.\", \"phone\": \"+32473912345\", \"email\": \"bram.janssens@gaia2mail.com\", \"address\": \"14 Rue de la Gare, 8500 Kanturk, Belgium\"}, {\"first_name\": \"Nalini\", \"last_name\": \"Rao\", \"contact_id\": \"138d9a9c34c7451b905afc2e59c23610\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"33\", \"nationality\": \"Indian\", \"city_living\": \"Bengaluru\", \"country\": \"India\", \"status\": \"Status.EMPLOYED\", \"job\": \"Online English Teacher and Novelist\", \"description\": \"Nalini Rao is a creative and ambitious individual who has always been passionate about literature and teaching. Born and raised in Bengaluru, she grew up in a family of book lovers and was encouraged from a young age to explore her writing skills. After completing her Master's degree in English Literature, Nalini started working as an online English teacher, which allowed her to connect with students from all over the world and share her love for language and literature. Meanwhile, she has been working on her debut novel, a fiction story that explores the complexities of Indian society and culture.\", \"phone\": \"+919900123456\", \"email\": \"nalini.rao@gaia2mail.com\", \"address\": \"145, 3rd Main Road, Jayanagar, Bengaluru, Karnataka 560011\"}, {\"first_name\": \"Prasert\", \"last_name\": \"Suthipong\", \"contact_id\": \"1391aba3269f46a19db4c3be6c2b07d9\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"70\", \"nationality\": \"Thai\", \"city_living\": \"Chiang Mai\", \"country\": \"Thailand\", \"status\": \"Status.RETIRED\", \"job\": \"Former Army Officer (Retired)\", \"description\": \"Prasert Suthipong is a 70-year-old retired army officer who has spent most of his life serving his country. Born and raised in Chiang Mai, Thailand, Prasert grew up in a traditional Thai family with strong values and respect for authority. After completing his secondary education, he joined the Royal Thai Army and served for over three decades, rising through the ranks to become a respected and decorated officer. During his time in the army, Prasert was stationed in various parts of the country, including the capital city of Bangkok and the southern provinces. He saw action in several military operations and was awarded several medals for his bravery and service.\", \"phone\": \"+66532014567\", \"email\": \"prasert.suthipong@gaia2mail.com\", \"address\": \"145/3 Moo 5, Tambon Mae Rim, Amphoe Mae Rim, Chiang Mai 50180, Thailand\"}], \"metadata\": {\"range\": [\"0\", \"10\"], \"total\": \"105\"}}",
+      "event_id": "series_s2_list_before",
+      "response_sha256": "1c27344323abb5a81c2460617644a456acedce8ea791d6c76f779d8305eaf2e9"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Amira El Khattabi",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，含独特姓氏组合，适合热词",
+          "weight": 50
+        },
+        {
+          "text": "Søren",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含丹麦语特殊字符ø的人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Amira El Khattabi",
+        "Søren"
+      ],
+      "active_vocabulary": {
+        "Amira El Khattabi": 50,
+        "Søren": 50
+      },
+      "vocabulary_sha256": "6a6d28273fe60989dec3971ccdd8440d95dcbbc2f53450f28990b31bc59d6101"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Astrid Sørensen",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_list_before",
+          "reason": "含特殊字符ø的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Aurélie Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_list_before",
+          "reason": "含重音字符é的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Birgitta Kjær",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_list_before",
+          "reason": "含特殊字符æ的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Bram Janssens",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "已有目录中的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Prasert Suthipong",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_list_before",
+          "reason": "泰语难发音完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Tanawat Srisombat",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_list_before",
+          "reason": "泰语难发音完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Thanawat Sricharoen",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_list_before",
+          "reason": "泰语难发音完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Sørensen",
+        "Aurélie Vandenberghe",
+        "Birgitta Kjær",
+        "Bram Janssens",
+        "Prasert Suthipong",
+        "Tanawat Srisombat",
+        "Thanawat Sricharoen"
+      ],
+      "active_vocabulary": {
+        "Amira El Khattabi": 50,
+        "Søren": 50,
+        "Astrid Sørensen": 50,
+        "Aurélie Vandenberghe": 50,
+        "Birgitta Kjær": 50,
+        "Bram Janssens": 50,
+        "Prasert Suthipong": 50,
+        "Tanawat Srisombat": 50,
+        "Thanawat Sricharoen": 50
+      },
+      "vocabulary_sha256": "799ecba08f49a0858297de6281aa82bc7b882d56522ea4eea0c8beedf18426b8"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Brussels"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:04.884601+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

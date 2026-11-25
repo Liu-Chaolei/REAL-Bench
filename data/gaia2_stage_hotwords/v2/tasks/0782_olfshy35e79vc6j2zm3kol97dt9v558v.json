@@ -1,0 +1,109 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0782_olfshy35e79vc6j2zm3kol97dt9v558v",
+  "model": "deepseek-flash",
+  "input_sha256": "cd5ffcf4e7b04e65a25c0a67df5cb45df37ed60681da0893689885b04a1ee536",
+  "review_input_sha256": "ea9fa3fddd0d5829d53edae28ab36ac0aa73b0abc78bf46619acb060763b7cc6",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "fc92a3058752ee6db3940818d1be9fee5fbed3f6a655577e7089d17d28d02876",
+  "reference_results_sha256": "5dc83f96f93bd85d681e41d9eed67d9f1fd16841546e01324c184dfa74cc95e3",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Colette",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Thanakorn",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Viggo",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Colette",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "外文人名，拼写较特殊",
+          "weight": 50
+        },
+        {
+          "text": "Thanakorn",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "较难的外文人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Viggo",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "外文人名，拼写较特殊",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Colette",
+        "Thanakorn",
+        "Viggo"
+      ],
+      "active_vocabulary": {
+        "Colette": 50,
+        "Thanakorn": 50,
+        "Viggo": 50
+      },
+      "vocabulary_sha256": "c60bd1d38656c74760093473ccef6121ac008df1fa57037395d0423c6b4f6ea1"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Colette": 50,
+        "Thanakorn": 50,
+        "Viggo": 50
+      },
+      "vocabulary_sha256": "c60bd1d38656c74760093473ccef6121ac008df1fa57037395d0423c6b4f6ea1"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Abacus with Clock",
+    "blue Abacus with Clock"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:19.991575+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

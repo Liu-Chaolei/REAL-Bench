@@ -1,0 +1,113 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0392_ive5o6qwbjayx272buha1t5ijhyzbwnt",
+  "model": "deepseek-flash",
+  "input_sha256": "722d5062ef3626b956d7aee99f8ee380516c11d0d55a6f1d55627bb2aa552407",
+  "review_input_sha256": "b7e5f93a38620021b5e1f53d8910f17212a1ab2a6cca8bf12bb77a8790705c2b",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "f2faa6c3d7c663b5944b998653fab6e4c307fb04f7c5e8346d394c2b8af00788",
+  "reference_results_sha256": "4bcc56e46563a6a1dfb2d2b29b6bcf393f0d49db198a1d5cae1bb0477ea0280f",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Evangelia Papadopoulos",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-07aceb1d-8c5d-4b41-933b-c8ec4ac2d6e3.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Kaidën Nakamura",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-07aceb1d-8c5d-4b41-933b-c8ec4ac2d6e3.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Rohini Deshpande",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-aef04387-1f68-4a6a-aaca-6601991cf868.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Evangelia Papadopoulos",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，拼写较难，保留",
+          "weight": 50
+        },
+        {
+          "text": "Kaidën Nakamura",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整人名，拼写较难，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Evangelia Papadopoulos",
+        "Kaidën Nakamura",
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "c60f2d514b5f6b35691227e05add24b5dd38a5c40ca5d766e59782a133070637"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "c60f2d514b5f6b35691227e05add24b5dd38a5c40ca5d766e59782a133070637"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "c60f2d514b5f6b35691227e05add24b5dd38a5c40ca5d766e59782a133070637"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Sushi Villa",
+    "Dallas Cowboys Collection"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:31.970340+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,151 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0718_fx4lt14v7zx6jcelany7aol23d3t9t4r",
+  "model": "deepseek-flash",
+  "input_sha256": "4faba56179c27b714c0307b82b85786e5ea2f9f3b5d8bfc134f46a8fd6254edf",
+  "review_input_sha256": "c2529c796946a6ac473f7e94a14901b4a6759c00ffe7c74807222fe1965e41da",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "4d6e4f23490306aac2be88f068539a9f75dd171342ef28ae332e94bc634e373d",
+  "reference_results_sha256": "bc71fc825de71e1177c8398115fdd3370473d96f14986996d62a658661850559",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Universitätsspital CH",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Petersgraben 4",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.tool_response.series_s1_read_today": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"31a215b1f9e748d293de354354e4efc1\", \"title\": \"Research Collaboration with Kazimierz Wojciechowski\", \"start_datetime\": \"1729000800\", \"end_datetime\": \"1729008000\", \"tag\": \"Work\", \"description\": \"Discuss research on the impact of battles on geopolitical dynamics.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Ursula Wiederkehr\", \"Kazimierz Wojciechowski\"], \"start_strftime\": \"Tuesday, 2024-10-15 14:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 16:00:00\"}, {\"event_id\": \"3f23ab4d2f5e4d789f610e780f74930a\", \"title\": \"Coffee Break with Aurélien Van der Straeten\", \"start_datetime\": \"1728993600\", \"end_datetime\": \"1728997200\", \"tag\": \"Social\", \"description\": \"Catch up with Aurélien Van der Straeten over coffee.\", \"location\": \"Café in Basel\", \"attendees\": [\"Ursula Wiederkehr\", \"Aurélien Van der Straeten\"], \"start_strftime\": \"Tuesday, 2024-10-15 12:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 13:00:00\"}, {\"event_id\": \"e62c105b99ec4009a5aa9be050cdcb3d\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729015200\", \"end_datetime\": \"1729018800\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio in Basel\", \"attendees\": [\"Ursula Wiederkehr\"], \"start_strftime\": \"Tuesday, 2024-10-15 18:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 19:00:00\"}, {\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Hospital Appointment – Universitätsspital CH\", \"start_datetime\": \"1728979200.0\", \"end_datetime\": \"1728986400.0\", \"tag\": \"Health\", \"description\": \"Visit to Universitätsspital CH about a lump on my skin.\", \"location\": \"Universitätsspital CH, Petersgraben 4, 4031 Basel, Switzerland\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-15 08:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 10:00:00\"}], \"range\": [\"0\", \"4\"], \"total\": \"4\"}",
+      "event_id": "series_s1_read_today",
+      "response_sha256": "11390830566ff04b8145b16df6e69ed2576684088d68c9152dce7231a202fc6d"
+    },
+    "stage2.tool_response.series_s2_get_created_event": {
+      "stage": 2,
+      "text": "{\"event_id\": \"d4c2d9f7cdacdf99ad578e25036c7e5f\", \"title\": \"Call Aïcha with an update\", \"start_datetime\": \"1728986400.0\", \"end_datetime\": \"1728987300.0\", \"tag\": \"Health\", \"description\": \"Call nurse friend Aïcha on Chats to update her about the lump check at Universitätsspital CH.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-15 10:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 10:15:00\"}",
+      "event_id": "series_s2_get_created_event",
+      "response_sha256": "e1b929fcc39fd0f35e67892b8982a3080673c0163996c4b32d562f17975b3d91"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Petersgraben 4",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含独特街道名的完整地址，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Universitätsspital CH",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的独特医疗机构名称，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Petersgraben 4",
+        "Universitätsspital CH"
+      ],
+      "active_vocabulary": {
+        "Petersgraben 4": 50,
+        "Universitätsspital CH": 50
+      },
+      "vocabulary_sha256": "539f95936864480ee8958d62b3971cb6938b623ed323937172060e8ae844d84d"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien Van der Straeten",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_today",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Kazimierz Wojciechowski",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_today",
+          "reason": "难识别的完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read_today",
+          "reason": "难识别的完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien Van der Straeten",
+        "Kazimierz Wojciechowski",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Petersgraben 4": 50,
+        "Universitätsspital CH": 50,
+        "Aurélien Van der Straeten": 50,
+        "Kazimierz Wojciechowski": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "d34289b7f6e9d9d3fbbad234499d4d6f58fad4eb3b0921c7821a3f43c2592e7b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aïcha",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_get_created_event",
+          "reason": "含变音符号的独特名字，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aïcha"
+      ],
+      "active_vocabulary": {
+        "Petersgraben 4": 50,
+        "Universitätsspital CH": 50,
+        "Aurélien Van der Straeten": 50,
+        "Kazimierz Wojciechowski": 50,
+        "Ursula Wiederkehr": 50,
+        "Aïcha": 50
+      },
+      "vocabulary_sha256": "c51ea1043f0f0a0a375b84b958f99345695fe6547de9032c863b12661912246b"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Petersgraben"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:06.559387+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

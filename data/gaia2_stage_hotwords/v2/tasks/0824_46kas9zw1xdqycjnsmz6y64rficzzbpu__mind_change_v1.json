@@ -1,0 +1,112 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0824_46kas9zw1xdqycjnsmz6y64rficzzbpu__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "7f34c95241f51c44871ce320840cf57888a81e7cab50d28b1a48602d16207ab4",
+  "review_input_sha256": "b248dd68a5d0e71cfa992b60ddfdd2953b05f0163524c241df16388938bc82d9",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "0e5b0eb48c067d463eb7e733f446fe9d5430e18a67c5708012c99ac380ee49aa",
+  "reference_results_sha256": "5d69780b367037156c935302c0a4d2b3470b55410913c0a483f4d31c3abda694",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Avengers: Endgame",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-71174ad0-2e49-4ec8-a64e-56333c521e4b.arguments.content"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Spider-Man: Far from Home",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-71174ad0-2e49-4ec8-a64e-56333c521e4b.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Captain Marvel",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-71174ad0-2e49-4ec8-a64e-56333c521e4b.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Spider-Man: Far from Home",
+          "kind": "product",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整电影专名，含连字符与冒号",
+          "weight": 50
+        },
+        {
+          "text": "Avengers: Endgame",
+          "kind": "product",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整电影专名，含冒号，ASR易错",
+          "weight": 50
+        },
+        {
+          "text": "Captain Marvel",
+          "kind": "product",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整电影专名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Spider-Man: Far from Home",
+        "Avengers: Endgame",
+        "Captain Marvel"
+      ],
+      "active_vocabulary": {
+        "Spider-Man: Far from Home": 50,
+        "Avengers: Endgame": 50,
+        "Captain Marvel": 50
+      },
+      "vocabulary_sha256": "7b5bc8a1eb0b6cf3a91e47846c9cd56a48a91a403990c00505b2508a6952059a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Spider-Man: Far from Home": 50,
+        "Avengers: Endgame": 50,
+        "Captain Marvel": 50
+      },
+      "vocabulary_sha256": "7b5bc8a1eb0b6cf3a91e47846c9cd56a48a91a403990c00505b2508a6952059a"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Spider-Man: Far from Home": 50,
+        "Avengers: Endgame": 50,
+        "Captain Marvel": 50
+      },
+      "vocabulary_sha256": "7b5bc8a1eb0b6cf3a91e47846c9cd56a48a91a403990c00505b2508a6952059a"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Marvel Movies"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:26.966568+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

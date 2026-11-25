@@ -1,0 +1,206 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0876_vhdis3c0sjtbyfig6jbhubt9eygu283b__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "067a47bc58604fd430a7bc43452b189fffdcfc0954dc309ecf327d65a1173542",
+  "review_input_sha256": "310657712bbf7032d35faa4bed6ced7f60f8e63bd71bba64c1f6707331287939",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "e6d361ef361aa0e87d7325d3ed4fe4b15209145c7261a9fe44a94de65e26feb8",
+  "reference_results_sha256": "714060b38c9b58a3d4f14d2c6b13244c5da60706e5aa80ba16f95978cc4b90d8",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Chhatrapati Shivaji Maharaj International Airport",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Kaida Jensen",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-52d8be39-14b4-4211-b280-cef4f238ba2f.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Kaitlyn Nguyen",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-52d8be39-14b4-4211-b280-cef4f238ba2f.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Rohan Kumar",
+      "original_source": "stage1.tool_gt.series_s1_add_calendar.arguments.attendees[0]"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Rohini Rao",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.tool_response.series_s2_read_today": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"5516adfff35a489e966df0262987bad9\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1729022400\", \"end_datetime\": \"1729029600\", \"tag\": \"Social\", \"description\": \"Catch up with friends over dinner.\", \"location\": \"Restaurant\", \"attendees\": [\"Rohan Kumar\", \"Kymberley Wundke\", \"Kaida Kaur\"], \"start_strftime\": \"Tuesday, 2024-10-15 20:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 22:00:00\"}, {\"event_id\": \"b0003901c5e04eedaedba7865054e13b\", \"title\": \"NGO Meeting\", \"start_datetime\": \"1728990000\", \"end_datetime\": \"1728997200\", \"tag\": \"Work\", \"description\": \"Discuss potential collaborations and project updates with NGOs.\", \"location\": \"NGO Office\", \"attendees\": [\"Rohan Kumar\", \"Žiga Kovačič\", \"Kaitlyn Nwosu\"], \"start_strftime\": \"Tuesday, 2024-10-15 11:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 13:00:00\"}, {\"event_id\": \"beb5fcf7a2bf4be0909d6d50aefe5981\", \"title\": \"Project Update\", \"start_datetime\": \"1728982800\", \"end_datetime\": \"1728990000\", \"tag\": \"Work\", \"description\": \"Update meeting with team on project progress.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Rohan Kumar\", \"Kaitlyn Nguyen\", \"Kaida Jensen\"], \"start_strftime\": \"Tuesday, 2024-10-15 09:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 11:00:00\"}, {\"event_id\": \"cec50e236da64e1aa1caf436999dbcd6\", \"title\": \"Project Update Call\", \"start_datetime\": \"1729004400\", \"end_datetime\": \"1729008000\", \"tag\": \"Work\", \"description\": \"Update team members on project progress.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Rohan Kumar\", \"Rohini Nambiar\", \"Aurélien Thibault\"], \"start_strftime\": \"Tuesday, 2024-10-15 15:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 16:00:00\"}, {\"event_id\": \"d4c2d9f7cdacdf99ad578e25036c7e5f\", \"title\": \"Return Cab Home\", \"start_datetime\": \"1729015200.0\", \"end_datetime\": \"1729018800.0\", \"tag\": \"Travel\", \"description\": \"Default cab booked from Chhatrapati Shivaji Maharaj International Airport Mumbai back to Home; pickup at 6:00pm.\", \"location\": \"Chhatrapati Shivaji Maharaj International Airport Mumbai\", \"attendees\": [\"Rohan Kumar\"], \"start_strftime\": \"Tuesday, 2024-10-15 18:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 19:00:00\"}, {\"event_id\": \"1eb633f381cb1a19fbaa26def26885d9\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729018800.0\", \"end_datetime\": \"1729022400.0\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Rohan Kumar\", \"Rohini Rao\"], \"start_strftime\": \"Tuesday, 2024-10-15 19:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 20:00:00\"}], \"range\": [\"0\", \"6\"], \"total\": \"6\"}",
+      "event_id": "series_s2_read_today",
+      "response_sha256": "9258836dbeb511e6254d04a39587242b1dfdd91714942a647d563c7fbbdf8956"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Chhatrapati Shivaji Maharaj International Airport",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "长且难的地名，含多个专有名词",
+          "weight": 50
+        },
+        {
+          "text": "Kaida Jensen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Kaitlyn Nguyen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，姓氏拼写难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Chhatrapati Shivaji Maharaj International Airport",
+        "Kaida Jensen",
+        "Kaitlyn Nguyen"
+      ],
+      "active_vocabulary": {
+        "Chhatrapati Shivaji Maharaj International Airport": 50,
+        "Kaida Jensen": 50,
+        "Kaitlyn Nguyen": 50
+      },
+      "vocabulary_sha256": "b76e63959d07542598aab5141b73d425ce00cf8b35f518d9546864453f8be8e3"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Rohan Kumar"
+      ],
+      "active_vocabulary": {
+        "Chhatrapati Shivaji Maharaj International Airport": 50,
+        "Kaida Jensen": 50,
+        "Kaitlyn Nguyen": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "e0c00d2cd5cf5074c54b1dce33d030b31722bf29558175bf699b796b605d652a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien Thibault",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_today",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Kaida Kaur",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_today",
+          "reason": "完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Kaitlyn Nwosu",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_today",
+          "reason": "完整人名，姓氏拼写难",
+          "weight": 50
+        },
+        {
+          "text": "Kymberley Wundke",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_today",
+          "reason": "完整人名，拼写罕见",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Nambiar",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_today",
+          "reason": "完整人名，姓氏拼写难",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Rao",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Žiga Kovačič",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_today",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien Thibault",
+        "Kaida Kaur",
+        "Kaitlyn Nwosu",
+        "Kymberley Wundke",
+        "Rohini Nambiar",
+        "Rohini Rao",
+        "Žiga Kovačič"
+      ],
+      "active_vocabulary": {
+        "Chhatrapati Shivaji Maharaj International Airport": 50,
+        "Kaida Jensen": 50,
+        "Kaitlyn Nguyen": 50,
+        "Rohan Kumar": 50,
+        "Aurélien Thibault": 50,
+        "Kaida Kaur": 50,
+        "Kaitlyn Nwosu": 50,
+        "Kymberley Wundke": 50,
+        "Rohini Nambiar": 50,
+        "Rohini Rao": 50,
+        "Žiga Kovačič": 50
+      },
+      "vocabulary_sha256": "fae65fbd3df21faef9a017f5beda8218d857b852478b7726f61e76c86ecce20f"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Chhatrapati Shivaji Maharaj International Airport Mumbai",
+    "Yoga Studio"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:25.653233+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

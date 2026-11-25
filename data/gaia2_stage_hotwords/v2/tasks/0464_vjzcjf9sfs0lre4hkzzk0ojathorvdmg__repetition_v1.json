@@ -1,0 +1,180 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0464_vjzcjf9sfs0lre4hkzzk0ojathorvdmg__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "4f8b6ce07dd6f0eda074cb513289106d80e2728390354aebeac4d94d2fd4e6d7",
+  "review_input_sha256": "327899a904352678e65ad4900a8e3dd6b47f2f24874a2a4fd7e81fa09dc1614a",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "5ddd661bc5a15c71532f65106d3063a35f885b1c2082ccc61037ae068bf72b4d",
+  "reference_results_sha256": "9aaf83603f0af503ec6794d86a1cf6622ea38e505a15f1667626bd3c1ab2926d",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Nigel Fothergill",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-124e683d-949d-425a-829f-6b58fc2dab0a.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Rohini Deshpande",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-124e683d-949d-425a-829f-6b58fc2dab0a.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "901 Albert Dock",
+      "original_source": "stage1.tool_gt.series_s1_post.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "10 Princes Dock",
+      "original_source": "stage1.tool_gt.series_s1_post.arguments.content"
+    },
+    "stage2.tool_response.series_s2_check_window": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"6a29004e83f04b009a53b9ded4023ed6\", \"title\": \"Lab Meeting\", \"start_datetime\": \"1729332000\", \"end_datetime\": \"1729339200\", \"tag\": \"Work\", \"description\": \"Discuss ongoing lab projects and experiments.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [\"Helmut Eisenstadt\", \"Gerrit van der Meer\"], \"start_strftime\": \"Saturday, 2024-10-19 10:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 12:00:00\"}, {\"event_id\": \"720cc98078bd4bbca9a6397f25599a49\", \"title\": \"Paper Writing\", \"start_datetime\": \"1729346400\", \"end_datetime\": \"1729353600\", \"tag\": \"Work\", \"description\": \"Dedicated time for writing research papers.\", \"location\": \"Home Office\", \"attendees\": [], \"start_strftime\": \"Saturday, 2024-10-19 14:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 16:00:00\"}, {\"event_id\": \"a3ada45a20174136b7dfe6a7a915cbad\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1729364400\", \"end_datetime\": \"1729371600\", \"tag\": \"Social\", \"description\": \"Catch up with friends over dinner.\", \"location\": \"The Pint Shop, Cambridge\", \"attendees\": [\"Evangelia Papadopoulos\", \"Kaidën Nakamura\"], \"start_strftime\": \"Saturday, 2024-10-19 19:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 21:00:00\"}], \"range\": [\"0\", \"3\"], \"total\": \"3\"}",
+      "event_id": "series_s2_check_window",
+      "response_sha256": "dca6b8d3b727448013c43987a0ab536c37e6fb19ac1f584c4d78d6c3611b8b86"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Nigel Fothergill",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，含不常见姓氏，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整人名，姓氏较难识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Nigel Fothergill",
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "Nigel Fothergill": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "791dc000d14816bb1fb23603749aeb555e26397358c0d4a15b129c1f89e43071"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "10 Princes Dock",
+          "kind": "place",
+          "source": "stage1.existing_catalog.2",
+          "reason": "具体地址，含门牌号与地名",
+          "weight": 50
+        },
+        {
+          "text": "901 Albert Dock",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "具体地址，含门牌号与地名，识别难度较高",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "10 Princes Dock",
+        "901 Albert Dock"
+      ],
+      "active_vocabulary": {
+        "Nigel Fothergill": 50,
+        "Rohini Deshpande": 50,
+        "10 Princes Dock": 50,
+        "901 Albert Dock": 50
+      },
+      "vocabulary_sha256": "001b04f171b442c7b8dcaabb44a455fc8477d23cfe5d72b0284006a0da899ef8"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Gerrit van der Meer",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_check_window",
+          "reason": "含介词前缀的完整人名，识别难度高",
+          "weight": 50
+        },
+        {
+          "text": "Evangelia Papadopoulos",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_check_window",
+          "reason": "完整人名，姓氏较长且难识别",
+          "weight": 50
+        },
+        {
+          "text": "Helmut Eisenstadt",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_check_window",
+          "reason": "完整人名，姓氏较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Kaidën Nakamura",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_check_window",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Gerrit van der Meer",
+        "Evangelia Papadopoulos",
+        "Helmut Eisenstadt",
+        "Kaidën Nakamura"
+      ],
+      "active_vocabulary": {
+        "Nigel Fothergill": 50,
+        "Rohini Deshpande": 50,
+        "10 Princes Dock": 50,
+        "901 Albert Dock": 50,
+        "Gerrit van der Meer": 50,
+        "Evangelia Papadopoulos": 50,
+        "Helmut Eisenstadt": 50,
+        "Kaidën Nakamura": 50
+      },
+      "vocabulary_sha256": "ea2a8d028c5cd8b3e6c71b50e797a9d09751929480590eaea8df3a1013fefa4c"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Liverpool",
+    "Aisha Patel",
+    "Liverpool Luxury Living",
+    "Liverpool Waterfront Apartments",
+    "Liverpool Properties Visit",
+    "Liverpool Property Viewing",
+    "Rohini",
+    "Liverpool Property Visit Prep",
+    "Dinner with Friends"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:46.925635+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,370 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0957_xm2ikmihzmydfednjefg8ncyr071qwej",
+  "model": "deepseek-flash",
+  "input_sha256": "454dd497bf45ef68bd599b77941d0bc4e62b1a646b7ba9cc7e2f290a3e0881b0",
+  "review_input_sha256": "7714c6183e6eb11883e94488fecab211d4c15896bdd2ae93ec84414687bd48a5",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "3f9ab661c5b095a1beab8f4bd55cb12a333d40107c7b842d5ae704a5a8e069b4",
+  "reference_results_sha256": "feb38208d5ad423ba1fbeb4c00a74211334a9aa0c6e03295c0ccf6403d98d730",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Aurélien",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-bb929d8b-02d0-41ba-82d7-d9219e6f7e10.arguments.content"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Liesbeth Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-bb929d8b-02d0-41ba-82d7-d9219e6f7e10.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Kiettisak",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-646c97f9-0e6c-40ea-a066-26cb6f92fbd2.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Émile Vandenberghe",
+      "original_source": "stage1.tool_gt.series_s1_create_brunch_alt.arguments.attendees[0]"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Kiettisak Somsakul",
+      "original_source": "stage1.tool_gt.series_s1_create_zoom_alt.arguments.attendees[0]"
+    },
+    "stage1.tool_response.series_s1_list_window": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"00470a0f0dc5442ab1c3b139776b1d0d\", \"title\": \"Net-Zero Energy Building Design Session\", \"start_datetime\": \"1729159200\", \"end_datetime\": \"1729166400\", \"tag\": \"Work\", \"description\": \"Work on the design of the net-zero energy building for the community.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Thursday, 2024-10-17 10:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 12:00:00\"}, {\"event_id\": \"0a8a20aec5084ef4b7ea2365bd01401f\", \"title\": \"Phone Call with Khalifa Al-Mansoori\", \"start_datetime\": \"1729090800\", \"end_datetime\": \"1729094400\", \"tag\": \"Personal\", \"description\": \"Catch up with Khalifa Al-Mansoori and discuss potential collaboration opportunities.\", \"location\": \"Home\", \"attendees\": [\"Khalifa Al-Mansoori\"], \"start_strftime\": \"Wednesday, 2024-10-16 15:00:00\", \"end_strftime\": \"Wednesday, 2024-10-16 16:00:00\"}, {\"event_id\": \"166b3090c26044118d94d6bc5845cbc6\", \"title\": \"Dinner with Family\", \"start_datetime\": \"1729450800\", \"end_datetime\": \"1729458000\", \"tag\": \"Social\", \"description\": \"Spend quality time with family.\", \"location\": \"Home\", \"attendees\": [\"Émile Vandenberghe\", \"Karel Vandenberghe\"], \"start_strftime\": \"Sunday, 2024-10-20 19:00:00\", \"end_strftime\": \"Sunday, 2024-10-20 21:00:00\"}, {\"event_id\": \"198c9bb51c6f48d89896073b9eb7c7c9\", \"title\": \"Review Meeting: Net-Zero Energy Building\", \"start_datetime\": \"1729587600\", \"end_datetime\": \"1729594800\", \"tag\": \"Work\", \"description\": \"Review the progress of the net-zero energy building project.\", \"location\": \"Zoom Meeting\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-22 09:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 11:00:00\"}, {\"event_id\": \"51b7f548562a43ef85149998c47234fc\", \"title\": \"Evening Walk\", \"start_datetime\": \"1729015200\", \"end_datetime\": \"1729018800\", \"tag\": \"Health\", \"description\": \"Take a relaxing evening walk around the neighborhood.\", \"location\": \"Neighborhood\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-15 18:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 19:00:00\"}, {\"event_id\": \"5cc33e9356e64cb8bd16ecf352e87efc\", \"title\": \"Design Session for Net-Zero Energy Building\", \"start_datetime\": \"1729504800\", \"end_datetime\": \"1729512000\", \"tag\": \"Work\", \"description\": \"Discuss design plans for the net-zero energy building project.\", \"location\": \"Home Office\", \"attendees\": [], \"start_strftime\": \"Monday, 2024-10-21 10:00:00\", \"end_strftime\": \"Monday, 2024-10-21 12:00:00\"}, {\"event_id\": \"6bd6eef6f646467b994a7ee1ccd1afca\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729274400\", \"end_datetime\": \"1729278000\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Friday, 2024-10-18 18:00:00\", \"end_strftime\": \"Friday, 2024-10-18 19:00:00\"}, {\"event_id\": \"787705183ee6451f8f1846b611f9d27c\", \"title\": \"Research: Renewable Energy Options\", \"start_datetime\": \"1729605600\", \"end_datetime\": \"1729612800\", \"tag\": \"Work\", \"description\": \"Research renewable energy options for the net-zero energy building project.\", \"location\": \"Home Office\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-22 14:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 16:00:00\"}, {\"event_id\": \"80def16483214d62a7db2d10b70746f8\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729533600\", \"end_datetime\": \"1729537200\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Monday, 2024-10-21 18:00:00\", \"end_strftime\": \"Monday, 2024-10-21 19:00:00\"}, {\"event_id\": \"8364c41a84fb4cf4b834f14a8de6aace\", \"title\": \"Phone Call with Nalinee\", \"start_datetime\": \"1729627200\", \"end_datetime\": \"1729630800\", \"tag\": \"Social\", \"description\": \"Catch up with Nalinee over the phone.\", \"location\": \"Home\", \"attendees\": [\"Nalinee Srisawat\"], \"start_strftime\": \"Tuesday, 2024-10-22 20:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 21:00:00\"}, {\"event_id\": \"85640861b39240959e25ed7feb8e96ed\", \"title\": \"Project Planning Meeting\", \"start_datetime\": \"1728982800\", \"end_datetime\": \"1728990000\", \"tag\": \"Work\", \"description\": \"Discuss project timeline and milestones.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Aurélien Dumont\"], \"start_strftime\": \"Tuesday, 2024-10-15 09:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 11:00:00\"}, {\"event_id\": \"8a081dc2edac418a8017bfb908af670d\", \"title\": \"Evening Walk\", \"start_datetime\": \"1729018800\", \"end_datetime\": \"1729022400\", \"tag\": \"Health\", \"description\": \"Take a walk around the neighborhood to clear my mind.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-15 19:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 20:00:00\"}, {\"event_id\": \"a4c127f4a42240c08ec4155b1bfcf344\", \"title\": \"Follow-up Call with Karel\", \"start_datetime\": \"1729072800\", \"end_datetime\": \"1729076400\", \"tag\": \"Work\", \"description\": \"Discuss progress on the project.\", \"location\": \"Phone Call\", \"attendees\": [\"Karel Vandenberghe\"], \"start_strftime\": \"Wednesday, 2024-10-16 10:00:00\", \"end_strftime\": \"Wednesday, 2024-10-16 11:00:00\"}, {\"event_id\": \"b24617a9216b4f6da1efcd7122da61ef\", \"title\": \"Project Update Meeting\", \"start_datetime\": \"1729328400\", \"end_datetime\": \"1729335600\", \"tag\": \"Work\", \"description\": \"Update the team on project progress.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Aurélien Dumont\", \"Karel Vandenberghe\"], \"start_strftime\": \"Saturday, 2024-10-19 09:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 11:00:00\"}, {\"event_id\": \"b395c65dc6fd49e2a9fb71ff8895bb6a\", \"title\": \"Evening Walk\", \"start_datetime\": \"1729364400\", \"end_datetime\": \"1729368000\", \"tag\": \"Health\", \"description\": \"Take a walk around the neighborhood to clear my mind.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Saturday, 2024-10-19 19:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 20:00:00\"}, {\"event_id\": \"b6141d2b79e94c1796a88bac5e106129\", \"title\": \"Lunch Break\", \"start_datetime\": \"1729598400\", \"end_datetime\": \"1729602000\", \"tag\": \"Break\", \"description\": \"Take a break and grab lunch.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-22 12:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 13:00:00\"}, {\"event_id\": \"cd26d916de9d44e38f03f7895f7c2bf6\", \"title\": \"Lunch with Nalinee\", \"start_datetime\": \"1729168200\", \"end_datetime\": \"1729173600\", \"tag\": \"Social\", \"description\": \"Catch up with Nalinee over lunch.\", \"location\": \"Restaurant\", \"attendees\": [\"Nalinee Wongwanich\"], \"start_strftime\": \"Thursday, 2024-10-17 12:30:00\", \"end_strftime\": \"Thursday, 2024-10-17 14:00:00\"}, {\"event_id\": \"d18db1fe0d0142b38db0dfe987081bfd\", \"title\": \"Evening Walk\", \"start_datetime\": \"1729620000\", \"end_datetime\": \"1729623600\", \"tag\": \"Health\", \"description\": \"Take a relaxing evening walk around the neighborhood.\", \"location\": \"Neighborhood\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-22 18:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 19:00:00\"}, {\"event_id\": \"dfc41ee5b7084c1d924ceaf789a4cba2\", \"title\": \"Meeting with Amal Al-Mansour\", \"start_datetime\": \"1729260000\", \"end_datetime\": \"1729267200\", \"tag\": \"Work\", \"description\": \"Discuss potential collaboration opportunities with Amal Al-Mansour.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Amal Al-Mansour\"], \"start_strftime\": \"Friday, 2024-10-18 14:00:00\", \"end_strftime\": \"Friday, 2024-10-18 16:00:00\"}, {\"event_id\": \"e297f5128d834274b4abd2699fab581e\", \"title\": \"Project Planning Session\", \"start_datetime\": \"1729418400\", \"end_datetime\": \"1729425600\", \"tag\": \"Work\", \"description\": \"Plan and organize the next steps for the net-zero energy building project.\", \"location\": \"Home\", \"attendees\": [], \"start_strftime\": \"Sunday, 2024-10-20 10:00:00\", \"end_strftime\": \"Sunday, 2024-10-20 12:00:00\"}, {\"event_id\": \"e8327d7372494e898ddd3f194138afd5\", \"title\": \"Dinner with Aurélien Dumont\", \"start_datetime\": \"1729537200\", \"end_datetime\": \"1729544400\", \"tag\": \"Personal\", \"description\": \"Have dinner with Aurélien Dumont and discuss potential collaboration opportunities.\", \"location\": \"Restaurant\", \"attendees\": [\"Aurélien Dumont\"], \"start_strftime\": \"Monday, 2024-10-21 19:00:00\", \"end_strftime\": \"Monday, 2024-10-21 21:00:00\"}, {\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Event created by Aurélien Dumont: Saturday Tea\", \"start_datetime\": \"1729339200.0\", \"end_datetime\": \"1729342800.0\", \"tag\": null, \"description\": \"Event created by Aurélien Dumont\", \"location\": null, \"attendees\": [\"Aurélien Dumont\", \"Liesbeth Vandenberghe\"], \"start_strftime\": \"Saturday, 2024-10-19 12:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 13:00:00\"}], \"range\": [\"0\", \"22\"], \"total\": \"22\"}",
+      "event_id": "series_s1_list_window",
+      "response_sha256": "eac76ec1ba85add6dbcdcd16288c597eaf671a0e14f9c49ee113713d1857a3f2"
+    },
+    "stage2.tool_response.series_s2_get_contacts": {
+      "stage": 2,
+      "text": "{\"contacts\": [{\"first_name\": \"Nonglak\", \"last_name\": \"Srisawat\", \"contact_id\": \"01fdccea9cdc495eb3d5fa069e31370f\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"50\", \"nationality\": \"Thai\", \"city_living\": \"Chiang Mai\", \"country\": \"Thailand\", \"status\": \"Status.EMPLOYED\", \"job\": \"Marketing Manager at a local wellness center\", \"description\": \"Nonglak Srisawat is a 50-year-old marketing manager at a local wellness center in Chiang Mai, Thailand. She is a beginner fitness enthusiast who has recently started exploring the world of yoga and hiking. Nonglak is eager to learn how to balance her love for treats with her new fitness routine. She is a busy professional who values her free time and enjoys spending it outdoors, whether it's hiking in the mountains or practicing yoga in the park. Nonglak is also an avid cook and loves trying out new recipes in her spare time. She is a bit of a bookworm and enjoys reading self-help and wellness books.\", \"phone\": \"+66532113456\", \"email\": \"nonglak.srisawat@gaia2mail.com\", \"address\": \"123/456 Moo 5, Chang Khlan Subdistrict, Chiang Mai 50100\"}, {\"first_name\": \"Pichaya\", \"last_name\": \"Wongkamhaeng\", \"contact_id\": \"02ffcdccc5cb4042b2c96ee2d1465013\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"50\", \"nationality\": \"Thai\", \"city_living\": \"Chiang Mai\", \"country\": \"Thailand\", \"status\": \"Status.STUDENT\", \"job\": \"Part-time cooking instructor\", \"description\": \"Pichaya is a warm and gentle soul with a passion for cooking and sharing the flavors of her culture.\", \"phone\": \"+66819876548\", \"email\": \"pichayawong@gaia2mail.com\", \"address\": \"34/2 Moo 5, Soi Sukkasem, Chiang Mai 50000\"}, {\"first_name\": \"Kiettisak\", \"last_name\": \"Suthipong\", \"contact_id\": \"032d0a3cc84143adae6842bc91a83429\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"65\", \"nationality\": \"Thai\", \"city_living\": \"Chiang Mai\", \"country\": \"Thailand\", \"status\": \"Status.RETIRED\", \"job\": \"Former Royal Thai Army Sergeant\", \"description\": \"\", \"phone\": \"+66532114367\", \"email\": \"kiettisak.suthipong@gaia2mail.com\", \"address\": \"145/3 Moo 5, Chang Khlan Subdistrict, Chiang Mai 50100\"}, {\"first_name\": \"Amal\", \"last_name\": \"Al-Farsi\", \"contact_id\": \"04e25eabab9b46baa77a4cdb190a4e64\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"22\", \"nationality\": \"Saudi Arabian\", \"city_living\": \"Riyadh\", \"country\": \"Saudi Arabia\", \"status\": \"Status.STUDENT\", \"job\": \"Research Assistant\", \"description\": \"A bright and ambitious young sociologist, currently pursuing her undergraduate degree in sociology at King Abdulaziz University in Jeddah, but living in Riyadh for her research work.\", \"phone\": \"+966551204567\", \"email\": \"amalfarsi@student.kau.edu.sa\", \"address\": \"3456 King Fahd Road, Al-Mursalat, Riyadh 11564\"}, {\"first_name\": \"Elodie\", \"last_name\": \"Vandenberghe\", \"contact_id\": \"0574b9ec96b346ad8e82f729f8be4919\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"75\", \"nationality\": \"Belgian\", \"city_living\": \"Antwerp\", \"country\": \"Belgium\", \"status\": \"Status.RETIRED\", \"job\": \"Former primary school teacher\", \"description\": \"Elodie Vandenberghe is a devout evangelical Christian who has lived in Antwerp, Belgium her entire life. Born and raised in a traditional Flemish family, Elodie was educated in a Catholic school, but later converted to evangelicalism in her early twenties. She spent most of her working life as a primary school teacher, where she was known for her kindness, patience, and dedication to her students. After retiring, Elodie continued to be involved in her community, volunteering at her local church and participating in various charity initiatives.\", \"phone\": \"+32465123456\", \"email\": \"elodie.vandenberghe@gaia2mail.com\", \"address\": \"23, Sint-Jansstraat, 2000 Antwerp, Belgium\"}, {\"first_name\": \"Kanchana\", \"last_name\": \"Srisombat\", \"contact_id\": \"06967daff8614e86bb5b433669860c83\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"77\", \"nationality\": \"Thai\", \"city_living\": \"Bangkok\", \"country\": \"Thailand\", \"status\": \"Status.RETIRED\", \"job\": \"Former UN Peacekeeper\", \"description\": \"A 77-year-old retired UN peacekeeper from Thailand. Born and raised in Bangkok, she spent most of her life serving in conflict zones around the world, providing on-the-ground support and assistance to those in need.\", \"phone\": \"+66812345678\", \"email\": \"kanchana.srisombat@gaia2mail.com\", \"address\": \"123/456 Soi Sukhumvit 31, Khlong Tan Nuea, Watthana, Bangkok 10110\"}, {\"first_name\": \"Aurélien\", \"last_name\": \"De Vos\", \"contact_id\": \"083fc205c5134b43a3558bba86673896\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"33\", \"nationality\": \"Belgian\", \"city_living\": \"Ghent\", \"country\": \"Belgium\", \"status\": \"Status.STUDENT\", \"job\": \"Research Assistant\", \"description\": \"A driven and ambitious individual who has always been fascinated by the world of medicine.\", \"phone\": \"+32497234567\", \"email\": \"aurelien.devos@student.ugent.be\", \"address\": \"Sint-Pietersnieuwstraat 123, 9000 Ghent, Belgium\"}, {\"first_name\": \"Aurélie\", \"last_name\": \"De Waele\", \"contact_id\": \"0d2314502b044d6899cdf5001eeed5db\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"62\", \"nationality\": \"Belgian\", \"city_living\": \"Bruges\", \"country\": \"Belgium\", \"status\": \"Status.RETIRED\", \"job\": \"Former Archaeologist, currently a Publishing Agent\", \"description\": \"Aurélie De Waele is a 62-year-old retired archaeologist turned publishing agent, living in the picturesque city of Bruges, Belgium.\", \"phone\": \"+32473129456\", \"email\": \"aurelie.dewaele@editionslumiere.be\", \"address\": \"14, Rue des Carmes, 8000 Bruges, Belgium\"}, {\"first_name\": \"Nonglak\", \"last_name\": \"Sriwong\", \"contact_id\": \"0ee67b2f57e74dc1adc9228bd6a5a4e3\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"48\", \"nationality\": \"Thai\", \"city_living\": \"Chiang Mai\", \"country\": \"Thailand\", \"status\": \"Status.EMPLOYED\", \"job\": \"High School Music Teacher\", \"description\": \"Nonglak Sriwong is a passionate music enthusiast and a dedicated high school music teacher in Chiang Mai, Thailand. As a die-hard fan of the bassist Hal Patino and the King Diamond band, she has always been fascinated by the world of heavy metal music. In her free time, she enjoys playing the bass guitar and attending concerts of her favorite bands. Nonglak is also an avid cook and loves experimenting with new recipes in her kitchen. She finds solace in meditation and reading about history, which helps her relax and broaden her knowledge.\", \"phone\": \"+36819876543\", \"email\": \"nonglak.sriwong@gaia2mail.com\", \"address\": \"145/6 Moo 5, T. Mae Rim, A. Mae Rim, Chiang Mai 50180\"}, {\"first_name\": \"Khalid\", \"last_name\": \"Al-Khateeb\", \"contact_id\": \"0f3d5cfbb9724364947826218352eaf3\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"70\", \"nationality\": \"Saudi Arabian\", \"city_living\": \"Jeddah\", \"country\": \"Saudi Arabia\", \"status\": \"Status.RETIRED\", \"job\": \"Former Music Teacher\", \"description\": \"A 70-year-old retired music teacher who has spent his life surrounded by the sounds of soul music.\", \"phone\": \"+666126543210\", \"email\": \"khalid.alkhateeb@gaia2mail.com\", \"address\": \"1456 King Abdulaziz Road, Al-Rawdah District, Jeddah, Saudi Arabia\"}], \"metadata\": {\"range\": [\"0\", \"10\"], \"total\": \"108\"}}",
+      "event_id": "series_s2_get_contacts",
+      "response_sha256": "d63248c7bc32d653245c3ee3c7e8f21f4ae9bac58e3753a2844a5837f03f5342"
+    },
+    "stage2.tool_response.series_s2_read_brunch_email": {
+      "stage": 2,
+      "text": "{\"sender\": \"liesbeth.vandenberghe@gaia2mail.com\", \"recipients\": [\"evandenberghe@skynet.be\"], \"subject\": \"Proposed alternative time for the Brunch event\", \"content\": \"Dear Émile,\\n\\nSince the Brunch event on October 17th conflicted with another appointment, I would like to propose an alternative 30-minute meeting on Thursday, October 17th at 14:00-14:30. I have added it to my calendar as 'Alternative for Brunch' and would be glad to see you then.\\n\\nBest regards,\\nLiesbeth Vandenberghe\", \"email_id\": \"f91179cf5bee959124d28921284df251\", \"parent_id\": null, \"cc\": [], \"attachments\": {}, \"timestamp\": \"1728975780.0\", \"is_read\": \"True\"}",
+      "event_id": "series_s2_read_brunch_email",
+      "response_sha256": "8ac76c9889ae519acb4b4c14ae00bb663985e270ab5a1c9eb99611a5130275b6"
+    },
+    "stage2.tool_response.series_s2_search_emile": {
+      "stage": 2,
+      "text": "[{\"first_name\": \"Émile\", \"last_name\": \"Vandenberghe\", \"contact_id\": \"47bae30c40884b13b0c774f176ac1af3\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"69\", \"nationality\": \"Belgian\", \"city_living\": \"Leuven\", \"country\": \"Belgium\", \"status\": \"Status.RETIRED\", \"job\": \"Former Physics Professor\", \"description\": \"Émile Vandenberghe is a 69-year-old retired physics professor who spent most of his career studying and teaching the development of nuclear weapons during World War II.\", \"phone\": \"+0216234567\", \"email\": \"evandenberghe@skynet.be\", \"address\": \"Sint-Michielsstraat 12, 3000 Leuven, Belgium\"}]",
+      "event_id": "series_s2_search_emile",
+      "response_sha256": "45e760e08fdd6d1eff167d50317d867a19ebfe79502bb3fb07394668a179ee0d"
+    },
+    "stage2.tool_response.series_s2_search_kiettisak": {
+      "stage": 2,
+      "text": "[{\"first_name\": \"Kiettisak\", \"last_name\": \"Somsakul\", \"contact_id\": \"2c37d7f2e2164818b9cbf26fa927838e\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"57\", \"nationality\": \"Thai\", \"city_living\": \"Bangkok\", \"country\": \"Thailand\", \"status\": \"Status.RETIRED\", \"job\": \"Former High School Physical Education Teacher\", \"description\": \"Kiettisak Somsakul is a 57-year-old retired physical education teacher from Bangkok, Thailand.\", \"phone\": \"+66817876543\", \"email\": \"kiettisak.somsakul@gaia2mail.com\", \"address\": \"145/6 Soi Sukhumvit 31, Khlong Tan Nuea, Watthana, Bangkok 10110\"}]",
+      "event_id": "series_s2_search_kiettisak",
+      "response_sha256": "76ce11696915adec77a0dfc208ca821f431d2acca8c60bf3b45ea20c7d18d819"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，含独特姓氏组合，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含拉丁变音符号的专有人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Kiettisak",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "罕见专有人名，拼写困难，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Liesbeth Vandenberghe",
+        "Aurélien",
+        "Kiettisak"
+      ],
+      "active_vocabulary": {
+        "Liesbeth Vandenberghe": 50,
+        "Aurélien": 50,
+        "Kiettisak": 50
+      },
+      "vocabulary_sha256": "512b5a9beb2009d97b3f8df1c1e8f5b37cb2122114fb6fe719d8a1746ca76eea"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Amal Al-Mansour",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_list_window",
+          "reason": "含连字符的完整阿拉伯人名",
+          "weight": 50
+        },
+        {
+          "text": "Khalifa Al-Mansoori",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_list_window",
+          "reason": "含连字符的完整阿拉伯人名，发音困难",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_list_window",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Karel Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_list_window",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Kiettisak Somsakul",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "较难发音的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_list_window",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Nalinee Srisawat",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_list_window",
+          "reason": "较难发音的完整泰式人名",
+          "weight": 50
+        },
+        {
+          "text": "Nalinee Wongwanich",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_list_window",
+          "reason": "较难发音的完整泰式人名",
+          "weight": 50
+        },
+        {
+          "text": "Émile Vandenberghe",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Amal Al-Mansour",
+        "Khalifa Al-Mansoori",
+        "Aurélien Dumont",
+        "Karel Vandenberghe",
+        "Kiettisak Somsakul",
+        "Nalinee Srisawat",
+        "Nalinee Wongwanich",
+        "Émile Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Liesbeth Vandenberghe": 50,
+        "Aurélien": 50,
+        "Kiettisak": 50,
+        "Amal Al-Mansour": 50,
+        "Khalifa Al-Mansoori": 50,
+        "Aurélien Dumont": 50,
+        "Karel Vandenberghe": 50,
+        "Kiettisak Somsakul": 50,
+        "Nalinee Srisawat": 50,
+        "Nalinee Wongwanich": 50,
+        "Émile Vandenberghe": 50
+      },
+      "vocabulary_sha256": "f0177fb783db0a025e140e794aeb5f014a783609e0cb8d4e541d418b9c854e4b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélie De Waele",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_get_contacts",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Chang Khlan Subdistrict",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_get_contacts",
+          "reason": "难拼写的泰语地名",
+          "weight": 50
+        },
+        {
+          "text": "Khlong Tan Nuea",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_kiettisak",
+          "reason": "难拼写的泰语地名",
+          "weight": 50
+        },
+        {
+          "text": "Elodie Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_get_contacts",
+          "reason": "难拼写的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Kiettisak Somsakul",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_search_kiettisak",
+          "reason": "难拼写的完整泰语人名",
+          "weight": 50
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_brunch_email",
+          "reason": "难拼写的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Mae Rim",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_get_contacts",
+          "reason": "难拼写的泰语地名",
+          "weight": 50
+        },
+        {
+          "text": "Nonglak Srisawat",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_get_contacts",
+          "reason": "难拼写的完整泰语人名",
+          "weight": 50
+        },
+        {
+          "text": "Nonglak Sriwong",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_get_contacts",
+          "reason": "难拼写的完整泰语人名",
+          "weight": 50
+        },
+        {
+          "text": "Sint-Jansstraat",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_get_contacts",
+          "reason": "难拼写的比利时街道名",
+          "weight": 50
+        },
+        {
+          "text": "Sint-Michielsstraat",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_emile",
+          "reason": "难拼写的比利时街道名",
+          "weight": 50
+        },
+        {
+          "text": "Sint-Pietersnieuwstraat",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_get_contacts",
+          "reason": "难拼写的比利时街道名",
+          "weight": 50
+        },
+        {
+          "text": "Soi Sukhumvit",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_kiettisak",
+          "reason": "难拼写的泰语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Émile Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_search_emile",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Watthana",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_kiettisak",
+          "reason": "难拼写的泰语区名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélie De Waele",
+        "Chang Khlan Subdistrict",
+        "Khlong Tan Nuea",
+        "Elodie Vandenberghe",
+        "Mae Rim",
+        "Nonglak Srisawat",
+        "Nonglak Sriwong",
+        "Sint-Jansstraat",
+        "Sint-Michielsstraat",
+        "Sint-Pietersnieuwstraat",
+        "Soi Sukhumvit",
+        "Watthana"
+      ],
+      "active_vocabulary": {
+        "Liesbeth Vandenberghe": 50,
+        "Aurélien": 50,
+        "Kiettisak": 50,
+        "Amal Al-Mansour": 50,
+        "Khalifa Al-Mansoori": 50,
+        "Aurélien Dumont": 50,
+        "Karel Vandenberghe": 50,
+        "Kiettisak Somsakul": 50,
+        "Nalinee Srisawat": 50,
+        "Nalinee Wongwanich": 50,
+        "Émile Vandenberghe": 50,
+        "Aurélie De Waele": 50,
+        "Chang Khlan Subdistrict": 50,
+        "Khlong Tan Nuea": 50,
+        "Elodie Vandenberghe": 50,
+        "Mae Rim": 50,
+        "Nonglak Srisawat": 50,
+        "Nonglak Sriwong": 50,
+        "Sint-Jansstraat": 50,
+        "Sint-Michielsstraat": 50,
+        "Sint-Pietersnieuwstraat": 50,
+        "Soi Sukhumvit": 50,
+        "Watthana": 50
+      },
+      "vocabulary_sha256": "a2f49c7718b0ff8f56b1735b4b87956a7b35968352b2d98ed30634cbb2c4906f"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 3,
+  "extracted_at": "2026-11-23T02:23:02.256179+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

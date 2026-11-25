@@ -1,0 +1,271 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0329_bm3w7elymvn7y1awhtur7zg5xk5p70jn",
+  "model": "deepseek-flash",
+  "input_sha256": "68db52d96e87e55cbaaa09f85cd29e78cea9743e0aecb70d314f3294a073aba9",
+  "review_input_sha256": "6803e1ba30fc8bdb86983ba0c768d08aa4d5153a8e814d368c83da1b09272dba",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "e7158b13df5f055843a319294ab8b24fecac3689b2d3818f10cab8245037a9a9",
+  "reference_results_sha256": "0fbf737def4eb66edd801d222aff99ffc82a0fe2e2ebf6d9a862223ffd2e8b2e",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Rohan Kumar",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-111ee25e-b311-4572-88ab-269a6655a496.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Kaitlyn Nguyen-Tran",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Kaya Nakoda",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.10": {
+      "stage": 1,
+      "text": "Rohini Mehta",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Rémi LaFleur",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Rohini Iyer",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Aurélie Dumont",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.5": {
+      "stage": 1,
+      "text": "Åke Jansson",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.6": {
+      "stage": 1,
+      "text": "Ryder McKenzie",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.7": {
+      "stage": 1,
+      "text": "Søren Jensen",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.8": {
+      "stage": 1,
+      "text": "Aurélien Thibault",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.9": {
+      "stage": 1,
+      "text": "Zara Kaur",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage2.tool_response.series_s2_list": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"661ea7bca6f8457c900ffc69a8a45eff\", \"title\": \"Meeting with NGOs\", \"start_datetime\": \"1729418400\", \"end_datetime\": \"1729425600\", \"tag\": \"Work\", \"description\": \"Meeting with NGOs to discuss potential collaborations.\", \"location\": \"NGO Office\", \"attendees\": [\"Rohan Kumar\", \"Réjean Laforest\"], \"start_strftime\": \"Sunday, 2024-10-20 10:00:00\", \"end_strftime\": \"Sunday, 2024-10-20 12:00:00\"}, {\"event_id\": \"b758652731714d4880304e437e712d3e\", \"title\": \"Lunch with Mentor\", \"start_datetime\": \"1729427400\", \"end_datetime\": \"1729432800\", \"tag\": \"Social\", \"description\": \"Lunch with mentor to seek guidance.\", \"location\": \"The Leela Hotel\", \"attendees\": [\"Rohan Kumar\", \"Rohini Mehta\"], \"start_strftime\": \"Sunday, 2024-10-20 12:30:00\", \"end_strftime\": \"Sunday, 2024-10-20 14:00:00\"}, {\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Review replies and follow up with non-responders\", \"start_datetime\": \"1729418400.0\", \"end_datetime\": \"1729420200.0\", \"tag\": \"Work\", \"description\": \"Go through the replies that come back to today's emails and follow up with anyone who has not answered yet.\", \"location\": null, \"attendees\": [], \"start_strftime\": \"Sunday, 2024-10-20 10:00:00\", \"end_strftime\": \"Sunday, 2024-10-20 10:30:00\"}], \"range\": [\"0\", \"3\"], \"total\": \"3\"}",
+      "event_id": "series_s2_list",
+      "response_sha256": "c2efa3bc99766360735a8431db22a8ba7cb0a948d0a88121104b526136ce81dd"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，难以从普通词推断",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Rohan Kumar"
+      ],
+      "active_vocabulary": {
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "8f47cad7abcfa3266a8ac57963bee50e3ae16d056cc931e7d74dc0a7b7d04236"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaitlyn Nguyen-Tran",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含连字符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Aurélie Dumont",
+          "kind": "person",
+          "source": "stage1.existing_catalog.4",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Thibault",
+          "kind": "person",
+          "source": "stage1.existing_catalog.8",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Kaya Nakoda",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Iyer",
+          "kind": "person",
+          "source": "stage1.existing_catalog.3",
+          "reason": "完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Mehta",
+          "kind": "person",
+          "source": "stage1.existing_catalog.10",
+          "reason": "完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Ryder McKenzie",
+          "kind": "person",
+          "source": "stage1.existing_catalog.6",
+          "reason": "完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Rémi LaFleur",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Søren Jensen",
+          "kind": "person",
+          "source": "stage1.existing_catalog.7",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Zara Kaur",
+          "kind": "person",
+          "source": "stage1.existing_catalog.9",
+          "reason": "完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Åke Jansson",
+          "kind": "person",
+          "source": "stage1.existing_catalog.5",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kaitlyn Nguyen-Tran",
+        "Aurélie Dumont",
+        "Aurélien Thibault",
+        "Kaya Nakoda",
+        "Rohini Iyer",
+        "Rohini Mehta",
+        "Ryder McKenzie",
+        "Rémi LaFleur",
+        "Søren Jensen",
+        "Zara Kaur",
+        "Åke Jansson"
+      ],
+      "active_vocabulary": {
+        "Rohan Kumar": 50,
+        "Kaitlyn Nguyen-Tran": 50,
+        "Aurélie Dumont": 50,
+        "Aurélien Thibault": 50,
+        "Kaya Nakoda": 50,
+        "Rohini Iyer": 50,
+        "Rohini Mehta": 50,
+        "Ryder McKenzie": 50,
+        "Rémi LaFleur": 50,
+        "Søren Jensen": 50,
+        "Zara Kaur": 50,
+        "Åke Jansson": 50
+      },
+      "vocabulary_sha256": "7680d779da1bae6dec4737d8ebff77b1261c23185004276a0fd26515927ab9fd"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "The Leela Hotel",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list",
+          "reason": "特定酒店地名",
+          "weight": 50
+        },
+        {
+          "text": "Réjean Laforest",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_list",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "The Leela Hotel",
+        "Réjean Laforest"
+      ],
+      "active_vocabulary": {
+        "Rohan Kumar": 50,
+        "Kaitlyn Nguyen-Tran": 50,
+        "Aurélie Dumont": 50,
+        "Aurélien Thibault": 50,
+        "Kaya Nakoda": 50,
+        "Rohini Iyer": 50,
+        "Rohini Mehta": 50,
+        "Ryder McKenzie": 50,
+        "Rémi LaFleur": 50,
+        "Søren Jensen": 50,
+        "Zara Kaur": 50,
+        "Åke Jansson": 50,
+        "The Leela Hotel": 50,
+        "Réjean Laforest": 50
+      },
+      "vocabulary_sha256": "30599d59b12b5691862679c2e346fb6ef40e67540f80e7c6a63209cbe0f9ea0e"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:10.987255+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

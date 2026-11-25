@@ -1,0 +1,115 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0822_1slhgnka10l1kjii7nqgamgznxjo4loh",
+  "model": "deepseek-flash",
+  "input_sha256": "0648662d0643b601fceea58dd3d9dc903580a223131ce8a4ca344a06454ea160",
+  "review_input_sha256": "d62f63e1abd909f0aa14a547dd5045ff7f5b6cb38ba025296be88faf56eff988",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "5af4797f7225545c4aa8698398880d1b05c9361c79456e228dc8cdef5e5d0754",
+  "reference_results_sha256": "7ab37dc5b58f258b6ad6e6ba3eeb365e246566124a701a5dcb768a1882f46fae",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Hatchimals",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Georgia Bulldogs",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "Anastasiya Kuznetsova",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-73a705cd-9409-457d-9fb8-c0d956a10b80.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.existing_catalog.6",
+          "reason": "完整俄语人名，含难拼写姓氏，适合热词",
+          "weight": 50
+        },
+        {
+          "text": "Georgia Bulldogs",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.2",
+          "reason": "独特球队名，含专有地名与队名",
+          "weight": 50
+        },
+        {
+          "text": "Hatchimals",
+          "kind": "product",
+          "source": "stage0.existing_catalog.0",
+          "reason": "独特品牌/产品名，非普通词汇",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Anastasiya Kuznetsova",
+        "Georgia Bulldogs",
+        "Hatchimals"
+      ],
+      "active_vocabulary": {
+        "Anastasiya Kuznetsova": 50,
+        "Georgia Bulldogs": 50,
+        "Hatchimals": 50
+      },
+      "vocabulary_sha256": "3c2cedfce20b4c4f2510ef9fa7e6270c1bed2d95e81bf30d6e2b7eea1f5360a9"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Anastasiya Kuznetsova": 50,
+        "Georgia Bulldogs": 50,
+        "Hatchimals": 50
+      },
+      "vocabulary_sha256": "3c2cedfce20b4c4f2510ef9fa7e6270c1bed2d95e81bf30d6e2b7eea1f5360a9"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Anastasiya Kuznetsova": 50,
+        "Georgia Bulldogs": 50,
+        "Hatchimals": 50
+      },
+      "vocabulary_sha256": "3c2cedfce20b4c4f2510ef9fa7e6270c1bed2d95e81bf30d6e2b7eea1f5360a9"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Unique Party Pink Balloons",
+    "Patriotic Sequin Sparkle Costume Dress",
+    "Viktor",
+    "Katharina"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:34.247671+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

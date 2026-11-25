@@ -1,0 +1,142 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0049_uhbiyv4plkz71z52e4eve282kd6vppbo__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "abfe7a4163bd3015f94eb6a7addec9bdbd1747281a6ac46bfd8bf003ce12c681",
+  "review_input_sha256": "6ea28dbe2b2726e7b30cebcf3d6dcb3df7fbad3f8e315613406a516f9e0b3ac7",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "028cd68c84400db82b75f231ff808f5386d89e7d0058e929daa36a06267d5fa8",
+  "reference_results_sha256": "1760d6f608e82ba87ec59ccdcda75fdcce680908cdd0db2c6e66001f237bdc1f",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Nalani Jensen",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Xóchitl Ramírez-García",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage1.tool_gt.series_s1_reply.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Alexandru Mihăilescu",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Luís Pereira",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Xóchitl Ramírez-García",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.existing_catalog.3",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "较难拼写的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Xóchitl Ramírez-García",
+        "Aurélien LaFleur",
+        "Nalani Jensen"
+      ],
+      "active_vocabulary": {
+        "Xóchitl Ramírez-García": 50,
+        "Aurélien LaFleur": 50,
+        "Nalani Jensen": 50
+      },
+      "vocabulary_sha256": "2f2c183fc915d3e9324d69fef61a8a9f2c42fbacc4e71d0c71c6ba934d17dd56"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Alexandru Mihăilescu",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Luís Pereira",
+          "kind": "person",
+          "source": "stage2.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Alexandru Mihăilescu",
+        "Luís Pereira"
+      ],
+      "active_vocabulary": {
+        "Xóchitl Ramírez-García": 50,
+        "Aurélien LaFleur": 50,
+        "Nalani Jensen": 50,
+        "Alexandru Mihăilescu": 50,
+        "Luís Pereira": 50
+      },
+      "vocabulary_sha256": "101ed21669d1ccd6de73734e2700a1cafae4493ac4ddece96d1e8334110c4447"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Garcia Enterprises",
+    "Wine List Update",
+    "Kaitlyn Reyes",
+    "Wine Cellar & Sustainability",
+    "Portland"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:28.030597+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,131 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0066_6x8khlqdpmjxpwhjbm5ak8vstewvdj6e",
+  "model": "deepseek-flash",
+  "input_sha256": "480feb2c07279cda29d6ad06e7334524c0eb6027a8c51936f9384dcea438e965",
+  "review_input_sha256": "fda775c0f1d9579c6c8ca670f8e64e73d3227cedc58d6f8565a51ccf1d43fa2b",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "c89f1fb6148cc1680c03af874c6767f3dc88bbfefc87fad37203ce75d8edca5d",
+  "reference_results_sha256": "dbf7ae5e8761ccb193b3e1ceb1637c53fdb875e981e20e9d26dace9895617acc",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Linnea",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Sunita",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "João Silva",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Stockholm Office",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "João Silva",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Linnea",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "较难的人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Sunita",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "较难的人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "João Silva",
+        "Linnea",
+        "Sunita"
+      ],
+      "active_vocabulary": {
+        "João Silva": 50,
+        "Linnea": 50,
+        "Sunita": 50
+      },
+      "vocabulary_sha256": "1b3f9aed483387ce0488abc3458c1b78739b19a6ddfec2f11330ca5d6086170e"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Stockholm Office",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整地点名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Stockholm Office"
+      ],
+      "active_vocabulary": {
+        "João Silva": 50,
+        "Linnea": 50,
+        "Sunita": 50,
+        "Stockholm Office": 50
+      },
+      "vocabulary_sha256": "6378678bc55456861603f986b5f05429969fa87bac8a7c65cf720e62ac3fd3fb"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "João Silva": 50,
+        "Linnea": 50,
+        "Sunita": 50,
+        "Stockholm Office": 50
+      },
+      "vocabulary_sha256": "6378678bc55456861603f986b5f05429969fa87bac8a7c65cf720e62ac3fd3fb"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Social Media Campaign",
+    "Networking Event",
+    "Campaign Wrap-Up"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:13:53.412277+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

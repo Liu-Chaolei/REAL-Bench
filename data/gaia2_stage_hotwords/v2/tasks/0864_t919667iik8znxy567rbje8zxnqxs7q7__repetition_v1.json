@@ -1,0 +1,203 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0864_t919667iik8znxy567rbje8zxnqxs7q7__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "ee78d9ead2772e811827e167dd305dbd69acbdfb42b720d8905f4ef18e98571b",
+  "review_input_sha256": "5cc5df5c9395a1c69d709bf257cdcf95b8632f9a1145a5b480fc8d7c846bf0df",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "91724aca4cf620db281396d9d8518867737d922514c0836246ca8fc668912095",
+  "reference_results_sha256": "991d0df4b2831d6e6c0886661194a9c379bb850db7f354b8eaa4b7b9a73a1605",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Lukáš",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f798a561-3f7e-4da8-91ae-300ad936499c.arguments.content"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Matěj",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f798a561-3f7e-4da8-91ae-300ad936499c.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Šárka",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-4a7989ab-9928-4f0f-a808-1ebb91fc80e7.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Kvido",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-d835802b-b098-4a48-87a9-dd4e40d47fea.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Šárka Nováková",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Lukáš Nováček",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Kvido Nováček",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Wild Republic Manatee Plush",
+      "original_source": "stage2.tool_gt.series_s2_add_sarka.arguments.description"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Cuddlekins",
+      "original_source": "stage2.tool_gt.series_s2_add_sarka.arguments.description"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kvido",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "罕见捷克人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Lukáš",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "带变音符号的捷克人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Matěj",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "带变音符号的捷克人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Šárka",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "带变音符号的捷克人名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kvido",
+        "Lukáš",
+        "Matěj",
+        "Šárka"
+      ],
+      "active_vocabulary": {
+        "Kvido": 50,
+        "Lukáš": 50,
+        "Matěj": 50,
+        "Šárka": 50
+      },
+      "vocabulary_sha256": "46e13a5f7818f918e5f721744b6098ea7ff65178a618b850a416a159a01d7ec9"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kvido Nováček",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "罕见名加带变音符号姓氏的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Lukáš Nováček",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "带变音符号的完整捷克人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Šárka Nováková",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "带变音符号的完整捷克人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kvido Nováček",
+        "Lukáš Nováček",
+        "Šárka Nováková"
+      ],
+      "active_vocabulary": {
+        "Kvido": 50,
+        "Lukáš": 50,
+        "Matěj": 50,
+        "Šárka": 50,
+        "Kvido Nováček": 50,
+        "Lukáš Nováček": 50,
+        "Šárka Nováková": 50
+      },
+      "vocabulary_sha256": "56f087ceff6b477092233dbd3f9cb89f14ccf116838ccf5ec786b09975c220da"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Wild Republic Manatee Plush",
+          "kind": "product",
+          "source": "stage2.existing_catalog.0",
+          "reason": "特定商品全名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Cuddlekins",
+          "kind": "product",
+          "source": "stage2.existing_catalog.1",
+          "reason": "特定品牌名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Wild Republic Manatee Plush",
+        "Cuddlekins"
+      ],
+      "active_vocabulary": {
+        "Kvido": 50,
+        "Lukáš": 50,
+        "Matěj": 50,
+        "Šárka": 50,
+        "Kvido Nováček": 50,
+        "Lukáš Nováček": 50,
+        "Šárka Nováková": 50,
+        "Wild Republic Manatee Plush": 50,
+        "Cuddlekins": 50
+      },
+      "vocabulary_sha256": "93e771e6bd18d00753ff9e7909f5fad334d0bd18b7c62d66fe2cdfba743216a1"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:24.539465+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

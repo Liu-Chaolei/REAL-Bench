@@ -1,0 +1,161 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0891_orvr2n92xivf9rm5s6ih12473ypo6t18__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "55da0e0357e58615ff58adfa2d12967c1c41e3c0395f6442b715aa3aa1985675",
+  "review_input_sha256": "6caa93ee4f8d4d0d580cc40e9f80af2abb490de8bc07a96edd85cac47d6f104a",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "490741ddfa349503a935ae8caeef1c21749eb91bc49ee301fa783046cbed50c5",
+  "reference_results_sha256": "6e8bd582afade258efb5ead433d2f11080fc69b97f370359e49462fb0f984f5e",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Leuven City Hall",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Émile Vandenberghe",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Elara Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-c4a70bac-dea3-41e2-bf16-923a678738d3.arguments.attendees[0]"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Leuven Book Club",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Elodie Vandenberghe",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Liesbeth Vandenberghe",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Leuven City Hall",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "具体地名，作为地点专名保留",
+          "weight": 50
+        },
+        {
+          "text": "Elara Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整人名，姓氏较难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Émile Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Leuven City Hall",
+        "Elara Vandenberghe",
+        "Émile Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Leuven City Hall": 50,
+        "Elara Vandenberghe": 50,
+        "Émile Vandenberghe": 50
+      },
+      "vocabulary_sha256": "9d7276f18575cd1e19c473b00403dd3c99caaf79b9b18e75736a47c66224aac8"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Leuven Book Club",
+          "kind": "organization",
+          "source": "stage1.existing_catalog.0",
+          "reason": "具体组织名称，非通用机构词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Leuven Book Club"
+      ],
+      "active_vocabulary": {
+        "Leuven City Hall": 50,
+        "Elara Vandenberghe": 50,
+        "Émile Vandenberghe": 50,
+        "Leuven Book Club": 50
+      },
+      "vocabulary_sha256": "2718fb567ed5b678378becefe4d6869dd4a472a6def911c18ee37c4171407b6b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Elodie Vandenberghe",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整人名，姓氏较难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "完整人名，姓氏较难拼写",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Elodie Vandenberghe",
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Leuven City Hall": 50,
+        "Elara Vandenberghe": 50,
+        "Émile Vandenberghe": 50,
+        "Leuven Book Club": 50,
+        "Elodie Vandenberghe": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "cb7ebd40148fd2c681fdc427f818e7fef182dc4f912310289965fefafd382699"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Elara",
+    "Leuven City Hall, 3000 Leuven, Belgium",
+    "Émile"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:18.392790+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

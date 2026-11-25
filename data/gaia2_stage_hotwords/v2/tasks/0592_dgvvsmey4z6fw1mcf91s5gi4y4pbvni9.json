@@ -1,0 +1,203 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0592_dgvvsmey4z6fw1mcf91s5gi4y4pbvni9",
+  "model": "deepseek-flash",
+  "input_sha256": "82c8ad04c5df8622067c00d1edd172ad2886c53eca34b0d87e2bdc654a18dafd",
+  "review_input_sha256": "b4e33a8e55ed4c182d7d714aabcc0d82a5a59cb9452f69e65c754ded54320241",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "40cfe00120a253e9f0ab30ac18652377f546691e6dc52b017bf70123381bfe56",
+  "reference_results_sha256": "67ef801fd0b21d1babf233b9a9f1b1d60fb32a1f5af9792ae152587ba4a6cc35",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "University of Melbourne",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Melbourne Relocation Review",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Akira Tanaka",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Kaitlyn Nguyen",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.tool_response.series_s1_akira": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Akira\", \"last_name\": \"Tanaka\", \"contact_id\": \"ef82a7d7934d47fc9fa99deba07a20af\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"20\", \"nationality\": \"Australian\", \"city_living\": \"Melbourne\", \"country\": \"Australia\", \"status\": \"Status.STUDENT\", \"job\": \"Part-time library assistant\", \"description\": \"Akira is a bright and curious college student who has recently discovered the beauty of classical music. She stumbled upon a Mozart concert at the Melbourne Recital Centre, and it sparked a new passion within her. As a violinist herself, she was amazed by the complexity and elegance of classical music. When she's not attending classes or working at the library, Akira loves to explore the city's cultural scene, attending concerts and exhibitions. She's also an avid hiker and enjoys exploring the nearby Dandenong Ranges.\", \"phone\": \"+61412345677\", \"email\": \"akira.tanaka@student.unimelb.edu.au\", \"address\": \"345/123 La Trobe St, Melbourne VIC 3000\"}",
+      "event_id": "series_s1_akira",
+      "response_sha256": "2cbd51cd14ac9f3814651ce56984d43a2a580dc580ed8e87e85685a2046ca053"
+    },
+    "stage1.tool_response.series_s1_kaitlyn": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Kaitlyn\", \"last_name\": \"Nguyen\", \"contact_id\": \"367787a8f00147f5acec020181175567\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"40\", \"nationality\": \"Australian\", \"city_living\": \"Melbourne\", \"country\": \"Australia\", \"status\": \"Status.EMPLOYED\", \"job\": \"Financial Planner\", \"description\": \"Kaitlyn Nguyen is a practical and analytical person who values stability and security. As a financial planner, she helps her clients make informed decisions about their money and investments. She is married to her partner, Alex, who works in marketing, and they often discuss the real-world impacts of marketing strategies on their clients' financial situations. Kaitlyn is a bit of a skeptic and likes to question assumptions, which makes her a great sounding board for Alex's ideas. She is also a bit of a worrier, always thinking about potential risks and downsides, but this trait serves her well in her line of work.\", \"phone\": \"+61412245678\", \"email\": \"kaitlyn.nguyen@gaia2mail.com\", \"address\": \"145/23 St Kilda Road, Melbourne VIC 3004\"}",
+      "event_id": "series_s1_kaitlyn",
+      "response_sha256": "98683f661c6b59cad6995985be785571b0e8511636cd9c7e484e16ad4d4f0e91"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Melbourne Relocation Follow-up",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "University of Melbourne",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整且具辨识度的大学名称，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "University of Melbourne"
+      ],
+      "active_vocabulary": {
+        "University of Melbourne": 50
+      },
+      "vocabulary_sha256": "a8905df120510b62d3faafe88cce80adb144379c8f9a9aaef9be3aa14cfc5632"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "La Trobe St",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_akira",
+          "reason": "街道专名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Melbourne Recital Centre",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_akira",
+          "reason": "特定场馆专名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Melbourne Relocation Review",
+          "kind": "custom_name",
+          "source": "stage1.existing_catalog.0",
+          "reason": "特定邮件主题/自定义名称，保留",
+          "weight": 50
+        },
+        {
+          "text": "St Kilda Road",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_kaitlyn",
+          "reason": "街道专名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Akira Tanaka",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Dandenong Ranges",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_akira",
+          "reason": "具辨识度的地名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Kaitlyn Nguyen",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "La Trobe St",
+        "Melbourne Recital Centre",
+        "Melbourne Relocation Review",
+        "St Kilda Road",
+        "Akira Tanaka",
+        "Dandenong Ranges",
+        "Kaitlyn Nguyen"
+      ],
+      "active_vocabulary": {
+        "University of Melbourne": 50,
+        "La Trobe St": 50,
+        "Melbourne Recital Centre": 50,
+        "Melbourne Relocation Review": 50,
+        "St Kilda Road": 50,
+        "Akira Tanaka": 50,
+        "Dandenong Ranges": 50,
+        "Kaitlyn Nguyen": 50
+      },
+      "vocabulary_sha256": "7c01f26c4010cb688f9b9a603442c5fbd1aa760a2685d8e375d0866ff0aa65ac"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Melbourne Relocation Follow-up",
+          "kind": "custom_name",
+          "source": "stage2.existing_catalog.0",
+          "reason": "特定日历事件名称，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Melbourne Relocation Follow-up"
+      ],
+      "active_vocabulary": {
+        "University of Melbourne": 50,
+        "La Trobe St": 50,
+        "Melbourne Recital Centre": 50,
+        "Melbourne Relocation Review": 50,
+        "St Kilda Road": 50,
+        "Akira Tanaka": 50,
+        "Dandenong Ranges": 50,
+        "Kaitlyn Nguyen": 50,
+        "Melbourne Relocation Follow-up": 50
+      },
+      "vocabulary_sha256": "da0817fc54deb63f936669891a7296ebe2df72ac2e348e52f77a2692a6be3b8b"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": [
+        {
+          "text": "Melbourne",
+          "covered_by": "University of Melbourne"
+        }
+      ]
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Melbourne",
+    "Astrid",
+    "Kaitlyn",
+    "Akira"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:38.822471+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

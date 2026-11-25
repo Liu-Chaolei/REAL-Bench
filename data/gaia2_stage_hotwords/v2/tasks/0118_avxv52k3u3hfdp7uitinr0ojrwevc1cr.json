@@ -1,0 +1,206 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0118_avxv52k3u3hfdp7uitinr0ojrwevc1cr",
+  "model": "deepseek-flash",
+  "input_sha256": "4b9ef0d6a242b8f2447fe13f6964d3af83416f58ab7746ca54b8033af7c5f515",
+  "review_input_sha256": "6df4f4fbc8a401f95f77c349689c06786edff4b67386647bf1336664379ddc23",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "02384daa15fa394d53c86cbe9f0ac04100d11d8e7ce1a8c19aedf1c1c9e9d2a6",
+  "reference_results_sha256": "55900cd6cb4db1ed33a897d0d6a7f3eeb821bb09e3022c045baa84030dcd091f",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Akira Kübler",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-a9f7086f-8db0-4d39-bb24-f4f49dba6907.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Aurélien De Smet",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Aurélien Janssens",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Dinant",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Café zum Kirschgarten",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Katarzyna Zielińska",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.tool_response.series_s2_check_day": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"5c6f2e09f3ce4060bc46e44f7f4e66a4\", \"title\": \"Historical Society Meeting\", \"start_datetime\": \"1729180800\", \"end_datetime\": \"1729188000\", \"tag\": \"Work\", \"description\": \"Discussion on the impact of lesser-known battles on geopolitical dynamics.\", \"location\": \"Basel Historical Society\", \"attendees\": [\"Ursula Wiederkehr\"], \"start_strftime\": \"Thursday, 2024-10-17 16:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 18:00:00\"}, {\"event_id\": \"98eaed1ae6294aaba008edcf6d12b2b5\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729188000\", \"end_datetime\": \"1729191600\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio in Basel\", \"attendees\": [\"Ursula Wiederkehr\"], \"start_strftime\": \"Thursday, 2024-10-17 18:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 19:00:00\"}, {\"event_id\": \"b69f8090a3404e98a6cc7ee2bb9ccf5d\", \"title\": \"Research Collaboration with Katarzyna Zielińska\", \"start_datetime\": \"1729173600\", \"end_datetime\": \"1729180800\", \"tag\": \"Work\", \"description\": \"Discuss research on the impact of battles on geopolitical dynamics.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Ursula Wiederkehr\", \"Katarzyna Zielińska\"], \"start_strftime\": \"Thursday, 2024-10-17 14:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 16:00:00\"}, {\"event_id\": \"b9124ba67bdf49a8849b338fddf22d48\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729159200\", \"end_datetime\": \"1729162800\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Thursday, 2024-10-17 10:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 11:00:00\"}, {\"event_id\": \"bfd0b3afbb884bee9b47b7a4c5bee9eb\", \"title\": \"Dinner with Liesbeth Vandenberghe\", \"start_datetime\": \"1729193400\", \"end_datetime\": \"1729200600\", \"tag\": \"Social\", \"description\": \"Catch up with Liesbeth Vandenberghe over dinner.\", \"location\": \"Restaurant in Basel\", \"attendees\": [\"Ursula Wiederkehr\", \"Liesbeth Vandenberghe\"], \"start_strftime\": \"Thursday, 2024-10-17 19:30:00\", \"end_strftime\": \"Thursday, 2024-10-17 21:30:00\"}, {\"event_id\": \"fea17f26447248d39ec986a79ce3b4ee\", \"title\": \"Coffee Break with Aurélien von Allmen\", \"start_datetime\": \"1729166400\", \"end_datetime\": \"1729170000\", \"tag\": \"Social\", \"description\": \"Catch up with Aurélien von Allmen over coffee.\", \"location\": \"Café in Basel\", \"attendees\": [\"Ursula Wiederkehr\", \"Aurélien von Allmen\"], \"start_strftime\": \"Thursday, 2024-10-17 12:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 13:00:00\"}], \"range\": [\"0\", \"6\"], \"total\": \"6\"}",
+      "event_id": "series_s2_check_day",
+      "response_sha256": "6ad066e48eb699119bd6aacc9a69e6984df4da3a13df9821a319e89c5d05e800"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Akira Kübler",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符的完整人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Akira Kübler",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Akira Kübler": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "c9ac832ca431433bca5984f1c9b41624af6ceec9ceaad42007ae8189b4d1d3a7"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aurélien De Smet",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Janssens",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Dinant",
+          "kind": "place",
+          "source": "stage1.existing_catalog.2",
+          "reason": "地名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien De Smet",
+        "Aurélien Janssens",
+        "Dinant"
+      ],
+      "active_vocabulary": {
+        "Akira Kübler": 50,
+        "Ursula Wiederkehr": 50,
+        "Aurélien De Smet": 50,
+        "Aurélien Janssens": 50,
+        "Dinant": 50
+      },
+      "vocabulary_sha256": "989defe3bd145fa72e6a55ec78f03a10dd6c68c6225e34de4fec84245869eaf2"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien von Allmen",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_check_day",
+          "reason": "含变音符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Café zum Kirschgarten",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符的完整店名",
+          "weight": 50
+        },
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "含变音符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_check_day",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien von Allmen",
+        "Café zum Kirschgarten",
+        "Katarzyna Zielińska",
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Akira Kübler": 50,
+        "Ursula Wiederkehr": 50,
+        "Aurélien De Smet": 50,
+        "Aurélien Janssens": 50,
+        "Dinant": 50,
+        "Aurélien von Allmen": 50,
+        "Café zum Kirschgarten": 50,
+        "Katarzyna Zielińska": 50,
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "b1d41c4adaf1cc69bb067e3e1b3050a62cdf186ae1625e0cb43248cc9a778f2e"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Akira",
+    "Aurelian",
+    "Collaborative Historical Project",
+    "Iceland_2020.jpg",
+    "India_2022.jpg",
+    "Indonesia_2021.jpg",
+    "complex_dag.png",
+    "Basel",
+    "Aurélien",
+    "Historical Society"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:04.416869+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

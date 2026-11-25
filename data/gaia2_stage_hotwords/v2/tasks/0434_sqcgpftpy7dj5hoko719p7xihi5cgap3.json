@@ -1,0 +1,361 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0434_sqcgpftpy7dj5hoko719p7xihi5cgap3",
+  "model": "deepseek-flash",
+  "input_sha256": "5059e4f8e9eb8a6bc2ab16a197649b64e81495892f5a96f71b0907274f496f19",
+  "review_input_sha256": "9986ab1fce9055f8cb5b33d24f8e645ffe66b6ebc211aeadd2537d565c372548",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "3ee66a4e7ba98921195166d1483745e433f9ae8c562c8f621aac3b73c4529b5c",
+  "reference_results_sha256": "2b102ac698490927295be4130936faacbf9513db33cbe867a4c7fd10fc926024",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Rukmini Sutanto",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Saskia Römer",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Saoirse Ní Mhaoldhamhnaigh",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Áine Ní Chonaill",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.tool_response.series_s1_search": {
+      "stage": 1,
+      "text": "[{\"event_id\": \"00cef7d1f7164c71a94c74578fa6ce35\", \"title\": \"Yoga Class\", \"start_datetime\": \"1724745600\", \"end_datetime\": \"1724749200\", \"tag\": \"Health\", \"description\": \"Attend a yoga class to relax and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Anastasiya Kuznetsova\"], \"start_strftime\": \"Tuesday, 2024-08-27 08:00:00\", \"end_strftime\": \"Tuesday, 2024-08-27 09:00:00\"}, {\"event_id\": \"13e37dae5fa14ac387eca8befec27a68\", \"title\": \"Yoga Class\", \"start_datetime\": \"1731520800\", \"end_datetime\": \"1731524400\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Wednesday, 2024-11-13 18:00:00\", \"end_strftime\": \"Wednesday, 2024-11-13 19:00:00\"}, {\"event_id\": \"16032776e9024f28bd47fa4f9cbf7e01\", \"title\": \"Yoga Class\", \"start_datetime\": \"1731088800\", \"end_datetime\": \"1731092400\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Helga Müller\", \"Suryani Widyastuti\"], \"start_strftime\": \"Friday, 2024-11-08 18:00:00\", \"end_strftime\": \"Friday, 2024-11-08 19:00:00\"}, {\"event_id\": \"2250e459279a44e6bdfef005950f99b5\", \"title\": \"Yoga Class\", \"start_datetime\": \"1725300000\", \"end_datetime\": \"1725305400\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Rukmini Sutanto\"], \"start_strftime\": \"Monday, 2024-09-02 18:00:00\", \"end_strftime\": \"Monday, 2024-09-02 19:30:00\"}, {\"event_id\": \"2fb7fcbd8e924239a1ce03d21c7017fa\", \"title\": \"Yoga Class\", \"start_datetime\": \"1730916000\", \"end_datetime\": \"1730919600\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Helga Müller\", \"Suryani Widyastuti\"], \"start_strftime\": \"Wednesday, 2024-11-06 18:00:00\", \"end_strftime\": \"Wednesday, 2024-11-06 19:00:00\"}, {\"event_id\": \"372d92cfafae422697fea544c81b357d\", \"title\": \"Yoga Class\", \"start_datetime\": \"1732989600\", \"end_datetime\": \"1732993200\", \"tag\": \"Health\", \"description\": \"Attend a vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Saoirse O'Connor\"], \"start_strftime\": \"Saturday, 2024-11-30 18:00:00\", \"end_strftime\": \"Saturday, 2024-11-30 19:00:00\"}, {\"event_id\": \"39f546eab77943eba9abe84f380f6cae\", \"title\": \"Yoga Class\", \"start_datetime\": \"1730138400\", \"end_datetime\": \"1730142000\", \"tag\": \"Health\", \"description\": \"Attend a vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio, Moscow\", \"attendees\": [\"Natalya Kuznetsova\"], \"start_strftime\": \"Monday, 2024-10-28 18:00:00\", \"end_strftime\": \"Monday, 2024-10-28 19:00:00\"}, {\"event_id\": \"3a14ed14c6b9401581214e32922b671a\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729879200\", \"end_datetime\": \"1729882800\", \"tag\": \"Health\", \"description\": \"Attend a yoga class to unwind and relax.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Katharina Müller-Schneider\"], \"start_strftime\": \"Friday, 2024-10-25 18:00:00\", \"end_strftime\": \"Friday, 2024-10-25 19:00:00\"}, {\"event_id\": \"4212163b802f405db2d6b0193cd8954c\", \"title\": \"Yoga Class\", \"start_datetime\": \"1731956400\", \"end_datetime\": \"1731960000\", \"tag\": \"Health\", \"description\": \"Attend a yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Monday, 2024-11-18 19:00:00\", \"end_strftime\": \"Monday, 2024-11-18 20:00:00\"}, {\"event_id\": \"44c405b20bd24640b8187dcc2e6602e5\", \"title\": \"Yoga Class\", \"start_datetime\": \"1726077600\", \"end_datetime\": \"1726081200\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Saskia Römer\", \"Saoirse Ní Mhaoldhamhnaigh\"], \"start_strftime\": \"Wednesday, 2024-09-11 18:00:00\", \"end_strftime\": \"Wednesday, 2024-09-11 19:00:00\"}, {\"event_id\": \"46c765789cc94b5c8ce395de75a563da\", \"title\": \"Yoga Class\", \"start_datetime\": \"1731002400\", \"end_datetime\": \"1731006000\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Helga Müller\", \"Suryani Widyastuti\"], \"start_strftime\": \"Thursday, 2024-11-07 18:00:00\", \"end_strftime\": \"Thursday, 2024-11-07 19:00:00\"}, {\"event_id\": \"48938629d2234d2e9fdf6ecca4e6636e\", \"title\": \"Yoga Class\", \"start_datetime\": \"1731780000\", \"end_datetime\": \"1731783600\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Saturday, 2024-11-16 18:00:00\", \"end_strftime\": \"Saturday, 2024-11-16 19:00:00\"}, {\"event_id\": \"4ea6f0be595f43a2b0f941be200d388a\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729015200\", \"end_datetime\": \"1729018800\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-15 18:00:00\", \"end_strftime\": \"Tuesday, 2024-10-15 19:00:00\"}, {\"event_id\": \"4ee515062fa24cdfa43646c0c38b74fe\", \"title\": \"Yoga Class\", \"start_datetime\": \"1725645600\", \"end_datetime\": \"1725651000\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Rukmini Sutanto\"], \"start_strftime\": \"Friday, 2024-09-06 18:00:00\", \"end_strftime\": \"Friday, 2024-09-06 19:30:00\"}, {\"event_id\": \"51957ee5081b485e9dfb856da93b7e61\", \"title\": \"Yoga Class\", \"start_datetime\": \"1726308000\", \"end_datetime\": \"1726311600\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Saskia Römer\", \"Saoirse Ní Mhaoldhamhnaigh\"], \"start_strftime\": \"Saturday, 2024-09-14 10:00:00\", \"end_strftime\": \"Saturday, 2024-09-14 11:00:00\"}, {\"event_id\": \"56b22e85d093486dab5d83d676339683\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729706400\", \"end_datetime\": \"1729710000\", \"tag\": \"Health\", \"description\": \"Attend a yoga class to unwind and relax.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Katharina Müller-Schneider\"], \"start_strftime\": \"Wednesday, 2024-10-23 18:00:00\", \"end_strftime\": \"Wednesday, 2024-10-23 19:00:00\"}, {\"event_id\": \"5d4be480eed845e4a0de986ef842d76d\", \"title\": \"Yoga Class\", \"start_datetime\": \"1725091200\", \"end_datetime\": \"1725094800\", \"tag\": \"Health\", \"description\": \"Attend a yoga class to relax and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Anastasiya Kuznetsova\"], \"start_strftime\": \"Saturday, 2024-08-31 08:00:00\", \"end_strftime\": \"Saturday, 2024-08-31 09:00:00\"}, {\"event_id\": \"62d0053647da4d33ae4a72a1d43617e7\", \"title\": \"Yoga Class\", \"start_datetime\": \"1732816800\", \"end_datetime\": \"1732820400\", \"tag\": \"Health\", \"description\": \"Attend a vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Saoirse O'Connor\"], \"start_strftime\": \"Thursday, 2024-11-28 18:00:00\", \"end_strftime\": \"Thursday, 2024-11-28 19:00:00\"}, {\"event_id\": \"655cff0d3da44390aa12df0c6b955922\", \"title\": \"Yoga Class\", \"start_datetime\": \"1725904800\", \"end_datetime\": \"1725908400\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Saskia Römer\", \"Saoirse Ní Mhaoldhamhnaigh\"], \"start_strftime\": \"Monday, 2024-09-09 18:00:00\", \"end_strftime\": \"Monday, 2024-09-09 19:00:00\"}, {\"event_id\": \"72e3971da1144c7480d06fb6df52e221\", \"title\": \"Yoga Class\", \"start_datetime\": \"1730743200\", \"end_datetime\": \"1730746800\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Helga Müller\", \"Suryani Widyastuti\"], \"start_strftime\": \"Monday, 2024-11-04 18:00:00\", \"end_strftime\": \"Monday, 2024-11-04 19:00:00\"}, {\"event_id\": \"75bfcc8f9f8a4a8e8a5922b3ddeb6ddb\", \"title\": \"Yoga Class\", \"start_datetime\": \"1728500400\", \"end_datetime\": \"1728504000\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Saskia Müller\"], \"start_strftime\": \"Wednesday, 2024-10-09 19:00:00\", \"end_strftime\": \"Wednesday, 2024-10-09 20:00:00\"}, {\"event_id\": \"769fdd6ff9d6482e9a1b94f5a2d9f145\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729533600\", \"end_datetime\": \"1729537200\", \"tag\": \"Health\", \"description\": \"Attend a yoga class to unwind and relax.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Katharina Müller-Schneider\"], \"start_strftime\": \"Monday, 2024-10-21 18:00:00\", \"end_strftime\": \"Monday, 2024-10-21 19:00:00\"}, {\"event_id\": \"77afa5849c2f48d8a8d831de1bfb50ae\", \"title\": \"Yoga Class\", \"start_datetime\": \"1725732000\", \"end_datetime\": \"1725737400\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Rukmini Sutanto\"], \"start_strftime\": \"Saturday, 2024-09-07 18:00:00\", \"end_strftime\": \"Saturday, 2024-09-07 19:30:00\"}, {\"event_id\": \"78b17d6c06eb4c2995ca0ed7f97f957f\", \"title\": \"Yoga Class\", \"start_datetime\": \"1724918400\", \"end_datetime\": \"1724922000\", \"tag\": \"Health\", \"description\": \"Attend a yoga class to relax and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Anastasiya Kuznetsova\"], \"start_strftime\": \"Thursday, 2024-08-29 08:00:00\", \"end_strftime\": \"Thursday, 2024-08-29 09:00:00\"}, {\"event_id\": \"795fb4183bf6406f8d59f2e9479ff494\", \"title\": \"Yoga Class\", \"start_datetime\": \"1732644000\", \"end_datetime\": \"1732647600\", \"tag\": \"Health\", \"description\": \"Attend a vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Saoirse O'Connor\"], \"start_strftime\": \"Tuesday, 2024-11-26 18:00:00\", \"end_strftime\": \"Tuesday, 2024-11-26 19:00:00\"}, {\"event_id\": \"7dbf996d00374d96a4020aa140377983\", \"title\": \"Yoga Class\", \"start_datetime\": \"1731175200\", \"end_datetime\": \"1731178800\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Helga Müller\", \"Suryani Widyastuti\"], \"start_strftime\": \"Saturday, 2024-11-09 18:00:00\", \"end_strftime\": \"Saturday, 2024-11-09 19:00:00\"}, {\"event_id\": \"8041c881d0134e24b6c8c4bf1b39e3a7\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729101600\", \"end_datetime\": \"1729105200\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Wednesday, 2024-10-16 18:00:00\", \"end_strftime\": \"Wednesday, 2024-10-16 19:00:00\"}, {\"event_id\": \"88b5b175030d4ce895573f8ee2fa0760\", \"title\": \"Yoga Class\", \"start_datetime\": \"1730829600\", \"end_datetime\": \"1730833200\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Helga Müller\", \"Suryani Widyastuti\"], \"start_strftime\": \"Tuesday, 2024-11-05 18:00:00\", \"end_strftime\": \"Tuesday, 2024-11-05 19:00:00\"}, {\"event_id\": \"8d293df3ef4c4cb5a661982c0baebb75\", \"title\": \"Yoga Class\", \"start_datetime\": \"1732129200\", \"end_datetime\": \"1732132800\", \"tag\": \"Health\", \"description\": \"Attend a yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Wednesday, 2024-11-20 19:00:00\", \"end_strftime\": \"Wednesday, 2024-11-20 20:00:00\"}, {\"event_id\": \"95fc2a248c014805a9fbe2fd39e66308\", \"title\": \"Yoga Class\", \"start_datetime\": \"1732388400\", \"end_datetime\": \"1732392000\", \"tag\": \"Health\", \"description\": \"Attend a yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Saturday, 2024-11-23 19:00:00\", \"end_strftime\": \"Saturday, 2024-11-23 20:00:00\"}, {\"event_id\": \"97c5a4765d28494aa2d26815a4dd7c25\", \"title\": \"Yoga Class\", \"start_datetime\": \"1725559200\", \"end_datetime\": \"1725564600\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Rukmini Sutanto\"], \"start_strftime\": \"Thursday, 2024-09-05 18:00:00\", \"end_strftime\": \"Thursday, 2024-09-05 19:30:00\"}, {\"event_id\": \"9b04144e6e8542828bec881ddf4b4942\", \"title\": \"Yoga Class\", \"start_datetime\": \"1728064800\", \"end_datetime\": \"1728068400\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Friday, 2024-10-04 18:00:00\", \"end_strftime\": \"Friday, 2024-10-04 19:00:00\"}, {\"event_id\": \"9c47428575d34052a4541380723af02f\", \"title\": \"Yoga Class\", \"start_datetime\": \"1727200800\", \"end_datetime\": \"1727204400\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Áine Ní Chonaill\"], \"start_strftime\": \"Tuesday, 2024-09-24 18:00:00\", \"end_strftime\": \"Tuesday, 2024-09-24 19:00:00\"}, {\"event_id\": \"aebcdc5be4224778924878c6582222d4\", \"title\": \"Yoga Class\", \"start_datetime\": \"1728640800\", \"end_datetime\": \"1728644400\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Saskia Müller\"], \"start_strftime\": \"Friday, 2024-10-11 10:00:00\", \"end_strftime\": \"Friday, 2024-10-11 11:00:00\"}, {\"event_id\": \"b24788ee64bd4375be2a483229b2ab0e\", \"title\": \"Yoga Class\", \"start_datetime\": \"1727546400\", \"end_datetime\": \"1727550000\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Áine Ní Chonaill\"], \"start_strftime\": \"Saturday, 2024-09-28 18:00:00\", \"end_strftime\": \"Saturday, 2024-09-28 19:00:00\"}, {\"event_id\": \"b321b1b10b184a5f9721f69fceefb40e\", \"title\": \"Yoga Class\", \"start_datetime\": \"1728327600\", \"end_datetime\": \"1728331200\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Saskia Müller\"], \"start_strftime\": \"Monday, 2024-10-07 19:00:00\", \"end_strftime\": \"Monday, 2024-10-07 20:00:00\"}, {\"event_id\": \"c3d4459244e947d79b8b32332f645d17\", \"title\": \"Yoga Class\", \"start_datetime\": \"1725472800\", \"end_datetime\": \"1725478200\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Rukmini Sutanto\"], \"start_strftime\": \"Wednesday, 2024-09-04 18:00:00\", \"end_strftime\": \"Wednesday, 2024-09-04 19:30:00\"}, {\"event_id\": \"c62a366b6b3a416cbe660db515616db1\", \"title\": \"Yoga Class\", \"start_datetime\": \"1727892000\", \"end_datetime\": \"1727895600\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Wednesday, 2024-10-02 18:00:00\", \"end_strftime\": \"Wednesday, 2024-10-02 19:00:00\"}, {\"event_id\": \"c78a1b17e5e347a9ac97e57994d7de64\", \"title\": \"Yoga Class\", \"start_datetime\": \"1731607200\", \"end_datetime\": \"1731610800\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Thursday, 2024-11-14 18:00:00\", \"end_strftime\": \"Thursday, 2024-11-14 19:00:00\"}, {\"event_id\": \"cc09554596d54d0c866090d06a2a7cf0\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729188000\", \"end_datetime\": \"1729191600\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Thursday, 2024-10-17 18:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 19:00:00\"}, {\"event_id\": \"ceba395d35ff42e693388665cb8bd688\", \"title\": \"Yoga Class\", \"start_datetime\": \"1730656800\", \"end_datetime\": \"1730660400\", \"tag\": \"Health\", \"description\": \"Attend a vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio, Moscow\", \"attendees\": [\"Natalya Kuznetsova\"], \"start_strftime\": \"Sunday, 2024-11-03 18:00:00\", \"end_strftime\": \"Sunday, 2024-11-03 19:00:00\"}, {\"event_id\": \"d7d3c2a379b34aeda49dc66e11b3f738\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729792800\", \"end_datetime\": \"1729796400\", \"tag\": \"Health\", \"description\": \"Attend a yoga class to unwind and relax.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Katharina Müller-Schneider\"], \"start_strftime\": \"Thursday, 2024-10-24 18:00:00\", \"end_strftime\": \"Thursday, 2024-10-24 19:00:00\"}, {\"event_id\": \"d8c19d870e7a496782caa3108a33149a\", \"title\": \"Yoga Class\", \"start_datetime\": \"1727719200\", \"end_datetime\": \"1727722800\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Monday, 2024-09-30 18:00:00\", \"end_strftime\": \"Monday, 2024-09-30 19:00:00\"}, {\"event_id\": \"d91882f839fc477fa26aa23f44c973ac\", \"title\": \"Yoga Class\", \"start_datetime\": \"1728928800\", \"end_datetime\": \"1728932400\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Monday, 2024-10-14 18:00:00\", \"end_strftime\": \"Monday, 2024-10-14 19:00:00\"}, {\"event_id\": \"db89b2ddd0e742d2bf278ce278f3a4d6\", \"title\": \"Yoga Class\", \"start_datetime\": \"1732557600\", \"end_datetime\": \"1732561200\", \"tag\": \"Health\", \"description\": \"Attend a vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Saoirse O'Connor\"], \"start_strftime\": \"Monday, 2024-11-25 18:00:00\", \"end_strftime\": \"Monday, 2024-11-25 19:00:00\"}, {\"event_id\": \"e1bb73eda7d5413292a7898efefeb813\", \"title\": \"Yoga Class\", \"start_datetime\": \"1726509600\", \"end_datetime\": \"1726513200\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Anastasiya Kuznetsova\"], \"start_strftime\": \"Monday, 2024-09-16 18:00:00\", \"end_strftime\": \"Monday, 2024-09-16 19:00:00\"}, {\"event_id\": \"ea5ec1f7918a489d9a3a79b760049bec\", \"title\": \"Yoga Class\", \"start_datetime\": \"1731348000\", \"end_datetime\": \"1731351600\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Monday, 2024-11-11 18:00:00\", \"end_strftime\": \"Monday, 2024-11-11 19:00:00\"}, {\"event_id\": \"f23b7b5c5acf4beb956026b4d5a0a7d9\", \"title\": \"Yoga Class\", \"start_datetime\": \"1728813600\", \"end_datetime\": \"1728817200\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [\"Saskia Müller\"], \"start_strftime\": \"Sunday, 2024-10-13 10:00:00\", \"end_strftime\": \"Sunday, 2024-10-13 11:00:00\"}, {\"event_id\": \"f815562d0a014ca38c19a7f5161eb744\", \"title\": \"Yoga Class\", \"start_datetime\": \"1729274400\", \"end_datetime\": \"1729278000\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio\", \"attendees\": [], \"start_strftime\": \"Friday, 2024-10-18 18:00:00\", \"end_strftime\": \"Friday, 2024-10-18 19:00:00\"}]",
+      "event_id": "series_s1_search",
+      "response_sha256": "15f595e7f47a1dd4e7c88e2cde32adf017f537b9fba206cdc923964d9bfedc6a"
+    },
+    "stage2.tool_response.series_s2_contact_aine": {
+      "stage": 2,
+      "text": "[{\"first_name\": \"Caoimhe\", \"last_name\": \"Ní Chonaill\", \"contact_id\": \"0657c81f08a04933969f21e2c9628596\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"26\", \"nationality\": \"Irish\", \"city_living\": \"Chicago\", \"country\": \"United States\", \"status\": \"Status.EMPLOYED\", \"job\": \"Detective, specializing in political crimes\", \"description\": \"Caoimhe Ní Chonaill is a determined and sharp-witted detective who has made a name for herself in the Chicago Police Department's Special Crimes Unit. Born and raised in Dublin, Ireland, Caoimhe moved to the United States to pursue a career in law enforcement, drawn by the diversity and complexity of American cities. She is fiercely intelligent and has a keen eye for detail, which serves her well in her work investigating political crimes. Caoimhe is also deeply committed to her Irish heritage and enjoys exploring the city's Irish-American communities in her free time.\", \"phone\": \"+17739428174\", \"email\": \"caoimhe.nichonaill@chicagopolice.org\", \"address\": \"3456 N Sheffield Ave, Apt 3B, Chicago, IL 60657\"}, {\"first_name\": \"Áine\", \"last_name\": \"Ní Chonaill\", \"contact_id\": \"5b4bfe988c0e42b5aaa9dfcb48d5cdd6\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"33\", \"nationality\": \"Irish\", \"city_living\": \"Dublin\", \"country\": \"Ireland\", \"status\": \"Status.EMPLOYED\", \"job\": \"Software Engineer\", \"description\": \"Áine Ní Chonaill is a software engineer with a passion for history and strategy. She created a website dedicated to showcasing historical chess games, which has become a go-to resource for chess enthusiasts worldwide. Born and raised in Dublin, Áine developed an interest in technology and coding at a young age. She pursued a degree in Computer Science from University College Dublin and began her career as a software engineer in a startup company. After a few years, she decided to combine her love of history and chess by creating her own website, which she maintains in her free time.\", \"phone\": \"+353856543210\", \"email\": \"aine.nichonaill@gaia2mail.com\", \"address\": \"14 Leeson Street Upper, Dublin 4, Ireland\"}, {\"first_name\": \"Aoife\", \"last_name\": \"Ní Chonaill\", \"contact_id\": \"9454f0d4cf24479385fc32b85aa05e6b\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"39\", \"nationality\": \"Irish\", \"city_living\": \"Dublin\", \"country\": \"Ireland\", \"status\": \"Status.EMPLOYED\", \"job\": \"Historian and Lecturer at Trinity College Dublin\", \"description\": \"Aoife Ní Chonaill is a respected historian specializing in Jewish history, with a particular focus on the experiences of Jewish communities in Eastern Europe during the 19th and 20th centuries.\", \"phone\": \"+353876543210\", \"email\": \"aoifenichonaill@tcd.ie\", \"address\": \"14 Leeson Street Upper, Dublin 4, Ireland\"}]",
+      "event_id": "series_s2_contact_aine",
+      "response_sha256": "934afa31ed00742ca338cbd35aa60ad2b9f13f0b48fe84b237cc03dd46bbac37"
+    },
+    "stage2.tool_response.series_s2_contact_rukmini": {
+      "stage": 2,
+      "text": "[{\"first_name\": \"Rukmini\", \"last_name\": \"Widyastuti\", \"contact_id\": \"1c890bd2c9d947c6b3c78c84f54aa83f\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"78\", \"nationality\": \"Indonesian\", \"city_living\": \"Jakarta\", \"country\": \"Indonesia\", \"status\": \"Status.RETIRED\", \"job\": \"Former University Lecturer and Diplomat\", \"description\": \"Rukmini Widyastuti is a retired Indonesian diplomat and university lecturer who has dedicated her life to the study and practice of international relations.\", \"phone\": \"+6261234567890\", \"email\": \"rukmini.widyastuti@gaia2mail.com\", \"address\": \"Jalan Menteng Raya No. 12, Jakarta Pusat, Jakarta 10310\"}, {\"first_name\": \"Rukmini\", \"last_name\": \"Sutanto\", \"contact_id\": \"9238b93fceea497d8a982bf1042bc9ef\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"53\", \"nationality\": \"Indonesian\", \"city_living\": \"Jakarta\", \"country\": \"Indonesia\", \"status\": \"Status.EMPLOYED\", \"job\": \"Owner of a supplement company focused on equestrian athletes\", \"description\": \"Rukmini Sutanto is a driven and passionate entrepreneur who has dedicated her life to the equestrian world. Born and raised in Jakarta, Indonesia, she developed a love for horses at a young age and went on to compete in various national and international competitions. After retiring from competitive riding, Rukmini turned her attention to the health and wellness of equestrian athletes, recognizing a gap in the market for high-quality supplements tailored to their specific needs.\", \"phone\": \"+6281234367890\", \"email\": \"rukmini.sutanto@equinefit.id\", \"address\": \"Jalan Kemang Raya No. 12, Jakarta Selatan, 12730\"}]",
+      "event_id": "series_s2_contact_rukmini",
+      "response_sha256": "0d49df9caf32714af52690e3ef04479507c707167d0d61270e3cdde051acf593"
+    },
+    "stage2.tool_response.series_s2_contact_saoirse": {
+      "stage": 2,
+      "text": "[{\"first_name\": \"Saoirse\", \"last_name\": \"Ní Chonchobhair\", \"contact_id\": \"1460d222d8454183acef44b0b10dcb46\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"26\", \"nationality\": \"Irish\", \"city_living\": \"Dublin\", \"country\": \"Ireland\", \"status\": \"Status.EMPLOYED\", \"job\": \"Part-time Administrative Assistant\", \"description\": \"Saoirse is a determined and caring single mother living in Dublin. She works part-time as an administrative assistant to make ends meet and provide for her 7-year-old daughter, Aisling. Despite her busy schedule, Saoirse is eager to learn new skills and expand her knowledge in the tech industry, hoping to secure a better future for herself and her daughter. She is particularly interested in affordable tech education programs that can help her upskill and reskill.\", \"phone\": \"+353870543210\", \"email\": \"saoirse.nichonchobhair@gaia2mail.com\", \"address\": \"34, St. Mobhi Road, Glasnevin, Dublin 9\"}, {\"first_name\": \"Saoirse\", \"last_name\": \"O'Connor\", \"contact_id\": \"63e8588d790f443d851582038809a9e4\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"24\", \"nationality\": \"Irish\", \"city_living\": \"Dublin\", \"country\": \"Ireland\", \"status\": \"Status.EMPLOYED\", \"job\": \"Food Photographer\", \"description\": \"Saoirse O'Connor is a 24-year-old food photographer from Dublin, Ireland. She has a deep passion for capturing the artisan cheesemaking process, and her photographs have been featured in several local food magazines. Saoirse is a creative and curious individual who loves exploring the Irish countryside in her free time. She is an avid hiker and enjoys trying out new recipes in her tiny kitchen. Her love for food and photography started when she was a child, watching her mother cook traditional Irish meals in their family kitchen.\", \"phone\": \"+353876543216\", \"email\": \"saoirse.oconnor@gaia2mail.com\", \"address\": \"14 St. Stephen's Green, Dublin 2, Ireland\"}, {\"first_name\": \"Saoirse\", \"last_name\": \"Ní Mhaoldhamhnaigh\", \"contact_id\": \"a4711864ca444f40b9ac241b24b6eae1\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"30\", \"nationality\": \"Irish\", \"city_living\": \"Dublin\", \"country\": \"Ireland\", \"status\": \"Status.EMPLOYED\", \"job\": \"Primary School Teacher\", \"description\": \"Saoirse is a dedicated and caring individual who is deeply invested in her community. As a primary school teacher, she is passionate about providing a nurturing and inclusive environment for her students. Her experience as a parent herself has given her a unique perspective on the importance of education and the role that parents and teachers play in shaping young minds. Saoirse is an active member of the parent-teacher association in Oconee County, where she has been instrumental in organizing events and initiatives that promote parental involvement and support for local schools.\", \"phone\": \"+353876548210\", \"email\": \"saoirse.nimhaoldhamhnaigh@gaia2mail.com\", \"address\": \"14 Oakdale Road, Rathmines, Dublin 6\"}, {\"first_name\": \"Saoirse\", \"last_name\": \"Ní Bhroin\", \"contact_id\": \"bd5af66e2fb24d30bea704c7b5dccb49\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"21\", \"nationality\": \"Irish\", \"city_living\": \"Dublin\", \"country\": \"Ireland\", \"status\": \"Status.EMPLOYED\", \"job\": \"Music Promoter\", \"description\": \"Saoirse Ní Bhroin is a 21-year-old music promoter from Dublin, Ireland. She has a deep passion for hip-hop music and its ability to bring people together and spark meaningful conversations. With a keen eye for talent, Saoirse has built a reputation for identifying and promoting emerging hip-hop artists who use their platforms to address social justice issues.\", \"phone\": \"+353876543410\", \"email\": \"saoirse.nibhroin@gaia2mail.com\", \"address\": \"14 Raglan Road, Ballsbridge, Dublin 4, Ireland\"}]",
+      "event_id": "series_s2_contact_saoirse",
+      "response_sha256": "d0d1ff63128dd6133e353559eaf00a4fe06b342ef65592e8b446b743caf486e5"
+    },
+    "stage2.tool_response.series_s2_contact_saskia": {
+      "stage": 2,
+      "text": "[{\"first_name\": \"Saskia\", \"last_name\": \"Krauss\", \"contact_id\": \"25e4c071cb274928bd19c76ee8354b1f\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"32\", \"nationality\": \"German\", \"city_living\": \"Berlin\", \"country\": \"Germany\", \"status\": \"Status.EMPLOYED\", \"job\": \"Research Assistant in Criminology and Psychology\", \"description\": \"Saskia Krauss is a diligent and meticulous research assistant in the field of criminology and psychology at the Free University of Berlin. She is known for her exceptional organizational skills and attention to detail, which makes her an invaluable asset to her team. Saskia is a respected expert in her field, often providing guidance and advice to her colleagues and students. She is passionate about her work and is always eager to take on new challenges.\", \"phone\": \"+4915782345678\", \"email\": \"saskia.krauss@fu-berlin.de\", \"address\": \"Schönhauser Allee 123, 10435 Berlin, Germany\"}, {\"first_name\": \"Saskia\", \"last_name\": \"Kaufmann\", \"contact_id\": \"6be7e873348244c0a95dfec689943fef\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"53\", \"nationality\": \"German\", \"city_living\": \"Munich\", \"country\": \"Germany\", \"status\": \"Status.EMPLOYED\", \"job\": \"Project Manager\", \"description\": \"Saskia Kaufmann is a seasoned project manager with over 20 years of experience in the industry.\", \"phone\": \"+498912345688\", \"email\": \"saskia.kaufmann@projetech.de\", \"address\": \"Schleißheimer Str. 12, 80803 München, Germany\"}, {\"first_name\": \"Saskia\", \"last_name\": \"Müller\", \"contact_id\": \"7b57abf272e34673939a1b8198db5290\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"37\", \"nationality\": \"German\", \"city_living\": \"Berlin\", \"country\": \"Germany\", \"status\": \"Status.EMPLOYED\", \"job\": \"Marketing Manager\", \"description\": \"Saskia Müller is a creative and driven individual who has a deep passion for film and art.\", \"phone\": \"+491764567890\", \"email\": \"saskia.mueller@gaia2mail.com\", \"address\": \"Kastanienallee 12, 10435 Berlin, Germany\"}, {\"first_name\": \"Saskia\", \"last_name\": \"Riemann\", \"contact_id\": \"8599c39e26de4b83a6b0785184f47f55\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"44\", \"nationality\": \"German\", \"city_living\": \"Berlin\", \"country\": \"Germany\", \"status\": \"Status.EMPLOYED\", \"job\": \"Film Archivist\", \"description\": \"Saskia Riemann is a 44-year-old film archivist living in Berlin, Germany. She has a deep passion for vintage films, particularly those from the German Expressionist era. Her love for cinema is matched only by her appreciation for jazz music, which she believes shares a similar spirit of creative experimentation. In her free time, Saskia enjoys attending jazz concerts at the Berlin Philharmonie and playing the saxophone in a local amateur ensemble. She is also an avid reader of German literature, with a particular fondness for the works of Thomas Mann and Hermann Hesse.\", \"phone\": \"+493072345678\", \"email\": \"saskia.riemann@filmarchiv.de\", \"address\": \"Kurfürstenstraße 12, 10785 Berlin, Germany\"}, {\"first_name\": \"Saskia\", \"last_name\": \"Müller-Krüger\", \"contact_id\": \"9a8c4ce11b58482fa4f7219781716662\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"53\", \"nationality\": \"German\", \"city_living\": \"Berlin\", \"country\": \"Germany\", \"status\": \"Status.EMPLOYED\", \"job\": \"Computer Science Professor\", \"description\": \"Saskia Müller-Krüger is a renowned computer science professor at the Technical University of Berlin. She is a leading expert in the field of human-computer interaction and has developed several innovative digital platforms to enhance democratic participation. Born and raised in Berlin, Saskia is deeply rooted in the city's vibrant cultural and academic scene. She is known for her passion for social causes and is an active volunteer for several organizations that promote digital literacy and online civic engagement.\", \"phone\": \"+4917645678231\", \"email\": \"saskia.mueller-krueger@tu-berlin.de\", \"address\": \"Kantstraße 12, 10625 Berlin, Germany\"}, {\"first_name\": \"Saskia\", \"last_name\": \"Müller-Klein\", \"contact_id\": \"a112f45ad69d46f58b9e6753afefde58\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"43\", \"nationality\": \"German\", \"city_living\": \"Berlin\", \"country\": \"Germany\", \"status\": \"Status.EMPLOYED\", \"job\": \"Human Resources Manager\", \"description\": \"Saskia Müller-Klein is a meticulous and organized human resources manager with over 10 years of experience in assisting foreign employees with their immigration paperwork and visas.\", \"phone\": \"+493012345678\", \"email\": \"saskia.mueller-klein@hr-consulting.de\", \"address\": \"Schönhauser Allee 123, 10435 Berlin, Germany\"}, {\"first_name\": \"Saskia\", \"last_name\": \"Kemmerer\", \"contact_id\": \"a260e7ab8d134c8aa18b8ae6590315c5\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"37\", \"nationality\": \"German\", \"city_living\": \"Berlin\", \"country\": \"Germany\", \"status\": \"Status.EMPLOYED\", \"job\": \"Mesoamerican Historian and Advisor\", \"description\": \"Saskia Kemmerer is a highly respected Mesoamerican historian, known for her extensive knowledge of the region's cultures, languages, and history.\", \"phone\": \"+491578234567\", \"email\": \"saskia.kemmerer@fu-berlin.de\", \"address\": \"Schönhauser Allee 123, 10435 Berlin, Germany\"}, {\"first_name\": \"Saskia\", \"last_name\": \"Müller-Schneider\", \"contact_id\": \"b22c9c085066412db0c2fddcdd951675\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"32\", \"nationality\": \"German\", \"city_living\": \"Berlin\", \"country\": \"Germany\", \"status\": \"Status.EMPLOYED\", \"job\": \"High School Math and Literature Teacher\", \"description\": \"Saskia Müller-Schneider is a 32-year-old high school teacher living in Berlin, Germany. She is a unique blend of analytical and creative, with a passion for both mathematics and literature.\", \"phone\": \"+491864567890\", \"email\": \"saskia.mueller.schneider@gaia2mail.com\", \"address\": \"Kollwitzstraße 23, 10405 Berlin, Germany\"}, {\"first_name\": \"Saskia\", \"last_name\": \"Müller-Fischer\", \"contact_id\": \"cba94d9248964b68b5390a024fa8e274\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"42\", \"nationality\": \"German\", \"city_living\": \"Berlin\", \"country\": \"Germany\", \"status\": \"Status.EMPLOYED\", \"job\": \"Owner and Event Planner at Müller-Fischer Events\", \"description\": \"Saskia Müller-Fischer is a driven and innovative entrepreneur who has made a name for herself in the competitive world of event planning.\", \"phone\": \"+491764537890\", \"email\": \"saskia@muller-fischer-events.de\", \"address\": \"Kurfürstenstraße 12, 10785 Berlin, Germany\"}, {\"first_name\": \"Saskia\", \"last_name\": \"Müller-Köhler\", \"contact_id\": \"d8f5dd66f1994e498de81bd8d5cf240b\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"42\", \"nationality\": \"German\", \"city_living\": \"Berlin\", \"country\": \"Germany\", \"status\": \"Status.EMPLOYED\", \"job\": \"Junior Politics Reporter\", \"description\": \"Saskia Müller-Köhler is a diligent and ambitious junior politics reporter from Berlin, Germany. Born and raised in the vibrant city, she developed a strong interest in politics and social issues from a young age. After completing her studies in journalism, she landed an internship at a local news outlet, where she quickly proved herself to be a talented and dedicated reporter. Now, at 42, she has established herself as a respected voice in Berlin's journalism scene, known for her in-depth coverage of local politics and her ability to connect with her readers.\", \"phone\": \"+491763456789\", \"email\": \"saskia.mueller-koehler@berliner-zeitung.de\", \"address\": \"Schönhauser Allee 123, 10435 Berlin, Germany\"}, {\"first_name\": \"Saskia\", \"last_name\": \"Römer\", \"contact_id\": \"e31579726e74450192a6afc85add4348\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"32\", \"nationality\": \"German\", \"city_living\": \"Berlin\", \"country\": \"Germany\", \"status\": \"Status.EMPLOYED\", \"job\": \"Travel Guide\", \"description\": \"Saskia Römer is a 32-year-old travel guide from Berlin, Germany. She has a deep passion for architectural tourism and has spent years exploring the intricacies of European cities. With a keen interest in public health systems, Saskia often finds herself drawn to the intersection of urban planning and healthcare. She is an avid photographer and urban sketcher, often capturing the unique architectural details of the cities she visits.\", \"phone\": \"+491764557890\", \"email\": \"saskia.roemer@gaia2mail.com\", \"address\": \"Kastanienallee 12, 10435 Berlin, Germany\"}, {\"first_name\": \"Saskia\", \"last_name\": \"Krüger\", \"contact_id\": \"e34c4c3828294068b8c4fce80f5ade28\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"47\", \"nationality\": \"German\", \"city_living\": \"Berlin\", \"country\": \"Germany\", \"status\": \"Status.EMPLOYED\", \"job\": \"Social Media Influencer\", \"description\": \"Saskia Krüger is a vibrant and charismatic social media influencer who has built a reputation for her witty hashtag games and engaging content. Born and raised in Berlin, Germany, Saskia has always been passionate about exploring new places, trying new foods, and capturing life's moments through her lens. As a social media influencer, she has collaborated with various brands and tourism boards, promoting their products and destinations to her large following. When she's not traveling or creating content, Saskia loves to practice yoga, experiment with new recipes, and attend fashion events.\", \"phone\": \"+491769567890\", \"email\": \"saskia.kruger@gaia2mail.com\", \"address\": \"Schönhauser Allee 123, 10435 Berlin, Germany\"}]",
+      "event_id": "series_s2_contact_saskia",
+      "response_sha256": "e4d68343b304dc3ab7acd8f74b471ab4bf57ac16544ae4c9c1a7ca74427fc58b"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Katharina Müller-Schneider",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_search",
+          "reason": "含变音符号及连字符复合姓氏，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Saoirse Ní Mhaoldhamhnaigh",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "爱尔兰语姓名，拼写极难",
+          "weight": 50
+        },
+        {
+          "text": "Saoirse O'Connor",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_search",
+          "reason": "爱尔兰语名字加撇号姓氏",
+          "weight": 50
+        },
+        {
+          "text": "Áine Ní Chonaill",
+          "kind": "person",
+          "source": "stage1.existing_catalog.3",
+          "reason": "含变音符号Á和爱尔兰语姓氏，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_search",
+          "reason": "较长的斯拉夫语完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Helga Müller",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_search",
+          "reason": "含变音符号ü的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Natalya Kuznetsova",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_search",
+          "reason": "斯拉夫语完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Rukmini Sutanto",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "印尼人名，含独特拼写，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Müller",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_search",
+          "reason": "含变音符号ü的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Römer",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号ö的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Suryani Widyastuti",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_search",
+          "reason": "印尼语完整人名，拼写独特",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Katharina Müller-Schneider",
+        "Saoirse Ní Mhaoldhamhnaigh",
+        "Saoirse O'Connor",
+        "Áine Ní Chonaill",
+        "Anastasiya Kuznetsova",
+        "Helga Müller",
+        "Natalya Kuznetsova",
+        "Rukmini Sutanto",
+        "Saskia Müller",
+        "Saskia Römer",
+        "Suryani Widyastuti"
+      ],
+      "active_vocabulary": {
+        "Katharina Müller-Schneider": 50,
+        "Saoirse Ní Mhaoldhamhnaigh": 50,
+        "Saoirse O'Connor": 50,
+        "Áine Ní Chonaill": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Helga Müller": 50,
+        "Natalya Kuznetsova": 50,
+        "Rukmini Sutanto": 50,
+        "Saskia Müller": 50,
+        "Saskia Römer": 50,
+        "Suryani Widyastuti": 50
+      },
+      "vocabulary_sha256": "4ed9c094f1a5c2df2c4073987329f87d281a40c5a3848e646547beb5cb8327c0"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aoife Ní Chonaill",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_contact_aine",
+          "reason": "爱尔兰语姓名，拼写极难",
+          "weight": 50
+        },
+        {
+          "text": "Caoimhe Ní Chonaill",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_contact_aine",
+          "reason": "爱尔兰语姓名，拼写极难",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Müller-Fischer",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_contact_saskia",
+          "reason": "含变音符号及连字符复合姓氏，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Müller-Klein",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_contact_saskia",
+          "reason": "含变音符号及连字符复合姓氏，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Müller-Krüger",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_contact_saskia",
+          "reason": "含变音符号及连字符复合姓氏，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Müller-Köhler",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_contact_saskia",
+          "reason": "含变音符号及连字符复合姓氏，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Müller-Schneider",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_contact_saskia",
+          "reason": "含变音符号及连字符复合姓氏，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Ní Bhroin",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_contact_saoirse",
+          "reason": "爱尔兰语姓氏，拼写极难（名字与姓氏分字段，取姓氏字面）",
+          "weight": 50
+        },
+        {
+          "text": "Ní Chonchobhair",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_contact_saoirse",
+          "reason": "爱尔兰语姓氏，拼写极难（名字与姓氏分字段，取姓氏字面）",
+          "weight": 50
+        },
+        {
+          "text": "Rukmini Widyastuti",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_contact_rukmini",
+          "reason": "印尼语完整人名，拼写独特",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Kaufmann",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_contact_saskia",
+          "reason": "完整人名，姓氏拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Kemmerer",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_contact_saskia",
+          "reason": "完整人名，姓氏拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Krauss",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_contact_saskia",
+          "reason": "完整人名，姓氏拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Krüger",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_contact_saskia",
+          "reason": "含变音符号ü的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Riemann",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_contact_saskia",
+          "reason": "完整人名，姓氏拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aoife Ní Chonaill",
+        "Caoimhe Ní Chonaill",
+        "Saskia Müller-Fischer",
+        "Saskia Müller-Klein",
+        "Saskia Müller-Krüger",
+        "Saskia Müller-Köhler",
+        "Saskia Müller-Schneider",
+        "Ní Bhroin",
+        "Ní Chonchobhair",
+        "Rukmini Widyastuti",
+        "Saskia Kaufmann",
+        "Saskia Kemmerer",
+        "Saskia Krauss",
+        "Saskia Krüger",
+        "Saskia Riemann"
+      ],
+      "active_vocabulary": {
+        "Katharina Müller-Schneider": 50,
+        "Saoirse Ní Mhaoldhamhnaigh": 50,
+        "Saoirse O'Connor": 50,
+        "Áine Ní Chonaill": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Helga Müller": 50,
+        "Natalya Kuznetsova": 50,
+        "Rukmini Sutanto": 50,
+        "Saskia Müller": 50,
+        "Saskia Römer": 50,
+        "Suryani Widyastuti": 50,
+        "Aoife Ní Chonaill": 50,
+        "Caoimhe Ní Chonaill": 50,
+        "Saskia Müller-Fischer": 50,
+        "Saskia Müller-Klein": 50,
+        "Saskia Müller-Krüger": 50,
+        "Saskia Müller-Köhler": 50,
+        "Saskia Müller-Schneider": 50,
+        "Ní Bhroin": 50,
+        "Ní Chonchobhair": 50,
+        "Rukmini Widyastuti": 50,
+        "Saskia Kaufmann": 50,
+        "Saskia Kemmerer": 50,
+        "Saskia Krauss": 50,
+        "Saskia Krüger": 50,
+        "Saskia Riemann": 50
+      },
+      "vocabulary_sha256": "e1cda8e33a438f4a685b85e86c21bcf4b3c544c2c3b099047e6912d823dc3ef5"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Jakarta",
+    "Berlin"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:56.985287+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

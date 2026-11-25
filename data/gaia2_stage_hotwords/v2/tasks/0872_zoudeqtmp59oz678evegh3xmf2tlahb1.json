@@ -1,0 +1,158 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0872_zoudeqtmp59oz678evegh3xmf2tlahb1",
+  "model": "deepseek-flash",
+  "input_sha256": "26aabc910eda6520e9826f48a5801efd66e1ef811cd7cee244fddc86af3c05f2",
+  "review_input_sha256": "d90d713e5994e7f9513f7f933ecdc2fff046ce52b7a51b89b1f96242037effc1",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "ba3680ec339298d3e7f3ba5f7d5d29d72a7f9ad7c6468bac641b4694fcbebc88",
+  "reference_results_sha256": "d82c4724a83fc9893d59804b3e82d3087154c3d0d25d1db3f685cc0d4e07f97e",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Rohini Deshpande",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f7a272ca-e172-4381-b22b-bdb2c14e87ca.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Evangelia Papadopoulos",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-00cae498-e9f7-4464-a5af-4cd9714e5dd2.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Kaidën Nakamura",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-00cae498-e9f7-4464-a5af-4cd9714e5dd2.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "University of Cambridge, Department of Physics",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-00cae498-e9f7-4464-a5af-4cd9714e5dd2.arguments.location"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Kaspar Eisenstadt",
+      "original_source": "stage2.tool_gt.series_s2_add_coffee2.arguments.attendees[0]"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Akira Kaur",
+      "original_source": "stage2.tool_gt.series_s2_add_coffee2.arguments.attendees[1]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "University of Cambridge, Department of Physics",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整机构名，含独特专有名词",
+          "weight": 50
+        },
+        {
+          "text": "Evangelia Papadopoulos",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，拼写复杂，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Kaidën Nakamura",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含变音符的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，含独特拼写，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "University of Cambridge, Department of Physics",
+        "Evangelia Papadopoulos",
+        "Kaidën Nakamura",
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "University of Cambridge, Department of Physics": 50,
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "4e74d79abeacff45729bea32fe4d18596044d4429fa95ae757e94f098d7ec541"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "University of Cambridge, Department of Physics": 50,
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "4e74d79abeacff45729bea32fe4d18596044d4429fa95ae757e94f098d7ec541"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Akira Kaur",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "完整人名，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Kaspar Eisenstadt",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整人名，姓氏独特，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Akira Kaur",
+        "Kaspar Eisenstadt"
+      ],
+      "active_vocabulary": {
+        "University of Cambridge, Department of Physics": 50,
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Rohini Deshpande": 50,
+        "Akira Kaur": 50,
+        "Kaspar Eisenstadt": 50
+      },
+      "vocabulary_sha256": "c8874f2186afc224658f3e0e2c2e1f47e61a8bb21d8850866bea774c1d1d2797"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kofi"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:39.872557+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

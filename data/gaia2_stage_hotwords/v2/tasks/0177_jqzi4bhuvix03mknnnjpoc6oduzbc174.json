@@ -1,0 +1,157 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0177_jqzi4bhuvix03mknnnjpoc6oduzbc174",
+  "model": "deepseek-flash",
+  "input_sha256": "6656d85fe62c0ff17dc1e1cedb89bad5dd28e5bebfca9c76e492f09be3fbd500",
+  "review_input_sha256": "44b773438144758519960c7d0bf2d97db4f1d0bd8c9544608d5e2e7bb37bc09d",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "21b47dde4997ed9479d4b7331cbcebb17dd20642905986b0cf01838c5a390533",
+  "reference_results_sha256": "1b87c0b90fceb299bf2e9d05aac2f113a761e617b9b402a529205dc9c39e21b3",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Leonie Krüger",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-52d0c8bc-0488-450d-86fb-713ef83f166c.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Bronwyn Fothergill",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-52d0c8bc-0488-450d-86fb-713ef83f166c.arguments.attendees[1]"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Rohini Deshpande",
+      "original_source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]"
+    },
+    "stage2.tool_response.series_s2_read_day": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"6a29004e83f04b009a53b9ded4023ed6\", \"title\": \"Lab Meeting\", \"start_datetime\": \"1729332000\", \"end_datetime\": \"1729339200\", \"tag\": \"Work\", \"description\": \"Discuss ongoing lab projects and experiments.\", \"location\": \"University of Cambridge, Department of Physics\", \"attendees\": [\"Helmut Eisenstadt\", \"Gerrit van der Meer\"], \"start_strftime\": \"Saturday, 2024-10-19 10:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 12:00:00\"}, {\"event_id\": \"720cc98078bd4bbca9a6397f25599a49\", \"title\": \"Paper Writing\", \"start_datetime\": \"1729346400\", \"end_datetime\": \"1729353600\", \"tag\": \"Work\", \"description\": \"Dedicated time for writing research papers.\", \"location\": \"Home Office\", \"attendees\": [], \"start_strftime\": \"Saturday, 2024-10-19 14:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 16:00:00\"}, {\"event_id\": \"a3ada45a20174136b7dfe6a7a915cbad\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1729364400\", \"end_datetime\": \"1729371600\", \"tag\": \"Social\", \"description\": \"Catch up with friends over dinner.\", \"location\": \"The Pint Shop, Cambridge\", \"attendees\": [\"Evangelia Papadopoulos\", \"Kaidën Nakamura\"], \"start_strftime\": \"Saturday, 2024-10-19 19:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 21:00:00\"}, {\"event_id\": \"d4c2d9f7cdacdf99ad578e25036c7e5f\", \"title\": \"Rehearse gene editing presentation\", \"start_datetime\": \"1729353600.0\", \"end_datetime\": \"1729357200.0\", \"tag\": \"Work\", \"description\": \"Rehearse timing, structure and audience questions. Do not include experimental results.\", \"location\": \"Home\", \"attendees\": [\"Rohini Deshpande\"], \"start_strftime\": \"Saturday, 2024-10-19 16:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 17:00:00\"}], \"range\": [\"0\", \"4\"], \"total\": \"4\"}",
+      "event_id": "series_s2_read_day",
+      "response_sha256": "06d610fab2104ee0f4777ea325d8097606077a8ece596cfe6d144949a232bfa9"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Bronwyn Fothergill",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "较难拼写的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Leonie Krüger",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Bronwyn Fothergill",
+        "Leonie Krüger"
+      ],
+      "active_vocabulary": {
+        "Bronwyn Fothergill": 50,
+        "Leonie Krüger": 50
+      },
+      "vocabulary_sha256": "5c2f4a81d39b126a68c95dbb85009260eebda14aa5d1ad87ab0e1199f971244a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Bronwyn Fothergill": 50,
+        "Leonie Krüger": 50
+      },
+      "vocabulary_sha256": "5c2f4a81d39b126a68c95dbb85009260eebda14aa5d1ad87ab0e1199f971244a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Gerrit van der Meer",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_day",
+          "reason": "含介词前缀的较难完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Evangelia Papadopoulos",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_day",
+          "reason": "较难拼写的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Helmut Eisenstadt",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_day",
+          "reason": "较难拼写的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Kaidën Nakamura",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_day",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "较难拼写的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Gerrit van der Meer",
+        "Evangelia Papadopoulos",
+        "Helmut Eisenstadt",
+        "Kaidën Nakamura",
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "Bronwyn Fothergill": 50,
+        "Leonie Krüger": 50,
+        "Gerrit van der Meer": 50,
+        "Evangelia Papadopoulos": 50,
+        "Helmut Eisenstadt": 50,
+        "Kaidën Nakamura": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "49a4fd4e66011509408bf27607e9a2c9af1652eca32201c5f0777631492199ab"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Bronwyn Fothergil",
+    "complex_dag.png",
+    "fractal.png",
+    "Rohini"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:21.090103+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

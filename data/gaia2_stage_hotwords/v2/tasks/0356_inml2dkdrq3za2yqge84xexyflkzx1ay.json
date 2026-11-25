@@ -1,0 +1,116 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0356_inml2dkdrq3za2yqge84xexyflkzx1ay",
+  "model": "deepseek-flash",
+  "input_sha256": "3bbee02e5434154961ae4c8a85b51a16b72b34dc110e1b1db3ef1085becb3ee1",
+  "review_input_sha256": "28111f6a66b2d57362a0eadb583a229da72e66bef27a5f89687610647414f10c",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "35cd24a8dad884f4543764febc1e2b1c6bcb1898b12dea592d27eb8b1af15ce9",
+  "reference_results_sha256": "cc41eb78f4f3bc052ad63d2aaad8671dcb0d4e04b02392e76de8292ecc36d146",
+  "sources": {
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Rohini Deshpande",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-779b576c-a806-4c51-9173-57810851b3ec.arguments.content"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "The Dead of Night",
+      "original_source": "stage0.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Astrid Jensen",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "The Dead of Night",
+          "kind": "product",
+          "source": "stage0.existing_catalog.6",
+          "reason": "独特书名，非普通词汇",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "完整人名，含独特姓氏，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "The Dead of Night",
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "The Dead of Night": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "ca04bd1b857b8bf733c28523e9970f7e6f61a77bdbfb8885efc308ed6a475cbf"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "The Dead of Night": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "ca04bd1b857b8bf733c28523e9970f7e6f61a77bdbfb8885efc308ed6a475cbf"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Astrid Jensen",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整人名，含独特姓氏，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Jensen"
+      ],
+      "active_vocabulary": {
+        "The Dead of Night": 50,
+        "Rohini Deshpande": 50,
+        "Astrid Jensen": 50
+      },
+      "vocabulary_sha256": "44d446f4464a71bacc9d0e6486501fd5bb301c63bdbc8132d50d77d5ff488d0f"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Astrid",
+    "Kymberley",
+    "Maureen",
+    "Bridget",
+    "Geertruida"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:19.643439+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,96 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0217_z05539r32kuzbpzsqeoamb26a40c5vgd",
+  "model": "deepseek-flash",
+  "input_sha256": "e8cf4658b1cec3b6e2bdd223f9f918c786afe8b9583f130c76169daf23ac0ba3",
+  "review_input_sha256": "6ec3ff7c552b33819efafef16ead199513b80cacdf8c67139481f6779d354f15",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "b1630a3e37770779f9a4a3f24052e0422c6b3b7fb40b2ea65f1d440b94e55b59",
+  "reference_results_sha256": "6fa721f828bad732cff9ea01a60f5462067e92b250199f28f1d11900a9c629f9",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Kavita Deshpande",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.tool_response.series_s1_get_kavita": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Kavita\", \"last_name\": \"Deshpande\", \"contact_id\": \"12cca5ae472b4f5dae777959aaf0336c\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"42\", \"nationality\": \"British\", \"city_living\": \"London\", \"country\": \"United Kingdom\", \"status\": \"Status.EMPLOYED\", \"job\": \"Hotel Manager\", \"description\": \"Kavita Deshpande is a meticulous and detail-oriented hotel manager who has been in the hospitality industry for over 15 years. Born and raised in India, she moved to the United Kingdom in her mid-twenties to pursue a career in hotel management. Despite being a non-native English speaker, Kavita has worked hard to develop her language skills and has become an integral part of the hotel's management team. She is known for her warm and welcoming smile, and her ability to make guests feel at home. Kavita is a perfectionist and takes pride in ensuring that every aspect of the hotel, from the rooms to the restaurant, is immaculate and running smoothly.\", \"phone\": \"+447723456789\", \"email\": \"kdeshpande@londonhotels.co.uk\", \"address\": \"34, Berkeley Street, London W1J 8DX\"}",
+      "event_id": "series_s1_get_kavita",
+      "response_sha256": "0b6bfebcaad889364b0a35640d706a470ab4e0448262b81b9e4e9fa228b88736"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Berkeley Street",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_get_kavita",
+          "reason": "具体街道名，拼写较难，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Kavita Deshpande",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，含独特姓氏，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Berkeley Street",
+        "Kavita Deshpande"
+      ],
+      "active_vocabulary": {
+        "Berkeley Street": 50,
+        "Kavita Deshpande": 50
+      },
+      "vocabulary_sha256": "22a1233e6b65c10c6eef2c81c0bc823bd25fd27d28a0a346bafd6f126214a01b"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Berkeley Street": 50,
+        "Kavita Deshpande": 50
+      },
+      "vocabulary_sha256": "22a1233e6b65c10c6eef2c81c0bc823bd25fd27d28a0a346bafd6f126214a01b"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kim",
+    "London",
+    "General Manager"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:34.657213+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

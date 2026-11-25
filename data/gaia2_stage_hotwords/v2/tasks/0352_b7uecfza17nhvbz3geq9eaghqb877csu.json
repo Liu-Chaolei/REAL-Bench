@@ -1,0 +1,260 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0352_b7uecfza17nhvbz3geq9eaghqb877csu",
+  "model": "deepseek-flash",
+  "input_sha256": "0f825926c9a5eddd35878b753519e9595acd17a646d3c24046197c4c21029757",
+  "review_input_sha256": "bd4f570f48be5a12331fc918d8af0e5c13b39f05d50f000659bee4be227ca126",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "72f77645b240ea8b1315de0319b83f8728c1021c400e8706d825ede8555aca2a",
+  "reference_results_sha256": "471f35a888a1cfe8f0b7b350c39cc3105980b09f94726da1d19516adc74418dd",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Søren Kjær",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Astrid Rasmussen",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Nongnuch Panya",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Rohan Deshpande",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Aoife Ní Bhroin",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.5": {
+      "stage": 1,
+      "text": "Aurélien Vandenberghe",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.6": {
+      "stage": 1,
+      "text": "Emilie Møller",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.7": {
+      "stage": 1,
+      "text": "Nalinee Srisombat",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.8": {
+      "stage": 1,
+      "text": "Narong Wongsombat",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.9": {
+      "stage": 1,
+      "text": "Søren Rasmussen",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage2.tool_response.series_s2_read": {
+      "stage": 2,
+      "text": "{\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Manager Replies Follow-up\", \"start_datetime\": \"1729580400.0\", \"end_datetime\": \"1729584000.0\", \"tag\": \"Work\", \"description\": \"Follow-up after the initial affirmative replies. Concrete arrangements still to agree:\\nAoife Ní Bhroin: Asked about availability for a call next week; agree a date/time.\\nAstrid Rasmussen: Asked to schedule a meeting about social-media skills supporting the startup; agree date/time and scope.\\nEmilie Møller: Asked about further partnership discussion; agree a meeting date/time.\\nNalinee Srisombat: Asked to schedule an exploratory partnership call; agree date/time.\\nNarong Wongsombat: Asked about a collaboration call next week; agree a slot.\\nRohan Deshpande: Asked about a partnership call next week; agree a slot.\", \"location\": null, \"attendees\": [\"Aoife Ní Bhroin\", \"Astrid Rasmussen\", \"Emilie Møller\", \"Nalinee Srisombat\", \"Narong Wongsombat\", \"Rohan Deshpande\"], \"start_strftime\": \"Tuesday, 2024-10-22 07:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 08:00:00\"}",
+      "event_id": "series_s2_read",
+      "response_sha256": "5d646b35f625ef015645501a85b7ee2760b6dce8c4c47cb19924ba0cf76cf661"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aoife Ní Bhroin",
+          "kind": "person",
+          "source": "stage1.existing_catalog.4",
+          "reason": "爱尔兰语人名，含变音符号，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Rasmussen",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Vandenberghe",
+          "kind": "person",
+          "source": "stage1.existing_catalog.5",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Emilie Møller",
+          "kind": "person",
+          "source": "stage1.existing_catalog.6",
+          "reason": "含特殊字符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Nalinee Srisombat",
+          "kind": "person",
+          "source": "stage1.existing_catalog.7",
+          "reason": "泰语人名，发音困难",
+          "weight": 50
+        },
+        {
+          "text": "Narong Wongsombat",
+          "kind": "person",
+          "source": "stage1.existing_catalog.8",
+          "reason": "泰语人名，发音困难",
+          "weight": 50
+        },
+        {
+          "text": "Nongnuch Panya",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "泰语人名，发音困难",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Deshpande",
+          "kind": "person",
+          "source": "stage1.existing_catalog.3",
+          "reason": "印度人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含特殊字符的完整人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Søren Rasmussen",
+          "kind": "person",
+          "source": "stage1.existing_catalog.9",
+          "reason": "含特殊字符的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aoife Ní Bhroin",
+        "Astrid Rasmussen",
+        "Aurélien Vandenberghe",
+        "Emilie Møller",
+        "Nalinee Srisombat",
+        "Narong Wongsombat",
+        "Nongnuch Panya",
+        "Rohan Deshpande",
+        "Søren Kjær",
+        "Søren Rasmussen"
+      ],
+      "active_vocabulary": {
+        "Aoife Ní Bhroin": 50,
+        "Astrid Rasmussen": 50,
+        "Aurélien Vandenberghe": 50,
+        "Emilie Møller": 50,
+        "Nalinee Srisombat": 50,
+        "Narong Wongsombat": 50,
+        "Nongnuch Panya": 50,
+        "Rohan Deshpande": 50,
+        "Søren Kjær": 50,
+        "Søren Rasmussen": 50
+      },
+      "vocabulary_sha256": "6abb10dc4738be8f87a6d62a457b3049293c4642196c79006d284080b8eca4b6"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aoife Ní Bhroin",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "爱尔兰语人名，含变音符号，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Rasmussen",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Emilie Møller",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "含特殊字符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Nalinee Srisombat",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "泰语人名，发音困难",
+          "weight": 50
+        },
+        {
+          "text": "Narong Wongsombat",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "泰语人名，发音困难",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Deshpande",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "印度人名，姓氏较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aoife Ní Bhroin": 50,
+        "Astrid Rasmussen": 50,
+        "Aurélien Vandenberghe": 50,
+        "Emilie Møller": 50,
+        "Nalinee Srisombat": 50,
+        "Narong Wongsombat": 50,
+        "Nongnuch Panya": 50,
+        "Rohan Deshpande": 50,
+        "Søren Kjær": 50,
+        "Søren Rasmussen": 50
+      },
+      "vocabulary_sha256": "6abb10dc4738be8f87a6d62a457b3049293c4642196c79006d284080b8eca4b6"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:19.549740+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

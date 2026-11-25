@@ -1,0 +1,132 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0063_dqqradqydvtjkat8ce1sen472uq5yolq",
+  "model": "deepseek-flash",
+  "input_sha256": "221ffa67ee990db4f950015050420d8ed7a08f5741431927c449cad762a1db10",
+  "review_input_sha256": "140daba5ed1d80212f734b10cff00a728caba6b4a401ae40c9e71f3d7d428a2e",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "33bcbd94ea9ae004d352d0f1785a2308325f6af0c9db1f6a582858f9e6f93bd2",
+  "reference_results_sha256": "2e94c859a11993bb659f31328c974b1a4bc8b644c501230315b6e2f8f4a20e1e",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kofi Nkrumah",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Rohini Deshpande",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-5d189d6a-3b78-4bb2-ad1f-142ddebb1c57.arguments.content"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Gulab Shahzad",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-18646440-32ff-4a4b-8396-2e6e5cd3cd1a.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Kymberley McTavish",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-18646440-32ff-4a4b-8396-2e6e5cd3cd1a.arguments.attendees[1]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Gulab Shahzad",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Kofi Nkrumah",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Kymberley McTavish",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Gulab Shahzad",
+        "Kofi Nkrumah",
+        "Kymberley McTavish",
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "Gulab Shahzad": 50,
+        "Kofi Nkrumah": 50,
+        "Kymberley McTavish": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "a7e7528fa6962430e588237b0a325e4ac1de367507c7f11f8fcafed324c09b2c"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Gulab Shahzad": 50,
+        "Kofi Nkrumah": 50,
+        "Kymberley McTavish": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "a7e7528fa6962430e588237b0a325e4ac1de367507c7f11f8fcafed324c09b2c"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Gulab Shahzad": 50,
+        "Kofi Nkrumah": 50,
+        "Kymberley McTavish": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "a7e7528fa6962430e588237b0a325e4ac1de367507c7f11f8fcafed324c09b2c"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Gulab",
+    "Kymberley",
+    "Meeting with Collaborators",
+    "Reading Time",
+    "Catch-up Conversation"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:13:50.638641+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

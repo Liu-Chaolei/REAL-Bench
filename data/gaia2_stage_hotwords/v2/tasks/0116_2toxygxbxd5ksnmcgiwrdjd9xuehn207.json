@@ -1,0 +1,241 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0116_2toxygxbxd5ksnmcgiwrdjd9xuehn207",
+  "model": "deepseek-flash",
+  "input_sha256": "d526235f9e9d72b3fb1609276d92f0c55fac2949ae658efa4962faf1d8acf3b8",
+  "review_input_sha256": "4d784594ac59d64c9910a0c18586475795d786f97e98b1eb9d38f0792b6bb714",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "3407c689e0ede6fe4d493c2c65a980401ef31a45ccabfa1ecca398cc6f10d0c3",
+  "reference_results_sha256": "df84cab8d335bf93b4db396a0bac4a0ea6ef6b5a9275afede6819804128da245",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Yumi Nakahara",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Katarzyna Zielińska",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.10": {
+      "stage": 0,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-c75c29c2-450c-4864-9599-3f018cb03df8.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Leon Vandenberghe",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Kazimierz Wojciechowski",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Wild Republic Cuddlekins",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Golden Tamarin Lion",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "PROLINE 344100",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.8": {
+      "stage": 0,
+      "text": "Fantasy Flight Games",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.9": {
+      "stage": 0,
+      "text": "The Ghost of Framsburg Adventure",
+      "original_source": "stage0.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "The Ghost of Framsburg Adventure",
+          "kind": "product",
+          "source": "stage0.existing_catalog.9",
+          "reason": "独特产品/作品名",
+          "weight": 50
+        },
+        {
+          "text": "Fantasy Flight Games",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.8",
+          "reason": "独特机构名",
+          "weight": 50
+        },
+        {
+          "text": "Golden Tamarin Lion",
+          "kind": "product",
+          "source": "stage0.existing_catalog.5",
+          "reason": "独特产品名",
+          "weight": 50
+        },
+        {
+          "text": "Wild Republic Cuddlekins",
+          "kind": "product",
+          "source": "stage0.existing_catalog.4",
+          "reason": "独特产品名",
+          "weight": 50
+        },
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Kazimierz Wojciechowski",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "较难拼写的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Leon Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "较难拼写的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "PROLINE 344100",
+          "kind": "product",
+          "source": "stage0.existing_catalog.6",
+          "reason": "含型号的独特产品名",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.existing_catalog.10",
+          "reason": "较难拼写的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Yumi Nakahara",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "The Ghost of Framsburg Adventure",
+        "Fantasy Flight Games",
+        "Golden Tamarin Lion",
+        "Wild Republic Cuddlekins",
+        "Katarzyna Zielińska",
+        "Kazimierz Wojciechowski",
+        "Leon Vandenberghe",
+        "PROLINE 344100",
+        "Ursula Wiederkehr",
+        "Yumi Nakahara"
+      ],
+      "active_vocabulary": {
+        "The Ghost of Framsburg Adventure": 50,
+        "Fantasy Flight Games": 50,
+        "Golden Tamarin Lion": 50,
+        "Wild Republic Cuddlekins": 50,
+        "Katarzyna Zielińska": 50,
+        "Kazimierz Wojciechowski": 50,
+        "Leon Vandenberghe": 50,
+        "PROLINE 344100": 50,
+        "Ursula Wiederkehr": 50,
+        "Yumi Nakahara": 50
+      },
+      "vocabulary_sha256": "62e0147ee14855b1b3b52771f47dca646b01dd36a52cc05bb4d6e3046913802f"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "The Ghost of Framsburg Adventure": 50,
+        "Fantasy Flight Games": 50,
+        "Golden Tamarin Lion": 50,
+        "Wild Republic Cuddlekins": 50,
+        "Katarzyna Zielińska": 50,
+        "Kazimierz Wojciechowski": 50,
+        "Leon Vandenberghe": 50,
+        "PROLINE 344100": 50,
+        "Ursula Wiederkehr": 50,
+        "Yumi Nakahara": 50
+      },
+      "vocabulary_sha256": "62e0147ee14855b1b3b52771f47dca646b01dd36a52cc05bb4d6e3046913802f"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "The Ghost of Framsburg Adventure": 50,
+        "Fantasy Flight Games": 50,
+        "Golden Tamarin Lion": 50,
+        "Wild Republic Cuddlekins": 50,
+        "Katarzyna Zielińska": 50,
+        "Kazimierz Wojciechowski": 50,
+        "Leon Vandenberghe": 50,
+        "PROLINE 344100": 50,
+        "Ursula Wiederkehr": 50,
+        "Yumi Nakahara": 50
+      },
+      "vocabulary_sha256": "62e0147ee14855b1b3b52771f47dca646b01dd36a52cc05bb4d6e3046913802f"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [
+    {
+      "text": "Fantasy Flight Games",
+      "from": "stage0.existing_catalog.7",
+      "to": "stage0.existing_catalog.8"
+    },
+    {
+      "text": "The Ghost of Framsburg Adventure",
+      "from": "stage0.existing_catalog.8",
+      "to": "stage0.existing_catalog.9"
+    },
+    {
+      "text": "Ursula Wiederkehr",
+      "from": "stage0.existing_catalog.9",
+      "to": "stage0.existing_catalog.10"
+    }
+  ],
+  "old_terms_removed": [
+    "Ram 2500",
+    "Yumi"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:04.436795+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

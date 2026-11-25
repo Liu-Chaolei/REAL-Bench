@@ -1,0 +1,173 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0797_2gfnv6qrc1ekxwg8bksxmc17e7bfidwr",
+  "model": "deepseek-flash",
+  "input_sha256": "2dd3ae4127ede06f186be4fd92393b5a2dc24acbcedab0d718b0dfeaa81e0e34",
+  "review_input_sha256": "aef4ca07ee238b43e3af435dccb32d2505e229a7d76200057fab417fccb5df14",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "7dea8c70d381253279c5b91f1a15a65f749835efae4855e4969be4585f97bf67",
+  "reference_results_sha256": "bc7881d2477dc40bf3e32cc2a509d6223bbce14e7f9b5532bfb9a36cb2cbbbb8",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kaidën Rylan",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Çağla",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-deb11ee9-dae3-4513-acd2-71e53d83385e.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Kaitlyn McAllister",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Astrid Nakamura",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Çağla Öztürk",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Ximena Reyes García",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Aurélien",
+      "original_source": "stage1.tool_gt.series_s1_email_cagla.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaidën Rylan",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Çağla",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含土耳其语变音符的专名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kaidën Rylan",
+        "Çağla"
+      ],
+      "active_vocabulary": {
+        "Kaidën Rylan": 50,
+        "Çağla": 50
+      },
+      "vocabulary_sha256": "8b548d5848eb33961315e2110c5c9eec5840ec06caa77407d7b71c6c0e7bd546"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Ximena Reyes García",
+          "kind": "person",
+          "source": "stage1.existing_catalog.3",
+          "reason": "含变音符的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Nakamura",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Kaitlyn McAllister",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Çağla Öztürk",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含变音符的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage1.existing_catalog.4",
+          "reason": "含变音符的专名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Ximena Reyes García",
+        "Astrid Nakamura",
+        "Kaitlyn McAllister",
+        "Çağla Öztürk",
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Kaidën Rylan": 50,
+        "Çağla": 50,
+        "Ximena Reyes García": 50,
+        "Astrid Nakamura": 50,
+        "Kaitlyn McAllister": 50,
+        "Çağla Öztürk": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "63b45e2444988aa515f158309956ae975bfb99ea2cb86ec5c35578ac0b197fb2"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kaidën Rylan": 50,
+        "Çağla": 50,
+        "Ximena Reyes García": 50,
+        "Astrid Nakamura": 50,
+        "Kaitlyn McAllister": 50,
+        "Çağla Öztürk": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "63b45e2444988aa515f158309956ae975bfb99ea2cb86ec5c35578ac0b197fb2"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Astrid"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:22.505562+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

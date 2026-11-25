@@ -1,0 +1,219 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0263_hgcckr1ihm38w12jl1viy51m81fybg32",
+  "model": "deepseek-flash",
+  "input_sha256": "cbaf255569bce7020e51bc2d0e1caab5ffc20e29ae8021e510b1fb95b6e7d41b",
+  "review_input_sha256": "9c6ef2c6cd9d6c71258bb37f0f08ad3fefebea6341681c9024f65cfb71d5113b",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "999c8cdc0db76373d9cb921533c385870cbb0b46d7e9aeeb249bd2cdafe6f931",
+  "reference_results_sha256": "e6dbab53f7b6d7c2eff7d1682a093b3ac65ec82eaa69a56baaf8f1ccc51d2be3",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kaito Matsumoto",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-967b36ce-bc71-4aa3-88aa-7956a8e32449.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Basel Academic Circle",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.title"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Anastasiya Zolotova",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Aurélie Vandenberghe",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Aurélien Ramseyer",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Colette Vandenberghe",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.5": {
+      "stage": 1,
+      "text": "Karel De Clercq",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.6": {
+      "stage": 1,
+      "text": "Katarzyna Zielińska",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.7": {
+      "stage": 1,
+      "text": "Zofia Kwiatkowska",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaito Matsumoto",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整日文人名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kaito Matsumoto"
+      ],
+      "active_vocabulary": {
+        "Kaito Matsumoto": 50
+      },
+      "vocabulary_sha256": "ed2edb44140bd6669cff684f41b7b123a1e28f2748d7c86eba75b6d67723e14a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Basel Academic Circle",
+          "kind": "organization",
+          "source": "stage1.existing_catalog.0",
+          "reason": "特定学术组织名称",
+          "weight": 50
+        },
+        {
+          "text": "Karel De Clercq",
+          "kind": "person",
+          "source": "stage1.existing_catalog.5",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Anastasiya Zolotova",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Aurélie Vandenberghe",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Ramseyer",
+          "kind": "person",
+          "source": "stage1.existing_catalog.3",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Colette Vandenberghe",
+          "kind": "person",
+          "source": "stage1.existing_catalog.4",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage1.existing_catalog.6",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Zofia Kwiatkowska",
+          "kind": "person",
+          "source": "stage1.existing_catalog.7",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Basel Academic Circle",
+        "Karel De Clercq",
+        "Anastasiya Zolotova",
+        "Aurélie Vandenberghe",
+        "Aurélien Ramseyer",
+        "Colette Vandenberghe",
+        "Katarzyna Zielińska",
+        "Zofia Kwiatkowska"
+      ],
+      "active_vocabulary": {
+        "Kaito Matsumoto": 50,
+        "Basel Academic Circle": 50,
+        "Karel De Clercq": 50,
+        "Anastasiya Zolotova": 50,
+        "Aurélie Vandenberghe": 50,
+        "Aurélien Ramseyer": 50,
+        "Colette Vandenberghe": 50,
+        "Katarzyna Zielińska": 50,
+        "Zofia Kwiatkowska": 50
+      },
+      "vocabulary_sha256": "8c39533361dc2adb1c9e98be738b02c7f8782b8eddab214658b7cd2707912452"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage2.existing_catalog.2",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Kaito Matsumoto": 50,
+        "Basel Academic Circle": 50,
+        "Karel De Clercq": 50,
+        "Anastasiya Zolotova": 50,
+        "Aurélie Vandenberghe": 50,
+        "Aurélien Ramseyer": 50,
+        "Colette Vandenberghe": 50,
+        "Katarzyna Zielińska": 50,
+        "Zofia Kwiatkowska": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "faa5dd4805ca06434a6ad460dcada128ee5ab1cb249662ee4bab9291731e24bc"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "University of Basel",
+    "Professor Matsumoto"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:48.878522+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

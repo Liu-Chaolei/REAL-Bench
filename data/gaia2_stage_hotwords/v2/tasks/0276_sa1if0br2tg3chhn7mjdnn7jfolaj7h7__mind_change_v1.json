@@ -1,0 +1,189 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0276_sa1if0br2tg3chhn7mjdnn7jfolaj7h7__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "601739ad4649cc54b85db2e76976f13078bcc9214ae51e6e13b1e067c5bae1ab",
+  "review_input_sha256": "e563c95bf2a0e93fcb72661f0f0f91417e12abd895c38f79fcbc1710acc447e9",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "ac25843e390f28ea46721a19b0a11f2c9f34ee3e59e1002494109bf542508f22",
+  "reference_results_sha256": "49f753c92804b5616f37bad32e333d315a99ef181603afad6b389e02f3024239",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Lisbon",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-27852ac0-7c68-4b9b-9575-af82ee6a3277.arguments.content"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Portugal",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Luísa Silva e Sousa",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Luís Marques",
+      "original_source": "stage1.tool_gt.series_s1_add.arguments.attendees[0]"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Jamila Fernandes",
+      "original_source": "stage1.tool_gt.series_s1_add.arguments.attendees[1]"
+    },
+    "stage1.existing_catalog.5": {
+      "stage": 1,
+      "text": "Aurélien",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Tagus Valley",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage2.tool_gt.series_s2_reply.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Lisbon",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "地名，但较常见，保留以覆盖旧候选",
+          "weight": 50
+        },
+        {
+          "text": "Portugal",
+          "kind": "place",
+          "source": "stage0.existing_catalog.1",
+          "reason": "国家名，普通易识别，可省略",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Lisbon",
+        "Portugal"
+      ],
+      "active_vocabulary": {
+        "Lisbon": 50,
+        "Portugal": 50
+      },
+      "vocabulary_sha256": "4f73a756355c8d0b38d42a9b8cfd19d7a8d9ee0c892f6c945011849f2b713805"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Luísa Silva e Sousa",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Jamila Fernandes",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Luís Marques",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage1.existing_catalog.5",
+          "reason": "含变音符号的名字，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Luísa Silva e Sousa",
+        "Jamila Fernandes",
+        "Luís Marques",
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Lisbon": 50,
+        "Portugal": 50,
+        "Luísa Silva e Sousa": 50,
+        "Jamila Fernandes": 50,
+        "Luís Marques": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "e5c5dc04f8b4404b12af38d53b8f1277cb54145f1d0e03c088920037db302fdd"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Tagus Valley",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "特定地名，较难识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur",
+        "Tagus Valley"
+      ],
+      "active_vocabulary": {
+        "Lisbon": 50,
+        "Portugal": 50,
+        "Luísa Silva e Sousa": 50,
+        "Jamila Fernandes": 50,
+        "Luís Marques": 50,
+        "Aurélien": 50,
+        "Aurélien LaFleur": 50,
+        "Tagus Valley": 50
+      },
+      "vocabulary_sha256": "83725ce2186103ef1377c1b7b90e8e231e506046151aad0811be69e619567a71"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Porto",
+    "Restaurant Private Dining Room"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:29.568256+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

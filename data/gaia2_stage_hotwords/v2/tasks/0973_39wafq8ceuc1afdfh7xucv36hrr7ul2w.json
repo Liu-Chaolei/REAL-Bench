@@ -1,0 +1,194 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0973_39wafq8ceuc1afdfh7xucv36hrr7ul2w",
+  "model": "deepseek-flash",
+  "input_sha256": "8055db4e1bb10be6ee16adb4915c3e3d9de1bda6703315713b9dce17d6b8985c",
+  "review_input_sha256": "b0ce75b4c6756c09a83515e76bdd691c6f51a15e8556918a10b3210122d4d914",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "6287478e84c209221bcda16e85fc121c8b80ee6a380e22f1a9bbb6db411709d8",
+  "reference_results_sha256": "afd30ecad46542c95948b26f4e6992499bfae9b871c5b66c5488f1c57977744f",
+  "sources": {
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-d9d66405-b529-46e8-9ad4-632bc8689495.arguments.content"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Swiss-Japanese Relations and Cultural Exchange",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Kiyoshi Nakahara",
+      "original_source": "stage1.tool_gt.series_s1_post.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Nadja Ramadanović",
+      "original_source": "stage1.tool_gt.series_s1_post.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Aurélie Dumont",
+      "original_source": "stage1.tool_gt.series_s1_post.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Swiss-Japanese Project Kickoff Agenda",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.subject"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Kaito Matsumoto",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    },
+    "stage2.tool_response.series_s2_chat": {
+      "stage": 2,
+      "text": "{\"messages\": [{\"sender_id\": \"84908bb6-c5c9-4973-8a38-4f9f331d0e2c\", \"message_id\": \"c934bb2c5f71e13f0cc5da288112035c\", \"timestamp\": \"1728975845.0\", \"content\": \"Welcome, Kaito! I emailed the Swiss-Japanese project introduction and kickoff agenda to kmatsumoto@tokyo-u.ac.jp, copying the original coordinators. Please tell us which actual meeting you would like to join. This is your supported individual Chats channel; no Messages membership or attendance is claimed.\"}, {\"sender_id\": \"156aada0-d2a8-45db-a5dd-90352666ae9c\", \"message_id\": \"bc92f052abee41d686c36dc7f1f03513\", \"timestamp\": \"1725016500\", \"content\": \"Ah, I'm glad I could inspire some culinary cravings! If you ever find yourself in Tokyo, you'll have to come visit me and I'll take you to some of my favorite noodle shops. Deal?\"}, {\"sender_id\": \"84908bb6-c5c9-4973-8a38-4f9f331d0e2c\", \"message_id\": \"c0b247bd9ae94d339da1beabad1b8bb8\", \"timestamp\": \"1725015600\", \"content\": \"Everyone's doing well, thank you for asking. My grandkids are keeping me busy, as always. But I have to say, I've been feeling a bit nostalgic for Japan lately. Maybe it's the influence of your book, but I've been craving some good ramen and udon noodles.\"}, {\"sender_id\": \"156aada0-d2a8-45db-a5dd-90352666ae9c\", \"message_id\": \"54a07c88fb10491ea3d8091ede27c34c\", \"timestamp\": \"1725014700\", \"content\": \"Ah, thank you for asking! My wife's garden is thriving, as always. She's been experimenting with new varieties of Japanese tea plants, and I've been enjoying the fruits of her labor. And how about you, Ursula-san? How's your family doing?\"}, {\"sender_id\": \"84908bb6-c5c9-4973-8a38-4f9f331d0e2c\", \"message_id\": \"a6f3ad882b3b471a9dbbd12077bd4212\", \"timestamp\": \"1725013800\", \"content\": \"That sounds like a great idea! I'll have to check with my colleagues, but I think we'd be very interested in hosting a joint event. And on a personal note, how's your family doing? I always enjoy hearing about your wife's gardening adventures.\"}, {\"sender_id\": \"156aada0-d2a8-45db-a5dd-90352666ae9c\", \"message_id\": \"83259305bdb0409a8dd6e335e617b9af\", \"timestamp\": \"1725012900\", \"content\": \"Yes, I'm familiar with Yoshida-san's work! His research on the Ainu people is indeed groundbreaking. I've been meaning to invite him to speak at our university, actually. Perhaps we could organize a joint event with your institution in Basel?\"}, {\"sender_id\": \"84908bb6-c5c9-4973-8a38-4f9f331d0e2c\", \"message_id\": \"02ba90b7a4454b22bac952665dbe46be\", \"timestamp\": \"1725012000\", \"content\": \"Actually, I've been reading a lot about the impact of colonialism on indigenous cultures. There's a great book by a historian named Takashi Yoshida that explores the experiences of the Ainu people in Japan. Have you come across his work?\"}, {\"sender_id\": \"156aada0-d2a8-45db-a5dd-90352666ae9c\", \"message_id\": \"84f78d634e16413fbaf030f3b8a5a16e\", \"timestamp\": \"1725011100\", \"content\": \"That's fascinating! I'd love to hear more about your thoughts on the exhibit. And speaking of colonialism, have you come across any interesting research on the topic lately? I'm always looking for new perspectives to incorporate into my own work.\"}, {\"sender_id\": \"84908bb6-c5c9-4973-8a38-4f9f331d0e2c\", \"message_id\": \"f8eedc82581b4ebfb3adbfc76b590740\", \"timestamp\": \"1725010200\", \"content\": \"Actually, I visited the exhibit last week! It's indeed impressive, and I was struck by the similarities between Basel's history and some of the themes you explored in your book. The way the exhibit highlights the city's complex relationships with its neighbors and the impact of colonialism on local culture... it really resonated with me.\"}, {\"sender_id\": \"156aada0-d2a8-45db-a5dd-90352666ae9c\", \"message_id\": \"7da76864ac6c418c91c459da96a82459\", \"timestamp\": \"1725009300\", \"content\": \"Ah, Ursula-san, thank you so much for your kind words! I'm glad you enjoyed the book. I've been meaning to ask you, have you had a chance to visit the new museum exhibit on the history of Basel? I heard it's quite impressive.\"}], \"metadata\": {\"message_range\": [\"0\", \"10\"], \"conversation_length\": \"11\", \"conversation_id\": \"3d67ff5b711445caa1907284d5d48f82\", \"conversation_title\": \"Kaito Matsumoto\"}}",
+      "event_id": "series_s2_chat",
+      "response_sha256": "3495be2c218a0ae55f5478dfbaf5665e71a335d1c70e24110e68c7c5e6e92f1e"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Swiss-Japanese Relations and Cultural Exchange",
+          "kind": "custom_name",
+          "source": "stage0.existing_catalog.5",
+          "reason": "独特项目/对话名称，含连字符复合词",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整人名，含独特姓氏，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Swiss-Japanese Relations and Cultural Exchange",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Swiss-Japanese Relations and Cultural Exchange": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "1ae5c222e9f4ea3a24b09a8cc31021d03d8ba758f2d8ab0f865c7f764506bfe5"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Swiss-Japanese Project Kickoff Agenda",
+          "kind": "custom_name",
+          "source": "stage1.existing_catalog.3",
+          "reason": "独特会议议程名称",
+          "weight": 50
+        },
+        {
+          "text": "Aurélie Dumont",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Kiyoshi Nakahara",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整日文人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Nadja Ramadanović",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Swiss-Japanese Project Kickoff Agenda",
+        "Aurélie Dumont",
+        "Kiyoshi Nakahara",
+        "Nadja Ramadanović"
+      ],
+      "active_vocabulary": {
+        "Swiss-Japanese Relations and Cultural Exchange": 50,
+        "Ursula Wiederkehr": 50,
+        "Swiss-Japanese Project Kickoff Agenda": 50,
+        "Aurélie Dumont": 50,
+        "Kiyoshi Nakahara": 50,
+        "Nadja Ramadanović": 50
+      },
+      "vocabulary_sha256": "1693418e08f9150cea6dad6692e10dd41a69b1fef212b33d49b95c34065af7d0"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaito Matsumoto",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整日文人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Takashi Yoshida",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_chat",
+          "reason": "完整日文人名，出现在聊天记录中",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kaito Matsumoto",
+        "Takashi Yoshida"
+      ],
+      "active_vocabulary": {
+        "Swiss-Japanese Relations and Cultural Exchange": 50,
+        "Ursula Wiederkehr": 50,
+        "Swiss-Japanese Project Kickoff Agenda": 50,
+        "Aurélie Dumont": 50,
+        "Kiyoshi Nakahara": 50,
+        "Nadja Ramadanović": 50,
+        "Kaito Matsumoto": 50,
+        "Takashi Yoshida": 50
+      },
+      "vocabulary_sha256": "60a0931cd7d22e2def87f61c03faffa4b24dd5e092e2cadb9a86c7f44025eab1"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kiyoshi",
+    "Aurélie",
+    "Nadja",
+    "Ursula",
+    "Swiss-Japanese Project Meeting",
+    "Kaito"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:06.124375+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

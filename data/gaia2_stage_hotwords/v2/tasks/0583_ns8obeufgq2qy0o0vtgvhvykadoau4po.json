@@ -1,0 +1,97 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0583_ns8obeufgq2qy0o0vtgvhvykadoau4po",
+  "model": "deepseek-flash",
+  "input_sha256": "14b3784a4b623329d76cdc6c5d01f540ae460918436299a4a4243b2069d6b49c",
+  "review_input_sha256": "66d51c2f52f9ac954636706075dcdcfa0c11727397a3ed7f55a7e54319113a6c",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "2086a563865b8471716ac24a7f854875528633ae6c157f08a6ca9bca7cedbef8",
+  "reference_results_sha256": "fb6e4c872d1bd82cc8fc107aa46e00835a1ed0208d21ad0cc37943e096346748",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Luísa",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b424a349-ec1d-4a55-8cd3-745a5f55a665.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Aurelien",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-3d46cd6c-92a4-4cbe-a1c4-f3d9089e57db.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurelien",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "较难拼写的专有人名",
+          "weight": 50
+        },
+        {
+          "text": "Luísa",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的专有人名，优先保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurelien",
+        "Luísa"
+      ],
+      "active_vocabulary": {
+        "Aurelien": 50,
+        "Luísa": 50
+      },
+      "vocabulary_sha256": "1d933ece8cc6ecd2ff2d84198dd29a15739c1a03a47ab7469cfdba8cbb35f5e2"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurelien": 50,
+        "Luísa": 50
+      },
+      "vocabulary_sha256": "1d933ece8cc6ecd2ff2d84198dd29a15739c1a03a47ab7469cfdba8cbb35f5e2"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurelien": 50,
+        "Luísa": 50
+      },
+      "vocabulary_sha256": "1d933ece8cc6ecd2ff2d84198dd29a15739c1a03a47ab7469cfdba8cbb35f5e2"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Mei",
+    "Herbaceous"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:30.470169+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

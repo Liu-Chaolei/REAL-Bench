@@ -1,0 +1,132 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0833_fr1ha583m0e86zdtmoen0yu4onbk5bvl",
+  "model": "deepseek-flash",
+  "input_sha256": "3ae2fac6584b1bd188177a2510534f74102f50a1a826be922501cd89d4aac5f6",
+  "review_input_sha256": "7968229003c473e9b050e9eb7a8b4b44e7088578e10da0397ba5c7bee03014a6",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "6730dc8caa0aab19693ece4b47549ca00e06718148fa8cef5deba278e0186f2b",
+  "reference_results_sha256": "38aee56724586455e6373ca6accf8e665e0b0b7d15aabffb85bebfcbaea4bdb4",
+  "sources": {
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "Åse Kjellstad",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-fbfb1bc6-e025-459e-8872-e4a7b10092cd.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Kaitlyn Nakamura",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Astrid Kleveland",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Alejandro Moreno-González",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Åse Kjellstad",
+          "kind": "person",
+          "source": "stage0.existing_catalog.6",
+          "reason": "含挪威语特殊字符Å的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Åse Kjellstad"
+      ],
+      "active_vocabulary": {
+        "Åse Kjellstad": 50
+      },
+      "vocabulary_sha256": "a58a66c7885b1d4f4fa791914bc70aa52427f073e8fcfffe9329fc5c78b70466"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Alejandro Moreno-González",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含重音符号á的完整复合姓氏人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Kleveland",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整姓名，Kleveland为较难专有姓氏",
+          "weight": 50
+        },
+        {
+          "text": "Kaitlyn Nakamura",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整姓名，姓氏Nakamura较难识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Alejandro Moreno-González",
+        "Astrid Kleveland",
+        "Kaitlyn Nakamura"
+      ],
+      "active_vocabulary": {
+        "Åse Kjellstad": 50,
+        "Alejandro Moreno-González": 50,
+        "Astrid Kleveland": 50,
+        "Kaitlyn Nakamura": 50
+      },
+      "vocabulary_sha256": "1a28dda44abe3acea0f2bd8952a0c628bde2e8b9ff0792047a7771f7d821f397"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Åse Kjellstad": 50,
+        "Alejandro Moreno-González": 50,
+        "Astrid Kleveland": 50,
+        "Kaitlyn Nakamura": 50
+      },
+      "vocabulary_sha256": "1a28dda44abe3acea0f2bd8952a0c628bde2e8b9ff0792047a7771f7d821f397"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kritsana",
+    "Kaitlyn",
+    "Astrid",
+    "Aarav",
+    "Nalinee",
+    "Alejandro"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:32.158316+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

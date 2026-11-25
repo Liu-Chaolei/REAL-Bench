@@ -1,0 +1,101 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0987_hcvpyfaca1f5ejmd7nqk65dn1xwfpaf7__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "91d7e11afc00a03400ddb6ae635637375af4d812dfc0b06dc32d06721e1be9bd",
+  "review_input_sha256": "845c414ff87259ef9b3a66372d3b0b19fb1ff0c795dc468e32892d40855c7f1d",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "95c4f129c077578b2e5858745f13f4c1ea6b8690c3c99ae0a433d272d70507f9",
+  "reference_results_sha256": "f4cc76e05478a2997407e7a10777f00d6653998ba4e10a07a492d36b470c73fe",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kaidën Rylan",
+      "original_source": "stage0.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Jesús García Hernández",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kaidën Rylan",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kaidën Rylan"
+      ],
+      "active_vocabulary": {
+        "Kaidën Rylan": 50
+      },
+      "vocabulary_sha256": "d0252b85e954cf6c81358997242b004171e038fa24e27ec9e18647b05ae1cde1"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Kaidën Rylan": 50
+      },
+      "vocabulary_sha256": "d0252b85e954cf6c81358997242b004171e038fa24e27ec9e18647b05ae1cde1"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Jesús García Hernández",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符的完整西班牙语人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Jesús García Hernández"
+      ],
+      "active_vocabulary": {
+        "Kaidën Rylan": 50,
+        "Jesús García Hernández": 50
+      },
+      "vocabulary_sha256": "b206b9e41b5e24dc4da7df6ce73806ab74b6bae8e3617053e2ff92dcafd683dd"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": [
+        {
+          "text": "Kaidën",
+          "covered_by": "Kaidën Rylan"
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kaidën"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:29.014287+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

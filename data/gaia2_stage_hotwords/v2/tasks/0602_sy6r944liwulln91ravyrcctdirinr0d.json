@@ -1,0 +1,113 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0602_sy6r944liwulln91ravyrcctdirinr0d",
+  "model": "deepseek-flash",
+  "input_sha256": "95efd4ad4bf8f0cae5a33e730e4ba91367eae2c11870ed78af19a4234fe2bca5",
+  "review_input_sha256": "2232f3606bd411c431e80a68b31b33995bf1a67345bd2d3ed9ef6f164ff57f3f",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "b9c338829145c9fc199ed7293a32101403cc602413487c2c33e261ac77659ac6",
+  "reference_results_sha256": "c04ab9e780c562a38ba0692b5441e9ae9bf9312995cc64605e9b1e7785af35d8",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Nalani Jensen",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-6f905404-ff39-4354-baae-14b2a9ae31b0.arguments.attendees[2]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-6f905404-ff39-4354-baae-14b2a9ae31b0.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Xóchitl Ramírez-González",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-6f905404-ff39-4354-baae-14b2a9ae31b0.arguments.attendees[1]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Xóchitl Ramírez-González",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整复合人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，拼写较难，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Xóchitl Ramírez-González",
+        "Aurélien LaFleur",
+        "Nalani Jensen"
+      ],
+      "active_vocabulary": {
+        "Xóchitl Ramírez-González": 50,
+        "Aurélien LaFleur": 50,
+        "Nalani Jensen": 50
+      },
+      "vocabulary_sha256": "4dc6e52f7ae524fee327d16f07851ecd3dabca62eb60592236aab32d3ee90ba1"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Xóchitl Ramírez-González": 50,
+        "Aurélien LaFleur": 50,
+        "Nalani Jensen": 50
+      },
+      "vocabulary_sha256": "4dc6e52f7ae524fee327d16f07851ecd3dabca62eb60592236aab32d3ee90ba1"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Xóchitl Ramírez-González": 50,
+        "Aurélien LaFleur": 50,
+        "Nalani Jensen": 50
+      },
+      "vocabulary_sha256": "4dc6e52f7ae524fee327d16f07851ecd3dabca62eb60592236aab32d3ee90ba1"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Nalani",
+    "Xóchitl"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:41.589592+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

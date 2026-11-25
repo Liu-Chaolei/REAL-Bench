@@ -1,0 +1,177 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0678_7xyadypwtak671mva24hj4xbd1gqdlcx",
+  "model": "deepseek-flash",
+  "input_sha256": "39cf1cad3355c0323f1d94296c62caa40dfdfa417a237a8d9b0bc47521040f94",
+  "review_input_sha256": "b2ad498b5d98af64cbd4a6236dc01fbe8634b5e8bc8159393674134ca2474f7e",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "f30d36756e748e583ffb83ab204420e985cf6d8d045f2adbd39bdfdefb3366c0",
+  "reference_results_sha256": "3778e90b94ade01336b684e20bf8847ec7f3955ed0b3c6bec8bdfd20dce5bd7a",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Helmut Schneider",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Coventry City Apartments",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-a63a43d2-0cae-46dd-8068-9542f7e28524.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Glasgow Gables",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-a63a43d2-0cae-46dd-8068-9542f7e28524.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Coventry Cosy",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-a63a43d2-0cae-46dd-8068-9542f7e28524.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Leeds Luxury Living",
+      "original_source": "stage1.tool_gt.series_s1_message_to_helmut.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Leeds Luxury Lofts",
+      "original_source": "stage1.tool_gt.series_s1_message_to_helmut.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Wellington Street",
+      "original_source": "stage2.tool_gt.series_s2_message_to_helmut.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Coventry City Apartments",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整公寓名称，专名",
+          "weight": 50
+        },
+        {
+          "text": "Coventry Cosy",
+          "kind": "place",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整公寓名称，专名",
+          "weight": 50
+        },
+        {
+          "text": "Glasgow Gables",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整公寓名称，专名",
+          "weight": 50
+        },
+        {
+          "text": "Helmut Schneider",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，含姓氏，属难识别专名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Coventry City Apartments",
+        "Coventry Cosy",
+        "Glasgow Gables",
+        "Helmut Schneider"
+      ],
+      "active_vocabulary": {
+        "Coventry City Apartments": 50,
+        "Coventry Cosy": 50,
+        "Glasgow Gables": 50,
+        "Helmut Schneider": 50
+      },
+      "vocabulary_sha256": "420e379c3d29c950573897b9f1f09d1a70e5d67e99efa839521be6eeb9ab7871"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Leeds Luxury Living",
+          "kind": "organization",
+          "source": "stage1.existing_catalog.2",
+          "reason": "完整公寓品牌名，专名",
+          "weight": 50
+        },
+        {
+          "text": "Leeds Luxury Lofts",
+          "kind": "organization",
+          "source": "stage1.existing_catalog.3",
+          "reason": "完整公寓品牌名，专名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Leeds Luxury Living",
+        "Leeds Luxury Lofts"
+      ],
+      "active_vocabulary": {
+        "Coventry City Apartments": 50,
+        "Coventry Cosy": 50,
+        "Glasgow Gables": 50,
+        "Helmut Schneider": 50,
+        "Leeds Luxury Living": 50,
+        "Leeds Luxury Lofts": 50
+      },
+      "vocabulary_sha256": "2364263b47e65c1f18495213e3572264fdae6517f46135c91d97bf1d218bae3d"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Wellington Street",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整街道名，专名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Wellington Street"
+      ],
+      "active_vocabulary": {
+        "Coventry City Apartments": 50,
+        "Coventry Cosy": 50,
+        "Glasgow Gables": 50,
+        "Helmut Schneider": 50,
+        "Leeds Luxury Living": 50,
+        "Leeds Luxury Lofts": 50,
+        "Wellington Street": 50
+      },
+      "vocabulary_sha256": "882b429406c2f0a6d8b080dc0a9236b68f452d43170d7b0434685b5c6f86c1d6"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Helmut",
+    "Leeds Luxury"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:00.037855+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

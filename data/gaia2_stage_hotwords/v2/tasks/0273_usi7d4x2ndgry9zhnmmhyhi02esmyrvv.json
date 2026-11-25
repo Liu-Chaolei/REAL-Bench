@@ -1,0 +1,210 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0273_usi7d4x2ndgry9zhnmmhyhi02esmyrvv",
+  "model": "deepseek-flash",
+  "input_sha256": "cc4c7a34ad717f8022ff724ab63931dc0d2f1834d13bf26aa8e4ef5d5d13876f",
+  "review_input_sha256": "85cf761c6f8a2505ba0f1fa6e7136e4de55a3ebfa8e651a5703ca70ea46a3ea7",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "ee0770cf588aca22531c3c6c3b72cf85eff282beb789a46d015422f111468a4a",
+  "reference_results_sha256": "f6f54b3c6b599c349163660af703f3ef123cd3b3fdbccc74991618972b05037d",
+  "sources": {
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Plzeň Panorama",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Praha 1 Luxury",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.4": {
+      "stage": 2,
+      "text": "Riverfront Residence",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.tool_response.series_s2_read_110": {
+      "stage": 2,
+      "text": "{\"2f5f98168dac40138281db4b017718f7\": {\"name\": \"Prague Luxury\", \"location\": \"Pařížská 123, Prague\", \"zip_code\": \"110 00\", \"price\": \"3500\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Apartment\", \"square_footage\": \"1800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"2f5f98168dac40138281db4b017718f7\", \"amenities\": [\"Gym\", \"Pool\", \"Parking\", \"Laundry\"], \"saved\": \"False\"}, \"502a433400f4498aae0ae86300b74931\": {\"name\": \"Riverfront Residence\", \"location\": \"Masarykovo nábřeží 12, Prague 1\", \"zip_code\": \"110 00\", \"price\": \"2500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"502a433400f4498aae0ae86300b74931\", \"amenities\": [\"River view\", \"Gym\", \"Laundry\"], \"saved\": \"False\"}, \"506f8615e6324de2a7f9acdc7c0c6398\": {\"name\": \"Vltava Views\", \"location\": \"Křižovnické náměstí, Prague\", \"zip_code\": \"110 00\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"506f8615e6324de2a7f9acdc7c0c6398\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"False\"}, \"7dbd866ddb744cb8a111aa3d9c7612b4\": {\"name\": \"Pražský Palác\", \"location\": \"Old Town, Prague\", \"zip_code\": \"110 00\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"7dbd866ddb744cb8a111aa3d9c7612b4\", \"amenities\": [\"Gym\", \"Laundry\", \"Elevator\"], \"saved\": \"True\"}, \"937ba502feb84e0a92ec38f72621ee30\": {\"name\": \"Prague Palace\", \"location\": \"Náměstí Republiky 3, Prague\", \"zip_code\": \"110 00\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1300\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"937ba502feb84e0a92ec38f72621ee30\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"bc30de267661412ba0113f005397ce1a\": {\"name\": \"Vltava River Views\", \"location\": \"Karlov náměstí 15, Prague 1\", \"zip_code\": \"110 00\", \"price\": \"2500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"bc30de267661412ba0113f005397ce1a\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"False\"}, \"de54b9ec30924dfca5b95f1a7323f4ae\": {\"name\": \"Prague 1 Luxury\", \"location\": \"ul. Pařížská 12, Prague\", \"zip_code\": \"110 00\", \"price\": \"3500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"de54b9ec30924dfca5b95f1a7323f4ae\", \"amenities\": [\"Gym\", \"Laundry\", \"Parking\"], \"saved\": \"False\"}, \"e3924c94efc043a69670c4b17df19323\": {\"name\": \"Praha 1 Luxury\", \"location\": \"Jindřišská, Praha 1\", \"zip_code\": \"110 00\", \"price\": \"3500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"e3924c94efc043a69670c4b17df19323\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"False\"}, \"f35434fe0b6442ec889140d21b85586a\": {\"name\": \"Charles Bridge Views\", \"location\": \"Karlův most 12, Prague\", \"zip_code\": \"110 00\", \"price\": \"2500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"f35434fe0b6442ec889140d21b85586a\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"False\"}}",
+      "event_id": "series_s2_read_110",
+      "response_sha256": "48e2adb9fceabb0f6f6d6a59a777893b16c684376969a1c84a7ee88541be8651"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Charles Bridge Views",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_read_110",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Praha 1 Luxury",
+          "kind": "place",
+          "source": "stage2.existing_catalog.2",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Vltava River Views",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_read_110",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Karlov náměstí",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_read_110",
+          "reason": "含变音符号的独特地名",
+          "weight": 50
+        },
+        {
+          "text": "Karlův most",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_read_110",
+          "reason": "含变音符号的独特地名",
+          "weight": 50
+        },
+        {
+          "text": "Křižovnické náměstí",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_read_110",
+          "reason": "含变音符号的独特地名",
+          "weight": 50
+        },
+        {
+          "text": "Masarykovo nábřeží",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_read_110",
+          "reason": "含变音符号的独特街道名",
+          "weight": 50
+        },
+        {
+          "text": "Náměstí Republiky",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_read_110",
+          "reason": "含变音符号的独特地名",
+          "weight": 50
+        },
+        {
+          "text": "Plzeň Panorama",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号的独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Pražský Palác",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_read_110",
+          "reason": "含变音符号的独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Riverfront Residence",
+          "kind": "place",
+          "source": "stage2.existing_catalog.4",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Vltava Views",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_read_110",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Jindřišská",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_read_110",
+          "reason": "含变音符号的独特街道名",
+          "weight": 50
+        },
+        {
+          "text": "Pařížská",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_read_110",
+          "reason": "含变音符号的独特街道名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Charles Bridge Views",
+        "Praha 1 Luxury",
+        "Vltava River Views",
+        "Karlov náměstí",
+        "Karlův most",
+        "Křižovnické náměstí",
+        "Masarykovo nábřeží",
+        "Náměstí Republiky",
+        "Plzeň Panorama",
+        "Pražský Palác",
+        "Riverfront Residence",
+        "Vltava Views",
+        "Jindřišská",
+        "Pařížská"
+      ],
+      "active_vocabulary": {
+        "Charles Bridge Views": 50,
+        "Praha 1 Luxury": 50,
+        "Vltava River Views": 50,
+        "Karlov náměstí": 50,
+        "Karlův most": 50,
+        "Křižovnické náměstí": 50,
+        "Masarykovo nábřeží": 50,
+        "Náměstí Republiky": 50,
+        "Plzeň Panorama": 50,
+        "Pražský Palác": 50,
+        "Riverfront Residence": 50,
+        "Vltava Views": 50,
+        "Jindřišská": 50,
+        "Pařížská": 50
+      },
+      "vocabulary_sha256": "821f0fd99003134a5d87742bf40e167b0e46a0eee5a2ca41d971f2df9322aa57"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Prague Luxury",
+    "Prague 1 Luxury"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:52.096728+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

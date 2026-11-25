@@ -1,0 +1,126 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0264_c3c837o9eevel1ywuy6306k8a1othzmw",
+  "model": "deepseek-flash",
+  "input_sha256": "aa981ec6e3d024d5cf5309ec794f84f589e517a3e0b26f523bc85ce4ee36584a",
+  "review_input_sha256": "be90b5c62cd461133d119421f55cb5dcabf8527638863517df0b030abe5b3627",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "f78ddf664a3ccf99e2a07cf7142911413683afcf78d7906de820f4f0d06c5126",
+  "reference_results_sha256": "07bb005045b59c1efade846266ed0c63a55f1d1015fd419b7f026dada6e44766",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Basel Waterfront",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-6da2c84e-277e-4473-8276-84ec1b45fccd.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Geneva Lakefront",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Ursula",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Basel Breeze",
+      "original_source": "stage2.reference_reply.series_s2_reply.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Basel Waterfront",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含地名的完整房产名称，具有辨识度",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Basel Waterfront"
+      ],
+      "active_vocabulary": {
+        "Basel Waterfront": 50
+      },
+      "vocabulary_sha256": "8f644316a675f52f850729ff840be5d80a5e48d0e1df3173e6216efdd8e207af"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Geneva Lakefront",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整房产地名，具有辨识度",
+          "weight": 50
+        },
+        {
+          "text": "Ursula",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "人名，作为姓氏缺失时的字面组成部分",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Geneva Lakefront",
+        "Ursula"
+      ],
+      "active_vocabulary": {
+        "Basel Waterfront": 50,
+        "Geneva Lakefront": 50,
+        "Ursula": 50
+      },
+      "vocabulary_sha256": "12f9e315d3c321ef81badb97e3662d05e453fc0bda5b3cb91a92b3f67392eafa"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Basel Breeze",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整房产名称，具有辨识度",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Basel Breeze"
+      ],
+      "active_vocabulary": {
+        "Basel Waterfront": 50,
+        "Geneva Lakefront": 50,
+        "Ursula": 50,
+        "Basel Breeze": 50
+      },
+      "vocabulary_sha256": "240f5ff14b3a1e40ddf4149f134c4ba91ac957ad67de2cd79807fec5bff9ddea"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:50.541523+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

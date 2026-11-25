@@ -1,0 +1,201 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0250_4mpn1qg7xxcb12b11fi0pekvvjwowji0__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "4a793945f7ed419af7e00de68862a1579381a105b10753a76ae85a7ac37ae437",
+  "review_input_sha256": "65917a29ae95f241518e7c47ad92fdb5d78a6a786c3a59cf551e6e5e517ebaf5",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "c7daa093c9cb3bed3de724697a23eb28b72d48f43b26198f517c298f30f29266",
+  "reference_results_sha256": "4ec193dc5909c0d492f980d249d57e064f4a6c961ca521a91fcf5aab9d668cbd",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage1.tool_gt.series_s1_add.arguments.attendees[0]"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Alessia Ramseyer",
+      "original_source": "stage1.tool_gt.series_s1_add.arguments.attendees[1]"
+    },
+    "stage1.tool_response.series_s1_read": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"1da635bdd38e451ebd7442e137b1bc8d\", \"title\": \"Dinner with Family\", \"start_datetime\": \"1730829600\", \"end_datetime\": \"1730836800\", \"tag\": \"Social\", \"description\": \"Spend quality time with family over dinner.\", \"location\": \"Home\", \"attendees\": [\"Ursula Zbinden\", \"Colette Vandenberghe\"], \"start_strftime\": \"Tuesday, 2024-11-05 18:00:00\", \"end_strftime\": \"Tuesday, 2024-11-05 20:00:00\"}, {\"event_id\": \"3aed38ab358e4e79b861cf1c932ea3f1\", \"title\": \"Meeting with Katarzyna\", \"start_datetime\": \"1730797200\", \"end_datetime\": \"1730800800\", \"tag\": \"Work\", \"description\": \"Discuss potential collaboration on a historical research project.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Katarzyna Szymańska\"], \"start_strftime\": \"Tuesday, 2024-11-05 09:00:00\", \"end_strftime\": \"Tuesday, 2024-11-05 10:00:00\"}, {\"event_id\": \"3cdc9548149d49ceae914a26c2873727\", \"title\": \"Lecture on Swiss History\", \"start_datetime\": \"1730804400\", \"end_datetime\": \"1730808000\", \"tag\": \"Work\", \"description\": \"Deliver a lecture on Swiss history to a group of students.\", \"location\": \"University of Basel\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-11-05 11:00:00\", \"end_strftime\": \"Tuesday, 2024-11-05 12:00:00\"}, {\"event_id\": \"85d311d24f934a9783ce3763f83b0c1a\", \"title\": \"Research Meeting\", \"start_datetime\": \"1730815200\", \"end_datetime\": \"1730818800\", \"tag\": \"Work\", \"description\": \"Discuss research progress and plan next steps.\", \"location\": \"University of Basel\", \"attendees\": [\"Elara von Allmen\", \"Nadja Ramadanović\"], \"start_strftime\": \"Tuesday, 2024-11-05 14:00:00\", \"end_strftime\": \"Tuesday, 2024-11-05 15:00:00\"}, {\"event_id\": \"957a316419cf41f4b6e161d6d127ecdc\", \"title\": \"Coffee Break with Alessia\", \"start_datetime\": \"1730800800\", \"end_datetime\": \"1730804400\", \"tag\": \"Social\", \"description\": \"Catch up with Alessia over coffee and discuss recent events.\", \"location\": \"Café zum Kirschgarten\", \"attendees\": [\"Alessia Ramseyer\"], \"start_strftime\": \"Tuesday, 2024-11-05 10:00:00\", \"end_strftime\": \"Tuesday, 2024-11-05 11:00:00\"}, {\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Follow-up Zoom Meeting with Alessia Ramseyer\", \"start_datetime\": \"1730815200.0\", \"end_datetime\": \"1730818800.0\", \"tag\": \"Work\", \"description\": \"Follow-up to our October research discussions.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Ursula Wiederkehr\", \"Alessia Ramseyer\"], \"start_strftime\": \"Tuesday, 2024-11-05 14:00:00\", \"end_strftime\": \"Tuesday, 2024-11-05 15:00:00\"}], \"range\": [\"0\", \"6\"], \"total\": \"6\"}",
+      "event_id": "series_s1_read",
+      "response_sha256": "3d82373d5b4472a17470af2f933b515e69f348a50e8f7a45a60c79e7ed8a1fcc"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Katarzyna Zielińska",
+      "original_source": "stage2.tool_gt.series_s2_get_kz.arguments.user_name"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Kazimierz Wojciechowski",
+      "original_source": "stage2.tool_gt.series_s2_get_kw.arguments.user_name"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "October Zoom Research Partners",
+      "original_source": "stage2.tool_gt.series_s2_create.arguments.title"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Café zum Kirschgarten",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "含变音符号的独特地点名",
+          "weight": 50
+        },
+        {
+          "text": "Elara von Allmen",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "工具响应中新出现的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Alessia Ramseyer",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，独特拼写，适合热词",
+          "weight": 50
+        },
+        {
+          "text": "Colette Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "工具响应中新出现的困难完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Katarzyna Szymańska",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Nadja Ramadanović",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，含独特拼写，适合热词",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Zbinden",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "工具响应中新出现的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Café zum Kirschgarten",
+        "Elara von Allmen",
+        "Alessia Ramseyer",
+        "Colette Vandenberghe",
+        "Katarzyna Szymańska",
+        "Nadja Ramadanović",
+        "Ursula Wiederkehr",
+        "Ursula Zbinden"
+      ],
+      "active_vocabulary": {
+        "Café zum Kirschgarten": 50,
+        "Elara von Allmen": 50,
+        "Alessia Ramseyer": 50,
+        "Colette Vandenberghe": 50,
+        "Katarzyna Szymańska": 50,
+        "Nadja Ramadanović": 50,
+        "Ursula Wiederkehr": 50,
+        "Ursula Zbinden": 50
+      },
+      "vocabulary_sha256": "03257cfdc93c640f14fc72b8617931c77131e20ebab2e794e766990b8270bc5e"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "October Zoom Research Partners",
+          "kind": "organization",
+          "source": "stage2.existing_catalog.2",
+          "reason": "独特自定义会话/组织名称",
+          "weight": 50
+        },
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Kazimierz Wojciechowski",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "困难完整人名，适合热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "October Zoom Research Partners",
+        "Katarzyna Zielińska",
+        "Kazimierz Wojciechowski"
+      ],
+      "active_vocabulary": {
+        "Café zum Kirschgarten": 50,
+        "Elara von Allmen": 50,
+        "Alessia Ramseyer": 50,
+        "Colette Vandenberghe": 50,
+        "Katarzyna Szymańska": 50,
+        "Nadja Ramadanović": 50,
+        "Ursula Wiederkehr": 50,
+        "Ursula Zbinden": 50,
+        "October Zoom Research Partners": 50,
+        "Katarzyna Zielińska": 50,
+        "Kazimierz Wojciechowski": 50
+      },
+      "vocabulary_sha256": "a4f065ba24158dbaa10a9f5513dd4ac78140f1b5ad44b06e6633d11b158b0019"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:23.207765+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,130 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0892_b2dgv8tqb7y7xmgso10xkbgbjoeifuwt__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "4838ee20cd1c5c838d0585e168c6c6dc6686cd08d78c3e2bc414f72ad11c0224",
+  "review_input_sha256": "09d5158316c62d6aa4c0ac2dc40b02cda5598ce59e56c675874c145bd61fea01",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "fe633b570293db8657e39c2553347124189a629f46ebf3e4e12298b7fcc6ec38",
+  "reference_results_sha256": "b9d8bb526075a044b18c30bc965e5ab8ce0e26a60783a64409c32879f961ddbe",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Akira Kübler",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Via della Pace 10, 6600 Locarno",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-8744bc3e-cbf9-44a5-9b27-c92c1a18d35b.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Zofia Kowalska",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Via della Pace 10, 6600 Locarno",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含意大利语街道名的完整地址",
+          "weight": 50
+        },
+        {
+          "text": "Akira Kübler",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "较难拼写的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Via della Pace 10, 6600 Locarno",
+        "Akira Kübler",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Via della Pace 10, 6600 Locarno": 50,
+        "Akira Kübler": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "55a880e40409a5d78e041b67cdeaedb2b11b46012f9b08707b570aa5da04ec64"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Zofia Kowalska",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "较难拼写的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Zofia Kowalska"
+      ],
+      "active_vocabulary": {
+        "Via della Pace 10, 6600 Locarno": 50,
+        "Akira Kübler": 50,
+        "Ursula Wiederkehr": 50,
+        "Zofia Kowalska": 50
+      },
+      "vocabulary_sha256": "df1f1266e2bc019429b89683baa4bf75e8769637db9a7dd618e3e63f7661926e"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Via della Pace 10, 6600 Locarno": 50,
+        "Akira Kübler": 50,
+        "Ursula Wiederkehr": 50,
+        "Zofia Kowalska": 50
+      },
+      "vocabulary_sha256": "df1f1266e2bc019429b89683baa4bf75e8769637db9a7dd618e3e63f7661926e"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "The Plaza",
+    "Locarno Train Station, 6600 Locarno"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:17.168250+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

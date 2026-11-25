@@ -1,0 +1,177 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0620_23nfq5tjilb4u29n1o010ew0c35jo843",
+  "model": "deepseek-flash",
+  "input_sha256": "e5bb38c80565b5626fffc1b951c3bbd9b35b1868e8a6896d32b363ac1f56368b",
+  "review_input_sha256": "ef8f716daaa92ed155ef79762d71c9a88fe7570d9f7dbb43596735b905aeb7ee",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "ecac9530bff83bbff309e35c2c40279d99757325ff1784408837289d6add2743",
+  "reference_results_sha256": "e5378f1029a354f925e54ca06e863e993a4816b81f4ca6d649939263efbd88f1",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Sugarbooger Zippee Lunch Totes",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Zofia Kowalczyk",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Katarzyna Zielińska",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Aurélien",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b0ecdbce-81cd-4415-b703-258a52b83311.arguments.content"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b0ecdbce-81cd-4415-b703-258a52b83311.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Mr. Pencil's ABC Backpack",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Aurélien Favre",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Sugarbooger Zippee Lunch Totes",
+          "kind": "product",
+          "source": "stage0.existing_catalog.0",
+          "reason": "独特品牌产品名，含生僻词",
+          "weight": 50
+        },
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整人名，姓氏难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Zofia Kowalczyk",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，含难拼写姓氏",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含变音符号的难拼写名字",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Sugarbooger Zippee Lunch Totes",
+        "Katarzyna Zielińska",
+        "Ursula Wiederkehr",
+        "Zofia Kowalczyk",
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Sugarbooger Zippee Lunch Totes": 50,
+        "Katarzyna Zielińska": 50,
+        "Ursula Wiederkehr": 50,
+        "Zofia Kowalczyk": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "e3a6a1769d85214f3b454f9753d640dce2ff4a990d6a79d3a70bb176061cb6c6"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Mr. Pencil's ABC Backpack",
+          "kind": "product",
+          "source": "stage1.existing_catalog.0",
+          "reason": "独特产品名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Mr. Pencil's ABC Backpack"
+      ],
+      "active_vocabulary": {
+        "Sugarbooger Zippee Lunch Totes": 50,
+        "Katarzyna Zielińska": 50,
+        "Ursula Wiederkehr": 50,
+        "Zofia Kowalczyk": 50,
+        "Aurélien": 50,
+        "Mr. Pencil's ABC Backpack": 50
+      },
+      "vocabulary_sha256": "1b9a08c447d36baeff92ad5a0a6e0a544589f216073861b94812a3907eed1782"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien Favre",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien Favre"
+      ],
+      "active_vocabulary": {
+        "Sugarbooger Zippee Lunch Totes": 50,
+        "Katarzyna Zielińska": 50,
+        "Ursula Wiederkehr": 50,
+        "Zofia Kowalczyk": 50,
+        "Aurélien": 50,
+        "Mr. Pencil's ABC Backpack": 50,
+        "Aurélien Favre": 50
+      },
+      "vocabulary_sha256": "4aaf23777ed8506ca8cace63bb2a96632aa0e96abd369092cb824d400a116cab"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Zofia"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:46.537676+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,170 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0415_ksd1rp3drlzqm9xq1amkmkqb0rff1q8l",
+  "model": "deepseek-flash",
+  "input_sha256": "20393ab54aa5c307e4cd6744850052e6748ecd5fee098d7be3663efe60872afb",
+  "review_input_sha256": "7004969f378c54d682d6a0e7b00600040f68df370951d8f236718964f743c831",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "d139594dbf90b75d8d5b553eccb64909840ec21f2a4da0ce03e1cd3fc74293ae",
+  "reference_results_sha256": "f6296f799a3315d80a303034d101222a9c45cf3a30f67399865219d5c3b2af07",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kalyan Rao",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-c1e59876-ef7a-4a16-851c-b249114bb692.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Dadar East",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Shanti Niketan",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.tool_response.series_s1_lookup": {
+      "stage": 1,
+      "text": "{\"Kalyan Rao\": \"3bfd18b7-2c01-477e-b540-2487b73ed593\"}",
+      "event_id": "series_s1_lookup",
+      "response_sha256": "d048b7a12ba2154df01864416c3a9e187cfb313a2ad353e95db78ca89de31fcf"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Rohan Kumar",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    },
+    "stage2.tool_response.series_s2_check_wednesday": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"8ff68df279174f1fa7f81c36e80256a0\", \"title\": \"Prison Reform Meeting\", \"start_datetime\": \"1729087200\", \"end_datetime\": \"1729094400\", \"tag\": \"Work\", \"description\": \"Meeting with local officials to discuss prison reform initiatives.\", \"location\": \"Mumbai City Hall\", \"attendees\": [\"Rohan Kumar\", \"Kuldip Saini\"], \"start_strftime\": \"Wednesday, 2024-10-16 14:00:00\", \"end_strftime\": \"Wednesday, 2024-10-16 16:00:00\"}], \"range\": [\"0\", \"1\"], \"total\": \"1\"}",
+      "event_id": "series_s2_check_wednesday",
+      "response_sha256": "f3d3bc2d94d42a0bc0cc0fc3f36839f6d4abc8113993fe8c262d95f19007dd9b"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kalyan Rao",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kalyan Rao"
+      ],
+      "active_vocabulary": {
+        "Kalyan Rao": 50
+      },
+      "vocabulary_sha256": "f55e94382a0720567486af25d86dd6701ec92930ea3b5dbb4c635d5f1da59cc7"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Dadar East",
+          "kind": "place",
+          "source": "stage1.existing_catalog.2",
+          "reason": "独特地名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Kalyan Rao",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_lookup",
+          "reason": "工具响应中出现的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Shanti Niketan",
+          "kind": "place",
+          "source": "stage1.existing_catalog.3",
+          "reason": "独特地名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Dadar East",
+        "Shanti Niketan"
+      ],
+      "active_vocabulary": {
+        "Kalyan Rao": 50,
+        "Dadar East": 50,
+        "Shanti Niketan": 50
+      },
+      "vocabulary_sha256": "9b04fab3ea9c1455519c51b383a1476286d2248ca74752ca8044ad35d15adc6b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Mumbai City Hall",
+          "kind": "organization",
+          "source": "stage2.tool_response.series_s2_check_wednesday",
+          "reason": "独特机构/地点名称",
+          "weight": 50
+        },
+        {
+          "text": "Kuldip Saini",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_check_wednesday",
+          "reason": "工具响应中新出现的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Mumbai City Hall",
+        "Kuldip Saini",
+        "Rohan Kumar"
+      ],
+      "active_vocabulary": {
+        "Kalyan Rao": 50,
+        "Dadar East": 50,
+        "Shanti Niketan": 50,
+        "Mumbai City Hall": 50,
+        "Kuldip Saini": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "d6ce3df13ac243208b5d966caf4f4616c22e135ae3a06afd4365d656c926794e"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kalyan ji",
+    "Foucault",
+    "Mumbai",
+    "Maharashtra",
+    "Rohan",
+    "Conference Room"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:42.446067+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

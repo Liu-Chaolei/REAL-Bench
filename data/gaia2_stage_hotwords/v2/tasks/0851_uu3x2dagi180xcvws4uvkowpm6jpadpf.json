@@ -1,0 +1,132 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0851_uu3x2dagi180xcvws4uvkowpm6jpadpf",
+  "model": "deepseek-flash",
+  "input_sha256": "253d2e0f6860e815354d0520c28412f28e60c91833754b81efd229a9883c2127",
+  "review_input_sha256": "1a7799959df05881b5fc9f21bafe5e050853c2670e001980617d8e33830bf5a0",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "491b45667e3df4cabd0b6d0d36a8638934e24e9bbd455e41552d9349b70e7122",
+  "reference_results_sha256": "7ec5475eec8fc551776fd2beea11ce205b788d743d252ff5fa4c41c1052a04ed",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Nalini Rao",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Rohan Kumar",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-a58a4d26-a81d-4c38-9724-7a1fb6fe17f2.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "New Marine Lines",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f23aeefd-d9bc-4637-bb0c-6217abc5c30b.arguments.end_location"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Aaradhya Rao",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "New Marine Lines",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "具体地名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Nalini Rao",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "New Marine Lines",
+        "Nalini Rao",
+        "Rohan Kumar"
+      ],
+      "active_vocabulary": {
+        "New Marine Lines": 50,
+        "Nalini Rao": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "6602e42432e53a9f8df48095cd99486472bab61b2d831c8ad2e9ce687e37edbc"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Aaradhya Rao",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aaradhya Rao"
+      ],
+      "active_vocabulary": {
+        "New Marine Lines": 50,
+        "Nalini Rao": 50,
+        "Rohan Kumar": 50,
+        "Aaradhya Rao": 50
+      },
+      "vocabulary_sha256": "128ed8fb61971e9e7b0b6a4c327ab565adfa18558bcd8eeceff80191d07f06ec"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "New Marine Lines": 50,
+        "Nalini Rao": 50,
+        "Rohan Kumar": 50,
+        "Aaradhya Rao": 50
+      },
+      "vocabulary_sha256": "128ed8fb61971e9e7b0b6a4c327ab565adfa18558bcd8eeceff80191d07f06ec"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Marine Lines",
+    "Mumbai",
+    "Maharashtra",
+    "Nalini"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:35.256617+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

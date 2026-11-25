@@ -1,0 +1,126 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0928_ihbgtmf866yart8bkcrrqqvjnx9eh1bo",
+  "model": "deepseek-flash",
+  "input_sha256": "53d8f52aa8e28e32df4f0aaab9806c0749cd02f3061c58703b0b0bcac43e82cb",
+  "review_input_sha256": "306e2d24d55a494672c05f684f843c48afe2996eec4ad204f9d10af58919182b",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "59e15c9afb3502a8ea03b579fc9a2d34b5b14573772b67933345cddd88e3d426",
+  "reference_results_sha256": "1248a0f544a9ffaf1999eaee3041e2f4513d92a6ab848198fa442d757cbb3f3d",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Cochinita Pibil",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Kaitlyn Nguyen",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-a91097b1-c4ee-4766-9dad-66883d327a44.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Kaitlyn McAllister",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-a91097b1-c4ee-4766-9dad-66883d327a44.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-a91097b1-c4ee-4766-9dad-66883d327a44.arguments.attendees[2]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Cochinita Pibil",
+          "kind": "custom_name",
+          "source": "stage0.existing_catalog.0",
+          "reason": "具有辨识度的特色菜名，发音困难",
+          "weight": 50
+        },
+        {
+          "text": "Kaitlyn McAllister",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，姓氏拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Kaitlyn Nguyen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，含不常见拼写",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur",
+        "Cochinita Pibil",
+        "Kaitlyn McAllister",
+        "Kaitlyn Nguyen"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Cochinita Pibil": 50,
+        "Kaitlyn McAllister": 50,
+        "Kaitlyn Nguyen": 50
+      },
+      "vocabulary_sha256": "103ac530515a98dde7a9db54b013292661d6100bfd2975dcf0e5ea9d398c8e3e"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Cochinita Pibil": 50,
+        "Kaitlyn McAllister": 50,
+        "Kaitlyn Nguyen": 50
+      },
+      "vocabulary_sha256": "103ac530515a98dde7a9db54b013292661d6100bfd2975dcf0e5ea9d398c8e3e"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Cochinita Pibil": 50,
+        "Kaitlyn McAllister": 50,
+        "Kaitlyn Nguyen": 50
+      },
+      "vocabulary_sha256": "103ac530515a98dde7a9db54b013292661d6100bfd2975dcf0e5ea9d398c8e3e"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:56.270580+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

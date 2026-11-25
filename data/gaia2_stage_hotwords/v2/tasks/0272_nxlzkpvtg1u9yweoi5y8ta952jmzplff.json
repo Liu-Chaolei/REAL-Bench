@@ -1,0 +1,142 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0272_nxlzkpvtg1u9yweoi5y8ta952jmzplff",
+  "model": "deepseek-flash",
+  "input_sha256": "410fc2277aa5b87f441c4ef849764b335e8505b6eddb76a54ed370f8aaac2cae",
+  "review_input_sha256": "d641a1c10834e3654868578f8ad795fbf8bbf757de2806a352ff86f1fb730baf",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "3ed28b6794787a363f169155d2d4603016ac40b18b380d109415090693527f56",
+  "reference_results_sha256": "bf3e16c15880e75dd45fe730542f3ca2b45d0ab5a958d298a5e0f956d548fa5e",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Prague Vinohrady",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-fb84e39c-27f7-40e3-b2e5-efd4b43ef0c4.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Bělehradská",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Milady Horákové",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Náměstí Republiky",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.3": {
+      "stage": 2,
+      "text": "Pražský Palác",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Prague Vinohrady",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "布拉格维诺赫拉迪区，含专有地名，发音较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Prague Vinohrady"
+      ],
+      "active_vocabulary": {
+        "Prague Vinohrady": 50
+      },
+      "vocabulary_sha256": "063374d4f93774d1dc583832fab82dfd67fb97822cbee222e829d50e0259a72e"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Bělehradská",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的街道名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Bělehradská"
+      ],
+      "active_vocabulary": {
+        "Prague Vinohrady": 50,
+        "Bělehradská": 50
+      },
+      "vocabulary_sha256": "b1be3a371c97acfc72fc0e2868101396b323e8d6c711f3ee7cff8872246244bf"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Milady Horákové",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号的街道名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Náměstí Republiky",
+          "kind": "place",
+          "source": "stage2.existing_catalog.2",
+          "reason": "含变音符号的广场名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Pražský Palác",
+          "kind": "place",
+          "source": "stage2.existing_catalog.3",
+          "reason": "含变音符号的专有建筑名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Milady Horákové",
+        "Náměstí Republiky",
+        "Pražský Palác"
+      ],
+      "active_vocabulary": {
+        "Prague Vinohrady": 50,
+        "Bělehradská": 50,
+        "Milady Horákové": 50,
+        "Náměstí Republiky": 50,
+        "Pražský Palác": 50
+      },
+      "vocabulary_sha256": "f546c1eebbc1179aec533be5a0a538337d7e33c3a8dceea07f45fdb254e43eee"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Prague Palace",
+    "Prague 6 Luxury"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:50.805466+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,109 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0302_f3h06qnxul65vq5855m4bw4eo3zkx3p1",
+  "model": "deepseek-flash",
+  "input_sha256": "7cf957163f157b08e149ae1928ce1332db03579273aa7bc658cb5edd0f7ae5e1",
+  "review_input_sha256": "f423ddc6c272aaaa96c348b80f35190cc435018c3d83f9436a9a456287f69d96",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "5efaacde2e8b04745cef9f39eba223bc1a20c73116e1a3edef65b7f50fe617f9",
+  "reference_results_sha256": "5c9f4e7286d7e98f10fcd2e3b549c1ef8dc51ccdda8654957fa885de5287cd73",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Aaradhya Rao",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-b511dfae-ae89-4daf-a27d-da6c27b51f36.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Rohan Kumar",
+      "original_source": "stage1.tool_gt.series_s1_email.arguments.content"
+    },
+    "stage2.tool_response.series_s2_verify": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Call with Aaradhya Rao\", \"start_datetime\": \"1729447200.0\", \"end_datetime\": \"1729450800.0\", \"tag\": \"Personal\", \"description\": \"Short call about the prison reform article idea, ahead of the dinner Aaradhya Rao is attending on 22 October. Contact: aaradhya.rao@gaia2mail.com\", \"location\": null, \"attendees\": [\"Aaradhya Rao\"], \"start_strftime\": \"Sunday, 2024-10-20 18:00:00\", \"end_strftime\": \"Sunday, 2024-10-20 19:00:00\"}], \"range\": [\"0\", \"1\"], \"total\": \"1\"}",
+      "event_id": "series_s2_verify",
+      "response_sha256": "ef20f388ee60262e48dd5bfee322383ae133f1838640347a238c136bc96ee389"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aaradhya Rao",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，拼写较难，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aaradhya Rao"
+      ],
+      "active_vocabulary": {
+        "Aaradhya Rao": 50
+      },
+      "vocabulary_sha256": "b26b0aafd96b5ad976017a6304c7ae32f5a8f9c2efb5d954a8476dcbb458e146"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Rohan Kumar"
+      ],
+      "active_vocabulary": {
+        "Aaradhya Rao": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "60a381834b22f5349ae1436811d0b052736cd9bc3b28cf25c6c29814f279741f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aaradhya Rao",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_verify",
+          "reason": "事件中出现的完整人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aaradhya Rao": 50,
+        "Rohan Kumar": 50
+      },
+      "vocabulary_sha256": "60a381834b22f5349ae1436811d0b052736cd9bc3b28cf25c6c29814f279741f"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:03.103752+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

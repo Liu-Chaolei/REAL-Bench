@@ -1,0 +1,160 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0196_ufaomk5pjnrlplm8p4c6m3rwpfeqx57c",
+  "model": "deepseek-flash",
+  "input_sha256": "a8510625e24c33bfbfcb16667cf6a5aef418eb7894f4722210ecdf6c062cc44e",
+  "review_input_sha256": "e0910979e4985fd5e65c37ec9b871ea1ea7e27406f402100a8f2409e7a63df18",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "c0a66a54d262fcec08a96a2db1a103a8019f9cca54e4f58335ec133b718bd7f2",
+  "reference_results_sha256": "9602610b7524e650744512cea6a2b1a7efc0b5fa0dcce21babd02f96b325b78d",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Xóchitl",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-c7d9c3e8-8b52-45e8-b2c7-79286eef1258.arguments.content"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Anastasiya Kuznetsova",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-c7d9c3e8-8b52-45e8-b2c7-79286eef1258.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Utah Playing Cards",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Saoirse Ní Mhaoldhamhnaigh",
+      "original_source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[0]"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Xóchitl Hernández García",
+      "original_source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[1]"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Áine Ní Bhroin",
+      "original_source": "stage1.tool_gt.series_s1_add_event.arguments.attendees[2]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Utah Playing Cards",
+          "kind": "product",
+          "source": "stage0.existing_catalog.2",
+          "reason": "独特产品名",
+          "weight": 50
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "困难完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Xóchitl",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的困难人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Utah Playing Cards",
+        "Anastasiya Kuznetsova",
+        "Xóchitl"
+      ],
+      "active_vocabulary": {
+        "Utah Playing Cards": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Xóchitl": 50
+      },
+      "vocabulary_sha256": "74c65120a7d007f04b55a766f09d1651c94bac50330cbd4317c9fddbc1a740a5"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Saoirse Ní Mhaoldhamhnaigh",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的困难完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Xóchitl Hernández García",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的困难完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Áine Ní Bhroin",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含变音符号的困难完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Saoirse Ní Mhaoldhamhnaigh",
+        "Xóchitl Hernández García",
+        "Áine Ní Bhroin"
+      ],
+      "active_vocabulary": {
+        "Utah Playing Cards": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Xóchitl": 50,
+        "Saoirse Ní Mhaoldhamhnaigh": 50,
+        "Xóchitl Hernández García": 50,
+        "Áine Ní Bhroin": 50
+      },
+      "vocabulary_sha256": "91e8f694941bda81cedcc8848337c7eb57284b26f59c97d2d8be33425f77eb3c"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Utah Playing Cards": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Xóchitl": 50,
+        "Saoirse Ní Mhaoldhamhnaigh": 50,
+        "Xóchitl Hernández García": 50,
+        "Áine Ní Bhroin": 50
+      },
+      "vocabulary_sha256": "91e8f694941bda81cedcc8848337c7eb57284b26f59c97d2d8be33425f77eb3c"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Saoirse",
+    "Áine"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:26.502511+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

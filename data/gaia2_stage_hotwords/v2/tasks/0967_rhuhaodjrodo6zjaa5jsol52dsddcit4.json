@@ -1,0 +1,443 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0967_rhuhaodjrodo6zjaa5jsol52dsddcit4",
+  "model": "deepseek-flash",
+  "input_sha256": "a4382d1f0a40e40299d4f7def35010956cf724ac1d7434ca6107b8a74208d6a9",
+  "review_input_sha256": "165969c4483f5955979b499e68fae5b3968fd41dae3adf670b1c4866caf80262",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "4f2a6eed3a82182103e3cccddb1bbf614f6eb4581b4ce84b345a7eae5dd8b91d",
+  "reference_results_sha256": "3a9c5058b1d8724431153f55ebdad0ed87f9a8261b9beff5389911f76a53f3d7",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kirsten Ravnkilde",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Søren Kjær",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-5d425046-b20c-4bb6-b7b3-13e3047b5248.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Yearning for Herning",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-590556a1-1b6a-4a60-beb2-4891baf23dc8.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Coping in Copenhagen",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-bd2418b6-05d5-4c7e-b2d5-8209ea2bbbce.arguments.content"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Aarhaus Is A Very Very Very Fine Haus",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-33fd1b49-a263-4738-85b8-be50fa573ca7.arguments.content"
+    },
+    "stage1.tool_response.series_s1_1": {
+      "stage": 1,
+      "text": "{\"name\": \"Yearning for Herning\", \"location\": \"Torvegade 50, Herning\", \"zip_code\": \"9000\", \"price\": \"400.0\", \"bedrooms\": \"6\", \"bathrooms\": \"5\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"666d5c1268f1ff115ba5d103d8be179f\", \"amenities\": [\"Laundry\", \"Gym\"], \"saved\": \"True\"}",
+      "event_id": "series_s1_1",
+      "response_sha256": "62c434ca6418062a3a052f169f10ac455df918a1db52ee6d2311865d9178d0b9"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Esbjerg Beachside",
+      "original_source": "stage2.tool_gt.series_s2_6.arguments.content"
+    },
+    "stage2.tool_response.series_s2_1": {
+      "stage": 2,
+      "text": "{\"9707978350844b1a814cfc9341b6f171\": {\"name\": \"København Kompas\", \"location\": \"1574 København V, Copenhagen\", \"zip_code\": \"1574\", \"price\": \"3500\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Apartment\", \"square_footage\": \"2000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"Long term lease\", \"apartment_id\": \"9707978350844b1a814cfc9341b6f171\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\", \"Balcony\", \"Parking\"], \"saved\": \"True\"}, \"ce1e50a35d57484599dd94c821940504\": {\"name\": \"Odense Family Home\", \"location\": \"Odense SV, Odense\", \"zip_code\": \"5200\", \"price\": \"2500\", \"bedrooms\": \"4\", \"bathrooms\": \"2\", \"property_type\": \"House\", \"square_footage\": \"1800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"ce1e50a35d57484599dd94c821940504\", \"amenities\": [\"Garden\", \"Parking\"], \"saved\": \"True\"}, \"ee05674c2fac4cc7b450ec0e3f23fb9a\": {\"name\": \"Viborg City\", \"location\": \"Søndergade 10, Viborg\", \"zip_code\": \"8800\", \"price\": \"5000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"400\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"ee05674c2fac4cc7b450ec0e3f23fb9a\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"069d74e2a3e940778e8859cf26c66c3d\": {\"name\": \"Copenhagen City Living\", \"location\": \"Vesterbro, Copenhagen\", \"zip_code\": \"1620\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"069d74e2a3e940778e8859cf26c66c3d\", \"amenities\": [\"Gym\", \"Laundry\", \"Pool\"], \"saved\": \"True\"}, \"0a942c4408fa4013bf2803d04fdd8944\": {\"name\": \"Esbjerg Waterfront\", \"location\": \"Havnevej 1, 6700 Esbjerg, Esbjerg\", \"zip_code\": \"6700\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"0a942c4408fa4013bf2803d04fdd8944\", \"amenities\": [\"Gym\"], \"saved\": \"True\"}, \"7c29adcc4bcd476ba78661fec333e8ea\": {\"name\": \"Esbjerg Harbour\", \"location\": \"6700 Esbjerg, Esbjerg\", \"zip_code\": \"6700\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"7c29adcc4bcd476ba78661fec333e8ea\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"c5d924af2f374ac48ce45672e4ccc4f9\": {\"name\": \"København Kajak\", \"location\": \"Kajakvej 10, København NV\", \"zip_code\": \"2400\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"c5d924af2f374ac48ce45672e4ccc4f9\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"205406df6dc54f6481227ccabf4d9e55\": {\"name\": \"Herning Hideaway\", \"location\": \"Bredgade 20, Herning\", \"zip_code\": \"7400\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"205406df6dc54f6481227ccabf4d9e55\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"27663723cb564edfbd9e639ac1e530fb\": {\"name\": \"Nordhavn Oasis\", \"location\": \"Østbanegade 55, København N\", \"zip_code\": \"2100\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"27663723cb564edfbd9e639ac1e530fb\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"c6a1b902babb475793a3dbe0001e0668\": {\"name\": \"Århus Syd\", \"location\": \"Sønder Allé 20, Aarhus\", \"zip_code\": \"8000\", \"price\": \"1600\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"c6a1b902babb475793a3dbe0001e0668\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"d8ffe9fa58e94f7e8428cf32f643ecd5\": {\"name\": \"København K\", \"location\": \"Købmagergade 20, Copenhagen\", \"zip_code\": \"1150\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1400\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"d8ffe9fa58e94f7e8428cf32f643ecd5\", \"amenities\": [\"Pool\", \"Parking\"], \"saved\": \"True\"}, \"127255efb947433f86a5f646b54da257\": {\"name\": \"Herning Centrum\", \"location\": \"Torvegade 15, Herning\", \"zip_code\": \"7400\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"127255efb947433f86a5f646b54da257\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"541d746b4ef942e3b50f49cc4afd0bdc\": {\"name\": \"Aalborg Waterfront\", \"location\": \"Ved Stranden 10, Aalborg\", \"zip_code\": \"9000\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"541d746b4ef942e3b50f49cc4afd0bdc\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"132dd417fdf1457cbac598f28011edf8\": {\"name\": \"Odense City Living\", \"location\": \"Østre Stationsvej 20, Odense\", \"zip_code\": \"5000\", \"price\": \"1200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"132dd417fdf1457cbac598f28011edf8\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"007788821a2d4d36bda51ac1d37e89e9\": {\"name\": \"Herning City Center\", \"location\": \"Torvet 12, Herning\", \"zip_code\": \"7400\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"007788821a2d4d36bda51ac1d37e89e9\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"04a9a58b00394871a28e7113ea042220\": {\"name\": \"Aarhus City Center\", \"location\": \"Store Torv 12, Aarhus C\", \"zip_code\": \"8000\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"04a9a58b00394871a28e7113ea042220\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"78819661eb27441db483421a7f02108f\": {\"name\": \"Esbjerg Havnefront\", \"location\": \"Havneboulevarden 10, Esbjerg\", \"zip_code\": \"6700\", \"price\": \"2500\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1400\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"No pets\", \"lease_term\": \"Long term lease\", \"apartment_id\": \"78819661eb27441db483421a7f02108f\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"e1498c67dcad40799e99f852b2e79f28\": {\"name\": \"Aarhus Syd\", \"location\": \"Sønder Allé 10, Aarhus\", \"zip_code\": \"8000\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"e1498c67dcad40799e99f852b2e79f28\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"bed0653112da4328b1bfc4c524bcd3c6\": {\"name\": \"Odense Kanalhus\", \"location\": \"Kanalvej 17, Odense\", \"zip_code\": \"5000\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"bed0653112da4328b1bfc4c524bcd3c6\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"df9e1362a56e4d328e075221b04a8c8b\": {\"name\": \"Aalborg Syd\", \"location\": \"9220 Aalborg Ø, Aalborg\", \"zip_code\": \"9220\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1400\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"df9e1362a56e4d328e075221b04a8c8b\", \"amenities\": [\"Gym\", \"Laundry\", \"Balcony\"], \"saved\": \"True\"}, \"69374fe219994ee596118c529d299109\": {\"name\": \"Aalborg Apartment Living\", \"location\": \"Vestre Havnepromenade, Aalborg\", \"zip_code\": \"9000\", \"price\": \"1200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"69374fe219994ee596118c529d299109\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"c8dbacd4138242b88da89920943eccbe\": {\"name\": \"København Kaj\", \"location\": \"Nordhavn, Copenhagen\", \"zip_code\": \"2100\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"c8dbacd4138242b88da89920943eccbe\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\"], \"saved\": \"True\"}, \"ce60cc438c3d474aa128ac073fe36d88\": {\"name\": \"København Kvarter\", \"location\": \"Enghavevej 14, Copenhagen\", \"zip_code\": \"1670\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"1800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"ce60cc438c3d474aa128ac073fe36d88\", \"amenities\": [\"Garden\", \"Laundry\", \"Balcony\"], \"saved\": \"True\"}, \"256336dd10a9498a93af3e86c346ec43\": {\"name\": \"Odense Nørre\", \"location\": \"Nørregade, Odense\", \"zip_code\": \"5000\", \"price\": \"2600\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1100\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"256336dd10a9498a93af3e86c346ec43\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"188ac58ee6e847e98f11bb3eceb1b195\": {\"name\": \"København Syd\", \"location\": \"Sydhavnsgade 20, København SV\", \"zip_code\": \"2450\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"188ac58ee6e847e98f11bb3eceb1b195\", \"amenities\": [\"Gym\", \"Parking\"], \"saved\": \"True\"}, \"5666931713a54053a1d34b7d91434669\": {\"name\": \"Aalborg Værftet\", \"location\": \"Værftsgade 22, Aalborg\", \"zip_code\": \"9000\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1100\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"5666931713a54053a1d34b7d91434669\", \"amenities\": [\"Gym\", \"Parking\"], \"saved\": \"True\"}, \"d70c189cff414e538e52b2b132f5552a\": {\"name\": \"Esbjerg Beachside\", \"location\": \"Strandvejen 100, Esbjerg\", \"zip_code\": \"6700\", \"price\": \"900\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"700\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"d70c189cff414e538e52b2b132f5552a\", \"amenities\": [\"Pool\"], \"saved\": \"True\"}, \"f70f5d44771946239ff7b3b6411d768b\": {\"name\": \"Silkeborg Sanctuary\", \"location\": \"Silkeborg C, Silkeborg\", \"zip_code\": \"8600\", \"price\": \"1200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"700\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"Month-to-month\", \"apartment_id\": \"f70f5d44771946239ff7b3b6411d768b\", \"amenities\": [], \"saved\": \"True\"}, \"7d2acdf123284cc2983338d571913111\": {\"name\": \"Odense Øst\", \"location\": \"5230 Odense M, Odense\", \"zip_code\": \"5230\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"7d2acdf123284cc2983338d571913111\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"144699fe69e647f0aa31986c07fa42d6\": {\"name\": \"Aalborg Harbour\", \"location\": \"Kragelundvej 10, Aalborg\", \"zip_code\": \"9000\", \"price\": \"1000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"144699fe69e647f0aa31986c07fa42d6\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"6bdd3050003b0386b6e8f13894927b45\": {\"name\": \"Aarhaus Is A Very Very Very Fine Haus\", \"location\": \"Aarhus A, Aarhus\", \"zip_code\": \"8000\", \"price\": \"900.0\", \"bedrooms\": \"2\", \"bathrooms\": \"5\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Basement\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"6bdd3050003b0386b6e8f13894927b45\", \"amenities\": [\"Laundry\", \"Gym\"], \"saved\": \"True\"}, \"666d5c1268f1ff115ba5d103d8be179f\": {\"name\": \"Yearning for Herning\", \"location\": \"Torvegade 50, Herning\", \"zip_code\": \"9000\", \"price\": \"400.0\", \"bedrooms\": \"6\", \"bathrooms\": \"5\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"666d5c1268f1ff115ba5d103d8be179f\", \"amenities\": [\"Laundry\", \"Gym\"], \"saved\": \"True\"}, \"651a5feb0f3d0bdc017d443fc731c415\": {\"name\": \"Coping in Copenhagen\", \"location\": \"Vesterbro 12, Copenhagen\", \"zip_code\": \"1620\", \"price\": \"700.0\", \"bedrooms\": \"2\", \"bathrooms\": \"5\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"651a5feb0f3d0bdc017d443fc731c415\", \"amenities\": [\"Laundry\", \"Gym\"], \"saved\": \"True\"}}",
+      "event_id": "series_s2_1",
+      "response_sha256": "fde0bb0797cfb26ff4b80fcdbe48403a4b8d101542031cee9702166f5496fed5"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aarhaus Is A Very Very Very Fine Haus",
+          "kind": "custom_name",
+          "source": "stage0.existing_catalog.4",
+          "reason": "独特长房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Coping in Copenhagen",
+          "kind": "custom_name",
+          "source": "stage0.existing_catalog.3",
+          "reason": "独特房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Yearning for Herning",
+          "kind": "custom_name",
+          "source": "stage0.existing_catalog.2",
+          "reason": "独特房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Kirsten Ravnkilde",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含特殊拼写的人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含丹麦语变音符号的人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aarhaus Is A Very Very Very Fine Haus",
+        "Coping in Copenhagen",
+        "Yearning for Herning",
+        "Kirsten Ravnkilde",
+        "Søren Kjær"
+      ],
+      "active_vocabulary": {
+        "Aarhaus Is A Very Very Very Fine Haus": 50,
+        "Coping in Copenhagen": 50,
+        "Yearning for Herning": 50,
+        "Kirsten Ravnkilde": 50,
+        "Søren Kjær": 50
+      },
+      "vocabulary_sha256": "e76ecbbf97bfea9d9fca89effcde0f53ef51840377cc12126f15e17e270d2cb8"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Torvegade 50, Herning",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_1",
+          "reason": "具体地址，含地名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Torvegade 50, Herning"
+      ],
+      "active_vocabulary": {
+        "Aarhaus Is A Very Very Very Fine Haus": 50,
+        "Coping in Copenhagen": 50,
+        "Yearning for Herning": 50,
+        "Kirsten Ravnkilde": 50,
+        "Søren Kjær": 50,
+        "Torvegade 50, Herning": 50
+      },
+      "vocabulary_sha256": "051e4198aaa8e15e839c14e92895c4a4c120aeedf48bec553c95f08aa572da36"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aalborg Apartment Living",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Aarhus City Center",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Copenhagen City Living",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Herning City Center",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Odense City Living",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Odense Family Home",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Aalborg Harbour",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Aalborg Syd",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Aalborg Værftet",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "含变音符号的房产名",
+          "weight": 50
+        },
+        {
+          "text": "Aalborg Waterfront",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Aarhus Syd",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Esbjerg Beachside",
+          "kind": "custom_name",
+          "source": "stage2.existing_catalog.0",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Esbjerg Harbour",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Esbjerg Havnefront",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Esbjerg Waterfront",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Herning Centrum",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Herning Hideaway",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "København K",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "含变音符号的房产名",
+          "weight": 50
+        },
+        {
+          "text": "København Kaj",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "含变音符号的房产名",
+          "weight": 50
+        },
+        {
+          "text": "København Kajak",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "含变音符号的独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "København Kompas",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "含变音符号的独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "København Kvarter",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "含变音符号的房产名",
+          "weight": 50
+        },
+        {
+          "text": "København Syd",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "含变音符号的房产名",
+          "weight": 50
+        },
+        {
+          "text": "Nordhavn Oasis",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Odense Kanalhus",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Odense Nørre",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "含变音符号的房产名",
+          "weight": 50
+        },
+        {
+          "text": "Odense Øst",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "含变音符号的房产名",
+          "weight": 50
+        },
+        {
+          "text": "Silkeborg Sanctuary",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Viborg City",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "独特房产名",
+          "weight": 50
+        },
+        {
+          "text": "Århus Syd",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_1",
+          "reason": "含变音符号的房产名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aalborg Apartment Living",
+        "Aarhus City Center",
+        "Copenhagen City Living",
+        "Herning City Center",
+        "Odense City Living",
+        "Odense Family Home",
+        "Aalborg Harbour",
+        "Aalborg Syd",
+        "Aalborg Værftet",
+        "Aalborg Waterfront",
+        "Aarhus Syd",
+        "Esbjerg Beachside",
+        "Esbjerg Harbour",
+        "Esbjerg Havnefront",
+        "Esbjerg Waterfront",
+        "Herning Centrum",
+        "Herning Hideaway",
+        "København K",
+        "København Kaj",
+        "København Kajak",
+        "København Kompas",
+        "København Kvarter",
+        "København Syd",
+        "Nordhavn Oasis",
+        "Odense Kanalhus",
+        "Odense Nørre",
+        "Odense Øst",
+        "Silkeborg Sanctuary",
+        "Viborg City",
+        "Århus Syd"
+      ],
+      "active_vocabulary": {
+        "Aarhaus Is A Very Very Very Fine Haus": 50,
+        "Coping in Copenhagen": 50,
+        "Yearning for Herning": 50,
+        "Kirsten Ravnkilde": 50,
+        "Søren Kjær": 50,
+        "Torvegade 50, Herning": 50,
+        "Aalborg Apartment Living": 50,
+        "Aarhus City Center": 50,
+        "Copenhagen City Living": 50,
+        "Herning City Center": 50,
+        "Odense City Living": 50,
+        "Odense Family Home": 50,
+        "Aalborg Harbour": 50,
+        "Aalborg Syd": 50,
+        "Aalborg Værftet": 50,
+        "Aalborg Waterfront": 50,
+        "Aarhus Syd": 50,
+        "Esbjerg Beachside": 50,
+        "Esbjerg Harbour": 50,
+        "Esbjerg Havnefront": 50,
+        "Esbjerg Waterfront": 50,
+        "Herning Centrum": 50,
+        "Herning Hideaway": 50,
+        "København K": 50,
+        "København Kaj": 50,
+        "København Kajak": 50,
+        "København Kompas": 50,
+        "København Kvarter": 50,
+        "København Syd": 50,
+        "Nordhavn Oasis": 50,
+        "Odense Kanalhus": 50,
+        "Odense Nørre": 50,
+        "Odense Øst": 50,
+        "Silkeborg Sanctuary": 50,
+        "Viborg City": 50,
+        "Århus Syd": 50
+      },
+      "vocabulary_sha256": "2e86a16d3d37438e0da9587cfd748ed858957f1ff07187f92304dae143213f75"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:05.089738+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

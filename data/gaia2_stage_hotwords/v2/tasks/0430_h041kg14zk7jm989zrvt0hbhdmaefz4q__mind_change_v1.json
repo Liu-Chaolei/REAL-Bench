@@ -1,0 +1,150 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0430_h041kg14zk7jm989zrvt0hbhdmaefz4q__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "4648fe9951ce2cebd05d1008eb349265d575efa3f0361682509d6419a2b798a5",
+  "review_input_sha256": "4b075c95e7070c1848b60550b5c24525cbfc2674f713c2c309f650a8d0e14866",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "2e79bc06bc6049c309c752b923e4c5d465fd353bcc026caf1f25148a65488f44",
+  "reference_results_sha256": "b0c1e0fdd11d615e10ea016e5539a29a614ed3b7c554cd20b190b850bab3ec37",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Brno Bliss",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-8219ec80-afd9-480b-8f5a-00af61abad55.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Brno Lake Views",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Kvido Nováček",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Brno Student Housing",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.tool_response.series_s2_search": {
+      "stage": 2,
+      "text": "{\"102cb58dd4f640b9b0c4b620fa59764d\": {\"name\": \"Brno Student Housing\", \"location\": \"ul. Křížkovského 15, Brno\", \"zip_code\": \"602 00\", \"price\": \"1000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"102cb58dd4f640b9b0c4b620fa59764d\", \"amenities\": [\"Parking\"], \"saved\": \"False\"}, \"19e67546be804a57968818ed96935df7\": {\"name\": \"Brno Student Living\", \"location\": \"Kounicova 12, Brno\", \"zip_code\": \"602 00\", \"price\": \"1000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"400\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"19e67546be804a57968818ed96935df7\", \"amenities\": [\"Parking\"], \"saved\": \"False\"}}",
+      "event_id": "series_s2_search",
+      "response_sha256": "9e7d97bc38b0ddee773f99fde43a4f94fd59b0173052d7a5ddb6727cd8f5e166"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Brno Bliss",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "布尔诺公寓专有名称，含地名，具辨识度",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Brno Bliss"
+      ],
+      "active_vocabulary": {
+        "Brno Bliss": 50
+      },
+      "vocabulary_sha256": "7afb37361c146b235d8f1d1f3ddaba3dc8f5fcf89a51419437f28b07e7969f24"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Brno Lake Views",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "布尔诺公寓专有名称，含地名，具辨识度",
+          "weight": 50
+        },
+        {
+          "text": "Kvido Nováček",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Brno Lake Views",
+        "Kvido Nováček"
+      ],
+      "active_vocabulary": {
+        "Brno Bliss": 50,
+        "Brno Lake Views": 50,
+        "Kvido Nováček": 50
+      },
+      "vocabulary_sha256": "f977eba9cb1b949e5820f60a14e8ef84471e506ad08306d1928ed915b7b78386"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Brno Student Housing",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "布尔诺学生公寓专有名称，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Brno Student Living",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search",
+          "reason": "布尔诺学生公寓专有名称，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Křížkovského",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search",
+          "reason": "含变音符号的街道名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Brno Student Housing",
+        "Brno Student Living",
+        "Křížkovského"
+      ],
+      "active_vocabulary": {
+        "Brno Bliss": 50,
+        "Brno Lake Views": 50,
+        "Kvido Nováček": 50,
+        "Brno Student Housing": 50,
+        "Brno Student Living": 50,
+        "Křížkovského": 50
+      },
+      "vocabulary_sha256": "fcec8439840a14efd3555665c8a1d7fa206543d898e8953443913db7fa599cd9"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:24.570484+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

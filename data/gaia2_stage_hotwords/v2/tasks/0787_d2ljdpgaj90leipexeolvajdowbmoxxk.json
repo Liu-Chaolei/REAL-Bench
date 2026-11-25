@@ -1,0 +1,146 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0787_d2ljdpgaj90leipexeolvajdowbmoxxk",
+  "model": "deepseek-flash",
+  "input_sha256": "5cc58cb9a0cd87e614d76841f1316cd7df460eaf8534fe87adfbdfd190610042",
+  "review_input_sha256": "cd59528a8c115a9fc434132211701ee5eb1688b3d3e368300de50b4c921e6cdf",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "e61a6482391b227deaf6985f14664eaa0104e740ea7fc8087443ba275bbf31a7",
+  "reference_results_sha256": "ff7aebc7e4c736baffd044fa6ac69184aed4e4ba63303b7ace904a8046ed76e1",
+  "sources": {
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Liesbeth Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-a4d7e249-fb0d-4192-8eef-0db85bba14ab.arguments.content"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Karel Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-fcaf8aae-8ab5-455a-9f51-7be8c2c8f4fb.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Émile Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-ee71b290-ca66-4bdb-9460-8ddeb92365ee.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "Aurélien Dumont",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-c5ab4685-5acf-4eef-8800-32483a62528e.arguments.attendees[0]"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Jawaher Al-Mansour",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien Dumont",
+          "kind": "person",
+          "source": "stage0.existing_catalog.6",
+          "reason": "完整人名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Karel Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整人名，含较难拼写姓氏",
+          "weight": 50
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整人名，含较难拼写姓氏",
+          "weight": 50
+        },
+        {
+          "text": "Émile Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "完整人名，含变音符号与难拼姓氏",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien Dumont",
+        "Karel Vandenberghe",
+        "Liesbeth Vandenberghe",
+        "Émile Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Aurélien Dumont": 50,
+        "Karel Vandenberghe": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Émile Vandenberghe": 50
+      },
+      "vocabulary_sha256": "f5c363e44a37928ba52f0bfba02381482ff07520091fc32a99ed6e9a41f1f320"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien Dumont": 50,
+        "Karel Vandenberghe": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Émile Vandenberghe": 50
+      },
+      "vocabulary_sha256": "f5c363e44a37928ba52f0bfba02381482ff07520091fc32a99ed6e9a41f1f320"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Jawaher Al-Mansour",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整人名，含难拼写姓氏",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Jawaher Al-Mansour"
+      ],
+      "active_vocabulary": {
+        "Aurélien Dumont": 50,
+        "Karel Vandenberghe": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Émile Vandenberghe": 50,
+        "Jawaher Al-Mansour": 50
+      },
+      "vocabulary_sha256": "377e816e5c25a5fdb353ba4f085bdccaa7d8f281df38ccb6b90623b5134826f5"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Karel",
+    "Émile",
+    "Aurélien"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:22.089547+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

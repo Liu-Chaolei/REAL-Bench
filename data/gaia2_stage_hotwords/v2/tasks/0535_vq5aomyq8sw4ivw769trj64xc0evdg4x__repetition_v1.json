@@ -1,0 +1,342 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0535_vq5aomyq8sw4ivw769trj64xc0evdg4x__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "ff1bf2e5cbfd393e0ae6d8d66a9e96c8f2f24305378504a377702104d044c2c0",
+  "review_input_sha256": "2376616f2d0412f9e728ef41d1aab52b6e5e7b841ec05ee2db93b16d36f5fd2a",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "3afb033f045833bd7f8ef8a64358dd91c221a3c1929984126e103b6010e87400",
+  "reference_results_sha256": "b93cda70e12088cbbda6a1af29ca29d930023edc96dff1db172277e7ec4c4eb3",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kamil",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.tool_response.series_s1_verify": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"0112d80b0df14caaa35ee4c545fa8d67\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1729539000\", \"end_datetime\": \"1729546200\", \"tag\": \"Social\", \"description\": \"Dinner with friends at a local restaurant.\", \"location\": \"Restaurant in Basel\", \"attendees\": [\"Aurélien Vandenberghe\", \"Liesbeth Vandenberghe\", \"Aurélie Wyss\"], \"start_strftime\": \"Monday, 2024-10-21 19:30:00\", \"end_strftime\": \"Monday, 2024-10-21 21:30:00\"}, {\"event_id\": \"03e4f517b96b4d739d35f6239fc241f6\", \"title\": \"Book Club Meeting\", \"start_datetime\": \"1730142000\", \"end_datetime\": \"1730149200\", \"tag\": \"Social\", \"description\": \"Discussion of the latest book club selection.\", \"location\": \"Book Club Member's Home\", \"attendees\": [\"Ursula Wiederkehr\", \"Nadja Ramadanović\", \"Ursula Zbinden\"], \"start_strftime\": \"Monday, 2024-10-28 19:00:00\", \"end_strftime\": \"Monday, 2024-10-28 21:00:00\"}, {\"event_id\": \"06638dd0b5384ca4b8bf6507b5cb5796\", \"title\": \"Phone Call with Kenji Nakamura\", \"start_datetime\": \"1730196000\", \"end_datetime\": \"1730199600\", \"tag\": \"Work\", \"description\": \"Discussion of research project with Kenji Nakamura.\", \"location\": \"Home Office\", \"attendees\": [\"Ursula Wiederkehr\"], \"start_strftime\": \"Tuesday, 2024-10-29 10:00:00\", \"end_strftime\": \"Tuesday, 2024-10-29 11:00:00\"}, {\"event_id\": \"06735ad4753545de96d6c7a280652c7e\", \"title\": \"Writing Session\", \"start_datetime\": \"1730210400\", \"end_datetime\": \"1730217600\", \"tag\": \"Work\", \"description\": \"Writing session for ongoing research project.\", \"location\": \"Home Office\", \"attendees\": [\"Ursula Wiederkehr\"], \"start_strftime\": \"Tuesday, 2024-10-29 14:00:00\", \"end_strftime\": \"Tuesday, 2024-10-29 16:00:00\"}, {\"event_id\": \"2cc2f957b6f1463886878a4f4eb85fdf\", \"title\": \"Historical Research Meeting\", \"start_datetime\": \"1729760400\", \"end_datetime\": \"1729767600\", \"tag\": \"Work\", \"description\": \"Discuss ongoing research project with colleagues.\", \"location\": \"University of Basel\", \"attendees\": [\"Aurélien Vandenberghe\", \"Liesbeth Vandenberghe\", \"Aurélie Wyss\"], \"start_strftime\": \"Thursday, 2024-10-24 09:00:00\", \"end_strftime\": \"Thursday, 2024-10-24 11:00:00\"}, {\"event_id\": \"311db161a9be4ab09ad90d5abd5821e1\", \"title\": \"Museum Visit\", \"start_datetime\": \"1730376000\", \"end_datetime\": \"1730383200\", \"tag\": \"Personal\", \"description\": \"Visit to the Basel Art Museum.\", \"location\": \"Basel Art Museum\", \"attendees\": [\"Ursula Wiederkehr\"], \"start_strftime\": \"Thursday, 2024-10-31 12:00:00\", \"end_strftime\": \"Thursday, 2024-10-31 14:00:00\"}, {\"event_id\": \"3f3831c5243a4130944b3ae00b829b9c\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1729798200\", \"end_datetime\": \"1729805400\", \"tag\": \"Social\", \"description\": \"Dinner with friends at a local restaurant.\", \"location\": \"Restaurant in Basel\", \"attendees\": [\"Aurélien Vandenberghe\", \"Liesbeth Vandenberghe\", \"Aurélie Wyss\"], \"start_strftime\": \"Thursday, 2024-10-24 19:30:00\", \"end_strftime\": \"Thursday, 2024-10-24 21:30:00\"}, {\"event_id\": \"5f53265e7d964b8b83ce5dd3692b4d33\", \"title\": \"Historical Research Seminar\", \"start_datetime\": \"1729591200\", \"end_datetime\": \"1729598400\", \"tag\": \"Work\", \"description\": \"Attend a seminar on historical research methods.\", \"location\": \"University of Basel\", \"attendees\": [\"Aurélien Vandenberghe\", \"Liesbeth Vandenberghe\", \"Aurélie Wyss\"], \"start_strftime\": \"Tuesday, 2024-10-22 10:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 12:00:00\"}, {\"event_id\": \"622f1afd83b44379b860c48d9d641b87\", \"title\": \"Phone Call with Kenji Nakamura\", \"start_datetime\": \"1729616400\", \"end_datetime\": \"1729620000\", \"tag\": \"Work\", \"description\": \"Discuss a research project with Kenji Nakamura.\", \"location\": \"Home\", \"attendees\": [\"Kenji Nakamura\"], \"start_strftime\": \"Tuesday, 2024-10-22 17:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 18:00:00\"}, {\"event_id\": \"648213eb110645babb697c88f17f38fa\", \"title\": \"Coffee Break\", \"start_datetime\": \"1729504800\", \"end_datetime\": \"1729508400\", \"tag\": \"Social\", \"description\": \"Catch up with friends over coffee.\", \"location\": \"Café in Basel\", \"attendees\": [\"Aurélie Wyss\", \"Saskia Wyss\"], \"start_strftime\": \"Monday, 2024-10-21 10:00:00\", \"end_strftime\": \"Monday, 2024-10-21 11:00:00\"}, {\"event_id\": \"74e1475b448a43569bae0d943eda8d2c\", \"title\": \"Dinner with Anastasiya Zolotova\", \"start_datetime\": \"1729969200\", \"end_datetime\": \"1729980000\", \"tag\": \"Social\", \"description\": \"Catch up with Anastasiya Zolotova over dinner\", \"location\": \"Restaurant in Basel\", \"attendees\": [\"Anastasiya Zolotova\"], \"start_strftime\": \"Saturday, 2024-10-26 19:00:00\", \"end_strftime\": \"Saturday, 2024-10-26 22:00:00\"}, {\"event_id\": \"7a894805c53740f99aad27b747b30545\", \"title\": \"Lunch Break\", \"start_datetime\": \"1729598400\", \"end_datetime\": \"1729602000\", \"tag\": \"Social\", \"description\": \"Meet a friend for lunch.\", \"location\": \"Café in Basel\", \"attendees\": [\"Saskia Wyss\"], \"start_strftime\": \"Tuesday, 2024-10-22 12:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 13:00:00\"}, {\"event_id\": \"7dd7ec92e3c84164b2247e301d603f97\", \"title\": \"Dinner with Family\", \"start_datetime\": \"1730224800\", \"end_datetime\": \"1730232000\", \"tag\": \"Social\", \"description\": \"Dinner with family members.\", \"location\": \"Family Member's Home\", \"attendees\": [\"Ursula Wiederkehr\", \"Ursula Zwygart\", \"Karel De Clercq\"], \"start_strftime\": \"Tuesday, 2024-10-29 18:00:00\", \"end_strftime\": \"Tuesday, 2024-10-29 20:00:00\"}, {\"event_id\": \"86578b51cda940a881d4645d60e8bba3\", \"title\": \"Historical Research Meeting\", \"start_datetime\": \"1730124000\", \"end_datetime\": \"1730131200\", \"tag\": \"Work\", \"description\": \"Meeting with colleagues to discuss ongoing research project.\", \"location\": \"University of Basel\", \"attendees\": [\"Ursula Wiederkehr\", \"Katarzyna Woźniak\", \"Zofia Kowalska\"], \"start_strftime\": \"Monday, 2024-10-28 14:00:00\", \"end_strftime\": \"Monday, 2024-10-28 16:00:00\"}, {\"event_id\": \"92fdd6f3a2144ac691aa33650c7bbc5f\", \"title\": \"Coffee Break with Colleagues\", \"start_datetime\": \"1730386800\", \"end_datetime\": \"1730392200\", \"tag\": \"Social\", \"description\": \"Catch up with colleagues over coffee.\", \"location\": \"Café in Basel\", \"attendees\": [\"Ursula Wiederkehr\", \"Maarten Vandenberghe\", \"Nadja Ramadanović\"], \"start_strftime\": \"Thursday, 2024-10-31 15:00:00\", \"end_strftime\": \"Thursday, 2024-10-31 16:30:00\"}, {\"event_id\": \"97a24d94a323444c8ebf203d027a4ac0\", \"title\": \"Lunch Break\", \"start_datetime\": \"1729771200\", \"end_datetime\": \"1729774800\", \"tag\": \"Social\", \"description\": \"Meet a friend for lunch.\", \"location\": \"Café in Basel\", \"attendees\": [\"Saskia Wyss\"], \"start_strftime\": \"Thursday, 2024-10-24 12:00:00\", \"end_strftime\": \"Thursday, 2024-10-24 13:00:00\"}, {\"event_id\": \"9adc46bf002541268a479fe1eb6980a5\", \"title\": \"Museum Visit\", \"start_datetime\": \"1729605600\", \"end_datetime\": \"1729612800\", \"tag\": \"Hobby\", \"description\": \"Visit a local museum to explore historical exhibits.\", \"location\": \"Museum in Basel\", \"attendees\": [], \"start_strftime\": \"Tuesday, 2024-10-22 14:00:00\", \"end_strftime\": \"Tuesday, 2024-10-22 16:00:00\"}, {\"event_id\": \"9c47e694db3a4855aa5bc39259e091ca\", \"title\": \"Museum Visit\", \"start_datetime\": \"1730116800\", \"end_datetime\": \"1730124000\", \"tag\": \"Personal\", \"description\": \"Visit to the Basel Historical Museum.\", \"location\": \"Basel Historical Museum\", \"attendees\": [\"Ursula Wiederkehr\"], \"start_strftime\": \"Monday, 2024-10-28 12:00:00\", \"end_strftime\": \"Monday, 2024-10-28 14:00:00\"}, {\"event_id\": \"9c4ca9dd12ae4f22a503053e9407064b\", \"title\": \"Research Meeting with Kazimierz Wojciechowski\", \"start_datetime\": \"1729864800\", \"end_datetime\": \"1729872000\", \"tag\": \"Research\", \"description\": \"Discuss research project with Kazimierz Wojciechowski\", \"location\": \"Basel University\", \"attendees\": [\"Kazimierz Wojciechowski\"], \"start_strftime\": \"Friday, 2024-10-25 14:00:00\", \"end_strftime\": \"Friday, 2024-10-25 16:00:00\"}, {\"event_id\": \"a8b064173dd647bc98bf43cc121b77ab\", \"title\": \"Research Meeting\", \"start_datetime\": \"1730282400\", \"end_datetime\": \"1730289600\", \"tag\": \"Work\", \"description\": \"Meeting with colleagues to discuss research project.\", \"location\": \"University of Basel\", \"attendees\": [\"Ursula Wiederkehr\", \"Maarten Vandenberghe\", \"Nadja Ramadanović\"], \"start_strftime\": \"Wednesday, 2024-10-30 10:00:00\", \"end_strftime\": \"Wednesday, 2024-10-30 12:00:00\"}, {\"event_id\": \"ba1df3c3798e443d8a5e2b4b907f2ef8\", \"title\": \"Coffee Break\", \"start_datetime\": \"1729850400\", \"end_datetime\": \"1729854000\", \"tag\": \"Social\", \"description\": \"Take a break and grab a coffee.\", \"location\": \"Café in Basel\", \"attendees\": [\"Aurélie Wyss\"], \"start_strftime\": \"Friday, 2024-10-25 10:00:00\", \"end_strftime\": \"Friday, 2024-10-25 11:00:00\"}, {\"event_id\": \"c1a094414f02415d98c1730fe573c490\", \"title\": \"Seminar on Historical Research\", \"start_datetime\": \"1730296800\", \"end_datetime\": \"1730304000\", \"tag\": \"Work\", \"description\": \"Seminar on historical research methods.\", \"location\": \"University of Basel\", \"attendees\": [\"Ursula Wiederkehr\", \"Zofia Kowalska\", \"Katarzyna Woźniak\"], \"start_strftime\": \"Wednesday, 2024-10-30 14:00:00\", \"end_strftime\": \"Wednesday, 2024-10-30 16:00:00\"}, {\"event_id\": \"c5fd9fdb621545d39ee26dc96789dbe8\", \"title\": \"Phone Call with Akira Nakamura\", \"start_datetime\": \"1729789200\", \"end_datetime\": \"1729792800\", \"tag\": \"Work\", \"description\": \"Discuss a research project with Akira Nakamura.\", \"location\": \"Home\", \"attendees\": [\"Akira Nakamura\"], \"start_strftime\": \"Thursday, 2024-10-24 17:00:00\", \"end_strftime\": \"Thursday, 2024-10-24 18:00:00\"}, {\"event_id\": \"c8579b51437643cb8a266b4b713dafac\", \"title\": \"Coffee Break\", \"start_datetime\": \"1729677600\", \"end_datetime\": \"1729681200\", \"tag\": \"Social\", \"description\": \"Take a break and grab a coffee.\", \"location\": \"Café in Basel\", \"attendees\": [\"Aurélie Wyss\"], \"start_strftime\": \"Wednesday, 2024-10-23 10:00:00\", \"end_strftime\": \"Wednesday, 2024-10-23 11:00:00\"}, {\"event_id\": \"cde5156b3ff844c19bffd3552d5c5b86\", \"title\": \"Dinner with Friends\", \"start_datetime\": \"1730311200\", \"end_datetime\": \"1730318400\", \"tag\": \"Social\", \"description\": \"Dinner with friends at a local restaurant.\", \"location\": \"Restaurant in Basel\", \"attendees\": [\"Ursula Wiederkehr\", \"Léa Dumont\", \"Alessia Ramseyer\"], \"start_strftime\": \"Wednesday, 2024-10-30 18:00:00\", \"end_strftime\": \"Wednesday, 2024-10-30 20:00:00\"}, {\"event_id\": \"e679025bc12541ae926e004cb43a7abe\", \"title\": \"Research Collaboration Meeting\", \"start_datetime\": \"1729519200\", \"end_datetime\": \"1729526400\", \"tag\": \"Research\", \"description\": \"Discuss research collaboration with Katarzyna Zielińska\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Katarzyna Zielińska\"], \"start_strftime\": \"Monday, 2024-10-21 14:00:00\", \"end_strftime\": \"Monday, 2024-10-21 16:00:00\"}, {\"event_id\": \"f3244c2e5ab341dcabcc9f38df3eff4b\", \"title\": \"Lunch Break\", \"start_datetime\": \"1730289600\", \"end_datetime\": \"1730295000\", \"tag\": \"Personal\", \"description\": \"Lunch break at a local café.\", \"location\": \"Café in Basel\", \"attendees\": [\"Ursula Wiederkehr\"], \"start_strftime\": \"Wednesday, 2024-10-30 12:00:00\", \"end_strftime\": \"Wednesday, 2024-10-30 13:30:00\"}, {\"event_id\": \"f4bf955ba4b14631846ae7c6715dcaf0\", \"title\": \"Dinner with Family\", \"start_datetime\": \"1729710000\", \"end_datetime\": \"1729717200\", \"tag\": \"Social\", \"description\": \"Have dinner with family members.\", \"location\": \"Home\", \"attendees\": [\"Nadja Ramadanović\", \"Aurélie Dupont\"], \"start_strftime\": \"Wednesday, 2024-10-23 19:00:00\", \"end_strftime\": \"Wednesday, 2024-10-23 21:00:00\"}], \"range\": [\"0\", \"28\"], \"total\": \"28\"}",
+      "event_id": "series_s1_verify",
+      "response_sha256": "414672b88d4a61b7d05b530015766edd2c60f00cd2294e9abcf97a504ba54da4"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Kamil Wojciechowski",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Yoga Studio Basel",
+      "original_source": "stage2.tool_gt.series_s2_create.arguments.location"
+    },
+    "stage2.tool_response.series_s2_verify_range": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"4801f9ddac434a98a37171a00e69eff6\", \"title\": \"Coffee Break with Nadja\", \"start_datetime\": \"1730714400\", \"end_datetime\": \"1730718000\", \"tag\": \"Social\", \"description\": \"Catch up with Nadja over coffee and discuss recent events.\", \"location\": \"Café zum Kirschgarten\", \"attendees\": [\"Nadja Ramadanović\"], \"start_strftime\": \"Monday, 2024-11-04 10:00:00\", \"end_strftime\": \"Monday, 2024-11-04 11:00:00\"}, {\"event_id\": \"703b267a074143aa87861c0112b6e7e7\", \"title\": \"Historical Research Seminar\", \"start_datetime\": \"1730728800\", \"end_datetime\": \"1730736000\", \"tag\": \"Work\", \"description\": \"Seminar on historical research methods and best practices.\", \"location\": \"University of Basel\", \"attendees\": [\"Elara von Allmen\", \"Nadja Ramadanović\"], \"start_strftime\": \"Monday, 2024-11-04 14:00:00\", \"end_strftime\": \"Monday, 2024-11-04 16:00:00\"}, {\"event_id\": \"91c6157e085b4aac9fb0d3a6b5d72015\", \"title\": \"Yoga Class\", \"start_datetime\": \"1730743200\", \"end_datetime\": \"1730746800\", \"tag\": \"Health\", \"description\": \"Weekly vinyasa flow yoga class to unwind and stay fit.\", \"location\": \"Yoga Studio Basel\", \"attendees\": [], \"start_strftime\": \"Monday, 2024-11-04 18:00:00\", \"end_strftime\": \"Monday, 2024-11-04 19:00:00\"}, {\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Decide about returning to yoga\", \"start_datetime\": \"1730714400.0\", \"end_datetime\": \"1730718000.0\", \"tag\": null, \"description\": \"Check-in about resuming classes after my break.\", \"location\": \"Yoga Studio Basel\", \"attendees\": [\"Kamil Wojciechowski\"], \"start_strftime\": \"Monday, 2024-11-04 10:00:00\", \"end_strftime\": \"Monday, 2024-11-04 11:00:00\"}], \"range\": [\"0\", \"4\"], \"total\": \"4\"}",
+      "event_id": "series_s2_verify_range",
+      "response_sha256": "78511453754a81eacae7c299c88e38ee3a2f0196510d961a3b85e1750ab9b08b"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Kamil",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "已有目录中的专有人名，但仅为名，且无难拼写；按规则完整名不可得时保留字面组件，但此名过于普通，故不选",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kamil"
+      ],
+      "active_vocabulary": {
+        "Kamil": 50
+      },
+      "vocabulary_sha256": "f732bdb097270d67aff8556f5368f84603678fd6be8650bc723095ea65881a21"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Karel De Clercq",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_verify",
+          "reason": "完整人名，姓氏较难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Akira Nakamura",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_verify",
+          "reason": "完整人名，较难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Alessia Ramseyer",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_verify",
+          "reason": "完整人名，姓氏较难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Anastasiya Zolotova",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_verify",
+          "reason": "完整人名，较难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Aurélie Dupont",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_verify",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Aurélie Wyss",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_verify",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_verify",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Katarzyna Woźniak",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_verify",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Katarzyna Zielińska",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_verify",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Kazimierz Wojciechowski",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_verify",
+          "reason": "完整人名，姓氏较难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Kenji Nakamura",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_verify",
+          "reason": "完整人名，较难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_verify",
+          "reason": "完整人名，姓氏较难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Léa Dumont",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_verify",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Maarten Vandenberghe",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_verify",
+          "reason": "完整人名，姓氏较难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Nadja Ramadanović",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_verify",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Wyss",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_verify",
+          "reason": "完整人名，姓氏较难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_verify",
+          "reason": "完整人名，姓氏较难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Zbinden",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_verify",
+          "reason": "完整人名，姓氏较难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Zwygart",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_verify",
+          "reason": "完整人名，姓氏较难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Zofia Kowalska",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_verify",
+          "reason": "完整人名，较难拼写",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Karel De Clercq",
+        "Akira Nakamura",
+        "Alessia Ramseyer",
+        "Anastasiya Zolotova",
+        "Aurélie Dupont",
+        "Aurélie Wyss",
+        "Aurélien Vandenberghe",
+        "Katarzyna Woźniak",
+        "Katarzyna Zielińska",
+        "Kazimierz Wojciechowski",
+        "Kenji Nakamura",
+        "Liesbeth Vandenberghe",
+        "Léa Dumont",
+        "Maarten Vandenberghe",
+        "Nadja Ramadanović",
+        "Saskia Wyss",
+        "Ursula Wiederkehr",
+        "Ursula Zbinden",
+        "Ursula Zwygart",
+        "Zofia Kowalska"
+      ],
+      "active_vocabulary": {
+        "Kamil": 50,
+        "Karel De Clercq": 50,
+        "Akira Nakamura": 50,
+        "Alessia Ramseyer": 50,
+        "Anastasiya Zolotova": 50,
+        "Aurélie Dupont": 50,
+        "Aurélie Wyss": 50,
+        "Aurélien Vandenberghe": 50,
+        "Katarzyna Woźniak": 50,
+        "Katarzyna Zielińska": 50,
+        "Kazimierz Wojciechowski": 50,
+        "Kenji Nakamura": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Léa Dumont": 50,
+        "Maarten Vandenberghe": 50,
+        "Nadja Ramadanović": 50,
+        "Saskia Wyss": 50,
+        "Ursula Wiederkehr": 50,
+        "Ursula Zbinden": 50,
+        "Ursula Zwygart": 50,
+        "Zofia Kowalska": 50
+      },
+      "vocabulary_sha256": "35a05b007cd90262b04221e6618fb89ae0d746c4da6c6f23bce0837440a0a54f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Café zum Kirschgarten",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_verify_range",
+          "reason": "含变音符号的具体地点名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Elara von Allmen",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_verify_range",
+          "reason": "完整人名，姓氏较难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Yoga Studio Basel",
+          "kind": "place",
+          "source": "stage2.existing_catalog.1",
+          "reason": "已有目录中的具体地点名",
+          "weight": 50
+        },
+        {
+          "text": "Kamil Wojciechowski",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "已有目录中的完整人名，姓氏较难拼写",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Café zum Kirschgarten",
+        "Elara von Allmen",
+        "Yoga Studio Basel",
+        "Kamil Wojciechowski"
+      ],
+      "active_vocabulary": {
+        "Kamil": 50,
+        "Karel De Clercq": 50,
+        "Akira Nakamura": 50,
+        "Alessia Ramseyer": 50,
+        "Anastasiya Zolotova": 50,
+        "Aurélie Dupont": 50,
+        "Aurélie Wyss": 50,
+        "Aurélien Vandenberghe": 50,
+        "Katarzyna Woźniak": 50,
+        "Katarzyna Zielińska": 50,
+        "Kazimierz Wojciechowski": 50,
+        "Kenji Nakamura": 50,
+        "Liesbeth Vandenberghe": 50,
+        "Léa Dumont": 50,
+        "Maarten Vandenberghe": 50,
+        "Nadja Ramadanović": 50,
+        "Saskia Wyss": 50,
+        "Ursula Wiederkehr": 50,
+        "Ursula Zbinden": 50,
+        "Ursula Zwygart": 50,
+        "Zofia Kowalska": 50,
+        "Café zum Kirschgarten": 50,
+        "Elara von Allmen": 50,
+        "Yoga Studio Basel": 50,
+        "Kamil Wojciechowski": 50
+      },
+      "vocabulary_sha256": "8ca63b314a70ddf305a871a43c04cbdcc75f8e955d0f824926f3929b9d6bfb16"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Nadja"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:06.504685+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

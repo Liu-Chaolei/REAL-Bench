@@ -1,0 +1,152 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0498_dvyqbs0hy70n7tp7oroqm1flg1gbqoro__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "90ac2e780eceb8f70fe43b4132cd3e93cc31c9bffb50b1804896e19c54dc9dfc",
+  "review_input_sha256": "f0b4e654810da9d8aec5360af201e8ff4e46b41af2c4d8f591398be2f5b41c60",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "2f7e97c4966749bad07481ba8a378fd0290770af757fb6f7d4c3c09e177a73d7",
+  "reference_results_sha256": "1fa8f4ecc6a31f5a3cfa2e06b47291fb6b8a8d73cb4a0d11b2e1abdc734c9bcd",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Aurélie",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-7a89efa8-3d36-4f98-a0bb-1825aa74c85a.arguments.content"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Kenji",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-7a89efa8-3d36-4f98-a0bb-1825aa74c85a.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Léon Vandenberghe",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Rik Vandenberghe",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Yumi Nakahara",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.3": {
+      "stage": 2,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage2.tool_gt.series_s2_email_leon.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélie",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "带变音符号的专有人名，难以识别，保留",
+          "weight": 50
+        },
+        {
+          "text": "Kenji",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "专有日本人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélie",
+        "Kenji"
+      ],
+      "active_vocabulary": {
+        "Aurélie": 50,
+        "Kenji": 50
+      },
+      "vocabulary_sha256": "fdc650bead4bb03b17879bc4356805301036e9bc8d2e3e39c9f143bde0a13644"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélie": 50,
+        "Kenji": 50
+      },
+      "vocabulary_sha256": "fdc650bead4bb03b17879bc4356805301036e9bc8d2e3e39c9f143bde0a13644"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Léon Vandenberghe",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号的完整专有人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Rik Vandenberghe",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "完整专有人名，姓氏较难，保留",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage2.existing_catalog.3",
+          "reason": "完整专有人名，姓氏较难，保留",
+          "weight": 50
+        },
+        {
+          "text": "Yumi Nakahara",
+          "kind": "person",
+          "source": "stage2.existing_catalog.2",
+          "reason": "完整专有日本人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Léon Vandenberghe",
+        "Rik Vandenberghe",
+        "Ursula Wiederkehr",
+        "Yumi Nakahara"
+      ],
+      "active_vocabulary": {
+        "Aurélie": 50,
+        "Kenji": 50,
+        "Léon Vandenberghe": 50,
+        "Rik Vandenberghe": 50,
+        "Ursula Wiederkehr": 50,
+        "Yumi Nakahara": 50
+      },
+      "vocabulary_sha256": "c5d641d6817ee2cb0b12b497b4527a17a40b3952c8ffbf7194e499391f94c774"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:40.575283+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

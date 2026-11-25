@@ -1,0 +1,111 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0898_h47f9xaz8othydwkcxky3us1ucsllkl0",
+  "model": "deepseek-flash",
+  "input_sha256": "568bb237c22ceaf4fd828ba1453554e2c56cc0be5363a37e34a324cd65d6ecaf",
+  "review_input_sha256": "e4243d11a004e3c50d56439a58d39f00d3c97885da3d4300251468aa9415c678",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "392e8ecaef04137c1f4a04f80125da5d5457806988ac459bda952a4c2c598baa",
+  "reference_results_sha256": "56d2befa17ff2b27f09ee199f53a6b2fa63aac4490e6af3b7649df9bc3f37908",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Guillermo Reyes",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Alexandra Popescu",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Nadira Jensen",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Alexandra Popescu",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Guillermo Reyes",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，含难拼写",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Alexandra Popescu",
+        "Guillermo Reyes"
+      ],
+      "active_vocabulary": {
+        "Alexandra Popescu": 50,
+        "Guillermo Reyes": 50
+      },
+      "vocabulary_sha256": "cbeefdd6640d287bd5c63cb195b479dfbbdb97e0b719cdee24105095a8d738c3"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Nadira Jensen",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Nadira Jensen"
+      ],
+      "active_vocabulary": {
+        "Alexandra Popescu": 50,
+        "Guillermo Reyes": 50,
+        "Nadira Jensen": 50
+      },
+      "vocabulary_sha256": "06d8d9bb0ae4ce2faa31a9bc44c35eabad34fa3f54453975f04996e81fb9e085"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Alexandra Popescu": 50,
+        "Guillermo Reyes": 50,
+        "Nadira Jensen": 50
+      },
+      "vocabulary_sha256": "06d8d9bb0ae4ce2faa31a9bc44c35eabad34fa3f54453975f04996e81fb9e085"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:44.874763+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

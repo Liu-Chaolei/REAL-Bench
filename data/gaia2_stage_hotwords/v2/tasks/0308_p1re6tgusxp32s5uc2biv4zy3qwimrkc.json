@@ -1,0 +1,110 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0308_p1re6tgusxp32s5uc2biv4zy3qwimrkc",
+  "model": "deepseek-flash",
+  "input_sha256": "c3c233081eefda996306fc1562f416a1d7cab567e6b08160fd271e86bb72ceb1",
+  "review_input_sha256": "f1ca8d090c9faea14033bdcdfac837d1c46a8371ad3cffab7cc10f19f377e053",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "ace8dfeb270972c28479574fa3ec5db6501b09a51865528078f3e520fbfdcdaf",
+  "reference_results_sha256": "2d7c8653bbbefaa385d8e009c29dc51fd2786acffe37d94a1cc9ac38ed158f20",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Astrid Nakamura",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.tool_response.series_s1_source": {
+      "stage": 1,
+      "text": "{\"sender\": \"astridnakamura@gaia2mail.com\", \"recipients\": [\"aurelien.lafleur@gaia2mail.com\"], \"subject\": \"Eco-Friendly Wine Packaging Ideas\", \"content\": \"Dear Aurélien,\\n\\nI hope this email finds you well. I’ve been following your journey as a sommelier in New York City, and I must say, I’m impressed by your passion for wine and culinary experiences. As someone who’s dedicated their life to promoting sustainability, I couldn’t help but think of ways to reduce waste in the wine industry.\\n\\nI’d love to discuss some eco-friendly wine packaging ideas with you. At Green Earth Stationery, we’ve been experimenting with biodegradable and recycled materials that could replace traditional wine packaging. I think it would be a great opportunity for your restaurant to reduce its environmental footprint while also enhancing its brand reputation.\\n\\nWould you be open to exploring this idea further? I’d be happy to set up a call to discuss more.\\n\\nBest regards,\\nAstrid Nakamura\", \"email_id\": \"74699dcc20f64627bf9383eb0edab999\", \"parent_id\": null, \"cc\": [], \"attachments\": {}, \"timestamp\": \"1728881001.61\", \"is_read\": \"True\"}",
+      "event_id": "series_s1_source",
+      "response_sha256": "dd7b86ecdac9502266203d38cfbd8400c845616da749f0c711252b947e6696a9"
+    },
+    "stage2.tool_response.series_s2_calendar": {
+      "stage": 2,
+      "text": "{\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Proposed Wine-and-Food Tasting Dinner with Astrid Nakamura\", \"start_datetime\": \"1729710000.0\", \"end_datetime\": \"1729717200.0\", \"tag\": \"Social\", \"description\": \"Proposed dinner, RSVP pending. Discuss wine, food and eco-friendly packaging.\", \"location\": \"1234 NW 23rd Ave, Portland, OR 97210\", \"attendees\": [\"Astrid Nakamura\"], \"start_strftime\": \"Wednesday, 2024-10-23 19:00:00\", \"end_strftime\": \"Wednesday, 2024-10-23 21:00:00\"}",
+      "event_id": "series_s2_calendar",
+      "response_sha256": "1f7edfa1761f463e06e4619a2db3c528078bd4ddb1c4095f95b5e357513b202d"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Astrid Nakamura",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，含独特姓氏，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_source",
+          "reason": "含变音符号的名字，高优先级；全名未在同一来源连续出现，故取字面组成部分",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Nakamura",
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Astrid Nakamura": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "c8ae46fbcf5835771172b2c1e5ac843173876253d4bfe612b4c020d11553b225"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Astrid Nakamura",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_calendar",
+          "reason": "完整人名，出现在日历事件中",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid Nakamura": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "c8ae46fbcf5835771172b2c1e5ac843173876253d4bfe612b4c020d11553b225"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Eco-Friendly Wine Packaging Ideas",
+    "Wine Ideas Circle",
+    "1234 NW 23rd Ave, Portland, OR 97210"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:06.024215+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

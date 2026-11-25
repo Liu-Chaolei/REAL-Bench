@@ -1,0 +1,285 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0568_0pk54gkq73erpxm7s6g80wf0ecs6otd8",
+  "model": "deepseek-flash",
+  "input_sha256": "4da6070c23b47b2877b3158b79b2353d51f0f129f407420d331382b96cf5b49e",
+  "review_input_sha256": "edff0162c65023fe4df0c7c8ac23d5fadc0ceef1b4ac151c7eae4aa7b1a09f38",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "0932260554bc84fe325723557a241af0af32174eaf0b9ea33557f1f7f07ec0bc",
+  "reference_results_sha256": "485b8bf638b193c0e87be21874fcfbd766782b1f3e648bff823838f5d30239f0",
+  "sources": {
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Raghavendra",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-d3e42a19-c558-4452-833f-b64564a55d01.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Anastasia",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-003f5066-b4c7-461d-b7f4-a2fe3556fe6c.arguments.content"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Rohan Kumar",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-074c4c0e-45ae-4a04-a0ef-c9946e20e194.arguments.content"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Bachmann Trains New York Central 40' Stock Car-Ho Scale",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "Chennai Central Railway Station",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-bc588db8-fbda-47a2-a6b4-a783243940d3.arguments.content"
+    },
+    "stage0.existing_catalog.7": {
+      "stage": 0,
+      "text": "Ahmedabad Railway Station",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-bc588db8-fbda-47a2-a6b4-a783243940d3.arguments.content"
+    },
+    "stage1.tool_response.series_s1_invitation_0": {
+      "stage": 1,
+      "text": "{\"sender\": \"rohankumar.advocate@gaia2mail.com\", \"recipients\": [\"rohan.nair.films@gaia2mail.com\"], \"subject\": \"Invitation to Railway to Rehabilitation\", \"content\": \"Dear Rohan,\\n\\nYou are invited to \\\"Railway to Rehabilitation\\\" on Sunday, November 24th, 2024 from 12pm to 4pm.\\n\\nBest regards,\\nRohan Kumar\", \"email_id\": \"42f498866abc915a2df3857468b71eab\", \"parent_id\": null, \"cc\": [], \"attachments\": {}, \"timestamp\": \"1728975601.0\", \"is_read\": \"True\"}",
+      "event_id": "series_s1_invitation_0",
+      "response_sha256": "b4034a3fe547b6e0b0de946d2d90275e0ad76c8d629b32971e202e3d1a5770e5"
+    },
+    "stage1.tool_response.series_s1_invitation_1": {
+      "stage": 1,
+      "text": "{\"sender\": \"rohankumar.advocate@gaia2mail.com\", \"recipients\": [\"rohini.nair@mumbaicorp.in\"], \"subject\": \"Invitation to Railway to Rehabilitation\", \"content\": \"Dear Rohini,\\n\\nYou are invited to \\\"Railway to Rehabilitation\\\" on Sunday, November 24th, 2024 from 12pm to 4pm.\\n\\nBest regards,\\nRohan Kumar\", \"email_id\": \"52e1ddc06020cc2ed26e5c843a6cc81f\", \"parent_id\": null, \"cc\": [], \"attachments\": {}, \"timestamp\": \"1728975601.0\", \"is_read\": \"True\"}",
+      "event_id": "series_s1_invitation_1",
+      "response_sha256": "600bdfaf18cc42e19621d66074d7a4a01fdb444fbd6b830a01039fc0016e16e6"
+    },
+    "stage1.tool_response.series_s1_invitation_2": {
+      "stage": 1,
+      "text": "{\"sender\": \"rohankumar.advocate@gaia2mail.com\", \"recipients\": [\"raghavendra.rao@gaia2mail.com\"], \"subject\": \"Invitation to Railway to Rehabilitation\", \"content\": \"Dear Raghavendra,\\n\\nYou are invited to \\\"Railway to Rehabilitation\\\" on Sunday, November 24th, 2024 from 12pm to 4pm.\\n\\nBest regards,\\nRohan Kumar\", \"email_id\": \"67005f5df094b3ef5a22f36a14c9ad06\", \"parent_id\": null, \"cc\": [], \"attachments\": {}, \"timestamp\": \"1728975601.0\", \"is_read\": \"True\"}",
+      "event_id": "series_s1_invitation_2",
+      "response_sha256": "688abf054b1aaddde25fdbd9508d329663cc42817a63996f0f030549ef87a23b"
+    },
+    "stage1.tool_response.series_s1_invitation_4": {
+      "stage": 1,
+      "text": "{\"sender\": \"rohankumar.advocate@gaia2mail.com\", \"recipients\": [\"anastasia.kuznetsova@gaia2mail.com\"], \"subject\": \"Invitation to Railway to Rehabilitation\", \"content\": \"Dear Anastasia,\\n\\nYou are invited to \\\"Railway to Rehabilitation\\\" on Sunday, November 24th, 2024 from 12pm to 4pm.\\n\\nBest regards,\\nRohan Kumar\", \"email_id\": \"1a5be7e8173deda1cfbf3cd98060e80c\", \"parent_id\": null, \"cc\": [], \"attachments\": {}, \"timestamp\": \"1728975601.0\", \"is_read\": \"True\"}",
+      "event_id": "series_s1_invitation_4",
+      "response_sha256": "37ebcb06b7ec2fb099462892ba73143ebc7dd9c7e40d39801af82ea62c76a481"
+    },
+    "stage1.tool_response.series_s1_read": {
+      "stage": 1,
+      "text": "{\"sender\": \"rohankumar.advocate@gaia2mail.com\", \"recipients\": [\"rohan.nair.films@gaia2mail.com\", \"rohini.nair@mumbaicorp.in\", \"raghavendra.rao@gaia2mail.com\", \"rohan.deshpande.mp@gaia2mail.com\", \"anastasia.kuznetsova@gaia2mail.com\", \"rohan.khurana@gaia2mail.com\"], \"subject\": \"Railway to Rehabilitation – Mumbai Kickoff\", \"content\": \"Railway to Rehabilitation – Mumbai Kickoff\\nFirst event: Sunday 24 November 2024, 12:00-16:00. Venue is awaiting the organizer's choice between Chennai Central Railway Station and Ahmedabad Railway Station. The 11:00 Van pickup is requested but not booked. Please reply with attendance confirmation and any accessibility needs by Sunday 20 October 2024. No response is assumed; this shared email thread is the coordination channel for all six invitees.\", \"email_id\": \"39e8fff795e6615b85988fb240190477\", \"parent_id\": null, \"cc\": [\"rohankumar.advocate@gaia2mail.com\"], \"attachments\": {}, \"timestamp\": \"1728975602.0\", \"is_read\": \"True\"}",
+      "event_id": "series_s1_read",
+      "response_sha256": "43c7606543fac3df82f6ba035dd7b2076aa288a10074add97ecd8ad9b4436d63"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Bachmann New York Central",
+      "original_source": "stage2.tool_gt.series_s2_send.arguments.content"
+    },
+    "stage2.tool_response.series_s2_read": {
+      "stage": 2,
+      "text": "{\"sender\": \"rohankumar.advocate@gaia2mail.com\", \"recipients\": [\"rohankumar.advocate@gaia2mail.com\"], \"subject\": \"Railway to Rehabilitation proposed run sheet\", \"content\": \"Railway to Rehabilitation proposed run sheet\\nDate: Sunday 24 November 2024.\\n11:00 requested Van pickup from home, unbooked; station choice pending: Chennai Central Railway Station or Ahmedabad Railway Station.\\n12:00 arrival and accessibility check-in.\\n12:15 welcome remarks and rehabilitation introduction.\\n12:30 proposed handout: six red Bachmann New York Central stock-car models purchased; delivery must be checked before distribution.\\n13:00-15:30 discussion and station activities, subject to venue confirmation.\\n15:30 closing and next steps; event ends 16:00.\\nAttendance and accessibility replies are pending; review on 18 October 09:00-09:30. No station, Van or delivery is asserted confirmed.\", \"email_id\": \"3cb88afa8becc15fc30689c5d02580b0\", \"parent_id\": null, \"cc\": [], \"attachments\": {}, \"timestamp\": \"1728975602.0\", \"is_read\": \"True\"}",
+      "event_id": "series_s2_read",
+      "response_sha256": "0c6967fafdb0b42e584a6f7c4e1194ee7eaf2123b5dd6a4e60f585d54e375851"
+    },
+    "stage2.tool_response.series_s2_review_read": {
+      "stage": 2,
+      "text": "{\"event_id\": \"d4c2d9f7cdacdf99ad578e25036c7e5f\", \"title\": \"Review Railway kickoff RSVPs and station choice\", \"start_datetime\": \"1729242000.0\", \"end_datetime\": \"1729243800.0\", \"tag\": \"Work\", \"description\": \"Three-day RSVP/accessibility review; choose Chennai Central or Ahmedabad Railway Station before booking the Van.\", \"location\": null, \"attendees\": [], \"start_strftime\": \"Friday, 2024-10-18 09:00:00\", \"end_strftime\": \"Friday, 2024-10-18 09:30:00\"}",
+      "event_id": "series_s2_review_read",
+      "response_sha256": "e348cef04b712446540cc18f0c9345eb824e7b05726f87d4606b14fada839aa0"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Bachmann Trains New York Central 40' Stock Car-Ho Scale",
+          "kind": "product",
+          "source": "stage0.existing_catalog.5",
+          "reason": "含品牌与型号的困难产品名",
+          "weight": 50
+        },
+        {
+          "text": "Chennai Central Railway Station",
+          "kind": "place",
+          "source": "stage0.existing_catalog.6",
+          "reason": "完整地名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Ahmedabad Railway Station",
+          "kind": "place",
+          "source": "stage0.existing_catalog.7",
+          "reason": "完整地名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Anastasia",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "较难的人名，适合热词",
+          "weight": 50
+        },
+        {
+          "text": "Raghavendra",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "较难的人名，适合热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Bachmann Trains New York Central 40' Stock Car-Ho Scale",
+        "Chennai Central Railway Station",
+        "Ahmedabad Railway Station",
+        "Rohan Kumar",
+        "Anastasia",
+        "Raghavendra"
+      ],
+      "active_vocabulary": {
+        "Bachmann Trains New York Central 40' Stock Car-Ho Scale": 50,
+        "Chennai Central Railway Station": 50,
+        "Ahmedabad Railway Station": 50,
+        "Rohan Kumar": 50,
+        "Anastasia": 50,
+        "Raghavendra": 50
+      },
+      "vocabulary_sha256": "c9b7ba8a6ef92bc5edc5e709c147b69e84e3b580818914bf7f35bfbe20912c5b"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Chennai Central Railway Station",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "完整地名，来自工具响应",
+          "weight": 50
+        },
+        {
+          "text": "Ahmedabad Railway Station",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "完整地名，来自工具响应",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_invitation_0",
+          "reason": "完整人名，来自工具响应",
+          "weight": 50
+        },
+        {
+          "text": "Anastasia",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_invitation_4",
+          "reason": "较难人名，来自工具响应",
+          "weight": 50
+        },
+        {
+          "text": "Raghavendra",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_invitation_2",
+          "reason": "较难人名，来自工具响应",
+          "weight": 50
+        },
+        {
+          "text": "Rohini",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_invitation_1",
+          "reason": "较难人名，来自工具响应",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Rohini"
+      ],
+      "active_vocabulary": {
+        "Bachmann Trains New York Central 40' Stock Car-Ho Scale": 50,
+        "Chennai Central Railway Station": 50,
+        "Ahmedabad Railway Station": 50,
+        "Rohan Kumar": 50,
+        "Anastasia": 50,
+        "Raghavendra": 50,
+        "Rohini": 50
+      },
+      "vocabulary_sha256": "79e545b8e84675be1e5ec019c7fc7d16e33bc308ea6a6fb965295d4676a49fb9"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Bachmann New York Central",
+          "kind": "product",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含品牌的产品名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Chennai Central Railway Station",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "完整地名，来自工具响应",
+          "weight": 50
+        },
+        {
+          "text": "Ahmedabad Railway Station",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_review_read",
+          "reason": "完整地名，来自工具响应",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Bachmann New York Central"
+      ],
+      "active_vocabulary": {
+        "Bachmann Trains New York Central 40' Stock Car-Ho Scale": 50,
+        "Chennai Central Railway Station": 50,
+        "Ahmedabad Railway Station": 50,
+        "Rohan Kumar": 50,
+        "Anastasia": 50,
+        "Raghavendra": 50,
+        "Rohini": 50,
+        "Bachmann New York Central": 50
+      },
+      "vocabulary_sha256": "354a3f9bf0a5cd6c9ef17263e29e6f6293dba8f38681a78de86ab22faa98210c"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [
+    {
+      "text": "Chennai Central Railway Station",
+      "from": "stage2.tool_response.series_s2_review_read",
+      "to": "stage2.tool_response.series_s2_read"
+    }
+  ],
+  "old_terms_removed": [
+    "Rohan"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:27.689419+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

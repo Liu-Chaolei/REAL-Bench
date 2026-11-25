@@ -1,0 +1,236 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0364_kla564650ggcg9f9m01bnvl4p8w0s0i2",
+  "model": "deepseek-flash",
+  "input_sha256": "8930bcb883c4b50c02a4607a156061efcefbc11e7c6a3e25780a000c62d1aaad",
+  "review_input_sha256": "55aade1d196abe64314225c4ea86a238123c33aec85e0cd8bc1d8c9c5eecf882",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "14c5745d488261f8cdaf645619644644fea3b60d8cb8a34d778efa2438a75f07",
+  "reference_results_sha256": "d4c0b218239d744ff02839a506b0dee9f88bd7637e4394973d0a815d11680f38",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Müller",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Katharina Müller",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Lea Müller",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Saskia Müller",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Klaus-Peter Müller",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Lukas Müller",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.tool_response.series_s1_contact_0": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Katharina\", \"last_name\": \"Müller\", \"contact_id\": \"38b15d3932a24bd8a63fb0b453815e76\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"28\", \"nationality\": \"German\", \"city_living\": \"New York\", \"country\": \"United States\", \"status\": \"Status.EMPLOYED\", \"job\": \"Machine Operator\", \"description\": \"Katharina Müller is a diligent and detail-oriented machine operator who takes pride in her work.\", \"phone\": \"+497111234567\", \"email\": \"katharina.mueller@gaia2mail.com\", \"address\": \"Schillerstraße 12, 70173 Stuttgart, Germany\"}",
+      "event_id": "series_s1_contact_0",
+      "response_sha256": "7c5895e7c12d10883d874ae803a79c27ffd0a08421e5c9964fe02e95b8caf482"
+    },
+    "stage1.tool_response.series_s1_contact_1": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Lea\", \"last_name\": \"Müller\", \"contact_id\": \"78b994d7fccd4a449b7bf3c8a2d8bd12\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"28\", \"nationality\": \"German\", \"city_living\": \"New York\", \"country\": \"United States\", \"status\": \"Status.STUDENT\", \"job\": \"Part-time Research Assistant\", \"description\": \"Lea Müller is a 28-year-old computer science major at the Technical University of Berlin. She is a diligent student who spends most of her time working on coding projects, participating in hackathons, and contributing to open-source software. Lea is a pragmatic and efficient person who values her time and energy. She often relies on quick and nutritious meals, such as salads, soups, and whole-grain sandwiches, to fuel her long study sessions. When she's not coding, Lea enjoys exploring the city's vibrant cultural scene, attending concerts, and practicing yoga.\", \"phone\": \"+491764567892\", \"email\": \"lea.mueller@student.tu-berlin.de\", \"address\": \"Schönhauser Allee 123, 10435 Berlin, Germany\"}",
+      "event_id": "series_s1_contact_1",
+      "response_sha256": "1ab91408b771da2caee583f5b42c28cabd416a8a3216cda28a539ee8d51e1b46"
+    },
+    "stage1.tool_response.series_s1_contact_2": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Saskia\", \"last_name\": \"Müller\", \"contact_id\": \"7b57abf272e34673939a1b8198db5290\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"37\", \"nationality\": \"German\", \"city_living\": \"New York\", \"country\": \"United States\", \"status\": \"Status.EMPLOYED\", \"job\": \"Marketing Manager\", \"description\": \"Saskia Müller is a creative and driven individual who has a deep passion for film and art.\", \"phone\": \"+491764567890\", \"email\": \"saskia.mueller@gaia2mail.com\", \"address\": \"Kastanienallee 12, 10435 Berlin, Germany\"}",
+      "event_id": "series_s1_contact_2",
+      "response_sha256": "53f3612d61a7e4b56fddc2190a3c42899e725fdacdfb0aa8bf06aa590203719e"
+    },
+    "stage1.tool_response.series_s1_contact_3": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Klaus-Peter\", \"last_name\": \"Müller\", \"contact_id\": \"8d91a83502d34233adeec272a32407d1\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"34\", \"nationality\": \"German\", \"city_living\": \"New York\", \"country\": \"United States\", \"status\": \"Status.EMPLOYED\", \"job\": \"Luxury Car Dealer\", \"description\": \"Klaus-Peter Müller is a 34-year-old established car dealer from Munich, Germany. He specializes in luxury gasoline vehicles and has built a reputation for his extensive knowledge and passion for high-performance cars.\", \"phone\": \"+098912345678\", \"email\": \"klaus-peter.mueller@autohaus-muenchen.de\", \"address\": \"Herzog-Wilhelm-Straße 12, 80803 München, Germany\"}",
+      "event_id": "series_s1_contact_3",
+      "response_sha256": "9f82c2672e3448bd1877f24f6d4b65ff13298f448d25f107a8c8deb329010aa9"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Müller",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "德语姓氏，含变音符号，ASR识别困难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Müller"
+      ],
+      "active_vocabulary": {
+        "Müller": 50
+      },
+      "vocabulary_sha256": "4c3fb825630783b66267a8f558adb4f9cbeeb1c63acb8426ed70a51f31ac0970"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Herzog-Wilhelm-Straße",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_contact_3",
+          "reason": "德语街道名，含连字符与ß",
+          "weight": 50
+        },
+        {
+          "text": "Klaus-Peter Müller",
+          "kind": "person",
+          "source": "stage1.existing_catalog.3",
+          "reason": "完整德语人名，含连字符与变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Katharina Müller",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整德语人名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Lea Müller",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整德语人名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Lukas Müller",
+          "kind": "person",
+          "source": "stage1.existing_catalog.4",
+          "reason": "完整德语人名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Müller",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "完整德语人名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Schönhauser Allee",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_contact_1",
+          "reason": "德语街道名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Kastanienallee",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_contact_2",
+          "reason": "德语街道名，拼写复杂",
+          "weight": 50
+        },
+        {
+          "text": "München",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_contact_3",
+          "reason": "德语城市名，含变音符号",
+          "weight": 50
+        },
+        {
+          "text": "Schillerstraße",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_contact_0",
+          "reason": "德语街道名，含ß，ASR易错",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Herzog-Wilhelm-Straße",
+        "Klaus-Peter Müller",
+        "Katharina Müller",
+        "Lea Müller",
+        "Lukas Müller",
+        "Saskia Müller",
+        "Schönhauser Allee",
+        "Kastanienallee",
+        "München",
+        "Schillerstraße"
+      ],
+      "active_vocabulary": {
+        "Müller": 50,
+        "Herzog-Wilhelm-Straße": 50,
+        "Klaus-Peter Müller": 50,
+        "Katharina Müller": 50,
+        "Lea Müller": 50,
+        "Lukas Müller": 50,
+        "Saskia Müller": 50,
+        "Schönhauser Allee": 50,
+        "Kastanienallee": 50,
+        "München": 50,
+        "Schillerstraße": 50
+      },
+      "vocabulary_sha256": "512088556626ed41e7150cc45e9f940303bff12c9d0ab6005c51b2fa592ca1aa"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Müller": 50,
+        "Herzog-Wilhelm-Straße": 50,
+        "Klaus-Peter Müller": 50,
+        "Katharina Müller": 50,
+        "Lea Müller": 50,
+        "Lukas Müller": 50,
+        "Saskia Müller": 50,
+        "Schönhauser Allee": 50,
+        "Kastanienallee": 50,
+        "München": 50,
+        "Schillerstraße": 50
+      },
+      "vocabulary_sha256": "512088556626ed41e7150cc45e9f940303bff12c9d0ab6005c51b2fa592ca1aa"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "New York",
+    "United States",
+    "Stuttgart",
+    "Berlin",
+    "Munich",
+    "Germany"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:23.965808+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

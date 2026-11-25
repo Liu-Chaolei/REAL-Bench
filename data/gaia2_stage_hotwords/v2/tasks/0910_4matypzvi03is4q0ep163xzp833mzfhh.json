@@ -1,0 +1,114 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0910_4matypzvi03is4q0ep163xzp833mzfhh",
+  "model": "deepseek-flash",
+  "input_sha256": "9e7cc86f13462c61bddeef283476a448a3529ddd2b6dfeac467438b2409b2d11",
+  "review_input_sha256": "d85a26952a5ec0ef43f6c1d496b7d53beb83d3842bb33f794a155a99fe5889fa",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "03e3fb9f98d8ea5add5b940fcb3dc407529b75078941bdc5a720e60ec5a85bc7",
+  "reference_results_sha256": "99bd4d636f723c66d01ef705463bf4060386eb74d6e0b5eb8ede60a1e1da02af",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kryštof Nováček",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Božetěchova 3",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Všehrdova 14",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-a3b5d993-e20e-4a3d-9fa3-34c3d6ec71e7.arguments.end_location"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Božetěchova 3",
+          "kind": "place",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的捷克街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Kryštof Nováček",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Všehrdova 14",
+          "kind": "place",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含变音符号的捷克街道地址",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Božetěchova 3",
+        "Kryštof Nováček",
+        "Všehrdova 14"
+      ],
+      "active_vocabulary": {
+        "Božetěchova 3": 50,
+        "Kryštof Nováček": 50,
+        "Všehrdova 14": 50
+      },
+      "vocabulary_sha256": "0688afafc1ec8f160b051eb9578115a1689b0f18a053b02e0c7583c9ee1e5eb6"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Božetěchova 3": 50,
+        "Kryštof Nováček": 50,
+        "Všehrdova 14": 50
+      },
+      "vocabulary_sha256": "0688afafc1ec8f160b051eb9578115a1689b0f18a053b02e0c7583c9ee1e5eb6"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Božetěchova 3": 50,
+        "Kryštof Nováček": 50,
+        "Všehrdova 14": 50
+      },
+      "vocabulary_sha256": "0688afafc1ec8f160b051eb9578115a1689b0f18a053b02e0c7583c9ee1e5eb6"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Korunní 105",
+    "Matěj",
+    "Kryštof"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:47.117109+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

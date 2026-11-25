@@ -1,0 +1,180 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0391_qn9kppdninjkq5nfb4rt0kdzmnwc122j",
+  "model": "deepseek-flash",
+  "input_sha256": "ff08a5daef331ee3fa180d2ff74d4e99e745647018318bffd076fbd666d1dee9",
+  "review_input_sha256": "d8fed2766e0a182ed4755b2bccf51e9793d67d66718659e625c14c11b9be1566",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "eb54a17e8af6e410aad72e9f636a943406253b6488e405b246a2f349b7641103",
+  "reference_results_sha256": "e7d6e981335eee4f3ec2f57f760bcf71f3a82382f5d67629a4965f8afc0396de",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Bengaluru",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Rohini",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Kolkata",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Rohini Rao",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Rohan Kumar",
+      "original_source": "stage1.tool_gt.series_s1_cutoff.arguments.content"
+    },
+    "stage1.existing_catalog.10": {
+      "stage": 1,
+      "text": "Rohan Sengupta",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.9": {
+      "stage": 1,
+      "text": "Sophea Chakraborty",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Bengaluru",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "印度城市专有地名，ASR易混淆",
+          "weight": 50
+        },
+        {
+          "text": "Kolkata",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "印度城市专有地名",
+          "weight": 50
+        },
+        {
+          "text": "Rohini",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "人名，发音易被误识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Bengaluru",
+        "Kolkata",
+        "Rohini"
+      ],
+      "active_vocabulary": {
+        "Bengaluru": 50,
+        "Kolkata": 50,
+        "Rohini": 50
+      },
+      "vocabulary_sha256": "e6c3e403d49607c81a9f91684236cf12d0fd9e3e74770fc571e9f2eb59948dcc"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，保留全名",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Sengupta",
+          "kind": "person",
+          "source": "stage1.existing_catalog.10",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Rao",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，保留全名",
+          "weight": 50
+        },
+        {
+          "text": "Sophea Chakraborty",
+          "kind": "person",
+          "source": "stage1.existing_catalog.9",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Rohan Kumar",
+        "Rohan Sengupta",
+        "Rohini Rao",
+        "Sophea Chakraborty"
+      ],
+      "active_vocabulary": {
+        "Bengaluru": 50,
+        "Kolkata": 50,
+        "Rohini": 50,
+        "Rohan Kumar": 50,
+        "Rohan Sengupta": 50,
+        "Rohini Rao": 50,
+        "Sophea Chakraborty": 50
+      },
+      "vocabulary_sha256": "92062e73bd3370ec27ec900548d2bf61d82aeec77338730095cd7a2ecf7cd6b9"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Bengaluru": 50,
+        "Kolkata": 50,
+        "Rohini": 50,
+        "Rohan Kumar": 50,
+        "Rohan Sengupta": 50,
+        "Rohini Rao": 50,
+        "Sophea Chakraborty": 50
+      },
+      "vocabulary_sha256": "92062e73bd3370ec27ec900548d2bf61d82aeec77338730095cd7a2ecf7cd6b9"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kolkata Coordination",
+    "Prison Reform in India",
+    "Prison Reform Initiative Discussion",
+    "Catch-up with Rohini and Akira",
+    "Prison Reform and Rehabilitation",
+    "Catch-up and Collaboration",
+    "Prison Reform and Social Justice"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:32.322344+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

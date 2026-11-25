@@ -1,0 +1,227 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0790_cljd6invhqwlhvau5ao73d3ger6j9oua",
+  "model": "deepseek-flash",
+  "input_sha256": "44a22e5f59310ed5a07627fcc1f1786d7d69da6507412fc207fdc5d9409234d6",
+  "review_input_sha256": "855f058d889270df369b5062f356eab6a49cb24b114157ab8bcc2c35027cf04f",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "c01b48c85da71f88f337cc5a69b76703ac35487fb8bf0ec94718df80eff4268b",
+  "reference_results_sha256": "fb0d2a804df502509e03dfa676d2baebda892ebee6cbc6fa073fcecaa0ea2264",
+  "sources": {
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Vasco Pinto",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-64adabeb-e107-4557-9059-df0c438bb6ca.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Leonor Sousa",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-64adabeb-e107-4557-9059-df0c438bb6ca.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "Östermalmsgatan 12",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-1e5c301e-4d4e-447f-893a-d023d6e17248.arguments.start_location"
+    },
+    "stage0.existing_catalog.7": {
+      "stage": 0,
+      "text": "Sweden Arlanda Airport",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-1e5c301e-4d4e-447f-893a-d023d6e17248.arguments.end_location"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Porto Match Day",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.title"
+    },
+    "stage1.tool_response.series_s1_read_confirmations": {
+      "stage": 1,
+      "text": "{\"messages\": [{\"sender_id\": \"e7ab09f6-1fdf-420f-a28b-c67d4c34f43e\", \"message_id\": \"fc027cf57b1420be1d49328508696a64\", \"timestamp\": \"1728975720.0\", \"content\": \"Hey Vasco, I'll book the tickets! I'm super excited!\"}, {\"sender_id\": \"e7ab09f6-1fdf-420f-a28b-c67d4c34f43e\", \"message_id\": \"84148b3bc5976c1777bfffd13ccfbf03\", \"timestamp\": \"1728975720.0\", \"content\": \"Hey Leonor, I'll book the tickets! I'm super excited!\"}, {\"sender_id\": \"4e74931c-bdfd-426b-a04d-61deeee27784\", \"message_id\": \"b62cecc66e271e57211f19e7272ac7c1\", \"timestamp\": \"1728975670.0\", \"content\": \"Hi Astrid, just confirming that I'm also coming to the Porto match on Sunday 20th! Can't wait!\"}, {\"sender_id\": \"9a624479-8a3b-4b05-9c66-60dfa8e81d5f\", \"message_id\": \"c934bb2c5f71e13f0cc5da288112035c\", \"timestamp\": \"1728975630.0\", \"content\": \"Hey Astrid, I'm coming to the Porto football match on Sunday 20th! Looking forward to it!\"}, {\"sender_id\": \"9a624479-8a3b-4b05-9c66-60dfa8e81d5f\", \"message_id\": \"4e35379be0e649799dab86b07b4b44e3\", \"timestamp\": \"1728662700\", \"content\": \"Actually, I was at the Porto vs. Benfica match last weekend - what an atmosphere! The stadium was electric. Leonor, I think you'd love the Portuguese football culture.\"}, {\"sender_id\": \"e7ab09f6-1fdf-420f-a28b-c67d4c34f43e\", \"message_id\": \"c7d7a8af2d014337ae205060ee3746a9\", \"timestamp\": \"1728662100\", \"content\": \"Hmm, that's a tough one. I think they have a good chance, but it's going to be a close competition. I'll have to keep an eye on the standings. Vasco, have you been to any good football matches lately?\"}, {\"sender_id\": \"9a624479-8a3b-4b05-9c66-60dfa8e81d5f\", \"message_id\": \"b7dd9698bea949608c182a1340eb86e9\", \"timestamp\": \"1728661500\", \"content\": \"Ah yes, I did! Astrid, do you think AIK Stockholm has a chance at winning the Allsvenskan title this season?\"}, {\"sender_id\": \"4e74931c-bdfd-426b-a04d-61deeee27784\", \"message_id\": \"3f57b2991308439b89941f81c5ef6406\", \"timestamp\": \"1728660900\", \"content\": \"Ah, it's been an adjustment, but I've been keeping busy with teaching and choreographing. I actually worked with a Swedish ballet company a few years ago - they were lovely to work with. Vasco, didn't you say you had a question about Swedish football?\"}, {\"sender_id\": \"e7ab09f6-1fdf-420f-a28b-c67d4c34f43e\", \"message_id\": \"aff67b6b14394b2cad8a138ada4b8ea2\", \"timestamp\": \"1728660300\", \"content\": \"Tack Leonor! I'd love to show you around Stockholm someday. And I'm curious, what's it like being a retired ballet dancer? Do you still get to perform or teach?\"}, {\"sender_id\": \"4e74931c-bdfd-426b-a04d-61deeee27784\", \"message_id\": \"b2294bc05443439d95525718b561fbc4\", \"timestamp\": \"1728659700\", \"content\": \"Olá Astrid! Vasco has told me so much about you. I'm a big fan of your Instagram feed - your fashion sense is impeccable. And I have to say, I'm a bit jealous of your travels - I've always wanted to visit Stockholm.\"}, {\"sender_id\": \"9a624479-8a3b-4b05-9c66-60dfa8e81d5f\", \"message_id\": \"1da733af06d74cb7ad216f62121f0880\", \"timestamp\": \"1728659100\", \"content\": \"Well, they're doing alright, considering their limited budget. But I'm more excited about the upcoming match against Cambridge United - it's going to be a tough one! By the way, have you met Leonor Sousa, my friend from Lisbon? She's a retired ballet dancer and a huge football fan.\"}, {\"sender_id\": \"e7ab09f6-1fdf-420f-a28b-c67d4c34f43e\", \"message_id\": \"02092a4dc6794e78a10ef642f8826180\", \"timestamp\": \"1728658500\", \"content\": \"Actually, I just got back from a photoshoot in Paris and I'm working on a new collaboration with a Swedish fashion brand. But I'd love to hear more about Peterborough United - what's the latest news?\"}, {\"sender_id\": \"9a624479-8a3b-4b05-9c66-60dfa8e81d5f\", \"message_id\": \"d95526773fe14b5092b049a5331e4f50\", \"timestamp\": \"1728657900\", \"content\": \"Ah, Astrid! Life is good, thanks for asking. And yes, I've been following the Champions League closely. My beloved Porto is doing well, but I'm also keeping an eye on Peterborough United's progress in the lower leagues. How about you, have you been to any exciting fashion events lately?\"}, {\"sender_id\": \"e7ab09f6-1fdf-420f-a28b-c67d4c34f43e\", \"message_id\": \"298c08927d66446eb78df88edabd8632\", \"timestamp\": \"1728657000\", \"content\": \"Hej Vasco! How's life in Porto treating you? I've been meaning to ask, have you been following the Champions League this season?\"}], \"metadata\": {\"message_range\": [\"0\", \"14\"], \"conversation_length\": \"14\", \"conversation_id\": \"4d9bac5a007740d8be91beb57f65b0e2\", \"conversation_title\": \"Football and Fashion\"}}",
+      "event_id": "series_s1_read_confirmations",
+      "response_sha256": "e6fc59e70ba8260b78f625180d3841e8cae75a8a96ca3dbce727000dffd0de3f"
+    },
+    "stage1.tool_response.series_s1_read_sent": {
+      "stage": 1,
+      "text": "{\"messages\": [{\"sender_id\": \"e7ab09f6-1fdf-420f-a28b-c67d4c34f43e\", \"message_id\": \"3299fe51d2f1f93984b2cb9522307d84\", \"timestamp\": \"1728975722.0\", \"content\": \"Porto vs Sporting Lisbon kicks off on Sunday, Oct 20 at 13:00. Please arrive 30 minutes before kick-off (12:30) and bring your ID.\"}], \"metadata\": {\"message_range\": [\"0\", \"1\"], \"conversation_length\": \"1\", \"conversation_id\": \"24f5f49f6bef01f49ebfd4b8e025926c\", \"conversation_title\": \"Porto Match Day\"}}",
+      "event_id": "series_s1_read_sent",
+      "response_sha256": "ea3764227d924dfaaa9beb013b45899d9f5f6b356cd4fd4153c8f43916d420d9"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Porto Trip Checklist",
+      "original_source": "stage2.tool_gt.series_s2_send.arguments.subject"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Sweden Arlanda Airport",
+          "kind": "place",
+          "source": "stage0.existing_catalog.7",
+          "reason": "完整机场地名，专有名词",
+          "weight": 50
+        },
+        {
+          "text": "Leonor Sousa",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整人名，保留全名",
+          "weight": 50
+        },
+        {
+          "text": "Vasco Pinto",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整人名，保留全名",
+          "weight": 50
+        },
+        {
+          "text": "Östermalmsgatan 12",
+          "kind": "place",
+          "source": "stage0.existing_catalog.6",
+          "reason": "含变音符号的瑞典语街道地址，ASR识别困难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Sweden Arlanda Airport",
+        "Leonor Sousa",
+        "Vasco Pinto",
+        "Östermalmsgatan 12"
+      ],
+      "active_vocabulary": {
+        "Sweden Arlanda Airport": 50,
+        "Leonor Sousa": 50,
+        "Vasco Pinto": 50,
+        "Östermalmsgatan 12": 50
+      },
+      "vocabulary_sha256": "db52412838a96e43b8d26f8c4f56a1b7a86b92d23f0f7e54c504dddbaf7db75f"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Porto Match Day",
+          "kind": "custom_name",
+          "source": "stage1.existing_catalog.0",
+          "reason": "自定义会话标题，专有名称",
+          "weight": 50
+        },
+        {
+          "text": "AIK Stockholm",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_confirmations",
+          "reason": "完整俱乐部专名",
+          "weight": 50
+        },
+        {
+          "text": "Cambridge United",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_confirmations",
+          "reason": "完整足球俱乐部专名",
+          "weight": 50
+        },
+        {
+          "text": "Peterborough United",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_confirmations",
+          "reason": "完整足球俱乐部专名",
+          "weight": 50
+        },
+        {
+          "text": "Sporting Lisbon",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_sent",
+          "reason": "完整俱乐部专名",
+          "weight": 50
+        },
+        {
+          "text": "Allsvenskan",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_confirmations",
+          "reason": "瑞典联赛专名，拼写困难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Porto Match Day",
+        "AIK Stockholm",
+        "Cambridge United",
+        "Peterborough United",
+        "Sporting Lisbon",
+        "Allsvenskan"
+      ],
+      "active_vocabulary": {
+        "Sweden Arlanda Airport": 50,
+        "Leonor Sousa": 50,
+        "Vasco Pinto": 50,
+        "Östermalmsgatan 12": 50,
+        "Porto Match Day": 50,
+        "AIK Stockholm": 50,
+        "Cambridge United": 50,
+        "Peterborough United": 50,
+        "Sporting Lisbon": 50,
+        "Allsvenskan": 50
+      },
+      "vocabulary_sha256": "fe2f8214892ac6b607148099a224396b354a6cb69ae84cbb34e42e288e2467ae"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Porto Trip Checklist",
+          "kind": "custom_name",
+          "source": "stage2.existing_catalog.0",
+          "reason": "自定义清单标题，专有名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Porto Trip Checklist"
+      ],
+      "active_vocabulary": {
+        "Sweden Arlanda Airport": 50,
+        "Leonor Sousa": 50,
+        "Vasco Pinto": 50,
+        "Östermalmsgatan 12": 50,
+        "Porto Match Day": 50,
+        "AIK Stockholm": 50,
+        "Cambridge United": 50,
+        "Peterborough United": 50,
+        "Sporting Lisbon": 50,
+        "Allsvenskan": 50,
+        "Porto Trip Checklist": 50
+      },
+      "vocabulary_sha256": "f71c7b2edb46018ccc7bc8ed7a71f148ca0c38ac8dfaa0ba50f28afd583e8bb3"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Porto",
+    "Vasco",
+    "Leonor",
+    "Porto Football Match",
+    "Pack for Porto"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:23.445205+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

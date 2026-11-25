@@ -1,0 +1,595 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0571_1k1ppcoxefgravh34lzycqi20saehz8r",
+  "model": "deepseek-flash",
+  "input_sha256": "62165a187bd8328477e0c3cce2ceb02311141851c9df4723bebc296acf003755",
+  "review_input_sha256": "d70cd6feb9d23c7440c29d129f7d5c278bdf9635f972ef6ccb05372624b39d2f",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "a5109ae2f200c443b0a541cfc6b0cd8fbb4d753dce64da4f42856eb43b7515bb",
+  "reference_results_sha256": "d99f98ae5ba5dceaa7177502788e8fb277b32ea1b40fc7d4239b8bc49cd80253",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kåre Østensen",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Bergen Student",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Nygaardsgaten 12",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.tool_response.series_s1_list_saved_apartments": {
+      "stage": 1,
+      "text": "{\"36f2eea26167450da252972884e54e55\": {\"name\": \"Fredrikstad Leilighet\", \"location\": \"Østre gate 12, Fredrikstad\", \"zip_code\": \"1603\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Second floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"36f2eea26167450da252972884e54e55\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"dd78cb91bc6b485fb6f387d91156c53a\": {\"name\": \"Trondheim Townhouses\", \"location\": \"Østre gate 34, Trondheim\", \"zip_code\": \"7014\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Townhouse\", \"square_footage\": \"800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"dd78cb91bc6b485fb6f387d91156c53a\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"6f5f4027bdcf4930a2eb0d7dc65c5557\": {\"name\": \"Stavanger Sentrum\", \"location\": \"Kongsgata 12, Stavanger\", \"zip_code\": \"4013\", \"price\": \"2400\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"6f5f4027bdcf4930a2eb0d7dc65c5557\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"5be04468ad594c17b8cc2438adc795ad\": {\"name\": \"Oslo Waterfront\", \"location\": \"Filipstad Brygge 2, Oslo\", \"zip_code\": \"0252\", \"price\": \"2800\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1600\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"5be04468ad594c17b8cc2438adc795ad\", \"amenities\": [\"Parking\", \"Laundry\", \"Sauna\"], \"saved\": \"True\"}, \"9da2b1a31e3d4b25a4ea8642ea9dbfad\": {\"name\": \"Tromsø Fjord Apartments\", \"location\": \"Strandveien 15, Tromsø\", \"zip_code\": \"9008\", \"price\": \"2500\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1400\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"9da2b1a31e3d4b25a4ea8642ea9dbfad\", \"amenities\": [\"Parking\", \"Laundry\", \"Sauna\"], \"saved\": \"True\"}, \"5ff340ad3d80413ca0bb16cbacdc457f\": {\"name\": \"Trondheim Townhouse\", \"location\": \"Kjøpmannsgata 20, Trondheim\", \"zip_code\": \"7010\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Townhouse\", \"square_footage\": \"800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"5ff340ad3d80413ca0bb16cbacdc457f\", \"amenities\": [\"Garden\"], \"saved\": \"True\"}, \"8cb7b6e129864e8e9dd5258bb77c87be\": {\"name\": \"Stavanger City Center\", \"location\": \"Kongsgata 30, Stavanger\", \"zip_code\": \"4010\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"8cb7b6e129864e8e9dd5258bb77c87be\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"2685ab8b4bfe46c391868b55edc53248\": {\"name\": \"Trondheim Student Living\", \"location\": \"Elgeseter gate 10, Trondheim\", \"zip_code\": \"7030\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"400\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"Month-to-month\", \"apartment_id\": \"2685ab8b4bfe46c391868b55edc53248\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"62039a74be884af0a4179e032ea626f1\": {\"name\": \"Oslo Waterfront Apartments\", \"location\": \"Akershusstranda 12, Oslo\", \"zip_code\": \"0150\", \"price\": \"3000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"62039a74be884af0a4179e032ea626f1\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"0c5cc3339d51495b833e07b5a79e9665\": {\"name\": \"Bryggen Residence\", \"location\": \"Bryggen 11, Bergen\", \"zip_code\": \"5003\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"0c5cc3339d51495b833e07b5a79e9665\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"c62bc3c115ba4761ad92de195f3043c7\": {\"name\": \"Trondheim Family Homes\", \"location\": \"Øvre Bakklandet 20, Trondheim\", \"zip_code\": \"7014\", \"price\": \"2500\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"House\", \"square_footage\": \"1800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"c62bc3c115ba4761ad92de195f3043c7\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"d23a63e8928942be80b0b4dd848dfcf8\": {\"name\": \"Stavanger City Apartments\", \"location\": \"Kongsgata 33, Stavanger\", \"zip_code\": \"4010\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1100\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"d23a63e8928942be80b0b4dd848dfcf8\", \"amenities\": [\"Gym\", \"Laundry\", \"Pool\"], \"saved\": \"True\"}, \"e196e6eaba224e698671f673bfc26a2e\": {\"name\": \"Bodø Bay Apartments\", \"location\": \"Havnegata 10, Bodø\", \"zip_code\": \"8006\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"e196e6eaba224e698671f673bfc26a2e\", \"amenities\": [\"Laundry\", \"Balcony\"], \"saved\": \"True\"}, \"6c9ca08882da43a8a751e8895fa7e24a\": {\"name\": \"Fredrikstad Leiligheter\", \"location\": \"St. Olavs gate 12, Fredrikstad\", \"zip_code\": \"1607\", \"price\": \"1300\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"700\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"6c9ca08882da43a8a751e8895fa7e24a\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"47b99229eb9546e784fe7c320e208f00\": {\"name\": \"Bergen Student Apartments\", \"location\": \"Nygaardsgaten 15, Bergen\", \"zip_code\": \"5015\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"47b99229eb9546e784fe7c320e208f00\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"fe4c587ccd6b435f8e058127a5061b2d\": {\"name\": \"Bergenhus Apartments\", \"location\": \"Bergenhusgata 15, Bergen\", \"zip_code\": \"5835\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"700\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"fe4c587ccd6b435f8e058127a5061b2d\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"024452d5474944dea525bb0d09fe272e\": {\"name\": \"Stavanger Harbour\", \"location\": \"Strandkaien 1, Stavanger\", \"zip_code\": \"4006\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"024452d5474944dea525bb0d09fe272e\", \"amenities\": [\"Gym\", \"Parking\", \"Harbour view\"], \"saved\": \"True\"}, \"02e77a2ac7cd475cbe9611bd46033723\": {\"name\": \"Bergen Student Housing\", \"location\": \"Fosswinckels gate 10, Bergen\", \"zip_code\": \"5005\", \"price\": \"1200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"02e77a2ac7cd475cbe9611bd46033723\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"d5a0921b1d6148519d9a29c04c9ab9d2\": {\"name\": \"Bodø Sentrum\", \"location\": \"Storgata 12, Bodø\", \"zip_code\": \"8006\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"d5a0921b1d6148519d9a29c04c9ab9d2\", \"amenities\": [\"Gym\", \"Laundry\", \"City view\"], \"saved\": \"True\"}, \"5f04ea474dba4430b044d4d434f5620a\": {\"name\": \"Bergen Bay\", \"location\": \"Strandgaten 20, Bergen\", \"zip_code\": \"5013\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"5f04ea474dba4430b044d4d434f5620a\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"7e62256041cc4328b0fe640684ece44c\": {\"name\": \"Oslo City Apartments\", \"location\": \"Torggata 15, Oslo\", \"zip_code\": \"0181\", \"price\": \"2800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"7e62256041cc4328b0fe640684ece44c\", \"amenities\": [\"Gym\", \"Laundry\", \"City view\"], \"saved\": \"True\"}, \"87d6d020ae184d849118ede1f92b2c3f\": {\"name\": \"Trondheim Luxury Apartments\", \"location\": \"Kongens gate 30, Trondheim\", \"zip_code\": \"7011\", \"price\": \"3000\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"87d6d020ae184d849118ede1f92b2c3f\", \"amenities\": [\"Parking\", \"Laundry\", \"Sauna\", \"Gym\"], \"saved\": \"True\"}, \"f134f3282a934cc08c76ee7e00bdd1ad\": {\"name\": \"Bergen North\", \"location\": \"Nordnesgaten 15, Bergen\", \"zip_code\": \"5011\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"f134f3282a934cc08c76ee7e00bdd1ad\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"85f709affe4f40819639ac10825c63fa\": {\"name\": \"Kristiansand Leilighet\", \"location\": \"Markens gate 12, Kristiansand\", \"zip_code\": \"4611\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"85f709affe4f40819639ac10825c63fa\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"281f1e20ba5d49fab056a8bc80ea362f\": {\"name\": \"Trondheim Student Apartments\", \"location\": \"Elgeseter gate 1, Trondheim\", \"zip_code\": \"7030\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Second floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"281f1e20ba5d49fab056a8bc80ea362f\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"0df3644624d64299b061f43ecf7dac41\": {\"name\": \"Trondheim City Centre Apartments\", \"location\": \"Nidarosdomen 12, Trondheim\", \"zip_code\": \"7013\", \"price\": \"2800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"0df3644624d64299b061f43ecf7dac41\", \"amenities\": [\"Gym\", \"Laundry\", \"Balcony\"], \"saved\": \"True\"}, \"decb202c7c364c099be6c2cc3420c0d0\": {\"name\": \"Tromsø Arctic Living\", \"location\": \"Grønnegata 10, Tromsø\", \"zip_code\": \"9008\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"decb202c7c364c099be6c2cc3420c0d0\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"300f7336fbb345c9953848260fecae52\": {\"name\": \"Ålesund Apartments\", \"location\": \"Kongens gate 25, Ålesund\", \"zip_code\": \"6003\", \"price\": \"1100\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"300f7336fbb345c9953848260fecae52\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"b8e0786d170d41b7bc003c7154b1b74a\": {\"name\": \"Bergen Harbour Homes\", \"location\": \"Strandgaten 15, Bergen\", \"zip_code\": \"5013\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"b8e0786d170d41b7bc003c7154b1b74a\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}}",
+      "event_id": "series_s1_list_saved_apartments",
+      "response_sha256": "e63702b59de8525cdb37ed3efc9a61dd08d5a479d376d0b9a364639fb201c541"
+    },
+    "stage2.tool_response.series_s2_read_conversation": {
+      "stage": 2,
+      "text": "{\"messages\": [{\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"c934bb2c5f71e13f0cc5da288112035c\", \"timestamp\": \"1728975601.0\", \"content\": \"Hi Kåre, how was your weekend? What do you think about Bergen?\"}, {\"sender_id\": \"f44f8146-eae8-4fb1-801f-77ac3cb87e51\", \"message_id\": \"ba09a492870d4c0c82e1202e7d82dffb\", \"timestamp\": \"1728833700\", \"content\": \"I've heard great things about that film! I'll have to add it to my list. Well, Åse, it was great catching up with you. Let's talk soon!\"}, {\"sender_id\": \"8e63c48c-6aef-4bcb-84d2-9a6f79bc9b16\", \"message_id\": \"00f7ccb95ea2431db074e48b4225cd20\", \"timestamp\": \"1728833100\", \"content\": \"Actually, I just saw 'The Worst Person in the World' and loved it! The director, Joachim Trier, is really making waves in the film world.\"}], \"metadata\": {\"message_range\": [\"0\", \"3\"], \"conversation_length\": \"11\", \"conversation_id\": \"6f71edc0aa93413190b42f46c6c913f3\", \"conversation_title\": \"Kåre Østensen\"}}",
+      "event_id": "series_s2_read_conversation",
+      "response_sha256": "c7c9b5efae946178f023845d7b9f40b62b9ab26e1564be7efc47d1b612d38ac6"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Bergen Student",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.2",
+          "reason": "特定组织名称，具有辨识度",
+          "weight": 50
+        },
+        {
+          "text": "Kåre Østensen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含特殊字符的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Bergen Student",
+        "Kåre Østensen"
+      ],
+      "active_vocabulary": {
+        "Bergen Student": 50,
+        "Kåre Østensen": 50
+      },
+      "vocabulary_sha256": "6348bae5746eca11464747238406e593c4aa0eead147812837cda6965666f702"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kongens gate 25, Ålesund",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "含变音字母Å的完整街道地址",
+          "weight": 50
+        },
+        {
+          "text": "St. Olavs gate 12",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "难拼写的街道名",
+          "weight": 50
+        },
+        {
+          "text": "Trondheim City Centre Apartments",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "完整且较难的地产名称，含地名Trondheim",
+          "weight": 50
+        },
+        {
+          "text": "Bergen Harbour Homes",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "完整且较难的地产名称",
+          "weight": 50
+        },
+        {
+          "text": "Bergen Student Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Bergen Student Housing",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Bodø Bay Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "含ø的独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Elgeseter gate 1",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "难拼写的街道名",
+          "weight": 50
+        },
+        {
+          "text": "Elgeseter gate 10",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "难拼写的街道名",
+          "weight": 50
+        },
+        {
+          "text": "Filipstad Brygge 2",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "难拼写的街道名",
+          "weight": 50
+        },
+        {
+          "text": "Fosswinckels gate 10",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "难拼写的街道名",
+          "weight": 50
+        },
+        {
+          "text": "Grønnegata 10, Tromsø",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "含变音字母ø的挪威语街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Markens gate 12",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "难拼写的街道名",
+          "weight": 50
+        },
+        {
+          "text": "Nidarosdomen 12, Trondheim",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "含挪威语专名Nidarosdomen的完整地址",
+          "weight": 50
+        },
+        {
+          "text": "Oslo Waterfront Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Stavanger City Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Strandgaten 15, Bergen",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "挪威语街道专名地址",
+          "weight": 50
+        },
+        {
+          "text": "Tromsø Arctic Living",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "含变音字母ø的独特地产名称",
+          "weight": 50
+        },
+        {
+          "text": "Tromsø Fjord Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "含挪威语特殊字符ø的独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Trondheim Family Homes",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Trondheim Luxury Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Trondheim Student Living",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Østre gate 12",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "含Ø的难读街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Østre gate 34",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "含Ø的难读街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Øvre Bakklandet 20",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "含Ø的难读街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Akershusstranda 12",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "难拼写的挪威街道名",
+          "weight": 50
+        },
+        {
+          "text": "Bergenhus Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Bergenhusgata 15",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "难拼写的街道名",
+          "weight": 50
+        },
+        {
+          "text": "Bodø Sentrum",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "含ø的独特地名",
+          "weight": 50
+        },
+        {
+          "text": "Bryggen Residence",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Fredrikstad Leilighet",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "含挪威语词的独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Fredrikstad Leiligheter",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "含挪威语词的独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Havnegata 10",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "难拼写的街道名",
+          "weight": 50
+        },
+        {
+          "text": "Kjøpmannsgata 20",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "含ø的难读街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Kongsgata 12",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "难拼写的街道名",
+          "weight": 50
+        },
+        {
+          "text": "Kongsgata 30",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "难拼写的街道名",
+          "weight": 50
+        },
+        {
+          "text": "Kongsgata 33",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "难拼写的街道名",
+          "weight": 50
+        },
+        {
+          "text": "Kristiansand Leilighet",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "含挪威语词的独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Nordnesgaten 15",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "难拼写的街道名",
+          "weight": 50
+        },
+        {
+          "text": "Nygaardsgaten 12",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "难拼写的街道名",
+          "weight": 50
+        },
+        {
+          "text": "Nygaardsgaten 15",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "难拼写的街道名",
+          "weight": 50
+        },
+        {
+          "text": "Stavanger Sentrum",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Strandkaien 1",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "难拼写的街道名",
+          "weight": 50
+        },
+        {
+          "text": "Trondheim Townhouses",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "独特公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Ålesund Apartments",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_list_saved_apartments",
+          "reason": "含变音字母Å的地产名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kongens gate 25, Ålesund",
+        "St. Olavs gate 12",
+        "Trondheim City Centre Apartments",
+        "Bergen Harbour Homes",
+        "Bergen Student Apartments",
+        "Bergen Student Housing",
+        "Bodø Bay Apartments",
+        "Elgeseter gate 1",
+        "Elgeseter gate 10",
+        "Filipstad Brygge 2",
+        "Fosswinckels gate 10",
+        "Grønnegata 10, Tromsø",
+        "Markens gate 12",
+        "Nidarosdomen 12, Trondheim",
+        "Oslo Waterfront Apartments",
+        "Stavanger City Apartments",
+        "Strandgaten 15, Bergen",
+        "Tromsø Arctic Living",
+        "Tromsø Fjord Apartments",
+        "Trondheim Family Homes",
+        "Trondheim Luxury Apartments",
+        "Trondheim Student Living",
+        "Østre gate 12",
+        "Østre gate 34",
+        "Øvre Bakklandet 20",
+        "Akershusstranda 12",
+        "Bergenhus Apartments",
+        "Bergenhusgata 15",
+        "Bodø Sentrum",
+        "Bryggen Residence",
+        "Fredrikstad Leilighet",
+        "Fredrikstad Leiligheter",
+        "Havnegata 10",
+        "Kjøpmannsgata 20",
+        "Kongsgata 12",
+        "Kongsgata 30",
+        "Kongsgata 33",
+        "Kristiansand Leilighet",
+        "Nordnesgaten 15",
+        "Nygaardsgaten 12",
+        "Nygaardsgaten 15",
+        "Stavanger Sentrum",
+        "Strandkaien 1",
+        "Trondheim Townhouses",
+        "Ålesund Apartments"
+      ],
+      "active_vocabulary": {
+        "Bergen Student": 50,
+        "Kåre Østensen": 50,
+        "Kongens gate 25, Ålesund": 50,
+        "St. Olavs gate 12": 50,
+        "Trondheim City Centre Apartments": 50,
+        "Bergen Harbour Homes": 50,
+        "Bergen Student Apartments": 50,
+        "Bergen Student Housing": 50,
+        "Bodø Bay Apartments": 50,
+        "Elgeseter gate 1": 50,
+        "Elgeseter gate 10": 50,
+        "Filipstad Brygge 2": 50,
+        "Fosswinckels gate 10": 50,
+        "Grønnegata 10, Tromsø": 50,
+        "Markens gate 12": 50,
+        "Nidarosdomen 12, Trondheim": 50,
+        "Oslo Waterfront Apartments": 50,
+        "Stavanger City Apartments": 50,
+        "Strandgaten 15, Bergen": 50,
+        "Tromsø Arctic Living": 50,
+        "Tromsø Fjord Apartments": 50,
+        "Trondheim Family Homes": 50,
+        "Trondheim Luxury Apartments": 50,
+        "Trondheim Student Living": 50,
+        "Østre gate 12": 50,
+        "Østre gate 34": 50,
+        "Øvre Bakklandet 20": 50,
+        "Akershusstranda 12": 50,
+        "Bergenhus Apartments": 50,
+        "Bergenhusgata 15": 50,
+        "Bodø Sentrum": 50,
+        "Bryggen Residence": 50,
+        "Fredrikstad Leilighet": 50,
+        "Fredrikstad Leiligheter": 50,
+        "Havnegata 10": 50,
+        "Kjøpmannsgata 20": 50,
+        "Kongsgata 12": 50,
+        "Kongsgata 30": 50,
+        "Kongsgata 33": 50,
+        "Kristiansand Leilighet": 50,
+        "Nordnesgaten 15": 50,
+        "Nygaardsgaten 12": 50,
+        "Nygaardsgaten 15": 50,
+        "Stavanger Sentrum": 50,
+        "Strandkaien 1": 50,
+        "Trondheim Townhouses": 50,
+        "Ålesund Apartments": 50
+      },
+      "vocabulary_sha256": "06a298a3b5ef76e7718badba8149f78855c2c6b64a06b211560385ecaf35fbee"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Joachim Trier",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_conversation",
+          "reason": "完整人名，导演专有名词",
+          "weight": 50
+        },
+        {
+          "text": "Kåre Østensen",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_conversation",
+          "reason": "含特殊字符å的完整人名，属于高优先级专有名词",
+          "weight": 50
+        },
+        {
+          "text": "Åse",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_conversation",
+          "reason": "含特殊字符Å的专有名字",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Joachim Trier",
+        "Åse"
+      ],
+      "active_vocabulary": {
+        "Bergen Student": 50,
+        "Kåre Østensen": 50,
+        "Kongens gate 25, Ålesund": 50,
+        "St. Olavs gate 12": 50,
+        "Trondheim City Centre Apartments": 50,
+        "Bergen Harbour Homes": 50,
+        "Bergen Student Apartments": 50,
+        "Bergen Student Housing": 50,
+        "Bodø Bay Apartments": 50,
+        "Elgeseter gate 1": 50,
+        "Elgeseter gate 10": 50,
+        "Filipstad Brygge 2": 50,
+        "Fosswinckels gate 10": 50,
+        "Grønnegata 10, Tromsø": 50,
+        "Markens gate 12": 50,
+        "Nidarosdomen 12, Trondheim": 50,
+        "Oslo Waterfront Apartments": 50,
+        "Stavanger City Apartments": 50,
+        "Strandgaten 15, Bergen": 50,
+        "Tromsø Arctic Living": 50,
+        "Tromsø Fjord Apartments": 50,
+        "Trondheim Family Homes": 50,
+        "Trondheim Luxury Apartments": 50,
+        "Trondheim Student Living": 50,
+        "Østre gate 12": 50,
+        "Østre gate 34": 50,
+        "Øvre Bakklandet 20": 50,
+        "Akershusstranda 12": 50,
+        "Bergenhus Apartments": 50,
+        "Bergenhusgata 15": 50,
+        "Bodø Sentrum": 50,
+        "Bryggen Residence": 50,
+        "Fredrikstad Leilighet": 50,
+        "Fredrikstad Leiligheter": 50,
+        "Havnegata 10": 50,
+        "Kjøpmannsgata 20": 50,
+        "Kongsgata 12": 50,
+        "Kongsgata 30": 50,
+        "Kongsgata 33": 50,
+        "Kristiansand Leilighet": 50,
+        "Nordnesgaten 15": 50,
+        "Nygaardsgaten 12": 50,
+        "Nygaardsgaten 15": 50,
+        "Stavanger Sentrum": 50,
+        "Strandkaien 1": 50,
+        "Trondheim Townhouses": 50,
+        "Ålesund Apartments": 50,
+        "Joachim Trier": 50,
+        "Åse": 50
+      },
+      "vocabulary_sha256": "e48d4e367c7c8262f9683b2b8e88483e92b16031b0efb20e04786085538c0186"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Bergen",
+    "Algebra High School X Y Equation Problems",
+    "Bergen Student Apartment",
+    "Kåre"
+  ],
+  "binary_omissions": [],
+  "request_parts": 4,
+  "extracted_at": "2026-11-23T02:22:47.205458+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

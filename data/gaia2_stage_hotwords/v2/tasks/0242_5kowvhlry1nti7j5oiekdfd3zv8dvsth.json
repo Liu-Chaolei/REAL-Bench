@@ -1,0 +1,109 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0242_5kowvhlry1nti7j5oiekdfd3zv8dvsth",
+  "model": "deepseek-flash",
+  "input_sha256": "e9992d4947eaca9fe2367b4c7a820701343f685024ea7c59428b92937fdfef37",
+  "review_input_sha256": "159960289164be19bb14a9688d4b7b5b3ef5e2d878b682296338dfe4c69a670f",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "13e380c2022a0445a19f58a20678b407e716e5a7e952d762c817a73bd3b7dab7",
+  "reference_results_sha256": "5b711a79d9df45746ef04bd8b0025f0d3b2a91d07bc7cb7177a7f0d1b1ebc7c4",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Bristol Temple Meads Station",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Bristol Bungalow",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Whiteladies Road",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Bristol Temple Meads Station",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "火车站专有地名，含多词难识别",
+          "weight": 50
+        },
+        {
+          "text": "Bristol Bungalow",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "房产专有名称",
+          "weight": 50
+        },
+        {
+          "text": "Whiteladies Road",
+          "kind": "place",
+          "source": "stage1.existing_catalog.2",
+          "reason": "街道专有地名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Bristol Temple Meads Station",
+        "Bristol Bungalow",
+        "Whiteladies Road"
+      ],
+      "active_vocabulary": {
+        "Bristol Temple Meads Station": 50,
+        "Bristol Bungalow": 50,
+        "Whiteladies Road": 50
+      },
+      "vocabulary_sha256": "67843626068e7296fcf19206000566095ef0c7e8fe8768f0e3f3141889fab232"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Bristol Temple Meads Station": 50,
+        "Bristol Bungalow": 50,
+        "Whiteladies Road": 50
+      },
+      "vocabulary_sha256": "67843626068e7296fcf19206000566095ef0c7e8fe8768f0e3f3141889fab232"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Bristol",
+    "Premium"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:42.252129+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

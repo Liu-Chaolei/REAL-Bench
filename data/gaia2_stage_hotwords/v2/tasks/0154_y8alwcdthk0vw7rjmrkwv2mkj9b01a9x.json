@@ -1,0 +1,398 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0154_y8alwcdthk0vw7rjmrkwv2mkj9b01a9x",
+  "model": "deepseek-flash",
+  "input_sha256": "e5ff94de0c3811c3c6d3dd81a1a70690177e78d96c07a3ae9c10b5154369fc60",
+  "review_input_sha256": "487b64707a18483a2e54f314e56053cb12dd7baa39ce57548e2d3c15b8629157",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "dfdba31523511c1a29b3b3a1dacd65a30a160b64241ab380298a042fc7cd391e",
+  "reference_results_sha256": "a7fd64c44e1d07cd0d8d68e96fa2ca321257d9c0b841c239a1a791d1d58d4ae2",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Søren",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Uppsala Urban",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Göteborgs Gård",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Västerås View",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Göteborgs Garden",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Norrköping Nest",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.5": {
+      "stage": 1,
+      "text": "Göteborgs Gem",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.6": {
+      "stage": 1,
+      "text": "Lund Lyckås",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.7": {
+      "stage": 1,
+      "text": "Uppsala Utopia",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.8": {
+      "stage": 1,
+      "text": "Uppsala University Heights",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.9": {
+      "stage": 1,
+      "text": "Uppsala Oaks",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.tool_response.series_s1_property_0": {
+      "stage": 1,
+      "text": "{\"name\": \"Uppsala Urban\", \"location\": \"Svartbäcksgatan 10, Uppsala\", \"zip_code\": \"753 32\", \"price\": \"1000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"0d836a21c18a4e029531ac8ffc9fb3fc\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}",
+      "event_id": "series_s1_property_0",
+      "response_sha256": "52759af1fdf0372fdad9b01e19724e027d151dd4a48bdb8335cb1b1305d8e61b"
+    },
+    "stage1.tool_response.series_s1_property_3": {
+      "stage": 1,
+      "text": "{\"name\": \"Göteborgs Garden\", \"location\": \"Karl Johansgatan 20, Göteborg\", \"zip_code\": \"411 21\", \"price\": \"1100\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"700\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"fde55cb1c7bb4cd6a35ab52bee2b30ec\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}",
+      "event_id": "series_s1_property_3",
+      "response_sha256": "20ec72fa037cc670c3ffb06899844ff3ef93a59c5a89fe1ef41443a72bfcf29f"
+    },
+    "stage1.tool_response.series_s1_property_4": {
+      "stage": 1,
+      "text": "{\"name\": \"Norrköping Nest\", \"location\": \"Drottninggatan 20, Norrköping\", \"zip_code\": \"602 32\", \"price\": \"1100\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"8025220454ce4808a6ed0e9f379f093b\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}",
+      "event_id": "series_s1_property_4",
+      "response_sha256": "8a1c413f8ea1a1b33c720d3f7d6365411d949de525c003d36c142b2e91b5ec45"
+    },
+    "stage1.tool_response.series_s1_property_5": {
+      "stage": 1,
+      "text": "{\"name\": \"Göteborgs Gem\", \"location\": \"Kungsgatan 12, Göteborg\", \"zip_code\": \"411 19\", \"price\": \"1200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"835cacdf88584dabb4186d25ecca08ab\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}",
+      "event_id": "series_s1_property_5",
+      "response_sha256": "d502b1f5b8b836cd50cea8b881f45e0d574e97d3ed675d4bb8e59196107ace7b"
+    },
+    "stage1.tool_response.series_s1_property_8": {
+      "stage": 1,
+      "text": "{\"name\": \"Uppsala University Heights\", \"location\": \"Östra Ågatan 12, Uppsala\", \"zip_code\": \"753 32\", \"price\": \"1200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"c4bdb29680ad4a6ab2f185bb0858574d\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}",
+      "event_id": "series_s1_property_8",
+      "response_sha256": "a2d0f93388dfc1d4b76a0dd4271ebb02067ae633167267d61d0b33b2c5bdd563"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Malmö City Center",
+      "original_source": "stage2.tool_gt.series_s2_send.arguments.content"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Malmö Harbour",
+      "original_source": "stage2.tool_gt.series_s2_send.arguments.content"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Malmö Majestic",
+      "original_source": "stage2.tool_gt.series_s2_send.arguments.content"
+    },
+    "stage2.existing_catalog.3": {
+      "stage": 2,
+      "text": "Malmö Marina View",
+      "original_source": "stage2.tool_gt.series_s2_send.arguments.content"
+    },
+    "stage2.tool_response.series_s2_property_1": {
+      "stage": 2,
+      "text": "{\"name\": \"Malmö Harbour\", \"location\": \"Södra Promenaden 25, Malmö\", \"zip_code\": \"211 19\", \"price\": \"2400\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"e11edfd522bc4daaa13c18e3f410a745\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"False\"}",
+      "event_id": "series_s2_property_1",
+      "response_sha256": "7b4d7477370be8298834e5872997f9f0c3f0855fa3188b614f049f56f6ed29e1"
+    },
+    "stage2.tool_response.series_s2_property_2": {
+      "stage": 2,
+      "text": "{\"name\": \"Malmö Majestic\", \"location\": \"Malmöhusvägen 34, Malmö\", \"zip_code\": \"211 18\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1100\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"e7d3e131384f4c7990c8a41d2e3ab29d\", \"amenities\": [\"Laundry\", \"Balcony\"], \"saved\": \"False\"}",
+      "event_id": "series_s2_property_2",
+      "response_sha256": "732d23dfb74c9d722867e452f454d5d313f5175de2e090f4514f89468395ba7c"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Søren",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含特殊字符Ø的专有人名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Søren"
+      ],
+      "active_vocabulary": {
+        "Søren": 50
+      },
+      "vocabulary_sha256": "6ba9740268792c4c1cad3500c674183b13637db530060768cf4af26252173693"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Uppsala University Heights",
+          "kind": "place",
+          "source": "stage1.existing_catalog.8",
+          "reason": "专有房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Göteborgs Garden",
+          "kind": "place",
+          "source": "stage1.existing_catalog.3",
+          "reason": "含Ö的瑞典语地名",
+          "weight": 50
+        },
+        {
+          "text": "Göteborgs Gem",
+          "kind": "place",
+          "source": "stage1.existing_catalog.5",
+          "reason": "含Ö的瑞典语地名",
+          "weight": 50
+        },
+        {
+          "text": "Göteborgs Gård",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含Ö和Å的瑞典语地名",
+          "weight": 50
+        },
+        {
+          "text": "Karl Johansgatan",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_property_3",
+          "reason": "瑞典语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Lund Lyckås",
+          "kind": "place",
+          "source": "stage1.existing_catalog.6",
+          "reason": "含Å的瑞典语地名",
+          "weight": 50
+        },
+        {
+          "text": "Norrköping Nest",
+          "kind": "place",
+          "source": "stage1.existing_catalog.4",
+          "reason": "含Ö的瑞典语地名",
+          "weight": 50
+        },
+        {
+          "text": "Uppsala Oaks",
+          "kind": "place",
+          "source": "stage1.existing_catalog.9",
+          "reason": "专有房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Uppsala Urban",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "瑞典语地名组合，含特殊拼写",
+          "weight": 50
+        },
+        {
+          "text": "Uppsala Utopia",
+          "kind": "place",
+          "source": "stage1.existing_catalog.7",
+          "reason": "专有房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Västerås View",
+          "kind": "place",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含Ä和Å的瑞典语地名",
+          "weight": 50
+        },
+        {
+          "text": "Östra Ågatan",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_property_8",
+          "reason": "含Ö和Å的瑞典语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Drottninggatan",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_property_4",
+          "reason": "瑞典语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Kungsgatan",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_property_5",
+          "reason": "瑞典语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Svartbäcksgatan",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_property_0",
+          "reason": "含Ä的瑞典语街道名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Uppsala University Heights",
+        "Göteborgs Garden",
+        "Göteborgs Gem",
+        "Göteborgs Gård",
+        "Karl Johansgatan",
+        "Lund Lyckås",
+        "Norrköping Nest",
+        "Uppsala Oaks",
+        "Uppsala Urban",
+        "Uppsala Utopia",
+        "Västerås View",
+        "Östra Ågatan",
+        "Drottninggatan",
+        "Kungsgatan",
+        "Svartbäcksgatan"
+      ],
+      "active_vocabulary": {
+        "Søren": 50,
+        "Uppsala University Heights": 50,
+        "Göteborgs Garden": 50,
+        "Göteborgs Gem": 50,
+        "Göteborgs Gård": 50,
+        "Karl Johansgatan": 50,
+        "Lund Lyckås": 50,
+        "Norrköping Nest": 50,
+        "Uppsala Oaks": 50,
+        "Uppsala Urban": 50,
+        "Uppsala Utopia": 50,
+        "Västerås View": 50,
+        "Östra Ågatan": 50,
+        "Drottninggatan": 50,
+        "Kungsgatan": 50,
+        "Svartbäcksgatan": 50
+      },
+      "vocabulary_sha256": "90dd4177436e81f6c7a8ea9629bc3d841b4a5aa7815e16599bb434e98a9820d8"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Malmö City Center",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含Ö的瑞典语地名",
+          "weight": 50
+        },
+        {
+          "text": "Malmö Marina View",
+          "kind": "place",
+          "source": "stage2.existing_catalog.3",
+          "reason": "含Ö的瑞典语地名",
+          "weight": 50
+        },
+        {
+          "text": "Malmö Harbour",
+          "kind": "place",
+          "source": "stage2.existing_catalog.1",
+          "reason": "含Ö的瑞典语地名",
+          "weight": 50
+        },
+        {
+          "text": "Malmö Majestic",
+          "kind": "place",
+          "source": "stage2.existing_catalog.2",
+          "reason": "含Ö的瑞典语地名",
+          "weight": 50
+        },
+        {
+          "text": "Södra Promenaden",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_property_1",
+          "reason": "含Ö的瑞典语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Malmöhusvägen",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_property_2",
+          "reason": "含Ö和Ä的瑞典语街道名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Malmö City Center",
+        "Malmö Marina View",
+        "Malmö Harbour",
+        "Malmö Majestic",
+        "Södra Promenaden",
+        "Malmöhusvägen"
+      ],
+      "active_vocabulary": {
+        "Søren": 50,
+        "Uppsala University Heights": 50,
+        "Göteborgs Garden": 50,
+        "Göteborgs Gem": 50,
+        "Göteborgs Gård": 50,
+        "Karl Johansgatan": 50,
+        "Lund Lyckås": 50,
+        "Norrköping Nest": 50,
+        "Uppsala Oaks": 50,
+        "Uppsala Urban": 50,
+        "Uppsala Utopia": 50,
+        "Västerås View": 50,
+        "Östra Ågatan": 50,
+        "Drottninggatan": 50,
+        "Kungsgatan": 50,
+        "Svartbäcksgatan": 50,
+        "Malmö City Center": 50,
+        "Malmö Marina View": 50,
+        "Malmö Harbour": 50,
+        "Malmö Majestic": 50,
+        "Södra Promenaden": 50,
+        "Malmöhusvägen": 50
+      },
+      "vocabulary_sha256": "7256d010a7b10f8474959f7e952390f8273356c223349a14fde16fee2a451277"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:18.682907+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

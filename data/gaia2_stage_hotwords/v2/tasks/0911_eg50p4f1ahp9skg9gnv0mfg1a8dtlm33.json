@@ -1,0 +1,130 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0911_eg50p4f1ahp9skg9gnv0mfg1a8dtlm33",
+  "model": "deepseek-flash",
+  "input_sha256": "8cc1343ac9d7917dff47f18f95aec9f8014838d37278751c051c2d881fc764ec",
+  "review_input_sha256": "2ad693eaec80933a4b03ce580e98bc71f43f7638a2f1ce4d60c95201721cc29e",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "f4d3dc02dac13eb9a8094c628f02bfce170eddda1d294466094da9339424c4a6",
+  "reference_results_sha256": "6ce8ffd7adf8c03c0eea39e182407790556e4b946092990032c449820ed7bee7",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Séamus",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Thierry",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Aurélie Vandenberghe",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Liesbeth",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b42c0e1f-97fd-4e89-ba00-f1d08c446189.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélie Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Liesbeth",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "较难拼写的专有人名",
+          "weight": 50
+        },
+        {
+          "text": "Séamus",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的难拼写人名",
+          "weight": 50
+        },
+        {
+          "text": "Thierry",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "较难拼写的专有人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélie Vandenberghe",
+        "Liesbeth",
+        "Séamus",
+        "Thierry"
+      ],
+      "active_vocabulary": {
+        "Aurélie Vandenberghe": 50,
+        "Liesbeth": 50,
+        "Séamus": 50,
+        "Thierry": 50
+      },
+      "vocabulary_sha256": "5f5e8316de923ba7f001231b51839d7544a35ce3b43b1467bd4eb9e459b80399"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélie Vandenberghe": 50,
+        "Liesbeth": 50,
+        "Séamus": 50,
+        "Thierry": 50
+      },
+      "vocabulary_sha256": "5f5e8316de923ba7f001231b51839d7544a35ce3b43b1467bd4eb9e459b80399"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélie Vandenberghe": 50,
+        "Liesbeth": 50,
+        "Séamus": 50,
+        "Thierry": 50
+      },
+      "vocabulary_sha256": "5f5e8316de923ba7f001231b51839d7544a35ce3b43b1467bd4eb9e459b80399"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Karel",
+    "Vandenberghe",
+    "Birthday Party – 27 October"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:47.544642+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

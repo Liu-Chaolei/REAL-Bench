@@ -1,0 +1,125 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0398_k0klthaq0yntxwpnj76clz530lq482i5",
+  "model": "deepseek-flash",
+  "input_sha256": "deb32c272a55669eb309f492d23d83e50dd6715b91be1a39708409eb09e68a8d",
+  "review_input_sha256": "c7209991e49b28805f2eabf3e5b1f8e797b49a1a480f04a3ac66888e121badfa",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "5d0002d72c718ceff3f1bb3f39dea1a6b1ddecbf01e3f789d241e3bffdab88f9",
+  "reference_results_sha256": "a42983178caf5a3022e49e16316175a5cefe486829b4e22c68b9538bb87f833d",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Bohumil Nováček",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.description"
+    },
+    "stage1.tool_response.series_s1_person": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Bohumil\", \"last_name\": \"Nováček\", \"contact_id\": \"51dc276250504a6d86d51c5d3665fb2d\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"78\", \"nationality\": \"Czech\", \"city_living\": \"Brno\", \"country\": \"Czech Republic\", \"status\": \"Status.RETIRED\", \"job\": \"Former CEO of a textile manufacturing company\", \"description\": \"Bohumil Nováček is a retired businessman who spent most of his life in Brno, Czech Republic. He was born in 1944 and grew up in a traditional Czech family. After completing his secondary education at St Mary's Catholic School in 1962, he went on to study economics at Masaryk University. Bohumil's career spanned over four decades, during which he worked his way up to become the CEO of a successful textile manufacturing company. He is proud of his accomplishments and the fact that he was able to provide for his family.\", \"phone\": \"+420732123456\", \"email\": \"bohumil.novacek@gaia2mail.com\", \"address\": \"14, Lidická 123, 602 00 Brno, Czech Republic\"}",
+      "event_id": "series_s1_person",
+      "response_sha256": "c5d939e92b6a59cd2f326585e5f52513646d79864547b88ab2568523ab79cd0e"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Matěj Nováček",
+      "original_source": "stage2.tool_gt.series_s2_create.arguments.attendees[0]"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Božetěchova 3, 110 00 Prague 1",
+      "original_source": "stage2.tool_gt.series_s2_create.arguments.location"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Bohumil Nováček",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Lidická",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_person",
+          "reason": "含变音符号的街道名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Bohumil Nováček",
+        "Lidická"
+      ],
+      "active_vocabulary": {
+        "Bohumil Nováček": 50,
+        "Lidická": 50
+      },
+      "vocabulary_sha256": "019206524c6e9737e6f3cb0a11f67973d9217fbb32c65cb518d9f893cead6981"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Božetěchova",
+          "kind": "place",
+          "source": "stage2.existing_catalog.1",
+          "reason": "含变音符号的街道名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Matěj Nováček",
+        "Božetěchova"
+      ],
+      "active_vocabulary": {
+        "Bohumil Nováček": 50,
+        "Lidická": 50,
+        "Matěj Nováček": 50,
+        "Božetěchova": 50
+      },
+      "vocabulary_sha256": "b961a1dc3705efe9c471a8f6ecd242699efc8812e90d33666d7cd56bff7fbb8c"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Brno",
+    "Božetěchova 3, 110 00 Prague 1"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:36.688345+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

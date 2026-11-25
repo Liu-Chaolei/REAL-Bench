@@ -1,0 +1,96 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0397_yl63g0932dqlfxk8efknhhpa9mk1f4qf",
+  "model": "deepseek-flash",
+  "input_sha256": "caed6dbe03fb9ce8d3bc9642155705d7175fcf5d09fa9a1f7b5876226d38878c",
+  "review_input_sha256": "cb76d3297b3a2114bcc8c773f400e88abe007e645172a2af0eb94d9e76c2fef1",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "0f85e196eaf1b1572deaee71e2e0dff304bc77a9900b9f727c625b1c404c807e",
+  "reference_results_sha256": "1b1a26bab37e5c4ac00a6c2ecd3704a9bc37678a31eff1166f8113b8bb7b2001",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Åsa Lindgren",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Café Östermalms",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Café Östermalms",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的独特场所名",
+          "weight": 50
+        },
+        {
+          "text": "Åsa Lindgren",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Café Östermalms",
+        "Åsa Lindgren"
+      ],
+      "active_vocabulary": {
+        "Café Östermalms": 50,
+        "Åsa Lindgren": 50
+      },
+      "vocabulary_sha256": "9be44fcb271566a923787256e341307cb104b3186c6fecebf8807380743c5586"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Café Östermalms": 50,
+        "Åsa Lindgren": 50
+      },
+      "vocabulary_sha256": "9be44fcb271566a923787256e341307cb104b3186c6fecebf8807380743c5586"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Åsa",
+    "Home Office",
+    "Stockholm Office",
+    "Polish reply to Åsa"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:35.265514+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,163 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0189_oiau5wsprbpytdu2her25bgzfrptwtv6",
+  "model": "deepseek-flash",
+  "input_sha256": "1ab65c955e0b1e10d9ad9c07f8d3548d797eacd5b70504f71b9f0f1a5bafd594",
+  "review_input_sha256": "545df80b15758cc79e32c7cdf4c47167b1c4c187efab0475da7488889c244d20",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "0916c2bcbe2779aac78c062592554f46a0195d637a101e48cfdd8d1dc0904344",
+  "reference_results_sha256": "0942265cc521655a4173788a501f85c05e48af47975f3d207fececeee8e06a6e",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Nalani Jensen",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Kaia Nakamura",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Luís Silva",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Novogratz Iconic Modern Metal End Table",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Novogratz Iconic Modern Metal End Tables",
+      "original_source": "stage1.tool_gt.series_s1_status_message.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Aurélien",
+      "original_source": "stage2.tool_gt.series_s2_email_kaia.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Novogratz Iconic Modern Metal End Table",
+          "kind": "product",
+          "source": "stage0.existing_catalog.3",
+          "reason": "独特产品全名",
+          "weight": 50
+        },
+        {
+          "text": "Kaia Nakamura",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Luís Silva",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Novogratz Iconic Modern Metal End Table",
+        "Kaia Nakamura",
+        "Luís Silva",
+        "Nalani Jensen"
+      ],
+      "active_vocabulary": {
+        "Novogratz Iconic Modern Metal End Table": 50,
+        "Kaia Nakamura": 50,
+        "Luís Silva": 50,
+        "Nalani Jensen": 50
+      },
+      "vocabulary_sha256": "26ed5ae608e7dfd82500dfd845f66b6ac7ba3e77949670397c73fe45d8d509e4"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Novogratz Iconic Modern Metal End Tables",
+          "kind": "product",
+          "source": "stage1.existing_catalog.1",
+          "reason": "独特产品全名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Novogratz Iconic Modern Metal End Tables"
+      ],
+      "active_vocabulary": {
+        "Novogratz Iconic Modern Metal End Table": 50,
+        "Kaia Nakamura": 50,
+        "Luís Silva": 50,
+        "Nalani Jensen": 50,
+        "Novogratz Iconic Modern Metal End Tables": 50
+      },
+      "vocabulary_sha256": "48cd68a46120b3549721d0bb8ad78e909e2a3df7954f83a6a0125f630aafbd5e"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号的专有名词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien"
+      ],
+      "active_vocabulary": {
+        "Novogratz Iconic Modern Metal End Table": 50,
+        "Kaia Nakamura": 50,
+        "Luís Silva": 50,
+        "Nalani Jensen": 50,
+        "Novogratz Iconic Modern Metal End Tables": 50,
+        "Aurélien": 50
+      },
+      "vocabulary_sha256": "e32afa9bcd83ea1be1e46a79a10b96e4fab1f8c00fcc2b4df93837c9259f45d8"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Nalani",
+    "Crisis Response Team",
+    "Kaia"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:24.936672+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

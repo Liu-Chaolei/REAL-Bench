@@ -1,0 +1,473 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0420_9vhu2kjcclmt3w0y7r3tt9deag511lw1",
+  "model": "deepseek-flash",
+  "input_sha256": "9e0910ce3f6fd474b1c9244b7ed4f0d9b121631e22931a71bee3ca565d2844ae",
+  "review_input_sha256": "6458daa137310e2cc61c043266a765909fb901db40886d093c14617b31886849",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "45c3eef709713cc7a6b59cb80a44f2b5594bcf45dc9c2c84f25c89841403749b",
+  "reference_results_sha256": "9d56d111d1e419d7ceaf415fcda201690de0da3c4f032a34350fecf4ac311a44",
+  "sources": {
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Moscow Metro Apartments",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Volga Riverwalk",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage1.tool_response.series_s1_read_saved": {
+      "stage": 1,
+      "text": "{\"423534a64f494b8baaa3ee8efe5feeb4\": {\"name\": \"Krasnodar City View\", \"location\": \"Krasnaya, Krasnodar\", \"zip_code\": \"350000\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"423534a64f494b8baaa3ee8efe5feeb4\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"c01d02fdb6834b3f950a130e81cd3488\": {\"name\": \"Nizhny Novgorod View\", \"location\": \"Bolshaya Pokrovskaya Street 15, Nizhny Novgorod\", \"zip_code\": \"603002\", \"price\": \"1200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"700\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"c01d02fdb6834b3f950a130e81cd3488\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"30fb06900743441e8405ed4536517121\": {\"name\": \"Kazan Kremlin\", \"location\": \"Bauman, Kazan\", \"zip_code\": \"420111\", \"price\": \"1800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1100\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"30fb06900743441e8405ed4536517121\", \"amenities\": [\"Pool\", \"Laundry\"], \"saved\": \"True\"}, \"0afc7cc770d54863820def89ac05bb5b\": {\"name\": \"Ural Mountains View\", \"location\": \"Lenina Street 45, Yekaterinburg\", \"zip_code\": \"620075\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"0afc7cc770d54863820def89ac05bb5b\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"376e6fe118ed4ed288f06ea4674b8f49\": {\"name\": \"Omsk Oasis\", \"location\": \"Lenin St, 25, Omsk\", \"zip_code\": \"644024\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"376e6fe118ed4ed288f06ea4674b8f49\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\"], \"saved\": \"True\"}, \"e1a55e51564d4585a6d22306365f761a\": {\"name\": \"Moscow City Lights\", \"location\": \"20 Tverskaya Street, Moscow\", \"zip_code\": \"125009\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1600\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"e1a55e51564d4585a6d22306365f761a\", \"amenities\": [\"Pool\", \"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"ab09cb66d0154060b9b5a7515956c04f\": {\"name\": \"Omsk Comfort\", \"location\": \"Lenina, Omsk\", \"zip_code\": \"644043\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"ab09cb66d0154060b9b5a7515956c04f\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"c6e7f6caeca1452c988d63c174c1d2fd\": {\"name\": \"Nizhny Novgorod Suites\", \"location\": \"25 Bolshaya Pokrovskaya Street, Nizhny Novgorod\", \"zip_code\": \"603005\", \"price\": \"1200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"c6e7f6caeca1452c988d63c174c1d2fd\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"ac0851a1e4cd471a912f975617ee2276\": {\"name\": \"Don River Apartments\", \"location\": \"Bolshaya Sadovaya Street 12, Rostov-on-Don\", \"zip_code\": \"344006\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"ac0851a1e4cd471a912f975617ee2276\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"c08baebfb97c4c96b883e53424281bef\": {\"name\": \"Omsk Luxury Residences\", \"location\": \"Lenina Street, Omsk\", \"zip_code\": \"644043\", \"price\": \"2800\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"c08baebfb97c4c96b883e53424281bef\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\", \"Pool\"], \"saved\": \"True\"}, \"4460c82d7fdd4b75b666221664c87445\": {\"name\": \"Kazan Riverfront\", \"location\": \"Kremlevskaya Street, Kazan\", \"zip_code\": \"420111\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"4460c82d7fdd4b75b666221664c87445\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"39f1f3ede2d44451b4bf03d8538b82e7\": {\"name\": \"Volga River Residence\", \"location\": \"Ulitsa Lenina, Nizhny Novgorod\", \"zip_code\": \"603000\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"39f1f3ede2d44451b4bf03d8538b82e7\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"b98f38e9521c4f339d305973aa3e8fd2\": {\"name\": \"Krasnodar City Living\", \"location\": \"Krasnaya St, 50, Krasnodar\", \"zip_code\": \"350000\", \"price\": \"1200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"b98f38e9521c4f339d305973aa3e8fd2\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"2a8bf1dfc4da4c52bfc5aade02577534\": {\"name\": \"Yekaterinburg Heights\", \"location\": \"10 Boris Yeltsin Street, Yekaterinburg\", \"zip_code\": \"620075\", \"price\": \"1800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"2a8bf1dfc4da4c52bfc5aade02577534\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"54222d39fa0c4e9796449d3e11caf6fb\": {\"name\": \"Siberian Dreams\", \"location\": \"Krasny Prospekt, Novosibirsk\", \"zip_code\": \"630007\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"54222d39fa0c4e9796449d3e11caf6fb\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"8861ed114ac64207a06379353f586e4b\": {\"name\": \"Krasnodar Luxury Apartments\", \"location\": \"Krasnaya Street, Krasnodar\", \"zip_code\": \"350000\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"8861ed114ac64207a06379353f586e4b\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"470d45616d0c4e08b8949654ada20409\": {\"name\": \"Novosibirsk Downtown\", \"location\": \"Krasny Avenue, Novosibirsk\", \"zip_code\": \"630000\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"470d45616d0c4e08b8949654ada20409\", \"amenities\": [\"Gym\", \"Parking\"], \"saved\": \"True\"}, \"4f9374cd26f448deb3a293c71e8b61de\": {\"name\": \"Saint Petersburg Bay Apartments\", \"location\": \"10 Vasilievsky Island, Saint Petersburg\", \"zip_code\": \"199034\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"4f9374cd26f448deb3a293c71e8b61de\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"03001f781b3d4c469e382f8a552cc42b\": {\"name\": \"Samara City Center\", \"location\": \"Ulitsa Kuibysheva, Samara\", \"zip_code\": \"443000\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"700\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"03001f781b3d4c469e382f8a552cc42b\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"06b768622d35425ea3139a8f33f48516\": {\"name\": \"Saint Petersburg Suites\", \"location\": \"Nevsky Prospekt, Saint Petersburg\", \"zip_code\": \"191186\", \"price\": \"3000\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"06b768622d35425ea3139a8f33f48516\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"af5a6aa7a887486ea77eb2ff37c7afd4\": {\"name\": \"Yekaterinburg Modern\", \"location\": \"8 Marta Street, Yekaterinburg\", \"zip_code\": \"620075\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"2200\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"af5a6aa7a887486ea77eb2ff37c7afd4\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"c1c4ae4634ac4fbca49c33d4604e2c66\": {\"name\": \"Nizhny Novgorod Oasis\", \"location\": \"Bolshaya Pokrovskaya Street, Nizhny Novgorod\", \"zip_code\": \"603005\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"c1c4ae4634ac4fbca49c33d4604e2c66\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"38b09a5a0840492e9f01aae569c58d53\": {\"name\": \"Samara Riverfront\", \"location\": \"Ulitsa Leningradskaya, Samara\", \"zip_code\": \"443011\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"38b09a5a0840492e9f01aae569c58d53\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"0e20e095a6a0485a9e5c118bd93aaa1a\": {\"name\": \"Samara City Apartments\", \"location\": \"Kuibysheva Street, Samara\", \"zip_code\": \"443010\", \"price\": \"1200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"0e20e095a6a0485a9e5c118bd93aaa1a\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"fefe0f38f9d14020a3ca392d57d54034\": {\"name\": \"Yekaterinburg Hills\", \"location\": \"Ulitsa Malysheva, Yekaterinburg\", \"zip_code\": \"620000\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"2000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"fefe0f38f9d14020a3ca392d57d54034\", \"amenities\": [\"Gym\", \"Pool\", \"Parking\"], \"saved\": \"True\"}, \"0029938a2d92410e95fe0a79f41a991e\": {\"name\": \"Rostov-on-Don Riverside\", \"location\": \"Bolshaya Sadovaya, Rostov-on-Don\", \"zip_code\": \"344006\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"0029938a2d92410e95fe0a79f41a991e\", \"amenities\": [\"Pool\", \"Laundry\"], \"saved\": \"True\"}, \"ff68f282183d48d8bebdf9a4c974913d\": {\"name\": \"Kremlin View Apartments\", \"location\": \"Tverskaya Street, Moscow\", \"zip_code\": \"101000\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"ff68f282183d48d8bebdf9a4c974913d\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"a1f59f7dacd14302a4ce293392186048\": {\"name\": \"Moscow Oasis\", \"location\": \"12 Tverskaya Street, Moscow\", \"zip_code\": \"125009\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"a1f59f7dacd14302a4ce293392186048\", \"amenities\": [\"Gym\", \"Parking\"], \"saved\": \"True\"}, \"d2e906487a2e4e879a3e07009db23bfd\": {\"name\": \"Saint Petersburg Palace\", \"location\": \"Nevsky Prospekt, 50, Saint Petersburg\", \"zip_code\": \"191011\", \"price\": \"3500\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"2000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"d2e906487a2e4e879a3e07009db23bfd\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"e30064a6b1204048b3555bf2eb3a92d1\": {\"name\": \"Kremlin Views\", \"location\": \"Tverskaya St, Moscow\", \"zip_code\": \"125009\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"e30064a6b1204048b3555bf2eb3a92d1\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"44d9fecb6d9d4201a164189278297120\": {\"name\": \"Moscow Metro Apartments\", \"location\": \"10 Tverskaya St, Moscow\", \"zip_code\": \"103104\", \"price\": \"3500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1300\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"44d9fecb6d9d4201a164189278297120\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\"], \"saved\": \"True\"}}",
+      "event_id": "series_s1_read_saved",
+      "response_sha256": "855a06a8791a120cd3e438486af79ed829757ec6cb93178474ce5526b03653db"
+    },
+    "stage1.tool_response.series_s1_search_2800": {
+      "stage": 1,
+      "text": "{\"398f7cbf6d5a47bcb35ebace29976202\": {\"name\": \"St. Petersburg Suites\", \"location\": \"Nevsky Prospekt, St. Petersburg\", \"zip_code\": \"191186\", \"price\": \"2800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1100\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"398f7cbf6d5a47bcb35ebace29976202\", \"amenities\": [\"Gym\", \"Laundry\", \"Parking\"], \"saved\": \"False\"}, \"43e79bbb6b1b4b9d8e16a09b743eaef5\": {\"name\": \"Samara Suites\", \"location\": \"Kuybyshev Street, Samara\", \"zip_code\": \"443099\", \"price\": \"2800\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Apartment\", \"square_footage\": \"1400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"43e79bbb6b1b4b9d8e16a09b743eaef5\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\", \"Parking\"], \"saved\": \"False\"}, \"8c9971a78f90466ba3c131972a148040\": {\"name\": \"Volga Riverwalk\", \"location\": \"Minina Street, Nizhny Novgorod\", \"zip_code\": \"603000\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"1500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"8c9971a78f90466ba3c131972a148040\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"False\"}, \"c08baebfb97c4c96b883e53424281bef\": {\"name\": \"Omsk Luxury Residences\", \"location\": \"Lenina Street, Omsk\", \"zip_code\": \"644043\", \"price\": \"2800\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"c08baebfb97c4c96b883e53424281bef\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\", \"Pool\"], \"saved\": \"True\"}}",
+      "event_id": "series_s1_search_2800",
+      "response_sha256": "b94518275c607ca7374cf5c6872e242091dea95e74520b8b132c47b67ce9429c"
+    },
+    "stage1.tool_response.series_s1_search_3500": {
+      "stage": 1,
+      "text": "{\"44d9fecb6d9d4201a164189278297120\": {\"name\": \"Moscow Metro Apartments\", \"location\": \"10 Tverskaya St, Moscow\", \"zip_code\": \"103104\", \"price\": \"3500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1300\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"44d9fecb6d9d4201a164189278297120\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\"], \"saved\": \"False\"}, \"984a16d3bb654a4ea011cce56338d96a\": {\"name\": \"Saint Petersburg Luxury\", \"location\": \"Nevsky Prospekt, 100, Saint Petersburg\", \"zip_code\": \"191186\", \"price\": \"3500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1400\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"984a16d3bb654a4ea011cce56338d96a\", \"amenities\": [\"Laundry\"], \"saved\": \"False\"}, \"d2e906487a2e4e879a3e07009db23bfd\": {\"name\": \"Saint Petersburg Palace\", \"location\": \"Nevsky Prospekt, 50, Saint Petersburg\", \"zip_code\": \"191011\", \"price\": \"3500\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"2000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"d2e906487a2e4e879a3e07009db23bfd\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}}",
+      "event_id": "series_s1_search_3500",
+      "response_sha256": "ad7005bcab4ddd6a57fac539a45f1e60d91e75f18addeeb82cb7955f31c22d6b"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "St. Petersburg Suites",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Samara Suites",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Rostov-on-Don Riverside",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "含连字符的难地名",
+          "weight": 50
+        },
+        {
+          "text": "Saint Petersburg Bay Apartments",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特的多词房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Don River Apartments",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特的多词房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Krasnodar City Living",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特的多词房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Krasnodar City View",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特的多词房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Krasnodar Luxury Apartments",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特的多词房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Kremlin View Apartments",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特的多词房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Moscow City Lights",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特的多词房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Moscow Metro Apartments",
+          "kind": "organization",
+          "source": "stage1.existing_catalog.2",
+          "reason": "独特的多词公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Nizhny Novgorod Oasis",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "含难城市名的房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Nizhny Novgorod Suites",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "含难城市名的房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Nizhny Novgorod View",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "含难城市名的房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Omsk Luxury Residences",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特的多词房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Saint Petersburg Luxury",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_search_3500",
+          "reason": "独特的多词房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Saint Petersburg Palace",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_search_3500",
+          "reason": "独特的多词房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Saint Petersburg Suites",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特的多词房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Samara City Apartments",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特的多词房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Samara City Center",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特的多词房产名称",
+          "weight": 50
+        },
+        {
+          "text": "St. Petersburg Suites",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_search_2800",
+          "reason": "独特的多词房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Ural Mountains View",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特的多词房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Volga River Residence",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特的多词房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Kazan Kremlin",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特的地标式名称",
+          "weight": 50
+        },
+        {
+          "text": "Kazan Riverfront",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特的房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Kremlin Views",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特的房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Moscow Oasis",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特的房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Novosibirsk Downtown",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "含难城市名的房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Omsk Comfort",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特的房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Omsk Oasis",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特的房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Samara Riverfront",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特的房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Samara Suites",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_search_2800",
+          "reason": "独特的房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Siberian Dreams",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "独特的房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Volga Riverwalk",
+          "kind": "place",
+          "source": "stage1.existing_catalog.3",
+          "reason": "独特的复合地名",
+          "weight": 50
+        },
+        {
+          "text": "Yekaterinburg Heights",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "含难城市名的房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Yekaterinburg Hills",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "含难城市名的房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Yekaterinburg Modern",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_read_saved",
+          "reason": "含难城市名的房产名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Rostov-on-Don Riverside",
+        "Saint Petersburg Bay Apartments",
+        "Don River Apartments",
+        "Krasnodar City Living",
+        "Krasnodar City View",
+        "Krasnodar Luxury Apartments",
+        "Kremlin View Apartments",
+        "Moscow City Lights",
+        "Moscow Metro Apartments",
+        "Nizhny Novgorod Oasis",
+        "Nizhny Novgorod Suites",
+        "Nizhny Novgorod View",
+        "Omsk Luxury Residences",
+        "Saint Petersburg Luxury",
+        "Saint Petersburg Palace",
+        "Saint Petersburg Suites",
+        "Samara City Apartments",
+        "Samara City Center",
+        "St. Petersburg Suites",
+        "Ural Mountains View",
+        "Volga River Residence",
+        "Kazan Kremlin",
+        "Kazan Riverfront",
+        "Kremlin Views",
+        "Moscow Oasis",
+        "Novosibirsk Downtown",
+        "Omsk Comfort",
+        "Omsk Oasis",
+        "Samara Riverfront",
+        "Samara Suites",
+        "Siberian Dreams",
+        "Volga Riverwalk",
+        "Yekaterinburg Heights",
+        "Yekaterinburg Hills",
+        "Yekaterinburg Modern"
+      ],
+      "active_vocabulary": {
+        "Rostov-on-Don Riverside": 50,
+        "Saint Petersburg Bay Apartments": 50,
+        "Don River Apartments": 50,
+        "Krasnodar City Living": 50,
+        "Krasnodar City View": 50,
+        "Krasnodar Luxury Apartments": 50,
+        "Kremlin View Apartments": 50,
+        "Moscow City Lights": 50,
+        "Moscow Metro Apartments": 50,
+        "Nizhny Novgorod Oasis": 50,
+        "Nizhny Novgorod Suites": 50,
+        "Nizhny Novgorod View": 50,
+        "Omsk Luxury Residences": 50,
+        "Saint Petersburg Luxury": 50,
+        "Saint Petersburg Palace": 50,
+        "Saint Petersburg Suites": 50,
+        "Samara City Apartments": 50,
+        "Samara City Center": 50,
+        "St. Petersburg Suites": 50,
+        "Ural Mountains View": 50,
+        "Volga River Residence": 50,
+        "Kazan Kremlin": 50,
+        "Kazan Riverfront": 50,
+        "Kremlin Views": 50,
+        "Moscow Oasis": 50,
+        "Novosibirsk Downtown": 50,
+        "Omsk Comfort": 50,
+        "Omsk Oasis": 50,
+        "Samara Riverfront": 50,
+        "Samara Suites": 50,
+        "Siberian Dreams": 50,
+        "Volga Riverwalk": 50,
+        "Yekaterinburg Heights": 50,
+        "Yekaterinburg Hills": 50,
+        "Yekaterinburg Modern": 50
+      },
+      "vocabulary_sha256": "4acb876abe7d837a170171b6ed5e2538a1f5a1037f684b04a2f43448d136a874"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "St. Petersburg Suites",
+          "kind": "organization",
+          "source": "stage2.existing_catalog.0",
+          "reason": "独特的多词房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Samara Suites",
+          "kind": "organization",
+          "source": "stage2.existing_catalog.1",
+          "reason": "独特的房产名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Rostov-on-Don Riverside": 50,
+        "Saint Petersburg Bay Apartments": 50,
+        "Don River Apartments": 50,
+        "Krasnodar City Living": 50,
+        "Krasnodar City View": 50,
+        "Krasnodar Luxury Apartments": 50,
+        "Kremlin View Apartments": 50,
+        "Moscow City Lights": 50,
+        "Moscow Metro Apartments": 50,
+        "Nizhny Novgorod Oasis": 50,
+        "Nizhny Novgorod Suites": 50,
+        "Nizhny Novgorod View": 50,
+        "Omsk Luxury Residences": 50,
+        "Saint Petersburg Luxury": 50,
+        "Saint Petersburg Palace": 50,
+        "Saint Petersburg Suites": 50,
+        "Samara City Apartments": 50,
+        "Samara City Center": 50,
+        "St. Petersburg Suites": 50,
+        "Ural Mountains View": 50,
+        "Volga River Residence": 50,
+        "Kazan Kremlin": 50,
+        "Kazan Riverfront": 50,
+        "Kremlin Views": 50,
+        "Moscow Oasis": 50,
+        "Novosibirsk Downtown": 50,
+        "Omsk Comfort": 50,
+        "Omsk Oasis": 50,
+        "Samara Riverfront": 50,
+        "Samara Suites": 50,
+        "Siberian Dreams": 50,
+        "Volga Riverwalk": 50,
+        "Yekaterinburg Heights": 50,
+        "Yekaterinburg Hills": 50,
+        "Yekaterinburg Modern": 50
+      },
+      "vocabulary_sha256": "4acb876abe7d837a170171b6ed5e2538a1f5a1037f684b04a2f43448d136a874"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": [
+        {
+          "text": "Nizhny Novgorod",
+          "covered_by": "Nizhny Novgorod Oasis"
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Ireland",
+    "Moscow",
+    "Nizhny Novgorod"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:46.951576+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

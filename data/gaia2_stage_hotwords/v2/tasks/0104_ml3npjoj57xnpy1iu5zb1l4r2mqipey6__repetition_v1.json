@@ -1,0 +1,266 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0104_ml3npjoj57xnpy1iu5zb1l4r2mqipey6__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "54559dbc62eca3165176dc003de5227fc1106b265cbf3b48da9dc2ed676a6b35",
+  "review_input_sha256": "511f2a5d8ccee5de630ef16f947d513c01d1ddb5ca1f5b8b1f470ef70b1afb57",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "a270cd6a2081f3d850b195fec4f2f44c269993df2e93f9809f52331039afe420",
+  "reference_results_sha256": "6dadac004a8a9835ca19cf4015f5a09fb990b00272e3a5c3b9f03f4a6eb22302",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Anna Parson",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Helmut Eisenstadt",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-36169cf5-4bf3-476a-ad91-f4903c1c67fd.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Gerrit van der Meer",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-36169cf5-4bf3-476a-ad91-f4903c1c67fd.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "LEGO Creator 3in1 Propeller Plane",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "The Pint Shop",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-66205084-9641-40bc-b21c-6ae5c8add238.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Evangelia Papadopoulos",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Kaidën Nakamura",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Glasgow City Centre Apartments",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "George Square",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Glasgow Gem",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    },
+    "stage2.existing_catalog.3": {
+      "stage": 2,
+      "text": "Glasgow West End Apartment",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    },
+    "stage2.existing_catalog.4": {
+      "stage": 2,
+      "text": "Glasgow West End Apartments",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    },
+    "stage2.existing_catalog.5": {
+      "stage": 2,
+      "text": "Hyndland St",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "LEGO Creator 3in1 Propeller Plane",
+          "kind": "product",
+          "source": "stage0.existing_catalog.5",
+          "reason": "特定产品名，较难",
+          "weight": 50
+        },
+        {
+          "text": "Gerrit van der Meer",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含介词的多段人名，较难",
+          "weight": 50
+        },
+        {
+          "text": "The Pint Shop",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.6",
+          "reason": "特定店名",
+          "weight": 50
+        },
+        {
+          "text": "Anna Parson",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Helmut Eisenstadt",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "LEGO Creator 3in1 Propeller Plane",
+        "Gerrit van der Meer",
+        "The Pint Shop",
+        "Anna Parson",
+        "Helmut Eisenstadt"
+      ],
+      "active_vocabulary": {
+        "LEGO Creator 3in1 Propeller Plane": 50,
+        "Gerrit van der Meer": 50,
+        "The Pint Shop": 50,
+        "Anna Parson": 50,
+        "Helmut Eisenstadt": 50
+      },
+      "vocabulary_sha256": "cdd94e8a245d4f7cbce94de9b89521e65b7fbbafab6d9e9002fc2d9b6228e93e"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Evangelia Papadopoulos",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，较难",
+          "weight": 50
+        },
+        {
+          "text": "Kaidën Nakamura",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符的完整人名，高优先",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Evangelia Papadopoulos",
+        "Kaidën Nakamura"
+      ],
+      "active_vocabulary": {
+        "LEGO Creator 3in1 Propeller Plane": 50,
+        "Gerrit van der Meer": 50,
+        "The Pint Shop": 50,
+        "Anna Parson": 50,
+        "Helmut Eisenstadt": 50,
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50
+      },
+      "vocabulary_sha256": "1256390befdb6d65fe4eb102ed45f712959412bf3538f86856fc695eebd8d16b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Glasgow City Centre Apartments",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "特定公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Glasgow West End Apartment",
+          "kind": "place",
+          "source": "stage2.existing_catalog.3",
+          "reason": "特定公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Glasgow West End Apartments",
+          "kind": "place",
+          "source": "stage2.existing_catalog.4",
+          "reason": "特定公寓名",
+          "weight": 50
+        },
+        {
+          "text": "George Square",
+          "kind": "place",
+          "source": "stage2.existing_catalog.1",
+          "reason": "特定地点名",
+          "weight": 50
+        },
+        {
+          "text": "Glasgow Gem",
+          "kind": "place",
+          "source": "stage2.existing_catalog.2",
+          "reason": "特定公寓名",
+          "weight": 50
+        },
+        {
+          "text": "Hyndland St",
+          "kind": "place",
+          "source": "stage2.existing_catalog.5",
+          "reason": "特定街道名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Glasgow City Centre Apartments",
+        "Glasgow West End Apartment",
+        "Glasgow West End Apartments",
+        "George Square",
+        "Glasgow Gem",
+        "Hyndland St"
+      ],
+      "active_vocabulary": {
+        "LEGO Creator 3in1 Propeller Plane": 50,
+        "Gerrit van der Meer": 50,
+        "The Pint Shop": 50,
+        "Anna Parson": 50,
+        "Helmut Eisenstadt": 50,
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Glasgow City Centre Apartments": 50,
+        "Glasgow West End Apartment": 50,
+        "Glasgow West End Apartments": 50,
+        "George Square": 50,
+        "Glasgow Gem": 50,
+        "Hyndland St": 50
+      },
+      "vocabulary_sha256": "ca9ab3a5233c285934f614e79896b869835114ef2848dca9c6039a70c6328988"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "University of Cambridge",
+    "Department of Physics",
+    "Cambridge",
+    "Glasgow",
+    "Scotland"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:51.504872+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

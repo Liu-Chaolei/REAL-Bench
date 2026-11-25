@@ -1,0 +1,132 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0392_ive5o6qwbjayx272buha1t5ijhyzbwnt__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "4e059ddfceec6c5f198195a2199cc06b6c6bdda98f86aef31426d7a754d3f0ee",
+  "review_input_sha256": "b757ac63c14b15350e031e8141f91c8a907bcd61530fbd7f75ab8a8af161ec59",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "05f10ece990e8124f0ab2a14f52595033d0d3d778a5327fdc7a9fc75a3b4642c",
+  "reference_results_sha256": "de2a86007264fdc6a7778bde91758154a395e2a6f704941e9935dbcf8cfcede2",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Evangelia Papadopoulos",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-07aceb1d-8c5d-4b41-933b-c8ec4ac2d6e3.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Kaidën Nakamura",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-07aceb1d-8c5d-4b41-933b-c8ec4ac2d6e3.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Rohini Deshpande",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-aef04387-1f68-4a6a-aaca-6601991cf868.arguments.content"
+    },
+    "stage1.tool_response.series_s1_read_thursday": {
+      "stage": 1,
+      "text": "{\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Sushi Making Class\", \"start_datetime\": \"1729191600.0\", \"end_datetime\": \"1729195200.0\", \"tag\": null, \"description\": null, \"location\": \"Sushi Villa\", \"attendees\": [\"Evangelia Papadopoulos\", \"Kaidën Nakamura\"], \"start_strftime\": \"Thursday, 2024-10-17 19:00:00\", \"end_strftime\": \"Thursday, 2024-10-17 20:00:00\"}",
+      "event_id": "series_s1_read_thursday",
+      "response_sha256": "d719b1965aafe6a7d0471bb73d12eba740592a7aa49e1738c95bf4a01814b45c"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Evangelia Papadopoulos",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Kaidën Nakamura",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Evangelia Papadopoulos",
+        "Kaidën Nakamura",
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "c60f2d514b5f6b35691227e05add24b5dd38a5c40ca5d766e59782a133070637"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Sushi Villa",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read_thursday",
+          "reason": "具体地点名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Sushi Villa"
+      ],
+      "active_vocabulary": {
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Rohini Deshpande": 50,
+        "Sushi Villa": 50
+      },
+      "vocabulary_sha256": "9b1d961da71d0915eb51aa5374865a56b3068e4ace9fd2ec464a13f12bcb2949"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Evangelia Papadopoulos": 50,
+        "Kaidën Nakamura": 50,
+        "Rohini Deshpande": 50,
+        "Sushi Villa": 50
+      },
+      "vocabulary_sha256": "9b1d961da71d0915eb51aa5374865a56b3068e4ace9fd2ec464a13f12bcb2949"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Amscan",
+    "Dallas Cowboys Collection",
+    "Sushi Class Setup"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:53.934317+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

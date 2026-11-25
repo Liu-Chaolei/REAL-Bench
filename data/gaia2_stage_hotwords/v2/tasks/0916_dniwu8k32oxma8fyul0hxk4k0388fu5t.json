@@ -1,0 +1,127 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0916_dniwu8k32oxma8fyul0hxk4k0388fu5t",
+  "model": "deepseek-flash",
+  "input_sha256": "f295d3e12265a8643e351874b5a7b9f6cd0cd551a5d6da2bcb68418a3e1f1d09",
+  "review_input_sha256": "a1fd693b06279bd7fc4e4680aa019260485078e03484769530d54e4ffec87d91",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "f04f7aa59d6e4d50a5827855e76828ee61e4e2445716f3e907e2a8e64d21d879",
+  "reference_results_sha256": "5d41f60075f93cb8a204a2c758f6920c246c73eeddf2de8c57d3b8c6b5ec1372",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Axel Lindqvist",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Göteborgs Galleria",
+      "original_source": "stage1.reference_reply.series_s1_answer.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Uppsala Student Living",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Lund Luxury Living",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Axel Lindqvist",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整的瑞典人名，具有辨识度，保留完整姓名并省略单独的名字",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Axel Lindqvist"
+      ],
+      "active_vocabulary": {
+        "Axel Lindqvist": 50
+      },
+      "vocabulary_sha256": "d6dc2a8cb04f1ddc9840e82f8a3073d0dae80aeec8d45d9ee3036f310551a715"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Göteborgs Galleria",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整地名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Göteborgs Galleria"
+      ],
+      "active_vocabulary": {
+        "Axel Lindqvist": 50,
+        "Göteborgs Galleria": 50
+      },
+      "vocabulary_sha256": "6ff492a36e83c3ad7d52168b3f05b24aafdf581c717c03cb84b9e7415e6c7993"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Lund Luxury Living",
+          "kind": "organization",
+          "source": "stage2.existing_catalog.1",
+          "reason": "完整专有名称，具有辨识度",
+          "weight": 50
+        },
+        {
+          "text": "Uppsala Student Living",
+          "kind": "organization",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整专有名称，具有辨识度",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Lund Luxury Living",
+        "Uppsala Student Living"
+      ],
+      "active_vocabulary": {
+        "Axel Lindqvist": 50,
+        "Göteborgs Galleria": 50,
+        "Lund Luxury Living": 50,
+        "Uppsala Student Living": 50
+      },
+      "vocabulary_sha256": "689420d048d27bde67042c65bdf947a7f8cf24e561a59cfe21177d3d3e6ddb26"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Axel"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:49.207272+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

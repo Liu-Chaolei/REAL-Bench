@@ -1,0 +1,127 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0181_xz8p2c2tq9ui6qbwada8czelgm3g5j9l",
+  "model": "deepseek-flash",
+  "input_sha256": "27ea50642409de0fe00810d8959be4924d0483cf3c44d56908e3702139ef37e0",
+  "review_input_sha256": "521bb319315432021336166b6a2aede2278de6089c200a64804b45c18a610f0a",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "753f06e4a80184b042ef51163961801f4ed895bb6844097d8e3b843aa4f37e89",
+  "reference_results_sha256": "23eac765934932ce8217b08eac9a3cc769fc0bfe9636997aa505c4aa8601d5aa",
+  "sources": {
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Sutopo Widyatmoko",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-ad245028-3aac-45b7-9e38-5f201ef2a0aa.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Sutrisno Widyatama",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-ad245028-3aac-45b7-9e38-5f201ef2a0aa.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Anastasiya Kuznetsova",
+      "original_source": "stage1.tool_gt.series_s1_send_email.arguments.content"
+    },
+    "stage1.tool_response.series_s1_get_contact": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Sutrisno\", \"last_name\": \"Widyatama\", \"contact_id\": \"63f60d614f8842338fab344d96b00f96\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"63\", \"nationality\": \"Indonesian\", \"city_living\": \"Jakarta\", \"country\": \"Indonesia\", \"status\": \"Status.RETIRED\", \"job\": \"Former Professor of History\", \"description\": \"Sutrisno Widyatama is a retired professor of history who has spent most of his life studying and teaching about the rich cultural heritage of Indonesia.\", \"phone\": \"+6288234567890\", \"email\": \"swidyatama@gaia2mail.com\", \"address\": \"Jl. Kemang Raya No. 12, Jakarta Selatan, 12730\"}",
+      "event_id": "series_s1_get_contact",
+      "response_sha256": "547d3e984a316ae0fb093448ec61060af4c12f7e7addb50f08ccd81af53f4606"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Sutopo Widyatmoko",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "独特完整的印尼人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Sutrisno Widyatama",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "独特完整的印尼人名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Sutopo Widyatmoko",
+        "Sutrisno Widyatama"
+      ],
+      "active_vocabulary": {
+        "Sutopo Widyatmoko": 50,
+        "Sutrisno Widyatama": 50
+      },
+      "vocabulary_sha256": "2fd5121c7b5aa390430fd94dadb7992bea71ca19d54905dead60daecf1922ac3"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整俄语人名，含难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Sutrisno Widyatama",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_get_contact",
+          "reason": "工具响应中完整印尼人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Anastasiya Kuznetsova"
+      ],
+      "active_vocabulary": {
+        "Sutopo Widyatmoko": 50,
+        "Sutrisno Widyatama": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "0bd6e5fff8c7369f9596e1bde9099a601d5201b8cdb9cb49b3b53d39fcba00a2"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Sutopo Widyatmoko": 50,
+        "Sutrisno Widyatama": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "0bd6e5fff8c7369f9596e1bde9099a601d5201b8cdb9cb49b3b53d39fcba00a2"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Moscow State University",
+    "Tverskaya Street 12"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:21.774113+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

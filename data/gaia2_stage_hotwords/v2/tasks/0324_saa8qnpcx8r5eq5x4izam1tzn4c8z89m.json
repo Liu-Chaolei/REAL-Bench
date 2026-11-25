@@ -1,0 +1,238 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0324_saa8qnpcx8r5eq5x4izam1tzn4c8z89m",
+  "model": "deepseek-flash",
+  "input_sha256": "b11ac043b935bb1fad821d80ed1d0ed37e764629795c584779de1c3959568c69",
+  "review_input_sha256": "69a1472bbf622f4e5639dc8cbc0ac772f08c8e847ade77dc64e9d707fc0cc5b5",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "0552cfc123ac485c1b5f1c89ddc27321f5649b988d4857a4fed8a53c45722a73",
+  "reference_results_sha256": "fb0cb9f4eef35ec490543ea2c3260c5f3d9271987636fb824a771963a794467b",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Kaidën McTavish",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Kaitlyn LaFleur",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "RMIT University",
+      "original_source": "stage1.tool_gt.series_s1_edit_kaiden.arguments.updates.description"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "V8 Supercar",
+      "original_source": "stage1.tool_gt.series_s1_edit_kaiden.arguments.updates.description"
+    },
+    "stage1.existing_catalog.5": {
+      "stage": 1,
+      "text": "University of British Columbia",
+      "original_source": "stage1.tool_gt.series_s1_edit_kaitlyn.arguments.updates.description"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Léa Dumont",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Anastasia Kuznetsova",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Kavita Rao",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.3": {
+      "stage": 2,
+      "text": "Axel Hernández-García",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.4": {
+      "stage": 2,
+      "text": "Kaitlyn Wong",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.5": {
+      "stage": 2,
+      "text": "Kaia Papadopoulos",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.6": {
+      "stage": 2,
+      "text": "Kaius Tanaka",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "University of British Columbia",
+          "kind": "organization",
+          "source": "stage1.existing_catalog.5",
+          "reason": "特定大学名",
+          "weight": 50
+        },
+        {
+          "text": "Kaidën McTavish",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含分音符的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Kaitlyn LaFleur",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含特殊拼写的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "RMIT University",
+          "kind": "organization",
+          "source": "stage1.existing_catalog.2",
+          "reason": "特定机构名",
+          "weight": 50
+        },
+        {
+          "text": "V8 Supercar",
+          "kind": "product",
+          "source": "stage1.existing_catalog.4",
+          "reason": "特定赛事/产品名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "University of British Columbia",
+        "Kaidën McTavish",
+        "Kaitlyn LaFleur",
+        "RMIT University",
+        "V8 Supercar"
+      ],
+      "active_vocabulary": {
+        "University of British Columbia": 50,
+        "Kaidën McTavish": 50,
+        "Kaitlyn LaFleur": 50,
+        "RMIT University": 50,
+        "V8 Supercar": 50
+      },
+      "vocabulary_sha256": "2e93505ea0924cb1271580a12dd75eab50d85f91fb8a55f8b6daeb6bf0f8ba21"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Axel Hernández-García",
+          "kind": "person",
+          "source": "stage2.existing_catalog.3",
+          "reason": "含变音符号的复合姓氏人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Anastasia Kuznetsova",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "较难完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Kaia Papadopoulos",
+          "kind": "person",
+          "source": "stage2.existing_catalog.5",
+          "reason": "较难完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Kaitlyn Wong",
+          "kind": "person",
+          "source": "stage2.existing_catalog.4",
+          "reason": "完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Kaius Tanaka",
+          "kind": "person",
+          "source": "stage2.existing_catalog.6",
+          "reason": "较难完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Kavita Rao",
+          "kind": "person",
+          "source": "stage2.existing_catalog.2",
+          "reason": "较难完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Léa Dumont",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Axel Hernández-García",
+        "Anastasia Kuznetsova",
+        "Kaia Papadopoulos",
+        "Kaitlyn Wong",
+        "Kaius Tanaka",
+        "Kavita Rao",
+        "Léa Dumont"
+      ],
+      "active_vocabulary": {
+        "University of British Columbia": 50,
+        "Kaidën McTavish": 50,
+        "Kaitlyn LaFleur": 50,
+        "RMIT University": 50,
+        "V8 Supercar": 50,
+        "Axel Hernández-García": 50,
+        "Anastasia Kuznetsova": 50,
+        "Kaia Papadopoulos": 50,
+        "Kaitlyn Wong": 50,
+        "Kaius Tanaka": 50,
+        "Kavita Rao": 50,
+        "Léa Dumont": 50
+      },
+      "vocabulary_sha256": "20bd14cd3a9f457a3424a7b104b094bd6177c40e61a7e91e0c1fd9d859722c5f"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Melbourne"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:08.517010+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

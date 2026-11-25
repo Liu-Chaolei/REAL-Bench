@@ -1,0 +1,83 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0341_loiadfgoibpu2c5kfc41221rye8ijg1j",
+  "model": "deepseek-flash",
+  "input_sha256": "c53cbee17ccaa876bfb0569aa384787b8c3d755c10aca8b2eafb3dc3e049d725",
+  "review_input_sha256": "d6746ebec49110b8620dc3064c0b8c3923fd51f835a99783ac45f9bf56979b71",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "03654f168c3cdba2ebbeaee7e2571ae6246ac78029cb36ad4719416261c8051f",
+  "reference_results_sha256": "5f7811bf727aba1cbd2a8e8619141f1a2f68d01128dcd1a73c5c2cd0dcd51c32",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Liesbeth Vandenberghe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f501d4fa-fbd2-4140-bb3e-6f70a78fb11c.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Liesbeth Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，含较难拼写，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Liesbeth Vandenberghe"
+      ],
+      "active_vocabulary": {
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "57ad47d6526d51ff839408a62045b67ce6e4481a234d063feb674bd86e888c43"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "57ad47d6526d51ff839408a62045b67ce6e4481a234d063feb674bd86e888c43"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Liesbeth Vandenberghe": 50
+      },
+      "vocabulary_sha256": "57ad47d6526d51ff839408a62045b67ce6e4481a234d063feb674bd86e888c43"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Fatima",
+    "Star Wars",
+    "Star Wars Order Follow-up",
+    "Project Planning Session"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:14.794628+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

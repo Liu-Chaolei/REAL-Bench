@@ -1,0 +1,143 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0461_8nexk8abdbf8a2vne3cvkdpjljeh5yu6",
+  "model": "deepseek-flash",
+  "input_sha256": "c62393b87f75dc5f520cbe9ff884d173646e6e69ccac45a07085000f91109cf9",
+  "review_input_sha256": "470cc692f221b5f436062c9a785f28009e9849bcb898504ee9eebad89138693b",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "42c416127b6548a4f254b36dc2ec4fc18d1b603a964fbb3ee446101bcaa5cf14",
+  "reference_results_sha256": "2975b42f6d11fbb391fe9c7b78b555a150b7c262c2a39c7abb2c81b7d3502601",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Saskia",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-439e2c3c-3447-4852-b64f-7034ccba571a.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Anastasiya Kuznetsova",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-439e2c3c-3447-4852-b64f-7034ccba571a.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Áine Ní Bhroin",
+      "original_source": "stage1.tool_gt.series_s1_add_two_hour_block.arguments.attendees[0]"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Moscow State University, Research Center",
+      "original_source": "stage1.tool_gt.series_s1_add_two_hour_block.arguments.location"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Saskia Müller-Schneider",
+      "original_source": "stage1.tool_gt.series_s1_add_followup_meeting.arguments.attendees[0]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整俄式人名，拼写较难，适合热词",
+          "weight": 50
+        },
+        {
+          "text": "Saskia",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "较不常见的名字，但为单名；保留作为困难专名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Anastasiya Kuznetsova",
+        "Saskia"
+      ],
+      "active_vocabulary": {
+        "Anastasiya Kuznetsova": 50,
+        "Saskia": 50
+      },
+      "vocabulary_sha256": "feaedcead8b947fd7b960d9fd01deda0e73252cef78a655a3bea9790ded7521c"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Moscow State University, Research Center",
+          "kind": "organization",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整机构名称，拼写较长且具体",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Müller-Schneider",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含变音符号与连字符的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Áine Ní Bhroin",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含爱尔兰语变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Moscow State University, Research Center",
+        "Saskia Müller-Schneider",
+        "Áine Ní Bhroin"
+      ],
+      "active_vocabulary": {
+        "Anastasiya Kuznetsova": 50,
+        "Saskia": 50,
+        "Moscow State University, Research Center": 50,
+        "Saskia Müller-Schneider": 50,
+        "Áine Ní Bhroin": 50
+      },
+      "vocabulary_sha256": "7199f2a5d095b9eafea091693fc39bf68b7e1f61b98a195fbb5a7ea0d582636b"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Anastasiya Kuznetsova": 50,
+        "Saskia": 50,
+        "Moscow State University, Research Center": 50,
+        "Saskia Müller-Schneider": 50,
+        "Áine Ní Bhroin": 50
+      },
+      "vocabulary_sha256": "7199f2a5d095b9eafea091693fc39bf68b7e1f61b98a195fbb5a7ea0d582636b"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Aine"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:00.281802+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

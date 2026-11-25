@@ -1,0 +1,213 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0209_xgnlzj47rwd8wmtompnrhzj6z6js85rb",
+  "model": "deepseek-flash",
+  "input_sha256": "1a03e03cb7a24c69aea2b97934998c621448e6f6eee84008dbfa0cfdde26d0c1",
+  "review_input_sha256": "35e61a106b3844fd0e002ff1e6c82ddda59215ef62e7e54e98b496a9b2203b75",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "0a0aaa65777f5d033497945264e3fb267f39017dc56a56d8055d39dd07b42c44",
+  "reference_results_sha256": "bde975ddb65ed24c62343b3171674879e552a865d7125eac71292135189ecac8",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "San Jose Villas",
+      "original_source": "stage1.tool_gt.series_s1_review.arguments.description"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "9010 Stevens Creek Blvd",
+      "original_source": "stage1.tool_gt.series_s1_review.arguments.description"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "The Villas at Houston",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Creekside Villas",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Creekwood Villas",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    },
+    "stage2.existing_catalog.3": {
+      "stage": 2,
+      "text": "Sunset Villas",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    },
+    "stage2.existing_catalog.4": {
+      "stage": 2,
+      "text": "7890 Westheimer Rd",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    },
+    "stage2.existing_catalog.5": {
+      "stage": 2,
+      "text": "4567 Creek Rd",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    },
+    "stage2.existing_catalog.6": {
+      "stage": 2,
+      "text": "5678 Wurzbach Rd",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    },
+    "stage2.existing_catalog.7": {
+      "stage": 2,
+      "text": "5678 Sunset Dr",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "9010 Stevens Creek Blvd",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整街道地址，含专有路名，难识别",
+          "weight": 50
+        },
+        {
+          "text": "San Jose Villas",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "具体公寓社区专名，含地名，属难识别专名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "9010 Stevens Creek Blvd",
+        "San Jose Villas"
+      ],
+      "active_vocabulary": {
+        "9010 Stevens Creek Blvd": 50,
+        "San Jose Villas": 50
+      },
+      "vocabulary_sha256": "abb1639a98c1dc6eae90af14941a2ef6c40ee2403165fd525812a7064cf242aa"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "The Villas at Houston",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "具体公寓社区专名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "4567 Creek Rd",
+          "kind": "place",
+          "source": "stage2.existing_catalog.5",
+          "reason": "完整街道地址",
+          "weight": 50
+        },
+        {
+          "text": "5678 Sunset Dr",
+          "kind": "place",
+          "source": "stage2.existing_catalog.7",
+          "reason": "完整街道地址",
+          "weight": 50
+        },
+        {
+          "text": "5678 Wurzbach Rd",
+          "kind": "place",
+          "source": "stage2.existing_catalog.6",
+          "reason": "完整街道地址，含难识别路名 Wurzbach",
+          "weight": 50
+        },
+        {
+          "text": "7890 Westheimer Rd",
+          "kind": "place",
+          "source": "stage2.existing_catalog.4",
+          "reason": "完整街道地址，含专有路名",
+          "weight": 50
+        },
+        {
+          "text": "Creekside Villas",
+          "kind": "place",
+          "source": "stage2.existing_catalog.1",
+          "reason": "具体公寓社区专名",
+          "weight": 50
+        },
+        {
+          "text": "Creekwood Villas",
+          "kind": "place",
+          "source": "stage2.existing_catalog.2",
+          "reason": "具体公寓社区专名",
+          "weight": 50
+        },
+        {
+          "text": "Sunset Villas",
+          "kind": "place",
+          "source": "stage2.existing_catalog.3",
+          "reason": "具体公寓社区专名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "The Villas at Houston",
+        "4567 Creek Rd",
+        "5678 Sunset Dr",
+        "5678 Wurzbach Rd",
+        "7890 Westheimer Rd",
+        "Creekside Villas",
+        "Creekwood Villas",
+        "Sunset Villas"
+      ],
+      "active_vocabulary": {
+        "9010 Stevens Creek Blvd": 50,
+        "San Jose Villas": 50,
+        "The Villas at Houston": 50,
+        "4567 Creek Rd": 50,
+        "5678 Sunset Dr": 50,
+        "5678 Wurzbach Rd": 50,
+        "7890 Westheimer Rd": 50,
+        "Creekside Villas": 50,
+        "Creekwood Villas": 50,
+        "Sunset Villas": 50
+      },
+      "vocabulary_sha256": "1eb34a92e757145840b3dd42753bcacfa5af81ec8953aaf588aeeb36bd764237"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kaitlyn",
+    "Villas",
+    "San Jose",
+    "Houston",
+    "Austin",
+    "San Antonio",
+    "Phoenix"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:33.194958+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

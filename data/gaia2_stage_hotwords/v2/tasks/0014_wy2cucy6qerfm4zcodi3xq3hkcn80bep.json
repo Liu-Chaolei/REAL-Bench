@@ -1,0 +1,149 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0014_wy2cucy6qerfm4zcodi3xq3hkcn80bep",
+  "model": "deepseek-flash",
+  "input_sha256": "dcbab02b88f54d62205e8e8b1d651241366991da98bb220e5b32e794478e1e0f",
+  "review_input_sha256": "bbd55904605111177fa977cc5028e30653e7b423cf5210d55c3687b1aa815c4e",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "30d595bfc4fe2f24585e889764c7d48817ba4687d0b9cd9f502d9087d9b57aec",
+  "reference_results_sha256": "9448d312ce9cecd733c1065f1d5519805065a3017abd036f3e33d07d938b0a9c",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Saskia Müller-Krüger",
+      "original_source": "stage1.reference_reply.series_s1_send_reply.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Katharina Müller-Schneider",
+      "original_source": "stage1.reference_reply.series_s1_send_reply.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Viktor Kuznetsov",
+      "original_source": "stage1.reference_reply.series_s1_send_reply.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Collaboration on European History Curriculum",
+      "original_source": "stage2.reference_reply.series_s2_send_reply.arguments.content"
+    },
+    "stage2.tool_response.series_s2_chats_lookup": {
+      "stage": 2,
+      "text": "{\"Katharina Müller-Schmidt\": \"1c56894a-db52-46ce-9fbe-57185778a14f\", \"Katharina Schneider\": \"0192b39c-78fd-4f85-8840-5cd3530a9dee\", \"Saskia Müller-Schneider\": \"2148bf3b-7a43-4746-ac08-83928ccba887\"}",
+      "event_id": "series_s2_chats_lookup",
+      "response_sha256": "44220f33e8d0e51a39ba9a86f11bc8249c88ba7162b3d7f5f974e3e531fc9bd9"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Katharina Müller-Schneider",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Müller-Krüger",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Viktor Kuznetsov",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "较难拼写的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Katharina Müller-Schneider",
+        "Saskia Müller-Krüger",
+        "Viktor Kuznetsov"
+      ],
+      "active_vocabulary": {
+        "Katharina Müller-Schneider": 50,
+        "Saskia Müller-Krüger": 50,
+        "Viktor Kuznetsov": 50
+      },
+      "vocabulary_sha256": "5921eaa958cee63130f56b5508126c1deb06e5e3254be711bf8b4e867ea626be"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Collaboration on European History Curriculum",
+          "kind": "custom_name",
+          "source": "stage2.existing_catalog.0",
+          "reason": "较长的特定项目名称",
+          "weight": 50
+        },
+        {
+          "text": "Katharina Müller-Schmidt",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_chats_lookup",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Müller-Schneider",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_chats_lookup",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Collaboration on European History Curriculum",
+        "Katharina Müller-Schmidt",
+        "Saskia Müller-Schneider"
+      ],
+      "active_vocabulary": {
+        "Katharina Müller-Schneider": 50,
+        "Saskia Müller-Krüger": 50,
+        "Viktor Kuznetsov": 50,
+        "Collaboration on European History Curriculum": 50,
+        "Katharina Müller-Schmidt": 50,
+        "Saskia Müller-Schneider": 50
+      },
+      "vocabulary_sha256": "a943182007c39c2f7517f9fdc89b0e458ad8ce8606c526ff01dbae6341518082"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Catching up on summer",
+    "Upcoming Lecture and Catching Up"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:13:41.949548+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

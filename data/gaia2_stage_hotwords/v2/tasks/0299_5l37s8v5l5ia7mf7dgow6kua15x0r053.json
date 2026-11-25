@@ -1,0 +1,166 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0299_5l37s8v5l5ia7mf7dgow6kua15x0r053",
+  "model": "deepseek-flash",
+  "input_sha256": "1cc28d8c6746e7ec08004015e454876708b5ed6ce9b6b72cfac513ee8d6ab61c",
+  "review_input_sha256": "26148fbd206272810ea8880ae4e212cd37adcd47ac87d362e2e9922ff0c218ed",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "8d9ae6cf9bc77e274a77e54c0a1f73c5114483c28a5c8ee996b1e20e5fc7eb2b",
+  "reference_results_sha256": "e5337d965690c3f123c41040bb5e7e3b0a057c93056d28256e60eb24e0c44c83",
+  "sources": {
+    "stage1.tool_response.series_s1_list": {
+      "stage": 1,
+      "text": "[{\"participant_ids\": [\"+61414345678\", \"+31612345578\", \"+441223456789\"], \"messages\": [], \"title\": \"Music, Math, and Drama\", \"conversation_id\": \"a559eb7ece7146d89c42ea8f352a6e20\", \"last_updated\": \"1728826200\"}, {\"participant_ids\": [\"+61412345677\", \"+441223456789\"], \"messages\": [], \"title\": \"Akira Tanaka\", \"conversation_id\": \"b16d72535aa443648f8bb371704aebf5\", \"last_updated\": \"1728819300\"}, {\"participant_ids\": [\"+491578234567\", \"+493012345678\", \"+441223456789\"], \"messages\": [], \"title\": \"Gene Editing and Quantum Mechanics\", \"conversation_id\": \"31a8a14d2d1041daad96b53c0ea57074\", \"last_updated\": \"1728819000\"}, {\"participant_ids\": [\"+31612345778\", \"+15051234567\", \"+441223456789\"], \"messages\": [], \"title\": \"Discussing Ancient Texts and Renewable Energy\", \"conversation_id\": \"6e8e389ffedc469cb72eb0eb33e75453\", \"last_updated\": \"1728818100\"}, {\"participant_ids\": [\"+862112345678\", \"+491764562890\", \"+441223456789\"], \"messages\": [], \"title\": \"Catching up with friends\", \"conversation_id\": \"bf0b061d385e43f8a6170e0020e4a63d\", \"last_updated\": \"1728733500\"}]",
+      "event_id": "series_s1_list",
+      "response_sha256": "5fba0806df878a5862a9d63301103a46ec71a67e13fe35e6235d81ddd46f866b"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Kymberley Papadopoulos",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Stijn van der Meer",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.tool_response.series_s2_kymberley": {
+      "stage": 2,
+      "text": "[{\"first_name\": \"Kymberley\", \"last_name\": \"Papadopoulos\", \"contact_id\": \"6085c2ed403e4399af9651f8d8eb3ed2\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"59\", \"nationality\": \"Australian\", \"city_living\": \"Melbourne\", \"country\": \"Australia\", \"status\": \"Status.RETIRED\", \"job\": \"Former High School Drama Teacher\", \"description\": \"A retired high school drama teacher with a passion for ancient Greek dramas.\", \"phone\": \"+61414345678\", \"email\": \"kpapadopoulos59@gaia2mail.com\", \"address\": \"14/25 Brunswick St, Fitzroy VIC 3065, Melbourne\"}]",
+      "event_id": "series_s2_kymberley",
+      "response_sha256": "d899bbc22c8c7997421d6be5a75a10e08adf8b3bbc8e522a3c79b8bdc7bccaa1"
+    },
+    "stage2.tool_response.series_s2_read": {
+      "stage": 2,
+      "text": "{\"messages\": [{\"sender_id\": \"+441223456789\", \"message_id\": \"3c0804b9897047adafcb27c670859be0\", \"timestamp\": \"1728826200\", \"content\": \"I'd love to, Stijn! Let's discuss it further and see what we can come up with. Kymberley, thanks for sparking this conversation, it's been really interesting.\"}, {\"sender_id\": \"+31612345578\", \"message_id\": \"168e1bdbd1304e7c96739d05a03e741c\", \"timestamp\": \"1728825300\", \"content\": \"That's actually a great idea, Kymberley! Rohini, would you be interested in collaborating on a music project that incorporates mathematical concepts?\"}, {\"sender_id\": \"+61414345678\", \"message_id\": \"a10a62cad0c74beab4e76a3d062bf045\", \"timestamp\": \"1728824400\", \"content\": \"I never thought about it that way, Rohini. But it makes sense, given the way music can evoke emotions and create a sense of harmony. Stijn, have you ever thought of collaborating with a mathematician or physicist on a music project?\"}, {\"sender_id\": \"+441223456789\", \"message_id\": \"4239d3b1545f436c90a1d2bccbf0f62d\", \"timestamp\": \"1728823500\", \"content\": \"Ah, that's a great question Stijn! I think there's definitely a connection between music and mathematics, especially when it comes to patterns and structures. I've always been fascinated by the way music can be used to represent complex mathematical concepts in a more accessible way.\"}, {\"sender_id\": \"+31612345578\", \"message_id\": \"219850ec091a4adda53a60a15b9e6f87\", \"timestamp\": \"1728822600\", \"content\": \"Actually, Kymberley, that's not a bad idea! I've been experimenting with some classical influences in my music. Rohini, as a theoretical physicist, what do you think about the connection between music and mathematics?\"}, {\"sender_id\": \"+61414345678\", \"message_id\": \"5857e38ce99c450ea65805dfb261a95e\", \"timestamp\": \"1728821700\", \"content\": \"Ronnie James Dio is a legend! I've always been a fan of his work with Black Sabbath. Stijn, have you ever thought of incorporating some classical elements into your music? I think it could be really interesting.\"}, {\"sender_id\": \"+31612345578\", \"message_id\": \"458aff6a205447768dc6342ecd7c8a0d\", \"timestamp\": \"1728820800\", \"content\": \"Hey Rohini! Music teaching is keeping me busy as usual. I've been working on a new project with a local band, we're planning to release an EP soon. And I've been listening to a lot of Ronnie James Dio lately, it's amazing how his music still holds up today.\"}, {\"sender_id\": \"+441223456789\", \"message_id\": \"0eb02610bd134512b08bb20c35fca774\", \"timestamp\": \"1728819000\", \"content\": \"Actually, I haven't! I'd love to hear more about it. And speaking of performances, I've been meaning to ask Stijn about his music. Stijn, how's the music teaching going? Any new projects or performances coming up?\"}, {\"sender_id\": \"+61414345678\", \"message_id\": \"4525a8342af141c0a8865210ba0faa47\", \"timestamp\": \"1728818100\", \"content\": \"Ah, Rohini, I'm so glad you enjoyed it! I've always been passionate about Greek dramas and their impact on Western literature. By the way, have you heard about the new production of Medea in Melbourne? I heard it's fantastic.\"}, {\"sender_id\": \"+441223456789\", \"message_id\": \"5d644a1bfa964e198bdb1c1a65a6ec3f\", \"timestamp\": \"1728813900\", \"content\": \"Hey Kymberley, hope you're doing well! I've been meaning to reach out to you about the ancient Greek drama book you recommended. I finally got around to reading it and I must say, it was fascinating.\"}], \"metadata\": {\"message_range\": [\"0\", \"10\"], \"conversation_length\": \"10\", \"conversation_id\": \"a559eb7ece7146d89c42ea8f352a6e20\", \"conversation_title\": \"Music, Math, and Drama\"}}",
+      "event_id": "series_s2_read",
+      "response_sha256": "6b286da6505aec4844b7e20d08ecda21f2768a2a0a8025d070c65ca15343ebbd"
+    },
+    "stage2.tool_response.series_s2_stijn": {
+      "stage": 2,
+      "text": "[{\"first_name\": \"Stijn\", \"last_name\": \"van der Meer\", \"contact_id\": \"8d738b684de544adaa139f3914040d96\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"29\", \"nationality\": \"Dutch\", \"city_living\": \"Amsterdam\", \"country\": \"Netherlands\", \"status\": \"Status.EMPLOYED\", \"job\": \"Keyboardist and Music Teacher\", \"description\": \"Stijn van der Meer is a 29-year-old keyboardist from Amsterdam, Netherlands. He has been playing keyboards since he was 12 years old and has been part of several bands over the years. One of his most notable experiences was playing with a Ronnie James Dio tribute band, where he had the opportunity to share the stage with other talented musicians and perform in front of large crowds. Stijn is passionate about music and loves to share stories of his experiences with others. He is currently working as a music teacher at a local music school, where he teaches keyboards and music theory to students of all ages.\", \"phone\": \"+31612345578\", \"email\": \"stijn.vandermeer@gaia2mail.com\", \"address\": \"Jan Evertsenstraat 123, 1056 EC Amsterdam\"}]",
+      "event_id": "series_s2_stijn",
+      "response_sha256": "aed7492423801dadea0c6d5d87a2ea5de377172e15c060da347c0a1b37e34c08"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Akira Tanaka",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_list",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Akira Tanaka"
+      ],
+      "active_vocabulary": {
+        "Akira Tanaka": 50
+      },
+      "vocabulary_sha256": "5a5167bf96780b7a8ca12a888976b2a5ce84f77f043990dae6ccb95cc190fc3c"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Stijn van der Meer",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "完整人名，含小写前缀",
+          "weight": 50
+        },
+        {
+          "text": "Ronnie James Dio",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "完整人名，含中间名",
+          "weight": 50
+        },
+        {
+          "text": "Brunswick St",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_kymberley",
+          "reason": "街道名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Jan Evertsenstraat",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_stijn",
+          "reason": "荷兰语街道名，拼写困难",
+          "weight": 50
+        },
+        {
+          "text": "Kymberley Papadopoulos",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整人名，拼写复杂",
+          "weight": 50
+        },
+        {
+          "text": "Rohini",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "较难人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Stijn van der Meer",
+        "Ronnie James Dio",
+        "Brunswick St",
+        "Jan Evertsenstraat",
+        "Kymberley Papadopoulos",
+        "Rohini"
+      ],
+      "active_vocabulary": {
+        "Akira Tanaka": 50,
+        "Stijn van der Meer": 50,
+        "Ronnie James Dio": 50,
+        "Brunswick St": 50,
+        "Jan Evertsenstraat": 50,
+        "Kymberley Papadopoulos": 50,
+        "Rohini": 50
+      },
+      "vocabulary_sha256": "d3eb321844887fc9c177879979fcdfcecfccfbea9fc596f60ca0e52e10eaf992"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Music, Math, and Drama",
+    "Melbourne",
+    "Amsterdam",
+    "Netherlands"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:01.200060+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

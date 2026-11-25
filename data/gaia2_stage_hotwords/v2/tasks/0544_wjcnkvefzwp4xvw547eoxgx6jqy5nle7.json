@@ -1,0 +1,206 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0544_wjcnkvefzwp4xvw547eoxgx6jqy5nle7",
+  "model": "deepseek-flash",
+  "input_sha256": "c5ad8ea4ced106d180c676ba51fa5c64655117578e363b41510f621eecdfe16c",
+  "review_input_sha256": "2d23d2f67430495f9f0eb560021243c41b6b33d3e14e7674a10c62604af347e4",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "bfd18d6bc87305559f376e413afb681d9c90fa3573e74d4d58166d939ad693cf",
+  "reference_results_sha256": "7daab2031152ac7f92cbb47b2c02a166318054fc2446f3ca063d971ab8c7b210",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kofi Owusu",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Zara Kaur",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Rohan Kumar",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-d4664bda-8bae-4805-8a6a-12a967042493.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Astrid McKenzie",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-d4664bda-8bae-4805-8a6a-12a967042493.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Akira Jensen",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-d4664bda-8bae-4805-8a6a-12a967042493.arguments.attendees[2]"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "The Oberoi Hotel",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-d4664bda-8bae-4805-8a6a-12a967042493.arguments.location"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "Kaitlyn Nguyen",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-2290930f-2b6c-4563-acba-3fce29d2f614.arguments.content"
+    },
+    "stage0.existing_catalog.7": {
+      "stage": 0,
+      "text": "Kaida Jensen",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-2290930f-2b6c-4563-acba-3fce29d2f614.arguments.content"
+    },
+    "stage0.existing_catalog.8": {
+      "stage": 0,
+      "text": "Rohini Mehta",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-2290930f-2b6c-4563-acba-3fce29d2f614.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "The Oberoi Hotel",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.5",
+          "reason": "专有酒店名称，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Akira Jensen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整人名，跨文化组合较难",
+          "weight": 50
+        },
+        {
+          "text": "Astrid McKenzie",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整人名，含不常见拼写",
+          "weight": 50
+        },
+        {
+          "text": "Kaida Jensen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.7",
+          "reason": "完整人名，含不常见名字",
+          "weight": 50
+        },
+        {
+          "text": "Kaitlyn Nguyen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.6",
+          "reason": "完整人名，含不常见姓氏",
+          "weight": 50
+        },
+        {
+          "text": "Kofi Owusu",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "加纳裔加拿大籍完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Mehta",
+          "kind": "person",
+          "source": "stage0.existing_catalog.8",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Zara Kaur",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，含不常见姓氏组合",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "The Oberoi Hotel",
+        "Akira Jensen",
+        "Astrid McKenzie",
+        "Kaida Jensen",
+        "Kaitlyn Nguyen",
+        "Kofi Owusu",
+        "Rohan Kumar",
+        "Rohini Mehta",
+        "Zara Kaur"
+      ],
+      "active_vocabulary": {
+        "The Oberoi Hotel": 50,
+        "Akira Jensen": 50,
+        "Astrid McKenzie": 50,
+        "Kaida Jensen": 50,
+        "Kaitlyn Nguyen": 50,
+        "Kofi Owusu": 50,
+        "Rohan Kumar": 50,
+        "Rohini Mehta": 50,
+        "Zara Kaur": 50
+      },
+      "vocabulary_sha256": "5b8f65013867928971b36b3bc3734b55f14085c7e45b8f5e916f44b0aec85ebb"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "The Oberoi Hotel": 50,
+        "Akira Jensen": 50,
+        "Astrid McKenzie": 50,
+        "Kaida Jensen": 50,
+        "Kaitlyn Nguyen": 50,
+        "Kofi Owusu": 50,
+        "Rohan Kumar": 50,
+        "Rohini Mehta": 50,
+        "Zara Kaur": 50
+      },
+      "vocabulary_sha256": "5b8f65013867928971b36b3bc3734b55f14085c7e45b8f5e916f44b0aec85ebb"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "The Oberoi Hotel": 50,
+        "Akira Jensen": 50,
+        "Astrid McKenzie": 50,
+        "Kaida Jensen": 50,
+        "Kaitlyn Nguyen": 50,
+        "Kofi Owusu": 50,
+        "Rohan Kumar": 50,
+        "Rohini Mehta": 50,
+        "Zara Kaur": 50
+      },
+      "vocabulary_sha256": "5b8f65013867928971b36b3bc3734b55f14085c7e45b8f5e916f44b0aec85ebb"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:21.158598+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

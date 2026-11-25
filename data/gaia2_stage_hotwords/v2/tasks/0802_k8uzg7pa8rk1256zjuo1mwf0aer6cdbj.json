@@ -1,0 +1,128 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0802_k8uzg7pa8rk1256zjuo1mwf0aer6cdbj",
+  "model": "deepseek-flash",
+  "input_sha256": "e3a42e02390d49dadc0cf1fff0234e7ac19eb90bb598333270a0f02b61d6eed6",
+  "review_input_sha256": "40079fbd4102752b4fe960101c447dcfca2873d880452724603a6d8192f23da3",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "01d3eeed7cfc27affb11772778f688a1b5f0a6336ea92f987ec19f70513918fa",
+  "reference_results_sha256": "bd24af448c83f035b75b2760a433a43176fee135140a260561d0a40cec2126b4",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Kaitlyn",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f0b8db84-480d-43f6-945b-dae08245104f.arguments.content"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Rohan Kumar",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-f0b8db84-480d-43f6-945b-dae08245104f.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Kaitlyn Nguyen",
+      "original_source": "stage1.tool_gt.series_s1_kaitlyn.arguments.user_name"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Kaida Jensen",
+      "original_source": "stage1.tool_gt.series_s1_kaida.arguments.user_name"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Kaitlyn",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "较难拼写的人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Rohan Kumar",
+        "Kaitlyn"
+      ],
+      "active_vocabulary": {
+        "Rohan Kumar": 50,
+        "Kaitlyn": 50
+      },
+      "vocabulary_sha256": "993fc5a201e2f047d9aa562996f13f6eb8087c4a318628fae465efb2789d51b5"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaida Jensen",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，含难拼写姓氏",
+          "weight": 50
+        },
+        {
+          "text": "Kaitlyn Nguyen",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，含难拼写姓氏",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kaida Jensen",
+        "Kaitlyn Nguyen"
+      ],
+      "active_vocabulary": {
+        "Rohan Kumar": 50,
+        "Kaitlyn": 50,
+        "Kaida Jensen": 50,
+        "Kaitlyn Nguyen": 50
+      },
+      "vocabulary_sha256": "1ded48837a0ae77ad40e73c7fcdaf283c332f2a4abf27e66d8e587bc100fc7a0"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Rohan Kumar": 50,
+        "Kaitlyn": 50,
+        "Kaida Jensen": 50,
+        "Kaitlyn Nguyen": 50
+      },
+      "vocabulary_sha256": "1ded48837a0ae77ad40e73c7fcdaf283c332f2a4abf27e66d8e587bc100fc7a0"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kaida"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:24.106219+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

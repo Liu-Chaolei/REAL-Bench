@@ -1,0 +1,134 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0334_w4362b7r0l35e4yc9is7qyhn96g471yb",
+  "model": "deepseek-flash",
+  "input_sha256": "884e7ce6ade8573eca1441857fbef2f29d733410c4b27b46eb36ad21dcd4c025",
+  "review_input_sha256": "311f17914f94c492f449fcef2d873c241e764edd150fcfb7fe2532c3cc3c63da",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "6ae5e720ecb15a784d7190d4c065dd1456796acfa6f5b118c91a4f8223235759",
+  "reference_results_sha256": "8f5998a1167e3a461ee62642c7beb637be86c0501b757708c9b75800c50ee393",
+  "sources": {
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Anastasiya Kuznetsova",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-a8a6247a-1501-4aa3-abc3-8a731c6c9ce7.arguments.content"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "names+achievements.xlsx",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-0319789e-0a0f-4b6a-bf8c-4920908fcb9e.arguments.path1"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Cold War Research Group",
+      "original_source": "stage1.tool_gt.series_s1_1.arguments.title"
+    },
+    "stage2.tool_response.series_s2_2": {
+      "stage": 2,
+      "text": "{\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Cold War Achievements Review\", \"start_datetime\": \"1729332000.0\", \"end_datetime\": \"1729337400.0\", \"tag\": \"Work\", \"description\": \"Review the achievements column in names+achievements.xlsx (kept in Documents/Cold War) with the teachers of the Cold War Research Group and collect their corrections before the end of the week.\", \"location\": \"Documents/Cold War\", \"attendees\": [], \"start_strftime\": \"Saturday, 2024-10-19 10:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 11:30:00\"}",
+      "event_id": "series_s2_2",
+      "response_sha256": "862f31c10a4e95fb2b9e80438cd0097fc9cd69ca6099e46e63f96a03769bb34d"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "names+achievements.xlsx",
+          "kind": "technical_term",
+          "source": "stage0.existing_catalog.6",
+          "reason": "具体文件名，含符号，属难识别专名",
+          "weight": 50
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整且拼写较难的人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "names+achievements.xlsx",
+        "Anastasiya Kuznetsova"
+      ],
+      "active_vocabulary": {
+        "names+achievements.xlsx": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "902415ff8f329b68c24d700496c891aec05eabc1642b97b50438d7788fdffadf"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Cold War Research Group",
+          "kind": "organization",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整机构名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Cold War Research Group"
+      ],
+      "active_vocabulary": {
+        "names+achievements.xlsx": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Cold War Research Group": 50
+      },
+      "vocabulary_sha256": "c7c578f020d53ec54595ca9bb5e77ea5f8c552cb707c42245220cbcd7b214f19"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Cold War Achievements Review",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_2",
+          "reason": "具体事件标题，属专名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Cold War Achievements Review"
+      ],
+      "active_vocabulary": {
+        "names+achievements.xlsx": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Cold War Research Group": 50,
+        "Cold War Achievements Review": 50
+      },
+      "vocabulary_sha256": "d13c089f5b9565778436cc46a3d077903ef516add6cb09d33d00580dfdf9a7b3"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kai",
+    "Sergei",
+    "Aidan",
+    "Katharina",
+    "Klaus"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:13.283313+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

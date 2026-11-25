@@ -1,0 +1,162 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0664_f1wk211hccak1x2i2yp4zfu50rh2k1av__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "255f56ac90724e579ca9b34ed6f750ead83ddf573ed3996795c7bd501de3f1bb",
+  "review_input_sha256": "499b0a86a05147ede037594fc5a601c7540c6977de2e987ebcccf7f303c80d46",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "0dbc1caab3fb76482fd44c617021d038d99cd8f1c383848887d7dae2b8f73f05",
+  "reference_results_sha256": "4a8923616e131d84a21ec77840d430e981318701346082ced7fd791b82cef17c",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Astrid Jensen",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Østergade 14, Herning",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-3736327c-5747-4a94-869e-4aca44e87f9a.arguments.end_location"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Østerbrogade 27, 3. tv, 2100 København Ø, Denmark",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-3736327c-5747-4a94-869e-4aca44e87f9a.arguments.start_location"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Torvegade 20, Herning",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-4aacfdc0-d6d3-4308-9596-4e846803dc77.arguments.end_location"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Herning City Living",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Herning Hytte",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Østerbrogade 27, 3. tv, 2100 København Ø, Denmark",
+          "kind": "place",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含Ø特殊字符的完整哥本哈根地址",
+          "weight": 50
+        },
+        {
+          "text": "Torvegade 20, Herning",
+          "kind": "place",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整街道地址，含地名Herning",
+          "weight": 50
+        },
+        {
+          "text": "Østergade 14, Herning",
+          "kind": "place",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含丹麦语特殊字符Ø的完整地址",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Jensen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，含独特拼写，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Østerbrogade 27, 3. tv, 2100 København Ø, Denmark",
+        "Torvegade 20, Herning",
+        "Østergade 14, Herning",
+        "Astrid Jensen"
+      ],
+      "active_vocabulary": {
+        "Østerbrogade 27, 3. tv, 2100 København Ø, Denmark": 50,
+        "Torvegade 20, Herning": 50,
+        "Østergade 14, Herning": 50,
+        "Astrid Jensen": 50
+      },
+      "vocabulary_sha256": "95f8a0c9d9cd189e3036680aa7e3f0fb1ca01cd812a2b9f8073e7476d83367e0"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Herning City Living",
+          "kind": "organization",
+          "source": "stage1.existing_catalog.1",
+          "reason": "独特物业名称，非通用词",
+          "weight": 50
+        },
+        {
+          "text": "Herning Hytte",
+          "kind": "organization",
+          "source": "stage1.existing_catalog.2",
+          "reason": "独特物业名称，非通用词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Herning City Living",
+        "Herning Hytte"
+      ],
+      "active_vocabulary": {
+        "Østerbrogade 27, 3. tv, 2100 København Ø, Denmark": 50,
+        "Torvegade 20, Herning": 50,
+        "Østergade 14, Herning": 50,
+        "Astrid Jensen": 50,
+        "Herning City Living": 50,
+        "Herning Hytte": 50
+      },
+      "vocabulary_sha256": "c926fd023d3c9a7b6568c57cb1f9c60526f4f025e2d5bed34859890b07f24d93"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Østerbrogade 27, 3. tv, 2100 København Ø, Denmark": 50,
+        "Torvegade 20, Herning": 50,
+        "Østergade 14, Herning": 50,
+        "Astrid Jensen": 50,
+        "Herning City Living": 50,
+        "Herning Hytte": 50
+      },
+      "vocabulary_sha256": "c926fd023d3c9a7b6568c57cb1f9c60526f4f025e2d5bed34859890b07f24d93"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Herning",
+    "Østergade 14, Herning, 7400",
+    "Torvegade 20, Herning, 7400"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:24.560686+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

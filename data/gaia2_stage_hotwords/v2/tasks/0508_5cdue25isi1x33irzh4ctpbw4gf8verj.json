@@ -1,0 +1,110 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0508_5cdue25isi1x33irzh4ctpbw4gf8verj",
+  "model": "deepseek-flash",
+  "input_sha256": "03e2063e6f53231a6fe755d0558c7890d09c0113ad5728062126e81780a85f76",
+  "review_input_sha256": "ce6011c67d6de8be73e0f8685a0a1725f8e26e60fe0c50acb6933a6c19e6bb8f",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "a7a61afd8f9456d35af3e4c0b1ce3218a1d086ca20dade0da063e82580baeed6",
+  "reference_results_sha256": "8dba083f38371a08b4c6ba54637ea6b53b067a2b913fa2d4ef3aed6d4d3c0ac5",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Harold Nakamura",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Ayşe Demir",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Xóchitl Ramírez",
+      "original_source": "stage0.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Ayşe Demir",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Harold Nakamura",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Xóchitl Ramírez",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Ayşe Demir",
+        "Harold Nakamura",
+        "Xóchitl Ramírez"
+      ],
+      "active_vocabulary": {
+        "Ayşe Demir": 50,
+        "Harold Nakamura": 50,
+        "Xóchitl Ramírez": 50
+      },
+      "vocabulary_sha256": "f091af5dc82e45959d1c7ac704dffcc69b8913ff29697fef243b089ac69aa184"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Ayşe Demir": 50,
+        "Harold Nakamura": 50,
+        "Xóchitl Ramírez": 50
+      },
+      "vocabulary_sha256": "f091af5dc82e45959d1c7ac704dffcc69b8913ff29697fef243b089ac69aa184"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Ayşe Demir": 50,
+        "Harold Nakamura": 50,
+        "Xóchitl Ramírez": 50
+      },
+      "vocabulary_sha256": "f091af5dc82e45959d1c7ac704dffcc69b8913ff29697fef243b089ac69aa184"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:11.246627+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

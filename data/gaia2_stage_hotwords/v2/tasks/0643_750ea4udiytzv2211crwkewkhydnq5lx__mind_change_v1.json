@@ -1,0 +1,173 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0643_750ea4udiytzv2211crwkewkhydnq5lx__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "4cd48e2509c774fd4f4edf44b7fea6b9f1bfc2ed7a9d748109623186fc4bf87e",
+  "review_input_sha256": "25f3d33a703ed783fb54367339073425bfc073b98e5c8f388c77a481404c6150",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "e5c1c4028e5f2842bc53ef3be5b83322a1d037e69704b2b6917b257c1765717b",
+  "reference_results_sha256": "6968f47b29515fa93f753e6bf4c154a05a574e32a7ea7835c4da0ba30365dd9d",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Věra Nováková",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b50aafb6-9c5d-4e0a-ab4a-8836c5a1485e.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Zdeněk Nováček",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b50aafb6-9c5d-4e0a-ab4a-8836c5a1485e.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Katharina Fuchs",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b50aafb6-9c5d-4e0a-ab4a-8836c5a1485e.arguments.attendees[2]"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Saskia König",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b50aafb6-9c5d-4e0a-ab4a-8836c5a1485e.arguments.attendees[3]"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Ovocný trh 560/5, Prague 1, 116 36",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-2b479baf-db25-4509-be87-8703da033ad0.arguments.start_location"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Helmut Grünewald",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Ovocný trh 560/5",
+          "kind": "place",
+          "source": "stage0.existing_catalog.5",
+          "reason": "含变音符号的难拼街道名",
+          "weight": 50
+        },
+        {
+          "text": "Katharina Fuchs",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Saskia König",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Věra Nováková",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Zdeněk Nováček",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Ovocný trh 560/5",
+        "Katharina Fuchs",
+        "Saskia König",
+        "Věra Nováková",
+        "Zdeněk Nováček"
+      ],
+      "active_vocabulary": {
+        "Ovocný trh 560/5": 50,
+        "Katharina Fuchs": 50,
+        "Saskia König": 50,
+        "Věra Nováková": 50,
+        "Zdeněk Nováček": 50
+      },
+      "vocabulary_sha256": "aca5aff5ef993199305f374e031202ba85208498db1a14a96c9b7cd45ef253ac"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Helmut Grünewald",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Helmut Grünewald"
+      ],
+      "active_vocabulary": {
+        "Ovocný trh 560/5": 50,
+        "Katharina Fuchs": 50,
+        "Saskia König": 50,
+        "Věra Nováková": 50,
+        "Zdeněk Nováček": 50,
+        "Helmut Grünewald": 50
+      },
+      "vocabulary_sha256": "e12de79ef2259432ed3b89526eaae00157f11a835d88347065c6552e6f00e562"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Ovocný trh 560/5": 50,
+        "Katharina Fuchs": 50,
+        "Saskia König": 50,
+        "Věra Nováková": 50,
+        "Zdeněk Nováček": 50,
+        "Helmut Grünewald": 50
+      },
+      "vocabulary_sha256": "e12de79ef2259432ed3b89526eaae00157f11a835d88347065c6552e6f00e562"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [
+    {
+      "text": "Ovocný trh 560/5",
+      "from": "stage0.tool_response.OracleEvent-AGENT-2b479baf-db25-4509-be87-8703da033ad0",
+      "to": "stage0.existing_catalog.5"
+    }
+  ],
+  "old_terms_removed": [
+    "Charles University",
+    "Ovocný trh 560/5, Prague 1, 116 36",
+    "Tic Tac Two",
+    "Věra",
+    "Katharina",
+    "Saskia",
+    "Zdeněk"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:17.347714+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

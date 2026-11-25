@@ -1,0 +1,94 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0888_51l8dcuw8jy68uqr68f725b0mk479ar2",
+  "model": "deepseek-flash",
+  "input_sha256": "b9e4b184843232070cecd21277f865e480731fa1c42599cc9d32abfc014befee",
+  "review_input_sha256": "525148c321eceeda2700ce282203419c456736338e9af5953297d3e8dc7ff9ba",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "e17c2ba571b0550ba2dc43ff93d3c6fb6042f85bf8b419da6f258519f89be98a",
+  "reference_results_sha256": "07884d45d8d587cb0bc40ca67314c034143a580050d9f3101f2bc600cf1f1c4a",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Astrid Kjærsgaard",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Beshoy Gadallah",
+      "original_source": "stage0.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Astrid Kjærsgaard",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含特殊字符æ的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Beshoy Gadallah",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "较难拼写的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Kjærsgaard",
+        "Beshoy Gadallah"
+      ],
+      "active_vocabulary": {
+        "Astrid Kjærsgaard": 50,
+        "Beshoy Gadallah": 50
+      },
+      "vocabulary_sha256": "984f476085c7e6eaac0f6be113d0d14f557b75aa6dcdb24b607189c22fc1c9b7"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid Kjærsgaard": 50,
+        "Beshoy Gadallah": 50
+      },
+      "vocabulary_sha256": "984f476085c7e6eaac0f6be113d0d14f557b75aa6dcdb24b607189c22fc1c9b7"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid Kjærsgaard": 50,
+        "Beshoy Gadallah": 50
+      },
+      "vocabulary_sha256": "984f476085c7e6eaac0f6be113d0d14f557b75aa6dcdb24b607189c22fc1c9b7"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:43.542267+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

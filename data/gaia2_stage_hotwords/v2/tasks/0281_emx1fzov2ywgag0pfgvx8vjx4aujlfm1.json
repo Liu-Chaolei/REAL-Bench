@@ -1,0 +1,95 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0281_emx1fzov2ywgag0pfgvx8vjx4aujlfm1",
+  "model": "deepseek-flash",
+  "input_sha256": "fc0f5b66acacec276787e3cdf96abafe5971b7c011e381128f4d348b5b1dc350",
+  "review_input_sha256": "4aff79cdcd6dbdc742711aeea518170b0ac70b8a8001918da0764e828821164c",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "df821aba813f21af8bb7cae9adb8c7a6d588f97bfb48a7c0df33f22fb2a27212",
+  "reference_results_sha256": "5cf9e7f4c53ec22005fa65bcf758517b22abbce3543310a14167730c5cd50d9b",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Sri Widyastuti",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-6309c35b-f9c7-4c71-88c1-c772cb0e77d1.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "History Buffs Reading Circle",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.title"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Sri Widyastuti",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整的印尼人名，具有辨识度",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Sri Widyastuti"
+      ],
+      "active_vocabulary": {
+        "Sri Widyastuti": 50
+      },
+      "vocabulary_sha256": "f25c000fd3f674c5235edaee2e767bcd7ed6f8489643ed0cce917ef210a72de6"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "History Buffs Reading Circle",
+          "kind": "organization",
+          "source": "stage1.existing_catalog.0",
+          "reason": "独特的读书会专有名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "History Buffs Reading Circle"
+      ],
+      "active_vocabulary": {
+        "Sri Widyastuti": 50,
+        "History Buffs Reading Circle": 50
+      },
+      "vocabulary_sha256": "a0928f31b52e4630dd7e0fed0ab8894de49334376329aa8e67045e68aa9fdd4d"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Sri Widyastuti": 50,
+        "History Buffs Reading Circle": 50
+      },
+      "vocabulary_sha256": "a0928f31b52e4630dd7e0fed0ab8894de49334376329aa8e67045e68aa9fdd4d"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:55.094558+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

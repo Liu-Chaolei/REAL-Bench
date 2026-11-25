@@ -1,0 +1,252 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0422_x30hjuzzfnrud36wdysyvvlusm21jqxc",
+  "model": "deepseek-flash",
+  "input_sha256": "fe8f8ba60f39811cce2e070d4342ac8f2682d1f6f09ecbbed844bb0ccd8086fc",
+  "review_input_sha256": "3cd3a8ddecd7c3789449b0fdc94bc0cca193e31e5bda27f33e39302014a096fa",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "7770a7fa5a9a0b187561f30b323dace22dbcb9dd1293b5c78ac9593ed76084b0",
+  "reference_results_sha256": "77eaefe342410aaf4a7a76969ec61548a01849503292197949033b52ef341046",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "India Network Check-in",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.title"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Raghavendra Rao",
+      "original_source": "stage2.tool_gt.series_s2_send_audit.arguments.content"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Rohini Nambiar",
+      "original_source": "stage2.tool_gt.series_s2_send_audit.arguments.content"
+    },
+    "stage2.existing_catalog.10": {
+      "stage": 2,
+      "text": "Sophea Chakraborty",
+      "original_source": "stage2.tool_gt.series_s2_send_audit.arguments.content"
+    },
+    "stage2.existing_catalog.13": {
+      "stage": 2,
+      "text": "Rohini Deshpande",
+      "original_source": "stage2.tool_gt.series_s2_send_audit.arguments.content"
+    },
+    "stage2.existing_catalog.14": {
+      "stage": 2,
+      "text": "Anastasia Kuznetsova",
+      "original_source": "stage2.tool_gt.series_s2_send_audit.arguments.content"
+    },
+    "stage2.existing_catalog.15": {
+      "stage": 2,
+      "text": "Rohan Kulkarni",
+      "original_source": "stage2.tool_gt.series_s2_send_audit.arguments.content"
+    },
+    "stage2.existing_catalog.24": {
+      "stage": 2,
+      "text": "Rohan Sengupta",
+      "original_source": "stage2.tool_gt.series_s2_send_audit.arguments.content"
+    },
+    "stage2.existing_catalog.25": {
+      "stage": 2,
+      "text": "Aaradhya Rao",
+      "original_source": "stage2.tool_gt.series_s2_send_audit.arguments.content"
+    },
+    "stage2.existing_catalog.28": {
+      "stage": 2,
+      "text": "Consumer Goods Manufacturers Association",
+      "original_source": "stage2.tool_gt.series_s2_send_audit.arguments.content"
+    },
+    "stage2.existing_catalog.3": {
+      "stage": 2,
+      "text": "Raghuram Iyer",
+      "original_source": "stage2.tool_gt.series_s2_send_audit.arguments.content"
+    },
+    "stage2.existing_catalog.5": {
+      "stage": 2,
+      "text": "Ravindra Deshpande",
+      "original_source": "stage2.tool_gt.series_s2_send_audit.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "India Network Check-in",
+          "kind": "custom_name",
+          "source": "stage1.existing_catalog.0",
+          "reason": "特定活动名称，含地名与用途，较难识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "India Network Check-in"
+      ],
+      "active_vocabulary": {
+        "India Network Check-in": 50
+      },
+      "vocabulary_sha256": "a0cd9fd0d06b2a024c83b611e8abb064f414c27e8c506a1b3ba4efe79b7c2b5f"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Consumer Goods Manufacturers Association",
+          "kind": "organization",
+          "source": "stage2.existing_catalog.28",
+          "reason": "特定机构全称，较长较难",
+          "weight": 50
+        },
+        {
+          "text": "Aaradhya Rao",
+          "kind": "person",
+          "source": "stage2.existing_catalog.25",
+          "reason": "完整人名，名字较难",
+          "weight": 50
+        },
+        {
+          "text": "Anastasia Kuznetsova",
+          "kind": "person",
+          "source": "stage2.existing_catalog.14",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Raghavendra Rao",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Raghuram Iyer",
+          "kind": "person",
+          "source": "stage2.existing_catalog.3",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Ravindra Deshpande",
+          "kind": "person",
+          "source": "stage2.existing_catalog.5",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Kulkarni",
+          "kind": "person",
+          "source": "stage2.existing_catalog.15",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Sengupta",
+          "kind": "person",
+          "source": "stage2.existing_catalog.24",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage2.existing_catalog.13",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Nambiar",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        },
+        {
+          "text": "Sophea Chakraborty",
+          "kind": "person",
+          "source": "stage2.existing_catalog.10",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Consumer Goods Manufacturers Association",
+        "Aaradhya Rao",
+        "Anastasia Kuznetsova",
+        "Raghavendra Rao",
+        "Raghuram Iyer",
+        "Ravindra Deshpande",
+        "Rohan Kulkarni",
+        "Rohan Sengupta",
+        "Rohini Deshpande",
+        "Rohini Nambiar",
+        "Sophea Chakraborty"
+      ],
+      "active_vocabulary": {
+        "India Network Check-in": 50,
+        "Consumer Goods Manufacturers Association": 50,
+        "Aaradhya Rao": 50,
+        "Anastasia Kuznetsova": 50,
+        "Raghavendra Rao": 50,
+        "Raghuram Iyer": 50,
+        "Ravindra Deshpande": 50,
+        "Rohan Kulkarni": 50,
+        "Rohan Sengupta": 50,
+        "Rohini Deshpande": 50,
+        "Rohini Nambiar": 50,
+        "Sophea Chakraborty": 50
+      },
+      "vocabulary_sha256": "7df9af2cf9f8a9a7c1427fb75273983574fb928a9f73de76e0872e3f8c77e4a8"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Rohan",
+    "Rohini Iyer",
+    "Rohan Nair",
+    "Rohan Srinivasan",
+    "Kavita Rao",
+    "Raghavan Iyer",
+    "Rohan Deshpande",
+    "Rohini Rao",
+    "Kalyan Rao",
+    "Rohini Desai",
+    "Rohini Naidu",
+    "Rohan Naidu",
+    "Rohan Mehta",
+    "Rohini Nair",
+    "Kaito Rao",
+    "Nalini Rao",
+    "Rohan Khurana",
+    "BJP",
+    "Ministry of External Affairs"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:45.065309+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

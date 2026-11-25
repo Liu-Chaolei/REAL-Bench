@@ -1,0 +1,134 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0672_m8t96v4a0xtg6841o3opog01kt811l8z",
+  "model": "deepseek-flash",
+  "input_sha256": "ddf2a97ce0913495b1f005c8c69d3c5a796b353b1cda7a3d7705e6b85a8a8fa1",
+  "review_input_sha256": "d70f152dd5dc580fda4792f88b858278e5544a09598d46965448ebb0f6b60977",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "cfcc0f2d074f6aa449657241862a17ca579465753ce622811bae86ab8affc8e3",
+  "reference_results_sha256": "d0f79d7d389a832aca83c88ac08583daa6ea42c00ba732650925b58ff32677d4",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Astrid MacPherson",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Rohini Deshpande",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-519ad977-e025-4284-bc4f-2a13967419ff.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Helmut Eisenstadt",
+      "original_source": "stage1.tool_gt.series_s1_add_research.arguments.attendees[0]"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Gerrit van der Meer",
+      "original_source": "stage1.tool_gt.series_s1_add_research.arguments.attendees[1]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Astrid MacPherson",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，含独特拼写，适合热词",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，拼写较难，适合热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid MacPherson",
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "Astrid MacPherson": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "0c3fb0f2b4ad026ae43028307f51c3d6db429bd70b3ef538f3039d14a1377837"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Gerrit van der Meer",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "完整人名，含介词姓氏，拼写独特",
+          "weight": 50
+        },
+        {
+          "text": "Helmut Eisenstadt",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，姓氏拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Gerrit van der Meer",
+        "Helmut Eisenstadt"
+      ],
+      "active_vocabulary": {
+        "Astrid MacPherson": 50,
+        "Rohini Deshpande": 50,
+        "Gerrit van der Meer": 50,
+        "Helmut Eisenstadt": 50
+      },
+      "vocabulary_sha256": "f421b6f8989fc2f88aad3f147cba77f08e1f83fcd506794854d2d3cc908ec27b"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid MacPherson": 50,
+        "Rohini Deshpande": 50,
+        "Gerrit van der Meer": 50,
+        "Helmut Eisenstadt": 50
+      },
+      "vocabulary_sha256": "f421b6f8989fc2f88aad3f147cba77f08e1f83fcd506794854d2d3cc908ec27b"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Astrid",
+    "14/2 Marchmont Road, Edinburgh, EH9 1HQ",
+    "Helmut",
+    "Gerrit",
+    "University of Cambridge, Department of Physics",
+    "Department of Physics",
+    "Department of Physics, University of Cambridge"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:57.921188+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

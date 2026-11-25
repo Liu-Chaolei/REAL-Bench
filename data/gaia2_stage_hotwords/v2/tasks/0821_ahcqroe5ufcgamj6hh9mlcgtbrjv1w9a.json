@@ -1,0 +1,130 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0821_ahcqroe5ufcgamj6hh9mlcgtbrjv1w9a",
+  "model": "deepseek-flash",
+  "input_sha256": "9c24a1ea6b0a4d2d79cfc85eef0398f3d0a7024a727ac9cd07910bffce5d2f0f",
+  "review_input_sha256": "2017cd2ac2993b90df0e8955457a95759cbfbd49194c3d237241c9c8c05d7075",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "7a914be1e3d348cf7b69f24c421ea061c0a4e0a06b8d144e288cdce4bc3c4868",
+  "reference_results_sha256": "2ec21bb088df9745ae8b1da1458301b9c16761ce2619f5fab37af8af96b6e0ba",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Zhaolong Liang",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-b99ba0ef-145e-4682-ae6e-1dea6e85290d.arguments.content"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Poke Ball 3-Ring Binder",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Poke Ball 3-Ring Binders",
+      "original_source": "stage1.tool_gt.series_s1_chat_breakdown.arguments.content"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Poke Ball binder",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Poke Ball 3-Ring Binder",
+          "kind": "product",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含品牌与规格的完整产品名，识别难度较高",
+          "weight": 50
+        },
+        {
+          "text": "Zhaolong Liang",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整中文人名，拼写较难，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Poke Ball 3-Ring Binder",
+        "Zhaolong Liang"
+      ],
+      "active_vocabulary": {
+        "Poke Ball 3-Ring Binder": 50,
+        "Zhaolong Liang": 50
+      },
+      "vocabulary_sha256": "ba703d6a4ad8e88b5df5866b9e767f11dd851f658ab8de8a1c361f7edb46e8f3"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Poke Ball 3-Ring Binders",
+          "kind": "product",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整产品名复数形式，保留以覆盖该说法",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Poke Ball 3-Ring Binders"
+      ],
+      "active_vocabulary": {
+        "Poke Ball 3-Ring Binder": 50,
+        "Zhaolong Liang": 50,
+        "Poke Ball 3-Ring Binders": 50
+      },
+      "vocabulary_sha256": "e80ed76b94cbca7a5a17fd731ce03d1ab9574c44c5e96492dd4d740e9421b6f1"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Poke Ball binder",
+          "kind": "product",
+          "source": "stage2.existing_catalog.1",
+          "reason": "产品名简称，含品牌词，保留以覆盖该说法",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Poke Ball binder"
+      ],
+      "active_vocabulary": {
+        "Poke Ball 3-Ring Binder": 50,
+        "Zhaolong Liang": 50,
+        "Poke Ball 3-Ring Binders": 50,
+        "Poke Ball binder": 50
+      },
+      "vocabulary_sha256": "76e045d0a02d32c5f5cd0173ba8e34d5d679b06ee3d07d2453961a2d45284cda"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Pokémon",
+    "Zhaolong"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:28.627625+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

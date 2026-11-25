@@ -1,0 +1,96 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0663_c4rhds3gn4hecrdzan4k442j69gsgzsl",
+  "model": "deepseek-flash",
+  "input_sha256": "4aee6c917b41a08f85b16744849bee6b3c697ef30b75c38925dcf605908a1529",
+  "review_input_sha256": "26c3bc8a967f1c57a4c710438f984e0f979e97ee93d6bb4303c8e505eaf371f6",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "2baaaa1f7de0f929c90fcdbf361cd9b71c42a5133324133657a385d1544da01f",
+  "reference_results_sha256": "cbd9d25b6df10fae70c502e87ff2bfa88c98183511c789714c81b37b07aff206",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Eliška Nováková",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-df87f0f6-6b47-4648-a83e-a2a232ed9d73.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Fatima Al-Khateeb",
+      "original_source": "stage0.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Fatima Al-Khateeb",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "结构复杂的外文完整人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Eliška Nováková",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Fatima Al-Khateeb",
+        "Eliška Nováková"
+      ],
+      "active_vocabulary": {
+        "Fatima Al-Khateeb": 50,
+        "Eliška Nováková": 50
+      },
+      "vocabulary_sha256": "ad13442b525d2504d502a438636b5537ba5dd0ded7eeff07136662fac0292ad0"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Fatima Al-Khateeb": 50,
+        "Eliška Nováková": 50
+      },
+      "vocabulary_sha256": "ad13442b525d2504d502a438636b5537ba5dd0ded7eeff07136662fac0292ad0"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Fatima Al-Khateeb": 50,
+        "Eliška Nováková": 50
+      },
+      "vocabulary_sha256": "ad13442b525d2504d502a438636b5537ba5dd0ded7eeff07136662fac0292ad0"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Eliška"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:55.707344+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

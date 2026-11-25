@@ -1,0 +1,206 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0330_h6ntdw2gguzrc2peafuk7czgh2j3w3tq",
+  "model": "deepseek-flash",
+  "input_sha256": "e7f52ff5581fbb5383f5c69da1b08f6f57709452520218d2194842a746e3d299",
+  "review_input_sha256": "3cdc0a694ebe9c91276a21fcd733ea95e34324c5debaa79bb065e8a9e3d4419e",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "354245b38a498a492f565a73f333a915fc4c25c9084cc850b5cb84783ad94d25",
+  "reference_results_sha256": "b36910843f1b731fb28d21c07d63e270c7608c6269591cf0833c9f2182676c01",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Sofía Kuznetsova García",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-81612803-dd7b-463b-97e1-a49e0e211fe0.arguments.content"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Anastasiya Kuznetsova",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-3946bb77-d943-43eb-9407-171da6da4305.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Žiga Korošec",
+      "original_source": "stage1.tool_gt.series_s1_create_event.arguments.attendees[1]"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Rukmini Widyastuti",
+      "original_source": "stage1.tool_gt.series_s1_create_event.arguments.attendees[2]"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Sri Widyastuti",
+      "original_source": "stage1.tool_gt.series_s1_create_event.arguments.attendees[3]"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Sutopo Widyatmoko",
+      "original_source": "stage1.tool_gt.series_s1_create_event.arguments.attendees[4]"
+    },
+    "stage1.tool_response.series_s1_check_calendar": {
+      "stage": 1,
+      "text": "{\"events\": [{\"event_id\": \"783d940905dc42c5ab41a5aec02fa755\", \"title\": \"Dinner with Family\", \"start_datetime\": \"1729364400\", \"end_datetime\": \"1729371600\", \"tag\": \"Social\", \"description\": \"Dinner with family to catch up and discuss personal matters.\", \"location\": \"Home\", \"attendees\": [\"Sergei Kuznetsov\"], \"start_strftime\": \"Saturday, 2024-10-19 19:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 21:00:00\"}, {\"event_id\": \"f4fc3fb3f6e241f78c0f096bc11a408f\", \"title\": \"Research Time\", \"start_datetime\": \"1729332000\", \"end_datetime\": \"1729339200\", \"tag\": \"Work\", \"description\": \"Conduct research on ongoing projects and read relevant literature.\", \"location\": \"Moscow State University, Research Center\", \"attendees\": [], \"start_strftime\": \"Saturday, 2024-10-19 10:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 12:00:00\"}], \"range\": [\"0\", \"2\"], \"total\": \"2\"}",
+      "event_id": "series_s1_check_calendar",
+      "response_sha256": "aab391fc9ea38d58ec177ab0fca8c5b853dce89c785d68c11b555c1ec8ad5539"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Jolly Elf Friends",
+      "original_source": "stage2.tool_gt.series_s2_create_group.arguments.title"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Sofía Kuznetsova García",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Sofía Kuznetsova García",
+        "Anastasiya Kuznetsova"
+      ],
+      "active_vocabulary": {
+        "Sofía Kuznetsova García": 50,
+        "Anastasiya Kuznetsova": 50
+      },
+      "vocabulary_sha256": "b8d1d5b83dcf5cf9d1c0abbf1e1c3c3f4bc00d768ec84ad858d774cf3efaea61"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Moscow State University",
+          "kind": "organization",
+          "source": "stage1.tool_response.series_s1_check_calendar",
+          "reason": "完整机构名",
+          "weight": 50
+        },
+        {
+          "text": "Rukmini Widyastuti",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Sergei Kuznetsov",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_check_calendar",
+          "reason": "工具响应中的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Sri Widyastuti",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Sutopo Widyatmoko",
+          "kind": "person",
+          "source": "stage1.existing_catalog.3",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Žiga Korošec",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Moscow State University",
+        "Rukmini Widyastuti",
+        "Sergei Kuznetsov",
+        "Sri Widyastuti",
+        "Sutopo Widyatmoko",
+        "Žiga Korošec"
+      ],
+      "active_vocabulary": {
+        "Sofía Kuznetsova García": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Moscow State University": 50,
+        "Rukmini Widyastuti": 50,
+        "Sergei Kuznetsov": 50,
+        "Sri Widyastuti": 50,
+        "Sutopo Widyatmoko": 50,
+        "Žiga Korošec": 50
+      },
+      "vocabulary_sha256": "4f71df5e6cd2c6a3d9190488b3a0b6dc517a0987a9bd0246ed7b9e18d39d317b"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Jolly Elf Friends",
+          "kind": "custom_name",
+          "source": "stage2.existing_catalog.0",
+          "reason": "自定义群组名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Jolly Elf Friends"
+      ],
+      "active_vocabulary": {
+        "Sofía Kuznetsova García": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Moscow State University": 50,
+        "Rukmini Widyastuti": 50,
+        "Sergei Kuznetsov": 50,
+        "Sri Widyastuti": 50,
+        "Sutopo Widyatmoko": 50,
+        "Žiga Korošec": 50,
+        "Jolly Elf Friends": 50
+      },
+      "vocabulary_sha256": "225c11c1855493c575fc3091fab94b5e15651101da1af1876aaf18bd491cd844"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Rukmini",
+    "Žiga",
+    "Sri",
+    "Sutopo",
+    "Jolly Elf Adult Costume",
+    "Moscow",
+    "Anastasiya"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:11.894982+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

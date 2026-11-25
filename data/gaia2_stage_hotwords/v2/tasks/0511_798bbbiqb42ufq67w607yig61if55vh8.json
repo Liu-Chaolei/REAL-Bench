@@ -1,0 +1,137 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0511_798bbbiqb42ufq67w607yig61if55vh8",
+  "model": "deepseek-flash",
+  "input_sha256": "9731bf02ac56bb951ad700ef23d00095fde1c88f56309385dea8c608090662f3",
+  "review_input_sha256": "14dc4bf37c686fa6bb36a8f9671f304584c5c2445b889dcc4799a3383b5be79d",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "8e29ab079569f3d62bb07664e318687071ee3d0399bb1018c3299a2ac5114949",
+  "reference_results_sha256": "3c756a899e30b4c5abcc3a2b09bbb34e77d3f061d811327ffbf2534c223f19a8",
+  "sources": {
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Astrid McKenzie",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Aaradhya Rao",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Kymberley Ngata",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    },
+    "stage2.existing_catalog.3": {
+      "stage": 2,
+      "text": "Rohini Deshpande",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    },
+    "stage2.existing_catalog.4": {
+      "stage": 2,
+      "text": "Kymberley Wundke",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aaradhya Rao",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Astrid McKenzie",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整人名，含较难拼写",
+          "weight": 50
+        },
+        {
+          "text": "Kymberley Ngata",
+          "kind": "person",
+          "source": "stage2.existing_catalog.2",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Kymberley Wundke",
+          "kind": "person",
+          "source": "stage2.existing_catalog.4",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage2.existing_catalog.3",
+          "reason": "完整人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aaradhya Rao",
+        "Astrid McKenzie",
+        "Kymberley Ngata",
+        "Kymberley Wundke",
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "Aaradhya Rao": 50,
+        "Astrid McKenzie": 50,
+        "Kymberley Ngata": 50,
+        "Kymberley Wundke": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "c89df45bcf48921e30b27315a849cfda5c12a5965646b238165c036ecf390f36"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Volunteer Social Work",
+    "Dinner with Friends",
+    "Dinner with Family",
+    "Lunch Break",
+    "Personal Development",
+    "Rohan"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:11.372576+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,271 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0969_daddnidn0tsf3p2mt7lrlelrk74vclyg",
+  "model": "deepseek-flash",
+  "input_sha256": "e7e6c8ea885a36dc9bd9ad179c330a7d28a248de486484ec85babe40450ad390",
+  "review_input_sha256": "2eb948c97cc43c4c489cc24882a97da421e25e8f3fb48e6eb08108b2ce2b5405",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "ae1ae30b317d8f759789a85c9cc0d15216d4af9f3dea2071c8482561eb0b2de7",
+  "reference_results_sha256": "116dc0731e950a76678dd287a2e823a4ea8df81ff128367485c877a94fe274fc",
+  "sources": {
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Ayşe",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-db40c863-dc02-4de8-a0b7-f87fdf740170.arguments.content"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Luís",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-7351866a-0d36-451b-8a36-816ee3614135.arguments.content"
+    },
+    "stage0.existing_catalog.8": {
+      "stage": 0,
+      "text": "Aurélien",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-150bcee3-0166-4f0d-9496-26d7de71d800.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.attendees[0]"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Ahmet Çelik",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.attendees[1]"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Astrid Nakamura",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.attendees[2]"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Aurel Ionescu",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.attendees[3]"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Ayşe Demir",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.attendees[4]"
+    },
+    "stage1.existing_catalog.5": {
+      "stage": 1,
+      "text": "Evelyn Nakamura",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.attendees[5]"
+    },
+    "stage1.existing_catalog.6": {
+      "stage": 1,
+      "text": "Luís Pereira",
+      "original_source": "stage1.tool_gt.series_s1_create.arguments.attendees[6]"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Rodica Dumitrescu",
+      "original_source": "stage2.tool_gt.series_s2_email_waitlist.arguments.content"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Kaitlyn McAllister",
+      "original_source": "stage2.tool_gt.series_s2_email_waitlist.arguments.content"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Kaitlyn Nguyen",
+      "original_source": "stage2.tool_gt.series_s2_email_waitlist.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien",
+          "kind": "person",
+          "source": "stage0.existing_catalog.8",
+          "reason": "含变音符号的困难人名",
+          "weight": 50
+        },
+        {
+          "text": "Ayşe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的困难人名",
+          "weight": 50
+        },
+        {
+          "text": "Luís",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "含变音符号的困难人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien",
+        "Ayşe",
+        "Luís"
+      ],
+      "active_vocabulary": {
+        "Aurélien": 50,
+        "Ayşe": 50,
+        "Luís": 50
+      },
+      "vocabulary_sha256": "eb86d609fd803ae5f549b1f246c84104fb42aa1a4b5519c41d366922c91b9ca9"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Ahmet Çelik",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的完整困难人名",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Nakamura",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "完整困难人名",
+          "weight": 50
+        },
+        {
+          "text": "Aurel Ionescu",
+          "kind": "person",
+          "source": "stage1.existing_catalog.3",
+          "reason": "完整困难人名",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整困难人名",
+          "weight": 50
+        },
+        {
+          "text": "Ayşe Demir",
+          "kind": "person",
+          "source": "stage1.existing_catalog.4",
+          "reason": "含变音符号的完整困难人名",
+          "weight": 50
+        },
+        {
+          "text": "Evelyn Nakamura",
+          "kind": "person",
+          "source": "stage1.existing_catalog.5",
+          "reason": "完整困难人名",
+          "weight": 50
+        },
+        {
+          "text": "Luís Pereira",
+          "kind": "person",
+          "source": "stage1.existing_catalog.6",
+          "reason": "含变音符号的完整困难人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Ahmet Çelik",
+        "Astrid Nakamura",
+        "Aurel Ionescu",
+        "Aurélien LaFleur",
+        "Ayşe Demir",
+        "Evelyn Nakamura",
+        "Luís Pereira"
+      ],
+      "active_vocabulary": {
+        "Aurélien": 50,
+        "Ayşe": 50,
+        "Luís": 50,
+        "Ahmet Çelik": 50,
+        "Astrid Nakamura": 50,
+        "Aurel Ionescu": 50,
+        "Aurélien LaFleur": 50,
+        "Ayşe Demir": 50,
+        "Evelyn Nakamura": 50,
+        "Luís Pereira": 50
+      },
+      "vocabulary_sha256": "eab81753262fee35ea78f777d776c701bde99a1f76389448cc44128053eae30c"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaitlyn McAllister",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "完整困难人名",
+          "weight": 50
+        },
+        {
+          "text": "Kaitlyn Nguyen",
+          "kind": "person",
+          "source": "stage2.existing_catalog.2",
+          "reason": "完整困难人名",
+          "weight": 50
+        },
+        {
+          "text": "Rodica Dumitrescu",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整困难人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kaitlyn McAllister",
+        "Kaitlyn Nguyen",
+        "Rodica Dumitrescu"
+      ],
+      "active_vocabulary": {
+        "Aurélien": 50,
+        "Ayşe": 50,
+        "Luís": 50,
+        "Ahmet Çelik": 50,
+        "Astrid Nakamura": 50,
+        "Aurel Ionescu": 50,
+        "Aurélien LaFleur": 50,
+        "Ayşe Demir": 50,
+        "Evelyn Nakamura": 50,
+        "Luís Pereira": 50,
+        "Kaitlyn McAllister": 50,
+        "Kaitlyn Nguyen": 50,
+        "Rodica Dumitrescu": 50
+      },
+      "vocabulary_sha256": "210f61cae0720a60cb4979f6c47458352886f729cbae7156464ccc31a3572680"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Aurel",
+    "Ahmet",
+    "Astrid",
+    "Evelyn",
+    "Rodica",
+    "Kaitlyn",
+    "Bucharest",
+    "Portland",
+    "San Francisco"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:02.637883+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,113 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0667_8o4d7q44ig0ej3hrl5vzxylde7t2s72u__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "148a9494f12f75dc1fa07f8bf966e215c777a7264eec17513f95e16bc972b2be",
+  "review_input_sha256": "b464e5f6bebfd182cf5bc4412888575fbf95180e4bcf6d89d92e245310fac36b",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "8bb106dc381034e5e292b1a071848c251677482e8bacf8447ed81d0fc4878569",
+  "reference_results_sha256": "2ac84d1849ed1a43cebf39a3393a8dbb0c15bb506225963ce33938d04daddaf7",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Nigel Fothergill",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-10940230-428a-48e9-a71d-34f6e18daf06.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Bridget MacTavish",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-10940230-428a-48e9-a71d-34f6e18daf06.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Rohini Deshpande",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-a053e634-462c-437d-a471-3b1694791aae.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Bridget MacTavish",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，含难拼写姓氏",
+          "weight": 50
+        },
+        {
+          "text": "Nigel Fothergill",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Deshpande",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整人名，难以识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Bridget MacTavish",
+        "Nigel Fothergill",
+        "Rohini Deshpande"
+      ],
+      "active_vocabulary": {
+        "Bridget MacTavish": 50,
+        "Nigel Fothergill": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "90619d80bee5fc76e8a3fb88acf8216012bf168c5c838d42b8215ca7f4b8dad8"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Bridget MacTavish": 50,
+        "Nigel Fothergill": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "90619d80bee5fc76e8a3fb88acf8216012bf168c5c838d42b8215ca7f4b8dad8"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Bridget MacTavish": 50,
+        "Nigel Fothergill": 50,
+        "Rohini Deshpande": 50
+      },
+      "vocabulary_sha256": "90619d80bee5fc76e8a3fb88acf8216012bf168c5c838d42b8215ca7f4b8dad8"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "University of Cambridge",
+    "Department of Physics"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:14.619476+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

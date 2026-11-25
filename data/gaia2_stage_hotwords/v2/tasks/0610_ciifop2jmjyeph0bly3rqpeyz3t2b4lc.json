@@ -1,0 +1,225 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0610_ciifop2jmjyeph0bly3rqpeyz3t2b4lc",
+  "model": "deepseek-flash",
+  "input_sha256": "17c63a3186d8a986786774feebd90008e7b7652011cc8a94fd22b5f60c6d1b6f",
+  "review_input_sha256": "81b15323c1e0f15a4fbfdcfc080e6a34ed917a30156c8ee0f230c74cda4953b5",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "b34a24c601887e34cc52ef995b29db95cb8812c3238085c352a1160adb7063fc",
+  "reference_results_sha256": "2787158bbf36e5e9a6a579111b15ca45998c32f7b7a7d8010ba6b658b06cd297",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Joana Silva",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-1098b985-5e3d-4fe8-acb6-57c8fc0b4b19.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Chiang Mai",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Loire Sauvignon Blanc",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Burgundy Chardonnay",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Comté",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Pinot Noir",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.tool_response.series_s1_joana": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Joana\", \"last_name\": \"Silva\", \"contact_id\": \"f817e1d7db34445db470ed7a15e83a45\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"28\", \"nationality\": \"Portuguese\", \"city_living\": \"Chiang Mai\", \"country\": \"Thailand\", \"status\": \"Status.EMPLOYED\", \"job\": \"English as a Foreign Language (EFL) Teacher\", \"description\": \"Joana Silva is a warm and empathetic person who values harmony and cooperation. As a Portuguese EFL teacher living in Chiang Mai, Thailand, she has learned to adapt to new cultures and environments. Joana is passionate about helping her students improve their English skills and loves to see them grow and succeed. She is a creative and patient teacher, always looking for innovative ways to engage her students in the learning process. Despite her dedication to her work, Joana is not a fan of competition and prefers to focus on collaboration and mutual support.\", \"phone\": \"+66934567890\", \"email\": \"joana.silva@gaia2mail.com\", \"address\": \"34/2 Moo 5, Soi 9, Nimmanhaemin Road, Chiang Mai 50000, Thailand\"}",
+      "event_id": "series_s1_joana",
+      "response_sha256": "d9f2240b528d9d8a2b9ef69b4063ebff0d30e0c62db0e584baac2b172467b9fe"
+    },
+    "stage2.tool_response.series_s2_read": {
+      "stage": 2,
+      "text": "{\"messages\": [{\"sender_id\": \"4a9702a2-0c98-459e-93e0-ff4b01fac807\", \"message_id\": \"c934bb2c5f71e13f0cc5da288112035c\", \"timestamp\": \"1728975610.0\", \"content\": \"Cultural Exchange Collaboration\\nHi Joana, welcome! We can use this individual conversation to coordinate the proposed virtual wine-and-cheese workshop with your EFL students. I emailed the complete outline. Could you share the learner level, group size and preferred workshop format/materials? Our planning meeting remains Sunday 20 October 08:30-10:30 Virtual. This is our coordination thread; no student workshop date or multiperson group is being claimed.\"}, {\"sender_id\": \"4a9702a2-0c98-459e-93e0-ff4b01fac807\", \"message_id\": \"255ddbf28ed5454d82080da2871680c5\", \"timestamp\": \"1724946300\", \"content\": \"Yeah, me too. I think you'd really enjoy the documentary. I'll send you a link to it when I get a chance. Anyway, I should probably get going, but it was great catching up with you, Joana!\"}, {\"sender_id\": \"546ab4c5-4e16-47dc-99db-d29be9951990\", \"message_id\": \"3555de71f163456da2fa1896cab84740\", \"timestamp\": \"1724945700\", \"content\": \"Actually, I haven't! But I've been meaning to check it out. I loved his show, he was such an inspiration to me when I was traveling.\"}, {\"sender_id\": \"4a9702a2-0c98-459e-93e0-ff4b01fac807\", \"message_id\": \"5f5ed32f3f7945f38f10448df237db35\", \"timestamp\": \"1724945100\", \"content\": \"That sounds like a great idea! I'm sure she'd love it. By the way, have you heard about the new Anthony Bourdain documentary that just came out?\"}, {\"sender_id\": \"546ab4c5-4e16-47dc-99db-d29be9951990\", \"message_id\": \"93816b0617af4c359cc4101457c76a53\", \"timestamp\": \"1724944500\", \"content\": \"Aww, that's so sweet! Please give her a big hug from me next time you talk to her. I've been meaning to send her a care package with some Thai treats, but I haven't had a chance yet.\"}, {\"sender_id\": \"4a9702a2-0c98-459e-93e0-ff4b01fac807\", \"message_id\": \"6ff22005c6af4fac878138486d84cdad\", \"timestamp\": \"1724943900\", \"content\": \"Yeah, I talked to her last weekend. She's doing well, just busy with work as usual. She's always asking about you, by the way. You're like a part of the family to her!\"}, {\"sender_id\": \"546ab4c5-4e16-47dc-99db-d29be9951990\", \"message_id\": \"7de15ae5f2634b68a56b3dfe62c37496\", \"timestamp\": \"1724943300\", \"content\": \"Ah, nice choice! I'm sure they'll have some great options. I'll send you a message when I find out more about the wine bar. Speaking of which, have you talked to your family lately? How's your mom doing?\"}, {\"sender_id\": \"4a9702a2-0c98-459e-93e0-ff4b01fac807\", \"message_id\": \"422983cb4e084de38a1c8fa0e4fb659e\", \"timestamp\": \"1724942700\", \"content\": \"Actually, I haven't! But I'd love to check it out. Do you know if they have any Portuguese wines on the list? I've been getting into Vinho Verde lately.\"}, {\"sender_id\": \"546ab4c5-4e16-47dc-99db-d29be9951990\", \"message_id\": \"c65171bf6999451d8e8f4b1fa254f2a9\", \"timestamp\": \"1724942100\", \"content\": \"You should totally try making some Khao Soi! It's one of my favorite dishes here. I can send you a recipe if you'd like. By the way, have you heard about the new wine bar that just opened up in the West Village?\"}, {\"sender_id\": \"4a9702a2-0c98-459e-93e0-ff4b01fac807\", \"message_id\": \"6678d297b2414d44ad991c80209617d9\", \"timestamp\": \"1724941500\", \"content\": \"It's been a wild ride, as always. We just launched a new wine list at the restaurant and I've been getting great feedback from customers. But I have to say, I'm a bit jealous of your market explorations. I've been meaning to try out some new Thai recipes in my spare time.\"}], \"metadata\": {\"message_range\": [\"0\", \"10\"], \"conversation_length\": \"12\", \"conversation_id\": \"255e7b7cc966413a892022c6a9934513\", \"conversation_title\": \"Joana Silva\"}}",
+      "event_id": "series_s2_read",
+      "response_sha256": "045e7470e5d1d90d6e413ce7b543f43a7183a111c1c412600e288d207d9f4769"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Joana Silva",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，作为已有候选保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur",
+        "Joana Silva"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Joana Silva": 50
+      },
+      "vocabulary_sha256": "dda0764098c8c197bac4aaf435017fb7a32554bd96cd7eab85be8a98e614a44b"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Loire Sauvignon Blanc",
+          "kind": "product",
+          "source": "stage1.existing_catalog.1",
+          "reason": "特定葡萄酒名称，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Burgundy Chardonnay",
+          "kind": "product",
+          "source": "stage1.existing_catalog.2",
+          "reason": "特定葡萄酒名称，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Chiang Mai",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "泰国地名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Nimmanhaemin Road",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_joana",
+          "reason": "清迈具体路名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Pinot Noir",
+          "kind": "product",
+          "source": "stage1.existing_catalog.4",
+          "reason": "特定葡萄酒品种名",
+          "weight": 50
+        },
+        {
+          "text": "Comté",
+          "kind": "product",
+          "source": "stage1.existing_catalog.3",
+          "reason": "含变音符号的奶酪专名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Loire Sauvignon Blanc",
+        "Burgundy Chardonnay",
+        "Chiang Mai",
+        "Nimmanhaemin Road",
+        "Pinot Noir",
+        "Comté"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Joana Silva": 50,
+        "Loire Sauvignon Blanc": 50,
+        "Burgundy Chardonnay": 50,
+        "Chiang Mai": 50,
+        "Nimmanhaemin Road": 50,
+        "Pinot Noir": 50,
+        "Comté": 50
+      },
+      "vocabulary_sha256": "ff491719dbeed43b932b2bd70357190c5556a7fc0232c43542f29d62bce75297"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Anthony Bourdain",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "完整人名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Khao Soi",
+          "kind": "custom_name",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "泰北特色菜名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Vinho Verde",
+          "kind": "product",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "葡萄牙葡萄酒专名，较难识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Anthony Bourdain",
+        "Khao Soi",
+        "Vinho Verde"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Joana Silva": 50,
+        "Loire Sauvignon Blanc": 50,
+        "Burgundy Chardonnay": 50,
+        "Chiang Mai": 50,
+        "Nimmanhaemin Road": 50,
+        "Pinot Noir": 50,
+        "Comté": 50,
+        "Anthony Bourdain": 50,
+        "Khao Soi": 50,
+        "Vinho Verde": 50
+      },
+      "vocabulary_sha256": "61b7bce947f979b655724f29975c8bce66eb563dd6ca56c2a0f09605d2bf1496"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Brie",
+    "Cultural Exchange Collaboration"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:44.569043+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

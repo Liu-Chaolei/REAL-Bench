@@ -1,0 +1,152 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0707_i706q09ixk7eh1bghozdtp5b7mz9jb7n__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "3a25461f739a301a1e6e67a7cace64c6e5ae4ee38aeb81ff76d84622fbb054a5",
+  "review_input_sha256": "0c311de5a4d990bcc4183f2d13fe6939c3b947bf3ae24d59ad8583937f031b36",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "6b4ec43ef20bad4b86ebc014932b8cd71013275d730be0c8ab205a132cce87f1",
+  "reference_results_sha256": "0fbee21a2981f33d32350e365729bdf8a790e92f38e8106eae687ea52e726fec",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Astrid Nakamura",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-c54600cf-772f-4d1b-9266-728b91cdfbc9.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Çağla Öztürk",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-6660a2f2-3f97-40a3-8362-8e3c56f4600b.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Ximena Reyes García",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-1da5c341-35f0-42f6-869d-432144ce5c77.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-a3cca8bc-ef26-4a4c-9a79-6217391d68d5.arguments.content"
+    },
+    "stage2.tool_response.series_s2_4": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"32e004fe95c14da29a53c0ffdbd42b3f\", \"title\": \"Staff Training: Wine Service\", \"start_datetime\": \"1729504800\", \"end_datetime\": \"1729512000\", \"tag\": \"Work\", \"description\": \"Train staff on wine service techniques to enhance the customer experience.\", \"location\": \"Restaurant Dining Area\", \"attendees\": [\"Aurélien LaFleur\", \"Nalani Jensen\", \"Kaia Nakamura\"], \"start_strftime\": \"Monday, 2024-10-21 10:00:00\", \"end_strftime\": \"Monday, 2024-10-21 12:00:00\"}], \"range\": [\"0\", \"1\"], \"total\": \"1\"}",
+      "event_id": "series_s2_4",
+      "response_sha256": "d5675cd17bd29f8ce343a20dcdb153d79f4989d64905d70ff3ee1a498e785f02"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Ximena Reyes García",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，含重音符号",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Nakamura",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，含独特姓氏",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含法语变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Çağla Öztürk",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含土耳其语变音符号的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Ximena Reyes García",
+        "Astrid Nakamura",
+        "Aurélien LaFleur",
+        "Çağla Öztürk"
+      ],
+      "active_vocabulary": {
+        "Ximena Reyes García": 50,
+        "Astrid Nakamura": 50,
+        "Aurélien LaFleur": 50,
+        "Çağla Öztürk": 50
+      },
+      "vocabulary_sha256": "8dbb06591e6eeb903e90040172342f11aa913911402f56e55648d14531db1152"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Ximena Reyes García": 50,
+        "Astrid Nakamura": 50,
+        "Aurélien LaFleur": 50,
+        "Çağla Öztürk": 50
+      },
+      "vocabulary_sha256": "8dbb06591e6eeb903e90040172342f11aa913911402f56e55648d14531db1152"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kaia Nakamura",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_4",
+          "reason": "新出现的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_4",
+          "reason": "新出现的完整人名，姓氏独特",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kaia Nakamura",
+        "Nalani Jensen"
+      ],
+      "active_vocabulary": {
+        "Ximena Reyes García": 50,
+        "Astrid Nakamura": 50,
+        "Aurélien LaFleur": 50,
+        "Çağla Öztürk": 50,
+        "Kaia Nakamura": 50,
+        "Nalani Jensen": 50
+      },
+      "vocabulary_sha256": "203d2abae3fc120fe42943d9a3543d586b25930d11b4c9ff39f29d11454bcfa0"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:24.491280+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

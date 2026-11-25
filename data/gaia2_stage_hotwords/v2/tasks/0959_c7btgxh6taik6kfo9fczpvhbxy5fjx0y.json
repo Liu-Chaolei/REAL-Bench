@@ -1,0 +1,158 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0959_c7btgxh6taik6kfo9fczpvhbxy5fjx0y",
+  "model": "deepseek-flash",
+  "input_sha256": "33a9f05799f8a4f58999e81df7da1280fc9cca1ff8ac77fa46fe61021c3f30e0",
+  "review_input_sha256": "bd1f36bc13cad33bf556eab181b107a2f3ee794d2016aa8c0a2c700a21007088",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "fe0076b99f2b70a84153321a7a10667ba2e94e9917acc06d8fc056e934084c97",
+  "reference_results_sha256": "01800c165e1889d7b2c742614bff445702eed1cc3e895c752559e9322dcb0dee",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Nalini Rao",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Kavita Rao",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Aurélien Vandenberghe",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Vigdis Rasmussen",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Prasert Suthipong",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Søren Kjær",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-6bf18d34-d8ad-4ab7-8e61-62f2c042172f.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien Vandenberghe",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Kavita Rao",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "较难识别的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Nalini Rao",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "较难识别的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Prasert Suthipong",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "较难识别的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage0.existing_catalog.5",
+          "reason": "含变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Vigdis Rasmussen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "较难识别的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien Vandenberghe",
+        "Kavita Rao",
+        "Nalini Rao",
+        "Prasert Suthipong",
+        "Søren Kjær",
+        "Vigdis Rasmussen"
+      ],
+      "active_vocabulary": {
+        "Aurélien Vandenberghe": 50,
+        "Kavita Rao": 50,
+        "Nalini Rao": 50,
+        "Prasert Suthipong": 50,
+        "Søren Kjær": 50,
+        "Vigdis Rasmussen": 50
+      },
+      "vocabulary_sha256": "b459d35cb3446977aaa754adecaab35f7695e5063149d0115a0df8785de34083"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien Vandenberghe": 50,
+        "Kavita Rao": 50,
+        "Nalini Rao": 50,
+        "Prasert Suthipong": 50,
+        "Søren Kjær": 50,
+        "Vigdis Rasmussen": 50
+      },
+      "vocabulary_sha256": "b459d35cb3446977aaa754adecaab35f7695e5063149d0115a0df8785de34083"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien Vandenberghe": 50,
+        "Kavita Rao": 50,
+        "Nalini Rao": 50,
+        "Prasert Suthipong": 50,
+        "Søren Kjær": 50,
+        "Vigdis Rasmussen": 50
+      },
+      "vocabulary_sha256": "b459d35cb3446977aaa754adecaab35f7695e5063149d0115a0df8785de34083"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:59.086575+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

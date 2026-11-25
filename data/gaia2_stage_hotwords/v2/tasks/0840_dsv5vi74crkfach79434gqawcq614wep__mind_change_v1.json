@@ -1,0 +1,211 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0840_dsv5vi74crkfach79434gqawcq614wep__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "e3630a2ee30e9c024d9d258dc24a528ac5b702bd10a1ea4228afe314e80deb81",
+  "review_input_sha256": "2aa8535ecb402243e67a6d1bde36074618e68fe75519be1a99c31ad1570961f6",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "9b6e6aa63711d7490da4d282b0203f460201e430fd9b7d02c1f95510bfa506e5",
+  "reference_results_sha256": "c344d51539a5bb8729aab13993876cb54138f25883efbfc41f96d9f438a02829",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Saoirse O'Connor",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Saskia Krüger",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Lukas Müller",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Ximena Ramírez García",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Anastasiya Kuznetsova",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-d4cdf7c6-14d3-4313-a819-54ee3c341a6d.arguments.content"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Think Fun Last Letter Card Game",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.tool_response.series_s1_party": {
+      "stage": 1,
+      "text": "{\"event_id\": \"255b18373165937b3acf9f69c2340cf2\", \"title\": \"Reunion Party\", \"start_datetime\": \"1729364400.0\", \"end_datetime\": \"1729371600.0\", \"tag\": null, \"description\": null, \"location\": \"Home\", \"attendees\": [\"Saoirse O'Connor\", \"Saskia Krüger\", \"Lukas Müller\", \"Ximena Ramírez García\"], \"start_strftime\": \"Saturday, 2024-10-19 19:00:00\", \"end_strftime\": \"Saturday, 2024-10-19 21:00:00\"}",
+      "event_id": "series_s1_party",
+      "response_sha256": "6ac1c1b4d6044d9e900062ef9a6d71262ef57d85eaa34894cc7076fbaea8e943"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Saoirse Ní Chonchobhair",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Think Fun Last Letter Card Game",
+          "kind": "product",
+          "source": "stage0.existing_catalog.5",
+          "reason": "独特产品名",
+          "weight": 50
+        },
+        {
+          "text": "Saoirse O'Connor",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含撇号的爱尔兰人名，发音困难",
+          "weight": 50
+        },
+        {
+          "text": "Ximena Ramírez García",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含重音符号的完整西语人名",
+          "weight": 50
+        },
+        {
+          "text": "Anastasiya Kuznetsova",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "较长的东欧完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Lukas Müller",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号ü的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Krüger",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号ü的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Think Fun Last Letter Card Game",
+        "Saoirse O'Connor",
+        "Ximena Ramírez García",
+        "Anastasiya Kuznetsova",
+        "Lukas Müller",
+        "Saskia Krüger"
+      ],
+      "active_vocabulary": {
+        "Think Fun Last Letter Card Game": 50,
+        "Saoirse O'Connor": 50,
+        "Ximena Ramírez García": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Lukas Müller": 50,
+        "Saskia Krüger": 50
+      },
+      "vocabulary_sha256": "a26cbf00ffa523c78a1f923f93dbf3963c4436cb16989cac910e9f0a0cf01cd9"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Saoirse O'Connor",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_party",
+          "reason": "含撇号的爱尔兰人名",
+          "weight": 50
+        },
+        {
+          "text": "Ximena Ramírez García",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_party",
+          "reason": "含重音符号的完整西语人名",
+          "weight": 50
+        },
+        {
+          "text": "Lukas Müller",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_party",
+          "reason": "含变音符号ü的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Krüger",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_party",
+          "reason": "含变音符号ü的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Think Fun Last Letter Card Game": 50,
+        "Saoirse O'Connor": 50,
+        "Ximena Ramírez García": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Lukas Müller": 50,
+        "Saskia Krüger": 50
+      },
+      "vocabulary_sha256": "a26cbf00ffa523c78a1f923f93dbf3963c4436cb16989cac910e9f0a0cf01cd9"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Saoirse Ní Chonchobhair",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含爱尔兰语变音符号的困难完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Saoirse Ní Chonchobhair"
+      ],
+      "active_vocabulary": {
+        "Think Fun Last Letter Card Game": 50,
+        "Saoirse O'Connor": 50,
+        "Ximena Ramírez García": 50,
+        "Anastasiya Kuznetsova": 50,
+        "Lukas Müller": 50,
+        "Saskia Krüger": 50,
+        "Saoirse Ní Chonchobhair": 50
+      },
+      "vocabulary_sha256": "a450ab9a2db1856f51e3ffdfc580713d9bfb7ae34fd36c41df817481b28235ee"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Watch Ya' Mouth Party Card Game, Family Bundle 2"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:31.732269+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

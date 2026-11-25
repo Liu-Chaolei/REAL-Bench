@@ -21,12 +21,13 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def test_current_stage_catalog_has_only_current_tasks_and_loads_a_profile():
     manifest = json.loads(
-        (ROOT / "data/gaia2_stage_hotwords/v3/manifest.json").read_text()
+        (ROOT / "data/gaia2_stage_hotwords/v2/manifest.json").read_text()
     )
+    assert manifest["version"] == "gaia2-stage-hotwords-v2"
     assert manifest["tasks"] == 1000
     assert manifest["async_tasks"] == 0
     profile_files = list(
-        (ROOT / "data/gaia2_stage_hotwords/v3/tasks").glob("*.json")
+        (ROOT / "data/gaia2_stage_hotwords/v2/tasks").glob("*.json")
     )
     assert len(profile_files) == 1000
     assert not any("__async_" in path.name for path in profile_files)
@@ -41,10 +42,15 @@ def test_current_stage_catalog_has_only_current_tasks_and_loads_a_profile():
             mode="gaia2_stage_gt",
             weight=50,
             max_terms=50,
-            catalog_dir=ROOT / "data/gaia2_stage_hotwords/v3",
+            catalog_dir=ROOT / "data/gaia2_stage_hotwords/v2",
         ),
     )
     assert profile.task_id == task.id
+    assert all(
+        entry.weight in {5, 50}
+        for stage in profile.stages
+        for entry in stage.entries
+    )
 
 
 def test_stage_activation_waits_for_actual_speech():

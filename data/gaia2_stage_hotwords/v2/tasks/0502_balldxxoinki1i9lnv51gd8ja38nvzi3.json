@@ -1,0 +1,161 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0502_balldxxoinki1i9lnv51gd8ja38nvzi3",
+  "model": "deepseek-flash",
+  "input_sha256": "167206955bd4b6e5d073a7e51ce0295c86ad38b6dc0bb52594dbd9cb9fcef849",
+  "review_input_sha256": "194c154d25564d218ccd2451ac87169616cc61f0b94146c0528153ced357405f",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "fdfe405d7db025473e497f64bdb0afab1ac7d18d521184341264027e0f66f31a",
+  "reference_results_sha256": "434fdace725486eef97d5fa39e672953ed064c07d32c25fd07694b25043d0ab5",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Fisher-Price",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Fisher-Price Musical Smart Phone",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Ursula Zbinden",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage2.tool_gt.series_s2_send_email.arguments.content"
+    },
+    "stage2.tool_response.series_s2_search_contact": {
+      "stage": 2,
+      "text": "[{\"first_name\": \"Aurélien\", \"last_name\": \"Zbinden\", \"contact_id\": \"2d0c02ed22d343efaff49f46d209b4bc\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"56\", \"nationality\": \"Swiss\", \"city_living\": \"Geneva\", \"country\": \"Switzerland\", \"status\": \"Status.RETIRED\", \"job\": \"Former Secondary School Teacher\", \"description\": \"Aurélien Zbinden is a 56-year-old retired secondary school teacher who lives in Geneva, Switzerland. He is a warm and gentle soul who loves nothing more than spending time outdoors, as long as it's not too cold. Aurélien has a confessed fear of the cold, which often makes him opt for warmer destinations during his travels. Despite this, he is an avid hiker and loves exploring the rolling hills and mountains surrounding Geneva during the spring and summer months. When he's not outdoors, Aurélien enjoys reading historical novels and cooking hearty meals in his cozy kitchen. He is a bit of a traditionalist and values simplicity and comfort in his daily life.\", \"phone\": \"+41784562345\", \"email\": \"aurelien.zbinden@gaia2mail.com\", \"address\": \"14 Rue de la Croix-Rouge, 1204 Geneva\"}, {\"first_name\": \"Ursula\", \"last_name\": \"Zbinden\", \"contact_id\": \"df657df7d85c43179950c0336d74773e\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"76\", \"nationality\": \"Swiss\", \"city_living\": \"Interlaken\", \"country\": \"Switzerland\", \"status\": \"Status.RETIRED\", \"job\": \"Former Wildlife Photographer\", \"description\": \"Ursula Zbinden is a gentle soul with a deep love for the natural world. Born and raised in Switzerland, she spent most of her life capturing the beauty of the country's diverse landscapes and wildlife through her lens. As a wildlife photographer, Ursula traveled extensively throughout Switzerland, from the majestic Alps to the serene lakes and forests. Her photographs have been featured in various publications and exhibitions, showcasing her unique ability to tell stories through images. Despite her retirement, Ursula remains an avid nature enthusiast, often taking long hikes in the surrounding mountains and forests, camera in hand. She is particularly fascinated by the intricate relationships within ecosystems and has a deep respect for the natural world. Her friends and family often joke that she can spend hours observing a single bird or insect, mesmerized by its behavior. Ursula's relationship with technology is practical and straightforward. She uses her smartphone to stay in touch with loved ones, check the weather forecast, and navigate during her hikes. She is not overly fond of social media but maintains a presence on Instagram to share her photographs and connect with fellow nature enthusiasts. Ursula prefers to use her computer for editing her photographs and writing articles about her experiences in the natural world. In her daily life, Ursula relies on her trusty camera, binoculars, and field guides to explore and understand the world around her. She is an early riser, often waking up before dawn to capture the golden light of sunrise. Her home, Chalet am See, is filled with books, photographs, and mementos from her travels, reflecting her love for nature and storytelling. Despite her advanced age, Ursula remains curious and engaged, always seeking to learn more about the world and its many wonders.\", \"phone\": \"+41797567890\", \"email\": \"uzbinden@gaia2mail.com\", \"address\": \"Chalet am See, 3825 Interlaken, Switzerland\"}]",
+      "event_id": "series_s2_search_contact",
+      "response_sha256": "8529d232b3197b2404b8e8f1c50b5fe1ba83ce70d2aa8f3e21e29714baa67cd3"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Fisher-Price",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.0",
+          "reason": "品牌专有名称，含连字符，ASR易错",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Fisher-Price"
+      ],
+      "active_vocabulary": {
+        "Fisher-Price": 50
+      },
+      "vocabulary_sha256": "bccf45f0a72f743e07568117de251335072c6da897b0eac8e0256ce5609faa21"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Fisher-Price Musical Smart Phone",
+          "kind": "product",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整产品名，含品牌与多词组合，识别难度高",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Fisher-Price Musical Smart Phone"
+      ],
+      "active_vocabulary": {
+        "Fisher-Price": 50,
+        "Fisher-Price Musical Smart Phone": 50
+      },
+      "vocabulary_sha256": "b2128434335333cab079fcd86b62aa458f19e1bba9b7026921cdf4da6cd46d77"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Rue de la Croix-Rouge",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_contact",
+          "reason": "法语街道名，含连字符，识别难度高",
+          "weight": 50
+        },
+        {
+          "text": "Chalet am See",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_contact",
+          "reason": "独特住所名称，多词组合",
+          "weight": 50
+        },
+        {
+          "text": "Aurélien Zbinden",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_search_contact",
+          "reason": "含拉丁变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage2.existing_catalog.2",
+          "reason": "完整人名，姓氏罕见难识别",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Zbinden",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整人名，姓氏较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Rue de la Croix-Rouge",
+        "Chalet am See",
+        "Aurélien Zbinden",
+        "Ursula Wiederkehr",
+        "Ursula Zbinden"
+      ],
+      "active_vocabulary": {
+        "Fisher-Price": 50,
+        "Fisher-Price Musical Smart Phone": 50,
+        "Rue de la Croix-Rouge": 50,
+        "Chalet am See": 50,
+        "Aurélien Zbinden": 50,
+        "Ursula Wiederkehr": 50,
+        "Ursula Zbinden": 50
+      },
+      "vocabulary_sha256": "669c63c2e139d2c4b337f226839ea7bba0303c5fbad6cd38acfd8cbbc7be2323"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Riverboat",
+    "Zbinden"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:09.899770+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

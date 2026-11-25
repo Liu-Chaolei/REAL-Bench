@@ -1,0 +1,111 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0007_tb52xggog13zgslxysl2jpf7k9h3wgz0__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "e70d1c3eed374212d33ad41eef6dd26dd10b1b42cdc29c4e10e804d46c40523d",
+  "review_input_sha256": "663b20efda0625b73eb696932b295581085c9cd199b04533a42fc5c1463a6578",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "bdcf8a5f4788744c8db11ca3976d344eaa07e944a255ce6e7c7581e431672834",
+  "reference_results_sha256": "dfa1ee01bbe43a7a78a252dcb6b45b63c7ccf1c698f1ee9bb51b89cb1ed4ea80",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Lysverket",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-b22c59d7-9b0a-4e92-8151-c3b7acf27718.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Kaida Rao",
+      "original_source": "stage1.tool_gt.series_s1_add_lunch.arguments.attendees[0]"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Åse",
+      "original_source": "stage2.tool_gt.series_s2_send_email.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Lysverket",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "挪威餐厅专有名称，拼写独特，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Lysverket"
+      ],
+      "active_vocabulary": {
+        "Lysverket": 50
+      },
+      "vocabulary_sha256": "3fe32685a991e8e88f32caa85115ba79fb027a096f3d5a412a2d49ef9422b6d1"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Kaida Rao",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，拼写较难，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kaida Rao"
+      ],
+      "active_vocabulary": {
+        "Lysverket": 50,
+        "Kaida Rao": 50
+      },
+      "vocabulary_sha256": "5f1456771b135bcc47c9b20e92a40d3a95baa5566c73090300506c2ced1a8ada"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Åse",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含拉丁变音符号的人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Åse"
+      ],
+      "active_vocabulary": {
+        "Lysverket": 50,
+        "Kaida Rao": 50,
+        "Åse": 50
+      },
+      "vocabulary_sha256": "6f3e2179b646712b966ddbe5d48f4163e5ed60209e462ad00f616daeb38dcbbf"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:19.073390+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

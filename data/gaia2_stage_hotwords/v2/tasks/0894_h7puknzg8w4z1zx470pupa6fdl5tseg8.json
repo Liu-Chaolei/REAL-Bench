@@ -1,0 +1,139 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0894_h7puknzg8w4z1zx470pupa6fdl5tseg8",
+  "model": "deepseek-flash",
+  "input_sha256": "777d58b6a8fbc1ca297565a56438eb5d892b91fb73430c44db586a5f91d83a3d",
+  "review_input_sha256": "a6de661c49b1535a0486cdfbb9a181183768215d3334e7a0b455cd39d2526703",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "4b766f161ae4a48c1608d357c790e75f19416685b778fb1116ec460204e7d49e",
+  "reference_results_sha256": "aa88341209a33c4a171904a4bb176625aa4d2939c385e25521acc77a38bae113",
+  "sources": {
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Kiyoshi Nakahara",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-db74b95c-181f-40d7-8572-fac2e8470d7a.arguments.title"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Ursula Wiederkehr",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-7eb166e3-1e53-4551-bf6d-73532f03701d.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Akira Kübler",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-7eb166e3-1e53-4551-bf6d-73532f03701d.arguments.attendees[1]"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Café in Basel",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-7eb166e3-1e53-4551-bf6d-73532f03701d.arguments.location"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Café in Basel",
+          "kind": "place",
+          "source": "stage0.existing_catalog.5",
+          "reason": "含变音符的地点名称",
+          "weight": 50
+        },
+        {
+          "text": "Akira Kübler",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整人名，含变音符",
+          "weight": 50
+        },
+        {
+          "text": "Kiyoshi Nakahara",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，日语专名",
+          "weight": 50
+        },
+        {
+          "text": "Ursula Wiederkehr",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "完整人名，含难拼写姓氏",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Café in Basel",
+        "Akira Kübler",
+        "Kiyoshi Nakahara",
+        "Ursula Wiederkehr"
+      ],
+      "active_vocabulary": {
+        "Café in Basel": 50,
+        "Akira Kübler": 50,
+        "Kiyoshi Nakahara": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "f8af9d13123e7485d696ea987d279f398d944b227dfb612d6aa00be0e57c421b"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Café in Basel": 50,
+        "Akira Kübler": 50,
+        "Kiyoshi Nakahara": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "f8af9d13123e7485d696ea987d279f398d944b227dfb612d6aa00be0e57c421b"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Café in Basel": 50,
+        "Akira Kübler": 50,
+        "Kiyoshi Nakahara": 50,
+        "Ursula Wiederkehr": 50
+      },
+      "vocabulary_sha256": "f8af9d13123e7485d696ea987d279f398d944b227dfb612d6aa00be0e57c421b"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Ursula",
+    "Kiyoshi",
+    "International Atomic Time",
+    "Terrestrial Time",
+    "Coordinated Universal Time",
+    "Time Perception Follow-up"
+  ],
+  "binary_omissions": [
+    {
+      "path": "$ .attachments.wikipedia_13.txt",
+      "chars": 9840,
+      "sha256": "b395d4ae01302d5feefa85e8c11980b50c3a27bf8e56cc0e0e247f7550761258"
+    }
+  ],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:44.793655+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

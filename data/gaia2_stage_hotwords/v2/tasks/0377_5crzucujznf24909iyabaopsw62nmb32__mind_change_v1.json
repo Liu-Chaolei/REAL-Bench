@@ -1,0 +1,274 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0377_5crzucujznf24909iyabaopsw62nmb32__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "9ac1a594352fa2f734a1134b9eeb5f64418ceefb8a5d058f5ad5fd61ad3f8138",
+  "review_input_sha256": "ec2b590cabc90220f931343e5a1e6d277d22edd9903de73d989c9bb03a0c7127",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "c8cbe2fae822f2788881d2fa4a7845f34e60de7642386015d0dc7077f58f6ea7",
+  "reference_results_sha256": "6a684e864ce14d1f632679606629f4dc7dd60fa9671a7c8794a508f8c0b5d600",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Matěj Nováček",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-a88dde72-dcf7-42e2-a482-e17f32d78b23.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Kvido Nováček",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Plzeň Penthouse",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Liberec Luxury",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Prague 6 Apartment",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Praha 1 Luxury",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage1.existing_catalog.7": {
+      "stage": 1,
+      "text": "Ostrava Luxury",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Pařížská 123",
+      "original_source": "stage2.tool_gt.series_s2_email_comparison.arguments.content"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Perštýn",
+      "original_source": "stage2.tool_gt.series_s2_email_comparison.arguments.content"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Českobratrská 12",
+      "original_source": "stage2.tool_gt.series_s2_email_comparison.arguments.content"
+    },
+    "stage2.existing_catalog.3": {
+      "stage": 2,
+      "text": "Jindřišská",
+      "original_source": "stage2.tool_gt.series_s2_email_comparison.arguments.content"
+    },
+    "stage2.existing_catalog.4": {
+      "stage": 2,
+      "text": "Nad Šárkou 20",
+      "original_source": "stage2.tool_gt.series_s2_email_comparison.arguments.content"
+    },
+    "stage2.existing_catalog.5": {
+      "stage": 2,
+      "text": "ul. Pařížská 12",
+      "original_source": "stage2.tool_gt.series_s2_email_comparison.arguments.content"
+    },
+    "stage2.existing_catalog.6": {
+      "stage": 2,
+      "text": "Křižíkova 14",
+      "original_source": "stage2.tool_gt.series_s2_email_comparison.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Matěj Nováček"
+      ],
+      "active_vocabulary": {
+        "Matěj Nováček": 50
+      },
+      "vocabulary_sha256": "6c05056e94526ac9050bd35403ab0ac6b76ba908f03940d9b96ba8b32300ebab"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Prague 6 Apartment",
+          "kind": "place",
+          "source": "stage1.existing_catalog.3",
+          "reason": "独特房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Praha 1 Luxury",
+          "kind": "place",
+          "source": "stage1.existing_catalog.4",
+          "reason": "独特房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Kvido Nováček",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Liberec Luxury",
+          "kind": "place",
+          "source": "stage1.existing_catalog.2",
+          "reason": "独特房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Ostrava Luxury",
+          "kind": "place",
+          "source": "stage1.existing_catalog.7",
+          "reason": "独特房产名称",
+          "weight": 50
+        },
+        {
+          "text": "Plzeň Penthouse",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的独特房产名称",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Prague 6 Apartment",
+        "Praha 1 Luxury",
+        "Kvido Nováček",
+        "Liberec Luxury",
+        "Ostrava Luxury",
+        "Plzeň Penthouse"
+      ],
+      "active_vocabulary": {
+        "Matěj Nováček": 50,
+        "Prague 6 Apartment": 50,
+        "Praha 1 Luxury": 50,
+        "Kvido Nováček": 50,
+        "Liberec Luxury": 50,
+        "Ostrava Luxury": 50,
+        "Plzeň Penthouse": 50
+      },
+      "vocabulary_sha256": "ad353905954b284573ab7a968b19e2d7e1762e3a70c46d3ec85986aa0d834297"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Nad Šárkou 20",
+          "kind": "place",
+          "source": "stage2.existing_catalog.4",
+          "reason": "含变音符号的完整街道地址",
+          "weight": 50
+        },
+        {
+          "text": "ul. Pařížská 12",
+          "kind": "place",
+          "source": "stage2.existing_catalog.5",
+          "reason": "含变音符号的完整街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Křižíkova 14",
+          "kind": "place",
+          "source": "stage2.existing_catalog.6",
+          "reason": "含变音符号的完整街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Pařížská 123",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号的完整街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Českobratrská 12",
+          "kind": "place",
+          "source": "stage2.existing_catalog.2",
+          "reason": "含变音符号的完整街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Jindřišská",
+          "kind": "place",
+          "source": "stage2.existing_catalog.3",
+          "reason": "含变音符号的独特街道名",
+          "weight": 50
+        },
+        {
+          "text": "Perštýn",
+          "kind": "place",
+          "source": "stage2.existing_catalog.1",
+          "reason": "含变音符号的独特地名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Nad Šárkou 20",
+        "ul. Pařížská 12",
+        "Křižíkova 14",
+        "Pařížská 123",
+        "Českobratrská 12",
+        "Jindřišská",
+        "Perštýn"
+      ],
+      "active_vocabulary": {
+        "Matěj Nováček": 50,
+        "Prague 6 Apartment": 50,
+        "Praha 1 Luxury": 50,
+        "Kvido Nováček": 50,
+        "Liberec Luxury": 50,
+        "Ostrava Luxury": 50,
+        "Plzeň Penthouse": 50,
+        "Nad Šárkou 20": 50,
+        "ul. Pařížská 12": 50,
+        "Křižíkova 14": 50,
+        "Pařížská 123": 50,
+        "Českobratrská 12": 50,
+        "Jindřišská": 50,
+        "Perštýn": 50
+      },
+      "vocabulary_sha256": "b1e710e561a5b5a001116d3cb9c77eef36393b274a878ec6863c9067fc94f078"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Petra",
+    "Prague 1 Luxury",
+    "Prague Luxury"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:41.676393+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

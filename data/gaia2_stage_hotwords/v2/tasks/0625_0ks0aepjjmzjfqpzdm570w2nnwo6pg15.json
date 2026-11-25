@@ -1,0 +1,145 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0625_0ks0aepjjmzjfqpzdm570w2nnwo6pg15",
+  "model": "deepseek-flash",
+  "input_sha256": "3209c0c76155a359640ab9ef6672d8921e61dbecb5084ab3544b76781365f612",
+  "review_input_sha256": "36a6cceb2d7db8d4df65ae0734bf407e4b530a005738a1f412963004f435aa30",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "bb25f9dc9fada3709d764d7782674781401661d78084dc3b5ea160c8f9d2330a",
+  "reference_results_sha256": "052f8769b4dada25b26bd7242fb2a8128ec13134918d1eb7647c8b9dfcd9bc63",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Bohumil Nováček",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-b38802ea-f141-4549-8f71-4c2e656f51ab.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Šárka Nováková",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-3d33f947-de0e-48e8-a2cd-cd01fa7599af.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Khalifa Al-Mansoori",
+      "original_source": "stage1.tool_gt.series_s1_lookup_khalifa.arguments.user_name"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Saskia Gruber",
+      "original_source": "stage1.tool_gt.series_s1_lookup_saskia.arguments.user_name"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Elden Ring",
+      "original_source": "stage2.tool_gt.series_s2_create.arguments.description"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Bohumil Nováček",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Šárka Nováková",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Bohumil Nováček",
+        "Šárka Nováková"
+      ],
+      "active_vocabulary": {
+        "Bohumil Nováček": 50,
+        "Šárka Nováková": 50
+      },
+      "vocabulary_sha256": "e8c52a17743b0dab91a04f0af652e9916124d8479f4ae1e38bbf1491a72422bf"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Khalifa Al-Mansoori",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "较难拼写的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Gruber",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "较难拼写的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Khalifa Al-Mansoori",
+        "Saskia Gruber"
+      ],
+      "active_vocabulary": {
+        "Bohumil Nováček": 50,
+        "Šárka Nováková": 50,
+        "Khalifa Al-Mansoori": 50,
+        "Saskia Gruber": 50
+      },
+      "vocabulary_sha256": "3054b0aa1c0a2b53c1c15562eeef007e54e673db21e45a3d86157e59831fb858"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Elden Ring",
+          "kind": "product",
+          "source": "stage2.existing_catalog.0",
+          "reason": "专有游戏产品名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Elden Ring"
+      ],
+      "active_vocabulary": {
+        "Bohumil Nováček": 50,
+        "Šárka Nováková": 50,
+        "Khalifa Al-Mansoori": 50,
+        "Saskia Gruber": 50,
+        "Elden Ring": 50
+      },
+      "vocabulary_sha256": "86f735aa8edea0c02c846d74dd51ba343abaac5e4da4f6815951c808667c1bdb"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Bohumil",
+    "Šárka"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:47.247814+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

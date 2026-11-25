@@ -1,0 +1,96 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0634_vl1sn9gyr68c5hgigh6r2aoutdgo5pjd",
+  "model": "deepseek-flash",
+  "input_sha256": "8572bff9b49d83a0efaac118f0432229dc0d3636262cd04f8b113154719d896e",
+  "review_input_sha256": "21fc2ac8ef9ceb310f5e6f27f6b5d9006c0369fcd818cabc55d566d33aba307f",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "24bc3bb03f39a606ec8a2058cf876eb6aa37848e5bdf9084037e68ad872aec40",
+  "reference_results_sha256": "efc51531806abc91002f82eda8d90d886eee935a0c7f6628a5369ccf1e41fd18",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Adelaide Silva",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Acoustic Guitar Pinata",
+      "original_source": "stage0.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Acoustic Guitar Pinata",
+          "kind": "product",
+          "source": "stage0.existing_catalog.1",
+          "reason": "独特产品名，保留",
+          "weight": 50
+        },
+        {
+          "text": "Adelaide Silva",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Acoustic Guitar Pinata",
+        "Adelaide Silva"
+      ],
+      "active_vocabulary": {
+        "Acoustic Guitar Pinata": 50,
+        "Adelaide Silva": 50
+      },
+      "vocabulary_sha256": "0977a8c3f08b21cae1193de68a51ca5b59638d960eb4c7e98b08c7c8ae966422"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Acoustic Guitar Pinata": 50,
+        "Adelaide Silva": 50
+      },
+      "vocabulary_sha256": "0977a8c3f08b21cae1193de68a51ca5b59638d960eb4c7e98b08c7c8ae966422"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Acoustic Guitar Pinata": 50,
+        "Adelaide Silva": 50
+      },
+      "vocabulary_sha256": "0977a8c3f08b21cae1193de68a51ca5b59638d960eb4c7e98b08c7c8ae966422"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Adelaide"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:47.688593+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

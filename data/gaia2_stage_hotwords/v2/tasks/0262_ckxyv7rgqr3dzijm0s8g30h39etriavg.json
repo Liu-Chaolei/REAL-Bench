@@ -1,0 +1,110 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0262_ckxyv7rgqr3dzijm0s8g30h39etriavg",
+  "model": "deepseek-flash",
+  "input_sha256": "0ba1027ecbe45dd5640bd471ca0b827d299014f3586e77c8b00fec715f0cf7a3",
+  "review_input_sha256": "c6e4124399cc6218bda71c67bb8aba0b76b4867643a621cf959f9c8e04a6ae09",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "3ee22c6ad07d2cf3fcc6e26196770adb16cb15fac279d70ed481b2f8e3b39f46",
+  "reference_results_sha256": "acb2d30b6be4e9e473eef958f26aa5c9c11fe9bdfbae1bc3edceb4a8e93d2342",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Lodha The Park",
+      "original_source": "stage1.tool_gt.series_s1_add.arguments.title"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Worli",
+      "original_source": "stage1.tool_gt.series_s1_add.arguments.description"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Anastasia Kuznetsova",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Lodha The Park",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "独特楼盘专名，含专有名词组合，难以识别",
+          "weight": 50
+        },
+        {
+          "text": "Worli",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "孟买地名，发音不直观",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Lodha The Park",
+        "Worli"
+      ],
+      "active_vocabulary": {
+        "Lodha The Park": 50,
+        "Worli": 50
+      },
+      "vocabulary_sha256": "efa219a0cfc4bf2ed8e2b1170ccfa2512cc6a6f927ec0a8b48378e0c39bdf898"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Anastasia Kuznetsova",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整外国人姓名，含难发音姓氏",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Anastasia Kuznetsova"
+      ],
+      "active_vocabulary": {
+        "Lodha The Park": 50,
+        "Worli": 50,
+        "Anastasia Kuznetsova": 50
+      },
+      "vocabulary_sha256": "90d7b9e537d4d58162438a16ee5334f1faac2982f0a1afdff4bcf528e134ac9a"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Mumbai",
+    "Los Angeles"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:47.923452+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,144 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0908_97uwxi3oz3gr2si1b6hp7ffw8b1f80pn",
+  "model": "deepseek-flash",
+  "input_sha256": "2228b3edcc14a5691597141881ebc65d1a6fddbb0f06151bc224ee9a91f1171a",
+  "review_input_sha256": "5fbc02c75ab251adeec52ea4d4210f9c78fc620232b809b9b3f8d0645ddfaadf",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "8c5940df122f5d2d5161d21941ae1b454c4f35083992e8ef7c584bfb4d7b589d",
+  "reference_results_sha256": "dfa3d2537a346f0fbf4d6091db30a6b4df02b2fc23973ea5aea7ebbdfbbc0bfb",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Rohini Desai",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Rohan Kumar",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-025c7c0e-050f-4ffb-9e55-58ac85562562.arguments.attendees[0]"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Anastasia Kuznetsova",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-025c7c0e-050f-4ffb-9e55-58ac85562562.arguments.attendees[1]"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Melissa & Doug",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "On the Go Water Wow! Pet Mazes",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Anastasia Kuznetsova",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整外国人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Rohan Kumar",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Rohini Desai",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，较难识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Anastasia Kuznetsova",
+        "Rohan Kumar",
+        "Rohini Desai"
+      ],
+      "active_vocabulary": {
+        "Anastasia Kuznetsova": 50,
+        "Rohan Kumar": 50,
+        "Rohini Desai": 50
+      },
+      "vocabulary_sha256": "99636c1ccc575f23397d51c1c67d286b04187a816a28cb70fcf9091c366f4926"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "On the Go Water Wow! Pet Mazes",
+          "kind": "product",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整产品名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Melissa & Doug",
+          "kind": "organization",
+          "source": "stage1.existing_catalog.0",
+          "reason": "品牌专名，含符号，较难识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "On the Go Water Wow! Pet Mazes",
+        "Melissa & Doug"
+      ],
+      "active_vocabulary": {
+        "Anastasia Kuznetsova": 50,
+        "Rohan Kumar": 50,
+        "Rohini Desai": 50,
+        "On the Go Water Wow! Pet Mazes": 50,
+        "Melissa & Doug": 50
+      },
+      "vocabulary_sha256": "1491a260f14bab054638538b04df4b82e5ce45adc477b64ae86c17cb90c40b22"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Anastasia Kuznetsova": 50,
+        "Rohan Kumar": 50,
+        "Rohini Desai": 50,
+        "On the Go Water Wow! Pet Mazes": 50,
+        "Melissa & Doug": 50
+      },
+      "vocabulary_sha256": "1491a260f14bab054638538b04df4b82e5ce45adc477b64ae86c17cb90c40b22"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Rohini"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:47.386568+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

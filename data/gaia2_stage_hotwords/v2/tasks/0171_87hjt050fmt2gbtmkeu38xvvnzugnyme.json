@@ -1,0 +1,82 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0171_87hjt050fmt2gbtmkeu38xvvnzugnyme",
+  "model": "deepseek-flash",
+  "input_sha256": "3bb56c6baa5089a7418fe36f207971e52477339a306a9f833d551a377f5aeef2",
+  "review_input_sha256": "9515b578ba0c5ecfea27332346d3a22626ea33ff1cd2e93a8f3cd7252a95739a",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "9ff29764b92f302816df5707ffaa46b6dbc0166a15971af00f04b1448a1e9d93",
+  "reference_results_sha256": "07244b6bb4655fb115f5527b1be5d2e9926abc694af6c68e5b6d0260fe9cd1a3",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Åke Svensson",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-097a66db-1972-4a9f-8ceb-0e77baad15ad.arguments.attendees[0]"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Åke Svensson",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含瑞典语变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Åke Svensson"
+      ],
+      "active_vocabulary": {
+        "Åke Svensson": 50
+      },
+      "vocabulary_sha256": "63c58e36bb2a96ac3ccb2c2bef49cd6c9fbeea9f5474c9eb386e617e991f995d"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Åke Svensson": 50
+      },
+      "vocabulary_sha256": "63c58e36bb2a96ac3ccb2c2bef49cd6c9fbeea9f5474c9eb386e617e991f995d"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Åke Svensson": 50
+      },
+      "vocabulary_sha256": "63c58e36bb2a96ac3ccb2c2bef49cd6c9fbeea9f5474c9eb386e617e991f995d"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "What's In The Box",
+    "What’s In the Box",
+    "Mystery Box Shoot Setup"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:19.363703+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

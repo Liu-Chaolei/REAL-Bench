@@ -1,0 +1,91 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0429_rzm5yd8clodnbufe2fr7aixqpkm778ym",
+  "model": "deepseek-flash",
+  "input_sha256": "16f5ed89dbbf71390da66674d9f757e3131419ff5419151ea19340588a4afb55",
+  "review_input_sha256": "d60c73313392cec8c8af17d17134f2402d78fd179ae8db5e64edd4dfd60903cb",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "b4a557645f8c5a70fd68b006df239f07afaeefa51a8367ebfb91995e7903d2d3",
+  "reference_results_sha256": "65fce498eeb189e209ae2811be5074aea9f2a44fb2b5e2bf835ef3f18abecf4c",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Seamus O'Connor",
+      "original_source": "stage1.tool_gt.series_s1_id_seamus.arguments.user_name"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Saoirse Ní Bhroin",
+      "original_source": "stage1.tool_gt.series_s1_id_saoirse.arguments.user_name"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Saoirse Ní Bhroin",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含爱尔兰语变音符号的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Seamus O'Connor",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含撇号的完整爱尔兰人名，发音困难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Saoirse Ní Bhroin",
+        "Seamus O'Connor"
+      ],
+      "active_vocabulary": {
+        "Saoirse Ní Bhroin": 50,
+        "Seamus O'Connor": 50
+      },
+      "vocabulary_sha256": "8c83383699295ca33b79659baa67de54a8d501402dc31ae710cb803a9b889302"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Saoirse Ní Bhroin": 50,
+        "Seamus O'Connor": 50
+      },
+      "vocabulary_sha256": "8c83383699295ca33b79659baa67de54a8d501402dc31ae710cb803a9b889302"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:15:49.314791+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

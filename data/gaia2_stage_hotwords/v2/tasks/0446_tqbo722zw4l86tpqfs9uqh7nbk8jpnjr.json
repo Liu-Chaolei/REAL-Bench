@@ -1,0 +1,517 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0446_tqbo722zw4l86tpqfs9uqh7nbk8jpnjr",
+  "model": "deepseek-flash",
+  "input_sha256": "037d8a152221d6c62b7fd4810e0cde9435bd1a831e4a41c216bfbf524d6568d6",
+  "review_input_sha256": "10ca0bc8794f4148aa61f159c84cce18a0d67e178000355128841cc1b9eac0ac",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "f4d94fc309f38a8fdee2158cbeba889381e055b40d0258f4a93bc4ecec6a28b6",
+  "reference_results_sha256": "7e6e984962f21898dbbfddecf4c53238e77599acd8095560bbc917e4779832fb",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Nonglak Srisombat",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Liege City Loft",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-343b2933-e392-417b-a753-9f12bbd440ac.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Ghent Canal Living",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Brugge Historic District",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.tool_response.series_s1_search3": {
+      "stage": 1,
+      "text": "{\"026768cf0e9d4362aecfa056f77358cb\": {\"name\": \"Ghent Canal Living\", \"location\": \"Nieuwevaart, 9000 Ghent\", \"zip_code\": \"9000\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"026768cf0e9d4362aecfa056f77358cb\", \"amenities\": [\"Laundry\", \"Gym\", \"Parking\"], \"saved\": \"False\"}, \"15572379c06c4755b4f1010268c10f16\": {\"name\": \"Leuven Luxury\", \"location\": \"Tiensestraat 50, Leuven\", \"zip_code\": \"3000\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1300\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"15572379c06c4755b4f1010268c10f16\", \"amenities\": [\"Laundry\", \"Gym\", \"Pool\"], \"saved\": \"True\"}, \"27ec2e1196c9423385bae75d32e3ea77\": {\"name\": \"Brussels Green\", \"location\": \"Avenue de Tervuren, 1150 Brussels\", \"zip_code\": \"1150\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"27ec2e1196c9423385bae75d32e3ea77\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"35a5483c47744cb4ad08be5d9560995b\": {\"name\": \"Mechelen Maison\", \"location\": \"Grote Markt, Mechelen\", \"zip_code\": \"2800\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"35a5483c47744cb4ad08be5d9560995b\", \"amenities\": [\"Laundry\", \"Gym\"], \"saved\": \"False\"}, \"42366c4726f84ee0a9d1cb9e20fe989a\": {\"name\": \"Ostend Beachside\", \"location\": \"Kustlaan, 8400 Ostend\", \"zip_code\": \"8400\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1600\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"Long term lease\", \"apartment_id\": \"42366c4726f84ee0a9d1cb9e20fe989a\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"False\"}, \"433134c66856462384f57fad2b1a119d\": {\"name\": \"Namur Riverfront\", \"location\": \"Rue de la Meuse, 5000 Namur\", \"zip_code\": \"5000\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1400\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"Long term lease\", \"apartment_id\": \"433134c66856462384f57fad2b1a119d\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"5c239073746842b691fbc1298f407462\": {\"name\": \"Ostend Beachside Condo\", \"location\": \"Koninginnelaan 10, Ostend\", \"zip_code\": \"8400\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"5c239073746842b691fbc1298f407462\", \"amenities\": [\"Parking\", \"Laundry\", \"Garden\"], \"saved\": \"True\"}, \"5c903fcd884b45679f05248dc5eafde0\": {\"name\": \"Brugge Canal View\", \"location\": \"8000 Brugge, Brugge\", \"zip_code\": \"8000\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1100\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"5c903fcd884b45679f05248dc5eafde0\", \"amenities\": [\"Pool\", \"Laundry\"], \"saved\": \"False\"}, \"5e0828b5cd804bc1a642537457bd4a9a\": {\"name\": \"Brugge Historic District\", \"location\": \"8000 Brugge, Markt\", \"zip_code\": \"8000\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"5e0828b5cd804bc1a642537457bd4a9a\", \"amenities\": [\"Pool\", \"Parking\"], \"saved\": \"False\"}, \"926c8186949e4a3ea720f4eeea600bd5\": {\"name\": \"Liege City Loft\", \"location\": \"4000 Liege, City Center\", \"zip_code\": \"4000\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"926c8186949e4a3ea720f4eeea600bd5\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"936577c2294046a993fcdeadb0b9fd61\": {\"name\": \"Antwerp Loft\", \"location\": \"Schuttershofstraat 20, Antwerp\", \"zip_code\": \"2000\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"936577c2294046a993fcdeadb0b9fd61\", \"amenities\": [\"Laundry\", \"Gym\"], \"saved\": \"False\"}, \"a608083ccf2c4efc9aba976846533d53\": {\"name\": \"Antwerp Haven\", \"location\": \"Schuttershofstraat, 2000 Antwerp\", \"zip_code\": \"2000\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"2500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"a608083ccf2c4efc9aba976846533d53\", \"amenities\": [\"Laundry\", \"Garden\"], \"saved\": \"True\"}, \"b137e7edaa5744c1b83bf5f45f337211\": {\"name\": \"Mechelen Mansion\", \"location\": \"Rue de l'Hôtel de Ville, 2800 Mechelen\", \"zip_code\": \"2800\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"b137e7edaa5744c1b83bf5f45f337211\", \"amenities\": [\"Laundry\"], \"saved\": \"False\"}, \"b922e9344c8348e19153a47be70d82af\": {\"name\": \"Brussels Boutique\", \"location\": \"Rue des Chartreux, 1000 Brussels\", \"zip_code\": \"1000\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1100\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"b922e9344c8348e19153a47be70d82af\", \"amenities\": [\"Laundry\", \"Balcony\"], \"saved\": \"True\"}, \"d812492ca0b145ddafe8658b722cceae\": {\"name\": \"Brussels Luxe Living\", \"location\": \"1000 Brussels, Saint-Gilles\", \"zip_code\": \"1000\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"d812492ca0b145ddafe8658b722cceae\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"d8e4a54335a941ab8cf870aadf6944e2\": {\"name\": \"Ghent Waterfront\", \"location\": \"Korenlei, 9000 Ghent\", \"zip_code\": \"9000\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"d8e4a54335a941ab8cf870aadf6944e2\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"df1553aa1217468288f03cd1b29ff459\": {\"name\": \"Brussels Grand Place\", \"location\": \"1000 Brussels, City Center\", \"zip_code\": \"1000\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"df1553aa1217468288f03cd1b29ff459\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"False\"}, \"e044b2a4c19f48f4bca2fe85baa0c8a3\": {\"name\": \"Antwerp Dream\", \"location\": \"Meir 100, Antwerp\", \"zip_code\": \"2000\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"e044b2a4c19f48f4bca2fe85baa0c8a3\", \"amenities\": [\"Pool\", \"Gym\"], \"saved\": \"True\"}, \"f1d4c01c01bd49f3a03f4ea9bd277698\": {\"name\": \"Brugge Breeze\", \"location\": \"Markt, 8000 Brugge\", \"zip_code\": \"8000\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"2200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Second floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"f1d4c01c01bd49f3a03f4ea9bd277698\", \"amenities\": [\"Garden\", \"Laundry\"], \"saved\": \"False\"}}",
+      "event_id": "series_s1_search3",
+      "response_sha256": "19de9993ebf35d946f3f7de4271766887b9d34c7e67f887424a5e3ac192fc7fc"
+    },
+    "stage1.tool_response.series_s1_search4": {
+      "stage": 1,
+      "text": "{\"537c9215c0e74dd788c91535a2b671c7\": {\"name\": \"Antwerp Oasis\", \"location\": \"Schuttershofstraat 45, Antwerp\", \"zip_code\": \"2000\", \"price\": \"2200\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Home\", \"square_footage\": \"2500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"537c9215c0e74dd788c91535a2b671c7\", \"amenities\": [\"Garden\", \"Laundry\", \"Elevator\"], \"saved\": \"False\"}, \"be9430457c2e4a4b9d7e4ff7525b14a1\": {\"name\": \"Leuven Luxury Living\", \"location\": \"3000 Leuven, Tiensestraat\", \"zip_code\": \"3000\", \"price\": \"2800\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"2000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"be9430457c2e4a4b9d7e4ff7525b14a1\", \"amenities\": [\"Pool\", \"Parking\", \"Gym\"], \"saved\": \"False\"}}",
+      "event_id": "series_s1_search4",
+      "response_sha256": "191966a37206c562c705600ff49ea86aa74bddb19678d3e106ba073387a69e69"
+    },
+    "stage2.existing_catalog.10": {
+      "stage": 2,
+      "text": "Le Château d'Eau",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    },
+    "stage2.existing_catalog.11": {
+      "stage": 2,
+      "text": "Le Clos des Abbesses",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    },
+    "stage2.existing_catalog.3": {
+      "stage": 2,
+      "text": "Antwerp Luxury Loft",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    },
+    "stage2.existing_catalog.7": {
+      "stage": 2,
+      "text": "Charleroi Comfort",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    },
+    "stage2.existing_catalog.8": {
+      "stage": 2,
+      "text": "Ghent Eco-Friendly",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    },
+    "stage2.existing_catalog.9": {
+      "stage": 2,
+      "text": "Ghent Student Apartments",
+      "original_source": "stage2.tool_gt.series_s2_email.arguments.content"
+    },
+    "stage2.tool_response.series_s2_list": {
+      "stage": 2,
+      "text": "{\"e044b2a4c19f48f4bca2fe85baa0c8a3\": {\"name\": \"Antwerp Dream\", \"location\": \"Meir 100, Antwerp\", \"zip_code\": \"2000\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"e044b2a4c19f48f4bca2fe85baa0c8a3\", \"amenities\": [\"Pool\", \"Gym\"], \"saved\": \"True\"}, \"a608083ccf2c4efc9aba976846533d53\": {\"name\": \"Antwerp Haven\", \"location\": \"Schuttershofstraat, 2000 Antwerp\", \"zip_code\": \"2000\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"2500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"a608083ccf2c4efc9aba976846533d53\", \"amenities\": [\"Laundry\", \"Garden\"], \"saved\": \"True\"}, \"43af12ff057c44f0b526c1936cd74d21\": {\"name\": \"Ghent Gem\", \"location\": \"Patershol, 9000 Ghent\", \"zip_code\": \"9000\", \"price\": \"1200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"43af12ff057c44f0b526c1936cd74d21\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"a92dc429a0254f77856ca5d77ab0661b\": {\"name\": \"Namur City Living\", \"location\": \"5000 Namur, Namur\", \"zip_code\": \"5000\", \"price\": \"1400\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"a92dc429a0254f77856ca5d77ab0661b\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"5255d5361506475a82ac3c442cf69e42\": {\"name\": \"Brussels Bright\", \"location\": \"Avenue Louise, 1050 Brussels\", \"zip_code\": \"1050\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"5255d5361506475a82ac3c442cf69e42\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"d812492ca0b145ddafe8658b722cceae\": {\"name\": \"Brussels Luxe Living\", \"location\": \"1000 Brussels, Saint-Gilles\", \"zip_code\": \"1000\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"d812492ca0b145ddafe8658b722cceae\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"41a4fe071a9943f99b88902c7007ceb1\": {\"name\": \"Namur River Views\", \"location\": \"5000 Namur, Sambre River\", \"zip_code\": \"5000\", \"price\": \"1500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1100\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"41a4fe071a9943f99b88902c7007ceb1\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"c3341930ecbf4b7085c0b861d4bc1ed2\": {\"name\": \"Namur Riverside\", \"location\": \"Quai des Bateliers, 5000 Namur\", \"zip_code\": \"5000\", \"price\": \"2500\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"c3341930ecbf4b7085c0b861d4bc1ed2\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"d8e4a54335a941ab8cf870aadf6944e2\": {\"name\": \"Ghent Waterfront\", \"location\": \"Korenlei, 9000 Ghent\", \"zip_code\": \"9000\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"d8e4a54335a941ab8cf870aadf6944e2\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"3826b53ecea84af5a7ddb96e757140c8\": {\"name\": \"Ghent Student Apartments\", \"location\": \"9000 Ghent, Overpoort\", \"zip_code\": \"9000\", \"price\": \"1000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"3826b53ecea84af5a7ddb96e757140c8\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"7bc166d1873e43d38ea6fe668ea8ceae\": {\"name\": \"Liege Living\", \"location\": \"Place Saint-Lambert, 4000 Liege\", \"zip_code\": \"4000\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"800\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"7bc166d1873e43d38ea6fe668ea8ceae\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"5c239073746842b691fbc1298f407462\": {\"name\": \"Ostend Beachside Condo\", \"location\": \"Koninginnelaan 10, Ostend\", \"zip_code\": \"8400\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"5c239073746842b691fbc1298f407462\", \"amenities\": [\"Parking\", \"Laundry\", \"Garden\"], \"saved\": \"True\"}, \"15572379c06c4755b4f1010268c10f16\": {\"name\": \"Leuven Luxury\", \"location\": \"Tiensestraat 50, Leuven\", \"zip_code\": \"3000\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1300\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"15572379c06c4755b4f1010268c10f16\", \"amenities\": [\"Laundry\", \"Gym\", \"Pool\"], \"saved\": \"True\"}, \"bb63f273ea4c4480aa9f6d8c3c9ba96b\": {\"name\": \"Le Château d'Eau\", \"location\": \"Rue de la Gare, 5000 Namur\", \"zip_code\": \"5000\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"700\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"bb63f273ea4c4480aa9f6d8c3c9ba96b\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"433134c66856462384f57fad2b1a119d\": {\"name\": \"Namur Riverfront\", \"location\": \"Rue de la Meuse, 5000 Namur\", \"zip_code\": \"5000\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1400\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"Long term lease\", \"apartment_id\": \"433134c66856462384f57fad2b1a119d\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"d8fd20181ea14354bd1e14f9f6d550ba\": {\"name\": \"Ghent Eco-Friendly\", \"location\": \"9000 Ghent, Gentbrugge\", \"zip_code\": \"9000\", \"price\": \"1200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"d8fd20181ea14354bd1e14f9f6d550ba\", \"amenities\": [\"Gym\", \"Pool\"], \"saved\": \"True\"}, \"49a13c88e7e745efa062a15d9e33dcc4\": {\"name\": \"Antwerp Luxury Loft\", \"location\": \"2000 Antwerp, Schuttershofstraat\", \"zip_code\": \"2000\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Loft\", \"square_footage\": \"1500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"49a13c88e7e745efa062a15d9e33dcc4\", \"amenities\": [\"Gym\", \"Laundry\", \"Pool\"], \"saved\": \"True\"}, \"ae3425a13b74458ea6135d8de4ce650f\": {\"name\": \"Antwerp Abode\", \"location\": \"Meir, 2000 Antwerp\", \"zip_code\": \"2000\", \"price\": \"2500\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Home\", \"square_footage\": \"2500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"Long term lease\", \"apartment_id\": \"ae3425a13b74458ea6135d8de4ce650f\", \"amenities\": [\"Garden\", \"Laundry\"], \"saved\": \"True\"}, \"bea0873b80664f79ace2f81f1444000d\": {\"name\": \"Charleroi Comfort\", \"location\": \"Rue de la Station, 6000 Charleroi\", \"zip_code\": \"6000\", \"price\": \"1000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"bea0873b80664f79ace2f81f1444000d\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"c6fd4209a881416b816b7ef6fe70dd9a\": {\"name\": \"Mechelen Modern\", \"location\": \"Rue de l'Eglise, 2800 Mechelen\", \"zip_code\": \"2800\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"c6fd4209a881416b816b7ef6fe70dd9a\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"4d3ff50172534ca8b778de29159347b4\": {\"name\": \"Liege Loft\", \"location\": \"Rue Saint-Gilles, 4000 Liege\", \"zip_code\": \"4000\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"4d3ff50172534ca8b778de29159347b4\", \"amenities\": [\"Gym\"], \"saved\": \"True\"}, \"c77a265131d34a7090b4913a3c5e9c52\": {\"name\": \"Namur City Center\", \"location\": \"Place d'Armes, 5000 Namur\", \"zip_code\": \"5000\", \"price\": \"1200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"c77a265131d34a7090b4913a3c5e9c52\", \"amenities\": [\"Gym\"], \"saved\": \"True\"}, \"27ec2e1196c9423385bae75d32e3ea77\": {\"name\": \"Brussels Green\", \"location\": \"Avenue de Tervuren, 1150 Brussels\", \"zip_code\": \"1150\", \"price\": \"2800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1400\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"27ec2e1196c9423385bae75d32e3ea77\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"b922e9344c8348e19153a47be70d82af\": {\"name\": \"Brussels Boutique\", \"location\": \"Rue des Chartreux, 1000 Brussels\", \"zip_code\": \"1000\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1100\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"b922e9344c8348e19153a47be70d82af\", \"amenities\": [\"Laundry\", \"Balcony\"], \"saved\": \"True\"}, \"cc3d5e1bbf7940f699b965ce10f5336d\": {\"name\": \"Liege Luxury\", \"location\": \"Rue des Guillemins 45, Liege\", \"zip_code\": \"4000\", \"price\": \"2500\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"cc3d5e1bbf7940f699b965ce10f5336d\", \"amenities\": [\"Pool\", \"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"f9eda3536aa54f889b76a53a03a68f6e\": {\"name\": \"Liege City Living\", \"location\": \"Rue de la République, 4000 Liege\", \"zip_code\": \"4000\", \"price\": \"1200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"f9eda3536aa54f889b76a53a03a68f6e\", \"amenities\": [\"Gym\"], \"saved\": \"True\"}, \"7e52079349594b2eb83bc13c89c289d8\": {\"name\": \"Liege City Center\", \"location\": \"4000 Liege, Outremeuse\", \"zip_code\": \"4000\", \"price\": \"1200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"7e52079349594b2eb83bc13c89c289d8\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"696972cc07e34e47aaf56019afb335b8\": {\"name\": \"Le Clos des Abbesses\", \"location\": \"Rue des Abbesses, 4000 Liege\", \"zip_code\": \"4000\", \"price\": \"1200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"696972cc07e34e47aaf56019afb335b8\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"926c8186949e4a3ea720f4eeea600bd5\": {\"name\": \"Liege City Loft\", \"location\": \"4000 Liege, City Center\", \"zip_code\": \"4000\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"926c8186949e4a3ea720f4eeea600bd5\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"068667e01c234691a0a612041f196850\": {\"name\": \"Liege City View\", \"location\": \"Place Saint-Lambert 10, Liege\", \"zip_code\": \"4000\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"068667e01c234691a0a612041f196850\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"5c60131fa96746ba8290ff049a0ff893\": {\"name\": \"Liege Luxe\", \"location\": \"Rue Saint-Gilles 15, Liege\", \"zip_code\": \"4000\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"5c60131fa96746ba8290ff049a0ff893\", \"amenities\": [\"Pool\", \"Parking\"], \"saved\": \"True\"}, \"026768cf0e9d4362aecfa056f77358cb\": {\"name\": \"Ghent Canal Living\", \"location\": \"Nieuwevaart, 9000 Ghent\", \"zip_code\": \"9000\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"026768cf0e9d4362aecfa056f77358cb\", \"amenities\": [\"Laundry\", \"Gym\", \"Parking\"], \"saved\": \"True\"}}",
+      "event_id": "series_s2_list",
+      "response_sha256": "e0365ed18f300e6af6196fd66ae1e68b504cb0edc2298c763c7624fe41dc0c96"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Liege City Loft",
+          "kind": "place",
+          "source": "stage0.existing_catalog.1",
+          "reason": "具体房源名称，含地名，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Nonglak Srisombat",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，拼写较难，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Liege City Loft",
+        "Nonglak Srisombat"
+      ],
+      "active_vocabulary": {
+        "Liege City Loft": 50,
+        "Nonglak Srisombat": 50
+      },
+      "vocabulary_sha256": "1df4b79529242a847abf0d7ecfaf15b940aadf7bcfc966aa45c4c1c0155bc571"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Rue de l'Hôtel de Ville",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search3",
+          "reason": "含变音符号的法语街道名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Brugge Historic District",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "具体地名与房源名称组合，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Ghent Canal Living",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "具体房源名称，含地名，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Leuven Luxury Living",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search4",
+          "reason": "具体房源名称，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Rue des Chartreux",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search3",
+          "reason": "法语街道名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Antwerp Oasis",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search4",
+          "reason": "具体房源名称，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Saint-Gilles",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search3",
+          "reason": "布鲁塞尔区名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Koninginnelaan",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search3",
+          "reason": "比利时街道名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Korenlei",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search3",
+          "reason": "比利时街道名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Nieuwevaart",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search3",
+          "reason": "比利时街道名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Schuttershofstraat",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search3",
+          "reason": "比利时街道名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Tiensestraat",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search3",
+          "reason": "比利时街道名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Rue de l'Hôtel de Ville",
+        "Brugge Historic District",
+        "Ghent Canal Living",
+        "Leuven Luxury Living",
+        "Rue des Chartreux",
+        "Antwerp Oasis",
+        "Saint-Gilles",
+        "Koninginnelaan",
+        "Korenlei",
+        "Nieuwevaart",
+        "Schuttershofstraat",
+        "Tiensestraat"
+      ],
+      "active_vocabulary": {
+        "Liege City Loft": 50,
+        "Nonglak Srisombat": 50,
+        "Rue de l'Hôtel de Ville": 50,
+        "Brugge Historic District": 50,
+        "Ghent Canal Living": 50,
+        "Leuven Luxury Living": 50,
+        "Rue des Chartreux": 50,
+        "Antwerp Oasis": 50,
+        "Saint-Gilles": 50,
+        "Koninginnelaan": 50,
+        "Korenlei": 50,
+        "Nieuwevaart": 50,
+        "Schuttershofstraat": 50,
+        "Tiensestraat": 50
+      },
+      "vocabulary_sha256": "fa1cf823e26a79b87f0b2dab90d7e6ef530528fc876c6ecdf6040609a1bf0320"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Le Château d'Eau",
+          "kind": "place",
+          "source": "stage2.existing_catalog.10",
+          "reason": "含变音符号的法语名称，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Le Clos des Abbesses",
+          "kind": "place",
+          "source": "stage2.existing_catalog.11",
+          "reason": "法语专有名称，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Rue de l'Eglise",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list",
+          "reason": "法语街道名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Rue de la Gare",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list",
+          "reason": "法语街道名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Rue de la Meuse",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list",
+          "reason": "法语街道名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Rue de la République",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list",
+          "reason": "法语街道名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Rue de la Station",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list",
+          "reason": "法语街道名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Antwerp Luxury Loft",
+          "kind": "place",
+          "source": "stage2.existing_catalog.3",
+          "reason": "具体房源名称，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Avenue de Tervuren",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list",
+          "reason": "布鲁塞尔大道名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Ghent Eco-Friendly",
+          "kind": "place",
+          "source": "stage2.existing_catalog.8",
+          "reason": "具体房源名称，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Ghent Student Apartments",
+          "kind": "place",
+          "source": "stage2.existing_catalog.9",
+          "reason": "具体房源名称，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Place d'Armes",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list",
+          "reason": "法语广场名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Place Saint-Lambert",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list",
+          "reason": "列日广场名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Quai des Bateliers",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list",
+          "reason": "法语河岸名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Rue des Abbesses",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list",
+          "reason": "法语街道名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Rue des Guillemins",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list",
+          "reason": "列日街道名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Rue Saint-Gilles",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list",
+          "reason": "法语街道名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Avenue Louise",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list",
+          "reason": "布鲁塞尔大道名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Charleroi Comfort",
+          "kind": "place",
+          "source": "stage2.existing_catalog.7",
+          "reason": "具体房源名称，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Sambre River",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list",
+          "reason": "河流名称，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Gentbrugge",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list",
+          "reason": "根特地名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Outremeuse",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list",
+          "reason": "列日街区名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Overpoort",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list",
+          "reason": "根特街区名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Patershol",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list",
+          "reason": "根特街区名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Le Château d'Eau",
+        "Le Clos des Abbesses",
+        "Rue de l'Eglise",
+        "Rue de la Gare",
+        "Rue de la Meuse",
+        "Rue de la République",
+        "Rue de la Station",
+        "Antwerp Luxury Loft",
+        "Avenue de Tervuren",
+        "Ghent Eco-Friendly",
+        "Ghent Student Apartments",
+        "Place d'Armes",
+        "Place Saint-Lambert",
+        "Quai des Bateliers",
+        "Rue des Abbesses",
+        "Rue des Guillemins",
+        "Rue Saint-Gilles",
+        "Avenue Louise",
+        "Charleroi Comfort",
+        "Sambre River",
+        "Gentbrugge",
+        "Outremeuse",
+        "Overpoort",
+        "Patershol"
+      ],
+      "active_vocabulary": {
+        "Liege City Loft": 50,
+        "Nonglak Srisombat": 50,
+        "Rue de l'Hôtel de Ville": 50,
+        "Brugge Historic District": 50,
+        "Ghent Canal Living": 50,
+        "Leuven Luxury Living": 50,
+        "Rue des Chartreux": 50,
+        "Antwerp Oasis": 50,
+        "Saint-Gilles": 50,
+        "Koninginnelaan": 50,
+        "Korenlei": 50,
+        "Nieuwevaart": 50,
+        "Schuttershofstraat": 50,
+        "Tiensestraat": 50,
+        "Le Château d'Eau": 50,
+        "Le Clos des Abbesses": 50,
+        "Rue de l'Eglise": 50,
+        "Rue de la Gare": 50,
+        "Rue de la Meuse": 50,
+        "Rue de la République": 50,
+        "Rue de la Station": 50,
+        "Antwerp Luxury Loft": 50,
+        "Avenue de Tervuren": 50,
+        "Ghent Eco-Friendly": 50,
+        "Ghent Student Apartments": 50,
+        "Place d'Armes": 50,
+        "Place Saint-Lambert": 50,
+        "Quai des Bateliers": 50,
+        "Rue des Abbesses": 50,
+        "Rue des Guillemins": 50,
+        "Rue Saint-Gilles": 50,
+        "Avenue Louise": 50,
+        "Charleroi Comfort": 50,
+        "Sambre River": 50,
+        "Gentbrugge": 50,
+        "Outremeuse": 50,
+        "Overpoort": 50,
+        "Patershol": 50
+      },
+      "vocabulary_sha256": "24a1c962b99b624d032fa0e489652afc28ec53abbeaab12f5bd9272a8d9850b6"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Antwerp Abode",
+    "Antwerp Dream",
+    "Antwerp Haven",
+    "Brussels Boutique",
+    "Brussels Bright",
+    "Brussels Green",
+    "Leuven Luxury",
+    "Liege City Center",
+    "Liege City Living",
+    "Liege City View",
+    "Liege Living",
+    "Liege Loft",
+    "Liege Luxe",
+    "Liege Luxury",
+    "Mechelen Modern",
+    "Namur City Center",
+    "Namur City Living",
+    "Namur River Views",
+    "Namur Riverfront",
+    "Namur Riverside",
+    "Brussels Luxe Living",
+    "Ghent Gem",
+    "Ghent Waterfront",
+    "Ostend Beachside Condo"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:04.192410+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

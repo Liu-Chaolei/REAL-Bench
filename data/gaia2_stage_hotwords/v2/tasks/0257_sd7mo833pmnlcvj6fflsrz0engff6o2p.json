@@ -1,0 +1,776 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0257_sd7mo833pmnlcvj6fflsrz0engff6o2p",
+  "model": "deepseek-flash",
+  "input_sha256": "ea184ae3103d78252fd1eb35b9d1fea624cb081d831a623e2d758f46f05ad2b6",
+  "review_input_sha256": "ec84f63cbdb65d33c0cc772fb4457b34d20d0be9d5684af481f57febb4d78cd8",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "9d2a87b948e69a9ff95a1d97e65100c94d58c8c2b8d5faa8b624c2c567e3488c",
+  "reference_results_sha256": "3de85d1999bef105821d4be6451e5b099495f4f239ef8ba9f4c47d78125d8da4",
+  "sources": {
+    "stage1.tool_response.series_s1_contact_0": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Astrid\", \"last_name\": \"Jensen\", \"contact_id\": \"0cf69d73c9cd4a4bac9150918025bea0\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"39\", \"nationality\": \"British\", \"city_living\": \"Edinburgh\", \"country\": \"United Kingdom\", \"status\": \"Status.EMPLOYED\", \"job\": \"Librarian\", \"description\": \"\", \"phone\": \"+441316234517\", \"email\": \"astrid.jensen@gaia2mail.com\", \"address\": \"14/2 Marchmont Road, Edinburgh, EH9 1HZ\"}",
+      "event_id": "series_s1_contact_0",
+      "response_sha256": "04b41a6b0d4d25c3715351c012324dfb751cc9b13ff1caa1985cd237b4c4672b"
+    },
+    "stage1.tool_response.series_s1_contact_1": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Kavita\", \"last_name\": \"Rao\", \"contact_id\": \"6d6e7e2e40b8474d9fd6ed5384398f7b\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"37\", \"nationality\": \"British\", \"city_living\": \"London\", \"country\": \"United Kingdom\", \"status\": \"Status.EMPLOYED\", \"job\": \"Financial Advisor\", \"description\": \"Kavita Rao is a meticulous and analytical financial advisor who has been working with a reputable firm in London for over a decade. She is known for her attention to detail and her ability to challenge and test the accuracy of financial models. Kavita is a strong believer in the importance of data-driven decision-making and is always on the lookout for innovative ways to improve her clients' financial portfolios. Outside of work, Kavita is an outdoor enthusiast who loves hiking in the countryside and practicing yoga to relax.\", \"phone\": \"+447945123456\", \"email\": \"kavita.rao@financepro.co.uk\", \"address\": \"145, Richmond Road, Kingston upon Thames, London, KT2 5BX\"}",
+      "event_id": "series_s1_contact_1",
+      "response_sha256": "2daca0a62b0d8bbdfc3e52f79bcc09073c152f8bfe1352c18edbf36d0de10b15"
+    },
+    "stage1.tool_response.series_s1_contact_2": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Rohan\", \"last_name\": \"Patel\", \"contact_id\": \"d838bf1109884938b18cacfde7612160\", \"is_user\": \"False\", \"gender\": \"Gender.MALE\", \"age\": \"35\", \"nationality\": \"British\", \"city_living\": \"London\", \"country\": \"United Kingdom\", \"status\": \"Status.EMPLOYED\", \"job\": \"Multinational Corporate Executive\", \"description\": \"Rohan Patel is a driven and ambitious corporate executive who has made a name for himself in the business world. Born and raised in London, Rohan comes from a family of entrepreneurs and always had a keen interest in business and economics. He holds an MBA from the London Business School and has worked his way up the corporate ladder, earning a reputation as a shrewd and innovative leader. As a multinational corporate executive, Rohan is responsible for overseeing the operations of a global company with offices in several countries. He is constantly on the move, traveling to different parts of the world to meet with clients, negotiate deals, and stay on top of market trends.\", \"phone\": \"+447781234567\", \"email\": \"rohan.patel@globalcorp.com\", \"address\": \"145 City Road, London EC1V 1AZ\"}",
+      "event_id": "series_s1_contact_2",
+      "response_sha256": "40f47a53cafb24d8484c3b381718c2fe3b3f74388c3a434957b8a8f1b6b5a21c"
+    },
+    "stage1.tool_response.series_s1_contact_3": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Saskia\", \"last_name\": \"Müller-Friedrich\", \"contact_id\": \"1e7591586a0b4fddb96231512382b8cb\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"36\", \"nationality\": \"German\", \"city_living\": \"Berlin\", \"country\": \"Germany\", \"status\": \"Status.STUDENT\", \"job\": \"Graduate Researcher\", \"description\": \"A 36-year-old graduate student at Humboldt University of Berlin, pursuing a Ph.D. in Communication Studies.\", \"phone\": \"+481764567890\", \"email\": \"saskia.mueller-friedrich@hu-berlin.de\", \"address\": \"Schönhauser Allee 123, 10435 Berlin, Germany\"}",
+      "event_id": "series_s1_contact_3",
+      "response_sha256": "8580fac91d94c288b1d31e3079ce3eec2fa96ff524eef1fd6b39580ad19f4d76"
+    },
+    "stage1.tool_response.series_s1_contact_4": {
+      "stage": 1,
+      "text": "{\"first_name\": \"Saskia\", \"last_name\": \"van der Meer\", \"contact_id\": \"7d3d181548804b8e87df4fba4b71b2f8\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"34\", \"nationality\": \"Dutch\", \"city_living\": \"Amsterdam\", \"country\": \"Netherlands\", \"status\": \"Status.EMPLOYED\", \"job\": \"High School Teacher (History and Social Studies)\", \"description\": \"Saskia van der Meer is a charismatic and passionate individual who has always been drawn to the world of education and social activism.\", \"phone\": \"+31612345678\", \"email\": \"saskia.vandermeer@gaia2mail.com\", \"address\": \"Elandsstraat 12, 1016 GW Amsterdam\"}",
+      "event_id": "series_s1_contact_4",
+      "response_sha256": "cdcc009279b83709e88d3753b38070c73767b40e177eef40e471b38b447e820a"
+    },
+    "stage1.tool_response.series_s1_saved_after": {
+      "stage": 1,
+      "text": "{\"be97a76a51c345ee958b501d519c5e53\": {\"name\": \"Edinburgh New Town Flat\", \"location\": \"50 George St, Edinburgh\", \"zip_code\": \"EH2 2LR\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"700\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"be97a76a51c345ee958b501d519c5e53\", \"amenities\": [\"Gym\", \"Laundry\", \"New Town location\"], \"saved\": \"True\"}, \"d0e03d25ac2a422586501cf90b3c68e6\": {\"name\": \"Belfast Bliss\", \"location\": \"1 Donegall Quay, Belfast\", \"zip_code\": \"BT1 3EA\", \"price\": \"1000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"d0e03d25ac2a422586501cf90b3c68e6\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"91c296b0d95d4385b6b457f0288a57d0\": {\"name\": \"Bristol Bay\", \"location\": \"1-3 Harbourside, Bristol\", \"zip_code\": \"BS1 5BA\", \"price\": \"1800\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"700\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"91c296b0d95d4385b6b457f0288a57d0\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"fc8da003f0fd4ba0848c6bc2e8c71b63\": {\"name\": \"Birmingham City Living\", \"location\": \"23 New St, Birmingham, B2 4EG\", \"zip_code\": \"B2 4EG\", \"price\": \"1200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"fc8da003f0fd4ba0848c6bc2e8c71b63\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"66b785a4d655421e994740bb28ec2b08\": {\"name\": \"Glasgow West End Apartment\", \"location\": \"20 Hyndland St, Glasgow\", \"zip_code\": \"G11 5PT\", \"price\": \"1000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"66b785a4d655421e994740bb28ec2b08\", \"amenities\": [\"Laundry\", \"West End location\"], \"saved\": \"True\"}, \"77675cfb01a742b8af3ab7181204e9bb\": {\"name\": \"Birmingham Boulevard\", \"location\": \"600 Broad Street, Birmingham\", \"zip_code\": \"B1 2EA\", \"price\": \"1400\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"700\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"77675cfb01a742b8af3ab7181204e9bb\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"75aa49e275594755a847c616f9bda19f\": {\"name\": \"Plymouth Penthouse\", \"location\": \"1000 Armada Way, Plymouth\", \"zip_code\": \"PL1 1LE\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"75aa49e275594755a847c616f9bda19f\", \"amenities\": [\"Gym\", \"Laundry\", \"Pool\"], \"saved\": \"True\"}, \"a13667a86b814f699305e9739d60ae22\": {\"name\": \"Edinburgh New Town Apartments\", \"location\": \"20 George Street, Edinburgh\", \"zip_code\": \"EH2 2LR\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"a13667a86b814f699305e9739d60ae22\", \"amenities\": [\"Pool\", \"Parking\"], \"saved\": \"True\"}, \"52faf42e1ffe4a5997d1bdb6e6cc46be\": {\"name\": \"Cardiff Bay Apartments\", \"location\": \"Cardiff, Wales\", \"zip_code\": \"CF10 5AL\", \"price\": \"1400\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"52faf42e1ffe4a5997d1bdb6e6cc46be\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"2f81f190d39e49168440f858eff5fef4\": {\"name\": \"Liverpool Lofts\", \"location\": \"45 Albert Dock, Liverpool, L3 4AZ\", \"zip_code\": \"L3 4AZ\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"2f81f190d39e49168440f858eff5fef4\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"568e27c28ec746d88cd3128b1c8f93dc\": {\"name\": \"Birmingham Brook\", \"location\": \"Brindleyplace, Birmingham\", \"zip_code\": \"B1 2HL\", \"price\": \"1100\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"568e27c28ec746d88cd3128b1c8f93dc\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"1369b5a883084c7ab7ebeb054cd5306a\": {\"name\": \"Glasgow Gem\", \"location\": \"50 George Square, Glasgow\", \"zip_code\": \"G2 1DU\", \"price\": \"1000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"1369b5a883084c7ab7ebeb054cd5306a\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"4b17efba33e94c4380819f916657a6f0\": {\"name\": \"Manchester Maison\", \"location\": \"234 Deansgate, Manchester\", \"zip_code\": \"M3 3WB\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"4b17efba33e94c4380819f916657a6f0\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"77661de6e480472cbdcfabc818ed6de8\": {\"name\": \"Edinburgh City Centre Flats\", \"location\": \"Edinburgh, Scotland\", \"zip_code\": \"EH1 1DD\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"77661de6e480472cbdcfabc818ed6de8\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"e2e85475e0164e9e89ee17d59d607db5\": {\"name\": \"Glasgow West End Apartments\", \"location\": \"Glasgow, Scotland\", \"zip_code\": \"G3 8AQ\", \"price\": \"1500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"e2e85475e0164e9e89ee17d59d607db5\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"69a184e9bb9f4125b58b5ff8f56138c3\": {\"name\": \"Nottingham Nest\", \"location\": \"1-3 Victoria St, Nottingham\", \"zip_code\": \"NG1 2EY\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"69a184e9bb9f4125b58b5ff8f56138c3\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"a97bbf88f4f94ee68840f72a4c19406a\": {\"name\": \"Bristol Harbourside Apartment\", \"location\": \"10 Canons Rd, Bristol\", \"zip_code\": \"BS1 5HH\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"a97bbf88f4f94ee68840f72a4c19406a\", \"amenities\": [\"Laundry\", \"Harbourside location\"], \"saved\": \"True\"}, \"daed5bcedfee42a6becf79f6328d40da\": {\"name\": \"Edinburgh Elite\", \"location\": \"1-3 Waterloo Pl, Edinburgh\", \"zip_code\": \"EH1 3BG\", \"price\": \"3000\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"daed5bcedfee42a6becf79f6328d40da\", \"amenities\": [\"Gym\", \"Pool\"], \"saved\": \"True\"}, \"70c76a66b8fb49e0a40266cbf8730f78\": {\"name\": \"Glasgow Heights\", \"location\": \"100 Bothwell Street, Glasgow\", \"zip_code\": \"G2 7JS\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"70c76a66b8fb49e0a40266cbf8730f78\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\"], \"saved\": \"True\"}, \"551d10469f07407795e65a25bb4a379f\": {\"name\": \"Liverpool Waterfront Apartment\", \"location\": \"10 The Strand, Liverpool\", \"zip_code\": \"L1 8LT\", \"price\": \"1200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"551d10469f07407795e65a25bb4a379f\", \"amenities\": [\"Parking\", \"Waterfront location\"], \"saved\": \"True\"}, \"91e52b10b9f3409792e4b423059eee2b\": {\"name\": \"Liverpool Luxury\", \"location\": \"321 Liverpool ONE, Liverpool\", \"zip_code\": \"L1 8BU\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"91e52b10b9f3409792e4b423059eee2b\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"71b8ead89c9446d4b82b6f13233aafb9\": {\"name\": \"Manchester Metro\", \"location\": \"1-3 Piccadilly, Manchester\", \"zip_code\": \"M1 1RG\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"71b8ead89c9446d4b82b6f13233aafb9\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"94bc5f49cdab44b8bc9338c77d0b7446\": {\"name\": \"Nottingham City Living Apartments\", \"location\": \"25 Market St, Nottingham\", \"zip_code\": \"NG1 6HY\", \"price\": \"1000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"400\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"94bc5f49cdab44b8bc9338c77d0b7446\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"085d4c6fe9584e9b9ea8d37a2b53f346\": {\"name\": \"Manchester Mews\", \"location\": \"45 Mews St, Manchester, M1 1HG\", \"zip_code\": \"M1 1HG\", \"price\": \"1000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"085d4c6fe9584e9b9ea8d37a2b53f346\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"cb69a230e0054aba8cc8be5ffe993f80\": {\"name\": \"Belfast Bungalow\", \"location\": \"456 Lisburn Rd, Belfast\", \"zip_code\": \"BT9 7EW\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Bungalow\", \"square_footage\": \"900\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"cb69a230e0054aba8cc8be5ffe993f80\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"92c76efbb46c49e28a6fbf22a5319d1c\": {\"name\": \"London Luxe\", \"location\": \"10 Downing St, London\", \"zip_code\": \"SW1A 2AA\", \"price\": \"2500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"92c76efbb46c49e28a6fbf22a5319d1c\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"1c4a1918d4f442798735622d312cca99\": {\"name\": \"Glasgow Grand\", \"location\": \"100-102 West George St, Glasgow\", \"zip_code\": \"G2 1PP\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"2500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"1c4a1918d4f442798735622d312cca99\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"e30c0cb2d47c43848c8c04265b68a1a2\": {\"name\": \"Bristol Bungalow\", \"location\": \"200 Whiteladies Road, Bristol\", \"zip_code\": \"BS8 2PY\", \"price\": \"1800\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"2500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"e30c0cb2d47c43848c8c04265b68a1a2\", \"amenities\": [\"Laundry\", \"Garden\"], \"saved\": \"True\"}, \"58a01e65023b43bda80652fe435e8bf0\": {\"name\": \"Birmingham Heights\", \"location\": \"Edgbaston, Birmingham\", \"zip_code\": \"B15 1TR\", \"price\": \"1200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"58a01e65023b43bda80652fe435e8bf0\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"6fe5e3bfbe0443c5a0988e68e911fcb7\": {\"name\": \"The Bristolian\", \"location\": \"23-25 College Green, Bristol\", \"zip_code\": \"BS1 5TN\", \"price\": \"1800\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"700\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"6fe5e3bfbe0443c5a0988e68e911fcb7\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"0670b8b6a21c4d229c7ac34a330bf5db\": {\"name\": \"London Luxury\", \"location\": \"901 Oxford Street, London, W1C 1DA\", \"zip_code\": \"W1C 1DA\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"0670b8b6a21c4d229c7ac34a330bf5db\", \"amenities\": [\"Pool\", \"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"d4f97738755649df9bbb877178ddf1de\": {\"name\": \"Skyline Views\", \"location\": \"100 City Road, London\", \"zip_code\": \"EC1Y 1BP\", \"price\": \"2500\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"d4f97738755649df9bbb877178ddf1de\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\"], \"saved\": \"True\"}}",
+      "event_id": "series_s1_saved_after",
+      "response_sha256": "fa20c1d30711ad08e041f3d6acff11c64b58882b3c0facbea9446178716341b7"
+    },
+    "stage1.tool_response.series_s1_search_edinburgh": {
+      "stage": 1,
+      "text": "{\"23351b803baf4ebf817585c0934691cc\": {\"name\": \"Edinburgh Escape\", \"location\": \"789 Princes St, Edinburgh\", \"zip_code\": \"EH2 2ER\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"23351b803baf4ebf817585c0934691cc\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"False\"}, \"630a1207dd4f40428c233e72eae36dea\": {\"name\": \"Edinburgh Oasis\", \"location\": \"12-14 George IV Bridge, Edinburgh\", \"zip_code\": \"EH1 1AD\", \"price\": \"2200\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"630a1207dd4f40428c233e72eae36dea\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"False\"}, \"66dea082ae9d41d2a7db74b31e6de2fc\": {\"name\": \"Edinburgh Mews\", \"location\": \"Old Town, Edinburgh\", \"zip_code\": \"EH1 1TB\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"Long term lease\", \"apartment_id\": \"66dea082ae9d41d2a7db74b31e6de2fc\", \"amenities\": [\"Laundry\", \"Garden\"], \"saved\": \"False\"}, \"77661de6e480472cbdcfabc818ed6de8\": {\"name\": \"Edinburgh City Centre Flats\", \"location\": \"Edinburgh, Scotland\", \"zip_code\": \"EH1 1DD\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"77661de6e480472cbdcfabc818ed6de8\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"a13667a86b814f699305e9739d60ae22\": {\"name\": \"Edinburgh New Town Apartments\", \"location\": \"20 George Street, Edinburgh\", \"zip_code\": \"EH2 2LR\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"a13667a86b814f699305e9739d60ae22\", \"amenities\": [\"Pool\", \"Parking\"], \"saved\": \"True\"}, \"bbcfc4cb910c4648a0f1dfd05b887949\": {\"name\": \"Edinburgh Elegance\", \"location\": \"789 Princes Street, Edinburgh\", \"zip_code\": \"EH2 2HH\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"bbcfc4cb910c4648a0f1dfd05b887949\", \"amenities\": [\"Gym\", \"Parking\"], \"saved\": \"False\"}, \"bd079b1f63104afebb5a0b32d9c6341d\": {\"name\": \"Edinburgh Estates\", \"location\": \"500 Princes Street, Edinburgh\", \"zip_code\": \"EH2 2EQ\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Home\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"bd079b1f63104afebb5a0b32d9c6341d\", \"amenities\": [\"Gym\", \"Laundry\", \"Pool\"], \"saved\": \"False\"}, \"be97a76a51c345ee958b501d519c5e53\": {\"name\": \"Edinburgh New Town Flat\", \"location\": \"50 George St, Edinburgh\", \"zip_code\": \"EH2 2LR\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"700\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"be97a76a51c345ee958b501d519c5e53\", \"amenities\": [\"Gym\", \"Laundry\", \"New Town location\"], \"saved\": \"True\"}, \"daed5bcedfee42a6becf79f6328d40da\": {\"name\": \"Edinburgh Elite\", \"location\": \"1-3 Waterloo Pl, Edinburgh\", \"zip_code\": \"EH1 3BG\", \"price\": \"3000\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"daed5bcedfee42a6becf79f6328d40da\", \"amenities\": [\"Gym\", \"Pool\"], \"saved\": \"True\"}, \"f5ed0c4301ff48fd99a89558431d1698\": {\"name\": \"Edinburgh Heights\", \"location\": \"12 Royal Mile, Edinburgh, EH1 1SG\", \"zip_code\": \"EH1 1SG\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"f5ed0c4301ff48fd99a89558431d1698\", \"amenities\": [\"Pool\", \"Parking\"], \"saved\": \"False\"}}",
+      "event_id": "series_s1_search_edinburgh",
+      "response_sha256": "9e2c86f836f6476b29f33982d8447d13031be89bc6ed538bb9befc46f67d85a9"
+    },
+    "stage1.tool_response.series_s1_search_london": {
+      "stage": 1,
+      "text": "{\"0670b8b6a21c4d229c7ac34a330bf5db\": {\"name\": \"London Luxury\", \"location\": \"901 Oxford Street, London, W1C 1DA\", \"zip_code\": \"W1C 1DA\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"0670b8b6a21c4d229c7ac34a330bf5db\", \"amenities\": [\"Pool\", \"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"False\"}, \"32954ef8da764b8da535166365e7291c\": {\"name\": \"River Thames View\", \"location\": \"1 London Bridge, London\", \"zip_code\": \"SE1 9BG\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"32954ef8da764b8da535166365e7291c\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"False\"}, \"3517acad4a994811b481f21b928d3e23\": {\"name\": \"River Thames Views\", \"location\": \"22-24 London Bridge St, London\", \"zip_code\": \"SE1 9SG\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"3517acad4a994811b481f21b928d3e23\", \"amenities\": [\"Gym\", \"Laundry\", \"River views\"], \"saved\": \"False\"}, \"451913ac478641f8bf9177257a9e7ac7\": {\"name\": \"River Thames Apartments\", \"location\": \"London, Southwark\", \"zip_code\": \"SE1 2AA\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"451913ac478641f8bf9177257a9e7ac7\", \"amenities\": [\"Gym\", \"Parking\", \"Laundry\"], \"saved\": \"False\"}, \"4ad5cb71af68414da89eee3192196bd7\": {\"name\": \"Skyline Apartments\", \"location\": \"100 Liverpool Street, London\", \"zip_code\": \"EC2M 7PY\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"4ad5cb71af68414da89eee3192196bd7\", \"amenities\": [\"Gym\", \"Laundry\", \"Pool\"], \"saved\": \"False\"}, \"92c76efbb46c49e28a6fbf22a5319d1c\": {\"name\": \"London Luxe\", \"location\": \"10 Downing St, London\", \"zip_code\": \"SW1A 2AA\", \"price\": \"2500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"92c76efbb46c49e28a6fbf22a5319d1c\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"9c315341bd9f471fa727044cc4b26372\": {\"name\": \"London Bridge Views\", \"location\": \"123 Borough High St, London\", \"zip_code\": \"SE1 1NE\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"9c315341bd9f471fa727044cc4b26372\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"False\"}, \"d4f97738755649df9bbb877178ddf1de\": {\"name\": \"Skyline Views\", \"location\": \"100 City Road, London\", \"zip_code\": \"EC1Y 1BP\", \"price\": \"2500\", \"bedrooms\": \"2\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1200\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"d4f97738755649df9bbb877178ddf1de\", \"amenities\": [\"Gym\", \"Pool\", \"Laundry\"], \"saved\": \"False\"}}",
+      "event_id": "series_s1_search_london",
+      "response_sha256": "ca2dcdbcdc0a59f0c4ae35fc725ce1768f94e85d6392911671abfdb3c6bc5301"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Saskia Müller-Friedrich",
+      "original_source": "stage2.tool_gt.series_s2_send_0.arguments.content"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Saskia van der Meer",
+      "original_source": "stage2.tool_gt.series_s2_send_1.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Edinburgh City Centre Flats",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_edinburgh",
+          "reason": "具体房产名称，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Edinburgh New Town Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_edinburgh",
+          "reason": "具体房产名称，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Edinburgh New Town Flat",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_edinburgh",
+          "reason": "具体房产名称，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Glasgow West End Apartment",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "完整房源名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Glasgow West End Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "完整房源名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Nottingham City Living Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "完整房源名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Saskia van der Meer",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_contact_4",
+          "reason": "含小品词的完整人名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Birmingham City Living",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "完整房源名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Borough High St",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_london",
+          "reason": "具体街道名，发音较难",
+          "weight": 50
+        },
+        {
+          "text": "Bristol Harbourside Apartment",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "完整房源名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Cardiff Bay Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "完整房源名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "George IV Bridge",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_edinburgh",
+          "reason": "具体街道名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Kingston upon Thames",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_contact_1",
+          "reason": "复合地名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Liverpool Waterfront Apartment",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "完整房源名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "London Bridge St",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_london",
+          "reason": "具体街道名，发音较难",
+          "weight": 50
+        },
+        {
+          "text": "London Bridge Views",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_london",
+          "reason": "独特公寓名，含地标词",
+          "weight": 50
+        },
+        {
+          "text": "River Thames Apartments",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_london",
+          "reason": "独特公寓名，含地标词",
+          "weight": 50
+        },
+        {
+          "text": "River Thames View",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_london",
+          "reason": "含泰晤士河地标的独特公寓名，发音较难",
+          "weight": 50
+        },
+        {
+          "text": "River Thames Views",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_london",
+          "reason": "独特公寓名，含地标词，易混淆",
+          "weight": 50
+        },
+        {
+          "text": "Armada Way",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "较难的具体街道名",
+          "weight": 50
+        },
+        {
+          "text": "Belfast Bliss",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "完整房源名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Belfast Bungalow",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "完整房源名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Birmingham Boulevard",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "完整房源名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Birmingham Brook",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "完整房源名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Bothwell Street",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "较难的具体街道名",
+          "weight": 50
+        },
+        {
+          "text": "Bristol Bay",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "完整房源名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Canons Rd",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "较难的具体街道名",
+          "weight": 50
+        },
+        {
+          "text": "City Road",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_london",
+          "reason": "具体街道名，发音较难",
+          "weight": 50
+        },
+        {
+          "text": "College Green",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "布里斯托专有地名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Donegall Quay",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "较难的具体地名",
+          "weight": 50
+        },
+        {
+          "text": "Downing St",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_london",
+          "reason": "具体街道名，发音较难",
+          "weight": 50
+        },
+        {
+          "text": "Edinburgh Elegance",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_edinburgh",
+          "reason": "具体房产名称，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Edinburgh Elite",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "完整房源名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Edinburgh Escape",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_edinburgh",
+          "reason": "具体房产名称，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Edinburgh Estates",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_edinburgh",
+          "reason": "具体房产名称，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Edinburgh Heights",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_edinburgh",
+          "reason": "具体房产名称，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Edinburgh Mews",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_edinburgh",
+          "reason": "具体房产名称，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Edinburgh Oasis",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_edinburgh",
+          "reason": "具体房产名称，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Glasgow Gem",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "完整房源名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Glasgow Heights",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "完整房源名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Hyndland St",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "较难的具体街道名",
+          "weight": 50
+        },
+        {
+          "text": "Kavita Rao",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_contact_1",
+          "reason": "完整人名，可作热词",
+          "weight": 50
+        },
+        {
+          "text": "Lisburn Rd",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "较难的具体街道名",
+          "weight": 50
+        },
+        {
+          "text": "Liverpool Lofts",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "完整房源名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Liverpool Luxury",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "完整房源名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Liverpool Street",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_london",
+          "reason": "具体街道名，发音较难",
+          "weight": 50
+        },
+        {
+          "text": "Manchester Maison",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "完整房源名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Manchester Metro",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "完整房源名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Manchester Mews",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "完整房源名，含地名",
+          "weight": 50
+        },
+        {
+          "text": "Marchmont Road",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_contact_0",
+          "reason": "具体街道名，较难识别",
+          "weight": 50
+        },
+        {
+          "text": "Nottingham Nest",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "完整房源名，含地名",
+          "weight": 5
+        },
+        {
+          "text": "Oxford Street",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_london",
+          "reason": "具体街道名，发音较难",
+          "weight": 5
+        },
+        {
+          "text": "Plymouth Penthouse",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "完整房源名，含地名",
+          "weight": 5
+        },
+        {
+          "text": "Rohan Patel",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_contact_2",
+          "reason": "完整人名，可作热词",
+          "weight": 5
+        },
+        {
+          "text": "Schönhauser Allee",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_contact_3",
+          "reason": "含变音符号的德语街道名，高优先级",
+          "weight": 5
+        },
+        {
+          "text": "Waterloo Pl",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_edinburgh",
+          "reason": "具体街道名，较难识别",
+          "weight": 5
+        },
+        {
+          "text": "Whiteladies Road",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "含专有难拼街道名，适合作为热词",
+          "weight": 5
+        },
+        {
+          "text": "Brindleyplace",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "较难的具体地名",
+          "weight": 5
+        },
+        {
+          "text": "Deansgate",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "较难的具体街道名",
+          "weight": 5
+        },
+        {
+          "text": "Edgbaston",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "难拼的伯明翰地名",
+          "weight": 5
+        },
+        {
+          "text": "Elandsstraat",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_contact_4",
+          "reason": "荷兰语街道名，较难识别",
+          "weight": 5
+        },
+        {
+          "text": "Piccadilly",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_saved_after",
+          "reason": "较难的具体地名",
+          "weight": 5
+        },
+        {
+          "text": "Southwark",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_london",
+          "reason": "伦敦地名，发音较难",
+          "weight": 5
+        }
+      ],
+      "new_terms": [
+        "Edinburgh City Centre Flats",
+        "Edinburgh New Town Apartments",
+        "Edinburgh New Town Flat",
+        "Glasgow West End Apartment",
+        "Glasgow West End Apartments",
+        "Nottingham City Living Apartments",
+        "Saskia van der Meer",
+        "Birmingham City Living",
+        "Borough High St",
+        "Bristol Harbourside Apartment",
+        "Cardiff Bay Apartments",
+        "George IV Bridge",
+        "Kingston upon Thames",
+        "Liverpool Waterfront Apartment",
+        "London Bridge St",
+        "London Bridge Views",
+        "River Thames Apartments",
+        "River Thames View",
+        "River Thames Views",
+        "Armada Way",
+        "Belfast Bliss",
+        "Belfast Bungalow",
+        "Birmingham Boulevard",
+        "Birmingham Brook",
+        "Bothwell Street",
+        "Bristol Bay",
+        "Canons Rd",
+        "City Road",
+        "College Green",
+        "Donegall Quay",
+        "Downing St",
+        "Edinburgh Elegance",
+        "Edinburgh Elite",
+        "Edinburgh Escape",
+        "Edinburgh Estates",
+        "Edinburgh Heights",
+        "Edinburgh Mews",
+        "Edinburgh Oasis",
+        "Glasgow Gem",
+        "Glasgow Heights",
+        "Hyndland St",
+        "Kavita Rao",
+        "Lisburn Rd",
+        "Liverpool Lofts",
+        "Liverpool Luxury",
+        "Liverpool Street",
+        "Manchester Maison",
+        "Manchester Metro",
+        "Manchester Mews",
+        "Marchmont Road",
+        "Nottingham Nest",
+        "Oxford Street",
+        "Plymouth Penthouse",
+        "Rohan Patel",
+        "Schönhauser Allee",
+        "Waterloo Pl",
+        "Whiteladies Road",
+        "Brindleyplace",
+        "Deansgate",
+        "Edgbaston",
+        "Elandsstraat",
+        "Piccadilly",
+        "Southwark"
+      ],
+      "active_vocabulary": {
+        "Edinburgh City Centre Flats": 50,
+        "Edinburgh New Town Apartments": 50,
+        "Edinburgh New Town Flat": 50,
+        "Glasgow West End Apartment": 50,
+        "Glasgow West End Apartments": 50,
+        "Nottingham City Living Apartments": 50,
+        "Saskia van der Meer": 50,
+        "Birmingham City Living": 50,
+        "Borough High St": 50,
+        "Bristol Harbourside Apartment": 50,
+        "Cardiff Bay Apartments": 50,
+        "George IV Bridge": 50,
+        "Kingston upon Thames": 50,
+        "Liverpool Waterfront Apartment": 50,
+        "London Bridge St": 50,
+        "London Bridge Views": 50,
+        "River Thames Apartments": 50,
+        "River Thames View": 50,
+        "River Thames Views": 50,
+        "Armada Way": 50,
+        "Belfast Bliss": 50,
+        "Belfast Bungalow": 50,
+        "Birmingham Boulevard": 50,
+        "Birmingham Brook": 50,
+        "Bothwell Street": 50,
+        "Bristol Bay": 50,
+        "Canons Rd": 50,
+        "City Road": 50,
+        "College Green": 50,
+        "Donegall Quay": 50,
+        "Downing St": 50,
+        "Edinburgh Elegance": 50,
+        "Edinburgh Elite": 50,
+        "Edinburgh Escape": 50,
+        "Edinburgh Estates": 50,
+        "Edinburgh Heights": 50,
+        "Edinburgh Mews": 50,
+        "Edinburgh Oasis": 50,
+        "Glasgow Gem": 50,
+        "Glasgow Heights": 50,
+        "Hyndland St": 50,
+        "Kavita Rao": 50,
+        "Lisburn Rd": 50,
+        "Liverpool Lofts": 50,
+        "Liverpool Luxury": 50,
+        "Liverpool Street": 50,
+        "Manchester Maison": 50,
+        "Manchester Metro": 50,
+        "Manchester Mews": 50,
+        "Marchmont Road": 50,
+        "Nottingham Nest": 5,
+        "Oxford Street": 5,
+        "Plymouth Penthouse": 5,
+        "Rohan Patel": 5,
+        "Schönhauser Allee": 5,
+        "Waterloo Pl": 5,
+        "Whiteladies Road": 5,
+        "Brindleyplace": 5,
+        "Deansgate": 5,
+        "Edgbaston": 5,
+        "Elandsstraat": 5,
+        "Piccadilly": 5,
+        "Southwark": 5
+      },
+      "vocabulary_sha256": "0b716bd4b0be186c13b9d0d50996cb6f078dcd4464bfe08f0308fa94e5616de3"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Saskia van der Meer",
+          "kind": "person",
+          "source": "stage2.existing_catalog.1",
+          "reason": "含前缀的完整人名，拼写较难",
+          "weight": 50
+        },
+        {
+          "text": "Saskia Müller-Friedrich",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 5
+        }
+      ],
+      "new_terms": [
+        "Saskia Müller-Friedrich"
+      ],
+      "active_vocabulary": {
+        "Edinburgh City Centre Flats": 50,
+        "Edinburgh New Town Apartments": 50,
+        "Edinburgh New Town Flat": 50,
+        "Glasgow West End Apartment": 50,
+        "Glasgow West End Apartments": 50,
+        "Nottingham City Living Apartments": 50,
+        "Saskia van der Meer": 50,
+        "Birmingham City Living": 50,
+        "Borough High St": 50,
+        "Bristol Harbourside Apartment": 50,
+        "Cardiff Bay Apartments": 50,
+        "George IV Bridge": 50,
+        "Kingston upon Thames": 50,
+        "Liverpool Waterfront Apartment": 50,
+        "London Bridge St": 50,
+        "London Bridge Views": 50,
+        "River Thames Apartments": 50,
+        "River Thames View": 50,
+        "River Thames Views": 50,
+        "Armada Way": 50,
+        "Belfast Bliss": 50,
+        "Belfast Bungalow": 50,
+        "Birmingham Boulevard": 50,
+        "Birmingham Brook": 50,
+        "Bothwell Street": 50,
+        "Bristol Bay": 50,
+        "Canons Rd": 50,
+        "City Road": 50,
+        "College Green": 50,
+        "Donegall Quay": 50,
+        "Downing St": 50,
+        "Edinburgh Elegance": 50,
+        "Edinburgh Elite": 50,
+        "Edinburgh Escape": 50,
+        "Edinburgh Estates": 50,
+        "Edinburgh Heights": 50,
+        "Edinburgh Mews": 50,
+        "Edinburgh Oasis": 50,
+        "Glasgow Gem": 50,
+        "Glasgow Heights": 50,
+        "Hyndland St": 50,
+        "Kavita Rao": 50,
+        "Lisburn Rd": 50,
+        "Liverpool Lofts": 50,
+        "Liverpool Luxury": 50,
+        "Liverpool Street": 50,
+        "Manchester Maison": 50,
+        "Manchester Metro": 50,
+        "Manchester Mews": 50,
+        "Marchmont Road": 50,
+        "Nottingham Nest": 5,
+        "Oxford Street": 5,
+        "Plymouth Penthouse": 5,
+        "Rohan Patel": 5,
+        "Schönhauser Allee": 5,
+        "Waterloo Pl": 5,
+        "Whiteladies Road": 5,
+        "Brindleyplace": 5,
+        "Deansgate": 5,
+        "Edgbaston": 5,
+        "Elandsstraat": 5,
+        "Piccadilly": 5,
+        "Southwark": 5,
+        "Saskia Müller-Friedrich": 5
+      },
+      "vocabulary_sha256": "cfe7b70ee0eb837da662423f1e4809ce319d58ae0409ba2696bd12aa85b575e1"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Edinburgh",
+    "London",
+    "Amsterdam",
+    "Berlin",
+    "London Luxury",
+    "London Luxe",
+    "Skyline Views"
+  ],
+  "binary_omissions": [],
+  "request_parts": 6,
+  "omission_review": [],
+  "extracted_at": "2026-11-23T02:26:44.076519+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

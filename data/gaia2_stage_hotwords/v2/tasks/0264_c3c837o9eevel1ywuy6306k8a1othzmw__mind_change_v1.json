@@ -1,0 +1,144 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0264_c3c837o9eevel1ywuy6306k8a1othzmw__mind_change_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "7088dc837bec027e7881949db748909a36592d5378b5d7f1282f1d17d2b01411",
+  "review_input_sha256": "3e614af5658c57f6aa7195c27b1dfd82165ef271e9d2f757d34af430bfb7268d",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "b6eef39a45891cb2da4e79e8f498bdd971eb200820b5769db9549d3d3698b601",
+  "reference_results_sha256": "1f42e51f3a30ecb351e5df77721c2849247f12dfe03a1760dc3947bba9fbdc29",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Basel Waterfront",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-6da2c84e-277e-4473-8276-84ec1b45fccd.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Geneva Lakefront",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.tool_response.series_s1_read": {
+      "stage": 1,
+      "text": "{\"name\": \"Basel Waterfront\", \"location\": \"Rheingasse, 4058 Basel\", \"zip_code\": \"4058\", \"price\": \"1800\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"7a4cb6825356464eb6b7e5008ee15d6a\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}",
+      "event_id": "series_s1_read",
+      "response_sha256": "1f04ce9bf20b7925ff192e3a949c9b37e3b6b12b73d9948c2e1d796c04c7b73c"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Basel Breeze",
+      "original_source": "stage2.reference_reply.series_s2_reply.arguments.content"
+    },
+    "stage2.tool_response.series_s2_read": {
+      "stage": 2,
+      "text": "{\"name\": \"Basel Breeze\", \"location\": \"Kleinbaslerstrasse, Basel\", \"zip_code\": \"4058\", \"price\": \"2200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"1236ac706e9945a89fd6b317f7b3866b\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}",
+      "event_id": "series_s2_read",
+      "response_sha256": "fe1f35b2365507209040b78598c9ed6f647884526ac5dc110350821d1d915273"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Basel Waterfront",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整房产名称，含地名，具辨识度",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Basel Waterfront"
+      ],
+      "active_vocabulary": {
+        "Basel Waterfront": 50
+      },
+      "vocabulary_sha256": "8f644316a675f52f850729ff840be5d80a5e48d0e1df3173e6216efdd8e207af"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Geneva Lakefront",
+          "kind": "place",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整房产名称，含地名，具辨识度",
+          "weight": 50
+        },
+        {
+          "text": "Rheingasse",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_read",
+          "reason": "具体街道名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Geneva Lakefront",
+        "Rheingasse"
+      ],
+      "active_vocabulary": {
+        "Basel Waterfront": 50,
+        "Geneva Lakefront": 50,
+        "Rheingasse": 50
+      },
+      "vocabulary_sha256": "88e6d6d78d5442946749dddec39440509564fdac6425fb552b49349c367bc4c8"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Basel Breeze",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "完整房产名称，具辨识度",
+          "weight": 50
+        },
+        {
+          "text": "Kleinbaslerstrasse",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_read",
+          "reason": "长且难拼的街道名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Basel Breeze",
+        "Kleinbaslerstrasse"
+      ],
+      "active_vocabulary": {
+        "Basel Waterfront": 50,
+        "Geneva Lakefront": 50,
+        "Rheingasse": 50,
+        "Basel Breeze": 50,
+        "Kleinbaslerstrasse": 50
+      },
+      "vocabulary_sha256": "c234faa37b9a696a04d8593ea5b5e3ded33d013c5db527da781362f6cbfe0677"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Ursula"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:18:30.346445+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,80 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0546_thyowfbi0uxq8niuyvg8jq519cqrvc06__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "7bf068b704fef108e6658100f08d22840a758f2b8525a8dc3039322afde17754",
+  "review_input_sha256": "dd763b1ce256fe10c39abe345c8058f1c7ab7bd6e53542163296b28008a89c79",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "4fb3cbb38af68e00003b6a92d5d3ca3a0a6cd79c958679a7c9bf96f09b651e6a",
+  "reference_results_sha256": "3c016a5bb322f0dbeb47a55fb10451aca20d2a299fb1e7ea1e86c75b844dcd0f",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Dubininskaya Ulitsa, 2, Moscow, Russia, 115054",
+      "original_source": "stage0.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Dubininskaya Ulitsa",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "俄语街道专名，含难拼写，作为地址核心地名保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Dubininskaya Ulitsa"
+      ],
+      "active_vocabulary": {
+        "Dubininskaya Ulitsa": 50
+      },
+      "vocabulary_sha256": "62948916e6c72d96454c177675ea624cd5571db2c9be1963289fef49923f394e"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Dubininskaya Ulitsa": 50
+      },
+      "vocabulary_sha256": "62948916e6c72d96454c177675ea624cd5571db2c9be1963289fef49923f394e"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Dubininskaya Ulitsa": 50
+      },
+      "vocabulary_sha256": "62948916e6c72d96454c177675ea624cd5571db2c9be1963289fef49923f394e"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Dubininskaya Ulitsa, 2, Moscow, Russia, 115054"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:19:03.401335+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

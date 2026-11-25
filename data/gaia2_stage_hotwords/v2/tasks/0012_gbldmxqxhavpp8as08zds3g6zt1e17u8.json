@@ -1,0 +1,129 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0012_gbldmxqxhavpp8as08zds3g6zt1e17u8",
+  "model": "deepseek-flash",
+  "input_sha256": "ec290384f3ab482c75b98b42585826ba34a8cc9e0f7c0ef3b770d1102c19096e",
+  "review_input_sha256": "219f05ed2dd619974803ffaaedb5eaf2677e7c01a482bb8898faa095991bcbf6",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "16ed6dce0943d6620fbc328ad646b815f9541d350691a842e573af47b1a3565f",
+  "reference_results_sha256": "6f5d9fe2cc6e7c9386204c16270e132b7f90d34e71ec9c4af21f8d593631275b",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Thailand",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-a09d979c-3306-4014-8c03-2ef3d848ce61.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Nonglak Suthisakul",
+      "original_source": "stage1.tool_gt.series_s1_find_contact.arguments.query"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Chiang Mai",
+      "original_source": "stage1.reference_reply.series_s1_reply.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Kari Østensen",
+      "original_source": "stage2.reference_reply.series_s2_reply.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Thailand",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "国家名，但较常见，保留为地名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Thailand"
+      ],
+      "active_vocabulary": {
+        "Thailand": 50
+      },
+      "vocabulary_sha256": "18566bb3f67bf4fbf59cd0b6e42ccc20b4540b9c68ca5d7932068b9411a6859d"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Chiang Mai",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "泰国城市名，含特殊拼写",
+          "weight": 50
+        },
+        {
+          "text": "Nonglak Suthisakul",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整泰语人名，拼写较难",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Chiang Mai",
+        "Nonglak Suthisakul"
+      ],
+      "active_vocabulary": {
+        "Thailand": 50,
+        "Chiang Mai": 50,
+        "Nonglak Suthisakul": 50
+      },
+      "vocabulary_sha256": "3994bf4ba7861e0c9ce92645a73daabfe408f7b4013c1f2fd861d63136837778"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Kari Østensen",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含挪威语特殊字母Ø的完整人名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Kari Østensen"
+      ],
+      "active_vocabulary": {
+        "Thailand": 50,
+        "Chiang Mai": 50,
+        "Nonglak Suthisakul": 50,
+        "Kari Østensen": 50
+      },
+      "vocabulary_sha256": "4fd9245807f3fe78b0112b16557edf01dcd2895a58d7039527812634a57078e3"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Oslo",
+    "Åse"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:13:39.105907+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,140 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0220_ttjxcmc6fpmyp9gqp10lfwf7v5ww6sf0",
+  "model": "deepseek-flash",
+  "input_sha256": "0aedfc6d8a47f5b50801f8936e6faa00c255795da56ae37fcc1ce22554aee11c",
+  "review_input_sha256": "5c46d60743dc4fad717617c0a5951cabb31484cc017a9d59ac853bceac51ddae",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "976ff8dc63359852936bf86228ab2b67437f6f85822924f7687dec3363c6f44d",
+  "reference_results_sha256": "12f66a80cc55c41b8e61814151fd93a44bc24427f10ca38b6833f75a9423dba0",
+  "sources": {
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Astrid Møller",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.tool_response.series_s2_read_contact": {
+      "stage": 2,
+      "text": "{\"first_name\": \"Astrid\", \"last_name\": \"Møller\", \"contact_id\": \"4755db5327494dc180de87abe2a0495c\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"31\", \"nationality\": \"Danish\", \"city_living\": \"Aarhus\", \"country\": \"Denmark\", \"status\": \"Status.EMPLOYED\", \"job\": \"Social Worker\", \"description\": \"Astrid Møller is a compassionate and empathetic individual who has overcome her own share of struggles, making her an excellent listener and confidante for those in need. She is the social worker whose work-life-balance advice I followed: after taking her advice I started a new recovery-time routine, and I want to check in with her on November 1 about how it is going.\", \"phone\": \"+7561234567\", \"email\": \"astrid.moller@gaia2mail.com\", \"address\": \"Åboulevarden 56, 3rd floor, 8000 Aarhus C\"}",
+      "event_id": "series_s2_read_contact",
+      "response_sha256": "6b4f3f415138d1029c78eb770e96e7692a2f272d06b2600bacddd6466f545817"
+    },
+    "stage2.tool_response.series_s2_read_nov1": {
+      "stage": 2,
+      "text": "{\"events\": [{\"event_id\": \"2e3244344b89404bad46a6a207a3afd3\", \"title\": \"Meeting with Jiaying\", \"start_datetime\": \"1730455200\", \"end_datetime\": \"1730462400\", \"tag\": \"Work\", \"description\": \"Discuss potential collaboration with Jiaying Liang, sports medicine doctor.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Astrid Lundqvist\", \"Jiaying Liang\"], \"start_strftime\": \"Friday, 2024-11-01 10:00:00\", \"end_strftime\": \"Friday, 2024-11-01 12:00:00\"}, {\"event_id\": \"63241d3ef22e49e4a9f92744c4af1a5b\", \"title\": \"Networking Event\", \"start_datetime\": \"1730484000\", \"end_datetime\": \"1730491200\", \"tag\": \"Social\", \"description\": \"Attend networking event for social media influencers.\", \"location\": \"Stockholm Convention Center\", \"attendees\": [\"Astrid Lundqvist\", \"Luísa Silva e Sousa\"], \"start_strftime\": \"Friday, 2024-11-01 18:00:00\", \"end_strftime\": \"Friday, 2024-11-01 20:00:00\"}, {\"event_id\": \"7fa55193564b458f870d117c66d1c5c1\", \"title\": \"Coffee Break with João\", \"start_datetime\": \"1730469600\", \"end_datetime\": \"1730473200\", \"tag\": \"Social\", \"description\": \"Catch up with João Pereira, professor of physics.\", \"location\": \"Café Östermalms\", \"attendees\": [\"Astrid Lundqvist\", \"João Pereira\"], \"start_strftime\": \"Friday, 2024-11-01 14:00:00\", \"end_strftime\": \"Friday, 2024-11-01 15:00:00\"}, {\"event_id\": \"8b81279f5000bdbabdbede576e9dd342\", \"title\": \"Check in with Astrid Møller\", \"start_datetime\": \"1730451600.0\", \"end_datetime\": \"1730453400.0\", \"tag\": \"Health\", \"description\": \"Call Astrid Møller, my social worker, to check in about how the new recovery-time routine is going.\", \"location\": \"Phone call\", \"attendees\": [], \"start_strftime\": \"Friday, 2024-11-01 09:00:00\", \"end_strftime\": \"Friday, 2024-11-01 09:30:00\"}], \"range\": [\"0\", \"4\"], \"total\": \"4\"}",
+      "event_id": "series_s2_read_nov1",
+      "response_sha256": "b7e772f1dee4053c26944a641970400ef2c54834b76ed1fbb835d3d51cb314aa"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Luísa Silva e Sousa",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_nov1",
+          "reason": "含重音í的完整复合人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_nov1",
+          "reason": "难识别的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Møller",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含特殊字符ø的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Café Östermalms",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_read_nov1",
+          "reason": "含特殊字符é和Ö的地点名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Jiaying Liang",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_nov1",
+          "reason": "难识别的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "João Pereira",
+          "kind": "person",
+          "source": "stage2.tool_response.series_s2_read_nov1",
+          "reason": "含特殊字符ã的完整人名，高优先级",
+          "weight": 50
+        },
+        {
+          "text": "Åboulevarden",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_read_contact",
+          "reason": "含特殊字符Å的街道名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Luísa Silva e Sousa",
+        "Astrid Lundqvist",
+        "Astrid Møller",
+        "Café Östermalms",
+        "Jiaying Liang",
+        "João Pereira",
+        "Åboulevarden"
+      ],
+      "active_vocabulary": {
+        "Luísa Silva e Sousa": 50,
+        "Astrid Lundqvist": 50,
+        "Astrid Møller": 50,
+        "Café Östermalms": 50,
+        "Jiaying Liang": 50,
+        "João Pereira": 50,
+        "Åboulevarden": 50
+      },
+      "vocabulary_sha256": "2ab37d6c2fe0fcc62828b89f30a9dc7d3dd7faf3a66daa52dd6448924b9dc25c"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:34.866511+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

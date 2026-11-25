@@ -1,0 +1,107 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0296_yxauylkdn61cesadi3fx0zplw3pfd0qg",
+  "model": "deepseek-flash",
+  "input_sha256": "e0261a578cfba02ec375e4d16243048deca800928e52c521db602611b141651b",
+  "review_input_sha256": "ecd83615ed9a78e52745a3cfab045aeb76f833668dc99b6e21487e20472da5b2",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "b43c786cf76b06b45abb630f5d9d010dcbaff31a57d7be571b71ffce56d5710d",
+  "reference_results_sha256": "05d1931d804a84975f27fc4b2e7dcd7196849ac8a5c6b928bca7c1fe55764b41",
+  "sources": {
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Rohan Deshpande",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Søren Kjær",
+      "original_source": "stage1.tool_gt.series_s1_reply.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Adwave",
+      "original_source": "stage2.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {},
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Rohan Deshpande",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，含独特姓氏，适合作为热词",
+          "weight": 50
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含拉丁变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Rohan Deshpande",
+        "Søren Kjær"
+      ],
+      "active_vocabulary": {
+        "Rohan Deshpande": 50,
+        "Søren Kjær": 50
+      },
+      "vocabulary_sha256": "471156ffebc9ab3996f3d227d1e1ae3a8ea14fa5a561ee7b59a044e95934f996"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Adwave",
+          "kind": "organization",
+          "source": "stage2.existing_catalog.0",
+          "reason": "独特公司名，非通用词，适合作为热词",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Adwave"
+      ],
+      "active_vocabulary": {
+        "Rohan Deshpande": 50,
+        "Søren Kjær": 50,
+        "Adwave": 50
+      },
+      "vocabulary_sha256": "34e5180a301a6c8eafd0faaebf674b7cfa2bd9682ab786057787512c8a8e73cd"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:59.715171+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

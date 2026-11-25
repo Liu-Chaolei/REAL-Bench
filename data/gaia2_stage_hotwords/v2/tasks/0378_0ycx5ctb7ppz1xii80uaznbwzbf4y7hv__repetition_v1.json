@@ -1,0 +1,690 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0378_0ycx5ctb7ppz1xii80uaznbwzbf4y7hv__repetition_v1",
+  "model": "deepseek-flash",
+  "input_sha256": "773db854d79d2ed11fed77521c60566811b6a71250b9715d32089acf0e6735a4",
+  "review_input_sha256": "a9c47b4c7c3c335ae7ba9c0291aecf085950f9d66f652b77796a8497276bb5db",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "a9968a781cc2b873065a7c9767ee7e6f7a3aea9883517c4764b53f8024df62ac",
+  "reference_results_sha256": "547a3bd162fef1eb454fe89eeb6fda3bc79fbb6a1bc34eb24860ef5d7a8684e7",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Stockholm",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Restaurant Östermalms",
+      "original_source": "stage1.source_task"
+    },
+    "stage1.tool_response.series_s1_search_axel": {
+      "stage": 1,
+      "text": "[{\"event_id\": \"02f5d64f072d40048f222f42ff714c25\", \"title\": \"Photoshoot for Campaign X\", \"start_datetime\": \"1725354000\", \"end_datetime\": \"1725364800\", \"tag\": \"Work\", \"description\": \"Photoshoot for upcoming campaign with brand X.\", \"location\": \"Photoshoot Location\", \"attendees\": [\"Astrid Lundqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Tuesday, 2024-09-03 09:00:00\", \"end_strftime\": \"Tuesday, 2024-09-03 12:00:00\"}, {\"event_id\": \"2cb50f22070e445ca8723fb5f5b81cac\", \"title\": \"Dinner Date with Axel\", \"start_datetime\": \"1725566400\", \"end_datetime\": \"1725573600\", \"tag\": \"Social\", \"description\": \"Catching up with Axel over dinner at a new restaurant.\", \"location\": \"Restaurant\", \"attendees\": [\"Astrid Lundqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Thursday, 2024-09-05 20:00:00\", \"end_strftime\": \"Thursday, 2024-09-05 22:00:00\"}, {\"event_id\": \"2f956ce132e347e3929d23794fcc9659\", \"title\": \"Meeting with Brand X\", \"start_datetime\": \"1725789600\", \"end_datetime\": \"1725796800\", \"tag\": \"Work\", \"description\": \"Meeting with brand X to discuss potential collaboration.\", \"location\": \"Stockholm Office\", \"attendees\": [\"Astrid Lundqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Sunday, 2024-09-08 10:00:00\", \"end_strftime\": \"Sunday, 2024-09-08 12:00:00\"}, {\"event_id\": \"5c2bdcfa7fd8470cbf869d8564887797\", \"title\": \"Brand Partnership Meeting\", \"start_datetime\": \"1730282400\", \"end_datetime\": \"1730289600\", \"tag\": \"Work\", \"description\": \"Discuss potential partnership with new fashion brand.\", \"location\": \"Zoom Meeting\", \"attendees\": [\"Astrid Lundqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Wednesday, 2024-10-30 10:00:00\", \"end_strftime\": \"Wednesday, 2024-10-30 12:00:00\"}, {\"event_id\": \"5f012117a8164ec3b3b2346c8414594b\", \"title\": \"Influencer Gathering\", \"start_datetime\": \"1727200800\", \"end_datetime\": \"1727211600\", \"tag\": \"Work\", \"description\": \"Networking event with fellow influencers and brands\", \"location\": \"Stockholm Influencer Lounge\", \"attendees\": [\"Astrid Lindqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Tuesday, 2024-09-24 18:00:00\", \"end_strftime\": \"Tuesday, 2024-09-24 21:00:00\"}, {\"event_id\": \"65f47f866f154377a88ab09e91a39367\", \"title\": \"Meeting with Agency\", \"start_datetime\": \"1725616800\", \"end_datetime\": \"1725624000\", \"tag\": \"Work\", \"description\": \"Meeting with agency to discuss upcoming projects.\", \"location\": \"Stockholm Office\", \"attendees\": [\"Astrid Lundqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Friday, 2024-09-06 10:00:00\", \"end_strftime\": \"Friday, 2024-09-06 12:00:00\"}, {\"event_id\": \"6b8fc82a334a47c0a3b0f39c5018a71e\", \"title\": \"Dinner with Axel\", \"start_datetime\": \"1730574000\", \"end_datetime\": \"1730581200\", \"tag\": \"Social\", \"description\": \"Catch up with Axel Lindqvist, marketing manager.\", \"location\": \"Restaurant Östermalms\", \"attendees\": [\"Astrid Lundqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Saturday, 2024-11-02 19:00:00\", \"end_strftime\": \"Saturday, 2024-11-02 21:00:00\"}, {\"event_id\": \"6c8d48e7acc8420fbaab87acf2df3c8d\", \"title\": \"Networking Event\", \"start_datetime\": \"1727373600\", \"end_datetime\": \"1727384400\", \"tag\": \"Work\", \"description\": \"Networking event with industry professionals\", \"location\": \"Stockholm Networking Venue\", \"attendees\": [\"Astrid Lindqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Thursday, 2024-09-26 18:00:00\", \"end_strftime\": \"Thursday, 2024-09-26 21:00:00\"}, {\"event_id\": \"a21e10b5b39645babbc489093a86464e\", \"title\": \"Photoshoot for Campaign Y\", \"start_datetime\": \"1725872400\", \"end_datetime\": \"1725883200\", \"tag\": \"Work\", \"description\": \"Photoshoot for upcoming campaign with brand Y.\", \"location\": \"Photoshoot Location\", \"attendees\": [\"Astrid Lundqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Monday, 2024-09-09 09:00:00\", \"end_strftime\": \"Monday, 2024-09-09 12:00:00\"}, {\"event_id\": \"a33cb4a50ef04bf58b38599735fe78f5\", \"title\": \"Meeting with Agency\", \"start_datetime\": \"1725962400\", \"end_datetime\": \"1725969600\", \"tag\": \"Work\", \"description\": \"Meeting with agency to discuss upcoming projects.\", \"location\": \"Stockholm Office\", \"attendees\": [\"Astrid Lundqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Tuesday, 2024-09-10 10:00:00\", \"end_strftime\": \"Tuesday, 2024-09-10 12:00:00\"}, {\"event_id\": \"a71dda8e8f8b4686a0e48ddc64129823\", \"title\": \"Networking Event\", \"start_datetime\": \"1727546400\", \"end_datetime\": \"1727557200\", \"tag\": \"Work\", \"description\": \"Networking event with industry professionals\", \"location\": \"Stockholm Networking Venue\", \"attendees\": [\"Astrid Lindqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Saturday, 2024-09-28 18:00:00\", \"end_strftime\": \"Saturday, 2024-09-28 21:00:00\"}, {\"event_id\": \"bf1001e0ac33498e873e23060bc254f7\", \"title\": \"Photoshoot for Campaign Z\", \"start_datetime\": \"1725526800\", \"end_datetime\": \"1725537600\", \"tag\": \"Work\", \"description\": \"Photoshoot for upcoming campaign with brand Z.\", \"location\": \"Photoshoot Location\", \"attendees\": [\"Astrid Lundqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Thursday, 2024-09-05 09:00:00\", \"end_strftime\": \"Thursday, 2024-09-05 12:00:00\"}, {\"event_id\": \"d8c00626455a49c68998d107f90f7f59\", \"title\": \"Content Creation Meeting\", \"start_datetime\": \"1725271200\", \"end_datetime\": \"1725278400\", \"tag\": \"Work\", \"description\": \"Meeting with team to discuss upcoming content creation projects.\", \"location\": \"Stockholm Office\", \"attendees\": [\"Astrid Lundqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Monday, 2024-09-02 10:00:00\", \"end_strftime\": \"Monday, 2024-09-02 12:00:00\"}, {\"event_id\": \"fd004c82bad74ee28ccd8e235aff67b2\", \"title\": \"Meeting with Brand Y\", \"start_datetime\": \"1725444000\", \"end_datetime\": \"1725451200\", \"tag\": \"Work\", \"description\": \"Meeting with brand Y to discuss potential collaboration.\", \"location\": \"Stockholm Office\", \"attendees\": [\"Astrid Lundqvist\", \"Axel Lindqvist\"], \"start_strftime\": \"Wednesday, 2024-09-04 10:00:00\", \"end_strftime\": \"Wednesday, 2024-09-04 12:00:00\"}]",
+      "event_id": "series_s1_search_axel",
+      "response_sha256": "e43774c03464747ebe72336d4780f8b496825eb6fa6a15719822c2258c3e9289"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Östermalmsgatan 12",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Södermalm Haven",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.2": {
+      "stage": 2,
+      "text": "Södermalmsallén 12",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.existing_catalog.3": {
+      "stage": 2,
+      "text": "Stockholm City Living",
+      "original_source": "stage2.reference_reply.series_s2_answer.arguments.content"
+    },
+    "stage2.tool_response.series_s2_list_saved": {
+      "stage": 2,
+      "text": "{\"62cb7292b5a54171a312e34ff332356d\": {\"name\": \"Helsingborg Haven\", \"location\": \"Stortorget 12, Helsingborg\", \"zip_code\": \"252 23\", \"price\": \"1600\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"62cb7292b5a54171a312e34ff332356d\", \"amenities\": [\"Pool\", \"Parking\"], \"saved\": \"True\"}, \"d8f02d5d11c14e5588120a316cbafef4\": {\"name\": \"Uppsala Studentboende\", \"location\": \"Kyrkogatan 20, Uppsala\", \"zip_code\": \"753 31\", \"price\": \"1000\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"500\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"d8f02d5d11c14e5588120a316cbafef4\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"256aeabd73374a37ba8f0bb64386ba6e\": {\"name\": \"Jönköping Jewel\", \"location\": \"Stora Torget 15, Jönköping\", \"zip_code\": \"553 22\", \"price\": \"12000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1100\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"256aeabd73374a37ba8f0bb64386ba6e\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"49c463a034404ca4a48bfbf5353a9021\": {\"name\": \"Lund Botaniska\", \"location\": \"Botaniska Trädgården 2, Lund\", \"zip_code\": \"223 61\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"49c463a034404ca4a48bfbf5353a9021\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"8fb973f7cd694f589755f5755a0dd8ba\": {\"name\": \"Uppsala Oasis\", \"location\": \"Kvarnbo, Uppsala\", \"zip_code\": \"754 50\", \"price\": \"1200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"8fb973f7cd694f589755f5755a0dd8ba\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"89e0dc49b2c849b2825dea28a710bda0\": {\"name\": \"Uppsala Upscale\", \"location\": \"Sysslomansgatan 10, Uppsala\", \"zip_code\": \"753 31\", \"price\": \"1400\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"89e0dc49b2c849b2825dea28a710bda0\", \"amenities\": [\"Laundry\", \"Gym\"], \"saved\": \"True\"}, \"2c35738320e74ee7a37c26eb5e432fc0\": {\"name\": \"Malmö Marina View\", \"location\": \"Malmö Marina, Malmö\", \"zip_code\": \"211 19\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"2c35738320e74ee7a37c26eb5e432fc0\", \"amenities\": [\"Pool\", \"Parking\"], \"saved\": \"True\"}, \"e7d3e131384f4c7990c8a41d2e3ab29d\": {\"name\": \"Malmö Majestic\", \"location\": \"Malmöhusvägen 34, Malmö\", \"zip_code\": \"211 18\", \"price\": \"2200\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1100\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"e7d3e131384f4c7990c8a41d2e3ab29d\", \"amenities\": [\"Laundry\", \"Balcony\"], \"saved\": \"True\"}, \"0f61e09dfd104988ac456c7e77552a68\": {\"name\": \"Örebro Oasis\", \"location\": \"Storgatan 15, Örebro\", \"zip_code\": \"702 11\", \"price\": \"1300\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"0f61e09dfd104988ac456c7e77552a68\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"5507456188584184a4583976dfe48327\": {\"name\": \"Uppsala Fyris\", \"location\": \"Fyris, Uppsala\", \"zip_code\": \"754 50\", \"price\": \"1600\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"500\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"5507456188584184a4583976dfe48327\", \"amenities\": [\"Pool\", \"Gym\"], \"saved\": \"True\"}, \"5a8070b881fb4a07bbeffc8b1e9b0109\": {\"name\": \"Stockholm Haven\", \"location\": \"Södermalm, Stockholm\", \"zip_code\": \"118 26\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"5a8070b881fb4a07bbeffc8b1e9b0109\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"e11edfd522bc4daaa13c18e3f410a745\": {\"name\": \"Malmö Harbour\", \"location\": \"Södra Promenaden 25, Malmö\", \"zip_code\": \"211 19\", \"price\": \"2400\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"e11edfd522bc4daaa13c18e3f410a745\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"5560dff5aa3141a5b26904d83bc227c7\": {\"name\": \"Lund Student Housing\", \"location\": \"Sölvegatan 20, Lund\", \"zip_code\": \"223 62\", \"price\": \"1200\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"Month-to-month\", \"apartment_id\": \"5560dff5aa3141a5b26904d83bc227c7\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"d77b19e401a149ff9493820a5db267e7\": {\"name\": \"Lund Lägenhet\", \"location\": \"Lund city, Lund\", \"zip_code\": \"222 25\", \"price\": \"1900\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"d77b19e401a149ff9493820a5db267e7\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"7c3b5b4570014347ad527322ff06e4c1\": {\"name\": \"Linköping Loft\", \"location\": \"Ågatan 17, Linköping\", \"zip_code\": \"582 54\", \"price\": \"1400\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"700\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"7c3b5b4570014347ad527322ff06e4c1\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"fd4ef3ea31944569b8a9f330bcf51369\": {\"name\": \"Lund Living\", \"location\": \"Stora Södergatan 15, Lund\", \"zip_code\": \"222 23\", \"price\": \"900\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"fd4ef3ea31944569b8a9f330bcf51369\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"e34f82c92f034439a27d6d39d3ada24c\": {\"name\": \"Göteborgs Hamn\", \"location\": \"Långgatorna 12, Göteborg\", \"zip_code\": \"411 14\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"e34f82c92f034439a27d6d39d3ada24c\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"36a9e0ab86b0461bad0d84dda28f2937\": {\"name\": \"Göteborgs Gnist\", \"location\": \"Vasagatan 34, Göteborg\", \"zip_code\": \"411 37\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"36a9e0ab86b0461bad0d84dda28f2937\", \"amenities\": [\"Parking\"], \"saved\": \"True\"}, \"8df53a12161b4d14be8c38465a1fa9f1\": {\"name\": \"Göteborgsbo\", \"location\": \"Majorna, Göteborg\", \"zip_code\": \"414 63\", \"price\": \"2200\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"8df53a12161b4d14be8c38465a1fa9f1\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"0b00633a025d4a328db4b1a074255bcf\": {\"name\": \"Uppsala Student Living\", \"location\": \"Övre Slottsgatan 5, Uppsala\", \"zip_code\": \"753 10\", \"price\": \"1800\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"0b00633a025d4a328db4b1a074255bcf\", \"amenities\": [\"Laundry\"], \"saved\": \"True\"}, \"6a572b8b24f445cd851709f559a0f8d6\": {\"name\": \"Stockholm City\", \"location\": \"Drottninggatan 83, Stockholm\", \"zip_code\": \"111 60\", \"price\": \"20000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1500\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"6a572b8b24f445cd851709f559a0f8d6\", \"amenities\": [\"Laundry\", \"Pool\"], \"saved\": \"True\"}, \"0467d6faee2d41f387fa1a5672c8dd67\": {\"name\": \"Malmö City Center\", \"location\": \"Malmö City, Malmö\", \"zip_code\": \"211 19\", \"price\": \"18000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"Month-to-month\", \"apartment_id\": \"0467d6faee2d41f387fa1a5672c8dd67\", \"amenities\": [\"Laundry\", \"Balcony\"], \"saved\": \"True\"}, \"a82c4cd615254a539deba855a1438f3e\": {\"name\": \"Lund Luxury Living\", \"location\": \"Klostergatan 15, Lund\", \"zip_code\": \"222 22\", \"price\": \"2200\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"a82c4cd615254a539deba855a1438f3e\", \"amenities\": [\"Pool\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"d7728c4ab7734d41bc52a1af7fd9441d\": {\"name\": \"Malmö Modern\", \"location\": \"Södra Förstadsgatan 20, Malmö\", \"zip_code\": \"211 43\", \"price\": \"1300\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"d7728c4ab7734d41bc52a1af7fd9441d\", \"amenities\": [\"Laundry\", \"Gym\"], \"saved\": \"True\"}, \"1be27bcaed1345119b27d4d6e8bbe913\": {\"name\": \"Lund Centrum\", \"location\": \"Lund\", \"zip_code\": \"221 00\", \"price\": \"2500\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Apartment\", \"square_footage\": \"1300\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"1be27bcaed1345119b27d4d6e8bbe913\", \"amenities\": [\"Gym\", \"Laundry\", \"Balcony\"], \"saved\": \"True\"}, \"92ba401d76614dc9be065a30c335099c\": {\"name\": \"Malmö Marina\", \"location\": \"Malmöhusvägen 10, Malmö\", \"zip_code\": \"211 18\", \"price\": \"1500\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"92ba401d76614dc9be065a30c335099c\", \"amenities\": [\"Laundry\", \"Gym\"], \"saved\": \"True\"}, \"153ddf565fe34633951e8cefa0367cd2\": {\"name\": \"Lund Linné\", \"location\": \"Linnéstaden, Lund\", \"zip_code\": \"224 60\", \"price\": \"1100\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Condo\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"No pets\", \"lease_term\": \"6 months\", \"apartment_id\": \"153ddf565fe34633951e8cefa0367cd2\", \"amenities\": [\"Parking\", \"Laundry\"], \"saved\": \"True\"}, \"d9836858cbb3461c9d7324abf051d391\": {\"name\": \"Malmö Castle Views\", \"location\": \"Slottsgatan 12, Malmö\", \"zip_code\": \"211 19\", \"price\": \"2000\", \"bedrooms\": \"3\", \"bathrooms\": \"2\", \"property_type\": \"Condo\", \"square_footage\": \"1200\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Third floor\", \"pet_policy\": \"Cats allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"d9836858cbb3461c9d7324abf051d391\", \"amenities\": [\"Parking\", \"Pool\"], \"saved\": \"True\"}, \"a3d10afbc7bd4e49b16fff81ad668cc2\": {\"name\": \"Uppsala City Living\", \"location\": \"Stora Torget 3, Uppsala\", \"zip_code\": \"753 30\", \"price\": \"1500\", \"bedrooms\": \"1\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"600\", \"furnished_status\": \"Unfurnished\", \"floor_level\": \"Ground floor\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"a3d10afbc7bd4e49b16fff81ad668cc2\", \"amenities\": [\"Laundry\", \"Parking\"], \"saved\": \"True\"}, \"26060fbbac9e4f49abdbf9494794e2ad\": {\"name\": \"Södermalm Haven\", \"location\": \"Södermalmsallén 12, Stockholm\", \"zip_code\": \"118 25\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"26060fbbac9e4f49abdbf9494794e2ad\", \"amenities\": [\"Gym\", \"Laundry\", \"Balcony\"], \"saved\": \"True\"}, \"251d14f5e4fb47f0a148c23b8f5ded2d\": {\"name\": \"Stockholm City Living\", \"location\": \"Norrmalm, Stockholm\", \"zip_code\": \"111 23\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"251d14f5e4fb47f0a148c23b8f5ded2d\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}}",
+      "event_id": "series_s2_list_saved",
+      "response_sha256": "cfd575f57c76e6db89f972f66b83f032dd6ac501ae6a19996afb4d714778c9b1"
+    },
+    "stage2.tool_response.series_s2_search_rentals": {
+      "stage": 2,
+      "text": "{\"251d14f5e4fb47f0a148c23b8f5ded2d\": {\"name\": \"Stockholm City Living\", \"location\": \"Norrmalm, Stockholm\", \"zip_code\": \"111 23\", \"price\": \"2000\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"1000\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"No pets\", \"lease_term\": \"1 year\", \"apartment_id\": \"251d14f5e4fb47f0a148c23b8f5ded2d\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"False\"}, \"26060fbbac9e4f49abdbf9494794e2ad\": {\"name\": \"Södermalm Haven\", \"location\": \"Södermalmsallén 12, Stockholm\", \"zip_code\": \"118 25\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"26060fbbac9e4f49abdbf9494794e2ad\", \"amenities\": [\"Gym\", \"Laundry\", \"Balcony\"], \"saved\": \"False\"}, \"5a8070b881fb4a07bbeffc8b1e9b0109\": {\"name\": \"Stockholm Haven\", \"location\": \"Södermalm, Stockholm\", \"zip_code\": \"118 26\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"5a8070b881fb4a07bbeffc8b1e9b0109\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"True\"}, \"63d3239ad97148afa5586d029cd1471b\": {\"name\": \"Södermalm Oasis\", \"location\": \"Hornsgatan 123, Stockholm\", \"zip_code\": \"118 21\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"63d3239ad97148afa5586d029cd1471b\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"False\"}, \"aae6d8011d49417390f7cdc050c4e39a\": {\"name\": \"Östermalm Oasis\", \"location\": \"Valhallavägen 22, Stockholm\", \"zip_code\": \"114 41\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"aae6d8011d49417390f7cdc050c4e39a\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"False\"}, \"bf9d37569e064982924362e5e6023990\": {\"name\": \"Nordic Oasis\", \"location\": \"Kungsgatan 12, Stockholm\", \"zip_code\": \"111 35\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"bf9d37569e064982924362e5e6023990\", \"amenities\": [\"Gym\", \"Laundry\"], \"saved\": \"False\"}, \"db61fa40d1714954a5b9aee3d20941ec\": {\"name\": \"Stockholm Serenity\", \"location\": \"Östermalmsgatan 12, Stockholm\", \"zip_code\": \"114 39\", \"price\": \"1800\", \"bedrooms\": \"2\", \"bathrooms\": \"1\", \"property_type\": \"Apartment\", \"square_footage\": \"900\", \"furnished_status\": \"Furnished\", \"floor_level\": \"Upper floors\", \"pet_policy\": \"Pets allowed\", \"lease_term\": \"1 year\", \"apartment_id\": \"db61fa40d1714954a5b9aee3d20941ec\", \"amenities\": [\"Gym\", \"Laundry\", \"Balcony\"], \"saved\": \"False\"}}",
+      "event_id": "series_s2_search_rentals",
+      "response_sha256": "6ea9d121457b7353470f658b080d59eb7740c39fb0b6c8f52757bbf61867366b"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Stockholm",
+          "kind": "place",
+          "source": "stage0.existing_catalog.0",
+          "reason": "瑞典首都，地名，保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Stockholm"
+      ],
+      "active_vocabulary": {
+        "Stockholm": 50
+      },
+      "vocabulary_sha256": "9ecd5fa359cad1b53e10d4b229eaf4e78b85fc6a3313a5603d5938d67999b80e"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Stockholm Influencer Lounge",
+          "kind": "place",
+          "source": "stage1.tool_response.series_s1_search_axel",
+          "reason": "独特场所名，含专有名词组合",
+          "weight": 50
+        },
+        {
+          "text": "Astrid Lundqvist",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_search_axel",
+          "reason": "完整人名，含独特姓氏，适合热词",
+          "weight": 50
+        },
+        {
+          "text": "Axel Lindqvist",
+          "kind": "person",
+          "source": "stage1.tool_response.series_s1_search_axel",
+          "reason": "完整人名，含独特姓氏，适合热词",
+          "weight": 50
+        },
+        {
+          "text": "Restaurant Östermalms",
+          "kind": "place",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符的独特餐厅名，高优先级",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Stockholm Influencer Lounge",
+        "Astrid Lundqvist",
+        "Axel Lindqvist",
+        "Restaurant Östermalms"
+      ],
+      "active_vocabulary": {
+        "Stockholm": 50,
+        "Stockholm Influencer Lounge": 50,
+        "Astrid Lundqvist": 50,
+        "Axel Lindqvist": 50,
+        "Restaurant Östermalms": 50
+      },
+      "vocabulary_sha256": "aaabea4d59ef4478542cb3157451f97ef1c5ee1b256d1713d374d55e9e17ede7"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Lund Luxury Living",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "独特房源名称",
+          "weight": 50
+        },
+        {
+          "text": "Lund Student Housing",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "独特房源名称",
+          "weight": 50
+        },
+        {
+          "text": "Malmö Castle Views",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符的完整房源名",
+          "weight": 50
+        },
+        {
+          "text": "Malmö City Center",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符地名的独特名称",
+          "weight": 50
+        },
+        {
+          "text": "Malmö Marina View",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符地名的独特名称",
+          "weight": 50
+        },
+        {
+          "text": "Stockholm City Living",
+          "kind": "organization",
+          "source": "stage2.existing_catalog.3",
+          "reason": "独特公寓品牌名称",
+          "weight": 50
+        },
+        {
+          "text": "Uppsala Student Living",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "独特房源名称",
+          "weight": 50
+        },
+        {
+          "text": "Botaniska Trädgården",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符的瑞典语地名",
+          "weight": 50
+        },
+        {
+          "text": "Göteborgs Gnist",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符地名的独特名称",
+          "weight": 50
+        },
+        {
+          "text": "Göteborgs Hamn",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符地名的独特名称",
+          "weight": 50
+        },
+        {
+          "text": "Helsingborg Haven",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含地名的独特房源名称",
+          "weight": 50
+        },
+        {
+          "text": "Hornsgatan 123",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_rentals",
+          "reason": "瑞典语街道地址，ASR识别困难",
+          "weight": 50
+        },
+        {
+          "text": "Jönköping Jewel",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符地名的独特名称",
+          "weight": 50
+        },
+        {
+          "text": "Kungsgatan 12",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_rentals",
+          "reason": "瑞典语街道地址，ASR识别困难",
+          "weight": 50
+        },
+        {
+          "text": "Linköping Loft",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符地名的独特名称",
+          "weight": 50
+        },
+        {
+          "text": "Lund Botaniska",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "独特房源名称",
+          "weight": 50
+        },
+        {
+          "text": "Lund Centrum",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "独特房源名称",
+          "weight": 50
+        },
+        {
+          "text": "Lund Linné",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符的完整地名",
+          "weight": 50
+        },
+        {
+          "text": "Lund Living",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "独特房源名称",
+          "weight": 50
+        },
+        {
+          "text": "Lund Lägenhet",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符的独特名称",
+          "weight": 50
+        },
+        {
+          "text": "Malmö Harbour",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符地名的独特名称",
+          "weight": 50
+        },
+        {
+          "text": "Malmö Majestic",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符地名的独特名称",
+          "weight": 50
+        },
+        {
+          "text": "Malmö Modern",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符地名的独特名称",
+          "weight": 50
+        },
+        {
+          "text": "Nordic Oasis",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_rentals",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Stockholm Haven",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "独特房源名称",
+          "weight": 50
+        },
+        {
+          "text": "Stockholm Serenity",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_rentals",
+          "reason": "独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Stora Södergatan",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符的瑞典语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Stora Torget",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "瑞典语广场名",
+          "weight": 50
+        },
+        {
+          "text": "Södermalm Haven",
+          "kind": "place",
+          "source": "stage2.existing_catalog.1",
+          "reason": "含变音符号的独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Södermalm Oasis",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_rentals",
+          "reason": "含变音符号的独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Södermalmsallén 12",
+          "kind": "place",
+          "source": "stage2.existing_catalog.2",
+          "reason": "含变音符号的瑞典语街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Södra Förstadsgatan",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符的瑞典语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Södra Promenaden",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符的瑞典语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Uppsala Fyris",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "独特房源名称",
+          "weight": 50
+        },
+        {
+          "text": "Uppsala Oasis",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "独特房源名称",
+          "weight": 50
+        },
+        {
+          "text": "Uppsala Studentboende",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "瑞典语独特房源名称",
+          "weight": 50
+        },
+        {
+          "text": "Uppsala Upscale",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "独特房源名称",
+          "weight": 50
+        },
+        {
+          "text": "Valhallavägen 22",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_rentals",
+          "reason": "含变音符号的瑞典语街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Örebro Oasis",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符地名的独特名称",
+          "weight": 50
+        },
+        {
+          "text": "Östermalm Oasis",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_search_rentals",
+          "reason": "含变音符号的独特公寓名称",
+          "weight": 50
+        },
+        {
+          "text": "Östermalmsgatan 12",
+          "kind": "place",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号的瑞典语街道地址，ASR识别困难",
+          "weight": 50
+        },
+        {
+          "text": "Övre Slottsgatan",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符的瑞典语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Drottninggatan",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "瑞典语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Göteborgsbo",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符的独特名称",
+          "weight": 50
+        },
+        {
+          "text": "Klostergatan",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "瑞典语街道名",
+          "weight": 50
+        },
+        {
+          "text": "Kvarnbo",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "乌普萨拉地区名",
+          "weight": 5
+        },
+        {
+          "text": "Kyrkogatan",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "瑞典语街道名",
+          "weight": 5
+        },
+        {
+          "text": "Linnéstaden",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符的街区名",
+          "weight": 5
+        },
+        {
+          "text": "Långgatorna",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符的瑞典语街道名",
+          "weight": 5
+        },
+        {
+          "text": "Majorna",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "哥德堡区名",
+          "weight": 5
+        },
+        {
+          "text": "Malmöhusvägen",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符的瑞典语街道名",
+          "weight": 5
+        },
+        {
+          "text": "Stortorget",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "瑞典语广场名",
+          "weight": 5
+        },
+        {
+          "text": "Sysslomansgatan",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "瑞典语街道名",
+          "weight": 5
+        },
+        {
+          "text": "Sölvegatan",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符的瑞典语街道名",
+          "weight": 5
+        },
+        {
+          "text": "Ågatan",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_list_saved",
+          "reason": "含变音符的瑞典语街道名",
+          "weight": 5
+        }
+      ],
+      "new_terms": [
+        "Lund Luxury Living",
+        "Lund Student Housing",
+        "Malmö Castle Views",
+        "Malmö City Center",
+        "Malmö Marina View",
+        "Stockholm City Living",
+        "Uppsala Student Living",
+        "Botaniska Trädgården",
+        "Göteborgs Gnist",
+        "Göteborgs Hamn",
+        "Helsingborg Haven",
+        "Hornsgatan 123",
+        "Jönköping Jewel",
+        "Kungsgatan 12",
+        "Linköping Loft",
+        "Lund Botaniska",
+        "Lund Centrum",
+        "Lund Linné",
+        "Lund Living",
+        "Lund Lägenhet",
+        "Malmö Harbour",
+        "Malmö Majestic",
+        "Malmö Modern",
+        "Nordic Oasis",
+        "Stockholm Haven",
+        "Stockholm Serenity",
+        "Stora Södergatan",
+        "Stora Torget",
+        "Södermalm Haven",
+        "Södermalm Oasis",
+        "Södermalmsallén 12",
+        "Södra Förstadsgatan",
+        "Södra Promenaden",
+        "Uppsala Fyris",
+        "Uppsala Oasis",
+        "Uppsala Studentboende",
+        "Uppsala Upscale",
+        "Valhallavägen 22",
+        "Örebro Oasis",
+        "Östermalm Oasis",
+        "Östermalmsgatan 12",
+        "Övre Slottsgatan",
+        "Drottninggatan",
+        "Göteborgsbo",
+        "Klostergatan",
+        "Kvarnbo",
+        "Kyrkogatan",
+        "Linnéstaden",
+        "Långgatorna",
+        "Majorna",
+        "Malmöhusvägen",
+        "Stortorget",
+        "Sysslomansgatan",
+        "Sölvegatan",
+        "Ågatan"
+      ],
+      "active_vocabulary": {
+        "Stockholm": 50,
+        "Stockholm Influencer Lounge": 50,
+        "Astrid Lundqvist": 50,
+        "Axel Lindqvist": 50,
+        "Restaurant Östermalms": 50,
+        "Lund Luxury Living": 50,
+        "Lund Student Housing": 50,
+        "Malmö Castle Views": 50,
+        "Malmö City Center": 50,
+        "Malmö Marina View": 50,
+        "Stockholm City Living": 50,
+        "Uppsala Student Living": 50,
+        "Botaniska Trädgården": 50,
+        "Göteborgs Gnist": 50,
+        "Göteborgs Hamn": 50,
+        "Helsingborg Haven": 50,
+        "Hornsgatan 123": 50,
+        "Jönköping Jewel": 50,
+        "Kungsgatan 12": 50,
+        "Linköping Loft": 50,
+        "Lund Botaniska": 50,
+        "Lund Centrum": 50,
+        "Lund Linné": 50,
+        "Lund Living": 50,
+        "Lund Lägenhet": 50,
+        "Malmö Harbour": 50,
+        "Malmö Majestic": 50,
+        "Malmö Modern": 50,
+        "Nordic Oasis": 50,
+        "Stockholm Haven": 50,
+        "Stockholm Serenity": 50,
+        "Stora Södergatan": 50,
+        "Stora Torget": 50,
+        "Södermalm Haven": 50,
+        "Södermalm Oasis": 50,
+        "Södermalmsallén 12": 50,
+        "Södra Förstadsgatan": 50,
+        "Södra Promenaden": 50,
+        "Uppsala Fyris": 50,
+        "Uppsala Oasis": 50,
+        "Uppsala Studentboende": 50,
+        "Uppsala Upscale": 50,
+        "Valhallavägen 22": 50,
+        "Örebro Oasis": 50,
+        "Östermalm Oasis": 50,
+        "Östermalmsgatan 12": 50,
+        "Övre Slottsgatan": 50,
+        "Drottninggatan": 50,
+        "Göteborgsbo": 50,
+        "Klostergatan": 50,
+        "Kvarnbo": 5,
+        "Kyrkogatan": 5,
+        "Linnéstaden": 5,
+        "Långgatorna": 5,
+        "Majorna": 5,
+        "Malmöhusvägen": 5,
+        "Stortorget": 5,
+        "Sysslomansgatan": 5,
+        "Sölvegatan": 5,
+        "Ågatan": 5
+      },
+      "vocabulary_sha256": "d5951c5a4c2b172f9a4ea4f5d31c078f5b5e1cde2a976ae108e817ca9224e8a4"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": [
+        {
+          "text": "Malmö Marina",
+          "covered_by": "Malmö Marina View"
+        },
+        {
+          "text": "Stockholm City",
+          "covered_by": "Stockholm City Living"
+        },
+        {
+          "text": "Slottsgatan",
+          "covered_by": "Övre Slottsgatan"
+        },
+        {
+          "text": "Södermalm",
+          "covered_by": "Södermalm Haven"
+        },
+        {
+          "text": "Södermalmsallén",
+          "covered_by": "Södermalmsallén 12"
+        }
+      ]
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "TRASH",
+    "Axel",
+    "Campaign Z",
+    "Campaign X",
+    "Campaign Y",
+    "Brand X",
+    "Brand Y",
+    "Norrmalm"
+  ],
+  "binary_omissions": [],
+  "request_parts": 5,
+  "extracted_at": "2026-11-23T02:23:32.712863+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

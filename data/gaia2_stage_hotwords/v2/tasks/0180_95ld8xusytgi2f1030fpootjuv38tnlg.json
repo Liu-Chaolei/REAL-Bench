@@ -1,0 +1,145 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0180_95ld8xusytgi2f1030fpootjuv38tnlg",
+  "model": "deepseek-flash",
+  "input_sha256": "f2b7d36c56b17fd04065b987d4cde0fdc18f49da0ad72bee360687758a90df47",
+  "review_input_sha256": "ae138ee7d98eb87dfdf0dfe6ef9a4b7adc3445e430cec52a5eb1155dc154817f",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "1da18e99f32b48c24aebaae064a92abd62da6772a39ae0e95257f18be4826a0c",
+  "reference_results_sha256": "d6dc9d6d922535f1c77077c7dae3fbc4d7c0da10ee509411a39c23307ee5003e",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "JanSport Lunch Break",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Lund Luxe",
+      "original_source": "stage0.source_task"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Jonathan Winfrey",
+      "original_source": "stage1.source_task"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Lund Luxury Living",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.tool_response.series_s2_get_lund_luxury": {
+      "stage": 2,
+      "text": "{\"name\": \"Lund Luxury Living\", \"location\": \"Klostergatan 15, Lund\", \"zip_code\": \"222 22\", \"price\": \"2200\", \"bedrooms\": \"4\", \"bathrooms\": \"3\", \"property_type\": \"Condo\", \"square_footage\": \"1800\", \"furnished_status\": \"Semi-furnished\", \"floor_level\": \"Penthouse\", \"pet_policy\": \"Dogs allowed\", \"lease_term\": \"6 months\", \"apartment_id\": \"a82c4cd615254a539deba855a1438f3e\", \"amenities\": [\"Pool\", \"Parking\", \"Laundry\"], \"saved\": \"True\"}",
+      "event_id": "series_s2_get_lund_luxury",
+      "response_sha256": "71cb8ac731f97ad3a144258f8b2aecdfc166ad8826bda731d503b703288d1545"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "JanSport Lunch Break",
+          "kind": "product",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含品牌与型号的完整产品名，识别难度较高",
+          "weight": 50
+        },
+        {
+          "text": "Lund Luxe",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.2",
+          "reason": "特定公寓品牌名，非普通词汇",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "JanSport Lunch Break",
+        "Lund Luxe"
+      ],
+      "active_vocabulary": {
+        "JanSport Lunch Break": 50,
+        "Lund Luxe": 50
+      },
+      "vocabulary_sha256": "c97e9fce9008618af0b5865cd77814e1c8fca1ff44aaff4349f9aebbac26632f"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Jonathan Winfrey",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，保留全名而不拆分",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Jonathan Winfrey"
+      ],
+      "active_vocabulary": {
+        "JanSport Lunch Break": 50,
+        "Lund Luxe": 50,
+        "Jonathan Winfrey": 50
+      },
+      "vocabulary_sha256": "6e4c712c5fa4a876371a43eff21e66b4369e8b3d43a677cfcf1e65cc982a5561"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Lund Luxury Living",
+          "kind": "organization",
+          "source": "stage2.existing_catalog.0",
+          "reason": "特定公寓品牌全名，识别难度较高",
+          "weight": 50
+        },
+        {
+          "text": "Klostergatan 15",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_get_lund_luxury",
+          "reason": "瑞典语街道地址，含特殊拼写",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Lund Luxury Living",
+        "Klostergatan 15"
+      ],
+      "active_vocabulary": {
+        "JanSport Lunch Break": 50,
+        "Lund Luxe": 50,
+        "Jonathan Winfrey": 50,
+        "Lund Luxury Living": 50,
+        "Klostergatan 15": 50
+      },
+      "vocabulary_sha256": "257250fdf81ca7990862773673fc8d86400d026c39e0efd9a29029edea66387b"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Winfrey",
+    "Jonathan"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:14:21.727649+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

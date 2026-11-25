@@ -1,0 +1,163 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0078_dc8rpkw2n0cfwji8lkfnrtfokrxnn3md",
+  "model": "deepseek-flash",
+  "input_sha256": "19bd4448c20d559f1e85c30985ca56267cf2d0dbea9172c07bef1755ffabde2a",
+  "review_input_sha256": "9af97b4133f9ade1fcff1e201c2368fb666d0db02255d773d23f9cd4c801d392",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "d052934cc18e0cc4a9274100873717334e2a25a3cadc86443bd2a8d24674050e",
+  "reference_results_sha256": "0dc2c6a46a11b2c460a4160c7124a2bf44afe28071d331d5ab3f5378012794a6",
+  "sources": {
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Aino Lahti",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-cc52a852-7cc6-4049-8518-e9f7feb228a4.arguments.content"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Matěj Nováček",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-cc52a852-7cc6-4049-8518-e9f7feb228a4.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Klaus Grüner",
+      "original_source": "stage1.tool_gt.series_s1_email.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Helga Gruber",
+      "original_source": "stage1.tool_gt.series_s1_email.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Aalto University",
+      "original_source": "stage2.tool_gt.series_s2_contact.arguments.updates.description"
+    },
+    "stage2.tool_response.series_s2_contact_read": {
+      "stage": 2,
+      "text": "{\"first_name\": \"Aino\", \"last_name\": \"Lahti\", \"contact_id\": \"43974c3ac32a41a79cf659a07bfff761\", \"is_user\": \"False\", \"gender\": \"Gender.FEMALE\", \"age\": \"20\", \"nationality\": \"Finnish\", \"city_living\": \"Espoo\", \"country\": \"Finland\", \"status\": \"Status.STUDENT\", \"job\": \"Robotics Engineering Student\", \"description\": \"A bright and ambitious 20-year-old robotics engineering student at Aalto University in Espoo, Finland. Follow-up: Robotics Project discussion.\", \"phone\": \"+358401234547\", \"email\": \"aino.lahti@student.aalto.fi\", \"address\": \"Otaniementie 17, 02150 Espoo, Finland\"}",
+      "event_id": "series_s2_contact_read",
+      "response_sha256": "ab1c40c4626627ebd3121353f364218f42b3948048f8937196ae3485fc3c0b6c"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aino Lahti",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，难以自动识别",
+          "weight": 50
+        },
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aino Lahti",
+        "Matěj Nováček"
+      ],
+      "active_vocabulary": {
+        "Aino Lahti": 50,
+        "Matěj Nováček": 50
+      },
+      "vocabulary_sha256": "7a789c833becefa882c877118ebf706c347ce4669cdca9244496df7fc1e00ec6"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Helga Gruber",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "完整人名，难以自动识别",
+          "weight": 50
+        },
+        {
+          "text": "Klaus Grüner",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Helga Gruber",
+        "Klaus Grüner"
+      ],
+      "active_vocabulary": {
+        "Aino Lahti": 50,
+        "Matěj Nováček": 50,
+        "Helga Gruber": 50,
+        "Klaus Grüner": 50
+      },
+      "vocabulary_sha256": "a61f075be86de26d5d6727d1f191b39d3884249ec841ea8f378d4f7c573a66be"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Aalto University",
+          "kind": "organization",
+          "source": "stage2.existing_catalog.0",
+          "reason": "特定机构名，难以自动识别",
+          "weight": 50
+        },
+        {
+          "text": "Otaniementie 17",
+          "kind": "place",
+          "source": "stage2.tool_response.series_s2_contact_read",
+          "reason": "芬兰语街道名，难以自动识别",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aalto University",
+        "Otaniementie 17"
+      ],
+      "active_vocabulary": {
+        "Aino Lahti": 50,
+        "Matěj Nováček": 50,
+        "Helga Gruber": 50,
+        "Klaus Grüner": 50,
+        "Aalto University": 50,
+        "Otaniementie 17": 50
+      },
+      "vocabulary_sha256": "0aa20b022787b1de4512bb84c859658c9868dd89ef922c34606efa3c0b479847"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Ecobee",
+    "Klaus",
+    "Helga",
+    "Espoo",
+    "Finland"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:13:55.363140+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

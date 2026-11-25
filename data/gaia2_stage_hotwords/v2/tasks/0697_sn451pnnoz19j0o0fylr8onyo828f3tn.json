@@ -1,0 +1,131 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0697_sn451pnnoz19j0o0fylr8onyo828f3tn",
+  "model": "deepseek-flash",
+  "input_sha256": "a5ffd1e38fe62f3cec5e65689bbd4509b7f06ee0d5ea79f32619c9b7865ecd05",
+  "review_input_sha256": "fcf2f890ab5b2430bca2c2239313a611ed31de4181544cbe542ed77483442158",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "d6cffa5f16894c3276fffc45d72b3fa94f226963568f01f39c4c1b80eec5e603",
+  "reference_results_sha256": "020a85c1aba04d10bf4943c611d2990bac91b1732eb2d7c3b436c32dd481f16a",
+  "sources": {
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Aurélien LaFleur",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-dbcd7134-1226-462f-92bf-5928bc2d38a0.arguments.content"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Xóchitl Ramírez",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-fc90d31c-4ead-4931-a9da-496f972540be.arguments.content"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "Nalani Jensen",
+      "original_source": "stage0.reference_reply.OracleEvent-AGENT-fc90d31c-4ead-4931-a9da-496f972540be.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Tommy Vino",
+      "original_source": "stage1.source_task"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Aurélien LaFleur",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Nalani Jensen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.4",
+          "reason": "完整人名，拼写较难，保留",
+          "weight": 50
+        },
+        {
+          "text": "Xóchitl Ramírez",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Aurélien LaFleur",
+        "Nalani Jensen",
+        "Xóchitl Ramírez"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Nalani Jensen": 50,
+        "Xóchitl Ramírez": 50
+      },
+      "vocabulary_sha256": "6558bcb83746d8c39233cee2a1e05313ab28ea98120bc0cec0fb5f28d6611f2a"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Tommy Vino",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "完整人名，保留；Wine Cellar 为通用词，丢弃",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Tommy Vino"
+      ],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Nalani Jensen": 50,
+        "Xóchitl Ramírez": 50,
+        "Tommy Vino": 50
+      },
+      "vocabulary_sha256": "6ef247c004a3bb419ac2a408881eb94dc0c773da691c701aa1cac9c3b466b1d6"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Aurélien LaFleur": 50,
+        "Nalani Jensen": 50,
+        "Xóchitl Ramírez": 50,
+        "Tommy Vino": 50
+      },
+      "vocabulary_sha256": "6ef247c004a3bb419ac2a408881eb94dc0c773da691c701aa1cac9c3b466b1d6"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Tommy",
+    "Vino",
+    "Wine Cellar"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:02.370137+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

@@ -1,0 +1,233 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0490_khnzq2qhgu6tjw8aki3jhx9vkydax3z7",
+  "model": "deepseek-flash",
+  "input_sha256": "f4cd5e51c41b9490db7adea3832ce0783a32a82a5870bfa92ed8d04fa23e1476",
+  "review_input_sha256": "037a32bd9f1785322f8a881a98338422df91962a51889baebf91afabbcf16253",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "e05aec18644a46e230ae924660134c7a5e52b5efe09032f68d6d85d3dff4b742",
+  "reference_results_sha256": "921c0edc91b48c5ae3e4bc24ef74ba7f5ed7a43ec5aa333704a66321a88dad03",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Matěj Nováček",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-d7cff449-3793-40f4-91c3-3d543d39337e.arguments.content"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Vladimíra",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-4bd05251-cf6d-4137-9e4e-943b667df10e.arguments.content"
+    },
+    "stage1.existing_catalog.0": {
+      "stage": 1,
+      "text": "Štěpán Nováček",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.1": {
+      "stage": 1,
+      "text": "Pavla Nováková",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.2": {
+      "stage": 1,
+      "text": "Květa Nováková",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.3": {
+      "stage": 1,
+      "text": "Věra Nováková",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.4": {
+      "stage": 1,
+      "text": "Zdeněk Nováček",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.5": {
+      "stage": 1,
+      "text": "Bohumil Nováček",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage1.existing_catalog.6": {
+      "stage": 1,
+      "text": "Lukáš Nováček",
+      "original_source": "stage1.tool_gt.series_s1_send.arguments.content"
+    },
+    "stage2.existing_catalog.0": {
+      "stage": 2,
+      "text": "Šárka Nováková",
+      "original_source": "stage2.source_task"
+    },
+    "stage2.existing_catalog.1": {
+      "stage": 2,
+      "text": "Translation Project for Android App",
+      "original_source": "stage2.tool_gt.series_s2_status.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Matěj Nováček",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        },
+        {
+          "text": "Vladimíra",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "含变音符号的专有名字",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Matěj Nováček",
+        "Vladimíra"
+      ],
+      "active_vocabulary": {
+        "Matěj Nováček": 50,
+        "Vladimíra": 50
+      },
+      "vocabulary_sha256": "991ba9d79fd7078a2c155f5935571d8d1ecbfeca11e724774f88b10e5fc851de"
+    },
+    {
+      "stage": 1,
+      "extracted": [
+        {
+          "text": "Bohumil Nováček",
+          "kind": "person",
+          "source": "stage1.existing_catalog.5",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Květa Nováková",
+          "kind": "person",
+          "source": "stage1.existing_catalog.2",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Lukáš Nováček",
+          "kind": "person",
+          "source": "stage1.existing_catalog.6",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Pavla Nováková",
+          "kind": "person",
+          "source": "stage1.existing_catalog.1",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Věra Nováková",
+          "kind": "person",
+          "source": "stage1.existing_catalog.3",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Zdeněk Nováček",
+          "kind": "person",
+          "source": "stage1.existing_catalog.4",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Štěpán Nováček",
+          "kind": "person",
+          "source": "stage1.existing_catalog.0",
+          "reason": "含变音符号的完整人名",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Bohumil Nováček",
+        "Květa Nováková",
+        "Lukáš Nováček",
+        "Pavla Nováková",
+        "Věra Nováková",
+        "Zdeněk Nováček",
+        "Štěpán Nováček"
+      ],
+      "active_vocabulary": {
+        "Matěj Nováček": 50,
+        "Vladimíra": 50,
+        "Bohumil Nováček": 50,
+        "Květa Nováková": 50,
+        "Lukáš Nováček": 50,
+        "Pavla Nováková": 50,
+        "Věra Nováková": 50,
+        "Zdeněk Nováček": 50,
+        "Štěpán Nováček": 50
+      },
+      "vocabulary_sha256": "45ce03c4e56bcf6dc7f8649f9bf79aff2d5d0788ae1402b30afaef8a678b8e88"
+    },
+    {
+      "stage": 2,
+      "extracted": [
+        {
+          "text": "Translation Project for Android App",
+          "kind": "product",
+          "source": "stage2.existing_catalog.1",
+          "reason": "特定项目名称，非通用词",
+          "weight": 50
+        },
+        {
+          "text": "Šárka Nováková",
+          "kind": "person",
+          "source": "stage2.existing_catalog.0",
+          "reason": "含变音符号的完整人名，高优先级保留",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Translation Project for Android App",
+        "Šárka Nováková"
+      ],
+      "active_vocabulary": {
+        "Matěj Nováček": 50,
+        "Vladimíra": 50,
+        "Bohumil Nováček": 50,
+        "Květa Nováková": 50,
+        "Lukáš Nováček": 50,
+        "Pavla Nováková": 50,
+        "Věra Nováková": 50,
+        "Zdeněk Nováček": 50,
+        "Štěpán Nováček": 50,
+        "Translation Project for Android App": 50,
+        "Šárka Nováková": 50
+      },
+      "vocabulary_sha256": "a74449f54295418bd65783555fb75748cf1e9df785945a17f22a9ea7852469d5"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Prague Police Department"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:16:06.966729+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}

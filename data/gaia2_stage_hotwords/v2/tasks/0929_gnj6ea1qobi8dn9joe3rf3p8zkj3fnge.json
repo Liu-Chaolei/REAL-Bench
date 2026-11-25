@@ -1,0 +1,210 @@
+{
+  "version": "gaia2-stage-hotwords-v2",
+  "task_id": "0929_gnj6ea1qobi8dn9joe3rf3p8zkj3fnge",
+  "model": "deepseek-flash",
+  "input_sha256": "07412baee1ac8c6ffe98bf0dc29ce1279ce97fa1d9cf79459fe90ca79782be00",
+  "review_input_sha256": "49646da27104bd6d2c014a457efcc8c985088287266405cc143b3b587284376d",
+  "prompt_sha256": "fe54f234b46460c3510be4d183cea3f1191e17a68749311c474c591d4ecf0802",
+  "weight": 50,
+  "baseline_profile_sha256": "96848c8d76c4795455a2e63d1ab6ea72935f385191033aa446abe6b7cb95e777",
+  "reference_results_sha256": "1b2c1dabebe4524398e5f07fe5acd8362745f36b0fc1013f5900b6fa59852514",
+  "sources": {
+    "stage0.existing_catalog.0": {
+      "stage": 0,
+      "text": "Astrid Rasmussen",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.1": {
+      "stage": 0,
+      "text": "Kirsten Ravnkilde",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.10": {
+      "stage": 0,
+      "text": "Frederiksborggade 12",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-3da8735a-0b6d-44f5-abd6-4a01c1d8b77b.arguments.start_location"
+    },
+    "stage0.existing_catalog.2": {
+      "stage": 0,
+      "text": "Viggo Rasmussen",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.3": {
+      "stage": 0,
+      "text": "Søren Mikkelsen",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.4": {
+      "stage": 0,
+      "text": "København Resto",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.5": {
+      "stage": 0,
+      "text": "Østerbrogade 90",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.6": {
+      "stage": 0,
+      "text": "København Ø",
+      "original_source": "stage0.source_task"
+    },
+    "stage0.existing_catalog.7": {
+      "stage": 0,
+      "text": "Søren Kjær",
+      "original_source": "stage0.tool_gt.OracleEvent-AGENT-c087037f-04a4-4208-8f0b-ada79345d985.arguments.content"
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "extracted": [
+        {
+          "text": "Astrid Rasmussen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.0",
+          "reason": "完整人名，含独特姓氏",
+          "weight": 50
+        },
+        {
+          "text": "Frederiksborggade 12",
+          "kind": "place",
+          "source": "stage0.existing_catalog.10",
+          "reason": "独特街道地址",
+          "weight": 50
+        },
+        {
+          "text": "Kirsten Ravnkilde",
+          "kind": "person",
+          "source": "stage0.existing_catalog.1",
+          "reason": "完整人名，姓氏罕见",
+          "weight": 50
+        },
+        {
+          "text": "København Resto",
+          "kind": "organization",
+          "source": "stage0.existing_catalog.4",
+          "reason": "含特殊字符的专有场所名",
+          "weight": 50
+        },
+        {
+          "text": "København Ø",
+          "kind": "place",
+          "source": "stage0.existing_catalog.6",
+          "reason": "含特殊字符的城区地名",
+          "weight": 50
+        },
+        {
+          "text": "Søren Kjær",
+          "kind": "person",
+          "source": "stage0.existing_catalog.7",
+          "reason": "含丹麦语特殊字符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Søren Mikkelsen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.3",
+          "reason": "含丹麦语特殊字符的完整人名",
+          "weight": 50
+        },
+        {
+          "text": "Viggo Rasmussen",
+          "kind": "person",
+          "source": "stage0.existing_catalog.2",
+          "reason": "完整人名，含独特姓氏",
+          "weight": 50
+        },
+        {
+          "text": "Østerbrogade 90",
+          "kind": "place",
+          "source": "stage0.existing_catalog.5",
+          "reason": "含特殊字符的街道地址",
+          "weight": 50
+        }
+      ],
+      "new_terms": [
+        "Astrid Rasmussen",
+        "Frederiksborggade 12",
+        "Kirsten Ravnkilde",
+        "København Resto",
+        "København Ø",
+        "Søren Kjær",
+        "Søren Mikkelsen",
+        "Viggo Rasmussen",
+        "Østerbrogade 90"
+      ],
+      "active_vocabulary": {
+        "Astrid Rasmussen": 50,
+        "Frederiksborggade 12": 50,
+        "Kirsten Ravnkilde": 50,
+        "København Resto": 50,
+        "København Ø": 50,
+        "Søren Kjær": 50,
+        "Søren Mikkelsen": 50,
+        "Viggo Rasmussen": 50,
+        "Østerbrogade 90": 50
+      },
+      "vocabulary_sha256": "65b200607e9cb3a190b3f14ec1bd54457af793e2893c1a3165273d0c7dc8a479"
+    },
+    {
+      "stage": 1,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid Rasmussen": 50,
+        "Frederiksborggade 12": 50,
+        "Kirsten Ravnkilde": 50,
+        "København Resto": 50,
+        "København Ø": 50,
+        "Søren Kjær": 50,
+        "Søren Mikkelsen": 50,
+        "Viggo Rasmussen": 50,
+        "Østerbrogade 90": 50
+      },
+      "vocabulary_sha256": "65b200607e9cb3a190b3f14ec1bd54457af793e2893c1a3165273d0c7dc8a479"
+    },
+    {
+      "stage": 2,
+      "extracted": [],
+      "new_terms": [],
+      "active_vocabulary": {
+        "Astrid Rasmussen": 50,
+        "Frederiksborggade 12": 50,
+        "Kirsten Ravnkilde": 50,
+        "København Resto": 50,
+        "København Ø": 50,
+        "Søren Kjær": 50,
+        "Søren Mikkelsen": 50,
+        "Viggo Rasmussen": 50,
+        "Østerbrogade 90": 50
+      },
+      "vocabulary_sha256": "65b200607e9cb3a190b3f14ec1bd54457af793e2893c1a3165273d0c7dc8a479"
+    }
+  ],
+  "phrase_coverage_removed": [
+    {
+      "stage": 0,
+      "terms": []
+    },
+    {
+      "stage": 1,
+      "terms": []
+    },
+    {
+      "stage": 2,
+      "terms": []
+    }
+  ],
+  "source_label_repairs": [],
+  "old_terms_removed": [
+    "Kasper",
+    "Colette",
+    "Viggo"
+  ],
+  "binary_omissions": [],
+  "request_parts": 1,
+  "extracted_at": "2026-11-23T02:17:52.369831+00:00",
+  "overflow_weight": 5,
+  "weight_policy": "first-50-cumulative-v1"
+}
