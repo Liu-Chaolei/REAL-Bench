@@ -525,6 +525,41 @@ def prompt_package_v2(package: dict[str, Any]) -> dict[str, Any]:
                 clipped["items"] = clipped["items"][:40]
             bounded.append(clipped)
         value["evidence"] = bounded
+    findings = value.get("unresolved_findings", [])
+    if size(findings) > 16000:
+        compact_findings = []
+        for finding in findings:
+            compact_findings.append(
+                {
+                    key: (
+                        [
+                            item[:900] + "...[truncated]"
+                            if isinstance(item, str) and len(item) > 900
+                            else item
+                            for item in finding.get("evidence", [])[:8]
+                        ]
+                        if key == "evidence"
+                        else (
+                            str(finding.get(key, ""))[:1500] + "...[truncated]"
+                            if key == "recommendation"
+                            and len(str(finding.get(key, ""))) > 1500
+                            else finding.get(key)
+                        )
+                    )
+                    for key in (
+                        "index",
+                        "status",
+                        "severity",
+                        "area",
+                        "title",
+                        "evidence",
+                        "recommendation",
+                        "related_event_ids",
+                    )
+                    if key in finding
+                }
+            )
+        value["unresolved_findings"] = compact_findings
     source_context = value.get("source_context")
     if isinstance(source_context, dict):
         source_events = source_context.get("relevant_events", [])
@@ -752,7 +787,7 @@ def run_v2(
             target = copy.deepcopy(package["current_target"])
         decisions = response.get("decisions", [])
         unresolved_indexes = [
-            item.get("finding_index")
+            item.get("finding_index", item.get("index"))
             for item in decisions
             if item.get("decision") == "unresolved"
         ]
@@ -794,7 +829,7 @@ def run_v2(
                         (
                             item.get("reason", "")
                             for item in decisions
-                            if item.get("finding_index") == index
+                            if item.get("finding_index", item.get("index")) == index
                         ),
                         response.get("detail", "Evidence remains insufficient"),
                     ),
@@ -844,6 +879,7 @@ def run_v2(
         "fixed": sum(item["status"] == "fixed" for item in changes),
         "unresolved": sum(item["status"] == "unresolved" for item in changes),
         "failed": sum(item["status"] == "failed" for item in changes),
+        "unresolved_finding_records": len(unresolved),
         "source_tasks": len(tasks),
         "interaction_variants": len(variants),
         "runtime_tasks": len(runtime_tasks),
@@ -863,6 +899,7 @@ def main() -> None:
     parser.add_argument("--config", type=Path)
     parser.add_argument("--env-file", type=Path)
     parser.add_argument("--limit", type=int)
+    parser.add_argument("--concurrency", type=int)
     parser.add_argument("--offline", action="store_true")
     args = parser.parse_args()
     if args.env_file:
@@ -891,6 +928,10 @@ def main() -> None:
             )
         from review_gaia2_references import load_config
 
+        config = load_config(args.config)
+        if args.concurrency is not None:
+            config.concurrency = max(1, args.concurrency)
+
         print(
             json.dumps(
                 run_v2(
@@ -898,7 +939,7 @@ def main() -> None:
                     review_dir=args.review_dir,
                     data_root=args.data_root,
                     out=args.out,
-                    config=load_config(args.config),
+                    config=config,
                     limit=args.limit,
                     offline=args.offline,
                 ),

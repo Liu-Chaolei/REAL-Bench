@@ -425,6 +425,7 @@ UV_FROZEN=1 .venv/bin/python scripts/repair_gaia2_references.py unresolved-prepa
 UV_FROZEN=1 .venv/bin/python scripts/repair_gaia2_unresolved.py unresolved-repair \
   --env-file /hpc_stor03/sjtu_home/chaolei.liu/.config/qwaudio/config.env \
   --config docs/gaia2-reference-review.deepseek.yaml \
+  --concurrency 2 \
   --out data/archives/gaia2/reference-repair-simple-v2
 ```
 

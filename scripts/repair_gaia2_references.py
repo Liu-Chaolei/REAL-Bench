@@ -197,7 +197,7 @@ class DirectModel:
                 "prompt": prompt,
                 "schema": schema,
                 "model": self.config.model,
-                "repair_protocol": "v2-max-tokens",
+                "repair_protocol": "v2-max-tokens-4096",
             }
         )
         path = self.cache_dir / f"{identity}.json"
@@ -225,7 +225,8 @@ class DirectModel:
                     f"Missing repair credential: {self.config.api_key_env}"
                 )
             arguments["api_key"] = api_key
-        arguments.setdefault("max_tokens", 12000)
+        # Keep the repair response within the proxy output allowance.
+        arguments.setdefault("max_tokens", 4096)
         response = completion(
             model=self.config.model,
             messages=[{"role": "user", "content": prompt}],
