@@ -76,9 +76,9 @@ def runtime_digest() -> str:
             "data_model/diagnostics.py",
             "diagnostics/collect.py",
             "agent/discrete_time_audio_native_agent.py",
-            "voice/audio_native/qwen_agent/provider.py",
-            "voice/audio_native/qwen_agent/config.py",
-            "voice/audio_native/qwen_agent/discrete_time_adapter.py",
+            "adapters/qwen_audio_agent/provider.py",
+            "adapters/qwen_audio_agent/config.py",
+            "adapters/qwen_audio_agent/adapter.py",
             "voice/audio_native/adapter.py",
             "voice/audio_native/tick_result.py",
             "utils/transcript/live.py",
@@ -91,7 +91,7 @@ def runtime_digest() -> str:
             "runner/simulation.py",
             "persistent_tasks/core/models.py",
             "persistent_tasks/core/observation.py",
-            "persistent_tasks/adapters/qwen.py",
+            "adapters/qwen_audio_agent/events.py",
             "environment/environment.py",
             "environment/scenario.py",
             "environment/replay.py",
@@ -111,9 +111,9 @@ def runtime_digest() -> str:
             "user/user_simulator_streaming.py",
             "user/dynamic_followup.py",
             "user/grounding.py",
-            "voice/audio_native/qwen_agent/mimo_transcription.py",
-            "voice/audio_native/qwen_agent/played_audio_transcription.py",
-            "voice/audio_native/qwen_agent/qwen_transcription.py",
+            "adapters/qwen_audio_agent/transcription/mimo.py",
+            "adapters/qwen_audio_agent/transcription/played_audio.py",
+            "adapters/qwen_audio_agent/transcription/qwen.py",
             "voice/qwen_asr.py",
             "data_model/asr.py",
             "user/asr_hotwords.py",
@@ -129,8 +129,16 @@ def runtime_digest() -> str:
         package / relative
         for relative in (
             "persistent_tasks/availability.py",
-            "voice/audio_native/qwen_agent/async_evidence.py",
+            "adapters/qwen_audio_agent/evidence.py",
             "utils/transcript/generated.py",
+        )
+    )
+    paths.extend((package / "adapters/qwen_audio_agent").rglob("*.py"))
+    paths.extend(
+        package / relative
+        for relative in (
+            "adapters/registry.py",
+            "data_model/user_simulation.py",
         )
     )
     digest = hashlib.sha256(GAIA2_VERSION.encode())

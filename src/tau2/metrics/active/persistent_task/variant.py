@@ -305,15 +305,21 @@ class InteractionVariantController(PersistentTaskMetricRuntime):
 
     def finalize(self, termination_reason, timestamp):
         self._drain()
-        summary = super().finalize(termination_reason, timestamp)
-        summary["version"] = "interaction-variant-evidence-v1"
-        summary["mechanism"] = "interaction_variant"
         if (
             self.backend_task_id is None
             and self.initial_delivery is not None
             and self.status != "unsupported"
         ):
-            summary["status"] = self.status = "target_unbound"
+            self.status = "target_unbound"
+        return super().finalize(termination_reason, timestamp)
+
+    def snapshot(self):
+        """Copy the complete variant evidence without modifying its runtime."""
+        from copy import deepcopy
+
+        summary = super().snapshot()
+        summary["version"] = "interaction-variant-evidence-v1"
+        summary["mechanism"] = "interaction_variant"
         summary.update(
             variant_type=self.variant.variant_type,
             requests=self.requests,
@@ -325,57 +331,7 @@ class InteractionVariantController(PersistentTaskMetricRuntime):
         summary["binding"]["role"] = (
             "temporary" if self.variant.variant_type == "cancel" else "primary"
         )
-        return summary
-
-    def _score(self, scoring=None):
-        if self.variant.variant_type == "addtask" or self.status in {
-            "target_unbound",
-            "target_finished_before_request",
-            "queued",
-        }:
-            return {
-                "status": "not_applicable"
-                if self.variant.variant_type == "addtask"
-                else self.status,
-                "completion_score": None,
-                "evaluation_log": {
-                    "native_result": {"passed": None},
-                    "reply": {"passed": None, "status": "not_evaluated"},
-                },
-            }
-        if (
-            self.variant.variant_type == "cancel"
-            and "temporary" in self.binding_status
-            and self.binding_status.get("temporary") != "bound"
-        ):
-            return {
-                "status": "target_unbound",
-                "completion_score": None,
-                "evaluation_log": {
-                    "native_result": {
-                        "passed": None,
-                        "reason": self.binding_status.get("temporary", "unbound"),
-                    },
-                    "reply": {"passed": None, "status": "not_evaluated"},
-                },
-            }
-        if (
-            self.variant.variant_type == "modify"
-            and "primary" in self.binding_status
-            and self.binding_status.get("primary") != "bound"
-        ):
-            return {
-                "status": "target_unbound",
-                "completion_score": None,
-                "evaluation_log": {
-                    "native_result": {
-                        "passed": None,
-                        "reason": self.binding_status.get("primary", "unbound"),
-                    },
-                    "reply": {"passed": None, "status": "not_evaluated"},
-                },
-            }
-        return super().score(scoring)
+        return deepcopy(summary)
 
     def score(self, scoring=None):
         """Evaluate the completed mechanism evidence through its evaluator."""
@@ -383,7 +339,7 @@ class InteractionVariantController(PersistentTaskMetricRuntime):
             InteractionVariantEvaluator,
         )
 
-        return InteractionVariantEvaluator.score(self, scoring)
+        return InteractionVariantEvaluator.score(self.snapshot(), scoring)
 
 
 # Compatibility for callers that imported the old runtime name.

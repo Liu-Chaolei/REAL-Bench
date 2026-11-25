@@ -1,12 +1,14 @@
 """Mechanism tests with fixed semantics; never call a live judge."""
 
+import json
 from types import SimpleNamespace
 
 from tau2.data_model.diagnostics import DiagnosticEvidence, OperationEvidence
 from tau2.diagnostics.state.events import recorded_events
 from tau2.diagnostics.state.metrics import evaluate_state_interaction
-from tau2.diagnostics.state.models import Interpretation
+from tau2.diagnostics.state.models import DialogueEvent, Interpretation
 from tau2.diagnostics.state.projector import project_state
+from tau2.diagnostics.state.semantic import SemanticInterpreter
 
 
 class Interpreter:
@@ -19,6 +21,14 @@ class Interpreter:
         return Interpretation.model_validate(
             value(event, visible) if callable(value) else value
         )
+
+
+class WrappedJsonModel:
+    def __init__(self, value):
+        self.value = value
+
+    def complete_sync(self, prompt, schema):
+        return json.dumps({"type": "json_object", **self.value})
 
 
 def ev(id, kind, content=None, role=None, view=None):
@@ -42,6 +52,17 @@ def evidence(events, operations=(), frames=None):
         operations=list(operations),
         frames=frames or {},
     )
+
+
+def test_semantic_interpreter_accepts_provider_json_object_wrapper():
+    event = DialogueEvent(**ev("agent", "agent_turn", "Hello"))
+    interpreter = SemanticInterpreter(
+        WrappedJsonModel({"greeting": True}), capabilities={}
+    )
+
+    result = interpreter.interpret(event, visible={})
+
+    assert result.greeting is True
 
 
 def agenda(id="answer", expected=6):

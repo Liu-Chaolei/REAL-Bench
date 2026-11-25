@@ -284,6 +284,7 @@ def test_smoke_launch_keeps_credentials_off_argv(api_dir, tmp_path, monkeypatch)
         saasr_config=None,
         gaia2_allow_stale_runtime=False,
         task_ids=None,
+        task_split_name="base",
         num_tasks=1,
     )
     config = QwenAgentConfig.model_validate({"api_config_dir": api_dir})

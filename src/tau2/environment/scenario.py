@@ -84,7 +84,18 @@ class ScenarioRuntime:
         self._event_ordinals = {event.id: i for i, event in enumerate(spec.events)}
         self.notifications: list[dict] = []
         self.user_inputs: list[tuple[str, str]] = []
+        events = {event.id: event for event in spec.events}
         self.user_input_metadata: dict[str, dict[str, str | None]] = {}
+        for stage in spec.stages:
+            # Use the same leading-user-event order as ScenarioStages. Other
+            # user events in a stage may be clarifications or variant requests.
+            request = next(
+                events[key] for key in stage.event_ids if events[key].kind == "user"
+            )
+            self.user_input_metadata[request.id] = {
+                "source": "scenario_stage",
+                "purpose": "stage_request",
+            }
         self.failure: BaseException | None = None
         self._origin: float | None = None
         self._manual: float | None = 0.0
@@ -514,11 +525,14 @@ class ScenarioRuntime:
                     )
                     if event.kind == "user":
                         if event.id not in self._released_inputs:
+                            metadata = self.user_input_metadata.get(
+                                event.id,
+                                {"source": "scenario", "purpose": "scripted_request"},
+                            )
                             self.queue_user_input(
                                 event.id,
                                 arguments["content"],
-                                source="scenario",
-                                purpose="scripted_request",
+                                **metadata,
                             )
                             self._released_inputs.add(event.id)
                         continue  # Delivery, rather than release, completes input.

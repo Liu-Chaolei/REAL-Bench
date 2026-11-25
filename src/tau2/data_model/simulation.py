@@ -6,7 +6,13 @@ from pathlib import Path
 from typing import Literal, Optional, Union
 
 import pandas as pd
-from pydantic import BaseModel, Field, model_serializer, model_validator
+from pydantic import (
+    BaseModel,
+    Field,
+    field_validator,
+    model_serializer,
+    model_validator,
+)
 from typing_extensions import Annotated
 
 from tau2.config import (
@@ -31,6 +37,7 @@ from tau2.data_model.message import Message, Tick
 from tau2.data_model.persona import PersonaConfig
 from tau2.data_model.run_config import (
     AudioNativeConfig,
+    RecordedAudioNativeConfig,
     RunSettings,
     TextRunSettings,
     VoiceRunSettings,
@@ -57,6 +64,16 @@ class BaseRunConfig(RunSettings):
     Do not instantiate directly. Use TextRunConfig or VoiceRunConfig.
     """
 
+    @model_validator(mode="before")
+    @classmethod
+    def reject_retired_settings(cls, value):
+        """Reject removed run settings instead of silently ignoring old inputs."""
+        if isinstance(value, dict):
+            for name in ("elicitation", "retrieval_config", "retrieval_config_kwargs"):
+                if value.get(name) is not None:
+                    raise ValueError(f"{name} is not supported by new Gaia2 runs")
+        return value
+
     @model_validator(mode="after")
     def _gaia2_runtime_scope(self):
         """Select the installed Gaia2 execution contract before provider setup."""
@@ -66,8 +83,6 @@ class BaseRunConfig(RunSettings):
             raise ValueError(
                 "Gaia2 does not use language extensions or regional databases"
             )
-        if self.elicitation is not None or self.retrieval_config is not None:
-            raise ValueError("Gaia2 does not use intake or banking retrieval settings")
         return self
 
     @model_validator(mode="after")
@@ -196,9 +211,7 @@ class BaseRunConfig(RunSettings):
         if audio.transcription_language is not None and audio.provider != "openai":
             raise ValueError("transcription_language applies only to OpenAI Realtime")
         if audio.voice is not None and audio.provider != "openai":
-            raise ValueError(
-                "voice override is supported for openai; openai_live uses live_config.voice"
-            )
+            raise ValueError("voice override is supported for openai")
         if audio.provider == "livekit":
             from tau2.data_model.cascaded import CascadedConfigRequest
 
@@ -337,15 +350,19 @@ class VoiceRunConfig(BaseRunConfig, VoiceRunSettings):
     managing the tick-based simulation.
     """
 
-    def validate(self) -> None:
-        """Validate voice-provider requirements before any simulation starts."""
-        super().validate()
-        if self.audio_native_config.provider == "gemini":
-            from tau2.voice.audio_native.gemini.provider import (
-                require_extended_thinking_sdk,
-            )
+    @model_validator(mode="after")
+    def require_runnable_audio_config(self):
+        """Recorded settings cannot bypass current provider selection."""
+        from tau2.config import DEFAULT_AUDIO_NATIVE_MODELS
 
-            require_extended_thinking_sdk(self.audio_native_config.model)
+        audio = self.audio_native_config
+        if audio.provider not in DEFAULT_AUDIO_NATIVE_MODELS:
+            raise ValueError(
+                f"Audio provider {audio.provider!r} is retired or unsupported"
+            )
+        if getattr(audio, "live_config", None) is not None:
+            raise ValueError("live_config is retired and cannot be used for new runs")
+        return self
 
     # ---- Properties ----
 
@@ -1081,10 +1098,19 @@ class Info(BaseModel):
         default=None,
         description="Caller voice sampling seed, separate from the task and trial seed.",
     )
-    audio_native_config: Optional["AudioNativeConfig"] = Field(
+    audio_native_config: Optional[RecordedAudioNativeConfig] = Field(
         description="Configuration for audio-native mode",
         default=None,
     )
+
+    @field_validator("audio_native_config", mode="before")
+    @classmethod
+    def read_audio_config(cls, value):
+        """Store current settings as data without requiring a runnable provider."""
+        if isinstance(value, AudioNativeConfig):
+            return value.model_dump()
+        return value
+
     retrieval_config: Optional[str] = Field(
         description="Knowledge retrieval config name (knowledge domain only).",
         default=None,

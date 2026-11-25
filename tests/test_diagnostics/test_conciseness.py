@@ -643,15 +643,15 @@ def test_audio_duration_uses_delivered_waveform_without_changing_text_score(
         "duration": 5,
         "timeline": [{"start": 3, "end": 4, "agent": {"bytes": 1}}],
     }
-    monkeypatch.setattr(
-        "tau2.diagnostics.voice.evaluate_voice",
-        lambda *args: {
-            "waveform_evidence": {
-                "status": "valid",
-                "agent_intervals": [[3, 3.5], [3.7, 4]],
-            }
-        },
-    )
+    evidence.audio["activity"] = {
+        "agent_intervals": [[3, 3.5], [3.7, 4]],
+        "user_turns": [],
+    }
+
+    def forbidden(*args):
+        pytest.fail("conciseness must not invoke voice scoring")
+
+    monkeypatch.setattr("tau2.diagnostics.voice.evaluate_voice", forbidden)
     window = build_windows(evidence, FeedbackConfig())[0]
     audio = _audio_stats(evidence, tmp_path, [window])[window["id"]]
     assert audio["agent_speech_seconds"] == pytest.approx(0.8)

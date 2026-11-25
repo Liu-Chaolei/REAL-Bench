@@ -11,7 +11,6 @@ from tau2.config import (
     VOICE_INSTRUCTION_PROMPT_VERSION,
     VOICE_USER_SIMULATOR_VERSION,
 )
-from tau2.data_model.elicitation import ElicitationStrategy
 from tau2.data_model.simulation import (
     AgentInfo,
     Info,
@@ -165,11 +164,6 @@ def get_info(
     # Pack prompts are persona-specific and recorded in language_tasks below.
     global_user_sim_guidelines = None
 
-    scoring_version = None
-    prompt_version = None
-    catalog_version = None
-    spell_detection_version = None
-
     user_info = UserInfo(
         implementation=config.effective_user,
         llm=config.llm_user,
@@ -206,27 +200,17 @@ def get_info(
         task.id: resolve_task(loaded, task, config.seed or 0) for task in selected
     }
 
-    # Resolve the run-level policy for its channel/retrieval settings. Individual
+    # Resolve the run-level policy for its channel settings. Individual
     # simulations also record their task-specific policy (e.g. callback orders).
     info_env_kwargs: dict = language_environment_kwargs(loaded)
     if config.domain == "gaia2" and getattr(config, "gaia2_allow_stale_runtime", False):
         info_env_kwargs["allow_stale_runtime"] = True
-    if getattr(config, "retrieval_config", None) is not None:
-        info_env_kwargs["retrieval_variant"] = config.retrieval_config
-        rk = dict(getattr(config, "retrieval_config_kwargs", None) or {})
-        if rk:
-            info_env_kwargs["retrieval_kwargs"] = rk
-
     environment_info = get_environment_info(
         config.domain, include_tool_info=False, env_kwargs=info_env_kwargs
     )
     if policy_override is not None:
         environment_info.policy = policy_override
 
-    shared_voice_prompt = is_voice and (
-        config.elicitation is None
-        or config.elicitation.strategy != ElicitationStrategy.AGENT_DIRECTED
-    )
     return Info(
         active_metrics=config.active_metrics,
         user_audio_renderer=(
@@ -234,18 +218,13 @@ def get_info(
         ),
         domain_tools_version=DOMAIN_TOOLS_VERSION,
         voice_instruction_prompt_version=(
-            VOICE_INSTRUCTION_PROMPT_VERSION if shared_voice_prompt else None
+            VOICE_INSTRUCTION_PROMPT_VERSION if is_voice else None
         ),
         language=config.language,
         pack_extension=loaded.pack_extension,
         localize_db=config.localize_db,
         language_artifacts=loaded.artifact_pins,
         language_tasks=language_tasks,
-        elicitation=config.elicitation,
-        elicitation_scoring_version=scoring_version,
-        elicitation_prompt_version=prompt_version,
-        elicitation_catalog_version=catalog_version,
-        elicitation_spell_detection_version=spell_detection_version,
         benchmark=config.benchmark,
         communicate_scoring=config.communicate_scoring,
         git_commit=get_commit_hash(),
@@ -269,6 +248,4 @@ def get_info(
         pass3_condition=(config.pass3_condition if is_voice else None),
         voice_sampling_seed=(config.voice_sampling_seed if is_voice else None),
         audio_native_config=getattr(config, "audio_native_config", None),
-        retrieval_config=getattr(config, "retrieval_config", None),
-        retrieval_config_kwargs=getattr(config, "retrieval_config_kwargs", None),
     )

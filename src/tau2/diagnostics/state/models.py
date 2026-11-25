@@ -53,20 +53,19 @@ class DialogueState(StateModel):
     facts: dict[str, StateItem] = Field(default_factory=dict)
     constraints: dict[str, StateItem] = Field(default_factory=dict)
     operations: dict[str, StateItem] = Field(default_factory=dict)
-    claims: dict[str, StateItem] = Field(default_factory=dict)
     uncertainty: list[dict] = Field(default_factory=list)
     dialogue: list[dict] = Field(default_factory=list)
 
     def visible(self, viewer):
         """Expose only information delivered to the behavior's own component."""
         value = self.model_dump(mode="json")
-        for name in ("goals", "agenda", "facts", "constraints", "operations", "claims"):
+        for name in ("goals", "agenda", "facts", "constraints", "operations"):
             value[name] = {
                 k: v
                 for k, v in value[name].items()
                 if viewer in v["visible_to"] or "all" in v["visible_to"]
             }
-        for name in ("goals", "agenda", "facts", "constraints", "operations", "claims"):
+        for name in ("goals", "agenda", "facts", "constraints", "operations"):
             for item in value[name].values():
                 history = [
                     h
@@ -164,7 +163,6 @@ class Interpretation(StateModel):
     advances: list[str] = Field(default_factory=list)
     regresses: list[str] = Field(default_factory=list)
     related_items: list[str] = Field(default_factory=list)
-    claims: list[str] = Field(default_factory=list)
     greeting: bool = False
     uncertain: bool = False
 

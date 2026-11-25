@@ -164,11 +164,7 @@ def run_simulation(
     recorder = None
     # Collect evidence once. Semantic diagnostics run only when explicitly
     # selected in this run's metrics configuration and share its budget.
-    if (
-        metrics_config is not None
-        or active_metrics_config is not None
-        or diagnostics_dir is not None
-    ):
+    if metrics_config is not None or diagnostics_dir is not None:
         from pathlib import Path
 
         from tau2.diagnostics.collect import EvidenceRecorder
@@ -196,12 +192,16 @@ def run_simulation(
             orchestrator.environment, orchestrator.task, diagnostics_dir / "evidence"
         )
         recorder.metrics_config = metrics_config.model_dump(mode="json")
+        recorder.communicate_scoring = communicate_scoring.model_dump(mode="json")
+        if recorder.communicate_scoring.get("judge"):
+            recorder.communicate_scoring["judge"]["model_args"].pop("api_key", None)
         orchestrator.environment.diagnostic_recorder = recorder
         orchestrator.user.diagnostic_recorder = recorder
         agent = orchestrator.agent
         agent.diagnostic_recorder = recorder
-        if getattr(agent, "provider", None) == "qwen_agent":
-            agent.adapter.provider.diagnostics_enabled = True
+        enable_diagnostics = getattr(agent, "enable_diagnostics", None)
+        if enable_diagnostics is not None:
+            enable_diagnostics()
 
     if active_metrics_config is not None:
         from tau2.metrics.active.config import ActiveMetricsConfig
@@ -220,29 +220,6 @@ def run_simulation(
     # Run the orchestrator
     try:
         simulation = orchestrator.run()
-        if active_manager is not None:
-            active_info = dict((simulation.info or {}).get("active_metrics", {}))
-            try:
-                active_info["scores"] = active_manager.score(communicate_scoring)
-            except Exception as error:
-                active_info["scores"] = {
-                    "persistent_task": {
-                        "status": "evidence_unavailable",
-                        "reason": type(error).__name__,
-                    }
-                }
-            simulation.info = {**(simulation.info or {}), "active_metrics": active_info}
-        if scenario_mechanism_manager is not None:
-            mechanism_info = dict(
-                (simulation.info or {}).get("scenario_mechanisms", {})
-            )
-            mechanism_info["scores"] = scenario_mechanism_manager.score(
-                communicate_scoring
-            )
-            simulation.info = {
-                **(simulation.info or {}),
-                "scenario_mechanisms": mechanism_info,
-            }
     except BaseException:
         if recorder is not None:
             recorder.close()
@@ -259,53 +236,12 @@ def run_simulation(
         raise
     if call_context is not None:
         simulation.language_context = call_context.language
-    evidence = None
-    if recorder is not None:
-        from tau2.diagnostics.collect import finalize_evidence
-
-        try:
-            evidence = finalize_evidence(
-                orchestrator, simulation, recorder, diagnostics_dir / "evidence"
-            )
-            simulation.diagnostics_ref = {
-                "evidence": str(diagnostics_dir / "evidence"),
-                "status": "collected",
-            }
-        except Exception as error:
-            simulation.diagnostics_ref = {
-                "status": "collection_error",
-                "reason": type(error).__name__,
-            }
-
-    def finalize_diagnostics():
-        if evidence is not None and metrics_config.auto_score:
-            from tau2.diagnostics.suite import evaluate_evidence
-
-            try:
-                result = evaluate_evidence(
-                    orchestrator.task,
-                    evidence,
-                    diagnostics_dir / "evidence",
-                    metrics_config,
-                )
-                simulation.diagnostics_ref.update(result)
-            except Exception as error:
-                simulation.diagnostics_ref.update(
-                    status="grading_error", reason=type(error).__name__
-                )
-
     agent = getattr(orchestrator, "agent", None)
-    adapter = getattr(agent, "_adapter", None)
-    if getattr(agent, "provider", None) == "qwen_agent" and adapter:
-        # No complete frontend/backend usage ledger is reported by the Gateway.
+    metadata = getattr(agent, "get_run_metadata", lambda: {})()
+    if metadata.get("cost_available") is False:
         simulation.agent_cost = None
-        simulation.agent_system_metadata = {
-            **adapter.provider.metadata,
-            "observer_asr": adapter.config.asr_model,
-            "transcript_origin": "recorded_audio",
-            "tick_duration_ms": adapter.tick_duration_ms,
-            "observer_finalization_latency": adapter.transcriber.summary(),
-        }
+    if metadata.get("system_metadata"):
+        simulation.agent_system_metadata = metadata["system_metadata"]
     if call_context is not None:
         from tau2.voice.voice_gender import VOICE_GENDER_CATALOG_REVISION
 
@@ -338,9 +274,60 @@ def run_simulation(
 
     # Evaluate
     stamp_grading(simulation)
+    simulation.trial = trial if trial is not None else simulation.trial
     simulation.evaluation_status = "pending"
     if on_trajectory_ready is not None:
-        on_trajectory_ready(simulation)
+        try:
+            on_trajectory_ready(simulation)
+        except BaseException:
+            if recorder is not None:
+                recorder.close()
+            raise
+    evidence = None
+    if recorder is not None:
+        from tau2.diagnostics.collect import finalize_evidence
+
+        try:
+            evidence = finalize_evidence(
+                orchestrator, simulation, recorder, diagnostics_dir / "evidence"
+            )
+            simulation.diagnostics_ref = {
+                "evidence": str(diagnostics_dir / "evidence"),
+                "status": "collected",
+            }
+        except Exception as error:
+            simulation.diagnostics_ref = {
+                "status": "collection_error",
+                "reason": type(error).__name__,
+            }
+
+    def finalize_diagnostics():
+        if evidence is not None and metrics_config.auto_score:
+            from tau2.diagnostics.suite import evaluate_evidence
+
+            try:
+                result = evaluate_evidence(
+                    orchestrator.task,
+                    evidence,
+                    diagnostics_dir / "evidence",
+                    metrics_config,
+                    precomputed={
+                        "persistent_task": (
+                            (simulation.info or {}).get("active_metrics") or {}
+                        )
+                        .get("scores", {})
+                        .get("persistent_task")
+                        or ((simulation.info or {}).get("scenario_mechanisms") or {})
+                        .get("scores", {})
+                        .get("interaction_variant")
+                    },
+                )
+                simulation.diagnostics_ref.update(result)
+            except Exception as error:
+                simulation.diagnostics_ref.update(
+                    status="grading_error", reason=type(error).__name__
+                )
+
     try:
         reward_info = evaluate_simulation(
             simulation=simulation,
@@ -361,16 +348,38 @@ def run_simulation(
         logger.warning(
             f"Scoring failed for simulation {simulation.id}: {type(error).__name__}"
         )
-        finalize_diagnostics()
-        return simulation
-    simulation.reward_info = reward_info
-    simulation.evaluation_status = (
-        "completed" if can_grade(simulation.termination_reason) else "skipped"
+    else:
+        simulation.reward_info = reward_info
+        simulation.evaluation_status = (
+            "completed" if can_grade(simulation.termination_reason) else "skipped"
+        )
+
+    from tau2.metrics.active.persistent_task.evaluator import score_persistent_task
+    from tau2.metrics.active.persistent_task.variant_evaluator import (
+        score_interaction_variant,
     )
 
+    for field, group, grader in (
+        ("active_metrics", "metrics", score_persistent_task),
+        ("scenario_mechanisms", "mechanisms", score_interaction_variant),
+    ):
+        envelope = (simulation.info or {}).get(field)
+        if envelope is None:
+            continue
+        scores = {}
+        for name, summary in envelope.get(group, {}).items():
+            try:
+                scores[name] = grader(summary, communicate_scoring)
+            except Exception as error:
+                scores[name] = {
+                    "status": "grader_error",
+                    "completion_score": None,
+                    "reason": type(error).__name__,
+                }
+        simulation.info[field] = {**envelope, "scores": scores}
+
     logger.info(
-        f"Simulation complete: domain={domain}, task={task.id}, "
-        f"reward={reward_info.reward}"
+        f"Simulation complete: domain={domain}, task={task.id}, evaluation={simulation.evaluation_status}"
     )
 
     finalize_diagnostics()

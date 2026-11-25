@@ -59,10 +59,16 @@ and scene clock persist across the three requests. Agent STOP and infrastructure
 failures retain their terminal handling.
 
 The whole conversation is scored after it ends. ENV checks the cumulative final
-business state; COMMUNICATE uses each request's actual playback window; NL checks
-receive stage boundaries with the recorded conversation and application evidence.
-There are no separate stage scores or runtime correctness decisions. Authoring
-`checks` remain part of offline reference verification.
+business state. Required feedback coverage belongs to the conciseness diagnostic;
+Gaia2 no longer runs whole-task COMMUNICATE or NL_ASSERTION scoring. See the
+[current metrics inventory](metrics-inventory.md). There are no separate stage
+scores or runtime correctness decisions. Authoring `checks` remain part of
+offline reference verification.
+
+The release manifest now indexes the existing reference repair as a candidate.
+Its 67 unresolved tasks and final reference seal remain pending; active task
+bytes have not changed. Six offline reference/replay samples passed, which does
+not establish a full seal. See the [revision record](gaia2-reference-finalization-report.md).
 
 Run `tau2 gaia2 verify --reference --workers 16 --seal` after runtime changes.
 The manifest's `verified`, `execution_ready` and series runtime version are

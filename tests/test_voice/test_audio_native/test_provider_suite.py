@@ -6,7 +6,7 @@ Each test progressively exercises one more capability the eval framework needs.
 Architecture
 ------------
 - Parameterized by provider name. Every test automatically runs against all
-  providers whose credentials are available (GEMINI_API_KEY, XAI_API_KEY, etc.).
+  providers whose credentials are available (OPENAI_API_KEY, XAI_API_KEY, etc.).
   Providers without credentials are skipped.
 
 - Tests at the DiscreteTimeAdapter interface. Uses create_adapter() -- the same
@@ -36,7 +36,7 @@ its own adapter with an independent connection. No shared state between tests.
 Usage
 -----
 Run for a specific provider:
-    pytest tests/test_voice/test_audio_native/test_provider_suite.py -v -s -k gemini
+    pytest tests/test_voice/test_audio_native/test_provider_suite.py -v -s -k openai
 
 Run for all available providers:
     pytest tests/test_voice/test_audio_native/test_provider_suite.py -v -s
@@ -55,8 +55,7 @@ from typing import List, Optional
 
 import pytest
 
-from tau2.config import DEFAULT_OPENAI_LIVE_MODEL, TELEPHONY_ULAW_SILENCE
-from tau2.data_model.live_config import LiveConfig
+from tau2.config import TELEPHONY_ULAW_SILENCE
 from tau2.environment.tool import Tool
 from tau2.voice.audio_native.adapter import DiscreteTimeAdapter, create_adapter
 from tau2.voice.audio_native.tick_result import TickResult
@@ -81,30 +80,6 @@ PROVIDERS = [
                 and os.environ.get("TAU2_QWEN_AGENT_CONFIG")
             ),
             reason="QWEN_AGENT_TEST_ENABLED and TAU2_QWEN_AGENT_CONFIG are required",
-        ),
-    ),
-    pytest.param(
-        "openai_live",
-        marks=pytest.mark.skipif(
-            not all(
-                os.environ.get(key)
-                for key in (
-                    "OPENAI_API_KEY",
-                    "OPENAI_LIVE_BACKEND_MODEL",
-                )
-            ),
-            reason="OpenAI Live credentials and backend model are required",
-        ),
-    ),
-    pytest.param(
-        "gemini",
-        marks=pytest.mark.skipif(
-            not (
-                os.environ.get("GEMINI_API_KEY")
-                or os.environ.get("GOOGLE_SERVICE_ACCOUNT_KEY")
-                or os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
-            ),
-            reason="No Gemini credentials (GEMINI_API_KEY, GOOGLE_SERVICE_ACCOUNT_KEY, or GOOGLE_APPLICATION_CREDENTIALS)",
         ),
     ),
     pytest.param(
@@ -405,7 +380,6 @@ def adapter(provider_name: str):
     """Create, yield, and teardown a DiscreteTimeAdapter."""
     real_provider = provider_name
     cascaded_config = None
-    live_config = None
     avartha_config = None
     qwen_agent_config = None
     model = None
@@ -425,9 +399,6 @@ def adapter(provider_name: str):
                 )
             }
         )
-    elif provider_name == "openai_live":
-        model = os.environ.get("OPENAI_LIVE_MODEL", DEFAULT_OPENAI_LIVE_MODEL)
-        live_config = LiveConfig(backend_model=os.environ["OPENAI_LIVE_BACKEND_MODEL"])
     elif provider_name == "avartha_pipecat":
         from tau2.voice.audio_native.avartha_pipecat.config import (
             AvarthaPipecatConfig,
@@ -448,7 +419,6 @@ def adapter(provider_name: str):
         tick_duration_ms=TICK_DURATION_MS,
         cascaded_config=cascaded_config,
         model=model,
-        live_config=live_config,
         avartha_config=avartha_config,
         qwen_agent_config=qwen_agent_config,
     )

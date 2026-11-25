@@ -98,6 +98,9 @@ def try_resume(
     from tau2.persistent_tasks.availability import reject_retired_results
 
     reject_retired_results(prev_simulation_results)
+    audio = prev_simulation_results.info.audio_native_config
+    if audio is not None and audio.provider in {"openai_live", "gemini"}:
+        raise ValueError(f"Cannot resume retired audio provider {audio.provider!r}")
     if getattr(prev_simulation_results.info, "active_metrics", None) != getattr(
         simulation_results.info, "active_metrics", None
     ):

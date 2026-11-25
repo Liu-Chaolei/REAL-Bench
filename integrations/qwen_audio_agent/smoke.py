@@ -15,9 +15,9 @@ DEFAULT_SMOKE_MAX_SECONDS = 1200
 
 def main():
     """Load evaluation credentials privately; keep model/key roles separate."""
+    from tau2.adapters.qwen_audio_agent.config import QwenAgentConfig
     from tau2.config import DEFAULT_SEED
     from tau2.utils.env_config import read_config_environment, resolve_env_reference
-    from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
 
     here = Path(__file__).resolve().parent
     parser = argparse.ArgumentParser(description=__doc__)
@@ -65,6 +65,7 @@ def main():
         help="Use caller LLM credentials and model for runtime judges.",
     )
     parser.add_argument("--active-metrics-config", type=Path)
+    parser.add_argument("--user-simulation-config", type=Path)
     parser.add_argument("--gaia2-allow-stale-runtime", action="store_true")
     parser.add_argument(
         "--judge-api-key-env",
@@ -103,6 +104,18 @@ def main():
     if config_value.get("api_config_dir"):
         config_value["api_configuration_resolved"] = False
     config = QwenAgentConfig.model_validate(config_value)
+    if args.user_simulation_config:
+        from tau2.data_model.user_simulation import (
+            UserSimulationConfig,
+            merge_user_settings,
+        )
+
+        caller = UserSimulationConfig.model_validate_json(
+            args.user_simulation_config.read_text()
+        )
+        config = config.model_copy(
+            update={"evaluation": merge_user_settings(caller, config.evaluation)}
+        )
     if config.api_config_dir:
         return run_shared(args, config)
     values = read_config_environment(config.config_env_file)
@@ -178,10 +191,17 @@ def main():
         )
     output.mkdir(parents=True, exist_ok=True)
     if caller is None:
+        from tau2.data_model.user_simulation import UserSimulationConfig
+
+        caller_settings = config.evaluation or UserSimulationConfig()
         config = config.model_copy(
             update={
-                "user_decision_llm": user_model,
-                "user_decision_llm_args": user_args,
+                "evaluation": caller_settings.model_copy(
+                    update={
+                        "user_decision_llm": user_model,
+                        "user_decision_llm_args": user_args,
+                    }
+                )
             }
         )
     derived_config = output / "qwen_agent_config.json"
@@ -269,6 +289,11 @@ def main():
         command += [
             "--active-metrics-config",
             str(args.active_metrics_config.resolve()),
+        ]
+    if getattr(args, "user_simulation_config", None):
+        command += [
+            "--user-simulation-config",
+            str(args.user_simulation_config.resolve()),
         ]
     if args.gaia2_allow_stale_runtime:
         command.append("--gaia2-allow-stale-runtime")
@@ -416,6 +441,11 @@ def run_shared(args, config):
         ]
     elif args.saasr_config is not None:
         raise ValueError("--saasr-config requires --user-audio-renderer saasr")
+    if getattr(args, "user_simulation_config", None):
+        command += [
+            "--user-simulation-config",
+            str(args.user_simulation_config.resolve()),
+        ]
     if args.gaia2_allow_stale_runtime:
         command.append("--gaia2-allow-stale-runtime")
     if args.resume:

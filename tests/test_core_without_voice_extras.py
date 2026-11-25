@@ -57,7 +57,7 @@ def test_import_and_text_run_config_without_voice_extras():
         import tau2.cli
         from tau2.data_model.simulation import TextRunConfig
 
-        config = TextRunConfig(domain="airline")
+        config = TextRunConfig(domain="gaia2")
         config.validate()
         print("language=" + config.language)
         """

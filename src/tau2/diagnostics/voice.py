@@ -88,12 +88,11 @@ def map_tool_operations(operations, timeline, scenario_start_time, monotonic_ori
 
 def evaluate_voice(evidence, directory: Path):
     """Measure waveforms, never substitute contains_speech or caption arrival."""
-    if evidence.audio.get("status") != "collected":
-        return {
-            "status": evidence.audio.get("status", "unavailable"),
-            "reason": evidence.audio.get("reason"),
-            "version": VERSION,
-        }
+    from tau2.diagnostics.media import read_media_activity
+
+    media = read_media_activity(evidence, directory)
+    if media["status"] != "measured":
+        return {**media, "version": VERSION}
     shared = evidence.audio.get("activity")
     if shared and shared.get("user_event_version") == EVENT_VERSION:
         from tau2.metrics.voice_interaction import evaluate
@@ -120,98 +119,8 @@ def evaluate_voice(evidence, directory: Path):
                 evidence.task_id,
             ),
         )
-    from tau2.data_model.audio import AudioData, AudioFormat
-    from tau2.voice.utils.audio_preprocessing import convert_to_pcm16
-
-    timeline = evidence.audio["timeline"]
-    raw = {
-        role: (directory / evidence.audio["files"][role]).read_bytes()
-        for role in ("user", "agent")
-    }
-    shared = evidence.audio.get("activity")
-    if shared is not None:
-        turns = [t["intervals"] for t in shared["user_turns"]]
-        intervals = {
-            "user": [r for t in turns for r in t],
-            "agent": shared["agent_intervals"],
-        }
-    else:
-        intervals = {"user": [], "agent": []}
-        for role in intervals:
-            # Detect on the complete channel, not separately on 200 ms frames.
-            chunks, formats, maps, count = [], set(), [], 0
-            for row in timeline:
-                item = row.get(role)
-                if not item:
-                    continue
-                fmt = AudioFormat.model_validate(item["format"])
-                formats.add(fmt.sample_rate)
-                pcm = convert_to_pcm16(
-                    AudioData(
-                        data=raw[role][item["offset"] : item["offset"] + item["bytes"]],
-                        format=fmt,
-                    )
-                ).data
-                n = len(pcm) // 2
-                maps.append(
-                    {
-                        "sample_start": count,
-                        "sample_end": count + n,
-                        "mono_start": row["start"],
-                        "mono_end": row["end"],
-                    }
-                )
-                chunks.append(pcm)
-                count += n
-            if len(formats) != 1:
-                return {
-                    "status": "unavailable",
-                    "reason": "missing_or_changing_audio_format",
-                    "version": VERSION,
-                }
-            rate = next(iter(formats))
-            voiced = (
-                real_voice.detect_speech(b"".join(chunks), rate)
-                if role == "agent"
-                else [
-                    [row.started, row.ended]
-                    for row in evidence.user_inputs
-                    if row.role == "user"
-                ]
-            )
-            if role == "user":
-                intervals[role] = voiced
-                continue
-            # Map each sample interval into delivered time, preserving channel gaps.
-            for a, b in voiced:
-                for row in maps:
-                    left, right = (
-                        max(a * rate, row["sample_start"]),
-                        min(b * rate, row["sample_end"]),
-                    )
-                    if right > left:
-                        scale = (row["mono_end"] - row["mono_start"]) / (
-                            row["sample_end"] - row["sample_start"]
-                        )
-                        intervals[role].append(
-                            [
-                                row["mono_start"]
-                                + (left - row["sample_start"]) * scale,
-                                row["mono_start"]
-                                + (right - row["sample_start"]) * scale,
-                            ]
-                        )
-        turns = []
-        for row in evidence.user_inputs:
-            if row.role != "user":
-                continue
-            pieces = [
-                [max(a, row.started), min(b, row.ended)]
-                for a, b in intervals["user"]
-                if min(b, row.ended) > max(a, row.started)
-            ]
-            if pieces:
-                turns.append(real_voice._intervals(pieces))
+    timeline = media["timeline"]
+    turns = media["user_turns"]
     waveform = {
         "version": real_voice.EVIDENCE_VERSION,
         "config": real_voice.CONFIG,
@@ -219,12 +128,12 @@ def evaluate_voice(evidence, directory: Path):
         "reason": None if turns else "no_user_speech",
         "user_intervals": [r for t in turns for r in t],
         "user_turns": turns,
-        "agent_intervals": intervals["agent"],
+        "agent_intervals": media["agent_intervals"],
         "agent_segments": real_voice._intervals(
-            intervals["agent"], real_voice.CONFIG["merge_gap_sec"]
+            media["agent_intervals"], real_voice.CONFIG["merge_gap_sec"]
         ),
         "input_start_mono": 0.0,
-        "cutoff_mono": evidence.audio["duration"],
+        "cutoff_mono": media["duration"],
     }
     # Operations use scenario seconds. Map each operation independently through
     # the recorded monotonic/media timeline so one gap cannot erase all context.
@@ -262,7 +171,7 @@ def evaluate_voice(evidence, directory: Path):
         namespace="real_voice",
         waveform_evidence=waveform,
         source_metric_version=real_voice.VERSION,
-        config={**CONFIG, **(shared["config"] if shared else {})},
+        config={**CONFIG, **(shared.get("config", {}) if shared else {})},
     )
     return result
 

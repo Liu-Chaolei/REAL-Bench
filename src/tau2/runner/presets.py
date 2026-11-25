@@ -15,7 +15,6 @@ from tau2.config import (
     DEFAULT_VOICE_BENCHMARK,
     DEFAULT_VOICE_BENCHMARK_MAX_STEPS_SECONDS,
     DEFAULT_VOICE_BENCHMARK_OPENAI_VOICE,
-    ELICITATION_DOMAINS,
 )
 from tau2.data_model.benchmark import (
     BenchmarkFrame,
@@ -256,11 +255,9 @@ def resolve_configs(
                 "model",
                 DEFAULT_AUDIO_NATIVE_MODELS[template.audio_native_config.provider],
             )
-            if cell.domain not in ELICITATION_DOMAINS:
-                # Elicitation calls keep their domain's own call-length default.
-                audio_values.setdefault(
-                    "max_steps_seconds", DEFAULT_VOICE_BENCHMARK_MAX_STEPS_SECONDS
-                )
+            audio_values.setdefault(
+                "max_steps_seconds", DEFAULT_VOICE_BENCHMARK_MAX_STEPS_SECONDS
+            )
             if template.audio_native_config.provider == "openai":
                 audio_values.setdefault("voice", DEFAULT_VOICE_BENCHMARK_OPENAI_VOICE)
         values.update(

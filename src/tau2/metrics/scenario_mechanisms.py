@@ -66,17 +66,23 @@ class ScenarioMechanismManager:
             mechanism.consume_reply_step(timestamp)
 
     def finalize(self, termination_reason: str, timestamp: float) -> dict[str, Any]:
-        return {
+        self._summary = {
             "version": "scenario-mechanisms-v1",
             "mechanisms": {
                 mechanism.name: mechanism.finalize(termination_reason, timestamp)
                 for mechanism in self.mechanisms
             },
         }
+        return self._summary
 
     def score(self, scoring=None) -> dict[str, Any]:
+        from tau2.metrics.active.persistent_task.variant_evaluator import (
+            score_interaction_variant,
+        )
+
         return {
-            mechanism.name: mechanism.score(scoring) for mechanism in self.mechanisms
+            name: score_interaction_variant(summary, scoring)
+            for name, summary in self._summary["mechanisms"].items()
         }
 
     def close(self) -> None:

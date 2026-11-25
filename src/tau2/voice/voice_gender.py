@@ -13,7 +13,6 @@ if TYPE_CHECKING:
     from tau2.data_model.simulation import RunConfig
 
 from tau2.config import (
-    DEFAULT_GEMINI_VOICE,
     DEFAULT_NOVA_VOICE,
     DEFAULT_OPENAI_VOICE,
     DEFAULT_PHONIC_VOICE,
@@ -24,7 +23,7 @@ from tau2.config import (
 # Per-provider default voice (what the adapters actually use today).
 PROVIDER_DEFAULT_VOICE: dict[str, str] = {
     "openai": DEFAULT_OPENAI_VOICE,
-    "gemini": DEFAULT_GEMINI_VOICE,
+    "gemini": "Zephyr",  # Historical catalog default
     "xai": DEFAULT_XAI_VOICE,
     "nova": DEFAULT_NOVA_VOICE,
     "qwen": DEFAULT_QWEN_VOICE,
@@ -111,9 +110,6 @@ def selected_agent_voice(config: "RunConfig") -> tuple[str | None, str | None]:
     audio = getattr(config, "audio_native_config", None)
     if audio is None:
         return None, None
-    if audio.provider == "openai_live":
-        voice = audio.live_config.voice
-        return voice, resolve_agent_gender("openai", voice)
     if audio.provider == "livekit":
         from tau2.data_model.cascaded import ElevenLabsTTSConfig
 

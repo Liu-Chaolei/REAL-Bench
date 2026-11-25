@@ -87,7 +87,7 @@ response, state = agent.generate_next_message(user_msg, state)
 
 ### DiscreteTimeAudioNativeAgent (voice evals, full-duplex)
 
-`DiscreteTimeAudioNativeAgent` is the agent for voice evals. It connects to an audio-native API (OpenAI Realtime, Gemini Live, xAI) and exchanges audio in discrete time ticks.
+`DiscreteTimeAudioNativeAgent` is the agent for voice evals. It connects to an audio-native API (OpenAI Realtime, Qwen, xAI) and exchanges audio in discrete time ticks.
 
 - **Base class:** `FullDuplexAgent`
 - **State:** `DiscreteTimeAgentState` (tracks tick count, audio bytes, message history)
@@ -103,12 +103,12 @@ agent = DiscreteTimeAudioNativeAgent(
     tick_duration_ms=1000,
 )
 
-# Gemini Live
+# xAI Grok Voice
 agent = DiscreteTimeAudioNativeAgent(
     tools=env.get_tools(),
     domain_policy=env.get_policy(),
     tick_duration_ms=1000,
-    provider="gemini",
+    provider="xai",
 )
 
 # Initialize state (connects to the API)

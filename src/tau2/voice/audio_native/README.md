@@ -7,8 +7,6 @@ Full-duplex voice evaluation via provider-specific realtime APIs. Each provider 
 | Provider | Type | API | Model |
 |----------|------|-----|-------|
 | **openai** | Native audio | OpenAI Realtime API | gpt-realtime-1.5 |
-| **openai_live** | Native audio | OpenAI GPT Live | gpt-live-1 |
-| **gemini** | Native audio | Google Gemini Live | gemini-3.8-live-extended-thinking |
 | **xai** | Native audio | xAI Grok Voice Agent | grok-voice-think-fast-2.0 |
 | **nova** | Native audio | Amazon Nova Sonic | amazon.nova-2-sonic-v1:0 |
 | **qwen** | Native audio | Alibaba Qwen Omni | qwen3-omni-flash-realtime |
@@ -24,7 +22,6 @@ DiscreteTimeAdapter (adapter.py)          ← shared base class
 ├── _send_audio_chunked()                 ← shared VoIP send helper
 ├── StreamingTelephonyConverter           ← shared audio format conversion (audio_converter.py)
 │
-├── gemini/discrete_time_adapter.py       ← implements _execute_tick + _flush_pending_tool_results
 ├── openai/discrete_time_adapter.py
 ├── xai/discrete_time_adapter.py
 ├── qwen/discrete_time_adapter.py
@@ -48,7 +45,7 @@ extra and `AVARTHA_API_KEY`):
 
 ```bash
 export AVARTHA_API_KEY=<your-api-key>
-tau2 run --audio-native --benchmark none --domain retail \
+tau2 run --audio-native --benchmark none --domain gaia2 \
   --audio-native-provider avartha_pipecat \
   --avartha-base-url https://<host>/inference/serverless/pipecat/v1/public/<agent_id> \
   --num-tasks 1
@@ -59,7 +56,11 @@ domain tools, and records the call's session ID on each simulation. See the
 [Avartha provider guide](avartha_pipecat/README.md) for the protocol,
 options, and live test setup.
 
+`openai_live` and `gemini` are retired. Saved results remain readable; new runs and resume are rejected. Ordinary `openai` is retained.
+
 ## Adding a New Provider
+
+New complete-agent integrations belong in [`tau2/adapters`](../../adapters/README.md). Existing low-level providers below retain their paths.
 
 1. Create `provider.py` with `connect()`, `send_audio()`, `receive_events_for_duration()`, `send_tool_result()`
 2. Create `events.py` with typed event models and a `parse_*_event()` function
@@ -79,7 +80,7 @@ options, and live test setup.
 uv run tests/test_voice/test_audio_native/run_provider_suite.py
 
 # Run for a specific provider
-uv run pytest tests/test_voice/test_audio_native/test_provider_suite.py -v -k gemini
+uv run pytest tests/test_voice/test_audio_native/test_provider_suite.py -v -k openai
 ```
 
 See `test_provider_suite.py` docstring for architecture details.

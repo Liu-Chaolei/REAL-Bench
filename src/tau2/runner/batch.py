@@ -415,16 +415,21 @@ def run_single_task(
     with _TaskLogContext(simulation_id, save_dir, task, verbose_logs):
         # Compute audio taps directory if enabled
         taps_dir = None
-        record_qwen_bridge = (
+        from tau2.adapters.registry import adapter_behavior
+
+        record_protocol = bool(
             verbose_logs
-            and isinstance(config, VoiceRunConfig)
-            and config.audio_native_config.provider == "qwen_agent"
+            and is_voice
+            and adapter_behavior(
+                config.audio_native_config.provider,
+                config.audio_native_config.qwen_agent_config,
+            ).protocol_trace
         )
         if (
             audio_taps
             or config.metrics_config is not None
             or config.active_metrics is not None
-            or record_qwen_bridge
+            or record_protocol
             or (is_voice and config.audio_native_config.user_audio_renderer == "saasr")
         ) and save_dir:
             taps_dir = (
@@ -592,8 +597,8 @@ def make_voice_run_settings(
     if not isinstance(config, VoiceRunConfig):
         return None, None
     synthesis = SynthesisConfig()
-    if config.audio_native_config.provider == "qwen_agent":
-        system = config.audio_native_config.qwen_agent_config
+    if config.audio_native_config.user_simulation is not None:
+        system = config.audio_native_config.user_simulation
         if system.tts is not None:
             settings = system.tts.model_copy(
                 update={

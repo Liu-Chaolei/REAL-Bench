@@ -68,9 +68,6 @@ DEFAULT_LLM_ARGS_USER = {"temperature": DEFAULT_LLM_TEMPERATURE_USER}
 
 # English elicitation defaults. Other domains retain the defaults above.
 ELICITATION_DOMAINS = frozenset({"intake"})
-# Retrieval config for banking_knowledge runs that do not choose one; the
-# released banking benchmark requires it.
-DEFAULT_BANKING_RETRIEVAL_CONFIG = "alltools"
 DEFAULT_ELICITATION_STRATEGY = "agent_directed"
 DEFAULT_ELICITATION_COMPLICATION_RATE = 1.0
 DEFAULT_ELICITATION_MAX_STEPS_SECONDS = 240
@@ -185,7 +182,7 @@ DEFAULT_SPEECH_EFFECTS_MODE = "regular"
 DEFAULT_AUDIO_NATIVE_AGENT_IMPLEMENTATION = "discrete_time_audio_native_agent"
 DEFAULT_AUDIO_NATIVE_USER_IMPLEMENTATION = "voice_streaming_user_simulator"
 DEFAULT_AUDIO_NATIVE_PROVIDER = (
-    "openai"  # overridable: openai, openai_live, gemini, xai, nova, qwen,
+    "openai"  # overridable: openai, xai, nova, qwen,
     # avartha_pipecat, livekit
 )
 DEFAULT_TICK_DURATION_SECONDS = 0.20  # overridable
@@ -228,7 +225,6 @@ DEFAULT_AUDIO_NATIVE_MAX_INACTIVE_SECONDS = 40.0  # fixed, stall detection
 # OPENAI PROVIDER (overridable model/voice, fixed API constants)
 # =============================================================================
 DEFAULT_OPENAI_REALTIME_MODEL = "gpt-realtime-1.5"  # overridable
-DEFAULT_OPENAI_LIVE_MODEL = "gpt-live-1"  # overridable
 _LEGACY_OPENAI_REALTIME_MODEL = "gpt-realtime-2025-08-28"
 DEFAULT_OPENAI_REALTIME_BASE_URL = "wss://api.openai.com/v1/realtime"  # fixed
 DEFAULT_OPENAI_VOICE = "alloy"  # overridable
@@ -239,21 +235,6 @@ DEFAULT_OPENAI_VAD_THRESHOLD = DEFAULT_OPENAI_VAD_THRESHOLD_DEFAULT
 DEFAULT_OPENAI_OUTPUT_SAMPLE_RATE = 24000  # fixed, API-defined
 DEFAULT_OPENAI_TRANSCRIPTION_MODEL = "gpt-4o-transcribe"  # overridable
 DEFAULT_WHISPER_MODEL = "whisper-1"  # fixed
-
-# =============================================================================
-# GEMINI PROVIDER (overridable model/voice, fixed API constants)
-# =============================================================================
-# Auth mode selected from environment:
-#   GEMINI_API_KEY -> AI Studio
-#   GOOGLE_SERVICE_ACCOUNT_KEY or GOOGLE_APPLICATION_CREDENTIALS -> Vertex AI
-DEFAULT_GEMINI_MODEL = "gemini-3.8-live-extended-thinking"  # overridable
-_LEGACY_GEMINI_MODEL = "gemini-live-2.5-flash-native-audio"
-DEFAULT_GEMINI_VOICE = "Zephyr"  # overridable
-DEFAULT_GEMINI_PROACTIVE_AUDIO = True  # fixed
-DEFAULT_GEMINI_LOCATION = "us-central1"  # fixed
-DEFAULT_GEMINI_INPUT_SAMPLE_RATE = 8000  # fixed, API-defined
-DEFAULT_GEMINI_OUTPUT_SAMPLE_RATE = 24000  # fixed, API-defined
-DEFAULT_GEMINI_TRANSCRIPTION_LANGUAGE_CODES = ["en-US"]  # overridable
 
 # =============================================================================
 # XAI PROVIDER (overridable model/voice, fixed API constants)
@@ -327,7 +308,9 @@ DEFAULT_QWEN_AGENT_TOOL_TIMEOUT_SECONDS = 120.0
 DEFAULT_QWEN_AGENT_ASR_MODEL = "nova-3"
 DEFAULT_QWEN_AGENT_MAX_BUFFER_SECONDS = 30.0
 DEFAULT_QWEN_AGENT_BACKEND_EVENT_QUEUE_SIZE = 10000
-DEFAULT_QWEN_AGENT_USER_SILENCE_CHECKIN_SECONDS = 30.0
+DEFAULT_USER_SILENCE_CHECKIN_SECONDS = 30.0
+# Compatibility name for historical Qwen configuration loaders.
+DEFAULT_QWEN_AGENT_USER_SILENCE_CHECKIN_SECONDS = DEFAULT_USER_SILENCE_CHECKIN_SECONDS
 
 # =============================================================================
 # PROVIDER REGISTRY (derived from above)
@@ -338,8 +321,6 @@ LAUNA_SAMPLE_RATE = 24000  # fixed, both directions of the Launa voice API
 DEFAULT_AUDIO_NATIVE_MODELS = {
     "launa": DEFAULT_LAUNA_MODEL,
     "openai": DEFAULT_OPENAI_REALTIME_MODEL,
-    "openai_live": DEFAULT_OPENAI_LIVE_MODEL,
-    "gemini": DEFAULT_GEMINI_MODEL,
     "xai": DEFAULT_XAI_MODEL,
     "nova": DEFAULT_NOVA_MODEL,
     "qwen": DEFAULT_QWEN_MODEL,
@@ -352,8 +333,6 @@ DEFAULT_AUDIO_NATIVE_MODELS = {
 DEFAULT_AUDIO_NATIVE_REASONING_EFFORT: dict[str, str | None] = {
     "launa": None,
     "openai": None,
-    "openai_live": None,
-    "gemini": "high",
     "xai": "high",
     "nova": None,
     "qwen": None,
@@ -366,8 +345,6 @@ DEFAULT_AUDIO_NATIVE_REASONING_EFFORT: dict[str, str | None] = {
 AUDIO_NATIVE_PROVIDER_TYPES = {
     "launa": "audio_native",
     "openai": "audio_native",
-    "openai_live": "audio_native",
-    "gemini": "audio_native",
     "xai": "audio_native",
     "nova": "audio_native",
     "qwen": "audio_native",

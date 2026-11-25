@@ -37,9 +37,8 @@ from tau2.voice.audio_native.tick_result import (
 )
 
 if TYPE_CHECKING:
-    from tau2.data_model.live_config import LiveConfig
+    from tau2.adapters.qwen_audio_agent.config import QwenAgentConfig
     from tau2.voice.audio_native.avartha_pipecat.config import AvarthaPipecatConfig
-    from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
 
 
 class DiscreteTimeAdapter(ABC):
@@ -430,7 +429,8 @@ class DiscreteTimeAdapter(ABC):
         for row in self.playback.drain(until):
             pcm = convert_to_pcm16(
                 AudioData(
-                    data=base64.b64decode(row["audio"]), format=self.playback_audio_format
+                    data=base64.b64decode(row["audio"]),
+                    format=self.playback_audio_format,
                 )
             ).data
             # Provider chunks must contain complete PCM16 samples before RMS
@@ -560,6 +560,26 @@ class DiscreteTimeAdapter(ABC):
         """
         raise NotImplementedError
 
+    def enable_diagnostics(self):
+        """Enable optional passive diagnostics; ordinary providers need no setup."""
+        return None
+
+    def get_diagnostic_evidence(self):
+        """Return only evidence exposed by this tested system."""
+        return {"status": "not_applicable"}
+
+    def get_run_metadata(self):
+        """Return public run provenance, available after shutdown."""
+        return {}
+
+    def get_final_live_transcript(self):
+        """Return optional observer text completed at shutdown."""
+        return None, None
+
+    def recheck_heard_audio(self, evidence, fragments):
+        """An optional bounded observer service, unavailable by default."""
+        return {"status": "unavailable"}
+
     @property
     def has_pending_output(self) -> bool:
         """Expose buffered media and tool replies without altering playback."""
@@ -570,8 +590,8 @@ class DiscreteTimeAdapter(ABC):
         """Send all pending tool results to the provider.
 
         Called at the start of each tick. Provider-specific because each
-        API has different batching semantics (e.g., Gemini batches all
-        results in one call, others send individually).
+        API has different batching semantics: results can be sent together
+        or individually.
 
         After sending, clear self._pending_tool_results.
         """
@@ -673,7 +693,6 @@ def create_adapter(
     reasoning_effort: Optional[str] = None,
     audio_format: Optional[AudioFormat] = None,
     cascaded_config: Any = None,
-    live_config: Optional["LiveConfig"] = None,
     trace_path: Optional[Path] = None,
     voice: Optional[str] = None,
     transcription_language: Optional[str] = None,
@@ -689,7 +708,7 @@ def create_adapter(
     and the resolved model name.
 
     Args:
-        provider: Provider identifier (openai, gemini, xai, nova, qwen,
+        provider: Provider identifier (openai, xai, nova, qwen,
             avartha_pipecat, phonic, livekit).
         tick_duration_ms: Duration of each tick in milliseconds.
         send_audio_instant: If True, send audio in one call per tick.
@@ -697,8 +716,7 @@ def create_adapter(
         audio_format: Audio format for external communication. Defaults to
             telephony (8kHz μ-law).
         cascaded_config: Configuration for cascaded providers (livekit).
-        live_config: Frontend and delegated backend configuration for OpenAI Live.
-        trace_path: Optional private protocol trace for OpenAI Live.
+        trace_path: Optional private adapter protocol trace.
         language: Resolved run language for supported provider hints. OpenAI
             input transcription retains its explicit transcription_language setting.
         avartha_config: Connection settings for a hosted Avartha agent.
@@ -709,10 +727,10 @@ def create_adapter(
     Raises:
         ValueError: If the provider is unknown.
     """
+    if provider not in DEFAULT_AUDIO_NATIVE_MODELS:
+        raise ValueError(f"Audio provider {provider!r} is retired or unsupported")
     if voice is not None and provider != "openai":
-        raise ValueError(
-            "voice override currently requires openai; Live uses live_config.voice"
-        )
+        raise ValueError("voice override currently requires openai")
     # --- Resolve reasoning_effort default ---
     if reasoning_effort is None:
         reasoning_effort = DEFAULT_AUDIO_NATIVE_REASONING_EFFORT.get(provider)
@@ -763,34 +781,6 @@ def create_adapter(
             reasoning_effort=reasoning_effort,
             audio_format=audio_format,
         )
-    elif provider == "openai_live":
-        from tau2.voice.audio_native.openai.live_adapter import (
-            DiscreteTimeOpenAILiveAdapter,
-        )
-
-        if live_config is None:
-            raise ValueError("openai_live requires live_config with a backend model")
-        adapter = DiscreteTimeOpenAILiveAdapter(
-            tick_duration_ms=tick_duration_ms,
-            model=model,
-            config=live_config,
-            reasoning_effort=reasoning_effort,
-            send_audio_instant=send_audio_instant,
-            audio_format=audio_format,
-            trace_path=trace_path,
-        )
-    elif provider == "gemini":
-        from tau2.voice.audio_native.gemini.discrete_time_adapter import (
-            DiscreteTimeGeminiAdapter,
-        )
-
-        adapter = DiscreteTimeGeminiAdapter(
-            language=language,
-            tick_duration_ms=tick_duration_ms,
-            send_audio_instant=send_audio_instant,
-            model=model,
-            reasoning_effort=reasoning_effort,
-        )
     elif provider == "xai":
         from tau2.voice.audio_native.xai.discrete_time_adapter import (
             DiscreteTimeXAIAdapter,
@@ -839,15 +829,12 @@ def create_adapter(
             avartha_config=avartha_config,
         )
     elif provider == "qwen_agent":
-        from tau2.voice.audio_native.qwen_agent.discrete_time_adapter import (
-            DiscreteTimeQwenAgentAdapter,
-        )
+        from tau2.adapters.registry import create_registered_adapter
 
-        if qwen_agent_config is None:
-            raise ValueError("qwen_agent requires qwen_agent_config")
-        adapter = DiscreteTimeQwenAgentAdapter(
+        adapter = create_registered_adapter(
+            provider,
             tick_duration_ms=tick_duration_ms,
-            config=qwen_agent_config,
+            qwen_agent_config=qwen_agent_config,
             observer_hotwords=observer_hotwords,
             model=model,
             reasoning_effort=reasoning_effort,

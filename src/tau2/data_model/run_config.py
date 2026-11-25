@@ -6,6 +6,7 @@ from typing import Literal, Optional
 from pydantic import BaseModel, ConfigDict, Field, model_serializer, model_validator
 from typing_extensions import Annotated
 
+from tau2.adapters.qwen_audio_agent.config import QwenAgentConfig
 from tau2.config import (
     DEFAULT_AUDIO_NATIVE_MODELS,
     DEFAULT_AUDIO_NATIVE_PROVIDER,
@@ -42,22 +43,19 @@ from tau2.config import (
     DEFAULT_YIELD_THRESHOLD_WHEN_INTERRUPTING_SECONDS,
 )
 from tau2.data_model.cascaded import CascadedConfig, CascadedConfigRequest
-from tau2.data_model.elicitation import (
-    ElicitationConfig,
-)
 from tau2.data_model.live_config import LiveConfig
 from tau2.data_model.saasr import SaasrConfig
 from tau2.data_model.semantic_communication import CommunicateScoring
+from tau2.data_model.user_simulation import UserSimulationConfig
 from tau2.data_model.voice import SpeechComplexity, VoiceSettings
 from tau2.voice.audio_native.avartha_pipecat.config import AvarthaPipecatConfig
-from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
 
 
 class AudioNativeConfig(BaseModel):
     """Configuration for audio-native mode using DiscreteTimeAudioNativeAgent.
 
     This configuration is used when running full-duplex voice simulations
-    with audio native APIs (OpenAI Realtime or Gemini Live).
+    with supported audio native APIs.
     """
 
     model_config = ConfigDict(extra="forbid")
@@ -99,8 +97,6 @@ class AudioNativeConfig(BaseModel):
     # Provider selection
     provider: Literal[
         "openai",
-        "openai_live",
-        "gemini",
         "xai",
         "nova",
         "qwen",
@@ -111,7 +107,7 @@ class AudioNativeConfig(BaseModel):
         "launa",
     ] = Field(
         default=DEFAULT_AUDIO_NATIVE_PROVIDER,
-        description="Audio native API provider: 'openai' (OpenAI Realtime), 'openai_live' (OpenAI Live), 'gemini' (Gemini Live), 'xai' (xAI Grok Voice Agent), 'nova' (Amazon Nova Sonic), 'qwen' (Alibaba Qwen Omni), 'avartha_pipecat' (hosted Avartha agent over Pipecat SmallWebRTC), 'phonic' (Phonic 1), 'launa' (Salesforce Launa), or 'livekit' (LiveKit cascaded STT→LLM→TTS)",
+        description="Audio native API provider: 'openai' (OpenAI Realtime), 'xai' (xAI Grok Voice Agent), 'nova' (Amazon Nova Sonic), 'qwen' (Alibaba Qwen Omni), 'avartha_pipecat' (hosted Avartha agent over Pipecat SmallWebRTC), 'phonic' (Phonic 1), 'launa' (Salesforce Launa), or 'livekit' (LiveKit cascaded STT→LLM→TTS)",
     )
 
     transcription_language: Optional[str] = Field(
@@ -126,7 +122,7 @@ class AudioNativeConfig(BaseModel):
 
     voice: Optional[str] = Field(
         default=None,
-        description="Explicit OpenAI Realtime voice; Live uses live_config.voice.",
+        description="Explicit OpenAI Realtime voice.",
     )
 
     # Cascaded config (for livekit provider)
@@ -145,6 +141,32 @@ class AudioNativeConfig(BaseModel):
         description="Hosted agent connection settings for the avartha_pipecat provider",
     )
 
+    user_simulation: Optional[UserSimulationConfig] = Field(
+        default=None,
+        description="Evaluator-owned caller, followup and watchdog controls.",
+    )
+    user_simulation_origin: Optional[str] = Field(default=None)
+
+    @model_validator(mode="after")
+    def resolve_user_simulation(self):
+        """Move historical Qwen caller settings to their evaluator-owned field once."""
+        from tau2.data_model.user_simulation import merge_user_settings
+
+        system = self.qwen_agent_config
+        if system is not None and system.evaluation is not None:
+            self.user_simulation_origin = self.user_simulation_origin or (
+                "legacy_qwen"
+                if self.user_simulation is None
+                else "explicit_and_legacy_qwen"
+            )
+            self.user_simulation = merge_user_settings(
+                self.user_simulation, system.evaluation
+            )
+            self.qwen_agent_config = system.model_copy(update={"evaluation": None})
+        elif self.user_simulation is not None and self.user_simulation_origin is None:
+            self.user_simulation_origin = "explicit"
+        return self
+
     qwen_agent_config: Optional[QwenAgentConfig] = Field(
         default=None, description="Complete Qwen Audio Agent system settings"
     )
@@ -160,14 +182,10 @@ class AudioNativeConfig(BaseModel):
         default=None,
         description="Reasoning effort for thinking models: 'minimal', 'low', 'medium', 'high'. If None, not sent.",
     )
-    live_config: Optional[LiveConfig] = Field(
-        default=None,
-        description="Backend model, voice, and optional prompt overrides for the openai_live provider",
-    )
     realtime_generation: Optional[bool] = Field(
         default=None,
         description="Whether user LLM and TTS generation run without blocking audio ticks. "
-        "Defaults to enabled for openai_live and avartha_pipecat and disabled for "
+        "Defaults to enabled for qwen_agent and avartha_pipecat and disabled for "
         "other providers.",
     )
 
@@ -178,7 +196,7 @@ class AudioNativeConfig(BaseModel):
             return self.realtime_generation
         if self.user_audio_renderer == "saasr":
             return True
-        return self.provider in ("openai_live", "avartha_pipecat", "qwen_agent")
+        return self.provider in ("avartha_pipecat", "qwen_agent")
 
     @model_validator(mode="after")
     def validate_qwen_agent_config(self):
@@ -198,14 +216,6 @@ class AudioNativeConfig(BaseModel):
                 self.model = DEFAULT_AUDIO_NATIVE_MODELS["qwen_agent"]
         elif self.qwen_agent_config is not None:
             raise ValueError("qwen_agent_config requires provider='qwen_agent'")
-        return self
-
-    @model_validator(mode="after")
-    def validate_live_config(self):
-        if (self.provider == "openai_live") != (self.live_config is not None):
-            raise ValueError(
-                "live_config is required for openai_live and only valid for that provider"
-            )
         return self
 
     @model_validator(mode="after")
@@ -229,6 +239,9 @@ class AudioNativeConfig(BaseModel):
     def serialize_avartha_config(self, handler):
         """Other providers keep their existing serialized contract."""
         value = handler(self)
+        if self.user_simulation is None:
+            value.pop("user_simulation", None)
+            value.pop("user_simulation_origin", None)
         if self.avartha_config is None:
             value.pop("avartha_config", None)
         if self.qwen_agent_config is None:
@@ -399,16 +412,15 @@ class AudioNativeConfig(BaseModel):
         return int(self.max_steps_seconds / self.tick_duration_seconds)
 
 
+class RecordedAudioNativeConfig(AudioNativeConfig):
+    """Passive saved settings, including providers no longer available to run."""
+
+    provider: str
+    live_config: LiveConfig | None = None
+
+
 class RunSettings(BaseModel):
     """Ordinary execution settings shared by text, voice and recorded conditions."""
-
-    elicitation: Annotated[
-        Optional[ElicitationConfig],
-        Field(
-            description="Caller stimulus settings for elicitation domains only.",
-            default=None,
-        ),
-    ]
 
     communicate_scoring: CommunicateScoring = Field(
         default_factory=CommunicateScoring,
@@ -480,7 +492,7 @@ class RunSettings(BaseModel):
         Field(
             description="Max concurrently-running simulations per provider, "
             "enforced at lease time in controller mode (workers > 0), "
-            'e.g. {"openai": 40, "gemini": 20}.',
+            'e.g. {"openai": 40, "xai": 20}.',
             default=None,
         ),
     ]
@@ -601,22 +613,6 @@ class RunSettings(BaseModel):
         Field(
             description="Whether to run the simulation remotely",
             default=False,
-        ),
-    ]
-
-    retrieval_config: Annotated[
-        Optional[str],
-        Field(
-            description="Knowledge retrieval config name (knowledge domain only).",
-            default=None,
-        ),
-    ]
-
-    retrieval_config_kwargs: Annotated[
-        Optional[dict],
-        Field(
-            description="Arguments to pass to the retrieval config constructor (e.g., top_k for RAG configs).",
-            default=None,
         ),
     ]
 

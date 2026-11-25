@@ -346,19 +346,6 @@ def project_state(task, evidence, interpreter=None, adapter=None):
                     if item and item.status != "cancelled":
                         _status(item, "open", event)
                         window.delta.regressed_items.append(identity)
-            for i, claim in enumerate(interpretation.claims):
-                id = f"claim:{event.event_id}:{i}"
-                state.claims[id] = StateItem(
-                    id=id,
-                    kind="claim",
-                    key=claim,
-                    value=claim,
-                    status="claimed",
-                    source_refs=[event.event_id],
-                    visible_to=event.visible_to,
-                    visible_at=event.sequence,
-                    updated_at=event.sequence,
-                )
             if event.kind == "tool_requested":
                 data = event.content
                 id = "operation:" + data["call_id"]

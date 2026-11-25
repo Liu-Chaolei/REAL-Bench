@@ -373,6 +373,17 @@ def delivered_inputs(simulation, task, index_offset=0):
                     role="user" if message.role == "user" else "assistant_context",
                 )
             )
+    provenance = {
+        row["event_id"]: {key: row.get(key) for key in ("source", "purpose")}
+        for row in (getattr(simulation, "environment_trace", None) or [])
+        if row.get("kind") == "user"
+        and row.get("event_id")
+        and row.get("source") is not None
+    }
+    for row in result:
+        if row.role == "user" and row.event_id in provenance:
+            row.source = provenance[row.event_id]["source"]
+            row.purpose = provenance[row.event_id]["purpose"]
     return sorted(result, key=lambda row: (row.started, row.id))
 
 
@@ -463,6 +474,15 @@ def collect_audio(simulation, directory, orchestrator=None):
     }
 
 
+def runtime_facts(summary):
+    """Copy a runtime envelope without embedding post-run grading outputs."""
+    return (
+        copy.deepcopy({k: v for k, v in summary.items() if k != "scores"})
+        if summary is not None
+        else None
+    )
+
+
 def finalize_evidence(orchestrator, simulation, recorder, directory):
     """Seal evidence before model grading; an incomplete source remains explicit."""
     from tau2.data_model.diagnostics import BackendInput
@@ -510,8 +530,14 @@ def finalize_evidence(orchestrator, simulation, recorder, directory):
                 "task_set_name"
             ),
             "metrics_config": getattr(recorder, "metrics_config", None),
+            "communicate_scoring": getattr(recorder, "communicate_scoring", None),
             "state_backend_observations": source.get("state_observations", []),
-            "active_metrics": (simulation.info or {}).get("active_metrics"),
+            "active_metrics": runtime_facts(
+                (simulation.info or {}).get("active_metrics")
+            ),
+            "scenario_mechanisms": runtime_facts(
+                (simulation.info or {}).get("scenario_mechanisms")
+            ),
             "interaction_variant": orchestrator.task.scenario.async_interaction
             if orchestrator.task.scenario
             else None,

@@ -2,6 +2,7 @@ import argparse
 import json
 from pathlib import Path
 
+from tau2.adapters.qwen_audio_agent.config import QwenAgentConfig
 from tau2.config import (
     DEFAULT_AGENT_IMPLEMENTATION,
     DEFAULT_AUDIO_NATIVE_MODELS,
@@ -43,7 +44,6 @@ from tau2.data_model.simulation import TextRunConfig, VoiceRunConfig
 from tau2.run import get_options, run_domain
 from tau2.runner.work import parse_provider_limits
 from tau2.voice.audio_native.avartha_pipecat.config import AvarthaPipecatConfig
-from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
 
 
 def add_run_args(parser):
@@ -177,7 +177,7 @@ def add_run_args(parser):
         "--provider-limit",
         type=str,
         default=None,
-        help='Per-provider concurrency caps in controller mode, e.g. "openai=40,gemini=20". '
+        help='Per-provider concurrency caps in controller mode, e.g. "openai=40,xai=20". '
         "Requires --workers.",
     )
     parser.add_argument(
@@ -299,8 +299,6 @@ def add_run_args(parser):
         type=str,
         choices=[
             "openai",
-            "openai_live",
-            "gemini",
             "xai",
             "nova",
             "qwen",
@@ -330,6 +328,12 @@ def add_run_args(parser):
         "selects the agent.",
     )
     parser.add_argument(
+        "--user-simulation-config",
+        type=Path,
+        default=None,
+        help="JSON caller, dynamic followup and watchdog configuration, independent of the tested Agent",
+    )
+    parser.add_argument(
         "--qwen-agent-config",
         default=None,
         help="JSON configuration file for the complete qwen_agent system provider.",
@@ -345,17 +349,11 @@ def add_run_args(parser):
         ),
     )
     parser.add_argument(
-        "--live-config",
-        type=json.loads,
-        default=None,
-        help="JSON config for openai_live: backend_model (required), voice, and optional frontend_prompt/backend_prompt overrides.",
-    )
-    parser.add_argument(
         "--realtime-generation",
         action=argparse.BooleanOptionalAction,
         default=None,
         help="Run user LLM/TTS generation without blocking audio ticks. "
-        "Defaults to enabled for openai_live and avartha_pipecat and disabled for "
+        "Defaults to enabled for qwen_agent and avartha_pipecat and disabled for "
         "other providers. "
         "Use --no-realtime-generation to disable.",
     )
@@ -483,8 +481,6 @@ def add_run_args(parser):
         help="Use plain text system prompt without XML tags (overrides auto-detection).",
     )
 
-    parser.set_defaults(retrieval_config=None, retrieval_config_kwargs=None)
-
     # Resume mode
     parser.add_argument(
         "--auto-resume",
@@ -573,7 +569,7 @@ def run_intro():
     )
     modes_table.add_row(
         "Full-duplex (voice)",
-        "Real-time audio-native voice using streaming APIs (OpenAI, Gemini, xAI).",
+        "Real-time audio-native voice using streaming APIs (OpenAI, Qwen, xAI).",
     )
     console.print(modes_table)
     console.print()
@@ -703,6 +699,8 @@ def main():
 
         args.benchmark = selected_benchmark(args) or "none"
         benchmark_mode = args.benchmark != "none"
+        if args.user_simulation_config and not args.audio_native:
+            run_parser.error("--user-simulation-config requires --audio-native")
         if args.audio_native_provider == "qwen_agent":
             if not args.audio_native:
                 run_parser.error("qwen_agent requires --audio-native")
@@ -772,9 +770,6 @@ def main():
                 if not args.qwen_agent_config:
                     run_parser.error("qwen_agent requires --qwen-agent-config")
                 try:
-                    import json
-                    from pathlib import Path
-
                     qwen_value = json.loads(Path(args.qwen_agent_config).read_text())
                     if args.api_config_dir is not None:
                         qwen_value["api_config_dir"] = str(args.api_config_dir)
@@ -805,6 +800,16 @@ def main():
             if args.xml_prompt:
                 use_xml_prompt = True
 
+            user_simulation = None
+            if args.user_simulation_config:
+                from tau2.data_model.user_simulation import UserSimulationConfig
+
+                try:
+                    user_simulation = UserSimulationConfig.model_validate_json(
+                        Path(args.user_simulation_config).read_text()
+                    )
+                except (OSError, ValueError) as exc:
+                    run_parser.error(f"invalid user simulation configuration: {exc}")
             audio_native_config = AudioNativeConfig(
                 user_audio_renderer=args.user_audio_renderer,
                 saasr_config=saasr_config,
@@ -813,6 +818,7 @@ def main():
                 model=audio_native_model,
                 avartha_config=avartha_config,
                 qwen_agent_config=qwen_agent_config,
+                user_simulation=user_simulation,
                 cascaded_request=(
                     CascadedConfigRequest(preset=args.cascaded_config)
                     if args.cascaded_config is not None
@@ -820,7 +826,6 @@ def main():
                 ),
                 reasoning_effort=args.reasoning_effort,
                 **({"voice": args.voice} if args.voice is not None else {}),
-                live_config=args.live_config,
                 realtime_generation=args.realtime_generation,
                 # Timing
                 tick_duration_seconds=args.tick_duration,
@@ -897,8 +902,6 @@ def main():
             review_mode=args.review_mode,
             review_model=args.review_model,
             hallucination_retries=args.hallucination_retries,
-            retrieval_config=args.retrieval_config,
-            retrieval_config_kwargs=args.retrieval_config_kwargs,
         )
 
         if not benchmark_mode and args.domain:
@@ -1041,7 +1044,7 @@ def main():
     domain_parser.add_argument(
         "domain",
         type=str,
-        help="Name of the domain to show documentation for (e.g., 'airline', 'mock')",
+        help="Name of the domain to show documentation for (currently 'gaia2')",
     )
     domain_parser.set_defaults(func=lambda args: run_show_domain(args))
 
@@ -1190,7 +1193,7 @@ def main():
 
     # Leaderboard command
     leaderboard_parser = subparsers.add_parser(
-        "leaderboard", help="Show the tau-bench leaderboard"
+        "leaderboard", help="Show historical tau-bench domain leaderboards"
     )
     leaderboard_parser.add_argument(
         "--domain",
@@ -1198,7 +1201,7 @@ def main():
         type=str,
         choices=["retail", "airline", "telecom", "banking_knowledge"],
         default=None,
-        help="Show leaderboard for a specific domain. If not specified, shows overall leaderboard.",
+        help="Historical domain filter; this command does not run Gaia2 evaluations.",
     )
     leaderboard_parser.add_argument(
         "--metric",

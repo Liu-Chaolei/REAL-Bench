@@ -24,7 +24,6 @@ from tau2.config import (
     DEFAULT_SPEECH_EFFECTS_MODE,
 )
 from tau2.data_model.dynamic_followup import DynamicFollowupConfig
-from tau2.data_model.elicitation import ElicitationConfig
 from tau2.data_model.language import CallContext, LanguageTaskInfo
 from tau2.data_model.persona import PersonaConfig
 from tau2.data_model.run_config import AudioNativeConfig
@@ -64,11 +63,11 @@ def build_environment(
     Uses the registry to resolve the domain name to an environment constructor.
 
     Args:
-        domain: Domain name (e.g., "airline", "retail", "mock").
+        domain: Registered domain name (currently "gaia2").
         solo_mode: If True, environment is built in solo mode (agent gets
             access to both agent and user tools).
         env_kwargs: Additional keyword arguments passed to the environment
-            constructor (e.g., retrieval_variant, task for banking_knowledge).
+            constructor (e.g., the Gaia2 task).
 
     Returns:
         A fully constructed Environment instance.
@@ -108,7 +107,6 @@ def build_agent(
     audio_taps_dir: Optional[Path] = None,
     language_guidance: str = "",
     language: str = "en",
-    elicitation_config: Optional[ElicitationConfig] = None,
 ) -> Union[HalfDuplexAgent, FullDuplexAgent]:
     """Build an agent from a registered name and an environment.
 
@@ -124,7 +122,6 @@ def build_agent(
         task: The task (required for some agents like llm_agent_gt, llm_agent_solo).
         audio_native_config: Audio config (full-duplex agents).
         solo_mode: If True, agent tools include both agent and user tools.
-        elicitation_config: Intake strategy settings for its domain-owned prompts.
 
     Returns:
         A fully constructed agent instance.
@@ -151,23 +148,24 @@ def build_agent(
 
     domain_kwargs = {}
     domain = environment.get_domain_name()
-    if audio_native_config is not None and audio_native_config.provider == "qwen_agent":
+    if audio_native_config is not None:
+        from tau2.adapters.registry import prepare_adapter_config
         from tau2.config import DEFAULT_SCENARIO_NOTIFICATION_WAIT_SECONDS
 
-        if (
-            getattr(environment, "scenario_runtime", None) is not None
-            and audio_native_config.qwen_agent_config.tool_timeout_seconds
-            <= DEFAULT_SCENARIO_NOTIFICATION_WAIT_SECONDS + 5
-        ):
-            raise ValueError(
-                "Timed scenarios require a Qwen MCP tool timeout greater than the shared notification wait plus five seconds"
+        prepared = prepare_adapter_config(
+            audio_native_config.provider,
+            audio_native_config.qwen_agent_config,
+            domain=domain,
+            notification_wait_seconds=(
+                DEFAULT_SCENARIO_NOTIFICATION_WAIT_SECONDS
+                if getattr(environment, "scenario_runtime", None) is not None
+                else None
+            ),
+        )
+        if prepared is not audio_native_config.qwen_agent_config:
+            audio_native_config = audio_native_config.model_copy(
+                update={"qwen_agent_config": prepared}
             )
-        system = audio_native_config.qwen_agent_config.model_copy(
-            update={"domain": domain}
-        )
-        audio_native_config = audio_native_config.model_copy(
-            update={"qwen_agent_config": system}
-        )
 
     return agent_factory(
         tools=tools,
@@ -257,7 +255,6 @@ def build_voice_user(
     domain: Optional[str] = None,
     hallucination_feedback: Optional[str] = None,
     audio_taps_dir: Optional[Path] = None,
-    elicitation_config: Optional[VoiceRunConfig] = None,
     channel_effects_mode: str = DEFAULT_CHANNEL_EFFECTS_MODE,
     speech_effects_mode: str = DEFAULT_SPEECH_EFFECTS_MODE,
     force_sample_voice_config: bool = False,
@@ -426,8 +423,8 @@ def build_voice_user(
         )
         domain_kwargs["role_reminder_override"] = GAIA2_ROLE_REMINDER
 
-    if audio_native_config.provider == "qwen_agent":
-        system = audio_native_config.qwen_agent_config
+    if audio_native_config.user_simulation is not None:
+        system = audio_native_config.user_simulation
         caller_llm = system.user_llm_settings()
         if system.api_config_dir:
             from tau2.utils.api_config import get_api_configuration
@@ -524,40 +521,12 @@ def call_context(config: RunConfig, language_context: LanguageTaskInfo) -> CallC
     )
 
 
-def _derive_read_log_allowlist(task: Task) -> set:
-    """Set of discoverable-tool names required by the task's golden trajectory.
-
-    The banking_knowledge ``call_discoverable_agent_tool`` wrapper logs every
-    call to the ``agent_discoverable_tools`` DB table, which is then hashed
-    for the env-eval reward. For READ-only discoverable tools this means any
-    extra validation call (e.g. an agent reading a balance "just in case")
-    diverges the hash and zeros the reward — even though the KB explicitly
-    encourages such reads.
-
-    To keep the "agent must call this read to verify" assertion (tasks 046,
-    085, etc.) while not punishing extra reads, we extract the set of tool
-    names appearing in golden ``call_discoverable_agent_tool`` actions and
-    pass it as an allowlist to the toolkit. Calls to writes are always
-    logged; calls to reads are only logged when in this set.
-    """
-    allowlist: set = set()
-    if task.evaluation_criteria is None:
-        return allowlist
-    for action in task.evaluation_criteria.actions or []:
-        if action.name == "call_discoverable_agent_tool":
-            name = (action.arguments or {}).get("agent_tool_name")
-            if name:
-                allowlist.add(name)
-    return allowlist
-
-
 def _build_env_kwargs(
     config: RunConfig, task: Task, *, language_context: LanguageTaskInfo
 ) -> dict:
     """Build env_kwargs from a RunConfig for the environment constructor.
 
-    Passes channel and task context for elicitation's pre-call work order, and
-    retrieval settings and task context for banking knowledge policies.
+    Passes the resolved language binding and Gaia2 task context.
     """
     from tau2.domains.gaia2.language_runtime import (
         language_environment_kwargs,
@@ -575,15 +544,6 @@ def _build_env_kwargs(
             config, "gaia2_allow_stale_runtime", False
         ):
             env_kwargs["allow_stale_runtime"] = True
-    retrieval_config = getattr(config, "retrieval_config", None)
-    if retrieval_config is not None:
-        env_kwargs["retrieval_variant"] = retrieval_config
-        env_kwargs["task"] = task
-        rk = dict(getattr(config, "retrieval_config_kwargs", None) or {})
-        if rk:
-            env_kwargs["retrieval_kwargs"] = rk
-    if getattr(config, "domain", None) == "banking_knowledge":
-        env_kwargs["read_log_allowlist"] = _derive_read_log_allowlist(task)
     return env_kwargs
 
 
@@ -610,8 +570,8 @@ def build_text_orchestrator(
         A fully constructed Orchestrator, ready for run_simulation().
 
     Example:
-        config = TextRunConfig(domain="airline", agent="llm_agent")
-        tasks = get_tasks("airline")
+        config = TextRunConfig(domain="gaia2", agent="llm_agent")
+        tasks = get_tasks("gaia2")
         orchestrator = build_text_orchestrator(config, tasks[0], seed=42)
         result = run_simulation(orchestrator)
     """
@@ -655,7 +615,6 @@ def build_text_orchestrator(
         llm_args=config.llm_args_agent,
         task=task,
         solo_mode=solo_mode,
-        elicitation_config=config.elicitation,
     )
 
     user = build_user(
@@ -683,16 +642,6 @@ def build_text_orchestrator(
         validate_communication=config.enforce_communication_protocol,
         timeout=config.timeout,
         call_context=context,
-        watchdog_config=(
-            config.audio_native_config.qwen_agent_config.watchdog
-            if config.audio_native_config.qwen_agent_config is not None
-            else None
-        ),
-        watchdog_judge=(
-            config.communicate_scoring.judge
-            if config.communicate_scoring is not None
-            else None
-        ),
     )
 
     logger.debug(
@@ -773,8 +722,8 @@ def _build_voice_orchestrator(
             not supported for voice/full-duplex runs.
 
     Example:
-        config = VoiceRunConfig(domain="airline", audio_native_config=AudioNativeConfig())
-        tasks = get_tasks("airline")
+        config = VoiceRunConfig(domain="gaia2", audio_native_config=AudioNativeConfig())
+        tasks = get_tasks("gaia2")
         orchestrator = build_voice_orchestrator(config, tasks[0], seed=42)
         result = run_simulation(orchestrator)
     """
@@ -855,9 +804,14 @@ def _build_voice_orchestrator(
             raise ValueError("SAASR worker software changed after batch preflight")
 
     observer_hotwords = None
-    if config.audio_native_config.provider == "qwen_agent":
-        observer_settings = config.audio_native_config.qwen_agent_config
-        if observer_settings.asr_hotwords.enabled:
+    from tau2.adapters.registry import observer_preparation
+
+    observer_settings = observer_preparation(
+        config.audio_native_config.provider,
+        config.audio_native_config.qwen_agent_config,
+    )
+    if observer_settings is not None:
+        if observer_settings.hotwords.enabled:
             from tau2.user.asr_hotwords import build_hotword_profile
 
             prompt_task = task
@@ -873,21 +827,19 @@ def _build_voice_orchestrator(
                     hotword_profile.arguments(),
                 )
             try:
-                if observer_settings.asr_hotwords.mode == "gaia2_stage_gt":
+                if observer_settings.hotwords.mode == "gaia2_stage_gt":
                     if domain != "gaia2" or language_context.language != "en":
-                        raise ValueError(
-                            "Fixed stage hotwords require English Gaia2"
-                        )
+                        raise ValueError("Fixed stage hotwords require English Gaia2")
                     from tau2.user.stage_asr_hotwords import load_stage_hotword_profile
 
                     observer_hotwords = load_stage_hotword_profile(
-                        task, observer_settings.asr_hotwords
+                        task, observer_settings.hotwords
                     )
                 else:
                     observer_hotwords = build_hotword_profile(
                         prompt_task,
                         environment.get_user_asr_materials(prompt_task),
-                        observer_settings.asr_hotwords,
+                        observer_settings.hotwords,
                         language=language_context.language,
                         model=hotword_model,
                         model_args=hotword_args,
@@ -914,7 +866,6 @@ def _build_voice_orchestrator(
             ),
             language=language_context.language,
             audio_taps_dir=audio_taps_dir,
-            elicitation_config=config.elicitation,
         )
         agent.observer_hotwords = observer_hotwords
     else:
@@ -927,24 +878,19 @@ def _build_voice_orchestrator(
             ),
             language=language_context.language,
             audio_taps_dir=audio_taps_dir,
-            elicitation_config=config.elicitation,
         )
 
-    dynamic_followup_config = None
+    caller_settings = config.audio_native_config.user_simulation
+    dynamic_followup_config = (
+        caller_settings.dynamic_followup if caller_settings is not None else None
+    )
     hidden_intent_graph = None
     if (
-        config.audio_native_config.provider == "qwen_agent"
-        and config.audio_native_config.qwen_agent_config is not None
+        dynamic_followup_config is not None
+        and dynamic_followup_config.enabled
+        and (domain != "gaia2" or language_context.language != "en")
     ):
-        dynamic_followup_config = (
-            config.audio_native_config.qwen_agent_config.dynamic_followup
-        )
-        if dynamic_followup_config.enabled and (
-            domain != "gaia2" or language_context.language != "en"
-        ):
-            raise ValueError(
-                "Dynamic followup v1 requires English Gaia2 Qwen voice runs"
-            )
+        raise ValueError("Dynamic followup v1 requires English Gaia2 voice runs")
     from tau2.domains.gaia2.interaction_variants import variant_for
 
     if variant_for(task) is not None:
@@ -977,7 +923,6 @@ def _build_voice_orchestrator(
         language_context=language_context,
         hallucination_feedback=hallucination_feedback,
         audio_taps_dir=audio_taps_dir,
-        elicitation_config=config,
         channel_effects_mode=config.channel_effects_mode,
         speech_effects_mode=config.speech_effects_mode,
         force_sample_voice_config=config.pass3_condition is not None,
@@ -999,16 +944,15 @@ def _build_voice_orchestrator(
         tick_duration_seconds=config.audio_native_config.tick_duration_seconds,
         timeout=config.timeout,
         call_context=context,
+        watchdog_config=caller_settings.watchdog
+        if caller_settings is not None
+        else None,
+        watchdog_judge=config.communicate_scoring.judge
+        if config.communicate_scoring is not None
+        else None,
     )
-    if config.audio_native_config.provider == "qwen_agent":
-
-        def recheck(evidence, fragments):
-            # The adapter is constructed lazily when the call starts.
-            method = getattr(
-                getattr(agent, "_adapter", None), "recheck_heard_audio", None
-            )
-            return method(evidence, fragments) if method else {"status": "unavailable"}
-
+    recheck = getattr(agent, "recheck_heard_audio", None)
+    if recheck is not None:
         user.audio_recheck = recheck
 
     logger.debug(

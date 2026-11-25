@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import hashlib
-import json
+from copy import deepcopy
 from dataclasses import replace
 from pathlib import Path
 from typing import Any
@@ -16,7 +16,6 @@ from tau2.metrics.active.persistent_task.generator import (
 from tau2.metrics.active.persistent_task.policy import PersistentTaskPolicy
 from tau2.persistent_tasks.availability import evidence_source
 from tau2.persistent_tasks.core.models import BackendTaskObservation
-from tau2.persistent_tasks.scores import consolidate_score
 
 
 class PersistentTaskMetricRuntime:
@@ -195,7 +194,7 @@ class PersistentTaskMetricRuntime:
             queue(
                 self.request_id,
                 self.request_text,
-                source="persistent_task",
+                source="active_persistent_task",
                 purpose="followup",
             )
         self.delivery["queued_at"] = timestamp
@@ -237,187 +236,53 @@ class PersistentTaskMetricRuntime:
             self.status = "not_reached"
         elif self.status == "delivered":
             self.status = "reply_unavailable"
-        return {
-            "version": "persistent-task-metric-evidence-v1",
-            "status": self.status,
-            "policy_version": self.config.policy_version,
-            "seed": self.seed,
-            "binding": {
-                "role": "primary",
-                "backend_task_id": self.backend_task_id,
-                "source_task_id": self.source_task_id,
-                "source_stage": self.source_stage,
-                "task_label": self.task_label,
-            },
-            "observations": self.observations,
-            "preferred_intent": (
-                {
-                    "state": self.policy.preferred.state.value,
-                    "operation": self.policy.preferred.operation,
-                }
-                if self.policy.preferred
-                else None
-            ),
-            "resolved_intent": self.generated_request.get("resolved_intent")
-            if self.generated_request
-            else None,
-            "generated_request": self.generated_request,
-            "request_id": self.request_id,
-            "delivery": self.delivery,
-            "reply_text": self.reply_text,
-            "operations": self.operations,
-            "termination_reason": termination_reason,
-            "finalized_at": timestamp,
-            "issues": self.issues,
-        }
+        self._termination_reason = termination_reason
+        self._finalized_at = timestamp
+        return self.snapshot()
+
+    def snapshot(self) -> dict[str, Any]:
+        """Copy observed facts without draining events or changing runtime state."""
+        return deepcopy(
+            {
+                "version": "persistent-task-metric-evidence-v1",
+                "status": self.status,
+                "policy_version": self.config.policy_version,
+                "seed": self.seed,
+                "binding": {
+                    "role": "primary",
+                    "backend_task_id": self.backend_task_id,
+                    "source_task_id": self.source_task_id,
+                    "source_stage": self.source_stage,
+                    "task_label": self.task_label,
+                },
+                "observations": self.observations,
+                "preferred_intent": (
+                    {
+                        "state": self.policy.preferred.state.value,
+                        "operation": self.policy.preferred.operation,
+                    }
+                    if self.policy.preferred
+                    else None
+                ),
+                "resolved_intent": self.generated_request.get("resolved_intent")
+                if self.generated_request
+                else None,
+                "generated_request": self.generated_request,
+                "request_id": self.request_id,
+                "delivery": self.delivery,
+                "reply_text": self.reply_text,
+                "operations": self.operations,
+                "termination_reason": getattr(self, "_termination_reason", None),
+                "finalized_at": getattr(self, "_finalized_at", None),
+                "issues": self.issues,
+            }
+        )
 
     def close(self) -> None:
         return None
 
     def score(self, scoring=None) -> dict[str, Any]:
-        """Score the resolved request independently of the task reward."""
-        if self.status in {
-            "unsupported",
-            "generation_unavailable",
-            "unresolved",
-            "not_reached",
-            "reply_unavailable",
-        }:
-            return consolidate_score(
-                {
-                    "status": self.status,
-                    "completion_score": None,
-                    "evaluation_log": {
-                        "operation_reward": None,
-                        "native_result": {"passed": None, "reason": self.status},
-                        "reply": {
-                            "passed": None,
-                            "status": "not_evaluated",
-                            "reason": self.status,
-                        },
-                    },
-                }
-            )
-        resolved = (self.generated_request or {}).get("resolved_intent") or {}
-        operation_name = resolved.get("operation")
-        candidates = [
-            event
-            for event in self.operations
-            if event.get("backend_task_id") == self.backend_task_id
-            and event.get("kind") != "native_operation_started"
-            and self.delivery["delivered_at"] is not None
-            and event.get("timestamp", 0) >= self.delivery["delivered_at"]
-            and event.get("success") is not False
-            and event.get("result") is not None
-            and next(
-                (
-                    start.get("timestamp", 0)
-                    for start in self.operations
-                    if event.get("call_id")
-                    and start.get("call_id") == event["call_id"]
-                    and start.get("kind") == "native_operation_started"
-                ),
-                event.get("timestamp", 0),
-            )
-            >= self.delivery["delivered_at"]
-        ]
-        operation = next(
-            (
-                event
-                for event in candidates
-                if event.get("operation") == operation_name
-                or (operation_name == "result" and event.get("operation") == "query")
-            ),
-            None,
-        )
-        operation_reward = float(operation is not None)
-        result = operation.get("result") if operation else None
-        actual_state = (
-            (result.get("state") if isinstance(result, dict) else None)
-            or (operation.get("state") if operation else None)
-            or (operation.get("status") if operation else None)
-        )
-        native_reward = float(
-            operation_reward
-            and (
-                (operation_name == "query" and actual_state is not None)
-                or (
-                    operation_name == "result"
-                    and actual_state == "completed"
-                    and isinstance(result, dict)
-                    and result.get("result_available", True)
-                )
-                or (
-                    operation_name == "modify"
-                    and isinstance(result, dict)
-                    and result.get("accepted") is True
-                )
-                or (
-                    operation_name == "cancel"
-                    and isinstance(result, dict)
-                    and result.get("effect") == "cancelled"
-                )
-            )
-        )
-        reply_reward = 0.0
-        reply_detail = {
-            "passed": None,
-            "status": "not_evaluated",
-            "reason": "native_result_not_passed",
-        }
-        if native_reward and not self.reply_text:
-            reply_detail = {
-                "passed": False,
-                "status": "no_reply",
-                "reason": "no_delivered_reply",
-            }
-        if self.reply_text and native_reward:
-            fact = json.dumps(
-                {
-                    "operation": operation_name,
-                    "actual_state": actual_state,
-                    "native_operation_result": result,
-                    "backend_task_id": self.backend_task_id,
-                    "task_objective": self.task_label,
-                    "requirement": "Accurately report the actual native task result without inventing completion or errors.",
-                },
-                ensure_ascii=False,
-            )
-            if scoring is None:
-                reply_reward = 1.0
-                reply_detail = {
-                    "passed": True,
-                    "status": "presence_only",
-                    "reason": "scoring_not_configured",
-                }
-            else:
-                from tau2.data_model.message import AssistantMessage
-                from tau2.evaluator.evaluator_communicate import CommunicateEvaluator
+        """Compatibility wrapper for independent snapshot scoring."""
+        from tau2.metrics.active.persistent_task.evaluator import score_persistent_task
 
-                verdict = CommunicateEvaluator.evaluate_communicate_info(
-                    [AssistantMessage(role="assistant", content=self.reply_text)],
-                    [fact],
-                    scoring=scoring,
-                )[0]
-                reply_reward = float(verdict.met)
-                reply_detail = {
-                    "passed": verdict.met,
-                    "status": "judged",
-                    "reason": verdict.justification,
-                }
-        reward = native_reward * reply_reward
-        return {
-            "status": "measured",
-            "completion_score": reward,
-            "evaluation_log": {
-                "operation_reward": operation_reward,
-                "native_result": {
-                    "passed": bool(native_reward),
-                    "operation": operation,
-                    "actual_state": actual_state,
-                },
-                "reply": {**reply_detail, "text": self.reply_text},
-            },
-            "operation": operation,
-            "actual_state": actual_state,
-        }
+        return score_persistent_task(self.snapshot(), scoring)

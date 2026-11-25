@@ -21,6 +21,10 @@ class FakeRuntime:
     def add_delivery_listener(self, listener):
         self.listeners.append(listener)
 
+    def queue_user_input(self, event_id, text, *, source="scenario", purpose="request"):
+        self.user_inputs.append((event_id, text))
+        self.input_metadata = {"source": source, "purpose": purpose}
+
     class _Lock:
         def __enter__(self):
             return self
@@ -112,6 +116,10 @@ def test_dynamic_request_is_queued_after_stable_preferred_state():
     assert metric.status == "queued"
     assert scenario.user_inputs[0][0].startswith("persistent_task_metric_")
     assert scenario.user_inputs[0][1] == "Please check the task status."
+    assert scenario.input_metadata == {
+        "source": "active_persistent_task",
+        "purpose": "followup",
+    }
 
 
 def test_failed_state_uses_deterministic_fallback():

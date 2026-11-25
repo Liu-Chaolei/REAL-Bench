@@ -1,6 +1,7 @@
 """Qwen caller TTS keeps provider voices through the complete user builder."""
 
 import json
+import sys
 from types import SimpleNamespace
 
 import httpx
@@ -9,7 +10,7 @@ import pytest
 from tau2.data_model.run_config import AudioNativeConfig
 from tau2.data_model.simulation import VoiceRunConfig
 from tau2.data_model.voice import QwenTTSConfig, SynthesisConfig
-from tau2.multilingual.runtime import task_context
+from tau2.domains.gaia2.language_runtime import task_context
 from tau2.registry import registry
 from tau2.runner.batch import make_voice_run_settings
 from tau2.runner.build import build_voice_user
@@ -30,9 +31,13 @@ def test_qwen_voice_reaches_http_request_after_persona_selection(
     monkeypatch, tmp_path, persona_id, expected
 ):
     """Reproduce the pack's ElevenLabs ID overwriting a valid Qwen voice."""
-    monkeypatch.setattr(
-        "tau2.user.user_simulator_streaming.VoiceStreamingUserSimulator",
-        lambda **kwargs: SimpleNamespace(**kwargs),
+    # This builder test uses a constructor double, not local playback hardware.
+    monkeypatch.setitem(
+        sys.modules,
+        "tau2.user.user_simulator_streaming",
+        SimpleNamespace(
+            VoiceStreamingUserSimulator=lambda **kwargs: SimpleNamespace(**kwargs)
+        ),
     )
     secret = tmp_path / "voice.env"
     secret.write_text("QWEN_TEST_KEY=synthetic-secret\n")
@@ -42,11 +47,11 @@ def test_qwen_voice_reaches_http_request_after_persona_selection(
     )
     system = QwenAgentConfig(config_env_file=str(secret), tts=tts)
     config = VoiceRunConfig(
-        domain="mock",
+        domain="gaia2",
         audio_native_config=AudioNativeConfig(),
         speech_complexity="control",
     )
-    task = registry.get_tasks_loader("mock")()[0]
+    task = registry.get_tasks_loader("gaia2")("base")[0]
     context = task_context(config, task)
     context = context.model_copy(
         update={
@@ -57,7 +62,7 @@ def test_qwen_voice_reaches_http_request_after_persona_selection(
     config = config.model_copy(update={"audio_native_config": audio})
     settings, _ = make_voice_run_settings(config)
     user = build_voice_user(
-        registry.get_env_constructor("mock")(),
+        registry.get_env_constructor("gaia2")(task=task, allow_unverified=True),
         task,
         audio,
         language_context=context,

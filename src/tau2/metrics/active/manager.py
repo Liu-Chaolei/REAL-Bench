@@ -77,7 +77,12 @@ class ActiveMetricManager:
         return summary
 
     def score(self, scoring=None) -> dict[str, Any]:
-        return {metric.name: metric.score(scoring) for metric in self.metrics}
+        from tau2.metrics.active.persistent_task.evaluator import score_persistent_task
+
+        return {
+            name: score_persistent_task(summary, scoring)
+            for name, summary in self._summary["metrics"].items()
+        }
 
     def close(self) -> None:
         for metric in self.metrics:

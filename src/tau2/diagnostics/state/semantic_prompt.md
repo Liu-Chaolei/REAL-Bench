@@ -32,8 +32,9 @@ missing_required_state. A repeated satisfied clarification can be inconsistent;
 a necessary question about an open ambiguity can be consistent. If the question
 or claim has no known item, use one stable claim/topic key and mark unsupported
 or uncertain as appropriate; never omit substantive behavior just for missing state.
-Claims describe the Agent's words only, not facts. Preserve negation, hypothetical
-scope, future plans and revisions. A future promise is not a completion claim.
+Represent claims through state-use opportunities: they describe the Agent's words
+only, not facts. Preserve negation, hypothetical scope, future plans and revisions.
+A future promise is not a completion claim.
 
 fulfills concerns communication/interaction agenda only: item_id, actual value,
 met true/false/null and reason, using the visible evidence. A typed numeric answer

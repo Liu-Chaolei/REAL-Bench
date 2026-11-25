@@ -1,5 +1,10 @@
 > 当前 Gaia2 链路使用三文件 API 配置：`config.env` 保存供应商连接，`qw.env` 选择 Agent，`realbench.env` 选择评测与生成角色。入口示例为 `config.gaia2.unified.json`，评分示例为 `examples/real-metrics.unified.yaml`。详见 [API 配置使用说明](../../docs/api-configuration.md)。本页旧供应商专用示例通过原单文件入口兼容使用。
 
+> Python 侧接入代码已迁至 [统一 Adapter 目录](../../src/tau2/adapters/qwen_audio_agent/README.md)。
+> 本目录保留构建、部署与容器内系统材料。新的调用者配置使用
+> `--user-simulation-config examples/user-simulation.gaia2.json`；旧 Qwen JSON 仍可在入口转换。
+
+
 # Evaluate the complete Qwen Audio Agent with τ-Voice
 
 `qwen_agent` connects the real Gateway, native task runtime and Qwen Code ACP

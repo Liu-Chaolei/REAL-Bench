@@ -1,7 +1,7 @@
 """DiscreteTimeAudioNativeAgent - Audio native agent with discrete-time tick semantics.
 
 This agent uses a DiscreteTimeAdapter for tick-based interaction with audio native
-APIs (e.g., OpenAI Realtime, Gemini Live). It integrates with the FullDuplexOrchestrator
+APIs (e.g., OpenAI Realtime, xAI Grok Voice). It integrates with the FullDuplexOrchestrator
 and handles tool calls through the standard orchestrator flow.
 
 The agent is provider-agnostic - it works with any adapter implementing DiscreteTimeAdapter.
@@ -12,7 +12,7 @@ Key features:
 - Proportional transcript: text distributed based on audio played
 - Tool support: tool calls returned to orchestrator for execution
 - Interruption handling: client-side truncation on user speech
-- Multi-provider support: OpenAI Realtime and Gemini Live
+- Multi-provider support: OpenAI Realtime and xAI Grok Voice
 
 Usage:
     # OpenAI Realtime (default)
@@ -22,12 +22,12 @@ Usage:
         tick_duration_ms=1000,
     )
 
-    # Gemini Live
+    # xAI Grok Voice
     agent = DiscreteTimeAudioNativeAgent(
         tools=env.get_tools(),
         domain_policy=env.get_policy(),
         tick_duration_ms=1000,
-        provider="gemini",
+        provider="xai",
     )
 
     state = agent.get_init_state()
@@ -45,13 +45,12 @@ from typing import TYPE_CHECKING, List, Literal, Optional, Tuple, Union
 from loguru import logger
 
 if TYPE_CHECKING:
+    from tau2.adapters.qwen_audio_agent.config import QwenAgentConfig
     from tau2.data_model.cascaded import CascadedConfig
     from tau2.voice.audio_native.avartha_pipecat.config import AvarthaPipecatConfig
-    from tau2.voice.audio_native.gemini.provider import GeminiVADConfig
     from tau2.voice.audio_native.nova.provider import NovaVADConfig
     from tau2.voice.audio_native.openai.provider import OpenAIVADConfig
     from tau2.voice.audio_native.qwen.provider import QwenVADConfig
-    from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
     from tau2.voice.audio_native.xai.provider import XAIVADConfig
 
 from pydantic import ConfigDict, Field
@@ -66,7 +65,6 @@ from tau2.config import (
     DEFAULT_SEND_AUDIO_INSTANT,
 )
 from tau2.data_model.audio import TELEPHONY_AUDIO_FORMAT, AudioEncoding, AudioFormat
-from tau2.data_model.live_config import LiveConfig
 from tau2.data_model.message import (
     AssistantMessage,
     EnvironmentMessage,
@@ -88,8 +86,6 @@ from tau2.voice.pricing import compute_tick_cost
 # Provider type alias
 AudioNativeProvider = Literal[
     "openai",
-    "openai_live",
-    "gemini",
     "xai",
     "nova",
     "qwen",
@@ -102,7 +98,6 @@ AudioNativeProvider = Literal[
 # VAD config union type (string annotations for lazy resolution)
 VADConfig = Union[
     "OpenAIVADConfig",
-    "GeminiVADConfig",
     "XAIVADConfig",
     "NovaVADConfig",
     "QwenVADConfig",
@@ -216,7 +211,7 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
     """Audio native agent with discrete-time tick semantics.
 
     Uses DiscreteTimeAdapter for tick-based API interaction. Supports multiple
-    providers (OpenAI Realtime, Gemini Live).
+    providers (OpenAI Realtime, xAI Grok Voice).
 
     Integrates with FullDuplexOrchestrator for tool handling and coordination.
 
@@ -248,7 +243,6 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
         use_xml_prompt: bool = False,
         cascaded_config: Optional["CascadedConfig"] = None,
         audio_taps_dir: Optional[Path] = None,
-        live_config: Optional[LiveConfig] = None,
         voice: Optional[str] = None,
         transcription_language: Optional[str] = None,
         language: Optional[str] = None,
@@ -268,14 +262,13 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
             adapter: Optional adapter instance. Created if not provided.
             vad_config: VAD configuration. Type depends on provider:
                 - OpenAI: OpenAIVADConfig (defaults to SERVER_VAD)
-                - Gemini: GeminiVADConfig (defaults to automatic VAD)
+                - xAI: XAIVADConfig (defaults to automatic VAD)
             send_audio_instant: If True, send audio instantly (discrete-time mode).
             audio_format: Audio format for external communication. Defaults to
-                telephony (8kHz μ-law). Note: Gemini uses different internal
-                formats (16kHz/24kHz PCM16) with automatic conversion.
+                telephony (8kHz μ-law); adapters convert provider-specific formats.
             provider: Audio native provider to use. Options:
                 - "openai": OpenAI Realtime API (DEFAULT_AUDIO_NATIVE_PROVIDER)
-                - "gemini": Google Gemini Live API
+                - "xai": xAI Grok Voice API
             model: Model to use. Defaults to None. If not provided, the default
                 model for the provider will be used.
             max_inactive_seconds: Maximum seconds without provider activity before
@@ -292,6 +285,8 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
                 used when provider="avartha_pipecat".
         """
         self.tools = tools
+        if provider not in AUDIO_NATIVE_PROVIDER_TYPES:
+            raise ValueError(f"Audio provider {provider!r} is retired or unsupported")
         self.domain_policy = domain_policy
         self.tick_duration_ms = tick_duration_ms
         self.modality = modality
@@ -302,7 +297,6 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
         self.reasoning_effort = reasoning_effort
         self.max_inactive_seconds = max_inactive_seconds
         self.cascaded_config = cascaded_config
-        self.live_config = live_config
         self.voice = voice
         self.transcription_language = transcription_language
         self.language = language
@@ -311,7 +305,13 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
         self.avartha_config = avartha_config
         self.qwen_agent_config = qwen_agent_config
         self.observer_hotwords = None
-        self._live_trace_path = (
+        self._diagnostics_enabled = False
+        from tau2.adapters.registry import adapter_behavior
+
+        self.adapter_behavior = adapter_behavior(
+            provider, qwen_agent_config, audio_format
+        )
+        self._protocol_trace_path = (
             audio_taps_dir / "live.jsonl" if audio_taps_dir else None
         )
 
@@ -326,7 +326,7 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
         # pulling in websockets/aiohttp when voice extras aren't installed)
         if vad_config is not None:
             self.vad_config = vad_config
-        elif provider in {"openai", "openai_live"}:
+        elif provider == "openai":
             from tau2.voice.audio_native.openai.provider import (
                 OpenAIVADConfig,
                 OpenAIVADMode,
@@ -336,10 +336,6 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
                 mode=OpenAIVADMode.SERVER_VAD,
                 threshold=DEFAULT_OPENAI_VAD_THRESHOLD,
             )
-        elif provider == "gemini":
-            from tau2.voice.audio_native.gemini.provider import GeminiVADConfig
-
-            self.vad_config = GeminiVADConfig()
         elif provider == "xai":
             from tau2.voice.audio_native.xai.provider import XAIVADConfig
 
@@ -348,7 +344,9 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
             from tau2.voice.audio_native.qwen.provider import QwenVADConfig
 
             self.vad_config = QwenVADConfig()
-        elif provider in ("avartha_pipecat", "qwen_agent"):
+        elif (
+            provider == "avartha_pipecat" or self.adapter_behavior.hosted_turn_detection
+        ):
             # Turn detection is configured on the hosted agent.
             self.vad_config = None
         elif provider == "phonic":
@@ -397,7 +395,7 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
 
     def _build_system_prompt(self) -> str:
         """Build the same prompt used by offline review."""
-        if self.provider == "qwen_agent":
+        if self.adapter_behavior.policy_only:
             # The remote system retains its native agent instructions. Only
             # public business policy/language guidance is added by its launcher.
             return self.domain_policy
@@ -420,8 +418,7 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
                 reasoning_effort=self.reasoning_effort,
                 audio_format=self.audio_format,
                 cascaded_config=self.cascaded_config,
-                live_config=self.live_config,
-                trace_path=self._live_trace_path,
+                trace_path=self._protocol_trace_path,
                 voice=self.voice,
                 transcription_language=self.transcription_language,
                 language=self.language,
@@ -429,6 +426,8 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
                 qwen_agent_config=self.qwen_agent_config,
                 observer_hotwords=self.observer_hotwords,
             )
+        if self._diagnostics_enabled:
+            self._adapter.enable_diagnostics()
         return self._adapter
 
     def get_init_state(
@@ -646,16 +645,8 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
             playback = getattr(self._adapter, "playback_audio_format", None)
             if isinstance(playback, AudioFormat):
                 return playback
-        if (
-            self.provider == "qwen_agent"
-            and self.qwen_agent_config is not None
-            and self.qwen_agent_config.asr_model
-            == "qwen-audio-3.1-asr-flash-streaming"
-        ):
-            return AudioFormat(
-                encoding=AudioEncoding.PCM_S16LE,
-                sample_rate=self.qwen_agent_config.playback_sample_rate,
-            )
+        if self.adapter_behavior.playback_audio_format is not None:
+            return self.adapter_behavior.playback_audio_format
         return self.audio_format
 
     def _get_output_silence(self) -> bytes:
@@ -863,7 +854,7 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
         # Generate silence audio for one tick
         output_format = self._get_output_audio_format()
         silence = self._get_output_silence()
-        if self.provider == "qwen_agent":
+        if not self.adapter_behavior.initial_greeting:
             # An external system has not spoken merely because the harness
             # created its first tick. Let the real voice conversation open.
             content = None
@@ -909,7 +900,7 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
         """Stop the agent and clean up resources.
 
         Called by the orchestrator at the end of the simulation.
-        Disconnects from the audio native API (OpenAI Realtime or Gemini Live).
+        Disconnects from the audio native API (OpenAI Realtime or xAI Grok Voice).
 
         Args:
             participant_chunk: The last chunk from the user (unused).
@@ -918,7 +909,7 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
         """
         if self._agent_input_tap:
             self._agent_input_tap.save()
-        if self.provider == "qwen_agent" and tool_results is not None:
+        if self.adapter_behavior.flush_results_on_stop and tool_results is not None:
             messages = (
                 tool_results.tool_messages
                 if isinstance(tool_results, MultiToolMessage)
@@ -972,19 +963,31 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
         """Whether known media/tool results still need transport before continuation."""
         return bool(self._adapter and self._adapter.has_pending_output)
 
+    def enable_diagnostics(self):
+        """Remember passive diagnostic setup without opening a connection."""
+        self._diagnostics_enabled = True
+        if self._adapter is not None:
+            self._adapter.enable_diagnostics()
+
+    def get_run_metadata(self):
+        """Read public adapter provenance after its connection has closed."""
+        return self._adapter.get_run_metadata() if self._adapter is not None else {}
+
     def get_diagnostic_evidence(self):
-        """Expose observed backend inputs when the provider has that boundary."""
-        if self.provider != "qwen_agent" or self._adapter is None:
-            return {"status": "not_applicable"}
-        provider = self._adapter.provider
-        return {
-            "status": "complete" if provider.backend_observer_ready else "unavailable",
-            "reason": None
-            if provider.backend_observer_ready
-            else "bridge_backend_observer_not_available",
-            "backend_inputs": list(provider.backend_inputs.values()),
-            "state_observations": list(getattr(provider, "state_observations", [])),
-        }
+        """Read optional evidence without inspecting Provider internals."""
+        return (
+            self._adapter.get_diagnostic_evidence()
+            if self._adapter is not None
+            else {"status": "not_applicable"}
+        )
+
+    def recheck_heard_audio(self, evidence, fragments):
+        """Delegate observer rechecking only when an adapter already exists."""
+        return (
+            self._adapter.recheck_heard_audio(evidence, fragments)
+            if self._adapter is not None
+            else {"status": "unavailable"}
+        )
 
     def set_observer_stage(self, stage: int) -> None:
         """Advance evaluator-side staged ASR vocabulary after real speech starts."""
@@ -1027,10 +1030,7 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
         """Return observer text finalized during adapter shutdown."""
         if self._adapter is None:
             return None, None
-        return (
-            self._adapter.final_live_transcript,
-            self._adapter.final_live_transcript_error,
-        )
+        return self._adapter.get_final_live_transcript()
 
     def _check_if_stop_toolcall(self, message: AssistantMessage) -> AssistantMessage:
         """Check if the message is a stop message.
@@ -1107,7 +1107,6 @@ def create_discrete_time_audio_native_agent(tools, domain_policy, **kwargs):
             cascaded_config=cascaded_config,
             audio_taps_dir=audio_taps_dir,
             **domain_kwargs,
-            live_config=audio_native_config.live_config,
             voice=audio_native_config.voice,
             transcription_language=audio_native_config.transcription_language,
             language=audio_native_config.language,

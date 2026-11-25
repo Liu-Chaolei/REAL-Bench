@@ -13,11 +13,11 @@ Usage:
     # High-level: run all tasks in a domain
     from tau2.run import run_domain
     from tau2.data_model.simulation import TextRunConfig
-    results = run_domain(TextRunConfig(domain="retail", agent="llm_agent", ...))
+    results = run_domain(TextRunConfig(domain="gaia2", agent="llm_agent", ...))
 
     # Mid-level: run a single task
     from tau2.run import get_tasks, run_single_task
-    tasks = get_tasks("mock", task_ids=["create_task_1"])
+    tasks = get_tasks("gaia2")[:1]
     result = run_single_task(config, tasks[0], seed=42)
 
     # Low-level: build and run manually
@@ -98,8 +98,6 @@ def run_task(
     review_model: str = DEFAULT_LLM_EVAL_USER_SIMULATOR,
     solo_mode: bool = False,
     hallucination_feedback: Optional[str] = None,
-    retrieval_config: Optional[str] = None,
-    retrieval_config_kwargs: Optional[dict] = None,
 ) -> SimulationRun:
     """Deprecated: use run_single_task(config, task, ...) instead."""
     warnings.warn(
@@ -123,8 +121,6 @@ def run_task(
             review_mode=review_mode,
             review_model=review_model,
             verbose_logs=verbose_logs,
-            retrieval_config=retrieval_config,
-            retrieval_config_kwargs=retrieval_config_kwargs,
         )
     else:
         config = TextRunConfig(
@@ -143,8 +139,6 @@ def run_task(
             review_mode=review_mode,
             review_model=review_model,
             verbose_logs=verbose_logs,
-            retrieval_config=retrieval_config,
-            retrieval_config_kwargs=retrieval_config_kwargs,
         )
     return run_single_task(
         config,
@@ -197,8 +191,6 @@ def run_tasks(
     review_model: str = DEFAULT_LLM_EVAL_USER_SIMULATOR,
     solo_mode: bool = False,
     hallucination_retries: int = 0,
-    retrieval_config: Optional[str] = None,
-    retrieval_config_kwargs: Optional[dict] = None,
 ) -> Results:
     """Deprecated: use runner.run_tasks(config, tasks, ...) instead."""
     warnings.warn(
@@ -230,8 +222,6 @@ def run_tasks(
             review_model=review_model,
             hallucination_retries=hallucination_retries,
             verbose_logs=verbose_logs,
-            retrieval_config=retrieval_config,
-            retrieval_config_kwargs=retrieval_config_kwargs,
         )
     else:
         config = TextRunConfig(
@@ -257,8 +247,6 @@ def run_tasks(
             review_model=review_model,
             hallucination_retries=hallucination_retries,
             verbose_logs=verbose_logs,
-            retrieval_config=retrieval_config,
-            retrieval_config_kwargs=retrieval_config_kwargs,
         )
 
     save_path = Path(save_to) if save_to else None

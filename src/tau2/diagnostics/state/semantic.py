@@ -1,5 +1,6 @@
 """One prefix-only interpretation per speech/action event, with existing cache."""
 
+import json
 from pathlib import Path
 
 from tau2.diagnostics.intent.io import canonical
@@ -23,4 +24,10 @@ class SemanticInterpreter:
             self.rubric + "\nRecorded prefix:\n" + canonical(payload),
             Interpretation.model_json_schema(),
         )
-        return Interpretation.model_validate_json(raw)
+        value = json.loads(raw)
+        # Some providers echo the requested JSON response format as a wrapper
+        # field. It is transport metadata, not part of Interpretation. Keep the
+        # state schema strict for every other unexpected field.
+        if isinstance(value, dict) and value.get("type") == "json_object":
+            value = {key: item for key, item in value.items() if key != "type"}
+        return Interpretation.model_validate(value)

@@ -33,7 +33,7 @@ For how the commands fit together, see
 | [`tau2 check-data`](#tau2-check-data) | Check if data directory is properly configured |
 | [`tau2 evaluate-trajs`](#tau2-evaluate-trajs) | Evaluate trajectories and update rewards |
 | [`tau2 review`](#tau2-review) | Run LLM-based conversation review on simulation results |
-| [`tau2 leaderboard`](#tau2-leaderboard) | Show the tau-bench leaderboard |
+| [`tau2 leaderboard`](#tau2-leaderboard) | Show historical tau-bench domain leaderboards |
 | [`tau2 submit`](#tau2-submit) | Leaderboard submissions |
 | [`tau2 convert-results`](#tau2-convert-results) | Convert simulation results between storage formats |
 
@@ -539,13 +539,11 @@ options:
 ## `tau2 benchmarks`
 
 ```text
-usage: tau2 benchmarks [-h] {list,pin} ...
+usage: tau2 benchmarks [-h] {list} ...
 
 positional arguments:
-  {list,pin}
+  {list}
     list      List installed benchmark manifests
-    pin       Recompute a manifest's subset digests and binding revisions from the
-              current checkout (or derive a new manifest with --from)
 
 options:
   -h, --help  show this help message and exit
@@ -560,40 +558,18 @@ options:
   -h, --help  show this help message and exit
 ```
 
-### `tau2 benchmarks pin`
-
-```text
-usage: tau2 benchmarks pin [-h] [--revision REVISION] [--from SOURCE]
-                           [--mode {text,voice}]
-                           [--benchmark-version BENCHMARK_VERSION]
-                           name
-
-positional arguments:
-  name                  Benchmark manifest name, e.g. voice or text
-
-options:
-  -h, --help            show this help message and exit
-  --revision REVISION   New manifest revision label; required when any pin changes
-  --from SOURCE         Derive a new manifest from this one's cells
-  --mode {text,voice}   Call mode with --from
-  --benchmark-version BENCHMARK_VERSION
-                        Benchmark generation with --from
-```
-
 ## `tau2 run`
 
 ```text
 usage: tau2 run [-h] [--communicate-scorer {semantic,substring}]
-                [--communicate-judge JSON] [--no-localize-db] [--language LANGUAGE]
-                [--benchmark BENCHMARK] [--dry-run] [--json]
-                [--global-limit GLOBAL_LIMIT] [--voice VOICE]
-                [--domain {mock,airline,retail,gaia2,telecom,telecom-workflow,banking_knowledge,intake}]
+                [--communicate-judge JSON] [--language {en}]
+                [--benchmark {gaia2,none}] [--dry-run] [--json]
+                [--global-limit GLOBAL_LIMIT] [--voice VOICE] [--domain {gaia2}]
                 [--num-trials NUM_TRIALS]
                 [--agent {llm_agent,llm_agent_gt,llm_agent_solo,discrete_time_audio_native_agent}]
                 [--agent-llm AGENT_LLM] [--agent-llm-args AGENT_LLM_ARGS]
                 [--user {user_simulator,dummy_user}] [--user-llm USER_LLM]
-                [--user-llm-args USER_LLM_ARGS]
-                [--task-set-name {mock,airline,retail,gaia2,gaia2_hidden,telecom_full,telecom_small,telecom,telecom-workflow,banking_knowledge,intake}]
+                [--user-llm-args USER_LLM_ARGS] [--task-set-name {gaia2,gaia2_hidden}]
                 [--task-split-name TASK_SPLIT_NAME]
                 [--task-ids TASK_IDS [TASK_IDS ...]] [--num-tasks NUM_TASKS]
                 [--max-steps MAX_STEPS] [--max-errors MAX_ERRORS] [--timeout TIMEOUT]
@@ -602,18 +578,18 @@ usage: tau2 run [-h] [--communicate-scorer {semantic,substring}]
                 [--log-level LOG_LEVEL] [--judge-from-user-llm]
                 [--api-config-dir API_CONFIG_DIR] [--metrics-config METRICS_CONFIG]
                 [--active-metrics-config ACTIVE_METRICS_CONFIG]
-                [--gaia2-allow-stale-runtime]
-                [--verbose-logs]
-                [--audio-debug] [--audio-taps] [--llm-log-mode {all,latest}]
+                [--gaia2-allow-stale-runtime] [--verbose-logs] [--audio-debug]
+                [--audio-taps] [--llm-log-mode {all,latest}]
                 [--max-retries MAX_RETRIES] [--retry-delay RETRY_DELAY]
                 [--enforce-communication-protocol] [--user-persona USER_PERSONA]
                 [--user-audio-renderer {standard,saasr}] [--saasr-config SAASR_CONFIG]
                 [--audio-native]
-                [--audio-native-provider {openai,openai_live,gemini,xai,nova,qwen,qwen_agent,avartha_pipecat,phonic,livekit,launa}]
+                [--audio-native-provider {openai,xai,nova,qwen,qwen_agent,avartha_pipecat,phonic,livekit,launa}]
                 [--cascaded-config CASCADED_CONFIG]
                 [--audio-native-model AUDIO_NATIVE_MODEL]
+                [--user-simulation-config USER_SIMULATION_CONFIG]
                 [--qwen-agent-config QWEN_AGENT_CONFIG]
-                [--avartha-base-url AVARTHA_BASE_URL] [--live-config LIVE_CONFIG]
+                [--avartha-base-url AVARTHA_BASE_URL]
                 [--realtime-generation | --no-realtime-generation]
                 [--reasoning-effort {minimal,low,medium,high,xhigh}]
                 [--tick-duration TICK_DURATION]
@@ -629,13 +605,8 @@ usage: tau2 run [-h] [--communicate-scorer {semantic,substring}]
                 [--interruption-check-interval INTERRUPTION_CHECK_INTERVAL]
                 [--integration-duration INTEGRATION_DURATION]
                 [--silence-annotation-threshold SILENCE_ANNOTATION_THRESHOLD]
-                [--xml-prompt | --no-xml-prompt]
-                [--elicitation-strategy {agent_directed,scaffolded}]
-                [--complication-rate COMPLICATION_RATE]
-                [--retrieval-config {alltools,alltools-qwen,bm25,bm25_grep,bm25_reranker,bm25_reranker_grep,full_kb,golden_retrieval,grep_only,no_knowledge,openai_embeddings,openai_embeddings_grep,openai_embeddings_reranker,openai_embeddings_reranker_grep,qwen_embeddings,qwen_embeddings_grep,qwen_embeddings_reranker,qwen_embeddings_reranker_grep,terminal_use,terminal_use_write}]
-                [--retrieval-config-kwargs RETRIEVAL_CONFIG_KWARGS] [--auto-resume]
-                [--auto-review] [--review-mode {full,user}]
-                [--review-model REVIEW_MODEL]
+                [--xml-prompt | --no-xml-prompt] [--auto-resume] [--auto-review]
+                [--review-mode {full,user}] [--review-model REVIEW_MODEL]
                 [--hallucination-retries HALLUCINATION_RETRIES]
 
 options:
@@ -647,16 +618,10 @@ options:
   --communicate-judge JSON
                         Semantic judge overrides, e.g. {"model": "...", "model_args":
                         {...}}.
-  --no-localize-db      Keep canonical databases, tasks and policies while speaking
-                        the selected language; voice runs require --benchmark none.
-  --language LANGUAGE   Language pack (default: English). Repeatable for released
-                        voice runs; omit there to run all released languages.
-  --benchmark BENCHMARK
-                        Released benchmark manifest: voice runs default to 'voice'
-                        (τ-i18n, V2); use 'voice-v1' for the English current-
-                        leaderboard frame. Text runs are custom single-domain runs
-                        unless you select 'text'. Use 'none' for a custom single-
-                        domain run.
+  --language {en}       Gaia2 call language (English only).
+  --benchmark {gaia2,none}
+                        Gaia2 release manifest; use 'none' for an explicit Gaia2 task-
+                        set run.
   --dry-run             Resolve and display the run without provider calls or output
                         writes.
   --json                Released benchmarks: print the full resolved plan (with --dry-
@@ -666,7 +631,7 @@ options:
                         Total concurrent calls across the benchmark worker fleet.
   --voice VOICE         OpenAI Realtime agent voice override; the released default is
                         marin.
-  --domain {mock,airline,retail,gaia2,telecom,telecom-workflow,banking_knowledge,intake}, -d {mock,airline,retail,gaia2,telecom,telecom-workflow,banking_knowledge,intake}
+  --domain {gaia2}, -d {gaia2}
                         Domain filter; repeatable for released voice runs. Omit to run
                         all released voice domains.
   --num-trials NUM_TRIALS
@@ -680,13 +645,11 @@ options:
                         '{"temperature": 0.0}'.
   --user {user_simulator,dummy_user}
                         The user implementation to use. Default is user_simulator.
-  --user-llm USER_LLM   The LLM to use for the user. Default is gpt-4.1-2025-04-14;
-                        τ-Entity uses gpt-5.5.
+  --user-llm USER_LLM   The LLM to use for the user. Default is gpt-4.1-2025-04-14.
   --user-llm-args USER_LLM_ARGS
                         The arguments to pass to the LLM for the user. Default is
-                        '{"temperature": 0.0}'; the default τ-Entity caller uses
-                        {"temperature": 0.0, "reasoning_effort": "low"}.
-  --task-set-name {mock,airline,retail,gaia2,gaia2_hidden,telecom_full,telecom_small,telecom,telecom-workflow,banking_knowledge,intake}
+                        '{"temperature": 0.0}'.
+  --task-set-name {gaia2,gaia2_hidden}
                         The task set to run the simulation on. If not provided, will
                         load default task set for the domain.
   --task-split-name TASK_SPLIT_NAME
@@ -726,7 +689,7 @@ options:
                         concurrency ceiling.
   --provider-limit PROVIDER_LIMIT
                         Per-provider concurrency caps in controller mode, e.g.
-                        "openai=40,gemini=20". Requires --workers.
+                        "openai=40,xai=20". Requires --workers.
   --seed SEED           The seed to use for the simulation. Default is 300.
   --log-level LOG_LEVEL
                         The log level to use for the simulation. Default is ERROR.
@@ -778,7 +741,7 @@ options:
   --audio-native        Enable audio-native mode using DiscreteTimeAudioNativeAgent
                         with VoiceStreamingUserSimulator. This enables full-duplex
                         voice simulation using audio native APIs.
-  --audio-native-provider {openai,openai_live,gemini,xai,nova,qwen,qwen_agent,avartha_pipecat,phonic,livekit,launa}
+  --audio-native-provider {openai,xai,nova,qwen,qwen_agent,avartha_pipecat,phonic,livekit,launa}
                         Audio native API provider. Default is 'openai'.
   --cascaded-config CASCADED_CONFIG
                         Cascaded config preset name for livekit provider. Available
@@ -788,6 +751,9 @@ options:
                         Audio native model to use. If not specified, uses the default
                         model for the selected provider. For avartha_pipecat, it is
                         only a label, since --avartha-base-url selects the agent.
+  --user-simulation-config USER_SIMULATION_CONFIG
+                        JSON caller, dynamic followup and watchdog configuration,
+                        independent of the tested Agent
   --qwen-agent-config QWEN_AGENT_CONFIG
                         JSON configuration file for the complete qwen_agent system
                         provider.
@@ -796,12 +762,9 @@ options:
                         calls, https://<host>/inference/serverless/pipecat/v1/public/<
                         agent_id>. Required for that provider, which also needs the
                         live extra and AVARTHA_API_KEY.
-  --live-config LIVE_CONFIG
-                        JSON config for openai_live: backend_model (required), voice,
-                        and optional frontend_prompt/backend_prompt overrides.
   --realtime-generation, --no-realtime-generation
                         Run user LLM/TTS generation without blocking audio ticks.
-                        Defaults to enabled for openai_live and avartha_pipecat and
+                        Defaults to enabled for qwen_agent and avartha_pipecat and
                         disabled for other providers. Use --no-realtime-generation to
                         disable.
   --reasoning-effort {minimal,low,medium,high,xhigh}
@@ -812,7 +775,7 @@ options:
                         0.2.
   --max-steps-seconds MAX_STEPS_SECONDS
                         Maximum conversation duration in seconds; 0 disables the
-                        limit. Default is 1200; τ-Entity uses 240.
+                        limit. Default is 1200.
   --speech-complexity {control,regular,control_audio,control_accents,control_behavior,control_audio_accents,control_audio_behavior,control_accents_behavior}
                         Speech complexity level for audio effects. Default is
                         'regular'.
@@ -850,17 +813,6 @@ options:
   --xml-prompt          Use XML tags in system prompt (overrides auto-detection).
   --no-xml-prompt       Use plain text system prompt without XML tags (overrides auto-
                         detection).
-  --retrieval-config {alltools,alltools-qwen,bm25,bm25_grep,bm25_reranker,bm25_reranker_grep,full_kb,golden_retrieval,grep_only,no_knowledge,openai_embeddings,openai_embeddings_grep,openai_embeddings_reranker,openai_embeddings_reranker_grep,qwen_embeddings,qwen_embeddings_grep,qwen_embeddings_reranker,qwen_embeddings_reranker_grep,terminal_use,terminal_use_write}
-                        Knowledge retrieval config name (banking_knowledge domain).
-                        Offline: no_knowledge, full_kb, golden_retrieval, bm25,
-                        bm25_grep, grep_only. Requires OPENAI_API_KEY:
-                        openai_embeddings*, alltools. Requires OPENROUTER_API_KEY:
-                        qwen_embeddings*, alltools-qwen. Requires sandbox-runtime:
-                        terminal_use*, alltools, alltools-qwen. Default for
-                        banking_knowledge: alltools (BM25 + dense + shell).
-  --retrieval-config-kwargs RETRIEVAL_CONFIG_KWARGS
-                        Arguments to pass to the retrieval config constructor as JSON
-                        (e.g., '{"top_k": 10}').
   --auto-resume         Automatically resume from existing save file without prompting
                         (for non-interactive runs).
   --auto-review         Automatically run LLM conversation review after each
@@ -873,31 +825,21 @@ options:
   --hallucination-retries HALLUCINATION_RETRIES
                         Max retries when a user simulator hallucination is detected
                         (full-duplex only). Set to 0 to disable.
-
-τ-entity (formerly elicitation; intake only):
-  --elicitation-strategy {agent_directed,scaffolded}
-                        Collection strategy. Default: agent_directed; scaffolded
-                        selects the prescribed-protocol ablation.
-  --complication-rate COMPLICATION_RATE
-                        Complication trigger scaling in [0, 1]; 0 disables
-                        complications. Default: 1 for both strategies. Inapplicable
-                        kinds retain their no-complication probability.
 ```
 
 ## `tau2 run-pass3`
 
 ```text
 usage: tau2 run-pass3 [-h] [--communicate-scorer {semantic,substring}]
-                      [--communicate-judge JSON] [--no-localize-db]
-                      [--language LANGUAGE] [--benchmark BENCHMARK] [--dry-run]
-                      [--json] [--global-limit GLOBAL_LIMIT] [--voice VOICE]
-                      [--domain {mock,airline,retail,gaia2,telecom,telecom-workflow,banking_knowledge,intake}]
+                      [--communicate-judge JSON] [--language {en}]
+                      [--benchmark {gaia2,none}] [--dry-run] [--json]
+                      [--global-limit GLOBAL_LIMIT] [--voice VOICE] [--domain {gaia2}]
                       [--num-trials NUM_TRIALS]
                       [--agent {llm_agent,llm_agent_gt,llm_agent_solo,discrete_time_audio_native_agent}]
                       [--agent-llm AGENT_LLM] [--agent-llm-args AGENT_LLM_ARGS]
                       [--user {user_simulator,dummy_user}] [--user-llm USER_LLM]
                       [--user-llm-args USER_LLM_ARGS]
-                      [--task-set-name {mock,airline,retail,gaia2,gaia2_hidden,telecom_full,telecom_small,telecom,telecom-workflow,banking_knowledge,intake}]
+                      [--task-set-name {gaia2,gaia2_hidden}]
                       [--task-split-name TASK_SPLIT_NAME]
                       [--task-ids TASK_IDS [TASK_IDS ...]] [--num-tasks NUM_TASKS]
                       [--max-steps MAX_STEPS] [--max-errors MAX_ERRORS]
@@ -908,19 +850,18 @@ usage: tau2 run-pass3 [-h] [--communicate-scorer {semantic,substring}]
                       [--api-config-dir API_CONFIG_DIR]
                       [--metrics-config METRICS_CONFIG]
                       [--active-metrics-config ACTIVE_METRICS_CONFIG]
-                      [--gaia2-allow-stale-runtime]
-                      [--verbose-logs] [--audio-debug] [--audio-taps]
-                      [--llm-log-mode {all,latest}] [--max-retries MAX_RETRIES]
-                      [--retry-delay RETRY_DELAY] [--enforce-communication-protocol]
-                      [--user-persona USER_PERSONA]
+                      [--gaia2-allow-stale-runtime] [--verbose-logs] [--audio-debug]
+                      [--audio-taps] [--llm-log-mode {all,latest}]
+                      [--max-retries MAX_RETRIES] [--retry-delay RETRY_DELAY]
+                      [--enforce-communication-protocol] [--user-persona USER_PERSONA]
                       [--user-audio-renderer {standard,saasr}]
                       [--saasr-config SAASR_CONFIG] [--audio-native]
-                      [--audio-native-provider {openai,openai_live,gemini,xai,nova,qwen,qwen_agent,avartha_pipecat,phonic,livekit,launa}]
+                      [--audio-native-provider {openai,xai,nova,qwen,qwen_agent,avartha_pipecat,phonic,livekit,launa}]
                       [--cascaded-config CASCADED_CONFIG]
                       [--audio-native-model AUDIO_NATIVE_MODEL]
+                      [--user-simulation-config USER_SIMULATION_CONFIG]
                       [--qwen-agent-config QWEN_AGENT_CONFIG]
                       [--avartha-base-url AVARTHA_BASE_URL]
-                      [--live-config LIVE_CONFIG]
                       [--realtime-generation | --no-realtime-generation]
                       [--reasoning-effort {minimal,low,medium,high,xhigh}]
                       [--tick-duration TICK_DURATION]
@@ -937,13 +878,8 @@ usage: tau2 run-pass3 [-h] [--communicate-scorer {semantic,substring}]
                       [--interruption-check-interval INTERRUPTION_CHECK_INTERVAL]
                       [--integration-duration INTEGRATION_DURATION]
                       [--silence-annotation-threshold SILENCE_ANNOTATION_THRESHOLD]
-                      [--xml-prompt | --no-xml-prompt]
-                      [--elicitation-strategy {agent_directed,scaffolded}]
-                      [--complication-rate COMPLICATION_RATE]
-                      [--retrieval-config {alltools,alltools-qwen,bm25,bm25_grep,bm25_reranker,bm25_reranker_grep,full_kb,golden_retrieval,grep_only,no_knowledge,openai_embeddings,openai_embeddings_grep,openai_embeddings_reranker,openai_embeddings_reranker_grep,qwen_embeddings,qwen_embeddings_grep,qwen_embeddings_reranker,qwen_embeddings_reranker_grep,terminal_use,terminal_use_write}]
-                      [--retrieval-config-kwargs RETRIEVAL_CONFIG_KWARGS]
-                      [--auto-resume] [--auto-review] [--review-mode {full,user}]
-                      [--review-model REVIEW_MODEL]
+                      [--xml-prompt | --no-xml-prompt] [--auto-resume] [--auto-review]
+                      [--review-mode {full,user}] [--review-model REVIEW_MODEL]
                       [--hallucination-retries HALLUCINATION_RETRIES]
                       [--pass3-mode {generic,crossed}]
                       [--regular-results REGULAR_RESULTS]
@@ -957,16 +893,10 @@ options:
   --communicate-judge JSON
                         Semantic judge overrides, e.g. {"model": "...", "model_args":
                         {...}}.
-  --no-localize-db      Keep canonical databases, tasks and policies while speaking
-                        the selected language; voice runs require --benchmark none.
-  --language LANGUAGE   Language pack (default: English). Repeatable for released
-                        voice runs; omit there to run all released languages.
-  --benchmark BENCHMARK
-                        Released benchmark manifest: voice runs default to 'voice'
-                        (τ-i18n, V2); use 'voice-v1' for the English current-
-                        leaderboard frame. Text runs are custom single-domain runs
-                        unless you select 'text'. Use 'none' for a custom single-
-                        domain run.
+  --language {en}       Gaia2 call language (English only).
+  --benchmark {gaia2,none}
+                        Gaia2 release manifest; use 'none' for an explicit Gaia2 task-
+                        set run.
   --dry-run             Resolve and display the run without provider calls or output
                         writes.
   --json                Released benchmarks: print the full resolved plan (with --dry-
@@ -976,7 +906,7 @@ options:
                         Total concurrent calls across the benchmark worker fleet.
   --voice VOICE         OpenAI Realtime agent voice override; the released default is
                         marin.
-  --domain {mock,airline,retail,gaia2,telecom,telecom-workflow,banking_knowledge,intake}, -d {mock,airline,retail,gaia2,telecom,telecom-workflow,banking_knowledge,intake}
+  --domain {gaia2}, -d {gaia2}
                         Domain filter; repeatable for released voice runs. Omit to run
                         all released voice domains.
   --num-trials NUM_TRIALS
@@ -990,13 +920,11 @@ options:
                         '{"temperature": 0.0}'.
   --user {user_simulator,dummy_user}
                         The user implementation to use. Default is user_simulator.
-  --user-llm USER_LLM   The LLM to use for the user. Default is gpt-4.1-2025-04-14;
-                        τ-Entity uses gpt-5.5.
+  --user-llm USER_LLM   The LLM to use for the user. Default is gpt-4.1-2025-04-14.
   --user-llm-args USER_LLM_ARGS
                         The arguments to pass to the LLM for the user. Default is
-                        '{"temperature": 0.0}'; the default τ-Entity caller uses
-                        {"temperature": 0.0, "reasoning_effort": "low"}.
-  --task-set-name {mock,airline,retail,gaia2,gaia2_hidden,telecom_full,telecom_small,telecom,telecom-workflow,banking_knowledge,intake}
+                        '{"temperature": 0.0}'.
+  --task-set-name {gaia2,gaia2_hidden}
                         The task set to run the simulation on. If not provided, will
                         load default task set for the domain.
   --task-split-name TASK_SPLIT_NAME
@@ -1036,7 +964,7 @@ options:
                         concurrency ceiling.
   --provider-limit PROVIDER_LIMIT
                         Per-provider concurrency caps in controller mode, e.g.
-                        "openai=40,gemini=20". Requires --workers.
+                        "openai=40,xai=20". Requires --workers.
   --seed SEED           The seed to use for the simulation. Default is 300.
   --log-level LOG_LEVEL
                         The log level to use for the simulation. Default is ERROR.
@@ -1088,7 +1016,7 @@ options:
   --audio-native        Enable audio-native mode using DiscreteTimeAudioNativeAgent
                         with VoiceStreamingUserSimulator. This enables full-duplex
                         voice simulation using audio native APIs.
-  --audio-native-provider {openai,openai_live,gemini,xai,nova,qwen,qwen_agent,avartha_pipecat,phonic,livekit,launa}
+  --audio-native-provider {openai,xai,nova,qwen,qwen_agent,avartha_pipecat,phonic,livekit,launa}
                         Audio native API provider. Default is 'openai'.
   --cascaded-config CASCADED_CONFIG
                         Cascaded config preset name for livekit provider. Available
@@ -1098,6 +1026,9 @@ options:
                         Audio native model to use. If not specified, uses the default
                         model for the selected provider. For avartha_pipecat, it is
                         only a label, since --avartha-base-url selects the agent.
+  --user-simulation-config USER_SIMULATION_CONFIG
+                        JSON caller, dynamic followup and watchdog configuration,
+                        independent of the tested Agent
   --qwen-agent-config QWEN_AGENT_CONFIG
                         JSON configuration file for the complete qwen_agent system
                         provider.
@@ -1106,12 +1037,9 @@ options:
                         calls, https://<host>/inference/serverless/pipecat/v1/public/<
                         agent_id>. Required for that provider, which also needs the
                         live extra and AVARTHA_API_KEY.
-  --live-config LIVE_CONFIG
-                        JSON config for openai_live: backend_model (required), voice,
-                        and optional frontend_prompt/backend_prompt overrides.
   --realtime-generation, --no-realtime-generation
                         Run user LLM/TTS generation without blocking audio ticks.
-                        Defaults to enabled for openai_live and avartha_pipecat and
+                        Defaults to enabled for qwen_agent and avartha_pipecat and
                         disabled for other providers. Use --no-realtime-generation to
                         disable.
   --reasoning-effort {minimal,low,medium,high,xhigh}
@@ -1122,7 +1050,7 @@ options:
                         0.2.
   --max-steps-seconds MAX_STEPS_SECONDS
                         Maximum conversation duration in seconds; 0 disables the
-                        limit. Default is 1200; τ-Entity uses 240.
+                        limit. Default is 1200.
   --speech-complexity {control,regular,control_audio,control_accents,control_behavior,control_audio_accents,control_audio_behavior,control_accents_behavior}
                         Speech complexity level for audio effects. Default is
                         'regular'.
@@ -1160,17 +1088,6 @@ options:
   --xml-prompt          Use XML tags in system prompt (overrides auto-detection).
   --no-xml-prompt       Use plain text system prompt without XML tags (overrides auto-
                         detection).
-  --retrieval-config {alltools,alltools-qwen,bm25,bm25_grep,bm25_reranker,bm25_reranker_grep,full_kb,golden_retrieval,grep_only,no_knowledge,openai_embeddings,openai_embeddings_grep,openai_embeddings_reranker,openai_embeddings_reranker_grep,qwen_embeddings,qwen_embeddings_grep,qwen_embeddings_reranker,qwen_embeddings_reranker_grep,terminal_use,terminal_use_write}
-                        Knowledge retrieval config name (banking_knowledge domain).
-                        Offline: no_knowledge, full_kb, golden_retrieval, bm25,
-                        bm25_grep, grep_only. Requires OPENAI_API_KEY:
-                        openai_embeddings*, alltools. Requires OPENROUTER_API_KEY:
-                        qwen_embeddings*, alltools-qwen. Requires sandbox-runtime:
-                        terminal_use*, alltools, alltools-qwen. Default for
-                        banking_knowledge: alltools (BM25 + dense + shell).
-  --retrieval-config-kwargs RETRIEVAL_CONFIG_KWARGS
-                        Arguments to pass to the retrieval config constructor as JSON
-                        (e.g., '{"top_k": 10}').
   --auto-resume         Automatically resume from existing save file without prompting
                         (for non-interactive runs).
   --auto-review         Automatically run LLM conversation review after each
@@ -1189,15 +1106,6 @@ options:
   --regular-results REGULAR_RESULTS
                         Existing ordinary seed-42 regular results to reuse read-only
                         in crossed mode.
-
-τ-entity (formerly elicitation; intake only):
-  --elicitation-strategy {agent_directed,scaffolded}
-                        Collection strategy. Default: agent_directed; scaffolded
-                        selects the prescribed-protocol ablation.
-  --complication-rate COMPLICATION_RATE
-                        Complication trigger scaling in [0, 1]; 0 disables
-                        complications. Default: 1 for both strategies. Inapplicable
-                        kinds retain their no-complication probability.
 ```
 
 ## `tau2 play`
@@ -1239,7 +1147,7 @@ options:
 usage: tau2 domain [-h] domain
 
 positional arguments:
-  domain      Name of the domain to show documentation for (e.g., 'airline', 'mock')
+  domain      Name of the domain to show documentation for (currently 'gaia2')
 
 options:
   -h, --help  show this help message and exit
@@ -1355,8 +1263,8 @@ usage: tau2 leaderboard [-h] [--domain {retail,airline,telecom,banking_knowledge
 options:
   -h, --help            show this help message and exit
   --domain {retail,airline,telecom,banking_knowledge}, -d {retail,airline,telecom,banking_knowledge}
-                        Show leaderboard for a specific domain. If not specified,
-                        shows overall leaderboard.
+                        Historical domain filter; this command does not run Gaia2
+                        evaluations.
   --metric {pass_1,pass_2,pass_3,pass_4,cost}, -m {pass_1,pass_2,pass_3,pass_4,cost}
                         Metric to rank by. Default is 'pass_1'.
   --limit LIMIT, -n LIMIT

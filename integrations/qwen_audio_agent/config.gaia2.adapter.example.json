@@ -1,0 +1,16 @@
+{
+  "image": "docker.v2.aispeech.com/sjtu/sjtu_yukai-tau-qwen-agent:0.3.1",
+  "config_env_file": "config.env",
+  "environment": {
+    "QWEN_AUDIO_REALTIME_API_KEY": "QWEN_AUDIO_REALTIME_API_KEY",
+    "QWEN_AUDIO_REALTIME_PROVIDER": "QWEN_AUDIO_REALTIME_PROVIDER",
+    "QWEN_AUDIO_REALTIME_URL": "QWEN_AUDIO_REALTIME_URL",
+    "QWEN_AUDIO_REALTIME_MODEL": "QWEN_AUDIO_REALTIME_MODEL",
+    "OPENAI_API_KEY": "QWEN_CODE_API_KEY",
+    "OPENAI_BASE_URL": "QWEN_CODE_API_BASE",
+    "OPENAI_MODEL": "QWEN_CODE_MODEL"
+  },
+  "asr_provider": "deepgram",
+  "asr_model": "nova-3",
+  "asr_api_key_env": "DEEPGRAM_API_KEY"
+}

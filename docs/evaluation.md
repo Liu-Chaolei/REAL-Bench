@@ -208,9 +208,10 @@ acceptable trajectory", so it should be reserved for tasks where you
 have actually enumerated all valid solutions (or where there genuinely
 is only one).
 
-## GPT Live transcript segments
+## Historical GPT Live transcript segments
 
-New Live recordings retain provider transcript fragments and their session timestamps,
+The `openai_live` adapter is retired; the following describes saved recordings only.
+Live recordings retain provider transcript fragments and their session timestamps,
 plus speech activity measured from delivered audio in 20 ms frames. Completed-call
 transcript views derive stable `live-segment:` IDs without rewriting recorded ticks.
 Other providers retain their native utterance grouping. Older Live recordings without

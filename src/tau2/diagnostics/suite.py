@@ -57,7 +57,9 @@ def load_evidence(directory):
     )
 
 
-def evaluate_evidence(task, evidence, directory, config, only=None):
+def evaluate_evidence(
+    task, evidence, directory, config, only=None, *, precomputed=None
+):
     """Score independent measures; failures never replace a task reward."""
     directory = Path(directory)
     if evidence.source.get("task_sha256") and evidence.source["task_sha256"] != digest(
@@ -151,12 +153,32 @@ def evaluate_evidence(task, evidence, directory, config, only=None):
                     ),
                 )
             elif measure == "persistent_task":
-                result = (
-                    evidence.source.get("active_metrics", {})
-                    .get("scores", {})
-                    .get("persistent_task")
+                from copy import deepcopy
+
+                from tau2.data_model.semantic_communication import CommunicateScoring
+                from tau2.diagnostics.request_changes import mechanism_summaries
+                from tau2.metrics.active.persistent_task.evaluator import (
+                    score_persistent_task,
                 )
-                if result is None:
+                from tau2.metrics.active.persistent_task.variant_evaluator import (
+                    score_interaction_variant,
+                )
+
+                summary = next(iter(mechanism_summaries(evidence)), None)
+                result = (precomputed or {}).get(measure)
+                if result is not None:
+                    result = deepcopy(result)
+                elif summary is not None:
+                    scoring = CommunicateScoring.model_validate(
+                        evidence.source.get("communicate_scoring") or {}
+                    )
+                    grader = (
+                        score_interaction_variant
+                        if summary.get("variant_type")
+                        else score_persistent_task
+                    )
+                    result = grader(summary, scoring)
+                else:
                     result = {
                         "status": "not_applicable",
                         "reason": "active_metric_evidence_missing",

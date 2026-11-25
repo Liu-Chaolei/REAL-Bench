@@ -7,7 +7,6 @@ Provider syntax: "provider", "provider:model", or "provider:model:reasoning"
   - openai:gpt-realtime-1.5          (specific model)
   - openai:gpt-realtime-1.5:high     (model + reasoning effort)
   - openai:pine-voice-preview        (Pine's OpenAI-compatible model)
-  - openai_live::medium              (default GPT Live frontend + reasoning effort)
   - livekit                           (default cascaded config)
   - livekit::openai-thinking          (default model + cascaded config)
 
@@ -16,7 +15,7 @@ Pine models use the normal OpenAI provider syntax. Set ``PINE_API_KEY`` and
 automatically for model names beginning with ``pine-``.
 
 Usage:
-    python -m experiments.tau_voice.run_multiple --providers openai,gemini --save-to data/exp/my_run
+    python -m experiments.tau_voice.run_multiple --providers openai,xai --save-to data/exp/my_run
     python -m experiments.tau_voice.run_multiple --providers openai:gpt-realtime-1.5:high --save-to data/exp/run --num-tasks 5
     python -m experiments.tau_voice.run_multiple --providers openai:pine-voice-preview --save-to data/exp/pine
     python -m experiments.tau_voice.run_multiple --providers livekit,livekit::openai-thinking --save-to data/exp/run
@@ -25,7 +24,7 @@ By default the grid runs sequentially, one `tau2 run` subprocess per combo.
 With --workers N the combos are registered as producers in one controller and
 run concurrently across N worker processes (see docs/cli-reference.md):
 
-    python -m experiments.tau_voice.run_multiple --providers openai,gemini \\
+    python -m experiments.tau_voice.run_multiple --providers openai,xai \\
         --save-to data/exp/run --workers 4
 """
 
@@ -40,11 +39,9 @@ from typing import Optional
 from tau2.config import DEFAULT_AUDIO_NATIVE_MODELS, DEFAULT_LLM_USER, DEFAULT_SEED
 from tau2.data_model.cascaded import CascadedConfigRequest
 
-DEFAULT_DOMAINS = ["airline", "retail"]
+DEFAULT_DOMAINS = ["gaia2"]
 DEFAULT_COMPLEXITIES = ["control", "regular"]
-DEFAULT_PROVIDER_LIMITS = (
-    "gemini=40,openai=40,openai_live=40,xai=40,livekit=10,nova=5,qwen=5"
-)
+DEFAULT_PROVIDER_LIMITS = "openai=40,xai=40,livekit=10,nova=5,qwen=5"
 
 
 @dataclass
@@ -68,7 +65,9 @@ def parse_provider(spec: str) -> ProviderSpec:
     """
     parts = spec.split(":")
     provider = parts[0]
-    model = DEFAULT_AUDIO_NATIVE_MODELS.get(provider, "dummy")
+    if provider not in DEFAULT_AUDIO_NATIVE_MODELS:
+        raise ValueError(f"Audio provider {provider!r} is retired or unsupported")
+    model = DEFAULT_AUDIO_NATIVE_MODELS[provider]
 
     if len(parts) == 1:
         return ProviderSpec(provider=provider, model=model, display_name=spec)
@@ -111,9 +110,11 @@ def build_command(
     max_concurrency: int = 8,
     max_steps_seconds: int | None = None,
     realtime_generation: bool | None = None,
-    live_backend_model: str | None = None,
-    live_voice: str = "marin",
 ) -> list[str]:
+    if spec.provider not in DEFAULT_AUDIO_NATIVE_MODELS:
+        raise ValueError(f"Audio provider {spec.provider!r} is retired or unsupported")
+    if domain != "gaia2":
+        raise ValueError("New runs support only domain gaia2")
     cmd = [
         sys.executable,
         "-m",
@@ -156,15 +157,6 @@ def build_command(
             if realtime_generation
             else "--no-realtime-generation"
         )
-    if spec.provider == "openai_live":
-        if live_backend_model is None:
-            raise ValueError("openai_live requires --live-backend-model")
-        cmd.extend(
-            [
-                "--live-config",
-                json.dumps({"backend_model": live_backend_model, "voice": live_voice}),
-            ]
-        )
     return cmd
 
 
@@ -181,8 +173,6 @@ def build_config(
     max_concurrency: int = 8,
     max_steps_seconds: int | None = None,
     realtime_generation: bool | None = None,
-    live_backend_model: str | None = None,
-    live_voice: str = "marin",
 ):
     """The same run build_command() shells out for, as a VoiceRunConfig —
     used by --workers mode to register combos with one controller."""
@@ -201,14 +191,6 @@ def build_config(
     )
     if max_steps_seconds is not None:
         audio_kwargs["max_steps_seconds"] = max_steps_seconds
-    if spec.provider == "openai_live":
-        if live_backend_model is None:
-            raise ValueError("openai_live requires --live-backend-model")
-        audio_kwargs["live_config"] = {
-            "backend_model": live_backend_model,
-            "voice": live_voice,
-        }
-
     config_kwargs = dict(
         domain=domain,
         num_tasks=num_tasks,
@@ -261,19 +243,7 @@ def main():
         action=argparse.BooleanOptionalAction,
         default=None,
         help="Run user LLM/TTS generation without blocking audio ticks. "
-        "Defaults to enabled for openai_live and disabled for other providers.",
-    )
-    parser.add_argument(
-        "--live-backend-model",
-        type=str,
-        default=None,
-        help="Delegated backend model for openai_live (required when selected).",
-    )
-    parser.add_argument(
-        "--live-voice",
-        type=str,
-        default="marin",
-        help="Output voice for openai_live. Default: marin.",
+        "Defaults to enabled for qwen_agent and avartha_pipecat.",
     )
     parser.add_argument("--seed", type=int, default=DEFAULT_SEED)
     parser.add_argument("--user-llm", type=str, default=DEFAULT_LLM_USER)
@@ -328,8 +298,6 @@ def main():
         max_concurrency=args.max_concurrency,
         max_steps_seconds=args.max_steps_seconds,
         realtime_generation=args.realtime_generation,
-        live_backend_model=args.live_backend_model,
-        live_voice=args.live_voice,
     )
 
     def combo_save_to(domain, spec, complexity) -> str:

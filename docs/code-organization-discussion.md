@@ -1,273 +1,91 @@
-# τ-bench 代码整理讨论稿
+# τ-bench 代码整理当前状态
 
-> 最新数据范围：主文件为1000题（base800、mind_change100、repetition100），隐藏信息100题独立。
-> 固定async100题及10题Persistent Tasks材料已移除；异步仅保留运行时动态机制。
-> 下文数据统计为最初讨论时的历史记录，当前目录见 [数据目录](gaia2-data-layout-plan.md)。
+本文已由最初的讨论稿改为当前实现清单。详细实施记录见[代码整理收尾计划](code-organization-finalization-plan.md)，指标定义以[指标清单](metrics-inventory.md)为准。
 
+## 1. 当前范围
 
-本文记录当前对 τ-bench 代码、数据和运行流程的初步整理结果。它是讨论稿，不是已经批准的重构方案。后续应按本文的待决策事项逐项确认，再修改代码和数据。
+当前新运行只支持 `gaia2`、英文及文本／语音模式。隐藏信息通过独立 task set 选择，共用 Gaia2 环境。
 
-## 一、整理目标
+本轮完成未完整适配 Provider 的移除、Gaia2 主入口旧领域清理、状态文档更新，以及参考修复产物与活动版本的对应。错误／重试／统计口径、默认采集及指标事实依据仍暂缓。
 
-这次整理希望把以下内容分开并说明清楚：
+## 2. 当前运行链路
 
-1. 一次测试从准备题目到输出结果到底经过哪些步骤。
-2. 当前有哪些指标，以及哪些指标应该保留、合并或移除。
-3. 哪些代码属于 τ-bench 公共能力，哪些是 Gaia2、ARE、REAL-Bench 或当前项目扩展带来的专用逻辑。
-4. 当前多个数据集版本的关系，并确定一个正式发布版本。
-5. 所有 API 调用分别使用什么模型、参数从哪里来，并统一配置方式。
-6. 针对不同待测 Agent 的适配代码在哪里，以及如何抽成统一适配层。
+```text
+CLI / RunConfig → 发布清单与任务选择 → Runner 装配
+    → Gaia2 Environment / ScenarioRuntime
+    → Orchestrator + 模拟用户 + 待测 Agent Adapter
+    → 保存轨迹与公共证据
+    → 主评分、active metric、场景变体评分、诊断评分
+    → 保存各自结果并汇总
+```
 
-还需要同时整理错误处理、时间规则、信息可见范围、日志格式、版本复现和启动入口，否则单独整理上述六项仍然会留下隐性耦合。
+关键入口：`src/tau2/cli.py`、`src/tau2/runner/build.py`、`src/tau2/runner/simulation.py`。
 
-## 二、当前整体流程
+场景机制各有职责：
 
-当前系统可以分成三条链路：题目制作、测试运行、结果分析。它们目前有交叉，尤其是用户模拟、语音适配、动态追问和诊断模块之间。
-
-### 2.1 题目制作和冻结
-
-1. 导入原始任务，保存用户要求、应用初始数据和资源文件。
-2. 检查附件和其他任务资源是否存在且内容正确。
-3. 为部分任务增加后续请求，形成多阶段任务。
-4. 制作改口、重复、异步和隐藏信息等不同测试条件。
-5. 编写参考操作和评分条件。
-6. 执行参考操作，检查任务是否可执行、状态是否正确、操作日志能否回放。
-7. 对生成或修改的请求进行语义和自然性审核。
-8. 冻结任务、资源、评分规则和校验信息，形成可以复现的发布版本。
-
-题目制作主要位于 [src/tau2/task_authoring](/aistor/hpc_stor03/sjtu_home/chaolei.liu/Audio-Agent/tau2-bench/src/tau2/task_authoring) 和 [src/tau2/domains/gaia2](/aistor/hpc_stor03/sjtu_home/chaolei.liu/Audio-Agent/tau2-bench/src/tau2/domains/gaia2)。制作期间的失败候选、审核记录和修复记录应保留为来源档案，但不应混入正式运行入口。
-
-### 2.2 一次测试的运行步骤
-
-1. 读取配置：题集、题目范围、待测 Agent、文本或语音模式、用户模型、裁判模型、时限、并发数、重复次数和随机种子。
-2. 选择任务并校验任务、资源和版本信息。
-3. 创建独立环境，恢复应用初始状态并准备工具。
-4. 启动待测 Agent，建立文字、语音或容器连接。
-5. 创建模拟用户，限制它能看到的信息。
-6. 发送第一条用户请求。
-7. 循环处理对话：Agent 回复或调用工具，环境执行工具并返回结果，用户根据实际收到的内容继续回复。
-8. 在语音模式下处理转写、语音播放、打断、双方同时说话和等待时间。
-9. 在隐藏信息任务中判断 Agent 是否询问了隐藏字段；满足条件后才释放信息。
-10. 在多阶段任务中根据结束信号推进到下一项请求；最后一个阶段才结束通话。
-11. 处理通知、查询、取消和其他后台事件。
-12. 区分正常结束、Agent 主动结束、超时、连接错误、用户模拟错误和评分错误。
-13. 保存对话、实际播放音频、工具输入输出、时间、阶段变化、隐藏信息释放记录和环境变化。
-14. 计算最终任务结果：业务状态、需要告诉用户的信息、时间条件、禁止事项和其他自然语言要求。
-15. 计算额外诊断指标，并与主任务结果分开保存。
-16. 汇总多道题和多次重复的结果，同时列出无效运行、评分失败和缺失证据。
-
-主要装配入口是 [runner/build.py](/aistor/hpc_stor03/sjtu_home/chaolei.liu/Audio-Agent/tau2-bench/src/tau2/runner/build.py)，单次执行和评分入口是 [runner/simulation.py](/aistor/hpc_stor03/sjtu_home/chaolei.liu/Audio-Agent/tau2-bench/src/tau2/runner/simulation.py)。
-
-### 2.3 事后分析
-
-已保存的运行证据可以重新计算诊断指标。理想状态是：更换诊断方法不需要重新运行对话；更换主评分规则时必须使用新的评分版本并明确记录。
-
-当前运行中还可能自动收集诊断证据，因此“显式选择的指标”和“实际被记录的指标”不一定完全相同。这一点需要在配置整理时明确。
-
-## 三、当前指标分类
-
-### 3.1 主任务结果
-
-- 最终任务成功和平均奖励。
-- `pass^k`，表示多次运行都成功时的可靠程度。
-- 最终业务状态检查，例如邮件、日历、联系人、文件等是否达到要求。
-- 必须传达的信息检查，判断结果是否真的告诉用户。
-- 自然语言条件检查，例如时间、预算、条件、禁止事项和选择要求。
-
-这些指标回答“事情最后有没有正确完成”，应作为主报告内容。
-
-### 3.2 诊断指标
-
-- 需求理解：是否漏掉用户要求，或理解出用户没有要求的内容。
-- 执行诊断：工具选择、参数、先后关系和业务效果。
-- Hidden Ask Rate：隐藏字段中有多少被 Agent 询问到。
-- Progressivity：对话是否向完成目标推进。
-- Grounding：Agent 的说法和动作是否有事实依据。
-- 交互有用率：每句 Agent 话是否对解决问题有帮助。
-- 简洁性：需要的信息是否说全，同时是否过于冗长。
-- 语音指标：响应延迟、回应率、打断、语音重叠和迟到回应。
-- 持续任务指标：后台任务的查询、等待、取消和回复是否正确。
-
-这些指标主要用于解释“为什么成功或失败”，不应默认混入主任务总分。
-
-### 3.3 运行质量统计
-
-以下内容不应当当成 Agent 能力分数：
-
-- API 调用耗时、用量和费用。
-- 并发、重试和超时情况。
-- 缺少证据、用户模拟错误、基础设施错误和评分器错误。
-- 任务覆盖率和有效运行比例。
-
-“不适用”“没有证据”“裁判失败”和“Agent 做错”必须分开保存，不能全部填零。
-
-### 3.4 初步精简建议
-
-- 保留最终任务成功、业务状态、必须传达的信息和关键自然语言条件。
-- 有重复运行时保留 `pass^k`；只有一次运行时不必突出它。
-- Hidden Ask Rate 只作为隐藏信息实验的诊断，不解释为信息已被正确使用。
-- 状态交互指标先作为实验诊断，暂不用于模型排名。当前实现仍有词汇重合和特定操作规则，需校准。
-- 语音报告只突出少量关键指标，其余放到详细报告。
-- 执行诊断应关注有效结果和关键约束，不能因为没有完全照着参考操作就判错。
-
-当前隐藏信息指标实现位于 [metrics/hidden_intent.py](/aistor/hpc_stor03/sjtu_home/chaolei.liu/Audio-Agent/tau2-bench/src/tau2/metrics/hidden_intent.py)，状态交互指标位于 [diagnostics/state/metrics.py](/aistor/hpc_stor03/sjtu_home/chaolei.liu/Audio-Agent/tau2-bench/src/tau2/diagnostics/state/metrics.py)。
-
-## 四、代码来源和 τ-bench 自身能力
-
-当前代码至少混合了四类来源：
-
-| 来源 | 主要内容 |
-| --- | --- |
-| τ-bench 公共框架 | 任务加载、用户模拟、文本/语音调度、工具执行、批量运行、基础评分、结果保存 |
-| Gaia2 和 ARE | 应用工具、初始快照、事件、附件、参考操作和业务检查 |
-| REAL-Bench 等诊断 | 需求理解、执行和部分语音诊断 |
-| 当前项目扩展 | 多阶段请求、动态追问、隐藏信息、持续任务适配、状态交互和实验脚本 |
-
-来源记录见 [diagnostics/SOURCE.json](/aistor/hpc_stor03/sjtu_home/chaolei.liu/Audio-Agent/tau2-bench/src/tau2/diagnostics/SOURCE.json)。
-
-建议保留公共基础设施：任务隔离、工具接口、语音时序、日志、批量调度、错误分类和回放。
-
-建议配置化而不是硬编码的部分：阶段切换、用户何时结束、隐藏信息何时释放、超时、重试和动态追问。它们都会改变测量含义。
-
-建议从主入口隔离的部分：其他领域、多语言发布流程、知识检索、训练接口和特定业务认证。先不让它们进入当前 Gaia2 运行链路，再决定是否删除。
-
-旧题目审核、修复、人工接管和恢复脚本应先确认是否仍被正式流程引用，再归档或移除。PropBank 等探索实验也不应成为正式评测依赖。
-
-特别注意：`metrics/active/` 中部分逻辑会生成请求并改变后续对话。它们不是普通的事后指标，应归到“测试场景控制”一类。
-
-## 五、数据集现状和最终版本建议
-
-当前实际数据如下：
-
-| 数据目录 | 当前数量 | 作用 | 当前状态 |
-| --- | ---: | --- | --- |
-| `data/tau2/domains/gaia2` | 1,100 | 原始五类 800 道，加上 mind-change、repetition、async 等变体 | `ready_for_live_series_pilot` |
-| `data/tau2/domains/gaia2_hidden` | 100 | 五类各 20 道的隐藏信息候选集 | `authoring_draft` |
-| `data/tau2/domains/gaia2_hidden_trial5` | 5 | 机制开发检查集 | `authoring_draft` |
-
-历史归档位于 `data/archives/`，目前包括集成前、回答规则修改前和加入变体前的版本。
-
-当前文档与数据有不一致：
-
-- `docs/gaia2.md` 仍写 1,000 道，但当前任务文件实际为 1,100 道。
-- `docs/gaia2-hidden-intent.md` 仍描述旧的隐藏字段数量分布，但当前清单是每题一个隐藏字段，且只隐藏初始阶段字段。
-
-最终版本不应简单地把所有目录合并。建议建立一个正式发布清单，明确列出：
-
-- 基础任务；
-- 多阶段、改口、重复和异步条件；
-- 隐藏信息条件；
-- 仅用于开发检查的五题试验集；
-- 不参与运行的历史来源。
-
-每道正式题至少固定来源 ID、初始数据、用户要求、后续目标、隐藏信息规则、评分条件和资源版本。还要确认派生变体是否被当成独立样本，以及隐藏值是否可能从工具或残留提示中泄漏。
-
-初步建议是：先冻结正式测试条件，再发布一个版本；100 道隐藏信息任务继续审核；5 道任务只作为机制检查集。
-
-## 六、API、模型和参数
-
-当前模型来源分散在默认配置、命令行参数、`RunConfig`、诊断 YAML、语音 Provider 配置、Qwen 启动脚本和环境变量中。
-
-主要角色如下：
-
-| 角色 | 当前来源或默认值 | 备注 |
+| 机制 | 当前职责 | 实现位置 |
 | --- | --- | --- |
-| 普通文本 Agent | 默认 `gpt-4.1-2025-04-14`，可由 `--agent-llm` 覆盖 | 待测对象或 τ 内置 Agent |
-| 文本模拟用户 | 通用用户模型，可由 `--user-llm` 覆盖 | 负责生成用户回复 |
-| 隐藏问题识别 | 当前复用用户模型和参数 | 会额外产生一次模型调用 |
-| 动态追问生成和核验 | 使用调用方传入的用户模型配置 | 影响后续用户请求的表达 |
-| 用户回复事实检查 | 用户生成链路传入的模型 | 检查是否编造个人事实或改变目标 |
-| 语音用户决策 | 默认 `gpt-5.4-mini-2026-03-17`，可覆盖 | 控制语音用户的行为 |
-| Agent 语音后端 | 由 Provider 或集成配置决定 | 例如 Qwen、OpenAI、Gemini、Nova 等 |
-| 语音转写 | 由 Provider 配置决定 | Qwen 集成示例使用 `mimo-v2.5-asr` |
-| 语音合成 | 由 Provider 配置决定 | Qwen 集成示例使用 `mimo-v2.5-tts` |
-| 必须传达信息裁判 | 默认 `gpt-5.5` | 语义通信评分 |
-| 自然语言条件裁判 | 默认 `gpt-5.4-mini-2026-03-17` | 可由环境变量覆盖 |
-| 需求、执行、交互和简洁性诊断 | 由 `MetricsConfig.model/models` 决定 | 各诊断角色可以单独配置 |
-| 题目生成和审核 | 配置文件中的 author/reviewer 模型环境变量 | 只属于题目制作流程 |
+| ScenarioRuntime | 场景事件、环境变化及其依赖 | `environment/scenario.py`、`domains/gaia2/replies.py` |
+| ScenarioStages | 收到普通用户 STOP，等待请求完整交付、输出和工具排空后，推进下一阶段 | `orchestrator/scenario_stages.py` |
+| InteractionVariant | modify／cancel／addtask 请求与任务视图 | `metrics/scenario_mechanisms.py`、`domains/gaia2/interaction_variants.py` |
+| Active persistent task | 根据真实后台事件动态提出 query／result／modify／cancel 请求，独立评分 | `metrics/active/persistent_task/` |
+| 旧 persistent task | 读取历史证据与已保存分数 | `persistent_tasks/` 中的兼容数据与证据接口 |
 
-Qwen 集成示例位于 [config.gaia2.deepseek.json](/aistor/hpc_stor03/sjtu_home/chaolei.liu/Audio-Agent/tau2-bench/integrations/qwen_audio_agent/config.gaia2.deepseek.json)，默认值集中在 [config.py](/aistor/hpc_stor03/sjtu_home/chaolei.liu/Audio-Agent/tau2-bench/src/tau2/config.py)，诊断配置位于 [diagnostics/config.py](/aistor/hpc_stor03/sjtu_home/chaolei.liu/Audio-Agent/tau2-bench/src/tau2/diagnostics/config.py)。
+Stages 与 Runtime 的职责可以并存。动态用户请求属于测试条件；它的来源与普通阶段、环境脚本分别记录。参考事件在特定环境因果中的作用见[链路审查](evaluation-chain-audit-report.md)，该文保留审查时的背景，不作为当前指标定义。
 
-建议建立按角色配置的统一模型表，不要求所有角色使用同一个模型。运行启动后保存一份不含密钥的最终生效配置，记录每个角色的模型、服务地址、参数、超时、重试和配置来源；每次调用记录用途、延迟、用量和错误。
+## 3. 已完成整理
 
-## 七、Agent 适配代码和统一适配层
+| 事项 | 当前状态与实现位置 | 详细说明 |
+| --- | --- | --- |
+| API 角色配置 | 服务、模型、调用角色从统一配置解析；`utils/api_config.py` | [API 配置](api-configuration.md) |
+| Qwen 适配层 | 实际实现集中到 `adapters/qwen_audio_agent/`，`adapters/registry.py` 延迟创建；原路径只作兼容转发 | [Adapter 入口](../src/tau2/adapters/README.md) |
+| 用户策略归属 | 动态追问等归入 `UserSimulationConfig`，旧 Qwen 配置仅在读取边界转换 | [Qwen 迁移计划](qwen-agent-adapter-migration-plan.md) |
+| GPT Live／Gemini Live | `openai_live`、`gemini` 的运行入口及专属实现已移除；未来重新完整接入。普通 `openai` 保留 | [Provider 说明](../src/tau2/voice/audio_native/README.md) |
+| 历史 Provider 读取 | `RecordedAudioNativeConfig` 保留历史字段；不含连接能力，恢复退役 Provider 明确拒绝 | `data_model/run_config.py`、`runner/checkpoint.py` |
+| Gaia2 主入口 | 新配置移除 retrieval／elicitation 设置，旧输入明确拒绝；Runner 不再传递旧领域装配参数 | `data_model/simulation.py`、`runner/build.py`、`runner/helpers.py` |
+| 历史领域数据 | Info 保留旧字段，leaderboard 明确标为历史展示；外围独立模块不顺带重写 | `data_model/simulation.py`、`cli.py` |
+| 交互变体与指标分离 | InteractionVariant 由场景机制管理器安装，普通 active metric 单独管理 | [变体分离计划](interaction-variant-separation-plan.md) |
+| 旧 Persistent Task 退役 | 新运行不再接受 `persistent_task_config`；历史数据和公共后台证据类型保留 | [退役计划](persistent-task-retirement-plan.md) |
+| 请求来源统一 | 运行记录及诊断读取 `source`、`purpose`；阶段、变体及 active 请求来源对应 | `environment/scenario.py`、`diagnostics/collect.py` |
+| 公共媒体证据 | 精简性与语音指标直接读取公共媒体证据 | `diagnostics/media.py` |
+| 先保存事实再评分 | 原始轨迹、证据先保存，各评分独立执行；不以另一项分数充当原始证据 | [证据与评分分离计划](evidence-and-scoring-separation-plan.md) |
+| 指标清理 | Gaia2 主业务结果保留 ENV_ASSERTION；所需反馈信息由 required_coverage 评价；NL／整题 COMMUNICATE 已取消 | [指标清单](metrics-inventory.md) |
 
-当前适配代码分布在以下位置：
+本轮没有向正式运行新增全量检查、模型验收、自动修复或巡检流程。
 
-| 位置 | 当前职责 |
-| --- | --- |
-| `src/tau2/agent/base` | 文本、流式和语音参与者的基础接口 |
-| `src/tau2/voice/audio_native` | 不同实时语音服务的连接和音频协议 |
-| `src/tau2/voice/audio_native/qwen_agent` | Qwen 连接、容器运行、音频、转写和后台事件 |
-| `integrations/qwen_audio_agent` | 镜像、启动、配置注入和语音服务 |
-| `src/tau2/persistent_tasks/adapters` | 后台任务状态和操作适配 |
-| `runner/build.py`、注册表和调度器 | 选择实现并组装运行对象 |
+## 4. 数据与发布状态
 
-统一适配层应负责：
+唯一活动清单是 [`data/tau2/benchmarks/gaia2.json`](../data/tau2/benchmarks/gaia2.json)。当前清单修订为 `gaia2-release-v3-reference-status`；这是版本说明更新，活动任务文件未切换到修复候选。
 
-- 启动、连接、结束和清理；
-- 发送文字或音频；
-- 返回文字、音频、工具请求和状态事件；
-- 接收工具结果；
-- 处理打断、取消、超时和断线；
-- 将不同 Provider 的事件转换成统一记录；
-- 声明 Agent 支持的能力和可提供的证据。
+| 集合 | 数量 | 清单状态 | 评分归属 |
+| --- | ---: | --- | --- |
+| base | 800，五类各 160 | released | primary |
+| mind_change | 100 | released | diagnostic |
+| repetition | 100 | released | diagnostic |
+| addtask／modify／cancel | 100／50／50 | draft | separate |
+| hidden_intent | 100，独立集合 | draft | diagnostic |
 
-题目选择、隐藏信息释放、用户策略和评分规则应留在评测侧，不应塞入 Agent 适配器。
+主文件包含 1000 道题；另有 200 个交互变体，构造后共 1200 个运行视图。隐藏信息 100 道不计入这 1200 个视图。固定 async 题集和 trial5 检查集不属于当前活动范围。
 
-需要区分三种接入能力：只支持文字、支持语音但内部不可见、能够提供工具及后台状态。不能要求所有 Agent 暴露内部计划，也不能因为某个 Agent 没有内部状态就把需求理解指标直接记为零。
+参考修复候选为 `gaia2-reference-repair-simple-v1-candidate`，保留在原归档位置。1000 个主任务、200 个变体均与修复前输入逐题一致，没有合并冲突；200 个修复后变体均可构造，6 个代表题的离线参考执行与重放通过。
 
-当前一个明显耦合是：动态追问属于模拟用户行为，却从 Qwen Agent 配置中取配置。换 Agent 后，同一套用户策略不一定能复用，这应优先拆开。
+候选仍有 67 道 `unresolved`，没有执行全量参考封存，因此未激活、未改写旧 `verified` 或 runtime pin，也未把 draft 集合升级为 released。隐藏集继续绑定自己的旧源版本，不跟随候选自动改写。具体哈希、验证范围和样例见[参考修复收尾记录](gaia2-reference-finalization-report.md)。
 
-## 八、还需要补充整理的事项
+## 5. 暂缓事项
 
-### 8.1 错误和重试
+- **错误、重试与统计口径**：后续单独整理错误分类、重试范围和聚合分母；本轮保留原计算与历史比较规则。
+- **默认采集与指标事实依据**：后续明确默认采集项及各指标使用的在线状态、操作记录、重放状态、用户交付内容；本轮仅完成已经授权的公共证据边界修复。
 
-网络失败重试、用户模拟失败重跑、Agent 做错后的重试含义不同，必须分别记录。重试不能覆盖第一次失败证据。
+## 6. 发布前尚未完成
 
-### 8.2 时间规则
+- 在独立离线修复流程中处理或明确处置 67 道 unresolved，保留原 finding 与修复记录；不在评测运行中修复题目。
+- 采用最终数据后，通过已有 reference verification／seal 流程封存对应数据与运行时，再切换活动来源及 pin。六个样例通过不能替代正式封存。
+- GPT Live、Gemini Live 将来需要时，从统一 Adapter 层重新新增完整实现，不恢复本轮删除的零碎接入。
 
-场景时间、模型等待时间、音频播放时间、工具等待时间和总运行时间应分开定义。异步和语音测试尤其需要统一时间基准。
+## 7. 权威文档索引
 
-### 8.3 信息可见范围
-
-明确 Agent、模拟用户和裁判各能看到什么，防止未来请求、参考操作、答案或隐藏值泄漏。
-
-### 8.4 证据格式
-
-统一对话、音频、工具调用、时间、状态变化和错误的记录格式，使不同 Agent 的结果可以使用同一套分析工具。
-
-### 8.5 复现信息
-
-每次运行应保存代码版本、任务版本、资源版本、提示词版本、模型、参数、适配器版本、容器版本、随机种子和评分版本。
-
-### 8.6 默认行为
-
-明确哪些指标会自动收集，哪些只在配置中声明后运行，避免用户以为没有启用某个指标但系统仍然执行了它。
-
-### 8.7 入口和依赖
-
-统一正式启动入口，减少必须经过某台机器专用脚本才能得到完整配置的情况。明确核心依赖和语音、知识库等可选依赖。
-
-### 8.8 文档一致性
-
-任务数量、隐藏字段分布、版本状态等内容应由发布清单自动生成或在校验时检查，避免文档与 JSON 长期不一致。
-
-## 九、建议的整理顺序
-
-1. 明确最终要测的能力：完整语音任务能力，还是主动询问隐藏信息并完成连续任务。
-2. 确定正式数据条件和版本边界。
-3. 确定主指标、诊断指标和运行质量统计的边界。
-4. 统一模型角色、参数来源和最终生效配置记录。
-5. 统一证据和错误格式。
-6. 抽出 Agent 适配层，先兼容现有 Qwen Audio Agent、普通文本工具 Agent 和一个外部实时语音服务。
-7. 再清理旧入口、重复实现和历史脚本。
-
-## 十、下一步需要确认的问题
-
-1. 最终测试是以“完整语音任务能力”为主，还是以“主动询问隐藏信息并完成连续任务”为主？
-2. 第一批统一接口必须支持哪些待测 Agent？现有 Qwen Audio Agent、普通文本工具 Agent 和外部实时语音服务是否都需要支持？
-3. 1,100 道 Gaia2 任务是否全部进入正式发布集，还是需要拆成基础集和变体集？
-4. 100 道隐藏信息任务何时从草稿升级为正式候选集？
-5. 主报告是否只保留任务完成、隐藏信息获取、关键语音表现和有效运行覆盖率，其余作为诊断？
-
+- 运行入口：[运行说明](running-the-benchmark.md)、[CLI 参数](cli-reference.md)、[Gaia2](gaia2.md)。
+- 集合与版本：[活动 manifest](../data/tau2/benchmarks/gaia2.json)、[数据目录](gaia2-data-layout-plan.md)、[参考修复收尾记录](gaia2-reference-finalization-report.md)。
+- 指标：[指标清单](metrics-inventory.md)。
+- 接入：[Adapter 说明](../src/tau2/adapters/README.md)、[Qwen 说明](../src/tau2/adapters/qwen_audio_agent/README.md)。
+- 模型角色：[API 配置](api-configuration.md)。

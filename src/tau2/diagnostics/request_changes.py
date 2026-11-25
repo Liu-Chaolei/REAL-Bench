@@ -1,12 +1,30 @@
 """Shared projections of actual task-management evidence; no additional judging."""
 
 
+def mechanism_summaries(evidence):
+    """Read current runtime facts, with one fallback for historical variants."""
+    active = ((evidence.source.get("active_metrics") or {}).get("metrics") or {}).get(
+        "persistent_task"
+    )
+    variant = (
+        (evidence.source.get("scenario_mechanisms") or {}).get("mechanisms") or {}
+    ).get("interaction_variant")
+    rows = []
+    if active is not None and (not active.get("variant_type") or variant is None):
+        rows.append(active)
+    if variant is not None:
+        rows.append(variant)
+    return rows
+
+
 def management_events(evidence):
     """Join start/result observations by call ID without inventing missing calls."""
-    source = evidence.source.get("active_metrics") or {}
-    metric = source.get("metrics", {}).get("persistent_task", {})
     calls = {}
-    for row in metric.get("operations", []):
+    for row in (
+        op
+        for metric in mechanism_summaries(evidence)
+        for op in metric.get("operations", [])
+    ):
         identity = row.get("call_id") or row.get("event_id")
         if identity is None:
             continue
@@ -51,16 +69,18 @@ def feedback_evidence(evidence):
     This is a view, not a rewritten execution trace. Original task stages and
     user records remain unchanged. All existing feedback formulas are reused.
     """
-    metric = (
-        (evidence.source.get("active_metrics") or {})
-        .get("metrics", {})
-        .get("persistent_task", {})
-    )
-    requests = metric.get("requests") or [
-        {
-            "request_id": metric.get("request_id"),
-            "delivery": metric.get("delivery", {}),
-        }
+    requests = [
+        request
+        for metric in mechanism_summaries(evidence)
+        for request in (
+            metric.get("requests")
+            or [
+                {
+                    "request_id": metric.get("request_id"),
+                    "delivery": metric.get("delivery", {}),
+                }
+            ]
+        )
     ]
     changes = []
     for request in requests:
@@ -115,11 +135,6 @@ def feedback_evidence(evidence):
 
 def request_relations(evidence):
     """Relations attached only to actual user delivery records, never predictions."""
-    metric = (
-        (evidence.source.get("active_metrics") or {})
-        .get("metrics", {})
-        .get("persistent_task", {})
-    )
     return {
         row["request_id"]: {
             "request_id": row["request_id"],
@@ -129,6 +144,7 @@ def request_relations(evidence):
             "operation": row.get("operation"),
             "target_role": row.get("target_role"),
         }
+        for metric in mechanism_summaries(evidence)
         for row in metric.get("requests", [])
         if row.get("delivery", {}).get("delivered_at") is not None
     }

@@ -132,21 +132,23 @@ def _audio_stats(evidence, directory, windows):
             for w in windows
         }
     try:
-        from tau2.diagnostics.voice import evaluate_voice
+        from tau2.diagnostics.media import read_media_activity
 
-        report = evaluate_voice(evidence, directory)
-        waveform = report.get("waveform_evidence", {})
-        if waveform.get("status") != "valid":
-            raise ValueError("invalid_waveform_evidence")
-        intervals = waveform["agent_intervals"]
+        media = read_media_activity(evidence, directory)
+        if media["status"] != "measured":
+            return {
+                w["id"]: {"status": "unavailable", "reason": media.get("reason")}
+                for w in windows
+            }
+        intervals = media["agent_intervals"]
         result = {}
         for window in windows:
             lower, upper = window.get("start", 0), window.get("end")
             upper = evidence.audio["duration"] if upper is None else upper
             speech = sum(max(0, min(b, upper) - max(a, lower)) for a, b in intervals)
-            from tau2.metrics.real_voice import _intervals
+            from tau2.voice.audio_activity import merge_intervals
 
-            reply_spans = _intervals(
+            reply_spans = merge_intervals(
                 [
                     [r["started"], r["ended"]]
                     for r in window.get("replies", [])

@@ -74,6 +74,70 @@ def test_stop_is_not_success_and_duplicate_stop_cannot_skip_a_request():
     assert runtime.results == {}  # No reference effect is invented to advance.
 
 
+def test_stage_requests_are_recorded_with_stage_source():
+    scene = spec()
+    runtime = ScenarioRuntime(
+        scene, lambda *a: None, managed_user_events={"user1", "user2"}
+    )
+    runtime.advance(0)
+    initial_id, text = runtime.user_inputs.pop(0)
+    runtime.delivered("user", text, event_id=initial_id)
+    assert runtime.records[-1].source == "scenario_stage"
+    assert runtime.records[-1].purpose == "stage_request"
+    controller = ScenarioStages(scene)
+    controller.delivered("user0", runtime, 0, complete=True)
+    controller.stop(UserMessage(role="user", content="###STOP###"), runtime, 1)
+    queued = []
+    controller.release(
+        SimpleNamespace(
+            scenario_transition_pending=False,
+            queue_scenario_input=lambda *args: queued.append(args),
+        ),
+        runtime,
+        2,
+    )
+    runtime.delivered("user", "Request 1", event_id="user1")
+    record = runtime.records[-1]
+    assert queued == [("user1", "Request 1")]
+    assert record.source == "scenario_stage"
+    assert record.purpose == "stage_request"
+
+    # Re-delivery after an interruption retains provenance without a new queue.
+    retry = controller.interrupted("user1", runtime, 3)
+    runtime.delivered("user", retry.arguments["content"], event_id=retry.id)
+    assert runtime.records[-1].source == "scenario_stage"
+    assert runtime.records[-1].purpose == "stage_request"
+
+
+def test_stage_clarifications_and_variant_requests_keep_their_own_sources():
+    scene = spec()
+    clarification = ScenarioAction(
+        id="clarification",
+        kind="user",
+        tool="user",
+        arguments={"content": "Use the first option"},
+        dependencies=["user0"],
+    )
+    extra = clarification.model_copy(update={"id": "extra"})
+    # Global event order need not match the stage's request order.
+    scene.events = [clarification, extra, *scene.events]
+    scene.stages[0].event_ids.extend([clarification.id, extra.id])
+    runtime = ScenarioRuntime(
+        scene, lambda *a: None, managed_user_events={"user1", "user2", "extra"}
+    )
+    runtime.advance(0)
+    runtime.delivered("user", "Request 0", event_id="user0")
+    runtime.delivered("user", "Use the first option", event_id="clarification")
+    assert runtime.records[-1].source == "scenario"
+    assert runtime.records[-1].purpose == "scripted_request"
+    runtime.queue_user_input(
+        "extra", "Another task", source="interaction_variant", purpose="followup"
+    )
+    runtime.delivered("user", "Another task", event_id="extra")
+    assert runtime.records[-1].source == "interaction_variant"
+    assert runtime.records[-1].purpose == "followup"
+
+
 def test_out_of_scope_is_terminal_only_after_the_last_stage():
     scene = spec()
     runtime = ScenarioRuntime(scene, lambda *a: None)
@@ -177,6 +241,10 @@ def test_voice_three_stops_preserve_session_and_deliver_each_request_once():
     assert all(row["completed"] for row in summary["stages"])
     assert [len(row["stops"]) for row in summary["stages"]] == [1, 1, 1]
     assert not any(key.startswith("ref") for key in runtime.completed)
+    delivered = [row for row in result.environment_trace if row["kind"] == "user"]
+    assert [row["event_id"] for row in delivered] == ["user0", "user1", "user2"]
+    assert all(row["source"] == "scenario_stage" for row in delivered)
+    assert all(row["purpose"] == "stage_request" for row in delivered)
 
 
 def test_joint_communication_uses_playback_time_even_when_asr_returns_late():

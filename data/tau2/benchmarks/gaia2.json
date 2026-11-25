@@ -1,7 +1,7 @@
 {
   "schema_version": "gaia2-benchmark-v1",
   "benchmark_version": "gaia2-v1",
-  "revision": "gaia2-release-v2-english-runtime",
+  "revision": "gaia2-release-v3-reference-status",
   "domain": "gaia2",
   "modes": [
     "text",
@@ -2235,6 +2235,55 @@
     },
     "language": [
       "en"
-    ]
+    ],
+    "reference_data": {
+      "active_revision": "gaia2-release-v2-english-runtime",
+      "candidate_revision": "gaia2-reference-repair-simple-v1-candidate",
+      "candidate_status": "candidate_not_activated",
+      "candidate_root": "data/archives/gaia2/reference-repair-simple-v1",
+      "candidate_sources": {
+        "main": {
+          "file": "repaired-tasks.json",
+          "sha256": "5b61866338bc02105ea9b365738a496a6a0ddbe4397138022316b52a9731fc48",
+          "canonical_sha256": "1768753df5488ba87764188276b9940cf983854aef8075641b4c2c5e398064a6"
+        },
+        "interaction_variants": {
+          "file": "repaired-interaction-variants.json",
+          "sha256": "7475bc190f40e02b20b0786468de4bcfda15bdbbb35be6bdc9bd13005f1f3a85",
+          "canonical_sha256": "d9adcb6b3b36054fa64200d4441738e4b6e545f8dbb27bd8c0fe23011f7dd3bf"
+        }
+      },
+      "source_match": {
+        "prepared_main_canonical_sha256": "2e9aff105f53511ee0d7830bbdf64e5b3fa82023cb294697b2900ab0e2a1ef46",
+        "prepared_variants_canonical_sha256": "659e13a232a02f547fe38e8524fdbb6e532f94fecf0b6bf01c525543835d9209",
+        "task_records_equal": 1000,
+        "variant_records_equal": 200,
+        "conflicts": 0
+      },
+      "repair_outcomes": {
+        "tasks_selected": 1200,
+        "changed": 1131,
+        "unchanged": 2,
+        "unresolved": 67,
+        "failed": 0
+      },
+      "validation": {
+        "structure_report": "data/archives/gaia2/reference-repair-simple-v1/validation-report.json",
+        "variant_views_constructed": 200,
+        "offline_reference_samples": 6,
+        "offline_reference_samples_passed": 6,
+        "full_reference_seal": false
+      },
+      "hidden_source": {
+        "source_tasks_sha256": "f2e9ada85eef24333cd71b07bd0be69c6f18d9e9dbb3e38ac7e65de9ec64d0e8",
+        "adopts_candidate": false
+      },
+      "pending": [
+        "Resolve or explicitly disposition the 67 unresolved task records in the offline repair workflow",
+        "Run the existing reference verification/seal process for the adopted data and runtime before activation"
+      ],
+      "notes": "Archived repair manifest source_* hashes describe canonical repaired outputs; prepare-summary hashes describe inputs. Active source bytes, collection membership/status and prior seals are unchanged.",
+      "report": "docs/gaia2-reference-finalization-report.md"
+    }
   }
 }

@@ -1,1 +1,1 @@
-"""Evaluate an unmodified Qwen Audio Agent Gateway and Qwen Code backend."""
+"""Compatibility package; Qwen implementation is in tau2.adapters.qwen_audio_agent."""

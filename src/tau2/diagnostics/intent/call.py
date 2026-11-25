@@ -89,6 +89,8 @@ def combined_sources(evidence):
                 "source_id": row.id,
                 "request_id": row.event_id,
                 "request_relation": relations.get(row.event_id),
+                "source": row.source,
+                "purpose": row.purpose,
                 "role": row.role,
                 "stage": row.stage,
                 "started": row.started,

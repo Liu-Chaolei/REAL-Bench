@@ -18,6 +18,8 @@ class UserInput(EvidenceModel):
     ended: float
     stage: int | None = None
     event_id: str | None = None
+    source: str | None = None
+    purpose: str | None = None
     complete: bool = True
     role: Literal["user", "assistant_context"] = "user"
     unavailable_reason: str | None = None
@@ -53,7 +55,7 @@ class OperationEvidence(EvidenceModel):
 
 
 class DiagnosticEvidence(EvidenceModel):
-    version: str = "tau-diagnostic-evidence/1"
+    version: str = "tau-diagnostic-evidence/2"
     simulation_id: str
     task_id: str
     domain: str
