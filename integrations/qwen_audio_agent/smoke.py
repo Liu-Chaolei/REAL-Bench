@@ -169,9 +169,9 @@ def main():
     env["TAU2_NL_ASSERTIONS_REASONING_EFFORT"] = judge_model_args.get(
         "reasoning_effort", "low"
     )
-    from tau2.utils.utils import DATA_DIR
+    from tau2.utils.utils import RESULTS_DIR
 
-    output = DATA_DIR / "simulations" / args.save_to
+    output = RESULTS_DIR / args.save_to
     if (output / "results.json").exists() and not args.dry_run and not args.resume:
         raise ValueError(
             "Choose a new save-to name to preserve previous smoke attempts"
@@ -310,9 +310,9 @@ def main():
             print(line, end="", flush=True)
         code = process.wait()
     if code == 0 and not args.dry_run:
-        from tau2.utils.utils import DATA_DIR
+        from tau2.utils.utils import RESULTS_DIR
 
-        result_file = DATA_DIR / "simulations" / args.save_to / "results.json"
+        result_file = RESULTS_DIR / args.save_to / "results.json"
         if not result_file.exists():
             raise RuntimeError("Smoke run did not produce results")
         index = json.loads(result_file.read_text()).get("simulation_index", [])
@@ -331,7 +331,7 @@ def main():
 def run_shared(args, config):
     """Launch shared API roles without putting any credentials on argv."""
     from tau2.utils.api_config import get_api_configuration
-    from tau2.utils.utils import DATA_DIR
+    from tau2.utils.utils import RESULTS_DIR
 
     here = Path(__file__).resolve().parent
     directory = config.api_config_dir
@@ -341,7 +341,7 @@ def run_shared(args, config):
     config.user_llm_settings()
     agent_api.agent_environment()
     api.text("USER" if args.judge_from_user_llm else "REPLY_JUDGE")
-    output = DATA_DIR / "simulations" / args.save_to
+    output = RESULTS_DIR / args.save_to
     if (output / "results.json").exists() and not args.dry_run and not args.resume:
         raise ValueError("Choose a new save-to name to preserve previous attempts")
     output.mkdir(parents=True, exist_ok=True)

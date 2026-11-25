@@ -433,6 +433,10 @@ class DiscreteTimeAdapter(ABC):
                     data=base64.b64decode(row["audio"]), format=self.playback_audio_format
                 )
             ).data
+            # Provider chunks must contain complete PCM16 samples before RMS
+            # framing. A malformed trailing byte cannot define speech time.
+            if len(pcm) % 2:
+                pcm = pcm[:-1]
             if self.playback_audio_format.channels == 2:
                 import audioop
 

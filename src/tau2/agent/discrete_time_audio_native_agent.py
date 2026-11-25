@@ -640,6 +640,38 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
             silence_byte = b"\x00\x00"
         return silence_byte * (self.bytes_per_tick // len(silence_byte))
 
+    def _get_output_audio_format(self) -> AudioFormat:
+        """Return the format used by the Agent playback channel."""
+        if self._adapter is not None:
+            playback = getattr(self._adapter, "playback_audio_format", None)
+            if isinstance(playback, AudioFormat):
+                return playback
+        if (
+            self.provider == "qwen_agent"
+            and self.qwen_agent_config is not None
+            and self.qwen_agent_config.asr_model
+            == "qwen-audio-3.1-asr-flash-streaming"
+        ):
+            return AudioFormat(
+                encoding=AudioEncoding.PCM_S16LE,
+                sample_rate=self.qwen_agent_config.playback_sample_rate,
+            )
+        return self.audio_format
+
+    def _get_output_silence(self) -> bytes:
+        """Generate one tick of silence in the Agent playback format."""
+        fmt = self._get_output_audio_format()
+        if fmt.encoding == AudioEncoding.ULAW:
+            value = b"\x7f"
+        elif fmt.encoding == AudioEncoding.ALAW:
+            value = b"\xd5"
+        elif fmt.encoding == AudioEncoding.PCM_U8:
+            value = b"\x80"
+        else:
+            value = b"\0" * fmt.sample_width
+        size = int(fmt.bytes_per_second * self.tick_duration_ms / 1000)
+        return value * (size // len(value))
+
     def _extract_user_audio(self, chunk: ValidAgentInputMessage) -> bytes:
         """Extract audio bytes from user message.
 
@@ -786,21 +818,14 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
     def _create_empty_response(self) -> AssistantMessage:
         """Create empty response for error cases."""
         # Text-mode message with silence audio (for time alignment)
-        # Use appropriate silence value based on encoding
-        if self.audio_format.encoding == AudioEncoding.ULAW:
-            silence_byte = b"\x7f"  # μ-law silence
-        elif self.audio_format.encoding == AudioEncoding.ALAW:
-            silence_byte = b"\xd5"  # A-law silence
-        else:
-            # PCM16: 2 bytes of zeros per sample
-            silence_byte = b"\x00\x00"
-        silence = silence_byte * (self.bytes_per_tick // len(silence_byte))
+        output_format = self._get_output_audio_format()
+        silence = self._get_output_silence()
         message = AssistantMessage(
             role="assistant",
             content=None,
             is_audio=False,
             audio_content=base64.b64encode(silence).decode("utf-8"),
-            audio_format=self.audio_format,
+            audio_format=output_format,
             timestamp=get_now(),
             chunk_id=0,
             is_final_chunk=True,
@@ -836,7 +861,8 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
             AssistantMessage with text content and silence audio.
         """
         # Generate silence audio for one tick
-        silence = self._get_silence()
+        output_format = self._get_output_audio_format()
+        silence = self._get_output_silence()
         if self.provider == "qwen_agent":
             # An external system has not spoken merely because the harness
             # created its first tick. Let the real voice conversation open.
@@ -846,7 +872,7 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
             content=content,
             is_audio=False,
             audio_content=base64.b64encode(silence).decode("utf-8"),
-            audio_format=self.audio_format,
+            audio_format=output_format,
             timestamp=get_now(),
             chunk_id=0,
             is_final_chunk=True,
