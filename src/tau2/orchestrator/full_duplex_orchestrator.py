@@ -28,7 +28,11 @@ from tau2.data_model.tasks import Task
 from tau2.environment.environment import Environment
 from tau2.orchestrator.modes import CommunicationMode
 from tau2.orchestrator.orchestrator import DEFAULT_FIRST_AGENT_MESSAGE, BaseOrchestrator
-from tau2.orchestrator.watchdog import WatchdogController, compact_watchdog_context
+from tau2.orchestrator.watchdog import (
+    WatchdogController,
+    WatchdogVerdict,
+    compact_watchdog_context,
+)
 from tau2.user.user_simulator import UserSimulator
 from tau2.user.user_simulator_base import FullDuplexUser, UserError
 from tau2.utils.llm_utils import get_cost
@@ -209,28 +213,62 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
 
     def _watchdog_context(self) -> str:
         scenario = self.task.scenario
+        series = self.scenario_stages
+        stage = None
         task_text = (
-            scenario.stages[0].request
+            scenario.stages[series.current if series is not None else 0].request
             if scenario is not None and scenario.stages
             else str(self.task.description or "")
         )
+        if scenario is not None and scenario.stages:
+            current = series.current if series is not None else 0
+            stage = {
+                "current_stage": scenario.stages[current].stage,
+                "total_stages": len(scenario.stages),
+                "transition_pending": bool(series and series.transition_pending),
+                "awaiting_delivery": bool(series and series.awaiting_delivery),
+            }
+        runtime = getattr(self.environment, "scenario_runtime", None)
+        trace = (
+            [record.model_dump(mode="json") for record in runtime.records]
+            if runtime is not None
+            else getattr(self.environment, "trace", [])
+        )
+        executor = self._tool_executor
         return compact_watchdog_context(
             task_text=task_text,
             ticks=self.ticks,
-            environment_trace=getattr(self.environment, "trace", []),
+            environment_trace=trace,
             pending={
                 "heartbeat_stale": self.watchdog.stale,
-                "heartbeat_age_seconds": time.monotonic() - self.watchdog.last_heartbeat,
+                "heartbeat_age_seconds": time.monotonic()
+                - self.watchdog.last_heartbeat,
                 "heartbeat_timeout_seconds": self.watchdog.config.heartbeat_timeout_seconds,
                 "phase": self.watchdog.last_phase,
                 "phase_age_seconds": time.monotonic() - self.watchdog.phase_started,
-                "agent_has_pending_output": bool(getattr(self.agent, "has_pending_output", False)),
-                "user_speech_active": bool(self.current_user_chunk and is_speaking(self.current_user_chunk)),
-                "agent_speech_active": bool(self.current_agent_chunk and is_speaking(self.current_agent_chunk)),
-                "termination_reason": self.termination_reason.value,
+                "agent_has_pending_output": bool(
+                    getattr(self.agent, "has_pending_output", False)
+                ),
+                "user_speech_active": bool(
+                    self.current_user_chunk and is_speaking(self.current_user_chunk)
+                ),
+                "agent_speech_active": bool(
+                    self.current_agent_chunk and is_speaking(self.current_agent_chunk)
+                ),
+                "termination_reason": (
+                    self.termination_reason.value
+                    if self.termination_reason is not None
+                    else None
+                ),
+                "tool_executor_pending": list(executor.pending) if executor else [],
+                "pending_agent_tool_results": bool(self.pending_agent_tool_results),
+                "pending_user_tool_results": bool(self.pending_user_tool_results),
+                "scenario_user_input": self._scenario_user_input,
             },
             context_ticks=self.watchdog.config.context_ticks,
-            current_time=get_now(),
+            current_time=runtime.time() if runtime is not None else get_now(),
+            wall_time=get_now(),
+            stage=stage,
         )
 
     def _run_watchdog_checkpoint(self) -> None:
@@ -241,7 +279,17 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             self.done = True
             self.termination_reason = TerminationReason.WATCHDOG_STALL
             return
-        verdict = self.watchdog.judge(self._watchdog_context())
+        try:
+            verdict = self.watchdog.judge(self._watchdog_context())
+        except Exception as error:
+            # An optional inspection must not discard the simulation evidence.
+            logger.warning("Watchdog checkpoint unavailable: {}", type(error).__name__)
+            verdict = WatchdogVerdict(
+                decision="uncertain",
+                state="unknown",
+                confidence=0.0,
+                reason=f"Watchdog checkpoint unavailable: {type(error).__name__}",
+            )
         action = verdict.decision
         if verdict.decision == "stop_and_evaluate":
             self.done = True
@@ -249,7 +297,9 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             action = "stop_and_evaluate"
         self.watchdog.record(self.step_count, verdict, action)
         interval = self.watchdog.config.check_interval_ticks
-        self._watchdog_next_check = min(self.step_count + interval, cap) if cap else self.step_count + interval
+        self._watchdog_next_check = (
+            min(self.step_count + interval, cap) if cap else self.step_count + interval
+        )
 
     def _validate_mode_compatibility(self):
         """Validate that agent and user support full-duplex streaming."""
@@ -962,7 +1012,10 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
 
         Checks max_steps, max_errors, and timeout after each tick.
         """
+        if self.done:
+            return
         if self.max_steps is not None and self.step_count >= self.max_steps:
+            extend_reply = False
             runtime = getattr(
                 getattr(self, "environment", None), "scenario_runtime", None
             )
@@ -970,12 +1023,17 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
                 for manager in self._runtime_managers():
                     if manager.should_extend_reply(runtime.time()):
                         manager.consume_reply_step(runtime.time())
-                        return
-            self.done = True
-            self.termination_reason = TerminationReason.MAX_STEPS
+                        extend_reply = True
+                        break
+            if not extend_reply:
+                self.done = True
+                self.termination_reason = TerminationReason.MAX_STEPS
         if self.num_errors >= self.max_errors:
             self.done = True
             self.termination_reason = TerminationReason.TOO_MANY_ERRORS
+        self._check_timeout()
+        if self.done:
+            return
         if self.watchdog is not None and self.watchdog.config.enabled:
             self.watchdog.heartbeat(self.step_count, "termination_check")
             if self._watchdog_stall_requested:
