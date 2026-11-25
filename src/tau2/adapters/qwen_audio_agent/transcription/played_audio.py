@@ -262,7 +262,10 @@ class SegmentedPlayedAudioTranscriber:
         padding = self.config.asr_recheck_context_seconds * 1000
         start = max(0, matched[0]["start_ms"] - padding)
         end = min(known[-1]["end_ms"], matched[-1]["end_ms"] + padding, self.sent_ms)
-        oldest = self.sent_ms - len(self._played_pcm) / 16
+        bytes_per_ms = (
+            getattr(self, "played_sample_rate", DEFAULT_TELEPHONY_RATE) * 2 / 1000
+        )
+        oldest = self.sent_ms - len(self._played_pcm) / bytes_per_ms
         result = {
             "fragment_ids": list(key),
             "start_ms": start,
@@ -278,7 +281,9 @@ class SegmentedPlayedAudioTranscriber:
         ):
             pcm = bytes(
                 self._played_pcm[
-                    round((start - oldest) * 16) : round((end - oldest) * 16)
+                    round((start - oldest) * bytes_per_ms) : round(
+                        (end - oldest) * bytes_per_ms
+                    )
                 ]
             )
             result["audio_sha256"] = hashlib.sha256(pcm).hexdigest()
