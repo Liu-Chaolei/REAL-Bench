@@ -22,7 +22,7 @@ QWEN_CODE_API_KEY、QWEN_CODE_API_BASE 和 QWEN_CODE_MODEL。
 当前运行使用 Qwen 音频模型。共享配置中的 `qw.env` 选择原生 DashScope Qwen
 Audio 前端，`realbench.env` 选择 Qwen 观察 ASR 与用户 TTS。使用
 `integrations/qwen_audio_agent/config.gaia2.unified.json`；旧 deepseek 启动示例也
-读取这一共享配置，不再启动 MiMo Speech-to-Speech 前端。不要在示例或结果里保存密钥。
+读取这一共享配置，不再启动历史 Speech-to-Speech 前端。不要在示例或结果里保存密钥。
 
 ## 新配置归属
 

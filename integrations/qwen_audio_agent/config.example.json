@@ -1,5 +1,5 @@
 {
-  "image": "docker.v2.aispeech.com/sjtu/sjtu_yukai-tau-qwen-agent:0.3.1",
+  "image": "docker.v2.aispeech.com/sjtu/sjtu_yukai-tau-qwen-agent:0.5.4-scenario-clock",
   "environment": {
     "OPENAI_API_KEY": "GAIA2_BACKEND_API_KEY",
     "OPENAI_BASE_URL": "GAIA2_BACKEND_API_BASE",
@@ -9,24 +9,30 @@
   "boot_timeout_seconds": 120,
   "tool_timeout_seconds": 120,
   "max_buffer_seconds": 1200,
-  "asr_model": "mimo-v2.5-asr",
-  "asr_api_key_env": "MIMO_API_KEY",
+  "asr_model": "qwen-audio-3.1-asr-flash",
+  "asr_api_key_env": "QWEN_API_KEY",
   "config_env_file": "/hpc_stor03/sjtu_home/chaolei.liu/.config/qwaudio/config.env",
-  "asr_provider": "mimo",
+  "asr_provider": "qwen",
   "tts": {
-    "model_id": "mimo-v2.5-tts",
-    "api_key_env": "MIMO_API_KEY",
+    "model_id": "qwen-audio-3.1-tts-flash",
+    "base_url": "https://dashscope.aliyuncs.com",
+    "api_key_env": "QWEN_API_KEY",
     "voices": {
-      "gaia2_male": "Dean",
-      "gaia2_female": "Chloe"
-    }
+      "gaia2_male": "loongbella_v3.1",
+      "gaia2_female": "loongbella_v3.1"
+    },
+    "voice_id": "loongbella_v3.1",
+    "language_code": "en",
+    "sample_rate": 16000
   },
   "asr_hotwords": {
     "enabled": false,
     "weight": 4,
     "max_terms": 2000
   },
-  "user_llm_api_key_env": "MIMO_API_KEY",
-  "user_llm_base_url_env": "MIMO_BASE_URL",
-  "user_llm_model_env": "MIMO_MODEL"
+  "user_llm_api_key_env": "DEEPSEEK_API_KEY",
+  "user_llm_base_url_env": "DEEPSEEK_BASE_URL",
+  "user_llm_model_env": "DEEPSEEK_MODEL",
+  "asr_base_url": "https://dashscope.aliyuncs.com",
+  "playback_sample_rate": 24000
 }

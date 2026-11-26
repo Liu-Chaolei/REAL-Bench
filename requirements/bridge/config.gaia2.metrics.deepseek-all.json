@@ -6,31 +6,23 @@
     "OPENAI_BASE_URL": "DEEPSEEK_BASE_URL",
     "OPENAI_MODEL": "DEEPSEEK_MODEL"
   },
-  "speech_to_speech": {
-    "llm_api_key_env": "DEEPSEEK_API_KEY",
-    "llm_base_url_env": "DEEPSEEK_BASE_URL",
-    "llm_model_env": "DEEPSEEK_MODEL",
-    "mimo_api_key_env": "MIMO_API_KEY",
-    "asr_model": "mimo-v2.5-asr",
-    "tts_model": "mimo-v2.5-tts",
-    "voice": "Dean",
-    "language": "en",
-    "llm_api": "responses-api",
-    "reasoning_effort": "low"
-  },
   "boot_timeout_seconds": 180,
   "tool_timeout_seconds": 120,
   "max_buffer_seconds": 1200,
-  "asr_provider": "mimo",
-  "asr_model": "mimo-v2.5-asr",
-  "asr_api_key_env": "MIMO_API_KEY",
+  "asr_provider": "qwen",
+  "asr_model": "qwen-audio-3.1-asr-flash",
+  "asr_api_key_env": "QWEN_API_KEY",
   "tts": {
-    "model_id": "mimo-v2.5-tts",
-    "api_key_env": "MIMO_API_KEY",
+    "model_id": "qwen-audio-3.1-tts-flash",
+    "base_url": "https://dashscope.aliyuncs.com",
+    "api_key_env": "QWEN_API_KEY",
     "voices": {
-      "mamadou_diallo": "Dean",
-      "priya_patil": "Chloe"
-    }
+      "mamadou_diallo": "loongbella_v3.1",
+      "priya_patil": "loongbella_v3.1"
+    },
+    "voice_id": "loongbella_v3.1",
+    "language_code": "en",
+    "sample_rate": 16000
   },
   "asr_hotwords": {
     "enabled": false,
@@ -39,5 +31,7 @@
   },
   "user_llm_api_key_env": "DEEPSEEK_API_KEY",
   "user_llm_base_url_env": "DEEPSEEK_BASE_URL",
-  "user_llm_model_env": "DEEPSEEK_MODEL"
+  "user_llm_model_env": "DEEPSEEK_MODEL",
+  "asr_base_url": "https://dashscope.aliyuncs.com",
+  "playback_sample_rate": 24000
 }

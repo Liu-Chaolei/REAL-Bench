@@ -134,22 +134,15 @@ user turn scheduling issue, is documented in
 The `v1.2` evaluator scheduling fix and its one-task acceptance result are in
 [TURN_TAKING_FIX_RESULTS.md](TURN_TAKING_FIX_RESULTS.md).
 
-Use `config.speech-to-speech.example.json` to evaluate the complete Agent with
-**MiMo ASR → MiMo LLM → MiMo TTS**. The frontend reads `MIMO_API_KEY`,
-`MIMO_BASE_URL` and `MIMO_MODEL` from the same private dotenv file. The current
-frontend model is `mimo-v2.6-pro`, using Responses streaming. The simulated caller
-uses the same profile through Chat Completions, including its behavior-decision
-model. `smoke.py` defaults to this speech-to-speech configuration and keeps caller
-credentials separate from judge credentials. The configs store only environment
-references via `user_llm_api_key_env`, `user_llm_base_url_env` and
-`user_llm_model_env`; resolved secrets are not added to the generated Agent config.
-The native Qwen Code backend separately retains `GAIA2_BACKEND_*` (MiniMax).
-Frontend and evaluation-side observer ASR both use `mimo-v2.5-asr` in the
-supplied configurations. Automatic listener hotwords are currently disabled;
-the optional Qwen listener implementation and its A/B evidence remain documented
-in [USER_ASR_HOTWORDS.md](USER_ASR_HOTWORDS.md).
+The current default path uses the native Qwen Audio frontend and Qwen models for
+caller TTS and played-audio observer ASR. The native Qwen Code backend keeps its
+separate `GAIA2_BACKEND_*` connection. `config.speech-to-speech.example.json` is
+retained as a historical optional frontend profile; it is not used by the default
+Qwen smoke path. Automatic listener hotwords are currently disabled; the optional
+Qwen listener implementation and its A/B evidence remain documented in
+[USER_ASR_HOTWORDS.md](USER_ASR_HOTWORDS.md).
 
-The supplied speech and Gaia2 configurations use MiMo directly. Optional
+The supplied speech and Gaia2 configurations use Qwen directly. Optional
 `llm_fallback_api_key_env` and `llm_fallback_base_url_env` remain available for
 a compatible backup using the same model.
 HTTP, connection, timeout and streamed provider errors switch the current request
@@ -163,30 +156,12 @@ their separate configuration. Image `0.5.1` or newer is required. Custom speech
 configurations enable it with `llm_fallback_api_key_env` and
 `llm_fallback_base_url_env`; omitting both retains a single endpoint.
 
-```bash
-integrations/qwen_audio_agent/run_hpc.sh smoke \
-  --config integrations/qwen_audio_agent/config.speech-to-speech.example.json \
-  --task-ids 0 1 2 --max-seconds 0 --save-to qwen-s2s-three
-```
-
-The optional `speech_to_speech` block launches stock Hugging Face
-`speech-to-speech==1.1.0` and a local audio translation service inside each
-trial's existing filesystem boundary. Both are ready before the native Gateway
-connects, listen on container loopback, and stop with that trial. No extra host
-mount or persistent service is needed. Frontend tools, delegation, permissions
-and MCP results follow the native Gateway paths. The upstream package is not
-patched and no tau package, task collection or evaluation database is installed
-in the image.
-
-The selected frontend uses Responses API streaming with reasoning `low`.
-Frontend ASR uses `mimo-v2.5-asr`, TTS uses
-`mimo-v2.5-tts` with voice `Dean`. Frontend ASR receives completed utterances as
-24 kHz WAV. The optional Qwen frontend implementation remains available to custom
-configurations; the supplied configurations select MiMo for the Agent.
-TTS synthesizes one sentence at a time and returns PCM audio; cancellation
-closes the pending local/provider request and the stock pipeline discards stale
-audio. Uploading audio is not a streaming ASR API, and real synthesis/recognition
-latency is included in the call.
+The historical `speech_to_speech` profile remains available for compatibility,
+but is not part of the current Qwen Audio Agent path. Current runs use the native
+Qwen Audio frontend and Qwen ASR/TTS directly. The frontend receives PCM audio at
+the negotiated Qwen rate; the current bridge reports 16 kHz input and 24 kHz
+playback. Cancellation and played-audio observation remain owned by the Qwen
+adapter.
 
 The existing top-level `tts` and `asr_*` settings still describe the evaluator's
 caller voice and played-audio observer. They are independent of the Agent's new
@@ -227,32 +202,32 @@ Supported automatic aliases:
 | Backend model | `QWEN_CODE_MODEL`, `GAIA2_BACKEND_MODEL`, `OPENAI_MODEL` |
 | Backend reasoning | `QWEN_CODE_REASONING_EFFORT`, `GAIA2_BACKEND_REASONING_EFFORT` |
 
-The configured frontend is `qwen-audio-3.0-realtime-plus`/DashScope; the backend
+The configured frontend is `qwen-audio-3.1-realtime-flash`/DashScope; the backend
 is Qwen Code `0.26.0` using `MiniMax-M3` with reasoning effort `low`. An `openai/`
 routing prefix is removed from an explicitly mapped model name. Reasoning uses
 native generation settings and the compatible endpoint's `reasoning_effort`
 request parameter; the complete-system contract checks the actual request.
 
-The supplied configuration selects **MiMo caller TTS and MiMo listener ASR**:
+The supplied configuration selects **Qwen caller TTS and Qwen listener ASR**:
 
-- Caller TTS: `mimo-v2.5-tts`, using `MIMO_API_KEY` from that same private file.
-  English voices are `Dean` and `Chloe`, selected by persona; no ElevenLabs voice
-  IDs are needed. The exact caller text is synthesized without text optimization.
+- Caller TTS: `qwen-audio-3.1-tts-flash`, using the Qwen/DashScope credential in
+  the shared private file. The exact caller text is synthesized without text
+  optimization.
 - Observer ASR: `qwen-audio-3.1-asr-flash`, using `DASHSCOPE_API_KEY3` and the
   configured DashScope regional host. It consumes only actually played Agent
   audio, normalized to 16 kHz WAV. Per-task hotwords are prepared before the
   conversation starts. Recognition uses the shared asynchronous segment and
   bounded-review lifecycle (4 s maximum or 0.6 s trailing silence), with measured
   segment timestamps. Actual vocabulary, provider usage and release latency are
-  saved in provenance. Legacy MiMo/Deepgram observer configurations remain valid.
+  saved in provenance. The active observer configuration is Qwen-only.
 - Native Agent credentials: the example explicitly selects `DASHSCOPE_API_KEY3`
   for Qwen Realtime. Backend variable references stay pinned to
   `GAIA2_BACKEND_*`, separating them from evaluator credentials.
 
-In the Realtime configuration, MiMo keys remain on the evaluator side. The
-Speech-to-Speech configuration additionally supplies a MiMo key to its Agent
-frontend. The generic defaults retain ElevenLabs/Deepgram for other runs; this
-custom integration selects MiMo through `tts` and `asr_provider` settings.
+In the Realtime configuration, Qwen keys remain on the evaluator side. The
+legacy Speech-to-Speech configuration may contain its historical provider
+settings, but the current custom integration selects Qwen through `tts` and
+`asr_provider` settings.
 
 The simulated caller waits at least 30 seconds of silence before starting an
 unsolicited check-in. Fresh Agent speech or text, initial requests and tool replies
@@ -267,7 +242,7 @@ Known facts and released scenario inputs are authoritative; Agent statements do
 not authorize changed prices, quantities or invented deadlines. Recovery attempts
 and costs are retained in `candidate_recovery` diagnostics and task logs.
 
-The MiMo observer can review already-heard audio on a grounding conflict involving
+The Qwen observer can review already-heard audio on a grounding conflict involving
 price, quantity, time or negation. `asr_recheck_enabled` defaults to true. Its bounded
 playback buffer defaults to 60 seconds; review audio is at most 20 seconds, with
 up to 2 seconds of context and a 15-second timeout. The snapshot's last heard
@@ -294,11 +269,9 @@ nonsecret model settings. For MiniMax's initial customer request, the final role
 reminder becomes the required conversational input; its text and all task
 instructions stay identical. Other model requests retain their existing roles.
 Missing provider prices in LiteLLM mean printed cost totals are not billing
-estimates for MiniMax/MiMo.
+estimates for MiniMax or Qwen.
 
-Official API references:
-[MiMo TTS](https://mimo.mi.com/static/docs/api/audio/tts.md) and
-[MiMo ASR](https://mimo.mi.com/static/docs/api/audio/Speech-Recognition.md), plus
+Official API reference:
 [Qwen ASR HTTP](https://help.aliyun.com/zh/model-studio/fun-asr-flash-recorded-speech-recognition-http-api).
 
 The launcher uses the original ACP backend constructor's `builtinMcp` parameter
@@ -326,7 +299,7 @@ caller TTS and μ-law transport path is rejected by the Qwen adapter.
 Use `--dry-run` for a preview, `--num-tasks 1` for one call, or `--task-ids 0 1 2`
 for explicit tasks. Each call uses a fresh isolated Agent. The helper retains
 recordings, played-audio transcripts, bridge traces, tool trajectories and scores
-under `data/simulations/qwen-mimo-smoke-<timestamp>/`. It exits nonzero for
+under `data/simulations/qwen-smoke-<timestamp>/`. It exits nonzero for
 infrastructure errors, preserves every attempt and refuses to overwrite results.
 The helper defaults to `--max-seconds 1200`, which is 6000 simulation ticks at
 the 0.2-second tick size. This gives Gaia2 dynamic follow-ups enough simulated
@@ -347,7 +320,7 @@ the checkpoint and skipped; unfinished pairs start fresh isolated calls. This
 resumes the batch, not an interrupted voice conversation.
 
 For ordinary CLI use, `run_hpc.sh run` accepts all tau arguments. The JSON config
-contains the MiMo choices; configure evaluator LLM credentials separately or use
+contains the Qwen choices; configure evaluator LLM credentials separately or use
 the smoke helper to load the existing judge service privately. Repeat the same
 selected tasks and seed when comparing speech conditions.
 

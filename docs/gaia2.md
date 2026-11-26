@@ -159,8 +159,8 @@ python integrations/qwen_audio_agent/build_image.py /path/to/qwen-audio-agent \
 ```
 
 Use `integrations/qwen_audio_agent/config.gaia2.example.json` as the configuration
-template. It uses the same MiMo ASR → configured MiniMax frontend → MiMo TTS
-pipeline and native Qwen Code backend as the retail integration. The image must
+template. It uses the Qwen ASR/TTS models, the configured Qwen Audio frontend and
+the native Qwen Code backend as the retail integration. The image must
 declare the `gaia2` domain capability; historical retail images remain usable for
 retail. Credentials stay environment-variable references.
 

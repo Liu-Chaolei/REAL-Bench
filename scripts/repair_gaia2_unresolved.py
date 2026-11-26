@@ -693,9 +693,21 @@ def run_v2(
     config,
     limit: int | None,
     offline: bool,
+    evidence_root: Path | None = None,
+    batch_start: int = 0,
+    batch_size: int | None = None,
 ) -> dict[str, Any]:
     task_map, variant_map = load_v1(v1_root)
     packages = [read_json(path) for path in sorted((out / "inputs").glob("*.json"))]
+    if evidence_root is not None:
+        for package in packages:
+            evidence_path = evidence_root / "source-evidence" / f"{package['task_id']}.json"
+            if evidence_path.exists():
+                package["source_evidence"] = read_json(evidence_path)
+    if batch_start:
+        packages = packages[batch_start:]
+    if batch_size is not None:
+        packages = packages[:batch_size]
     if limit is not None:
         packages = packages[:limit]
     model = DirectModel(config, out / "requests")
@@ -715,6 +727,7 @@ def run_v2(
                 "relevant_events": package["relevant_events"],
                 "relevant_stages": package["relevant_stages"],
                 "evidence": package["evidence"],
+                "source_evidence": package.get("source_evidence"),
             }
         )
         response_path = responses_dir / f"{package['task_id']}.json"
@@ -921,6 +934,9 @@ def main() -> None:
     parser.add_argument("--env-file", type=Path)
     parser.add_argument("--limit", type=int)
     parser.add_argument("--concurrency", type=int)
+    parser.add_argument("--evidence-root", type=Path)
+    parser.add_argument("--batch-start", type=int, default=0)
+    parser.add_argument("--batch-size", type=int)
     parser.add_argument("--offline", action="store_true")
     args = parser.parse_args()
     if args.env_file:
@@ -963,6 +979,9 @@ def main() -> None:
                     config=config,
                     limit=args.limit,
                     offline=args.offline,
+                    evidence_root=args.evidence_root,
+                    batch_start=args.batch_start,
+                    batch_size=args.batch_size,
                 ),
                 ensure_ascii=False,
             )
