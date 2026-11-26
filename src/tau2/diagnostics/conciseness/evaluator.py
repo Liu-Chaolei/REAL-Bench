@@ -1,6 +1,7 @@
 """Independent two-stage feedback evaluation over sealed delivered evidence."""
 
 import json
+import time
 import unicodedata
 from pathlib import Path
 
@@ -205,6 +206,8 @@ def evaluate_feedback(evidence, config, directory, output, budget, language=None
         write_json(target / "window.json", window)
         result = {k: window.get(k) for k in ("id", "stage", "status", "reason")}
         result["response_length"] = response_length(window.get("replies", []))
+        result["stage_timing"] = {}
+        result["cache"] = {"nuggets": False, "alignment": False}
         if window["status"] != "ready":
             results.append(result)
             continue
@@ -222,11 +225,13 @@ def evaluate_feedback(evidence, config, directory, output, budget, language=None
         )
         frozen_path = cache / "nuggets" / (key + ".json")
         try:
+            nuggets_started = time.perf_counter()
 
             def validator(raw):
                 return validate_inventory(raw, window["sources"])
 
             if frozen_path.exists():
+                result["cache"]["nuggets"] = True
                 frozen = json.loads(frozen_path.read_text())
                 inventory = validator(canonical(frozen["inventory"]))
                 if frozen["input_key"] != key or digest(inventory) != frozen["sha256"]:
@@ -250,6 +255,9 @@ def evaluate_feedback(evidence, config, directory, output, budget, language=None
                             "sha256": digest(inventory),
                         },
                     )
+            result["stage_timing"]["nuggets_seconds"] = (
+                time.perf_counter() - nuggets_started
+            )
             write_json(target / "nuggets.json", inventory)
             result.update(
                 outcome=inventory["outcome"], nuggets_sha256=digest(inventory)
@@ -283,12 +291,24 @@ def evaluate_feedback(evidence, config, directory, output, budget, language=None
                 def validator(raw):
                     return validate_alignment(raw, inventory, window)
 
+                alignment_prompt = _rubric("alignment") + "\nINPUT:\n" + canonical(payload)
+                cache_exists = getattr(
+                    models["feedback_alignment"], "cache_exists", None
+                )
+                result["cache"]["alignment"] = bool(
+                    cache_exists
+                    and cache_exists(alignment_prompt, Alignment.model_json_schema())
+                )
+                alignment_started = time.perf_counter()
                 alignment, validations = _stage(
                     models["feedback_alignment"],
-                    _rubric("alignment") + "\nINPUT:\n" + canonical(payload),
+                    alignment_prompt,
                     Alignment.model_json_schema(),
                     validator,
                     target / "alignment-raw.json",
+                )
+                result["stage_timing"]["alignment_seconds"] = (
+                    time.perf_counter() - alignment_started
                 )
             write_json(target / "alignment.json", alignment)
             write_json(target / "validation.json", validations)

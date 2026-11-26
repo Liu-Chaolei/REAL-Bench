@@ -14,9 +14,9 @@
 
 ## 四环节与计分
 
-τ 整通入口现使用 `tau-real-intent/2`：GT 合并重复强调，Prediction 保留独立委派目标及 `path/source_id/quote` 来源。双向内容核对后，增加一次读取完整 Prediction 和两侧实际原文的重复检查。确认超额的目标内 matched 事实改为 extra，其他判定及共享/跨目标事实保留；原始判定、重复记录和最终判定均保存，计分校验其确定性重建。未知或失败不能给最终 Precision/F1 点值。此扩展不改变以下独立双向核对的事实粒度，也不对历史初始请求 sidecar 自动追加新评分。
+τ 整通入口现使用 `tau-real-intent/3`：GT 合并重复强调，Prediction 保留独立委派目标及 `path/source_id/quote` 来源。生产评分执行双向内容核对，不再增加额外的 repetition check。历史 `tau-real-intent/2` 结果仍保留其冻结的重复记录和最终判定，可继续读取。此扩展不改变双向核对的事实粒度，也不对历史初始请求 sidecar 自动追加新评分。
 
-下文的初始请求 sidecar 范围说明保留导入接口的历史行为；当前 `tau2 metrics` 使用整通范围及上述 v2 重复委派检查。
+下文的初始请求 sidecar 范围说明保留导入接口的历史行为；当前 `tau2 metrics` 使用整通范围及上述 v3 双向内容评分。
 
 GT 在测评前抽取；逐条测评只运行独立后端输入抽取、两次独立原文核对和确定性计分。Qwen 的预测只读取初始用户请求阶段后端实际收到的完整任务消息，不读取 GT 模板或另存的原始 USER 文本。Qwen 接入仍是 post-run sidecar，不向后端注入预测 JSON。
 

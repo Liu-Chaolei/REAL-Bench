@@ -785,7 +785,24 @@ def run_v2(
             )
         if errors:
             target = copy.deepcopy(package["current_target"])
-        decisions = response.get("decisions", [])
+        decisions = []
+        for raw_decision in response.get("decisions", []):
+            if not isinstance(raw_decision, dict):
+                continue
+            decisions.append(
+                {
+                    "finding_index": raw_decision.get(
+                        "finding_index", raw_decision.get("index")
+                    ),
+                    "decision": raw_decision.get(
+                        "decision", raw_decision.get("status")
+                    ),
+                    "reason": raw_decision.get(
+                        "reason", raw_decision.get("rationale", "")
+                    ),
+                    "evidence": raw_decision.get("evidence", []),
+                }
+            )
         unresolved_indexes = [
             item.get("finding_index", item.get("index"))
             for item in decisions
@@ -840,7 +857,11 @@ def run_v2(
     for variant in variants.values():
         source = tasks.get(variant["source_task_id"])
         if source is not None:
-            variant["source_sha256"] = sha(source)
+            from tau2.data_model.tasks import Task
+
+            variant["source_sha256"] = sha(
+                Task.model_validate(source).model_dump(mode="json")
+            )
 
     write_json(out / "repaired-tasks.json", list(tasks.values()))
     write_json(out / "repaired-interaction-variants.json", list(variants.values()))

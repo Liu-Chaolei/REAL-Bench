@@ -62,7 +62,7 @@ class QwenStreamingPlayedAudioTranscriber(QwenPlayedAudioTranscriber):
         self._active = None
         self._confirmed = ""
         self._version = 0
-        self.played_sample_rate = DEFAULT_TELEPHONY_RATE
+        self.played_sample_rate = config.playback_sample_rate
         self._hotword_stage = 0
         self.hotword_activations = []
         self._review_stage = ContextVar("observer_review_stage", default=None)
@@ -81,7 +81,7 @@ class QwenStreamingPlayedAudioTranscriber(QwenPlayedAudioTranscriber):
         self._active = None
         self._confirmed = ""
         self._version = 0
-        self.played_sample_rate = DEFAULT_TELEPHONY_RATE
+        self.played_sample_rate = self.config.playback_sample_rate
         self._hotword_stage = 0
         self.hotword_activations.clear()
         await super().connect()

@@ -9,17 +9,13 @@ from tau2.adapters.qwen_audio_agent.transcription.base import PlayedAudioTranscr
 from tau2.config import (
     DEFAULT_AUDIO_NATIVE_DISCONNECT_TIMEOUT,
     DEFAULT_QWEN_ASR_STREAMING_MODEL,
-    DEFAULT_TELEPHONY_RATE,
 )
 from tau2.data_model.audio import AudioEncoding, AudioFormat
 from tau2.data_model.message import ToolCall
 from tau2.data_model.transcript import LiveTranscriptTick
 from tau2.voice.audio_native.adapter import DiscreteTimeAdapter
 from tau2.voice.audio_native.async_loop import BackgroundAsyncLoop
-from tau2.voice.audio_native.audio_converter import (
-    StreamingPcm16Converter,
-    pcm16_to_pcm16,
-)
+from tau2.voice.audio_native.audio_converter import StreamingPcm16Converter
 from tau2.voice.audio_native.tick_result import PlaybackCancellation
 
 
@@ -54,7 +50,6 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
         self.playback_bytes_per_tick = int(
             self.playback_audio_format.bytes_per_second * tick_duration_ms / 1000
         )
-        self._native_playback = config.asr_model == DEFAULT_QWEN_ASR_STREAMING_MODEL
         self.playback = self.playback.__class__(self.playback_audio_format)
         self.realtime_pacing = True
         self.config, self.model = config, model
@@ -86,7 +81,10 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
             self.transcriber = MiMoPlayedAudioTranscriber(config)
         else:
             self.transcriber = PlayedAudioTranscriber(
-                config.asr_model, config.asr_api_key_env, "en"
+                config.asr_model,
+                config.asr_api_key_env,
+                "en",
+                sample_rate=self.playback_audio_format.sample_rate,
             )
         self._bg_loop = BackgroundAsyncLoop()
         self._connected = False
@@ -201,6 +199,8 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
         # Validate the observer before starting billable agent work.
         self.transcriber.validate_config()
         await self.provider.connect(policy, tools)
+        if self.provider.input_sample_rate not in (16000, 24000):
+            raise ValueError("Qwen bridge must negotiate PCM16 at 16 or 24 kHz")
         await self.transcriber.connect()
         self._input_converter = StreamingPcm16Converter(
             input_sample_rate=self.audio_format.sample_rate,
@@ -304,11 +304,9 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
                 return
             rate = int(event["sample_rate"])
             pcm = base64.b64decode(event["audio"], validate=True)
-            if self._native_playback:
-                if rate != self.playback_audio_format.sample_rate or len(pcm) % 2:
-                    raise ValueError(
-                        "Qwen native PCM rate or sample alignment mismatch"
-                    )
+            if rate <= 0 or len(pcm) % 2:
+                raise ValueError("Invalid Qwen PCM16 sample rate or sample alignment")
+            if rate == self.playback_audio_format.sample_rate:
                 data = pcm
             else:
                 converter = self._converters.setdefault(
@@ -476,12 +474,7 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
                 played, self.playback_audio_format.sample_rate
             )
         else:
-            observer_pcm, _ = pcm16_to_pcm16(
-                played,
-                self.playback_audio_format.sample_rate,
-                DEFAULT_TELEPHONY_RATE,
-            )
-            await self.transcriber.send(observer_pcm)
+            await self.transcriber.send(played)
         if result.was_truncated and result.contains_speech:
             queue_partial = getattr(self.transcriber, "queue_pending", None)
             if queue_partial is not None:

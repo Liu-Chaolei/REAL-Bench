@@ -1,5 +1,6 @@
 """Stage 3: independently check each intent against the other side's raw text."""
 
+import asyncio
 from typing import Any
 
 from tau2.diagnostics.intent import PIPELINE_VERSION
@@ -314,11 +315,8 @@ async def evaluate(
         "gt_sha256": digest(gt.get("intent")) if gt else None,
         "prediction_sha256": digest(prediction.get("intent")) if prediction else None,
     }
-    for direction, source, target in (
-        ("forward", gt, prediction),
-        ("backward", prediction, gt),
-    ):
-        result[direction] = await check_direction(
+    async def run_direction(direction, source, target):
+        return direction, await check_direction(
             direction,
             source,
             target,
@@ -330,6 +328,12 @@ async def evaluate(
             definition_metadata,
             (previous or {}).get(direction),
         )
+
+    directions = await asyncio.gather(
+        run_direction("forward", gt, prediction),
+        run_direction("backward", prediction, gt),
+    )
+    result.update(dict(directions))
     statuses = {result[name]["status"] for name in DIRECTIONS}
     result["status"] = next(
         state

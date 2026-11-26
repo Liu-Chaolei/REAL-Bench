@@ -54,12 +54,8 @@ class TauJsonModel:
             budget,
         )
 
-    def _complete_once(self, prompt, schema, *, validate=None):
-        from tau2.data_model.message import UserMessage
-        from tau2.utils.llm_utils import extract_json_from_llm_response, generate
-
-        if len(prompt) > self.config.max_characters:
-            raise ValueError("diagnostic_input_too_long")
+    def cache_path(self, prompt, schema):
+        """Return the content-addressed cache path for one request."""
         profile = self.config.profile(self.role)
         identity = digest(
             {
@@ -69,7 +65,21 @@ class TauJsonModel:
                 "implementation": "tau-json/2",
             }
         )
-        path = self.directory / (identity + ".json")
+        return self.directory / (identity + ".json")
+
+    def cache_exists(self, prompt, schema):
+        """Whether a valid cached response file exists for one request."""
+        return self.cache_path(prompt, schema).is_file()
+
+    def _complete_once(self, prompt, schema, *, validate=None):
+        from tau2.data_model.message import UserMessage
+        from tau2.utils.llm_utils import extract_json_from_llm_response, generate
+
+        if len(prompt) > self.config.max_characters:
+            raise ValueError("diagnostic_input_too_long")
+        profile = self.config.profile(self.role)
+        path = self.cache_path(prompt, schema)
+        identity = path.stem
         if path.exists():
             row = json.loads(path.read_text())
             if row.get("identity") == identity and row.get("output_sha256") == digest(

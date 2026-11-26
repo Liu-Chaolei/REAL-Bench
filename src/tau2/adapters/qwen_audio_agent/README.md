@@ -19,8 +19,10 @@ Dockerfile、构建脚本、Gateway bridge 和容器内观察器仍在
 配置只保存环境变量名称及配置文件路径。常见连接变量包括
 QWEN_AUDIO_REALTIME_API_KEY、QWEN_AUDIO_REALTIME_URL、QWEN_AUDIO_REALTIME_MODEL、
 QWEN_CODE_API_KEY、QWEN_CODE_API_BASE 和 QWEN_CODE_MODEL。
-观察 ASR 依配置使用 DEEPGRAM_API_KEY 或 Qwen/MiMo 凭据引用；共享 API 模式继续支持
-api_config_dir 中的 qw.env 和 realbench.env。不要在示例或结果里保存密钥。
+当前运行使用 Qwen 音频模型。共享配置中的 `qw.env` 选择原生 DashScope Qwen
+Audio 前端，`realbench.env` 选择 Qwen 观察 ASR 与用户 TTS。使用
+`integrations/qwen_audio_agent/config.gaia2.unified.json`；旧 deepseek 启动示例也
+读取这一共享配置，不再启动 MiMo Speech-to-Speech 前端。不要在示例或结果里保存密钥。
 
 ## 新配置归属
 
@@ -54,8 +56,19 @@ tau2 run --audio-native --audio-native-provider qwen_agent \
 
 ## 观察与能力
 
-输入沿用 telephony 音频约定；实际输出格式由 adapter 声明，流式 Qwen 观察支持原生 PCM
-播放。转写只能观察实际播放给用户的音频，不使用未播放 caption 代替听到的回复。
+音频边界为：
+
+- SAASR 最终输出和 adapter 外部输入：PCM16、16 kHz、单声道。
+- Qwen bridge 输入：以 `voice.ready.inputSampleRate` 为准。当前原生
+  `qwen-audio-3.1-realtime-flash` 握手返回 16 kHz，输入无需重采样；若声明
+  24 kHz，仅在 adapter 内做 PCM 重采样。
+- Agent 播放：PCM16、24 kHz，包含初始静音、播放队列及重连后的状态。
+- Qwen 普通 HTTP ASR：直接接收已播放的 PCM24，按真实时长分段，再为 ASR
+  API 重采样到 16 kHz；Qwen 流式 ASR 直接读取实际 playback 采样率。
+
+这条链路不经过 8 kHz 降采样或 μ-law 编解码。只把 16 kHz 输入的元数据改为
+24 kHz 会改变时长并产生错误音频；必要转换必须重采样实际样本。
+转写只能观察实际播放给用户的音频，不使用未播放 caption 代替听到的回复。
 
 热词材料由评测侧选择，adapter 只接收已准备的 profile。它不能读取完整题目、
 未来阶段、隐藏值或参考答案。观察 ASR 与被测系统自己的 ASR/TTS 属于不同配置。

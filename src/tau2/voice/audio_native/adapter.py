@@ -103,7 +103,7 @@ class DiscreteTimeAdapter(ABC):
         self.send_audio_instant = send_audio_instant
         self.realtime_pacing = False
         self._next_tick_start: float | None = None
-        self.playback = MediaPlayback(self.audio_format)
+        self.playback = MediaPlayback(self.playback_audio_format)
         self._media_task = None
         self._playback_task = None
         self._stream_result = None
@@ -111,7 +111,7 @@ class DiscreteTimeAdapter(ABC):
         self._media_origin = None
         self._played_stream_ms = 0.0
         self._input_context = None
-        self._speech_detector = SpeechDetector(self.audio_format.sample_rate)
+        self._speech_detector = SpeechDetector(self.playback_audio_format.sample_rate)
         self._speech_origin = None
         self._speech_end = None
         self._speech_intervals = []

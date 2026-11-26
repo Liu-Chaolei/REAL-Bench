@@ -400,8 +400,6 @@ async def test_whole_call_pipeline_resume_and_empty_prediction(monkeypatch, tmp_
         ],
     )
     seen = []
-    fail_check = True
-
     class Model:
         def __init__(self, config, role, *args):
             self.role = role
@@ -414,28 +412,23 @@ async def test_whole_call_pipeline_resume_and_empty_prediction(monkeypatch, tmp_
                 return json.dumps(
                     {"intent": document(), "evidence": artifacts()[1]["evidence"]}
                 )
-            if "checked_goal_paths" in schema.get("properties", {}):
-                if fail_check:
-                    raise RuntimeError("grading request budget exhausted")
-                return json.dumps(judgment())
             paths = schema["properties"]["judgments"]
             assert paths
             doc = document(1) if "Forward:" in prompt else document()
             return json.dumps(decisions(doc))
 
     monkeypatch.setattr(call, "TauJsonModel", Model)
-    failed = await evaluate_call(evidence, MetricsConfig(), tmp_path, RequestBudget(10))
-    assert failed["precision"] is None and failed["recall"] == 1
-    assert len(seen) == 5
-    fail_check = False
     result = await evaluate_call(evidence, MetricsConfig(), tmp_path, RequestBudget(10))
-    assert result["version"] == "tau-real-intent/2" and result["f1"] == 0.5
-    assert len(seen) == 6
+    assert result["version"] == "tau-real-intent/3"
+    assert result["precision"] == result["recall"] == result["f1"] == 1
+    assert len(seen) == 4
+    result = await evaluate_call(evidence, MetricsConfig(), tmp_path, RequestBudget(10))
+    assert result["version"] == "tau-real-intent/3" and result["f1"] == 1
+    assert len(seen) == 4
     assert {p.name for p in tmp_path.glob("*.json")} == {
         "gt.json",
         "prediction.json",
         "evaluation.content.json",
-        "repetition.json",
         "evaluation.json",
         "scores.json",
     }
@@ -443,7 +436,7 @@ async def test_whole_call_pipeline_resume_and_empty_prediction(monkeypatch, tmp_
         await evaluate_call(evidence, MetricsConfig(), tmp_path, RequestBudget(10))
         == result
     )
-    assert len(seen) == 6
+    assert len(seen) == 4
     _, backend, _ = combined_sources(evidence)
     assert json.loads(backend.text)[0]["task_id"] == "t0"
     assert "merge goals across independent delegations" in seen[1][1]
@@ -452,7 +445,7 @@ async def test_whole_call_pipeline_resume_and_empty_prediction(monkeypatch, tmp_
         evidence, MetricsConfig(), tmp_path / "empty", RequestBudget(10)
     )
     assert empty["precision"] == 1 and empty["f1"] == 0
-    assert len(seen) == 7
+    assert len(seen) == 5
 
 
 @pytest.mark.asyncio

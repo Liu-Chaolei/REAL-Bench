@@ -24,6 +24,8 @@ from tau2.config import (
     DEFAULT_QWEN_ASR_APPEND_SECONDS,
     DEFAULT_QWEN_ASR_STREAMING_TIMEOUT_SECONDS,
     DEFAULT_QWEN_OUTPUT_SAMPLE_RATE,
+    DEFAULT_QWEN_TTS_API_BASE,
+    DEFAULT_QWEN_TTS_API_KEY_ENV,
 )
 from tau2.data_model.asr import HotwordSettings
 from tau2.data_model.audio import AudioEncoding, AudioFormat
@@ -204,8 +206,8 @@ class QwenAgentConfig(BaseModel):
         """Compatibility for historical standalone integration launchers."""
         return self.evaluation.user_llm_settings() if self.evaluation else None
 
-    asr_provider: Literal["deepgram", "mimo", "qwen"] = "deepgram"
-    asr_base_url: str = DEFAULT_MIMO_API_BASE
+    asr_provider: Literal["deepgram", "mimo", "qwen"] = "qwen"
+    asr_base_url: str = DEFAULT_QWEN_TTS_API_BASE
     asr_base_url_env: str | None = None
     asr_provider_env: str | None = None
     asr_hotwords: HotwordSettings = Field(default_factory=HotwordSettings)
@@ -213,9 +215,7 @@ class QwenAgentConfig(BaseModel):
     asr_append_seconds: float = Field(
         default=DEFAULT_QWEN_ASR_APPEND_SECONDS, ge=0.2, le=2
     )
-    playback_sample_rate: int = Field(
-        default=DEFAULT_QWEN_OUTPUT_SAMPLE_RATE, ge=8000, le=48000
-    )
+    playback_sample_rate: Literal[16000, 24000] = DEFAULT_QWEN_OUTPUT_SAMPLE_RATE
     asr_streaming_timeout_seconds: float = Field(
         default=DEFAULT_QWEN_ASR_STREAMING_TIMEOUT_SECONDS, gt=0
     )
@@ -235,7 +235,7 @@ class QwenAgentConfig(BaseModel):
         default=DEFAULT_ASR_RECHECK_TIMEOUT_SECONDS, gt=0, le=15
     )
     asr_model: str = DEFAULT_QWEN_AGENT_ASR_MODEL
-    asr_api_key_env: str = "DEEPGRAM_API_KEY"
+    asr_api_key_env: str = DEFAULT_QWEN_TTS_API_KEY_ENV
 
     @field_validator("environment")
     @classmethod

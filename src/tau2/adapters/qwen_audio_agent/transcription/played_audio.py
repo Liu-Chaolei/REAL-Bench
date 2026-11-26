@@ -34,6 +34,7 @@ class SegmentedPlayedAudioTranscriber:
         self.failure = None
         self.worker = None
         self.sent_ms = 0.0
+        self.played_sample_rate = DEFAULT_TELEPHONY_RATE
         self.latencies_ms = []
         self._segments = asyncio.Queue(maxsize=8)
         self._pending = bytearray()
@@ -63,6 +64,7 @@ class SegmentedPlayedAudioTranscriber:
         self.fragments = asyncio.Queue()
         self.failure = None
         self.sent_ms = 0.0
+        self.played_sample_rate = DEFAULT_TELEPHONY_RATE
         self.latencies_ms = []
         self._segments = asyncio.Queue(maxsize=8)
         self._pending.clear()
@@ -80,26 +82,33 @@ class SegmentedPlayedAudioTranscriber:
         self.worker = asyncio.create_task(self._recognize())
 
     async def send(self, pcm):
-        """Consume PCM16 mono at the framework's played 8 kHz clock."""
+        """Accept legacy PCM16 8 kHz playback from historical callers."""
+        await self.send_native(pcm, DEFAULT_TELEPHONY_RATE)
+
+    async def send_native(self, pcm, sample_rate):
+        """Segment played PCM16 at its actual rate, without a telephony hop."""
         if self.failure:
             raise RuntimeError(
                 f"{self.display_name} observer transcription unavailable"
             ) from self.failure
         if not pcm:
             return
+        if not isinstance(sample_rate, int) or sample_rate <= 0 or len(pcm) % 2:
+            raise ValueError("Observer requires aligned mono PCM16 and a sample rate")
+        if self.sent_ms and self.played_sample_rate != sample_rate:
+            raise ValueError("Observer playback sample rate changed during a session")
+        self.played_sample_rate = sample_rate
         start_ms = self.sent_ms
-        duration_ms = len(pcm) / (DEFAULT_TELEPHONY_RATE * 2) * 1000
+        duration_ms = len(pcm) / (sample_rate * 2) * 1000
         if self._clock_start is None:
             self._clock_start = time.monotonic() - duration_ms / 1000
         self.sent_ms += duration_ms
         if self.config.asr_recheck_enabled:
             self._played_pcm.extend(pcm)
-            limit = (
-                int(self.config.asr_recheck_buffer_seconds * DEFAULT_TELEPHONY_RATE) * 2
-            )
+            limit = int(self.config.asr_recheck_buffer_seconds * sample_rate) * 2
             if len(self._played_pcm) > limit:
                 del self._played_pcm[:-limit]
-            oldest = self.sent_ms - len(self._played_pcm) / 16
+            oldest = self.sent_ms - len(self._played_pcm) / (sample_rate * 2) * 1000
             self._fragment_ranges = {
                 key: value
                 for key, value in self._fragment_ranges.items()
@@ -215,6 +224,7 @@ class SegmentedPlayedAudioTranscriber:
             "timestamp_source": "local_segment_bounds",
             "word_timestamps": False,
             "input_sample_rate": self.output_sample_rate,
+            "played_sample_rate": self.played_sample_rate,
             "segment_seconds": self.config.asr_segment_seconds,
             "silence_seconds": self.config.asr_silence_seconds,
             "finalized_segments": len(self.latencies_ms),

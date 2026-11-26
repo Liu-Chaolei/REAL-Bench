@@ -392,8 +392,8 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
             self._agent_output_tap = AudioTap(
                 name="agent_output",
                 output_dir=audio_taps_dir,
-                sample_rate=self.audio_format.sample_rate,
-                encoding=self.audio_format.encoding,
+                sample_rate=self._get_output_audio_format().sample_rate,
+                encoding=self._get_output_audio_format().encoding,
             )
             logger.info(f"Agent audio taps enabled, output dir: {audio_taps_dir}")
 
@@ -689,6 +689,15 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
         if audio_bytes is None:
             return self._get_silence()
 
+        if self.adapter_behavior.input_audio_format is not None:
+            if chunk.audio_format != self.audio_format:
+                raise ValueError(
+                    f"Expected Agent input {self.audio_format}, got {chunk.audio_format}"
+                )
+            if len(audio_bytes) % self.audio_format.bytes_per_sample:
+                raise ValueError("Agent input has an incomplete PCM sample")
+            return audio_bytes
+
         # Verify format matches configured audio format
         # The user simulator should already output the correct format
         if (
@@ -769,9 +778,9 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
             has_speech = bool(
                 detect_speech(
                     convert_to_pcm16(
-                        AudioData(data=agent_audio, format=self.audio_format)
+                        AudioData(data=agent_audio, format=audio_format)
                     ).data,
-                    self.audio_format.sample_rate,
+                    audio_format.sample_rate,
                 )
             )
 

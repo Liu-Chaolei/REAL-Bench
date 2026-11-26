@@ -73,7 +73,11 @@ GT and prediction extraction are independent, and each intent is judged against
 the opposite raw text. The output contains Precision, Recall, F1, exact-complete
 match, directional item explanations, micro/macro summaries and coverage.
 
-### Duplicate delegations (intent v2)
+### Duplicate delegations (intent v2 legacy)
+
+The following section describes the historical `tau-real-intent/2` pipeline.
+New scoring uses `tau-real-intent/3` and does not run the extra repetition check;
+old v2 records remain readable with their frozen repetition judgments.
 
 User extraction merges repeated emphasis while retaining explicitly requested
 repetitions. Backend extraction retains independently issued goals even when
@@ -187,7 +191,7 @@ and model ability scores are separate.
 
 Source revisions, licenses and upstream file hashes are shipped in
 `tau2/diagnostics/SOURCE.json`. The independent metric versions are
-`tau-real-intent/2`, `tau-real-execution/1`, and `tau-real-voice/1`.
+`tau-real-intent/3`, `tau-real-execution/1`, and `tau-real-voice/1`.
 Duplicate delegation checking is a τ extension (`tau-intent-repetition/1`);
 the pinned original REAL source provenance remains in `SOURCE.json`.
 

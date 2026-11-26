@@ -1,5 +1,6 @@
 """One bidirectional intent verdict over all actually delivered requests."""
 
+import asyncio
 import json
 from pathlib import Path
 
@@ -14,7 +15,6 @@ from tau2.diagnostics.intent.generation import (
 from tau2.diagnostics.intent.gt import build_gt
 from tau2.diagnostics.intent.io import canonical, digest, write_json
 from tau2.diagnostics.intent.prediction import extract_prediction
-from tau2.diagnostics.intent.repetition import apply_repetition, check_repetition
 from tau2.diagnostics.intent.scoring import score_record
 from tau2.diagnostics.intent.types import TextRecord
 from tau2.diagnostics.model import TauJsonModel
@@ -198,11 +198,7 @@ async def evaluate_call(evidence, config, directory: Path, budget):
             "type": "string",
             "description": "Source of the request whose time anchors this relative requirement; spelling is not scored.",
         }
-    artifacts = {}
-    for role, record, fn in (
-        ("gt", a, build_gt),
-        ("prediction", b, extract_prediction),
-    ):
+    async def extract_role(role, record, fn):
         instructions = definition.instructions() + "\n" + record.context["policy"]
         path = directory / (role + ".json")
         key = digest(
@@ -222,8 +218,7 @@ async def evaluate_call(evidence, config, directory: Path, budget):
         )
         previous = json.loads(path.read_text()) if path.exists() else {}
         if previous.get("input_key") == key and previous.get("status") == "complete":
-            artifacts[role] = previous
-            continue
+            return role, previous
         model = TauJsonModel(config, role, directory / "requests", budget)
         mc = ModelConfig(
             model=config.profile(role).model,
@@ -243,7 +238,13 @@ async def evaluate_call(evidence, config, directory: Path, budget):
         artifact["input_key"] = key
         artifact["artifact_sha256"] = digest(artifact)
         write_json(path, artifact)
-        artifacts[role] = artifact
+        return role, artifact
+
+    extracted = await asyncio.gather(
+        extract_role("gt", a, build_gt),
+        extract_role("prediction", b, extract_prediction),
+    )
+    artifacts = dict(extracted)
     path = directory / "evaluation.content.json"
     previous = json.loads(path.read_text()) if path.exists() else None
     verdict = await evaluate(
@@ -262,21 +263,6 @@ async def evaluate_call(evidence, config, directory: Path, budget):
         previous,
     )
     write_json(path, verdict)
-    path = directory / "repetition.json"
-    previous = json.loads(path.read_text()) if path.exists() else None
-    repetition = await check_repetition(
-        artifacts["gt"],
-        artifacts["prediction"],
-        TauJsonModel(config, "evaluation", directory / "requests", budget),
-        ModelConfig(
-            model=config.profile("evaluation").model,
-            api_base=config.profile("evaluation").api_base,
-            reasoning_effort=config.profile("evaluation").args.get("reasoning_effort"),
-        ),
-        previous,
-    )
-    write_json(path, repetition)
-    verdict = apply_repetition(verdict, repetition)
     write_json(directory / "evaluation.json", verdict)
     result = score_record(verdict)
     result.update(

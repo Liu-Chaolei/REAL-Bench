@@ -1,3 +1,4 @@
+import asyncio
 import json
 from copy import deepcopy
 
@@ -171,6 +172,34 @@ async def test_directional_counts_with_different_inventories():
     tampered["backward"]["items"][0]["values"] = ["altered"]
     with pytest.raises(ValueError, match="checksum"):
         score_record(tampered)
+
+
+@pytest.mark.asyncio
+async def test_directional_evaluations_run_concurrently():
+    active = 0
+    maximum = 0
+
+    class ConcurrentModel:
+        async def complete(self, prompt, schema):
+            nonlocal active, maximum
+            active += 1
+            maximum = max(maximum, active)
+            await asyncio.sleep(0.01)
+            active -= 1
+            return json.dumps(decisions(notify()))
+
+    result = await evaluate(
+        record(notify()),
+        record(notify()),
+        PROFILE,
+        ConcurrentModel(),
+        MODEL,
+        SCHEMA,
+        VALIDATION,
+    )
+
+    assert result["status"] == "complete"
+    assert maximum == 2
 
 
 @pytest.mark.asyncio

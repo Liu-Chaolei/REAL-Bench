@@ -8,14 +8,18 @@ from urllib.parse import urlencode
 
 import websockets
 
+from tau2.config import DEFAULT_TELEPHONY_RATE
 from tau2.data_model.transcript import LiveTranscriptFragment
 
 
 class PlayedAudioTranscriber:
     """Stream the complete playback clock, including silence, to Deepgram."""
 
-    def __init__(self, model, key_env, language="en"):
+    def __init__(
+        self, model, key_env, language="en", *, sample_rate=DEFAULT_TELEPHONY_RATE
+    ):
         self.model, self.key_env, self.language = model, key_env, language
+        self.sample_rate = sample_rate
         self.fragments = asyncio.Queue()
         self.failure = None
         self.ws = None
@@ -46,7 +50,7 @@ class PlayedAudioTranscriber:
                 "model": self.model,
                 "language": self.language,
                 "encoding": "linear16",
-                "sample_rate": 8000,
+                "sample_rate": self.sample_rate,
                 "channels": 1,
                 "interim_results": "false",
                 "punctuate": "true",
@@ -105,13 +109,23 @@ class PlayedAudioTranscriber:
             self.failure = exc
 
     async def send(self, pcm):
-        """Accept PCM16 8 kHz only after playback has advanced."""
+        """Accept PCM16 at the connection's declared playback rate."""
         if self.failure:
             raise RuntimeError("Observer transcription unavailable") from self.failure
         if self.clock_start is None:
-            self.clock_start = asyncio.get_running_loop().time() - len(pcm) / 16000
-        self.sent_ms += len(pcm) / 16
+            self.clock_start = asyncio.get_running_loop().time() - len(pcm) / (
+                self.sample_rate * 2
+            )
+        self.sent_ms += len(pcm) / (self.sample_rate * 2) * 1000
         await self.ws.send(pcm)
+
+    async def send_native(self, pcm, sample_rate):
+        """Accept the configured native PCM rate without downsampling to 8 kHz."""
+        if sample_rate != self.sample_rate or len(pcm) % 2:
+            raise ValueError(
+                "Observer playback differs from its configured PCM16 format"
+            )
+        await self.send(pcm)
 
     def drain(self):
         """Return newly finalized words; never use speculative Gateway text."""

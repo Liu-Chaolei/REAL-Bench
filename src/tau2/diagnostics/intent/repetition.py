@@ -6,10 +6,11 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from tau2.diagnostics.intent import PIPELINE_VERSION
 from tau2.diagnostics.intent.evaluation import materialize, raw_input
 from tau2.diagnostics.intent.generation import generate_json, provenance
 from tau2.diagnostics.intent.io import canonical, digest, pointer_get
+
+LEGACY_PIPELINE_VERSION = "tau-real-intent/2"
 
 REPETITION_VERSION = "tau-intent-repetition/1"
 REPETITION_POLICY = """Check duplicate FRONTEND delegations in the complete delivered call.
@@ -343,7 +344,7 @@ def apply_repetition(content: dict, repetition: dict) -> dict:
             raise ValueError("Repetition and content source texts differ")
     final = deepcopy(content)
     final.update(
-        version=PIPELINE_VERSION,
+        version=LEGACY_PIPELINE_VERSION,
         content_evaluation=deepcopy(content),
         content_evaluation_sha256=digest(content),
         repetition=deepcopy(repetition),

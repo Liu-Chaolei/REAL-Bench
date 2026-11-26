@@ -3,7 +3,7 @@
 from tau2.adapters.qwen_audio_agent.transcription.played_audio import (
     SegmentedPlayedAudioTranscriber,
 )
-from tau2.config import DEFAULT_QWEN_ASR_SAMPLE_RATE, DEFAULT_TELEPHONY_RATE
+from tau2.config import DEFAULT_QWEN_ASR_SAMPLE_RATE
 from tau2.utils.env_config import read_config_environment, resolve_env_reference
 from tau2.voice.qwen_asr import qwen_asr_url, transcribe_qwen
 
@@ -54,7 +54,7 @@ class QwenPlayedAudioTranscriber(SegmentedPlayedAudioTranscriber):
             self.model,
             self._key,
             pcm,
-            DEFAULT_TELEPHONY_RATE,
+            self.played_sample_rate,
             self.language,
             self.hotwords.vocabulary() if self.hotwords is not None else None,
         )
@@ -64,7 +64,7 @@ class QwenPlayedAudioTranscriber(SegmentedPlayedAudioTranscriber):
                 status="empty",
                 reason=result.empty_reason,
                 request_id=result.request_id,
-                audio_duration_seconds=len(pcm) / (DEFAULT_TELEPHONY_RATE * 2),
+                audio_duration_seconds=len(pcm) / (self.played_sample_rate * 2),
             )
         self.usage_records.append(record)
         return result.text
