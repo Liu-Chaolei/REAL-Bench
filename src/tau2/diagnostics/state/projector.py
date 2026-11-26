@@ -1,5 +1,7 @@
 """Prefix-only state transitions, explicit completion and opportunity scoring."""
 
+from dataclasses import dataclass
+
 from tau2.diagnostics.state.adapter import DomainAdapter, compare, equal, pointer
 from tau2.diagnostics.state.events import build_events
 from tau2.diagnostics.state.models import (
@@ -225,15 +227,42 @@ def _advance(state, identity, event, window, satisfied=False):
     destination.append(identity)
 
 
-def project_state(task, evidence, interpreter=None, adapter=None):
-    """Return transitions, version snapshots and final state; never use lookahead."""
-    state = initialize_state()
-    versions = [state.model_dump(mode="json")]
-    windows = []
-    window = StateTransition(window_id="window:1")
-    adapter = adapter or DomainAdapter(evidence)
-    pending_relations = {}
-    for event in build_events(task, evidence):
+
+
+@dataclass
+class StateStepResult:
+    """One event's state transition and semantic interpretation."""
+
+    state_before: DialogueState
+    interpretation: Interpretation
+    state_after: DialogueState
+    transition: StateTransition | None
+
+
+class StateProjector:
+    """Incremental state projector shared by replay and the online sidecar."""
+
+    def __init__(self, task=None, interpreter=None, adapter=None, evidence=None):
+        self.task = task
+        self.interpreter = interpreter
+        self.adapter = adapter or DomainAdapter(evidence)
+        self.state = initialize_state(task)
+        self.versions = [self.state.model_dump(mode="json")]
+        self.windows = []
+        self.window = StateTransition(window_id="window:1")
+        self.pending_relations = {}
+
+    def process_event(self, event) -> StateStepResult:
+        """Interpret and apply one event in sequence order."""
+        before = self.state.model_copy(deep=True)
+        state = self.state
+        window = self.window
+        adapter = self.adapter
+        pending_relations = self.pending_relations
+        windows = self.windows
+        versions = self.versions
+        closed_transition = None
+        interpretation = Interpretation()
         window.events.append(event.event_id)
         agent_action = event.kind in ("agent_turn", "tool_requested")
         visible = state.visible(
@@ -253,9 +282,9 @@ def project_state(task, evidence, interpreter=None, adapter=None):
         interpretation = Interpretation()
         if event.kind in ("user_turn", "agent_turn", "tool_requested"):
             try:
-                if interpreter is None or event.metadata.get("incomplete"):
+                if self.interpreter is None or event.metadata.get("incomplete"):
                     raise ValueError("semantic_interpretation_unavailable")
-                interpretation = interpreter.interpret(event, visible)
+                interpretation = self.interpreter.interpret(event, visible)
             except Exception as exc:
                 interpretation.uncertain = True
                 window.issues.append(
@@ -456,14 +485,39 @@ def project_state(task, evidence, interpreter=None, adapter=None):
         if event.kind == "agent_turn":
             window.closed_by_reply = True
             _finish_window(state, window)
+            closed_transition = window
             windows.append(window)
             window = StateTransition(window_id=f"window:{len(windows) + 1}")
-    if window.events:
-        _finish_window(state, window)
-        # A tail with no Agent decision is state history, not a stagnation score.
-        window.scoreable &= bool(window.state_before_tool_action)
-        windows.append(window)
-    return windows, versions, state
+        self.state = state
+        self.window = window
+        self.pending_relations = pending_relations
+        self.windows = windows
+        self.versions = versions
+        return StateStepResult(
+            state_before=before,
+            interpretation=interpretation,
+            state_after=state.model_copy(deep=True),
+            transition=closed_transition,
+        )
+
+    def finish(self) -> tuple[list[StateTransition], list[dict], DialogueState]:
+        """Close a trailing non-agent window and return the complete trace."""
+        if self.window.events:
+            _finish_window(self.state, self.window)
+            self.window.scoreable &= bool(self.window.state_before_tool_action)
+            self.windows.append(self.window)
+            self.window = StateTransition(window_id=f"window:{len(self.windows) + 1}")
+        return self.windows, self.versions, self.state
+
+
+def project_state(task, evidence, interpreter=None, adapter=None):
+    """Replay all events through the incremental projector."""
+    projector = StateProjector(
+        task, interpreter=interpreter, adapter=adapter, evidence=evidence
+    )
+    for event in build_events(task, evidence):
+        projector.process_event(event)
+    return projector.finish()
 
 
 def _finish_window(state, window):

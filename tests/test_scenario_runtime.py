@@ -90,6 +90,39 @@ def test_script_release_is_once_and_completion_requires_delivery():
     assert "later" in runtime.completed
 
 
+def test_pause_freezes_manual_time_and_blocks_due_events():
+    executed = []
+    runtime = ScenarioRuntime(
+        spec(
+            [
+                ScenarioAction(
+                    id="later",
+                    kind="environment",
+                    tool="update",
+                    arguments={},
+                    delay_seconds=5,
+                )
+            ]
+        ),
+        lambda *args: executed.append(args),
+    )
+
+    runtime.advance(0)
+    runtime.pause()
+    runtime.advance(100)
+
+    assert runtime.paused
+    assert runtime.time() == 1000
+    assert runtime.records == []
+
+    runtime.resume()
+    runtime.advance(4)
+    assert runtime.records == []
+    runtime.advance(5)
+    assert [record.kind for record in runtime.records] == ["environment"]
+    assert executed == [("update", {})]
+
+
 def test_overdue_environment_updates_keep_causal_time_order():
     state = {}
 

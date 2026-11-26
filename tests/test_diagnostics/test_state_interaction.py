@@ -4,11 +4,13 @@ import json
 from types import SimpleNamespace
 
 from tau2.data_model.diagnostics import DiagnosticEvidence, OperationEvidence
-from tau2.diagnostics.state.events import recorded_events
+from tau2.diagnostics.config import MetricsConfig
+from tau2.diagnostics.state.events import build_events, recorded_events
 from tau2.diagnostics.state.metrics import evaluate_state_interaction
 from tau2.diagnostics.state.models import DialogueEvent, Interpretation
-from tau2.diagnostics.state.projector import project_state
+from tau2.diagnostics.state.projector import StateProjector, project_state
 from tau2.diagnostics.state.semantic import SemanticInterpreter
+from tau2.diagnostics.state.sidecar import StateShadowWorker
 
 
 class Interpreter:
@@ -100,6 +102,60 @@ def test_private_task_data_is_not_initial_agent_knowledge():
     visible = interpreter.inputs[0][1]
     assert "Future secret" not in str(visible) and "hidden answer" not in str(visible)
     assert not state.facts and len(state.agenda) == 1
+
+
+def test_incremental_projector_matches_replay_projector():
+    events = [
+        ev("u", "user_turn", "What is the answer?"),
+        ev("a", "agent_turn", "I will check."),
+    ]
+    semantics = {
+        "u": {"updates": [agenda()]},
+        "a": {"uses": [use(actual=6)], "fulfills": [dict(item_id="answer", actual=6, met=True)]},
+    }
+    source = evidence(events)
+    replay_windows, replay_versions, replay_state = project_state(
+        None, source, Interpreter(semantics)
+    )
+    incremental = StateProjector(None, Interpreter(semantics), evidence=source)
+    for event in build_events(None, source):
+        incremental.process_event(event)
+    windows, versions, state = incremental.finish()
+
+    assert [w.model_dump() for w in windows] == [w.model_dump() for w in replay_windows]
+    assert versions == replay_versions
+    assert state.model_dump() == replay_state.model_dump()
+
+
+def test_state_sidecar_writes_ordered_full_checkpoints(monkeypatch, tmp_path):
+    source = evidence(
+        [
+            ev("u", "user_turn", "Hello"),
+            ev("a", "agent_turn", "Hi"),
+        ]
+    )
+    monkeypatch.setattr(
+        SemanticInterpreter,
+        "interpret",
+        lambda self, event, visible: Interpretation(),
+    )
+    worker = StateShadowWorker(
+        None,
+        source,
+        MetricsConfig(measures=["state_interaction"], state_sidecar="online_full"),
+        tmp_path,
+    )
+    worker.start()
+    for event in build_events(None, source):
+        worker.submit(event)
+    worker.close_and_drain(timeout=5)
+
+    status = json.loads((tmp_path / "status.json").read_text())
+    trace = json.loads((tmp_path / "state_trace.json").read_text())
+    assert status["status"] == "complete"
+    assert status["committed_sequence"] == 1
+    assert len(list((tmp_path / "checkpoints").glob("*.json"))) == 2
+    assert len(trace["versions"]) == 3
 
 
 def test_numeric_completion_and_repetition_are_state_edges():

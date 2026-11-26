@@ -1,6 +1,6 @@
 """Qwen construction without connecting a Provider or starting a container."""
 
-from tau2.config import DEFAULT_QWEN_ASR_STREAMING_MODEL
+from tau2.adapters.qwen_audio_agent.config import QWEN_AGENT_INPUT_AUDIO_FORMAT
 from tau2.data_model.audio import AudioEncoding, AudioFormat
 
 
@@ -9,7 +9,7 @@ def behavior(config, audio_format=None):
     from tau2.adapters.registry import AdapterBehavior
 
     playback = None
-    if config is not None and config.asr_model == DEFAULT_QWEN_ASR_STREAMING_MODEL:
+    if config is not None:
         playback = AudioFormat(
             encoding=AudioEncoding.PCM_S16LE, sample_rate=config.playback_sample_rate
         )
@@ -18,6 +18,7 @@ def behavior(config, audio_format=None):
         initial_greeting=False,
         flush_results_on_stop=True,
         hosted_turn_detection=True,
+        input_audio_format=QWEN_AGENT_INPUT_AUDIO_FORMAT,
         playback_audio_format=playback,
         protocol_trace=True,
     )

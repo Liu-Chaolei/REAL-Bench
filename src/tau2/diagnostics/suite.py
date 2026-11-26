@@ -142,16 +142,32 @@ def evaluate_evidence(
 
                 result = evaluate_interaction(evidence, config, output, budget)
             elif measure == "state_interaction":
-                from tau2.diagnostics.state.metrics import evaluate_state_interaction
+                sidecar = directory.parent / "state_sidecar"
+                sidecar_status = sidecar / "status.json"
+                sidecar_result = sidecar / "state_interaction.json"
+                if sidecar_status.is_file() and sidecar_result.is_file():
+                    status = json.loads(sidecar_status.read_text())
+                    if (
+                        status.get("status") == "complete"
+                        and (sidecar / "state_trace.json").is_file()
+                    ):
+                        result = json.loads(sidecar_result.read_text())
+                        result["source"] = "online_full_sidecar"
+                    else:
+                        sidecar_result = None
+                if sidecar_result is None or not sidecar_result.is_file():
+                    from tau2.diagnostics.state.metrics import (
+                        evaluate_state_interaction,
+                    )
 
-                result = evaluate_state_interaction(
-                    task,
-                    evidence,
-                    output,
-                    model=TauJsonModel(
-                        config, "state_interaction", output / "requests", budget
-                    ),
-                )
+                    result = evaluate_state_interaction(
+                        task,
+                        evidence,
+                        output,
+                        model=TauJsonModel(
+                            config, "state_interaction", output / "requests", budget
+                        ),
+                    )
             elif measure == "persistent_task":
                 from copy import deepcopy
 

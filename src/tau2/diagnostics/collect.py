@@ -20,6 +20,7 @@ class EvidenceRecorder:
         self.operations, self.frames, self.errors = [], {}, []
         self.frame_labels = {}
         self.state_events = []
+        self.state_event_sink = None
         self.media_ticks = []
         self.media_times = []
         self.writer = ThreadPoolExecutor(
@@ -34,19 +35,30 @@ class EvidenceRecorder:
     def state_event(self, kind, role, content, visible_to, event_id=None):
         """Capture native order at existing hooks; no extra evaluation occurs."""
         with self.lock:
-            self.state_events.append(
-                dict(
-                    event_id=event_id or f"event:{len(self.state_events)}",
-                    kind=kind,
-                    role=role,
-                    content=copy.deepcopy(content),
-                    visible_to=visible_to,
-                    timestamp=time.monotonic(),
-                    sequence=len(self.state_events),
-                    source="tau-state-events/2",
-                    metadata={},
-                )
+            event = dict(
+                event_id=event_id or f"event:{len(self.state_events)}",
+                kind=kind,
+                role=role,
+                content=copy.deepcopy(content),
+                visible_to=list(visible_to),
+                timestamp=time.monotonic(),
+                sequence=len(self.state_events),
+                source="tau-state-events/2",
+                metadata={},
             )
+            self.state_events.append(event)
+            sink = self.state_event_sink
+        if sink is not None:
+            sink(copy.deepcopy(event))
+
+    def set_state_event_sink(self, sink):
+        """Attach a non-blocking observer for canonical state events."""
+        with self.lock:
+            self.state_event_sink = sink
+
+    def message_event(self, kind, role, content, visible_to, event_id=None):
+        """Publish a delivered user/Agent message to the state sidecar."""
+        self.state_event(kind, role, content, visible_to, event_id=event_id)
 
     def tool_delivered(self, call_id, viewer="agent"):
         self.state_event(

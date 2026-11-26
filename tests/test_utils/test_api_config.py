@@ -280,19 +280,22 @@ def test_smoke_launch_keeps_credentials_off_argv(api_dir, tmp_path, monkeypatch)
         realtime_generation=False,
         metrics_config=None,
         active_metrics_config=None,
-        user_audio_renderer="standard",
-        saasr_config=None,
+        user_audio_renderer="saasr",
+        saasr_config=tmp_path / "saasr.json",
         gaia2_allow_stale_runtime=False,
         task_ids=None,
         task_split_name="base",
         num_tasks=1,
     )
+    args.saasr_config.write_text("{}")
     config = QwenAgentConfig.model_validate({"api_config_dir": api_dir})
     with pytest.raises(SystemExit) as error:
         smoke.run_shared(args, config)
     assert error.value.code == 0
     assert "secret-" not in json.dumps(captured)
     assert "--judge-from-user-llm" in captured[0]
+    assert "--no-realtime-generation" in captured[0]
+    assert "--user-audio-renderer" in captured[0]
     assert config.resolved_environment({})["OPENAI_MODEL"] == "beta"
 
 

@@ -316,7 +316,11 @@ class DiscreteTimeAudioNativeAgent(FullDuplexAgent[DiscreteTimeAgentState]):
         )
 
         # Audio format (defaults to telephony)
-        self.audio_format = audio_format or TELEPHONY_AUDIO_FORMAT
+        self.audio_format = (
+            audio_format
+            or self.adapter_behavior.input_audio_format
+            or TELEPHONY_AUDIO_FORMAT
+        )
         # Calculate bytes_per_tick from audio format
         self.bytes_per_tick = int(
             self.audio_format.bytes_per_second * tick_duration_ms / 1000

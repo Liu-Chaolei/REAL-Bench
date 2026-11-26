@@ -12,15 +12,8 @@ from tau2.metrics.aggregation import task_mean
 VERSION = "tau-state-interaction/2"
 
 
-def evaluate_state_interaction(
-    task, evidence, output_directory, model=None, *, interpreter=None
-):
-    """Interpret sequential prefixes and persist the same trace used for scoring."""
-    if interpreter is None and model is not None:
-        interpreter = SemanticInterpreter(
-            model, evidence.source.get("state_capabilities", {})
-        )
-    windows, versions, state = project_state(task, evidence, interpreter)
+def result_from_windows(windows, *, trace_path="state_trace.json", status=None):
+    """Build the local State interaction summary from projected windows."""
     progress = Counter(w.progressivity for w in windows if w.scoreable)
     opportunities = [o for w in windows for o in w.opportunities]
     ground = Counter(o["status"] for o in opportunities)
@@ -28,18 +21,10 @@ def evaluate_state_interaction(
     ground_denominator = sum(
         ground[k] for k in ("consistent", "inconsistent", "unsupported")
     )
-    directory = Path(output_directory)
-    directory.mkdir(parents=True, exist_ok=True)
-    result = dict(
+    return dict(
         version=VERSION,
         projector_version=PROJECTOR_VERSION,
-        status=(
-            "partial"
-            if any(not w.scoreable and w.issues for w in windows)
-            else "complete"
-        )
-        if interpreter is not None
-        else "unavailable",
+        status=status or ("partial" if any(not w.scoreable and w.issues for w in windows) else "complete"),
         progressivity=dict(
             progress,
             eligible_windows=denominator,
@@ -59,7 +44,30 @@ def evaluate_state_interaction(
             not_applicable=ground["not_applicable"],
             incomplete_events=[i for w in windows for i in w.issues],
         ),
-        trace_path="state_trace.json",
+        trace_path=trace_path,
+    )
+
+
+def evaluate_state_interaction(
+    task, evidence, output_directory, model=None, *, interpreter=None
+):
+    """Interpret sequential prefixes and persist the same trace used for scoring."""
+    if interpreter is None and model is not None:
+        interpreter = SemanticInterpreter(
+            model, evidence.source.get("state_capabilities", {})
+        )
+    windows, versions, state = project_state(task, evidence, interpreter)
+    directory = Path(output_directory)
+    directory.mkdir(parents=True, exist_ok=True)
+    result = result_from_windows(
+        windows,
+        status=(
+            "partial"
+            if interpreter is not None and any(not w.scoreable and w.issues for w in windows)
+            else "complete"
+            if interpreter is not None
+            else "unavailable"
+        ),
     )
     if interpreter is None:
         result["reason"] = "state_interaction_model_not_configured"

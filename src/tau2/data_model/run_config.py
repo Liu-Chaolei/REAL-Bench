@@ -69,8 +69,6 @@ class AudioNativeConfig(BaseModel):
         """Continuous caller scenes need background ticks during synthesis."""
         if (self.user_audio_renderer == "saasr") != (self.saasr_config is not None):
             raise ValueError("SAASR renderer requires saasr_config and vice versa")
-        if self.saasr_config is not None and self.realtime_generation is False:
-            raise ValueError("SAASR requires non-blocking user generation")
         return self
 
     @model_validator(mode="before")

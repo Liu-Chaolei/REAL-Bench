@@ -803,6 +803,11 @@ def _build_voice_orchestrator(
         ):
             raise ValueError("SAASR worker software changed after batch preflight")
 
+    if config.audio_native_config.provider == "qwen_agent" and saasr_session is None:
+        raise ValueError(
+            "qwen_agent requires --user-audio-renderer saasr and --saasr-config"
+        )
+
     observer_hotwords = None
     from tau2.adapters.registry import observer_preparation
 

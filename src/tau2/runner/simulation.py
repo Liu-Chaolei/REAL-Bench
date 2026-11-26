@@ -162,6 +162,7 @@ def run_simulation(
     active_manager = None
 
     recorder = None
+    state_sidecar = None
     # Collect evidence once. Semantic diagnostics run only when explicitly
     # selected in this run's metrics configuration and share its budget.
     if metrics_config is not None or diagnostics_dir is not None:
@@ -202,6 +203,25 @@ def run_simulation(
         enable_diagnostics = getattr(agent, "enable_diagnostics", None)
         if enable_diagnostics is not None:
             enable_diagnostics()
+        if (
+            "state_interaction" in metrics_config.measures
+            and metrics_config.state_sidecar == "online_full"
+        ):
+            from tau2.diagnostics.state.sidecar import StateShadowWorker
+
+            state_sidecar = StateShadowWorker(
+                orchestrator.task,
+                recorder,
+                metrics_config,
+                diagnostics_dir / "state_sidecar",
+                capabilities={
+                    name: tool.openai_schema["function"]
+                    for name, tool in orchestrator.environment.tools.tools.items()
+                    if hasattr(tool, "openai_schema")
+                },
+            )
+            recorder.set_state_event_sink(state_sidecar.submit)
+            state_sidecar.start()
 
     if active_metrics_config is not None:
         from tau2.metrics.active.config import ActiveMetricsConfig
@@ -221,6 +241,10 @@ def run_simulation(
     try:
         simulation = orchestrator.run()
     except BaseException:
+        if state_sidecar is not None:
+            state_sidecar.close_and_drain(
+                metrics_config.state_sidecar_drain_timeout_seconds
+            )
         if recorder is not None:
             recorder.close()
         if active_manager is not None:
@@ -285,6 +309,10 @@ def run_simulation(
             raise
     evidence = None
     if recorder is not None:
+        if state_sidecar is not None:
+            state_sidecar.close_and_drain(
+                metrics_config.state_sidecar_drain_timeout_seconds
+            )
         from tau2.diagnostics.collect import finalize_evidence
 
         try:

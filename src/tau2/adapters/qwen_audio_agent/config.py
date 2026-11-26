@@ -15,6 +15,7 @@ from tau2.config import (
     DEFAULT_MIMO_ASR_MODEL,
     DEFAULT_MIMO_TTS_MODEL,
     DEFAULT_MIMO_TTS_VOICE,
+    DEFAULT_PCM_SAMPLE_RATE,
     DEFAULT_QWEN_AGENT_ASR_MODEL,
     DEFAULT_QWEN_AGENT_BOOT_TIMEOUT_SECONDS,
     DEFAULT_QWEN_AGENT_IMAGE,
@@ -25,6 +26,7 @@ from tau2.config import (
     DEFAULT_QWEN_OUTPUT_SAMPLE_RATE,
 )
 from tau2.data_model.asr import HotwordSettings
+from tau2.data_model.audio import AudioEncoding, AudioFormat
 from tau2.data_model.user_simulation import UserSimulationConfig
 from tau2.utils.env_config import read_config_environment, resolve_env_reference
 
@@ -39,6 +41,14 @@ LEGACY_EVALUATION_FIELDS = {
     "user_silence_checkin_seconds",
     "watchdog",
 }
+
+# Qwen receives the PCM stream produced by the SAASR caller renderer. The
+# adapter converts this external contract to the provider's negotiated rate.
+QWEN_AGENT_INPUT_AUDIO_FORMAT = AudioFormat(
+    encoding=AudioEncoding.PCM_S16LE,
+    sample_rate=DEFAULT_PCM_SAMPLE_RATE,
+    channels=1,
+)
 
 
 class SpeechToSpeechConfig(BaseModel):

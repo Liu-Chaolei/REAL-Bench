@@ -309,8 +309,14 @@ business-operation permissions remain under the original Agent's control.
 Run three real English retail control calls with the configured services:
 
 ```bash
-integrations/qwen_audio_agent/run_hpc.sh smoke --num-tasks 3 --max-seconds 0
+integrations/qwen_audio_agent/run_hpc.sh smoke \
+  --saasr-config /path/to/runtime.local.json \
+  --num-tasks 3 --max-seconds 0
 ```
+
+Qwen Audio Agent smoke runs use the SAASR caller renderer exclusively. Provide a
+local SAASR worker configuration with `--saasr-config`; the former standard
+caller TTS and μ-law transport path is rejected by the Qwen adapter.
 
 Use `--dry-run` for a preview, `--num-tasks 1` for one call, or `--task-ids 0 1 2`
 for explicit tasks. Each call uses a fresh isolated Agent. The helper retains
@@ -323,9 +329,10 @@ time for backend retries and later stage delivery. Pass `--max-seconds 0`
 explicitly for an unlimited smoke run. Agent/user stop signals and
 infrastructure failures still end a trial. Ordinary `tau2 run` defaults are
 unchanged; its `--max-steps-seconds 0` explicitly disables the voice tick limit.
-Caller LLM and TTS generation is synchronous by default, so preparation time
-does not advance the simulation tick clock. Pass `--realtime-generation` to
-restore background caller generation and wall-clock tick advancement.
+SAASR caller generation can run in realtime, or with
+`--no-realtime-generation` using first-audio release: the scenario clock pauses
+until the first playable sentence is ready, then later sentences continue in the
+background.
 For a shorter bounded smoke check, pass a smaller positive `--max-seconds N`;
 that also sets a wallclock timeout of `N + 150` seconds.
 

@@ -220,13 +220,20 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             environment_trace=getattr(self.environment, "trace", []),
             pending={
                 "heartbeat_stale": self.watchdog.stale,
-                "heartbeat_age_seconds": time.monotonic() - self.watchdog.last_heartbeat,
+                "heartbeat_age_seconds": time.monotonic()
+                - self.watchdog.last_heartbeat,
                 "heartbeat_timeout_seconds": self.watchdog.config.heartbeat_timeout_seconds,
                 "phase": self.watchdog.last_phase,
                 "phase_age_seconds": time.monotonic() - self.watchdog.phase_started,
-                "agent_has_pending_output": bool(getattr(self.agent, "has_pending_output", False)),
-                "user_speech_active": bool(self.current_user_chunk and is_speaking(self.current_user_chunk)),
-                "agent_speech_active": bool(self.current_agent_chunk and is_speaking(self.current_agent_chunk)),
+                "agent_has_pending_output": bool(
+                    getattr(self.agent, "has_pending_output", False)
+                ),
+                "user_speech_active": bool(
+                    self.current_user_chunk and is_speaking(self.current_user_chunk)
+                ),
+                "agent_speech_active": bool(
+                    self.current_agent_chunk and is_speaking(self.current_agent_chunk)
+                ),
                 "termination_reason": self.termination_reason.value,
             },
             context_ticks=self.watchdog.config.context_ticks,
@@ -249,7 +256,9 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             action = "stop_and_evaluate"
         self.watchdog.record(self.step_count, verdict, action)
         interval = self.watchdog.config.check_interval_ticks
-        self._watchdog_next_check = min(self.step_count + interval, cap) if cap else self.step_count + interval
+        self._watchdog_next_check = (
+            min(self.step_count + interval, cap) if cap else self.step_count + interval
+        )
 
     def _validate_mode_compatibility(self):
         """Validate that agent and user support full-duplex streaming."""
@@ -362,6 +371,25 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
         self.current_user_chunk, self.user_state = self.user.get_next_chunk(
             self.user_state, participant_chunk=dummy_agent_message
         )
+
+        diagnostic_recorder = getattr(self.environment, "diagnostic_recorder", None)
+        if diagnostic_recorder is not None:
+            if self.current_user_chunk is not None and self.current_user_chunk.content:
+                diagnostic_recorder.message_event(
+                    "user_turn",
+                    "user",
+                    self.current_user_chunk.content,
+                    ["agent"],
+                    event_id="tick:initial:user",
+                )
+            if first_agent_message is not None and first_agent_message.content:
+                diagnostic_recorder.message_event(
+                    "agent_turn",
+                    "agent",
+                    first_agent_message.content,
+                    ["agent"],
+                    event_id="tick:initial:agent",
+                )
 
         # Initialize trajectory with first tick
         init_start_time = time.perf_counter()
@@ -591,6 +619,33 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             self._wrap_tool_results(agent_tool_results) if agent_tool_results else None
         )
 
+        diagnostic_recorder = getattr(self.environment, "diagnostic_recorder", None)
+        if diagnostic_recorder is not None:
+            if (
+                user_chunk is not None
+                and user_chunk.content
+                and user_chunk.is_final_chunk
+            ):
+                diagnostic_recorder.message_event(
+                    "user_turn",
+                    "user",
+                    user_chunk.content,
+                    ["agent"],
+                    event_id=f"tick:{tick_id}:user",
+                )
+            if (
+                agent_chunk is not None
+                and agent_chunk.content
+                and agent_chunk.is_final_chunk
+            ):
+                diagnostic_recorder.message_event(
+                    "agent_turn",
+                    "agent",
+                    agent_chunk.content,
+                    ["agent"],
+                    event_id=f"tick:{tick_id}:agent",
+                )
+
         # --- 3. Update state and bookkeeping ---
         self.current_user_chunk = user_chunk
         self.current_agent_chunk = agent_chunk
@@ -675,6 +730,15 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
 
         # Single get_next_chunk call with both channels
         logger.debug(f"  [{participant_name}] Calling get_next_chunk...")
+        scenario_runtime = getattr(self.environment, "scenario_runtime", None)
+        pause_for_first_saasr_audio = bool(
+            not is_agent
+            and scenario_runtime is not None
+            and getattr(participant, "saasr_session", None) is not None
+            and not getattr(participant, "realtime_generation", True)
+        )
+        if pause_for_first_saasr_audio:
+            scenario_runtime.pause()
         try:
             new_chunk, new_state = participant.get_next_chunk(
                 state=new_state,
@@ -697,6 +761,9 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
                 [],
                 [],
             )
+        finally:
+            if pause_for_first_saasr_audio:
+                scenario_runtime.resume()
         logger.debug(
             f"  [{participant_name}] Returned chunk: "
             f"{self._format_chunk_summary(new_chunk, 'chunk')}"

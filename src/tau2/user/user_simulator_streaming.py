@@ -1,7 +1,9 @@
 import hashlib
 import json
 import random
+import re
 import time
+import uuid
 from concurrent.futures import CancelledError, Future, ThreadPoolExecutor
 from contextvars import copy_context
 from copy import deepcopy
@@ -507,6 +509,7 @@ class VoiceStreamingUserSimulator(
             if realtime_generation
             else None
         )
+        self._saasr_stream = None
 
         # Default yield_threshold_when_interrupting to yield_threshold_when_interrupted if not set
         if (
@@ -799,6 +802,9 @@ class VoiceStreamingUserSimulator(
                 if state is not None:
                     self._refresh_voice_tasks(state)
         finally:
+            if self._saasr_stream is not None:
+                self._saasr_stream.close()
+                self._saasr_stream = None
             if self.saasr_session is not None:
                 self.saasr_session.close()
             # Persist recordings even when an unplayed request failed while
@@ -1127,6 +1133,19 @@ class VoiceStreamingUserSimulator(
             return self._compute_turn_taking_action(state)
         if self._refresh_voice_tasks(state):
             return TurnTakingAction(action="wait", info="Discarded obsolete generation")
+        if (
+            self._saasr_stream is not None
+            and not state.is_talking
+            and not state.output_streaming_queue
+        ):
+            queued, done = self._poll_saasr_segment(state)
+            if queued:
+                # The normal policy below will deliver the newly queued chunk.
+                pass
+            elif not done:
+                return TurnTakingAction(action="wait", info="SAASR audio pending")
+            else:
+                self._saasr_stream = None
         if self._generation_task is not None:
             task = self._generation_task
             if task.origin == "scripted" and state.agent_speech_active:
@@ -1645,6 +1664,9 @@ class VoiceStreamingUserSimulator(
             logger.debug("Stopping talking: Flushing output streaming queue")
             state.output_streaming_queue = []
             state.is_backchanneling = False
+            if self._saasr_stream is not None:
+                self._saasr_stream.cancel()
+                self._saasr_stream = None
         elif action.action == "generate_message":
             if self.realtime_generation:
                 generated = self._take_generation(state, action)
@@ -1813,6 +1835,9 @@ class VoiceStreamingUserSimulator(
 
     def queue_scenario_input(self, event_id: str, text: str) -> None:
         """Queue one released input through the same TTS and playback pipeline."""
+        if self._saasr_stream is not None:
+            self._saasr_stream.cancel()
+            self._saasr_stream = None
         if not any(key == event_id for key, _ in self._scenario_inputs):
             self._scenario_inputs.append((event_id, text))
             if (
@@ -2230,6 +2255,9 @@ class VoiceStreamingUserSimulator(
         if not user_message.has_text_content():
             return user_message, state
 
+        if self.saasr_session is not None:
+            return self._generate_saasr_first_segment(user_message, state)
+
         # Synthesize voice (without background noise - added per chunk) with timing
         effects_turn_idx = state.user_utterance_count
         tts_start = time.perf_counter()
@@ -2256,6 +2284,82 @@ class VoiceStreamingUserSimulator(
                 state.system_messages.append(reminder)
 
         return user_message, state
+
+    @staticmethod
+    def _split_saasr_segments(text: str) -> list[str]:
+        """Split a caller reply at sentence boundaries for first-audio release."""
+        segments = [
+            segment.strip() for segment in re.split(r"(?<=[.!?。！？])\s+", text)
+        ]
+        return [segment for segment in segments if segment]
+
+    def _generate_saasr_first_segment(self, message, state):
+        """Generate the first SAASR sentence and queue later sentences."""
+        from tau2.voice.saasr import SAASR_AUDIO_FORMAT
+
+        segments = self._split_saasr_segments(message.content or "")
+        if not segments:
+            return message, state
+        base_raw_data = {
+            **(message.raw_data or {}),
+            "user_event_kind": "formal",
+            "saasr_utterance_id": str(uuid.uuid4()),
+        }
+        stream = self.saasr_session.synthesize_stream(
+            segments, base_raw_data=base_raw_data
+        )
+        started = time.perf_counter()
+        first = stream.wait_first()
+        state._tts_synthesis_seconds = time.perf_counter() - started
+        if first is None:
+            stream.close()
+            return message, state
+        self._saasr_stream = None if first["final"] else stream
+        first_message = UserMessage(
+            role="user",
+            content=first["text"],
+            cost=message.cost,
+            usage=message.usage,
+            is_audio=True,
+            audio_content=audio_bytes_to_string(first["audio"]),
+            audio_format=SAASR_AUDIO_FORMAT.model_copy(),
+            audio_script_gold=first["text"],
+            raw_data={
+                **base_raw_data,
+                "saasr_foreground": first["metadata"],
+                "saasr_segment_final": first["final"],
+            },
+        )
+        state.user_utterance_count += 1
+        return first_message, state
+
+    def _poll_saasr_segment(self, state) -> tuple[bool, bool]:
+        """Move one completed SAASR sentence into the normal output queue."""
+        stream = self._saasr_stream
+        if stream is None:
+            return False, True
+        item, done = stream.poll()
+        if item is None:
+            return False, done
+        from tau2.voice.saasr import SAASR_AUDIO_FORMAT
+
+        message = UserMessage(
+            role="user",
+            content=item["text"],
+            cost=0.0,
+            usage=None,
+            is_audio=True,
+            audio_content=audio_bytes_to_string(item["audio"]),
+            audio_format=SAASR_AUDIO_FORMAT.model_copy(),
+            audio_script_gold=item["text"],
+            raw_data={
+                **stream.base_raw_data,
+                "saasr_foreground": item["metadata"],
+                "saasr_segment_final": item["final"],
+            },
+        )
+        state.output_streaming_queue.extend(self._create_chunk_messages(message))
+        return True, False
 
     def synthesize_voice(self, message, state, **kwargs):
         """Route all caller text, including backchannels, through one renderer."""
@@ -2309,9 +2413,9 @@ class VoiceStreamingUserSimulator(
         text_chunks[first : last + 1] = spoken
         script_chunks = [""] * len(chunks)
         script_chunks[first : last + 1] = script
-        import uuid
-
-        utterance = str(uuid.uuid4())
+        utterance = (full_message.raw_data or {}).get("saasr_utterance_id") or str(
+            uuid.uuid4()
+        )
         template = "".join(
             f"<chunk id={i}>{text}</chunk>" for i, text in enumerate(script_chunks)
         )
@@ -2333,7 +2437,10 @@ class VoiceStreamingUserSimulator(
                 if first <= index <= last
                 else [0.0, 0.0],
                 "user_event_kind": full_message.raw_data["user_event_kind"],
-                "saasr_main_final": index == last,
+                "saasr_main_final": (
+                    index == last
+                    and (full_message.raw_data or {}).get("saasr_segment_final", True)
+                ),
                 "saasr_speech_offset_seconds": max(0, lead - index * self.chunk_size)
                 / PCM_SAMPLE_RATE,
             }

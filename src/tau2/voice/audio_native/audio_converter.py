@@ -81,6 +81,60 @@ def pcm16_to_telephony(
     return ulaw_8khz, new_state
 
 
+def pcm16_to_pcm16(
+    audio_bytes: bytes,
+    source_sample_rate: int,
+    target_sample_rate: int,
+    resample_state: Optional[Tuple] = None,
+) -> Tuple[bytes, Optional[Tuple]]:
+    """Resample mono PCM16 while preserving streaming state."""
+    if len(audio_bytes) == 0 or source_sample_rate == target_sample_rate:
+        return audio_bytes, resample_state
+    return audioop.ratecv(
+        audio_bytes,
+        2,
+        1,
+        source_sample_rate,
+        target_sample_rate,
+        resample_state,
+    )
+
+
+class StreamingPcm16Converter:
+    """Convert mono PCM16 between two negotiated sample rates."""
+
+    def __init__(self, input_sample_rate: int, output_sample_rate: int):
+        self.input_sample_rate = input_sample_rate
+        self.output_sample_rate = output_sample_rate
+        self._input_resample_state: Optional[Tuple] = None
+        self._output_resample_state: Optional[Tuple] = None
+
+    def convert_input(self, pcm_audio: bytes) -> bytes:
+        """Resample external PCM16 to the provider input rate."""
+        result, self._input_resample_state = pcm16_to_pcm16(
+            pcm_audio,
+            self.input_sample_rate,
+            self.output_sample_rate,
+            self._input_resample_state,
+        )
+        return result
+
+    def convert_output(self, pcm_audio: bytes, source_sample_rate: int) -> bytes:
+        """Resample provider PCM16 to the configured playback rate."""
+        result, self._output_resample_state = pcm16_to_pcm16(
+            pcm_audio,
+            source_sample_rate,
+            self.output_sample_rate,
+            self._output_resample_state,
+        )
+        return result
+
+    def reset(self) -> None:
+        """Reset both streaming resamplers."""
+        self._input_resample_state = None
+        self._output_resample_state = None
+
+
 class StreamingTelephonyConverter:
     """Streaming audio converter between telephony (8kHz mu-law) and PCM16.
 

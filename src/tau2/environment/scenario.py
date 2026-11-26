@@ -99,6 +99,8 @@ class ScenarioRuntime:
         self.failure: BaseException | None = None
         self._origin: float | None = None
         self._manual: float | None = 0.0
+        self._paused = False
+        self._paused_elapsed: float | None = None
         self._stop = threading.Event()
         self._thread: threading.Thread | None = None
         self._drained = 0
@@ -151,11 +153,42 @@ class ScenarioRuntime:
         if fixed is not None:
             return fixed
         elapsed = (
-            self._manual
+            self._paused_elapsed
+            if self._paused and self._paused_elapsed is not None
+            else self._manual
             if self._manual is not None
             else self.monotonic() - self._origin
         )
         return self.spec.start_time + elapsed
+
+    @property
+    def paused(self) -> bool:
+        """Whether scenario time and due-event dispatch are suspended."""
+        with self.lock:
+            return self._paused
+
+    def pause(self) -> None:
+        """Freeze scenario time and prevent the scheduler from dispatching events."""
+        with self.lock:
+            if self._paused:
+                return
+            self._paused_elapsed = self.time() - self.spec.start_time
+            self._paused = True
+            self.changed.notify_all()
+
+    def resume(self) -> None:
+        """Resume scenario time without counting the paused wall-clock interval."""
+        with self.lock:
+            if not self._paused:
+                return
+            elapsed = self._paused_elapsed or 0.0
+            if self._origin is not None:
+                self._origin = self.monotonic() - elapsed
+            else:
+                self._manual = elapsed
+            self._paused_elapsed = None
+            self._paused = False
+            self.changed.notify_all()
 
     @contextmanager
     def operation(self):
@@ -473,6 +506,8 @@ class ScenarioRuntime:
     def advance(self, elapsed: float | None = None) -> None:
         """Execute due environment events or release a scripted user message."""
         with self.lock:
+            if self._paused:
+                return
             if self.failure:
                 raise RuntimeError("Scenario scheduler failed") from self.failure
             if self.event_triggers is not None and not self.replaying:

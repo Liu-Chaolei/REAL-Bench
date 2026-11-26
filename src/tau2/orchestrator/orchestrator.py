@@ -829,6 +829,20 @@ class Orchestrator(BaseOrchestrator[AgentT, UserT, Message]):
                 )
                 self.trajectory = [first_message]
                 self.message = first_message
+                diagnostic_recorder = getattr(
+                    self.environment, "diagnostic_recorder", None
+                )
+                if (
+                    diagnostic_recorder is not None
+                    and not first_message.is_tool_call()
+                ):
+                    diagnostic_recorder.message_event(
+                        "agent_turn",
+                        "agent",
+                        first_message.content or "",
+                        ["agent"],
+                        event_id="message:initial:agent",
+                    )
                 # In solo mode, there is no user, so if the message is not a tool call, then we end and report an agent error
                 if not first_message.is_tool_call():
                     self.from_role = Role.AGENT
@@ -1058,6 +1072,15 @@ class Orchestrator(BaseOrchestrator[AgentT, UserT, Message]):
             self._update_voice_metadata(user_msg)
 
             self.trajectory.append(user_msg)
+            diagnostic_recorder = getattr(self.environment, "diagnostic_recorder", None)
+            if diagnostic_recorder is not None and not user_msg.is_tool_call():
+                diagnostic_recorder.message_event(
+                    "user_turn",
+                    "user",
+                    user_msg.content or "",
+                    ["agent"],
+                    event_id=f"message:{self.step_count}:user",
+                )
             self.message = user_msg
             self.from_role = Role.USER
             if user_msg.is_tool_call():
@@ -1078,6 +1101,15 @@ class Orchestrator(BaseOrchestrator[AgentT, UserT, Message]):
                 self.termination_reason = TerminationReason.AGENT_STOP
 
             self.trajectory.append(agent_msg)
+            diagnostic_recorder = getattr(self.environment, "diagnostic_recorder", None)
+            if diagnostic_recorder is not None and not agent_msg.is_tool_call():
+                diagnostic_recorder.message_event(
+                    "agent_turn",
+                    "agent",
+                    agent_msg.content or "",
+                    ["agent"],
+                    event_id=f"message:{self.step_count}:agent",
+                )
             self.message = agent_msg
             self.from_role = Role.AGENT
             if agent_msg.is_tool_call():
@@ -1099,6 +1131,14 @@ class Orchestrator(BaseOrchestrator[AgentT, UserT, Message]):
                         for call in agent_msg.tool_calls
                     ]
                     self.trajectory.extend(tool_results)
+                    diagnostic_recorder = getattr(
+                        self.environment, "diagnostic_recorder", None
+                    )
+                    if diagnostic_recorder is not None:
+                        for tool_result in tool_results:
+                            diagnostic_recorder.tool_delivered(
+                                tool_result.id, viewer="agent"
+                            )
                     self.message = self._wrap_tool_results(tool_results)
                     self.done = True
                     self.termination_reason = TerminationReason.AGENT_STOP
@@ -1125,6 +1165,12 @@ class Orchestrator(BaseOrchestrator[AgentT, UserT, Message]):
                 "Number of tool calls and tool messages should be the same"
             )
             self.trajectory.extend(tool_results)
+            diagnostic_recorder = getattr(self.environment, "diagnostic_recorder", None)
+            if diagnostic_recorder is not None:
+                for tool_result in tool_results:
+                    diagnostic_recorder.tool_delivered(
+                        tool_result.id, viewer="agent"
+                    )
             self.message = self._wrap_tool_results(tool_results)
             self.to_role = self.from_role
             self.from_role = Role.ENV

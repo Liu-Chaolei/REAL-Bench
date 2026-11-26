@@ -1,9 +1,9 @@
 """Tick adapter for a complete Gateway, orchestrator and native Qwen Code."""
 
-import audioop
 import base64
 from collections import Counter
 
+from tau2.adapters.qwen_audio_agent.config import QWEN_AGENT_INPUT_AUDIO_FORMAT
 from tau2.adapters.qwen_audio_agent.provider import QwenAgentProvider
 from tau2.adapters.qwen_audio_agent.transcription.base import PlayedAudioTranscriber
 from tau2.config import (
@@ -11,12 +11,15 @@ from tau2.config import (
     DEFAULT_QWEN_ASR_STREAMING_MODEL,
     DEFAULT_TELEPHONY_RATE,
 )
-from tau2.data_model.audio import TELEPHONY_AUDIO_FORMAT, AudioEncoding, AudioFormat
+from tau2.data_model.audio import AudioEncoding, AudioFormat
 from tau2.data_model.message import ToolCall
 from tau2.data_model.transcript import LiveTranscriptTick
 from tau2.voice.audio_native.adapter import DiscreteTimeAdapter
 from tau2.voice.audio_native.async_loop import BackgroundAsyncLoop
-from tau2.voice.audio_native.audio_converter import StreamingTelephonyConverter
+from tau2.voice.audio_native.audio_converter import (
+    StreamingPcm16Converter,
+    pcm16_to_pcm16,
+)
 from tau2.voice.audio_native.tick_result import PlaybackCancellation
 
 
@@ -38,8 +41,9 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
     ):
         if reasoning_effort is not None:
             raise ValueError("Configure reasoning on the Qwen system")
-        if audio_format is not None and audio_format != TELEPHONY_AUDIO_FORMAT:
-            raise ValueError("qwen_agent expects 8 kHz mu-law audio")
+        audio_format = audio_format or QWEN_AGENT_INPUT_AUDIO_FORMAT
+        if audio_format != QWEN_AGENT_INPUT_AUDIO_FORMAT:
+            raise ValueError("qwen_agent expects SAASR PCM16 audio at 16 kHz")
         if language not in (None, "en", "en-US"):
             raise ValueError("The first Qwen Agent integration supports English only")
         super().__init__(tick_duration_ms, audio_format, send_audio_instant=False)
@@ -51,8 +55,7 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
             self.playback_audio_format.bytes_per_second * tick_duration_ms / 1000
         )
         self._native_playback = config.asr_model == DEFAULT_QWEN_ASR_STREAMING_MODEL
-        if self._native_playback:
-            self.playback = self.playback.__class__(self.playback_audio_format)
+        self.playback = self.playback.__class__(self.playback_audio_format)
         self.realtime_pacing = True
         self.config, self.model = config, model
         self.provider = provider or QwenAgentProvider(config, trace_path)
@@ -199,8 +202,9 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
         self.transcriber.validate_config()
         await self.provider.connect(policy, tools)
         await self.transcriber.connect()
-        self._input_converter = StreamingTelephonyConverter(
-            input_sample_rate=self.provider.input_sample_rate,
+        self._input_converter = StreamingPcm16Converter(
+            input_sample_rate=self.audio_format.sample_rate,
+            output_sample_rate=self.provider.input_sample_rate,
         )
 
     def run_tick(self, user_audio, tick_number=None):
@@ -308,9 +312,13 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
                 data = pcm
             else:
                 converter = self._converters.setdefault(
-                    rate, StreamingTelephonyConverter(output_sample_rate=rate)
+                    rate,
+                    StreamingPcm16Converter(
+                        input_sample_rate=rate,
+                        output_sample_rate=self.playback_audio_format.sample_rate,
+                    ),
                 )
-                data = converter.convert_output(pcm)
+                data = converter.convert_output(pcm, rate)
             self._received[response_id] += len(data)
             result.agent_audio_chunks.append((data, response_id))
         elif kind == "audio_done":
@@ -464,16 +472,16 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
         await self._playback_progress()
         played = result.get_played_agent_audio()
         if hasattr(self.transcriber, "send_native"):
-            if self._native_playback:
-                await self.transcriber.send_native(
-                    played, self.playback_audio_format.sample_rate
-                )
-            else:
-                await self.transcriber.send_native(
-                    audioop.ulaw2lin(played, 2), DEFAULT_TELEPHONY_RATE
-                )
+            await self.transcriber.send_native(
+                played, self.playback_audio_format.sample_rate
+            )
         else:
-            await self.transcriber.send(audioop.ulaw2lin(played, 2))
+            observer_pcm, _ = pcm16_to_pcm16(
+                played,
+                self.playback_audio_format.sample_rate,
+                DEFAULT_TELEPHONY_RATE,
+            )
+            await self.transcriber.send(observer_pcm)
         if result.was_truncated and result.contains_speech:
             queue_partial = getattr(self.transcriber, "queue_pending", None)
             if queue_partial is not None:

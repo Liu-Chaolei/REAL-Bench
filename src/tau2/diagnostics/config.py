@@ -106,6 +106,9 @@ class MetricsConfig(BaseModel):
     max_requests: int = Field(default=DEFAULT_DIAGNOSTIC_MAX_REQUESTS, ge=1)
     timeout_seconds: float = Field(default=DEFAULT_DIAGNOSTIC_TIMEOUT_SECONDS, gt=0)
     max_characters: int = Field(default=DEFAULT_DIAGNOSTIC_MAX_CHARACTERS, ge=1)
+    state_sidecar: Literal["off", "online_full"] = "off"
+    state_sidecar_queue_size: int = Field(default=256, ge=1)
+    state_sidecar_drain_timeout_seconds: float = Field(default=900.0, gt=0)
     model: ModelProfile = Field(default_factory=ModelProfile)
     models: dict[
         Literal[

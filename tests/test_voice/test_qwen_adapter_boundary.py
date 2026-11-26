@@ -14,6 +14,7 @@ from tau2.adapters.registry import (
     create_registered_adapter,
     prepare_adapter_config,
 )
+from tau2.data_model.audio import AudioEncoding
 from tau2.data_model.run_config import AudioNativeConfig
 from tau2.data_model.user_simulation import UserSimulationConfig
 
@@ -95,6 +96,30 @@ def test_qwen_factory_creates_separate_unconnected_resources(monkeypatch):
     left.disconnect()
     left.disconnect()
     right.disconnect()
+
+
+def test_qwen_adapter_uses_saasr_pcm_input_contract():
+    behavior = adapter_behavior("qwen_agent", QwenAgentConfig())
+    assert behavior.input_audio_format.encoding == AudioEncoding.PCM_S16LE
+    assert behavior.input_audio_format.sample_rate == 16000
+    assert behavior.playback_audio_format.sample_rate == 24000
+
+
+def test_qwen_agent_initial_message_uses_qwen_playback_format():
+    from tau2.agent.discrete_time_audio_native_agent import (
+        DiscreteTimeAudioNativeAgent,
+    )
+
+    agent = DiscreteTimeAudioNativeAgent(
+        tools=[],
+        domain_policy="policy",
+        provider="qwen_agent",
+        qwen_agent_config=QwenAgentConfig(),
+        tick_duration_ms=200,
+    )
+    assert agent.audio_format.encoding == AudioEncoding.PCM_S16LE
+    assert agent.audio_format.sample_rate == 16000
+    assert agent.create_initial_message().audio_format.sample_rate == 24000
 
 
 def test_generic_agent_delegates_prompt_greeting_and_stop_behavior():

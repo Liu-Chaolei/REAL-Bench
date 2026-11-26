@@ -16,6 +16,7 @@ class AdapterBehavior(BaseModel):
     initial_greeting: bool = True
     flush_results_on_stop: bool = False
     hosted_turn_detection: bool = False
+    input_audio_format: AudioFormat | None = None
     playback_audio_format: AudioFormat | None = None
     protocol_trace: bool = False
 

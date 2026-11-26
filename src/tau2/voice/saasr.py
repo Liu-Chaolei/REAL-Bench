@@ -9,6 +9,7 @@ import threading
 import time
 from concurrent.futures import CancelledError, TimeoutError
 from pathlib import Path
+from queue import Empty, Full, Queue
 
 import numpy as np
 
@@ -199,6 +200,22 @@ class SaasrSession:
         self.events.append({"event": "generated", **metadata})
         return pcm.tobytes(), metadata
 
+    def synthesize_stream(self, texts, *, base_raw_data=None):
+        """Synthesize sentence-sized foreground segments in the background.
+
+        The external worker protocol still returns one foreground waveform per
+        request. Splitting the caller reply into sentence requests lets the
+        first playable segment reach the caller while later segments are being
+        prepared. The stream is deliberately independent of evaluation data.
+        """
+        stream = SaasrStream(
+            self,
+            texts,
+            base_raw_data=base_raw_data,
+        )
+        stream.start()
+        return stream
+
     def commit(self, full_message):
         """Calibrate once, at the first accepted utterance; return initial lead-in samples."""
         foreground = full_message.raw_data["saasr_foreground"]
@@ -355,3 +372,89 @@ class SaasrSession:
 SAASR_AUDIO_FORMAT = AudioFormat(
     encoding=AudioEncoding.PCM_S16LE, sample_rate=PCM_SAMPLE_RATE
 )
+
+
+class SaasrStream:
+    """Background sentence synthesis with first-chunk and cancellation state."""
+
+    def __init__(self, session, texts, *, base_raw_data=None):
+        self.session = session
+        self.texts = [text for text in texts if text]
+        self.base_raw_data = dict(base_raw_data or {})
+        self.queue = Queue(maxsize=3)
+        self.cancelled = threading.Event()
+        self.completed = threading.Event()
+        self.error: BaseException | None = None
+        self.thread: threading.Thread | None = None
+
+    def start(self):
+        """Start sentence synthesis exactly once."""
+        if self.thread is not None:
+            raise RuntimeError("SAASR stream already started")
+        self.thread = threading.Thread(
+            target=self._run, name="tau-saasr-stream", daemon=True
+        )
+        self.thread.start()
+
+    def _run(self):
+        try:
+            for index, text in enumerate(self.texts):
+                if self.cancelled.is_set():
+                    return
+                audio, metadata = self.session.synthesize(text)
+                item = {
+                    "text": text,
+                    "audio": audio,
+                    "metadata": metadata,
+                    "final": index == len(self.texts) - 1,
+                }
+                while not self.cancelled.is_set():
+                    try:
+                        self.queue.put(item, timeout=0.1)
+                        break
+                    except Full:
+                        continue
+        except BaseException as error:
+            self.error = error
+        finally:
+            self.completed.set()
+
+    def wait_first(self, timeout=None):
+        """Wait for the first segment, returning ``None`` on clean exhaustion."""
+        deadline = None if timeout is None else time.monotonic() + timeout
+        while True:
+            if self.error is not None:
+                raise self.error
+            try:
+                return self.queue.get(timeout=0.1)
+            except Empty:
+                if self.completed.is_set():
+                    if self.error is not None:
+                        raise self.error
+                    return None
+                if deadline is not None and time.monotonic() >= deadline:
+                    raise TimeoutError("Timed out waiting for the first SAASR segment")
+
+    def poll(self):
+        """Return ``(item, done)`` without waiting for a later segment."""
+        if self.error is not None:
+            raise self.error
+        try:
+            return self.queue.get_nowait(), False
+        except Empty:
+            return None, self.completed.is_set()
+
+    def cancel(self):
+        """Stop admission of future segments and release queued work."""
+        self.cancelled.set()
+        while True:
+            try:
+                self.queue.get_nowait()
+            except Empty:
+                break
+
+    def close(self):
+        """Cancel and join the producer without waiting on worker inference."""
+        self.cancel()
+        if self.thread is not None and self.thread is not threading.current_thread():
+            self.thread.join(timeout=2)
