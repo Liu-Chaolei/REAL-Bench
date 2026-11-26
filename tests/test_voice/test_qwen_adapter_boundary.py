@@ -1,10 +1,12 @@
 """Qwen adaptation boundaries use only local doubles, without Docker or live APIs."""
 
+import asyncio
 import importlib
 import os
 import subprocess
 import sys
 from types import SimpleNamespace
+from unittest.mock import AsyncMock
 
 import pytest
 
@@ -14,7 +16,8 @@ from tau2.adapters.registry import (
     create_registered_adapter,
     prepare_adapter_config,
 )
-from tau2.data_model.audio import AudioEncoding
+from tau2.config import DEFAULT_QWEN_ASR_MODEL, DEFAULT_QWEN_ASR_STREAMING_MODEL
+from tau2.data_model.audio import AudioEncoding, AudioFormat
 from tau2.data_model.run_config import AudioNativeConfig
 from tau2.data_model.user_simulation import UserSimulationConfig
 
@@ -59,6 +62,71 @@ assert 'tau2.adapters.qwen_audio_agent.runtime' not in sys.modules
         env=dict(os.environ, LITELLM_LOCAL_MODEL_COST_MAP="True"),
     )
     assert result.returncode == 0, result.stderr
+
+
+@pytest.mark.parametrize(
+    "provider,model",
+    [
+        pytest.param("qwen", DEFAULT_QWEN_ASR_STREAMING_MODEL, id="native-streaming"),
+        pytest.param("qwen", DEFAULT_QWEN_ASR_MODEL, id="batch-qwen"),
+        pytest.param("deepgram", "nova-3", id="deepgram"),
+    ],
+)
+def test_qwen_playback_duration_survives_connect_and_reconnect(
+    monkeypatch, provider, model
+):
+    """Connection resets must preserve the playback clock and audio encoding."""
+    from tau2.adapters.qwen_audio_agent.adapter import DiscreteTimeQwenAgentAdapter
+
+    config = QwenAgentConfig(
+        asr_provider=provider,
+        asr_model=model,
+        asr_base_url="https://dashscope.aliyuncs.com",
+    )
+    adapter = DiscreteTimeQwenAgentAdapter(
+        200,
+        config,
+        provider=SimpleNamespace(is_connected=True),
+        transcriber=SimpleNamespace(),
+    )
+    monkeypatch.setattr(adapter, "_connect", AsyncMock())
+    monkeypatch.setattr(adapter, "_disconnect", AsyncMock())
+
+    class InlineLoop:
+        is_running = False
+
+        def start(self):
+            self.is_running = True
+
+        def stop(self):
+            self.is_running = False
+
+        def run_coroutine(self, coroutine, **kwargs):
+            return asyncio.run(coroutine)
+
+    monkeypatch.setattr(adapter, "_bg_loop", InlineLoop())
+    expected_format = AudioFormat(encoding=AudioEncoding.PCM_S16LE, sample_rate=24000)
+    payload = bytes(expected_format.bytes_per_second * 2)
+
+    try:
+        for _ in range(2):
+            adapter.connect("", [])
+            assert adapter.playback_audio_format == expected_format
+            assert adapter.playback.format == expected_format
+            assert adapter._speech_detector.rate == expected_format.sample_rate
+            # Queue two seconds without sleeping or contacting a provider.
+            adapter.playback.clock = lambda: 0.0
+            adapter.playback.append(payload, "response", received=0.0)
+            assert adapter.playback.queue[-1]["end"] == pytest.approx(2.0)
+            adapter.playback.drain(0.2)
+            expected_bytes = expected_format.bytes_per_second // 5
+            assert adapter.playback.played["response"] == expected_bytes
+            assert adapter.playback_bytes_per_tick == expected_bytes
+            adapter.disconnect()
+            assert adapter.playback.format == expected_format
+            assert not adapter.playback.queue
+    finally:
+        adapter.disconnect()
 
 
 def test_qwen_factory_creates_separate_unconnected_resources(monkeypatch):

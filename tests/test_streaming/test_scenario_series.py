@@ -350,7 +350,10 @@ def test_interrupted_request_cannot_consume_stop_for_the_following_stage():
     assert controller.transition_pending
 
 
-def test_missing_last_request_is_logged_without_overriding_business_score(monkeypatch):
+@pytest.mark.parametrize("termination_reason", ["user_stop", "watchdog_stall"])
+def test_missing_last_request_is_logged_without_overriding_business_score(
+    monkeypatch, termination_reason
+):
     from tau2.data_model.simulation import SimulationRun
     from tau2.data_model.tasks import EvaluationCriteria, RewardType
     from tau2.evaluator.evaluator import EvaluationType, evaluate_simulation
@@ -368,14 +371,21 @@ def test_missing_last_request_is_logged_without_overriding_business_score(monkey
         "tau2.evaluator.evaluator.EnvironmentEvaluator.calculate_reward",
         lambda **kw: RewardInfo(reward=1.0),
     )
-    summary = ScenarioStages(scene).summary("user_stop")
+    # This fixture does not depend on registering the retired mock domain.
+    monkeypatch.setattr(
+        "tau2.evaluator.evaluator.registry.get_env_constructor",
+        lambda domain: lambda **kwargs: Environment(
+            "mock", "Fixture policy", ToolKitBase(DB())
+        ),
+    )
+    summary = ScenarioStages(scene).summary(termination_reason)
     result = SimulationRun(
         id="test",
         task_id="series",
         start_time="start",
         end_time="end",
         duration=1,
-        termination_reason="user_stop",
+        termination_reason=termination_reason,
         info={"scenario_series": summary},
     )
     reward = evaluate_simulation(

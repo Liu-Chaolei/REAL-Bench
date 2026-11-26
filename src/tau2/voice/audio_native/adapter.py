@@ -217,11 +217,12 @@ class DiscreteTimeAdapter(ABC):
             elif task.done() and not task.cancelled():
                 task.exception()
         self._stream_result = None
-        self.playback = MediaPlayback(self.audio_format)
+        # Input and playback can use different encodings and sample rates.
+        self.playback = MediaPlayback(self.playback_audio_format)
         self._media_rows = []
         self._media_origin = None
         self._played_stream_ms = 0.0
-        self._speech_detector = SpeechDetector(self.audio_format.sample_rate)
+        self._speech_detector = SpeechDetector(self.playback_audio_format.sample_rate)
         self._speech_origin = self._speech_end = None
         self._speech_intervals = []
         self._buffered_agent_audio.clear()

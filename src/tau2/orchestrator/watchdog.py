@@ -95,6 +95,12 @@ status "speaking" or is_final=false means the user is still talking: always
 continue and wait for that turn to finish. Do not stop while a user utterance
 is incomplete, even if the Agent's last completed answer is unchanged.
 
+Confirmed ASR fragments are recorded once, when released. Missing transcript
+text is not proof of silence; check the live speech/output flags. Dialogue
+timestamps use the host wall clock (or explicitly marked ASR release times),
+while application operations may use the scenario clock. Do not compare times
+from different clocks without their supplied current-time references.
+
 Return JSON only with these five fields: decision, state, confidence, reason,
 and evidence. Use the following values exactly; do not invent synonyms.
 
@@ -184,7 +190,7 @@ class WatchdogController:
                 call_name="watchdog_health_check",
                 response_model=WatchdogVerdict,
                 response_validation_retries=1,
-                **self.judge_settings.model_args,
+                **self.judge_settings.arguments(),
             )
             verdict = WatchdogVerdict.model_validate_json(
                 extract_json_from_llm_response(response.content or "{}")
@@ -223,8 +229,22 @@ class WatchdogController:
             name="tau2-watchdog-judge",
             daemon=True,
         )
+        previous_phase = self.last_phase
+        self.heartbeat(self.last_tick, "watchdog_judge")
         self._judge_thread.start()
-        self._judge_thread.join(timeout=self.config.judge_timeout_seconds)
+        deadline = time.monotonic() + self.config.judge_timeout_seconds
+        try:
+            while self._judge_thread.is_alive():
+                remaining = deadline - time.monotonic()
+                if remaining <= 0:
+                    break
+                self._judge_thread.join(
+                    timeout=min(remaining, self.config.heartbeat_timeout_seconds / 3)
+                )
+                # The main thread is alive inside its own bounded inspection.
+                self.heartbeat(self.last_tick, "watchdog_judge")
+        finally:
+            self.heartbeat(self.last_tick, previous_phase)
         try:
             return self._judge_queue.get_nowait()
         except queue.Empty:
@@ -292,10 +312,12 @@ def _conversation_events(
 ) -> tuple[list[dict], dict | None]:
     """Collapse repeated streaming chunks into completed and active turns.
 
-    Full-duplex trajectories intentionally repeat the latest cumulative Agent
-    transcript on silent ticks.  This function only updates an Agent turn while
-    it is active, and concatenates incremental User chunks by utterance ID.
+    Explicit Live metadata supplies confirmed fragments, not cumulative text.
+    Legacy adapters can repeat cumulative Agent text on silent ticks. User
+    chunks remain incremental and are grouped by utterance ID.
     """
+    from tau2.utils.transcript.live import live_metadata
+
     # Reconstruct turns from the full in-memory trajectory. The tick bound
     # must not discard an earlier completed dialogue turn merely because the
     # adapter emitted many silent ticks afterward.
@@ -310,6 +332,35 @@ def _conversation_events(
         for role, chunk in (("user", tick.user_chunk), ("agent", tick.agent_chunk)):
             if chunk is None:
                 continue
+            if role == "agent":
+                metadata = live_metadata(tick)
+                if metadata is not None:
+                    for index, fragment in enumerate(metadata.fragments):
+                        if fragment.speaker != "agent" or not fragment.text.strip():
+                            continue
+                        key = (
+                            role,
+                            "live",
+                            metadata.session_id,
+                            fragment.event_id or (tick.tick_id, index),
+                        )
+                        if key not in turns:
+                            order += 1
+                            turns[key] = {
+                                "role": role,
+                                "start_time": tick_time,
+                                "end_time": tick_time,
+                                "time_basis": "asr_release_host_wall_clock",
+                                "status": "completed",
+                                "is_final": True,
+                                "_order": order,
+                            }
+                        turns[key].update(
+                            text=fragment.text.strip(),
+                            audio_start_ms=fragment.start_ms,
+                            audio_end_ms=fragment.end_ms,
+                        )
+                    continue
             raw_content = chunk.content or ""
             content = raw_content.strip()
             speaking = bool(chunk.contains_speech)
@@ -322,6 +373,9 @@ def _conversation_events(
                         order += 1
                         key = (role, f"synthetic-{order}")
                 elif open_keys.get(role) not in (None, key):
+                    previous = turns.get(open_keys[role])
+                    if previous is not None and previous["status"] == "speaking":
+                        previous["status"] = "interrupted"
                     active_speech[role] = False
                 open_keys[role] = key
                 active_speech[role] = True
@@ -336,7 +390,15 @@ def _conversation_events(
             # A silent chunk with cumulative Agent text is the settled version
             # of the preceding utterance.  Never create a new turn from it.
             if not content or key is None:
-                if not speaking and key is not None and role == "user":
+                if (
+                    not speaking
+                    and key is not None
+                    and role == "user"
+                    and chunk.is_final_chunk
+                ):
+                    previous = turns.get(key)
+                    if previous is not None and previous["status"] == "speaking":
+                        previous["status"] = "interrupted"
                     active_speech[role] = False
                     open_keys.pop(role, None)
                 continue
@@ -401,6 +463,7 @@ def _tool_events(ticks: list, environment_trace: list[dict]) -> list[dict]:
             "start_time": _iso_timestamp(row.get("started_time") or row.get("time")),
             "end_time": _iso_timestamp(row.get("observed_time") or row.get("time")),
             "duration_seconds": None,
+            "time_basis": "environment",
             "status": "error" if row.get("error") else "success",
             "result_summary": _short_value(row.get("result")),
         }
@@ -418,6 +481,7 @@ def _tool_events(ticks: list, environment_trace: list[dict]) -> list[dict]:
                     "start_time": tick_time,
                     "end_time": None,
                     "duration_seconds": None,
+                    "time_basis": "host_wall_clock",
                     "status": "pending",
                     "result_summary": None,
                 },
@@ -432,11 +496,13 @@ def _tool_events(ticks: list, environment_trace: list[dict]) -> list[dict]:
                     "start_time": None,
                     "end_time": tick_time,
                     "duration_seconds": None,
+                    "time_basis": "host_wall_clock",
                     "status": "error" if result.error else "success",
                     "result_summary": _short_value(result.content),
                 },
             )
-            record["end_time"] = tick_time
+            if record["time_basis"] == "host_wall_clock":
+                record["end_time"] = tick_time
             record["status"] = (
                 "error"
                 if result.error or result.execution_status == "rejected"
@@ -454,6 +520,7 @@ def compact_watchdog_context(
     pending: dict,
     context_ticks: int = 120,
     current_time: float | str | None = None,
+    wall_time: float | str | None = None,
     stage: dict | None = None,
 ) -> str:
     """Build an event-oriented, bounded history view for one watchdog request."""
@@ -470,6 +537,7 @@ def compact_watchdog_context(
         "environment": {
             "current_time": _iso_timestamp(current_time),
             "current_time_epoch": current_time,
+            "host_wall_time": _iso_timestamp(wall_time),
             "stage": stage,
         },
         "heartbeat": {
@@ -481,6 +549,7 @@ def compact_watchdog_context(
             "phase_age_seconds": pending.get("phase_age_seconds"),
         },
         "conversation": {
+            "time_basis": "host_wall_clock",
             "completed_turns": [row for row in conversations if row is not active_turn],
             "active_turn": active_turn,
         },
