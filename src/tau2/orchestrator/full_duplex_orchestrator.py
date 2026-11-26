@@ -365,6 +365,10 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
         """Initialize full-duplex specific state."""
         # Initialize user and agent states
         self.user_state = self.user.get_init_state()
+        runtime = getattr(self.environment, "scenario_runtime", None)
+        set_runtime = getattr(self.user, "set_saasr_scenario_runtime", None)
+        if runtime is not None and set_runtime is not None:
+            set_runtime(runtime)
 
         # Create first agent message
         # If agent has create_initial_message (audio-native agents), use it to get
@@ -771,15 +775,6 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
 
         # Single get_next_chunk call with both channels
         logger.debug(f"  [{participant_name}] Calling get_next_chunk...")
-        scenario_runtime = getattr(self.environment, "scenario_runtime", None)
-        pause_for_first_saasr_audio = bool(
-            not is_agent
-            and scenario_runtime is not None
-            and getattr(participant, "saasr_session", None) is not None
-            and not getattr(participant, "realtime_generation", True)
-        )
-        if pause_for_first_saasr_audio:
-            scenario_runtime.pause()
         try:
             new_chunk, new_state = participant.get_next_chunk(
                 state=new_state,
@@ -802,9 +797,6 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
                 [],
                 [],
             )
-        finally:
-            if pause_for_first_saasr_audio:
-                scenario_runtime.resume()
         logger.debug(
             f"  [{participant_name}] Returned chunk: "
             f"{self._format_chunk_summary(new_chunk, 'chunk')}"

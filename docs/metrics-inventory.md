@@ -2,6 +2,44 @@
 
 本文件记录当前实现。实施计划见 [metrics-cleanup-plan.md](metrics-cleanup-plan.md) 与 [metrics-cleanup-followup-plan.md](metrics-cleanup-followup-plan.md)。题目与历史轨迹没有重写。
 
+## 0. 当前版本实际评测项
+
+以下按当前 **Gaia2 全双工语音评测**整理，核对日期为 2026-11-26。以 [统一配置](../examples/real-metrics.unified.yaml) 和实际评分入口为准，不包含精简或新增指标的建议。
+
+统一配置显式启用 6 个诊断模块：`intent`、`execution`、`voice`、`interaction`、`state_interaction`、`conciseness`。环境结果由任务评分入口提供。对应的常规指标为：
+
+| 来源／模块 | 当前实际指标 | 评价内容 |
+| --- | --- | --- |
+| 环境评分 | `ENV_ASSERTION` | 环境目标是否达成；汇总字段为 `environment.env_assertion` |
+| `intent` | `precision`、`recall`、单次 `f1`／批量 `macro_f1` | 用户需求与实际后台任务之间的准确性、完整性 |
+| `execution` | `tools`、`parameters`、`order`、`effects`，以及按适用范围分组的执行总分 | 工具选择、参数、依赖顺序和执行效果；权重为 25/35/10/30 |
+| `voice` | 下列 12 项 `voice_interaction` 指标 | 响应、让话、主动打断、重叠、及时性与非正式发言处理 |
+| `interaction` | `effective_interaction_rate` | 发言中的交互行为是否有用 |
+| `state_interaction` | `progressivity.forward_rate`、`grounding.consistent_rate` | 是否推进相关工作，以及是否正确使用当时可见的状态与证据 |
+| `conciseness` | `required_coverage`、`length_efficiency`、`feedback_score` | 必要反馈覆盖、长度效率及二者的 F3 综合分 |
+
+语音的 12 项为：
+
+| 类别 | 字段 |
+| --- | --- |
+| 响应（3） | `response_rate`、`response_latency_mean`、`response_latency_p90` |
+| 让话（2） | `yield_rate`、`yield_latency_mean` |
+| 主动打断（2） | `agent_interruption_event_rate`、`agent_interrupted_turn_rate` |
+| 语音重叠（1） | `speech_overlap_duration` |
+| 及时响应（1） | `on_time_rate` |
+| 发言类型区分（3） | `selectivity_backchannel`、`selectivity_vocal_tic`、`selectivity_non_directed` |
+
+另有两项依赖运行场景与证据，不是统一配置自动生成的普通诊断项：
+
+| 场景 | 实际指标 | 评价内容 |
+| --- | --- | --- |
+| 后台请求管理／请求变化 | `persistent_task.completion_score` | 对应后台请求的结果与回复是否满足要求 |
+| 隐藏信息 | `hidden_intent.hidden_ask_rate` | 隐藏信息节点中已询问节点的比例 |
+
+现有 `avg_reward`、`pass^k` 结果统计仍保留。单次 F1 与 Macro F1 是同一能力在不同层级的结果；执行总分和反馈综合分是现有分项的汇总，不是新增独立评测。
+
+实际能否得到数值仍受适用性和证据约束：Modify／Cancel 变体不评价 environment、execution、state_interaction；没有对应事件的语音分项为空；长度效率与反馈综合分需要对应语言的 calibration。不适用、缺证据与评分失败保留状态／原因，不补成 0 或 1。
+
 ## 1. 能力指标
 
 | 家族 | 保留内容 | 当前计算口径 | 来源说明 |

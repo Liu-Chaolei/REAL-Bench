@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import copy
 import gzip
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -30,7 +31,9 @@ def read_json(path: Path) -> Any:
 
 def write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n")
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n")
+    temporary.replace(path)
 
 
 def pointer_tokens(pointer: str) -> list[str]:
@@ -39,8 +42,7 @@ def pointer_tokens(pointer: str) -> list[str]:
     if not pointer.startswith("/"):
         raise ValueError(f"Invalid JSON pointer: {pointer}")
     return [
-        token.replace("~1", "/").replace("~0", "~")
-        for token in pointer[1:].split("/")
+        token.replace("~1", "/").replace("~0", "~") for token in pointer[1:].split("/")
     ]
 
 
@@ -57,24 +59,22 @@ def pointer_get(value: Any, pointer: str) -> Any:
 
 
 def equal_value(actual: Any, expected: Any) -> bool:
-    if actual == expected:
-        return True
-    if isinstance(actual, str) and isinstance(expected, str):
-        return " ".join(actual.split()) == " ".join(expected.split())
-    return str(actual) == str(expected)
+    return json.dumps(actual, sort_keys=True) == json.dumps(expected, sort_keys=True)
 
 
 def load_snapshot(snapshot_id: str, data_root: Path) -> list[dict[str, Any]]:
+    if not re.fullmatch(r"[0-9a-f]{64}", snapshot_id):
+        raise ValueError("Invalid snapshot ID")
     path = data_root / "snapshots" / f"{snapshot_id}.json.gz"
-    with gzip.open(path, "rt") as stream:
-        return json.load(stream)
+    raw = gzip.decompress(path.read_bytes())
+    if hashlib.sha256(raw).hexdigest() != snapshot_id:
+        raise ValueError("Snapshot digest mismatch")
+    return json.loads(raw)
 
 
 def app_states(snapshot: list[dict[str, Any]]) -> dict[str, Any]:
     return {
-        app["name"]: app.get("app_state", {})
-        for app in snapshot
-        if app.get("name")
+        app["name"]: app.get("app_state", {}) for app in snapshot if app.get("name")
     }
 
 
@@ -112,10 +112,7 @@ def stage_numbers(text: str, count: int) -> set[int]:
 
 
 def inventory(review_dir: Path) -> dict[str, dict[str, Any]]:
-    return {
-        row["id"]: row
-        for row in read_json(review_dir / "inventory.json")["rows"]
-    }
+    return {row["id"]: row for row in read_json(review_dir / "inventory.json")["rows"]}
 
 
 def load_current_targets(v2_root: Path, data_root: Path) -> tuple[dict, dict]:
@@ -128,10 +125,7 @@ def load_current_targets(v2_root: Path, data_root: Path) -> tuple[dict, dict]:
         )
     return (
         {row["id"]: row for row in read_json(data_root / "tasks.json")},
-        {
-            row["id"]: row
-            for row in read_json(data_root / "interaction_variants.json")
-        },
+        {row["id"]: row for row in read_json(data_root / "interaction_variants.json")},
     )
 
 
@@ -218,6 +212,9 @@ def resolve_stage_evidence(
                 "public_tool": evidence.get("public_tool"),
                 "result_pointer": evidence.get("result_pointer"),
                 "status": "needs_replay",
+                "basis": "initial_snapshot"
+                if source == "snapshot"
+                else "candidate_reference_replay",
             }
             if source == "snapshot" and snapshot is not None:
                 actual, error = resolve_snapshot_pointer(
@@ -269,21 +266,48 @@ def build_packet(
     source_task: dict[str, Any] | None,
     findings: list[dict[str, Any]],
     data_root: Path,
+    replay: bool = False,
 ) -> dict[str, Any]:
-    evidence_task = source_task if meta["kind"] in {
-        "repetition",
-        "mind_change",
-        "addtask",
-        "modify",
-        "cancel",
-    } and source_task else task
+    evidence_task = task if task.get("scenario") else source_task
+    if evidence_task is None:
+        raise ValueError("No source task for evidence")
+    replay_scope = "current_task"
+    if not task.get("scenario"):
+        replay_scope = "source_task_only"
+        if task.get("variant_type") == "addtask":
+            from repair_gaia2_references import sha
+
+            from tau2.data_model.tasks import Task
+            from tau2.domains.gaia2.interaction_variants import (
+                InteractionVariant,
+                apply_variant,
+            )
+
+            source_model = Task.model_validate(source_task)
+            variant = dict(
+                task, source_sha256=sha(source_model.model_dump(mode="json"))
+            )
+            evidence_task = apply_variant(
+                source_model, InteractionVariant.model_validate(variant)
+            ).model_dump(mode="json")
+            replay_scope = "addtask_runtime_view"
     snapshot_id = (evidence_task.get("scenario") or {}).get("snapshot")
-    snapshot = (
-        load_snapshot(snapshot_id, data_root)
-        if snapshot_id
-        else None
-    )
+    snapshot = load_snapshot(snapshot_id, data_root) if snapshot_id else None
     stage_evidence = resolve_stage_evidence(evidence_task, findings, snapshot)
+    replay_report = None
+    pending = [row for row in stage_evidence if row["status"] == "needs_replay"]
+    if replay and pending:
+        from gaia2_source_replay import replay_evidence
+
+        replay_report = replay_evidence(evidence_task, pending, data_root)
+        resolved = {
+            (row["stage"], row["evidence_index"]): row
+            for row in replay_report.pop("rows")
+        }
+        stage_evidence = [
+            resolved.get((row["stage"], row["evidence_index"]), row)
+            for row in stage_evidence
+        ]
     pointer_evidence = resolve_finding_pointers(findings, snapshot)
     # Stage evidence carries an explicit authoring reference and expected
     # value. Paths extracted from reviewer prose are only hints: prose often
@@ -305,17 +329,58 @@ def build_packet(
         "kind": meta["kind"],
         "source_task_id": meta["source_task_id"],
         "snapshot_id": snapshot_id,
+        "scenario_clock": {
+            key: evidence_task["scenario"].get(key)
+            for key in ("start_time", "timezone")
+        },
+        "replay_scope": replay_scope,
+        "replay": replay_report,
         "evidence_status": status,
         "findings": findings,
         "stage_evidence": stage_evidence,
         "finding_pointers": pointer_evidence,
         "source_task_context": {
             "source_task_id": meta["source_task_id"],
-            "source_sha256": (source_task or {}).get("scenario", {}).get(
-                "source_sha256"
-            ),
+            "source_sha256": (source_task or {})
+            .get("scenario", {})
+            .get("source_sha256"),
         },
     }
+
+
+def refresh_index(out: Path) -> dict:
+    """Summarize existing packets without discarding earlier evidence batches."""
+    rows = []
+    for path in sorted((out / "source-evidence").glob("*.json")):
+        packet = read_json(path)
+        if "task_id" not in packet:
+            continue
+        rows.append(
+            {
+                "task_id": packet["task_id"],
+                "kind": packet["kind"],
+                "finding_indexes": [item["index"] for item in packet["findings"]],
+                "evidence_status": packet["evidence_status"],
+                "replay_executed": packet.get("replay") is not None,
+                "source_evidence_path": str(path),
+            }
+        )
+    path = out / "source-evidence-index.jsonl"
+    temp = path.with_suffix(".jsonl.tmp")
+    temp.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows))
+    temp.replace(path)
+    summary = {
+        "version": VERSION,
+        "tasks": len(rows),
+        "scope": "Only referenced evidence; matching a candidate replay does not prove the answer correct",
+        "replay_executed": sum(row["replay_executed"] for row in rows),
+        "evidence_status": {
+            status: sum(row["evidence_status"] == status for row in rows)
+            for status in ("verified", "contradicted", "missing", "needs_replay")
+        },
+    }
+    write_json(out / "source-evidence-summary.json", summary)
+    return summary
 
 
 def main() -> None:
@@ -326,15 +391,17 @@ def main() -> None:
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--batch-size", type=int, default=10)
     parser.add_argument("--limit", type=int)
+    parser.add_argument("--batch-start", type=int, default=0)
+    parser.add_argument("--replay", action="store_true")
     args = parser.parse_args()
 
     meta_by_id = inventory(args.review_dir)
     unresolved = unresolved_by_task(args.input_root)
     tasks, variants = load_current_targets(args.input_root, args.data_root)
     rows = []
-    for task_id, indexes in sorted(unresolved.items()):
-        if args.limit is not None and len(rows) >= args.limit:
-            break
+    selected = sorted(unresolved.items())[args.batch_start :]
+    selected = selected[: args.limit or args.batch_size]
+    for task_id, indexes in selected:
         meta = meta_by_id.get(task_id)
         if not meta:
             continue
@@ -350,6 +417,7 @@ def main() -> None:
             source_task=source,
             findings=findings,
             data_root=args.data_root,
+            replay=args.replay,
         )
         out_path = args.out / "source-evidence" / f"{task_id}.json"
         write_json(out_path, packet)
@@ -362,28 +430,12 @@ def main() -> None:
                 "source_evidence_path": str(out_path),
             }
         )
-        if len(rows) % args.batch_size == 0:
-            write_json(
-                args.out / "source-evidence" / f"batch-{len(rows) // args.batch_size:04d}.json",
-                {"version": VERSION, "tasks": rows[-args.batch_size :]},
-            )
-    (args.out / "source-evidence-index.jsonl").write_text(
-        "".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows)
-    )
     write_json(
-        args.out / "source-evidence-summary.json",
-        {
-            "version": VERSION,
-            "tasks": len(rows),
-            "evidence_status": {
-                status: sum(row["evidence_status"] == status for row in rows)
-                for status in ("verified", "contradicted", "missing", "needs_replay")
-            },
-            "batch_size": args.batch_size,
-        },
+        args.out / "batches" / f"evidence-{args.batch_start:04d}-{len(rows):02d}.json",
+        {"version": VERSION, "tasks": rows},
     )
+    print(json.dumps(refresh_index(args.out), ensure_ascii=False))
 
 
 if __name__ == "__main__":
     main()
-

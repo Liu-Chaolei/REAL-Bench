@@ -1,9 +1,13 @@
 # REAL-derived diagnostics in τ-bench
 
+For the current metric inventory and the modules selected by the unified
+configuration, see [metrics-inventory.md](metrics-inventory.md).
+
 The optional diagnostics suite reports whole-call intent fidelity, four execution
-scores and eight waveform interaction measurements alongside the ordinary task
-reward. The execution adapter covers the Gaia2 tasks, including the 200 request
-variants in the 1,000-task population, and their three
+scores and unified voice interaction measurements alongside the task's environment
+result. Interaction usefulness, state interaction and concise feedback are
+additional opt-in modules. The execution adapter covers the Gaia2 tasks, including
+the 200 request variants in the 1,000-task population, and their three
 requests. Agent implementations share the same environment and playback evidence;
 only backend-input observation needs an Agent-specific integration.
 
@@ -70,8 +74,11 @@ Intent uses one chronological record of all actually delivered user requirements
 and one of all actually delivered top-level backend task messages. Both retain
 message boundaries, corrections and temporal anchors. There is no lossy summary.
 GT and prediction extraction are independent, and each intent is judged against
-the opposite raw text. The output contains Precision, Recall, F1, exact-complete
-match, directional item explanations, micro/macro summaries and coverage.
+the opposite raw text. The output contains Precision, Recall, F1 and directional
+item explanations. Batch Precision/Recall and Macro F1 give each task equal
+weight after averaging its trials. Macro F1 averages task F1 values; it is not
+recomputed from averaged Precision/Recall. Exact-complete match and micro F1 are
+retired. Coverage belongs to evaluation logs.
 
 ### Duplicate delegations (intent v2 legacy)
 
@@ -145,17 +152,26 @@ and actual call-start times; effects use executing app states after each operati
 Later authorized mutations do not erase a completed intermediate effect. Weights
 are 25/35/10/30. N/A dimensions redistribute weights; unknown units retain their
 weight as an interval. Pure query tasks use binary whole-task answer effects.
-Necessary speech in mixed tasks continues to be checked by the original reward.
+For current Gaia2 runs, necessary spoken feedback is evaluated by
+`conciseness.required_coverage` when that module is selected; it is not
+automatically part of the environment reward.
 
 Reference data describes one solution path. These execution scores measure the
 relation to that path and do not redefine τ outcome correctness. The original
 reward remains visible even when a different valid trajectory scores differently.
 
-`real_voice` reports mean/P90 response latency, response rate, interruption rate,
-speech overlap, on-time/late rates and audible pre-tool speech. It uses the pinned
-REAL VAD/resampler and threshold rules, with τ's actual media delivery/playback
-clock and delivered user turns. These are versioned separately from τ's original
-similarly named metrics. Rates pool event counts; P90 pools latency samples.
+New source-classified recordings report 12 metrics under `voice_interaction`,
+using `tau-voice-interaction/4`: mean/P90 response latency, response rate, mean
+yield latency, yield rate, interruption event/turn rates, speech overlap,
+on-time rate and three selectivity rates. Ordinary means and rates give tasks
+equal weight after averaging their trials. P90 uses task/trial-weighted latency
+samples. On-time means response delay < 2.75 seconds, independent of tools;
+yield confirmation requires one second of silence without a timeliness deadline.
+See [interaction-metrics.md](interaction-metrics.md) for exact definitions.
+
+Historical `real_voice` results retain their recorded versions and remain
+separate from the unified metrics. Late rate and audible pre-tool speech are
+retired from new output; historical definitions do not govern new recordings.
 
 Infrastructure and caller errors retain diagnostic detail but do not enter
 headline valid-sample aggregates. A model failure with complete evidence remains
@@ -191,9 +207,10 @@ and model ability scores are separate.
 
 Source revisions, licenses and upstream file hashes are shipped in
 `tau2/diagnostics/SOURCE.json`. The independent metric versions are
-`tau-real-intent/3`, `tau-real-execution/1`, and `tau-real-voice/1`.
-Duplicate delegation checking is a τ extension (`tau-intent-repetition/1`);
-the pinned original REAL source provenance remains in `SOURCE.json`.
+`tau-real-intent/3`, `tau-real-execution/1`, and, for new source-classified voice
+records, `tau-voice-interaction/4`. Duplicate delegation checking was a legacy
+τ extension (`tau-intent-repetition/1`); current intent v3 does not invoke it.
+The pinned original REAL source provenance remains in `SOURCE.json`.
 
 Implementation test results and the real frontend authentication limitation are
 recorded in [validation](real-metrics-validation.md).

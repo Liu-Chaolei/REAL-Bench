@@ -91,7 +91,17 @@ def loop_audio(audio, position, count, crossfade):
 class SaasrSession:
     """One trial's scene, cancellation token, audio cursor and evidence writers."""
 
-    def __init__(self, config, scene_yaml, directory, *, seed, language, identity=None):
+    def __init__(
+        self,
+        config,
+        scene_yaml,
+        directory,
+        *,
+        seed,
+        language,
+        identity=None,
+        foreground_synthesizer=None,
+    ):
         self.config = config
         self.scene_yaml = Path(scene_yaml).resolve()
         self.directory = Path(directory).resolve()
@@ -99,6 +109,7 @@ class SaasrSession:
         self.seed = seed
         self.language = language
         self.identity = identity
+        self.foreground_synthesizer = foreground_synthesizer
         self.pool = get_pool(config)
         self.cancelled = threading.Event()
         self.counter = itertools.count()
@@ -170,27 +181,40 @@ class SaasrSession:
         """Return new foreground and source metadata, never advancing playback."""
         index = next(self.counter)
         started = time.perf_counter()
-        result = self.request(
-            {
-                "op": "foreground",
-                "text": text,
-                "language": self.language,
-                "seed": turn_seed(self.seed, f"utterance:{index}"),
-                "output_dir": str(self.directory / f"utterance_{index:05d}"),
+        if self.foreground_synthesizer is not None:
+            pcm, result = self.foreground_synthesizer(text)
+            pcm = np.frombuffer(pcm, dtype="<i2")
+            if pcm.ndim != 1 or not pcm.size:
+                raise SaasrWorkerError("Foreground synthesizer returned empty PCM")
+            result = {
+                "speech_samples": len(pcm),
+                "transport_gain": 1.0,
+                "utterance": index,
+                **result,
             }
-        )
-        wet = np.load(result["path"], allow_pickle=False)
-        if (
-            wet.ndim != 1
-            or not wet.size
-            or not np.isfinite(wet).all()
-            or not 0 < result["speech_samples"] <= len(wet)
-        ):
-            raise SaasrWorkerError("Invalid SAASR foreground waveform")
-        # Transport PCM is temporary. Restore this gain before the final common
-        # mixer gain, so high foreground peaks are not clipped at this boundary.
-        transport_gain = min(1.0, 0.95 / max(float(np.max(np.abs(wet))), 1e-9))
-        pcm = np.rint(wet * transport_gain * 32767).astype("<i2")
+            transport_gain = result["transport_gain"]
+        else:
+            result = self.request(
+                {
+                    "op": "foreground",
+                    "text": text,
+                    "language": self.language,
+                    "seed": turn_seed(self.seed, f"utterance:{index}"),
+                    "output_dir": str(self.directory / f"utterance_{index:05d}"),
+                }
+            )
+            wet = np.load(result["path"], allow_pickle=False)
+            if (
+                wet.ndim != 1
+                or not wet.size
+                or not np.isfinite(wet).all()
+                or not 0 < result["speech_samples"] <= len(wet)
+            ):
+                raise SaasrWorkerError("Invalid SAASR foreground waveform")
+            # Transport PCM is temporary. Restore this gain before the final common
+            # mixer gain, so high foreground peaks are not clipped at this boundary.
+            transport_gain = min(1.0, 0.95 / max(float(np.max(np.abs(wet))), 1e-9))
+            pcm = np.rint(wet * transport_gain * 32767).astype("<i2")
         metadata = {
             **result,
             "transport_gain": transport_gain,
@@ -383,6 +407,7 @@ class SaasrStream:
         self.base_raw_data = dict(base_raw_data or {})
         self.queue = Queue(maxsize=3)
         self.cancelled = threading.Event()
+        self.first_audio_ready = threading.Event()
         self.completed = threading.Event()
         self.error: BaseException | None = None
         self.thread: threading.Thread | None = None
@@ -411,11 +436,17 @@ class SaasrStream:
                 while not self.cancelled.is_set():
                     try:
                         self.queue.put(item, timeout=0.1)
+                        if index == 0:
+                            self.first_audio_ready.set()
                         break
                     except Full:
                         continue
         except BaseException as error:
-            self.error = error
+            self.error = (
+                error
+                if isinstance(error, SaasrWorkerError)
+                else SaasrWorkerError(f"SAASR stream synthesis failed: {error}")
+            )
         finally:
             self.completed.set()
 
@@ -423,6 +454,8 @@ class SaasrStream:
         """Wait for the first segment, returning ``None`` on clean exhaustion."""
         deadline = None if timeout is None else time.monotonic() + timeout
         while True:
+            if self.cancelled.is_set():
+                return None
             if self.error is not None:
                 raise self.error
             try:
@@ -437,6 +470,8 @@ class SaasrStream:
 
     def poll(self):
         """Return ``(item, done)`` without waiting for a later segment."""
+        if self.cancelled.is_set():
+            return None, True
         if self.error is not None:
             raise self.error
         try:
@@ -447,6 +482,7 @@ class SaasrStream:
     def cancel(self):
         """Stop admission of future segments and release queued work."""
         self.cancelled.set()
+        self.completed.set()
         while True:
             try:
                 self.queue.get_nowait()

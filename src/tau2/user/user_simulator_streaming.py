@@ -485,8 +485,6 @@ class VoiceStreamingUserSimulator(
         self.scenario_dynamic_stage_tool_gts: dict[str, list[dict]] = {}
         self._dynamic_followup_events: list[dict] = []
         self._dynamic_followup_cache: dict[str, dict] = {}
-        if saasr_session is not None and not realtime_generation:
-            raise ValueError("SAASR needs asynchronous user generation")
         self._scenario_inputs = []
         self.scenario_constraints = None
         self._released_scenario_facts = []
@@ -510,6 +508,9 @@ class VoiceStreamingUserSimulator(
             else None
         )
         self._saasr_stream = None
+        # Set by the full-duplex orchestrator. This runtime is used only
+        # around the first-audio gate, never around the whole user turn.
+        self._saasr_scenario_runtime = None
 
         # Default yield_threshold_when_interrupting to yield_threshold_when_interrupted if not set
         if (
@@ -758,6 +759,21 @@ class VoiceStreamingUserSimulator(
         message, state = super().get_next_chunk(state, participant_chunk, tool_results)
         self._discard_last_control_message_from_history(state, message)
         return message, state
+
+    def set_saasr_scenario_runtime(self, runtime) -> None:
+        """Attach the scenario clock used by the first-audio gate."""
+        self._saasr_scenario_runtime = runtime
+
+    def _wait_for_saasr_first_audio(self, stream):
+        """Freeze only scenario time while waiting for the first segment."""
+        runtime = self._saasr_scenario_runtime
+        if runtime is not None:
+            runtime.pause()
+        try:
+            return stream.wait_first()
+        finally:
+            if runtime is not None:
+                runtime.resume()
 
     def _discard_last_control_message_from_history(
         self, state: "UserAudioStreamingState", message: UserMessage
@@ -1129,10 +1145,6 @@ class VoiceStreamingUserSimulator(
             return TurnTakingAction(
                 action="wait", info="Continuing to listen during stage transition"
             )
-        if not self.realtime_generation:
-            return self._compute_turn_taking_action(state)
-        if self._refresh_voice_tasks(state):
-            return TurnTakingAction(action="wait", info="Discarded obsolete generation")
         if (
             self._saasr_stream is not None
             and not state.is_talking
@@ -1146,6 +1158,10 @@ class VoiceStreamingUserSimulator(
                 return TurnTakingAction(action="wait", info="SAASR audio pending")
             else:
                 self._saasr_stream = None
+        if not self.realtime_generation:
+            return self._compute_turn_taking_action(state)
+        if self._refresh_voice_tasks(state):
+            return TurnTakingAction(action="wait", info="Discarded obsolete generation")
         if self._generation_task is not None:
             task = self._generation_task
             if task.origin == "scripted" and state.agent_speech_active:
@@ -2309,7 +2325,7 @@ class VoiceStreamingUserSimulator(
             segments, base_raw_data=base_raw_data
         )
         started = time.perf_counter()
-        first = stream.wait_first()
+        first = self._wait_for_saasr_first_audio(stream)
         state._tts_synthesis_seconds = time.perf_counter() - started
         if first is None:
             stream.close()

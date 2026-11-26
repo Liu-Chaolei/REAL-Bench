@@ -459,3 +459,37 @@ failed
 → 当前题立即检查
 → 保存小批次结果
 ```
+
+## 13. 已实现的运行机制
+
+来源 replay 位于 `scripts/gaia2_source_replay.py`，累计保存位于
+`scripts/gaia2_repair_batches.py`。二者均为离线修复工具，不修改正式评测代码。
+
+- snapshot 引用校验原始内容哈希后读取；state 引用读取指定阶段完成后的 checkpoint；
+  result 引用读取实际工具结果或已交付的参考回复，支持动态返回对象 ID。
+- checkpoint 包含该阶段全部事件及其依赖，避免遗漏竞争写操作。只执行所需阶段和依赖，
+  不调用 reward、评测模型或全量验收。
+- replay 失败会保存错误和已完成部分，未到达的 checkpoint 标为 missing，不能用初始状态代替。
+- `verified` 仅表示该条 evidence 与实际读取值相符；参考执行结果本身不能证明参考答案满足用户要求。
+- 每道题结果单独写入 `results/<task_id>.json`；中断后从这些记录恢复。
+- 累计文件由不可变 v2 基线加全部逐题结果生成，不再用当前 10 道覆盖上一批。
+- 重跑从基线构造同一道题，避免重复应用 add/remove。基线或证据改变时，旧响应不会被当作新复核结果。
+- 历史响应和结果分别保存在 `response-history/`、`result-history/`。
+- `batches/` 保存批次清单，`progress.json` 保存累计进度；目录锁阻止两个进程同时写入。
+- 题目级 fixed 表示产生了已接受修改；仍有未解决 finding 的数量另外记录，不能将 fixed 当作全部解决。
+
+实际使用现有修复入口，每次最多 10 道：
+
+```bash
+UV_FROZEN=1 .venv/bin/python scripts/repair_gaia2_unresolved.py unresolved-repair \
+  --input-root data/archives/gaia2/reference-repair-simple-v2 \
+  --out data/archives/gaia2/reference-repair-simple-v3 \
+  --evidence-root data/archives/gaia2/reference-repair-simple-v3 \
+  --resolve-sources --batch-start 0 --batch-size 10 --concurrency 1 \
+  --config docs/gaia2-reference-review.deepseek.yaml \
+  --env-file /hpc_stor03/sjtu_home/chaolei.liu/.config/qwaudio/config.env
+```
+
+下一批将 `--batch-start` 改为 10，再下一批改为 20。每题先恢复来源证据，再调用模型，
+不预先向模型提交全部题目。原有旧缓存可通过 `--offline --recover-cached` 显式恢复，
+但结果会标记为 `recovered_legacy_cache`，不算作新的来源复核。

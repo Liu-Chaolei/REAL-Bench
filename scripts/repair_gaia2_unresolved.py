@@ -13,15 +13,12 @@ import copy
 import gzip
 import json
 import re
-from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Any
 
 from pydantic import ValidationError
 from repair_gaia2_references import (
     DirectModel,
-    allowed_path,
-    apply_operation,
     load_env_file,
     load_sources,
     read_json,
@@ -105,12 +102,31 @@ def unresolved_rows(
     tasks, variants = load_v1(v1_root)
     rows = []
     response_dir = v1_root / "responses"
+    # v2 writes normalized finding rows to unresolved.jsonl, while v1 stored
+    # unresolved_findings directly in each response. Support both layouts.
+    indexed: dict[str, list[int]] = {}
+    unresolved_path = v1_root / "unresolved.jsonl"
+    if unresolved_path.exists():
+        for line in unresolved_path.read_text().splitlines():
+            if not line.strip():
+                continue
+            record = json.loads(line)
+            if "task_id" not in record or "finding_index" not in record:
+                continue
+            try:
+                index = int(record["finding_index"])
+            except (TypeError, ValueError):
+                continue
+            if index not in indexed.setdefault(record["task_id"], []):
+                indexed[record["task_id"]].append(index)
     for response_path in sorted(response_dir.glob("*.json")):
         response = read_json(response_path)
         indexes = response.get("unresolved_findings")
-        if response.get("status") != "complete" or not isinstance(indexes, list):
-            continue
         task_id = response.get("task_id") or response_path.stem
+        if not isinstance(indexes, list):
+            indexes = indexed.get(task_id)
+        if not isinstance(indexes, list):
+            continue
         inventory_row = inventory.get(task_id)
         if inventory_row is None:
             continue
@@ -440,6 +456,10 @@ The target remains a complete {target_type} JSON object locally. JSON Patch path
 
 Return JSON only with decisions and operations. A fix decision must have a corresponding operation. A keep decision must not change the target. Use unresolved when the current content should be retained because evidence is insufficient.
 
+Use decisions=[{{finding_index: integer, decision: fix|keep|unresolved, reason: string, evidence: string[]}}], operations=[{{op: add|replace|remove, path: JSON Pointer, value: JSON value}}], summary=string. Use the exact original finding indexes shown in the package. Do not omit decisions.
+
+source_evidence distinguishes initial_snapshot facts from candidate_reference_replay outcomes. A verified replay row only means that this candidate's execution produced the claimed value; it does not independently prove the candidate satisfied the caller. A missing row or replay error is unavailable evidence, never a successful verification. Do not change a value unless its required fields are actually present; omitted fields are not empty fields.
+
 PACKAGE:
 {json.dumps(prompt_package, ensure_ascii=False, separators=(",", ":"))}
 """
@@ -450,9 +470,33 @@ def prompt_package_v2(package: dict[str, Any]) -> dict[str, Any]:
     value = copy.deepcopy(
         {key: item for key, item in package.items() if key != "current_target"}
     )
-    finding_blob = json.dumps(
-        value.get("unresolved_findings", []), ensure_ascii=False
-    )
+    if isinstance(value.get("source_evidence"), dict):
+        packet = value["source_evidence"]
+        packet.pop("findings", None)  # Already present in unresolved_findings.
+        if isinstance(packet.get("replay"), dict):
+            packet["replay"].pop("completed_events", None)
+        for row in packet.get("stage_evidence", []):
+            if row.get("status") == "verified" and "actual" in row:
+                row.pop("expected", None)  # Same value; avoid duplicating payloads.
+
+        def bound_source(node):
+            if isinstance(node, dict):
+                for key, child in list(node.items()):
+                    if key in {"actual", "expected"} and size(child) > 5000:
+                        node[key] = {
+                            "omitted_large_value": True,
+                            "characters": size(child),
+                            "sha256": sha(child),
+                            "note": "Full value remains in the local source-evidence packet; no facts may be inferred from this omission",
+                        }
+                    else:
+                        bound_source(child)
+            elif isinstance(node, list):
+                for child in node:
+                    bound_source(child)
+
+        bound_source(packet)
+    finding_blob = json.dumps(value.get("unresolved_findings", []), ensure_ascii=False)
     referenced_ids = {
         event.get("id")
         for event in value.get("relevant_events", [])
@@ -684,7 +728,15 @@ def prepare_v2(
     return summary
 
 
-def run_v2(
+def run_v2(**kwargs) -> dict[str, Any]:
+    """Serialize output mutations across repair invocations."""
+    from gaia2_repair_batches import exclusive_output
+
+    with exclusive_output(kwargs["out"]):
+        return _run_v2(**kwargs)
+
+
+def _run_v2(
     *,
     v1_root: Path,
     review_dir: Path,
@@ -696,230 +748,157 @@ def run_v2(
     evidence_root: Path | None = None,
     batch_start: int = 0,
     batch_size: int | None = None,
+    resolve_sources: bool = False,
+    recover_cached: bool = False,
 ) -> dict[str, Any]:
-    task_map, variant_map = load_v1(v1_root)
-    packages = [read_json(path) for path in sorted((out / "inputs").glob("*.json"))]
-    if evidence_root is not None:
-        for package in packages:
-            evidence_path = evidence_root / "source-evidence" / f"{package['task_id']}.json"
-            if evidence_path.exists():
-                package["source_evidence"] = read_json(evidence_path)
-    if batch_start:
-        packages = packages[batch_start:]
-    if batch_size is not None:
-        packages = packages[:batch_size]
-    if limit is not None:
-        packages = packages[:limit]
-    model = DirectModel(config, out / "requests")
-    responses_dir = out / "responses"
-    tasks = copy.deepcopy(task_map)
-    variants = copy.deepcopy(variant_map)
-    changes = []
-    unresolved = []
+    """Commit each task separately, then export all completed task checkpoints."""
+    from gaia2_repair_batches import export_results, record_result
 
-    def one(package):
+    if out.resolve() == v1_root.resolve():
+        raise ValueError("Output must differ from the immutable input version")
+    tasks, variants = load_v1(v1_root)
+    paths = sorted((out / "inputs").glob("*.json"))
+    if not paths:
+        raise ValueError("No repair inputs; run unresolved-prepare first")
+    selected = paths[batch_start:]
+    if evidence_root is not None and not offline:
+        batch_size = min(batch_size or 10, 10)
+    if batch_size is not None:
+        selected = selected[:batch_size]
+    if limit is not None:
+        selected = selected[:limit]
+    model = None if offline else DirectModel(config, out / "requests")
+    batch_id = f"batch-{batch_start:04d}-{len(selected):02d}"
+    batch = {
+        "id": batch_id,
+        "selected_ids": [p.stem for p in selected],
+        "completed_ids": [],
+    }
+    for path in selected:
+        package = read_json(path)
+        task_id = package["task_id"]
+        baseline = (tasks if package["target_type"] == "task" else variants)[task_id]
+        if sha(baseline) != sha(package["current_target"]):
+            raise ValueError(f"Input package is stale: {task_id}")
+        if evidence_root is not None:
+            evidence_path = evidence_root / "source-evidence" / f"{task_id}.json"
+            if resolve_sources:
+                from build_gaia2_source_evidence import build_packet
+                from gaia2_source_replay import fingerprint
+
+                source = tasks[package["source_task_id"]]
+                evidence_task = baseline if package["target_type"] == "task" else source
+                evidence_key = sha(
+                    {
+                        "protocol": "resolved-sources-1",
+                        "task": fingerprint(evidence_task, data_root),
+                        "variant": baseline
+                        if package["target_type"] != "task"
+                        else None,
+                        "findings": package["unresolved_findings"],
+                    }
+                )
+                packet = read_json(evidence_path) if evidence_path.exists() else {}
+                if packet.get("replay_input_key") != evidence_key:
+                    packet = build_packet(
+                        task_id=task_id,
+                        meta={
+                            "kind": package["kind"],
+                            "source_task_id": package["source_task_id"],
+                        },
+                        task=baseline,
+                        source_task=source,
+                        findings=package["unresolved_findings"],
+                        data_root=data_root,
+                        replay=True,
+                    )
+                    packet["replay_input_key"] = evidence_key
+                    write_json(evidence_path, packet)
+                package["source_evidence"] = packet
+            elif evidence_path.exists():
+                package["source_evidence"] = read_json(evidence_path)
+        prompt = repair_prompt_v2(package)
         key = sha(
             {
-                "version": VERSION,
-                "task_id": package["task_id"],
-                "current_target": package["current_target"],
-                "findings": package["unresolved_findings"],
-                "relevant_events": package["relevant_events"],
-                "relevant_stages": package["relevant_stages"],
-                "evidence": package["evidence"],
-                "source_evidence": package.get("source_evidence"),
+                "prompt": prompt,
+                "target": sha(baseline),
+                "profile": config.model_dump(),
+                "protocol": "cumulative-repairs-1",
             }
         )
-        response_path = responses_dir / f"{package['task_id']}.json"
-        if response_path.exists():
-            old = read_json(response_path)
-            if offline or (
-                old.get("input_key") == key and old.get("status") == "complete"
-            ):
-                return package, old
-        if offline:
-            return package, {
-                "task_id": package["task_id"],
-                "status": "error",
-                "detail": "no cached response",
-                "input_key": key,
-            }
-        try:
-            raw = model.complete(repair_prompt_v2(package), REPAIR_SCHEMA)
-            response = json.loads(raw)
-            response.update(
-                task_id=package["task_id"], input_key=key, status="complete"
-            )
-        except Exception as exc:
-            response = {
-                "task_id": package["task_id"],
-                "input_key": key,
-                "status": "error",
-                "error": type(exc).__name__,
-                "detail": str(exc),
-            }
-        write_json(response_path, response)
-        return package, response
-
-    with ThreadPoolExecutor(max_workers=config.concurrency) as pool:
-        results = list(pool.map(one, packages))
-
-    for package, response in results:
-        task_id = package["task_id"]
-        target = copy.deepcopy(package["current_target"])
-        operations = (
-            response.get("operations", [])
-            if response.get("status") == "complete"
-            else []
-        )
-        errors = []
-        valid_operations = []
-        for operation in operations:
-            if not isinstance(operation, dict) or not operation.get("op"):
-                errors.append("invalid operation")
+        result_path = out / "results" / f"{task_id}.json"
+        old_result = read_json(result_path) if result_path.exists() else {}
+        if old_result.get("input_key") == key and old_result.get("status") != "failed":
+            batch["completed_ids"].append(task_id)
+            write_json(out / "batches" / (batch_id + ".json"), batch)
+            continue
+        response_path = out / "responses" / f"{task_id}.json"
+        response = read_json(response_path) if response_path.exists() else {}
+        reuse = (response.get("input_key") == key or recover_cached) and response.get(
+            "status"
+        ) == "complete"
+        if not reuse:
+            if offline:
+                # An old response stays in its cache; an evidence change cannot
+                # silently turn it into a freshly grounded model decision.
+                batch.setdefault("pending_ids", []).append(task_id)
                 continue
-            path = operation.get("path", "")
-            if package["target_type"] == "task" and path.startswith(
-                ("/events/", "/stages/")
-            ):
-                operation = dict(operation)
-                operation["path"] = "/scenario" + path
-            if not allowed_path(package["target_type"], operation.get("path", "")):
-                errors.append(f"forbidden path: {operation.get('path')}")
-                continue
+            if response:
+                write_json(
+                    out / "response-history" / task_id / (sha(response) + ".json"),
+                    response,
+                )
             try:
-                apply_operation(target, operation)
-                valid_operations.append(operation)
-            except (ValueError, KeyError, IndexError, TypeError) as exc:
-                errors.append(str(exc))
-        if response.get("status") == "complete":
-            errors.extend(
-                validate_one(target, package["target_type"], valid_operations)
-            )
-        if errors:
-            target = copy.deepcopy(package["current_target"])
-        decisions = []
-        for raw_decision in response.get("decisions", []):
-            if not isinstance(raw_decision, dict):
-                continue
-            decisions.append(
-                {
-                    "finding_index": raw_decision.get(
-                        "finding_index", raw_decision.get("index")
-                    ),
-                    "decision": raw_decision.get(
-                        "decision", raw_decision.get("status")
-                    ),
-                    "reason": raw_decision.get(
-                        "reason", raw_decision.get("rationale", "")
-                    ),
-                    "evidence": raw_decision.get("evidence", []),
+                if len(prompt) > 120000:
+                    raise ValueError(
+                        "Prompt exceeds 120k characters; evidence retained locally"
+                    )
+                raw = model.complete(prompt, REPAIR_SCHEMA)
+                response = json.loads(raw)
+                if not isinstance(response, dict):
+                    raise ValueError("Expected JSON object")
+                response.update(task_id=task_id, input_key=key, status="complete")
+            except Exception as exc:
+                response = {
+                    "task_id": task_id,
+                    "input_key": key,
+                    "status": "error",
+                    "detail": f"{type(exc).__name__}: {exc}",
                 }
-            )
-        unresolved_indexes = [
-            item.get("finding_index", item.get("index"))
-            for item in decisions
-            if item.get("decision") == "unresolved"
-        ]
-        if response.get("status") != "complete":
-            unresolved_indexes = [
-                item["index"] for item in package["unresolved_findings"]
-            ]
-        if package["target_type"] == "task":
-            tasks[task_id] = target
-        else:
-            variants[task_id] = target
-        if errors:
-            change_status = "failed"
-        elif valid_operations:
-            change_status = "fixed"
-        elif unresolved_indexes:
-            change_status = "unresolved"
-        else:
-            change_status = "kept"
-        changes.append(
-            {
-                "task_id": task_id,
-                "status": change_status,
-                "decisions": decisions,
-                "changed_paths": [item["path"] for item in valid_operations]
-                if not errors
-                else [],
-                "before_sha256": sha(package["current_target"]),
-                "after_sha256": sha(target),
-                "validation": {"errors": errors, "ok": not errors},
-            }
+            write_json(response_path, response)
+        record = record_result(package, response, tasks, key)
+        record["batch_id"] = batch_id
+        record["evidence_review"] = (
+            "recovered_legacy_cache"
+            if recover_cached
+            else ("source_replay_resolved" if resolve_sources else "provided_evidence")
         )
-        for index in unresolved_indexes:
-            unresolved.append(
+        if old_result:
+            write_json(
+                out / "result-history" / task_id / (sha(old_result) + ".json"),
+                old_result,
+            )
+        write_json(result_path, record)
+        batch["completed_ids"].append(task_id)
+        write_json(out / "batches" / (batch_id + ".json"), batch)
+        print(
+            json.dumps(
                 {
                     "task_id": task_id,
-                    "finding_index": index,
-                    "reason": next(
-                        (
-                            item.get("reason", "")
-                            for item in decisions
-                            if item.get("finding_index", item.get("index")) == index
-                        ),
-                        response.get("detail", "Evidence remains insufficient"),
-                    ),
-                    "current_content_kept": True,
+                    "status": record["status"],
+                    "open_findings": record["unresolved_count"],
                 }
-            )
-
-    for variant in variants.values():
-        source = tasks.get(variant["source_task_id"])
-        if source is not None:
-            from tau2.data_model.tasks import Task
-
-            variant["source_sha256"] = sha(
-                Task.model_validate(source).model_dump(mode="json")
-            )
-
-    write_json(out / "repaired-tasks.json", list(tasks.values()))
-    write_json(out / "repaired-interaction-variants.json", list(variants.values()))
-    runtime_tasks = list(tasks.values())
-    materialization_errors = []
-    try:
-        from tau2.data_model.tasks import Task
-        from tau2.domains.gaia2.interaction_variants import (
-            InteractionVariant,
-            apply_variant,
+            ),
+            flush=True,
         )
+    summary = export_results(out, tasks, variants)
+    if evidence_root is not None:
+        from build_gaia2_source_evidence import refresh_index
 
-        for raw_variant in variants.values():
-            try:
-                source = Task.model_validate(tasks[raw_variant["source_task_id"]])
-                variant = InteractionVariant.model_validate(raw_variant)
-                runtime_tasks.append(
-                    apply_variant(source, variant).model_dump(mode="json")
-                )
-            except Exception as exc:
-                materialization_errors.append(
-                    {"task_id": raw_variant.get("id"), "error": str(exc)}
-                )
-    except Exception as exc:
-        materialization_errors.append({"scope": "runtime_import", "error": str(exc)})
-    write_json(out / "repaired-all-tasks.json", runtime_tasks)
-    (out / "changes.jsonl").write_text(
-        "\n".join(json.dumps(item, ensure_ascii=False) for item in changes) + "\n"
-    )
-    (out / "unresolved.jsonl").write_text(
-        "\n".join(json.dumps(item, ensure_ascii=False) for item in unresolved) + "\n"
-    )
-    summary = {
-        "version": VERSION,
-        "tasks": len(packages),
-        "fixed": sum(item["status"] == "fixed" for item in changes),
-        "unresolved": sum(item["status"] == "unresolved" for item in changes),
-        "failed": sum(item["status"] == "failed" for item in changes),
-        "unresolved_finding_records": len(unresolved),
-        "source_tasks": len(tasks),
-        "interaction_variants": len(variants),
-        "runtime_tasks": len(runtime_tasks),
-        "materialization_errors": materialization_errors,
-    }
-    write_json(out / "summary.json", summary)
+        refresh_index(evidence_root)
+    summary["selected_this_batch"] = len(selected)
+    summary["pending_this_batch"] = len(batch.get("pending_ids", []))
+    write_json(out / "batches" / (batch_id + ".json"), {**batch, "summary": summary})
     return summary
 
 
@@ -937,6 +916,12 @@ def main() -> None:
     parser.add_argument("--evidence-root", type=Path)
     parser.add_argument("--batch-start", type=int, default=0)
     parser.add_argument("--batch-size", type=int)
+    parser.add_argument("--resolve-sources", action="store_true")
+    parser.add_argument(
+        "--recover-cached",
+        action="store_true",
+        help="Explicitly restore legacy cached patches; does not claim a new evidence review",
+    )
     parser.add_argument("--offline", action="store_true")
     args = parser.parse_args()
     if args.env_file:
@@ -955,7 +940,7 @@ def main() -> None:
             )
         )
     else:
-        if not (args.out / "inputs").exists():
+        if not any((args.out / "inputs").glob("*.json")):
             prepare_v2(
                 v1_root=args.input_root,
                 review_dir=args.review_dir,
@@ -982,6 +967,8 @@ def main() -> None:
                     evidence_root=args.evidence_root,
                     batch_start=args.batch_start,
                     batch_size=args.batch_size,
+                    resolve_sources=args.resolve_sources,
+                    recover_cached=args.recover_cached,
                 ),
                 ensure_ascii=False,
             )

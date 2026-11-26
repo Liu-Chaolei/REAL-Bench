@@ -42,9 +42,9 @@ def main():
     )
     parser.add_argument(
         "--user-audio-renderer",
-        choices=["saasr"],
+        choices=["standard", "saasr"],
         default="saasr",
-        help="Qwen Audio Agent uses the SAASR caller renderer.",
+        help="SAASR scene rendering with the configured Qwen caller TTS.",
     )
     parser.add_argument("--saasr-config", type=Path)
     parser.add_argument(
@@ -303,16 +303,19 @@ def main():
 
     if args.max_seconds:
         command.extend(["--timeout", str(args.max_seconds + 150)])
-    if args.saasr_config is None:
-        parser.error("Qwen Audio Agent requires --saasr-config")
-    command.extend(
-        [
-            "--user-audio-renderer",
-            "saasr",
-            "--saasr-config",
-            str(args.saasr_config.resolve()),
-        ]
-    )
+    if args.user_audio_renderer == "saasr":
+        if args.saasr_config is None:
+            parser.error("SAASR requires --saasr-config")
+        command.extend(
+            [
+                "--user-audio-renderer",
+                "saasr",
+                "--saasr-config",
+                str(args.saasr_config.resolve()),
+            ]
+        )
+    elif args.saasr_config is not None:
+        parser.error("--saasr-config requires --user-audio-renderer saasr")
     if args.resume:
         command.append("--auto-resume")
     if args.task_ids:
@@ -430,14 +433,17 @@ def run_shared(args, config):
             command += [flag, str(path.resolve())]
     if args.max_seconds:
         command += ["--timeout", str(args.max_seconds + 150)]
-    if args.saasr_config is None:
-        raise ValueError("Qwen Audio Agent requires --saasr-config")
-    command += [
-        "--user-audio-renderer",
-        "saasr",
-        "--saasr-config",
-        str(args.saasr_config.resolve()),
-    ]
+    if args.user_audio_renderer == "saasr":
+        if args.saasr_config is None:
+            raise ValueError("SAASR requires --saasr-config")
+        command += [
+            "--user-audio-renderer",
+            "saasr",
+            "--saasr-config",
+            str(args.saasr_config.resolve()),
+        ]
+    elif args.saasr_config is not None:
+        raise ValueError("--saasr-config requires --user-audio-renderer saasr")
     if getattr(args, "user_simulation_config", None):
         command += [
             "--user-simulation-config",

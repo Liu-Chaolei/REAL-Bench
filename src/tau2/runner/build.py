@@ -390,6 +390,22 @@ def build_voice_user(
         # Preserve the independent TTS settings used only for short interaction
         # inserts before the main caller renderer is switched to SAASR.
         interaction_insert_config = deepcopy(task_voice_settings.synthesis_config)
+        if interaction_insert_config.provider == "qwen":
+            from tau2.voice.synthesis.synthesize import synthesize_voice
+
+            def foreground_synthesizer(text):
+                audio = synthesize_voice(
+                    text,
+                    interaction_insert_config.provider,
+                    interaction_insert_config.provider_config,
+                )
+                return audio.data, {
+                    "provider": "qwen",
+                    "model": interaction_insert_config.provider_config.model_id,
+                    "sample_rate": audio.format.sample_rate,
+                }
+
+            saasr_session.foreground_synthesizer = foreground_synthesizer
         # Record the actual acoustic assignment rather than an unused legacy TTS voice.
         synthesis = task_voice_settings.synthesis_config
         synthesis.provider = "saasr"
