@@ -1,0 +1,913 @@
+{
+  "schema_version": "gaia2-benchmark-v1",
+  "benchmark_version": "compact",
+  "revision": "compact",
+  "domain": "gaia2",
+  "modes": [
+    "text",
+    "voice"
+  ],
+  "task_sources": {
+    "main": {
+      "file": "tasks.json",
+      "sha256": "2e9aff105f53511ee0d7830bbdf64e5b3fa82023cb294697b2900ab0e2a1ef46"
+    },
+    "interaction_variants": {
+      "file": "interaction_variants.json",
+      "sha256": "c564d502e555377879abf18abc9df9ec259abf6bcd248c27fb16b5eb90a5aa4b"
+    }
+  },
+  "task_groups": {
+    "base": {
+      "source": "main",
+      "count": 70,
+      "task_ids": [
+        "0004_zsnxn8rtxeqy64r6axi78wlnmodvvpb8",
+        "0006_hemtb6lwn3izyke84qxmwp2t1nrzoe2y",
+        "0011_805s6ijrg2r7r97nsjwfgh88mgxucq82",
+        "0016_60gb4uwbtlrs6pt0keb4cz25dnhub7vr",
+        "0020_81caosueheupw9ri6kxp5jx7qia9fmdq",
+        "0029_5psdqgpwhjokawkbnio3cls6fxbm8du0",
+        "0032_fwfr1ffsqyuq7vxq3jrwyh94ijhbh8wt",
+        "0034_50r3ienrscvru8yhhl2uwwu6my1dwz16",
+        "0054_1dgwdp6aym08vzmbkpfwdk0mo6bc2mn8",
+        "0065_mymsm053nfd0blonuhfuexgq6jfy0v1l",
+        "0074_o4zylqu4lbtumngdld10niqy7q2a2sd6",
+        "0076_ihkrjocj7n77vcaqjendy92rbmo05iqo",
+        "0079_u0u8jye1kgslgrxicfe2tv85jb5cqk4g",
+        "0082_ydvnfzlpi1maeeoui4pljydk6xvkq9xm",
+        "0085_n2bjfslvr71pe00qd50y52lb66hdeebv",
+        "0093_zdhuiup4pf7ohlmp4gw7kbug2oh0y2jq",
+        "0096_4koich32dugimfgns7sqiaawvbrsn2fb",
+        "0106_mipxayaatquvuvr2y5e0di3ns7h69dl1",
+        "0107_sj2livi5op281u82sill7zhbowlxm6p9",
+        "0115_9zedfc2doyawp3tuei4tf0wdrg1q8cid",
+        "0116_2toxygxbxd5ksnmcgiwrdjd9xuehn207",
+        "0117_21kzyhlzscui6zvrqouyc1n2xuyhkbal",
+        "0130_qlwh8i3a0fiqehqfbqw8wqqr7em8p4gc",
+        "0138_t6mwmx3ilpme496q17bhcx0f39vm1a9o",
+        "0140_7x1ftu4qbqrhebu7off9sgzd4dhlbyyr",
+        "0145_66t96b5aaydj4a7ia5g6nth2q2cvagtx",
+        "0153_40f2nobclwlsgauwiq8yatbnayrcxcze",
+        "0164_23ufcglz1508vmts9afttnsje3wolk8d",
+        "0169_ayxzqy5qwlkp6vsii0h5b2hlaa9i5n78",
+        "0172_k5r68ukmh3304e6nenxcoo51yk6w417n",
+        "0207_sfhusojpk2ifpgdl9vtse0cb5zc8vp15",
+        "0213_dfndrulsomu1kwltefx4k3p4ux0ssnsl",
+        "0219_lavov5aq242w7w83k2f0fxzq2v20o3v3",
+        "0221_af040y4ypvxo24pgput1apdtgkl77amk",
+        "0245_39p1w2cv12wmovrngvrhr68qy1cxh84i",
+        "0254_qb5m2mayzadgk39jz5ddsxpq0uyb10wu",
+        "0258_k5409dngqbsyias34uraja7xb7gayttj",
+        "0265_kbq2p9ttzuhm6z1w49yghtuarhdeuzls",
+        "0296_yxauylkdn61cesadi3fx0zplw3pfd0qg",
+        "0300_dpt0php27086l6z0b7e0t6qdz695fw64",
+        "0302_f3h06qnxul65vq5855m4bw4eo3zkx3p1",
+        "0308_p1re6tgusxp32s5uc2biv4zy3qwimrkc",
+        "0321_ix3k7msla5r85tkfecwtwptv7x4jbkvr",
+        "0324_saa8qnpcx8r5eq5x4izam1tzn4c8z89m",
+        "0325_pixli5p6bhxqhjdu02nggaum92ub8hla",
+        "0326_cua96jjihfu9cuznvuu8dimpkuxb690t",
+        "0329_bm3w7elymvn7y1awhtur7zg5xk5p70jn",
+        "0346_kmo9dwg4c18xgxhz97nwk36wyjjpgzhe",
+        "0354_z48swrgppdxc8henm6qf6238s2iuikpm",
+        "0366_mnf0r2hnbggxulb73xhz37sqz05hbzpz",
+        "0397_yl63g0932dqlfxk8efknhhpa9mk1f4qf",
+        "0463_ama85inj9b2ej1fozxte0xv4ib1ejidk",
+        "0465_qxn97yhbqirz6vvxfjjqvp984e2a5rr3",
+        "0514_u8wwuid7dd340fdbxqkha1x3fovnn0ee",
+        "0520_vs2mfw4rol4q163x0lzp2f907btnnsmk",
+        "0521_h3x8mxz2j3hsqikhyjvrycs08gt9mbth",
+        "0553_ljwzrb1yvd89ran9z4bpvnom7m65uscz",
+        "0555_wswol5n9gj70bmxj8w65vjz3ti8mtk3t",
+        "0560_b4hefr9ivg78e9msvd3mjwojab3gfcxi",
+        "0663_c4rhds3gn4hecrdzan4k442j69gsgzsl",
+        "0678_7xyadypwtak671mva24hj4xbd1gqdlcx",
+        "0721_26hhyey1nrd2qfdr0rm1bn1ld2bu028i",
+        "0735_sbonsywxnoryge3wlcev7sxiqje8uyti",
+        "0744_88w8pypjwqbovybfxdhqfqmsoyffor9l",
+        "0747_k2dnfncw3pcijujp55b4a7hf53exilpa",
+        "0770_wr11p4jja84co11mmhp640n3cvz64etj",
+        "0783_vjj7dmsbkzgvqg5xjpxuhhgg23gzjepy",
+        "0801_kge3t5tit6m1692plqa9w3zxuwekf4mv",
+        "0802_k8uzg7pa8rk1256zjuo1mwf0aer6cdbj",
+        "0806_0zjfrj2mic9yhnox27ekqhid14o86ezd"
+      ],
+      "status": "released",
+      "scoring": "primary"
+    },
+    "mind_change": {
+      "source": "main",
+      "count": 8,
+      "task_ids": [
+        "0025_slwr953cyo9j4zx9p769s1raiuxcrec6__mind_change_v1",
+        "0049_uhbiyv4plkz71z52e4eve282kd6vppbo__mind_change_v1",
+        "0053_aanknwl7oew08yda60lfw6ii37zmbn27__mind_change_v1",
+        "0126_xhkxhbg14yywxzuet1hph3c1rs98wjmo__mind_change_v1",
+        "0187_wk3hw6dtnbrvzs94r1cjqmkwogkjziv6__mind_change_v1",
+        "0202_mhtxm4sglzuc1aj5t6ck24d7iwuuucoo__mind_change_v1",
+        "0220_ttjxcmc6fpmyp9gqp10lfwf7v5ww6sf0__mind_change_v1",
+        "0239_013y0lsf6zeo439sgtqg706mlszjhsqt__mind_change_v1"
+      ],
+      "status": "released",
+      "scoring": "diagnostic"
+    },
+    "repetition": {
+      "source": "main",
+      "count": 7,
+      "task_ids": [
+        "0002_46myz87t501b0c902dy81rlbqbye2dyi__repetition_v1",
+        "0007_tb52xggog13zgslxysl2jpf7k9h3wgz0__repetition_v1",
+        "0060_20gzbu5axwurnrooquit6zgdiu8h51v0__repetition_v1",
+        "0165_r8pvueijvovyaw9gwc9k8k2c3jjrlczp__repetition_v1",
+        "0240_kz6i37hfujt1637fkq85ubtbn55x4inr__repetition_v1",
+        "0309_wup0afdzrk4dm3z9oxlwd3oud25bsxpa__repetition_v1",
+        "0374_dsbw566w83tsj8gahist6yifo2x2pdwf__repetition_v1"
+      ],
+      "status": "released",
+      "scoring": "diagnostic"
+    },
+    "addtask": {
+      "source": "interaction_variants",
+      "count": 8,
+      "task_ids": [
+        "0023_ru4l57vj112779bwcyoon0fqhsd90wiy__addtask_v1",
+        "0091_x4potxhbbpnsoa97pr1gv8bd3fcfdj1m__addtask_v1",
+        "0192_cosvjo75ypeswhkbz3tqbn8tb3vnoh3f__addtask_v1",
+        "0223_o8p534abv2e69h6eqqspoak5pi921mx2__addtask_v1",
+        "0280_7avg49u20mcrecxfny270yls7ftm0kj9__addtask_v1",
+        "0291_wjz6qsytccpipe8zg7bhzhovmv3w9ffv__addtask_v1",
+        "0361_6h1wlgpju37lez11ni1bgfcsksthnf4l__addtask_v1",
+        "0445_zkqhde1d8h1yzjyvdbggtduz7shrghmt__addtask_v1"
+      ],
+      "status": "released",
+      "scoring": "separate"
+    },
+    "modify": {
+      "source": "interaction_variants",
+      "count": 4,
+      "task_ids": [
+        "0039_6u86tml7x72m298phk38pb7m7gihkro5__modify_v1",
+        "0078_dc8rpkw2n0cfwji8lkfnrtfokrxnn3md__modify_v1",
+        "0127_ce0xbgfn1xfcqjk0bqrbzvywl89jvlam__modify_v1",
+        "0226_ker4ctidgarpr2n4x2nponnjq2euzf4m__modify_v1"
+      ],
+      "status": "released",
+      "scoring": "separate"
+    },
+    "cancel": {
+      "source": "interaction_variants",
+      "count": 3,
+      "task_ids": [
+        "0259_c864b8uw0no68przmug02ukj6mnx4yxf__cancel_v1",
+        "0480_b9fsaz0rklpo9lr2y23hxk6hdzwq85sx__cancel_v1",
+        "0579_6n668fwqc5g3rgj1nj9stog9dze1vono__cancel_v1"
+      ],
+      "status": "released",
+      "scoring": "separate"
+    }
+  },
+  "conditions": {
+    "task_count": 100,
+    "source_task_count": 100,
+    "full_release": "gaia2-v1",
+    "provenance_files": {
+      "results": {
+        "file": "simple_results.json",
+        "sha256": "23abd94bb4a0941a6d82cd95a241d7c58f4406a23c3872cd43bb702c4457d50b"
+      },
+      "repair": {
+        "file": "data/archives/gaia2/reference-repair-simple-v2/changes.jsonl",
+        "sha256": "32f4720279975f98ac62f115530c3fe8b3da04f9dadb64dd77bf3e5502fac694"
+      }
+    },
+    "frame_groups": [
+      "base",
+      "mind_change",
+      "repetition",
+      "addtask",
+      "modify",
+      "cancel"
+    ],
+    "selection_policy": {
+      "source_filter": "completed_all_three_intersection_v2_repair_fixed",
+      "parent_candidates": 144,
+      "counts": {
+        "base": 70,
+        "mind_change": 8,
+        "repetition": 7,
+        "addtask": 8,
+        "modify": 4,
+        "cancel": 3,
+        "total": 100
+      },
+      "unique_parent_family": true,
+      "selection_rule": "Every selected task has a distinct source_task_id; derived tasks are selected only from the 144 eligible base parents."
+    },
+    "source_task_ids": [
+      "0002_46myz87t501b0c902dy81rlbqbye2dyi",
+      "0004_zsnxn8rtxeqy64r6axi78wlnmodvvpb8",
+      "0006_hemtb6lwn3izyke84qxmwp2t1nrzoe2y",
+      "0007_tb52xggog13zgslxysl2jpf7k9h3wgz0",
+      "0011_805s6ijrg2r7r97nsjwfgh88mgxucq82",
+      "0016_60gb4uwbtlrs6pt0keb4cz25dnhub7vr",
+      "0020_81caosueheupw9ri6kxp5jx7qia9fmdq",
+      "0023_ru4l57vj112779bwcyoon0fqhsd90wiy",
+      "0025_slwr953cyo9j4zx9p769s1raiuxcrec6",
+      "0029_5psdqgpwhjokawkbnio3cls6fxbm8du0",
+      "0032_fwfr1ffsqyuq7vxq3jrwyh94ijhbh8wt",
+      "0034_50r3ienrscvru8yhhl2uwwu6my1dwz16",
+      "0039_6u86tml7x72m298phk38pb7m7gihkro5",
+      "0049_uhbiyv4plkz71z52e4eve282kd6vppbo",
+      "0053_aanknwl7oew08yda60lfw6ii37zmbn27",
+      "0054_1dgwdp6aym08vzmbkpfwdk0mo6bc2mn8",
+      "0060_20gzbu5axwurnrooquit6zgdiu8h51v0",
+      "0065_mymsm053nfd0blonuhfuexgq6jfy0v1l",
+      "0074_o4zylqu4lbtumngdld10niqy7q2a2sd6",
+      "0076_ihkrjocj7n77vcaqjendy92rbmo05iqo",
+      "0078_dc8rpkw2n0cfwji8lkfnrtfokrxnn3md",
+      "0079_u0u8jye1kgslgrxicfe2tv85jb5cqk4g",
+      "0082_ydvnfzlpi1maeeoui4pljydk6xvkq9xm",
+      "0085_n2bjfslvr71pe00qd50y52lb66hdeebv",
+      "0091_x4potxhbbpnsoa97pr1gv8bd3fcfdj1m",
+      "0093_zdhuiup4pf7ohlmp4gw7kbug2oh0y2jq",
+      "0096_4koich32dugimfgns7sqiaawvbrsn2fb",
+      "0106_mipxayaatquvuvr2y5e0di3ns7h69dl1",
+      "0107_sj2livi5op281u82sill7zhbowlxm6p9",
+      "0115_9zedfc2doyawp3tuei4tf0wdrg1q8cid",
+      "0116_2toxygxbxd5ksnmcgiwrdjd9xuehn207",
+      "0117_21kzyhlzscui6zvrqouyc1n2xuyhkbal",
+      "0126_xhkxhbg14yywxzuet1hph3c1rs98wjmo",
+      "0127_ce0xbgfn1xfcqjk0bqrbzvywl89jvlam",
+      "0130_qlwh8i3a0fiqehqfbqw8wqqr7em8p4gc",
+      "0138_t6mwmx3ilpme496q17bhcx0f39vm1a9o",
+      "0140_7x1ftu4qbqrhebu7off9sgzd4dhlbyyr",
+      "0145_66t96b5aaydj4a7ia5g6nth2q2cvagtx",
+      "0153_40f2nobclwlsgauwiq8yatbnayrcxcze",
+      "0164_23ufcglz1508vmts9afttnsje3wolk8d",
+      "0165_r8pvueijvovyaw9gwc9k8k2c3jjrlczp",
+      "0169_ayxzqy5qwlkp6vsii0h5b2hlaa9i5n78",
+      "0172_k5r68ukmh3304e6nenxcoo51yk6w417n",
+      "0187_wk3hw6dtnbrvzs94r1cjqmkwogkjziv6",
+      "0192_cosvjo75ypeswhkbz3tqbn8tb3vnoh3f",
+      "0202_mhtxm4sglzuc1aj5t6ck24d7iwuuucoo",
+      "0207_sfhusojpk2ifpgdl9vtse0cb5zc8vp15",
+      "0213_dfndrulsomu1kwltefx4k3p4ux0ssnsl",
+      "0219_lavov5aq242w7w83k2f0fxzq2v20o3v3",
+      "0220_ttjxcmc6fpmyp9gqp10lfwf7v5ww6sf0",
+      "0221_af040y4ypvxo24pgput1apdtgkl77amk",
+      "0223_o8p534abv2e69h6eqqspoak5pi921mx2",
+      "0226_ker4ctidgarpr2n4x2nponnjq2euzf4m",
+      "0239_013y0lsf6zeo439sgtqg706mlszjhsqt",
+      "0240_kz6i37hfujt1637fkq85ubtbn55x4inr",
+      "0245_39p1w2cv12wmovrngvrhr68qy1cxh84i",
+      "0254_qb5m2mayzadgk39jz5ddsxpq0uyb10wu",
+      "0258_k5409dngqbsyias34uraja7xb7gayttj",
+      "0259_c864b8uw0no68przmug02ukj6mnx4yxf",
+      "0265_kbq2p9ttzuhm6z1w49yghtuarhdeuzls",
+      "0280_7avg49u20mcrecxfny270yls7ftm0kj9",
+      "0291_wjz6qsytccpipe8zg7bhzhovmv3w9ffv",
+      "0296_yxauylkdn61cesadi3fx0zplw3pfd0qg",
+      "0300_dpt0php27086l6z0b7e0t6qdz695fw64",
+      "0302_f3h06qnxul65vq5855m4bw4eo3zkx3p1",
+      "0308_p1re6tgusxp32s5uc2biv4zy3qwimrkc",
+      "0309_wup0afdzrk4dm3z9oxlwd3oud25bsxpa",
+      "0321_ix3k7msla5r85tkfecwtwptv7x4jbkvr",
+      "0324_saa8qnpcx8r5eq5x4izam1tzn4c8z89m",
+      "0325_pixli5p6bhxqhjdu02nggaum92ub8hla",
+      "0326_cua96jjihfu9cuznvuu8dimpkuxb690t",
+      "0329_bm3w7elymvn7y1awhtur7zg5xk5p70jn",
+      "0346_kmo9dwg4c18xgxhz97nwk36wyjjpgzhe",
+      "0354_z48swrgppdxc8henm6qf6238s2iuikpm",
+      "0361_6h1wlgpju37lez11ni1bgfcsksthnf4l",
+      "0366_mnf0r2hnbggxulb73xhz37sqz05hbzpz",
+      "0374_dsbw566w83tsj8gahist6yifo2x2pdwf",
+      "0397_yl63g0932dqlfxk8efknhhpa9mk1f4qf",
+      "0445_zkqhde1d8h1yzjyvdbggtduz7shrghmt",
+      "0463_ama85inj9b2ej1fozxte0xv4ib1ejidk",
+      "0465_qxn97yhbqirz6vvxfjjqvp984e2a5rr3",
+      "0480_b9fsaz0rklpo9lr2y23hxk6hdzwq85sx",
+      "0514_u8wwuid7dd340fdbxqkha1x3fovnn0ee",
+      "0520_vs2mfw4rol4q163x0lzp2f907btnnsmk",
+      "0521_h3x8mxz2j3hsqikhyjvrycs08gt9mbth",
+      "0553_ljwzrb1yvd89ran9z4bpvnom7m65uscz",
+      "0555_wswol5n9gj70bmxj8w65vjz3ti8mtk3t",
+      "0560_b4hefr9ivg78e9msvd3mjwojab3gfcxi",
+      "0579_6n668fwqc5g3rgj1nj9stog9dze1vono",
+      "0663_c4rhds3gn4hecrdzan4k442j69gsgzsl",
+      "0678_7xyadypwtak671mva24hj4xbd1gqdlcx",
+      "0721_26hhyey1nrd2qfdr0rm1bn1ld2bu028i",
+      "0735_sbonsywxnoryge3wlcev7sxiqje8uyti",
+      "0744_88w8pypjwqbovybfxdhqfqmsoyffor9l",
+      "0747_k2dnfncw3pcijujp55b4a7hf53exilpa",
+      "0770_wr11p4jja84co11mmhp640n3cvz64etj",
+      "0783_vjj7dmsbkzgvqg5xjpxuhhgg23gzjepy",
+      "0801_kge3t5tit6m1692plqa9w3zxuwekf4mv",
+      "0802_k8uzg7pa8rk1256zjuo1mwf0aer6cdbj",
+      "0806_0zjfrj2mic9yhnox27ekqhid14o86ezd"
+    ],
+    "task_records": [
+      {
+        "task_id": "0002_46myz87t501b0c902dy81rlbqbye2dyi__repetition_v1",
+        "source_task_id": "0002_46myz87t501b0c902dy81rlbqbye2dyi",
+        "kind": "repetition_v1",
+        "category": "search"
+      },
+      {
+        "task_id": "0004_zsnxn8rtxeqy64r6axi78wlnmodvvpb8",
+        "source_task_id": "0004_zsnxn8rtxeqy64r6axi78wlnmodvvpb8",
+        "kind": "base",
+        "category": "search"
+      },
+      {
+        "task_id": "0006_hemtb6lwn3izyke84qxmwp2t1nrzoe2y",
+        "source_task_id": "0006_hemtb6lwn3izyke84qxmwp2t1nrzoe2y",
+        "kind": "base",
+        "category": "search"
+      },
+      {
+        "task_id": "0007_tb52xggog13zgslxysl2jpf7k9h3wgz0__repetition_v1",
+        "source_task_id": "0007_tb52xggog13zgslxysl2jpf7k9h3wgz0",
+        "kind": "repetition_v1",
+        "category": "search"
+      },
+      {
+        "task_id": "0011_805s6ijrg2r7r97nsjwfgh88mgxucq82",
+        "source_task_id": "0011_805s6ijrg2r7r97nsjwfgh88mgxucq82",
+        "kind": "base",
+        "category": "search"
+      },
+      {
+        "task_id": "0016_60gb4uwbtlrs6pt0keb4cz25dnhub7vr",
+        "source_task_id": "0016_60gb4uwbtlrs6pt0keb4cz25dnhub7vr",
+        "kind": "base",
+        "category": "search"
+      },
+      {
+        "task_id": "0020_81caosueheupw9ri6kxp5jx7qia9fmdq",
+        "source_task_id": "0020_81caosueheupw9ri6kxp5jx7qia9fmdq",
+        "kind": "base",
+        "category": "search"
+      },
+      {
+        "task_id": "0023_ru4l57vj112779bwcyoon0fqhsd90wiy__addtask_v1",
+        "source_task_id": "0023_ru4l57vj112779bwcyoon0fqhsd90wiy",
+        "kind": "addtask",
+        "category": "search"
+      },
+      {
+        "task_id": "0025_slwr953cyo9j4zx9p769s1raiuxcrec6__mind_change_v1",
+        "source_task_id": "0025_slwr953cyo9j4zx9p769s1raiuxcrec6",
+        "kind": "mind_change_v1",
+        "category": "search"
+      },
+      {
+        "task_id": "0029_5psdqgpwhjokawkbnio3cls6fxbm8du0",
+        "source_task_id": "0029_5psdqgpwhjokawkbnio3cls6fxbm8du0",
+        "kind": "base",
+        "category": "search"
+      },
+      {
+        "task_id": "0032_fwfr1ffsqyuq7vxq3jrwyh94ijhbh8wt",
+        "source_task_id": "0032_fwfr1ffsqyuq7vxq3jrwyh94ijhbh8wt",
+        "kind": "base",
+        "category": "search"
+      },
+      {
+        "task_id": "0034_50r3ienrscvru8yhhl2uwwu6my1dwz16",
+        "source_task_id": "0034_50r3ienrscvru8yhhl2uwwu6my1dwz16",
+        "kind": "base",
+        "category": "search"
+      },
+      {
+        "task_id": "0039_6u86tml7x72m298phk38pb7m7gihkro5__modify_v1",
+        "source_task_id": "0039_6u86tml7x72m298phk38pb7m7gihkro5",
+        "kind": "modify",
+        "category": "search"
+      },
+      {
+        "task_id": "0049_uhbiyv4plkz71z52e4eve282kd6vppbo__mind_change_v1",
+        "source_task_id": "0049_uhbiyv4plkz71z52e4eve282kd6vppbo",
+        "kind": "mind_change_v1",
+        "category": "search"
+      },
+      {
+        "task_id": "0053_aanknwl7oew08yda60lfw6ii37zmbn27__mind_change_v1",
+        "source_task_id": "0053_aanknwl7oew08yda60lfw6ii37zmbn27",
+        "kind": "mind_change_v1",
+        "category": "execution"
+      },
+      {
+        "task_id": "0054_1dgwdp6aym08vzmbkpfwdk0mo6bc2mn8",
+        "source_task_id": "0054_1dgwdp6aym08vzmbkpfwdk0mo6bc2mn8",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0060_20gzbu5axwurnrooquit6zgdiu8h51v0__repetition_v1",
+        "source_task_id": "0060_20gzbu5axwurnrooquit6zgdiu8h51v0",
+        "kind": "repetition_v1",
+        "category": "execution"
+      },
+      {
+        "task_id": "0065_mymsm053nfd0blonuhfuexgq6jfy0v1l",
+        "source_task_id": "0065_mymsm053nfd0blonuhfuexgq6jfy0v1l",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0074_o4zylqu4lbtumngdld10niqy7q2a2sd6",
+        "source_task_id": "0074_o4zylqu4lbtumngdld10niqy7q2a2sd6",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0076_ihkrjocj7n77vcaqjendy92rbmo05iqo",
+        "source_task_id": "0076_ihkrjocj7n77vcaqjendy92rbmo05iqo",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0078_dc8rpkw2n0cfwji8lkfnrtfokrxnn3md__modify_v1",
+        "source_task_id": "0078_dc8rpkw2n0cfwji8lkfnrtfokrxnn3md",
+        "kind": "modify",
+        "category": "execution"
+      },
+      {
+        "task_id": "0079_u0u8jye1kgslgrxicfe2tv85jb5cqk4g",
+        "source_task_id": "0079_u0u8jye1kgslgrxicfe2tv85jb5cqk4g",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0082_ydvnfzlpi1maeeoui4pljydk6xvkq9xm",
+        "source_task_id": "0082_ydvnfzlpi1maeeoui4pljydk6xvkq9xm",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0085_n2bjfslvr71pe00qd50y52lb66hdeebv",
+        "source_task_id": "0085_n2bjfslvr71pe00qd50y52lb66hdeebv",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0091_x4potxhbbpnsoa97pr1gv8bd3fcfdj1m__addtask_v1",
+        "source_task_id": "0091_x4potxhbbpnsoa97pr1gv8bd3fcfdj1m",
+        "kind": "addtask",
+        "category": "execution"
+      },
+      {
+        "task_id": "0093_zdhuiup4pf7ohlmp4gw7kbug2oh0y2jq",
+        "source_task_id": "0093_zdhuiup4pf7ohlmp4gw7kbug2oh0y2jq",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0096_4koich32dugimfgns7sqiaawvbrsn2fb",
+        "source_task_id": "0096_4koich32dugimfgns7sqiaawvbrsn2fb",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0106_mipxayaatquvuvr2y5e0di3ns7h69dl1",
+        "source_task_id": "0106_mipxayaatquvuvr2y5e0di3ns7h69dl1",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0107_sj2livi5op281u82sill7zhbowlxm6p9",
+        "source_task_id": "0107_sj2livi5op281u82sill7zhbowlxm6p9",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0115_9zedfc2doyawp3tuei4tf0wdrg1q8cid",
+        "source_task_id": "0115_9zedfc2doyawp3tuei4tf0wdrg1q8cid",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0116_2toxygxbxd5ksnmcgiwrdjd9xuehn207",
+        "source_task_id": "0116_2toxygxbxd5ksnmcgiwrdjd9xuehn207",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0117_21kzyhlzscui6zvrqouyc1n2xuyhkbal",
+        "source_task_id": "0117_21kzyhlzscui6zvrqouyc1n2xuyhkbal",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0126_xhkxhbg14yywxzuet1hph3c1rs98wjmo__mind_change_v1",
+        "source_task_id": "0126_xhkxhbg14yywxzuet1hph3c1rs98wjmo",
+        "kind": "mind_change_v1",
+        "category": "execution"
+      },
+      {
+        "task_id": "0127_ce0xbgfn1xfcqjk0bqrbzvywl89jvlam__modify_v1",
+        "source_task_id": "0127_ce0xbgfn1xfcqjk0bqrbzvywl89jvlam",
+        "kind": "modify",
+        "category": "execution"
+      },
+      {
+        "task_id": "0130_qlwh8i3a0fiqehqfbqw8wqqr7em8p4gc",
+        "source_task_id": "0130_qlwh8i3a0fiqehqfbqw8wqqr7em8p4gc",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0138_t6mwmx3ilpme496q17bhcx0f39vm1a9o",
+        "source_task_id": "0138_t6mwmx3ilpme496q17bhcx0f39vm1a9o",
+        "kind": "base",
+        "category": "ambiguity"
+      },
+      {
+        "task_id": "0140_7x1ftu4qbqrhebu7off9sgzd4dhlbyyr",
+        "source_task_id": "0140_7x1ftu4qbqrhebu7off9sgzd4dhlbyyr",
+        "kind": "base",
+        "category": "ambiguity"
+      },
+      {
+        "task_id": "0145_66t96b5aaydj4a7ia5g6nth2q2cvagtx",
+        "source_task_id": "0145_66t96b5aaydj4a7ia5g6nth2q2cvagtx",
+        "kind": "base",
+        "category": "ambiguity"
+      },
+      {
+        "task_id": "0153_40f2nobclwlsgauwiq8yatbnayrcxcze",
+        "source_task_id": "0153_40f2nobclwlsgauwiq8yatbnayrcxcze",
+        "kind": "base",
+        "category": "ambiguity"
+      },
+      {
+        "task_id": "0164_23ufcglz1508vmts9afttnsje3wolk8d",
+        "source_task_id": "0164_23ufcglz1508vmts9afttnsje3wolk8d",
+        "kind": "base",
+        "category": "ambiguity"
+      },
+      {
+        "task_id": "0165_r8pvueijvovyaw9gwc9k8k2c3jjrlczp__repetition_v1",
+        "source_task_id": "0165_r8pvueijvovyaw9gwc9k8k2c3jjrlczp",
+        "kind": "repetition_v1",
+        "category": "ambiguity"
+      },
+      {
+        "task_id": "0169_ayxzqy5qwlkp6vsii0h5b2hlaa9i5n78",
+        "source_task_id": "0169_ayxzqy5qwlkp6vsii0h5b2hlaa9i5n78",
+        "kind": "base",
+        "category": "ambiguity"
+      },
+      {
+        "task_id": "0172_k5r68ukmh3304e6nenxcoo51yk6w417n",
+        "source_task_id": "0172_k5r68ukmh3304e6nenxcoo51yk6w417n",
+        "kind": "base",
+        "category": "ambiguity"
+      },
+      {
+        "task_id": "0187_wk3hw6dtnbrvzs94r1cjqmkwogkjziv6__mind_change_v1",
+        "source_task_id": "0187_wk3hw6dtnbrvzs94r1cjqmkwogkjziv6",
+        "kind": "mind_change_v1",
+        "category": "ambiguity"
+      },
+      {
+        "task_id": "0192_cosvjo75ypeswhkbz3tqbn8tb3vnoh3f__addtask_v1",
+        "source_task_id": "0192_cosvjo75ypeswhkbz3tqbn8tb3vnoh3f",
+        "kind": "addtask",
+        "category": "ambiguity"
+      },
+      {
+        "task_id": "0202_mhtxm4sglzuc1aj5t6ck24d7iwuuucoo__mind_change_v1",
+        "source_task_id": "0202_mhtxm4sglzuc1aj5t6ck24d7iwuuucoo",
+        "kind": "mind_change_v1",
+        "category": "ambiguity"
+      },
+      {
+        "task_id": "0207_sfhusojpk2ifpgdl9vtse0cb5zc8vp15",
+        "source_task_id": "0207_sfhusojpk2ifpgdl9vtse0cb5zc8vp15",
+        "kind": "base",
+        "category": "ambiguity"
+      },
+      {
+        "task_id": "0213_dfndrulsomu1kwltefx4k3p4ux0ssnsl",
+        "source_task_id": "0213_dfndrulsomu1kwltefx4k3p4ux0ssnsl",
+        "kind": "base",
+        "category": "ambiguity"
+      },
+      {
+        "task_id": "0219_lavov5aq242w7w83k2f0fxzq2v20o3v3",
+        "source_task_id": "0219_lavov5aq242w7w83k2f0fxzq2v20o3v3",
+        "kind": "base",
+        "category": "ambiguity"
+      },
+      {
+        "task_id": "0220_ttjxcmc6fpmyp9gqp10lfwf7v5ww6sf0__mind_change_v1",
+        "source_task_id": "0220_ttjxcmc6fpmyp9gqp10lfwf7v5ww6sf0",
+        "kind": "mind_change_v1",
+        "category": "ambiguity"
+      },
+      {
+        "task_id": "0221_af040y4ypvxo24pgput1apdtgkl77amk",
+        "source_task_id": "0221_af040y4ypvxo24pgput1apdtgkl77amk",
+        "kind": "base",
+        "category": "search"
+      },
+      {
+        "task_id": "0223_o8p534abv2e69h6eqqspoak5pi921mx2__addtask_v1",
+        "source_task_id": "0223_o8p534abv2e69h6eqqspoak5pi921mx2",
+        "kind": "addtask",
+        "category": "search"
+      },
+      {
+        "task_id": "0226_ker4ctidgarpr2n4x2nponnjq2euzf4m__modify_v1",
+        "source_task_id": "0226_ker4ctidgarpr2n4x2nponnjq2euzf4m",
+        "kind": "modify",
+        "category": "search"
+      },
+      {
+        "task_id": "0239_013y0lsf6zeo439sgtqg706mlszjhsqt__mind_change_v1",
+        "source_task_id": "0239_013y0lsf6zeo439sgtqg706mlszjhsqt",
+        "kind": "mind_change_v1",
+        "category": "search"
+      },
+      {
+        "task_id": "0240_kz6i37hfujt1637fkq85ubtbn55x4inr__repetition_v1",
+        "source_task_id": "0240_kz6i37hfujt1637fkq85ubtbn55x4inr",
+        "kind": "repetition_v1",
+        "category": "search"
+      },
+      {
+        "task_id": "0245_39p1w2cv12wmovrngvrhr68qy1cxh84i",
+        "source_task_id": "0245_39p1w2cv12wmovrngvrhr68qy1cxh84i",
+        "kind": "base",
+        "category": "search"
+      },
+      {
+        "task_id": "0254_qb5m2mayzadgk39jz5ddsxpq0uyb10wu",
+        "source_task_id": "0254_qb5m2mayzadgk39jz5ddsxpq0uyb10wu",
+        "kind": "base",
+        "category": "search"
+      },
+      {
+        "task_id": "0258_k5409dngqbsyias34uraja7xb7gayttj",
+        "source_task_id": "0258_k5409dngqbsyias34uraja7xb7gayttj",
+        "kind": "base",
+        "category": "search"
+      },
+      {
+        "task_id": "0259_c864b8uw0no68przmug02ukj6mnx4yxf__cancel_v1",
+        "source_task_id": "0259_c864b8uw0no68przmug02ukj6mnx4yxf",
+        "kind": "cancel",
+        "category": "search"
+      },
+      {
+        "task_id": "0265_kbq2p9ttzuhm6z1w49yghtuarhdeuzls",
+        "source_task_id": "0265_kbq2p9ttzuhm6z1w49yghtuarhdeuzls",
+        "kind": "base",
+        "category": "search"
+      },
+      {
+        "task_id": "0280_7avg49u20mcrecxfny270yls7ftm0kj9__addtask_v1",
+        "source_task_id": "0280_7avg49u20mcrecxfny270yls7ftm0kj9",
+        "kind": "addtask",
+        "category": "search"
+      },
+      {
+        "task_id": "0291_wjz6qsytccpipe8zg7bhzhovmv3w9ffv__addtask_v1",
+        "source_task_id": "0291_wjz6qsytccpipe8zg7bhzhovmv3w9ffv",
+        "kind": "addtask",
+        "category": "search"
+      },
+      {
+        "task_id": "0296_yxauylkdn61cesadi3fx0zplw3pfd0qg",
+        "source_task_id": "0296_yxauylkdn61cesadi3fx0zplw3pfd0qg",
+        "kind": "base",
+        "category": "search"
+      },
+      {
+        "task_id": "0300_dpt0php27086l6z0b7e0t6qdz695fw64",
+        "source_task_id": "0300_dpt0php27086l6z0b7e0t6qdz695fw64",
+        "kind": "base",
+        "category": "search"
+      },
+      {
+        "task_id": "0302_f3h06qnxul65vq5855m4bw4eo3zkx3p1",
+        "source_task_id": "0302_f3h06qnxul65vq5855m4bw4eo3zkx3p1",
+        "kind": "base",
+        "category": "search"
+      },
+      {
+        "task_id": "0308_p1re6tgusxp32s5uc2biv4zy3qwimrkc",
+        "source_task_id": "0308_p1re6tgusxp32s5uc2biv4zy3qwimrkc",
+        "kind": "base",
+        "category": "search"
+      },
+      {
+        "task_id": "0309_wup0afdzrk4dm3z9oxlwd3oud25bsxpa__repetition_v1",
+        "source_task_id": "0309_wup0afdzrk4dm3z9oxlwd3oud25bsxpa",
+        "kind": "repetition_v1",
+        "category": "search"
+      },
+      {
+        "task_id": "0321_ix3k7msla5r85tkfecwtwptv7x4jbkvr",
+        "source_task_id": "0321_ix3k7msla5r85tkfecwtwptv7x4jbkvr",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0324_saa8qnpcx8r5eq5x4izam1tzn4c8z89m",
+        "source_task_id": "0324_saa8qnpcx8r5eq5x4izam1tzn4c8z89m",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0325_pixli5p6bhxqhjdu02nggaum92ub8hla",
+        "source_task_id": "0325_pixli5p6bhxqhjdu02nggaum92ub8hla",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0326_cua96jjihfu9cuznvuu8dimpkuxb690t",
+        "source_task_id": "0326_cua96jjihfu9cuznvuu8dimpkuxb690t",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0329_bm3w7elymvn7y1awhtur7zg5xk5p70jn",
+        "source_task_id": "0329_bm3w7elymvn7y1awhtur7zg5xk5p70jn",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0346_kmo9dwg4c18xgxhz97nwk36wyjjpgzhe",
+        "source_task_id": "0346_kmo9dwg4c18xgxhz97nwk36wyjjpgzhe",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0354_z48swrgppdxc8henm6qf6238s2iuikpm",
+        "source_task_id": "0354_z48swrgppdxc8henm6qf6238s2iuikpm",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0361_6h1wlgpju37lez11ni1bgfcsksthnf4l__addtask_v1",
+        "source_task_id": "0361_6h1wlgpju37lez11ni1bgfcsksthnf4l",
+        "kind": "addtask",
+        "category": "execution"
+      },
+      {
+        "task_id": "0366_mnf0r2hnbggxulb73xhz37sqz05hbzpz",
+        "source_task_id": "0366_mnf0r2hnbggxulb73xhz37sqz05hbzpz",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0374_dsbw566w83tsj8gahist6yifo2x2pdwf__repetition_v1",
+        "source_task_id": "0374_dsbw566w83tsj8gahist6yifo2x2pdwf",
+        "kind": "repetition_v1",
+        "category": "execution"
+      },
+      {
+        "task_id": "0397_yl63g0932dqlfxk8efknhhpa9mk1f4qf",
+        "source_task_id": "0397_yl63g0932dqlfxk8efknhhpa9mk1f4qf",
+        "kind": "base",
+        "category": "search"
+      },
+      {
+        "task_id": "0445_zkqhde1d8h1yzjyvdbggtduz7shrghmt__addtask_v1",
+        "source_task_id": "0445_zkqhde1d8h1yzjyvdbggtduz7shrghmt",
+        "kind": "addtask",
+        "category": "execution"
+      },
+      {
+        "task_id": "0463_ama85inj9b2ej1fozxte0xv4ib1ejidk",
+        "source_task_id": "0463_ama85inj9b2ej1fozxte0xv4ib1ejidk",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0465_qxn97yhbqirz6vvxfjjqvp984e2a5rr3",
+        "source_task_id": "0465_qxn97yhbqirz6vvxfjjqvp984e2a5rr3",
+        "kind": "base",
+        "category": "execution"
+      },
+      {
+        "task_id": "0480_b9fsaz0rklpo9lr2y23hxk6hdzwq85sx__cancel_v1",
+        "source_task_id": "0480_b9fsaz0rklpo9lr2y23hxk6hdzwq85sx",
+        "kind": "cancel",
+        "category": "execution"
+      },
+      {
+        "task_id": "0514_u8wwuid7dd340fdbxqkha1x3fovnn0ee",
+        "source_task_id": "0514_u8wwuid7dd340fdbxqkha1x3fovnn0ee",
+        "kind": "base",
+        "category": "ambiguity"
+      },
+      {
+        "task_id": "0520_vs2mfw4rol4q163x0lzp2f907btnnsmk",
+        "source_task_id": "0520_vs2mfw4rol4q163x0lzp2f907btnnsmk",
+        "kind": "base",
+        "category": "ambiguity"
+      },
+      {
+        "task_id": "0521_h3x8mxz2j3hsqikhyjvrycs08gt9mbth",
+        "source_task_id": "0521_h3x8mxz2j3hsqikhyjvrycs08gt9mbth",
+        "kind": "base",
+        "category": "ambiguity"
+      },
+      {
+        "task_id": "0553_ljwzrb1yvd89ran9z4bpvnom7m65uscz",
+        "source_task_id": "0553_ljwzrb1yvd89ran9z4bpvnom7m65uscz",
+        "kind": "base",
+        "category": "ambiguity"
+      },
+      {
+        "task_id": "0555_wswol5n9gj70bmxj8w65vjz3ti8mtk3t",
+        "source_task_id": "0555_wswol5n9gj70bmxj8w65vjz3ti8mtk3t",
+        "kind": "base",
+        "category": "ambiguity"
+      },
+      {
+        "task_id": "0560_b4hefr9ivg78e9msvd3mjwojab3gfcxi",
+        "source_task_id": "0560_b4hefr9ivg78e9msvd3mjwojab3gfcxi",
+        "kind": "base",
+        "category": "ambiguity"
+      },
+      {
+        "task_id": "0579_6n668fwqc5g3rgj1nj9stog9dze1vono__cancel_v1",
+        "source_task_id": "0579_6n668fwqc5g3rgj1nj9stog9dze1vono",
+        "kind": "cancel",
+        "category": "ambiguity"
+      },
+      {
+        "task_id": "0663_c4rhds3gn4hecrdzan4k442j69gsgzsl",
+        "source_task_id": "0663_c4rhds3gn4hecrdzan4k442j69gsgzsl",
+        "kind": "base",
+        "category": "adaptability"
+      },
+      {
+        "task_id": "0678_7xyadypwtak671mva24hj4xbd1gqdlcx",
+        "source_task_id": "0678_7xyadypwtak671mva24hj4xbd1gqdlcx",
+        "kind": "base",
+        "category": "adaptability"
+      },
+      {
+        "task_id": "0721_26hhyey1nrd2qfdr0rm1bn1ld2bu028i",
+        "source_task_id": "0721_26hhyey1nrd2qfdr0rm1bn1ld2bu028i",
+        "kind": "base",
+        "category": "time"
+      },
+      {
+        "task_id": "0735_sbonsywxnoryge3wlcev7sxiqje8uyti",
+        "source_task_id": "0735_sbonsywxnoryge3wlcev7sxiqje8uyti",
+        "kind": "base",
+        "category": "time"
+      },
+      {
+        "task_id": "0744_88w8pypjwqbovybfxdhqfqmsoyffor9l",
+        "source_task_id": "0744_88w8pypjwqbovybfxdhqfqmsoyffor9l",
+        "kind": "base",
+        "category": "time"
+      },
+      {
+        "task_id": "0747_k2dnfncw3pcijujp55b4a7hf53exilpa",
+        "source_task_id": "0747_k2dnfncw3pcijujp55b4a7hf53exilpa",
+        "kind": "base",
+        "category": "time"
+      },
+      {
+        "task_id": "0770_wr11p4jja84co11mmhp640n3cvz64etj",
+        "source_task_id": "0770_wr11p4jja84co11mmhp640n3cvz64etj",
+        "kind": "base",
+        "category": "time"
+      },
+      {
+        "task_id": "0783_vjj7dmsbkzgvqg5xjpxuhhgg23gzjepy",
+        "source_task_id": "0783_vjj7dmsbkzgvqg5xjpxuhhgg23gzjepy",
+        "kind": "base",
+        "category": "time"
+      },
+      {
+        "task_id": "0801_kge3t5tit6m1692plqa9w3zxuwekf4mv",
+        "source_task_id": "0801_kge3t5tit6m1692plqa9w3zxuwekf4mv",
+        "kind": "base",
+        "category": "time"
+      },
+      {
+        "task_id": "0802_k8uzg7pa8rk1256zjuo1mwf0aer6cdbj",
+        "source_task_id": "0802_k8uzg7pa8rk1256zjuo1mwf0aer6cdbj",
+        "kind": "base",
+        "category": "time"
+      },
+      {
+        "task_id": "0806_0zjfrj2mic9yhnox27ekqhid14o86ezd",
+        "source_task_id": "0806_0zjfrj2mic9yhnox27ekqhid14o86ezd",
+        "kind": "base",
+        "category": "time"
+      }
+    ],
+    "parent_benchmark": "gaia2-v1"
+  }
+}

@@ -422,11 +422,37 @@ class TestCheckpointDirFormat:
 
         assert (0, "t0", 42) in done_runs
         assert (0, "t1", 42) not in done_runs
-        assert len(resumed.simulations) == 1
+        assert resumed.simulations == []
 
         sims_dir = tmp_path / SIMULATIONS_DIR
         sim_files = list(sims_dir.glob("*.json"))
         assert len(sim_files) == 1
+
+    def test_metadata_resume_removes_only_infra_index_entry(self, tmp_path):
+        save_path = tmp_path / "results.json"
+        tasks = [_make_task("t0"), _make_task("t1")]
+        info = _make_info()
+        ok_sim = _make_sim("t0", termination_reason=TerminationReason.USER_STOP)
+        err_sim = _make_sim(
+            "t1", termination_reason=TerminationReason.INFRASTRUCTURE_ERROR
+        )
+        Results(info=info, tasks=tasks, simulations=[ok_sim, err_sim]).save(
+            save_path, format="dir"
+        )
+
+        requested = Results(info=info, tasks=tasks, simulations=[])
+        resumed, done_runs, _ = try_resume(
+            save_path,
+            requested,
+            tasks,
+            1,
+            auto_resume=True,
+        )
+
+        assert resumed.simulations == []
+        assert (0, "t0", 42) in done_runs
+        metadata = Results.load_metadata(save_path)
+        assert [entry.id for entry in metadata.simulation_index] == [ok_sim.id]
 
     def test_try_resume_dir_format_adds_new_tasks(self, tmp_path):
         save_path = tmp_path / "results.json"
@@ -449,6 +475,54 @@ class TestCheckpointDirFormat:
         assert len(updated_tasks) == 2
         reloaded = Results.load_metadata(save_path)
         assert len(reloaded.tasks) == 2
+
+    def test_try_resume_metadata_only_uses_index(self, tmp_path):
+        """Batch resume can skip loading completed full-duplex trajectories."""
+        save_path = tmp_path / "results.json"
+        task = _make_task("t0")
+        results = Results(
+            info=_make_info(),
+            tasks=[task],
+            simulations=[_make_sim("t0", trial=0, seed=42)],
+        )
+        results.save(save_path, format="dir")
+
+        requested = Results(info=_make_info(), tasks=[task], simulations=[])
+        resumed, done_runs, _ = try_resume(
+            save_path,
+            requested,
+            [task],
+            1,
+            auto_resume=True,
+        )
+
+        assert resumed.simulations == []
+        assert (0, "t0", 42) in done_runs
+
+    def test_try_resume_metadata_only_supports_legacy_indexless_dir(self, tmp_path):
+        """Indexless directory checkpoints still resume without full models."""
+        save_path = tmp_path / "results.json"
+        task = _make_task("t0")
+        Results(
+            info=_make_info(),
+            tasks=[task],
+            simulations=[_make_sim("t0", trial=0, seed=42)],
+        ).save(save_path, format="dir")
+        metadata = json.loads(save_path.read_text())
+        metadata.pop("simulation_index")
+        save_path.write_text(json.dumps(metadata))
+
+        requested = Results(info=_make_info(), tasks=[task], simulations=[])
+        resumed, done_runs, _ = try_resume(
+            save_path,
+            requested,
+            [task],
+            1,
+            auto_resume=True,
+        )
+
+        assert resumed.simulations == []
+        assert (0, "t0", 42) in done_runs
 
 
 # ---- Simulation index ----

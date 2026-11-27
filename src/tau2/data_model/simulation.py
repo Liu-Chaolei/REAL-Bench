@@ -1302,6 +1302,7 @@ class SimulationIndexEntry(BaseModel):
     id: str
     task_id: int | str
     trial: int
+    seed: int | None = None
     reward: float | None = None
     termination_reason: str | None = None
     agent_cost: float | None = None
@@ -1390,6 +1391,7 @@ class Results(BaseModel):
                 id=sim.id,
                 task_id=sim.task_id,
                 trial=sim.trial,
+                seed=sim.seed,
                 reward=sim.reward_info.reward if sim.reward_info else None,
                 termination_reason=sim.termination_reason,
                 agent_cost=sim.agent_cost,

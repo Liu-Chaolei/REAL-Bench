@@ -240,6 +240,7 @@ def worker_loop(
             for future in [f for f in list(inflight) if f.done()]:
                 with inflight_lock:
                     unit_id = inflight.pop(future)
+                sim = None
                 try:
                     sim = future.result()
                 except BaseException as e:
@@ -266,6 +267,10 @@ def worker_loop(
                     logger.info(
                         f"Controller requeued {unit_id} (infrastructure_error result)"
                     )
+                # A completed Future retains its return value. Release both
+                # references before this worker leases and starts another unit.
+                del future
+                sim = None
 
             # Fill free slots.
             if len(inflight) < slots:

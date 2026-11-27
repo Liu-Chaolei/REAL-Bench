@@ -16,7 +16,7 @@ import os
 import random
 import threading
 import uuid
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from contextvars import ContextVar
 from dataclasses import dataclass
 from pathlib import Path
@@ -42,7 +42,7 @@ from tau2.data_model.voice_personas import warn_if_non_official_voices
 from tau2.evaluator.evaluator import EvaluationType
 from tau2.evaluator.hallucination_reviewer import failed_hallucination_check
 from tau2.evaluator.reviewer import check_hallucination, format_hallucination_feedback
-from tau2.metrics.agent_metrics import compute_metrics
+from tau2.metrics.agent_metrics import compute_metrics, compute_metrics_from_path
 from tau2.registry import registry
 from tau2.runner.build import _build_env_kwargs, build_orchestrator
 from tau2.runner.checkpoint import (
@@ -896,6 +896,8 @@ class BatchPrep:
     user_voice_settings: Optional[VoiceSettings]
     user_persona_config: Optional[PersonaConfig]
     save_dir: Optional[Path]
+    save_path: Optional[Path]
+    retain_simulations: bool
     evaluation_type: EvaluationType
     console_display: bool
     run_id: str
@@ -979,6 +981,13 @@ def prepare_batch(
         simulations=[],
     )
 
+    # Directory-format voice runs keep only the lightweight index in memory.
+    # Full trajectories remain on disk and are streamed only when explicitly
+    # needed for aggregate metrics or later inspection.
+    retain_simulations = save_path is None or not (
+        results_format == "dir" or Results._detect_format(save_path) == "dir"
+    )
+
     # Checkpoint resume
     done_runs: set = set()
     if save_path is not None:
@@ -1032,6 +1041,8 @@ def prepare_batch(
         user_voice_settings=user_voice_settings,
         user_persona_config=user_persona_config,
         save_dir=save_dir,
+        save_path=save_path,
+        retain_simulations=retain_simulations,
         evaluation_type=evaluation_type,
         console_display=console_display,
         run_id=run_id,
@@ -1218,7 +1229,12 @@ def _run_tasks(
                 raise
             queue.complete(unit.unit_id, worker_id=worker_id)
             with results_lock:
-                simulation_results.simulations.append(result)
+                if prep.retain_simulations:
+                    simulation_results.simulations.append(result)
+            if not prep.retain_simulations:
+                # The checkpoint already owns the serialized trajectory. Drop
+                # the model before leasing the next unit on this thread.
+                del result
 
     executor = ThreadPoolExecutor(max_workers=config.max_concurrency)
     futures: dict = {}
@@ -1226,8 +1242,20 @@ def _run_tasks(
         futures = {
             executor.submit(_consume, i): i for i in range(config.max_concurrency)
         }
-        for future in as_completed(futures):
-            future.result()
+        # Remove completed Future objects as we consume them. A Future keeps
+        # its return value until it is garbage-collected; retaining the whole
+        # futures dict would therefore retain every completed voice trajectory
+        # even when directory-format results are metadata-only in memory.
+        pending = set(futures)
+        while pending:
+            completed, pending = wait(pending, return_when=FIRST_COMPLETED)
+            for future in completed:
+                future.result()
+        futures.clear()
+        # ``wait`` leaves the last completed set and loop variable bound.
+        # Clear them before the final metadata-only return below.
+        completed = set()
+        future = None
     except KeyboardInterrupt:
         ConsoleDisplay.console.print(
             "\n[bold red]Ctrl+C received — cancelling remaining tasks...[/bold red]"
@@ -1236,6 +1264,9 @@ def _run_tasks(
         executor.shutdown(wait=False, cancel_futures=True)
 
         n = len(simulation_results.simulations)
+        if not prep.retain_simulations and prep.save_path is not None:
+            metadata = Results.load_metadata(prep.save_path)
+            n = len(metadata.simulation_index or [])
         ConsoleDisplay.console.print(
             f"[bold yellow]{n} simulation(s) already checkpointed. "
             f"Use --auto-resume to continue later.[/bold yellow]"
@@ -1340,8 +1371,13 @@ def run_domain(config: RunConfig) -> Results:
         results_format=results_format,
     )
 
-    # Compute and display metrics
-    metrics = compute_metrics(simulation_results)
+    # Compute and display metrics. Directory-format voice results are streamed
+    # one simulation at a time so this does not repopulate memory with ticks.
+    metrics = (
+        compute_metrics_from_path(save_path)
+        if not simulation_results.simulations and save_path is not None
+        else compute_metrics(simulation_results)
+    )
     logger.debug("Evaluation log: {}", metrics.as_dict()["evaluation_log"])
     ConsoleDisplay.display_agent_metrics(metrics)
 
@@ -1414,7 +1450,11 @@ def run_domains(
         ConsoleDisplay.console.print(
             Text(text=f"\n=== {prep.run_id} ===", style="bold green")
         )
-        metrics = compute_metrics(prep.simulation_results)
+        metrics = (
+            compute_metrics_from_path(prep.save_path)
+            if not prep.retain_simulations and prep.save_path is not None
+            else compute_metrics(prep.simulation_results)
+        )
         logger.debug("Evaluation log: {}", metrics.as_dict()["evaluation_log"])
         ConsoleDisplay.display_agent_metrics(metrics)
         results_by_run[prep.run_id] = prep.simulation_results

@@ -162,7 +162,7 @@ class UserSimulationConfig(BaseModel):
         allow_inf_nan=False,
         description="Minimum silence before an unsolicited user check-in; "
         "fresh agent speech and normal replies retain their existing timing. "
-        "Set to 0 for the previous pacing.",
+        "Disabled by default; set to a positive value to enable it.",
     )
 
 

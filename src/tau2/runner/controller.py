@@ -90,6 +90,8 @@ class ControllerRun:
         units: list[WorkUnit],
         save_fn: Optional[Callable],
         save_dir: Optional[Path],
+        save_path: Optional[Path],
+        retain_simulations: bool,
         evaluation_type: EvaluationType,
     ):
         self.run_id = run_id
@@ -104,6 +106,8 @@ class ControllerRun:
         ]
         self.save_fn = save_fn
         self.save_dir = save_dir
+        self.save_path = save_path
+        self.retain_simulations = retain_simulations
         self.evaluation_type = evaluation_type
         # Captured at registration time (main thread): uvicorn handler threads
         # get a fresh ContextVar context, and workers are separate processes,
@@ -120,6 +124,8 @@ class ControllerRun:
             units=prep.units,
             save_fn=prep.save_fn,
             save_dir=prep.save_dir,
+            save_path=prep.save_path,
+            retain_simulations=prep.retain_simulations,
             evaluation_type=prep.evaluation_type,
         )
 
@@ -276,7 +282,8 @@ class Controller:
             self._written.add(unit_id)
             if run.save_fn:
                 run.save_fn(sim)
-            run.simulation_results.simulations.append(sim)
+            if run.retain_simulations:
+                run.simulation_results.simulations.append(sim)
         if self.monitor:
             unit = self._unit_from_id(unit_id)
             key = self._monitor_key(unit) if unit else f"{sim.task_id}.{sim.trial}"
@@ -484,7 +491,12 @@ def drive_batches(
         for proc in procs:
             if proc.poll() is None:
                 proc.terminate()
-        n = sum(len(run.simulation_results.simulations) for run in runs)
+        n = 0
+        for run in runs:
+            if run.retain_simulations:
+                n += len(run.simulation_results.simulations)
+            elif run.save_path is not None:
+                n += len(Results.load_metadata(run.save_path).simulation_index or [])
         ConsoleDisplay.console.print(
             f"[bold yellow]{n} simulation(s) already checkpointed. "
             f"Use --auto-resume to continue later.[/bold yellow]"

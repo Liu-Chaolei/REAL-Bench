@@ -1,6 +1,7 @@
 import math
 import re
 from collections import defaultdict
+from pathlib import Path
 
 import pandas as pd
 from loguru import logger
@@ -504,6 +505,90 @@ def compute_metrics(results: Results) -> AgentMetrics:
             k: dict(v) for k, v in user_error_tags_by_severity.items()
         },
     )
+
+
+def compute_metrics_from_path(path: str | Path) -> AgentMetrics:
+    """Compute metrics while loading at most one saved simulation at a time.
+
+    Directory-format voice runs can contain very large tick trajectories. This
+    helper keeps the batch process metadata-only and releases each trajectory
+    immediately after it contributes to the aggregate metrics.
+    """
+    path = Path(path)
+    metadata = Results.load_metadata(path)
+    task_rewards: dict[str | int, list[float]] = defaultdict(list)
+    task_successes: dict[str | int, list[bool]] = defaultdict(list)
+    costs: list[float] = []
+    aggregate = AgentMetrics(avg_reward=0.0, pass_hat_ks={}, avg_agent_cost=0.0)
+
+    # Every scalar count and nested diagnostic map is additive across one-sim
+    # metric results. The three score fields are computed from the collected
+    # valid simulations below to preserve the batch semantics.
+    additive_fields = {
+        name
+        for name, field in AgentMetrics.model_fields.items()
+        if name not in {"avg_reward", "pass_hat_ks", "avg_agent_cost", "total_tasks"}
+        and field.annotation in (int, float)
+    }
+    map_fields = {
+        "agent_errors_by_severity",
+        "user_errors_by_severity",
+        "sims_by_max_agent_severity",
+        "sims_by_max_user_severity",
+        "sims_by_first_critical_source",
+    }
+
+    for simulation in Results.iter_simulations(path):
+        one = Results(
+            info=metadata.info,
+            tasks=metadata.tasks,
+            simulations=[simulation],
+        )
+        metrics = compute_metrics(one)
+        for name in additive_fields:
+            setattr(aggregate, name, getattr(aggregate, name) + getattr(metrics, name))
+        for name in map_fields:
+            target = getattr(aggregate, name)
+            for key, value in getattr(metrics, name).items():
+                target[key] = target.get(key, 0) + value
+        for name in ("agent_error_tags_by_severity", "user_error_tags_by_severity"):
+            target = getattr(aggregate, name)
+            for key, values in getattr(metrics, name).items():
+                bucket = target.setdefault(key, {})
+                for severity, value in values.items():
+                    bucket[severity] = bucket.get(severity, 0) + value
+
+        valid = (
+            simulation.termination_reason
+            not in {TerminationReason.INFRASTRUCTURE_ERROR, TerminationReason.USER_ERROR}
+            and simulation.evaluation_status not in {"pending", "failed"}
+            and simulation.reward_info is not None
+            and simulation.reward_info.reward is not None
+        )
+        if valid:
+            reward = simulation.reward_info.reward
+            task_rewards[simulation.task_id].append(reward)
+            task_successes[simulation.task_id].append(is_successful(reward))
+            if simulation.agent_cost is not None:
+                costs.append(simulation.agent_cost)
+
+    if task_rewards:
+        aggregate.avg_reward = sum(
+            sum(rewards) / len(rewards) for rewards in task_rewards.values()
+        ) / len(task_rewards)
+        max_k = min(len(successes) for successes in task_successes.values())
+        aggregate.pass_hat_ks = {
+            k: sum(
+                pass_hat_k(len(successes), sum(successes), k)
+                for successes in task_successes.values()
+            )
+            / len(task_successes)
+            for k in range(1, max_k + 1)
+        }
+        aggregate.total_tasks = len(task_rewards)
+    if costs:
+        aggregate.avg_agent_cost = sum(costs) / len(costs)
+    return aggregate
 
 
 def display_metrics(metrics: AgentMetrics) -> None:

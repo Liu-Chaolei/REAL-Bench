@@ -194,21 +194,19 @@ def run_benchmarks_list(args: argparse.Namespace) -> None:
 
     rows = []
     for name in preset_names():
-        if name == "gaia2":
-            from tau2.domains.gaia2.manifest import load_manifest as load_gaia2_manifest
+        from tau2.domains.gaia2.manifest import load_manifest as load_gaia2_manifest
+        from tau2.runner.presets import manifest_path
 
-            manifest = load_gaia2_manifest()
-            rows.append(
-                {
-                    "name": name,
-                    "benchmark_version": manifest.benchmark_version,
-                    "revision": manifest.revision,
-                    "mode": ",".join(manifest.modes),
-                    "task_groups": len(manifest.task_groups),
-                }
-            )
-            continue
-        raise ValueError(f"Unsupported benchmark manifest: {name}")
+        manifest = load_gaia2_manifest(manifest_path(name))
+        rows.append(
+            {
+                "name": name,
+                "benchmark_version": manifest.benchmark_version,
+                "revision": manifest.revision,
+                "mode": ",".join(manifest.modes),
+                "task_groups": len(manifest.task_groups),
+            }
+        )
     print(json.dumps(rows, indent=2))
 
 

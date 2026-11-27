@@ -239,6 +239,10 @@ def test_public_domain_timeout_binding_keeps_original_config():
         )
 
 
+def test_caller_silence_checkin_is_disabled_by_default():
+    assert UserSimulationConfig().user_silence_checkin_seconds == 0
+
+
 def test_legacy_caller_settings_resolve_once_outside_adapter():
     config = AudioNativeConfig(
         provider="qwen_agent",

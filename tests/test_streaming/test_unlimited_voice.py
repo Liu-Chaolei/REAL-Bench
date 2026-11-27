@@ -87,7 +87,9 @@ def test_unlimited_voice_batch_records_no_step_cap(tmp_path, monkeypatch):
     )
     assert calls == ["create_task_1"]
     assert results.info.max_steps is None
-    assert results.simulations[0].termination_reason == TerminationReason.USER_STOP
+    # Directory-format voice runs return metadata only; full trajectories stay
+    # on disk and are loaded explicitly when needed.
+    assert results.simulations == []
     resumed = batch.run_tasks(
         config,
         get_tasks("mock", task_ids=config.task_ids),
@@ -96,4 +98,4 @@ def test_unlimited_voice_batch_records_no_step_cap(tmp_path, monkeypatch):
         console_display=False,
     )
     assert calls == ["create_task_1"]
-    assert len(resumed.simulations) == 1
+    assert resumed.simulations == []

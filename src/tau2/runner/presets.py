@@ -348,52 +348,56 @@ def manifest_path(name: str) -> Path:
 def load_frame(
     name: str = "gaia2", *, num_trials: int = 1, mode: str | None = None
 ) -> BenchmarkFrame:
-    """Expand the Gaia2 base group into an ordinary run frame."""
+    """Expand an installed Gaia2 manifest into an ordinary run frame."""
     if num_trials < 1:
         raise ValueError("num_trials must be positive")
-    if name == "gaia2":
-        from tau2.domains.gaia2.language_runtime import load_language
-        from tau2.domains.gaia2.manifest import load_manifest as load_gaia2_manifest
+    from tau2.domains.gaia2.language_runtime import load_language
+    from tau2.domains.gaia2.manifest import load_manifest as load_gaia2_manifest
 
-        manifest = load_gaia2_manifest()
-        selected_mode = mode or "text"
-        if selected_mode not in manifest.modes:
-            raise ValueError(f"Gaia2 benchmark does not support {selected_mode!r} runs")
-        group = manifest.task_groups.get("base")
-        if group is None:
-            raise ValueError("Gaia2 manifest has no base task group")
-        loaded = load_language("en", "gaia2", mode=selected_mode)
-        return BenchmarkFrame(
-            benchmark_version=manifest.benchmark_version,
-            revision=manifest.revision,
-            mode=selected_mode,
-            trials=list(range(num_trials)),
-            cells=[
-                CellFrame(
-                    language="en",
-                    domain="gaia2",
-                    canonical_task_ids=group.task_ids,
-                    binding_revision=binding_revision(loaded),
-                )
-            ],
-        )
-    raise ValueError(
-        f"Unknown released benchmark {name!r}; the active release is 'gaia2'"
+    path = manifest_path(name)
+    if not path.is_file():
+        raise ValueError(f"Unknown released benchmark {name!r}")
+    manifest = load_gaia2_manifest(path)
+    selected_mode = mode or "text"
+    if selected_mode not in manifest.modes:
+        raise ValueError(f"Gaia2 benchmark does not support {selected_mode!r} runs")
+    group_names = manifest.conditions.get("frame_groups") or ["base"]
+    try:
+        groups = [manifest.task_groups[group_name] for group_name in group_names]
+    except KeyError as error:
+        raise ValueError(f"Gaia2 manifest has unknown frame group: {error}") from error
+    canonical_task_ids = [task_id for group in groups for task_id in group.task_ids]
+    if len(canonical_task_ids) != len(set(canonical_task_ids)):
+        raise ValueError("Gaia2 manifest frame groups contain duplicate task IDs")
+    loaded = load_language("en", "gaia2", mode=selected_mode)
+    return BenchmarkFrame(
+        benchmark_version=manifest.benchmark_version,
+        revision=manifest.revision,
+        mode=selected_mode,
+        trials=list(range(num_trials)),
+        cells=[
+            CellFrame(
+                language="en",
+                domain="gaia2",
+                canonical_task_ids=canonical_task_ids,
+                binding_revision=binding_revision(loaded),
+            )
+        ],
     )
 
 
 def verify_frame(frame: BenchmarkFrame, name: str = "gaia2") -> None:
-    """Check the Gaia2 release source digests and task membership."""
-    if name == "gaia2":
-        from tau2.domains.gaia2.manifest import load_manifest as load_gaia2_manifest
-        from tau2.domains.gaia2.manifest import verify_manifest_sources
+    """Check a Gaia2 release manifest's source digests and task membership."""
+    from tau2.domains.gaia2.manifest import load_manifest as load_gaia2_manifest
+    from tau2.domains.gaia2.manifest import verify_manifest_sources
 
-        manifest = load_gaia2_manifest()
-        verify_manifest_sources(manifest)
-        if frame != load_frame(name, num_trials=len(frame.trials), mode=frame.mode):
-            raise ValueError("Gaia2 benchmark frame differs from its release manifest")
-        return
-    raise ValueError(f"Only the Gaia2 release can be verified: {name}")
+    path = manifest_path(name)
+    if not path.is_file():
+        raise ValueError(f"Unknown released benchmark {name!r}")
+    manifest = load_gaia2_manifest(path)
+    verify_manifest_sources(manifest)
+    if frame != load_frame(name, num_trials=len(frame.trials), mode=frame.mode):
+        raise ValueError("Gaia2 benchmark frame differs from its release manifest")
 
 
 def extend_plan(previous: BenchmarkPlan, requested: BenchmarkPlan) -> BenchmarkPlan:

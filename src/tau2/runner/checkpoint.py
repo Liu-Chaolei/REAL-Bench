@@ -92,9 +92,35 @@ def try_resume(
             f"File {save_path} already exists. Please delete it or use a different save_to name."
         )
 
-    # Auto-detect format from on-disk state
+    # Directory checkpoints always resume from metadata and the lightweight
+    # simulation index. Full trajectories remain available through the explicit
+    # Results.load() API used by viewers and re-evaluation tools.
     fmt = Results._detect_format(save_path)
-    prev_simulation_results = Results.load(save_path)
+    if fmt == "dir":
+        prev_simulation_results = Results.load_metadata(save_path)
+        if prev_simulation_results.simulation_index is not None:
+            indexed_ids = {
+                entry.id for entry in prev_simulation_results.simulation_index
+            }
+            on_disk_ids = (
+                {sim_file.stem for sim_file in sims_dir.glob("*.json")}
+                if sims_dir.exists()
+                else set()
+            )
+            missing = indexed_ids - on_disk_ids
+            extra = on_disk_ids - indexed_ids
+            errors = []
+            if missing:
+                errors.append(f"Missing simulation files: {sorted(missing)}")
+            if extra:
+                errors.append(f"Extra simulation files not in index: {sorted(extra)}")
+            if errors:
+                raise ValueError(
+                    f"Dir format integrity check failed for {save_path}: "
+                    + "; ".join(errors)
+                )
+    else:
+        prev_simulation_results = Results.load(save_path)
     from tau2.persistent_tasks.availability import reject_retired_results
 
     reject_retired_results(prev_simulation_results)
@@ -247,26 +273,88 @@ def try_resume(
             f"Adding {len(added_task_ids)} new tasks to the run: {sorted(added_task_ids)}"
         )
 
-    # Determine completed runs (exclude infrastructure failures for retry)
+    # Determine completed runs (exclude infrastructure failures for retry).
+    # Batch execution may have loaded only metadata for a directory checkpoint;
+    # use its lightweight index instead of retaining complete tick trajectories.
+    if prev_simulation_results.simulations:
+        records = [
+            {
+                "id": sim.id,
+                "trial": sim.trial,
+                "task_id": sim.task_id,
+                "seed": sim.seed,
+                "termination_reason": sim.termination_reason,
+            }
+            for sim in prev_simulation_results.simulations
+        ]
+    else:
+        records = [
+            entry.model_dump(mode="python")
+            for entry in (prev_simulation_results.simulation_index or [])
+        ]
+        if fmt == "dir" and not records and sims_dir.exists():
+            # Very old directory checkpoints have no simulation_index. Read
+            # only the resume fields from each file, releasing the parsed JSON
+            # before moving to the next one.
+            for sim_file in sorted(sims_dir.glob("*.json")):
+                with sim_file.open() as fp:
+                    payload = json.load(fp)
+                records.append(
+                    {
+                        "id": payload.get("id", sim_file.stem),
+                        "trial": payload.get("trial"),
+                        "task_id": payload.get("task_id"),
+                        "seed": payload.get("seed"),
+                        "termination_reason": payload.get("termination_reason"),
+                    }
+                )
+        # Index entries written by older versions did not include seed. Fill
+        # that one small field from each simulation file, one file at a time,
+        # while preserving the bounded-memory property of metadata resume.
+        if fmt == "dir" and any(record.get("seed") is None for record in records):
+            for record in records:
+                if record.get("seed") is not None:
+                    continue
+                sim_file = sims_dir / f"{record['id']}.json"
+                if sim_file.exists():
+                    with sim_file.open() as fp:
+                        payload = json.load(fp)
+                    record["seed"] = payload.get("seed")
+                    record["termination_reason"] = payload.get(
+                        "termination_reason", record.get("termination_reason")
+                    )
+
     infra_error_sim_ids = [
-        sim.id
-        for sim in prev_simulation_results.simulations
-        if sim.termination_reason == TerminationReason.INFRASTRUCTURE_ERROR
+        record["id"]
+        for record in records
+        if record.get("termination_reason") == TerminationReason.INFRASTRUCTURE_ERROR
+        or record.get("termination_reason")
+        == TerminationReason.INFRASTRUCTURE_ERROR.value
     ]
-    done_runs = set(
-        [
-            (sim.trial, sim.task_id, sim.seed)
+    done_runs = {
+        (record.get("trial"), record.get("task_id"), record.get("seed"))
+        for record in records
+        if record.get("termination_reason")
+        not in {
+            TerminationReason.INFRASTRUCTURE_ERROR,
+            TerminationReason.INFRASTRUCTURE_ERROR.value,
+        }
+        and record.get("seed") is not None
+    }
+    # Remove infrastructure failure simulations so they can be replaced
+    infra_error_count = len(infra_error_sim_ids)
+    if prev_simulation_results.simulations:
+        prev_simulation_results.simulations = [
+            sim
             for sim in prev_simulation_results.simulations
             if sim.termination_reason != TerminationReason.INFRASTRUCTURE_ERROR
         ]
-    )
-    # Remove infrastructure failure simulations so they can be replaced
-    infra_error_count = len(infra_error_sim_ids)
-    prev_simulation_results.simulations = [
-        sim
-        for sim in prev_simulation_results.simulations
-        if sim.termination_reason != TerminationReason.INFRASTRUCTURE_ERROR
-    ]
+    elif prev_simulation_results.simulation_index is not None:
+        prev_simulation_results.simulation_index = [
+            entry
+            for entry in prev_simulation_results.simulation_index
+            if entry.id not in infra_error_sim_ids
+        ]
 
     # Merge tasks: keep previous tasks and add any new ones
     if added_task_ids:
@@ -304,10 +392,13 @@ def try_resume(
                 sim_file = sims_dir / f"{sim_id}.json"
                 if sim_file.exists():
                     sim_file.unlink()
-            # Rebuild index after removing infra-error sims
-            prev_simulation_results.simulation_index = (
-                prev_simulation_results._build_simulation_index()
-            )
+            # Full resumes rebuild the index from the models. Metadata-only
+            # resumes already filtered the lightweight index above; rebuilding
+            # from ``simulations=[]`` would accidentally erase its entries.
+            if prev_simulation_results.simulations:
+                prev_simulation_results.simulation_index = (
+                    prev_simulation_results._build_simulation_index()
+                )
             prev_simulation_results.save_metadata(save_path)
         else:
             with open(save_path, "w") as fp:
@@ -371,6 +462,7 @@ def create_checkpoint_fns(
                 id=sim.id,
                 task_id=sim.task_id,
                 trial=sim.trial,
+                seed=sim.seed,
                 reward=sim.reward_info.reward if sim.reward_info else None,
                 termination_reason=sim.termination_reason,
                 agent_cost=sim.agent_cost,

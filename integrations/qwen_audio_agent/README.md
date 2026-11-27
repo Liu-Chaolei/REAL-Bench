@@ -229,11 +229,11 @@ legacy Speech-to-Speech configuration may contain its historical provider
 settings, but the current custom integration selects Qwen through `tts` and
 `asr_provider` settings.
 
-The simulated caller waits at least 30 seconds of silence before starting an
-unsolicited check-in. Fresh Agent speech or text, initial requests and tool replies
-retain their ordinary response timing. `QwenAgentConfig.user_silence_checkin_seconds`
-sets this interval (0 restores the previous pacing); the effective value is saved
-in the run configuration. Caller generation and synthesis add to this minimum.
+Unsolicited caller check-ins are disabled by default. Set
+`QwenAgentConfig.user_silence_checkin_seconds` to a positive interval to enable
+one after that much silence. Fresh Agent speech or text, initial requests and tool
+replies retain their ordinary response timing; the effective value is saved in the
+run configuration. Caller generation and synthesis add to the configured minimum.
 
 Scenario callers retain free-text generation. An ungrounded reply is corrected
 privately using its reason and the original request, with at most two additional

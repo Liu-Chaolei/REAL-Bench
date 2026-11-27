@@ -21,13 +21,14 @@ def main() -> None:
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument("--env-file", type=Path, required=True)
     parser.add_argument("--batch-size", type=int, default=10)
+    parser.add_argument("--concurrency", type=int, default=1)
     parser.add_argument("--start", type=int, default=0)
     parser.add_argument("--stop", type=int)
     args = parser.parse_args()
 
     load_env_file(args.env_file)
     config = load_config(args.config)
-    config.concurrency = 1
+    config.concurrency = max(1, args.concurrency)
     inputs = sorted((args.out / "inputs").glob("*.json"))
     stop = args.stop if args.stop is not None else len(inputs)
     progress_path = args.out / "batch-driver-progress.json"
