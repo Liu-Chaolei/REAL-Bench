@@ -6,19 +6,18 @@
 
 以下按当前 **Gaia2 全双工语音评测**整理，核对日期为 2026-11-26。以 [统一配置](../examples/real-metrics.unified.yaml) 和实际评分入口为准，不包含精简或新增指标的建议。
 
-统一配置显式启用 6 个诊断模块：`intent`、`execution`、`voice`、`interaction`、`state_interaction`、`conciseness`。环境结果由任务评分入口提供。对应的常规指标为：
+统一配置显式启用 5 个诊断模块：`intent`、`execution`、`voice`、`state_interaction`、`conciseness`。环境结果由任务评分入口提供。对应的常规指标为：
 
 | 来源／模块 | 当前实际指标 | 评价内容 |
 | --- | --- | --- |
 | 环境评分 | `ENV_ASSERTION` | 环境目标是否达成；汇总字段为 `environment.env_assertion` |
-| `intent` | `precision`、`recall`、单次 `f1`／批量 `macro_f1` | 用户需求与实际后台任务之间的准确性、完整性 |
-| `execution` | `tools`、`parameters`、`order`、`effects`，以及按适用范围分组的执行总分 | 工具选择、参数、依赖顺序和执行效果；权重为 25/35/10/30 |
-| `voice` | 下列 12 项 `voice_interaction` 指标 | 响应、让话、主动打断、重叠、及时性与非正式发言处理 |
-| `interaction` | `effective_interaction_rate` | 发言中的交互行为是否有用 |
+| `intent` | 批量 `macro_f1` | 用户需求与实际后台任务之间的准确性、完整性；precision、recall 留在明细 |
+| `execution` | `total` | 工具选择、参数、依赖顺序和执行效果的加权总分；四个分项留在明细，权重为 25/35/10/30 |
+| `voice` | `latency`、`responsiveness`、`interrupt`、`selectivity` | τ-Voice 风格的四个语音交互聚合维度 |
 | `state_interaction` | `progressivity.forward_rate`、`grounding.consistent_rate` | 是否推进相关工作，以及是否正确使用当时可见的状态与证据 |
-| `conciseness` | `required_coverage`、`length_efficiency`、`feedback_score` | 必要反馈覆盖、长度效率及二者的 F3 综合分 |
+| `conciseness` | `feedback_score` | 必要反馈覆盖与长度效率的 F3 综合分；两项留在明细 |
 
-语音的 12 项为：
+语音主报告显示四个聚合指标。`latency` 是 `response_latency_mean` 与 `yield_latency_mean` 的平均值；`responsiveness` 是 `response_rate` 与 `yield_rate` 的平均值；`interrupt` 使用事件级 `agent_interruption_event_rate`；`selectivity` 是三项 selectivity 的平均值。语音的完整 12 项计算如下，底层字段进入 `evaluation_log.metric_details.voice`：
 
 | 类别 | 字段 |
 | --- | --- |
@@ -36,7 +35,7 @@
 | 后台请求管理／请求变化 | `persistent_task.completion_score` | 对应后台请求的结果与回复是否满足要求 |
 | 隐藏信息 | `hidden_intent.hidden_ask_rate` | 隐藏信息节点中已询问节点的比例 |
 
-现有 `avg_reward`、`pass^k` 结果统计仍保留。单次 F1 与 Macro F1 是同一能力在不同层级的结果；执行总分和反馈综合分是现有分项的汇总，不是新增独立评测。
+现有 `avg_reward`、`pass^k` 结果统计仍保留。Intent 主报告只显示一个 Macro F1；precision、recall、执行四分项、反馈覆盖和长度效率仍保留在明细中。
 
 实际能否得到数值仍受适用性和证据约束：Modify／Cancel 变体不评价 environment、execution、state_interaction；没有对应事件的语音分项为空；长度效率与反馈综合分需要对应语言的 calibration。不适用、缺证据与评分失败保留状态／原因，不补成 0 或 1。
 
@@ -49,7 +48,6 @@
 | 执行质量 | tools、parameters、order、effects | 单次定义及 25/35/10/30 权重保持现状；批量分项按题等权；总分按相同适用范围分组 | REAL-Bench/ARE 相关实现及本地适配 |
 | 后台请求完成 | completion_score | 沿用原后台结果与回复的总判断；后台结果 passed、回复 passed/未评价及理由进入 evaluation_log，不单独作为性能分 | 本地扩展 |
 | 统一语音交互 | response_latency_mean、response_latency_p90、response_rate、yield_latency_mean、yield_rate、agent_interruption_event_rate、agent_interrupted_turn_rate、speech_overlap_duration、on_time_rate、三项 selectivity | 正式发言分母；只有用户结束后的新 Agent 发言分组才是响应；持续旧发言不算 0 秒响应；1 秒静音确认让话，无及时期限；原始声音计算重叠；普通指标题目等权，P90 题目／试验等权加权分位数 | τ-voice、REAL-Bench/EVA 来源及本地统一定义 |
-| 发言有用性 | effective_interaction_rate | 单次 useful/(useful+unhelpful)，批量按题等权 | 本地诊断实现 |
 | 状态交互 | progressivity.forward_rate、grounding.consistent_rate | v2 逐事件可见状态；Agent 相关推进窗口率、实际状态使用机会一致率；同题试验平均后题目等权 | 通用状态管理与语义解释，本地实现 |
 | 精简反馈 | required_coverage、length_efficiency、feedback_score | v2 只评价正确覆盖和长度，综合分为 F3；无独立真实性判断或重大错误清零，陈述真实性由 Grounding 评价；批量按题等权；中文初始预算 10+20N，英文初始预算 15+30N，按语言选择 calibration | 本地诊断实现 |
 | 隐藏信息 | hidden_ask_rate | asked hidden nodes / hidden nodes；批量按题等权 | 本地隐藏信息扩展 |
@@ -101,8 +99,13 @@ On Time Rate 统计用户结束后新发言分组产生的已回应样本，取�
 ```json
 {
   "version": "tau-real-diagnostics/2",
-  "metrics": {"intent": {"precision": 0.8, "recall": 0.7, "macro_f1": 0.74}},
-  "evaluation_log": {"total_trials": 10, "records": [], "statuses": {}}
+  "metrics": {"intent": {"macro_f1": 0.74}},
+  "evaluation_log": {
+    "total_trials": 10,
+    "metric_details": {"intent": {"precision": 0.8, "recall": 0.7}},
+    "records": [],
+    "statuses": {}
+  }
 }
 ```
 
@@ -119,9 +122,9 @@ On Time Rate 统计用户结束后新发言分组产生的已回应样本，取�
 - 新的整题成功定义与综合总分；
 - 评测无效和 Agent 失败的边界；
 - 三项 selectivity 细分指标保留；通话级错误次数阈值标记已删除。
-- 发言有用性、Progressivity、Grounding、精简反馈之间的取舍。
+- Progressivity、Grounding、精简反馈之间的取舍；发言有用性已从当前统一配置移除。
 
 本次验证使用离线小用例和 mock，不向评测运行中添加验收流程，不重新生成或封存数据，不调用真实模型。
 
 
-状态交互 v2 已接入同次诊断报告，需在 measures 中显式选择 `state_interaction`。语义解释使用该角色的模型配置和共享请求预算；不再隐式创建另一配置评分。原 interaction 的 effective_interaction_rate 保留，未替换或合成。实现说明见 [状态交互实施记录](state-interaction-implementation-plan.md)。
+状态交互 v2 已接入同次诊断报告，需在 measures 中显式选择 `state_interaction`。语义解释使用该角色的模型配置和共享请求预算；不再隐式创建另一配置评分。发言有用性不再作为当前统一配置的评测项；历史 interaction 结果仍可读取。实现说明见 [状态交互实施记录](state-interaction-implementation-plan.md)。

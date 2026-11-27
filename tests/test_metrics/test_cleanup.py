@@ -103,22 +103,18 @@ def test_task_means_ignore_trial_count_and_keep_datasets_separate():
                         "recall": value,
                         "f1": value,
                     },
-                    "interaction": {
-                        "status": "complete",
-                        "effective_interaction_rate": value,
-                    },
                 }
             },
         }
 
     rows = [row("a", 1)] * 9 + [row("b", 0)]
     report = summarize(rows)
-    assert report["metrics"]["intent"] == {
+    assert report["metrics"]["intent"] == {"macro_f1": 0.5}
+    assert "interaction" not in report["metrics"]
+    assert report["evaluation_log"]["metric_details"]["intent"] == {
         "precision": 0.5,
         "recall": 0.5,
-        "macro_f1": 0.5,
     }
-    assert report["metrics"]["interaction"]["effective_interaction_rate"] == 0.5
     assert report["evaluation_log"]["total_trials"] == 10
     assert "coverage" not in report["metrics"]["intent"]
     assert "micro" not in report["metrics"]["intent"]

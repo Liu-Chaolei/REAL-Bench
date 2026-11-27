@@ -641,8 +641,6 @@ def summarize(rows):
     }
     metrics = {
         "intent": {
-            "precision": average("intent", "precision"),
-            "recall": average("intent", "recall"),
             "macro_f1": average("intent", "f1"),
         },
         "execution": {
@@ -651,11 +649,6 @@ def summarize(rows):
                 for field in ("score", "lower", "upper")
             }
             for name in ("tools", "parameters", "order", "effects")
-        },
-        "interaction": {
-            "effective_interaction_rate": average(
-                "interaction", "effective_interaction_rate"
-            )
         },
         "state_interaction": {
             "progressivity": {
@@ -670,12 +663,7 @@ def summarize(rows):
             },
         },
         "conciseness": {
-            name: average("conciseness", "trial", name)
-            for name in (
-                "required_coverage",
-                "length_efficiency",
-                "feedback_score",
-            )
+            "feedback_score": average("conciseness", "trial", "feedback_score")
         },
     }
     environment_rows = [
@@ -709,6 +697,32 @@ def summarize(rows):
         }
         for key, group in groups.items()
     }
+    # Keep diagnostic breakdowns available in the log while exposing only the
+    # weighted execution total in the capability panel.
+    execution_details = {
+        key: {
+            name: {
+                field: task_mean(
+                    (
+                        task_key(row),
+                        result.get("dimensions", {}).get(name, {}).get(field),
+                    )
+                    for row, result in group["rows"]
+                )
+                for field in ("score", "lower", "upper")
+            }
+            for name in ("tools", "parameters", "order", "effects")
+        }
+        for key, group in groups.items()
+    }
+    total_by_profile = metrics["execution"]["totals_by_profile"]
+    metrics["execution"] = {
+        "total": (
+            next(iter(total_by_profile.values()))
+            if len(total_by_profile) == 1
+            else total_by_profile
+        ),
+    }
     voice = [
         dict(result, task_key=task_key(row))
         if result and "metrics" in result and not result.get("diagnostic_only")
@@ -717,8 +731,37 @@ def summarize(rows):
     ]
     voice_report = aggregate_voice(voice)
     namespace = voice_report.get("namespace", "real_voice")
+    voice_values = {
+        name: voice_report["metrics"].get(name, {}).get("value")
+        for name in (
+            "response_latency_mean",
+            "yield_latency_mean",
+            "response_rate",
+            "yield_rate",
+            "agent_interruption_event_rate",
+            "agent_interrupted_turn_rate",
+            "selectivity_backchannel",
+            "selectivity_vocal_tic",
+            "selectivity_non_directed",
+            "response_latency_p90",
+            "on_time_rate",
+            "speech_overlap_duration",
+        )
+    }
+
+    def voice_average(*names):
+        values = [voice_values.get(name) for name in names]
+        return sum(values) / len(values) if all(v is not None for v in values) else None
+
     metrics[namespace] = {
-        name: item["value"] for name, item in voice_report["metrics"].items()
+        "latency": voice_average("response_latency_mean", "yield_latency_mean"),
+        "responsiveness": voice_average("response_rate", "yield_rate"),
+        "interrupt": voice_values["agent_interruption_event_rate"],
+        "selectivity": voice_average(
+            "selectivity_backchannel",
+            "selectivity_vocal_tic",
+            "selectivity_non_directed",
+        ),
     }
     from tau2.persistent_tasks.scores import completion_score
 
@@ -753,6 +796,38 @@ def summarize(rows):
             "feedback_versions": sorted(feedback_versions),
             "execution_profiles": {
                 key: group["profile"] for key, group in groups.items()
+            },
+            "metric_details": {
+                "intent": {
+                    "precision": average("intent", "precision"),
+                    "recall": average("intent", "recall"),
+                },
+                "execution": execution_details,
+                "conciseness": {
+                    "required_coverage": task_mean(
+                        (
+                            task_key(row),
+                            result.get("trial", {}).get("required_coverage"),
+                        )
+                        for row, result in measures("conciseness")
+                        if not result.get("diagnostic_only")
+                    ),
+                    "length_efficiency": task_mean(
+                        (
+                            task_key(row),
+                            result.get("trial", {}).get("length_efficiency"),
+                        )
+                        for row, result in measures("conciseness")
+                        if not result.get("diagnostic_only")
+                    ),
+                },
+                "voice": {
+                    **voice_values,
+                    "latency": metrics[namespace]["latency"],
+                    "responsiveness": metrics[namespace]["responsiveness"],
+                    "interrupt": metrics[namespace]["interrupt"],
+                    "selectivity": metrics[namespace]["selectivity"],
+                },
             },
             "voice": voice_report,
             "termination_reasons": dict(

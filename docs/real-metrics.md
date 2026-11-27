@@ -74,11 +74,13 @@ Intent uses one chronological record of all actually delivered user requirements
 and one of all actually delivered top-level backend task messages. Both retain
 message boundaries, corrections and temporal anchors. There is no lossy summary.
 GT and prediction extraction are independent, and each intent is judged against
-the opposite raw text. The output contains Precision, Recall, F1 and directional
-item explanations. Batch Precision/Recall and Macro F1 give each task equal
-weight after averaging its trials. Macro F1 averages task F1 values; it is not
-recomputed from averaged Precision/Recall. Exact-complete match and micro F1 are
-retired. Coverage belongs to evaluation logs.
+the opposite raw text. Per-call results contain Precision, Recall, F1 and
+directional item explanations. The benchmark summary exposes one Intent F1
+(Macro F1); Precision and Recall remain in the diagnostic details. Batch
+Precision/Recall and Macro F1 give each task equal weight after averaging its
+trials. Macro F1 averages task F1 values; it is not recomputed from averaged
+Precision/Recall. Exact-complete match and micro F1 are retired. Coverage belongs
+to evaluation logs.
 
 ### Duplicate delegations (intent v2 legacy)
 

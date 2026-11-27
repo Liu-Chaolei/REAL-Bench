@@ -159,7 +159,10 @@ def replay_evidence(task: dict, rows: list[dict], root: Path) -> dict:
                 arguments = resolve_references(event.arguments, runtime.results)
                 if event.kind == "user":
                     runtime.delivered("user", arguments["content"], event_id=event.id)
-                elif event.channel == "agent":
+                elif event.channel == "agent" or event.tool in {
+                    "AgentUserInterface__send_message_to_user",
+                    "AgentUserInterface__send_message_to_agent",
+                }:
                     runtime.delivered("agent", arguments["content"])
                     answers[event.id] = {"content": arguments["content"]}
                 elif event.kind == "reference":
