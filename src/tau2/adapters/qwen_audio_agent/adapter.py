@@ -546,9 +546,12 @@ class DiscreteTimeQwenAgentAdapter(DiscreteTimeAdapter):
         """Reject later writes and always tear down the owned system."""
         try:
             if self._bg_loop.is_running:
+                observer_timeout = getattr(
+                    self.transcriber, "finalization_timeout_seconds", 0
+                )
                 self._bg_loop.run_coroutine(
                     self._disconnect(),
-                    timeout=self.config.boot_timeout_seconds
+                    timeout=max(self.config.boot_timeout_seconds, observer_timeout)
                     + DEFAULT_AUDIO_NATIVE_DISCONNECT_TIMEOUT,
                 )
         finally:

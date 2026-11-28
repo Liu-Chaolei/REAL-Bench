@@ -2,7 +2,6 @@
 
 import asyncio
 import audioop
-import contextlib
 import hashlib
 import json
 import time
@@ -11,6 +10,7 @@ from contextvars import ContextVar
 
 import websockets
 from pydantic import BaseModel, ConfigDict, Field
+from websockets.exceptions import ConnectionClosed, InvalidStatus
 
 from tau2.adapters.qwen_audio_agent.transcription.qwen import (
     QwenPlayedAudioTranscriber,
@@ -21,6 +21,36 @@ from tau2.config import (
 )
 from tau2.data_model.transcript import LiveTranscriptFragment, LiveTranscriptSnapshot
 from tau2.voice.qwen_asr import qwen_streaming_asr_url, transcribe_qwen
+
+
+class _ASRTaskFailure(RuntimeError):
+    """Classify service failures without retaining private provider messages."""
+
+    def __init__(self, code):
+        super().__init__("Qwen ASR task failed")
+        normalized = (
+            code.lower().replace("_", "").replace(".", "")
+            if isinstance(code, str)
+            else ""
+        )
+        self.retryable = normalized in {
+            "internalerror",
+            "internalservererror",
+            "servererror",
+            "serviceunavailable",
+            "requesttimeout",
+            "throttling",
+            "throttlingratelimit",
+            "toomanyrequests",
+        }
+
+
+def _retryable(error):
+    if isinstance(error, _ASRTaskFailure):
+        return error.retryable
+    if isinstance(error, InvalidStatus):
+        return error.response.status_code in {408, 429, 500, 502, 503, 504}
+    return isinstance(error, (TimeoutError, OSError, ConnectionClosed))
 
 
 class _SpeechSession(BaseModel):
@@ -40,6 +70,15 @@ class _SpeechSession(BaseModel):
     next_sentence: int = 1
     sentences: dict[int, dict] = Field(default_factory=dict)
     usage: dict = Field(default_factory=dict)
+    attempts: list[dict] = Field(default_factory=list)
+    replay_available: bool = True
+    input_consumed: bool = False
+    replay_pcm_bytes: int = Field(default=0, exclude=True)
+    replay_audio: list[tuple[bytes, float, float]] = Field(
+        default_factory=list, exclude=True
+    )
+    attempt_next_sentence: int = Field(default=1, exclude=True)
+    attempt_sentences: dict[int, dict] = Field(default_factory=dict, exclude=True)
     queue: asyncio.Queue = Field(
         default_factory=lambda: asyncio.Queue(maxsize=16), exclude=True
     )
@@ -48,9 +87,9 @@ class _SpeechSession(BaseModel):
 class QwenStreamingPlayedAudioTranscriber(QwenPlayedAudioTranscriber):
     """Append bounded audio batches, exposing only complete confirmed sentences.
 
-    Each speech episode owns one WebSocket task. Media ticks only enqueue audio;
-    connection startup, ASR and finish-task all run in the background. Silence or
-    an actual playback cut ends the episode; new speech opens a fresh task.
+    Media ticks only enqueue audio; connection startup, ASR, bounded reconnects
+    and finish-task all run in the background. Silence or an actual playback cut
+    ends the episode; new speech opens a fresh task.
     """
 
     def __init__(self, config, language="en", client=None, hotwords=None):
@@ -235,11 +274,12 @@ class QwenStreamingPlayedAudioTranscriber(QwenPlayedAudioTranscriber):
             while True:
                 session = await self._segments.get()
                 try:
-                    await self._run_session(session)
+                    await self._run_with_retry(session)
                 except Exception:
                     session.status = "failed"
                     raise
                 finally:
+                    session.replay_audio.clear()
                     self._segments.task_done()
         except asyncio.CancelledError:
             raise
@@ -251,15 +291,87 @@ class QwenStreamingPlayedAudioTranscriber(QwenPlayedAudioTranscriber):
 
     def _record(self, session, kind, **fields):
         record = {
-            "task_id": session.task_id,
+            "task_id": session.attempts[-1]["task_id"]
+            if session.attempts
+            else session.task_id,
+            "session_id": session.task_id,
+            "attempt": len(session.attempts),
             "event": kind,
             "received_ms": (time.monotonic() - self._clock_start) * 1000,
             **fields,
         }
         self.events.append(record)
 
+    async def _run_with_retry(self, session):
+        """Replay one episode on a new connection, verifying its released prefix."""
+        retries = self.config.asr_streaming_max_retries
+        for number in range(retries + 1):
+            attempt = {
+                "task_id": session.task_id if number == 0 else uuid.uuid4().hex,
+                "number": number + 1,
+                "status": "running",
+            }
+            session.attempts.append(attempt)
+            session.attempt_next_sentence = 1
+            session.attempt_sentences.clear()
+            session.sent_end_ms = session.start_ms
+            session.usage.clear()
+            try:
+                await self._run_session(session)
+                attempt["status"] = "completed"
+                return
+            except Exception as error:
+                attempt.update(
+                    status="failed", reason=type(error).__name__, phase=session.status
+                )
+                retry = number < retries and _retryable(error)
+                if retry and not session.replay_available:
+                    self._record(
+                        session, "retry_unavailable", reason="audio_buffer_limit"
+                    )
+                    retry = False
+                if not retry:
+                    raise
+                self._record(session, "retry_scheduled", reason=type(error).__name__)
+                session.status = "retrying"
+                await asyncio.sleep(self.config.asr_streaming_retry_delay_seconds)
+            finally:
+                attempt["usage"] = dict(session.usage)
+
+    def _remember_audio(self, session, packet):
+        if not session.replay_available or not self.config.asr_streaming_max_retries:
+            return
+        session.replay_pcm_bytes += len(packet[0])
+        limit = self.config.asr_streaming_retry_buffer_seconds * session.sample_rate * 2
+        if session.replay_pcm_bytes > limit:
+            session.replay_available = False
+            session.replay_audio.clear()
+        else:
+            session.replay_audio.append(packet)
+
+    async def _next_packet(self, session, reader):
+        """Wake on disconnect even when no further played audio is arriving."""
+        queued = asyncio.create_task(session.queue.get())
+        try:
+            await asyncio.wait({queued, reader}, return_when=asyncio.FIRST_COMPLETED)
+            if not queued.done():
+                # The reader has already classified the transport/protocol failure.
+                return False, None
+            packet = queued.result()
+            if packet is None:
+                session.input_consumed = True
+            else:
+                # Retain packets even when the reader fails in the same loop turn.
+                self._remember_audio(session, packet)
+            return True, packet
+        finally:
+            queued.cancel()
+            await asyncio.gather(queued, return_exceptions=True)
+
     async def _run_session(self, session):
         timeout = self.config.asr_streaming_timeout_seconds
+        task_id = session.attempts[-1]["task_id"]
+        replay = iter(tuple(session.replay_audio))
         parameters = {
             "format": "pcm",
             "sample_rate": session.sample_rate,
@@ -273,7 +385,7 @@ class QwenStreamingPlayedAudioTranscriber(QwenPlayedAudioTranscriber):
         request = {
             "header": {
                 "action": "run-task",
-                "task_id": session.task_id,
+                "task_id": task_id,
                 "streaming": "duplex",
             },
             "payload": {
@@ -303,10 +415,10 @@ class QwenStreamingPlayedAudioTranscriber(QwenPlayedAudioTranscriber):
                     async for raw in ws:
                         event = json.loads(raw)
                         kind = event["header"]["event"]
-                        if event["header"].get("task_id") != session.task_id:
+                        if event["header"].get("task_id") != task_id:
                             raise ValueError("ASR task identity mismatch")
                         if kind == "task-failed":
-                            raise RuntimeError("Qwen ASR task failed")
+                            raise _ASRTaskFailure(event["header"].get("error_code"))
                         self._process_event(session, event)
                         if kind == "task-started":
                             started.set()
@@ -317,13 +429,11 @@ class QwenStreamingPlayedAudioTranscriber(QwenPlayedAudioTranscriber):
                                 )
                             finished.set()
                             return
-                    raise RuntimeError("Qwen ASR closed before task-finished")
+                    raise ConnectionError("Qwen ASR closed before task-finished")
                 except Exception as error:
                     failure.append(error)
                     started.set()
                     finished.set()
-                    with contextlib.suppress(asyncio.QueueFull):
-                        session.queue.put_nowait(None)
 
             reader = asyncio.create_task(receive())
             try:
@@ -335,7 +445,13 @@ class QwenStreamingPlayedAudioTranscriber(QwenPlayedAudioTranscriber):
                 while True:
                     if failure:
                         raise failure[0]
-                    item = await session.queue.get()
+                    item = next(replay, None)
+                    if item is None:
+                        if session.input_consumed:
+                            break
+                        available, item = await self._next_packet(session, reader)
+                        if not available:
+                            raise failure[0]
                     if failure:
                         raise failure[0]
                     if item is None:
@@ -347,7 +463,9 @@ class QwenStreamingPlayedAudioTranscriber(QwenPlayedAudioTranscriber):
                     await asyncio.wait_for(ws.send(pcm), timeout)
                     self.appends.append(
                         {
-                            "task_id": session.task_id,
+                            "task_id": task_id,
+                            "session_id": session.task_id,
+                            "attempt": len(session.attempts),
                             "start_ms": start_ms,
                             "end_ms": end_ms,
                             "pcm_sha256": hashlib.sha256(pcm).hexdigest(),
@@ -363,7 +481,7 @@ class QwenStreamingPlayedAudioTranscriber(QwenPlayedAudioTranscriber):
                             {
                                 "header": {
                                     "action": "finish-task",
-                                    "task_id": session.task_id,
+                                    "task_id": task_id,
                                     "streaming": "duplex",
                                 },
                                 "payload": {"input": {}},
@@ -377,10 +495,12 @@ class QwenStreamingPlayedAudioTranscriber(QwenPlayedAudioTranscriber):
                     raise failure[0]
                 if any(
                     row["text"].strip()
-                    for ident, row in session.sentences.items()
-                    if ident >= session.next_sentence
+                    for ident, row in session.attempt_sentences.items()
+                    if ident >= session.attempt_next_sentence
                 ):
                     raise RuntimeError("Qwen ASR finished with unresolved text")
+                if session.attempt_next_sentence < session.next_sentence:
+                    raise ValueError("Qwen ASR replay omitted confirmed sentences")
                 session.status = "completed"
             finally:
                 reader.cancel()
@@ -426,21 +546,32 @@ class QwenStreamingPlayedAudioTranscriber(QwenPlayedAudioTranscriber):
         if not isinstance(ident, int) or not isinstance(text, str):
             raise ValueError("Invalid Qwen streaming sentence")
         final = bool(sentence.get("sentence_end"))
-        if ident < session.next_sentence:
-            previous = session.sentences[ident]
+        if ident < session.attempt_next_sentence:
+            previous = session.attempt_sentences[ident]
             if text.strip() and text.strip() != previous["text"].strip():
                 raise ValueError("Qwen changed a previously confirmed sentence")
             return
-        session.sentences[ident] = {
+        session.attempt_sentences[ident] = {
             "text": text,
             "final": final,
             "begin_ms": sentence.get("begin_time"),
             "end_ms": sentence.get("end_time"),
         }
-        while (row := session.sentences.get(session.next_sentence)) and row["final"]:
-            if row["text"].strip():
-                self._commit(session, session.next_sentence, row)
-            session.next_sentence += 1
+        while (
+            row := session.attempt_sentences.get(session.attempt_next_sentence)
+        ) and row["final"]:
+            ident = session.attempt_next_sentence
+            if ident < session.next_sentence:
+                # A new socket may revise interim hypotheses. Only compare final
+                # sentences, and never publish the already-released prefix twice.
+                if row["text"].strip() != session.sentences[ident]["text"].strip():
+                    raise ValueError("Qwen ASR replay changed confirmed text")
+            else:
+                if row["text"].strip():
+                    self._commit(session, ident, row)
+                session.sentences[ident] = row
+                session.next_sentence += 1
+            session.attempt_next_sentence += 1
 
     def _commit(self, session, ident, row):
         start = session.start_ms + (row["begin_ms"] or 0)
@@ -501,7 +632,7 @@ class QwenStreamingPlayedAudioTranscriber(QwenPlayedAudioTranscriber):
         try:
             await asyncio.wait(
                 {joined, self.worker},
-                timeout=self.config.asr_streaming_timeout_seconds,
+                timeout=self.finalization_timeout_seconds,
                 return_when=asyncio.FIRST_COMPLETED,
             )
             self.drain_failure()
@@ -511,6 +642,16 @@ class QwenStreamingPlayedAudioTranscriber(QwenPlayedAudioTranscriber):
         finally:
             joined.cancel()
             await asyncio.gather(joined, return_exceptions=True)
+
+    @property
+    def finalization_timeout_seconds(self):
+        """Give retries a bounded drain window shared by the whole backlog."""
+        retries = self.config.asr_streaming_max_retries
+        # Allow startup/replay plus terminal confirmation for each attempt. Do
+        # not multiply by queued episodes: a failing backlog needs a global cap.
+        return (retries + 1) * (
+            2 * self.config.asr_streaming_timeout_seconds + 5
+        ) + retries * self.config.asr_streaming_retry_delay_seconds
 
     async def recheck(self, evidence, fragments):
         """Use only vocabularies that were active for the referenced audio."""
@@ -560,14 +701,23 @@ class QwenStreamingPlayedAudioTranscriber(QwenPlayedAudioTranscriber):
             "append_seconds": self.config.asr_append_seconds,
             "tail_words": 0,
             "stable_mode": "ASR_final_confirmation",
+            "max_retries": self.config.asr_streaming_max_retries,
+            "retry_buffer_seconds": self.config.asr_streaming_retry_buffer_seconds,
             "sessions": [session.model_dump() for session in self.sessions],
             "appends": list(self.appends),
             "events": list(self.events),
             "snapshots": list(self.versions),
             "usage": [
-                {"purpose": "primary", "task_id": session.task_id, **session.usage}
+                {
+                    "purpose": "primary",
+                    "session_id": session.task_id,
+                    "task_id": attempt["task_id"],
+                    "attempt": attempt["number"],
+                    **attempt["usage"],
+                }
                 for session in self.sessions
-                if session.usage
+                for attempt in session.attempts
+                if attempt.get("usage")
             ]
             + list(self.usage_records),
         }

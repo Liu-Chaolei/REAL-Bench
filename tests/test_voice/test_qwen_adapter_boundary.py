@@ -166,6 +166,35 @@ def test_qwen_factory_creates_separate_unconnected_resources(monkeypatch):
     right.disconnect()
 
 
+def test_disconnect_allows_observer_retry_window_to_finish(monkeypatch):
+    from tau2.adapters.qwen_audio_agent.adapter import DiscreteTimeQwenAgentAdapter
+    from tau2.config import DEFAULT_AUDIO_NATIVE_DISCONNECT_TIMEOUT
+
+    config = QwenAgentConfig(boot_timeout_seconds=1)
+    adapter = DiscreteTimeQwenAgentAdapter(
+        200,
+        config,
+        provider=SimpleNamespace(is_connected=True),
+        transcriber=SimpleNamespace(finalization_timeout_seconds=90),
+    )
+    deadlines = []
+
+    class InlineLoop:
+        is_running = True
+
+        def run_coroutine(self, coroutine, *, timeout):
+            deadlines.append(timeout)
+            return asyncio.run(coroutine)
+
+        def stop(self):
+            self.is_running = False
+
+    monkeypatch.setattr(adapter, "_bg_loop", InlineLoop())
+    monkeypatch.setattr(adapter, "_disconnect", AsyncMock())
+    adapter.disconnect()
+    assert deadlines == [90 + DEFAULT_AUDIO_NATIVE_DISCONNECT_TIMEOUT]
+
+
 def test_qwen_adapter_uses_saasr_pcm_input_contract():
     behavior = adapter_behavior("qwen_agent", QwenAgentConfig())
     assert behavior.input_audio_format.encoding == AudioEncoding.PCM_S16LE

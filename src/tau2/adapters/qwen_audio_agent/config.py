@@ -22,6 +22,9 @@ from tau2.config import (
     DEFAULT_QWEN_AGENT_TOOL_TIMEOUT_SECONDS,
     DEFAULT_QWEN_ASR_APPEND_SECONDS,
     DEFAULT_QWEN_ASR_MODEL,
+    DEFAULT_QWEN_ASR_STREAMING_MAX_RETRIES,
+    DEFAULT_QWEN_ASR_STREAMING_RETRY_BUFFER_SECONDS,
+    DEFAULT_QWEN_ASR_STREAMING_RETRY_DELAY_SECONDS,
     DEFAULT_QWEN_ASR_STREAMING_TIMEOUT_SECONDS,
     DEFAULT_QWEN_OUTPUT_SAMPLE_RATE,
     DEFAULT_QWEN_TTS_API_BASE,
@@ -218,6 +221,15 @@ class QwenAgentConfig(BaseModel):
     playback_sample_rate: Literal[16000, 24000] = DEFAULT_QWEN_OUTPUT_SAMPLE_RATE
     asr_streaming_timeout_seconds: float = Field(
         default=DEFAULT_QWEN_ASR_STREAMING_TIMEOUT_SECONDS, gt=0
+    )
+    asr_streaming_max_retries: int = Field(
+        default=DEFAULT_QWEN_ASR_STREAMING_MAX_RETRIES, ge=0, le=3
+    )
+    asr_streaming_retry_delay_seconds: float = Field(
+        default=DEFAULT_QWEN_ASR_STREAMING_RETRY_DELAY_SECONDS, ge=0
+    )
+    asr_streaming_retry_buffer_seconds: float = Field(
+        default=DEFAULT_QWEN_ASR_STREAMING_RETRY_BUFFER_SECONDS, gt=0
     )
     asr_silence_seconds: float = Field(default=0.6, ge=0.2, le=3)
     asr_speech_rms: int = Field(default=80, ge=1, le=32767)
