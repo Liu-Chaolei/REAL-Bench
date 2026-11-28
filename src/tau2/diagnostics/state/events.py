@@ -1,5 +1,8 @@
 """Normalize recorded causal order without comparing independent clocks."""
 
+from copy import deepcopy
+
+from tau2.diagnostics.state.capture import CAPTURE_VERSION
 from tau2.diagnostics.state.models import DialogueEvent
 
 EVENT_VERSION = "tau-state-events/2"
@@ -108,25 +111,39 @@ def recorded_events(simulation, evidence, operation_events):
                     ["agent"],
                 )
         return result
-    # Operation timestamps here were captured at the actual request/completion/
-    # dispatch hook using local monotonic time, never scenario seconds.
+    # The recorder also carries complete caller utterances and confirmed ASR.
+    # Legacy dialogue hooks only recorded final chunks, so reconstruct those
+    # from delivered_inputs instead of treating a final chunk as a whole turn.
+    captured_dialogue = set()
     for row in operation_events:
-        row = dict(row, content=dict(row["content"]), sequence=len(result))
+        if row["kind"] in {"user_turn", "agent_turn"}:
+            if (row.get("metadata") or {}).get("capture_version") != CAPTURE_VERSION:
+                continue
+            captured_dialogue.add(row["kind"])
+        # Dialogue content is a string; tool payloads are dictionaries. Copy
+        # both without changing their types or mutating the online event log.
+        row = deepcopy(row)
+        row["sequence"] = len(result)
         if row["kind"] == "tool_delivered":
             op = operations.get(row["content"]["call_id"])
             if op is not None:
-                row["content"].update(name=op.name, result=op.result, error=op.error)
+                row["content"].update(
+                    name=op.name, result=deepcopy(op.result), error=op.error
+                )
         result.append(row)
     origin = evidence.audio.get("activity", {}).get("origin")
-    if origin is None:
+    if origin is None and not captured_dialogue:
         return []  # no basis for comparing legacy media with runtime seconds
     for row in evidence.user_inputs:
+        kind = "user_turn" if row.role == "user" else "agent_turn"
+        if kind in captured_dialogue or origin is None:
+            continue
         if not row.text and not row.unavailable_reason:
             continue
         user = row.role == "user"
         add(
             row.id,
-            "user_turn" if user else "agent_turn",
+            kind,
             "user" if user else "frontend",
             row.text,
             ["frontend"],

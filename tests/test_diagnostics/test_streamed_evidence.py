@@ -334,6 +334,59 @@ def test_voice_event_normalization_does_not_dict_coerce_string_dialogue():
     assert len(result) == 1 and result[0]["content"] == "The contact."
 
 
+@pytest.mark.parametrize("audio", [{}, {"activity": {"origin": 100}}])
+def test_captured_dialogue_keeps_its_clock_and_is_not_rebuilt_from_snapshots(audio):
+    rows = [
+        dict(
+            event_id="caller",
+            kind="user_turn",
+            role="user",
+            content="Find the contact.",
+            visible_to=["frontend"],
+            timestamp=101,
+            metadata={"capture_version": CAPTURE_VERSION},
+        ),
+        dict(
+            event_id="agent",
+            kind="agent_turn",
+            role="frontend",
+            content="Kaidën.",
+            visible_to=["frontend"],
+            timestamp=102,
+            metadata={"capture_version": CAPTURE_VERSION},
+        ),
+    ]
+    original = deepcopy(rows)
+    evidence = DiagnosticEvidence(
+        simulation_id="s",
+        task_id="t",
+        domain="mock",
+        audio=audio,
+        user_inputs=[
+            UserInput(
+                id="caller-snapshot", text="Find the contact.", started=0, ended=1
+            ),
+            UserInput(
+                id="agent-snapshot",
+                role="assistant_context",
+                text="Kaidën.",
+                started=1,
+                ended=2,
+            ),
+        ],
+    )
+
+    result = recorded_events(SimpleNamespace(ticks=[object()]), evidence, rows)
+
+    assert [e["event_id"] for e in result] == ["caller", "agent"]
+    assert [e["content"] for e in result] == ["Find the contact.", "Kaidën."]
+    assert [e["timestamp"] for e in result] == [101, 102]
+    assert [e["sequence"] for e in result] == [0, 1]
+    assert rows == original
+    result[0]["metadata"]["incomplete"] = True
+    assert rows == original
+
+
 @pytest.mark.parametrize("current", [False, True])
 def test_legacy_sidecar_scores_are_not_reused_after_capture_fix(
     tmp_path, monkeypatch, current
