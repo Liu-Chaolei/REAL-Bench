@@ -51,7 +51,7 @@ Turns names and configuration into live instances using the registry for name re
 from tau2.runner import build_text_orchestrator, run_simulation
 from tau2 import TextRunConfig
 
-config = TextRunConfig(domain="airline", agent="llm_agent", llm_agent="openai/gpt-4.1")
+config = TextRunConfig(domain="gaia2", agent="llm_agent", llm_agent="openai/gpt-4.1")
 orchestrator = build_text_orchestrator(config, task, seed=42)
 result = run_simulation(orchestrator)
 ```
@@ -77,7 +77,7 @@ Entry points:
 from tau2.runner import run_domain
 from tau2 import TextRunConfig
 
-config = TextRunConfig(domain="airline", agent="llm_agent", llm_agent="openai/gpt-4.1")
+config = TextRunConfig(domain="gaia2", agent="llm_agent", llm_agent="openai/gpt-4.1")
 results = run_domain(config)
 ```
 

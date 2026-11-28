@@ -60,7 +60,7 @@ trajectory: list[Message]  # Flat list of messages
 from tau2.orchestrator.orchestrator import Orchestrator
 
 orchestrator = Orchestrator(
-    domain="airline",
+    domain="gaia2",
     agent=LLMAgent(tools=tools, domain_policy=policy, llm="gpt-4"),
     user=UserSimulator(llm="gpt-4", instructions=instructions, tools=user_tools),
     environment=environment,
@@ -138,7 +138,7 @@ class Tick(BaseModel):
 from tau2.orchestrator.full_duplex_orchestrator import FullDuplexOrchestrator
 
 orchestrator = FullDuplexOrchestrator(
-    domain="airline",
+    domain="gaia2",
     agent=DiscreteTimeAudioNativeAgent(tools=tools, domain_policy=policy, tick_duration_ms=1000, provider="openai"),
     user=VoiceStreamingUserSimulator(tools=user_tools, instructions=instructions, llm="gpt-4"),
     environment=environment,

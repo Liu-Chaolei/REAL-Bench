@@ -385,7 +385,7 @@ def adapter(provider_name: str):
     model = None
 
     if provider_name == "qwen_agent":
-        from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
+        from tau2.adapters.qwen_audio_agent.config import QwenAgentConfig
 
         qwen_agent_config = QwenAgentConfig.model_validate_json(
             Path(os.environ["TAU2_QWEN_AGENT_CONFIG"]).read_text()

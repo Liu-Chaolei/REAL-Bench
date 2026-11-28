@@ -14,7 +14,7 @@ from tau2.user.dynamic_followup import (
 
 
 def test_qwen_dynamic_followup_config_defaults_off_and_validates_stages():
-    from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
+    from tau2.adapters.qwen_audio_agent.config import QwenAgentConfig
 
     assert QwenAgentConfig().dynamic_followup.enabled is False
     with pytest.raises(ValueError, match="stages"):
@@ -222,8 +222,7 @@ def test_dynamic_followup_rejects_unsupported_historical_claim(monkeypatch):
             model_args={},
             stage=1,
             source_request=(
-                "Email Alice at alice@example.com. The subject is "
-                '"Follow-up".'
+                'Email Alice at alice@example.com. The subject is "Follow-up".'
             ),
             conversation=[
                 UserMessage(

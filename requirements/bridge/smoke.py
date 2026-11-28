@@ -15,9 +15,9 @@ DEFAULT_SMOKE_MAX_SECONDS = 1200
 
 def main():
     """Load evaluation credentials privately; keep model/key roles separate."""
+    from tau2.adapters.qwen_audio_agent.config import QwenAgentConfig
     from tau2.config import DEFAULT_SEED
     from tau2.utils.env_config import read_config_environment, resolve_env_reference
-    from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
 
     here = Path(__file__).resolve().parent
     parser = argparse.ArgumentParser(description=__doc__)

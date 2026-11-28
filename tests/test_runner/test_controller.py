@@ -24,13 +24,20 @@ from tau2.runner.work import WorkUnit
 from tau2.runner.worker import ControllerClient, worker_loop
 from tau2.utils.errors import NonRetryableError
 
+TASK_IDS = [
+    "0002_46myz87t501b0c902dy81rlbqbye2dyi",
+    "0004_zsnxn8rtxeqy64r6axi78wlnmodvvpb8",
+]
+
 
 def _make_config(**overrides) -> TextRunConfig:
     defaults = dict(
-        domain="mock",
+        domain="gaia2",
+        language="en",
+        gaia2_allow_stale_runtime=True,
         agent="llm_agent",
         user="user_simulator",
-        task_ids=["create_task_1", "update_task_1"],
+        task_ids=TASK_IDS,
         llm_agent="gpt-3.5-turbo",
         llm_args_agent={},
         llm_user="gpt-3.5-turbo",
@@ -66,7 +73,7 @@ def _make_sim(
 @pytest.fixture
 def controller(tmp_path):
     config = _make_config()
-    tasks = get_tasks("mock", task_ids=config.task_ids)
+    tasks = get_tasks("gaia2", task_ids=config.task_ids)
     save_path = tmp_path / "results.json"
     prep = prepare_batch(
         config,
@@ -173,7 +180,7 @@ class TestControllerHttpContract:
             assert unit["run_id"] == "test_run"
             run = body["run"]
             assert run["config_kind"] == "text"
-            assert run["config"]["domain"] == "mock"
+            assert run["config"]["domain"] == "gaia2"
             assert run["task"]["id"] == unit["task_id"]
             # The CLI's --llm-log-mode only reaches worker processes through
             # the lease payload ("latest" is the ContextVar default).
@@ -328,7 +335,7 @@ class TestWorkerLoop:
             exit_code = worker_loop(client, worker_id="w1", slots=2)
 
         assert exit_code == 0
-        assert sorted(executed) == ["create_task_1", "update_task_1"]
+        assert sorted(executed) == sorted(TASK_IDS)
         assert len(_load_sims(controller.save_path)) == 2
         assert controller.queue.all_resolved()
 
@@ -437,7 +444,7 @@ class TestMultiRunMonitorKeys:
         runs = []
         for name in ["run_a", "run_b"]:
             config = _make_config()
-            tasks = get_tasks("mock", task_ids=config.task_ids)
+            tasks = get_tasks("gaia2", task_ids=config.task_ids)
             prep = prepare_batch(
                 config,
                 tasks,

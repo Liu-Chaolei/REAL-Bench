@@ -602,9 +602,6 @@ def run_intro():
     cmd_table.add_column("What it does")
     cmd_table.add_row("tau2 run", "Run a benchmark evaluation against a domain")
     cmd_table.add_row("tau2 view", "Browse and inspect simulation results")
-    cmd_table.add_row(
-        "tau2 play", "Interactive manual mode \u2014 play the agent yourself"
-    )
     cmd_table.add_row("tau2 domain <name>", "Show detailed documentation for a domain")
     cmd_table.add_row("tau2 leaderboard", "Display the current leaderboard")
     cmd_table.add_row(
@@ -993,12 +990,6 @@ def main():
         run_command=run_command,
     )
 
-    # Play command
-    play_parser = subparsers.add_parser(
-        "play", help="Play manual mode - interact with a domain as the agent"
-    )
-    play_parser.set_defaults(func=lambda args: run_manual_mode())
-
     # View command
     view_parser = subparsers.add_parser("view", help="View simulation results")
     view_parser.add_argument(
@@ -1362,12 +1353,6 @@ def run_review(args):
             log_llm=args.log_llm,
             review_model=args.review_model,
         )
-
-
-def run_manual_mode():
-    from tau2.scripts.manual_mode import main as manual_main
-
-    manual_main()
 
 
 def run_leaderboard(args):

@@ -24,7 +24,6 @@ For how the commands fit together, see
 | [`tau2 benchmarks`](#tau2-benchmarks) | Released benchmark manifests and their pins |
 | [`tau2 run`](#tau2-run) | Run a benchmark |
 | [`tau2 run-pass3`](#tau2-run-pass3) | Run Pass^3 on three ordinary or crossed trials |
-| [`tau2 play`](#tau2-play) | Play manual mode - interact with a domain as the agent |
 | [`tau2 view`](#tau2-view) | View simulation results |
 | [`tau2 domain`](#tau2-domain) | Show domain documentation |
 | [`tau2 start`](#tau2-start) | Start all servers |
@@ -568,8 +567,9 @@ usage: tau2 run [-h] [--communicate-scorer {semantic,substring}]
                 [--num-trials NUM_TRIALS]
                 [--agent {llm_agent,llm_agent_gt,llm_agent_solo,discrete_time_audio_native_agent}]
                 [--agent-llm AGENT_LLM] [--agent-llm-args AGENT_LLM_ARGS]
-                [--user {user_simulator,dummy_user}] [--user-llm USER_LLM]
-                [--user-llm-args USER_LLM_ARGS] [--task-set-name {gaia2,gaia2_hidden}]
+                [--user {user_simulator,dummy_user,voice_streaming_user_simulator}]
+                [--user-llm USER_LLM] [--user-llm-args USER_LLM_ARGS]
+                [--task-set-name {gaia2,gaia2_hidden}]
                 [--task-split-name TASK_SPLIT_NAME]
                 [--task-ids TASK_IDS [TASK_IDS ...]] [--num-tasks NUM_TASKS]
                 [--max-steps MAX_STEPS] [--max-errors MAX_ERRORS] [--timeout TIMEOUT]
@@ -643,7 +643,7 @@ options:
   --agent-llm-args AGENT_LLM_ARGS
                         The arguments to pass to the LLM for the agent. Default is
                         '{"temperature": 0.0}'.
-  --user {user_simulator,dummy_user}
+  --user {user_simulator,dummy_user,voice_streaming_user_simulator}
                         The user implementation to use. Default is user_simulator.
   --user-llm USER_LLM   The LLM to use for the user. Default is gpt-4.1-2025-04-14.
   --user-llm-args USER_LLM_ARGS
@@ -837,8 +837,8 @@ usage: tau2 run-pass3 [-h] [--communicate-scorer {semantic,substring}]
                       [--num-trials NUM_TRIALS]
                       [--agent {llm_agent,llm_agent_gt,llm_agent_solo,discrete_time_audio_native_agent}]
                       [--agent-llm AGENT_LLM] [--agent-llm-args AGENT_LLM_ARGS]
-                      [--user {user_simulator,dummy_user}] [--user-llm USER_LLM]
-                      [--user-llm-args USER_LLM_ARGS]
+                      [--user {user_simulator,dummy_user,voice_streaming_user_simulator}]
+                      [--user-llm USER_LLM] [--user-llm-args USER_LLM_ARGS]
                       [--task-set-name {gaia2,gaia2_hidden}]
                       [--task-split-name TASK_SPLIT_NAME]
                       [--task-ids TASK_IDS [TASK_IDS ...]] [--num-tasks NUM_TASKS]
@@ -918,7 +918,7 @@ options:
   --agent-llm-args AGENT_LLM_ARGS
                         The arguments to pass to the LLM for the agent. Default is
                         '{"temperature": 0.0}'.
-  --user {user_simulator,dummy_user}
+  --user {user_simulator,dummy_user,voice_streaming_user_simulator}
                         The user implementation to use. Default is user_simulator.
   --user-llm USER_LLM   The LLM to use for the user. Default is gpt-4.1-2025-04-14.
   --user-llm-args USER_LLM_ARGS
@@ -1106,15 +1106,6 @@ options:
   --regular-results REGULAR_RESULTS
                         Existing ordinary seed-42 regular results to reuse read-only
                         in crossed mode.
-```
-
-## `tau2 play`
-
-```text
-usage: tau2 play [-h]
-
-options:
-  -h, --help  show this help message and exit
 ```
 
 ## `tau2 view`

@@ -90,7 +90,7 @@ def test_invalid_configuration_fails_without_credentials(api_dir, extra, match):
 
 
 def test_qwen_config_routes_agent_caller_and_audio_independently(api_dir):
-    from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
+    from tau2.adapters.qwen_audio_agent.config import QwenAgentConfig
     from tau2.voice.qwen_tts import _resolve_key
 
     config = QwenAgentConfig.model_validate({"api_config_dir": api_dir})
@@ -186,9 +186,9 @@ def test_json_references_escape_credentials_correctly(api_dir):
 
 
 def test_saved_configuration_is_readable_without_private_files(api_dir):
+    from tau2.adapters.qwen_audio_agent.config import QwenAgentConfig
     from tau2.data_model.semantic_communication import SemanticCommunicateSettings
     from tau2.diagnostics.config import MetricsConfig
-    from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
 
     values = [
         (QwenAgentConfig, {"api_config_dir": api_dir}),
@@ -212,8 +212,8 @@ def test_saved_configuration_is_readable_without_private_files(api_dir):
 
 
 def test_judge_from_user_affects_only_judges(api_dir):
+    from tau2.adapters.qwen_audio_agent.config import QwenAgentConfig
     from tau2.diagnostics.config import MetricsConfig
-    from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
 
     metrics = MetricsConfig.model_validate(
         {"api_config_dir": api_dir, "api_judge_role": "USER"}
@@ -242,7 +242,7 @@ def test_active_generator_overrides_directory_before_loading(api_dir, tmp_path):
 def test_smoke_launch_keeps_credentials_off_argv(api_dir, tmp_path, monkeypatch):
     import importlib.util
 
-    from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
+    from tau2.adapters.qwen_audio_agent.config import QwenAgentConfig
 
     spec = importlib.util.spec_from_file_location(
         "api_smoke_test", "integrations/qwen_audio_agent/smoke.py"

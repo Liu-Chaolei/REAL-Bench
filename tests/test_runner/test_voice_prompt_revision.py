@@ -10,18 +10,14 @@ from tau2.runner.checkpoint import try_resume
 from tau2.runner.helpers import get_info
 
 
-@pytest.mark.parametrize("kind", ["text", "voice", "scaffolded", "agent_directed"])
+@pytest.mark.parametrize("kind", ["text", "voice"])
 def test_effective_shared_prompt_revision_is_recorded(kind):
     if kind == "text":
-        config = TextRunConfig(domain="retail")
+        config = TextRunConfig(domain="gaia2", gaia2_allow_stale_runtime=True)
     elif kind == "voice":
         config = VoiceRunConfig(
-            domain="retail", audio_native_config=AudioNativeConfig()
-        )
-    else:
-        config = VoiceRunConfig(
-            domain="intake",
-            elicitation={"strategy": kind},
+            domain="gaia2",
+            gaia2_allow_stale_runtime=True,
             audio_native_config=AudioNativeConfig(),
         )
     info = get_info(config)
@@ -37,7 +33,11 @@ def test_voice_resume_refuses_legacy_or_changed_shared_prompt(
     previous_version, tmp_path
 ):
     current = get_info(
-        VoiceRunConfig(domain="retail", audio_native_config=AudioNativeConfig())
+        VoiceRunConfig(
+            domain="gaia2",
+            gaia2_allow_stale_runtime=True,
+            audio_native_config=AudioNativeConfig(),
+        )
     )
     old = current.model_copy(
         update={"voice_instruction_prompt_version": previous_version}, deep=True
@@ -55,7 +55,11 @@ def test_voice_resume_refuses_legacy_or_changed_shared_prompt(
 
 def test_voice_resume_accepts_same_shared_prompt_revision(tmp_path):
     info = get_info(
-        VoiceRunConfig(domain="retail", audio_native_config=AudioNativeConfig())
+        VoiceRunConfig(
+            domain="gaia2",
+            gaia2_allow_stale_runtime=True,
+            audio_native_config=AudioNativeConfig(),
+        )
     )
     task = Task(id="fixture", user_scenario={"instructions": "Fixture."})
     path = tmp_path / "results.json"
@@ -72,7 +76,7 @@ def test_voice_resume_accepts_same_shared_prompt_revision(tmp_path):
 def test_resume_rejects_changed_domain_lookup_contract(previous_version, tmp_path):
     from tau2.config import DOMAIN_TOOLS_VERSION
 
-    current = get_info(TextRunConfig(domain="retail"))
+    current = get_info(TextRunConfig(domain="gaia2", gaia2_allow_stale_runtime=True))
     assert current.domain_tools_version == DOMAIN_TOOLS_VERSION
     old = current.model_copy(update={"domain_tools_version": previous_version})
     task = Task(id="fixture", user_scenario={"instructions": "Fixture."})

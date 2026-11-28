@@ -4,7 +4,6 @@ import wave
 from pathlib import Path
 from typing import Literal
 
-import pyaudio
 from loguru import logger
 
 from tau2.data_model.audio import AudioData, AudioEncoding, AudioFormat
@@ -91,6 +90,10 @@ def save_wav_file(audio: AudioData, output_path: str | Path) -> None:
 
 def play_audio(audio_data: AudioData) -> None:
     """Play AudioData using pyaudio. Converts to PCM_S16LE before playback."""
+    # Keep the playback-only dependency out of import-time audio processing.
+    # Loading and saving WAV files work without PortAudio being installed.
+    import pyaudio
+
     p = pyaudio.PyAudio()
 
     # Convert to PCM_S16LE for playback

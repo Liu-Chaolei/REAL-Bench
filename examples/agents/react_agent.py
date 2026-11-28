@@ -213,11 +213,11 @@ if __name__ == "__main__":
     # Register the ReAct agent
     registry.register_agent_factory(create_react_agent, "react_agent")
 
-    # Run on a mock task
-    tasks = get_tasks("mock", task_ids=["create_task_1"])
+    # Run on a Gaia2 task
+    tasks = get_tasks("gaia2", task_ids=["0002_46myz87t501b0c902dy81rlbqbye2dyi"])
     result = run_single_task(
         TextRunConfig(
-            domain="mock",
+            domain="gaia2",
             agent="react_agent",
             llm_agent="openai/gpt-4.1-mini",
         ),

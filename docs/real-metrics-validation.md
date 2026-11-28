@@ -90,11 +90,8 @@ These are a small local measurement, not a general performance guarantee.
 
 ## Repository-wide checks
 
-`make check-all` was run and failed on the pre-existing
-`scripts/manual_fix_stage2_0074.py` lint issues. A separate format check also found
-pre-existing formatting in `src/tau2/task_authoring/gaia2_series/manual.py`.
-Excluding those two files, repository lint and formatting pass. `git diff --check`
-passes. These unrelated scripts were not rewritten.
+`git diff --check` passes. The authoring manual module still has pre-existing
+format debt outside this validation bundle.
 
 The full core run finished with 3264 passed, 57 failed, 28 skipped and six setup
 errors. One failure was an early version of the new waveform fixture; it was

@@ -67,10 +67,8 @@ are both covered, along with first-request synchronization, forbidden reference
 edits, incomplete export, stage indexing and sealed-record binding.
 
 Changed Python files pass Ruff lint and format checks; `git diff --check` passes.
-Repository-wide `make check-all` remains blocked by 14 existing lint errors in
-`scripts/manual_fix_stage2_0074.py`. The full format check also reports that file
-and `src/tau2/task_authoring/gaia2_series/manual.py`. Those unrelated files were
-not rewritten to conceal the existing failures.
+The authoring manual module still has pre-existing format debt outside this
+validation bundle.
 
 The historical authoring bundle at
 `data/archives/gaia2/authoring/gaia2-variants-v1/` contains the authored native tasks,

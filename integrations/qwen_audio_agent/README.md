@@ -13,8 +13,8 @@ directly. The Qwen checkout is archived at its clean git revision and is never
 edited by the integration at runtime. The scenario-clock image includes Qwen's
 optional frontend time-provider interface (source commit `02426d5`).
 
-Supported runs are **English retail and Gaia2**, with the
-normal Qwen routing and native permissions. A dedicated container, workspace,
+Supported runs are **English Gaia2**, with the normal Qwen routing and native
+permissions. A dedicated container, workspace,
 MCP environment and fresh sessions are created for every trial. Only public
 policy and tool schemas cross into that container; task instructions, reference
 actions, raw business databases and evaluation artifacts stay in τ.
@@ -25,8 +25,8 @@ workspace and application state. Five simultaneous containers and trial clocks
 are covered by the migration's isolation checks.
 
 For Gaia2, use `config.gaia2.example.json` and `smoke --domain gaia2` after data
-verification. Its image must declare `gaia2` support; version `0.5.0` includes
-both domains. See the [Gaia2 guide](../../docs/gaia2.md) for import and scoring.
+verification. Its image must declare `gaia2` support. See the
+[Gaia2 guide](../../docs/gaia2.md) for import and scoring.
 
 ## Build
 
@@ -284,7 +284,7 @@ business-operation permissions remain under the original Agent's control.
 
 ## Run and inspect
 
-Run three real English retail control calls with the configured services:
+Run three real English Gaia2 control calls with the configured services:
 
 ```bash
 integrations/qwen_audio_agent/run_hpc.sh smoke \
@@ -332,7 +332,7 @@ Every business MCP request becomes a normal τ `ToolCall`. Only τ executes it;
 its exact `ToolMessage` is returned to the backend. Calls and results remain in
 the standard tick trajectory for strict database replay and scoring. Native
 delegation, permissions and task progress are diagnostic Gateway events, not
-retail tool calls. Only the actual user simulator's replies can approve work.
+business tool calls. Only the actual user simulator's replies can approve work.
 
 Per-call retries and hallucination retries are disabled for this provider.
 Infrastructure failures remain failed trials instead of being replaced by a

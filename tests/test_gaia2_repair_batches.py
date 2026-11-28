@@ -262,3 +262,86 @@ def test_large_source_values_stay_local_and_omissions_are_explicit():
     assert (
         original["source_evidence"]["stage_evidence"][0]["actual"] == "payload" * 3000
     )
+
+
+def test_sixteen_requests_really_overlap_and_batch_is_not_truncated(
+    tmp_path, monkeypatch
+):
+    import json
+    import threading
+
+    import repair_gaia2_unresolved as repair
+    from review_gaia2_references import ReviewConfig
+
+    baseline = {}
+    for number in range(16):
+        original = task(f"parallel-{number:02d}")
+        baseline[original["id"]] = original
+        package = {
+            "task_id": original["id"],
+            "current_target": original,
+            "target_type": "task",
+            "unresolved_findings": [{"index": 1}],
+        }
+        write_json(tmp_path / "inputs" / (original["id"] + ".json"), package)
+    rendezvous = threading.Barrier(16, timeout=20)
+    calls = []
+
+    class FakeModel:
+        def __init__(self, config, cache):
+            pass
+
+        def complete(self, prompt, schema):
+            calls.append(prompt)
+            rendezvous.wait()  # fails if requests are actually serial or batch capped at 10
+            return json.dumps(
+                {
+                    "decisions": [
+                        {"finding_index": 1, "decision": "keep", "reason": "correct"}
+                    ],
+                    "operations": [],
+                }
+            )
+
+    monkeypatch.setattr(repair, "DirectModel", FakeModel)
+    monkeypatch.setattr(repair, "repair_prompt_v2", lambda package: package["task_id"])
+    monkeypatch.setattr(repair, "load_v1", lambda root: (baseline, {}))
+    kwargs = dict(
+        v1_root=tmp_path / "baseline",
+        review_dir=tmp_path,
+        data_root=tmp_path,
+        out=tmp_path,
+        evidence_root=tmp_path,
+        config=ReviewConfig(concurrency=16),
+        limit=None,
+        offline=False,
+        batch_size=16,
+    )
+    summary = repair.run_v2(**kwargs)
+    assert summary["selected_this_batch"] == 16
+    assert summary["processed"] == 16
+    assert len(calls) == 16
+    assert read_json(tmp_path / "runtime-status.json")["max_active_requests"] == 16
+    kwargs["config"] = ReviewConfig(concurrency=2)
+    repair.run_v2(**kwargs)
+    assert len(calls) == 16  # scheduling change does not invalidate model answers
+
+
+def test_pending_batches_fill_holes_instead_of_advancing_a_cursor(tmp_path):
+    from run_gaia2_source_repair_batches import pending_batches
+
+    inputs = [tmp_path / "inputs" / f"task-{number:02d}.json" for number in range(34)]
+    for index in list(range(10)) + list(range(16, 26)):
+        write_json(
+            tmp_path / "results" / inputs[index].name,
+            {"evidence_review": "source_replay_resolved"},
+        )
+    plans = pending_batches(inputs, tmp_path, 16)
+    flattened = [task_id for batch in plans for task_id in batch]
+    expected = [
+        path.stem
+        for index, path in enumerate(inputs)
+        if index not in list(range(10)) + list(range(16, 26))
+    ]
+    assert flattened == expected
+    assert len(flattened) == len(set(flattened))

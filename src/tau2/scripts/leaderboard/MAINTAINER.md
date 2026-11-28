@@ -136,7 +136,7 @@ back into `<language>-<domain>/` cells next to `trajectories/benchmark-frame.jso
 
 Release packages cite the release export instead of a matrix
 (`evidence: historical-voice-v2-2026-10-02`). Build and review with
-`--historical-voice-v2`; see [the release guide](../../../../docs/voice-v2-publication.md).
+Historical package flags are retained only for reading published submissions; new packages follow the active Gaia2 submission rules in `docs/leaderboard-submission.md`.
 The upload retains trajectories, source corrections and entity's crossed Pass^3
 conditions. It does not read or upload Judge verdicts. Banking and entity use
 `--benchmark banking|entity` and the existing recorded-binding checks.

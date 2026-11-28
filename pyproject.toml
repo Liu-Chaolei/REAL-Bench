@@ -81,9 +81,6 @@ knowledge = [
     "rank-bm25>=0.2.2",
     "openai>=1.0.0",
 ]
-gym = [
-    "gymnasium>=1.2.2",
-]
 dev = [
     "pytest>=8.3.5",
     "pytest-asyncio>=0.24.0",
@@ -98,7 +95,7 @@ experiments = [
     "scikit-learn>=1.6.1",
 ]
 all = [
-    "tau2[voice,live,knowledge,gym,dev,experiments,localization-review,gaia2,diagnostics]",
+    "tau2[voice,live,knowledge,dev,experiments,localization-review,gaia2,diagnostics]",
 ]
 [project.urls]
 Homepage = "https://taubench.com/"

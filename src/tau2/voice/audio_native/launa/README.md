@@ -16,32 +16,29 @@ export LAUNA_WS_URL='wss://<operator-provided-host>/v1/voice/ws'
 The adapter authenticates with `Authorization: Bearer <API_KEY>`. WSS is required;
 credentials must not appear in the URL or repository.
 
-The endpoint accepts approved native Airline, Retail, and Telecom policies and
-complete tool schemas. Inputs from benchmark revisions
-`b7ea9074c1cba482b30687fecdb5c8425fd6f619` and
-`4ce7c0397c1eb65c9bbe59aeacfe1ca44a1cd699` have been tested. Coordinate revision
-changes, concurrency limits, and availability with the operator. Arbitrary toy
-policies and extra tools are rejected.
+The endpoint accepts the approved Gaia2 policy and complete tool schema. Coordinate
+runtime revisions, concurrency limits, and availability with the operator.
+Arbitrary toy policies and extra tools are rejected.
 
 ## Evaluation
 
 ```bash
-for domain in airline retail telecom; do
-  tau2 run --domain "$domain" --audio-native \
+for task_id in 0002_46myz87t501b0c902dy81rlbqbye2dyi; do
+  tau2 run --domain gaia2 --audio-native \
     --audio-native-provider launa --audio-native-model launa-v1 \
     --user-llm gpt-5.2-2025-12-11 --user-llm-args '{"temperature": 0}' \
     --review-model vertex_ai/claude-opus-4-5@20251101 \
     --seed 300 --tick-duration 0.2 --max-steps-seconds 1200 \
     --wait-to-respond-self 5 \
     --speech-complexity regular --num-trials 1 --verbose-logs \
-    --save-to "launa_v1_${domain}"
+    --task-ids "$task_id" --save-to "launa_v1_${task_id}"
 done
 ```
 
 Provide separate credentials for the customer simulator, customer TTS, and
 Vertex AI reviewer. `LAUNA_API_KEY` covers only the agent endpoint. Follow the
 [submission guide](../../../../../docs/leaderboard-submission.md) and
-[voice setup guide](../../../../../docs/voice-personas.md).
+[voice configuration guide](../../../../../src/tau2/voice/README.md).
 
 ## Methodology
 

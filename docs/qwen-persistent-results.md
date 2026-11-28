@@ -35,7 +35,7 @@
 - Provider suite：132 skipped，0 failed（独立真实 Qwen probe 与上述真实通话另行执行）。
 - 完整 1000 条 reference/replay 校验通过并封存，runtime pin 匹配。
 - 封存报告原有四条 authoring 诊断与提交版本一致，保留未改。
-- 涉及文件 lint、format check 与 git diff --check 通过。全仓 lint 另被已有 scripts/manual_fix_stage2_0074.py 的 14 项格式/导入问题阻塞，没有改动该无关脚本。
+- 涉及文件 lint、format check 与 git diff --check 通过。
 
 运行配置、构建与复验命令见 [实现和运行说明](qwen-persistent-validation.md)。历史 qpt 报告与 evidence/config hashes 在 [native manifest](../data/tau2/domains/gaia2/manifest.json)；每次失败和每版关联题定义均保留。
 

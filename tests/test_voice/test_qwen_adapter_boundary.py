@@ -1,7 +1,6 @@
 """Qwen adaptation boundaries use only local doubles, without Docker or live APIs."""
 
 import asyncio
-import importlib
 import os
 import subprocess
 import sys
@@ -20,31 +19,6 @@ from tau2.config import DEFAULT_QWEN_ASR_MODEL, DEFAULT_QWEN_ASR_STREAMING_MODEL
 from tau2.data_model.audio import AudioEncoding, AudioFormat
 from tau2.data_model.run_config import AudioNativeConfig
 from tau2.data_model.user_simulation import UserSimulationConfig
-
-
-@pytest.mark.parametrize(
-    "old,new",
-    [
-        (
-            "tau2.voice.audio_native.qwen_agent.config",
-            "tau2.adapters.qwen_audio_agent.config",
-        ),
-        (
-            "tau2.voice.audio_native.qwen_agent.discrete_time_adapter",
-            "tau2.adapters.qwen_audio_agent.adapter",
-        ),
-        (
-            "tau2.voice.audio_native.qwen_agent.runtime",
-            "tau2.adapters.qwen_audio_agent.runtime",
-        ),
-        (
-            "tau2.persistent_tasks.adapters.qwen",
-            "tau2.adapters.qwen_audio_agent.events",
-        ),
-    ],
-)
-def test_old_import_is_the_same_implementation(old, new):
-    assert importlib.import_module(old) is importlib.import_module(new)
 
 
 def test_non_qwen_selection_does_not_import_qwen_transport():

@@ -57,16 +57,16 @@ def test_benchmark_summary_table_skips_cells_outside_the_requested_scope():
         by_language={},
         by_domain={},
         cells=[
-            _cell("en", "retail", 5, 5, 0.6),
-            _cell("es", "retail", 2, 0, None),
-            _cell("pt", "retail", 0, 0, None),
+            _cell("en", "gaia2", 5, 5, 0.6),
+            _cell("pt", "gaia2", 2, 0, None),
+            _cell("fr", "gaia2", 0, 0, None),
         ],
     )
     assert render_summary(summary).splitlines() == [
         "language  domain  scored  errors  unscored  missing  score  observed  complete",
         "--------  ------  ------  ------  --------  -------  -----  --------  --------",
-        "en        retail  5/5          0         0        0  60.0%  60.0%     yes",
-        "es        retail  0/2          0         0        2  -      -         no",
+        "en        gaia2   5/5          0         0        0  60.0%  60.0%     yes",
+        "pt        gaia2   0/2          0         0        2  -      -         no",
     ]
 
 
@@ -80,21 +80,20 @@ def test_benchmark_plan_table_lists_selected_cells(tmp_path):
         BenchmarkRequest(
             output=tmp_path,
             template=VoiceRunConfig(audio_native_config=AudioNativeConfig()),
-            languages=["en", "pt"],
-            domains=["retail"],
+            languages=["en"],
+            domains=["gaia2"],
         )
     )
     assert render_plan(plan).splitlines() == [
         "language  domain  tasks  trials  calls",
         "--------  ------  -----  ------  -----",
-        "en        retail     50       1     50",
-        "pt        retail     50       1     50",
+        "en        gaia2     800       1    800",
     ]
 
 
 @pytest.mark.parametrize(
     "command",
-    [["--help"], ["judges", "suite", "--help"], ["run", "--help"]],
+    [["--help"], ["run", "--help"]],
     ids=" ".join,
 )
 def test_help_is_only_help(command):

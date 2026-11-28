@@ -29,11 +29,11 @@ def test_pass3_default_is_generic_and_crossed_accepts_other_voice_domains():
     seen = []
     add_pass3_args(parser, add_run_args=add_run_args, run_command=seen.append)
 
-    generic = parser.parse_args(["--domain", "airline", "--dry-run"])
+    generic = parser.parse_args(["--domain", "gaia2", "--dry-run"])
     generic.func(generic)
     assert len(seen) == 1
     assert seen[0].num_trials == 3
-    assert seen[0].domain == ["airline"]
+    assert seen[0].domain == ["gaia2"]
 
     seen.clear()
     crossed = parser.parse_args(
@@ -42,7 +42,7 @@ def test_pass3_default_is_generic_and_crossed_accepts_other_voice_domains():
             "crossed",
             "--audio-native",
             "--domain",
-            "airline",
+            "gaia2",
             "--save-to",
             "fixture",
             "--dry-run",
@@ -54,7 +54,7 @@ def test_pass3_default_is_generic_and_crossed_accepts_other_voice_domains():
     ]
     assert [call.seed for call in seen] == [42, 401, 16319]
     assert all(call.voice_sampling_seed is None for call in seen)
-    assert all(call.domain == ["airline"] for call in seen)
+    assert all(call.domain == ["gaia2"] for call in seen)
 
 
 def test_crossed_voice_modes_change_acoustics_and_selected_caller_behavior():
@@ -103,6 +103,7 @@ def test_crossed_seeds_redraw_the_run_as_in_the_robustness_catalog():
             VoiceRunConfig(
                 domain=domain,
                 language=language,
+                gaia2_allow_stale_runtime=True,
                 num_tasks=1,
                 seed=condition.seed,
                 audio_native_config=AudioNativeConfig(),
@@ -110,15 +111,14 @@ def test_crossed_seeds_redraw_the_run_as_in_the_robustness_catalog():
             for condition in CROSSED_CONDITIONS
         ]
 
-    intake = configs("intake", "en")
-    _load_run_tasks(intake[0])
-    assert len({config.seed for config in intake}) == 3
-    assert all(config.voice_sampling_seed is None for config in intake)
+    runs = configs("gaia2", "en")
+    _load_run_tasks(runs[0])
+    assert len({config.seed for config in runs}) == 3
+    assert all(config.voice_sampling_seed is None for config in runs)
 
-    retail = configs("retail", "ko")
-    task = _load_run_tasks(retail[0])[0]
+    task = _load_run_tasks(runs[0])[0]
     contexts = [
-        get_info(config, tasks=[task]).language_tasks[task.id] for config in retail
+        get_info(config, tasks=[task]).language_tasks[task.id] for config in runs
     ]
     assert contexts[0] == contexts[1] == contexts[2]
 
@@ -139,7 +139,7 @@ def test_crossed_regular_resamples_instead_of_loading_a_presampled_file(
     )
 
     actual = get_or_load_task_voice_config(
-        "airline", "task", 42, "regular", SynthesisConfig(), force_sample=True
+        "gaia2", "task", 42, "regular", SynthesisConfig(), force_sample=True
     )
     assert actual is not saved
     assert (
@@ -149,7 +149,7 @@ def test_crossed_regular_resamples_instead_of_loading_a_presampled_file(
 
 def _result(condition, rewards, *, ordinary_regular=False):
     info = SimpleNamespace(
-        environment_info=SimpleNamespace(domain_name="airline"),
+        environment_info=SimpleNamespace(domain_name="gaia2"),
         language=None,
         git_commit="commit",
         domain_tools_version="tools",
@@ -300,7 +300,7 @@ def test_crossed_cli_reuses_regular_without_running_it(monkeypatch, tmp_path):
 
     def run_command(args):
         seen.append(args)
-        return VoiceRunConfig(domain="intake", audio_native_config=AudioNativeConfig())
+        return VoiceRunConfig(domain="gaia2", audio_native_config=AudioNativeConfig())
 
     parser = argparse.ArgumentParser()
     add_pass3_args(parser, add_run_args=add_run_args, run_command=run_command)
@@ -310,7 +310,7 @@ def test_crossed_cli_reuses_regular_without_running_it(monkeypatch, tmp_path):
             "crossed",
             "--audio-native",
             "--domain",
-            "intake",
+            "gaia2",
             "--save-to",
             "fixture",
             "--regular-results",

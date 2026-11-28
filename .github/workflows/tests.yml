@@ -1,7 +1,7 @@
 name: Tests
 
 # Key-free test suite: lint plus every tier that runs without provider API keys.
-# Tests that call live models (and the gym extras) stay local.
+# Tests that call live models stay local.
 on:
   pull_request:
   push:

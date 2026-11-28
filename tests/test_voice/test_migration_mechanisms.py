@@ -4,6 +4,10 @@ import json
 from pathlib import Path
 from types import SimpleNamespace
 
+from tau2.adapters.qwen_audio_agent.adapter import (
+    DiscreteTimeQwenAgentAdapter,
+)
+from tau2.adapters.qwen_audio_agent.config import QwenAgentConfig
 from tau2.config import DEFAULT_QWEN_ASR_STREAMING_MODEL
 from tau2.data_model.asr import HotwordSettings
 from tau2.data_model.audio import AudioEncoding
@@ -11,10 +15,6 @@ from tau2.data_model.message import UserMessage
 from tau2.data_model.tasks import Task
 from tau2.orchestrator.full_duplex_orchestrator import FullDuplexOrchestrator
 from tau2.user.stage_asr_hotwords import load_stage_hotword_profile
-from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
-from tau2.voice.audio_native.qwen_agent.discrete_time_adapter import (
-    DiscreteTimeQwenAgentAdapter,
-)
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -26,9 +26,7 @@ def test_current_stage_catalog_has_only_current_tasks_and_loads_a_profile():
     assert manifest["version"] == "gaia2-stage-hotwords-v2"
     assert manifest["tasks"] == 1000
     assert manifest["async_tasks"] == 0
-    profile_files = list(
-        (ROOT / "data/gaia2_stage_hotwords/v2/tasks").glob("*.json")
-    )
+    profile_files = list((ROOT / "data/gaia2_stage_hotwords/v2/tasks").glob("*.json"))
     assert len(profile_files) == 1000
     assert not any("__async_" in path.name for path in profile_files)
 
@@ -47,9 +45,7 @@ def test_current_stage_catalog_has_only_current_tasks_and_loads_a_profile():
     )
     assert profile.task_id == task.id
     assert all(
-        entry.weight in {5, 50}
-        for stage in profile.stages
-        for entry in stage.entries
+        entry.weight in {5, 50} for stage in profile.stages for entry in stage.entries
     )
 
 

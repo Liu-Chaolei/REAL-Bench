@@ -24,8 +24,7 @@ REAL-Bench 评测 Agent 在真实业务环境中的完整行为：理解用户�
 
 - **Gaia2 任务集**：1,000 道三阶段任务（800 道基础任务、100 道改口变体、
   100 道重复表达变体），另有 AddTask、Modify、Cancel 交互变体。
-- **Qwen Audio Agent**：通过独立容器、工作区、MCP 和应用状态运行完整 Agent，
-  支持 English retail 与 Gaia2 场景。
+- **Qwen Audio Agent**：通过独立容器、工作区、MCP 和应用状态运行 Gaia2 Agent。
 - **REAL 诊断指标**：意图忠实度、执行质量、语音交互和交互状态指标，与原有
   任务 reward 并列保存。
 - **可审计证据**：保存实际交付的用户输入、Agent 播放音频、ASR 片段、后端
@@ -80,8 +79,6 @@ UV_FROZEN=1 uv sync --extra dev
 | <code>voice</code> | 全双工语音、ASR、TTS 和音频处理 |
 | <code>diagnostics</code> | REAL 指标依赖 |
 | <code>dev</code> | pytest、ruff 和 pre-commit |
-| <code>knowledge</code> | <code>banking_knowledge</code> 检索域 |
-| <code>gym</code> | Gymnasium 接口 |
 | <code>all</code> | 全部功能 |
 
 ### API 配置
@@ -122,16 +119,16 @@ integrations/qwen_audio_agent/run_hpc.sh smoke \
 <code>--resume</code> 继续未完成的批次。结果写入
 <code>data/simulations/realbench-smoke/</code>。
 
-运行普通文本任务的示例：
+运行 Gaia2 文本任务的示例：
 
 ~~~bash
 UV_FROZEN=1 uv run tau2 run \
-  --domain retail \
+  --domain gaia2 \
   --agent-llm gpt-4.1 \
   --user-llm gpt-4.1 \
   --num-trials 1 \
   --num-tasks 2 \
-  --save-to retail-text-smoke
+  --save-to gaia2-text-smoke
 ~~~
 
 ### 查看和重算结果
@@ -213,7 +210,6 @@ UV_FROZEN=1 uv run python integrations/qwen_audio_agent/build_image.py \
 UV_FROZEN=1 uv run pytest tests/ \
   --ignore=tests/test_voice \
   --ignore=tests/test_streaming \
-  --ignore=tests/test_gym \
   --ignore=tests/test_domains/test_banking_knowledge
 
 UV_FROZEN=1 uv run pytest tests/test_diagnostics

@@ -10,7 +10,7 @@ from tau2.domains.gaia2.utils import runtime_digest
 @pytest.mark.parametrize(
     "suffix",
     [
-        "voice/audio_native/qwen_agent/discrete_time_adapter.py",
+        "adapters/qwen_audio_agent/adapter.py",
         "voice/audio_native/adapter.py",
         "voice/audio_native/tick_result.py",
         "utils/transcript/live.py",

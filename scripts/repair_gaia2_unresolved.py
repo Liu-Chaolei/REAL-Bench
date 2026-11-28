@@ -12,7 +12,10 @@ import argparse
 import copy
 import gzip
 import json
+import os
 import re
+import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any
 
@@ -750,6 +753,7 @@ def _run_v2(
     batch_size: int | None = None,
     resolve_sources: bool = False,
     recover_cached: bool = False,
+    selected_task_ids: list[str] | None = None,
 ) -> dict[str, Any]:
     """Commit each task separately, then export all completed task checkpoints."""
     from gaia2_repair_batches import export_results, record_result
@@ -760,21 +764,52 @@ def _run_v2(
     paths = sorted((out / "inputs").glob("*.json"))
     if not paths:
         raise ValueError("No repair inputs; run unresolved-prepare first")
-    selected = paths[batch_start:]
-    if evidence_root is not None and not offline:
-        batch_size = min(batch_size or 10, 10)
+    if selected_task_ids is None:
+        selected = paths[batch_start:]
+    else:
+        by_id = {path.stem: path for path in paths}
+        selected = [by_id[task_id] for task_id in selected_task_ids]
+    if evidence_root is not None and batch_size is None:
+        batch_size = 10
     if batch_size is not None:
         selected = selected[:batch_size]
     if limit is not None:
         selected = selected[:limit]
     model = None if offline else DirectModel(config, out / "requests")
     batch_id = f"batch-{batch_start:04d}-{len(selected):02d}"
+    if selected_task_ids is not None:
+        batch_id += "-" + sha(selected_task_ids)[:10]
     batch = {
         "id": batch_id,
         "selected_ids": [p.stem for p in selected],
         "completed_ids": [],
     }
-    for path in selected:
+    replay_lock = threading.Lock()
+    status_lock = threading.Lock()
+    runtime_status = {
+        "pid": os.getpid(),
+        "batch_id": batch_id,
+        "configured_concurrency": max(1, config.concurrency),
+        "selected": len(selected),
+        "active_request_ids": [],
+        "max_active_requests": 0,
+        "completed": 0,
+        "state": "running",
+    }
+
+    def request_status(task_id, starting):
+        with status_lock:
+            active = runtime_status["active_request_ids"]
+            if starting:
+                active.append(task_id)
+            elif task_id in active:
+                active.remove(task_id)
+            runtime_status["max_active_requests"] = max(
+                runtime_status["max_active_requests"], len(active)
+            )
+            write_json(out / "runtime-status.json", runtime_status)
+
+    def process_one(path):
         package = read_json(path)
         task_id = package["task_id"]
         baseline = (tasks if package["target_type"] == "task" else variants)[task_id]
@@ -799,50 +834,63 @@ def _run_v2(
                     }
                 )
                 packet = read_json(evidence_path) if evidence_path.exists() else {}
-                if packet.get("replay_input_key") != evidence_key:
-                    packet = build_packet(
-                        task_id=task_id,
-                        meta={
-                            "kind": package["kind"],
-                            "source_task_id": package["source_task_id"],
-                        },
-                        task=baseline,
-                        source_task=source,
-                        findings=package["unresolved_findings"],
-                        data_root=data_root,
-                        replay=True,
-                    )
-                    packet["replay_input_key"] = evidence_key
-                    write_json(evidence_path, packet)
+                with replay_lock:
+                    if packet.get("replay_input_key") != evidence_key:
+                        packet = build_packet(
+                            task_id=task_id,
+                            meta={
+                                "kind": package["kind"],
+                                "source_task_id": package["source_task_id"],
+                            },
+                            task=baseline,
+                            source_task=source,
+                            findings=package["unresolved_findings"],
+                            data_root=data_root,
+                            replay=True,
+                        )
+                        packet["replay_input_key"] = evidence_key
+                        write_json(evidence_path, packet)
                 package["source_evidence"] = packet
             elif evidence_path.exists():
                 package["source_evidence"] = read_json(evidence_path)
         prompt = repair_prompt_v2(package)
-        key = sha(
-            {
-                "prompt": prompt,
-                "target": sha(baseline),
-                "profile": config.model_dump(),
-                "protocol": "cumulative-repairs-1",
-            }
-        )
+        profile = config.model_dump()
+        scheduling_free_profile = {
+            name: value
+            for name, value in profile.items()
+            if name not in {"concurrency", "max_requests"}
+        }
+        key_fields = {
+            "prompt": prompt,
+            "target": sha(baseline),
+            "profile": scheduling_free_profile,
+            "protocol": "cumulative-repairs-1",
+        }
+        key = sha(key_fields)
+        compatible_keys = {key}
+        for old_concurrency in {1, 2, 4, 16, 32, config.concurrency}:
+            compatible_keys.add(
+                sha(
+                    dict(key_fields, profile=dict(profile, concurrency=old_concurrency))
+                )
+            )
         result_path = out / "results" / f"{task_id}.json"
         old_result = read_json(result_path) if result_path.exists() else {}
-        if old_result.get("input_key") == key and old_result.get("status") != "failed":
-            batch["completed_ids"].append(task_id)
-            write_json(out / "batches" / (batch_id + ".json"), batch)
-            continue
+        if (
+            old_result.get("input_key") in compatible_keys
+            and old_result.get("status") != "failed"
+        ):
+            return task_id, "cached", None
         response_path = out / "responses" / f"{task_id}.json"
         response = read_json(response_path) if response_path.exists() else {}
-        reuse = (response.get("input_key") == key or recover_cached) and response.get(
-            "status"
-        ) == "complete"
+        reuse = (
+            response.get("input_key") in compatible_keys or recover_cached
+        ) and response.get("status") == "complete"
         if not reuse:
             if offline:
                 # An old response stays in its cache; an evidence change cannot
                 # silently turn it into a freshly grounded model decision.
-                batch.setdefault("pending_ids", []).append(task_id)
-                continue
+                return task_id, "pending", None
             if response:
                 write_json(
                     out / "response-history" / task_id / (sha(response) + ".json"),
@@ -853,7 +901,11 @@ def _run_v2(
                     raise ValueError(
                         "Prompt exceeds 120k characters; evidence retained locally"
                     )
-                raw = model.complete(prompt, REPAIR_SCHEMA)
+                request_status(task_id, True)
+                try:
+                    raw = model.complete(prompt, REPAIR_SCHEMA)
+                finally:
+                    request_status(task_id, False)
                 response = json.loads(raw)
                 if not isinstance(response, dict):
                     raise ValueError("Expected JSON object")
@@ -879,18 +931,37 @@ def _run_v2(
                 old_result,
             )
         write_json(result_path, record)
-        batch["completed_ids"].append(task_id)
-        write_json(out / "batches" / (batch_id + ".json"), batch)
-        print(
-            json.dumps(
-                {
-                    "task_id": task_id,
-                    "status": record["status"],
-                    "open_findings": record["unresolved_count"],
-                }
-            ),
-            flush=True,
-        )
+        return task_id, record["status"], record["unresolved_count"]
+
+    with ThreadPoolExecutor(max_workers=max(1, config.concurrency)) as pool:
+        futures = {pool.submit(process_one, path): path.stem for path in selected}
+        for future in as_completed(futures):
+            try:
+                task_id, status, open_findings = future.result()
+            except Exception as exc:
+                task_id = futures[future]
+                status, open_findings = "pending", None
+                batch.setdefault("errors", {})[task_id] = f"{type(exc).__name__}: {exc}"
+            if status == "pending":
+                batch.setdefault("pending_ids", []).append(task_id)
+            else:
+                batch["completed_ids"].append(task_id)
+            write_json(out / "batches" / (batch_id + ".json"), batch)
+            with status_lock:
+                runtime_status["completed"] += 1
+                write_json(out / "runtime-status.json", runtime_status)
+            print(
+                json.dumps(
+                    {
+                        "task_id": task_id,
+                        "status": status,
+                        "open_findings": open_findings,
+                    }
+                ),
+                flush=True,
+            )
+    runtime_status["state"] = "completed"
+    write_json(out / "runtime-status.json", runtime_status)
     summary = export_results(out, tasks, variants)
     if evidence_root is not None:
         from build_gaia2_source_evidence import refresh_index

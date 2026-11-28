@@ -2,24 +2,36 @@ import pytest
 
 from tau2.agent.llm_agent import LLMAgent, LLMSoloAgent
 from tau2.data_model.message import AssistantMessage, UserMessage
+from tau2.registry import registry
+from tau2.run import get_tasks
+
+GAIA2_TASK_ID = "0002_46myz87t501b0c902dy81rlbqbye2dyi"
 
 
 @pytest.fixture
-def agent(get_environment) -> LLMAgent:
+def agent() -> LLMAgent:
+    task = get_tasks("gaia2", task_ids=[GAIA2_TASK_ID])[0]
+    environment = registry.get_env_constructor("gaia2")(
+        task=task, allow_unverified=True
+    )
     return LLMAgent(
         llm="gpt-4o-mini",
-        tools=get_environment().get_tools(),
-        domain_policy=get_environment().get_policy(),
+        tools=environment.get_tools(),
+        domain_policy=environment.get_policy(),
     )
 
 
 @pytest.fixture
-def solo_agent(get_environment, base_task) -> LLMSoloAgent:
+def solo_agent() -> LLMSoloAgent:
+    task = get_tasks("gaia2", task_ids=[GAIA2_TASK_ID])[0]
+    environment = registry.get_env_constructor("gaia2")(
+        task=task, allow_unverified=True
+    )
     return LLMSoloAgent(
         llm="gpt-4o-mini",
-        tools=get_environment().get_tools(),
-        domain_policy=get_environment().get_policy(),
-        task=base_task,
+        tools=environment.get_tools(),
+        domain_policy=environment.get_policy(),
+        task=task,
     )
 
 

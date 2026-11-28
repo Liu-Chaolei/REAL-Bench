@@ -31,8 +31,7 @@ are defined in the [glossary](glossary.md).
   For 1.x text, at least 4 trials per domain are strongly preferred.
 - **Voice speech complexity.** Voice submissions use `--speech-complexity regular`
   (the default).
-- **Use your own caller voices** for voice runs. See
-  [Voice personas](voice-personas.md).
+- **Use your own caller voices** for voice runs through the active voice configuration.
 
 ### Standard and custom submissions
 
@@ -215,10 +214,7 @@ panel. Historical UI displays and released scores keep their recorded definition
 current diagnostics do not change task rank. 1.x and voice-v1
 submissions keep their own tabs and are still accepted.
 
-The frozen 2026-10-02 voice-v2 release calls predate the matrix layout. A
-maintainer-only adapter, `tau2 submit prepare --historical-voice-v2`, reads
-those saved exports and writes the same package; see
-[Voice V2 release packages](voice-v2-publication.md).
+Historical release exports remain readable through explicit compatibility paths; new submissions use the active Gaia2 package layout.
 
 ---
 

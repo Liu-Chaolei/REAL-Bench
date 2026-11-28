@@ -7,6 +7,7 @@ from types import SimpleNamespace
 import httpx
 import pytest
 
+from tau2.adapters.qwen_audio_agent.config import QwenAgentConfig
 from tau2.data_model.run_config import AudioNativeConfig
 from tau2.data_model.simulation import VoiceRunConfig
 from tau2.data_model.voice import QwenTTSConfig, SynthesisConfig
@@ -14,7 +15,6 @@ from tau2.domains.gaia2.language_runtime import task_context
 from tau2.registry import registry
 from tau2.runner.batch import make_voice_run_settings
 from tau2.runner.build import build_voice_user
-from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
 from tau2.voice.mimo import pcm_wav
 from tau2.voice.synthesis.synthesize import synthesize_voice
 

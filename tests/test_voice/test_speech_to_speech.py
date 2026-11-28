@@ -15,7 +15,7 @@ import pytest
 from fastapi import HTTPException
 from fastapi.testclient import TestClient
 
-from tau2.voice.audio_native.qwen_agent.config import (
+from tau2.adapters.qwen_audio_agent.config import (
     QwenAgentConfig,
     SpeechToSpeechConfig,
 )
@@ -498,7 +498,7 @@ def test_native_pipeline_uses_local_proxy_only_when_fallback_is_configured(monke
 
 
 def test_old_image_cannot_silently_ignore_requested_fallback(monkeypatch):
-    from tau2.voice.audio_native.qwen_agent.runtime import DockerRuntime
+    from tau2.adapters.qwen_audio_agent.runtime import DockerRuntime
 
     runtime = DockerRuntime(
         QwenAgentConfig(

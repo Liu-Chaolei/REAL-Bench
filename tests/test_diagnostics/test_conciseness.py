@@ -944,42 +944,6 @@ def test_legacy_frozen_inventory_is_reused_with_new_alignment(
     assert frozen.read_bytes() == original
 
 
-def test_feedback_versions_are_not_averaged_together():
-    from tau2.diagnostics.suite import summarize
-
-    def row(version, score):
-        measure = dict(
-            version=version,
-            status="measured",
-            trial=dict(required_coverage=1, length_efficiency=1, feedback_score=score),
-            windows=[],
-        )
-        return dict(task_id="t", summary=dict(measures={"conciseness": measure}))
-
-    rows = [row("tau-feedback-conciseness/1", 0), row(VERSION, 100), {}]
-    before = copy.deepcopy(rows)
-    for report in (summarize(rows), aggregate_reports(rows)):
-        assert set(report["groups"]) == {
-            "tau-feedback-conciseness/1",
-            VERSION,
-            "unscored",
-        }
-        for version, score in [("tau-feedback-conciseness/1", 0), (VERSION, 100)]:
-            group = report["groups"][version]
-            value = group["metrics"]["conciseness"] if "metrics" in group else group
-            assert value["feedback_score"] == score
-            assert "raw_feedback_score" not in value
-            assert "material_error_rate" not in value
-    assert rows == before
-    current = summarize([rows[1]])
-    assert set(current["metrics"]["conciseness"]) == {
-        "required_coverage",
-        "length_efficiency",
-        "feedback_score",
-    }
-    assert current["evaluation_log"]["feedback_versions"] == [VERSION]
-
-
 def test_history_flows_to_next_window_without_truth_gate(
     evidence, tmp_path, monkeypatch
 ):

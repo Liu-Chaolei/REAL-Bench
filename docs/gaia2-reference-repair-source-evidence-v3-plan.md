@@ -493,3 +493,25 @@ UV_FROZEN=1 .venv/bin/python scripts/repair_gaia2_unresolved.py unresolved-repai
 下一批将 `--batch-start` 改为 10，再下一批改为 20。每题先恢复来源证据，再调用模型，
 不预先向模型提交全部题目。原有旧缓存可通过 `--offline --recover-cached` 显式恢复，
 但结果会标记为 `recovered_legacy_cache`，不算作新的来源复核。
+
+### 实际并发和补缺
+
+模型请求使用线程池，`--concurrency` 控制同时调用的数量；本地来源 replay 串行隔离执行，
+避免应用状态互相影响。批次大小不再被内部静默截成 10。当前可用 `--batch-size 16 --concurrency 16`。
+`runtime-status.json` 记录配置并发、当前活动请求和本批峰值，不能仅凭命令行参数宣称已并行执行。
+
+批次驱动的 `--pending-only` 按任务 ID 查找没有来源复核 checkpoint 的题和旧缓存题，
+分成最多 16 道的显式任务列表执行，避免仅靠批次步长前进时漏题。已经存在的来源复核结果保留；
+其中仍为 failed/unresolved 的题不算已解决，需要另外定向处理。
+
+```bash
+UV_FROZEN=1 .venv/bin/python scripts/run_gaia2_source_repair_batches.py \
+  --input-root data/archives/gaia2/reference-repair-simple-v2 \
+  --review-dir data/archives/gaia2/reference-review-v2 \
+  --data-root data/tau2/domains/gaia2 \
+  --out data/archives/gaia2/reference-repair-simple-v3 \
+  --evidence-root data/archives/gaia2/reference-repair-simple-v3 \
+  --config docs/gaia2-reference-review.deepseek.yaml \
+  --env-file /hpc_stor03/sjtu_home/chaolei.liu/.config/qwaudio/config.env \
+  --batch-size 16 --concurrency 16 --pending-only
+```

@@ -57,10 +57,8 @@ class DockerRuntime:
         """Start the fixed image and return its loopback control URL."""
         image = json.loads(self._command("image", "inspect", self.config.image))[0]
         labels = image.get("Config", {}).get("Labels") or {}
-        supported_domains = labels.get("org.tau.qwen-agent.domains", "retail").split(
-            ","
-        )
-        if (getattr(self.config, "domain", None) or "retail") not in supported_domains:
+        supported_domains = labels.get("org.tau.qwen-agent.domains", "gaia2").split(",")
+        if (getattr(self.config, "domain", None) or "gaia2") not in supported_domains:
             raise ValueError(
                 "The configured Qwen image does not declare support for this domain; build the updated integration image"
             )

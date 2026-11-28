@@ -10,11 +10,11 @@ import httpx
 import pytest
 from tenacity import stop_after_attempt, wait_none
 
-from tau2.data_model.voice import MiMoTTSConfig, SynthesisConfig
-from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
-from tau2.voice.audio_native.qwen_agent.mimo_transcription import (
+from tau2.adapters.qwen_audio_agent.config import QwenAgentConfig
+from tau2.adapters.qwen_audio_agent.transcription.mimo import (
     MiMoPlayedAudioTranscriber,
 )
+from tau2.data_model.voice import MiMoTTSConfig, SynthesisConfig
 from tau2.voice.mimo import pcm_wav, synthesize_mimo
 from tau2.voice.synthesis.synthesize import synthesize_voice
 

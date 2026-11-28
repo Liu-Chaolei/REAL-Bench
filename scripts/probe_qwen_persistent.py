@@ -5,8 +5,8 @@ import asyncio
 import json
 from pathlib import Path
 
-from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
-from tau2.voice.audio_native.qwen_agent.provider import QwenAgentProvider
+from tau2.adapters.qwen_audio_agent.config import QwenAgentConfig
+from tau2.adapters.qwen_audio_agent.provider import QwenAgentProvider
 
 
 async def probe(config, output):

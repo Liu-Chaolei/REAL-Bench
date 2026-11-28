@@ -27,9 +27,7 @@ produce Precision `1/3`, Recall `1`, F1 `0.5`. Content judgments remain intact;
 replaying the saved final evaluation reproduces the score without model calls.
 
 All changed Python files pass Ruff lint and format checks; `git diff --check`
-passes. `make check-all` was run and stops on the 14 existing lint errors in
-`scripts/manual_fix_stage2_0074.py`; that unrelated manual data-edit script was
-not changed. The container lacks system ALSA/JACK libraries required by its
+passes. The container lacks system ALSA/JACK libraries required by its
 installed PyAudio, so regression commands used extracted Ubuntu runtime libraries
 under `/tmp/tau-repetition-system-libs/root/usr/lib/x86_64-linux-gnu` via
 `LD_LIBRARY_PATH`, without changing the project environment or lockfile.

@@ -603,7 +603,7 @@ class Orchestrator(BaseOrchestrator[AgentT, UserT, Message]):
             max_errors: Maximum number of tool execution errors before termination. Defaults to 10.
             seed: Optional random seed for reproducibility of agent and user behavior. Defaults to None.
             solo_mode: If True, agent operates without user interaction (only tool calls allowed).
-                      Requires agent to be LLMSoloAgent or GymAgent, and user to be DummyUser.
+                      Requires agent to be LLMSoloAgent, and user to be DummyUser.
                       Defaults to False.
             validate_communication: If True, validates communication protocol rules (e.g., no mixed
                                    messages with both text and tool calls). Defaults to False.
@@ -689,10 +689,9 @@ class Orchestrator(BaseOrchestrator[AgentT, UserT, Message]):
 
         if self.solo_mode:
             assert self.environment.solo_mode, "Environment should be in solo mode"
-            assert (
-                isinstance(self.agent, LLMSoloAgent)
-                or self.agent.__class__.__name__ == "GymAgent"
-            ), "Agent must be a LLMSoloAgent or GymAgent in solo mode"
+            assert isinstance(self.agent, LLMSoloAgent), (
+                "Agent must be a LLMSoloAgent in solo mode"
+            )
             assert isinstance(self.user, DummyUser), (
                 "User must be a DummyUser in solo mode"
             )
@@ -832,10 +831,7 @@ class Orchestrator(BaseOrchestrator[AgentT, UserT, Message]):
                 diagnostic_recorder = getattr(
                     self.environment, "diagnostic_recorder", None
                 )
-                if (
-                    diagnostic_recorder is not None
-                    and not first_message.is_tool_call()
-                ):
+                if diagnostic_recorder is not None and not first_message.is_tool_call():
                     diagnostic_recorder.message_event(
                         "agent_turn",
                         "agent",
@@ -1168,9 +1164,7 @@ class Orchestrator(BaseOrchestrator[AgentT, UserT, Message]):
             diagnostic_recorder = getattr(self.environment, "diagnostic_recorder", None)
             if diagnostic_recorder is not None:
                 for tool_result in tool_results:
-                    diagnostic_recorder.tool_delivered(
-                        tool_result.id, viewer="agent"
-                    )
+                    diagnostic_recorder.tool_delivered(tool_result.id, viewer="agent")
             self.message = self._wrap_tool_results(tool_results)
             self.to_role = self.from_role
             self.from_role = Role.ENV

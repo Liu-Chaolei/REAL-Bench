@@ -17,7 +17,7 @@ uv sync --extra voice --extra live
 
 ```bash
 export AVARTHA_API_KEY=<your-api-key>
-tau2 run --audio-native --benchmark none --domain retail \
+tau2 run --audio-native --benchmark none --domain gaia2 \
   --audio-native-provider avartha_pipecat \
   --avartha-base-url https://<host>/inference/serverless/pipecat/v1/public/<agent_id> \
   --num-tasks 1

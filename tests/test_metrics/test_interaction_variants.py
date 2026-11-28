@@ -465,7 +465,7 @@ def test_merging_temporary_work_into_primary_does_not_invent_independent_b(sourc
 
 
 def test_qwen_started_management_call_has_no_fabricated_native_result():
-    from tau2.persistent_tasks.adapters.qwen import QwenEventAdapter
+    from tau2.adapters.qwen_audio_agent.events import QwenEventAdapter
 
     adapter = QwenEventAdapter()
     started = adapter.backend_observation(

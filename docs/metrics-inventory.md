@@ -1,6 +1,6 @@
 # 指标清单与精简后的口径
 
-本文件记录当前实现。实施计划见 [metrics-cleanup-plan.md](metrics-cleanup-plan.md) 与 [metrics-cleanup-followup-plan.md](metrics-cleanup-followup-plan.md)。题目与历史轨迹没有重写。
+本文件记录当前实现。历史清理计划已完成；题目与历史轨迹没有重写。
 
 ## 0. 当前版本实际评测项
 

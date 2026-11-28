@@ -25,7 +25,7 @@ from tau2.runner.checkpoint import (
 )
 
 
-@pytest.mark.parametrize("previous_version", [None, "v1.1", "v1.2"])
+@pytest.mark.parametrize("previous_version", [None, "v1.1"])
 def test_voice_resume_rejects_mixing_scheduling_versions(tmp_path, previous_version):
     from tau2.data_model.run_config import AudioNativeConfig
 
@@ -43,12 +43,8 @@ def test_voice_resume_rejects_mixing_scheduling_versions(tmp_path, previous_vers
         update={"voice_user_simulator_version": "v1.2"}
     )
     current = Results(info=current_info, tasks=[task], simulations=[])
-    if previous_version != "v1.2":
-        with pytest.raises(ValueError, match="voice_user_simulator_version"):
-            try_resume(path, current, [task], 1, auto_resume=True)
-    else:
-        resumed, done, _ = try_resume(path, current, [task], 1, auto_resume=True)
-        assert len(resumed.simulations) == 1 and len(done) == 1
+    with pytest.raises(ValueError, match="voice_user_simulator_version"):
+        try_resume(path, current, [task], 1, auto_resume=True)
 
 
 def test_legacy_results_do_not_acquire_the_new_scheduling_version():

@@ -19,26 +19,21 @@ file name (`text`, `voice`, `voice-v1`).
 
 ## Binding revision
 
-A SHA-256 fingerprint of everything a cell feeds into a call: the [pack](#pack) revision, the localized tasks, database and policy, the
-prompt and guideline versions, and the call mode. A text cell and a voice cell
-for the same language and domain have different binding revisions. A run refuses
-to start if the current checkout no longer produces the binding revision the
-manifest records.
+A SHA-256 fingerprint of everything a Gaia2 binding feeds into a call: the task
+content, caller prompt, runtime rules, assets, and call mode. A run refuses to
+start if the current checkout no longer produces the binding revision recorded
+by the manifest.
 
 ## Cell
 
-One language × domain pair in a benchmark, for example `es-retail`. A
-benchmark run saves each cell in its own directory (`<root>/es-retail/`). Scores are
-averaged over tasks within a cell, then over cells with equal weight.
+A selected Gaia2 task and its language/runtime binding. New results are stored
+under `data/results/<run-name>/`.
 
 ## Frame
 
-The full, fixed population a benchmark is scored over: every cell, every
-frozen task ID, and the trial indices. A run that covers only part of the
-frame (a slice or a `--num-tasks` sample) has no official score; the frame is the
-denominator. Calls that ended in an infrastructure error are the exception: they
-are harness faults, so they are excluded from the denominator and reported as
-`error_trials`. A saved run records its frame in `benchmark-frame.json` at the root.
+The fixed Gaia2 task population and trial indices used for a benchmark score. A
+run records its selected canonical task IDs and benchmark metadata in its result
+root. Infrastructure failures remain explicit error trials.
 
 ## Generation quality
 
@@ -60,13 +55,9 @@ One named evaluation quantity. Current measures and aggregation rules are listed
 in [the metrics inventory](metrics-inventory.md). The independent Judge suite has
 been removed; task evaluators and current diagnostics remain separate.
 
-## Pack
+## Binding
 
-A language pack: `data/tau2/multilingual/<lang>/pack.yaml` plus its
-localization files. It holds the caller personas, prompt clauses, voice settings,
-and the localized tasks and database for each domain it covers. Every run
-resolves a pack; with no `--language`, the English pack is used. See
-[Language packs](language-packs.md).
+Gaia2 resolves an English caller binding from `src/tau2/domains/gaia2/language_runtime.py`. The binding records the prompt, caller settings, task selection, and content fingerprints used by a run.
 
 ## Pin
 
@@ -80,10 +71,6 @@ One run of one task. `--num-trials N` runs each task N times with different
 seeds. The released benchmarks are scored at one trial (pass@1);
 `pass^k` is the share of tasks passed in all k trials.
 
-## τ-i18n / τ-multi
+## Historical benchmark names
 
-The multilingual voice benchmark (`voice-v2`). Older docs and identifiers call it τ-Multilingual or "multilingual".
-
-## τ-Entity
-
-The entity-capture benchmark on the `intake` domain. Older docs and identifiers call it "elicitation". See [τ-Entity](elicitation.md).
+τ-i18n/τ-Multilingual and τ-Entity/elicitation are historical benchmark names. They remain readable in old serialized records but are not active run targets.

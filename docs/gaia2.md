@@ -36,7 +36,7 @@ not instruct the user to guide the agent's tool use. Existing stage transitions,
 dynamic follow-ups and scoring retain their own behavior. The prompt is selected
 at construction without new runtime checks or model calls. The role version is
 included in the saved user guidelines; historical runs retain their old prompts.
-See the [implementation record](gaia2-neutral-user-results.md).
+The active caller configuration is recorded with each run's binding metadata.
 
 ## Task structure
 
@@ -257,8 +257,8 @@ and are recorded under the τ adaptation's score version.
 
 ## Validation
 
-The [migration validation record](gaia2-validation.md) includes the complete
-offline checks, concurrency verification and the live API rate-limit outcome.
+Reference verification and seal status are recorded in the Gaia2 manifest and
+run metadata.
 
 ```bash
 make test-gaia2

@@ -62,7 +62,7 @@ def test_user_simulator_set_state(
 
 
 def test_dummy_user_no_args():
-    """DummyUser must be instantiable without arguments (solo-mode gym path)."""
+    """DummyUser must be instantiable without arguments for solo mode."""
     dummy = DummyUser()
     state = dummy.get_init_state()
     assert state.messages == []

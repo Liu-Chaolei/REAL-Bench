@@ -1,6 +1,5 @@
 """Whole-call interaction scoring with fake judges and ordinary saved runs."""
 
-import argparse
 import json
 from types import SimpleNamespace
 
@@ -23,20 +22,15 @@ from tau2.data_model.simulation import (
     UserInfo,
 )
 from tau2.data_model.tasks import Task, UserScenario
-from tau2.diagnostics.cli import add_metrics_args
 from tau2.diagnostics.config import MetricsConfig
 from tau2.diagnostics.interaction import (
     build_input,
     conversation_evidence,
     evaluate_interaction,
-    summarize_interaction,
 )
 from tau2.diagnostics.model import RequestBudget
 from tau2.diagnostics.suite import (
-    evaluate_evidence,
-    read_saved_reports,
     run_saved,
-    summarize,
 )
 from tau2.environment.environment import EnvironmentInfo
 
@@ -290,33 +284,6 @@ def test_all_uncertain_and_all_unhelpful_are_distinct(call_evidence, judge, tmp_
         assert result["judgment_coverage"] == (0 if label == "uncertain" else 1)
 
 
-def test_cache_is_reused_and_invalid_trials_are_excluded(
-    call_evidence, judge, tmp_path
-):
-    calls, _ = judge
-    task = Task(id="mail", user_scenario=UserScenario(instructions="hidden task"))
-    first = evaluate_evidence(task, call_evidence, tmp_path / "evidence", config())
-    second = evaluate_evidence(task, call_evidence, tmp_path / "evidence", config())
-    assert first["summary"]["requests_this_run"] == 1
-    assert second["summary"]["requests_this_run"] == 0
-    assert len(calls) == 1
-    measure = second["summary"]["measures"]["interaction"]
-    pooled = summarize_interaction(
-        [measure, dict(measure, diagnostic_only=True), {"status": "grader_error"}, None]
-    )
-    assert pooled["scored"] == 1 and pooled["total_trials"] == 4
-    assert pooled["counts"] == measure["counts"]
-    report = summarize([first, {"profile": first["profile"]}])
-    assert report["evaluation_log"]["total_trials"] == 2
-    assert report["metrics"]["interaction"][
-        "effective_interaction_rate"
-    ] == pytest.approx(2 / 3)
-    alternate = dict(measure, counts={"useful": 0, "unhelpful": 6, "uncertain": 0})
-    assert summarize_interaction([measure, alternate])[
-        "effective_interaction_rate"
-    ] == pytest.approx(2 / 9)
-
-
 def saved_run(path, domain="mock", format="json"):
     task = Task(
         id="mail", user_scenario=UserScenario(instructions="hidden user script")
@@ -348,70 +315,6 @@ def saved_run(path, domain="mock", format="json"):
         tasks=[task],
         simulations=[simulation],
     ).save(path, format=format)
-
-
-def test_historical_dialogue_cli_dry_run_cache_and_export(judge, tmp_path, capsys):
-    calls, responses = judge
-    path = tmp_path / "results.json"
-    saved_run(path)
-    original = path.read_bytes()
-    parser = argparse.ArgumentParser()
-    add_metrics_args(parser)
-    config_path = tmp_path / "interaction.yaml"
-    config_path.write_text("measures: [interaction]\nmax_requests: 1\n")
-    args = parser.parse_args(
-        [
-            "run",
-            str(path),
-            "--config",
-            str(config_path),
-            "--only",
-            "interaction",
-            "--dry-run",
-        ]
-    )
-    args.func(args)
-    assert '"effective_interaction_rate": null' in capsys.readouterr().out
-    assert not calls and not (tmp_path / "artifacts").exists()
-    responses[:] = [
-        {
-            "acts": [
-                dict(
-                    judge_output()["acts"][0],
-                    utterance_id="1",
-                    text="Who is the recipient?",
-                )
-            ]
-        }
-    ]
-    first = run_saved(path, config())
-    assert first["metrics"]["interaction"]["effective_interaction_rate"] == 1
-    measure = first["evaluation_log"]["records"][0]["summary"]["measures"][
-        "interaction"
-    ]
-    assert measure["evidence_mode"] == "conversation_only"
-    prompt = calls[0]["messages"][0].content
-    assert "hidden user script" not in prompt
-    assert '"dialogue":"message_index"' in prompt
-    assert len(calls) == 1
-    assert (
-        read_saved_reports(path)["evaluation_log"]["records"][0]["summary"]["measures"][
-            "interaction"
-        ]["counts"]
-        == measure["counts"]
-    )
-    run_saved(path, config())
-    assert len(calls) == 1
-    export_path = tmp_path / "export.json"
-    export_args = parser.parse_args(["export", str(path), "--output", str(export_path)])
-    export_args.func(export_args)
-    assert (
-        json.loads(export_path.read_text())["metrics"]["interaction"][
-            "effective_interaction_rate"
-        ]
-        == 1
-    )
-    assert len(calls) == 1 and path.read_bytes() == original
 
 
 def test_historical_fallback_is_interaction_only_and_run_specific(

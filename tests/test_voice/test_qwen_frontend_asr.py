@@ -12,7 +12,7 @@ import httpx
 import pytest
 from fastapi.testclient import TestClient
 
-from tau2.voice.audio_native.qwen_agent.config import (
+from tau2.adapters.qwen_audio_agent.config import (
     QwenAgentConfig,
     SpeechToSpeechConfig,
 )
@@ -232,7 +232,7 @@ UNRELATED_JUDGE_KEY=judge-private
 
 
 def test_old_image_is_rejected_before_launching_a_qwen_asr_frontend(monkeypatch):
-    from tau2.voice.audio_native.qwen_agent.runtime import DockerRuntime
+    from tau2.adapters.qwen_audio_agent.runtime import DockerRuntime
 
     runtime = DockerRuntime(
         QwenAgentConfig(

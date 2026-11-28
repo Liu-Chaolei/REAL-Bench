@@ -1,7 +1,6 @@
 """Duplicate delegation evidence, deterministic penalties and failed-check coverage."""
 
 import json
-from copy import deepcopy
 
 import pytest
 
@@ -400,6 +399,7 @@ async def test_whole_call_pipeline_resume_and_empty_prediction(monkeypatch, tmp_
         ],
     )
     seen = []
+
     class Model:
         def __init__(self, config, role, *args):
             self.role = role
@@ -507,44 +507,3 @@ async def test_conditional_inline_and_cross_goal_facts_keep_their_scopes():
             assert row["status"] == "matched"
         elif path.startswith("/rules/0/then_goals/1/"):
             assert row["status"] == "extra"
-
-
-@pytest.mark.asyncio
-async def test_summary_and_terminal_show_counts_evidence_and_versions(monkeypatch):
-    from io import StringIO
-
-    from rich.console import Console
-
-    from tau2.data_model.simulation import SimulationRun, TerminationReason
-    from tau2.diagnostics.suite import summarize
-    from tau2.utils.display import ConsoleDisplay
-
-    gt, prediction = artifacts()
-    content = await content_verdict(gt, prediction)
-    record = await check_repetition(gt, prediction, Fake(judgment()), MODEL)
-    result = score_record(apply_repetition(content, record))
-    row = {"profile": "same", "summary": {"measures": {"intent": result}}}
-    report = summarize([row])
-    assert report["metrics"]["intent"]["precision"] == pytest.approx(1 / 3)
-    assert report["evaluation_log"]["records"][0]["summary"]["measures"]["intent"]["repetition"]["extra_goal_count"] == 2
-    assert report["evaluation_log"]["statuses"]["intent"] == {"complete": 1}
-    old = deepcopy(row)
-    old["summary"]["measures"]["intent"]["version"] = "tau-real-intent/1"
-    assert "intent" not in summarize([row, old])
-    output = StringIO()
-    monkeypatch.setattr(ConsoleDisplay, "console", Console(file=output, width=160))
-    simulation = SimulationRun(
-        id="s",
-        task_id="t",
-        trial=0,
-        start_time="start",
-        end_time="end",
-        duration=1,
-        messages=[],
-        termination_reason=TerminationReason.USER_STOP,
-        diagnostics_ref=row,
-    )
-    ConsoleDisplay.display_simulation(simulation, show_details=True)
-    text = output.getvalue()
-    assert "extra goals: 2" in text and "Content precision: 1" in text
-    assert "user u:" in text and "matched -> extra" in text

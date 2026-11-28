@@ -8,8 +8,8 @@ import wave
 
 import httpx
 
-from tau2.voice.audio_native.qwen_agent.config import QwenAgentConfig
-from tau2.voice.audio_native.qwen_agent.mimo_transcription import (
+from tau2.adapters.qwen_audio_agent.config import QwenAgentConfig
+from tau2.adapters.qwen_audio_agent.transcription.mimo import (
     MiMoPlayedAudioTranscriber,
 )
 
