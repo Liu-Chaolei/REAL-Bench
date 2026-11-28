@@ -4,7 +4,7 @@ from tau2.data_model.language import CallMode, RuntimePersona
 from tau2.data_model.persona import PersonaConfig
 from tau2.user.guidelines import default_persona, language_directive
 
-GAIA2_USER_GUIDELINES_VERSION = "gaia2-neutral-user-v2-no-transfer"
+GAIA2_USER_GUIDELINES_VERSION = "gaia2-neutral-user-v3-asr-aware"
 
 GAIA2_ROLE_REMINDER = (
     "REMINDER: You are the human user who gave the AI agent the current task. "
@@ -36,6 +36,39 @@ _VOICE_GUIDELINES = """## Voice interaction
 - If the agent continues not to respond after two check-ins, end the interaction.
 """
 
+_VOICE_TRANSCRIPT_GUIDELINES = """## Interpreting the agent's speech transcript
+You receive the agent's speech through automatic speech recognition (ASR).
+The transcript is an imperfect representation of what was spoken.
+
+- Capitalization, accent marks, punctuation, spacing, and the spelling of
+  names or technical terms may differ because of transcription. Do not
+  treat cosmetic differences alone as evidence that the agent made a mistake.
+- Preserve all substantive requirements. If a difference could change the
+  intended person, email domain, identifier, number, date, amount, or action,
+  treat it as uncertainty and ask a targeted clarification.
+- For names, email addresses, IDs, or other critical strings, you may ask
+  the agent to spell the unclear part letter by letter, explicitly naming
+  digits and necessary separators such as "dot", "at", or "hyphen".
+  Use only facts provided in your scenario or released conversation.
+- A clear, complete letter-by-letter spelling takes precedence over a
+  conflicting whole-word transcription of the same value. If only part
+  of the spelling is unclear, ask about that part rather than restarting
+  the entire verification.
+- Once the spelling has been clearly confirmed, accept that confirmation.
+  Do not reopen the same issue merely because a later whole-word transcript
+  renders it differently. Recheck only if there is new, substantive evidence
+  of a different value.
+- A suspicious transcript does not prove that an action was performed
+  incorrectly. Before requesting a resend, deletion, or recreation, ask the
+  agent to verify the details of the existing action.
+- Do not claim that an email was not received, or that another action failed,
+  unless that information is supported by your scenario or available evidence.
+  Express uncertainty or ask for confirmation instead.
+
+After clarification, continue with the current request and follow the normal
+completion and STOP rules.
+"""
+
 _TOOL_GUIDELINES = """## Your tools
 - At each turn, either speak/write to the agent or use one of your provided tools; do not do both at once.
 - Use tools only when requested by the agent or necessary to answer its question. Ground reports in actual tool results; do not invent them.
@@ -63,7 +96,9 @@ def get_gaia2_user_guidelines(
         sections.append(f"You are a {persona.gender} user.")
         sections.extend([persona.user_guidelines, persona.mode_guidelines])
     if mode == "voice":
-        sections.extend([_VOICE_GUIDELINES, resolved.spellout_section])
+        sections.extend(
+            [_VOICE_GUIDELINES, _VOICE_TRANSCRIPT_GUIDELINES, resolved.spellout_section]
+        )
     else:
         sections.append("Generate one natural text message at a time.")
     if use_tools:
