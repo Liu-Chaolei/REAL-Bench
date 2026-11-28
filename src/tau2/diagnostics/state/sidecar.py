@@ -3,14 +3,16 @@
 from __future__ import annotations
 
 import copy
-import queue
+import heapq
 import threading
+import time
 from pathlib import Path
 from typing import Any
 
 from tau2.diagnostics.intent.io import write_json
 from tau2.diagnostics.model import RequestBudget, TauJsonModel
 from tau2.diagnostics.state.adapter import DomainAdapter
+from tau2.diagnostics.state.capture import CAPTURE_VERSION
 from tau2.diagnostics.state.models import DialogueEvent
 from tau2.diagnostics.state.projector import StateProjector
 from tau2.diagnostics.state.semantic import SemanticInterpreter
@@ -53,7 +55,10 @@ class StateCheckpointStore:
         temporary.replace(target)
 
     def write_status(self, **values: Any) -> None:
-        write_json(self.directory / "status.json", values)
+        write_json(
+            self.directory / "status.json",
+            {**values, "capture_version": CAPTURE_VERSION},
+        )
 
     def write_trace(self, projector: StateProjector):
         windows, versions, state = projector.finish()
@@ -76,15 +81,20 @@ class StateShadowWorker:
         self.evidence = evidence
         self.config = config
         self.store = StateCheckpointStore(Path(directory))
-        self.queue: queue.Queue[DialogueEvent | None] = queue.Queue(
-            maxsize=getattr(config, "state_sidecar_queue_size", 256)
+        self.queue_size = getattr(config, "state_sidecar_queue_size", 256)
+        self.stability_seconds = float(
+            getattr(config, "state_sidecar_stability_seconds", 30.0)
         )
+        self._ready: list[tuple[float, int, DialogueEvent]] = []
+        self._condition = threading.Condition()
+        # Online state and post-call diagnostics have independent request caps.
+        self.request_budget = RequestBudget(config.max_requests)
         self.interpreter = SemanticInterpreter(
             TauJsonModel(
                 config,
                 "state_interaction",
                 self.store.requests,
-                RequestBudget(config.max_requests),
+                self.request_budget,
             ),
             capabilities or {},
         )
@@ -119,28 +129,52 @@ class StateShadowWorker:
         )
         self.received_sequence = max(self.received_sequence, value.sequence)
         self.store.record_event(value)
-        try:
-            self.queue.put_nowait(value)
-        except queue.Full:
-            self.failed_events.append(
-                {
-                    "sequence": value.sequence,
-                    "event_id": value.event_id,
-                    "reason": "sidecar_queue_full",
-                }
+        with self._condition:
+            if self._closed:
+                return
+            if len(self._ready) >= self.queue_size:
+                self.failed_events.append(
+                    {
+                        "sequence": value.sequence,
+                        "event_id": value.event_id,
+                        "reason": "sidecar_queue_full",
+                    }
+                )
+                return
+            heapq.heappush(
+                self._ready,
+                (time.monotonic() + self.stability_seconds, value.sequence, value),
             )
+            self._condition.notify()
 
     def _run(self) -> None:
         pending: dict[int, DialogueEvent] = {}
         next_sequence = 0
         try:
             while True:
-                item = self.queue.get()
-                if item is None:
-                    break
-                pending[item.sequence] = item
-                while next_sequence in pending:
-                    event = pending.pop(next_sequence)
+                with self._condition:
+                    while True:
+                        now = time.monotonic()
+                        while self._ready and self._ready[0][0] <= now:
+                            _, sequence, event = heapq.heappop(self._ready)
+                            pending[sequence] = event
+                        if next_sequence in pending:
+                            event = pending.pop(next_sequence)
+                            break
+                        if self._closed and not self._ready:
+                            if pending:
+                                self.failed_events.append(
+                                    {
+                                        "reason": "missing_event_sequence",
+                                        "sequences": sorted(pending),
+                                    }
+                                )
+                            return
+                        delay = (
+                            max(0.0, self._ready[0][0] - now) if self._ready else None
+                        )
+                        self._condition.wait(timeout=delay)
+                try:
                     try:
                         result = self.projector.process_event(event)
                         self.store.write_checkpoint(result, event)
@@ -154,22 +188,17 @@ class StateShadowWorker:
                             }
                         )
                     next_sequence += 1
-                self.store.write_status(
-                    received_sequence=self.received_sequence,
-                    committed_sequence=self.committed_sequence,
-                    status="running",
-                    failed_events=self.failed_events,
-                )
-            if pending:
-                self.failed_events.append(
-                    {
-                        "reason": "missing_event_sequence",
-                        "sequences": sorted(pending),
-                    }
-                )
+                finally:
+                    self.store.write_status(
+                        received_sequence=self.received_sequence,
+                        committed_sequence=self.committed_sequence,
+                        status="running",
+                        failed_events=self.failed_events,
+                    )
         except Exception as exc:
             self._error = exc
         finally:
+            self.request_budget.close()
             self.store.write_status(
                 received_sequence=self.received_sequence,
                 committed_sequence=self.committed_sequence,
@@ -183,9 +212,12 @@ class StateShadowWorker:
         self._closed = True
         if not self._started:
             self.start()
-        self.queue.put(None)
+        with self._condition:
+            self._condition.notify_all()
         self.thread.join(timeout=max(0.0, timeout))
         if self.thread.is_alive():
+            # Prevent the timed-out worker from starting further model calls.
+            self.request_budget.close()
             self.store.write_status(
                 received_sequence=self.received_sequence,
                 committed_sequence=self.committed_sequence,
@@ -193,6 +225,15 @@ class StateShadowWorker:
                 failed_events=self.failed_events,
             )
             return
+        if self._error is not None:
+            self.failed_events.append(
+                {"reason": "state_worker_failed", "error": type(self._error).__name__}
+            )
+        if any(
+            row.get("kind") == "state_dialogue_capture"
+            for row in getattr(self.evidence, "errors", [])
+        ):
+            self.failed_events.append({"reason": "state_dialogue_capture_failed"})
         windows, _, _ = self.store.write_trace(self.projector)
         from tau2.diagnostics.state.metrics import result_from_windows
 

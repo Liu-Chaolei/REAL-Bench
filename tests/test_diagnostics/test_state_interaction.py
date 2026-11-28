@@ -1,6 +1,7 @@
 """Mechanism tests with fixed semantics; never call a live judge."""
 
 import json
+from threading import Event
 from types import SimpleNamespace
 
 from tau2.data_model.diagnostics import DiagnosticEvidence, OperationEvidence
@@ -111,7 +112,10 @@ def test_incremental_projector_matches_replay_projector():
     ]
     semantics = {
         "u": {"updates": [agenda()]},
-        "a": {"uses": [use(actual=6)], "fulfills": [dict(item_id="answer", actual=6, met=True)]},
+        "a": {
+            "uses": [use(actual=6)],
+            "fulfills": [dict(item_id="answer", actual=6, met=True)],
+        },
     }
     source = evidence(events)
     replay_windows, replay_versions, replay_state = project_state(
@@ -142,7 +146,11 @@ def test_state_sidecar_writes_ordered_full_checkpoints(monkeypatch, tmp_path):
     worker = StateShadowWorker(
         None,
         source,
-        MetricsConfig(measures=["state_interaction"], state_sidecar="online_full"),
+        MetricsConfig(
+            measures=["state_interaction"],
+            state_sidecar="online_full",
+            state_sidecar_stability_seconds=0,
+        ),
         tmp_path,
     )
     worker.start()
@@ -156,6 +164,61 @@ def test_state_sidecar_writes_ordered_full_checkpoints(monkeypatch, tmp_path):
     assert status["committed_sequence"] == 1
     assert len(list((tmp_path / "checkpoints").glob("*.json"))) == 2
     assert len(trace["versions"]) == 3
+
+
+def test_state_sidecar_stability_window_is_async(monkeypatch, tmp_path):
+    source = evidence([ev("u", "user_turn", "Hello")])
+    monkeypatch.setattr(
+        SemanticInterpreter,
+        "interpret",
+        lambda self, event, visible: Interpretation(),
+    )
+    worker = StateShadowWorker(
+        None,
+        source,
+        MetricsConfig(
+            measures=["state_interaction"],
+            state_sidecar="online_full",
+            state_sidecar_stability_seconds=0.05,
+        ),
+        tmp_path,
+    )
+    worker.start()
+    worker.submit(build_events(None, source)[0])
+    assert not list((tmp_path / "checkpoints").glob("*.json"))
+    worker.close_and_drain(timeout=1)
+    assert len(list((tmp_path / "checkpoints").glob("*.json"))) == 1
+
+
+def test_state_drain_timeout_prevents_later_model_calls(monkeypatch, tmp_path):
+    """A timed-out state worker cannot start another paid request."""
+    source = evidence([ev("u", "user_turn", "Hello")])
+    worker = StateShadowWorker(
+        None,
+        source,
+        MetricsConfig(state_sidecar_stability_seconds=0),
+        tmp_path,
+    )
+    entered, release = Event(), Event()
+
+    def delayed_request(prompt, schema, *, validate=None):
+        entered.set()
+        assert release.wait(2)
+        worker.request_budget.take()
+        return "{}"
+
+    monkeypatch.setattr(worker.interpreter.model, "_complete_once", delayed_request)
+    worker.start()
+    worker.submit(build_events(None, source)[0])
+    try:
+        assert entered.wait(1)
+        worker.close_and_drain(timeout=0)
+        assert worker.request_budget.closed
+    finally:
+        release.set()
+        worker.thread.join(timeout=2)
+    assert not worker.thread.is_alive()
+    assert worker.request_budget.used == 0
 
 
 def test_numeric_completion_and_repetition_are_state_edges():

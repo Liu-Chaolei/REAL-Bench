@@ -163,13 +163,14 @@ def run_simulation(
 
     recorder = None
     state_sidecar = None
-    # Collect evidence once. Semantic diagnostics run only when explicitly
-    # selected in this run's metrics configuration and share its budget.
+    # Collect evidence once. Online state owns its budget; independent post-call
+    # diagnostics share another cap, even while both scoring groups overlap.
     if metrics_config is not None or diagnostics_dir is not None:
         from pathlib import Path
 
         from tau2.diagnostics.collect import EvidenceRecorder
         from tau2.diagnostics.config import MetricsConfig
+        from tau2.diagnostics.model import RequestBudget
 
         if metrics_config is None:
             metrics_config = MetricsConfig(measures=[], auto_score=False)
@@ -186,6 +187,7 @@ def run_simulation(
                 },
             }
         metrics_config = MetricsConfig.model_validate(metrics_config)
+        diagnostic_budget = RequestBudget(metrics_config.max_requests)
         if diagnostics_dir is None:
             raise ValueError("Diagnostics require an artifact directory")
         diagnostics_dir = Path(diagnostics_dir)
@@ -309,13 +311,11 @@ def run_simulation(
             raise
     evidence = None
     if recorder is not None:
-        if state_sidecar is not None:
-            state_sidecar.close_and_drain(
-                metrics_config.state_sidecar_drain_timeout_seconds
-            )
         from tau2.diagnostics.collect import finalize_evidence
 
         try:
+            # Close media/tool capture and persist the final evidence before
+            # launching any post-call graders. State has its own event copies.
             evidence = finalize_evidence(
                 orchestrator, simulation, recorder, diagnostics_dir / "evidence"
             )
@@ -329,7 +329,7 @@ def run_simulation(
                 "reason": type(error).__name__,
             }
 
-    def finalize_diagnostics():
+    def finalize_diagnostics(dependencies=None):
         if evidence is not None and metrics_config.auto_score:
             from tau2.diagnostics.suite import evaluate_evidence
 
@@ -349,6 +349,8 @@ def run_simulation(
                         .get("scores", {})
                         .get("interaction_variant")
                     },
+                    budget=diagnostic_budget,
+                    **({"dependencies": dependencies} if dependencies else {}),
                 )
                 simulation.diagnostics_ref.update(result)
             except Exception as error:
@@ -356,59 +358,93 @@ def run_simulation(
                     status="grading_error", reason=type(error).__name__
                 )
 
-    try:
-        reward_info = evaluate_simulation(
-            simulation=simulation,
-            task=task,
-            evaluation_type=evaluation_type,
-            solo_mode=solo_mode,
-            domain=domain,
-            mode=mode,
-            env_kwargs=env_kwargs,
-            communicate_scoring=communicate_scoring,
-            customer_language=customer_language,
+    def score_outcomes():
+        """Score formal outcomes and expose the persistent result exactly once."""
+        try:
+            reward_info = evaluate_simulation(
+                simulation=simulation,
+                task=task,
+                evaluation_type=evaluation_type,
+                solo_mode=solo_mode,
+                domain=domain,
+                mode=mode,
+                env_kwargs=env_kwargs,
+                communicate_scoring=communicate_scoring,
+                customer_language=customer_language,
+            )
+        except Exception as error:
+            # Preserve the actual completed conversation, never a new empty run.
+            simulation.reward_info = None
+            simulation.evaluation_status = "failed"
+            simulation.evaluation_error = evaluation_error_info(error)
+            logger.warning(
+                f"Scoring failed for simulation {simulation.id}: {type(error).__name__}"
+            )
+        else:
+            simulation.reward_info = reward_info
+            simulation.evaluation_status = (
+                "completed" if can_grade(simulation.termination_reason) else "skipped"
+            )
+
+        from tau2.metrics.active.persistent_task.evaluator import score_persistent_task
+        from tau2.metrics.active.persistent_task.variant_evaluator import (
+            score_interaction_variant,
         )
-    except Exception as error:
-        # Preserve the actual completed conversation, never a new empty run.
-        simulation.reward_info = None
-        simulation.evaluation_status = "failed"
-        simulation.evaluation_error = evaluation_error_info(error)
-        logger.warning(
-            f"Scoring failed for simulation {simulation.id}: {type(error).__name__}"
-        )
+
+        for field, group, grader in (
+            ("active_metrics", "metrics", score_persistent_task),
+            ("scenario_mechanisms", "mechanisms", score_interaction_variant),
+        ):
+            envelope = (simulation.info or {}).get(field)
+            if envelope is None:
+                continue
+            scores = {}
+            for name, summary in envelope.get(group, {}).items():
+                try:
+                    scores[name] = grader(summary, communicate_scoring)
+                except Exception as error:
+                    scores[name] = {
+                        "status": "grader_error",
+                        "completion_score": None,
+                        "reason": type(error).__name__,
+                    }
+            simulation.info[field] = {**envelope, "scores": scores}
+
+        return ((simulation.info or {}).get("active_metrics") or {}).get(
+            "scores", {}
+        ).get("persistent_task") or (
+            (simulation.info or {}).get("scenario_mechanisms") or {}
+        ).get("scores", {}).get("interaction_variant")
+
+    if state_sidecar is None:
+        score_outcomes()
+        finalize_diagnostics()
     else:
-        simulation.reward_info = reward_info
-        simulation.evaluation_status = (
-            "completed" if can_grade(simulation.termination_reason) else "skipped"
-        )
+        from concurrent.futures import ThreadPoolExecutor
+        from contextvars import copy_context
 
-    from tau2.metrics.active.persistent_task.evaluator import score_persistent_task
-    from tau2.metrics.active.persistent_task.variant_evaluator import (
-        score_interaction_variant,
-    )
-
-    for field, group, grader in (
-        ("active_metrics", "metrics", score_persistent_task),
-        ("scenario_mechanisms", "mechanisms", score_interaction_variant),
-    ):
-        envelope = (simulation.info or {}).get(field)
-        if envelope is None:
-            continue
-        scores = {}
-        for name, summary in envelope.get(group, {}).items():
-            try:
-                scores[name] = grader(summary, communicate_scoring)
-            except Exception as error:
-                scores[name] = {
-                    "status": "grader_error",
-                    "completion_score": None,
-                    "reason": type(error).__name__,
+        # Only state_interaction needs the sidecar's result. Other measures use
+        # the already-frozen evidence and can overlap both drain and outcomes.
+        with ThreadPoolExecutor(
+            max_workers=2, thread_name_prefix="tau-finalize"
+        ) as pool:
+            state_ready = pool.submit(
+                copy_context().run,
+                state_sidecar.close_and_drain,
+                metrics_config.state_sidecar_drain_timeout_seconds,
+            )
+            outcomes_ready = pool.submit(copy_context().run, score_outcomes)
+            finalize_diagnostics(
+                {
+                    "state_interaction": state_ready,
+                    "persistent_task": outcomes_ready,
                 }
-        simulation.info[field] = {**envelope, "scores": scores}
+            )
+            outcomes_ready.result()
+            state_ready.result()
 
     logger.info(
         f"Simulation complete: domain={domain}, task={task.id}, evaluation={simulation.evaluation_status}"
     )
 
-    finalize_diagnostics()
     return simulation

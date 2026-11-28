@@ -1,7 +1,10 @@
 """Gaia2 business operations and state effects adapted to tau's native journals."""
 
 import copy
+import hashlib
+import os
 import re
+import tempfile
 from functools import lru_cache
 from pathlib import Path
 from types import SimpleNamespace
@@ -18,31 +21,151 @@ from tau2.diagnostics.execution.scoring import (
     tool_score,
 )
 
+METADATA_CACHE_VERSION = "tau-execution-metadata/1"
 
-@lru_cache(maxsize=4)
-def metadata(root):
-    """Read operation metadata once; no model or reference action is executed."""
+
+def _extract_metadata(tools):
+    """Extract only static operation descriptions from an initialized toolkit."""
+    return {
+        name: {
+            "write": tool.write_operation,
+            "app": tool.class_instance.name,
+            "defaults": {a.name: a.default for a in tool.args if a.has_default},
+        }
+        for name, tool in tools._operations.items()
+    }
+
+
+def _metadata_cache_path(root, snapshot, manifest):
+    """Return a content-addressed cache path for one snapshot's tool catalog."""
     import json
+
+    identity = {
+        "version": METADATA_CACHE_VERSION,
+        "snapshot": snapshot,
+        "runtime_sha256": manifest.get("runtime_sha256"),
+        "assets": str(manifest.get("assets", "")),
+    }
+    key = hashlib.sha256(
+        json.dumps(identity, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+    return Path(root) / ".execution_metadata_cache" / f"{key}.json"
+
+
+def _read_metadata_cache(path):
+    """Read a cache entry, treating corruption or old versions as a miss."""
+    import json
+
+    try:
+        payload = json.loads(path.read_text())
+        if payload.get("version") != METADATA_CACHE_VERSION:
+            return None
+        metadata = payload.get("metadata")
+        return metadata if isinstance(metadata, dict) else None
+    except (OSError, TypeError, ValueError):
+        return None
+
+
+def _write_metadata_cache(path, snapshot, manifest, metadata):
+    """Atomically write a reusable snapshot catalog; cache failures are harmless."""
+    import json
+
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        payload = {
+            "version": METADATA_CACHE_VERSION,
+            "snapshot": snapshot,
+            "runtime_sha256": manifest.get("runtime_sha256"),
+            "metadata": metadata,
+        }
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            dir=path.parent,
+            prefix=f".{path.name}.",
+            suffix=".tmp",
+            delete=False,
+        ) as stream:
+            json.dump(payload, stream, ensure_ascii=False, sort_keys=True)
+            temporary = Path(stream.name)
+        os.replace(temporary, path)
+    except (OSError, TypeError, ValueError):
+        try:
+            temporary.unlink(missing_ok=True)
+        except (UnboundLocalError, OSError):
+            pass
+
+
+def _metadata_for_snapshot(snapshot, root, manifest, *, use_cache=True):
+    """Build metadata for one snapshot, reusing a persistent catalog when possible."""
+    root = Path(root)
+    cache = _metadata_cache_path(root, snapshot, manifest)
+    if use_cache:
+        cached = _read_metadata_cache(cache) if cache.is_file() else None
+        if cached is not None:
+            return cached
 
     from tau2.domains.gaia2.tools import Gaia2Tools
     from tau2.domains.gaia2.utils import read_snapshot
 
-    manifest = json.loads((Path(root) / "manifest.json").read_text())
-    tasks = json.loads((Path(root) / "tasks.json").read_text())
+    tools = Gaia2Tools(read_snapshot(snapshot, root), assets=Path(manifest["assets"]))
+    try:
+        result = _extract_metadata(tools)
+    finally:
+        tools.close()
+    if use_cache:
+        _write_metadata_cache(cache, snapshot, manifest, result)
+    return result
+
+
+def metadata_for_task(task, root, required_tools=None):
+    """Read only the operation catalog needed by the current task.
+
+    The old ``metadata`` function remains available for full-dataset tools such
+    as coverage and verification. Execution scoring uses this task-scoped path
+    so one task does not initialize every Gaia2 snapshot first.
+    """
+    import json
+
+    root = Path(root)
+    manifest = json.loads((root / "manifest.json").read_text())
+    scenario = getattr(task, "scenario", None)
+    snapshot = getattr(scenario, "snapshot", None)
+    if not snapshot:
+        return metadata(root)
+    result = _metadata_for_snapshot(snapshot, root, manifest)
+    required = set(required_tools or ())
+    required.update(
+        event.tool
+        for event in getattr(scenario, "events", [])
+        if getattr(event, "kind", None) == "reference"
+        and getattr(event, "tool", None)
+        and not event.tool.startswith("AgentUserInterface__")
+        and not event.tool.startswith("System__")
+    )
+    # System reads are runtime helpers rather than Gaia2 application
+    # operations. They are retained in evidence but never enter the WRITE
+    # execution score and therefore need no application metadata.
+    required = {name for name in required if not name.startswith("System__")}
+    if required - result.keys():
+        # A changed or malformed snapshot must not silently alter the scoring
+        # semantics. Preserve the historical all-snapshot path as a slow but
+        # safe fallback for missing operation definitions.
+        return metadata(root)
+    return result
+
+
+@lru_cache(maxsize=4)
+def metadata(root):
+    """Read operation metadata for the full dataset when explicitly required."""
+    import json
+
+    root = Path(root)
+    manifest = json.loads((root / "manifest.json").read_text())
+    tasks = json.loads((root / "tasks.json").read_text())
     result = {}
     for snapshot in sorted({t["scenario"]["snapshot"] for t in tasks}):
-        tools = Gaia2Tools(
-            read_snapshot(snapshot, Path(root)), assets=Path(manifest["assets"])
-        )
-        try:
-            for name, tool in tools._operations.items():
-                result[name] = {
-                    "write": tool.write_operation,
-                    "app": tool.class_instance.name,
-                    "defaults": {a.name: a.default for a in tool.args if a.has_default},
-                }
-        finally:
-            tools.close()
+        result.update(_metadata_for_snapshot(snapshot, root, manifest))
     return result
 
 

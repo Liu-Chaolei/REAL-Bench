@@ -10,6 +10,7 @@ from pathlib import Path
 
 from tau2.data_model.diagnostics import DiagnosticEvidence, OperationEvidence, UserInput
 from tau2.diagnostics.intent.io import digest, write_json, write_jsonl
+from tau2.diagnostics.state.capture import DialogueCapture
 
 
 class EvidenceRecorder:
@@ -21,6 +22,7 @@ class EvidenceRecorder:
         self.frame_labels = {}
         self.state_events = []
         self.state_event_sink = None
+        self.dialogue_capture = DialogueCapture(self.state_event)
         self.media_ticks = []
         self.media_times = []
         self.writer = ThreadPoolExecutor(
@@ -32,7 +34,17 @@ class EvidenceRecorder:
         self.origin = time.monotonic()
         self.initial_frame = self.capture("initial")
 
-    def state_event(self, kind, role, content, visible_to, event_id=None):
+    def state_event(
+        self,
+        kind,
+        role,
+        content,
+        visible_to,
+        event_id=None,
+        *,
+        timestamp=None,
+        metadata=None,
+    ):
         """Capture native order at existing hooks; no extra evaluation occurs."""
         with self.lock:
             event = dict(
@@ -41,10 +53,10 @@ class EvidenceRecorder:
                 role=role,
                 content=copy.deepcopy(content),
                 visible_to=list(visible_to),
-                timestamp=time.monotonic(),
+                timestamp=time.monotonic() if timestamp is None else timestamp,
                 sequence=len(self.state_events),
                 source="tau-state-events/2",
-                metadata={},
+                metadata=copy.deepcopy(metadata or {}),
             )
             self.state_events.append(event)
             sink = self.state_event_sink
@@ -59,6 +71,15 @@ class EvidenceRecorder:
     def message_event(self, kind, role, content, visible_to, event_id=None):
         """Publish a delivered user/Agent message to the state sidecar."""
         self.state_event(kind, role, content, visible_to, event_id=event_id)
+
+    def finish_dialogue(self, final_live=None):
+        """Seal the transported dialogue prefix before draining the state worker."""
+        try:
+            self.dialogue_capture.finish(final_live, released=time.monotonic())
+        except Exception as exc:
+            self.errors.append(
+                {"kind": "state_dialogue_capture", "error": type(exc).__name__}
+            )
 
     def tool_delivered(self, call_id, viewer="agent"):
         self.state_event(
@@ -228,6 +249,15 @@ class EvidenceRecorder:
             )
         )
         self.media_times.append((started, ended))
+        try:
+            tick_id = self.media_ticks[-1].tick_id
+            self.dialogue_capture.observe("user", user_chunk, tick_id, started, ended)
+            self.dialogue_capture.observe("agent", agent_chunk, tick_id, started, ended)
+        except Exception as exc:
+            # Optional diagnostics must not terminate the live interaction.
+            self.errors.append(
+                {"kind": "state_dialogue_capture", "error": type(exc).__name__}
+            )
 
     def stage(self, label):
         self.capture(label)
@@ -235,6 +265,7 @@ class EvidenceRecorder:
     def close(self):
         if self.closed:
             return
+        self.finish_dialogue()
         self.closed = True
         self.final_frame = self.capture("final")
         self.writer.shutdown(wait=True)

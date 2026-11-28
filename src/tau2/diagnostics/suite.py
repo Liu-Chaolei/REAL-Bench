@@ -58,9 +58,17 @@ def load_evidence(directory):
 
 
 def evaluate_evidence(
-    task, evidence, directory, config, only=None, *, precomputed=None
+    task,
+    evidence,
+    directory,
+    config,
+    only=None,
+    *,
+    precomputed=None,
+    budget=None,
+    dependencies=None,
 ):
-    """Score independent measures; failures never replace a task reward."""
+    """Score frozen evidence, waiting only for each measure's own dependencies."""
     directory = Path(directory)
     if evidence.source.get("task_sha256") and evidence.source["task_sha256"] != digest(
         task.model_dump(mode="json")
@@ -70,39 +78,23 @@ def evaluate_evidence(
         {"config": config.model_dump(), "implementation": implementation_digest()}
     )
     output = directory.parent / "evaluations" / profile
-    budget = RequestBudget(config.max_requests)
+    budget = budget or RequestBudget(config.max_requests)
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
+    from tau2.domains.gaia2.interaction_variants import metric_enabled
+
+    evidence_payload = evidence.model_dump(mode="json")
+    task_payload = task.model_dump(mode="json")
     results = {}
-    for measure in only if only is not None else config.measures:
-        from tau2.domains.gaia2.interaction_variants import metric_enabled
+    pending = []
+    selected = list(only if only is not None else config.measures)
 
-        if not metric_enabled(task, measure):
-            results[measure] = {
-                "status": "not_applicable",
-                "reason": "interaction_variant_scoring_scope",
-            }
-            continue
+    def run_measure(measure, key):
+        """Evaluate one measure in isolation; persistence stays in the collector."""
         path = output / (measure + ".json")
-        key = digest(
-            {
-                "evidence": evidence.model_dump(mode="json"),
-                "task": task.model_dump(mode="json"),
-                "profile": profile,
-                "measure": measure,
-            }
-        )
-        previous = json.loads(path.read_text()) if path.exists() else {}
-        if previous.get("input_key") == key and previous.get("status") in {
-            "complete",
-            "measured",
-            "not_applicable",
-        }:
-            if measure == "persistent_task":
-                from tau2.persistent_tasks.scores import consolidate_score
-
-                previous = consolidate_score(previous)
-            results[measure] = previous
-            continue
         try:
+            dependency = (dependencies or {}).get(measure)
+            ready_result = dependency.result() if dependency is not None else None
             if measure == "intent":
                 from tau2.diagnostics.intent.call import evaluate_call
 
@@ -118,11 +110,17 @@ def evaluate_evidence(
                 else:
                     from tau2.diagnostics.execution.gaia2 import (
                         Gaia2ExecutionAdapter,
-                        metadata,
+                        metadata_for_task,
                     )
                     from tau2.domains.gaia2.utils import GAIA2_DATA_DIR
 
-                    result = Gaia2ExecutionAdapter(metadata(GAIA2_DATA_DIR)).evaluate(
+                    result = Gaia2ExecutionAdapter(
+                        metadata_for_task(
+                            task,
+                            GAIA2_DATA_DIR,
+                            required_tools={op.name for op in evidence.operations},
+                        )
+                    ).evaluate(
                         task,
                         evidence,
                         TauJsonModel(config, "execution", output / "requests", budget),
@@ -142,6 +140,8 @@ def evaluate_evidence(
 
                 result = evaluate_interaction(evidence, config, output, budget)
             elif measure == "state_interaction":
+                from tau2.diagnostics.state.capture import CAPTURE_VERSION
+
                 sidecar = directory.parent / "state_sidecar"
                 sidecar_status = sidecar / "status.json"
                 sidecar_result = sidecar / "state_interaction.json"
@@ -149,6 +149,7 @@ def evaluate_evidence(
                     status = json.loads(sidecar_status.read_text())
                     if (
                         status.get("status") == "complete"
+                        and status.get("capture_version") == CAPTURE_VERSION
                         and (sidecar / "state_trace.json").is_file()
                     ):
                         result = json.loads(sidecar_result.read_text())
@@ -181,7 +182,11 @@ def evaluate_evidence(
                 )
 
                 summary = next(iter(mechanism_summaries(evidence)), None)
-                result = (precomputed or {}).get(measure)
+                result = (
+                    ready_result
+                    if dependency is not None
+                    else (precomputed or {}).get(measure)
+                )
                 if result is not None:
                     result = deepcopy(result)
                 elif summary is not None:
@@ -202,18 +207,65 @@ def evaluate_evidence(
             else:
                 raise ValueError("Unknown diagnostic measure: " + measure)
         except Exception as exc:
-            result = {
-                "status": "grader_error",
-                "reason": type(exc).__name__,
-            }
+            result = {"status": "grader_error", "reason": type(exc).__name__}
         if measure == "persistent_task":
             from tau2.persistent_tasks.scores import consolidate_score
 
             result = consolidate_score(result)
         result["diagnostic_only"] = not evidence.complete
         result["input_key"] = key
-        write_json(path, result)
-        results[measure] = result
+        return measure, path, result
+
+    for measure in selected:
+        if not metric_enabled(task, measure):
+            results[measure] = {
+                "status": "not_applicable",
+                "reason": "interaction_variant_scoring_scope",
+            }
+            continue
+        path = output / (measure + ".json")
+        key = digest(
+            {
+                "evidence": evidence_payload,
+                "task": task_payload,
+                "profile": profile,
+                "measure": measure,
+            }
+        )
+        previous = json.loads(path.read_text()) if path.exists() else {}
+        if previous.get("input_key") == key and previous.get("status") in {
+            "complete",
+            "measured",
+            "not_applicable",
+        }:
+            if measure == "persistent_task":
+                from tau2.persistent_tasks.scores import consolidate_score
+
+                previous = consolidate_score(previous)
+            results[measure] = previous
+        else:
+            pending.append((measure, key))
+
+    max_workers = min(max(1, config.metric_concurrency), max(1, len(pending)))
+    if dependencies:
+        # Put waiting measures last: even one worker can start independent work
+        # before waiting for the state drain or persistent-task score.
+        pending.sort(key=lambda row: row[0] in dependencies)
+    if pending:
+        with ThreadPoolExecutor(
+            max_workers=max_workers, thread_name_prefix="tau-diagnostic"
+        ) as pool:
+            futures = [
+                pool.submit(run_measure, measure, key) for measure, key in pending
+            ]
+            for future in as_completed(futures):
+                measure, path, result = future.result()
+                write_json(path, result)
+                results[measure] = result
+    # Cached/skipped measures may never enter run_measure. Join all dependencies
+    # before the final report; requests_this_run counts this suite's budget only.
+    for dependency in (dependencies or {}).values():
+        dependency.result()
     # Keep earlier successful measures when a CLI call selects a subset.
     summary_path = output / "summary.json"
     stored = json.loads(summary_path.read_text()) if summary_path.exists() else {}

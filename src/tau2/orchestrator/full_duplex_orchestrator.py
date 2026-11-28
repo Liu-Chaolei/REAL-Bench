@@ -419,14 +419,8 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
 
         diagnostic_recorder = getattr(self.environment, "diagnostic_recorder", None)
         if diagnostic_recorder is not None:
-            if self.current_user_chunk is not None and self.current_user_chunk.content:
-                diagnostic_recorder.message_event(
-                    "user_turn",
-                    "user",
-                    self.current_user_chunk.content,
-                    ["agent"],
-                    event_id="tick:initial:user",
-                )
+            # Caller chunks are observed by recorder.media only after the
+            # Agent consumes them, including the first chunk on the next tick.
             if first_agent_message is not None and first_agent_message.content:
                 diagnostic_recorder.message_event(
                     "agent_turn",
@@ -664,32 +658,8 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
             self._wrap_tool_results(agent_tool_results) if agent_tool_results else None
         )
 
-        diagnostic_recorder = getattr(self.environment, "diagnostic_recorder", None)
-        if diagnostic_recorder is not None:
-            if (
-                user_chunk is not None
-                and user_chunk.content
-                and user_chunk.is_final_chunk
-            ):
-                diagnostic_recorder.message_event(
-                    "user_turn",
-                    "user",
-                    user_chunk.content,
-                    ["agent"],
-                    event_id=f"tick:{tick_id}:user",
-                )
-            if (
-                agent_chunk is not None
-                and agent_chunk.content
-                and agent_chunk.is_final_chunk
-            ):
-                diagnostic_recorder.message_event(
-                    "agent_turn",
-                    "agent",
-                    agent_chunk.content,
-                    ["agent"],
-                    event_id=f"tick:{tick_id}:agent",
-                )
+        # recorder.media aggregates transported caller chunks and publishes
+        # confirmed Agent ASR fragments; a final chunk alone is not a sentence.
 
         # --- 3. Update state and bookkeeping ---
         self.current_user_chunk = user_chunk
@@ -1137,6 +1107,12 @@ class FullDuplexOrchestrator(BaseOrchestrator[StreamingAgentT, StreamingUserT, T
                 get_final_live_transcript()
             )
         _merge_final_live_transcript(ticks, final_live_transcript)
+        diagnostic_recorder = getattr(self.environment, "diagnostic_recorder", None)
+        if diagnostic_recorder is not None:
+            _merge_final_live_transcript(
+                diagnostic_recorder.media_ticks, final_live_transcript
+            )
+            diagnostic_recorder.finish_dialogue(final_live_transcript)
         agent_cost, user_cost = get_cost(self.get_messages())
 
         # Provider usage ledger (audio-native agents). The session-level

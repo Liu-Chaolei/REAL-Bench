@@ -103,11 +103,20 @@ class MetricsConfig(BaseModel):
     ] = Field(default_factory=lambda: ["intent", "execution", "voice"])
     auto_score: bool = True
     concurrency: int = Field(default=DEFAULT_DIAGNOSTIC_CONCURRENCY, ge=1)
-    max_requests: int = Field(default=DEFAULT_DIAGNOSTIC_MAX_REQUESTS, ge=1)
+    metric_concurrency: int = Field(default=3, ge=1)
+    max_requests: int = Field(
+        default=DEFAULT_DIAGNOSTIC_MAX_REQUESTS,
+        ge=1,
+        description=(
+            "Per-trial cap for each scoring group: online state has its own cap; "
+            "post-call diagnostics share a separate cap."
+        ),
+    )
     timeout_seconds: float = Field(default=DEFAULT_DIAGNOSTIC_TIMEOUT_SECONDS, gt=0)
     max_characters: int = Field(default=DEFAULT_DIAGNOSTIC_MAX_CHARACTERS, ge=1)
     state_sidecar: Literal["off", "online_full"] = "off"
     state_sidecar_queue_size: int = Field(default=256, ge=1)
+    state_sidecar_stability_seconds: float = Field(default=30.0, ge=0)
     state_sidecar_drain_timeout_seconds: float = Field(default=900.0, gt=0)
     model: ModelProfile = Field(default_factory=ModelProfile)
     models: dict[

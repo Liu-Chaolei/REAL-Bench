@@ -171,6 +171,36 @@ def test_checkpoint_failure_preserves_run_and_schedules_next_check(
     assert "ValueError" in orchestrator.watchdog.checkpoints[0]["reason"]
 
 
+def test_completion_verdict_does_not_override_normal_termination(
+    monkeypatch, make_orchestrator
+):
+    def judge(**kwargs):
+        return AssistantMessage(
+            role="assistant",
+            content=json.dumps(
+                dict(
+                    decision="stop_and_evaluate",
+                    state="task_completed",
+                    confidence=0.9,
+                    reason="All requested cancellations and notifications completed.",
+                    evidence=["No pending tool results", "No active speech"],
+                )
+            ),
+        )
+
+    monkeypatch.setattr(watchdog, "generate", judge)
+    orchestrator = make_orchestrator(max_steps=3)
+
+    result = orchestrator.run()
+
+    assert result.termination_reason == TerminationReason.MAX_STEPS
+    checkpoints = result.info["watchdog"]["checkpoints"]
+    assert len(checkpoints) == 1
+    assert checkpoints[0]["tick"] == 2
+    assert checkpoints[0]["decision"] == "uncertain"
+    assert "ValidationError" in checkpoints[0]["reason"]
+
+
 def test_cap_and_heartbeat_stall_stop_without_model_call(make_orchestrator):
     for cause in ("cap", "heartbeat"):
         orchestrator = make_orchestrator()

@@ -2,6 +2,8 @@ import json
 import threading
 import time
 
+import pytest
+
 from tau2.data_model.message import (
     AssistantMessage,
     Tick,
@@ -60,6 +62,44 @@ def test_watchdog_normalizes_common_model_variants(monkeypatch):
     assert verdict.decision == "continue"
     assert verdict.state == "progressing"
     assert verdict.evidence == ["tick=600", "phase=tick_complete"]
+
+
+@pytest.mark.parametrize("state", ["task_completed", "completed", "complete"])
+def test_completion_verdict_is_rejected_and_keeps_run_alive(monkeypatch, state):
+    def fake_generate(**kwargs):
+        schema = kwargs["response_model"].model_json_schema()
+        assert state not in schema["properties"]["state"]["enum"]
+        return AssistantMessage(
+            role="assistant",
+            content=json.dumps(
+                dict(
+                    decision="stop_and_evaluate",
+                    state=state,
+                    confidence=0.9,
+                    reason="All requested cancellations and notifications completed.",
+                    evidence=["No pending tool results", "No active speech"],
+                )
+            ),
+        )
+
+    monkeypatch.setattr(watchdog, "generate", fake_generate)
+    controller = watchdog.WatchdogController(
+        WatchdogConfig(enabled=True, judge_timeout_seconds=1),
+        SemanticCommunicateSettings(model="test"),
+    )
+    context = watchdog.compact_watchdog_context(
+        task_text="Cancel morning Social events and notify the attendees.",
+        ticks=[],
+        environment_trace=[],
+        pending={},
+        stage={"current_stage": 0, "total_stages": 3},
+    )
+
+    verdict = controller.judge(context)
+
+    assert verdict.decision == "uncertain"
+    assert verdict.state == "unknown"
+    assert "ValidationError" in verdict.reason
 
 
 def test_watchdog_judge_timeout_is_conservative(monkeypatch):

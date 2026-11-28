@@ -27,17 +27,25 @@ def _is_timeout_error(error: BaseException) -> bool:
 
 
 class RequestBudget:
-    """Shared request cap for one trial, including malformed-response repair."""
+    """Thread-safe cap for one scoring group, including response repair."""
 
     def __init__(self, maximum):
         self.maximum, self.used = maximum, 0
         self.lock = threading.Lock()
+        self.closed = False
 
     def take(self):
         with self.lock:
+            if self.closed:
+                raise RuntimeError("Diagnostic request budget closed")
             if self.used >= self.maximum:
                 raise RuntimeError("Diagnostic request budget exhausted")
             self.used += 1
+
+    def close(self):
+        """Prevent new requests after a scoring worker stops or times out."""
+        with self.lock:
+            self.closed = True
 
 
 class TauJsonModel:
